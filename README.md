@@ -5,6 +5,7 @@ A small sailing-robot project balancing efficiency, reliability, and ease of man
 The recovered December 2023 brief describes a one-metre monohull with a printable hull, ballasted fin keel, low-power electronics, and self-righting and failure-recovery goals. These are design intentions; build and test status still need documenting.
 
 - [Mission and requirements](docs/mission-and-requirements.md)
+- [Requirements derivation diagram](docs/mission-and-requirements.md#requirement-derivation)
 - [SysML v2 architecture and learning guide](models/README.md)
 - [Project status and restart checklist](docs/project-status.md)
 - [Article: picking up a small sailing robot again](docs/restarting-sv-blue-dog.md)
@@ -14,6 +15,9 @@ The recovered December 2023 brief describes a one-metre monohull with a printabl
 - `cad/`: SolidWorks assemblies and parts, plus manufacturing and exchange files.
 - `docs/`: mission decisions, project status, restart checklist, and the website article.
 - `models/`: SysML v2 mission, requirements, and architecture source.
+- `scripts/`: model-driven documentation generation.
+- `tests/`: derivation extraction and validation checks.
+- `pyproject.toml` / `uv.lock`: package-free Python environment managed by uv.
 
 ## CAD
 

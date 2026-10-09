@@ -1,6 +1,6 @@
 # Mission and requirements
 
-Working baseline, October 9, 2026. The SysML source is [models/blue-dog.sysml](../models/blue-dog.sysml). This page records decisions, rationale, and open questions; requirement definitions belong in the model.
+Working baseline, October 9, 2026. Mission and architecture are in [blue-dog.sysml](../models/blue-dog.sysml); requirements and explicit derivations are in [requirements.sysml](../models/requirements.sysml). This page records decisions, rationale, and open questions; requirement definitions belong in the model.
 
 ## Mission agreed with David
 
@@ -23,6 +23,18 @@ Prepare and launch; sail outbound; turn around; sail home; recover the boat and 
 - **Proposed:** energy awareness, navigation/control responsibilities, and mission evidence recording. These are discussion candidates, not approved specifications.
 
 Self-righting, weed resistance, printable hull geometry, and collision-avoidance/compliance goals are system-level concerns to carry into later model revisions. The old frame cost target does not establish an electronics budget. The 2023 component list is historical input, not the selected architecture.
+
+## Requirement derivation
+
+![Requirement derivation: original requirements on the left lead to proposed derived electronics requirements](figures/requirements-derivation.svg)
+
+[PNG version](figures/requirements-derivation.png) · [Generated requirement statements and derivation rationale](requirements-register.md)
+
+Every dashed arrow comes from an explicit `#derivation` connection in the SysML model, with `#original` and `#derive` ends. Arrows read from original to derived requirement. This is a generated traceability view, not a claim of a complete standard graphical notation implementation.
+
+All eight derivation relationships are proposed reasoning for us to review. Node maturity is separate: a legacy requirement can have a newly proposed derivation. The two mission requirements remain independent inputs; the round-trip route alone does not imply a particular endurance. Low-energy recovery has two parents because it follows both the endurance objective and the energy-management policy. No link means "verified" or "satisfied."
+
+Regenerate with `uv run python scripts/render_requirements.py`. The [modeling guide](../models/README.md) records the renderer scope and validation limits.
 
 ## How we will turn intent into requirements
 
@@ -49,4 +61,4 @@ These are proposed verification approaches; no passing result or satisfaction li
 4. What must it do when it loses communications, cannot make progress, or runs short of energy?
 5. What sail/steering mechanism and actuators will the electronics support?
 6. What mass, space, cost, and electrical limits apply to the electronics?
-7. Which SysML v2 editor/validator should we use?
+7. Refine the agreed sysmlpy workflow and decide whether we need an additional semantic validator.

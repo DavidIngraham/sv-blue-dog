@@ -42,6 +42,16 @@ I also liked the possibility of collecting interesting data. One idea was a pers
 
 That adds another question to the journey. Completing a course gives the robot a destination; monitoring asks it to stay somewhere useful. I would need to work out what station keeping means for this boat, what measurements would be useful, and how to interpret them from a moving platform. For now, it is a possibility I want to explore.
 
+## Using SysML v2 to work through the requirements
+
+Learning SysML v2 is now another goal for the project. I want to use it to decompose the mission and connect the electronics requirements back to the reasons for them. I have been using sysmlpy at work, so I am using it here too.
+
+The first derivation view starts with the Bonneville-to-The-Dalles round trip and multi-day endurance with energy harvesting. The arrows are proposed reasoning to work through, while the colors distinguish confirmed intent, older requirements, and new proposals. None of these links establishes that the boat satisfies a requirement.
+
+![SV Blue Dog requirement derivation](figures/requirements-derivation.svg)
+
+The diagram is generated from explicit relationships in the SysML source. The [mission and requirements notes](mission-and-requirements.md) contain the details and open questions; the [generated register](requirements-register.md) records the rationale for each arrow.
+
 ## Picking up the thread
 
 The original motivation still holds: learn about sailing, see what I can make with desktop tools, and bring a complete autonomous system together. The trans-gorge mission gives that work a direction, and the swell-monitor idea gives me another reason to keep thinking about endurance and station keeping.
