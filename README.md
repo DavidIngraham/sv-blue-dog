@@ -7,9 +7,14 @@ The recovered December 2023 brief describes a one-metre monohull with a printabl
 - [Project status and restart checklist](docs/project-status.md)
 - [Article: picking up a small sailing robot again](docs/restarting-sv-blue-dog.md)
 
+## Folder layout
+
+- `cad/`: SolidWorks assemblies and parts, plus manufacturing and exchange files.
+- `docs/`: project status, restart checklist, and the website article.
+
 ## CAD
 
-The original SolidWorks files remain at the repository root to preserve their relative assembly paths. The primary assembly filename is `SV Bluedog.SLDASM`; `BluedogMast.SLDASM` is also included. Assembly dependencies and geometry have not yet been validated. STEP, IGES, and 3MF files are retained as supplied.
+The SolidWorks files and their STEP, IGES, and 3MF exports live together in [`cad/`](cad/) to preserve relative assembly paths. Start with [`cad/SV Bluedog.SLDASM`](cad/SV%20Bluedog.SLDASM); the mast assembly is [`cad/BluedogMast.SLDASM`](cad/BluedogMast.SLDASM). Assembly dependencies and geometry have not yet been validated. STEP, IGES, and 3MF files are retained as supplied.
 
 SolidWorks lock files are ignored. CAD files are stored as ordinary Git binary files in this initial snapshot; the largest is approximately 7.4 MB. Avoid committing automatic backups or repeated export copies.
 

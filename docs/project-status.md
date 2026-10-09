@@ -1,6 +1,6 @@
 # SV Blue Dog restart checklist
 
-Prepared October 9, 2026 from the two-page OneNote export dated December 26, 2023 and a filename inventory of the local CAD folder. CAD geometry and physical hardware have not been inspected.
+Prepared October 9, 2026 from the two-page OneNote export dated December 26, 2023 and a filename inventory of the local `cad/` folder. CAD geometry and physical hardware have not been inspected.
 
 ## Recovered baseline
 
@@ -36,6 +36,6 @@ These are transcribed candidates, not verified part selections. Preserve the que
 
 Draft article: `docs/restarting-sv-blue-dog.md`.
 
-The website already supports fetching Markdown directly from public source repositories. Source repository: `DavidIngraham/sv-blue-dog`, branch `main`. The website manifest change has been prepared with collection `sv-blue-dog`, article `restarting`, and a homepage project link. Publish the manifest only after the source article is available on GitHub.
+The website already supports fetching Markdown directly from public source repositories. Source repository: `DavidIngraham/sv-blue-dog`, branch `main`. The website manifest is published with collection `sv-blue-dog`, article `restarting`, and a homepage project link. The website reads the article directly from the public source repository.
 
 The public article needs the owner's review of build status and the proposed next steps. The supplied PDF and reference photograph have not been copied into the website.
