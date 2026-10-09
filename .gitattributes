@@ -1,0 +1,7 @@
+* text=auto
+*.md text eol=lf
+*.SLDPRT binary
+*.SLDASM binary
+*.3mf binary
+*.STEP -text
+*.igs -text
