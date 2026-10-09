@@ -36,6 +36,6 @@ These are transcribed candidates, not verified part selections. Preserve the que
 
 Draft article: `docs/restarting-sv-blue-dog.md`.
 
-The website already supports fetching Markdown directly from public source repositories. Once the source repository and ref are known, add an `sv-blue-dog` collection in the website's `publish-manifest.json`, with an article id such as `restarting` pointing to the draft path. Add a homepage project referencing that collection. Do not insert a guessed repository or a broken public link.
+The website already supports fetching Markdown directly from public source repositories. Source repository: `DavidIngraham/sv-blue-dog`, branch `main`. The website manifest change has been prepared with collection `sv-blue-dog`, article `restarting`, and a homepage project link. Publish the manifest only after the source article is available on GitHub.
 
 The public article needs the owner's review of build status and the proposed next steps. The supplied PDF and reference photograph have not been copied into the website.
