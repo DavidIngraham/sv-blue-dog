@@ -1,41 +1,49 @@
 # SV Blue Dog: picking up a small sailing robot again
 
-Draft for review. Based on the OneNote design brief dated December 26, 2023, revisited October 9, 2026.
+I wanted to explore how far I could get with autonomous sailing and desktop manufacturing. I wanted to learn about sailing, build something cool, and develop a complete system: the boat, the electronics, the controls, and the decisions that would let it look after itself.
 
-SV Blue Dog started with a balancing act: efficiency, reliability, and ease of manufacture. My original notes describe a one-metre sailing robot with a printable hull, a ballasted fin keel, and a strong emphasis on low power consumption. I am picking the project up again, beginning with those requirements and the CAD work already collected.
+The original inspiration was Microtransat. My version was an even more micro "trans-gorge" sailboat. Could I build a small robot that would complete the Gorge Blowout course? Could it go further, sailing from Bonneville to The Dalles and back?
 
-## Start with the boat
+That was the ambition behind SV Blue Dog. I am picking it up again with the original design notes and CAD, and returning to the questions that made me want to build it.
 
-The design brief calls for a monohull that can right itself from a fully inverted position and resist catching weeds. It specifies a sealed hull, a fin keel with a ballast bulb, and a printable hull cross-section of 250 by 250. The notes do not give units for that cross-section; that needs checking against the CAD before it becomes a manufacturing requirement.
+## What would a trans-gorge boat need to do?
 
-The manufacturing target was deliberately ambitious: a frame bill of materials below $100 and less than four hours of labour. That is the target written in the notes, not a measured cost or a budget for the complete boat and its electronics.
+I envisioned a robot I could "set and forget." I wanted to give it a mission and have it handle the sailing, manage its energy, and recover from the kinds of problems that would otherwise end the trip.
 
-The existing CAD folder includes the main boat and mast assemblies, hull sections, a keel shell, and several sail or wing design files. Those files give me something concrete to return to. Their presence alone does not establish which design was selected, printed, assembled, or tested.
+The round-trip idea gave me a concrete mission to think about. Getting somewhere was only part of it; I wanted the boat to bring itself back. How small could I make a system capable of that? What would I need to understand about sailing to make good decisions about the hull, rig, and controller?
 
-## Design around things going wrong
+Those questions were part of the appeal. This was a way to learn about sailing by trying to build something that could do it for itself.
 
-The most useful part of the old brief is its list of expected failures. A small hull breach should have a recovery path, with a bilge pump listed as the proposed response. Battery exhaustion should lead to a low-energy "limp mode." A software reset should also be something the system can recover from.
+## How much of the boat could I make on a desktop?
 
-Those are requirements to make specific and test. What remains powered in limp mode? What state does the controller recover after a reset? How much water can the boat tolerate, and how is it detected? The old notes identify the problems without yet documenting the answers.
+Desktop manufacturing was central to the idea. My December 2023 notes describe a one-metre monohull with a printable hull, a fin keel, and a ballast bulb. I wanted to balance efficiency and reliability with something I could actually manufacture.
 
-Communication and COLREGs compliance also appear as goals. The brief does not document an implemented collision-avoidance system or evidence of compliance.
+I set an ambitious target for the frame: a bill of materials below $100 and less than four hours of labour. That was a design target for the frame, not a measured cost for a finished boat. The notes also call for a printable hull cross-section of 250 by 250, although I still need to confirm the units against the CAD.
 
-## The electronics sketch
+The [CAD files](../cad/) include hull sections, boat and mast assemblies, a keel shell, and several sail or wing variants. That is the design work I am returning to. The next step is to sort through those alternatives and establish which configuration to carry forward.
 
-The proposed architecture separates the autopilot, communications, AIS, and air-data functions. The autopilot list includes an STM32 H7, a CAN transceiver, an inertial sensor, an RM3100 magnetometer, an SD card, battery monitoring, an LT3652 energy harvester, an 18650 holder, a u-blox M10Q, an ExpressLRS/LoRa receiver with ESP32, and a light controller.
+## What does "set and forget" ask of the design?
 
-The communications notes name a possible RockBLOCK 9603N and a u-blox cellular modem. Separate lists cover an AIS board and an air-data board, the latter with an STM32 L4, CAN, an AS5048B, and a hot-wire anemometer.
+That ambition shows up clearly in the failure cases I wrote down. The boat should right itself from a fully inverted position, resist catching weeds, and recover from a software reset. A small hull breach had a proposed response: a bilge pump. Battery exhaustion had another: a low-energy "limp mode."
 
-This is a record of candidate hardware from 2023. It is useful context for restarting the design, but it is not a final bill of materials. The next revision needs a power budget and a clearer account of what each subsystem must do before those choices become commitments.
+Each of those ideas opens up a more specific question. What should the boat keep doing when energy runs low? What does it need to remember after a reset? How would it detect water ingress, and what could it recover from? Self-righting also needs to become a demonstrated property of the boat and rig together.
 
-## Picking it up again
+My notes include communication and COLREGs compliance as goals, too. These are still design questions to work through; the brief records what I wanted the system to handle, rather than results showing that it can.
 
-The first step is to establish the actual baseline: which CAD assembly is current, what physical hardware exists, and what testing has already happened. From there, I want to turn the brief into a small set of measurable checks: hull mass and buoyancy, recovery from inversion, sealing and water ingress, and energy use in normal operation and recovery modes.
+## Bringing the whole system together
 
-The project notes and this write-up will live as Markdown in the source repository. My website can read that material through its existing publication manifest, keeping the article close to the design work as it develops.
+The electronics sketch separates the autopilot, communications, AIS, and air-data functions. It includes an STM32 H7-based autopilot concept, inertial and magnetic sensing, GNSS, logging, battery monitoring, and energy harvesting. CAN appears in both the autopilot and air-data board notes. I also considered cellular communication and a possible RockBLOCK satellite modem.
 
-For now, the recovered brief gives the project a clear direction. The next update should connect those intentions to the hardware and measurements that actually exist.
+The detailed candidate parts are in the [project notes](project-status.md). What interests me now is how those pieces fit together: what information the boat needs to sail, how it uses that information, and how much energy it takes to keep the whole system running. The hardware list was a starting point for that work.
 
----
+## Could it do something useful while it was out there?
 
-Source: personal OneNote page "SV Blue Dog," dated December 26, 2023, supplied as a two-page PDF. The export contains a reference photograph labeled "Sailbotix silicon sailor"; it is not presented here as a photograph of SV Blue Dog. Proposed restart steps above are new editorial suggestions, not recorded test results.
+I also liked the possibility of collecting interesting data. One idea was a persistent swell monitor: could the boat keep station in an area and measure conditions over time?
+
+That adds another question to the journey. Completing a course gives the robot a destination; monitoring asks it to stay somewhere useful. I would need to work out what station keeping means for this boat, what measurements would be useful, and how to interpret them from a moving platform. For now, it is a possibility I want to explore.
+
+## Picking up the thread
+
+The original motivation still holds: learn about sailing, see what I can make with desktop tools, and bring a complete autonomous system together. The trans-gorge mission gives that work a direction, and the swell-monitor idea gives me another reason to keep thinking about endurance and station keeping.
+
+I am starting by revisiting the CAD and the old requirements, documenting the current build status, and choosing the next questions to test. This is where I will keep the journey: the designs I try, the things I learn, and how those results change the boat.
