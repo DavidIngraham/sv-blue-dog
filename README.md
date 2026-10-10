@@ -19,3 +19,5 @@ The GitHub Pages blog imports Markdown from this repository. Requirement stateme
 The current [two-metre mission-sizing study](docs/mission-sizing.md) compares removable assemblies and printed construction options, couples sailing states to route progress, and keeps recovery evidence explicit. The [FDM/glass structural model](docs/structure-sizing.md) supplies its mass and structural screens.
 
 The [sail architecture trade](docs/sail-trade.md) compares tail-controlled and cambered rigid wings with a triangular soft sail, separating development preference from requirement evidence.
+
+The [coupled sizing workflow](docs/coupled-sizing.md) develops the CAD-derived fixed-camber wing, OpenVSP analysis and full-angle recovery inputs needed for size optimization.

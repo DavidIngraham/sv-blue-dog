@@ -1,0 +1,8 @@
+[project]
+name = "blue-dog-wing-analysis"
+version = "0.1.0"
+requires-python = ">=3.13,<3.14"
+dependencies = ["cadquery-ocp>=7.8,<8", "numpy>=2,<3", "scipy>=1.15,<2", "matplotlib>=3.10,<4"]
+
+[tool.uv]
+package = false
