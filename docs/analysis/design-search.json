@@ -423,7 +423,7 @@
       "models/sailing-documents.sysml": "90e0aaf0fc9daf9cebbd8c23164604f695772a1ec40a4a479a519c95e464791c",
       "models/appendage-sizing.sysml": "4f1c64dd4708e53f737c3ee57b00be55274237aa01fd9b79702ced03fad0b87e",
       "models/sizing-documents.sysml": "c2b2f2a4ba7d0d546c0a3e8165101c6173a373090307e1e355bab9d2a084fb38",
-      "models/design-search.sysml": "f260d7a645bca1375d2ed8bf953b8470f07e4cc1f8f606d9fdb38177839fcdf6",
+      "models/design-search.sysml": "d9f63729da18b654dc68bdeb2a7c5438f21a778b944517ea192b8550225391b4",
       "models/design-physics.sysml": "d88bdf0a7142b11b6bd76e0df1f53a8ec97aec298c57a891eb5ec09d94be6ec9",
       "uv.lock": "0bec78a83535ed974fe3aff3be6917ce24d35233545e5418b02a34b188ed2ea8",
       "scripts/install_renderer.py": "fcc5b259d6bf05b337981975b883081cfea6620cb745812a5e274160d9e456a2"

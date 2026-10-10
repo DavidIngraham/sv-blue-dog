@@ -27,6 +27,14 @@
           "value": "false"
         },
         {
+          "name": "waterlineLength",
+          "value": "2.0213593649870587"
+        },
+        {
+          "name": "operatingFeasible",
+          "value": "true"
+        },
+        {
           "name": "caseLabel",
           "value": "\"full_envelope\""
         },
@@ -78,6 +86,8 @@
         "  maxEquilibriumResidual = 7.407134905434987e-10",
         "  minimumMargin = -2.5713211558444558",
         "  numericalFeasible = false",
+        "  waterlineLength = 2.0213593649870587",
+        "  operatingFeasible = true",
         "  caseLabel = \"full_envelope\"",
         "  fullEnvelopeCovered = true",
         "  groundSpeeds = [-0.7762118994833507, -0.785660577922228, -0.6372421497385038, -0.5990217692228128, -0.7856605779008603, -0.4218643489018896, -0.7856605504606328, -0.5981722495421702]",
@@ -151,6 +161,14 @@
           "value": "false"
         },
         {
+          "name": "waterlineLength",
+          "value": "2.893418393538921"
+        },
+        {
+          "name": "operatingFeasible",
+          "value": "true"
+        },
+        {
           "name": "caseLabel",
           "value": "\"nominal_5ms\""
         },
@@ -202,6 +220,8 @@
         "  maxEquilibriumResidual = 3.8829568449472164e-10",
         "  minimumMargin = -1.8296785726049163",
         "  numericalFeasible = false",
+        "  waterlineLength = 2.893418393538921",
+        "  operatingFeasible = true",
         "  caseLabel = \"nominal_5ms\"",
         "  fullEnvelopeCovered = false",
         "  groundSpeeds = [-0.41483928630245814, -0.41483928618094845]",

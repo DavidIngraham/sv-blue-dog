@@ -119,7 +119,8 @@ package BlueDogDesignSearch {
     }
     analysis def SearchAudit {
         subject trial : SearchResult;
-        out attribute boundsValid : Boolean = Within(trial.design, settings.lower, settings.upper) and
+        in attribute designUpper : Real [*] ordered nonunique default = settings.upper;
+        out attribute boundsValid : Boolean = Within(trial.design, settings.lower, designUpper) and
             trial.points->ControlFunctions::forAll { in point : OperatingPoint;
                 point.index >= 1 and point.index <= SequenceFunctions::size(settings.winds) and
                 Within(point.operatingValues, if settings.windward#(point.index) ? settings.stateLowerUp else settings.stateLowerDown,
@@ -136,6 +137,11 @@ package BlueDogDesignSearch {
         out attribute maxEquilibriumResidual : Real = equations->ControlFunctions::reduce { in a : Real; in b : Real; NumericalFunctions::max(a, b) };
         out attribute minimumMargin : Real = margins->ControlFunctions::reduce { in a : Real; in b : Real; NumericalFunctions::min(a, b) };
         out attribute numericalFeasible : Boolean = boundsValid and maxEquilibriumResidual <= settings.equilibrium_tolerance and minimumMargin >= -settings.margin_tolerance;
+        out attribute waterlineLength : Real = trial.design#(1);
+        attribute nonProgressMargins : Real [*] ordered nonunique = (1..SequenceFunctions::size(trial.points))->ControlFunctions::collect { in i : Integer;
+            (2..settings.marginCount)->ControlFunctions::collect { in j : Integer; rows#((i-1)*width+settings.equationCount+j) } };
+        out attribute operatingFeasible : Boolean = boundsValid and maxEquilibriumResidual <= settings.equilibrium_tolerance and
+            nonProgressMargins->ControlFunctions::forAll { in margin : Real; margin >= -settings.margin_tolerance };
         out attribute caseLabel : String = trial.label;
         attribute scenarioIndices : Integer [*] ordered nonunique = trial.points->ControlFunctions::collect { in point : OperatingPoint; point.index };
         out attribute fullEnvelopeCovered : Boolean = SequenceFunctions::size(trial.points) == SequenceFunctions::size(settings.winds) and
