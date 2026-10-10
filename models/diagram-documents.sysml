@@ -802,4 +802,8 @@ package BlueDogDiagramDocuments {
         attribute redefines title = "Polar legs feed the cruise model";
         part diagram : Diagram { attribute redefines direction = "BT"; ref redefines source = BlueDogSemanticViews::SailingIntegration; }
     }
+    part def SizingIntegrationDiagram :> Document {
+        attribute redefines title = "Coupled sizing configuration";
+        part diagram : Diagram { attribute redefines direction = "TB"; ref redefines source = BlueDogSemanticViews::SizingIntegration; }
+    }
 }

@@ -4,6 +4,8 @@ This study works backward from the mission: how much **water-relative boat speed
 
 The executable source is [sailing-performance.sysml](../models/sailing-performance.sysml). Read the [generated results and inputs](sailing-performance-results.md) or [native analysis output](analysis/sailing-performance.json) for current values. The calculations reuse the existing Q-101 progress and Q-102 duration criteria; Q-101 retains its proposed-target status. Scenario assumptions are examples, not additional requirements.
 
+The next step is the [coupled sail, keel and rudder sizing study](appendage-sizing.md), which uses this clean upwind demand as a force-balance input.
+
 ## From a polar point to mission progress
 
 A polar gives water-relative boat speed versus true wind speed and angle. VMG is the component useful to the route; a fast reach is not necessarily a fast passage. A VPP predicts the polar by balancing sailing forces against resistance and stability constraints. This inverse study specifies the performance needed before attempting that prediction. [ORC speed-guide explanation](https://orc.org/uploads/files/Rules-Regulations/2023/Speed-Guide-Explanation-2023.pdf)

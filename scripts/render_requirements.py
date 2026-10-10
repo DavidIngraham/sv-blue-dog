@@ -15,7 +15,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = tuple(ROOT / "models" / name for name in (
     "challenge.sysml", "blue-dog.sysml", "requirements.sysml",
-    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml", "cruise-reliability.sysml", "dfmea.sysml", "reliability-documents.sysml", "semantic-views.sysml", "sailing-performance.sysml", "sailing-documents.sysml"))
+    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml", "cruise-reliability.sysml", "dfmea.sysml", "reliability-documents.sysml", "semantic-views.sysml", "sailing-performance.sysml", "sailing-documents.sysml", "appendage-sizing.sysml", "sizing-documents.sysml"))
 
 
 def native(*arguments, models=MODELS):
@@ -71,6 +71,14 @@ def native_sailing_case():
     return native(*arguments, "-json")
 
 
+def native_sizing_case():
+    arguments = []
+    for example in ("reference", "lowRig", "slowControl", "gust", "highResistance"):
+        subject = f"BlueDogSizingExamples::{example}"
+        arguments.extend(("-instantiate", subject, "-analysis", f"BlueDogSizing::CoupledSizing {subject}"))
+    return native(*arguments, "-json")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Check generated diagrams, reports and analyses for freshness")
@@ -106,6 +114,13 @@ def main():
         from plot_sailing import sailing_figures
     for name, content in sailing_figures(outputs[ROOT / "docs/analysis/sailing-performance.json"]).items():
         outputs[ROOT / "docs/figures" / name] = content
+    outputs[ROOT / "docs/appendage-sizing-results.md"] = native("-render-document", "BlueDogSizingDocuments::SizingReport")
+    outputs[ROOT / "docs/analysis/appendage-sizing.json"] = native_sizing_case()
+    try:
+        from .plot_sizing import sizing_figure
+    except ImportError:
+        from plot_sizing import sizing_figure
+    outputs[ROOT / "docs/figures/appendage-sizing.png"] = sizing_figure(outputs[ROOT / "docs/analysis/appendage-sizing.json"])
     diagrams = {}
     # Compile the model once per format, rather than once for every view.
     with tempfile.TemporaryDirectory(dir=ROOT / ".tools", prefix="documents-") as scratch:
@@ -164,6 +179,7 @@ def main():
             "requirements-q-001": "CruisePerformanceRequirements",
             "requirements-l-001": "MissionReliabilityRequirements",
             "sailing-integration": "SailingIntegrationDiagram",
+            "sizing-integration": "SizingIntegrationDiagram",
             "mission-semantics": "MissionSemantics",
             "energy-semantics": "EnergySemantics",
             "cruise-semantics": "CruiseSemantics",

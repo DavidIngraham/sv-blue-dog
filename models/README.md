@@ -44,3 +44,5 @@ Update the website publication manifest when adding or removing reader-facing pa
 - [Standard modeling metadata](https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml.library/Domain%20Libraries/Metadata/ModelingMetadata.sysml)
 
 Sailing performance uses `sailing-performance.sysml` for inverse polar demand, hull-speed screening and cruise integration. Mathematical figures are rendered from native sensitivity outputs by `scripts/plot_sailing.py`, using the uv-locked Matplotlib dependency; no sailing equations are reimplemented in Python.
+
+Coupled sail, keel and rudder sizing is in `appendage-sizing.sysml`; `sizing-documents.sysml` defines its native report. The sizing objective checks valid computation, while `modeledFit` and `supportedSizing` distinguish numerical fit from accepted evidence. `scripts/plot_sizing.py` plots only native results.

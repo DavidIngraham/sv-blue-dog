@@ -1,0 +1,1670 @@
+{
+  "status": "holds",
+  "exit": 0,
+  "checks": [
+    {
+      "subject": "BlueDogSizing::CoupledSizing",
+      "status": "holds",
+      "values": [
+        {
+          "name": "caseLabel",
+          "value": "\"Reference\""
+        },
+        {
+          "name": "boatSpeed",
+          "value": "3.721614637823934 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindSpeed",
+          "value": "5 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindAngle",
+          "value": "0.7853981633974483 [rad]"
+        },
+        {
+          "name": "hullResistance",
+          "value": "4 [N]"
+        },
+        {
+          "name": "candidateSailArea",
+          "value": "0.55 [SI::'m²']"
+        },
+        {
+          "name": "candidateKeelArea",
+          "value": "0.012 [SI::'m²']"
+        },
+        {
+          "name": "candidateRudderArea",
+          "value": "0.005 [SI::'m²']"
+        },
+        {
+          "name": "effortHeight",
+          "value": "0.6 [m]"
+        },
+        {
+          "name": "lateralForceDepth",
+          "value": "0.2 [m]"
+        },
+        {
+          "name": "candidateBallastMass",
+          "value": "6 [kg]"
+        },
+        {
+          "name": "otherMass",
+          "value": "4 [kg]"
+        },
+        {
+          "name": "massBudget",
+          "value": "12 [kg]"
+        },
+        {
+          "name": "keelSpan",
+          "value": "0.25 [m]"
+        },
+        {
+          "name": "rudderSpan",
+          "value": "0.14 [m]"
+        },
+        {
+          "name": "availableTorque",
+          "value": "0.5 [SI::'N⋅m']"
+        },
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "driveSolutionExists",
+          "value": "true"
+        },
+        {
+          "name": "minimumSailArea",
+          "value": "0.39925721227799876 [SI::'m²']"
+        },
+        {
+          "name": "maximumDriveSailArea",
+          "value": "9.711781862946044 [SI::'m²']"
+        },
+        {
+          "name": "apparentWindSpeed",
+          "value": "8.072558763251562 [SI::'m/s']"
+        },
+        {
+          "name": "sailDrive",
+          "value": "7.246435336734371 [N]"
+        },
+        {
+          "name": "sailSideForce",
+          "value": "20.889165551703552 [N]"
+        },
+        {
+          "name": "keelTrimForce",
+          "value": "18.8002489965332 [N]"
+        },
+        {
+          "name": "rudderTrimForce",
+          "value": "2.0889165551703552 [N]"
+        },
+        {
+          "name": "totalResistance",
+          "value": "5.446808617088781 [N]"
+        },
+        {
+          "name": "driveMargin",
+          "value": "1.7996267196455902 [N]"
+        },
+        {
+          "name": "minimumKeelArea",
+          "value": "0.007147889887748487 [SI::'m²']"
+        },
+        {
+          "name": "minimumRudderArea",
+          "value": "0.0017423419944007786 [SI::'m²']"
+        },
+        {
+          "name": "keelAspectRatio",
+          "value": "5.208333333333333"
+        },
+        {
+          "name": "rudderAspectRatio",
+          "value": "3.9200000000000004"
+        },
+        {
+          "name": "keelMeanChord",
+          "value": "0.048 [m]"
+        },
+        {
+          "name": "rudderMeanChord",
+          "value": "0.03571428571428571 [m]"
+        },
+        {
+          "name": "keelReynolds",
+          "value": "178637.50261554884"
+        },
+        {
+          "name": "rudderReynolds",
+          "value": "106331.84679496955"
+        },
+        {
+          "name": "sailReynolds",
+          "value": "161451.17526503123"
+        },
+        {
+          "name": "heelingMoment",
+          "value": "16.711332441362842 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "availableRightingMoment",
+          "value": "13.526625462509422 [SI::'N⋅m']"
+        },
+        {
+          "name": "maximumHeelSailArea",
+          "value": "0.2967903778462748 [SI::'m²']"
+        },
+        {
+          "name": "minimumBallastMass",
+          "value": "12.577819211276708 [kg]"
+        },
+        {
+          "name": "requiredRudderTorque",
+          "value": "0.09950062249133299 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "driveMet",
+          "value": "true"
+        },
+        {
+          "name": "heelMet",
+          "value": "false"
+        },
+        {
+          "name": "keelMet",
+          "value": "true"
+        },
+        {
+          "name": "rudderMet",
+          "value": "true"
+        },
+        {
+          "name": "rudderEnvelopeTorque",
+          "value": "0.329168975069252 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "keelRootSideMoment",
+          "value": "3.712546686849975 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "rudderRootSideMoment",
+          "value": "0.3243362382928873 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "torqueMet",
+          "value": "true"
+        },
+        {
+          "name": "massMet",
+          "value": "true"
+        },
+        {
+          "name": "sailIntervalExists",
+          "value": "false"
+        },
+        {
+          "name": "modeledFit",
+          "value": "false"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "supportedSizing",
+          "value": "false"
+        },
+        {
+          "name": "objective characterization",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSizing::CoupledSizing on object #1 of \"BlueDogSizingExamples::reference\"",
+        "  caseLabel = \"Reference\"",
+        "  boatSpeed = 3.721614637823934 [SI::'m/s']",
+        "  trueWindSpeed = 5 [SI::'m/s']",
+        "  trueWindAngle = 0.7853981633974483 [rad]",
+        "  hullResistance = 4 [N]",
+        "  candidateSailArea = 0.55 [SI::'m²']",
+        "  candidateKeelArea = 0.012 [SI::'m²']",
+        "  candidateRudderArea = 0.005 [SI::'m²']",
+        "  effortHeight = 0.6 [m]",
+        "  lateralForceDepth = 0.2 [m]",
+        "  candidateBallastMass = 6 [kg]",
+        "  otherMass = 4 [kg]",
+        "  massBudget = 12 [kg]",
+        "  keelSpan = 0.25 [m]",
+        "  rudderSpan = 0.14 [m]",
+        "  availableTorque = 0.5 [SI::'N⋅m']",
+        "  inputsValid = true",
+        "  driveSolutionExists = true",
+        "  minimumSailArea = 0.39925721227799876 [SI::'m²']",
+        "  maximumDriveSailArea = 9.711781862946044 [SI::'m²']",
+        "  apparentWindSpeed = 8.072558763251562 [SI::'m/s']",
+        "  sailDrive = 7.246435336734371 [N]",
+        "  sailSideForce = 20.889165551703552 [N]",
+        "  keelTrimForce = 18.8002489965332 [N]",
+        "  rudderTrimForce = 2.0889165551703552 [N]",
+        "  totalResistance = 5.446808617088781 [N]",
+        "  driveMargin = 1.7996267196455902 [N]",
+        "  minimumKeelArea = 0.007147889887748487 [SI::'m²']",
+        "  minimumRudderArea = 0.0017423419944007786 [SI::'m²']",
+        "  keelAspectRatio = 5.208333333333333",
+        "  rudderAspectRatio = 3.9200000000000004",
+        "  keelMeanChord = 0.048 [m]",
+        "  rudderMeanChord = 0.03571428571428571 [m]",
+        "  keelReynolds = 178637.50261554884",
+        "  rudderReynolds = 106331.84679496955",
+        "  sailReynolds = 161451.17526503123",
+        "  heelingMoment = 16.711332441362842 [SI::'kg⋅m²⋅s⁻²']",
+        "  availableRightingMoment = 13.526625462509422 [SI::'N⋅m']",
+        "  maximumHeelSailArea = 0.2967903778462748 [SI::'m²']",
+        "  minimumBallastMass = 12.577819211276708 [kg]",
+        "  requiredRudderTorque = 0.09950062249133299 [SI::'kg⋅m²⋅s⁻²']",
+        "  driveMet = true",
+        "  heelMet = false",
+        "  keelMet = true",
+        "  rudderMet = true",
+        "  rudderEnvelopeTorque = 0.329168975069252 [SI::'kg⋅m²⋅s⁻²']",
+        "  keelRootSideMoment = 3.712546686849975 [SI::'kg⋅m²⋅s⁻²']",
+        "  rudderRootSideMoment = 0.3243362382928873 [SI::'kg⋅m²⋅s⁻²']",
+        "  torqueMet = true",
+        "  massMet = true",
+        "  sailIntervalExists = false",
+        "  modeledFit = false",
+        "  evidenceReady = false",
+        "  supportedSizing = false",
+        "  objective characterization: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSizing::CoupledSizing",
+      "status": "holds",
+      "values": [
+        {
+          "name": "caseLabel",
+          "value": "\"Lower effort / more ballast\""
+        },
+        {
+          "name": "boatSpeed",
+          "value": "3.721614637823934 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindSpeed",
+          "value": "5 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindAngle",
+          "value": "0.7853981633974483 [rad]"
+        },
+        {
+          "name": "hullResistance",
+          "value": "4 [N]"
+        },
+        {
+          "name": "candidateSailArea",
+          "value": "0.55 [SI::'m²']"
+        },
+        {
+          "name": "candidateKeelArea",
+          "value": "0.012 [SI::'m²']"
+        },
+        {
+          "name": "candidateRudderArea",
+          "value": "0.005 [SI::'m²']"
+        },
+        {
+          "name": "effortHeight",
+          "value": "0.3 [m]"
+        },
+        {
+          "name": "lateralForceDepth",
+          "value": "0.2 [m]"
+        },
+        {
+          "name": "candidateBallastMass",
+          "value": "8 [kg]"
+        },
+        {
+          "name": "otherMass",
+          "value": "4 [kg]"
+        },
+        {
+          "name": "massBudget",
+          "value": "12 [kg]"
+        },
+        {
+          "name": "keelSpan",
+          "value": "0.25 [m]"
+        },
+        {
+          "name": "rudderSpan",
+          "value": "0.14 [m]"
+        },
+        {
+          "name": "availableTorque",
+          "value": "0.5 [SI::'N⋅m']"
+        },
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "driveSolutionExists",
+          "value": "true"
+        },
+        {
+          "name": "minimumSailArea",
+          "value": "0.39925721227799876 [SI::'m²']"
+        },
+        {
+          "name": "maximumDriveSailArea",
+          "value": "9.711781862946044 [SI::'m²']"
+        },
+        {
+          "name": "apparentWindSpeed",
+          "value": "8.072558763251562 [SI::'m/s']"
+        },
+        {
+          "name": "sailDrive",
+          "value": "7.246435336734371 [N]"
+        },
+        {
+          "name": "sailSideForce",
+          "value": "20.889165551703552 [N]"
+        },
+        {
+          "name": "keelTrimForce",
+          "value": "18.8002489965332 [N]"
+        },
+        {
+          "name": "rudderTrimForce",
+          "value": "2.0889165551703552 [N]"
+        },
+        {
+          "name": "totalResistance",
+          "value": "5.446808617088781 [N]"
+        },
+        {
+          "name": "driveMargin",
+          "value": "1.7996267196455902 [N]"
+        },
+        {
+          "name": "minimumKeelArea",
+          "value": "0.007147889887748487 [SI::'m²']"
+        },
+        {
+          "name": "minimumRudderArea",
+          "value": "0.0017423419944007786 [SI::'m²']"
+        },
+        {
+          "name": "keelAspectRatio",
+          "value": "5.208333333333333"
+        },
+        {
+          "name": "rudderAspectRatio",
+          "value": "3.9200000000000004"
+        },
+        {
+          "name": "keelMeanChord",
+          "value": "0.048 [m]"
+        },
+        {
+          "name": "rudderMeanChord",
+          "value": "0.03571428571428571 [m]"
+        },
+        {
+          "name": "keelReynolds",
+          "value": "178637.50261554884"
+        },
+        {
+          "name": "rudderReynolds",
+          "value": "106331.84679496955"
+        },
+        {
+          "name": "sailReynolds",
+          "value": "161451.17526503123"
+        },
+        {
+          "name": "heelingMoment",
+          "value": "10.444582775851776 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "availableRightingMoment",
+          "value": "17.03550061667923 [SI::'N⋅m']"
+        },
+        {
+          "name": "maximumHeelSailArea",
+          "value": "0.598046888053536 [SI::'m²']"
+        },
+        {
+          "name": "minimumBallastMass",
+          "value": "7.219905871387219 [kg]"
+        },
+        {
+          "name": "requiredRudderTorque",
+          "value": "0.09950062249133299 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "driveMet",
+          "value": "true"
+        },
+        {
+          "name": "heelMet",
+          "value": "true"
+        },
+        {
+          "name": "keelMet",
+          "value": "true"
+        },
+        {
+          "name": "rudderMet",
+          "value": "true"
+        },
+        {
+          "name": "rudderEnvelopeTorque",
+          "value": "0.329168975069252 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "keelRootSideMoment",
+          "value": "3.712546686849975 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "rudderRootSideMoment",
+          "value": "0.3243362382928873 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "torqueMet",
+          "value": "true"
+        },
+        {
+          "name": "massMet",
+          "value": "true"
+        },
+        {
+          "name": "sailIntervalExists",
+          "value": "true"
+        },
+        {
+          "name": "modeledFit",
+          "value": "true"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "supportedSizing",
+          "value": "false"
+        },
+        {
+          "name": "objective characterization",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSizing::CoupledSizing on object #6 of \"BlueDogSizingExamples::lowRig\"",
+        "  caseLabel = \"Lower effort / more ballast\"",
+        "  boatSpeed = 3.721614637823934 [SI::'m/s']",
+        "  trueWindSpeed = 5 [SI::'m/s']",
+        "  trueWindAngle = 0.7853981633974483 [rad]",
+        "  hullResistance = 4 [N]",
+        "  candidateSailArea = 0.55 [SI::'m²']",
+        "  candidateKeelArea = 0.012 [SI::'m²']",
+        "  candidateRudderArea = 0.005 [SI::'m²']",
+        "  effortHeight = 0.3 [m]",
+        "  lateralForceDepth = 0.2 [m]",
+        "  candidateBallastMass = 8 [kg]",
+        "  otherMass = 4 [kg]",
+        "  massBudget = 12 [kg]",
+        "  keelSpan = 0.25 [m]",
+        "  rudderSpan = 0.14 [m]",
+        "  availableTorque = 0.5 [SI::'N⋅m']",
+        "  inputsValid = true",
+        "  driveSolutionExists = true",
+        "  minimumSailArea = 0.39925721227799876 [SI::'m²']",
+        "  maximumDriveSailArea = 9.711781862946044 [SI::'m²']",
+        "  apparentWindSpeed = 8.072558763251562 [SI::'m/s']",
+        "  sailDrive = 7.246435336734371 [N]",
+        "  sailSideForce = 20.889165551703552 [N]",
+        "  keelTrimForce = 18.8002489965332 [N]",
+        "  rudderTrimForce = 2.0889165551703552 [N]",
+        "  totalResistance = 5.446808617088781 [N]",
+        "  driveMargin = 1.7996267196455902 [N]",
+        "  minimumKeelArea = 0.007147889887748487 [SI::'m²']",
+        "  minimumRudderArea = 0.0017423419944007786 [SI::'m²']",
+        "  keelAspectRatio = 5.208333333333333",
+        "  rudderAspectRatio = 3.9200000000000004",
+        "  keelMeanChord = 0.048 [m]",
+        "  rudderMeanChord = 0.03571428571428571 [m]",
+        "  keelReynolds = 178637.50261554884",
+        "  rudderReynolds = 106331.84679496955",
+        "  sailReynolds = 161451.17526503123",
+        "  heelingMoment = 10.444582775851776 [SI::'kg⋅m²⋅s⁻²']",
+        "  availableRightingMoment = 17.03550061667923 [SI::'N⋅m']",
+        "  maximumHeelSailArea = 0.598046888053536 [SI::'m²']",
+        "  minimumBallastMass = 7.219905871387219 [kg]",
+        "  requiredRudderTorque = 0.09950062249133299 [SI::'kg⋅m²⋅s⁻²']",
+        "  driveMet = true",
+        "  heelMet = true",
+        "  keelMet = true",
+        "  rudderMet = true",
+        "  rudderEnvelopeTorque = 0.329168975069252 [SI::'kg⋅m²⋅s⁻²']",
+        "  keelRootSideMoment = 3.712546686849975 [SI::'kg⋅m²⋅s⁻²']",
+        "  rudderRootSideMoment = 0.3243362382928873 [SI::'kg⋅m²⋅s⁻²']",
+        "  torqueMet = true",
+        "  massMet = true",
+        "  sailIntervalExists = true",
+        "  modeledFit = true",
+        "  evidenceReady = false",
+        "  supportedSizing = false",
+        "  objective characterization: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSizing::CoupledSizing",
+      "status": "holds",
+      "values": [
+        {
+          "name": "caseLabel",
+          "value": "\"Slow control probe\""
+        },
+        {
+          "name": "boatSpeed",
+          "value": "0.5 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindSpeed",
+          "value": "5 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindAngle",
+          "value": "0.7853981633974483 [rad]"
+        },
+        {
+          "name": "hullResistance",
+          "value": "4 [N]"
+        },
+        {
+          "name": "candidateSailArea",
+          "value": "0.55 [SI::'m²']"
+        },
+        {
+          "name": "candidateKeelArea",
+          "value": "0.012 [SI::'m²']"
+        },
+        {
+          "name": "candidateRudderArea",
+          "value": "0.005 [SI::'m²']"
+        },
+        {
+          "name": "effortHeight",
+          "value": "0.6 [m]"
+        },
+        {
+          "name": "lateralForceDepth",
+          "value": "0.2 [m]"
+        },
+        {
+          "name": "candidateBallastMass",
+          "value": "6 [kg]"
+        },
+        {
+          "name": "otherMass",
+          "value": "4 [kg]"
+        },
+        {
+          "name": "massBudget",
+          "value": "12 [kg]"
+        },
+        {
+          "name": "keelSpan",
+          "value": "0.25 [m]"
+        },
+        {
+          "name": "rudderSpan",
+          "value": "0.14 [m]"
+        },
+        {
+          "name": "availableTorque",
+          "value": "0.5 [SI::'N⋅m']"
+        },
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "driveSolutionExists",
+          "value": "false"
+        },
+        {
+          "name": "minimumSailArea",
+          "value": "0 [SI::'m²']"
+        },
+        {
+          "name": "maximumDriveSailArea",
+          "value": "0 [SI::'m²']"
+        },
+        {
+          "name": "apparentWindSpeed",
+          "value": "5.365215177971219 [SI::'m/s']"
+        },
+        {
+          "name": "sailDrive",
+          "value": "5.514886044899 [N]"
+        },
+        {
+          "name": "sailSideForce",
+          "value": "8.060669467318837 [N]"
+        },
+        {
+          "name": "keelTrimForce",
+          "value": "7.254602520586953 [N]"
+        },
+        {
+          "name": "rudderTrimForce",
+          "value": "0.8060669467318837 [N]"
+        },
+        {
+          "name": "totalResistance",
+          "value": "7.27072760617553 [N]"
+        },
+        {
+          "name": "driveMargin",
+          "value": "-1.7558415612765303 [N]"
+        },
+        {
+          "name": "minimumKeelArea",
+          "value": "0.16509205041173908 [SI::'m²']"
+        },
+        {
+          "name": "minimumRudderArea",
+          "value": "0.056439592085371366 [SI::'m²']"
+        },
+        {
+          "name": "keelAspectRatio",
+          "value": "5.208333333333333"
+        },
+        {
+          "name": "rudderAspectRatio",
+          "value": "3.9200000000000004"
+        },
+        {
+          "name": "keelMeanChord",
+          "value": "0.048 [m]"
+        },
+        {
+          "name": "rudderMeanChord",
+          "value": "0.03571428571428571 [m]"
+        },
+        {
+          "name": "keelReynolds",
+          "value": "24000.0"
+        },
+        {
+          "name": "rudderReynolds",
+          "value": "14285.714285714286"
+        },
+        {
+          "name": "sailReynolds",
+          "value": "107304.30355942437"
+        },
+        {
+          "name": "heelingMoment",
+          "value": "6.44853557385507 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "availableRightingMoment",
+          "value": "13.526625462509422 [SI::'N⋅m']"
+        },
+        {
+          "name": "maximumHeelSailArea",
+          "value": "0.7691300781057392 [SI::'m²']"
+        },
+        {
+          "name": "minimumBallastMass",
+          "value": "3.8033860240669504 [kg]"
+        },
+        {
+          "name": "requiredRudderTorque",
+          "value": "0.07063650630146738 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "driveMet",
+          "value": "false"
+        },
+        {
+          "name": "heelMet",
+          "value": "true"
+        },
+        {
+          "name": "keelMet",
+          "value": "false"
+        },
+        {
+          "name": "rudderMet",
+          "value": "false"
+        },
+        {
+          "name": "rudderEnvelopeTorque",
+          "value": "0.0354 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "keelRootSideMoment",
+          "value": "1.5477379726100537 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "rudderRootSideMoment",
+          "value": "0.18963702940684782 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "torqueMet",
+          "value": "true"
+        },
+        {
+          "name": "massMet",
+          "value": "true"
+        },
+        {
+          "name": "sailIntervalExists",
+          "value": "false"
+        },
+        {
+          "name": "modeledFit",
+          "value": "false"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "supportedSizing",
+          "value": "false"
+        },
+        {
+          "name": "objective characterization",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSizing::CoupledSizing on object #10 of \"BlueDogSizingExamples::slowControl\"",
+        "  caseLabel = \"Slow control probe\"",
+        "  boatSpeed = 0.5 [SI::'m/s']",
+        "  trueWindSpeed = 5 [SI::'m/s']",
+        "  trueWindAngle = 0.7853981633974483 [rad]",
+        "  hullResistance = 4 [N]",
+        "  candidateSailArea = 0.55 [SI::'m²']",
+        "  candidateKeelArea = 0.012 [SI::'m²']",
+        "  candidateRudderArea = 0.005 [SI::'m²']",
+        "  effortHeight = 0.6 [m]",
+        "  lateralForceDepth = 0.2 [m]",
+        "  candidateBallastMass = 6 [kg]",
+        "  otherMass = 4 [kg]",
+        "  massBudget = 12 [kg]",
+        "  keelSpan = 0.25 [m]",
+        "  rudderSpan = 0.14 [m]",
+        "  availableTorque = 0.5 [SI::'N⋅m']",
+        "  inputsValid = true",
+        "  driveSolutionExists = false",
+        "  minimumSailArea = 0 [SI::'m²']",
+        "  maximumDriveSailArea = 0 [SI::'m²']",
+        "  apparentWindSpeed = 5.365215177971219 [SI::'m/s']",
+        "  sailDrive = 5.514886044899 [N]",
+        "  sailSideForce = 8.060669467318837 [N]",
+        "  keelTrimForce = 7.254602520586953 [N]",
+        "  rudderTrimForce = 0.8060669467318837 [N]",
+        "  totalResistance = 7.27072760617553 [N]",
+        "  driveMargin = -1.7558415612765303 [N]",
+        "  minimumKeelArea = 0.16509205041173908 [SI::'m²']",
+        "  minimumRudderArea = 0.056439592085371366 [SI::'m²']",
+        "  keelAspectRatio = 5.208333333333333",
+        "  rudderAspectRatio = 3.9200000000000004",
+        "  keelMeanChord = 0.048 [m]",
+        "  rudderMeanChord = 0.03571428571428571 [m]",
+        "  keelReynolds = 24000.0",
+        "  rudderReynolds = 14285.714285714286",
+        "  sailReynolds = 107304.30355942437",
+        "  heelingMoment = 6.44853557385507 [SI::'kg⋅m²⋅s⁻²']",
+        "  availableRightingMoment = 13.526625462509422 [SI::'N⋅m']",
+        "  maximumHeelSailArea = 0.7691300781057392 [SI::'m²']",
+        "  minimumBallastMass = 3.8033860240669504 [kg]",
+        "  requiredRudderTorque = 0.07063650630146738 [SI::'kg⋅m²⋅s⁻²']",
+        "  driveMet = false",
+        "  heelMet = true",
+        "  keelMet = false",
+        "  rudderMet = false",
+        "  rudderEnvelopeTorque = 0.0354 [SI::'kg⋅m²⋅s⁻²']",
+        "  keelRootSideMoment = 1.5477379726100537 [SI::'kg⋅m²⋅s⁻²']",
+        "  rudderRootSideMoment = 0.18963702940684782 [SI::'kg⋅m²⋅s⁻²']",
+        "  torqueMet = true",
+        "  massMet = true",
+        "  sailIntervalExists = false",
+        "  modeledFit = false",
+        "  evidenceReady = false",
+        "  supportedSizing = false",
+        "  objective characterization: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSizing::CoupledSizing",
+      "status": "holds",
+      "values": [
+        {
+          "name": "caseLabel",
+          "value": "\"Full-sail high wind\""
+        },
+        {
+          "name": "boatSpeed",
+          "value": "3.721614637823934 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindSpeed",
+          "value": "15 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindAngle",
+          "value": "0.7853981633974483 [rad]"
+        },
+        {
+          "name": "hullResistance",
+          "value": "4 [N]"
+        },
+        {
+          "name": "candidateSailArea",
+          "value": "0.55 [SI::'m²']"
+        },
+        {
+          "name": "candidateKeelArea",
+          "value": "0.012 [SI::'m²']"
+        },
+        {
+          "name": "candidateRudderArea",
+          "value": "0.005 [SI::'m²']"
+        },
+        {
+          "name": "effortHeight",
+          "value": "0.6 [m]"
+        },
+        {
+          "name": "lateralForceDepth",
+          "value": "0.2 [m]"
+        },
+        {
+          "name": "candidateBallastMass",
+          "value": "6 [kg]"
+        },
+        {
+          "name": "otherMass",
+          "value": "4 [kg]"
+        },
+        {
+          "name": "massBudget",
+          "value": "12 [kg]"
+        },
+        {
+          "name": "keelSpan",
+          "value": "0.25 [m]"
+        },
+        {
+          "name": "rudderSpan",
+          "value": "0.14 [m]"
+        },
+        {
+          "name": "availableTorque",
+          "value": "0.5 [SI::'N⋅m']"
+        },
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "driveSolutionExists",
+          "value": "true"
+        },
+        {
+          "name": "minimumSailArea",
+          "value": "0.05282163047525398 [SI::'m²']"
+        },
+        {
+          "name": "maximumDriveSailArea",
+          "value": "3.6491212182079025 [SI::'m²']"
+        },
+        {
+          "name": "apparentWindSpeed",
+          "value": "17.826883741515733 [SI::'m/s']"
+        },
+        {
+          "name": "sailDrive",
+          "value": "53.37156509138695 [N]"
+        },
+        {
+          "name": "sailSideForce",
+          "value": "93.69078763111142 [N]"
+        },
+        {
+          "name": "keelTrimForce",
+          "value": "84.32170886800027 [N]"
+        },
+        {
+          "name": "rudderTrimForce",
+          "value": "9.369078763111142 [N]"
+        },
+        {
+          "name": "totalResistance",
+          "value": "12.982078898941696 [N]"
+        },
+        {
+          "name": "driveMargin",
+          "value": "40.389486192445254 [N]"
+        },
+        {
+          "name": "minimumKeelArea",
+          "value": "0.03080113690134811 [SI::'m²']"
+        },
+        {
+          "name": "minimumRudderArea",
+          "value": "0.00584880848981738 [SI::'m²']"
+        },
+        {
+          "name": "keelAspectRatio",
+          "value": "5.208333333333333"
+        },
+        {
+          "name": "rudderAspectRatio",
+          "value": "3.9200000000000004"
+        },
+        {
+          "name": "keelMeanChord",
+          "value": "0.048 [m]"
+        },
+        {
+          "name": "rudderMeanChord",
+          "value": "0.03571428571428571 [m]"
+        },
+        {
+          "name": "keelReynolds",
+          "value": "178637.50261554884"
+        },
+        {
+          "name": "rudderReynolds",
+          "value": "106331.84679496955"
+        },
+        {
+          "name": "sailReynolds",
+          "value": "356537.6748303146"
+        },
+        {
+          "name": "heelingMoment",
+          "value": "74.95263010488914 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "availableRightingMoment",
+          "value": "13.526625462509422 [SI::'N⋅m']"
+        },
+        {
+          "name": "maximumHeelSailArea",
+          "value": "0.06617196304714147 [SI::'m²']"
+        },
+        {
+          "name": "minimumBallastMass",
+          "value": "62.37266380212628 [kg]"
+        },
+        {
+          "name": "requiredRudderTorque",
+          "value": "0.2633042721700007 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "driveMet",
+          "value": "true"
+        },
+        {
+          "name": "heelMet",
+          "value": "false"
+        },
+        {
+          "name": "keelMet",
+          "value": "false"
+        },
+        {
+          "name": "rudderMet",
+          "value": "false"
+        },
+        {
+          "name": "rudderEnvelopeTorque",
+          "value": "0.329168975069252 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "keelRootSideMoment",
+          "value": "15.997820412750052 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "rudderRootSideMoment",
+          "value": "1.08875327012667 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "torqueMet",
+          "value": "true"
+        },
+        {
+          "name": "massMet",
+          "value": "true"
+        },
+        {
+          "name": "sailIntervalExists",
+          "value": "true"
+        },
+        {
+          "name": "modeledFit",
+          "value": "false"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "supportedSizing",
+          "value": "false"
+        },
+        {
+          "name": "objective characterization",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSizing::CoupledSizing on object #14 of \"BlueDogSizingExamples::gust\"",
+        "  caseLabel = \"Full-sail high wind\"",
+        "  boatSpeed = 3.721614637823934 [SI::'m/s']",
+        "  trueWindSpeed = 15 [SI::'m/s']",
+        "  trueWindAngle = 0.7853981633974483 [rad]",
+        "  hullResistance = 4 [N]",
+        "  candidateSailArea = 0.55 [SI::'m²']",
+        "  candidateKeelArea = 0.012 [SI::'m²']",
+        "  candidateRudderArea = 0.005 [SI::'m²']",
+        "  effortHeight = 0.6 [m]",
+        "  lateralForceDepth = 0.2 [m]",
+        "  candidateBallastMass = 6 [kg]",
+        "  otherMass = 4 [kg]",
+        "  massBudget = 12 [kg]",
+        "  keelSpan = 0.25 [m]",
+        "  rudderSpan = 0.14 [m]",
+        "  availableTorque = 0.5 [SI::'N⋅m']",
+        "  inputsValid = true",
+        "  driveSolutionExists = true",
+        "  minimumSailArea = 0.05282163047525398 [SI::'m²']",
+        "  maximumDriveSailArea = 3.6491212182079025 [SI::'m²']",
+        "  apparentWindSpeed = 17.826883741515733 [SI::'m/s']",
+        "  sailDrive = 53.37156509138695 [N]",
+        "  sailSideForce = 93.69078763111142 [N]",
+        "  keelTrimForce = 84.32170886800027 [N]",
+        "  rudderTrimForce = 9.369078763111142 [N]",
+        "  totalResistance = 12.982078898941696 [N]",
+        "  driveMargin = 40.389486192445254 [N]",
+        "  minimumKeelArea = 0.03080113690134811 [SI::'m²']",
+        "  minimumRudderArea = 0.00584880848981738 [SI::'m²']",
+        "  keelAspectRatio = 5.208333333333333",
+        "  rudderAspectRatio = 3.9200000000000004",
+        "  keelMeanChord = 0.048 [m]",
+        "  rudderMeanChord = 0.03571428571428571 [m]",
+        "  keelReynolds = 178637.50261554884",
+        "  rudderReynolds = 106331.84679496955",
+        "  sailReynolds = 356537.6748303146",
+        "  heelingMoment = 74.95263010488914 [SI::'kg⋅m²⋅s⁻²']",
+        "  availableRightingMoment = 13.526625462509422 [SI::'N⋅m']",
+        "  maximumHeelSailArea = 0.06617196304714147 [SI::'m²']",
+        "  minimumBallastMass = 62.37266380212628 [kg]",
+        "  requiredRudderTorque = 0.2633042721700007 [SI::'kg⋅m²⋅s⁻²']",
+        "  driveMet = true",
+        "  heelMet = false",
+        "  keelMet = false",
+        "  rudderMet = false",
+        "  rudderEnvelopeTorque = 0.329168975069252 [SI::'kg⋅m²⋅s⁻²']",
+        "  keelRootSideMoment = 15.997820412750052 [SI::'kg⋅m²⋅s⁻²']",
+        "  rudderRootSideMoment = 1.08875327012667 [SI::'kg⋅m²⋅s⁻²']",
+        "  torqueMet = true",
+        "  massMet = true",
+        "  sailIntervalExists = true",
+        "  modeledFit = false",
+        "  evidenceReady = false",
+        "  supportedSizing = false",
+        "  objective characterization: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSizing::CoupledSizing",
+      "status": "holds",
+      "values": [
+        {
+          "name": "caseLabel",
+          "value": "\"Higher hull resistance\""
+        },
+        {
+          "name": "boatSpeed",
+          "value": "3.721614637823934 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindSpeed",
+          "value": "5 [SI::'m/s']"
+        },
+        {
+          "name": "trueWindAngle",
+          "value": "0.7853981633974483 [rad]"
+        },
+        {
+          "name": "hullResistance",
+          "value": "12 [N]"
+        },
+        {
+          "name": "candidateSailArea",
+          "value": "0.55 [SI::'m²']"
+        },
+        {
+          "name": "candidateKeelArea",
+          "value": "0.012 [SI::'m²']"
+        },
+        {
+          "name": "candidateRudderArea",
+          "value": "0.005 [SI::'m²']"
+        },
+        {
+          "name": "effortHeight",
+          "value": "0.6 [m]"
+        },
+        {
+          "name": "lateralForceDepth",
+          "value": "0.2 [m]"
+        },
+        {
+          "name": "candidateBallastMass",
+          "value": "6 [kg]"
+        },
+        {
+          "name": "otherMass",
+          "value": "4 [kg]"
+        },
+        {
+          "name": "massBudget",
+          "value": "12 [kg]"
+        },
+        {
+          "name": "keelSpan",
+          "value": "0.25 [m]"
+        },
+        {
+          "name": "rudderSpan",
+          "value": "0.14 [m]"
+        },
+        {
+          "name": "availableTorque",
+          "value": "0.5 [SI::'N⋅m']"
+        },
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "driveSolutionExists",
+          "value": "true"
+        },
+        {
+          "name": "minimumSailArea",
+          "value": "1.1132606039155621 [SI::'m²']"
+        },
+        {
+          "name": "maximumDriveSailArea",
+          "value": "8.99777847130848 [SI::'m²']"
+        },
+        {
+          "name": "apparentWindSpeed",
+          "value": "8.072558763251562 [SI::'m/s']"
+        },
+        {
+          "name": "sailDrive",
+          "value": "7.246435336734371 [N]"
+        },
+        {
+          "name": "sailSideForce",
+          "value": "20.889165551703552 [N]"
+        },
+        {
+          "name": "keelTrimForce",
+          "value": "18.8002489965332 [N]"
+        },
+        {
+          "name": "rudderTrimForce",
+          "value": "2.0889165551703552 [N]"
+        },
+        {
+          "name": "totalResistance",
+          "value": "13.44680861708878 [N]"
+        },
+        {
+          "name": "driveMargin",
+          "value": "-6.20037328035441 [N]"
+        },
+        {
+          "name": "minimumKeelArea",
+          "value": "0.007147889887748487 [SI::'m²']"
+        },
+        {
+          "name": "minimumRudderArea",
+          "value": "0.0017423419944007786 [SI::'m²']"
+        },
+        {
+          "name": "keelAspectRatio",
+          "value": "5.208333333333333"
+        },
+        {
+          "name": "rudderAspectRatio",
+          "value": "3.9200000000000004"
+        },
+        {
+          "name": "keelMeanChord",
+          "value": "0.048 [m]"
+        },
+        {
+          "name": "rudderMeanChord",
+          "value": "0.03571428571428571 [m]"
+        },
+        {
+          "name": "keelReynolds",
+          "value": "178637.50261554884"
+        },
+        {
+          "name": "rudderReynolds",
+          "value": "106331.84679496955"
+        },
+        {
+          "name": "sailReynolds",
+          "value": "161451.17526503123"
+        },
+        {
+          "name": "heelingMoment",
+          "value": "16.711332441362842 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "availableRightingMoment",
+          "value": "13.526625462509422 [SI::'N⋅m']"
+        },
+        {
+          "name": "maximumHeelSailArea",
+          "value": "0.2967903778462748 [SI::'m²']"
+        },
+        {
+          "name": "minimumBallastMass",
+          "value": "12.577819211276708 [kg]"
+        },
+        {
+          "name": "requiredRudderTorque",
+          "value": "0.09950062249133299 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "driveMet",
+          "value": "false"
+        },
+        {
+          "name": "heelMet",
+          "value": "false"
+        },
+        {
+          "name": "keelMet",
+          "value": "true"
+        },
+        {
+          "name": "rudderMet",
+          "value": "true"
+        },
+        {
+          "name": "rudderEnvelopeTorque",
+          "value": "0.329168975069252 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "keelRootSideMoment",
+          "value": "3.712546686849975 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "rudderRootSideMoment",
+          "value": "0.3243362382928873 [SI::'kg⋅m²⋅s⁻²']"
+        },
+        {
+          "name": "torqueMet",
+          "value": "true"
+        },
+        {
+          "name": "massMet",
+          "value": "true"
+        },
+        {
+          "name": "sailIntervalExists",
+          "value": "false"
+        },
+        {
+          "name": "modeledFit",
+          "value": "false"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "supportedSizing",
+          "value": "false"
+        },
+        {
+          "name": "objective characterization",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSizing::CoupledSizing on object #18 of \"BlueDogSizingExamples::highResistance\"",
+        "  caseLabel = \"Higher hull resistance\"",
+        "  boatSpeed = 3.721614637823934 [SI::'m/s']",
+        "  trueWindSpeed = 5 [SI::'m/s']",
+        "  trueWindAngle = 0.7853981633974483 [rad]",
+        "  hullResistance = 12 [N]",
+        "  candidateSailArea = 0.55 [SI::'m²']",
+        "  candidateKeelArea = 0.012 [SI::'m²']",
+        "  candidateRudderArea = 0.005 [SI::'m²']",
+        "  effortHeight = 0.6 [m]",
+        "  lateralForceDepth = 0.2 [m]",
+        "  candidateBallastMass = 6 [kg]",
+        "  otherMass = 4 [kg]",
+        "  massBudget = 12 [kg]",
+        "  keelSpan = 0.25 [m]",
+        "  rudderSpan = 0.14 [m]",
+        "  availableTorque = 0.5 [SI::'N⋅m']",
+        "  inputsValid = true",
+        "  driveSolutionExists = true",
+        "  minimumSailArea = 1.1132606039155621 [SI::'m²']",
+        "  maximumDriveSailArea = 8.99777847130848 [SI::'m²']",
+        "  apparentWindSpeed = 8.072558763251562 [SI::'m/s']",
+        "  sailDrive = 7.246435336734371 [N]",
+        "  sailSideForce = 20.889165551703552 [N]",
+        "  keelTrimForce = 18.8002489965332 [N]",
+        "  rudderTrimForce = 2.0889165551703552 [N]",
+        "  totalResistance = 13.44680861708878 [N]",
+        "  driveMargin = -6.20037328035441 [N]",
+        "  minimumKeelArea = 0.007147889887748487 [SI::'m²']",
+        "  minimumRudderArea = 0.0017423419944007786 [SI::'m²']",
+        "  keelAspectRatio = 5.208333333333333",
+        "  rudderAspectRatio = 3.9200000000000004",
+        "  keelMeanChord = 0.048 [m]",
+        "  rudderMeanChord = 0.03571428571428571 [m]",
+        "  keelReynolds = 178637.50261554884",
+        "  rudderReynolds = 106331.84679496955",
+        "  sailReynolds = 161451.17526503123",
+        "  heelingMoment = 16.711332441362842 [SI::'kg⋅m²⋅s⁻²']",
+        "  availableRightingMoment = 13.526625462509422 [SI::'N⋅m']",
+        "  maximumHeelSailArea = 0.2967903778462748 [SI::'m²']",
+        "  minimumBallastMass = 12.577819211276708 [kg]",
+        "  requiredRudderTorque = 0.09950062249133299 [SI::'kg⋅m²⋅s⁻²']",
+        "  driveMet = false",
+        "  heelMet = false",
+        "  keelMet = true",
+        "  rudderMet = true",
+        "  rudderEnvelopeTorque = 0.329168975069252 [SI::'kg⋅m²⋅s⁻²']",
+        "  keelRootSideMoment = 3.712546686849975 [SI::'kg⋅m²⋅s⁻²']",
+        "  rudderRootSideMoment = 0.3243362382928873 [SI::'kg⋅m²⋅s⁻²']",
+        "  torqueMet = true",
+        "  massMet = true",
+        "  sailIntervalExists = false",
+        "  modeledFit = false",
+        "  evidenceReady = false",
+        "  supportedSizing = false",
+        "  objective characterization: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "output": [
+    "✓ package GorgeChallenge",
+    "✓ package BlueDog",
+    "✓ package BlueDogRequirements",
+    "✓ package BlueDogViews",
+    "✓ package BlueDogDocuments",
+    "✓ package BlueDogArchitectureViews",
+    "✓ package BlueDogUseCases",
+    "✓ package BlueDogUseCaseViews",
+    "✓ package BlueDogSatisfaction",
+    "✓ package RecoveryPropulsionTrade",
+    "✓ package BlueDogEnergy",
+    "✓ package BlueDogEnergyExamples",
+    "✓ package BlueDogDiagramDocuments",
+    "✓ package BlueDogRequirementVerification",
+    "✓ package BlueDogReliability",
+    "✓ package BlueDogReliabilityExamples",
+    "✓ package BlueDogDFMEA",
+    "✓ package BlueDogReliabilityDocuments",
+    "✓ package BlueDogSemanticViews",
+    "✓ package BlueDogSailing",
+    "✓ package BlueDogSailingExamples",
+    "✓ package BlueDogSailingDocuments",
+    "✓ package BlueDogSizing",
+    "✓ package BlueDogSizingExamples",
+    "✓ package BlueDogSizingDocuments",
+    "✓ Created instance of BlueDogSizingExamples::reference",
+    "  ID: 1",
+    "  Use %features BlueDogSizingExamples::reference to inspect",
+    "✓ Created instance of BlueDogSizingExamples::lowRig",
+    "  ID: 6",
+    "  Use %features BlueDogSizingExamples::lowRig to inspect",
+    "✓ Created instance of BlueDogSizingExamples::slowControl",
+    "  ID: 10",
+    "  Use %features BlueDogSizingExamples::slowControl to inspect",
+    "✓ Created instance of BlueDogSizingExamples::gust",
+    "  ID: 14",
+    "  Use %features BlueDogSizingExamples::gust to inspect",
+    "✓ Created instance of BlueDogSizingExamples::highResistance",
+    "  ID: 18",
+    "  Use %features BlueDogSizingExamples::highResistance to inspect"
+  ],
+  "errors": null
+}

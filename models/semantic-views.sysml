@@ -86,4 +86,15 @@ package BlueDogSemanticViews {
         metadata Layout about BlueDogSailing::PolarVoyageProfile { x = 350; y = 200; }
         metadata Layout about BlueDogReliability::VoyageProfile { x = 350; y = 0; }
     }
+    view SizingIntegration : GeneralView {
+        filter @SysML::PartDefinition;
+        expose BlueDogSizing::Configuration;
+        expose BlueDogSizing::Sail;
+        expose BlueDogSizing::Foil;
+        expose BlueDogSizing::Rudder;
+        metadata Layout about BlueDogSizing::Configuration { x = 300; y = 0; }
+        metadata Layout about BlueDogSizing::Sail { x = 0; y = 220; }
+        metadata Layout about BlueDogSizing::Foil { x = 300; y = 220; }
+        metadata Layout about BlueDogSizing::Rudder { x = 600; y = 220; }
+    }
 }
