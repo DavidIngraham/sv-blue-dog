@@ -15,7 +15,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = tuple(ROOT / "models" / name for name in (
     "challenge.sysml", "blue-dog.sysml", "requirements.sysml",
-    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml", "cruise-reliability.sysml", "dfmea.sysml", "reliability-documents.sysml", "semantic-views.sysml", "sailing-performance.sysml", "sailing-documents.sysml", "appendage-sizing.sysml", "sizing-documents.sysml"))
+    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml", "cruise-reliability.sysml", "dfmea.sysml", "reliability-documents.sysml", "semantic-views.sysml", "sailing-performance.sysml", "sailing-documents.sysml", "appendage-sizing.sysml", "sizing-documents.sysml", "design-search.sysml", "design-physics.sysml", "design-search-results.sysml", "design-search-documents.sysml"))
 
 
 def native(*arguments, models=MODELS):
@@ -121,6 +121,19 @@ def main():
     except ImportError:
         from plot_sizing import sizing_figure
     outputs[ROOT / "docs/figures/appendage-sizing.png"] = sizing_figure(outputs[ROOT / "docs/analysis/appendage-sizing.json"])
+    try:
+        from .publish_design_search import read_search, result_model
+        from .plot_design_search import search_figure
+    except ImportError:
+        from publish_design_search import read_search, result_model
+        from plot_design_search import search_figure
+    search = read_search()
+    if (ROOT / "models/design-search-results.sysml").read_text() != result_model(search):
+        raise SystemExit("Run scripts/publish_design_search.py to update the saved model subjects")
+    audit = native("-analysis", "BlueDogDesignResults::full_envelopeAudit", "-analysis", "BlueDogDesignResults::nominal_5msAudit", "-json")
+    outputs[ROOT / "docs/analysis/design-search-audit.json"] = audit
+    outputs[ROOT / "docs/design-search-results.md"] = native("-render-document", "BlueDogDesignSearchDocuments::SearchReport")
+    outputs[ROOT / "docs/figures/design-search.png"] = search_figure(audit, search)
     diagrams = {}
     # Compile the model once per format, rather than once for every view.
     with tempfile.TemporaryDirectory(dir=ROOT / ".tools", prefix="documents-") as scratch:

@@ -1,0 +1,62 @@
+# Searching for a boat that can make progress
+
+The earlier [sail, keel and rudder study](appendage-sizing.md) could find a numerical fit when hull resistance was supplied as an input. I wanted to know whether that fit would survive when the boat had to carry its own ballast, wing, battery and solar panel. This search closes those loops: the same geometry must balance the sailing loads in several wind and fouling cases while carrying its electrical system.
+
+The first result is a useful setback. Three starting points found balanced sailing states, but none found a design meeting upstream progress. The nominal 5 m/s-wind study reached a worst upstream VMG of approximately **−0.41 m/s**; the broader scenario study reached approximately **−0.79 m/s**, against a target of **+0.50 m/s**. Negative VMG means drifting downstream despite sailing through the water. These are local search results within the declared bounds, not proof that no boat can complete the challenge.
+
+![Upstream progress from native replay of the selected designs](figures/design-search.png)
+
+The [native replay report](design-search-results.md) recomputes the checks from saved geometry and trim. The [search record](analysis/design-search.json) retains all starts, solver messages, inputs, outputs and source hashes; the [native audit](analysis/design-search-audit.json) independently evaluates the selected candidates. Neither result is a selected or qualified vessel design.
+
+## What is solved
+
+One shared design has thirteen variables: waterline length, beam, wing area and aspect ratio, keel and rudder areas and spans, ballast, wing longitudinal position, battery capacity, panel area and actuator rating. Each operating point has six variables: boat speed, heading, wing incidence, leeway, rudder angle and heel.
+
+The broader study contains headwind and tailwind cases at 3, 5 and 15 m/s water-relative true wind, plus both directions at 5 m/s with increased profile/hull drag. Every point is assessed against an upstream adverse current. This tests both wind directions for the difficult leg; it is not a time-resolved voyage, a complete environmental envelope, or a Hawaii simulation. The separate nominal study diagnoses the 5 m/s clean-water cases without replacing the broader study.
+
+```mermaid
+flowchart TD
+    A[SysML assumptions, design bounds and scenarios] --> B[SciPy proposes geometry and operating states]
+    B --> C[Compiled SysML: mass, buoyancy and apparent wind]
+    C --> D[Compiled SysML: lift, drag, moments and actuator loads]
+    D --> E[Compiled SysML: energy, progress and margins]
+    E --> F{Balanced and within limits?}
+    F -->|No| B
+    F -->|Yes| G[Search for lower mass]
+    G --> B
+    E --> H[Retain best bounded candidate and solver status]
+    H --> I[Native SysML replay and published results]
+```
+
+SciPy first seeks balanced states and non-progress constraints using least squares. SLSQP then maximizes the worst progress while keeping force/moment balances and hardware constraints explicit. Only a candidate passing all numerical screens proceeds to mass minimization. A final fixed-geometry trim search improves each operating point. Variables are scaled to their bounds, and three deterministic starts reduce dependence on one initial guess. This does not establish a global optimum. [SciPy optimization methods](https://docs.scipy.org/doc/scipy/reference/optimize.html)
+
+## Where the equations live
+
+[design-physics.sysml](../models/design-physics.sysml) owns the engineering calculations. [design-search.sysml](../models/design-search.sysml) owns the assumptions, bounds, output contract and audit. OpenSysML compiles the calculation to C; a small Python adapter calls it during the SciPy search. The native interpreter then replays the saved designs, with tests comparing every reported output against the compiled execution.
+
+SysML v2 explicitly anticipates simultaneous equations and external solvers in analysis cases. The current adapter is a practical integration, not a new modeling language or an upstream OpenSysML change. A later numerical-backend proposal could replace the explicit Python mapping of equality residuals, inequality margins and objective with model-driven discovery. [SysML v2 §7.23.1, printed page 138](https://www.omg.org/spec/SysML/2.0/Language/PDF#page=170)
+
+## Assumptions that matter
+
+| Model | Current treatment and limit |
+| --- | --- |
+| Wing | Finite-wing lift slope varies with aspect ratio and incidence; profile plus induced drag, with an explicit lift cap. Coefficients and minimum Reynolds number are assumptions pending low-Re wing data. No stall, separation or detailed downwind polar is modeled. |
+| Hull | A rectangular displacement surrogate solves draft from mass and buoyancy. Viscous resistance uses the ITTC-1957 correlation with an assumed form factor; wave resistance is an explicitly heuristic mass/Froude term. No fitted hull resistance or planing model exists. |
+| Stability | Waterplane inertia and component vertical mass/buoyancy moments give a small-angle righting surrogate. It supports a heel screen, not a large-angle righting curve or self-righting proof. |
+| Keel and rudder | Finite-span lift slopes, profile/induced drag, signed yaw balance and a rudder inflow factor. The low-speed steering screen includes a yaw reserve and a feathered-wing side-load assumption. Fouling raises drag; it does not simulate milfoil wrapping or lift loss. |
+| Packaging | Separate hull and detachable keel assemblies are each limited to the lifting allowance. Deck area limits solar area. Structural strength, joints, 250 mm printer segmentation and attachment loads remain outside this search. |
+| Energy | Estimated actuation power depends on modeled torque and motion duty. An 18-hour dark/6-hour solar cycle checks balance, initial-night recovery reserve and peak battery withdrawal, including conversion losses. Constant electronics load, solar resource and repeated daily weather are assumptions. This is a sizing screen, not evidence of indefinite operation. |
+
+The lift/drag formulation follows the standard coefficient approach, including aspect-ratio-dependent induced drag. Actual coefficients must be measured or computed for the wing and foils at their operating Reynolds numbers. [NASA induced drag](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/induced-drag-coefficient/), [NASA lift coefficients](https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/lift-coefficient-2/)
+
+The viscous correlation is only one contribution to resistance. The added wave term is a project assumption, not an ITTC resistance prediction or a validated VPP. The Froude ceiling bounds this surrogate's search space; it does not identify a displacement-to-planing transition. [ITTC resistance-test procedure](https://www.ittc.info/media/8169/75-03-03-01.pdf)
+
+## What this changes
+
+The earlier low-rig example still passes its prescribed-resistance screen. It does not establish feasibility once mass and resistance are coupled. In this search, even the nominal candidate's effective water VMG is insufficient to overcome the assumed current and retain the required progress margin.
+
+The selected candidates sit on several declared limits, including wing height, heel reserve, low-speed steering and energy balance. The nominal search also reaches the ballast bound. These active constraints identify useful sensitivity studies; they do not by themselves establish which change will recover feasibility.
+
+The next useful evidence is a resistance curve for candidate hulls and a credible low-Re wing polar. Then we can test sensitivity to hull/wing limits, current exposure and the planning speed allowance. The current's spatial and temporal variation needs a route study; changing a constant in this screen would not establish that a route is navigable. We should retain the failed cases as regression examples for any future OpenSysML nonlinear-optimization integration.
+
+Run instructions are in the [modeling guide](../models/README.md#coupled-design-search).

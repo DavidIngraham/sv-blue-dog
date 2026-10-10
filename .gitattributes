@@ -5,3 +5,8 @@
 *.3mf binary
 *.STEP -text
 *.igs -text
+
+*.sysml text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.lock text eol=lf

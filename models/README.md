@@ -46,3 +46,25 @@ Update the website publication manifest when adding or removing reader-facing pa
 Sailing performance uses `sailing-performance.sysml` for inverse polar demand, hull-speed screening and cruise integration. Mathematical figures are rendered from native sensitivity outputs by `scripts/plot_sailing.py`, using the uv-locked Matplotlib dependency; no sailing equations are reimplemented in Python.
 
 Coupled sail, keel and rudder sizing is in `appendage-sizing.sysml`; `sizing-documents.sysml` defines its native report. The sizing objective checks valid computation, while `modeledFit` and `supportedSizing` distinguish numerical fit from accepted evidence. `scripts/plot_sizing.py` plots only native results.
+
+## Coupled design search
+
+The equations and bounds live in `design-physics.sysml` and `design-search.sysml`. SciPy searches design and trim values; the model remains authoritative for physics. `design-search-results.sysml` is generated from the selected saved inputs, and `design-search-documents.sysml` defines the native replay report. Generated subjects are not authored requirements.
+
+The initial C adapter supports Linux with GCC (including WSL). Prepare on either platform with the pinned native CLI, then run the numerical search in a Linux uv environment. A Linux-only workflow is:
+
+```sh
+uv sync --locked
+uv run python scripts/install_renderer.py
+uv run python scripts/prepare_design_search.py
+uv run python scripts/solve_design.py --starts 3 --budget 250
+uv run python scripts/publish_design_search.py
+uv run python scripts/render_requirements.py
+uv run pytest -q
+uv run python scripts/publish_design_search.py --check
+uv run python scripts/render_requirements.py --check
+```
+
+When preparing on Windows and solving in WSL, use a separate uv environment such as `UV_PROJECT_ENVIRONMENT=.tools/solver-venv`; never reuse the Windows `.venv` binaries in Linux. Both use `uv.lock`. The C source, shared library, exported contract and environments remain ignored in `.tools/`. The ABI adapter copies outputs before the next native call and serializes runtime access.
+
+The search record includes normalized source hashes, dependency lock, renderer pin and driver hashes. Changes to these inputs require preparation and a new search; the publisher refuses stale results. Publishing replays the saved candidates but does not silently launch a new optimization. Test the C adapter in Linux; Windows pytest explicitly skips that adapter test file while still comparing saved compiled results against native interpretation. Read [the search method and limitations](../docs/design-search.md) before interpreting numerical feasibility as design evidence.

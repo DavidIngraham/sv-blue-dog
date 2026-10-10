@@ -104,6 +104,10 @@
     "✓ package BlueDogSizing",
     "✓ package BlueDogSizingExamples",
     "✓ package BlueDogSizingDocuments",
+    "✓ package BlueDogDesignSearch",
+    "✓ package BlueDogDesignPhysics",
+    "✓ package BlueDogDesignResults",
+    "✓ package BlueDogDesignSearchDocuments",
     "✓ Created instance of BlueDogDFMEA::starter",
     "  ID: 1",
     "  Use %features BlueDogDFMEA::starter to inspect"

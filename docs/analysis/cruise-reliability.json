@@ -164,6 +164,10 @@
     "✓ package BlueDogSizing",
     "✓ package BlueDogSizingExamples",
     "✓ package BlueDogSizingDocuments",
+    "✓ package BlueDogDesignSearch",
+    "✓ package BlueDogDesignPhysics",
+    "✓ package BlueDogDesignResults",
+    "✓ package BlueDogDesignSearchDocuments",
     "✓ Created instance of BlueDogReliabilityExamples::gorgeIllustration",
     "  ID: 1",
     "  Use %features BlueDogReliabilityExamples::gorgeIllustration to inspect"

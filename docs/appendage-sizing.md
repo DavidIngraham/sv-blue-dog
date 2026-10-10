@@ -6,6 +6,8 @@ The executable source is [appendage-sizing.sysml](../models/appendage-sizing.sys
 
 ![Coupled sail and appendage sizing from native SysML results](figures/appendage-sizing.png)
 
+The [coupled design search](design-search.md) now extends this prescribed-resistance screen by solving geometry, mass, draft, trim and estimated resistance together.
+
 ## What the first cases tell us
 
 The reference takes clean boat speed, true wind and heading directly from the upstream headwind polar-demand case. Hull resistance, sail coefficients, geometry, mass allowance and load factors are illustrative inputs. They are not new requirements or measurements.

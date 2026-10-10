@@ -17,6 +17,8 @@ Requirements state obligations concisely. Qualification conditions remain normat
 
 The architecture describes logical responsibilities, not selected boards or a completed physical design. Satisfaction relationships record intended allocations. Mission actions are decomposed, but do not yet form an executable controller. The CAD in this repository is a manufacturing and wing-sail prototype, not the qualified challenge vessel.
 
+The [coupled design search](design-search.md) varies shared hull, wing, appendage and energy-system dimensions. Its [native replay](design-search-results.md) checks saved SciPy candidates against the SysML equations.
+
 ## Read the relationships
 
 `derive` connects a required acceptance outcome back to its original requirement. `refine` points from a more precise representation to the requirement it clarifies. `satisfy` records the intended design allocation; `verify` identifies what a verification case evaluates. None of these arrows is a passing test result.
