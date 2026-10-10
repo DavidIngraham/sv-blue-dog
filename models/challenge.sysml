@@ -10,7 +10,7 @@ package GorgeChallenge {
      */
     private import RequirementDerivation::*;
     requirement def <'C-000'> TransGorgeChallenge {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* Complete the autonomous Trans-Gorge sailing
          * challenge: The Dalles-Bonneville-The Dalles as the threshold,
          * then repeat for as long as practical, under the course, autonomy,
@@ -19,21 +19,21 @@ package GorgeChallenge {
     }
     requirement transGorgeChallenge : TransGorgeChallenge;
     requirement def <'C-001'> CourseCompletion {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* Threshold: Complete a journey from The Dalles
          * to Bonneville and back to The Dalles. Exact start/finish and turnaround
          * gates, permitted corridor, and crossing evidence remain to be agreed.
          */
     }
     requirement def <'C-002'> RepeatedOperation {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* Objective beyond the first completed round trip:
          * repeat The Dalles-Bonneville-The Dalles autonomously for as long as
          * practical. No fixed objective endurance duration has been selected.
          */
     }
     requirement def <'C-003'> UnassistedAttempt {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* A qualifying attempt shall complete the round trip
          * without operator intervention. Passive live monitoring is permitted.
          * Any use of remote emergency abort or manual control disqualifies the
@@ -41,7 +41,7 @@ package GorgeChallenge {
          */
     }
     requirement def <'C-004'> SailingPropulsion {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* A qualifying challenge attempt shall use sailing
          * propulsion without auxiliary motor propulsion. Auxiliary motor use is
          * allowed during development tests, which do not count as challenge attempts.
@@ -53,7 +53,7 @@ package GorgeChallenge {
          */
     }
     requirement def <'C-005'> LiveObservation {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* Live monitoring shall be available to the operator.
          * Monitoring-link loss shall not interrupt autonomous mission execution.
          * Telemetry shall be retained onboard and transmitted when contact returns.
@@ -61,7 +61,7 @@ package GorgeChallenge {
          */
     }
     requirement def <'C-006'> EmergencyIntervention {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* Provide remote emergency abort or manual control
          * when a command link is available. Use disqualifies the attempt as unassisted.
          * Emergency abort behavior and the subsequent recovery procedure are open.
@@ -74,37 +74,37 @@ package GorgeChallenge {
     requirement liveObservation : LiveObservation;
     requirement emergencyIntervention : EmergencyIntervention;
     #derivation connection challengeRuleCourseCompletion {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> courseCompletion;
     }
     #derivation connection challengeRuleRepeatedOperation {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> repeatedOperation;
     }
     #derivation connection challengeRuleUnassistedAttempt {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> unassistedAttempt;
     }
     #derivation connection challengeRuleSailingPropulsion {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> sailingPropulsion;
     }
     #derivation connection challengeRuleLiveObservation {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> liveObservation;
     }
     #derivation connection challengeRuleEmergencyIntervention {
-        @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> emergencyIntervention;

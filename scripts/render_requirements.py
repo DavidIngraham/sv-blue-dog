@@ -179,14 +179,16 @@ def native_graph():
     return result.stdout
 
 
-def table(requirements, edges):
-    lines = ["# Requirement derivation register", "", "Generated from `models/challenge.sysml` , `models/blue-dog.sysml`, and `models/requirements.sysml`; edit the models and regenerate. C-IDs identify challenge rules; H-IDs identify the Hawaii goal; M/E-IDs identify vehicle requirements.", "", "## Requirements", "", "| ID | Requirement | Status | Statement |", "| --- | --- | --- | --- |"]
-    for req in requirements.values():
-        lines.append(f'| {req["id"]} | {req["name"]} | {req["status"]} | {req["statement"].replace("|", "&#124;")} |')
-    lines += ["", "## Derivations", "", "Direction: original requirement to derived requirement. These relationships record design reasoning, not proof of satisfaction.", "", "| Original | Derived | Status | Rationale |", "| --- | --- | --- | --- |"]
-    for edge in edges:
-        lines.append(f'| {requirements[edge["source"]]["id"]} | {requirements[edge["target"]]["id"]} | {edge["status"]} | {edge["rationale"].replace("|", "&#124;")} |')
-    return "\n".join(lines) + "\n"
+def native_register():
+    """Render the model-defined document without custom table construction."""
+    result = subprocess.run(
+        [str(binary_path()), str(CHALLENGE), str(ARCHITECTURE), str(MODEL),
+         str(ROOT / "models/requirements-document.sysml"),
+         "-render-document", "BlueDogDocuments::RequirementsRegister"],
+        check=True, capture_output=True, text=True, encoding="utf-8")
+    if result.stderr:
+        print(result.stderr.strip(), file=sys.stderr)
+    return result.stdout
 
 
 def main():
@@ -197,7 +199,7 @@ def main():
     # Analyze the mission/architecture through the same OpenSysML runtime.
     # project_sources includes the architecture and both mission drivers.
     outputs = {ROOT / "docs/figures/requirements-derivation.dot": native_graph(),
-               ROOT / "docs/requirements-register.md": table(requirements, edges)}
+               ROOT / "docs/requirements-register.md": native_register()}
     for path, content in outputs.items():
         if args.check:
             if not path.exists() or path.read_text(encoding="utf-8") != content:

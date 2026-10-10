@@ -77,11 +77,20 @@ against the source model. Short IDs remain in the linked register; the
 native diagram uses its default monochrome style without our former maturity colors.
 The renderer reports two exposed standard-library elements as intentionally not drawn.
 
-The Markdown register still uses the Python client's experimental API-JSON export,
-which retains IDs, documentation, metadata types and reference bindings. Its narrow
-project adapter checks missing roles, unresolved endpoints, duplicate IDs/edges and
-cycles. That adapter no longer drives diagram construction. `--check` regenerates
-native DOT for comparison as well as checking register freshness.
+The Markdown register is rendered natively from `requirements-document.sysml`
+using `-render-document BlueDogDocuments::RequirementsRegister`. Its
+`DocumentQueries` queries select requirements and derivations, read the named
+`workStatus` metadata, and resolve endpoints through their original/derive roles.
+DocumentQueries is an OpenSysML tooling library, not an OMG standard library.
+The CLI writes Markdown directly; Python does not construct table rows or cells.
+
+The Python client's experimental API-JSON export remains in use only for project
+graph checks (missing roles, unresolved endpoints, duplicate IDs/edges, cycles,
+and status checks). `--check` compares both native DOT and native Markdown.
+Regression tests check that the native register retains every requirement and
+relationship. The Python API also offers `render_document` and
+`run_document_query`; this workflow uses the already-pinned native CLI for both
+published outputs.
 
 Passing analysis does not establish mission feasibility or requirement satisfaction.
 Requirements currently carry prose and unresolved thresholds, not executable acceptance
@@ -100,8 +109,7 @@ of this project.
 
 Requirement documentation contains statements and rationale, not maturity tags.
 The register does not infer lifecycle status from prose. Requirements and derivations now carry standard `StatusInfo` metadata with
-`status = ModelingMetadata::StatusKind::open`. The register reads the resolved
-enum reference, not documentation text. Open means work remains on the model
+`status = ModelingMetadata::StatusKind::open`. The native register queries the typed metadata field, not documentation text. Open means work remains on the model
 element; it does not revoke the agreed mission intent.
 
 The standard [ModelingMetadata library](https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml.library/Domain%20Libraries/Metadata/ModelingMetadata.sysml)

@@ -1,7 +1,7 @@
 import unittest
 import re
 
-from scripts.render_requirements import extract, MODEL, CHALLENGE, native_graph, project_sources, load_model
+from scripts.render_requirements import extract, MODEL, CHALLENGE, native_graph, project_sources, load_model, native_register
 
 
 BASE = """package Requirements {
@@ -96,6 +96,16 @@ class DerivationTests(unittest.TestCase):
         self.assertEqual(requirements['mission']['status'], 'tbc')
         self.assertEqual(requirements['function']['status'], 'unspecified')
         self.assertEqual(edges[0]['status'], 'unspecified')
+
+    def test_native_register_preserves_requirements_and_derivations(self):
+        requirements, edges = extract(project_sources())
+        markdown = native_register()
+        for req in requirements.values():
+            self.assertIn(f"| {req['id']} | {req['name']} | {req['status']} |", markdown)
+        for edge in edges:
+            self.assertIn(f"| {edge['source']} | {edge['target']} | {edge['status']} |", markdown)
+        self.assertEqual(len([line for line in markdown.splitlines() if line.startswith('| ')]),
+                         len(requirements) + len(edges) + 4)
 
     def test_project_status_annotations(self):
         requirements, edges = extract(project_sources())

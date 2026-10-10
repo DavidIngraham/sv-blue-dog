@@ -14,7 +14,7 @@ package BlueDog {
 
     package Goals {
         requirement def <'H-001'> HawaiiVoyage {
-            @ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+            metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
             doc /* Develop SV Blue Dog toward completing an
              * autonomous sailing voyage to Hawaii. The Gorge challenge is a
              * proving ground for that end goal, not evidence of ocean readiness.
