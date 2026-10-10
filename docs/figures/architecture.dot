@@ -1,24 +1,28 @@
 // view: BlueDogArchitectureViews::architecture
-// kind: interconnection
-// stated: render Views::asInterconnectionDiagram
+// kind: definition
+// stated: view def GeneralView, filter @PartDefinition
 // layout: dot
 digraph "BlueDogArchitectureViews::architecture" {
   graph [fontname="Helvetica"];
   node [shape=box, style=filled, fillcolor=white, color="#181818", fontname="Helvetica", fontsize=14, penwidth=0.5];
   edge [color="#181818", fontname="Helvetica", fontsize=13, penwidth=1];
-  subgraph "cluster_n0" {
-    label=<<font point-size="10"><i>«part def»</i></font><br/><b>Boat</b>>;
-    color=black;
-    penwidth=0.5;
-    "n0" [shape=point, style=invis, width=0, height=0, label=""];
-    "n1" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>hullAndRig : HullAndRig</b>>];
-    "n2" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>energy : EnergySubsystem</b>>];
-    "n3" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>navigation : NavigationAndSensing</b>>];
-    "n4" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>control : GuidanceAndControl</b>>];
-    "n5" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>actuation : SailAndSteeringActuation</b>>];
-    "n6" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>communications : Communications</b>>];
-    "n7" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>recovery : HealthAndRecovery</b>>];
-    "n8" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>recording : DataRecording</b>>];
-    "n9" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>observationPayload : ObservationPayload</b>>];
-  }
+  "n0" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>Boat</b>>];
+  "n1" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>HullAndRig</b>>];
+  "n2" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>EnergySubsystem</b>>];
+  "n3" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>NavigationAndSensing</b>>];
+  "n4" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>GuidanceAndControl</b>>];
+  "n5" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>SailAndSteeringActuation</b>>];
+  "n6" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>Communications</b>>];
+  "n7" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>HealthAndRecovery</b>>];
+  "n8" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>DataRecording</b>>];
+  "n9" [label=<<font point-size="10"><i>«part def»</i></font><br/><b>ObservationPayload</b>>];
+  "n0" -> "n1" [label="hullAndRig", dir=back, arrowtail=diamond];
+  "n0" -> "n2" [label="energy", dir=back, arrowtail=diamond];
+  "n0" -> "n3" [label="navigation", dir=back, arrowtail=diamond];
+  "n0" -> "n4" [label="control", dir=back, arrowtail=diamond];
+  "n0" -> "n5" [label="actuation", dir=back, arrowtail=diamond];
+  "n0" -> "n6" [label="communications", dir=back, arrowtail=diamond];
+  "n0" -> "n7" [label="recovery", dir=back, arrowtail=diamond];
+  "n0" -> "n8" [label="recording", dir=back, arrowtail=diamond];
+  "n0" -> "n9" [label="observationPayload", dir=back, arrowtail=diamond];
 }
