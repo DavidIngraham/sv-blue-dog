@@ -69,7 +69,7 @@ supports requirement graphs. `scripts/install_renderer.py` downloads the CLI to
 `.tools/`, verifies a committed SHA-256 archive digest, and extracts only its executable.
 The installer supports Windows x64 and Linux/macOS x64/ARM64; Windows was exercised
 for this migration. Nothing is installed globally and no moving nightly tag is used.
-The Python client and its analysis service remain pinned to 0.9.2 for register generation.
+The Python client remains pinned to 0.9.2 for interactive modeling; publishing uses the native CLI.
 
 Native dashed `derive` arrows point **from derived to original**, opposite the earlier
 custom diagram convention. All seventeen nodes and twenty-five relationships are regression-checked
@@ -84,13 +84,18 @@ using `-render-document BlueDogDocuments::RequirementsRegister`. Its
 DocumentQueries is an OpenSysML tooling library, not an OMG standard library.
 The CLI writes Markdown directly; Python does not construct table rows or cells.
 
-The Python client's experimental API-JSON export remains in use only for project
-graph checks (missing roles, unresolved endpoints, duplicate IDs/edges, cycles,
-and status checks). `--check` compares both native DOT and native Markdown.
-Regression tests check that the native register retains every requirement and
-relationship. The Python API also offers `render_document` and
-`run_document_query`; this workflow uses the already-pinned native CLI for both
-published outputs.
+The publishing script is a thin CLI wrapper: native validation, native DOT and
+Markdown rendering, Graphviz conversion, and generated-file freshness checks.
+It does not use the Python client or experimental API-JSON export. The pinned
+Python client remains available for interactive modeling, but publishing needs
+only Python, the installed native CLI, and Graphviz.
+
+Five integration tests cover native validation, standalone challenge loading,
+the expected diagram relationships, the two top-level drivers, and register
+IDs/statuses/relationships. The former generic custom duplicate-ID and cycle
+validator has been removed; native validation and these project publication
+checks are the checks we run. `--check` compares native DOT and Markdown without
+rewriting them or comparing image pixels.
 
 Passing analysis does not establish mission feasibility or requirement satisfaction.
 Requirements currently carry prose and unresolved thresholds, not executable acceptance
