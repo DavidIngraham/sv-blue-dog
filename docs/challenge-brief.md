@@ -19,7 +19,7 @@ Exact start/finish and turnaround gates, permitted corridor, crossing criteria, 
 
 A qualifying attempt uses sailing propulsion without auxiliary motor propulsion (C-004). Auxiliary motors are allowed in development tests; those tests do not count as qualifying challenge attempts. Motor propulsion during an attempt prevents qualification.
 
-Whether a disabled motor may remain installed is an open decision. Electrical power for sensing, computation, communication, and sail or steering actuation is not prohibited by this propulsion rule. No challenge-wide hull dimensions, component choices, or energy-harvesting technology have been selected.
+An auxiliary motor may remain aboard for vessel recovery. Recovery propulsion is permitted outside the qualifying attempt; using it during an attempt ends that attempt without qualification. Electrical power for sensing, computation, communication, and sail or steering actuation is not prohibited by this propulsion rule. No challenge-wide hull dimensions, component choices, or energy-harvesting technology have been selected.
 
 ## Autonomy and observation
 
@@ -44,10 +44,9 @@ The [generated requirements register](requirements-register.md) records confirme
 ## Decisions needed to complete the rules
 
 1. Exact course gates, corridor, and crossing criteria.
-2. Whether an inactive auxiliary motor may remain aboard.
-3. Attempt start, finish, disqualification, and restart procedures.
-4. Environmental limits and emergency/recovery behavior.
-5. Monitoring performance and acceptable outage retention.
-6. Required evidence, data quality, and any completion time limit.
+2. Attempt start, finish, disqualification, and restart procedures.
+3. Environmental limits and emergency/recovery behavior.
+4. Monitoring performance and acceptable outage retention.
+5. Required evidence, data quality, and any completion time limit.
 
 These decisions will refine the independent challenge first, then flow into the vehicle requirements through explicit derivations.

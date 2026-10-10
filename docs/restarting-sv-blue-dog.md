@@ -48,7 +48,7 @@ Learning SysML v2 is now another goal for the project. I want to use it to decom
 
 The challenge is becoming more concrete: sail from The Dalles to Bonneville and back without intervention. One round trip is the threshold; keeping the boat going for repeated trips is the objective. I want to watch it live, but it needs to keep sailing if the monitoring link drops. The longer-term ambition is a voyage to Hawai'i, with the Gorge serving as a torture test for the system.
 
-I have separated the [challenge brief](challenge-brief.md) from the vehicle design. Its own SysML file defines what counts, and the boat requirements import it. That lets me work on how to build Blue Dog without quietly changing the challenge to fit the design. Microtransat remains the inspiration for the brief. An auxiliary motor can help during testing, but motor propulsion will not count toward a qualifying attempt.
+I have separated the [challenge brief](challenge-brief.md) from the vehicle design. Its own SysML file defines what counts, and the boat requirements import it. That lets me work on how to build Blue Dog without quietly changing the challenge to fit the design. Microtransat remains the inspiration for the brief. An auxiliary motor can help during testing and remain aboard for vessel recovery. Using it during a challenge attempt ends that attempt without qualification.
 
 The native OpenSysML diagram shows proposed derivations from those challenge rules into vehicle requirements, with arrows pointing from each derived requirement back to its original. The linked register distinguishes confirmed intent, older requirements, and new proposals. None of these links establishes that the boat satisfies a requirement.
 

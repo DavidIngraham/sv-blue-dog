@@ -12,7 +12,7 @@ Project objectives are to learn sailing, explore desktop manufacturing, build a 
 
 "Set and forget" now means no operator intervention during a qualifying round trip, while allowing live observation. Monitoring does not imply approval of remote mission guidance. Loss of the monitoring link shall not interrupt autonomous mission execution. The vessel shall retain telemetry onboard during the outage and transmit the retained data when contact returns. Retention duration and backlog transmission priority remain open. A remote emergency override for mission abort or manual control is required when a command link is available. Using it disqualifies that attempt as an unassisted round trip; passive monitoring does not. Abort behavior, control handover, and recovery support remain to be defined. No route coordinates, dam passages, or operating permissions are assumed by this model.
 
-Auxiliary motor propulsion is allowed for development tests but prohibited during a qualifying challenge attempt (C-004). Whether a disabled motor may remain installed is open.
+Auxiliary motor propulsion is allowed for development tests but prohibited during a qualifying challenge attempt (C-004). An auxiliary motor may remain installed and be used for vessel recovery outside a qualifying attempt. Using it during an attempt ends that attempt without qualification.
 
 ## Long-term direction
 

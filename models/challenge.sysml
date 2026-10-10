@@ -32,7 +32,9 @@ package GorgeChallenge {
          * propulsion without auxiliary motor propulsion. Auxiliary motor use is
          * allowed during development tests, which do not count as challenge attempts.
          * Motor use during an attempt prevents it from qualifying.
-         * Whether a disabled motor may remain installed remains to be agreed.
+         * An auxiliary motor may remain installed for vessel recovery.
+         * Recovery propulsion is permitted outside the qualifying attempt; use
+         * during an attempt ends that attempt without qualification.
          * The restriction concerns propulsion, not electrical power for onboard systems.
          */
     }
