@@ -61,4 +61,4 @@ These are proposed verification approaches; no passing result or satisfaction li
 4. What must it do when it loses communications, cannot make progress, or runs short of energy?
 5. What sail/steering mechanism and actuators will the electronics support?
 6. What mass, space, cost, and electrical limits apply to the electronics?
-7. Refine the agreed sysmlpy workflow and decide whether we need an additional semantic validator.
+7. Use the pinned OpenSysML workflow to analyze model changes and regenerate the requirements diagram.

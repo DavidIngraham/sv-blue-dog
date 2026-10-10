@@ -15,7 +15,7 @@ The recovered December 2023 brief describes a one-metre monohull with a printabl
 - `cad/`: SolidWorks assemblies and parts, plus manufacturing and exchange files.
 - `docs/`: mission decisions, project status, restart checklist, and the website article.
 - `models/`: SysML v2 mission, requirements, and architecture source.
-- `scripts/`: model-driven documentation generation.
+- `scripts/`: OpenSysML-backed model analysis and documentation generation.
 - `tests/`: derivation extraction and validation checks.
 - `pyproject.toml` / `uv.lock`: package-free Python environment managed by uv.
 
@@ -28,3 +28,10 @@ SolidWorks lock files are ignored. CAD files are stored as ordinary Git binary f
 ## Publishing
 
 The GitHub Pages site reads `docs/restarting-sv-blue-dog.md` from this repository through its publication manifest. Article edits belong here alongside the project work.
+
+## Modeling tools
+
+OpenSysML 0.9.2 replaces the earlier sysmlpy dependency. The package-free Python
+environment remains managed by uv. Run `uv sync --locked`, then
+`uv run python scripts/render_requirements.py` to analyze the models and generate
+the diagram and register. See [tooling setup and limitations](models/README.md#reproducible-tooling).

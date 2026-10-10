@@ -16,7 +16,7 @@ The textual model is the editable architecture source in Git. It currently conta
 ## Learning sequence
 
 1. Review system boundary and mission decomposition together.
-2. Use the pinned sysmlpy environment, then extend validation as the model grows.
+2. Use the pinned OpenSysML environment, then extend validation as the model grows.
 3. Add mission sequencing, continuous supporting behavior, and recovery paths.
 4. Agree on measurable requirements and introduce typed quantities/units and constraints.
 5. Define ports, exchanged information, and power interfaces; allocate behavior to logical parts.
@@ -27,7 +27,7 @@ Do not use satisfaction relationships as a substitute for verification results. 
 
 ## Reproducible tooling
 
-The root `pyproject.toml` defines a **package-free uv project** (`[tool.uv] package = false`). `uv.lock` fixes the dependency resolution, including sysmlpy 0.96.4. The project is not installed as a Python package; scripts run directly. Python 3.12 or 3.13 is supported.
+The root `pyproject.toml` defines a **package-free uv project** (`[tool.uv] package = false`). `uv.lock` fixes the dependency resolution, including OpenSysML 0.9.2. The project is not installed as a Python package; scripts run directly. Python 3.12 or 3.13 is supported.
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Graphviz](https://graphviz.org/download/) with `dot` on PATH, then run from the repository root:
 
@@ -38,21 +38,44 @@ uv run python -m unittest discover -s tests -v
 uv run python scripts/render_requirements.py --check
 ```
 
+The official Python client automatically downloads a matching `sysml-grpc`
+runtime on first use, checks it against its packaged SHA-256 digest, and starts a
+private local service for the Python process. First use requires network access;
+subsequent runs use the cached runtime. `uv.lock` pins Python packages; the client
+release pins the runtime download. For offline setup and explicit runtime paths,
+see the [OpenSysML client guide](https://opensysml.org/guide/09-clients/).
+No model is sent to a hosted analysis service by this workflow.
+
 The renderer writes SVG, PNG, and DOT to `docs/figures/` and the readable requirement/derivation register to `docs/requirements-register.md`. Commit these with model changes so GitHub and the website can display them without a Python runtime. `--check` checks DOT and register freshness; it does not compare rendered image pixels. Graphviz is a system dependency outside the uv lockfile, so its version and fonts can affect layout.
 
 ## Renderer scope and validation limits
 
-Testing sysmlpy 0.96.4 showed that its higher-level `ConnectionUsage` conversion and built-in general view omit the metadata-tagged derivation ends. The generator therefore reads **sysmlpy's concrete ANTLR parse tree**, before that lossy conversion, and renders the extracted graph with local Graphviz. It does not parse SysML with regular expressions or keep a separate handwritten edge list. No hosted renderer receives the model.
+OpenSysML loads and analyzes both project models. Error diagnostics stop generation.
+The project renderer reads the engine's public API-JSON export: requirement IDs,
+documentation, resolved metadata types, and reference-subsetting targets. It keeps
+Graphviz for the existing project-specific layout and generates the Markdown register
+from those same model elements. There is no handwritten edge list or source-text parser.
 
-The adapter intentionally supports one flat Requirements package, requirement definitions with short IDs and maturity documentation, local typed requirement usages, and explicit derivation usages with one original and one derived end. Unsupported patterns fail. It checks duplicate IDs/edges, endpoint resolution, role metadata, and cycles. Both project SysML files are syntax-checked with parser rescue disabled. Tests exercise direction, unresolved endpoints, missing roles, cycles, and invalid syntax.
+The API-JSON mapping is experimental upstream and emits an explicit warning. We pin
+OpenSysML 0.9.2 and check the complete project graph when upgrading. This renderer
+supports one flat Requirements package, locally typed requirement usages, and explicit
+metadata-tagged connections with one original and one derived end. It rejects missing
+roles, unresolved endpoints, duplicate IDs/edges, and cycles. This is a narrow project
+publishing adapter, not a general implementation of Requirement Derivation semantics.
 
-These checks are not full SysML semantic validation. In particular, they do not establish complete standard-library metadata semantics, system feasibility, numerical acceptance criteria, or requirement satisfaction. The built-in analyzer on the earlier nine-requirement baseline reported nine expected `REQUIREMENT_UNCOVERED` warnings and no errors; that result predates the explicit derivations and is not claimed as validation of this revision. No satisfaction assertions have been added to silence those warnings.
+The migration preserved all nine requirement usages and eight links, and both models
+loaded without OpenSysML diagnostics. The generated SVG, PNG, and DOT stayed unchanged;
+the register only lost redundant whitespace. Model source files were not rewritten.
 
-sysmlpy may emit a nonfatal DFA cache-save `RecursionError` warning; parsing continues. Do not edit these models through a sysmlpy high-level dump/format round trip until derivation-end preservation has been verified.
+Passing analysis does not establish mission feasibility or requirement satisfaction.
+Requirements currently carry prose and unresolved thresholds, not executable acceptance
+constraints. The mission decomposition does not yet define an executable sequence.
 
 ## References
 
-- [sysmlpy](https://github.com/mycr0ft/sysmlpy), pinned to PyPI 0.96.4 in this project.
+- [OpenMBEE/OpenSysML](https://github.com/Open-MBEE/OpenSysML), pinned to 0.9.2.
 - [Official SysML v2 release repository](https://github.com/Systems-Modeling/SysML-v2-Release).
 - [Official requirement derivation example](https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml/src/examples/Requirements%20Examples/RequirementDerivationExample.sysml).
-- The pinned sysmlpy distribution includes the `RequirementDerivation` domain library used as syntax guidance.
+
+The earlier sysmlpy fork work is retained separately and is no longer a dependency
+of this project.

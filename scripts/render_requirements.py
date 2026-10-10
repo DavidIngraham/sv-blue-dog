@@ -1,10 +1,4 @@
-"""Render explicit requirement derivations from sysmlpy's concrete parse tree.
-
-Pinned to sysmlpy 0.96.4: its higher-level ConnectionUsage conversion drops
-metadata ends. This narrow adapter supports one flat Requirements package,
-local typed requirement usages, and one original/one derived end per connection.
-Unsupported constructs fail rather than silently losing graph edges.
-"""
+"""Generate the Blue Dog requirements diagram and register using OpenSysML 0.9.2."""
 from __future__ import annotations
 
 import argparse
@@ -14,78 +8,102 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from sysmlpy.antlr_parser import parse
+import opensysml
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = ROOT / "models/requirements.sysml"
 COLORS = {"CONFIRMED INTENT": "#dbeafe", "LEGACY INTENT": "#fef3c7", "PROPOSED": "#e2e8f0"}
 
 
-def nodes(tree, kind):
-    if type(tree).__name__ == kind + "Context":
-        yield tree
-    for child in getattr(tree, "children", None) or []:
-        yield from nodes(child, kind)
-
-
-def one(tree, kind):
-    found = list(nodes(tree, kind))
-    if len(found) != 1:
-        raise ValueError(f"Expected one {kind}, found {len(found)}")
-    return found[0]
-
-
-def documentation(tree):
-    text = one(tree, "Documentation").getText()
-    text = text[text.index("/*") + 2:text.rindex("*/")]
-    return " ".join(line.strip().lstrip("*").strip() for line in text.splitlines())
+def load_model(source):
+    """Reject engine diagnostics before consuming a potentially partial model."""
+    model = opensysml.loads(source)
+    if not model.ok:
+        raise ValueError("OpenSysML model errors: " + "; ".join(map(str, model.errors)))
+    return model
 
 
 def extract(source):
-    tree = parse(source, rescue_language=None)
+    # The public API JSON export retains documentation, metadata types and
+    # reference subsetting. Symbol summaries alone do not expose all three.
+    # This export is experimental upstream; pin the engine and fail on gaps.
+    model = load_model(source)
+    elements = json.loads(str(model.to_api_json()))
+    index = {e["@id"]: e for e in elements}
+
+    def deref(ref):
+        try:
+            return index[ref["@id"]]
+        except (KeyError, TypeError) as exc:
+            raise ValueError(f"Unresolved model reference: {ref}") from exc
+
+    def members(element):
+        return [deref(ref) for ref in element.get("ownedMember", [])]
+
+    def single(items, description):
+        if len(items) != 1:
+            raise ValueError(f"Expected one {description}, found {len(items)}")
+        return items[0]
+
+    def documentation(element):
+        doc = single([e for e in members(element) if e["@type"] == "Documentation"], "documentation")
+        return " ".join(doc["body"].split())
+
+    def tags(element):
+        return [deref(single(e.get("type", []), "metadata type"))["qualifiedName"]
+                for e in members(element) if e["@type"] == "MetadataUsage"]
+
+    scope = single([e for e in elements if e["@type"] == "Package"
+                    and e.get("declaredName") == "Requirements"], "Requirements package")
+    children = members(scope)
+    if any(e["@type"] == "Package" for e in children):
+        raise ValueError("Nested requirement packages are not supported by this renderer")
     definitions, requirements, edges = {}, {}, []
-    packages = [p for p in nodes(tree, "Package")
-                if p.packageDeclaration().identification().getText() == "Requirements"]
-    if len(packages) != 1:
-        raise ValueError("Expected exactly one Requirements package")
-    scope = packages[0]
-    if len(list(nodes(scope, "Package"))) != 1:
-        raise ValueError("Nested requirement packages are not supported by this adapter")
-    for definition in nodes(scope, "RequirementDefinition"):
-        ident = definition.definitionDeclaration().identification()
-        names = [n.getText().strip("'") for n in nodes(ident, "Name")]
-        if len(names) != 2:
+    for definition in children:
+        if definition["@type"] != "RequirementDefinition":
+            continue
+        name, short_id = definition.get("declaredName"), definition.get("declaredShortName")
+        if not name or not short_id:
             raise ValueError("Every requirement definition needs a short ID and name")
-        short_id, name = names
-        doc = documentation(definition)
-        status, separator, statement = doc.partition(": ")
+        status, separator, statement = documentation(definition).partition(": ")
         if not separator or status not in COLORS:
             raise ValueError(f"Unknown requirement maturity: {name}")
-        if name in definitions or any(d["id"] == short_id for d in definitions.values()):
+        if any(d["id"] == short_id or d["name"] == name for d in definitions.values()):
             raise ValueError(f"Duplicate definition name or ID: {name}")
-        definitions[name] = dict(id=short_id, name=name, status=status, statement=statement)
-    for usage in nodes(scope, "RequirementUsage"):
-        name = one(usage, "Identification").getText()
-        type_name = one(one(usage, "FeatureTyping"), "QualifiedName").getText()
-        if type_name not in definitions or name in requirements:
+        definitions[definition["@id"]] = dict(id=short_id, name=name, status=status, statement=statement)
+    usage_ids = {}
+    for usage in children:
+        if usage["@type"] != "RequirementUsage":
+            continue
+        name = usage["declaredName"]
+        type_id = single(usage.get("type", []), "requirement type")["@id"]
+        if type_id not in definitions or name in requirements:
             raise ValueError(f"Unknown type or duplicate requirement usage: {name}")
-        requirements[name] = dict(definitions[type_name], usage=name)
-    for connection in nodes(scope, "ConnectionUsage"):
-        name = connection.usageDeclaration().identification().getText()
-        tags = [n.getText() for n in nodes(connection.occurrenceUsagePrefix(), "PrefixMetadataFeature")]
-        if tags != ["derivation"]:
+        requirements[name] = dict(definitions[type_id], usage=name)
+        usage_ids[usage["@id"]] = name
+    roles = {"RequirementDerivation::OriginalRequirementMetadata": "original",
+             "RequirementDerivation::DerivedRequirementMetadata": "derive"}
+    for connection in children:
+        if connection["@type"] != "ConnectionUsage":
+            continue
+        name = connection["declaredName"]
+        if tags(connection) != ["RequirementDerivation::DerivationMetadata"]:
             raise ValueError(f"Unsupported connection in requirements package: {name}")
         ends = {}
-        for end in nodes(connection, "ExtendedUsage"):
-            if not list(nodes(end, "EndUsagePrefix")):
-                raise ValueError(f"Expected an end usage in {name}")
-            tag = one(end, "PrefixMetadataFeature").getText()
-            ref = one(one(end, "OwnedReferenceSubsetting"), "QualifiedName").getText()
-            if tag not in {"original", "derive"} or tag in ends:
+        for end in members(connection):
+            if end["@type"] in {"Documentation", "MetadataUsage"}:
+                continue
+            if not end.get("isEnd"):
+                raise ValueError(f"Unsupported connection member in {name}")
+            tag = single(tags(end), "end role")
+            role = roles.get(tag)
+            if role is None or role in ends:
                 raise ValueError(f"Unsupported or duplicate end role in {name}")
-            if ref not in requirements:
-                raise ValueError(f"Unresolved requirement endpoint: {ref}")
-            ends[tag] = ref
+            binding = deref(end.get("ownedReferenceSubsetting"))
+            target = binding.get("referencedFeature", {}).get("@id")
+            if target not in usage_ids:
+                raise ValueError(f"Unresolved requirement endpoint in {name}: {target}")
+            ends[role] = usage_ids[target]
         if set(ends) != {"original", "derive"}:
             raise ValueError(f"Missing derivation ends in {name}")
         rationale = documentation(connection)
@@ -150,8 +168,8 @@ def main():
     args = parser.parse_args()
     source = MODEL.read_text(encoding="utf-8-sig")
     requirements, edges = extract(source)
-    # Also parse the mission/architecture file. This is syntax validation only.
-    parse((ROOT / "models/blue-dog.sysml").read_text(encoding="utf-8-sig"), rescue_language=None)
+    # Analyze the mission/architecture through the same OpenSysML runtime.
+    load_model((ROOT / "models/blue-dog.sysml").read_text(encoding="utf-8-sig"))
     outputs = {ROOT / "docs/figures/requirements-derivation.dot": graph(requirements, edges),
                ROOT / "docs/requirements-register.md": table(requirements, edges)}
     for path, content in outputs.items():
@@ -169,7 +187,7 @@ def main():
         for extension in ("svg", "png"):
             subprocess.run([dot, f"-T{extension}", str(source_path), "-o", str(source_path.with_suffix('.' + extension))], check=True)
     print(f"Checked {len(requirements)} requirements and {len(edges)} explicit derivations; no cycles or unresolved endpoints.")
-    print("Syntax and adapter checks only; no complete SysML semantic validation or requirement satisfaction claimed.")
+    print("OpenSysML analysis and project graph checks passed; requirement satisfaction is not evaluated.")
 
 
 if __name__ == "__main__":
