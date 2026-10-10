@@ -1,5 +1,7 @@
 # Requirement derivation register
 
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
+
 [Qualification conditions, rationale, open issues and verification specifications](<requirements-context.md>)
 
 Generated natively by OpenSysML from the project models. Status describes work on the model element, not verification. Derivations record design reasoning, not proof of satisfaction.

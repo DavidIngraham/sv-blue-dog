@@ -78,6 +78,8 @@ def main():
     outputs[ROOT / "docs/analysis/dfmea.json"] = native(
         "-instantiate", "BlueDogDFMEA::starter", "-analysis",
         "BlueDogDFMEA::DesignFailureReview BlueDogDFMEA::starter", "-json")
+    outputs[ROOT / "docs/challenge-brief.md"] = native("-render-document", "BlueDogDocuments::ChallengeBrief")
+    outputs[ROOT / "docs/requirements-views.md"] = native("-render-document", "BlueDogDocuments::RequirementsIndex")
     diagrams = {}
     # Compile the model once per format, rather than once for every view.
     with tempfile.TemporaryDirectory(dir=ROOT / ".tools", prefix="documents-") as scratch:
@@ -155,6 +157,9 @@ def main():
                 lambda match: f"<!-- diagram:{match[1]} -->\n{diagrams[match[1]]}\n<!-- /diagram -->",
                 source, flags=re.DOTALL)
     for path, content in outputs.items():
+        if path.suffix == ".md":
+            heading, separator, body = content.partition("\n")
+            content = heading + separator + "\n<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->\n" + body
         if args.check:
             if not path.exists() or path.read_text(encoding="utf-8") != content:
                 raise SystemExit(f"Stale generated file: {path.relative_to(ROOT)}")

@@ -1,5 +1,7 @@
 # Requirement context and verification specifications
 
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
+
 Requirement statements are in the register and focused views. Qualification conditions below are normative definitions and test applicability; they are not optional rationale. Notes and rationale explain scope and decisions. Verification specifications describe planned evidence collection and return inconclusive until implemented with accepted evidence. No physical compliance is asserted.
 
 ## Qualification conditions (normative)

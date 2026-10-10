@@ -1,5 +1,7 @@
 # Use cases and requirements
 
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
+
 ```mermaid
 ---
 config:

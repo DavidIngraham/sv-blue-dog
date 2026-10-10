@@ -1,5 +1,7 @@
 # Mission context
 
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
+
 ```mermaid
 ---
 config:

@@ -1,5 +1,7 @@
 # Cruise and reliability example results
 
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
+
 Synthetic sensitivity example, not measured boat performance, a surveyed route, or a reliability demonstration. See cruise-reliability.md for assumptions, equations and evidence requirements.
 
 [Cruise and reliability analysis guide](<cruise-reliability.md>)

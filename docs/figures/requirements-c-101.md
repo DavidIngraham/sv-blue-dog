@@ -1,5 +1,7 @@
 # C-101 telemetry equipment
 
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
+
 [All requirement views](<../requirements-views.md>)
 
 [Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)

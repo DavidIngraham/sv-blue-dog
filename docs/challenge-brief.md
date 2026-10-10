@@ -1,52 +1,21 @@
-# Trans-Gorge autonomous sailing challenge
+# Trans-Gorge challenge
 
-This challenge asks a sailing robot to travel from The Dalles to Bonneville and return under its own autonomous control. The Gorge is a proving ground for a longer-term ambition of sailing to Hawai'i; completing this challenge alone does not demonstrate ocean readiness.
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
-The structure follows the [Microtransat rules](https://microtransat.org/content.php?p=rules&top=rules): course, propulsion, autonomy, safety, and judging. This is an independent project challenge. It does not adopt Microtransat's Atlantic course, boat-size limits, or reporting intervals.
+The challenge is defined independently of the vehicle in challenge.sysml. The statements below are generated from that model. Read the linked qualification conditions and open issues with these rules; a statement or model check is not proof of completion.
 
-The canonical rules are in [challenge.sysml](../models/challenge.sysml). C-000 is the overall challenge requirement; C-001 through C-006 refine it. They stand alone: no Blue Dog architecture is required to read or analyze them. [Vehicle requirements](../models/requirements.sysml) import the challenge and derive implementation responsibilities from it. The agreed intent below still needs measurable acceptance details before it forms a complete competition rulebook.
-
-## Course and achievement
-
-| Level | Agreed intent | Model reference |
+| ID | Rule | Statement |
 | --- | --- | --- |
-| Threshold | Complete The Dalles to Bonneville and back to The Dalles. | C-001 |
-| Objective | Continue repeating that route autonomously for as long as practical. | C-002 |
+| C-000 | TransGorgeChallenge | The vessel shall complete the Trans-Gorge challenge under C-001 through C-006. |
+| C-001 | CourseCompletion | The vessel shall complete a journey from The Dalles to Bonneville and back to The Dalles. |
+| C-002 | RepeatedOperation | After its first circuit, the vessel should repeat The Dalles–Bonneville–The Dalles autonomously for as long as practical. |
+| C-003 | UnassistedAttempt | A qualifying attempt shall complete the round trip without operator intervention. |
+| C-004 | SailingPropulsion | A qualifying attempt shall use sailing propulsion without auxiliary motor propulsion. |
+| C-005 | LiveObservation | The vessel shall provide live monitoring with autonomous operation and retained telemetry across communication outages. |
+| C-006 | EmergencyIntervention | The vessel shall permit remote emergency abort or manual control when a command link is available. |
 
-Exact start/finish and turnaround gates, permitted corridor, crossing criteria, and any time limit remain open. No dam passage is assumed. No fixed objective endurance duration has been selected.
+[Qualification conditions and open issues](<requirements-context.md>)
 
-## Vessel and propulsion
+[Challenge derivations](<figures/requirements-c-000.md>)
 
-A qualifying attempt uses sailing propulsion without auxiliary motor propulsion (C-004). Auxiliary motors are allowed in development tests; those tests do not count as qualifying challenge attempts. Motor propulsion during an attempt prevents qualification.
-
-An auxiliary motor may remain aboard for vessel recovery. Recovery propulsion is permitted outside the qualifying attempt; using it during an attempt ends that attempt without qualification. Electrical power for sensing, computation, communication, and sail or steering actuation is not prohibited by this propulsion rule. No challenge-wide hull dimensions, component choices, or energy-harvesting technology have been selected.
-
-## Autonomy and observation
-
-A qualifying round trip must be completed without operator intervention (C-003). Passive live observation is allowed and live monitoring must be available (C-005). Monitoring is not permission to guide the vessel remotely.
-
-Loss of the monitoring link must not interrupt autonomous mission execution. The vessel retains telemetry onboard and sends the retained data when contact returns. Required coverage, update interval, data fields, retention duration, and backlog priority remain open.
-
-## Emergency intervention and recovery
-
-Remote emergency abort or manual control must be available when a command link is available (C-006). Using it disqualifies the attempt as unassisted. Abort behavior, recovery procedure, and conditions for starting a new attempt remain open.
-
-Operating boundaries, traffic encounters, environmental limits, and recovery arrangements require further definition. The model does not establish operating permission or prove safe behavior.
-
-## Evidence and judging
-
-Qualification requires the course, autonomy, and propulsion rules above to be met. The evidence protocol has not yet been agreed.
-
-Proposed evidence is a timestamped position track showing gate crossings, supported by command/intervention and propulsion-state records. For the endurance objective, completed round trips and elapsed autonomous operation could be reported together. These are proposals for review, not additional accepted requirements or existing test results.
-
-The [generated requirements register](requirements-register.md) records requirement statements and derivation rationale. Neither a derivation arrow nor a successful model analysis counts as verification of the vessel.
-
-## Decisions needed to complete the rules
-
-1. Exact course gates, corridor, and crossing criteria.
-2. Attempt start, finish, disqualification, and restart procedures.
-3. Environmental limits and emergency/recovery behavior.
-4. Monitoring performance and acceptable outage retention.
-5. Required evidence, data quality, and any completion time limit.
-
-These decisions will refine the independent challenge first, then flow into the vehicle requirements through explicit derivations.
+[Design process and model sources](<design-guide.md>)

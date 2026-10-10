@@ -1,5 +1,7 @@
 # Sustained-operation energy roll-up
 
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
+
 Generated natively from the synthetic example. These are illustrative inputs, not measurements or hardware selections. Conversion losses and uncertainty factors are included per load; peak powers are conservatively coincident. See sustained-operations.md for the executable campaign, evidence checklist and limitations.
 
 | Load | Active power | Idle power | Active fraction | Conversion efficiency | Uncertainty factor | Average bus power | Peak bus power |

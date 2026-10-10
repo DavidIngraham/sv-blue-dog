@@ -1,46 +1,17 @@
 # SV Blue Dog
 
-A small sailing-robot project balancing efficiency, reliability, and ease of manufacture.
+An autonomous sailing project exploring sailing, desktop manufacturing and complete-system design. The model connects the independent Trans-Gorge challenge to the longer-term Hawaii objective.
 
-The recovered December 2023 brief describes a one-metre monohull with a printable hull, ballasted fin keel, low-power electronics, and self-righting and failure-recovery goals. These are design intentions; build and test status still need documenting.
+- [Design process and current model](docs/design-guide.md)
+- [Generated challenge brief](docs/challenge-brief.md)
+- [Focused requirement views](docs/requirements-views.md)
+- [Modeling and publishing](models/README.md)
+- [Project article](docs/restarting-sv-blue-dog.md)
 
-- [Independent Gorge challenge brief](docs/challenge-brief.md)
-- [Use-case and satisfaction traceability](docs/traceability.md)
-- [Operating constraints and regulatory sources](docs/operating-constraints.md)
-- [Logical architecture diagrams](docs/architecture.md)
-- [Mission and requirements](docs/mission-and-requirements.md)
-- [Focused requirement derivations](docs/requirements-views.md)
-- [Cruise speed and reliability analysis](docs/cruise-reliability.md)
-- [Initial architecture DFMEA](docs/dfmea.md)
-- [SysML v2 architecture and learning guide](models/README.md)
-- [Project status and restart checklist](docs/project-status.md)
-- [Article: picking up a small sailing robot again](docs/restarting-sv-blue-dog.md)
+## Repository
 
-## Folder layout
+`models/` holds the authoritative SysML. `docs/` contains a short design guide, analysis methods and generated reports. `scripts/` publishes with native OpenSysML; `tests/` exercises model behavior and documentation consistency. Python dependencies use the package-free uv project.
 
-- `cad/`: SolidWorks assemblies and parts, plus manufacturing and exchange files.
-- `docs/`: mission decisions, project status, restart checklist, and the website article.
-- `models/`: SysML v2 mission, requirements, and architecture source.
-- `scripts/`: OpenSysML-backed model analysis and documentation generation.
-- `tests/`: derivation extraction and validation checks.
-- `pyproject.toml` / `uv.lock`: package-free Python environment managed by uv.
+The [CAD files](cad/) are a manufacturing and wing-sail prototype, separate from the challenge-vessel design. Assemblies, parts and exchange files remain together to preserve references. Start with [SV Bluedog.SLDASM](cad/SV%20Bluedog.SLDASM); physical build status and geometry qualification are not established by this model.
 
-## CAD
-
-The SolidWorks files and their STEP, IGES, and 3MF exports live together in [`cad/`](cad/) to preserve relative assembly paths. Start with [`cad/SV Bluedog.SLDASM`](cad/SV%20Bluedog.SLDASM); the mast assembly is [`cad/BluedogMast.SLDASM`](cad/BluedogMast.SLDASM). Assembly dependencies and geometry have not yet been validated. STEP, IGES, and 3MF files are retained as supplied.
-
-SolidWorks lock files are ignored. CAD files are stored as ordinary Git binary files in this initial snapshot; the largest is approximately 7.4 MB. Avoid committing automatic backups or repeated export copies.
-
-## Publishing
-
-The GitHub Pages site reads `docs/restarting-sv-blue-dog.md` from this repository through its publication manifest. Article edits belong here alongside the project work.
-
-## Modeling tools
-
-OpenSysML 0.9.2 replaces the earlier sysmlpy dependency. The package-free Python
-environment remains managed by uv. Run `uv sync --locked`, then
-`uv run python scripts/install_renderer.py` to install the pinned native renderer,
-then `uv run python scripts/render_requirements.py` to analyze the models and generate
-the diagram and register. See [tooling setup and limitations](models/README.md#reproducible-tooling).
-
-The [sustained-operation energy framework](docs/sustained-operations.md) and [native load roll-up](docs/energy-budget.md) connect the endurance objective to executable energy criteria and an evidence-gated SysML verification case.
+The GitHub Pages blog imports Markdown from this repository. Requirement statements, model counts and numerical results belong in generated artifacts, not duplicated prose. Publishing commands and source conventions are in the modeling guide.

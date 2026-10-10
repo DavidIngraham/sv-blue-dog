@@ -1,5 +1,7 @@
 # Use-case and architecture traceability
 
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
+
 Use-case objectives subset the referenced requirements. Satisfy relationships express intended design allocations, not verified compliance; criteria and evidence remain open.
 
 ## Use-case objectives

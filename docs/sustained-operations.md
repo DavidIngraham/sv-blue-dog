@@ -12,30 +12,17 @@ The battery model includes usable capacity after derating, charging/discharging 
 
 The profile is piecewise constant. Stored energy is monotone within each interval, so its initial value and interval endpoints cover its minimum **within this model**. Duty-cycle averages do not by themselves bound short bursts, shade outages or wave-induced actuator demand. Split intervals at such changes and validate the resolution before accepting evidence. The independent peak-power criterion covers supply power, not transient voltage sag or control-loop response.
 
-## Separately executable requirements
+## Acceptance and verification
 
-| ID | Acceptance outcome |
-| --- | --- |
-| E-200 | Aggregate sustained-energy feasibility; verified through the derived criteria |
-| E-201 | Every stored-energy boundary remains strictly above the protected recovery reserve |
-| E-202 | End energy is at least initial energy at the same phase of the complete repeating profile |
-| E-203 | Every mode's coincident peak withdrawal fits battery supply power, without harvesting credit |
-| E-204 | At least three complete 24-hour days, harvesting enabled at most six hours in each day |
-| E-205 | The configuration-specific evidence package has been reviewed and accepted |
-
-E-201 through E-205 have native `require constraint` predicates. The analysis calls the same SysML criterion calculations, so Python does not duplicate the acceptance logic. Invalid input domains also prevent modeled feasibility. E-201, E-203, E-204 and E-205 refine M-002; E-202 refines the repeated-operation objective rather than silently making energy-neutral operation a prerequisite for merely completing one finite endurance run.
+Follow the [energy requirements](figures/requirements-e-200.md) and [qualification conditions](requirements-context.md). The analysis calls the same native criterion calculations as the requirements.
 
 `modeledEnergyFeasible` combines valid inputs, reserve protection, repeatable balance, peak support and campaign coverage. `energyCaseSupported` additionally requires accepted evidence. The native `SustainedEnergyVerification` case explicitly verifies E-200, runs the analysis, and returns inconclusive without accepted evidence, pass for an accepted numerically feasible case, or fail for an accepted numerically failing case. Its objective separately requires `energyCaseSupported`; an inconclusive example is therefore not a successful verification command.
 
 For a fixed profile, storage capacity and efficiencies, the energy transition is monotone in initial energy. If the first complete cycle never breaches reserve and ends no lower than it began, repeating the identical bounded profile preserves that property. This is a conditional energy argument, not proof of indefinite operation in arbitrary weather. Capacity aging, seasonal resource changes, faults, fouling and loss of functional performance remain outside that repetition assumption. The Gorge-to-Hawaii mission also needs route-specific profiles and physical functional evidence.
 
-## Current illustrative result
+## Published results
 
-The synthetic example rolls up approximately **6.388 W average** and **31.433 W coincident peak** at the load bus. It uses a 250 Wh nominal battery derated to 200 Wh usable, starts at 180 Wh, and protects a 49.2 Wh recovery reserve. Three repeated days each begin with 18 hours of no harvesting and end with six hours of 40 W raw harvest at 85 percent harvesting efficiency. These numbers are examples, not selected equipment or a forecast.
-
-With 90 percent charging/discharging efficiency and 0.02 W self-discharge, the lowest modeled energy is **51.875 Wh**: only **2.675 Wh above reserve**. Later charging reaches the 200 Wh capacity limit. Numerical feasibility holds, but `evidenceReady` and `energyCaseSupported` are false. The small initial reserve margin is a reason to investigate measured demand and resource variability, not a design endorsement.
-
-Regressions demonstrate an overnight reserve breach despite a recovered final balance, long finite survival without repeatability, no harvesting, charge-rate limits, inadequate peak supply, mode-dependent load growth, invalid/missing inputs, and evidence-gated verification. Duplicate sample values are explicitly permitted by `ordered nonunique` attributes; chronological intervals remain ordered.
+Read the [generated load budget](energy-budget.md) and [native campaign output](analysis/sustained-energy.json) for current input-derived values and verdicts. The synthetic case is not a hardware selection or forecast.
 
 ## Run or extend a case
 

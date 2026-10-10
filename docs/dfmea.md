@@ -1,5 +1,7 @@
 # Initial architecture DFMEA
 
+<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
+
 Initial hypotheses for the logical architecture. Detection and prevention actions are proposed, not implemented controls. Risks are unassessed; no probabilities or RPNs are assigned. Scope completeness and every disposition remain open. Read cruise-reliability.md for the exposure model.
 
 ## Functions and failure modes
