@@ -2,11 +2,13 @@
 
 The earlier [sail, keel and rudder study](appendage-sizing.md) could find a numerical fit when hull resistance was supplied as an input. I wanted to know whether that fit would survive when the boat had to carry its own ballast, wing, battery and solar panel. This search closes those loops: the same geometry must balance the sailing loads in several wind and fouling cases while carrying its electrical system.
 
-The first result is a useful setback. Three starting points found balanced sailing states, but none found a design meeting upstream progress. The nominal 5 m/s-wind study reached a worst upstream VMG of approximately **−0.41 m/s**; the broader scenario study reached approximately **−0.79 m/s**, against a target of **+0.50 m/s**. Negative VMG means drifting downstream despite sailing through the water. These are local search results within the declared bounds, not proof that no boat can complete the challenge.
+The original bounded search was a useful setback. Three starting points found balanced sailing states, but none found a design meeting upstream progress. The nominal 5 m/s-wind study reached a worst upstream VMG of approximately **−0.41 m/s**; the broader scenario study reached approximately **−0.79 m/s**, against a target of **+0.50 m/s**. Negative VMG means drifting downstream despite sailing through the water. These are local search results within the declared bounds, not proof that no boat can complete the challenge.
 
 ![Upstream progress from native replay of the selected designs](figures/design-search.png)
 
 The [native replay report](design-search-results.md) recomputes the checks from saved geometry and trim. The [search record](analysis/design-search.json) retains all starts, solver messages, inputs, outputs and source hashes; the [native audit](analysis/design-search-audit.json) independently evaluates the selected candidates. Neither result is a selected or qualified vessel design.
+
+The current [joint sizing study](#joint-sizing-without-premature-dimension-caps) removes those premature dimension caps. The original and length-only screens below remain comparisons, not the current sizing policy.
 
 ## What is solved
 
@@ -76,3 +78,19 @@ Length reduces the model's wave-resistance term at a given speed, but adds wette
 The useful conclusion is that **length alone is not the limiting design allowance in this model**. A next design-space experiment should investigate rig area and height together with stability, alongside validation of hull resistance and the wing polar. Simply making the hull longer does not close the modeled progress gap.
 
 The [study definition](../models/hull-length-study.sysml), [reproducible search record](analysis/hull-length.json) and [native audit](analysis/hull-length-audit.json) preserve this comparison separately from the original search.
+
+## Joint sizing without premature dimension caps
+
+The latest search varies all fifteen represented sizing quantities together: the original thirteen dimensions/capacities, plus freeboard and rudder longitudinal position. Wing height follows wing area and aspect ratio; draft and total mass follow buoyancy and the mass budget. There is no separate 2 m wing-height cap and no minimum-length objective.
+
+The objective has two stages: first find a balanced design meeting the selected progress screen, then minimize total mass while retaining the screen constraints. Until progress passes, the search maximizes the worst progress margin. It never treats an unbalanced force/moment solution as a useful sailing result.
+
+Numerical brackets are deliberately wider than the original bounds. Any expandable sizing bracket approached within 0.5% of its range is enlarged for the next round, with a previous candidate reused as a starting point. The run stops after its declared round budget; remaining boundary hits are reported, not accepted as design limits. The complete brackets and all starts are in the [search record](analysis/open-sizing.json). Positive lower bounds avoid singular geometry. Sail/rudder placement remains within the modeled hull; ballast, battery, panel and actuator upper ceilings follow the retained 15 kg assembly limit and mass assumptions.
+
+[Generated results and dimensions](open-sizing-results.md) report the current outcome. The selected designs are independently replayed through the native SysML interpreter, with every output compared against compiled execution. Freeboard contributes side-shell mass as well as wing/panel elevation. The inherited hydrostatic surrogate still places shell/equipment mass at waterline, so this is not a detailed center-of-gravity calculation.
+
+**A numerical fit is not yet a mission-feasible vessel.** These comparisons retain the original stationary scenarios and their 1.5 m/s opposing current. Q-101 requires mean progress over a declared sailing leg; N-011 and N-013 explicitly do not require upstream progress everywhere. We must use a route/time profile before drawing a mission-completion conclusion. Keeping the stress screen makes the effect of broader sizing freedom visible without quietly improving the weather assumptions.
+
+Hull-form coefficients, material properties and lift/drag coefficients remain documented model assumptions. They are not selectable favorable physics. Structural strength/stiffness, appendage attachment loads, practical assembly dimensions, minimum safe freeboard, reserve buoyancy and detailed hull-form optimization are still missing. In particular, a long keel or near-zero freeboard is evidence that those constraints need implementation, not a design recommendation. Fifteen live sizing variables do not mean every possible vessel architecture is represented.
+
+The [study definition](../models/open-sizing.sysml) owns the additional sizing calculation and brackets. The [driver](../scripts/study_open_sizing.py) manages numerical optimization, expansion and reproducible publication. This is the current sizing workflow; the original and length-only studies remain bounded comparisons.

@@ -83,3 +83,19 @@ uv run python scripts/render_requirements.py
 ```
 
 The free-length studies minimize length only if a numerically feasible candidate exists; otherwise they retain the best progress found. Fixed-length cases vary the remaining design and trim values. Both the original result hash and the study sources are checked before publishing the comparison.
+
+
+### Joint sizing (current workflow)
+
+All fifteen represented sizing quantities vary together; no minimum-length objective is applied. Physical coefficients remain assumptions. Numerical brackets expand when reached; remaining hits are unresolved. The stationary progress screens do not replace a route-integrated Q-101 assessment.
+
+```sh
+uv run python -m scripts.study_open_sizing --prepare
+# In the prepared Linux/GCC environment:
+OPENBLAS_NUM_THREADS=1 .tools/solver-venv/bin/python -m scripts.study_open_sizing --starts 3 --budget 350 --rounds 3
+# Back in the native-CLI environment:
+uv run python -m scripts.study_open_sizing --publish
+uv run python scripts/render_requirements.py
+```
+
+See [current dimensions and results](../docs/open-sizing-results.md) and [assumptions](../docs/design-search.md#joint-sizing-without-premature-dimension-caps). A numerical fit with unresolved freeboard/structural constraints is not an accepted vessel design.

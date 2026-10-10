@@ -139,6 +139,12 @@ def main():
     except ImportError:
         from study_hull_length import publication_outputs
     outputs.update(publication_outputs())
+    try:
+        from .study_open_sizing import publication_outputs as sizing_outputs
+    except ImportError:
+        sys.path.insert(0, str(ROOT))
+        from scripts.study_open_sizing import publication_outputs as sizing_outputs
+    outputs.update(sizing_outputs())
     diagrams = {}
     # Compile the model once per format, rather than once for every view.
     with tempfile.TemporaryDirectory(dir=ROOT / ".tools", prefix="documents-") as scratch:
@@ -225,7 +231,7 @@ def main():
                 lambda match: f"<!-- diagram:{match[1]} -->\n{diagrams[match[1]]}\n<!-- /diagram -->",
                 source, flags=re.DOTALL)
     for path, content in outputs.items():
-        if path.suffix == ".md" and path in generated_paths:
+        if path.suffix == ".md" and path in generated_paths and "<!-- Generated" not in content:
             heading, separator, body = content.partition("\n")
             content = heading + separator + "\n<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->\n" + body
         if args.check:
