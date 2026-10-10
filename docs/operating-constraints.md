@@ -28,10 +28,10 @@ Accordingly, no 7 m or 12 m hull-size requirement has been invented. S-005 requi
 
 ## Project constraints now in the model
 
-- **P-001:** one-person transport, launch, and recovery. Lift mass, packed dimensions, procedure, and acceptable conditions remain to be set.
-- **P-002:** parts fit the selected desktop printer. A typical printer has no universal build volume; select the printer or a project envelope before fixing dimensions. Qualify joints, seals, materials, orientation, and tolerances.
+- **P-001:** one-person transport, launch, and recovery. P-001 proposes a 15 kg per-lift limit and a measurable sheltered handling demonstration.
+- **P-002:** each oriented print job, including supports, brim, raft and required clearance, fits the user-selected 250 × 250 × 250 mm usable build envelope.
 - **N-001 through N-003:** separate Gorge/ocean envelopes, marine durability, stability, and fouling response. Quantitative operating, survival, immersion, thermal, exposure and self-righting requirements are now specified; see [environmental qualification](environmental-envelope.md).
 - **R-001/R-002:** motor for testing and recovery, challenge-mode interlock and event logging, protected propulsion, and a quantified recovery energy reserve. Thrust must be demonstrated for the recovery current envelope.
 - **C-101/C-102:** telemetry and shore equipment, antenna/power/coverage budgets, authenticated emergency commands, and retained autonomous behavior during link loss. No modem, service, AIS transmitter, or radio licensing exemption is selected.
 
-Next decisions are the printer envelope, a practical one-person lift limit, the course gates and recovery locations, and validation of the environmental design targets against route observations. Radio authorization and applicable vessel/installation permissions remain recorded review items rather than component satisfaction claims.
+Next decisions are review of the proposed handling targets, the course gates and recovery locations, and validation of the environmental design targets against route observations. Radio authorization and applicable vessel/installation permissions remain recorded review items rather than component satisfaction claims.

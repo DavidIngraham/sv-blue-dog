@@ -77,3 +77,9 @@ The model now includes numerical Gorge and ocean operating and survival targets,
 Other vessels now appear explicitly in the operating context and the voyage, recovery, collision-avoidance and signaling use cases. The design has to encounter non-AIS traffic as well as vessels broadcasting their position.
 
 Further reading of the Microtransat group uncovered the reported USCG basis for its 2.4 m oceanographic-device interpretation, and a newer discussion pointing to the actual UK small-MASS certification exemption. The [classification research](operating-constraints.md) separates those sources and the unresolved US applicability question.
+
+### Turning intentions into acceptance criteria
+
+The printable build envelope is now 250 × 250 × 250 mm, measured around the entire oriented print job rather than by part volume. The environmental model now has separate Gorge/ocean profiles and individual parameter requirements, with explicit milfoil passage, snag shedding and blockage response. Five native SysML predicates can evaluate supplied print dimensions, restart time, recovery-energy sizing and capsize recovery times; synthetic passing and failing examples exercise the criteria without claiming the boat has passed a physical test.
+
+The [verification plan](verification-plan.md) identifies remaining evidence and proposed engineering targets. A [water-versus-air propeller trade study](recovery-propulsion-trade.md) compares recovery propulsion against energy, weed tolerance, guarding and capsize constraints. The propulsion medium remains open.

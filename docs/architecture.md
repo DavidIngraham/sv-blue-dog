@@ -63,4 +63,6 @@ committed in `docs/figures/`; `--check` checks the DOT and register for freshnes
 
 The context includes zero or more `OtherVessel` instances: commercial ships, barges and recreational/fishing craft, including non-AIS traffic. These are external participants, not onboard components or controllable resources. Voyage and recovery use cases include traffic; collision avoidance links to S-001 and presentation of navigation signals links to S-004. The operator actor does not imply intervention is required during a qualifying attempt. Encounter geometry and sensor performance remain to be decomposed.
 
-Environmental qualification targets are specified in N-001 through N-003; see [envelope and acceptance criteria](environmental-envelope.md).
+Environmental qualification targets are decomposed beneath N-001 through N-003; see [envelope and acceptance criteria](environmental-envelope.md).
+
+Recovery propulsion medium remains unselected; see the [water/air propeller trade study](recovery-propulsion-trade.md).
