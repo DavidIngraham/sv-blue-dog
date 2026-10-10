@@ -43,14 +43,14 @@ def test_shape_scaling_and_degenerate_foil_tip_cells():
 @pytest.mark.skipif(sys.platform!='linux',reason='Native C adapter uses Linux/GCC')
 def test_native_mass_derivatives_and_centroid_bookkeeping():
     from scripts.native_coupled import MassKernel
-    k=MassKernel();c,d=reference();_,v=build_geometry(d);geometry=np.concatenate(list(v.values()));x=np.array(c['referenceDesign'])
+    k=MassKernel();c,d=reference();_,v=build_geometry(d);geometry=np.r_[np.concatenate(list(v.values())),json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())['ballastCentroid']];x=np.array(c['referenceDesign'])
     base=k.evaluate(x,geometry);p=np.array(k.contract['parameterValues'])
     saved=json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())
     for name,value in base.items():assert value==pytest.approx(saved['mass'][name],rel=1e-11,abs=1e-12)
     x[c['designNames'].index('ballast_kg')]+=1
     ballast=k.evaluate(x,geometry)
     assert ballast['totalMass']-base['totalMass']==pytest.approx(1)
-    assert ballast['cgZ']*ballast['totalMass']-base['cgZ']*base['totalMass']==pytest.approx(-d['bottom_depth_m']-d['keel_span_m'])
+    assert ballast['cgZ']*ballast['totalMass']-base['cgZ']*base['totalMass']==pytest.approx(geometry[-1])
     x=np.array(c['referenceDesign']);x[c['designNames'].index('wing_glass_kg_m2')]+=.1
     glass=k.evaluate(x,geometry)
     assert glass['totalMass']-base['totalMass']==pytest.approx(v['wing'][0]*.1*(1+p[0]))
@@ -65,9 +65,10 @@ def test_polar_nodes_provenance_and_no_extrapolation():
     from scripts.wing_polar import WingPolar
     polar=WingPolar();data=json.loads(polar.path.read_text())
     for row in data['cases']:
-        if row['reverseChord'] or row['camberScale']==0:continue
+        if row['camberScale']==0:continue
         for i,a in enumerate(row['values']['Alpha']):
-            np.testing.assert_allclose(polar.evaluate(row['aspect'],row['camberScale'],a),[row['values'][k][i] for k in ['CLtot','CDi','CMytot']],atol=1e-12)
+            sign=np.array([-1,1,-1]) if row['reverseChord'] else np.ones(3)
+            np.testing.assert_allclose(polar.evaluate(row['aspect'],row['camberScale'],-a if row['reverseChord'] else a,reverse_flow=row['reverseChord']),np.array([row['values'][k][i] for k in ['CLtot','CDi','CMytot']])*sign,atol=1e-12)
     for point in [(1,1,0),(4,2,0),(4,1,17),(4,np.nan,0)]:
         with pytest.raises(ValueError):polar.evaluate(*point)
     zero=next(r for r in data['cases'] if r['camberScale']==0)

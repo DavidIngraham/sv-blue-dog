@@ -15,11 +15,11 @@ package BlueDogCoupledSizing {
         in d : Real [28] ordered nonunique;
         in p : Real [38] ordered nonunique;
         in m : Real [10] ordered nonunique;
-        in geometry : Real [48] ordered nonunique;
+        in geometry : Real [51] ordered nonunique;
         doc /* Four bodies: hull, wing, keel, rudder. Each geometry block is
          * skin area; skin centroid XYZ; enclosed volume; volume centroid XYZ;
          * minimum thin-wall inertia/thickness; worst bending modulus/thickness;
-         * root enclosed area; root perimeter. Geometry units are SI.
+         * root enclosed area; root perimeter. Last three inputs: ballast centroid XYZ. Geometry units are SI.
          * Foil ribs are unperforated transverse diaphragms. Hull ribs follow
          * a surface-density allocation. Neither earns FDM bending credit. */
         attribute seamKgM2 : Real = 2*m#(1)/m#(2)*m#(3)*(1+p#(1));
@@ -49,9 +49,9 @@ package BlueDogCoupledSizing {
         attribute rudderDriveMass : Real = 0.08+p#(21)*d#(20);
         attribute equipmentMass : Real = p#(23)+p#(24);
         attribute totalMass : Real = hullMass+wingMass+keelMass+rudderMass+d#(16)+batteryMass+panelMass+wingDriveMass+rudderDriveMass+equipmentMass;
-        attribute moment0 : Real = hullSkinKg*geometry#(2)+hullRibKg*geometry#(2)+wingSkinKg*geometry#(14)+wingRibKg*geometry#(18)+keelSkinKg*geometry#(26)+keelRibKg*geometry#(30)+rudderSkinKg*geometry#(38)+rudderRibKg*geometry#(42)+batteryMass*d#(27)*d#(1)+wingDriveMass*d#(10)*d#(1)+-rudderDriveMass*d#(15)*d#(1);
-        attribute moment1 : Real = hullSkinKg*geometry#(3)+hullRibKg*geometry#(3)+wingSkinKg*geometry#(15)+wingRibKg*geometry#(19)+keelSkinKg*geometry#(27)+keelRibKg*geometry#(31)+rudderSkinKg*geometry#(39)+rudderRibKg*geometry#(43);
-        attribute moment2 : Real = hullSkinKg*geometry#(4)+hullRibKg*geometry#(4)+wingSkinKg*geometry#(16)+wingRibKg*geometry#(20)+keelSkinKg*geometry#(28)+keelRibKg*geometry#(32)+rudderSkinKg*geometry#(40)+rudderRibKg*geometry#(44)+-d#(16)*(d#(3)+d#(12))+batteryMass*(-d#(3)+(d#(3)+d#(4))*d#(28))+panelMass*d#(4)+-(wingDriveMass+rudderDriveMass+equipmentMass)*d#(3)/2;
+        attribute moment0 : Real = hullSkinKg*geometry#(2)+hullRibKg*geometry#(2)+wingSkinKg*geometry#(14)+wingRibKg*geometry#(18)+keelSkinKg*geometry#(26)+keelRibKg*geometry#(30)+rudderSkinKg*geometry#(38)+rudderRibKg*geometry#(42)+batteryMass*d#(27)*d#(1)+wingDriveMass*d#(10)*d#(1)+-rudderDriveMass*d#(15)*d#(1)+d#(16)*geometry#(49);
+        attribute moment1 : Real = hullSkinKg*geometry#(3)+hullRibKg*geometry#(3)+wingSkinKg*geometry#(15)+wingRibKg*geometry#(19)+keelSkinKg*geometry#(27)+keelRibKg*geometry#(31)+rudderSkinKg*geometry#(39)+rudderRibKg*geometry#(43)+d#(16)*geometry#(50);
+        attribute moment2 : Real = hullSkinKg*geometry#(4)+hullRibKg*geometry#(4)+wingSkinKg*geometry#(16)+wingRibKg*geometry#(20)+keelSkinKg*geometry#(28)+keelRibKg*geometry#(32)+rudderSkinKg*geometry#(40)+rudderRibKg*geometry#(44)+d#(16)*geometry#(51)+batteryMass*(-d#(3)+(d#(3)+d#(4))*d#(28))+panelMass*d#(4)+-(wingDriveMass+rudderDriveMass+equipmentMass)*d#(3)/2;
         return result : Real [*] ordered nonunique;
         (totalMass, hullMass, wingMass, keelMass, rudderMass, batteryMass, panelMass, wingDriveMass, rudderDriveMass, equipmentMass,
          moment0/totalMass,moment1/totalMass,moment2/totalMass,

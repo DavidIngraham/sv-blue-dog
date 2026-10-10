@@ -15,17 +15,29 @@ The sizing baseline is a fixed-camber rotating-mast wing with a non-backdrivable
 | Recovery | Geometry-based immersed volumes and full-angle righting curves at multiple trim/flooding states; dynamic recovery remains a separate verification obligation. |
 | Uncertainty | Material properties, aerodynamic coefficients, current/wind exposure and actuator duty are evidence-bounded inputs, not freely optimized improvements. |
 
-## Current implementation gaps
+## Implementation and evidence boundary
 
-The historical two-metre study fixes waterline at 2 m, models a symmetric linear-lift wing, approximates structural sections and actuator scaling, and uses a below-hull CG allocation rather than a full-angle recovery model. Its results remain a reproducible historical comparison. The next workflow must not relabel them as fixed-camber/VSP results.
+The historical two-metre study remains a reproducible comparison. The coupled workflow uses separate models so its CAD-derived wing, mass, hydrostatics and drive calculations cannot be mistaken for those historical results.
 
-1. Extract sections, span stations, surface area and enclosed volume from `cad/SweptCrescentWing.STEP`, recording source hash and units. Distinguish manufactured material volume from displaced sealed volume.
-2. Build a parameterized VSP representation and verify geometry against the CAD. Establish axis, incidence, force/moment reference and sail tack conventions before generating polars.
-3. Verify aerodynamic runs with symmetry/sign checks and mesh refinement. Record solver version and settings. Bound viscous drag, stall and broadside loads independently; reject interpolation outside valid coverage.
-4. Couple geometry to printed structure/glass mass, actuator loads/energy and immersed-body hydrostatics. Replace the CG proxy only after full-angle checks are working.
-5. Validate a fixed design, then solve feasibility followed by length minimization under nominal and conservative assumptions. Re-evaluate rounded construction recipes and report active constraints.
+| Responsibility | Implementation |
+|---|---|
+| Geometry | Parameterized hull, CAD-midsection wing, elliptic appendages and a volume-normalized ballast bulb; common geometry supplies mass, stiffness and buoyancy inputs. |
+| Aerodynamics | OpenVSP/VSPAERO aspect/camber/incidence grids for both chord orientations; bounded interpolation with independent profile drag, lift caps and discrepancy factors. |
+| Physics | Native SysML mass/CG, force and moment balance, gearbox/motor energy, structural screens, tack weighting and route arithmetic. |
+| Numerical search | SciPy operating-state and shared-design solves. Feasibility precedes length minimization; 28 vessel variables remain free within declared brackets. |
+| Recovery | Native immersed-volume calculations; coarse fixed-pitch search screens followed by finer free-pitch curves. Static screening does not verify dynamic releases. |
 
-Numerical convergence, physical-model adequacy and mission verification are distinct verdicts. A converged solution using unsupported aerodynamic coefficients must remain labeled exploratory.
+The wing's aerodynamic moment contributes to both yaw balance and actuator torque. Its physical rotation also moves its mass and displaced volume. Opposite-tack performance uses the reversed-chord grid with the corresponding camber/sign transformation. The coordinate mapping follows [OpenVSP's body/wind-axis definitions](https://groups.google.com/g/openvsp/c/4HD1bI3jCYo/m/8vUXYf_HEQAJ).
+
+| Requirement family | Executable screening | Evidence still required |
+|---|---|---|
+| Q-101/102/103 cruise | Both-tack force balance, lateral-drift-cancelling tack weights, signed current and round-trip duration | Accepted polar and environmental profile, fouling and weather holds; the synthetic route is not a mission qualification |
+| E-200 sustained energy | Drive losses, controller/holding loads, day/night balance, reserve and peak supply | Measured duty, selected hardware, seasonal harvesting and calm/survival loads |
+| P-102 handling | Mass of separate body, wing, battery and keel assemblies | Detailed attachments and physical handling demonstration |
+| T-101–105 structure | Skin bending, deflection and hull-panel pressure screens | Wet/jointed properties, buckling, fatigue, impact, ribs and joints; full environmental load cases |
+| N-051/052 recovery | Geometry-based static restoring curves across mast positions | Dynamic releases, retained water, damage, control restoration and rig integrity |
+
+Numerical convergence, physical-model adequacy and mission verification are distinct verdicts. The VLM model does not establish viscous drag, stall, broadside behavior or aerodynamic thickness sensitivity. The geometry family and unqualified material/actuator scalings remain explicit assumptions.
 
 ## Tools
 
@@ -48,11 +60,20 @@ The STEP contains a printed/ribbed 300 mm segment, not a complete boat wing. [Ex
 
 [Generated wing-analysis results](wing-analysis-results.md) distinguish the geometry extraction, numerical mesh sensitivity and physical evidence gaps. The coupled optimization remains incomplete until the integration gates above are met.
 
-## Current coupling progress
+## Coupled execution
 
-The [full-angle diagnostic](hydrostatics.md) now computes native SysML immersed volumes and gravity/buoyancy moments, with numerical heave and pitch equilibrium. It exposes a recovery sensitivity to wing buoyancy that the old CG screen misses. The next solve must use geometry-consistent mass and explicit flooded/retained-water cases; the diagnostic has not yet replaced the historical solver's stability constraints.
+[Coupled inputs](coupled-inputs.md) records the geometry/mass replay and VSPAERO grid. The [operation model](../models/coupled-operation.sysml) connects these to force balance, drive energy, structural margins and route assessment. [Sensitivity inputs](../models/coupled-uncertainty.sysml) distinguish nominal assumptions from adverse material, aerodynamic and energy cases; these are engineering brackets, not measured probability distributions.
 
-[wing-actuator.sysml](../models/wing-actuator.sysml) separates output-shaft torque, motor and gearbox efficiencies, moving duty, powered holding and controller consumption. Its accounting example verifies arithmetic only; it is not a selected actuator or a mission energy estimate. These functions still need to be connected to the candidate-specific aerodynamic moments in the coupled search.
+After generating the VSPAERO grid, export the native kernels with the main uv environment on Windows:
 
-The [generated coupled-input report](coupled-inputs.md) records the current geometry-consistent native mass replay and bounded VSPAERO response grid. These replace input approximations for the next solver; they do not yet establish a feasible vessel.
+```powershell
+uv run --project analysis/wing python analysis/wing/polar_grid.py
+uv run python -m scripts.native_hydrostatics
+uv run python -m scripts.native_coupled
+uv run python -m scripts.native_coupled_operation
+uv run python -m scripts.prepare_coupled_uncertainty
+```
 
+Run `scripts.study_coupled`, `scripts.optimize_coupled` and `scripts.verify_coupled` as Python modules in the Linux SciPy/GCC environment. The first establishes both-tack reference operating states, the second runs shared-design feasibility and length search, and the third performs finer operating/recovery replay and sensitivity cases. Kernel preparation checks the generated C output representation; pytest checks native/interpreted parity, geometry, reference-moment invariance, gearbox accounting and tack weighting.
+
+The [earlier recovery diagnostic](hydrostatics.md) remains a sensitivity comparison using the old design's mass. It must not be substituted for the new geometry-consistent replay.

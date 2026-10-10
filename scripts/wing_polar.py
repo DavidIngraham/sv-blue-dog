@@ -14,21 +14,27 @@ class WingPolar:
     def __init__(self):
         self.path=ROOT/'docs/analysis/wing-polar-grid.json'
         data=json.loads(self.path.read_text());validate(data['driverHashes'])
-        rows=[r for r in data['cases'] if not r['reverseChord'] and r['camberScale']>0]
-        if {r['cadSha256'] for r in rows}!={json.loads((ROOT/'docs/analysis/wing-geometry.json').read_text())['sha256']}:
+        all_rows=[r for r in data['cases'] if r['camberScale']>0]
+        if {r['cadSha256'] for r in all_rows}!={json.loads((ROOT/'docs/analysis/wing-geometry.json').read_text())['sha256']}:
             raise ValueError('Polar CAD provenance mismatch')
-        self.axes=[np.array(sorted({r[key] for r in rows})) for key in ['aspect','camberScale']]+[np.array(rows[0]['values']['Alpha'])]
-        values=np.empty(tuple(len(a) for a in self.axes)+(3,))
-        for i,ar in enumerate(self.axes[0]):
-            for j,camber in enumerate(self.axes[1]):
-                matching=[r for r in rows if r['aspect']==ar and r['camberScale']==camber]
-                if len(matching)!=1:raise ValueError('Missing or duplicate polar cell')
-                row=matching[0]
-                if not np.array_equal(row['values']['Alpha'],self.axes[2]):raise ValueError('Inconsistent incidence grid')
-                values[i,j]=np.array([row['values'][key] for key in ['CLtot','CDi','CMytot']]).T
-        if not np.isfinite(values).all() or np.min(values[:,:,:,1]) < -1e-10:raise ValueError('Invalid aerodynamic response')
-        self.interpolator=RegularGridInterpolator(self.axes,values,bounds_error=True)
-    def evaluate(self,aspect,camber,alpha_deg):
-        point=np.asarray([aspect,camber,alpha_deg],dtype=float)
+        self.interpolators={}
+        for reverse in [False,True]:
+            rows=[r for r in all_rows if r['reverseChord']==reverse]
+            self.axes=[np.array(sorted({r[key] for r in rows})) for key in ['aspect','camberScale']]+[np.array(rows[0]['values']['Alpha'])]
+            values=np.empty(tuple(len(a) for a in self.axes)+(3,))
+            for i,ar in enumerate(self.axes[0]):
+                for j,camber in enumerate(self.axes[1]):
+                    matching=[r for r in rows if r['aspect']==ar and r['camberScale']==camber]
+                    if len(matching)!=1:raise ValueError('Missing or duplicate polar cell')
+                    row=matching[0]
+                    if not np.array_equal(row['values']['Alpha'],self.axes[2]):raise ValueError('Inconsistent incidence grid')
+                    values[i,j]=np.array([row['values'][key][k] for k in range(len(self.axes[2])) for key in ['CLtot','CDi','CMytot']]).reshape(-1,3)
+            if not np.isfinite(values).all() or np.min(values[:,:,:,1]) < -1e-10:raise ValueError('Invalid aerodynamic response')
+            self.interpolators[reverse]=RegularGridInterpolator(self.axes,values,bounds_error=True)
+    def evaluate(self,aspect,camber,alpha_deg,reverse_flow=False):
+        # Turning the original section end-for-end reverses chord and camber.
+        # Reflect the positive-camber reversed-chord grid using alpha -> -alpha.
+        point=np.asarray([aspect,camber,-alpha_deg if reverse_flow else alpha_deg],dtype=float)
         if not np.isfinite(point).all():raise ValueError('Nonfinite aerodynamic input')
-        return self.interpolator(point[None])[0]
+        values=self.interpolators[reverse_flow](point[None])[0]
+        return values*np.array([-1,1,-1]) if reverse_flow else values

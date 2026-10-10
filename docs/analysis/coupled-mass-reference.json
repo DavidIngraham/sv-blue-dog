@@ -1,9 +1,9 @@
 {
   "sourceHashes": {
-    "models/coupled-sizing.sysml": "d9ae4ef258ffd5b4b0b27df959d2376501a9b4566f8f48d419eabc7cdb49a7b1",
+    "models/coupled-sizing.sysml": "4715fa71a45379d2797d0e24f9925cfbf43f3fcc496360b9ddc527c7e82e46ca",
     "models/structure.sysml": "f610c6b71a5c3d2a50471d3a73354df931e64089812b37ef1fce87fd3be25c7e",
-    "scripts/coupled_geometry.py": "f40cd251a4a334f599f2cc5b9758e3898a70e7048ce6fc0bb07707c60ca51645",
-    "scripts/native_coupled.py": "625c4e9296b99442a8c39b994c5f834acde3d99eb33b36c628ea9ffb0eb83c81",
+    "scripts/coupled_geometry.py": "5605176272abe947390ec928f084c3e93c52c02898041f680783aa78b9c26f1c",
+    "scripts/native_coupled.py": "132d9b37fcf2f361ac563d5d6d245a18864e3572c358a4c80274ff06cbb86dc2",
     "docs/analysis/wing-geometry.json": "1a3836193ed6ddb2fd8e42c920e5b41bf68deb3ec8092317a1fedab53ea3123b"
   },
   "design": {
@@ -134,6 +134,11 @@
       0.1921032323370404
     ]
   },
+  "ballastCentroid": [
+    0.0,
+    0.0,
+    -0.8177350638321151
+  ],
   "mass": {
     "totalMass": 33.09785619157583,
     "hullMass": 8.187913240972776,
@@ -147,7 +152,7 @@
     "equipmentMass": 3.1,
     "cgX": -0.012410098372206782,
     "cgY": 0.004175752967856176,
-    "cgZ": -0.10382446270266657,
+    "cgZ": -0.1215552855144664,
     "hullMaterialVolume": 0.005492027892447909,
     "wingMaterialVolume": 0.002823939079211448,
     "keelMaterialVolume": 0.0019339756074109938,
@@ -158,5 +163,5 @@
     "rudderLaminateThickness": 0.0004958457959454969
   },
   "qualified": false,
-  "scope": "Reference geometry/material accounting only. Not a new optimized or verified vessel. Thin skin plus printed ribs and provisional equipment allocations. Seams/finish mass included, their displacement omitted. Ballast center is at keel tip; detailed bulb integration remains required."
+  "scope": "Reference geometry/material accounting only. Not a new optimized or verified vessel. Thin skin plus printed ribs and provisional equipment allocations. Seams/finish mass included, their displacement omitted. A volume-normalized 3:1:1 ballast bulb touches the keel tip without geometric overlap; its junction remains a structural detail."
 }

@@ -6,7 +6,7 @@
 
 ## Geometry and mass
 
-Calculated mass: **33.10 kg**. Center of gravity: (-0.0124, 0.0042, -0.1038) m in the hull reference frame. The reference plane is not the solved waterline.
+Calculated mass: **33.10 kg**. Center of gravity: (-0.0124, 0.0042, -0.1216) m in the hull reference frame. The reference plane is not the solved waterline.
 
 | Component | Calculated mass (kg) |
 |---|---:|
@@ -25,7 +25,7 @@ External mesh faces supply skin area; closed volumes supply diaphragm-rib alloca
 
 The reference wing is a rectangular extrusion of the CAD midsection. Camber, thickness, aspect ratio, area and mast position are independent geometry inputs. The hull is an elliptical-planform sizing family. Keel and rudder use a 12%-thick elliptic section family; section-shape optimization is not implemented.
 
-Ballast center is provisionally at the keel tip; a nonoverlapping bulb/junction geometry still needs integration. Seam/finish mass is included but its displacement is omitted. Flooding, retained water and trim-dependent wing centroid are not yet part of this mass replay.
+The volume-normalized 3:1:1 bulb sits immediately below the keel tip without overlap; its joint still needs structural detailing. Seam/finish mass is included but its displacement is omitted. Flooding, retained water and trim-dependent wing centroid are not yet part of this mass replay.
 
 ## VSPAERO response surface
 
@@ -33,7 +33,7 @@ The saved grid contains 12 aspect/camber combinations, each with eight incidence
 
 Interpolation returns lift, induced drag and pitching moment about midchord. It rejects out-of-range or nonfinite requests. Profile drag, stall limits and uncertainty factors remain separate engineering inputs; they are not VSPAERO predictions. Thickness is fixed in the grid, and no aerodynamic thickness sensitivity has been established.
 
-The additional zero-camber case passes the zero-incidence lift/moment symmetry check. A reversed-chord case checks geometric interchange only; neither that case nor the inviscid grid validates both-tack operation, rounded-edge separation or square-sail mode.
+The additional zero-camber case passes the zero-incidence lift/moment symmetry check. Twelve reversed-chord counterparts support an end-for-end transformation for the opposite tack, with lift and moment signs reflected consistently. These inviscid computations still do not validate rounded-edge separation, viscous behavior or square-sail mode.
 
 ## Execution boundary
 

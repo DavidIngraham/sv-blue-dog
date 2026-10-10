@@ -39,7 +39,7 @@ def run():
     drivers=['analysis/wing/polar_grid.py','analysis/wing/reference_vsp.py','analysis/wing/vsp_runtime.py']
     hashes={name:hashlib.sha256((ROOT/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for name in drivers}
     rows=[]
-    tasks=[(ar,camber,False) for ar in [2.,4.,6.,8.] for camber in [.5,1.,1.5]]+[(4.,1.,True),(4.,0.,False)]
+    tasks=[(ar,camber,reverse) for ar in [2.,4.,6.,8.] for camber in [.5,1.,1.5] for reverse in [False,True]]+[(4.,0.,False)]
     checkpoint=ROOT/'.tools/wing-grid-checkpoint.json'
     if checkpoint.exists():
         old=json.loads(checkpoint.read_text())

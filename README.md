@@ -23,3 +23,5 @@ The [sail architecture trade](docs/sail-trade.md) compares tail-controlled and c
 The [coupled sizing workflow](docs/coupled-sizing.md) develops the CAD-derived fixed-camber wing, OpenVSP analysis and full-angle recovery inputs needed for size optimization.
 
 The [static recovery diagnostic](docs/hydrostatics.md) evaluates sealed-wing and lost-buoyancy cases through full heel angles, including pitch equilibrium and numerical geometry sensitivity.
+
+The [coupled sizing results](docs/coupled-results.md) connect the CAD wing, native SysML physics and free-design search. The current boundary-limited result exposes hull-resistance and robustness gaps; it is not a selected minimum-size vessel.

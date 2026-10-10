@@ -7,7 +7,7 @@ from functools import lru_cache
 import json
 import numpy as np
 from .native_design_kernel import ROOT
-from .hydro_geometry import hull_geometry
+from .hydro_geometry import hull_geometry,ellipsoid
 
 @lru_cache(maxsize=1)
 def section_data():
@@ -88,3 +88,12 @@ def build_geometry(d,resolution=8):
         geometries[name]=body;sections[name]=section_properties(np.vstack([upper,lower[::-1]]))
     vectors={name:np.r_[metrics(body),sections[name]] for name,body in geometries.items()}
     return geometries,vectors
+
+
+def ballast_geometry(volume_m3,keel_tip_z,resolution=8):
+    """3:1:1 bulb, volume-normalized mesh, touching the keel tip without overlap."""
+    if volume_m3<=0:raise ValueError('Positive ballast volume required')
+    unit=ellipsoid([3,1,1],resolution=resolution)
+    scale=(volume_m3/metrics(unit)[4])**(1/3)
+    center=np.array([0.,0.,keel_tip_z-scale])
+    return unit*scale+center,center
