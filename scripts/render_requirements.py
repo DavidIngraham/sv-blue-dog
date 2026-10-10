@@ -1,7 +1,6 @@
 """Validate and publish requirements with the pinned native OpenSysML CLI."""
 import argparse
 import re
-import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -14,7 +13,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = tuple(ROOT / "models" / name for name in (
     "challenge.sysml", "blue-dog.sysml", "requirements.sysml",
-    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml"))
+    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml"))
 
 
 def native(*arguments, models=MODELS):
@@ -55,23 +54,36 @@ def native_energy_case():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="Check model-derived DOT and register freshness without rendering")
+    parser.add_argument("--check", action="store_true", help="Check generated diagrams, reports and analyses for freshness")
     args = parser.parse_args()
     native("-validate")
     outputs = {ROOT / "docs/energy-budget.md": native("-render-document", "BlueDogDocuments::EnergyBudget"),
                ROOT / "docs/analysis/sustained-energy.json": native_energy_case(),
                ROOT / "docs/analysis/recovery-trade.json": native_recovery_trade(),
-               ROOT / "docs/figures/requirements-derivation.dot": native_graph(),
                ROOT / "docs/requirements-register.md": native_register()}
-    views = {"architecture": "BlueDogArchitectureViews::architecture",
-             "context": "BlueDogArchitectureViews::context",
-             "architecture-detail": "BlueDogArchitectureViews::detail",
-             "use-cases": "BlueDogUseCaseViews::operations"}
     outputs[ROOT / "docs/traceability.md"] = native(
         "-render-document", "BlueDogDocuments::Traceability")
-    for name, view in views.items():
-        outputs[ROOT / f"docs/figures/{name}.dot"] = native(
-            "-render", view, "-render-form", "dot")
+    diagrams = {}
+    for name, document in {
+        "requirements-derivation": "RequirementsDiagram",
+        "architecture": "ArchitectureDiagram", "context": "ContextDiagram",
+        "architecture-detail": "DetailDiagram", "use-cases": "UseCasesDiagram",
+    }.items():
+        target = f"BlueDogDiagramDocuments::{document}"
+        markdown = native("-render-document", target, "-diagram-form", "mermaid")
+        outputs[ROOT / f"docs/figures/{name}.md"] = markdown
+        outputs[ROOT / f"docs/figures/{name}.html"] = native(
+            "-render-document", target, "-diagram-form", "mermaid",
+            "-doc-form", "html", "-html-mermaid", "cdn")
+        diagrams[name] = markdown[markdown.index("```mermaid"):].strip()
+    # Keep hand-written prose; replace only explicitly marked native diagrams.
+    for path in (ROOT / "docs").glob("*.md"):
+        source = path.read_text(encoding="utf-8")
+        if "<!-- diagram:" in source:
+            outputs[path] = re.sub(
+                r"<!-- diagram:([\w-]+) -->.*?<!-- /diagram -->",
+                lambda match: f"<!-- diagram:{match[1]} -->\n{diagrams[match[1]]}\n<!-- /diagram -->",
+                source, flags=re.DOTALL)
     for path, content in outputs.items():
         if args.check:
             if not path.exists() or path.read_text(encoding="utf-8") != content:
@@ -79,24 +91,6 @@ def main():
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(content.encode("utf-8"))
-    if not args.check:
-        dot = shutil.which("dot")
-        if not dot:
-            raise SystemExit("Install Graphviz and ensure dot is on PATH, then rerun.")
-        source_path = ROOT / "docs/figures/requirements-derivation.dot"
-        # Align the two mission drivers at the top without changing native edges.
-        layout = source_path.read_text(encoding="utf-8")
-        roots = re.findall(r'"(n[0-9]+)" \[.*?<b>(?:GorgeChallenge::transGorgeChallenge|BlueDog::Goals::hawaiiVoyage) :', layout)
-        if len(roots) != 2:
-            raise SystemExit("Expected both top-level requirements in the native diagram.")
-        layout = layout.rstrip().removesuffix("}") + '\n{ rank=sink; ' + '; '.join(roots) + '; }\n}\n'
-        for extension in ("svg", "png"):
-            subprocess.run([dot, "-Grankdir=BT", f"-T{extension}", "-o", str(source_path.with_suffix('.' + extension))], input=layout, text=True, encoding="utf-8", check=True)
-        for name in views:
-            source = ROOT / f"docs/figures/{name}.dot"
-            for extension in ("svg", "png"):
-                subprocess.run([dot, f"-T{extension}", str(source), "-o",
-                                str(source.with_suffix("." + extension))], check=True)
     print("Native validation, publishing, recovery-trade and sustained-energy analyses passed; physical compliance is not evaluated.")
 
 

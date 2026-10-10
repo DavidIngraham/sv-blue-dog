@@ -29,7 +29,7 @@ Do not use satisfaction relationships as a substitute for verification results. 
 
 The root `pyproject.toml` defines a **package-free uv project** (`[tool.uv] package = false`). `uv.lock` fixes the dependency resolution, including OpenSysML 0.9.2. The project is not installed as a Python package; scripts run directly. Python 3.12 or 3.13 is supported.
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Graphviz](https://graphviz.org/download/) with `dot` on PATH, then run from the repository root:
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run from the repository root:
 
 ```sh
 uv sync --locked
@@ -49,7 +49,7 @@ release pins the runtime download. For offline setup and explicit runtime paths,
 see the [OpenSysML client guide](https://opensysml.org/guide/09-clients/).
 No model is sent to a hosted analysis service by this workflow.
 
-The renderer writes SVG, PNG, and DOT to `docs/figures/` and the readable requirement/derivation register to `docs/requirements-register.md`. Commit these with model changes so GitHub and the website can display them without a Python runtime. `--check` checks DOT and register freshness; it does not compare rendered image pixels. Graphviz is a system dependency outside the uv lockfile, so its version and fonts can affect layout.
+The renderer writes native Mermaid Markdown and standalone HTML to `docs/figures/`, updates marked diagram blocks in the authored articles, and regenerates the reports and analysis JSON. Commit these with model changes. GitHub renders the fenced Mermaid blocks; the blog loads a pinned Mermaid renderer. Standalone HTML uses OpenSysML's pinned CDN renderer and falls back to source when unavailable. `--check` compares all generated text, including embedded diagrams. Graphviz is no longer required for publishing.
 
 ## Native requirements view
 
@@ -62,12 +62,11 @@ derivation endpoints. The challenge can also be analyzed by itself. The combined
 The two graph roots are C-000 (Trans-Gorge challenge) and H-001 (Hawaii voyage).
 Vehicle requirements live in the distinct `BlueDogRequirements` package; files
 do not reopen or merge separate declarations of the `BlueDog` package. OpenSysML selects the nodes and
-relationships and writes DOT; Python no longer constructs diagram nodes or edges.
-Graphviz converts the native DOT to SVG/PNG with high-level requirements above their derived requirements.
-Graphviz uses `rankdir=BT` because native derive arrows point from derived to
-original; the arrows therefore point upward while the hierarchy reads top-down.
-A rendering-only rank constraint aligns both mission drivers on the top row;
-the saved native DOT and all native nodes and edges remain unchanged.
+relationships and writes Mermaid; Python does not construct nodes or edges.
+`diagram-documents.sysml` defines native document wrappers for the five views.
+The requirements document uses `direction = "BT"` because derive arrows point
+from derived to original: higher-level requirements appear above their descendants.
+Mermaid controls layout; the former Graphviz-only same-row root constraint is removed.
 
 The native CLI is pinned separately to `nightly-20261009-28106371e`. Release 0.9.2
 renders this view as a containment tree without derivation links; the dated nightly
@@ -90,17 +89,12 @@ using `-render-document BlueDogDocuments::RequirementsRegister`. Its
 DocumentQueries is an OpenSysML tooling library, not an OMG standard library.
 The CLI writes Markdown directly; Python does not construct table rows or cells.
 
-The publishing script is a thin CLI wrapper: native validation, native DOT and
-Markdown rendering, Graphviz conversion, and generated-file freshness checks.
-It does not use the Python client or experimental API-JSON export. The pinned
-Python client remains available for interactive modeling, but publishing needs
-only Python, the installed native CLI, and Graphviz.
-
-Six integration tests cover native validation, standalone challenge loading,
-the expected diagram relationships, the two top-level drivers, register IDs/statuses/relationships, and use-case/satisfaction traceability. The former generic custom duplicate-ID and cycle
-validator has been removed; native validation and these project publication
-checks are the checks we run. `--check` compares native DOT and Markdown without
-rewriting them or comparing image pixels.
+The publishing script wraps native validation, document rendering and analyses,
+then replaces only explicitly marked diagram blocks in authored Markdown.
+Publishing needs Python and the pinned native CLI. Regression tests retain native
+DOT inspection as an independent check of derivation endpoints; DOT is no longer
+a published artifact. Browser checks verify Mermaid rendering separately from
+model correctness. Run `uv run pytest` and the publishing freshness check before pushing.
 
 Passing analysis does not establish mission feasibility or requirement satisfaction.
 Thirteen requirement definitions contain native numeric or state acceptance predicates. Synthetic boundary tests exercise them; they do not establish physical compliance. See [verification plan](../docs/verification-plan.md). The mission decomposition does not yet define an executable sequence.
@@ -144,7 +138,7 @@ Executable-criteria tests cover numeric boundaries, navigation epoch counts, lau
 
 ## Atomic acceptance leaves
 
-The [decomposition map](../docs/requirement-decomposition.md) explains the 127 acceptance leaves beneath 29 retained parent IDs. Parents supply common test context and link to individual outcomes; derivation is not executable aggregation. The atomicity pass moved five existing native predicates from bundled parents to the corresponding leaves; the later energy framework adds its own criteria. The full SVG is a zoomable trace graph; the PNG is a scaled overview because Graphviz limits bitmap width. Use the native register for readable statements.
+The [decomposition map](../docs/requirement-decomposition.md) explains the 127 acceptance leaves beneath 29 retained parent IDs. Parents supply common test context and link to individual outcomes; derivation is not executable aggregation. The atomicity pass moved five existing native predicates from bundled parents to the corresponding leaves; the later energy framework adds its own criteria. The full Mermaid trace graph is large; use the blog zoom controls or GitHub diagram controls to inspect it. Use the native register for readable statements.
 
 ## Sustained-operation energy framework
 

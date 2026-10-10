@@ -92,3 +92,14 @@ def test_register_preserves_ids_status_and_relationships(published_model):
         '| ID | Requirement | Status | Statement |',
         '| Original | Derived | Status | Rationale |', '| --- | --- | --- | --- |')]
     assert all((' | open | ' in line for line in data))
+
+
+def test_mermaid_derivations_match_native_graph(published_model):
+    document = native('-render-document', 'BlueDogDiagramDocuments::RequirementsDiagram',
+                      '-diagram-form', 'mermaid')
+    assert 'flowchart BT' in document
+    # Compare every source/target, not just counts: migration must preserve direction.
+    edges = re.findall(r'(n[0-9]+) -\.->\|"derive"\| (n[0-9]+)', document)
+    native_edges = re.findall(r'"(n[0-9]+)" -> "(n[0-9]+)" \[label="derive"', published_model.dot)
+    assert len(edges) == 249
+    assert set(edges) == set(native_edges)

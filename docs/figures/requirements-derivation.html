@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirement derivation</title>
+<style>
+/* The default OpenSysML document stylesheet. Every value comes from a
+   --sysml-* token on .sysml-document, and the whole sheet is in the
+   opensysml cascade layer, so unlayered reader CSS overrides it without
+   specificity fights or !important. */
+@layer opensysml;
+
+@layer opensysml {
+  .sysml-document {
+    --sysml-font-body: system-ui, sans-serif;
+    --sysml-font-mono: ui-monospace, monospace;
+    --sysml-font-size: 1rem;
+    --sysml-line-height: 1.55;
+    --sysml-measure: 42rem;
+    --sysml-space: 1rem;
+    --sysml-space-tight: 0.35rem;
+    --sysml-text: #16191d;
+    --sysml-muted: #5a6472;
+    --sysml-accent: #1f4e79;
+    --sysml-rule: #cfd6de;
+    --sysml-surface: #f4f6f8;
+    --sysml-cell-padding: 0.35rem 0.6rem;
+    --sysml-code-font-size: 0.9em;
+    --sysml-caption-font-size: 0.9em;
+    --sysml-border-width: 1px;
+    --sysml-table-width: 100%;
+    --sysml-row-indent: 1.25em;
+    --sysml-title-page-height: 60vh;
+    --sysml-group-heading-weight: 600;
+    --sysml-term-weight: 600;
+    --sysml-formula-align: center;
+    --sysml-image-max-width: 100%;
+
+    box-sizing: border-box;
+    max-width: var(--sysml-measure);
+    margin: var(--sysml-space) auto;
+    padding: 0 var(--sysml-space);
+    font-family: var(--sysml-font-body);
+    font-size: var(--sysml-font-size);
+    line-height: var(--sysml-line-height);
+    color: var(--sysml-text);
+  }
+
+  .sysml-document .sysml-title {
+    color: var(--sysml-accent);
+  }
+
+  .sysml-document .sysml-title-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--sysml-title-page-height);
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .sysml-document .sysml-section-number {
+    color: var(--sysml-muted);
+    margin-right: var(--sysml-space-tight);
+  }
+
+  .sysml-document .sysml-toc ol {
+    list-style: none;
+    padding-left: var(--sysml-space);
+  }
+
+  .sysml-document .sysml-toc > ol {
+    padding-left: 0;
+  }
+
+  .sysml-document .sysml-toc a {
+    color: inherit;
+  }
+
+  .sysml-document .sysml-paragraph {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-table {
+    border-collapse: collapse;
+    width: var(--sysml-table-width);
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-table th,
+  .sysml-document .sysml-table td {
+    border: var(--sysml-border-width) solid var(--sysml-rule);
+    padding: var(--sysml-cell-padding);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .sysml-document .sysml-table thead th {
+    background: var(--sysml-surface);
+  }
+
+  /* A sized table lays its columns out at the shares its <col> widths state,
+     breaking a token wider than its cell rather than overflowing it. */
+  .sysml-document .sysml-table-sized {
+    table-layout: fixed;
+  }
+
+  .sysml-document .sysml-table-sized th,
+  .sysml-document .sysml-table-sized td {
+    overflow-wrap: break-word;
+  }
+
+  /* A nested row's first cell is indented one --sysml-row-indent per level of
+     the --sysml-depth the row states. */
+  .sysml-document .sysml-indent {
+    display: inline-block;
+    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
+  }
+
+  .sysml-document .sysml-group-heading th {
+    background: var(--sysml-surface);
+    color: var(--sysml-muted);
+    font-weight: var(--sysml-group-heading-weight);
+  }
+
+  .sysml-document .sysml-caption {
+    color: var(--sysml-muted);
+    font-size: var(--sysml-caption-font-size);
+    text-align: left;
+  }
+
+  .sysml-document .sysml-list {
+    margin: var(--sysml-space) 0;
+    padding-left: var(--sysml-space);
+  }
+
+  .sysml-document .sysml-definitions {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-entry {
+    margin: var(--sysml-space-tight) 0;
+  }
+
+  .sysml-document .sysml-term {
+    font-weight: var(--sysml-term-weight);
+  }
+
+  .sysml-document .sysml-description {
+    margin: 0 0 0 var(--sysml-space);
+  }
+
+  .sysml-document .sysml-diagram {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-image {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-image img {
+    max-width: var(--sysml-image-max-width);
+  }
+
+  .sysml-document .sysml-formula {
+    margin: var(--sysml-space) 0;
+    text-align: var(--sysml-formula-align);
+  }
+
+  .sysml-document .sysml-formula .sysml-math {
+    overflow-x: auto;
+  }
+
+  .sysml-document .sysml-diagram pre {
+    overflow-x: auto;
+    font-family: var(--sysml-font-mono);
+  }
+
+  .sysml-document code {
+    font-family: var(--sysml-font-mono);
+    font-size: var(--sysml-code-font-size);
+  }
+
+  .sysml-document .sysml-link,
+  .sysml-document .sysml-ref {
+    color: var(--sysml-accent);
+  }
+}
+</style>
+</head>
+<body>
+<article class="sysml-document" data-document="BlueDogDiagramDocuments::RequirementsDiagram">
+<h1 class="sysml-title">Requirement derivation</h1>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::requirements" data-diagram-kind="requirement" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogViews::requirements — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 2 exposed standard library element(s) not drawn; a requirement rendering draws the model&#39;s own elements
+flowchart BT
+  n0(&#34;`*«requirement»*
+**GorgeChallenge::transGorgeChallenge : TransGorgeChallenge**`&#34;)
+  n1(&#34;`*«requirement»*
+**GorgeChallenge::courseCompletion : CourseCompletion**`&#34;)
+  n2(&#34;`*«requirement»*
+**GorgeChallenge::repeatedOperation : RepeatedOperation**`&#34;)
+  n3(&#34;`*«requirement»*
+**GorgeChallenge::unassistedAttempt : UnassistedAttempt**`&#34;)
+  n4(&#34;`*«requirement»*
+**GorgeChallenge::sailingPropulsion : SailingPropulsion**`&#34;)
+  n5(&#34;`*«requirement»*
+**GorgeChallenge::liveObservation : LiveObservation**`&#34;)
+  n6(&#34;`*«requirement»*
+**GorgeChallenge::emergencyIntervention : EmergencyIntervention**`&#34;)
+  n7(&#34;`*«requirement»*
+**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`&#34;)
+  n8(&#34;`*«requirement»*
+**BlueDogRequirements::roundTrip : RoundTrip**`&#34;)
+  n9(&#34;`*«requirement»*
+**BlueDogRequirements::multiDayEndurance : MultiDayEndurance**`&#34;)
+  n10(&#34;`*«requirement»*
+**BlueDogRequirements::energyAwareness : EnergyAwareness**`&#34;)
+  n11(&#34;`*«requirement»*
+**BlueDogRequirements::navigationAndControl : NavigationAndControl**`&#34;)
+  n12(&#34;`*«requirement»*
+**BlueDogRequirements::resetRecovery : ResetRecovery**`&#34;)
+  n13(&#34;`*«requirement»*
+**BlueDogRequirements::lowEnergyRecovery : LowEnergyRecovery**`&#34;)
+  n14(&#34;`*«requirement»*
+**BlueDogRequirements::communications : Communications**`&#34;)
+  n15(&#34;`*«requirement»*
+**BlueDogRequirements::ingressResponse : IngressResponse**`&#34;)
+  n16(&#34;`*«requirement»*
+**BlueDogRequirements::missionEvidence : MissionEvidence**`&#34;)
+  n17(&#34;`*«requirement»*
+**BlueDogRequirements::transportability : Transportability**`&#34;)
+  n18(&#34;`*«requirement»*
+**BlueDogRequirements::desktopManufacture : DesktopManufacture**`&#34;)
+  n19(&#34;`*«requirement»*
+**BlueDogRequirements::serviceability : Serviceability**`&#34;)
+  n20(&#34;`*«requirement»*
+**BlueDogRequirements::trafficSafety : TrafficSafety**`&#34;)
+  n21(&#34;`*«requirement»*
+**BlueDogRequirements::operatingBoundary : OperatingBoundary**`&#34;)
+  n22(&#34;`*«requirement»*
+**BlueDogRequirements::safeRecovery : SafeRecovery**`&#34;)
+  n23(&#34;`*«requirement»*
+**BlueDogRequirements::navigationConspicuity : NavigationConspicuity**`&#34;)
+  n24(&#34;`*«requirement»*
+**BlueDogRequirements::regulatoryClassification : RegulatoryClassification**`&#34;)
+  n25(&#34;`*«requirement»*
+**BlueDogRequirements::environmentalEnvelope : EnvironmentalEnvelope**`&#34;)
+  n26(&#34;`*«requirement»*
+**BlueDogRequirements::marineDurability : MarineDurability**`&#34;)
+  n27(&#34;`*«requirement»*
+**BlueDogRequirements::stabilityAndFouling : StabilityAndFouling**`&#34;)
+  n28(&#34;`*«requirement»*
+**BlueDogRequirements::recoveryPropulsion : RecoveryPropulsion**`&#34;)
+  n29(&#34;`*«requirement»*
+**BlueDogRequirements::recoveryEnergy : RecoveryEnergy**`&#34;)
+  n30(&#34;`*«requirement»*
+**BlueDogRequirements::telemetryEquipment : TelemetryEquipment**`&#34;)
+  n31(&#34;`*«requirement»*
+**BlueDogRequirements::commandIntegrity : CommandIntegrity**`&#34;)
+  n32(&#34;`*«requirement»*
+**BlueDogRequirements::gorgeEnvironment : GorgeEnvironment**`&#34;)
+  n33(&#34;`*«requirement»*
+**BlueDogRequirements::oceanEnvironment : OceanEnvironment**`&#34;)
+  n34(&#34;`*«requirement»*
+**BlueDogRequirements::gorgeWind : GorgeWind**`&#34;)
+  n35(&#34;`*«requirement»*
+**BlueDogRequirements::gorgeWaves : GorgeWaves**`&#34;)
+  n36(&#34;`*«requirement»*
+**BlueDogRequirements::gorgeCurrent : GorgeCurrent**`&#34;)
+  n37(&#34;`*«requirement»*
+**BlueDogRequirements::gorgeSurvivalWind : GorgeSurvivalWind**`&#34;)
+  n38(&#34;`*«requirement»*
+**BlueDogRequirements::gorgeSurvivalWaves : GorgeSurvivalWaves**`&#34;)
+  n39(&#34;`*«requirement»*
+**BlueDogRequirements::oceanWind : OceanWind**`&#34;)
+  n40(&#34;`*«requirement»*
+**BlueDogRequirements::oceanWaves : OceanWaves**`&#34;)
+  n41(&#34;`*«requirement»*
+**BlueDogRequirements::oceanCurrent : OceanCurrent**`&#34;)
+  n42(&#34;`*«requirement»*
+**BlueDogRequirements::oceanSurvivalWind : OceanSurvivalWind**`&#34;)
+  n43(&#34;`*«requirement»*
+**BlueDogRequirements::oceanSurvivalWaves : OceanSurvivalWaves**`&#34;)
+  n44(&#34;`*«requirement»*
+**BlueDogRequirements::airTemperature : AirTemperature**`&#34;)
+  n45(&#34;`*«requirement»*
+**BlueDogRequirements::waterTemperature : WaterTemperature**`&#34;)
+  n46(&#34;`*«requirement»*
+**BlueDogRequirements::humidity : Humidity**`&#34;)
+  n47(&#34;`*«requirement»*
+**BlueDogRequirements::visibility : Visibility**`&#34;)
+  n48(&#34;`*«requirement»*
+**BlueDogRequirements::calmOperation : CalmOperation**`&#34;)
+  n49(&#34;`*«requirement»*
+**BlueDogRequirements::envelopeTransition : EnvelopeTransition**`&#34;)
+  n50(&#34;`*«requirement»*
+**BlueDogRequirements::freshwaterExposure : FreshwaterExposure**`&#34;)
+  n51(&#34;`*«requirement»*
+**BlueDogRequirements::saltwaterExposure : SaltwaterExposure**`&#34;)
+  n52(&#34;`*«requirement»*
+**BlueDogRequirements::enclosureSealing : EnclosureSealing**`&#34;)
+  n53(&#34;`*«requirement»*
+**BlueDogRequirements::wetMechanicalIntegrity : WetMechanicalIntegrity**`&#34;)
+  n54(&#34;`*«requirement»*
+**BlueDogRequirements::wetElectricalIntegrity : WetElectricalIntegrity**`&#34;)
+  n55(&#34;`*«requirement»*
+**BlueDogRequirements::solarHeating : SolarHeating**`&#34;)
+  n56(&#34;`*«requirement»*
+**BlueDogRequirements::printedMaterialAging : PrintedMaterialAging**`&#34;)
+  n57(&#34;`*«requirement»*
+**BlueDogRequirements::selfRighting : SelfRighting**`&#34;)
+  n58(&#34;`*«requirement»*
+**BlueDogRequirements::capsizeControlRecovery : CapsizeControlRecovery**`&#34;)
+  n59(&#34;`*«requirement»*
+**BlueDogRequirements::submergedWeedPassage : SubmergedWeedPassage**`&#34;)
+  n60(&#34;`*«requirement»*
+**BlueDogRequirements::weedSnagShedding : WeedSnagShedding**`&#34;)
+  n61(&#34;`*«requirement»*
+**BlueDogRequirements::weedBlockageResponse : WeedBlockageResponse**`&#34;)
+  n62(&#34;`*«requirement»*
+**BlueDogRequirements::recoveryPropulsorWeeds : RecoveryPropulsorWeeds**`&#34;)
+  n63(&#34;`*«requirement»*
+**BlueDogRequirements::navigationAvailability : NavigationAvailability**`&#34;)
+  n64(&#34;`*«requirement»*
+**BlueDogRequirements::launchEnergyAdmission : LaunchEnergyAdmission**`&#34;)
+  n65(&#34;`*«requirement»*
+**BlueDogRequirements::challengeMotorInhibition : ChallengeMotorInhibition**`&#34;)
+  n66(&#34;`*«requirement»*
+**BlueDogRequirements::energyEstimateCadence : EnergyEstimateCadence**`&#34;)
+  n67(&#34;`*«requirement»*
+**BlueDogRequirements::reserveEstimateCadence : ReserveEstimateCadence**`&#34;)
+  n68(&#34;`*«requirement»*
+**BlueDogRequirements::energyEstimateAccuracy : EnergyEstimateAccuracy**`&#34;)
+  n69(&#34;`*«requirement»*
+**BlueDogRequirements::conservativeEnergyEstimate : ConservativeEnergyEstimate**`&#34;)
+  n70(&#34;`*«requirement»*
+**BlueDogRequirements::guidanceUpdateCadence : GuidanceUpdateCadence**`&#34;)
+  n71(&#34;`*«requirement»*
+**BlueDogRequirements::sailCommandCadence : SailCommandCadence**`&#34;)
+  n72(&#34;`*«requirement»*
+**BlueDogRequirements::steeringCommandCadence : SteeringCommandCadence**`&#34;)
+  n73(&#34;`*«requirement»*
+**BlueDogRequirements::positionAccuracy : PositionAccuracy**`&#34;)
+  n74(&#34;`*«requirement»*
+**BlueDogRequirements::headingAccuracy : HeadingAccuracy**`&#34;)
+  n75(&#34;`*«requirement»*
+**BlueDogRequirements::restartDeadline : RestartDeadline**`&#34;)
+  n76(&#34;`*«requirement»*
+**BlueDogRequirements::missionStateRestoration : MissionStateRestoration**`&#34;)
+  n77(&#34;`*«requirement»*
+**BlueDogRequirements::gateProgressRestoration : GateProgressRestoration**`&#34;)
+  n78(&#34;`*«requirement»*
+**BlueDogRequirements::resetRestrictionPreservation : ResetRestrictionPreservation**`&#34;)
+  n79(&#34;`*«requirement»*
+**BlueDogRequirements::lowEnergyEntry : LowEnergyEntry**`&#34;)
+  n80(&#34;`*«requirement»*
+**BlueDogRequirements::lowEnergyPayloadInhibition : LowEnergyPayloadInhibition**`&#34;)
+  n81(&#34;`*«requirement»*
+**BlueDogRequirements::lowEnergyNavigationContinuity : LowEnergyNavigationContinuity**`&#34;)
+  n82(&#34;`*«requirement»*
+**BlueDogRequirements::lowEnergyCollisionContinuity : LowEnergyCollisionContinuity**`&#34;)
+  n83(&#34;`*«requirement»*
+**BlueDogRequirements::lowEnergyExit : LowEnergyExit**`&#34;)
+  n84(&#34;`*«requirement»*
+**BlueDogRequirements::payloadRestartPermission : PayloadRestartPermission**`&#34;)
+  n85(&#34;`*«requirement»*
+**BlueDogRequirements::telemetryDeliveryCadence : TelemetryDeliveryCadence**`&#34;)
+  n86(&#34;`*«requirement»*
+**BlueDogRequirements::outageAutonomy : OutageAutonomy**`&#34;)
+  n87(&#34;`*«requirement»*
+**BlueDogRequirements::reconnectCurrentRecord : ReconnectCurrentRecord**`&#34;)
+  n88(&#34;`*«requirement»*
+**BlueDogRequirements::backlogOrdering : BacklogOrdering**`&#34;)
+  n89(&#34;`*«requirement»*
+**BlueDogRequirements::backlogCurrentPriority : BacklogCurrentPriority**`&#34;)
+  n90(&#34;`*«requirement»*
+**BlueDogRequirements::ingressDetection : IngressDetection**`&#34;)
+  n91(&#34;`*«requirement»*
+**BlueDogRequirements::ingressRecoveryRequest : IngressRecoveryRequest**`&#34;)
+  n92(&#34;`*«requirement»*
+**BlueDogRequirements::ingressFlotation : IngressFlotation**`&#34;)
+  n93(&#34;`*«requirement»*
+**BlueDogRequirements::ingressElectronicsProtection : IngressElectronicsProtection**`&#34;)
+  n94(&#34;`*«requirement»*
+**BlueDogRequirements::ingressPositionContinuity : IngressPositionContinuity**`&#34;)
+  n95(&#34;`*«requirement»*
+**BlueDogRequirements::periodicLogCadence : PeriodicLogCadence**`&#34;)
+  n96(&#34;`*«requirement»*
+**BlueDogRequirements::logRetention : LogRetention**`&#34;)
+  n97(&#34;`*«requirement»*
+**BlueDogRequirements::criticalEventRecording : CriticalEventRecording**`&#34;)
+  n98(&#34;`*«requirement»*
+**BlueDogRequirements::logTimestampAccuracy : LogTimestampAccuracy**`&#34;)
+  n99(&#34;`*«requirement»*
+**BlueDogRequirements::invalidTimestampMarking : InvalidTimestampMarking**`&#34;)
+  n100(&#34;`*«requirement»*
+**BlueDogRequirements::logGapIndication : LogGapIndication**`&#34;)
+  n101(&#34;`*«requirement»*
+**BlueDogRequirements::logInterruptionDurability : LogInterruptionDurability**`&#34;)
+  n102(&#34;`*«requirement»*
+**BlueDogRequirements::reconnectLogPreservation : ReconnectLogPreservation**`&#34;)
+  n103(&#34;`*«requirement»*
+**BlueDogRequirements::qualificationPersistence : QualificationPersistence**`&#34;)
+  n104(&#34;`*«requirement»*
+**BlueDogRequirements::unknownQualificationFallback : UnknownQualificationFallback**`&#34;)
+  n105(&#34;`*«requirement»*
+**BlueDogRequirements::navigationValidEpochs : NavigationValidEpochs**`&#34;)
+  n106(&#34;`*«requirement»*
+**BlueDogRequirements::staleNavigationInvalidation : StaleNavigationInvalidation**`&#34;)
+  n107(&#34;`*«requirement»*
+**BlueDogRequirements::navigationDegradedTransition : NavigationDegradedTransition**`&#34;)
+  n108(&#34;`*«requirement»*
+**BlueDogRequirements::staleNavigationUseInhibition : StaleNavigationUseInhibition**`&#34;)
+  n109(&#34;`*«requirement»*
+**BlueDogRequirements::soloTransport : SoloTransport**`&#34;)
+  n110(&#34;`*«requirement»*
+**BlueDogRequirements::liftMass : LiftMass**`&#34;)
+  n111(&#34;`*«requirement»*
+**BlueDogRequirements::setupDuration : SetupDuration**`&#34;)
+  n112(&#34;`*«requirement»*
+**BlueDogRequirements::packDuration : PackDuration**`&#34;)
+  n113(&#34;`*«requirement»*
+**BlueDogRequirements::soloLaunch : SoloLaunch**`&#34;)
+  n114(&#34;`*«requirement»*
+**BlueDogRequirements::soloRetrieval : SoloRetrieval**`&#34;)
+  n115(&#34;`*«requirement»*
+**BlueDogRequirements::replacementDuration : ReplacementDuration**`&#34;)
+  n116(&#34;`*«requirement»*
+**BlueDogRequirements::nondestructiveService : NondestructiveService**`&#34;)
+  n117(&#34;`*«requirement»*
+**BlueDogRequirements::postServiceSealing : PostServiceSealing**`&#34;)
+  n118(&#34;`*«requirement»*
+**BlueDogRequirements::postServiceActuation : PostServiceActuation**`&#34;)
+  n119(&#34;`*«requirement»*
+**BlueDogRequirements::trafficTracking : TrafficTracking**`&#34;)
+  n120(&#34;`*«requirement»*
+**BlueDogRequirements::collisionAssessmentCadence : CollisionAssessmentCadence**`&#34;)
+  n121(&#34;`*«requirement»*
+**BlueDogRequirements::avoidanceCommandDeadline : AvoidanceCommandDeadline**`&#34;)
+  n122(&#34;`*«requirement»*
+**BlueDogRequirements::trafficAwarenessFault : TrafficAwarenessFault**`&#34;)
+  n123(&#34;`*«requirement»*
+**BlueDogRequirements::boundaryEvaluationCadence : BoundaryEvaluationCadence**`&#34;)
+  n124(&#34;`*«requirement»*
+**BlueDogRequirements::boundaryAvoidanceDeadline : BoundaryAvoidanceDeadline**`&#34;)
+  n125(&#34;`*«requirement»*
+**BlueDogRequirements::boundaryAvoidanceRecording : BoundaryAvoidanceRecording**`&#34;)
+  n126(&#34;`*«requirement»*
+**BlueDogRequirements::boundaryStartInhibition : BoundaryStartInhibition**`&#34;)
+  n127(&#34;`*«requirement»*
+**BlueDogRequirements::boundaryDegradedEvidence : BoundaryDegradedEvidence**`&#34;)
+  n128(&#34;`*«requirement»*
+**BlueDogRequirements::abortLatchDeadline : AbortLatchDeadline**`&#34;)
+  n129(&#34;`*«requirement»*
+**BlueDogRequirements::recoveryTelemetryCadence : RecoveryTelemetryCadence**`&#34;)
+  n130(&#34;`*«requirement»*
+**BlueDogRequirements::motorIsolationDeadline : MotorIsolationDeadline**`&#34;)
+  n131(&#34;`*«requirement»*
+**BlueDogRequirements::isolationRestartInhibition : IsolationRestartInhibition**`&#34;)
+  n132(&#34;`*«requirement»*
+**BlueDogRequirements::manualControlLossShutdown : ManualControlLossShutdown**`&#34;)
+  n133(&#34;`*«requirement»*
+**BlueDogRequirements::controlLossLocationContinuity : ControlLossLocationContinuity**`&#34;)
+  n134(&#34;`*«requirement»*
+**BlueDogRequirements::navigationLightPresentation : NavigationLightPresentation**`&#34;)
+  n135(&#34;`*«requirement»*
+**BlueDogRequirements::navigationShapePresentation : NavigationShapePresentation**`&#34;)
+  n136(&#34;`*«requirement»*
+**BlueDogRequirements::navigationSoundPresentation : NavigationSoundPresentation**`&#34;)
+  n137(&#34;`*«requirement»*
+**BlueDogRequirements::signalingModeDeadline : SignalingModeDeadline**`&#34;)
+  n138(&#34;`*«requirement»*
+**BlueDogRequirements::signalingFaultRecording : SignalingFaultRecording**`&#34;)
+  n139(&#34;`*«requirement»*
+**BlueDogRequirements::signalingFaultReporting : SignalingFaultReporting**`&#34;)
+  n140(&#34;`*«requirement»*
+**BlueDogRequirements::deploymentComplianceRecord : DeploymentComplianceRecord**`&#34;)
+  n141(&#34;`*«requirement»*
+**BlueDogRequirements::deploymentReleaseGate : DeploymentReleaseGate**`&#34;)
+  n142(&#34;`*«requirement»*
+**BlueDogRequirements::telemetryDisplayContent : TelemetryDisplayContent**`&#34;)
+  n143(&#34;`*«requirement»*
+**BlueDogRequirements::telemetryStaleIndication : TelemetryStaleIndication**`&#34;)
+  n144(&#34;`*«requirement»*
+**BlueDogRequirements::telemetryIdentityPreservation : TelemetryIdentityPreservation**`&#34;)
+  n145(&#34;`*«requirement»*
+**BlueDogRequirements::telemetryDuplicateSuppression : TelemetryDuplicateSuppression**`&#34;)
+  n146(&#34;`*«requirement»*
+**BlueDogRequirements::unauthenticatedCommandRejection : UnauthenticatedCommandRejection**`&#34;)
+  n147(&#34;`*«requirement»*
+**BlueDogRequirements::replayCommandRejection : ReplayCommandRejection**`&#34;)
+  n148(&#34;`*«requirement»*
+**BlueDogRequirements::expiredCommandRejection : ExpiredCommandRejection**`&#34;)
+  n149(&#34;`*«requirement»*
+**BlueDogRequirements::acceptedCommandDeadline : AcceptedCommandDeadline**`&#34;)
+  n150(&#34;`*«requirement»*
+**BlueDogRequirements::onboardAcknowledgmentDeadline : OnboardAcknowledgmentDeadline**`&#34;)
+  n151(&#34;`*«requirement»*
+**BlueDogRequirements::acknowledgmentQueueing : AcknowledgmentQueueing**`&#34;)
+  n152(&#34;`*«requirement»*
+**BlueDogRequirements::externalControlDisqualification : ExternalControlDisqualification**`&#34;)
+  n153(&#34;`*«requirement»*
+**BlueDogRequirements::visibilityNavigationCapability : VisibilityNavigationCapability**`&#34;)
+  n154(&#34;`*«requirement»*
+**BlueDogRequirements::visibilityTrafficCapability : VisibilityTrafficCapability**`&#34;)
+  n155(&#34;`*«requirement»*
+**BlueDogRequirements::restrictedVisibilityEntry : RestrictedVisibilityEntry**`&#34;)
+  n156(&#34;`*«requirement»*
+**BlueDogRequirements::restrictedVisibilityEvidence : RestrictedVisibilityEvidence**`&#34;)
+  n157(&#34;`*«requirement»*
+**BlueDogRequirements::restrictedVisibilityCollisionAssessment : RestrictedVisibilityCollisionAssessment**`&#34;)
+  n158(&#34;`*«requirement»*
+**BlueDogRequirements::survivalEntryDeadline : SurvivalEntryDeadline**`&#34;)
+  n159(&#34;`*«requirement»*
+**BlueDogRequirements::survivalTransitionRecording : SurvivalTransitionRecording**`&#34;)
+  n160(&#34;`*«requirement»*
+**BlueDogRequirements::sailingResumptionDeadline : SailingResumptionDeadline**`&#34;)
+  n161(&#34;`*«requirement»*
+**BlueDogRequirements::sailingResumptionInhibition : SailingResumptionInhibition**`&#34;)
+  n162(&#34;`*«requirement»*
+**BlueDogRequirements::resumptionBlockEvidence : ResumptionBlockEvidence**`&#34;)
+  n163(&#34;`*«requirement»*
+**BlueDogRequirements::wetMechanismTravel : WetMechanismTravel**`&#34;)
+  n164(&#34;`*«requirement»*
+**BlueDogRequirements::wetJointIntegrity : WetJointIntegrity**`&#34;)
+  n165(&#34;`*«requirement»*
+**BlueDogRequirements::wetConductorResistance : WetConductorResistance**`&#34;)
+  n166(&#34;`*«requirement»*
+**BlueDogRequirements::wetInsulationResistance : WetInsulationResistance**`&#34;)
+  n167(&#34;`*«requirement»*
+**BlueDogRequirements::hotSunElectronicsOperation : HotSunElectronicsOperation**`&#34;)
+  n168(&#34;`*«requirement»*
+**BlueDogRequirements::hotSunBatteryTemperature : HotSunBatteryTemperature**`&#34;)
+  n169(&#34;`*«requirement»*
+**BlueDogRequirements::batteryChargeTemperatureInhibition : BatteryChargeTemperatureInhibition**`&#34;)
+  n170(&#34;`*«requirement»*
+**BlueDogRequirements::rightingDeadline : RightingDeadline**`&#34;)
+  n171(&#34;`*«requirement»*
+**BlueDogRequirements::capsizeRigRetention : CapsizeRigRetention**`&#34;)
+  n172(&#34;`*«requirement»*
+**BlueDogRequirements::capsizeBallastRetention : CapsizeBallastRetention**`&#34;)
+  n173(&#34;`*«requirement»*
+**BlueDogRequirements::capsizeElectronicsSealing : CapsizeElectronicsSealing**`&#34;)
+  n174(&#34;`*«requirement»*
+**BlueDogRequirements::controlRecoveryDeadline : ControlRecoveryDeadline**`&#34;)
+  n175(&#34;`*«requirement»*
+**BlueDogRequirements::capsizeGateProgressRetention : CapsizeGateProgressRetention**`&#34;)
+  n176(&#34;`*«requirement»*
+**BlueDogRequirements::capsizeQualificationRetention : CapsizeQualificationRetention**`&#34;)
+  n177(&#34;`*«requirement»*
+**BlueDogRequirements::capsizeRestrictionRetention : CapsizeRestrictionRetention**`&#34;)
+  n178(&#34;`*«requirement»*
+**BlueDogRequirements::weedPassageSpeed : WeedPassageSpeed**`&#34;)
+  n179(&#34;`*«requirement»*
+**BlueDogRequirements::weedPassageSteering : WeedPassageSteering**`&#34;)
+  n180(&#34;`*«requirement»*
+**BlueDogRequirements::weedSnagSpeedRecovery : WeedSnagSpeedRecovery**`&#34;)
+  n181(&#34;`*«requirement»*
+**BlueDogRequirements::weedSnagSteeringRecovery : WeedSnagSteeringRecovery**`&#34;)
+  n182(&#34;`*«requirement»*
+**BlueDogRequirements::weedBlockageFault : WeedBlockageFault**`&#34;)
+  n183(&#34;`*«requirement»*
+**BlueDogRequirements::weedBlockageContingency : WeedBlockageContingency**`&#34;)
+  n184(&#34;`*«requirement»*
+**BlueDogRequirements::weedBlockageLocation : WeedBlockageLocation**`&#34;)
+  n185(&#34;`*«requirement»*
+**BlueDogRequirements::poweredWeedSpeed : PoweredWeedSpeed**`&#34;)
+  n186(&#34;`*«requirement»*
+**BlueDogRequirements::poweredWeedCurrent : PoweredWeedCurrent**`&#34;)
+  n187(&#34;`*«requirement»*
+**BlueDogRequirements::poweredWeedTemperature : PoweredWeedTemperature**`&#34;)
+  n188(&#34;`*«requirement»*
+**BlueDogRequirements::lockedPropulsorShutdown : LockedPropulsorShutdown**`&#34;)
+  n189(&#34;`*«requirement»*
+**BlueDogRequirements::motorQualificationInvariant : MotorQualificationInvariant**`&#34;)
+  n190(&#34;`*«requirement»*
+**BlueDogRequirements::freshRecoveryCommand : FreshRecoveryCommand**`&#34;)
+  n191(&#34;`*«requirement»*
+**BlueDogRequirements::ingressEventDeadline : IngressEventDeadline**`&#34;)
+  n192(&#34;`*«requirement»*
+**BlueDogRequirements::qualificationRestoration : QualificationRestoration**`&#34;)
+  n193(&#34;`*«requirement»*
+**BlueDogRequirements::sustainedEnergyFeasibility : SustainedEnergyFeasibility**`&#34;)
+  n194(&#34;`*«requirement»*
+**BlueDogRequirements::sustainedReserveProtection : SustainedReserveProtection**`&#34;)
+  n195(&#34;`*«requirement»*
+**BlueDogRequirements::repeatableCycleBalance : RepeatableCycleBalance**`&#34;)
+  n196(&#34;`*«requirement»*
+**BlueDogRequirements::peakSupplyCapability : PeakSupplyCapability**`&#34;)
+  n197(&#34;`*«requirement»*
+**BlueDogRequirements::harvestCampaignCoverage : HarvestCampaignCoverage**`&#34;)
+  n198(&#34;`*«requirement»*
+**BlueDogRequirements::energyEvidenceReadiness : EnergyEvidenceReadiness**`&#34;)
+  n199[&#34;`*«verification def»*
+**BlueDogEnergy::SustainedEnergyVerification**`&#34;]
+  n200(&#34;`*«part»*
+**handling : HandlingInterfaces**`&#34;)
+  n201(&#34;`*«part»*
+**printedHull : PrintedHull**`&#34;)
+  n202(&#34;`*«part»*
+**enclosure : SealedEnclosure**`&#34;)
+  n203(&#34;`*«part»*
+**BlueDog::Architecture::missionContext::boat : Boat**`&#34;)
+  n204(&#34;`*«part»*
+**boundarySupervisor : BoundarySupervisor**`&#34;)
+  n205(&#34;`*«part»*
+**signaling : NavigationSignaling**`&#34;)
+  n206(&#34;`*«part»*
+**BlueDog::Architecture::ShoreSupport::monitoringStation : MonitoringStation**`&#34;)
+  n207(&#34;`*«part»*
+**commandGateway : CommandGateway**`&#34;)
+  n208(&#34;`*«part»*
+**powerManagement : PowerManagement**`&#34;)
+  n209(&#34;`*«part»*
+**hullAndRig : HullAndRig**`&#34;)
+  n210(&#34;`*«part»*
+**communications : Communications**`&#34;)
+  n211(&#34;`*«part»*
+**navigation : NavigationAndSensing**`&#34;)
+  n212(&#34;`*«part»*
+**BlueDog::Architecture::HealthAndRecovery::recoveryController : RecoveryController**`&#34;)
+  n213(&#34;`*«part»*
+**control : GuidanceAndControl**`&#34;)
+  n214(&#34;`*«part»*
+**actuation : SailAndSteeringActuation**`&#34;)
+  n215(&#34;`*«part»*
+**positionAndAttitude : PositionAndAttitude**`&#34;)
+  n216(&#34;`*«part»*
+**collisionAvoidance : CollisionAvoidance**`&#34;)
+  n217(&#34;`*«part»*
+**BlueDog::Architecture::HealthAndRecovery::ingressMonitor : IngressMonitor**`&#34;)
+  n218(&#34;`*«part»*
+**recording : DataRecording**`&#34;)
+  n219(&#34;`*«part»*
+**traffic : TrafficSensing**`&#34;)
+  n220(&#34;`*«part»*
+**BlueDog::Architecture::HealthAndRecovery::motorSystem : RecoveryPropulsion**`&#34;)
+  n221(&#34;`*«part»*
+**energy : EnergySubsystem**`&#34;)
+  n222(&#34;`*«part»*
+**storage : EnergyStorage**`&#34;)
+  n223(&#34;`*«part»*
+**keelAndBallast : KeelAndBallast**`&#34;)
+  n224(&#34;`*«part»*
+**missionManager : MissionManager**`&#34;)
+  n1 -.-&gt;|&#34;derive&#34;| n0
+  n2 -.-&gt;|&#34;derive&#34;| n0
+  n3 -.-&gt;|&#34;derive&#34;| n0
+  n4 -.-&gt;|&#34;derive&#34;| n0
+  n5 -.-&gt;|&#34;derive&#34;| n0
+  n6 -.-&gt;|&#34;derive&#34;| n0
+  n199 -.-&gt;|&#34;verify&#34;| n193
+  n8 -.-&gt;|&#34;derive&#34;| n1
+  n9 -.-&gt;|&#34;derive&#34;| n2
+  n11 -.-&gt;|&#34;derive&#34;| n3
+  n8 -.-&gt;|&#34;derive&#34;| n4
+  n14 -.-&gt;|&#34;derive&#34;| n5
+  n14 -.-&gt;|&#34;derive&#34;| n6
+  n9 -.-&gt;|&#34;derive&#34;| n7
+  n11 -.-&gt;|&#34;derive&#34;| n7
+  n14 -.-&gt;|&#34;derive&#34;| n7
+  n12 -.-&gt;|&#34;derive&#34;| n7
+  n16 -.-&gt;|&#34;derive&#34;| n7
+  n11 -.-&gt;|&#34;derive&#34;| n8
+  n12 -.-&gt;|&#34;derive&#34;| n8
+  n14 -.-&gt;|&#34;derive&#34;| n8
+  n15 -.-&gt;|&#34;derive&#34;| n8
+  n16 -.-&gt;|&#34;derive&#34;| n8
+  n10 -.-&gt;|&#34;derive&#34;| n9
+  n13 -.-&gt;|&#34;derive&#34;| n9
+  n13 -.-&gt;|&#34;derive&#34;| n10
+  n17 -.-&gt;|&#34;derive&#34;| n8
+  n18 -.-&gt;|&#34;derive&#34;| n8
+  n19 -.-&gt;|&#34;derive&#34;| n2
+  n20 -.-&gt;|&#34;derive&#34;| n11
+  n21 -.-&gt;|&#34;derive&#34;| n8
+  n22 -.-&gt;|&#34;derive&#34;| n6
+  n23 -.-&gt;|&#34;derive&#34;| n20
+  n24 -.-&gt;|&#34;derive&#34;| n8
+  n25 -.-&gt;|&#34;derive&#34;| n8
+  n26 -.-&gt;|&#34;derive&#34;| n25
+  n27 -.-&gt;|&#34;derive&#34;| n25
+  n28 -.-&gt;|&#34;derive&#34;| n22
+  n29 -.-&gt;|&#34;derive&#34;| n28
+  n30 -.-&gt;|&#34;derive&#34;| n14
+  n31 -.-&gt;|&#34;derive&#34;| n14
+  n25 -.-&gt;|&#34;derive&#34;| n7
+  n32 -.-&gt;|&#34;derive&#34;| n8
+  n33 -.-&gt;|&#34;derive&#34;| n7
+  n34 -.-&gt;|&#34;derive&#34;| n32
+  n35 -.-&gt;|&#34;derive&#34;| n32
+  n36 -.-&gt;|&#34;derive&#34;| n32
+  n37 -.-&gt;|&#34;derive&#34;| n32
+  n38 -.-&gt;|&#34;derive&#34;| n32
+  n39 -.-&gt;|&#34;derive&#34;| n33
+  n40 -.-&gt;|&#34;derive&#34;| n33
+  n41 -.-&gt;|&#34;derive&#34;| n33
+  n42 -.-&gt;|&#34;derive&#34;| n33
+  n43 -.-&gt;|&#34;derive&#34;| n33
+  n44 -.-&gt;|&#34;derive&#34;| n25
+  n45 -.-&gt;|&#34;derive&#34;| n25
+  n46 -.-&gt;|&#34;derive&#34;| n25
+  n47 -.-&gt;|&#34;derive&#34;| n25
+  n48 -.-&gt;|&#34;derive&#34;| n25
+  n49 -.-&gt;|&#34;derive&#34;| n25
+  n50 -.-&gt;|&#34;derive&#34;| n26
+  n51 -.-&gt;|&#34;derive&#34;| n26
+  n52 -.-&gt;|&#34;derive&#34;| n26
+  n53 -.-&gt;|&#34;derive&#34;| n26
+  n54 -.-&gt;|&#34;derive&#34;| n26
+  n55 -.-&gt;|&#34;derive&#34;| n26
+  n56 -.-&gt;|&#34;derive&#34;| n26
+  n57 -.-&gt;|&#34;derive&#34;| n27
+  n58 -.-&gt;|&#34;derive&#34;| n27
+  n59 -.-&gt;|&#34;derive&#34;| n27
+  n60 -.-&gt;|&#34;derive&#34;| n27
+  n61 -.-&gt;|&#34;derive&#34;| n27
+  n62 -.-&gt;|&#34;derive&#34;| n27
+  n62 -.-&gt;|&#34;derive&#34;| n28
+  n63 -.-&gt;|&#34;derive&#34;| n11
+  n64 -.-&gt;|&#34;derive&#34;| n29
+  n65 -.-&gt;|&#34;derive&#34;| n4
+  n65 -.-&gt;|&#34;derive&#34;| n3
+  n31 -.-&gt;|&#34;derive&#34;| n3
+  n31 -.-&gt;|&#34;derive&#34;| n6
+  n21 -.-&gt;|&#34;derive&#34;| n7
+  n24 -.-&gt;|&#34;derive&#34;| n7
+  n19 -.-&gt;|&#34;derive&#34;| n7
+  n50 -.-&gt;|&#34;derive&#34;| n32
+  n51 -.-&gt;|&#34;derive&#34;| n33
+  n59 -.-&gt;|&#34;derive&#34;| n32
+  n60 -.-&gt;|&#34;derive&#34;| n32
+  n66 -.-&gt;|&#34;derive&#34;| n10
+  n67 -.-&gt;|&#34;derive&#34;| n10
+  n68 -.-&gt;|&#34;derive&#34;| n10
+  n69 -.-&gt;|&#34;derive&#34;| n10
+  n70 -.-&gt;|&#34;derive&#34;| n11
+  n71 -.-&gt;|&#34;derive&#34;| n11
+  n72 -.-&gt;|&#34;derive&#34;| n11
+  n73 -.-&gt;|&#34;derive&#34;| n11
+  n74 -.-&gt;|&#34;derive&#34;| n11
+  n75 -.-&gt;|&#34;derive&#34;| n12
+  n76 -.-&gt;|&#34;derive&#34;| n12
+  n77 -.-&gt;|&#34;derive&#34;| n12
+  n78 -.-&gt;|&#34;derive&#34;| n12
+  n79 -.-&gt;|&#34;derive&#34;| n13
+  n80 -.-&gt;|&#34;derive&#34;| n13
+  n81 -.-&gt;|&#34;derive&#34;| n13
+  n82 -.-&gt;|&#34;derive&#34;| n13
+  n83 -.-&gt;|&#34;derive&#34;| n13
+  n84 -.-&gt;|&#34;derive&#34;| n13
+  n85 -.-&gt;|&#34;derive&#34;| n14
+  n86 -.-&gt;|&#34;derive&#34;| n14
+  n87 -.-&gt;|&#34;derive&#34;| n14
+  n88 -.-&gt;|&#34;derive&#34;| n14
+  n89 -.-&gt;|&#34;derive&#34;| n14
+  n90 -.-&gt;|&#34;derive&#34;| n15
+  n91 -.-&gt;|&#34;derive&#34;| n15
+  n92 -.-&gt;|&#34;derive&#34;| n15
+  n93 -.-&gt;|&#34;derive&#34;| n15
+  n94 -.-&gt;|&#34;derive&#34;| n15
+  n95 -.-&gt;|&#34;derive&#34;| n16
+  n96 -.-&gt;|&#34;derive&#34;| n16
+  n97 -.-&gt;|&#34;derive&#34;| n16
+  n98 -.-&gt;|&#34;derive&#34;| n16
+  n99 -.-&gt;|&#34;derive&#34;| n16
+  n100 -.-&gt;|&#34;derive&#34;| n16
+  n101 -.-&gt;|&#34;derive&#34;| n16
+  n102 -.-&gt;|&#34;derive&#34;| n16
+  n103 -.-&gt;|&#34;derive&#34;| n16
+  n104 -.-&gt;|&#34;derive&#34;| n16
+  n105 -.-&gt;|&#34;derive&#34;| n63
+  n106 -.-&gt;|&#34;derive&#34;| n63
+  n107 -.-&gt;|&#34;derive&#34;| n63
+  n108 -.-&gt;|&#34;derive&#34;| n63
+  n109 -.-&gt;|&#34;derive&#34;| n17
+  n110 -.-&gt;|&#34;derive&#34;| n17
+  n111 -.-&gt;|&#34;derive&#34;| n17
+  n112 -.-&gt;|&#34;derive&#34;| n17
+  n113 -.-&gt;|&#34;derive&#34;| n17
+  n114 -.-&gt;|&#34;derive&#34;| n17
+  n115 -.-&gt;|&#34;derive&#34;| n19
+  n116 -.-&gt;|&#34;derive&#34;| n19
+  n117 -.-&gt;|&#34;derive&#34;| n19
+  n118 -.-&gt;|&#34;derive&#34;| n19
+  n119 -.-&gt;|&#34;derive&#34;| n20
+  n120 -.-&gt;|&#34;derive&#34;| n20
+  n121 -.-&gt;|&#34;derive&#34;| n20
+  n122 -.-&gt;|&#34;derive&#34;| n20
+  n123 -.-&gt;|&#34;derive&#34;| n21
+  n124 -.-&gt;|&#34;derive&#34;| n21
+  n125 -.-&gt;|&#34;derive&#34;| n21
+  n126 -.-&gt;|&#34;derive&#34;| n21
+  n127 -.-&gt;|&#34;derive&#34;| n21
+  n128 -.-&gt;|&#34;derive&#34;| n22
+  n129 -.-&gt;|&#34;derive&#34;| n22
+  n130 -.-&gt;|&#34;derive&#34;| n22
+  n131 -.-&gt;|&#34;derive&#34;| n22
+  n132 -.-&gt;|&#34;derive&#34;| n22
+  n133 -.-&gt;|&#34;derive&#34;| n22
+  n134 -.-&gt;|&#34;derive&#34;| n23
+  n135 -.-&gt;|&#34;derive&#34;| n23
+  n136 -.-&gt;|&#34;derive&#34;| n23
+  n137 -.-&gt;|&#34;derive&#34;| n23
+  n138 -.-&gt;|&#34;derive&#34;| n23
+  n139 -.-&gt;|&#34;derive&#34;| n23
+  n140 -.-&gt;|&#34;derive&#34;| n24
+  n141 -.-&gt;|&#34;derive&#34;| n24
+  n142 -.-&gt;|&#34;derive&#34;| n30
+  n143 -.-&gt;|&#34;derive&#34;| n30
+  n144 -.-&gt;|&#34;derive&#34;| n30
+  n145 -.-&gt;|&#34;derive&#34;| n30
+  n146 -.-&gt;|&#34;derive&#34;| n31
+  n147 -.-&gt;|&#34;derive&#34;| n31
+  n148 -.-&gt;|&#34;derive&#34;| n31
+  n149 -.-&gt;|&#34;derive&#34;| n31
+  n150 -.-&gt;|&#34;derive&#34;| n31
+  n151 -.-&gt;|&#34;derive&#34;| n31
+  n152 -.-&gt;|&#34;derive&#34;| n31
+  n153 -.-&gt;|&#34;derive&#34;| n47
+  n154 -.-&gt;|&#34;derive&#34;| n47
+  n155 -.-&gt;|&#34;derive&#34;| n47
+  n156 -.-&gt;|&#34;derive&#34;| n47
+  n157 -.-&gt;|&#34;derive&#34;| n47
+  n158 -.-&gt;|&#34;derive&#34;| n49
+  n159 -.-&gt;|&#34;derive&#34;| n49
+  n160 -.-&gt;|&#34;derive&#34;| n49
+  n161 -.-&gt;|&#34;derive&#34;| n49
+  n162 -.-&gt;|&#34;derive&#34;| n49
+  n163 -.-&gt;|&#34;derive&#34;| n53
+  n164 -.-&gt;|&#34;derive&#34;| n53
+  n165 -.-&gt;|&#34;derive&#34;| n54
+  n166 -.-&gt;|&#34;derive&#34;| n54
+  n167 -.-&gt;|&#34;derive&#34;| n55
+  n168 -.-&gt;|&#34;derive&#34;| n55
+  n169 -.-&gt;|&#34;derive&#34;| n55
+  n170 -.-&gt;|&#34;derive&#34;| n57
+  n171 -.-&gt;|&#34;derive&#34;| n57
+  n172 -.-&gt;|&#34;derive&#34;| n57
+  n173 -.-&gt;|&#34;derive&#34;| n57
+  n174 -.-&gt;|&#34;derive&#34;| n58
+  n175 -.-&gt;|&#34;derive&#34;| n58
+  n176 -.-&gt;|&#34;derive&#34;| n58
+  n177 -.-&gt;|&#34;derive&#34;| n58
+  n178 -.-&gt;|&#34;derive&#34;| n59
+  n179 -.-&gt;|&#34;derive&#34;| n59
+  n180 -.-&gt;|&#34;derive&#34;| n60
+  n181 -.-&gt;|&#34;derive&#34;| n60
+  n182 -.-&gt;|&#34;derive&#34;| n61
+  n183 -.-&gt;|&#34;derive&#34;| n61
+  n184 -.-&gt;|&#34;derive&#34;| n61
+  n185 -.-&gt;|&#34;derive&#34;| n62
+  n186 -.-&gt;|&#34;derive&#34;| n62
+  n187 -.-&gt;|&#34;derive&#34;| n62
+  n188 -.-&gt;|&#34;derive&#34;| n62
+  n189 -.-&gt;|&#34;derive&#34;| n65
+  n190 -.-&gt;|&#34;derive&#34;| n65
+  n191 -.-&gt;|&#34;derive&#34;| n15
+  n192 -.-&gt;|&#34;derive&#34;| n12
+  n101 -.-&gt;|&#34;derive&#34;| n12
+  n104 -.-&gt;|&#34;derive&#34;| n12
+  n103 -.-&gt;|&#34;derive&#34;| n12
+  n190 -.-&gt;|&#34;derive&#34;| n12
+  n189 -.-&gt;|&#34;derive&#34;| n12
+  n97 -.-&gt;|&#34;derive&#34;| n31
+  n103 -.-&gt;|&#34;derive&#34;| n31
+  n103 -.-&gt;|&#34;derive&#34;| n22
+  n189 -.-&gt;|&#34;derive&#34;| n22
+  n95 -.-&gt;|&#34;derive&#34;| n22
+  n103 -.-&gt;|&#34;derive&#34;| n65
+  n97 -.-&gt;|&#34;derive&#34;| n65
+  n95 -.-&gt;|&#34;derive&#34;| n13
+  n85 -.-&gt;|&#34;derive&#34;| n13
+  n97 -.-&gt;|&#34;derive&#34;| n13
+  n189 -.-&gt;|&#34;derive&#34;| n13
+  n97 -.-&gt;|&#34;derive&#34;| n15
+  n189 -.-&gt;|&#34;derive&#34;| n15
+  n96 -.-&gt;|&#34;derive&#34;| n14
+  n102 -.-&gt;|&#34;derive&#34;| n14
+  n97 -.-&gt;|&#34;derive&#34;| n63
+  n95 -.-&gt;|&#34;derive&#34;| n49
+  n189 -.-&gt;|&#34;derive&#34;| n49
+  n189 -.-&gt;|&#34;derive&#34;| n61
+  n189 -.-&gt;|&#34;derive&#34;| n62
+  n193 -.-&gt;|&#34;derive&#34;| n2
+  n193 -.-&gt;|&#34;derive&#34;| n7
+  n194 -.-&gt;|&#34;derive&#34;| n193
+  n195 -.-&gt;|&#34;derive&#34;| n193
+  n196 -.-&gt;|&#34;derive&#34;| n193
+  n198 -.-&gt;|&#34;derive&#34;| n193
+  n194 -.-&gt;|&#34;derive&#34;| n9
+  n196 -.-&gt;|&#34;derive&#34;| n9
+  n197 -.-&gt;|&#34;derive&#34;| n9
+  n198 -.-&gt;|&#34;derive&#34;| n9
+  n194 -.-&gt;|&#34;derive&#34;| n29
+  n200 -.-&gt;|&#34;satisfy&#34;| n17
+  n201 -.-&gt;|&#34;satisfy&#34;| n18
+  n202 -.-&gt;|&#34;satisfy&#34;| n19
+  n203 -.-&gt;|&#34;satisfy&#34;| n20
+  n204 -.-&gt;|&#34;satisfy&#34;| n21
+  n203 -.-&gt;|&#34;satisfy&#34;| n22
+  n205 -.-&gt;|&#34;satisfy&#34;| n23
+  n203 -.-&gt;|&#34;satisfy&#34;| n25
+  n203 -.-&gt;|&#34;satisfy&#34;| n26
+  n203 -.-&gt;|&#34;satisfy&#34;| n27
+  n203 -.-&gt;|&#34;satisfy&#34;| n28
+  n203 -.-&gt;|&#34;satisfy&#34;| n29
+  n206 -.-&gt;|&#34;satisfy&#34;| n30
+  n207 -.-&gt;|&#34;satisfy&#34;| n31
+  n203 -.-&gt;|&#34;satisfy&#34;| n8
+  n203 -.-&gt;|&#34;satisfy&#34;| n9
+  n208 -.-&gt;|&#34;satisfy&#34;| n10
+  n203 -.-&gt;|&#34;satisfy&#34;| n11
+  n203 -.-&gt;|&#34;satisfy&#34;| n12
+  n203 -.-&gt;|&#34;satisfy&#34;| n13
+  n203 -.-&gt;|&#34;satisfy&#34;| n14
+  n203 -.-&gt;|&#34;satisfy&#34;| n15
+  n203 -.-&gt;|&#34;satisfy&#34;| n16
+  n203 -.-&gt;|&#34;satisfy&#34;| n32
+  n203 -.-&gt;|&#34;satisfy&#34;| n33
+  n203 -.-&gt;|&#34;satisfy&#34;| n34
+  n203 -.-&gt;|&#34;satisfy&#34;| n35
+  n203 -.-&gt;|&#34;satisfy&#34;| n36
+  n203 -.-&gt;|&#34;satisfy&#34;| n37
+  n203 -.-&gt;|&#34;satisfy&#34;| n38
+  n203 -.-&gt;|&#34;satisfy&#34;| n39
+  n203 -.-&gt;|&#34;satisfy&#34;| n40
+  n203 -.-&gt;|&#34;satisfy&#34;| n41
+  n203 -.-&gt;|&#34;satisfy&#34;| n42
+  n203 -.-&gt;|&#34;satisfy&#34;| n43
+  n203 -.-&gt;|&#34;satisfy&#34;| n44
+  n203 -.-&gt;|&#34;satisfy&#34;| n45
+  n203 -.-&gt;|&#34;satisfy&#34;| n46
+  n203 -.-&gt;|&#34;satisfy&#34;| n47
+  n203 -.-&gt;|&#34;satisfy&#34;| n48
+  n203 -.-&gt;|&#34;satisfy&#34;| n49
+  n203 -.-&gt;|&#34;satisfy&#34;| n50
+  n203 -.-&gt;|&#34;satisfy&#34;| n51
+  n202 -.-&gt;|&#34;satisfy&#34;| n52
+  n209 -.-&gt;|&#34;satisfy&#34;| n53
+  n210 -.-&gt;|&#34;satisfy&#34;| n54
+  n208 -.-&gt;|&#34;satisfy&#34;| n55
+  n201 -.-&gt;|&#34;satisfy&#34;| n56
+  n203 -.-&gt;|&#34;satisfy&#34;| n57
+  n203 -.-&gt;|&#34;satisfy&#34;| n58
+  n203 -.-&gt;|&#34;satisfy&#34;| n59
+  n203 -.-&gt;|&#34;satisfy&#34;| n60
+  n203 -.-&gt;|&#34;satisfy&#34;| n61
+  n203 -.-&gt;|&#34;satisfy&#34;| n62
+  n211 -.-&gt;|&#34;satisfy&#34;| n63
+  n208 -.-&gt;|&#34;satisfy&#34;| n64
+  n212 -.-&gt;|&#34;satisfy&#34;| n65
+  n208 -.-&gt;|&#34;satisfy&#34;| n66
+  n208 -.-&gt;|&#34;satisfy&#34;| n67
+  n208 -.-&gt;|&#34;satisfy&#34;| n68
+  n208 -.-&gt;|&#34;satisfy&#34;| n69
+  n213 -.-&gt;|&#34;satisfy&#34;| n70
+  n214 -.-&gt;|&#34;satisfy&#34;| n71
+  n214 -.-&gt;|&#34;satisfy&#34;| n72
+  n215 -.-&gt;|&#34;satisfy&#34;| n73
+  n215 -.-&gt;|&#34;satisfy&#34;| n74
+  n212 -.-&gt;|&#34;satisfy&#34;| n75
+  n213 -.-&gt;|&#34;satisfy&#34;| n76
+  n213 -.-&gt;|&#34;satisfy&#34;| n77
+  n213 -.-&gt;|&#34;satisfy&#34;| n78
+  n208 -.-&gt;|&#34;satisfy&#34;| n79
+  n208 -.-&gt;|&#34;satisfy&#34;| n80
+  n213 -.-&gt;|&#34;satisfy&#34;| n81
+  n216 -.-&gt;|&#34;satisfy&#34;| n82
+  n208 -.-&gt;|&#34;satisfy&#34;| n83
+  n208 -.-&gt;|&#34;satisfy&#34;| n84
+  n210 -.-&gt;|&#34;satisfy&#34;| n85
+  n213 -.-&gt;|&#34;satisfy&#34;| n86
+  n210 -.-&gt;|&#34;satisfy&#34;| n87
+  n210 -.-&gt;|&#34;satisfy&#34;| n88
+  n210 -.-&gt;|&#34;satisfy&#34;| n89
+  n217 -.-&gt;|&#34;satisfy&#34;| n90
+  n212 -.-&gt;|&#34;satisfy&#34;| n91
+  n209 -.-&gt;|&#34;satisfy&#34;| n92
+  n202 -.-&gt;|&#34;satisfy&#34;| n93
+  n210 -.-&gt;|&#34;satisfy&#34;| n94
+  n218 -.-&gt;|&#34;satisfy&#34;| n95
+  n218 -.-&gt;|&#34;satisfy&#34;| n96
+  n218 -.-&gt;|&#34;satisfy&#34;| n97
+  n218 -.-&gt;|&#34;satisfy&#34;| n98
+  n218 -.-&gt;|&#34;satisfy&#34;| n99
+  n218 -.-&gt;|&#34;satisfy&#34;| n100
+  n218 -.-&gt;|&#34;satisfy&#34;| n101
+  n218 -.-&gt;|&#34;satisfy&#34;| n102
+  n212 -.-&gt;|&#34;satisfy&#34;| n103
+  n212 -.-&gt;|&#34;satisfy&#34;| n104
+  n211 -.-&gt;|&#34;satisfy&#34;| n105
+  n211 -.-&gt;|&#34;satisfy&#34;| n106
+  n213 -.-&gt;|&#34;satisfy&#34;| n107
+  n213 -.-&gt;|&#34;satisfy&#34;| n108
+  n200 -.-&gt;|&#34;satisfy&#34;| n109
+  n200 -.-&gt;|&#34;satisfy&#34;| n110
+  n200 -.-&gt;|&#34;satisfy&#34;| n111
+  n200 -.-&gt;|&#34;satisfy&#34;| n112
+  n200 -.-&gt;|&#34;satisfy&#34;| n113
+  n200 -.-&gt;|&#34;satisfy&#34;| n114
+  n203 -.-&gt;|&#34;satisfy&#34;| n115
+  n203 -.-&gt;|&#34;satisfy&#34;| n116
+  n202 -.-&gt;|&#34;satisfy&#34;| n117
+  n214 -.-&gt;|&#34;satisfy&#34;| n118
+  n219 -.-&gt;|&#34;satisfy&#34;| n119
+  n216 -.-&gt;|&#34;satisfy&#34;| n120
+  n216 -.-&gt;|&#34;satisfy&#34;| n121
+  n216 -.-&gt;|&#34;satisfy&#34;| n122
+  n204 -.-&gt;|&#34;satisfy&#34;| n123
+  n204 -.-&gt;|&#34;satisfy&#34;| n124
+  n218 -.-&gt;|&#34;satisfy&#34;| n125
+  n204 -.-&gt;|&#34;satisfy&#34;| n126
+  n204 -.-&gt;|&#34;satisfy&#34;| n127
+  n212 -.-&gt;|&#34;satisfy&#34;| n128
+  n210 -.-&gt;|&#34;satisfy&#34;| n129
+  n220 -.-&gt;|&#34;satisfy&#34;| n130
+  n220 -.-&gt;|&#34;satisfy&#34;| n131
+  n212 -.-&gt;|&#34;satisfy&#34;| n132
+  n210 -.-&gt;|&#34;satisfy&#34;| n133
+  n205 -.-&gt;|&#34;satisfy&#34;| n134
+  n205 -.-&gt;|&#34;satisfy&#34;| n135
+  n205 -.-&gt;|&#34;satisfy&#34;| n136
+  n205 -.-&gt;|&#34;satisfy&#34;| n137
+  n218 -.-&gt;|&#34;satisfy&#34;| n138
+  n210 -.-&gt;|&#34;satisfy&#34;| n139
+  n206 -.-&gt;|&#34;satisfy&#34;| n142
+  n206 -.-&gt;|&#34;satisfy&#34;| n143
+  n206 -.-&gt;|&#34;satisfy&#34;| n144
+  n206 -.-&gt;|&#34;satisfy&#34;| n145
+  n207 -.-&gt;|&#34;satisfy&#34;| n146
+  n207 -.-&gt;|&#34;satisfy&#34;| n147
+  n207 -.-&gt;|&#34;satisfy&#34;| n148
+  n207 -.-&gt;|&#34;satisfy&#34;| n149
+  n207 -.-&gt;|&#34;satisfy&#34;| n150
+  n207 -.-&gt;|&#34;satisfy&#34;| n151
+  n212 -.-&gt;|&#34;satisfy&#34;| n152
+  n211 -.-&gt;|&#34;satisfy&#34;| n153
+  n219 -.-&gt;|&#34;satisfy&#34;| n154
+  n213 -.-&gt;|&#34;satisfy&#34;| n155
+  n218 -.-&gt;|&#34;satisfy&#34;| n156
+  n216 -.-&gt;|&#34;satisfy&#34;| n157
+  n213 -.-&gt;|&#34;satisfy&#34;| n158
+  n218 -.-&gt;|&#34;satisfy&#34;| n159
+  n213 -.-&gt;|&#34;satisfy&#34;| n160
+  n213 -.-&gt;|&#34;satisfy&#34;| n161
+  n218 -.-&gt;|&#34;satisfy&#34;| n162
+  n209 -.-&gt;|&#34;satisfy&#34;| n163
+  n209 -.-&gt;|&#34;satisfy&#34;| n164
+  n221 -.-&gt;|&#34;satisfy&#34;| n165
+  n221 -.-&gt;|&#34;satisfy&#34;| n166
+  n203 -.-&gt;|&#34;satisfy&#34;| n167
+  n222 -.-&gt;|&#34;satisfy&#34;| n168
+  n208 -.-&gt;|&#34;satisfy&#34;| n169
+  n209 -.-&gt;|&#34;satisfy&#34;| n170
+  n209 -.-&gt;|&#34;satisfy&#34;| n171
+  n223 -.-&gt;|&#34;satisfy&#34;| n172
+  n202 -.-&gt;|&#34;satisfy&#34;| n173
+  n213 -.-&gt;|&#34;satisfy&#34;| n174
+  n224 -.-&gt;|&#34;satisfy&#34;| n175
+  n212 -.-&gt;|&#34;satisfy&#34;| n176
+  n213 -.-&gt;|&#34;satisfy&#34;| n177
+  n203 -.-&gt;|&#34;satisfy&#34;| n178
+  n214 -.-&gt;|&#34;satisfy&#34;| n179
+  n203 -.-&gt;|&#34;satisfy&#34;| n180
+  n214 -.-&gt;|&#34;satisfy&#34;| n181
+  n218 -.-&gt;|&#34;satisfy&#34;| n182
+  n213 -.-&gt;|&#34;satisfy&#34;| n183
+  n210 -.-&gt;|&#34;satisfy&#34;| n184
+  n220 -.-&gt;|&#34;satisfy&#34;| n185
+  n220 -.-&gt;|&#34;satisfy&#34;| n186
+  n220 -.-&gt;|&#34;satisfy&#34;| n187
+  n220 -.-&gt;|&#34;satisfy&#34;| n188
+  n212 -.-&gt;|&#34;satisfy&#34;| n189
+  n212 -.-&gt;|&#34;satisfy&#34;| n190
+  n218 -.-&gt;|&#34;satisfy&#34;| n191
+  n212 -.-&gt;|&#34;satisfy&#34;| n192
+  n221 -.-&gt;|&#34;satisfy&#34;| n193
+  n221 -.-&gt;|&#34;satisfy&#34;| n194
+  n221 -.-&gt;|&#34;satisfy&#34;| n195
+  n221 -.-&gt;|&#34;satisfy&#34;| n196</pre>
+</figure>
+</article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({maxTextSize: 33795, maxEdges: 437});</script>
+</body>
+</html>
