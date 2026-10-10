@@ -99,12 +99,13 @@ of this project.
 ## Model status metadata
 
 Requirement documentation contains statements and rationale, not maturity tags.
-The register does not infer lifecycle status from prose. No replacement statuses
-have been assigned by removing the former labels.
+The register does not infer lifecycle status from prose. Requirements and derivations now carry standard `StatusInfo` metadata with
+`status = ModelingMetadata::StatusKind::open`. The register reads the resolved
+enum reference, not documentation text. Open means work remains on the model
+element; it does not revoke the agreed mission intent.
 
 The standard [ModelingMetadata library](https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml.library/Domain%20Libraries/Metadata/ModelingMetadata.sysml)
 defines `StatusInfo` with a typed `StatusKind`: `open`, `tbd` (to be determined),
 `tbr` (to be resolved), `tbc` (to be confirmed), `done`, and `closed`.
-It also provides optional owner, originator, and risk information. Use this
-metadata if we introduce work-status tracking. These values do not directly
+It also provides optional owner, originator, and risk information. This metadata supplies work-status tracking. These values do not directly
 encode the former confirmed/legacy/proposed categories or prove verification.

@@ -64,6 +64,23 @@ def extract(source):
         return [deref(single(e.get("type", []), "metadata type"))["qualifiedName"]
                 for e in members(element) if e["@type"] == "MetadataUsage"]
 
+    def work_status(element):
+        annotations = [e for e in members(element) if e["@type"] == "MetadataUsage"
+                       and deref(single(e.get("type", []), "metadata type"))["qualifiedName"]
+                       == "ModelingMetadata::StatusInfo"]
+        if not annotations:
+            return "unspecified"
+        annotation = single(annotations, "StatusInfo annotation")
+        field = single([e for e in members(annotation)
+                        if e.get("qualifiedName", "").endswith("::status")], "status field")
+        value = deref(field.get("value"))
+        literal = deref(value.get("referent"))
+        qualified = literal.get("qualifiedName", "")
+        prefix = "ModelingMetadata::StatusKind::"
+        if not qualified.startswith(prefix):
+            raise ValueError("StatusInfo requires a StatusKind enum value")
+        return qualified[len(prefix):]
+
     scope = single([e for e in elements if e["@type"] == "Package"
                     and e.get("declaredName") in {"Requirements", "BlueDogRequirements"}], "Requirements package")
     challenge_scopes = [e for e in elements if e["@type"] == "Package"
@@ -82,7 +99,7 @@ def extract(source):
         statement = documentation(definition)
         if any(d["id"] == short_id or d["name"] == name for d in definitions.values()):
             raise ValueError(f"Duplicate definition name or ID: {name}")
-        definitions[definition["@id"]] = dict(id=short_id, name=name, statement=statement)
+        definitions[definition["@id"]] = dict(id=short_id, name=name, statement=statement, status=work_status(definition))
     usage_ids = {}
     for usage in children:
         if usage["@type"] != "RequirementUsage":
@@ -99,7 +116,7 @@ def extract(source):
         if connection["@type"] != "ConnectionUsage":
             continue
         name = connection["declaredName"]
-        if tags(connection) != ["RequirementDerivation::DerivationMetadata"]:
+        if [tag for tag in tags(connection) if tag != "ModelingMetadata::StatusInfo"] != ["RequirementDerivation::DerivationMetadata"]:
             raise ValueError(f"Unsupported connection in requirements package: {name}")
         ends = {}
         for end in members(connection):
@@ -119,7 +136,7 @@ def extract(source):
         if set(ends) != {"original", "derive"}:
             raise ValueError(f"Missing derivation ends in {name}")
         rationale = documentation(connection)
-        edges.append(dict(name=name, source=ends["original"], target=ends["derive"], rationale=rationale))
+        edges.append(dict(name=name, source=ends["original"], target=ends["derive"], rationale=rationale, status=work_status(connection)))
     if not requirements or not edges:
         raise ValueError("Empty requirements or derivation graph")
     pairs = [(e["source"], e["target"]) for e in edges]
@@ -163,12 +180,12 @@ def native_graph():
 
 
 def table(requirements, edges):
-    lines = ["# Requirement derivation register", "", "Generated from `models/challenge.sysml` , `models/blue-dog.sysml`, and `models/requirements.sysml`; edit the models and regenerate. C-IDs identify challenge rules; H-IDs identify the Hawaii goal; M/E-IDs identify vehicle requirements.", "", "## Requirements", "", "| ID | Requirement | Statement |", "| --- | --- | --- |"]
+    lines = ["# Requirement derivation register", "", "Generated from `models/challenge.sysml` , `models/blue-dog.sysml`, and `models/requirements.sysml`; edit the models and regenerate. C-IDs identify challenge rules; H-IDs identify the Hawaii goal; M/E-IDs identify vehicle requirements.", "", "## Requirements", "", "| ID | Requirement | Status | Statement |", "| --- | --- | --- | --- |"]
     for req in requirements.values():
-        lines.append(f'| {req["id"]} | {req["name"]} | {req["statement"].replace("|", "&#124;")} |')
-    lines += ["", "## Derivations", "", "Direction: original requirement to derived requirement. These relationships record design reasoning, not proof of satisfaction.", "", "| Original | Derived | Rationale |", "| --- | --- | --- |"]
+        lines.append(f'| {req["id"]} | {req["name"]} | {req["status"]} | {req["statement"].replace("|", "&#124;")} |')
+    lines += ["", "## Derivations", "", "Direction: original requirement to derived requirement. These relationships record design reasoning, not proof of satisfaction.", "", "| Original | Derived | Status | Rationale |", "| --- | --- | --- | --- |"]
     for edge in edges:
-        lines.append(f'| {requirements[edge["source"]]["id"]} | {requirements[edge["target"]]["id"]} | {edge["rationale"].replace("|", "&#124;")} |')
+        lines.append(f'| {requirements[edge["source"]]["id"]} | {requirements[edge["target"]]["id"]} | {edge["status"]} | {edge["rationale"].replace("|", "&#124;")} |')
     return "\n".join(lines) + "\n"
 
 

@@ -88,6 +88,20 @@ class DerivationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Cyclic'):
             extract(BASE[:BASE.rfind('}')] + reverse + '}')
 
+    def test_status_comes_from_typed_metadata(self):
+        source = BASE.replace(
+            'doc /* Complete the mission.',
+            '@ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::tbc; } doc /* Complete the mission.')
+        requirements, edges = extract(source)
+        self.assertEqual(requirements['mission']['status'], 'tbc')
+        self.assertEqual(requirements['function']['status'], 'unspecified')
+        self.assertEqual(edges[0]['status'], 'unspecified')
+
+    def test_project_status_annotations(self):
+        requirements, edges = extract(project_sources())
+        self.assertEqual({r['status'] for r in requirements.values()}, {'open'})
+        self.assertEqual({e['status'] for e in edges}, {'open'})
+
     def test_invalid_sysml_is_rejected(self):
         with self.assertRaises(Exception):
             extract(BASE.replace('requirement mission : Mission;', 'requirement mission : ;'))
