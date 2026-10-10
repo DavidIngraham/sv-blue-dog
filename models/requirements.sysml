@@ -11,7 +11,7 @@ package BlueDogRequirements {
     }
     requirement def <'M-002'> MultiDayEndurance {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall operate for 72 continuous hours without servicing or external charging while meeting the Gorge operational functions in N-001. A qualification run shall include three consecutive 24-hour cycles, each with no more than 6 hours of harvesting and at least 18 hours with harvesting disabled. The battery shall remain above the R-002 recovery reserve throughout. Actual harvested energy, loads and battery energy shall be recorded; passing this campaign does not establish indefinite energy balance. */
+        doc /* The vessel shall operate for 72 continuous hours without servicing or external charging while meeting the Gorge operational functions under N-010 and the applicable shared N-001 conditions. A qualification run shall include three consecutive 24-hour cycles, each with at most 6 hours of harvesting and at least 18 hours with harvesting disabled. Harvest input shall be limited to the installed harvester output measured under a frozen, recorded resource profile; a test supply may replay that profile but shall not exceed its measured power or accumulated energy. The conservative usable-energy estimate shall remain above the R-002 recovery reserve throughout. Acceptance requires the initial battery state, harvester configuration, replay profile, actual harvested energy and loads in the test record; absent profile evidence invalidates the test. Passing does not establish indefinite energy balance. */
     }
     requirement def <'E-001'> EnergyAwareness {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -19,11 +19,11 @@ package BlueDogRequirements {
     }
     requirement def <'E-002'> NavigationAndControl {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* During N-001 operation the vessel shall update position, heading, mission guidance and sail/steering commands at least once per second. Position error shall be at most 10 m and heading error at most 10 degrees for at least 95 percent of valid samples in each 30-minute qualification run against an independent reference. Position or heading data older than 5 seconds shall be marked invalid and trigger a logged navigation-degraded state within 1 second; the controller shall not continue using stale observations as current measurements. */
+        doc /* Under the selected operational profile N-010 or N-020 and its shared conditions, the vessel shall update mission guidance and sail/steering commands at least once per second. In each 30-minute qualification run, at least 1710 of the 1800 scheduled one-second epochs shall have a valid position within 10 m and a valid heading within 10 degrees of an independent reference. Missing or invalid epochs count as failures, not excluded samples. Deliberately injected navigation failures shall be assessed separately under E-008 and shall not be mixed into an accuracy run. */
     }
     requirement def <'E-003'> ResetRecovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* After a software watchdog reset with usable battery energy above the recovery reserve and valid navigation observations available, the vessel shall restore autonomous control and its persisted mission mode, gate progress and qualification status within 30 seconds. Propulsive motor output shall remain inhibited throughout restart unless a fresh authenticated recovery command is accepted after restart. Loss of recorded data shall not exceed the last 5 seconds; a reset shall never restore a disqualified attempt to qualifying status. */
+        doc /* After a software watchdog reset with conservative usable battery energy above the recovery reserve and valid navigation observations available, the vessel shall restore mode-appropriate autonomous control, persisted mission mode, gate progress and qualification status within 30 seconds. Reset shall preserve survival and low-energy restrictions; full sailing resumption shall obey N-035. Motor enabling shall obey R-004 and require a fresh authenticated recovery command after restart. Records older than 5 seconds before reset shall persist. An absent or inconsistent persisted qualification state shall force nonqualifying status, never infer a qualifying attempt. */
         attribute measuredRestartTime : TimeValue;
         require constraint restartDeadline {
             measuredRestartTime >= 0 [s] and measuredRestartTime <= 30 [s]
@@ -31,11 +31,11 @@ package BlueDogRequirements {
     }
     requirement def <'E-004'> LowEnergyRecovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* When the conservative usable-energy estimate reaches the R-002 reserve, the vessel shall enter a logged low-energy state within 5 seconds and disable the optional observation payload. Position recording shall continue at least once per minute and live telemetry at least once per 5 minutes when a link is available. Autonomous navigation, collision response and challenge motor inhibition shall remain active. Normal payload operation shall resume only after energy exceeds 1.2 times the reserve for 10 continuous minutes. */
+        doc /* When the conservative usable-energy estimate reaches the R-002 reserve, the vessel shall enter a logged low-energy state within 5 seconds and disable the optional observation payload. Position recording shall continue at least once per minute. Telemetry cadence shall be at most 300 seconds except during active emergency or powered recovery, when the S-003 60-second cadence takes precedence. Autonomous navigation, collision response and R-004 motor inhibition shall remain active. The low-energy flag shall clear after conservative usable energy exceeds 1.2 times the reserve for 10 continuous minutes, independently of survival or recovery flags. Payload operation shall resume only when that flag has cleared and no survival or recovery restriction remains. */
     }
     requirement def <'E-005'> Communications {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* During normal operation with a functioning link, the vessel shall deliver a current telemetry record to the shore endpoint at least once per 60 seconds. A 24-hour link outage shall not require operator intervention, erase mission data or stop autonomous control. After reconnection it shall deliver a current record within 60 seconds and resume oldest-first backlog transfer without delaying current records beyond 60 seconds. Onboard retention shall meet E-007; command handling shall meet C-102. */
+        doc /* With a functioning link, the vessel shall deliver a current telemetry record to the shore endpoint at least once per 60 seconds in normal operation; E-004 permits 300 seconds in low-energy mode outside active emergency/powered recovery. A 24-hour link outage shall not require operator intervention, erase mission data or stop autonomous control. After reconnection it shall deliver a current record within the active cadence and transfer oldest-first backlog without delaying current records beyond that cadence. Onboard retention shall meet E-007; command handling shall meet C-102. */
     }
     requirement def <'E-006'> IngressResponse {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -43,7 +43,7 @@ package BlueDogRequirements {
     }
     requirement def <'E-007'> MissionEvidence {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain at least 30 days of timestamped position, heading, mission mode, gate progress, battery energy and fault state at 1 Hz during normal operation, and at the degraded rates required by E-004/N-001 in those modes. It shall record every accepted/rejected external command, reset, motor-enable transition and qualification change. Timestamps shall be UTC within 1 second while GNSS time is valid; invalid time and gaps shall be flagged. A power interruption shall lose no more than the last 5 seconds of committed logging activity, and reconnection shall not delete retained records. */
+        doc /* The vessel shall retain at least 30 days of timestamped position, heading, mission mode, gate progress, battery energy and fault state at 1 Hz in normal operation and at least once per minute in low-energy or survival operation. Every external-command disposition, reset, motor-enable transition and qualification change shall be recorded regardless of periodic sampling cadence. Timestamps shall be UTC within 1 second while GNSS time is valid; invalid time and gaps shall be flagged. After abrupt power removal, all records older than 5 seconds before removal shall remain readable. Reconnection shall not delete retained records. Disqualifying transitions shall be persisted before commanded intervention or motor enable; unknown qualification state on restart shall be nonqualifying. */
     }
     requirement roundTrip : RoundTrip;
     requirement multiDayEndurance : MultiDayEndurance;
@@ -204,8 +204,8 @@ package BlueDogRequirements {
     requirement desktopManufacture : DesktopManufacture;
     #derivation connection deriveDesktopManufacture {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* DesktopManufacture refines the responsibilities needed for transportability. */
-        end #original source ::> transportability;
+        doc /* David specified desktop manufacture and a 250 mm usable build cube as a project constraint on the vehicle; this is an imposed stakeholder constraint, not a consequence of one-person handling. */
+        end #original source ::> roundTrip;
         end #derive target ::> desktopManufacture;
     }
 
@@ -216,8 +216,8 @@ package BlueDogRequirements {
     requirement serviceability : Serviceability;
     #derivation connection deriveServiceability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Serviceability refines the responsibilities needed for desktopManufacture. */
-        end #original source ::> desktopManufacture;
+        doc /* Repeated deployment motivates maintainability between attempts; the timed service target is an engineering allocation, not implied by printer size. */
+        end #original source ::> GorgeChallenge::repeatedOperation;
         end #derive target ::> serviceability;
     }
 
@@ -247,13 +247,13 @@ package BlueDogRequirements {
 
     requirement def <'S-003'> SafeRecovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* An accepted emergency abort shall latch the attempt as disqualified within 1 second and retain that state through power cycling. The vessel shall provide position reports at least once per 60 seconds while the link is available. A physically accessible local isolation control shall remove motor power within 1 second and prevent restart until deliberately reset. Loss of remote control for 5 seconds during manual powered recovery shall command zero thrust within a further 1 second while retaining autonomous recording and location reporting. */
+        doc /* After accepting an emergency abort, the vessel shall persistently latch the attempt as disqualified within 1 second, before performing the commanded intervention. During active emergency or powered recovery it shall provide position telemetry at least once per 60 seconds while a link is available, taking precedence over low-energy cadence. A physically accessible local isolation control shall remove motor power within 1 second and prevent restart until deliberately reset. Loss of remote control for 5 seconds during manual powered recovery shall command zero thrust within a further 1 second while retaining recording and location reporting; R-004 remains applicable. */
     }
     requirement safeRecovery : SafeRecovery;
     #derivation connection deriveSafeRecovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* SafeRecovery refines the responsibilities needed for transportability. */
-        end #original source ::> transportability;
+        doc /* Permitted emergency intervention requires explicit abort, qualification, isolation and control-loss behavior. */
+        end #original source ::> GorgeChallenge::emergencyIntervention;
         end #derive target ::> safeRecovery;
     }
 
@@ -283,7 +283,7 @@ package BlueDogRequirements {
 
     requirement def <'N-001'> EnvironmentalEnvelope {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall support autonomous operation in the Columbia River Gorge reservoir environment and the intended northeast Pacific passage environment, with separate operational and survival capabilities. The derived Gorge, ocean and shared exposure requirements specify acceptance conditions. Qualification shall exercise navigation, sail/steering control, recording and available-link telemetry concurrently; survival acceptance permits loss of course progress but requires flotation, attached rig/ballast, dry electronics and retained mission state. Passing the Gorge profile alone shall not establish ocean capability. */
+        doc /* The vessel shall retain the common environmental capabilities specified by the shared exposure requirements in both mission environments, with distinct operational and survival outcomes. Gorge acceptance uses N-010 and its profile leaves; ocean acceptance uses N-020 and its profile leaves. These mission-specific profiles are not interchangeable, and a Gorge release does not require ocean qualification. Qualification shall exercise navigation, sail/steering control, recording and available-link telemetry concurrently; survival acceptance permits loss of course progress but requires flotation, attached rig/ballast, dry electronics and retained mission state. Passing the Gorge profile alone shall not establish ocean capability. */
     }
     requirement environmentalEnvelope : EnvironmentalEnvelope;
     #derivation connection deriveEnvironmentalEnvelope {
@@ -295,7 +295,7 @@ package BlueDogRequirements {
 
     requirement def <'N-002'> MarineDurability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain its required functions and structural integrity during repeated freshwater Gorge service and prolonged saltwater ocean exposure. Derived requirements specify wet exposure, sealing, material aging and thermal qualification. Acceptance shall include post-exposure functional checks against the affected operational requirements. */
+        doc /* The vessel shall retain its required functions and structural integrity during repeated freshwater Gorge service and prolonged saltwater ocean exposure. Qualification uses N-041 freshwater for the Gorge profile and N-042 saltwater for the ocean profile; dual-profile qualification requires both campaigns. Shared sealing, material aging and thermal checks use that selected campaign. Acceptance shall include post-exposure functional checks for the selected profile. Derivation edges indicate reasoning, not unconditional applicability of every descendant to every mission. */
     }
     requirement marineDurability : MarineDurability;
     #derivation connection deriveMarineDurability {
@@ -319,7 +319,7 @@ package BlueDogRequirements {
 
     requirement def <'R-001'> RecoveryPropulsion {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall provide auxiliary propulsion that is inhibited for every qualifying challenge state, including restart and link loss. Entering powered recovery shall disqualify and log the attempt before motor thrust is enabled. At maximum mission load, powered recovery shall sustain at least 0.5 m/s speed over ground for 30 minutes against a 1.5 m/s current in wind no greater than 5 m/s and waves no greater than 0.2 m. Acceptance shall measure the track, current and electrical power. This sheltered recovery target does not imply motor recovery in the full N-001 storm envelope; local isolation and control-loss response shall meet S-003. */
+        doc /* At maximum mission load, auxiliary powered recovery shall sustain at least 0.5 m/s speed over ground for 30 minutes directly against a 1.5 m/s current, with wind no greater than 5 m/s and waves no greater than 0.2 m. Acceptance shall measure track, current and electrical power. This sheltered recovery target is not a storm-recovery guarantee; motor enable and challenge qualification shall comply with R-004, and isolation/control-loss behavior with S-003. */
     }
     requirement recoveryPropulsion : RecoveryPropulsion;
     #derivation connection deriveRecoveryPropulsion {
@@ -339,7 +339,7 @@ package BlueDogRequirements {
 
     requirement def <'R-002'> RecoveryEnergy {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Before starting an attempt, conservative usable battery energy shall exceed a protected reserve of at least 1.2 times the sum of 30 minutes of measured worst-case electrical motor power in the R-001 recovery test and 2 hours of essential navigation/control/recording/telemetry electrical power. Motor and essential power shall be separate, non-overlapping measurements. Throughout the attempt, reserve crossing shall trigger E-004. Acceptance shall evaluate the energy inequality using measured usable battery energy at the lowest operating battery temperature and end-of-service capacity. */
+        doc /* The protected recovery reserve shall be at least 1.2 times the sum of 30 minutes of worst-case electrical motor power measured in the R-001 recovery test and 2 hours of essential navigation/control/recording/telemetry electrical power measured at the S-003 recovery cadence. Motor and essential powers shall be separate, non-overlapping measurements. Reserve sizing shall use the selected installed configuration; available battery energy shall be characterized at the lowest operating battery temperature and end-of-service capacity. Launch admission is R-003; in-mission reserve crossing invokes E-004. */
         attribute motorPower : PowerValue;
         attribute essentialPower : PowerValue;
         attribute reserveEnergy : EnergyValue;
@@ -358,7 +358,7 @@ package BlueDogRequirements {
 
     requirement def <'C-101'> TelemetryEquipment {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The shore endpoint shall display UTC sample time, position, mission mode, usable battery energy, reserve, faults and time since the last received sample for every current telemetry record. It shall mark data stale once its age exceeds 120 seconds and retain that indication until a fresh record arrives. With injected 24-hour loss and subsequent reconnection, reception shall resume and records shall remain identifiable by vessel identity and sequence number without duplicate entries being presented as new observations. Delivery timing shall meet E-005, with the degraded-mode exception in E-004. */
+        doc /* The shore endpoint shall display UTC sample time, position, mission mode, conservative usable battery energy, reserve, faults and age of each current telemetry record. It shall mark records stale above 120 seconds age in normal/emergency/powered-recovery modes and above 600 seconds in explicitly reported low-energy mode only when neither emergency nor powered recovery is active. Emergency or powered-recovery flags take precedence if flags coexist. Missing or unrecognized mode shall use 120 seconds. Stale denotes data age, not a diagnosis of link failure; it clears only upon receipt of a record within its mode threshold. A 24-hour outage/reconnection test shall restore reception, preserve identity/sequence numbers and suppress duplicate presentation as new observations. Delivery cadence shall meet E-005 and S-003. */
     }
     requirement telemetryEquipment : TelemetryEquipment;
     #derivation connection deriveTelemetryEquipment {
@@ -393,8 +393,8 @@ package BlueDogRequirements {
     requirement gorgeEnvironment : GorgeEnvironment;
     #derivation connection deriveGorgeEnvironment {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* GorgeEnvironment provides a separately verifiable criterion for environmentalEnvelope. */
-        end #original source ::> environmentalEnvelope;
+        doc /* The Gorge mission sets the river environment; it does not impose the ocean profile. */
+        end #original source ::> roundTrip;
         end #derive target ::> gorgeEnvironment;
     }
 
@@ -405,8 +405,8 @@ package BlueDogRequirements {
     requirement oceanEnvironment : OceanEnvironment;
     #derivation connection deriveOceanEnvironment {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* OceanEnvironment provides a separately verifiable criterion for environmentalEnvelope. */
-        end #original source ::> environmentalEnvelope;
+        doc /* The Hawaii mission sets the ocean environment; this profile is not a Gorge acceptance prerequisite. */
+        end #original source ::> BlueDog::Goals::hawaiiVoyage;
         end #derive target ::> oceanEnvironment;
     }
 
@@ -436,7 +436,7 @@ package BlueDogRequirements {
 
     requirement def <'N-013'> GorgeCurrent {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain navigation and control in currents from 0 to 1.5 m/s from any direction relative to wind and waves. Qualification shall include opposing current. Failure to make progress shall invoke S-002 contingency behavior; positive upstream speed is not required at every wind speed or heading. */
+        doc /* The vessel shall retain navigation and control in currents from 0 to 1.5 m/s from any direction relative to wind and waves. Qualification shall include opposing current. Predicted boundary risk shall invoke S-002; current tolerance alone does not ensure progress or station keeping. Positive upstream speed is not required at every wind speed or heading. */
     }
     requirement gorgeCurrent : GorgeCurrent;
     #derivation connection deriveGorgeCurrent {
@@ -496,7 +496,7 @@ package BlueDogRequirements {
 
     requirement def <'N-023'> OceanCurrent {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain navigation and control in currents from 0 to 1.0 m/s from any direction relative to wind and waves. Qualification shall include opposing current. Failure to make progress shall invoke S-002 contingency behavior; positive upstream speed is not required at every wind speed or heading. */
+        doc /* The vessel shall retain navigation and control in currents from 0 to 1.0 m/s from any direction relative to wind and waves. Qualification shall include opposing current. Predicted boundary risk shall invoke S-002; current tolerance alone does not ensure progress or station keeping. Positive upstream speed is not required at every wind speed or heading. */
     }
     requirement oceanCurrent : OceanCurrent;
     #derivation connection deriveOceanCurrent {
@@ -532,7 +532,7 @@ package BlueDogRequirements {
 
     requirement def <'N-030'> AirTemperature {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain operational functions from 0 to 40 degC ambient air temperature. Qualification shall include powered cold and hot endpoints with internal temperatures stabilized to less than 1 degC change per hour, followed by 2 hours of operation at each endpoint. The same range applies during survival. */
+        doc /* The vessel shall retain operational functions from 0 to 40 degC ambient air temperature. Qualification shall include powered cold and hot endpoints with internal temperatures stabilized to less than 1 degC change per hour, followed by 2 hours of operation at each endpoint. The same temperature range applies during survival, with only the mode-appropriate retained functions required by N-001/N-035. */
     }
     requirement airTemperature : AirTemperature;
     #derivation connection deriveAirTemperature {
@@ -544,7 +544,7 @@ package BlueDogRequirements {
 
     requirement def <'N-031'> WaterTemperature {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The immersed hull, appendages and installed equipment shall retain operational functions in water from 2 to 30 degC, including 2 hours at each endpoint after thermal stabilization. The same range applies during survival. */
+        doc /* The immersed hull, appendages and installed equipment shall retain operational functions in water from 2 to 30 degC, including 2 hours at each endpoint after thermal stabilization. The same temperature range applies during survival, with only the mode-appropriate retained functions required by N-001/N-035. */
     }
     requirement waterTemperature : WaterTemperature;
     #derivation connection deriveWaterTemperature {
@@ -580,7 +580,7 @@ package BlueDogRequirements {
 
     requirement def <'N-034'> CalmOperation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* At mean wind below 3 m/s the vessel shall retain navigation, recording and autonomous boundary/traffic contingency functions for at least 24 hours with the energy reserve initially available. Neither progress nor station keeping is required in calm conditions. No automatic motor activation is permitted during a qualifying attempt. */
+        doc /* With harvesting disabled, the vessel shall retain navigation, recording and autonomous boundary/traffic contingency functions for 24 continuous hours in mean wind below 3 m/s, without drawing conservative usable energy below the R-002 reserve. Initial conservative usable energy shall cover the reserve plus 24 hours of the measured worst-case electrical load for those calm-mode functions. Acceptance shall record the initial energy, load measurement and full energy history. Neither progress nor station keeping is required; R-004 prohibits automatic motor activation in a qualifying attempt. */
     }
     requirement calmOperation : CalmOperation;
     #derivation connection deriveCalmOperation {
@@ -592,7 +592,7 @@ package BlueDogRequirements {
 
     requirement def <'N-035'> EnvelopeTransition {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Within 60 seconds of detecting an operating wind or wave limit exceedance, the vessel shall enter and log survival mode and retain position recording at least once per minute. After 10 continuous minutes inside operating limits, autonomous sailing shall resume within 5 minutes without repair or operator commands. Entry into survival mode shall not enable the recovery motor. */
+        doc /* Within 60 seconds of detecting an upper operational wind or wave limit exceedance for the selected profile, the vessel shall enter and log survival mode with position recording at least once per minute. Calm conditions invoke N-034, not this upper-limit trigger. After 10 continuous minutes inside the selected operational wind/wave limits, full autonomous sailing shall resume within 5 minutes if navigation is valid and no low-energy, emergency-recovery or isolation restriction remains. Otherwise the vessel shall retain and log the blocking mode. Restoration of mode-appropriate control after capsize under N-052 does not bypass this resumption gate or R-004. */
     }
     requirement envelopeTransition : EnvelopeTransition;
     #derivation connection deriveEnvelopeTransition {
@@ -604,7 +604,7 @@ package BlueDogRequirements {
 
     requirement def <'N-041'> FreshwaterExposure {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Following 72 hours continuous freshwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its Gorge functional checks without repair or servicing. */
+        doc /* For Gorge qualification, following 72 hours continuous freshwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its Gorge functional checks without repair or servicing. */
     }
     requirement freshwaterExposure : FreshwaterExposure;
     #derivation connection deriveFreshwaterExposure {
@@ -616,7 +616,7 @@ package BlueDogRequirements {
 
     requirement def <'N-042'> SaltwaterExposure {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Following 30 days continuous 35 g/kg saltwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its ocean functional checks without repair or servicing. This campaign is an exposure qualification, not proof of the eventual passage duration. */
+        doc /* For ocean qualification, following 30 days continuous 35 g/kg saltwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its ocean functional checks without repair or servicing. This campaign is an exposure qualification, not proof of the eventual passage duration. */
     }
     requirement saltwaterExposure : SaltwaterExposure;
     #derivation connection deriveSaltwaterExposure {
@@ -676,7 +676,7 @@ package BlueDogRequirements {
 
     requirement def <'N-047'> PrintedMaterialAging {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Printed structural material shall retain at least 80 percent of unaged failure load after 300 MJ/m2 cumulative UV exposure in the 300-400 nm band followed by the saltwater exposure campaign. Acceptance shall compare the lowest failure load of five aged coupons with the lowest of five unaged coupons of identical geometry, material, print orientation and process under the same loading fixture and rate. */
+        doc /* Printed structural material shall retain at least 80 percent of unaged failure load after 300 MJ/m2 cumulative UV exposure in the 300-400 nm band followed by the selected profile wet-exposure campaign (N-041 for Gorge; N-042 for ocean). Dual-profile qualification shall evaluate both aging/exposure sequences. Acceptance shall compare the lowest failure load of five aged coupons with the lowest of five unaged coupons of identical geometry, material, print orientation and process under the same loading fixture and rate. */
     }
     requirement printedMaterialAging : PrintedMaterialAging;
     #derivation connection derivePrintedMaterialAging {
@@ -688,7 +688,7 @@ package BlueDogRequirements {
 
     requirement def <'N-051'> SelfRighting {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* At minimum and maximum mission loading, the vessel shall self-right from 90 and 180 degrees heel within 60 seconds of release without external action or motor thrust. Acceptance shall include five releases at each angle toward each side in freshwater and 35 g/kg saltwater; every release shall meet the time limit without loss of rig or ballast or water reaching electronics. */
+        doc /* At minimum and maximum mission loading, the vessel shall self-right from 90 and 180 degrees heel within 60 seconds of release without external action or motor thrust. Acceptance shall include five releases at each angle toward each side in freshwater for Gorge qualification or 35 g/kg saltwater for ocean qualification; dual qualification requires both media; every release shall meet the time limit without loss of rig or ballast or water reaching electronics. */
         attribute measuredRightingTime : TimeValue;
         require constraint rightingDeadline {
             measuredRightingTime >= 0 [s] and measuredRightingTime <= 60 [s]
@@ -704,7 +704,7 @@ package BlueDogRequirements {
 
     requirement def <'N-052'> CapsizeControlRecovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* For every N-051 release, the vessel shall restore autonomous sail/steering control within 120 seconds of release, preserving qualification status and gate progress without operator input. */
+        doc /* For every N-051 release, the vessel shall restore mode-appropriate autonomous sail/steering control within 120 seconds from release without operator input, preserving gate progress and qualification status. Restoration shall retain active survival, low-energy, recovery and motor-inhibition restrictions. This deadline is not permission to resume normal sailing before N-035 permits it. */
         attribute measuredControlRecoveryTime : TimeValue;
         require constraint controlRecoveryDeadline {
             measuredControlRecoveryTime >= 0 [s] and measuredControlRecoveryTime <= 120 [s]
@@ -720,7 +720,7 @@ package BlueDogRequirements {
 
     requirement def <'N-053'> SubmergedWeedPassage {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall complete five consecutive sailing passes through a 5 m long by 1 m wide submerged milfoil-like vegetation test patch without manual clearing or motor use. The patch shall contain 20 flexible branched stems per square metre, each 0.5-1.0 m long, reaching from below the deepest appendage to within 0.1 m of the surface. In 5 m/s mean wind on the same heading as a weed-free reference run, the vessel shall retain at least 50 percent of reference mean speed through the patch and regain full commanded rudder travel within 5 minutes after each pass. Qualification records shall identify stem material, branch geometry, wet bending stiffness and anchoring so repeated campaigns use the same patch properties; surrogate equivalence to collected local milfoil remains a physical-test validation task. */
+        doc /* For Gorge qualification, the vessel shall complete five consecutive sailing passes through a 5 m long by 1 m wide submerged milfoil-like vegetation test patch without manual clearing or motor use. The patch shall contain 20 flexible branched stems per square metre, each 0.5-1.0 m long, reaching from below the deepest appendage to within 0.1 m of the surface. In 5 m/s mean wind on the same heading as a weed-free reference run, the vessel shall retain at least 50 percent of reference mean water-relative speed through the patch and regain full commanded rudder travel within 5 minutes after each pass. Qualification records shall identify stem material, branch geometry, wet bending stiffness and anchoring so repeated campaigns use the same patch properties; surrogate equivalence to collected local milfoil remains a physical-test validation task. */
     }
     requirement submergedWeedPassage : SubmergedWeedPassage;
     #derivation connection deriveSubmergedWeedPassage {
@@ -732,7 +732,7 @@ package BlueDogRequirements {
 
     requirement def <'N-054'> WeedSnagShedding {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* After one wet 1 m branched vegetation stem is draped across each appendage leading edge in separate tests, the vessel shall clear the snag or regain at least 50 percent of unobstructed sailing speed and full rudder travel within 5 minutes in 5 m/s mean wind, without manual assistance or motor use. Five repetitions per appendage shall pass; stem characteristics shall match the N-053 qualified weed surrogate. */
+        doc /* For Gorge qualification, after one wet 1 m branched vegetation stem is draped across each appendage leading edge in separate tests, the vessel shall regain both at least 50 percent of unobstructed reference sailing speed and full commanded rudder travel within 5 minutes in 5 m/s mean wind, without manual assistance or motor use. Removing visible weed alone is not acceptance. Five repetitions per appendage shall pass, using the same heading and water-relative speed reference; stem characteristics shall match the N-053 qualified weed surrogate. */
     }
     requirement weedSnagShedding : WeedSnagShedding;
     #derivation connection deriveWeedSnagShedding {
@@ -744,7 +744,7 @@ package BlueDogRequirements {
 
     requirement def <'N-055'> WeedBlockageResponse {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* When a vegetation blockage causes commanded rudder motion to remain incomplete for 5 seconds, or speed through water to remain below 25 percent of the preceding weed-free 60-second mean for 60 seconds with mean wind at least 3 m/s, the vessel shall log a suspected fouling fault and enter contingency behavior within a further 10 seconds. It shall retain location reporting and shall not automatically enable the recovery motor during a qualifying attempt. Dense mats are a blockage/avoidance case, not a claimed pass-through capability. */
+        doc /* For Gorge qualification, when a vegetation blockage causes commanded rudder motion to remain incomplete for 5 seconds, or speed through water to remain below 25 percent of the preceding weed-free 60-second mean for 60 seconds with mean wind at least 3 m/s, the vessel shall log a suspected fouling fault and enter contingency behavior within a further 10 seconds. It shall retain location reporting and shall not automatically enable the recovery motor during a qualifying attempt. Dense mats are a blockage/avoidance case, not a claimed pass-through capability. */
     }
     requirement weedBlockageResponse : WeedBlockageResponse;
     #derivation connection deriveWeedBlockageResponse {
@@ -756,7 +756,7 @@ package BlueDogRequirements {
 
     requirement def <'N-056'> RecoveryPropulsorWeeds {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* During a separately designated powered recovery test, the vessel shall traverse the N-053 patch five times without manual propulsor clearing, retain at least 50 percent of its weed-free powered speed and remain within the motor/controller rated current and temperature limits. A locked propulsor shall cause motor shutdown within 2 seconds; recovery-mode weed clearing shall never bypass challenge-mode motor inhibition. */
+        doc /* During a separately designated Gorge powered-recovery test, the vessel shall traverse the N-053 patch five times without manual propulsor clearing, retain at least 50 percent of its weed-free mean water-relative powered speed on the same heading and remain within the motor/controller rated current and temperature limits. A locked propulsor shall cause motor shutdown within 2 seconds; recovery-mode weed clearing shall never bypass challenge-mode motor inhibition. */
     }
     requirement recoveryPropulsorWeeds : RecoveryPropulsorWeeds;
     #derivation connection deriveRecoveryPropulsorWeeds {
@@ -770,5 +770,121 @@ package BlueDogRequirements {
         doc /* The recovery propulsor must remain usable in the vegetation encountered by the sailing vessel. */
         end #original source ::> recoveryPropulsion;
         end #derive target ::> recoveryPropulsorWeeds;
+    }
+    requirement def <'E-008'> NavigationAvailability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall provide valid position and heading observations at at least 1710 of the 1800 scheduled one-second epochs in each 30-minute operational qualification run. Missing and invalid epochs count against availability. Observations older than 5 seconds shall be marked invalid and trigger a logged navigation-degraded state within 1 second; stale values shall not be presented as current. Fault-injection tests shall verify the degraded transition separately from the availability run. */
+        attribute validEpochs : Integer;
+        require constraint availabilityFraction {
+            validEpochs >= 1710 and validEpochs <= 1800
+        }
+    }
+    requirement navigationAvailability : NavigationAvailability;
+    requirement def <'R-003'> LaunchEnergyAdmission {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall inhibit mission start unless the conservative usable battery-energy estimate is strictly greater than the protected reserve sized under R-002. A missing, stale or invalid energy estimate or reserve configuration shall inhibit start. The estimate shall be no older than 1 second at admission. Acceptance shall inject values below, equal to and above the reserve and missing/invalid/stale inputs. */
+        attribute conservativeStartEnergy : EnergyValue;
+        attribute protectedReserve : EnergyValue;
+        attribute estimateAge : TimeValue;
+        attribute estimateValid : Boolean;
+        attribute reserveValid : Boolean;
+        attribute missionStartEnabled : Boolean;
+        attribute admissionEligible : Boolean =
+            estimateValid and reserveValid and protectedReserve > 0 [J] and
+            estimateAge >= 0 [s] and estimateAge <= 1 [s] and
+            conservativeStartEnergy > protectedReserve;
+        require constraint launchEnergyGate {
+            not missionStartEnabled or admissionEligible
+        }
+    }
+    requirement launchEnergyAdmission : LaunchEnergyAdmission;
+    requirement def <'R-004'> ChallengeMotorInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown, including restart and link loss. On an accepted powered-recovery request, nonqualifying status shall be persisted and logged before motor enable. Restart shall require a fresh authenticated recovery command before any motor enable. Tests shall cover qualifying, nonqualifying and unknown status, power loss at the transition and conflicting/stale commands. */
+        attribute qualifying : Boolean;
+        attribute qualificationStateKnown : Boolean;
+        attribute motorEnabled : Boolean;
+        require constraint motorQualificationInvariant {
+            not motorEnabled or (qualificationStateKnown and not qualifying)
+        }
+    }
+    requirement challengeMotorInhibition : ChallengeMotorInhibition;
+    #derivation connection auditDerivation1 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* NavigationAvailability isolates a separately verifiable consequence of navigationAndControl. */
+        end #original source ::> navigationAndControl;
+        end #derive target ::> navigationAvailability;
+    }
+    #derivation connection auditDerivation2 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* LaunchEnergyAdmission isolates a separately verifiable consequence of recoveryEnergy. */
+        end #original source ::> recoveryEnergy;
+        end #derive target ::> launchEnergyAdmission;
+    }
+    #derivation connection auditDerivation3 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* ChallengeMotorInhibition isolates a separately verifiable consequence of GorgeChallenge::sailingPropulsion. */
+        end #original source ::> GorgeChallenge::sailingPropulsion;
+        end #derive target ::> challengeMotorInhibition;
+    }
+    #derivation connection auditDerivation4 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* No-intervention qualification must survive resets and motor-mode transitions. */
+        end #original source ::> GorgeChallenge::unassistedAttempt;
+        end #derive target ::> challengeMotorInhibition;
+    }
+    #derivation connection auditDerivation5 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Accepted external control changes the attempt qualification; communications alone does not supply this rule. */
+        end #original source ::> GorgeChallenge::unassistedAttempt;
+        end #derive target ::> commandIntegrity;
+    }
+    #derivation connection auditDerivation6 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The emergency control channel needs authenticated, fresh commands and persistent qualification changes. */
+        end #original source ::> GorgeChallenge::emergencyIntervention;
+        end #derive target ::> commandIntegrity;
+    }
+    #derivation connection auditDerivation7 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* An ocean route also needs configured boundaries and no-feasible-route behavior; its boundaries differ from the Gorge course. */
+        end #original source ::> BlueDog::Goals::hawaiiVoyage;
+        end #derive target ::> operatingBoundary;
+    }
+    #derivation connection auditDerivation8 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Deployment permissions and applicable rules depend on the ocean route as well as the Gorge mission. */
+        end #original source ::> BlueDog::Goals::hawaiiVoyage;
+        end #derive target ::> regulatoryClassification;
+    }
+    #derivation connection auditDerivation9 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Unattended ocean preparation and post-voyage maintenance motivate replaceable modules; this is not at-sea servicing during qualification. */
+        end #original source ::> BlueDog::Goals::hawaiiVoyage;
+        end #derive target ::> serviceability;
+    }
+    #derivation connection auditDerivation10 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The river profile supplies the freshwater exposure medium. */
+        end #original source ::> gorgeEnvironment;
+        end #derive target ::> freshwaterExposure;
+    }
+    #derivation connection auditDerivation11 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The ocean profile supplies the saltwater exposure medium. */
+        end #original source ::> oceanEnvironment;
+        end #derive target ::> saltwaterExposure;
+    }
+    #derivation connection auditDerivation12 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* David identified Columbia River milfoil as a Gorge design condition. */
+        end #original source ::> gorgeEnvironment;
+        end #derive target ::> submergedWeedPassage;
+    }
+    #derivation connection auditDerivation13 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Appendage snags are a consequence of the Gorge submerged-vegetation exposure. */
+        end #original source ::> gorgeEnvironment;
+        end #derive target ::> weedSnagShedding;
     }
 }

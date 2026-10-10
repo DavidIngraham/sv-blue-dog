@@ -66,3 +66,5 @@ The context includes zero or more `OtherVessel` instances: commercial ships, bar
 Environmental qualification targets are decomposed beneath N-001 through N-003; see [envelope and acceptance criteria](environmental-envelope.md).
 
 Recovery propulsion medium remains unselected; see the [water/air propeller trade study](recovery-propulsion-trade.md).
+
+The independent requirements audit moved aggregate mission and environmental outcomes to the whole `boat` design allocation, and shore-display behavior to `monitoringStation`. Component responsibilities remain visible in the architecture, but a subsystem is not claimed to independently satisfy a whole-vessel outcome. The launch-energy gate and challenge motor invariant are separately identified requirements.

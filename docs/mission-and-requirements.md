@@ -20,7 +20,7 @@ C-000, the independent Trans-Gorge challenge, and H-001, the Hawaii voyage goal 
 
 ## Long-term direction
 
-The long-term ambition is to work toward a vessel capable of making a voyage to HawaiÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“i.
+The long-term ambition is to work toward a vessel capable of making a voyage to HawaiÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¹Ã…â€œi.
 The Gorge is intended as a "torture test" for autonomy, endurance, and reliability.
 The current baseline is the repeated Gorge route; an ocean departure point, passage
 route, duration, and ocean-specific acceptance criteria have not been selected.
@@ -32,7 +32,7 @@ Prepare and launch; sail outbound; turn around; sail home to complete the thresh
 
 ## Acceptance criteria
 
-The printer build envelope is 250 × 250 × 250 mm, including the entire oriented print job. Numerical handling, timing, energy and environmental values are proposed design targets. See the [verification plan](verification-plan.md) for provenance, executable predicates, physical evidence and remaining blockers. Environmental parents now derive into individually testable leaves, including explicit milfoil tolerance.
+The printer build envelope is 250 Ã— 250 Ã— 250 mm, including the entire oriented print job. Numerical handling, timing, energy and environmental values are proposed design targets. See the [verification plan](verification-plan.md) for provenance, executable predicates, physical evidence and remaining blockers. Environmental parents now derive into individually testable leaves, including explicit milfoil tolerance.
 
 ## Requirement derivation
 
@@ -51,3 +51,5 @@ Regenerate with `uv run python scripts/render_requirements.py`. The [modeling gu
 Use the [verification plan](verification-plan.md), [environmental hierarchy](environmental-envelope.md), [operating constraints](operating-constraints.md), and [architecture traceability](traceability.md). Remaining mission inputs include course gates, boundary margins, Hawaii route, traffic-detection scenarios, legal applicability and representative weed-test material. Model evaluation does not resolve these inputs.
 
 The recovery architecture remains open; the [water-versus-air propeller trade study](recovery-propulsion-trade.md) compares both against the recovery energy and weed requirements.
+
+An [independent requirements and derivation audit](requirements-audit.md) records defects, implemented corrections and remaining evidence gaps. Derivation rationales distinguish imposed stakeholder constraints from consequences of the mission.

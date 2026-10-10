@@ -5,8 +5,8 @@ package GorgeChallenge {
      * This is a separate project challenge, not a Microtransat entry or endorsement.
      * No vessel architecture, hull size, or communications technology is prescribed.
      * The Gorge is the proving ground for a longer-term voyage toward Hawaii.
-     * Exact gates, corridor, time limit, environmental envelope, evidence requirements,
-     * and restart/recovery procedure remain open; no dam passage is assumed.
+     * Exact gates, corridor, time limit, route-specific acceptance evidence,
+     * and formal attempt restart procedure remain open; the vehicle defines candidate environmental qualification profiles; no dam passage is assumed.
      */
     private import RequirementDerivation::*;
     requirement def <'C-000'> TransGorgeChallenge {

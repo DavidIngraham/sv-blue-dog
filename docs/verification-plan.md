@@ -1,18 +1,21 @@
 # Requirement verification and executable criteria
 
-The model distinguishes high-level mission/environment requirements from quantitative acceptance leaves. P-002's **250 × 250 × 250 mm usable printer envelope** is user-specified. Other newly selected values (15 kg separately lifted mass, 30-minute setup/service targets, 72-hour endurance campaign, timing/energy thresholds and environmental test severities) are proposed engineering targets for review, not attributed to the user or a standard. Work status remains typed SysML metadata.
+The model distinguishes high-level mission/environment requirements from quantitative acceptance leaves. P-002's **250 Ã— 250 Ã— 250 mm usable printer envelope** is user-specified. Other newly selected values (15 kg separately lifted mass, 30-minute setup/service targets, 72-hour endurance campaign, timing/energy thresholds and environmental test severities) are proposed engineering targets for review, not attributed to the user or a standard. Work status remains typed SysML metadata.
 
 ## Native executable predicates
 
 | Requirement | Inputs supplied by design/test evidence | Native predicate covers | Still requires evidence |
 | --- | --- | --- | --- |
-| P-002 DesktopManufacture | Occupied X/Y/Z of each oriented print job | Each dimension positive and ≤250 mm, with unit conversion | All jobs enumerated; slicer supports/brim/raft/clearance included |
-| E-003 ResetRecovery | Measured restart time | 0–30 s | Correct restored state, qualification latch and motor inhibition |
-| R-002 RecoveryEnergy | Separate motor and essential electrical powers; reserve energy | Reserve ≥1.2×(motor power×1800 s + essential power×7200 s) | Measurement conditions, aged/cold battery capacity, reserve enforcement |
-| N-051 SelfRighting | Measured time for one release | 0–60 s | Every loading/angle/water trial, no damage or ingress |
-| N-052 CapsizeControlRecovery | Measured time from release | 0–120 s | Correct restored control and retained state |
+| P-002 DesktopManufacture | Occupied X/Y/Z of each oriented print job | Each dimension positive and â‰¤250 mm, with unit conversion | All jobs enumerated; slicer supports/brim/raft/clearance included |
+| E-003 ResetRecovery | Measured restart time | 0â€“30 s | Correct restored state, qualification latch and motor inhibition |
+| R-002 RecoveryEnergy | Separate motor and essential electrical powers; reserve energy | Reserve â‰¥1.2Ã—(motor powerÃ—1800 s + essential powerÃ—7200 s) | Measurement conditions, aged/cold battery capacity, reserve enforcement |
+| N-051 SelfRighting | Measured time for one release | 0â€“60 s | Every loading/angle/water trial, no damage or ingress |
+| N-052 CapsizeControlRecovery | Measured time from release | 0â€“120 s | Correct restored control and retained state |
+| E-008 NavigationAvailability | Count of valid one-second epochs in a 30-minute run | At least 1710 and no more than 1800 | Accuracy remains E-002; timestamps, validity, and stale-data transition evidence |
+| R-003 LaunchEnergyAdmission | Start-enable state, conservative start energy, reserve, age and validity flags | Start is disabled unless energy > reserve and all inputs are current/valid | Controller must actually enforce inhibition; configured reserve must satisfy R-002 |
+| R-004 ChallengeMotorInhibition | Motor-enable, qualifying and qualification-known states | Enabled motor implies known, nonqualifying status | Temporal ordering, persistence and fresh-command enforcement across resets |
 
-These `require constraint` expressions are in the production SysML definitions. They have no invented observation defaults. The native CLI returns exit 0 for a holding supplied case, 1 for a failing case, and 2 when missing observations prevent evaluation. Only the numeric predicate is executed; passing it is not a full physical compliance verdict.
+These `require constraint` expressions are in the production SysML definitions. They have no invented observation defaults. The native CLI returns exit 0 for a holding supplied case, 1 for a failing case, and 2 when missing observations prevent evaluation. Only the supplied-observation predicate is executed; passing it is not a full physical compliance verdict.
 
 Run `uv run python -m unittest discover -s tests -q`. The executable regression tests instantiate the real definitions with synthetic boundary, over-limit, negative and missing observations. They include mixed metre/millimetre inputs and a just-insufficient energy reserve. Python invokes the native engine and checks its verdict; it does not reimplement the requirement equations.
 
@@ -37,9 +40,15 @@ For actual evidence, create a SysML requirement usage specializing the relevant 
 | S-003/C-102 | Abort latch, isolation timing, remote-control loss, replay/expiry/authentication injections |
 | S-004/S-005 | Deployment-specific compliance matrix, measured signaling performance and authorization evidence; unresolved applicability blocks deployment release |
 | R-001 | Instrumented sheltered recovery speed/current/power test and challenge-mode inhibition |
-| N-011–N-035 | Per-parameter functional tests plus combined-condition qualification; retain separate results for each leaf |
-| N-041–N-047 | Exposure campaigns, sealing indicators, mechanical/electrical measurements, thermal logging and aged coupons |
+| N-011â€“N-035 | Per-parameter functional tests plus combined-condition qualification; retain separate results for each leaf |
+| N-041â€“N-047 | Exposure campaigns, sealing indicators, mechanical/electrical measurements, thermal logging and aged coupons |
 | N-051/N-052 | Time-stamped capsize trials across the specified loading/angle/water matrix |
-| N-053–N-056 | Documented milfoil-equivalent patch, snag, blocked-rudder and propulsor tests; establish surrogate equivalence before acceptance |
+| N-053â€“N-056 | Documented milfoil-equivalent patch, snag, blocked-rudder and propulsor tests; establish surrogate equivalence before acceptance |
 
-Next executable opportunities are trajectory gate-crossing/order, motor/qualification invariants over event logs, telemetry age/retention, and environmental sample coverage. Those need time-series evidence adapters or executable mission behavior; they are not implemented by the current five numeric predicates. The high-level environmental parents should aggregate leaf evidence, not return true merely because they contain prose.
+Next executable opportunities are trajectory gate-crossing/order, motor/qualification invariants over event logs, telemetry age/retention, and environmental sample coverage. Those need time-series evidence adapters or executable mission behavior; they are not implemented by the current eight numeric/state predicates. High-level environmental acceptance should aggregate only the selected profile and its applicable shared leaf evidence, not return true merely because they contain prose.
+
+## Audit clarifications
+
+Accuracy counts all 1800 scheduled epochs, including missing/invalid observations. Deliberate fault-injection runs are assessed separately. Harvest replay cannot exceed a measured installed-harvester resource profile. The 24-hour calm campaign starts with both the protected recovery reserve and sufficient energy for measured calm-mode loads, with harvesting disabled.
+
+Emergency/powered recovery takes priority over low-energy telemetry cadence and shore freshness thresholds. Clearing the low-energy flag depends on energy alone, so it cannot wait on survival exit; payload restoration still respects other active restrictions. Capsize recovery restores mode-appropriate control, while normal sailing waits for the survival exit gate. See the [independent audit and dispositions](requirements-audit.md).

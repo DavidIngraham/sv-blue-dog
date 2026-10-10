@@ -80,8 +80,10 @@ Further reading of the Microtransat group uncovered the reported USCG basis for 
 
 ### Turning intentions into acceptance criteria
 
-The printable build envelope is now 250 Ã— 250 Ã— 250 mm, measured around the entire oriented print job rather than by part volume. The environmental model now has separate Gorge/ocean profiles and individual parameter requirements, with explicit milfoil passage, snag shedding and blockage response. Five native SysML predicates can evaluate supplied print dimensions, restart time, recovery-energy sizing and capsize recovery times; synthetic passing and failing examples exercise the criteria without claiming the boat has passed a physical test.
+The printable build envelope is now 250 Ãƒâ€” 250 Ãƒâ€” 250 mm, measured around the entire oriented print job rather than by part volume. The environmental model now has separate Gorge/ocean profiles and individual parameter requirements, with explicit milfoil passage, snag shedding and blockage response. Five native SysML predicates can evaluate supplied print dimensions, restart time, recovery-energy sizing and capsize recovery times; synthetic passing and failing examples exercise the criteria without claiming the boat has passed a physical test.
 
 The [verification plan](verification-plan.md) identifies remaining evidence and proposed engineering targets. A [water-versus-air propeller trade study](recovery-propulsion-trade.md) compares recovery propulsion against energy, weed tolerance, guarding and capsize constraints. The propulsion medium remains open.
 
 The recovery-propulsion trade now has an [executable SysML analysis case](../models/recovery-trade.sysml). It compares the two fluids at their respective inflow speeds, estimates electrical demand and checks the recovery reserve. The example numbers are illustrative; weed and capsize evidence remain explicit gates, so an energy calculation alone cannot select the design.
+
+An [independent requirements audit](requirements-audit.md) caught gaps in navigation sampling, energy admission, mode precedence and derivation rationale. The corrected model separates launch energy and motor inhibition, distinguishes Gorge from ocean qualification, and retains physical evidence gaps explicitly.

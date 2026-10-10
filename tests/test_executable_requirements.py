@@ -52,8 +52,36 @@ class ExecutableRequirementsTests(unittest.TestCase):
                 with self.subTest(definition=definition, seconds=seconds):
                     self.assertEqual(self.evaluate(definition, {field: f'{seconds} [s]'}), expected)
 
+    def test_navigation_availability_counts_missing_epochs(self):
+        for count, expected in [(1710, (0, 'holds')), (1709, (1, 'fails')),
+                                (1800, (0, 'holds')), (1801, (1, 'fails')), (-1, (1, 'fails'))]:
+            with self.subTest(validEpochs=count):
+                self.assertEqual(self.evaluate('NavigationAvailability', {'validEpochs': str(count)}), expected)
+
+    def test_launch_energy_gate_and_input_validity(self):
+        baseline = dict(conservativeStartEnergy='101 [J]', protectedReserve='100 [J]',
+                        estimateAge='1 [s]', estimateValid='true', reserveValid='true', missionStartEnabled='true')
+        self.assertEqual(self.evaluate('LaunchEnergyAdmission', baseline), (0, 'holds'))
+        for change in [dict(conservativeStartEnergy='100 [J]'), dict(conservativeStartEnergy='99 [J]'),
+                       dict(estimateAge='1.1 [s]'), dict(estimateAge='-1 [s]'),
+                       dict(estimateValid='false'), dict(reserveValid='false'), dict(protectedReserve='0 [J]')]:
+            with self.subTest(change=change):
+                self.assertEqual(self.evaluate('LaunchEnergyAdmission', baseline | change), (1, 'fails'))
+                self.assertEqual(self.evaluate('LaunchEnergyAdmission', baseline | change | {'missionStartEnabled': 'false'}), (0, 'holds'))
+
+    def test_challenge_motor_invariant(self):
+        for known in (False, True):
+            for qualifying in (False, True):
+                for motor in (False, True):
+                    with self.subTest(known=known, qualifying=qualifying, motor=motor):
+                        allowed = not motor or (known and not qualifying)
+                        inputs = dict(qualificationStateKnown=str(known).lower(),
+                                      qualifying=str(qualifying).lower(), motorEnabled=str(motor).lower())
+                        self.assertEqual(self.evaluate('ChallengeMotorInhibition', inputs),
+                                         (0, 'holds') if allowed else (1, 'fails'))
+
     def test_missing_observations_cannot_pass(self):
-        for definition in ['DesktopManufacture', 'ResetRecovery', 'RecoveryEnergy', 'SelfRighting', 'CapsizeControlRecovery']:
+        for definition in ['DesktopManufacture', 'ResetRecovery', 'RecoveryEnergy', 'SelfRighting', 'CapsizeControlRecovery', 'NavigationAvailability', 'LaunchEnergyAdmission', 'ChallengeMotorInhibition']:
             with self.subTest(definition=definition):
                 code, status = self.evaluate(definition, {})
                 self.assertEqual(code, 2)
