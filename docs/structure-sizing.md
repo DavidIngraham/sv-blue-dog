@@ -2,7 +2,7 @@
 
 Removing the early dimension caps let the optimizer propose an extremely long keel and almost no freeboard. That was a useful sign that the physics needed more work. The current model treats the boat as a printed PETG structure with wet-layup glass/epoxy skins, and makes the structural and hydrostatic tradeoffs visible.
 
-The [current results](open-sizing-results.md) and [native requirement definitions, focused derivation diagrams and design-basis table](structure-requirements.md) are generated from the model. Geometry remains free within expandable search brackets; structural limits are constraints with explicit design bases, not a return to arbitrary hull-length or sail-area caps.
+The [earlier stationary-screen results](open-sizing-results.md) and [native requirement definitions, focused derivation diagrams and design-basis table](structure-requirements.md) are generated from the model. Geometry remains free within expandable search brackets; structural limits are constraints with explicit design bases, not a return to arbitrary hull-length or sail-area caps.
 
 ## Manufacturing model
 
@@ -40,6 +40,8 @@ The new requirements keep acceptance statements short and separate their conditi
 - **Handling:** the existing 15 kg limit per lifted assembly remains active. Setup time, total carried bulk and practical transport-module geometry still need demonstration.
 
 These values are deliberately reviewable in the [requirement report](structure-requirements.md). They are not presented as regulatory or certified small-craft limits.
+
+The current [two-metre route-sizing workflow](mission-sizing.md) supersedes the stationary optimizer as the design direction. It uses removable wing/battery assemblies, an explicit ribbed construction option and a mass-center screen. The earlier stationary study remains reproducible for comparison.
 
 ## Route progress versus environmental tolerance
 

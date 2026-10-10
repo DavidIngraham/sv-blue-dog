@@ -145,6 +145,18 @@ def main():
         sys.path.insert(0, str(ROOT))
         from scripts.study_open_sizing import publication_outputs as sizing_outputs
     outputs.update(sizing_outputs())
+    try:
+        from .study_mission_sizing import publish as publish_mission
+    except ImportError:
+        from scripts.study_mission_sizing import publish as publish_mission
+    publish_mission()
+    from scripts.plot_mission_sizing import figure as mission_figure
+    outputs[ROOT / "docs/figures/mission-polars.png"] = mission_figure()
+
+    for name in ('docs/mission-sizing-results.md', 'docs/analysis/mission-sizing-audit.json', 'models/mission-sizing-results.sysml'):
+        path = ROOT / name
+        outputs[path] = path.read_text(encoding='utf-8')
+
     outputs[ROOT / "docs/requirements-register.md"] += "\n\n[Hybrid structure requirements and native relationship diagrams](structure-requirements.md) supplement this register with the current construction allocations.\n"
     diagrams = {}
     # Compile the model once per format, rather than once for every view.

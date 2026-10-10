@@ -99,3 +99,28 @@ uv run python scripts/render_requirements.py
 ```
 
 See [current dimensions and results](../docs/open-sizing-results.md) and [assumptions](../docs/design-search.md#joint-sizing-without-premature-dimension-caps). The FDM/glass structural and hydrostatic screens are defined in `structure.sysml`; `sizing-route.sysml` separately evaluates signed, time-weighted route progress. Whole-ply re-sizing follows continuous optimization. A numerical fit without validated material, bond, stability and route evidence is not an accepted vessel design. See [construction assumptions](../docs/structure-sizing.md) and [traced requirements](../docs/structure-requirements.md).
+
+
+## Two-metre mission sizing
+
+`mission-sizing.sysml` is the current design study. It wraps the existing native physics without changing historical comparison results. `mission-sizing-results.sysml` and the report are generated; edit the source model and rerun instead.
+
+```powershell
+uv run python -m scripts.study_mission_sizing --prepare
+```
+
+The compiled solve requires GCC/Linux; use the prepared uv environment there:
+
+```bash
+PYTHONPATH=. OPENBLAS_NUM_THREADS=1 .tools/solver-venv/bin/python -m scripts.study_mission_sizing --starts 5 --budget 800
+```
+
+Then publish with the pinned native CLI on Windows:
+
+```powershell
+uv run python -m scripts.study_mission_sizing --publish
+uv run python scripts/render_requirements.py
+uv run python -m pytest tests/test_mission_sizing.py
+```
+
+Run the same pytest file under Linux for the compiled ABI, signed-current and independent mass-moment checks. The numerical record includes source/driver hashes; stale results cannot be published. The 2 m waterline stays fixed until the baseline is credible. Expandable search brackets are enlarged when active; a remaining numerical boundary is reported rather than interpreted as a physical limit.

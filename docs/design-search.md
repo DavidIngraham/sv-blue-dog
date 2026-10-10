@@ -1,5 +1,7 @@
 # Searching for a boat that can make progress
 
+Current design direction: [two-metre mission sizing](mission-sizing.md), with route progress, modular handling and recovery screening.
+
 The earlier [sail, keel and rudder study](appendage-sizing.md) could find a numerical fit when hull resistance was supplied as an input. I wanted to know whether that fit would survive when the boat had to carry its own ballast, wing, battery and solar panel. This search closes those loops: the same geometry must balance the sailing loads in several wind and fouling cases while carrying its electrical system.
 
 The original bounded search was a useful setback. Three starting points found balanced sailing states, but none found a design meeting upstream progress. The nominal 5 m/s-wind study reached a worst upstream VMG of approximately **−0.41 m/s**; the broader scenario study reached approximately **−0.79 m/s**, against a target of **+0.50 m/s**. Negative VMG means drifting downstream despite sailing through the water. These are local search results within the declared bounds, not proof that no boat can complete the challenge.
