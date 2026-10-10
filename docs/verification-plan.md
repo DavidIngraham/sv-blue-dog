@@ -17,7 +17,7 @@ The model distinguishes high-level mission/environment requirements from quantit
 
 These `require constraint` expressions are in the production SysML definitions. They have no invented observation defaults. The native CLI returns exit 0 for a holding supplied case, 1 for a failing case, and 2 when missing observations prevent evaluation. Only the supplied-observation predicate is executed; passing it is not a full physical compliance verdict.
 
-Run `uv run python -m unittest discover -s tests -q`. The executable regression tests instantiate the real definitions with synthetic boundary, over-limit, negative and missing observations. They include mixed metre/millimetre inputs and a just-insufficient energy reserve. Python invokes the native engine and checks its verdict; it does not reimplement the requirement equations.
+Run `uv run pytest -q`. The executable regression tests instantiate the real definitions with synthetic boundary, over-limit, negative and missing observations. They include mixed metre/millimetre inputs and a just-insufficient energy reserve. Python invokes the native engine and checks its verdict; it does not reimplement the requirement equations.
 
 For actual evidence, create a SysML requirement usage specializing the relevant definition, bind its measured attributes, load it with the project models and invoke `-requirement Package::usage -json`. Preserve source measurements and provenance. Do not use the synthetic fixtures as vessel test results. The model's existing `satisfy` links are design allocations, not verified compliance.
 

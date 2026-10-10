@@ -43,7 +43,7 @@ Run from the repository root:
 
 ```sh
 uv run python scripts/render_requirements.py
-uv run python -m unittest discover -s tests -q
+uv run pytest -q
 uv run python scripts/render_requirements.py --check
 ```
 

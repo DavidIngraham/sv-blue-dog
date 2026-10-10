@@ -35,9 +35,11 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Graph
 uv sync --locked
 uv run python scripts/install_renderer.py
 uv run python scripts/render_requirements.py
-uv run python -m unittest discover -s tests -v
+uv run pytest -v
 uv run python scripts/render_requirements.py --check
 ```
+
+Pytest is a development dependency managed by uv. Run `uv run pytest` for the full suite or select cases with `-k`. Parametrized tests report individual boundary and invalid-input cases; fixtures share the native CLI runner and cache publication outputs for their test module.
 
 The official Python client automatically downloads a matching `sysml-grpc`
 runtime on first use, checks it against its packaged SHA-256 digest, and starts a

@@ -80,7 +80,7 @@ Regenerate or check the results with the existing workflow:
 ```powershell
 uv run python scripts/render_requirements.py
 uv run python scripts/render_requirements.py --check
-uv run python -m unittest discover -s tests -q
+uv run pytest -q
 ```
 
 For an individual native run (from the repository root):
