@@ -6,12 +6,12 @@ from scripts.render_requirements import extract, MODEL, CHALLENGE, native_graph,
 
 BASE = """package Requirements {
     private import RequirementDerivation::*;
-    requirement def <'M-1'> Mission { doc /* CONFIRMED INTENT: Complete the mission. */ }
-    requirement def <'E-1'> Function { doc /* PROPOSED: Perform a function. */ }
+    requirement def <'M-1'> Mission { doc /* Complete the mission. */ }
+    requirement def <'E-1'> Function { doc /* Perform a function. */ }
     requirement mission : Mission;
     requirement function : Function;
     #derivation connection rationale {
-        doc /* PROPOSED: A reason for this derivation. */
+        doc /* A reason for this derivation. */
         end #original source ::> mission;
         end #derive target ::> function;
     }
@@ -81,7 +81,7 @@ class DerivationTests(unittest.TestCase):
 
     def test_cycle_fails(self):
         reverse = '''#derivation connection reverse {
-            doc /* PROPOSED: Circular reasoning. */
+            doc /* Circular reasoning. */
             end #original a ::> function;
             end #derive b ::> mission;
         }'''

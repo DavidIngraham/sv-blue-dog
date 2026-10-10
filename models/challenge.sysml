@@ -10,7 +10,7 @@ package GorgeChallenge {
      */
     private import RequirementDerivation::*;
     requirement def <'C-000'> TransGorgeChallenge {
-        doc /* CONFIRMED INTENT: Complete the autonomous Trans-Gorge sailing
+        doc /* Complete the autonomous Trans-Gorge sailing
          * challenge: The Dalles-Bonneville-The Dalles as the threshold,
          * then repeat for as long as practical, under the course, autonomy,
          * propulsion, observation, and emergency intervention rules below.
@@ -18,26 +18,26 @@ package GorgeChallenge {
     }
     requirement transGorgeChallenge : TransGorgeChallenge;
     requirement def <'C-001'> CourseCompletion {
-        doc /* CONFIRMED INTENT: Threshold: Complete a journey from The Dalles
+        doc /* Threshold: Complete a journey from The Dalles
          * to Bonneville and back to The Dalles. Exact start/finish and turnaround
          * gates, permitted corridor, and crossing evidence remain to be agreed.
          */
     }
     requirement def <'C-002'> RepeatedOperation {
-        doc /* CONFIRMED INTENT: Objective beyond the first completed round trip:
+        doc /* Objective beyond the first completed round trip:
          * repeat The Dalles-Bonneville-The Dalles autonomously for as long as
          * practical. No fixed objective endurance duration has been selected.
          */
     }
     requirement def <'C-003'> UnassistedAttempt {
-        doc /* CONFIRMED INTENT: A qualifying attempt shall complete the round trip
+        doc /* A qualifying attempt shall complete the round trip
          * without operator intervention. Passive live monitoring is permitted.
          * Any use of remote emergency abort or manual control disqualifies the
          * attempt as unassisted. Restart criteria remain to be agreed.
          */
     }
     requirement def <'C-004'> SailingPropulsion {
-        doc /* CONFIRMED INTENT: A qualifying challenge attempt shall use sailing
+        doc /* A qualifying challenge attempt shall use sailing
          * propulsion without auxiliary motor propulsion. Auxiliary motor use is
          * allowed during development tests, which do not count as challenge attempts.
          * Motor use during an attempt prevents it from qualifying.
@@ -48,14 +48,14 @@ package GorgeChallenge {
          */
     }
     requirement def <'C-005'> LiveObservation {
-        doc /* CONFIRMED INTENT: Live monitoring shall be available to the operator.
+        doc /* Live monitoring shall be available to the operator.
          * Monitoring-link loss shall not interrupt autonomous mission execution.
          * Telemetry shall be retained onboard and transmitted when contact returns.
          * Coverage, update rate, retained data, and outage retention duration are open.
          */
     }
     requirement def <'C-006'> EmergencyIntervention {
-        doc /* CONFIRMED INTENT: Provide remote emergency abort or manual control
+        doc /* Provide remote emergency abort or manual control
          * when a command link is available. Use disqualifies the attempt as unassisted.
          * Emergency abort behavior and the subsequent recovery procedure are open.
          */
@@ -67,32 +67,32 @@ package GorgeChallenge {
     requirement liveObservation : LiveObservation;
     requirement emergencyIntervention : EmergencyIntervention;
     #derivation connection challengeRuleCourseCompletion {
-        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> courseCompletion;
     }
     #derivation connection challengeRuleRepeatedOperation {
-        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> repeatedOperation;
     }
     #derivation connection challengeRuleUnassistedAttempt {
-        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> unassistedAttempt;
     }
     #derivation connection challengeRuleSailingPropulsion {
-        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> sailingPropulsion;
     }
     #derivation connection challengeRuleLiveObservation {
-        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> liveObservation;
     }
     #derivation connection challengeRuleEmergencyIntervention {
-        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        doc /* This rule refines the overall Trans-Gorge challenge. */
         end #original source ::> transGorgeChallenge;
         end #derive target ::> emergencyIntervention;
     }

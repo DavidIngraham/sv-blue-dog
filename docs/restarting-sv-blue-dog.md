@@ -52,7 +52,7 @@ I have separated the [challenge brief](challenge-brief.md) from the vehicle desi
 
 The model now has two top-level requirements: the Trans-Gorge challenge and the eventual Hawaii voyage. The Gorge gives me a demanding proving ground while the ocean goal keeps the longer-term design needs visible. Its departure point, route, and acceptance criteria still need definition.
 
-The native OpenSysML diagram shows proposed derivations from both mission drivers into vehicle requirements, with arrows pointing from each derived requirement back to its original. The linked register distinguishes confirmed intent, older requirements, and new proposals. None of these links establishes that the boat satisfies a requirement.
+The native OpenSysML diagram shows proposed derivations from both mission drivers into vehicle requirements, with arrows pointing from each derived requirement back to its original. The linked register records requirement statements and derivation rationale. None of these links establishes that the boat satisfies a requirement.
 
 ![SV Blue Dog requirement derivation](figures/requirements-derivation.svg)
 

@@ -73,7 +73,7 @@ The Python client and its analysis service remain pinned to 0.9.2 for register g
 
 Native dashed `derive` arrows point **from derived to original**, opposite the earlier
 custom diagram convention. All seventeen nodes and twenty-five relationships are regression-checked
-against the source model. Maturity and short IDs remain in the linked register; the
+against the source model. Short IDs remain in the linked register; the
 native diagram uses its default monochrome style without our former maturity colors.
 The renderer reports two exposed standard-library elements as intentionally not drawn.
 
@@ -95,3 +95,16 @@ constraints. The mission decomposition does not yet define an executable sequenc
 
 The earlier sysmlpy fork work is retained separately and is no longer a dependency
 of this project.
+
+## Model status metadata
+
+Requirement documentation contains statements and rationale, not maturity tags.
+The register does not infer lifecycle status from prose. No replacement statuses
+have been assigned by removing the former labels.
+
+The standard [ModelingMetadata library](https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml.library/Domain%20Libraries/Metadata/ModelingMetadata.sysml)
+defines `StatusInfo` with a typed `StatusKind`: `open`, `tbd` (to be determined),
+`tbr` (to be resolved), `tbc` (to be confirmed), `done`, and `closed`.
+It also provides optional owner, originator, and risk information. Use this
+metadata if we introduce work-status tracking. These values do not directly
+encode the former confirmed/legacy/proposed categories or prove verification.

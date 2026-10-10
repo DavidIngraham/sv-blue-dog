@@ -39,7 +39,7 @@ Qualification requires the course, autonomy, and propulsion rules above to be me
 
 Proposed evidence is a timestamped position track showing gate crossings, supported by command/intervention and propulsion-state records. For the endurance objective, completed round trips and elapsed autonomous operation could be reported together. These are proposals for review, not additional accepted requirements or existing test results.
 
-The [generated requirements register](requirements-register.md) records confirmed intent separately from proposed vehicle derivations and legacy design intentions. Neither a derivation arrow nor a successful model analysis counts as verification of the vessel.
+The [generated requirements register](requirements-register.md) records requirement statements and derivation rationale. Neither a derivation arrow nor a successful model analysis counts as verification of the vessel.
 
 ## Decisions needed to complete the rules
 

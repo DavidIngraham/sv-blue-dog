@@ -19,7 +19,6 @@ ROOT = Path(__file__).resolve().parents[1]
 MODEL = ROOT / "models/requirements.sysml"
 ARCHITECTURE = ROOT / "models/blue-dog.sysml"
 CHALLENGE = ROOT / "models/challenge.sysml"
-MATURITIES = {"CONFIRMED INTENT", "LEGACY INTENT", "PROPOSED"}
 
 
 def load_model(source):
@@ -80,12 +79,10 @@ def extract(source):
         name, short_id = definition.get("declaredName"), definition.get("declaredShortName")
         if not name or not short_id:
             raise ValueError("Every requirement definition needs a short ID and name")
-        status, separator, statement = documentation(definition).partition(": ")
-        if not separator or status not in MATURITIES:
-            raise ValueError(f"Unknown requirement maturity: {name}")
+        statement = documentation(definition)
         if any(d["id"] == short_id or d["name"] == name for d in definitions.values()):
             raise ValueError(f"Duplicate definition name or ID: {name}")
-        definitions[definition["@id"]] = dict(id=short_id, name=name, status=status, statement=statement)
+        definitions[definition["@id"]] = dict(id=short_id, name=name, statement=statement)
     usage_ids = {}
     for usage in children:
         if usage["@type"] != "RequirementUsage":
@@ -122,8 +119,6 @@ def extract(source):
         if set(ends) != {"original", "derive"}:
             raise ValueError(f"Missing derivation ends in {name}")
         rationale = documentation(connection)
-        if not rationale.startswith("PROPOSED: "):
-            raise ValueError(f"Review maturity handling before approving derivation {name}")
         edges.append(dict(name=name, source=ends["original"], target=ends["derive"], rationale=rationale))
     if not requirements or not edges:
         raise ValueError("Empty requirements or derivation graph")
@@ -168,10 +163,10 @@ def native_graph():
 
 
 def table(requirements, edges):
-    lines = ["# Requirement derivation register", "", "Generated from `models/challenge.sysml` , `models/blue-dog.sysml`, and `models/requirements.sysml`; edit the models and regenerate. C-IDs identify challenge rules; H-IDs identify the Hawaii goal; M/E-IDs identify vehicle requirements.", "", "## Requirements", "", "| ID | Requirement | Maturity | Statement |", "| --- | --- | --- | --- |"]
+    lines = ["# Requirement derivation register", "", "Generated from `models/challenge.sysml` , `models/blue-dog.sysml`, and `models/requirements.sysml`; edit the models and regenerate. C-IDs identify challenge rules; H-IDs identify the Hawaii goal; M/E-IDs identify vehicle requirements.", "", "## Requirements", "", "| ID | Requirement | Statement |", "| --- | --- | --- |"]
     for req in requirements.values():
-        lines.append(f'| {req["id"]} | {req["name"]} | {req["status"]} | {req["statement"].replace("|", "&#124;")} |')
-    lines += ["", "## Proposed derivations", "", "Direction: original requirement to derived requirement. These relationships record design reasoning, not proof of satisfaction.", "", "| Original | Derived | Rationale |", "| --- | --- | --- |"]
+        lines.append(f'| {req["id"]} | {req["name"]} | {req["statement"].replace("|", "&#124;")} |')
+    lines += ["", "## Derivations", "", "Direction: original requirement to derived requirement. These relationships record design reasoning, not proof of satisfaction.", "", "| Original | Derived | Rationale |", "| --- | --- | --- |"]
     for edge in edges:
         lines.append(f'| {requirements[edge["source"]]["id"]} | {requirements[edge["target"]]["id"]} | {edge["rationale"].replace("|", "&#124;")} |')
     return "\n".join(lines) + "\n"

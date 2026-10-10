@@ -6,7 +6,7 @@ package BlueDog {
      * Two top-level drivers: GorgeChallenge::transGorgeChallenge and Goals::hawaiiVoyage.
      * Hawaii is the end goal; the Gorge is the torture test, not proof of ocean readiness.
      * Multi-day endurance with energy harvesting remains an earlier intent. SysML v2 learning is a project goal.
-     * Proposed decomposition below is for discussion, not a selected design.
+     * Decomposition identifies responsibilities; physical design remains open.
      * Tool checks are recorded in the modeling guide; satisfaction is not claimed.
      */
 
@@ -14,7 +14,7 @@ package BlueDog {
 
     package Goals {
         requirement def <'H-001'> HawaiiVoyage {
-            doc /* CONFIRMED INTENT: Develop SV Blue Dog toward completing an
+            doc /* Develop SV Blue Dog toward completing an
              * autonomous sailing voyage to Hawaii. The Gorge challenge is a
              * proving ground for that end goal, not evidence of ocean readiness.
              * Departure point, destination gate, route, duration, environmental
@@ -28,7 +28,7 @@ package BlueDog {
 
     package Mission {
         action def HawaiiMission {
-            doc /* Proposed decomposition supporting Goals::hawaiiVoyage.
+            doc /* Mission decomposition supporting Goals::hawaiiVoyage.
              * This is not an executable sequence or a verified mission plan.
              * Route, landfall, endurance, and recovery criteria remain open.
              */
@@ -42,7 +42,7 @@ package BlueDog {
             action recordMissionData;
         }
         action def TransGorgeMission {
-            doc /* Proposed activity decomposition, not execution order.
+            doc /* Activity decomposition, not execution order.
              * Departure/turnaround coordinates, duration, operating envelope,
              * recovery criteria, and monitoring service levels are TBD.
              * No operator intervention is permitted during a qualifying round trip.
