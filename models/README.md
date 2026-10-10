@@ -53,20 +53,23 @@ The renderer writes native Mermaid Markdown and standalone HTML to `docs/figures
 
 ## Native requirements view
 
-`requirements-view.sysml` declares `BlueDogViews::requirements` as an OMG
-`GeneralView` filtered to requirement usages. It exposes both the independent
-`GorgeChallenge` package and the vehicle requirements. `requirements.sysml` imports
-`GorgeChallenge`; the tooling loads both source files together, resolving cross-file
-derivation endpoints. The challenge can also be analyzed by itself. The combined source set also includes
-`blue-dog.sysml`, which defines the Hawaii goal and both mission decompositions.
-The two graph roots are C-000 (Trans-Gorge challenge) and H-001 (Hawaii voyage).
-Vehicle requirements live in the distinct `BlueDogRequirements` package; files
-do not reopen or merge separate declarations of the `BlueDog` package. OpenSysML selects the nodes and
-relationships and writes Mermaid; Python does not construct nodes or edges.
-`diagram-documents.sysml` defines native document wrappers for the five views.
-The requirements document uses `direction = "BT"` because derive arrows point
-from derived to original: higher-level requirements appear above their descendants.
-Mermaid controls layout; the former Graphviz-only same-row root constraint is removed.
+`requirements-view.sysml` declares bounded native views, grouped by original
+requirement. Each drawing includes one parent and at most three immediate children.
+The [requirements view index](../docs/requirements-views.md) links 47 parent pages,
+including separate Trans-Gorge and Hawaii entry points, environment, weed tolerance,
+energy, safety, communications and practicality.
+
+`DiagramLayout::Layout` annotations bound the native rendering's membership:
+OpenSysML otherwise expands a requirement view through related elements. Mermaid
+preserves that node selection but computes its own layout. Documents explicitly
+request Mermaid and `BT` direction, keeping original requirements above derived
+ones. Omitted-node notices describe intentional view boundaries, not missing model
+relationships. Satisfaction is available separately in the traceability register.
+
+The all-encompassing view remains solely as the regression oracle. It is not
+published or embedded in articles. A coverage test checks that the small views
+together preserve every one of the 249 derivations and contain at most four nodes.
+The native documents also provide requirement statements and next-level links.
 
 The native CLI is pinned separately to `nightly-20261009-28106371e`. Release 0.9.2
 renders this view as a containment tree without derivation links; the dated nightly
@@ -138,7 +141,7 @@ Executable-criteria tests cover numeric boundaries, navigation epoch counts, lau
 
 ## Atomic acceptance leaves
 
-The [decomposition map](../docs/requirement-decomposition.md) explains the 127 acceptance leaves beneath 29 retained parent IDs. Parents supply common test context and link to individual outcomes; derivation is not executable aggregation. The atomicity pass moved five existing native predicates from bundled parents to the corresponding leaves; the later energy framework adds its own criteria. The full Mermaid trace graph is large; use the blog zoom controls or GitHub diagram controls to inspect it. Use the native register for readable statements.
+The [decomposition map](../docs/requirement-decomposition.md) explains the 127 acceptance leaves beneath 29 retained parent IDs. Parents supply common test context and link to individual outcomes; derivation is not executable aggregation. The atomicity pass moved five existing native predicates from bundled parents to the corresponding leaves; the later energy framework adds its own criteria. Use the focused requirement views to follow one parent at a time. Use the native register for readable statements.
 
 ## Sustained-operation energy framework
 

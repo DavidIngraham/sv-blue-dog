@@ -94,12 +94,19 @@ def test_register_preserves_ids_status_and_relationships(published_model):
     assert all((' | open | ' in line for line in data))
 
 
-def test_mermaid_derivations_match_native_graph(published_model):
-    document = native('-render-document', 'BlueDogDiagramDocuments::RequirementsDiagram',
-                      '-diagram-form', 'mermaid')
-    assert 'flowchart BT' in document
-    # Compare every source/target, not just counts: migration must preserve direction.
-    edges = re.findall(r'(n[0-9]+) -\.->\|"derive"\| (n[0-9]+)', document)
-    native_edges = re.findall(r'"(n[0-9]+)" -> "(n[0-9]+)" \[label="derive"', published_model.dot)
-    assert len(edges) == 249
-    assert set(edges) == set(native_edges)
+def test_focused_views_cover_all_derivations(published_model):
+    # The full native graph is an oracle only; readers receive bounded views.
+    edges = set()
+    pages = list(Path('docs/figures').glob('requirements-*.md'))
+    assert len(pages) == 47
+    assert not Path('docs/figures/requirements-derivation.md').exists()
+    for page in pages:
+        import re
+        for diagram in re.findall(r'```mermaid\n(.*?)```', page.read_text(encoding='utf-8'), re.S):
+            nodes = dict(re.findall(r'(n[0-9]+)\("`.*?\*\*([A-Za-z0-9_:]+) :', diagram, re.S))
+            nodes = {key: name.rsplit('::', 1)[-1] for key, name in nodes.items()}
+            assert 2 <= len(nodes) <= 4, page
+            assert 'flowchart BT' in diagram
+            for child, parent in re.findall(r'(n[0-9]+) -\.->\|"derive"\| (n[0-9]+)', diagram):
+                edges.add((nodes[parent], nodes[child]))
+    assert edges == set(published_model.edges)

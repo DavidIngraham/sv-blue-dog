@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>N-020 ocean environment</title>
+<style>
+/* The default OpenSysML document stylesheet. Every value comes from a
+   --sysml-* token on .sysml-document, and the whole sheet is in the
+   opensysml cascade layer, so unlayered reader CSS overrides it without
+   specificity fights or !important. */
+@layer opensysml;
+
+@layer opensysml {
+  .sysml-document {
+    --sysml-font-body: system-ui, sans-serif;
+    --sysml-font-mono: ui-monospace, monospace;
+    --sysml-font-size: 1rem;
+    --sysml-line-height: 1.55;
+    --sysml-measure: 42rem;
+    --sysml-space: 1rem;
+    --sysml-space-tight: 0.35rem;
+    --sysml-text: #16191d;
+    --sysml-muted: #5a6472;
+    --sysml-accent: #1f4e79;
+    --sysml-rule: #cfd6de;
+    --sysml-surface: #f4f6f8;
+    --sysml-cell-padding: 0.35rem 0.6rem;
+    --sysml-code-font-size: 0.9em;
+    --sysml-caption-font-size: 0.9em;
+    --sysml-border-width: 1px;
+    --sysml-table-width: 100%;
+    --sysml-row-indent: 1.25em;
+    --sysml-title-page-height: 60vh;
+    --sysml-group-heading-weight: 600;
+    --sysml-term-weight: 600;
+    --sysml-formula-align: center;
+    --sysml-image-max-width: 100%;
+
+    box-sizing: border-box;
+    max-width: var(--sysml-measure);
+    margin: var(--sysml-space) auto;
+    padding: 0 var(--sysml-space);
+    font-family: var(--sysml-font-body);
+    font-size: var(--sysml-font-size);
+    line-height: var(--sysml-line-height);
+    color: var(--sysml-text);
+  }
+
+  .sysml-document .sysml-title {
+    color: var(--sysml-accent);
+  }
+
+  .sysml-document .sysml-title-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--sysml-title-page-height);
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .sysml-document .sysml-section-number {
+    color: var(--sysml-muted);
+    margin-right: var(--sysml-space-tight);
+  }
+
+  .sysml-document .sysml-toc ol {
+    list-style: none;
+    padding-left: var(--sysml-space);
+  }
+
+  .sysml-document .sysml-toc > ol {
+    padding-left: 0;
+  }
+
+  .sysml-document .sysml-toc a {
+    color: inherit;
+  }
+
+  .sysml-document .sysml-paragraph {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-table {
+    border-collapse: collapse;
+    width: var(--sysml-table-width);
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-table th,
+  .sysml-document .sysml-table td {
+    border: var(--sysml-border-width) solid var(--sysml-rule);
+    padding: var(--sysml-cell-padding);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .sysml-document .sysml-table thead th {
+    background: var(--sysml-surface);
+  }
+
+  /* A sized table lays its columns out at the shares its <col> widths state,
+     breaking a token wider than its cell rather than overflowing it. */
+  .sysml-document .sysml-table-sized {
+    table-layout: fixed;
+  }
+
+  .sysml-document .sysml-table-sized th,
+  .sysml-document .sysml-table-sized td {
+    overflow-wrap: break-word;
+  }
+
+  /* A nested row's first cell is indented one --sysml-row-indent per level of
+     the --sysml-depth the row states. */
+  .sysml-document .sysml-indent {
+    display: inline-block;
+    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
+  }
+
+  .sysml-document .sysml-group-heading th {
+    background: var(--sysml-surface);
+    color: var(--sysml-muted);
+    font-weight: var(--sysml-group-heading-weight);
+  }
+
+  .sysml-document .sysml-caption {
+    color: var(--sysml-muted);
+    font-size: var(--sysml-caption-font-size);
+    text-align: left;
+  }
+
+  .sysml-document .sysml-list {
+    margin: var(--sysml-space) 0;
+    padding-left: var(--sysml-space);
+  }
+
+  .sysml-document .sysml-definitions {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-entry {
+    margin: var(--sysml-space-tight) 0;
+  }
+
+  .sysml-document .sysml-term {
+    font-weight: var(--sysml-term-weight);
+  }
+
+  .sysml-document .sysml-description {
+    margin: 0 0 0 var(--sysml-space);
+  }
+
+  .sysml-document .sysml-diagram {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-image {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-image img {
+    max-width: var(--sysml-image-max-width);
+  }
+
+  .sysml-document .sysml-formula {
+    margin: var(--sysml-space) 0;
+    text-align: var(--sysml-formula-align);
+  }
+
+  .sysml-document .sysml-formula .sysml-math {
+    overflow-x: auto;
+  }
+
+  .sysml-document .sysml-diagram pre {
+    overflow-x: auto;
+    font-family: var(--sysml-font-mono);
+  }
+
+  .sysml-document code {
+    font-family: var(--sysml-font-mono);
+    font-size: var(--sysml-code-font-size);
+  }
+
+  .sysml-document .sysml-link,
+  .sysml-document .sysml-ref {
+    color: var(--sysml-accent);
+  }
+}
+</style>
+</head>
+<body>
+<article class="sysml-document" data-document="BlueDogDiagramDocuments::OceanEnvironmentRequirements">
+<h1 class="sysml-title">N-020 ocean environment</h1>
+<p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements19">
+<div class="sysml-entry" data-element="BlueDogRequirements::OceanEnvironment" data-element-kind="requirementDef">
+<dt class="sysml-term">OceanEnvironment</dt>
+<dd class="sysml-description">The vessel shall operate on a northeast Pacific passage toward Hawaii in saltwater, ocean swell, wind seas and prolonged unattended exposure. Ocean-derived parameter requirements and the shared exposure requirements apply together. The baseline is not a hurricane-survival claim or a completed route/season qualification.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::OceanWind" data-element-kind="requirementDef">
+<dt class="sysml-term">OceanWind</dt>
+<dd class="sysml-description">The vessel shall retain the N-001 operational functions in true wind from 3 to 15 m/s (10-minute mean referenced to 10 m above water), including 3-second gusts up to 20 m/s. Qualification shall include upwind, crosswind and downwind headings; this is a functional wind limit, not a guarantee of upstream progress.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::OceanWaves" data-element-kind="requirementDef">
+<dt class="sysml-term">OceanWaves</dt>
+<dd class="sysml-description">The vessel shall retain N-001 operational functions in significant wave heights up to 3 m with peak periods 5-20 s, including individual waves up to 6 m. Wave statistics shall use 20-minute records. Qualification shall include head, beam and following seas and physically realizable wind-wave-current combinations within the profile.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::OceanCurrent" data-element-kind="requirementDef">
+<dt class="sysml-term">OceanCurrent</dt>
+<dd class="sysml-description">The vessel shall retain navigation and control in currents from 0 to 1.0 m/s from any direction relative to wind and waves. Qualification shall include opposing current. Predicted boundary risk shall invoke S-002; current tolerance alone does not ensure progress or station keeping. Positive upstream speed is not required at every wind speed or heading.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::OceanSurvivalWind" data-element-kind="requirementDef">
+<dt class="sysml-term">OceanSurvivalWind</dt>
+<dd class="sysml-description">For 24 continuous hours, the vessel shall meet the N-001 survival acceptance outcomes in mean wind up to 25 m/s and 3-second gusts up to 35 m/s, using the operational wind reference convention. The respective wave, current, temperature and humidity limits apply concurrently.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::OceanSurvivalWaves" data-element-kind="requirementDef">
+<dt class="sysml-term">OceanSurvivalWaves</dt>
+<dd class="sysml-description">For 24 continuous hours, the vessel shall meet the N-001 survival acceptance outcomes in significant wave heights up to 6 m, peak periods 6-20 s and individual waves up to 12 m. Qualification shall include adverse relative directions and physically realizable combinations with profile survival wind and current.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::SaltwaterExposure" data-element-kind="requirementDef">
+<dt class="sysml-term">SaltwaterExposure</dt>
+<dd class="sysml-description">For ocean qualification, following 30 days continuous 35 g/kg saltwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its ocean functional checks without repair or servicing. This campaign is an exposure qualification, not proof of the eventual passage duration.</dd>
+</div>
+</dl>
+<section class="sysml-section" id="group1" data-content="section" data-name="group1">
+<h2>N-020 derivation 1</h2>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::oceanEnvironment1" data-diagram-kind="requirement" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogViews::oceanEnvironment1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 72 node(s) without a position, left undrawn, and 92 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+%% layout: n2 x=300 y=200
+%% layout: n3 x=600 y=200
+flowchart BT
+  n0(&#34;`*«requirement»*
+**oceanEnvironment : OceanEnvironment**`&#34;)
+  n1(&#34;`*«requirement»*
+**oceanWind : OceanWind**`&#34;)
+  n2(&#34;`*«requirement»*
+**oceanWaves : OceanWaves**`&#34;)
+  n3(&#34;`*«requirement»*
+**oceanCurrent : OceanCurrent**`&#34;)
+  n1 -.-&gt;|&#34;derive&#34;| n0
+  n2 -.-&gt;|&#34;derive&#34;| n0
+  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
+</figure>
+</section>
+<section class="sysml-section" id="group2" data-content="section" data-name="group2">
+<h2>N-020 derivation 2</h2>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::oceanEnvironment2" data-diagram-kind="requirement" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogViews::oceanEnvironment2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 111 node(s) without a position, left undrawn, and 139 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+%% layout: n2 x=300 y=200
+%% layout: n3 x=600 y=200
+flowchart BT
+  n0(&#34;`*«requirement»*
+**oceanEnvironment : OceanEnvironment**`&#34;)
+  n1(&#34;`*«requirement»*
+**oceanSurvivalWind : OceanSurvivalWind**`&#34;)
+  n2(&#34;`*«requirement»*
+**oceanSurvivalWaves : OceanSurvivalWaves**`&#34;)
+  n3(&#34;`*«requirement»*
+**saltwaterExposure : SaltwaterExposure**`&#34;)
+  n1 -.-&gt;|&#34;derive&#34;| n0
+  n2 -.-&gt;|&#34;derive&#34;| n0
+  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
+</figure>
+</section>
+</article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({maxTextSize: 1335, maxEdges: 4});</script>
+</body>
+</html>

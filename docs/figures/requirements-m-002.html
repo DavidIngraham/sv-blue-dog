@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M-002 multi day endurance</title>
+<style>
+/* The default OpenSysML document stylesheet. Every value comes from a
+   --sysml-* token on .sysml-document, and the whole sheet is in the
+   opensysml cascade layer, so unlayered reader CSS overrides it without
+   specificity fights or !important. */
+@layer opensysml;
+
+@layer opensysml {
+  .sysml-document {
+    --sysml-font-body: system-ui, sans-serif;
+    --sysml-font-mono: ui-monospace, monospace;
+    --sysml-font-size: 1rem;
+    --sysml-line-height: 1.55;
+    --sysml-measure: 42rem;
+    --sysml-space: 1rem;
+    --sysml-space-tight: 0.35rem;
+    --sysml-text: #16191d;
+    --sysml-muted: #5a6472;
+    --sysml-accent: #1f4e79;
+    --sysml-rule: #cfd6de;
+    --sysml-surface: #f4f6f8;
+    --sysml-cell-padding: 0.35rem 0.6rem;
+    --sysml-code-font-size: 0.9em;
+    --sysml-caption-font-size: 0.9em;
+    --sysml-border-width: 1px;
+    --sysml-table-width: 100%;
+    --sysml-row-indent: 1.25em;
+    --sysml-title-page-height: 60vh;
+    --sysml-group-heading-weight: 600;
+    --sysml-term-weight: 600;
+    --sysml-formula-align: center;
+    --sysml-image-max-width: 100%;
+
+    box-sizing: border-box;
+    max-width: var(--sysml-measure);
+    margin: var(--sysml-space) auto;
+    padding: 0 var(--sysml-space);
+    font-family: var(--sysml-font-body);
+    font-size: var(--sysml-font-size);
+    line-height: var(--sysml-line-height);
+    color: var(--sysml-text);
+  }
+
+  .sysml-document .sysml-title {
+    color: var(--sysml-accent);
+  }
+
+  .sysml-document .sysml-title-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--sysml-title-page-height);
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .sysml-document .sysml-section-number {
+    color: var(--sysml-muted);
+    margin-right: var(--sysml-space-tight);
+  }
+
+  .sysml-document .sysml-toc ol {
+    list-style: none;
+    padding-left: var(--sysml-space);
+  }
+
+  .sysml-document .sysml-toc > ol {
+    padding-left: 0;
+  }
+
+  .sysml-document .sysml-toc a {
+    color: inherit;
+  }
+
+  .sysml-document .sysml-paragraph {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-table {
+    border-collapse: collapse;
+    width: var(--sysml-table-width);
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-table th,
+  .sysml-document .sysml-table td {
+    border: var(--sysml-border-width) solid var(--sysml-rule);
+    padding: var(--sysml-cell-padding);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .sysml-document .sysml-table thead th {
+    background: var(--sysml-surface);
+  }
+
+  /* A sized table lays its columns out at the shares its <col> widths state,
+     breaking a token wider than its cell rather than overflowing it. */
+  .sysml-document .sysml-table-sized {
+    table-layout: fixed;
+  }
+
+  .sysml-document .sysml-table-sized th,
+  .sysml-document .sysml-table-sized td {
+    overflow-wrap: break-word;
+  }
+
+  /* A nested row's first cell is indented one --sysml-row-indent per level of
+     the --sysml-depth the row states. */
+  .sysml-document .sysml-indent {
+    display: inline-block;
+    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
+  }
+
+  .sysml-document .sysml-group-heading th {
+    background: var(--sysml-surface);
+    color: var(--sysml-muted);
+    font-weight: var(--sysml-group-heading-weight);
+  }
+
+  .sysml-document .sysml-caption {
+    color: var(--sysml-muted);
+    font-size: var(--sysml-caption-font-size);
+    text-align: left;
+  }
+
+  .sysml-document .sysml-list {
+    margin: var(--sysml-space) 0;
+    padding-left: var(--sysml-space);
+  }
+
+  .sysml-document .sysml-definitions {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-entry {
+    margin: var(--sysml-space-tight) 0;
+  }
+
+  .sysml-document .sysml-term {
+    font-weight: var(--sysml-term-weight);
+  }
+
+  .sysml-document .sysml-description {
+    margin: 0 0 0 var(--sysml-space);
+  }
+
+  .sysml-document .sysml-diagram {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-image {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-image img {
+    max-width: var(--sysml-image-max-width);
+  }
+
+  .sysml-document .sysml-formula {
+    margin: var(--sysml-space) 0;
+    text-align: var(--sysml-formula-align);
+  }
+
+  .sysml-document .sysml-formula .sysml-math {
+    overflow-x: auto;
+  }
+
+  .sysml-document .sysml-diagram pre {
+    overflow-x: auto;
+    font-family: var(--sysml-font-mono);
+  }
+
+  .sysml-document code {
+    font-family: var(--sysml-font-mono);
+    font-size: var(--sysml-code-font-size);
+  }
+
+  .sysml-document .sysml-link,
+  .sysml-document .sysml-ref {
+    color: var(--sysml-accent);
+  }
+}
+</style>
+</head>
+<body>
+<article class="sysml-document" data-document="BlueDogDiagramDocuments::MultiDayEnduranceRequirements">
+<h1 class="sysml-title">M-002 multi day endurance</h1>
+<p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements10">
+<div class="sysml-entry" data-element="BlueDogRequirements::MultiDayEndurance" data-element-kind="requirementDef">
+<dt class="sysml-term">MultiDayEndurance</dt>
+<dd class="sysml-description">The vessel shall operate for 72 continuous hours without servicing or external charging while meeting the Gorge operational functions under N-010 and the applicable shared N-001 conditions. A qualification run shall include three consecutive 24-hour cycles, each with at most 6 hours of harvesting and at least 18 hours with harvesting disabled. Harvest input shall be limited to the installed harvester output measured under a frozen, recorded resource profile; a test supply may replay that profile but shall not exceed its measured power or accumulated energy. The conservative usable-energy estimate shall remain above the R-002 recovery reserve throughout. Acceptance requires the initial battery state, harvester configuration, replay profile, actual harvested energy and loads in the test record; absent profile evidence invalidates the test. Passing does not establish indefinite energy balance.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::EnergyAwareness" data-element-kind="requirementDef">
+<dt class="sysml-term">EnergyAwareness</dt>
+<dd class="sysml-description">Aggregate requirement for EnergyAwareness. Acceptance requires all applicable derived leaf results (E-101, E-102, E-103, E-104); this parent has no independent executable pass/fail predicate. Shared verification context: Energy estimation and conservative decision inputs; accuracy uses calibrated energy integration across operating battery temperatures.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::LowEnergyRecovery" data-element-kind="requirementDef">
+<dt class="sysml-term">LowEnergyRecovery</dt>
+<dd class="sysml-description">Aggregate requirement for LowEnergyRecovery. Acceptance requires all applicable derived leaf results (E-114, E-115, E-116, E-117, E-118, E-119, E-130, E-120, E-132, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Reserve means R-002. Emergency/recovery cadence takes precedence; clearing low-energy state is independent of other modes, while payload enabling respects all restrictions.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::SustainedReserveProtection" data-element-kind="requirementDef">
+<dt class="sysml-term">SustainedReserveProtection</dt>
+<dd class="sysml-description">Conservative stored energy shall remain strictly above the R-002 protected reserve throughout the selected sustained-operation profile. For piecewise-constant net power, check the initial state and every interval endpoint; unmodeled intrainterval dips are outside this claim.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::PeakSupplyCapability" data-element-kind="requirementDef">
+<dt class="sysml-term">PeakSupplyCapability</dt>
+<dd class="sysml-description">The battery supply shall support each selected mode&#39;s coincident peak withdrawal power without relying on harvesting. Load power shall include conversion losses and the declared uncertainty allowance.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::HarvestCampaignCoverage" data-element-kind="requirementDef">
+<dt class="sysml-term">HarvestCampaignCoverage</dt>
+<dd class="sysml-description">The qualification energy profile shall cover at least three complete consecutive 24-hour days, with harvesting enabled for no more than 6 hours in each day. Remaining time in each gap-free modeled day is harvesting-disabled time; enabling a harvester with zero resource still counts as enabled.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::EnergyEvidenceReadiness" data-element-kind="requirementDef">
+<dt class="sysml-term">EnergyEvidenceReadiness</dt>
+<dd class="sysml-description">An energy case shall be accepted as evidence-backed only after the installed-configuration load coverage, resource bounds, battery derating and interval-resolution evidence have been reviewed and accepted under the sustained-operations evidence checklist.</dd>
+</div>
+</dl>
+<section class="sysml-section" id="group1" data-content="section" data-name="group1">
+<h2>M-002 derivation 1</h2>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::multiDayEndurance1" data-diagram-kind="requirement" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogViews::multiDayEndurance1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 214 node(s) without a position, left undrawn, and 404 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+%% layout: n2 x=300 y=200
+%% layout: n3 x=600 y=200
+flowchart BT
+  n0(&#34;`*«requirement»*
+**multiDayEndurance : MultiDayEndurance**`&#34;)
+  n1(&#34;`*«requirement»*
+**energyAwareness : EnergyAwareness**`&#34;)
+  n2(&#34;`*«requirement»*
+**lowEnergyRecovery : LowEnergyRecovery**`&#34;)
+  n3(&#34;`*«requirement»*
+**sustainedReserveProtection : SustainedReserveProtection**`&#34;)
+  n1 -.-&gt;|&#34;derive&#34;| n0
+  n2 -.-&gt;|&#34;derive&#34;| n0
+  n2 -.-&gt;|&#34;derive&#34;| n1
+  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
+</figure>
+</section>
+<section class="sysml-section" id="group2" data-content="section" data-name="group2">
+<h2>M-002 derivation 2</h2>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::multiDayEndurance2" data-diagram-kind="requirement" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogViews::multiDayEndurance2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 214 node(s) without a position, left undrawn, and 405 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+%% layout: n2 x=300 y=200
+%% layout: n3 x=600 y=200
+flowchart BT
+  n0(&#34;`*«requirement»*
+**multiDayEndurance : MultiDayEndurance**`&#34;)
+  n1(&#34;`*«requirement»*
+**peakSupplyCapability : PeakSupplyCapability**`&#34;)
+  n2(&#34;`*«requirement»*
+**harvestCampaignCoverage : HarvestCampaignCoverage**`&#34;)
+  n3(&#34;`*«requirement»*
+**energyEvidenceReadiness : EnergyEvidenceReadiness**`&#34;)
+  n1 -.-&gt;|&#34;derive&#34;| n0
+  n2 -.-&gt;|&#34;derive&#34;| n0
+  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
+</figure>
+</section>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-e-001.md">Continue: E-001 energy awareness</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next1"><a class="sysml-link" href="requirements-e-004.md">Continue: E-004 low energy recovery</a></p>
+</article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({maxTextSize: 1373, maxEdges: 5});</script>
+</body>
+</html>

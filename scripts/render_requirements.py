@@ -65,7 +65,53 @@ def main():
         "-render-document", "BlueDogDocuments::Traceability")
     diagrams = {}
     for name, document in {
-        "requirements-derivation": "RequirementsDiagram",
+        "requirements-c-000": "TransGorgeChallengeRequirements",
+        "requirements-c-001": "CourseCompletionRequirements",
+        "requirements-c-002": "RepeatedOperationRequirements",
+        "requirements-c-003": "UnassistedAttemptRequirements",
+        "requirements-c-004": "SailingPropulsionRequirements",
+        "requirements-c-005": "LiveObservationRequirements",
+        "requirements-c-006": "EmergencyInterventionRequirements",
+        "requirements-h-001": "HawaiiVoyageRequirements",
+        "requirements-m-001": "RoundTripRequirements",
+        "requirements-m-002": "MultiDayEnduranceRequirements",
+        "requirements-e-001": "EnergyAwarenessRequirements",
+        "requirements-e-002": "NavigationAndControlRequirements",
+        "requirements-s-001": "TrafficSafetyRequirements",
+        "requirements-n-001": "EnvironmentalEnvelopeRequirements",
+        "requirements-s-003": "SafeRecoveryRequirements",
+        "requirements-r-001": "RecoveryPropulsionRequirements",
+        "requirements-e-005": "CommunicationsRequirements",
+        "requirements-n-010": "GorgeEnvironmentRequirements",
+        "requirements-n-020": "OceanEnvironmentRequirements",
+        "requirements-n-002": "MarineDurabilityRequirements",
+        "requirements-n-003": "StabilityAndFoulingRequirements",
+        "requirements-r-002": "RecoveryEnergyRequirements",
+        "requirements-e-003": "ResetRecoveryRequirements",
+        "requirements-e-004": "LowEnergyRecoveryRequirements",
+        "requirements-e-006": "IngressResponseRequirements",
+        "requirements-e-007": "MissionEvidenceRequirements",
+        "requirements-e-008": "NavigationAvailabilityRequirements",
+        "requirements-p-001": "TransportabilityRequirements",
+        "requirements-p-003": "ServiceabilityRequirements",
+        "requirements-s-002": "OperatingBoundaryRequirements",
+        "requirements-s-004": "NavigationConspicuityRequirements",
+        "requirements-s-005": "RegulatoryClassificationRequirements",
+        "requirements-c-101": "TelemetryEquipmentRequirements",
+        "requirements-c-102": "CommandIntegrityRequirements",
+        "requirements-n-033": "VisibilityRequirements",
+        "requirements-n-035": "EnvelopeTransitionRequirements",
+        "requirements-n-044": "WetMechanicalIntegrityRequirements",
+        "requirements-n-045": "WetElectricalIntegrityRequirements",
+        "requirements-n-046": "SolarHeatingRequirements",
+        "requirements-n-051": "SelfRightingRequirements",
+        "requirements-n-052": "CapsizeControlRecoveryRequirements",
+        "requirements-n-053": "SubmergedWeedPassageRequirements",
+        "requirements-n-054": "WeedSnagSheddingRequirements",
+        "requirements-n-055": "WeedBlockageResponseRequirements",
+        "requirements-n-056": "RecoveryPropulsorWeedsRequirements",
+        "requirements-r-004": "ChallengeMotorInhibitionRequirements",
+        "requirements-e-200": "SustainedEnergyFeasibilityRequirements",
         "architecture": "ArchitectureDiagram", "context": "ContextDiagram",
         "architecture-detail": "DetailDiagram", "use-cases": "UseCasesDiagram",
     }.items():
@@ -75,7 +121,7 @@ def main():
         outputs[ROOT / f"docs/figures/{name}.html"] = native(
             "-render-document", target, "-diagram-form", "mermaid",
             "-doc-form", "html", "-html-mermaid", "cdn")
-        diagrams[name] = markdown[markdown.index("```mermaid"):].strip()
+        diagrams[name] = markdown.split("\n", 1)[1].strip()
     # Keep hand-written prose; replace only explicitly marked native diagrams.
     for path in (ROOT / "docs").glob("*.md"):
         source = path.read_text(encoding="utf-8")

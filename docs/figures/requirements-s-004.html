@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S-004 navigation conspicuity</title>
+<style>
+/* The default OpenSysML document stylesheet. Every value comes from a
+   --sysml-* token on .sysml-document, and the whole sheet is in the
+   opensysml cascade layer, so unlayered reader CSS overrides it without
+   specificity fights or !important. */
+@layer opensysml;
+
+@layer opensysml {
+  .sysml-document {
+    --sysml-font-body: system-ui, sans-serif;
+    --sysml-font-mono: ui-monospace, monospace;
+    --sysml-font-size: 1rem;
+    --sysml-line-height: 1.55;
+    --sysml-measure: 42rem;
+    --sysml-space: 1rem;
+    --sysml-space-tight: 0.35rem;
+    --sysml-text: #16191d;
+    --sysml-muted: #5a6472;
+    --sysml-accent: #1f4e79;
+    --sysml-rule: #cfd6de;
+    --sysml-surface: #f4f6f8;
+    --sysml-cell-padding: 0.35rem 0.6rem;
+    --sysml-code-font-size: 0.9em;
+    --sysml-caption-font-size: 0.9em;
+    --sysml-border-width: 1px;
+    --sysml-table-width: 100%;
+    --sysml-row-indent: 1.25em;
+    --sysml-title-page-height: 60vh;
+    --sysml-group-heading-weight: 600;
+    --sysml-term-weight: 600;
+    --sysml-formula-align: center;
+    --sysml-image-max-width: 100%;
+
+    box-sizing: border-box;
+    max-width: var(--sysml-measure);
+    margin: var(--sysml-space) auto;
+    padding: 0 var(--sysml-space);
+    font-family: var(--sysml-font-body);
+    font-size: var(--sysml-font-size);
+    line-height: var(--sysml-line-height);
+    color: var(--sysml-text);
+  }
+
+  .sysml-document .sysml-title {
+    color: var(--sysml-accent);
+  }
+
+  .sysml-document .sysml-title-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--sysml-title-page-height);
+    text-align: center;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .sysml-document .sysml-section-number {
+    color: var(--sysml-muted);
+    margin-right: var(--sysml-space-tight);
+  }
+
+  .sysml-document .sysml-toc ol {
+    list-style: none;
+    padding-left: var(--sysml-space);
+  }
+
+  .sysml-document .sysml-toc > ol {
+    padding-left: 0;
+  }
+
+  .sysml-document .sysml-toc a {
+    color: inherit;
+  }
+
+  .sysml-document .sysml-paragraph {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-table {
+    border-collapse: collapse;
+    width: var(--sysml-table-width);
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-table th,
+  .sysml-document .sysml-table td {
+    border: var(--sysml-border-width) solid var(--sysml-rule);
+    padding: var(--sysml-cell-padding);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .sysml-document .sysml-table thead th {
+    background: var(--sysml-surface);
+  }
+
+  /* A sized table lays its columns out at the shares its <col> widths state,
+     breaking a token wider than its cell rather than overflowing it. */
+  .sysml-document .sysml-table-sized {
+    table-layout: fixed;
+  }
+
+  .sysml-document .sysml-table-sized th,
+  .sysml-document .sysml-table-sized td {
+    overflow-wrap: break-word;
+  }
+
+  /* A nested row's first cell is indented one --sysml-row-indent per level of
+     the --sysml-depth the row states. */
+  .sysml-document .sysml-indent {
+    display: inline-block;
+    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
+  }
+
+  .sysml-document .sysml-group-heading th {
+    background: var(--sysml-surface);
+    color: var(--sysml-muted);
+    font-weight: var(--sysml-group-heading-weight);
+  }
+
+  .sysml-document .sysml-caption {
+    color: var(--sysml-muted);
+    font-size: var(--sysml-caption-font-size);
+    text-align: left;
+  }
+
+  .sysml-document .sysml-list {
+    margin: var(--sysml-space) 0;
+    padding-left: var(--sysml-space);
+  }
+
+  .sysml-document .sysml-definitions {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-entry {
+    margin: var(--sysml-space-tight) 0;
+  }
+
+  .sysml-document .sysml-term {
+    font-weight: var(--sysml-term-weight);
+  }
+
+  .sysml-document .sysml-description {
+    margin: 0 0 0 var(--sysml-space);
+  }
+
+  .sysml-document .sysml-diagram {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-image {
+    margin: var(--sysml-space) 0;
+  }
+
+  .sysml-document .sysml-image img {
+    max-width: var(--sysml-image-max-width);
+  }
+
+  .sysml-document .sysml-formula {
+    margin: var(--sysml-space) 0;
+    text-align: var(--sysml-formula-align);
+  }
+
+  .sysml-document .sysml-formula .sysml-math {
+    overflow-x: auto;
+  }
+
+  .sysml-document .sysml-diagram pre {
+    overflow-x: auto;
+    font-family: var(--sysml-font-mono);
+  }
+
+  .sysml-document code {
+    font-family: var(--sysml-font-mono);
+    font-size: var(--sysml-code-font-size);
+  }
+
+  .sysml-document .sysml-link,
+  .sysml-document .sysml-ref {
+    color: var(--sysml-accent);
+  }
+}
+</style>
+</head>
+<body>
+<article class="sysml-document" data-document="BlueDogDiagramDocuments::NavigationConspicuityRequirements">
+<h1 class="sysml-title">S-004 navigation conspicuity</h1>
+<p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements31">
+<div class="sysml-entry" data-element="BlueDogRequirements::NavigationConspicuity" data-element-kind="requirementDef">
+<dt class="sysml-term">NavigationConspicuity</dt>
+<dd class="sysml-description">Aggregate requirement for NavigationConspicuity. Acceptance requires all applicable derived leaf results (S-116, S-117, S-118, S-119, S-120, S-121); this parent has no independent executable pass/fail predicate. Shared verification context: Use the deployment-specific compliance matrix for sailing, powered-recovery and stationary modes, including its visibility, arcs, colors and sound criteria. The matrix remains a deployment hold point under S-005.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::NavigationLightPresentation" data-element-kind="requirementDef">
+<dt class="sysml-term">NavigationLightPresentation</dt>
+<dd class="sysml-description">The vessel shall present the lights prescribed for its current mode by the S-004 compliance matrix without a person aboard. Verification uses the shared context of S-004.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::NavigationShapePresentation" data-element-kind="requirementDef">
+<dt class="sysml-term">NavigationShapePresentation</dt>
+<dd class="sysml-description">The vessel shall present the shapes prescribed for its current mode by the S-004 compliance matrix without a person aboard. Verification uses the shared context of S-004.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::NavigationSoundPresentation" data-element-kind="requirementDef">
+<dt class="sysml-term">NavigationSoundPresentation</dt>
+<dd class="sysml-description">The vessel shall present the sound signals prescribed for its current mode by the S-004 compliance matrix without a person aboard. Verification uses the shared context of S-004.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::SignalingModeDeadline" data-element-kind="requirementDef">
+<dt class="sysml-term">SignalingModeDeadline</dt>
+<dd class="sysml-description">A commanded mode change shall select the corresponding signaling configuration within 1 second. Verification uses the shared context of S-004.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::SignalingFaultRecording" data-element-kind="requirementDef">
+<dt class="sysml-term">SignalingFaultRecording</dt>
+<dd class="sysml-description">Each detectable signaling failure shall be logged within 5 seconds of detection. Verification uses the shared context of S-004.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::SignalingFaultReporting" data-element-kind="requirementDef">
+<dt class="sysml-term">SignalingFaultReporting</dt>
+<dd class="sysml-description">With a functioning link, each detected signaling failure shall be reported to shore within 5 seconds. Verification uses the shared context of S-004.</dd>
+</div>
+</dl>
+<section class="sysml-section" id="group1" data-content="section" data-name="group1">
+<h2>S-004 derivation 1</h2>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::navigationConspicuity1" data-diagram-kind="requirement" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogViews::navigationConspicuity1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 67 node(s) without a position, left undrawn, and 73 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+%% layout: n2 x=300 y=200
+%% layout: n3 x=600 y=200
+flowchart BT
+  n0(&#34;`*«requirement»*
+**navigationConspicuity : NavigationConspicuity**`&#34;)
+  n1(&#34;`*«requirement»*
+**navigationLightPresentation : NavigationLightPresentation**`&#34;)
+  n2(&#34;`*«requirement»*
+**navigationShapePresentation : NavigationShapePresentation**`&#34;)
+  n3(&#34;`*«requirement»*
+**navigationSoundPresentation : NavigationSoundPresentation**`&#34;)
+  n1 -.-&gt;|&#34;derive&#34;| n0
+  n2 -.-&gt;|&#34;derive&#34;| n0
+  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
+</figure>
+</section>
+<section class="sysml-section" id="group2" data-content="section" data-name="group2">
+<h2>S-004 derivation 2</h2>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::navigationConspicuity2" data-diagram-kind="requirement" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogViews::navigationConspicuity2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 67 node(s) without a position, left undrawn, and 73 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+%% layout: n2 x=300 y=200
+%% layout: n3 x=600 y=200
+flowchart BT
+  n0(&#34;`*«requirement»*
+**navigationConspicuity : NavigationConspicuity**`&#34;)
+  n1(&#34;`*«requirement»*
+**signalingModeDeadline : SignalingModeDeadline**`&#34;)
+  n2(&#34;`*«requirement»*
+**signalingFaultRecording : SignalingFaultRecording**`&#34;)
+  n3(&#34;`*«requirement»*
+**signalingFaultReporting : SignalingFaultReporting**`&#34;)
+  n1 -.-&gt;|&#34;derive&#34;| n0
+  n2 -.-&gt;|&#34;derive&#34;| n0
+  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
+</figure>
+</section>
+</article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({maxTextSize: 1406, maxEdges: 4});</script>
+</body>
+</html>
