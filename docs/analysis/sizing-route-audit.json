@@ -1,0 +1,144 @@
+{
+  "status": "holds",
+  "exit": 0,
+  "checks": [
+    {
+      "subject": "BlueDogOpenSizingResults::routeAudit",
+      "status": "holds",
+      "values": [
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "downstreamMean",
+          "value": "2.0134810490781625"
+        },
+        {
+          "name": "upstreamMean",
+          "value": "-0.9545159679434108"
+        },
+        {
+          "name": "progressMet",
+          "value": "false"
+        },
+        {
+          "name": "passagePossible",
+          "value": "false"
+        },
+        {
+          "name": "elapsedHours",
+          "value": "null"
+        },
+        {
+          "name": "durationMet",
+          "value": "false"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "missionSupported",
+          "value": "false"
+        },
+        {
+          "name": "objective calculation",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogOpenSizingResults::routeAudit",
+        "  inputsValid = true",
+        "  downstreamMean = 2.0134810490781625",
+        "  upstreamMean = -0.9545159679434108",
+        "  progressMet = false",
+        "  passagePossible = false",
+        "  elapsedHours = null",
+        "  durationMet = false",
+        "  evidenceReady = false",
+        "  missionSupported = false",
+        "  objective calculation: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "output": [
+    "✓ package GorgeChallenge",
+    "✓ package BlueDog",
+    "✓ package BlueDogRequirements",
+    "✓ package BlueDogViews",
+    "✓ package BlueDogDocuments",
+    "✓ package BlueDogArchitectureViews",
+    "✓ package BlueDogUseCases",
+    "✓ package BlueDogUseCaseViews",
+    "✓ package BlueDogSatisfaction",
+    "✓ package RecoveryPropulsionTrade",
+    "✓ package BlueDogEnergy",
+    "✓ package BlueDogEnergyExamples",
+    "✓ package BlueDogDiagramDocuments",
+    "✓ package BlueDogRequirementVerification",
+    "✓ package BlueDogReliability",
+    "✓ package BlueDogReliabilityExamples",
+    "✓ package BlueDogDFMEA",
+    "✓ package BlueDogReliabilityDocuments",
+    "✓ package BlueDogSemanticViews",
+    "✓ package BlueDogSailing",
+    "✓ package BlueDogSailingExamples",
+    "✓ package BlueDogSailingDocuments",
+    "✓ package BlueDogSizing",
+    "✓ package BlueDogSizingExamples",
+    "✓ package BlueDogSizingDocuments",
+    "✓ package BlueDogDesignSearch",
+    "✓ package BlueDogDesignPhysics",
+    "✓ package BlueDogDesignResults",
+    "✓ package BlueDogDesignSearchDocuments",
+    "✓ package BlueDogStructure",
+    "✓ package BlueDogStructureDocuments",
+    "✓ package BlueDogStructureViews",
+    "✓ package BlueDogSizingRoute",
+    "✓ package BlueDogOpenSizing",
+    "✓ package BlueDogOpenSizingResults"
+  ],
+  "errors": null
+}

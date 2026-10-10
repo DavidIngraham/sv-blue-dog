@@ -430,3 +430,6 @@ Generated natively by OpenSysML from the project models. Status describes work o
 | missionReliability | failureRateBudget | open | failureRateBudget supplies an acceptance condition needed to achieve missionReliability. |
 | missionReliability | reliabilityEvidence | open | reliabilityEvidence supplies an acceptance condition needed to achieve missionReliability. |
 | missionReliability | criticalFailureDisposition | open | criticalFailureDisposition supplies an acceptance condition needed to achieve missionReliability. |
+
+
+[Hybrid structure requirements and native relationship diagrams](structure-requirements.md) supplement this register with the current construction allocations.

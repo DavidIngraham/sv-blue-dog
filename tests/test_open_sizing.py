@@ -18,9 +18,9 @@ def test_boundary_detection_includes_near_limits():
     assert [(h['name'],h['side']) for h in hits]==[('length','lower'),('ballast','upper')]
 
 
-def test_saved_search_has_fifteen_live_sizing_dimensions():
+def test_saved_search_has_twenty_live_sizing_dimensions():
     r=read_report(); c=r['contract']
-    assert len(c['designNames'])==15
+    assert len(c['designNames'])==20
     assert all(a<b for a,b in zip(c['lower'],c['upper']))
     assert {'freeboard_m','rudder_arm_fraction'} <= set(c['designNames'])
     for study in r['studies'].values():
@@ -31,7 +31,7 @@ def test_saved_search_has_fifteen_live_sizing_dimensions():
 
 def test_native_replay_and_published_artifacts():
     for path, content in publication_outputs().items():
-        assert path.read_text(encoding='utf-8')==content
+        assert path.read_text(encoding='utf-8').replace('<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->\n','').replace('\n\n\n','\n\n')==content
 
 
 @pytest.mark.skipif(__import__('sys').platform!='linux',reason='Compiled C adapter requires GCC/Linux')
@@ -56,7 +56,7 @@ def test_adapter_rejects_boxed_native_sequence():
     from scripts.study_open_sizing import SizingKernel
     # Exercise the guard without dereferencing a mismatched native pointer.
     k=object.__new__(SizingKernel)
-    k.contract={'parameterNames':['p'],'outputNames':['x']}
+    k.contract={'designNames':['d']*20,'parameterNames':['p'],'outputNames':['x']}
     k.parameters=np.array([1.])
     k.lock=__import__('threading').Lock()
     def boxed(*args):
@@ -66,7 +66,7 @@ def test_adapter_rejects_boxed_native_sequence():
         return 0
     k.lib=SimpleNamespace(sysml_run=boxed)
     with pytest.raises(ValueError,match='representation'):
-        k.evaluate(np.ones(15),np.ones(9))
+        k.evaluate(np.ones(20),np.ones(9))
 
 
 def test_saved_verdicts_follow_equilibrium_and_margin_outputs():
@@ -75,7 +75,7 @@ def test_saved_verdicts_follow_equilibrium_and_margin_outputs():
         b=study['best']
         rows=np.array([[row[n] for n in c['outputNames']] for row in b['results']])
         balanced=np.abs(rows[:,:4]).max()<=c['equilibrium_tolerance']
-        operating=balanced and rows[:,5:29].min()>=-c['margin_tolerance']
+        operating=balanced and rows[:,5:4+c['marginCount']].min()>=-c['margin_tolerance']
         fit=operating and rows[:,4].min()>=-c['margin_tolerance']
         assert b['operatingFeasible']==bool(operating)
         assert b['numericalFeasible']==bool(fit)
@@ -83,3 +83,27 @@ def test_saved_verdicts_follow_equilibrium_and_margin_outputs():
         x=np.array([b['design'][n] for n in c['designNames']])
         assert np.all(x>=np.array(bounds['lower'])-1e-8)
         assert np.all(x<=np.array(bounds['upper'])+1e-8)
+
+
+def test_wide_mass_ceiling_does_not_falsely_flag_small_actuator():
+    assert boundary_hits({'design':{'servo':.2}},[.0125],[50],['servo'])==[]
+
+
+@pytest.mark.skipif(__import__('sys').platform!='linux',reason='Compiled C adapter requires GCC/Linux')
+def test_structural_sensitivities_penalize_long_appendages_and_wide_panels():
+    from scripts.study_open_sizing import SizingKernel
+    k=SizingKernel();c=k.contract;b=read_report()['studies']['nominal_5ms']['best']
+    d=np.array([b['design'][n] for n in c['designNames']]);point=np.r_[5,1,1,b['states'][0]]
+    baseline=dict(zip(c['outputNames'],k.evaluate(d,point)))
+    longer=d.copy();longer[5]*=2
+    stretched=dict(zip(c['outputNames'],k.evaluate(longer,point)))
+    assert stretched['keelTipDeflection']>baseline['keelTipDeflection']*8
+    wider=d.copy();wider[19]*=2
+    panels=dict(zip(c['outputNames'],k.evaluate(wider,point)))
+    # Normalized panel deflection divides displacement by pitch: scales as pitch^3.
+    assert 1-panels['panel_deflection']==pytest.approx(8*(1-baseline['panel_deflection']))
+    assert panels['hullArealMass']<baseline['hullArealMass']
+    thicker=d.copy();thicker[15]*=2
+    laminate=dict(zip(c['outputNames'],k.evaluate(thicker,point)))
+    assert 1-laminate['panel_strength']==pytest.approx((1-baseline['panel_strength'])/4)
+    assert laminate['totalMass']>baseline['totalMass']

@@ -87,7 +87,7 @@ The free-length studies minimize length only if a numerically feasible candidate
 
 ### Joint sizing (current workflow)
 
-All fifteen represented sizing quantities vary together; no minimum-length objective is applied. Physical coefficients remain assumptions. Numerical brackets expand when reached; remaining hits are unresolved. The stationary progress screens do not replace a route-integrated Q-101 assessment.
+Twenty represented sizing quantities vary together, including four layups and rib spacing; no minimum-length objective is applied. Physical coefficients remain assumptions. Numerical brackets expand when reached; remaining hits are unresolved. The stationary progress screens do not replace a route-integrated Q-101 assessment.
 
 ```sh
 uv run python -m scripts.study_open_sizing --prepare
@@ -98,4 +98,4 @@ uv run python -m scripts.study_open_sizing --publish
 uv run python scripts/render_requirements.py
 ```
 
-See [current dimensions and results](../docs/open-sizing-results.md) and [assumptions](../docs/design-search.md#joint-sizing-without-premature-dimension-caps). A numerical fit with unresolved freeboard/structural constraints is not an accepted vessel design.
+See [current dimensions and results](../docs/open-sizing-results.md) and [assumptions](../docs/design-search.md#joint-sizing-without-premature-dimension-caps). The FDM/glass structural and hydrostatic screens are defined in `structure.sysml`; `sizing-route.sysml` separately evaluates signed, time-weighted route progress. Whole-ply re-sizing follows continuous optimization. A numerical fit without validated material, bond, stability and route evidence is not an accepted vessel design. See [construction assumptions](../docs/structure-sizing.md) and [traced requirements](../docs/structure-requirements.md).

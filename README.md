@@ -15,3 +15,5 @@ An autonomous sailing project exploring sailing, desktop manufacturing and compl
 The [CAD files](cad/) are a manufacturing and wing-sail prototype, separate from the challenge-vessel design. Assemblies, parts and exchange files remain together to preserve references. Start with [SV Bluedog.SLDASM](cad/SV%20Bluedog.SLDASM); physical build status and geometry qualification are not established by this model.
 
 The GitHub Pages blog imports Markdown from this repository. Requirement statements, model counts and numerical results belong in generated artifacts, not duplicated prose. Publishing commands and source conventions are in the modeling guide.
+
+The current [FDM/glass structural sizing study](docs/structure-sizing.md) links the construction mass model, practical constraints, native requirement diagrams and latest solver results.

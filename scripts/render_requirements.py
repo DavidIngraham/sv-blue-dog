@@ -145,6 +145,7 @@ def main():
         sys.path.insert(0, str(ROOT))
         from scripts.study_open_sizing import publication_outputs as sizing_outputs
     outputs.update(sizing_outputs())
+    outputs[ROOT / "docs/requirements-register.md"] += "\n\n[Hybrid structure requirements and native relationship diagrams](structure-requirements.md) supplement this register with the current construction allocations.\n"
     diagrams = {}
     # Compile the model once per format, rather than once for every view.
     with tempfile.TemporaryDirectory(dir=ROOT / ".tools", prefix="documents-") as scratch:
