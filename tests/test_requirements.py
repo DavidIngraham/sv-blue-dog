@@ -32,24 +32,40 @@ class PublishingTests(unittest.TestCase):
             ("roundTrip", "missionEvidence"), ("multiDayEndurance", "energyAwareness"),
             ("multiDayEndurance", "lowEnergyRecovery"), ("energyAwareness", "lowEnergyRecovery"),
         }
+        expected.update([('roundTrip', 'transportability'), ('transportability', 'desktopManufacture'), ('desktopManufacture', 'serviceability'), ('navigationAndControl', 'trafficSafety'), ('roundTrip', 'operatingBoundary'), ('transportability', 'safeRecovery'), ('trafficSafety', 'navigationConspicuity'), ('roundTrip', 'regulatoryClassification'), ('roundTrip', 'environmentalEnvelope'), ('environmentalEnvelope', 'marineDurability'), ('environmentalEnvelope', 'stabilityAndFouling'), ('safeRecovery', 'recoveryPropulsion'), ('recoveryPropulsion', 'recoveryEnergy'), ('communications', 'telemetryEquipment'), ('communications', 'commandIntegrity'), ('hawaiiVoyage', 'environmentalEnvelope')])
         self.assertEqual(set(self.edges), expected)
         self.assertEqual(len(self.edges), len(expected))
-        self.assertEqual(len(self.nodes), 17)
+        self.assertEqual(len({name for edge in self.edges for name in edge}), 32)
+
+    def test_use_case_and_satisfaction_traceability(self):
+        text = native("-render-document", "BlueDogDocuments::Traceability")
+        for case, requirement in [('prepare', 'transportability'), ('sailGorge', 'roundTrip'),
+                                  ('sailOcean', 'hawaiiVoyage'), ('monitor', 'telemetryEquipment'),
+                                  ('recover', 'safeRecovery'), ('maintain', 'serviceability'),
+                                  ('avoidTraffic', 'trafficSafety')]:
+            self.assertRegex(text, rf"\| {case} \|[^\n]+\| {requirement} \|")
+        self.assertIn('| recoveryPropulsion | motorSystem |', text)
+        self.assertIn('| commandIntegrity | commandGateway |', text)
+        self.assertIn('| regulatoryClassification |  |', text)
+        diagram = native('-render', 'BlueDogUseCaseViews::operations', '-render-form', 'dot')
+        self.assertIn('// kind: case', diagram)
+        self.assertIn('P-001 Transportability', diagram)
 
     def test_exactly_two_top_level_drivers(self):
-        roots = set(self.nodes.values()) - {target for _, target in self.edges}
+        roots = {source for source, _ in self.edges} - {target for _, target in self.edges}
         self.assertEqual(roots, {"transGorgeChallenge", "hawaiiVoyage"})
 
     def test_register_preserves_ids_status_and_relationships(self):
-        ids = re.findall(r"^\| ([CHEM]-[0-9]+) \|", self.markdown, re.MULTILINE)
+        ids = re.findall(r"^\| ([CHEMPNSR]-[0-9]+) \|", self.markdown, re.MULTILINE)
         expected = {"H-001", "M-001", "M-002",
                     *(f"C-00{i}" for i in range(7)), *(f"E-00{i}" for i in range(1, 8))}
+        expected.update(['P-001', 'P-002', 'P-003', 'S-001', 'S-002', 'S-003', 'S-004', 'S-005', 'N-001', 'N-002', 'N-003', 'R-001', 'R-002', 'C-101', 'C-102'])
         self.assertEqual(set(ids), expected)
         self.assertEqual(len(ids), len(expected))
         for source, target in self.edges:
             self.assertIn(f"| {source} | {target} | open |", self.markdown)
         rows = [line for line in self.markdown.splitlines() if line.startswith('| ')]
-        self.assertEqual(len(rows), 17 + 25 + 4)
+        self.assertEqual(len(rows), 32 + 41 + 4)
         data = [line for line in rows if line not in (
             '| ID | Requirement | Status | Statement |',
             '| Original | Derived | Status | Rationale |', '| --- | --- | --- | --- |')]

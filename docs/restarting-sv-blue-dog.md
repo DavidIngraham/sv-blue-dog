@@ -36,7 +36,9 @@ The electronics sketch separates the autopilot, communications, AIS, and air-dat
 
 The detailed candidate parts are in the [project notes](project-status.md). What interests me now is how those pieces fit together: what information the boat needs to sail, how it uses that information, and how much energy it takes to keep the whole system running. The hardware list was a starting point for that work.
 
-The current [logical architecture](architecture.md) captures the boat's subsystem responsibilities alongside its operator, shore support, and environment. Interfaces are the next layer to define.
+The current [logical architecture](architecture.md) now breaks down the boat's subsystems, including recovery propulsion and communications equipment. I want a boat I can transport myself and build with a desktop 3D printer, so handling, manufacture, and service access now have their own requirements. Use cases connect the missions to those requirements; design satisfaction links identify which parts are intended to meet them. Those links still need test evidence.
+
+I am also separating the regulatory questions from assumptions about size. Being small and unattended does not by itself make the boat an exempt buoy. The [operating constraints](operating-constraints.md) record the sources and questions still to resolve.
 
 ![SV Blue Dog logical subsystems](figures/architecture.svg)
 

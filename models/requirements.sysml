@@ -205,4 +205,190 @@ package BlueDogRequirements {
         end #original source ::> energyAwareness;
         end #derive target ::> lowEnergyRecovery;
     }
+
+    requirement def <'P-001'> Transportability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The complete vessel, disassembled where needed, shall be transportable, launched, and recovered by one person using a documented handling procedure. Packed dimensions, lift mass, lifting points, setup time, and launch/recovery conditions shall be specified and demonstrated; numerical limits remain open. */
+    }
+    requirement transportability : Transportability;
+    #derivation connection deriveTransportability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Transportability refines the responsibilities needed for roundTrip. */
+        end #original source ::> roundTrip;
+        end #derive target ::> transportability;
+    }
+
+    requirement def <'P-002'> DesktopManufacture {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Printed components shall fit an agreed desktop 3D-printer build envelope and support assembly, sealing, inspection, and replacement with accessible tools. Printer dimensions, material, tolerances, joints, print orientation, and material/process qualification remain open; a typical printer is not a fixed dimensional standard. */
+    }
+    requirement desktopManufacture : DesktopManufacture;
+    #derivation connection deriveDesktopManufacture {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* DesktopManufacture refines the responsibilities needed for transportability. */
+        end #original source ::> transportability;
+        end #derive target ::> desktopManufacture;
+    }
+
+    requirement def <'P-003'> Serviceability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Energy storage, seals, electronics, and actuators shall be accessible for inspection and replacement between attempts. Define service intervals, spares, leak checks, cost and build-time budgets before accepting the design. */
+    }
+    requirement serviceability : Serviceability;
+    #derivation connection deriveServiceability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Serviceability refines the responsibilities needed for desktopManufacture. */
+        end #original source ::> desktopManufacture;
+        end #derive target ::> serviceability;
+    }
+
+    requirement def <'S-001'> TrafficSafety {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall detect and assess collision risk, maintain an effective lookout, and take appropriate avoiding action within its approved operational envelope. Define detection performance for non-AIS craft, reaction time, maneuvering capability, and loss-of-awareness response; AIS alone is not the lookout solution. */
+    }
+    requirement trafficSafety : TrafficSafety;
+    #derivation connection deriveTrafficSafety {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* TrafficSafety refines the responsibilities needed for navigationAndControl. */
+        end #original source ::> navigationAndControl;
+        end #derive target ::> trafficSafety;
+    }
+
+    requirement def <'S-002'> OperatingBoundary {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall enforce mission boundaries and respond autonomously to loss of progress, grounding risk, or boundary approach using a defined contingency plan. Course gates, chart margins, prohibited areas, traffic corridors, and recovery areas remain open. No dam transit is assumed. */
+    }
+    requirement operatingBoundary : OperatingBoundary;
+    #derivation connection deriveOperatingBoundary {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* OperatingBoundary refines the responsibilities needed for roundTrip. */
+        end #original source ::> roundTrip;
+        end #derive target ::> operatingBoundary;
+    }
+
+    requirement def <'S-003'> SafeRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall support emergency abort, location reporting, and one-person recovery with controlled propulsion and actuator states. Define remote/local authority, communications-loss behavior, reserve energy, accessible isolation, and recovery conditions. Safety intervention ends qualifying challenge operation. */
+    }
+    requirement safeRecovery : SafeRecovery;
+    #derivation connection deriveSafeRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* SafeRecovery refines the responsibilities needed for transportability. */
+        end #original source ::> transportability;
+        end #derive target ::> safeRecovery;
+    }
+
+    requirement def <'S-004'> NavigationConspicuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall carry and operate lights, shapes, and sound-signaling arrangements applicable to its measured dimensions, operating waters, visibility, and sailing, powered, or anchored mode. Assess automatic presentation for unattended operation. Selection and legal applicability remain open; no universal small-size exemption is assumed. */
+    }
+    requirement navigationConspicuity : NavigationConspicuity;
+    #derivation connection deriveNavigationConspicuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* NavigationConspicuity refines the responsibilities needed for trafficSafety. */
+        end #original source ::> trafficSafety;
+        end #derive target ::> navigationConspicuity;
+    }
+
+    requirement def <'S-005'> RegulatoryClassification {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Before deployment, determine applicable vessel classification, Inland or International navigation rules, registration, radio authorization, and any permissions for a stationary observation or buoy mode. Record dimensions and mode-dependent obligations. Unattended operation or small size shall not be treated as a COLREG exemption or proof of buoy classification. */
+    }
+    requirement regulatoryClassification : RegulatoryClassification;
+    #derivation connection deriveRegulatoryClassification {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* RegulatoryClassification refines the responsibilities needed for roundTrip. */
+        end #original source ::> roundTrip;
+        end #derive target ::> regulatoryClassification;
+    }
+
+    requirement def <'N-001'> EnvironmentalEnvelope {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Define separate Gorge and ocean operating and survival envelopes for wind, gusts, current, waves, water/air temperature, visibility, and debris. Launch readiness and autonomous contingency decisions shall use the applicable envelope; numerical limits require site evidence and testing. */
+    }
+    requirement environmentalEnvelope : EnvironmentalEnvelope;
+    #derivation connection deriveEnvironmentalEnvelope {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* EnvironmentalEnvelope refines the responsibilities needed for roundTrip. */
+        end #original source ::> roundTrip;
+        end #derive target ::> environmentalEnvelope;
+    }
+
+    requirement def <'N-002'> MarineDurability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Hull, seals, connectors, electronics, and exposed materials shall withstand the specified immersion, spray, UV, corrosion, and fatigue exposure. Include freshwater Gorge trials and saltwater ocean service. Specify test severity, duration, inspection criteria, and tolerable ingress. */
+    }
+    requirement marineDurability : MarineDurability;
+    #derivation connection deriveMarineDurability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* MarineDurability refines the responsibilities needed for environmentalEnvelope. */
+        end #original source ::> environmentalEnvelope;
+        end #derive target ::> marineDurability;
+    }
+
+    requirement def <'N-003'> StabilityAndFouling {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall recover a defined sailing condition after the specified capsize event and tolerate the agreed weed/debris exposure without unacceptable control loss. Establish ballast, stability, recovery time, fouling loads, and test conditions before acceptance. */
+    }
+    requirement stabilityAndFouling : StabilityAndFouling;
+    #derivation connection deriveStabilityAndFouling {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* StabilityAndFouling refines the responsibilities needed for environmentalEnvelope. */
+        end #original source ::> environmentalEnvelope;
+        end #derive target ::> stabilityAndFouling;
+    }
+
+    requirement def <'R-001'> RecoveryPropulsion {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Provide auxiliary motor propulsion for development testing and vessel recovery. Interlock challenge mode against propulsive motor commands; entering powered recovery shall terminate and log the qualifying attempt. Define thrust/current envelope, runtime, protected propulsor, isolation, and energy reserve. Recovery thrust is not yet sized for Gorge currents. */
+    }
+    requirement recoveryPropulsion : RecoveryPropulsion;
+    #derivation connection deriveRecoveryPropulsion {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* RecoveryPropulsion refines the responsibilities needed for safeRecovery. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> recoveryPropulsion;
+    }
+
+    requirement def <'R-002'> RecoveryEnergy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Allocate and monitor energy reserved for communications, safe control, and the specified powered recovery scenario. Define trigger thresholds and verify recovery demand against available battery energy; a motor alone does not guarantee recovery. */
+    }
+    requirement recoveryEnergy : RecoveryEnergy;
+    #derivation connection deriveRecoveryEnergy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* RecoveryEnergy refines the responsibilities needed for recoveryPropulsion. */
+        end #original source ::> recoveryPropulsion;
+        end #derive target ::> recoveryEnergy;
+    }
+
+    requirement def <'C-101'> TelemetryEquipment {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Provide onboard telemetry equipment and a shore monitoring endpoint reporting timestamped position, mission mode, energy, faults, and link/data age. Retain observations through outages and resume transfer. Determine Gorge and ocean coverage, update rates, antenna installation, power demand, and service costs before selecting cellular or satellite equipment. */
+    }
+    requirement telemetryEquipment : TelemetryEquipment;
+    #derivation connection deriveTelemetryEquipment {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* TelemetryEquipment refines the responsibilities needed for communications. */
+        end #original source ::> communications;
+        end #derive target ::> telemetryEquipment;
+    }
+
+    requirement def <'C-102'> CommandIntegrity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Emergency command equipment shall authenticate commands, reject stale or replayed requests, acknowledge accepted mode changes, and record interventions. Link loss shall leave autonomous safety functions operating. Command latency, authority handover, and recovery procedure remain open. */
+    }
+    requirement commandIntegrity : CommandIntegrity;
+    #derivation connection deriveCommandIntegrity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* CommandIntegrity refines the responsibilities needed for communications. */
+        end #original source ::> communications;
+        end #derive target ::> commandIntegrity;
+    }
+    #derivation connection hawaiiEnvironment {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Ocean operation requires its own environmental envelope; Gorge success does not establish it. */
+        end #original source ::> BlueDog::Goals::hawaiiVoyage;
+        end #derive target ::> environmentalEnvelope;
+    }
 }

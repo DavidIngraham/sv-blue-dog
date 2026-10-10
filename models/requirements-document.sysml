@@ -16,6 +16,31 @@ package BlueDogDocuments {
                     WhereMetadata(source = row.connectorEnd, 'metadata' = "RequirementDerivation::DerivedRequirementMetadata")->ControlFunctions::collect { in e : KerML::Core::Feature; e.ownedReferenceSubsetting.referencedFeature } }),
                 Column(name = "Status", path = "workStatus.status"), Column(name = "Rationale", path = "documentation")))
     }
+    calc def UseCaseLinks :> Query {
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogUseCases")), type = "UseCaseUsage"),
+            properties = ("name", "documentation"),
+            columns = (Column(name = "Requirement", cell = { in row : SysML::UseCaseUsage;
+                row.objectiveRequirement.ownedSubsetting.subsettedFeature })))
+    }
+
+    calc def SatisfactionLinks :> Query {
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirements")), type = "RequirementUsage"),
+            properties = ("name"),
+            columns = (Column(name = "Design element", cell = { in row : SysML::RequirementUsage;
+                RelatedElements(source = row, relationshipKind = "satisfaction", direction = "incoming", maxDepth = 1) })))
+    }
+    part def Traceability :> Document {
+        attribute redefines title = "Use-case and architecture traceability";
+        part caution : Paragraph { attribute redefines text = "Use-case objectives subset the referenced requirements. Satisfy relationships express intended design allocations, not verified compliance; criteria and evidence remain open."; }
+        part useCases : Section {
+            attribute redefines title = "Use-case objectives";
+            part entries : Table { calc rows : UseCaseLinks; }
+        }
+        part satisfaction : Section {
+            attribute redefines title = "Architecture satisfaction allocations";
+            part entries : Table { calc rows : SatisfactionLinks; }
+        }
+    }
     part def RequirementsRegister :> Document {
         attribute redefines title = "Requirement derivation register";
         part intro : Paragraph {

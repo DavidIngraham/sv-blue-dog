@@ -20,7 +20,7 @@ C-000, the independent Trans-Gorge challenge, and H-001, the Hawaii voyage goal 
 
 ## Long-term direction
 
-The long-term ambition is to work toward a vessel capable of making a voyage to Hawai‘i.
+The long-term ambition is to work toward a vessel capable of making a voyage to Hawaiâ€˜i.
 The Gorge is intended as a "torture test" for autonomy, endurance, and reliability.
 The current baseline is the repeated Gorge route; an ocean departure point, passage
 route, duration, and ocean-specific acceptance criteria have not been selected.
@@ -47,7 +47,7 @@ Self-righting, weed resistance, printable hull geometry, and collision-avoidance
 
 Every dashed arrow comes from an explicit `#derivation` connection in the SysML model, with `#original` and `#derive` ends. Native OpenSysML arrows read from derived to original requirement. Short IDs are listed in the register. This is a generated traceability view, not a claim of a complete standard graphical notation implementation.
 
-All twenty-five derivation relationships are proposed reasoning for us to review. Node maturity is separate: a legacy requirement can have a newly proposed derivation. The challenge threshold and endurance objective remain separate inputs; the round-trip route alone does not imply a particular endurance. Low-energy recovery has two parents because it follows both the endurance objective and the energy-management policy. No link means "verified" or "satisfied."
+All forty-one derivation relationships are proposed reasoning for us to review. Node maturity is separate: a legacy requirement can have a newly proposed derivation. The challenge threshold and endurance objective remain separate inputs; the round-trip route alone does not imply a particular endurance. Low-energy recovery has two parents because it follows both the endurance objective and the energy-management policy. No link means "verified" or "satisfied."
 
 Regenerate with `uv run python scripts/render_requirements.py`. The [modeling guide](../models/README.md) records the renderer scope and validation limits.
 
@@ -77,3 +77,13 @@ These are proposed verification approaches; no passing result or satisfaction li
 5. What sail/steering mechanism and actuators will the electronics support?
 6. What mass, space, cost, and electrical limits apply to the electronics?
 7. Use the pinned OpenSysML workflow to analyze model changes and regenerate the requirements diagram.
+
+## Practicality, safety, and equipment decomposition
+
+The current model adds one-person handling, desktop-printer manufacture and
+serviceability; traffic safety, boundaries, recovery, navigation signaling and
+classification review; distinct environmental envelopes, durability and stability;
+and recovery motor/energy plus telemetry/command equipment requirements.
+Numeric mass, printer, weather, current, wave and recovery limits remain open.
+See [operating constraints](operating-constraints.md), [architecture and use cases](architecture.md),
+and the native [satisfaction and objective traceability](traceability.md).

@@ -7,7 +7,8 @@ package BlueDog {
      * Hawaii is the end goal; the Gorge is the torture test, not proof of ocean readiness.
      * Multi-day endurance with energy harvesting remains an earlier intent. SysML v2 learning is a project goal.
      * Decomposition identifies responsibilities; physical design remains open.
-     * Tool checks are recorded in the modeling guide; satisfaction is not claimed.
+     * Tool checks are recorded in the modeling guide; design satisfaction links
+     * are maintained separately and do not establish verification.
      */
 
     private import GorgeChallenge::*;
@@ -72,15 +73,63 @@ package BlueDog {
 
     package Architecture {
         part def Operator;
-        part def ShoreSupport;
+        part def MonitoringStation;
+        part def ShoreSupport {
+            part monitoringStation : MonitoringStation;
+        }
         part def Environment;
-        part def HullAndRig;
-        part def EnergySubsystem;
-        part def NavigationAndSensing;
-        part def GuidanceAndControl;
+        part def PrintedHull;
+        part def SealedEnclosure;
+        part def KeelAndBallast;
+        part def HandlingInterfaces;
+        part def HullAndRig {
+            part printedHull : PrintedHull;
+            part enclosure : SealedEnclosure;
+            part keelAndBallast : KeelAndBallast;
+            part handling : HandlingInterfaces;
+        }
+        part def EnergyStorage;
+        part def HarvestingInterface;
+        part def PowerManagement;
+        part def EnergySubsystem {
+            part storage : EnergyStorage;
+            part harvesting : HarvestingInterface;
+            part powerManagement : PowerManagement;
+        }
+        part def PositionAndAttitude;
+        part def WindSensing;
+        part def TrafficSensing;
+        part def NavigationAndSensing {
+            part positionAndAttitude : PositionAndAttitude;
+            part wind : WindSensing;
+            part traffic : TrafficSensing;
+        }
+        part def MissionManager;
+        part def CollisionAvoidance;
+        part def BoundarySupervisor;
+        part def GuidanceAndControl {
+            part missionManager : MissionManager;
+            part collisionAvoidance : CollisionAvoidance;
+            part boundarySupervisor : BoundarySupervisor;
+        }
         part def SailAndSteeringActuation;
-        part def Communications;
-        part def HealthAndRecovery;
+        part def TelemetryRadio;
+        part def AntennaSystem;
+        part def CommandGateway;
+        part def Communications {
+            part telemetryRadio : TelemetryRadio;
+            part antenna : AntennaSystem;
+            part commandGateway : CommandGateway;
+        }
+        part def RecoveryPropulsion;
+        part def RecoveryController;
+        part def IngressMonitor;
+        part def HealthAndRecovery {
+            part motorSystem : RecoveryPropulsion;
+            part recoveryController : RecoveryController;
+            part ingressMonitor : IngressMonitor;
+        }
+        part def NavigationSignaling;
         part def DataRecording;
         part def ObservationPayload;
 
@@ -97,6 +146,7 @@ package BlueDog {
             part communications : Communications;
             part recovery : HealthAndRecovery;
             part recording : DataRecording;
+            part signaling : NavigationSignaling;
             part observationPayload : ObservationPayload [0..1];
         }
         part missionContext {

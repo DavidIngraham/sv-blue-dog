@@ -2,6 +2,7 @@ package BlueDogArchitectureViews {
     private import StandardViewDefinitions::*;
     view architecture : GeneralView {
         expose BlueDog::Architecture::Boat;
+        expose BlueDog::Architecture::NavigationSignaling;
         expose BlueDog::Architecture::HullAndRig;
         expose BlueDog::Architecture::EnergySubsystem;
         expose BlueDog::Architecture::NavigationAndSensing;
@@ -16,5 +17,9 @@ package BlueDogArchitectureViews {
     view context : GeneralView {
         expose BlueDog::Architecture::missionContext;
         render Views::asInterconnectionDiagram;
+    }
+    view detail : GeneralView {
+        expose BlueDog::Architecture::*;
+        filter @SysML::PartDefinition;
     }
 }
