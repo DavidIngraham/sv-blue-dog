@@ -32,20 +32,20 @@ package BlueDogSailTrade {
         attribute :>> recovery = "Include main wing, tail, boom, tab, actuator and any counterweight as separate mass/volume bodies. Check free, jammed and failed trim states plus sealed, flooded and draining states.";
         attribute :>> manufacturing = "Compatible in principle with printed ribs and glass skins; extra bearings, waterproof actuation, alignment and tail clearance need design.";
         attribute :>> nextEvidence = "Low-speed trim bench; unpowered and jammed-tab gust tests; wet-cycle endurance; actual rig mass/CG and compartment geometry.";
-        metadata rationale : ModelingMetadata::Rationale { text = "Lead development choice based on passive trim and removing cloth/line wear mechanisms, not demonstrated Blue Dog reliability. See sail-trade.md for primary sources and limitations."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Co-leading development choice based on passive trim and removing cloth/line wear mechanisms, not demonstrated Blue Dog reliability. See sail-trade.md for primary sources and limitations."; }
     }
     part camberedWing : Candidate {
-        attribute :>> label = "Original cambered wing concept";
+        attribute :>> label = "Fixed-camber rotating-mast wing";
         attribute :>> membraneSail = false;
         attribute :>> aerodynamicTrim = false;
-        attribute :>> concept = "Original CrescentWing manufacturing concept retained. Camber reversal and the intended trim mechanism have not yet been established; a powered whole-wing trim is only the comparison assumption.";
-        attribute :>> durability = "Avoids cloth flogging but retains skin, seam, bearing and trim-drive fatigue; a camber-changing mechanism would add joints and failure modes.";
+        attribute :>> concept = "Owner-defined fixed-camber CrescentWing with whole-mast rotation for trim. Square-sail/downwind mode and reaching mode; no camber reversal, flap or tail mechanism is assumed.";
+        attribute :>> durability = "Avoids cloth flogging and camber-changing joints; retains skin, seam, mast-bearing and trim-drive fatigue and wave-impact loads.";
         attribute :>> energy = "Measure whole-wing moment, holding power and jam loads. A balanced pivot could reduce demand; no inherent high-power verdict is assumed.";
-        attribute :>> sailing = "Measure positive and negative lift polars on both tacks. Fixed camber must not inherit the symmetric-wing model; reversal/flap geometry must be explicit if used.";
+        attribute :>> sailing = "Measure full-angle lift, drag and moment on both tacks, including drag-dominated square/downwind and lift-dominated reaching modes and transitions. Do not inherit symmetric linear-wing polars. Inspect edge geometry before assuming leading/trailing-edge interchange.";
         attribute :>> recovery = "Use actual crescent/swept geometry, dry and retained-water CG, sealed volume, trim angle and failed-drive position. Manufacturing CAD is not qualified challenge-vessel geometry.";
-        attribute :>> manufacturing = "Closest to the existing CAD and useful for coupons/prototypes. Benefits from fewer tail parts; exact actuator and reversal architecture remain unresolved.";
-        attribute :>> nextEvidence = "Confirm intended camber/trim mechanism; inspect CAD section and stations; measure both-tack polars and drive power before quantitative comparison.";
-        metadata issue : ModelingMetadata::Issue { text = "Owner clarification of original camber/trim mechanism is pending. Do not silently assume reversible camber or reject fixed camber as incapable of sailing both tacks."; }
+        attribute :>> manufacturing = "Closest to existing CAD and useful for coupons/prototypes. Fixed section and rotating mast avoid tail/tab/boom parts; bearing, drive and waterproofing details remain to be designed.";
+        attribute :>> nextEvidence = "Inspect CAD section and stations; measure both-mode, both-tack polars, trim moments and drive energy, including depower and jam states; compare against published square-sail-derived MaxiMOOP precedent.";
+        metadata rationale : ModelingMetadata::Rationale { text = "Owner confirmed fixed camber, whole-mast trim and square/downwind plus reaching modes. Miller et al., An Alternative Wing Sail Concept for Small Autonomous Sailing Craft, DOI 10.1007/978-3-319-72739-4_1, provides analogous square-sail-derived precedent, not Blue Dog qualification. Retain alongside tail control pending comparable measurements."; }
     }
     part softSail : Candidate {
         attribute :>> label = "Triangular soft sail";
@@ -71,8 +71,7 @@ package BlueDogSailTrade {
         // Explicit development policy, not an inferred failure probability or weighted score.
         return developmentDecision : String = if knownFailure ? "Resolve verified failure before selection" else
             if qualified ? "Eligible for selection; compare validated margins" else
-            if candidate.aerodynamicTrim and not candidate.membraneSail ? "Lead development candidate" else
-            if not candidate.membraneSail ? "Retain comparison candidate" else
+            if not candidate.membraneSail ? "Co-leading development candidate" else
             "Deprioritize for long unattended service; retain prototype benchmark";
         objective assess { require constraint { gateCount == 7 } }
     }
@@ -136,7 +135,7 @@ package BlueDogSailTradeDocuments {
     calc def Traces :> Query { Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogSailTrade")), type = "Dependency"), columns = (Column(name = "Analysis element", cell = { in row : KerML::Root::Dependency; row.client }), Column(name = "Requirement / architecture", cell = { in row : KerML::Root::Dependency; row.supplier }))) }
     part def Report :> Document {
         attribute redefines title = "Sail architecture trade study";
-        part scope : Paragraph { attribute redefines text = "Preliminary qualitative development selection. All physical requirement gates remain unknown. No numeric reliability rates or arbitrary weighted scores are assigned. The lead concept is not mission-qualified; the soft sail is deprioritized, not proven noncompliant. Sources and decision rationale: sail-trade.md."; }
+        part scope : Paragraph { attribute redefines text = "Preliminary qualitative development selection. All physical requirement gates remain unknown. No numeric reliability rates or arbitrary weighted scores are assigned. Neither rigid concept is mission-qualified; the soft sail is deprioritized, not proven noncompliant. Sources and decision rationale: sail-trade.md."; }
         part decision : Section { attribute redefines title = "Native analysis conclusion"; part rows : Table { calc rows : Results; } }
         part concepts : Section { attribute redefines title = "Candidate definitions"; part rows : Table { calc rows : Concepts; } }
         part durability : Section { attribute redefines title = "Durability and energy"; part rows : Table { calc rows : Durability; } }

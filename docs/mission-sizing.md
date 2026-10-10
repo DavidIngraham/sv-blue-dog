@@ -49,4 +49,4 @@ Run the commands in the [modeling guide](../models/README.md). [mission-sizing.s
 
 Before reducing length, resolve the generated result's limiting margins, measure mass/stiffness with wet manufactured coupons, obtain credible hull resistance and wing polar data, and evaluate full-angle stability for actual enclosed geometry. A numerical route fit alone is not the baseline acceptance criterion.
 
-The [sail architecture trade](sail-trade.md) now defines the candidate-specific work needed before applying these generic-wing results to a particular rig. The present sizing model does not yet include a tail, counterweight, camber reversal or soft-sail control system.
+The [sail architecture trade](sail-trade.md) now defines the candidate-specific work needed before applying these generic-wing results to a particular rig. The present sizing model does not yet include a tail, counterweight, fixed-camber square/reaching-mode polars or soft-sail control system.

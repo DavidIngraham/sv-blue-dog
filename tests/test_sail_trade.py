@@ -16,7 +16,8 @@ def test_published_assessments_do_not_reject_unknown_candidates():
         assert v['knownFailure']=='false'
         assert v['qualified']=='false'
         assert v['evidenceComplete']=='false'
-    assert 'Lead development' in values(r['checks'][0])['developmentDecision']
+    for case in r['checks'][:2]:
+        assert 'Co-leading development' in values(case)['developmentDecision']
     assert 'Deprioritize' in values(r['checks'][2])['developmentDecision']
     moments=values(r['checks'][3])
     assert float(moments['positiveMomentNm'])==pytest.approx(98.0665)

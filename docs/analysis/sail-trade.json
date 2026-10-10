@@ -32,7 +32,7 @@
         },
         {
           "name": "developmentDecision",
-          "value": "\"Lead development candidate\""
+          "value": "\"Co-leading development candidate\""
         },
         {
           "name": "objective assess",
@@ -47,7 +47,7 @@
         "  evidenceComplete = false",
         "  qualified = false",
         "  requirementVerdict = \"Inconclusive: evidence missing\"",
-        "  developmentDecision = \"Lead development candidate\"",
+        "  developmentDecision = \"Co-leading development candidate\"",
         "  objective assess: satisfied",
         "  standing: value (observed: 1 run under reverse)"
       ],
@@ -92,7 +92,7 @@
       "values": [
         {
           "name": "candidateName",
-          "value": "\"Original cambered wing concept\""
+          "value": "\"Fixed-camber rotating-mast wing\""
         },
         {
           "name": "gateCount",
@@ -116,7 +116,7 @@
         },
         {
           "name": "developmentDecision",
-          "value": "\"Retain comparison candidate\""
+          "value": "\"Co-leading development candidate\""
         },
         {
           "name": "objective assess",
@@ -125,13 +125,13 @@
       ],
       "lines": [
         "✓ BlueDogSailTrade::camberAssessment",
-        "  candidateName = \"Original cambered wing concept\"",
+        "  candidateName = \"Fixed-camber rotating-mast wing\"",
         "  gateCount = 7",
         "  knownFailure = false",
         "  evidenceComplete = false",
         "  qualified = false",
         "  requirementVerdict = \"Inconclusive: evidence missing\"",
-        "  developmentDecision = \"Retain comparison candidate\"",
+        "  developmentDecision = \"Co-leading development candidate\"",
         "  objective assess: satisfied",
         "  standing: value (observed: 1 run under reverse)"
       ],
