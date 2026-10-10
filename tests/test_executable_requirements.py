@@ -36,7 +36,7 @@ class ExecutableRequirementsTests(unittest.TestCase):
     def test_reset_deadline(self):
         for value, expected in [('30 [s]', (0, 'holds')), ('30.1 [s]', (1, 'fails')), ('-1 [s]', (1, 'fails'))]:
             with self.subTest(value=value):
-                self.assertEqual(self.evaluate('ResetRecovery', {'measuredRestartTime': value}), expected)
+                self.assertEqual(self.evaluate('RestartDeadline', {'measuredRestartTime': value}), expected)
 
     def test_recovery_energy_boundary(self):
         # 1.2 * (100 W * 1800 s + 10 W * 7200 s) = 302400 J.
@@ -46,8 +46,8 @@ class ExecutableRequirementsTests(unittest.TestCase):
         self.assertEqual(self.evaluate('RecoveryEnergy', inputs | {'motorPower': '-100 [W]'}), (1, 'fails'))
 
     def test_capsize_deadlines(self):
-        for definition, field, limit in [('SelfRighting', 'measuredRightingTime', 60),
-                                          ('CapsizeControlRecovery', 'measuredControlRecoveryTime', 120)]:
+        for definition, field, limit in [('RightingDeadline', 'measuredRightingTime', 60),
+                                          ('ControlRecoveryDeadline', 'measuredControlRecoveryTime', 120)]:
             for seconds, expected in [(limit, (0, 'holds')), (limit + 1, (1, 'fails')), (-1, (1, 'fails'))]:
                 with self.subTest(definition=definition, seconds=seconds):
                     self.assertEqual(self.evaluate(definition, {field: f'{seconds} [s]'}), expected)
@@ -56,7 +56,7 @@ class ExecutableRequirementsTests(unittest.TestCase):
         for count, expected in [(1710, (0, 'holds')), (1709, (1, 'fails')),
                                 (1800, (0, 'holds')), (1801, (1, 'fails')), (-1, (1, 'fails'))]:
             with self.subTest(validEpochs=count):
-                self.assertEqual(self.evaluate('NavigationAvailability', {'validEpochs': str(count)}), expected)
+                self.assertEqual(self.evaluate('NavigationValidEpochs', {'validEpochs': str(count)}), expected)
 
     def test_launch_energy_gate_and_input_validity(self):
         baseline = dict(conservativeStartEnergy='101 [J]', protectedReserve='100 [J]',
@@ -77,11 +77,11 @@ class ExecutableRequirementsTests(unittest.TestCase):
                         allowed = not motor or (known and not qualifying)
                         inputs = dict(qualificationStateKnown=str(known).lower(),
                                       qualifying=str(qualifying).lower(), motorEnabled=str(motor).lower())
-                        self.assertEqual(self.evaluate('ChallengeMotorInhibition', inputs),
+                        self.assertEqual(self.evaluate('MotorQualificationInvariant', inputs),
                                          (0, 'holds') if allowed else (1, 'fails'))
 
     def test_missing_observations_cannot_pass(self):
-        for definition in ['DesktopManufacture', 'ResetRecovery', 'RecoveryEnergy', 'SelfRighting', 'CapsizeControlRecovery', 'NavigationAvailability', 'LaunchEnergyAdmission', 'ChallengeMotorInhibition']:
+        for definition in ['DesktopManufacture', 'RestartDeadline', 'RecoveryEnergy', 'RightingDeadline', 'ControlRecoveryDeadline', 'NavigationValidEpochs', 'LaunchEnergyAdmission', 'MotorQualificationInvariant']:
             with self.subTest(definition=definition):
                 code, status = self.evaluate(definition, {})
                 self.assertEqual(code, 2)

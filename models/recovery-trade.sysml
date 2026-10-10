@@ -81,5 +81,6 @@ package RecoveryPropulsionTrade {
     dependency weedGate from RecoverySizing to BlueDogRequirements::recoveryPropulsorWeeds;
     dependency capsizeGate from RecoverySizing to BlueDogRequirements::selfRighting;
     dependency controlRecoveryGate from RecoverySizing to BlueDogRequirements::capsizeControlRecovery;
-    dependency isolationGate from RecoverySizing to BlueDogRequirements::safeRecovery;
+    dependency isolationGate from RecoverySizing to BlueDogRequirements::motorIsolationDeadline;
+    dependency isolationLatchGate from RecoverySizing to BlueDogRequirements::isolationRestartInhibition;
 }

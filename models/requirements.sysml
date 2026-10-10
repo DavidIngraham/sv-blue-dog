@@ -15,35 +15,31 @@ package BlueDogRequirements {
     }
     requirement def <'E-001'> EnergyAwareness {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall update usable battery-energy and recovery-reserve estimates at least once per second. Against calibrated charge/discharge integration across the operating battery temperature range, usable-energy estimation error shall not exceed 10 percent of measured usable full-charge energy. The low-energy transition shall use a conservative estimate equal to estimated usable energy minus that error allowance. */
+        doc /* Aggregate requirement for EnergyAwareness. Acceptance requires all applicable derived leaf results (E-101, E-102, E-103, E-104); this parent has no independent executable pass/fail predicate. Shared verification context: Energy estimation and conservative decision inputs; accuracy uses calibrated energy integration across operating battery temperatures. */
     }
     requirement def <'E-002'> NavigationAndControl {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Under the selected operational profile N-010 or N-020 and its shared conditions, the vessel shall update mission guidance and sail/steering commands at least once per second. In each 30-minute qualification run, at least 1710 of the 1800 scheduled one-second epochs shall have a valid position within 10 m and a valid heading within 10 degrees of an independent reference. Missing or invalid epochs count as failures, not excluded samples. Deliberately injected navigation failures shall be assessed separately under E-008 and shall not be mixed into an accuracy run. */
+        doc /* Aggregate requirement for NavigationAndControl. Acceptance requires all applicable derived leaf results (E-105, E-106, E-107, E-108, E-109); this parent has no independent executable pass/fail predicate. Shared verification context: Qualification uses the selected mission profile. Accuracy trials contain 1800 scheduled one-second epochs in 30 minutes; invalid or missing epochs fail. Position and heading criteria use the same set of at least 1710 qualifying epochs, preventing separate selection of different good samples. Fault-injection runs are separate. */
     }
     requirement def <'E-003'> ResetRecovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* After a software watchdog reset with conservative usable battery energy above the recovery reserve and valid navigation observations available, the vessel shall restore mode-appropriate autonomous control, persisted mission mode, gate progress and qualification status within 30 seconds. Reset shall preserve survival and low-energy restrictions; full sailing resumption shall obey N-035. Motor enabling shall obey R-004 and require a fresh authenticated recovery command after restart. Records older than 5 seconds before reset shall persist. An absent or inconsistent persisted qualification state shall force nonqualifying status, never infer a qualifying attempt. */
-        attribute measuredRestartTime : TimeValue;
-        require constraint restartDeadline {
-            measuredRestartTime >= 0 [s] and measuredRestartTime <= 30 [s]
-        }
+        doc /* Aggregate requirement for ResetRecovery. Acceptance requires all applicable derived leaf results (E-110, E-111, E-112, E-113, E-145, E-136, E-139, E-138, R-102, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Watchdog-reset tests start above protected reserve with valid navigation observations. Normal sailing remains subject to N-035; data and qualification persistence have shared leaf criteria. */
     }
     requirement def <'E-004'> LowEnergyRecovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* When the conservative usable-energy estimate reaches the R-002 reserve, the vessel shall enter a logged low-energy state within 5 seconds and disable the optional observation payload. Position recording shall continue at least once per minute. Telemetry cadence shall be at most 300 seconds except during active emergency or powered recovery, when the S-003 60-second cadence takes precedence. Autonomous navigation, collision response and R-004 motor inhibition shall remain active. The low-energy flag shall clear after conservative usable energy exceeds 1.2 times the reserve for 10 continuous minutes, independently of survival or recovery flags. Payload operation shall resume only when that flag has cleared and no survival or recovery restriction remains. */
+        doc /* Aggregate requirement for LowEnergyRecovery. Acceptance requires all applicable derived leaf results (E-114, E-115, E-116, E-117, E-118, E-119, E-130, E-120, E-132, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Reserve means R-002. Emergency/recovery cadence takes precedence; clearing low-energy state is independent of other modes, while payload enabling respects all restrictions. */
     }
     requirement def <'E-005'> Communications {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* With a functioning link, the vessel shall deliver a current telemetry record to the shore endpoint at least once per 60 seconds in normal operation; E-004 permits 300 seconds in low-energy mode outside active emergency/powered recovery. A 24-hour link outage shall not require operator intervention, erase mission data or stop autonomous control. After reconnection it shall deliver a current record within the active cadence and transfer oldest-first backlog without delaying current records beyond that cadence. Onboard retention shall meet E-007; command handling shall meet C-102. */
+        doc /* Aggregate requirement for Communications. Acceptance requires all applicable derived leaf results (E-120, E-121, E-122, E-123, E-124, E-131, E-137); this parent has no independent executable pass/fail predicate. Shared verification context: Link availability is a delivery-test precondition, not a coverage guarantee. Normal cadence is 60 seconds; low-energy alone permits 300 seconds; emergency/powered recovery takes precedence at 60 seconds. Outage tests last 24 hours. */
     }
     requirement def <'E-006'> IngressResponse {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* In a 30-minute qualification test injecting freshwater into the normally dry hull at 10 mL/min, the vessel shall detect and record ingress within 60 seconds of injection starting, enter a logged recovery-request state, and retain flotation, dry electronics and position reporting for the full test. Detection shall not automatically enable motor propulsion in challenge mode. A pump is one possible implementation, not a prescribed solution. */
+        doc /* Aggregate requirement for IngressResponse. Acceptance requires all applicable derived leaf results (E-125, E-126, E-127, E-128, E-129, E-144, E-132, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: All leaves use a 30-minute freshwater injection at 10 mL/min into the normally dry hull. No pump technology is prescribed; R-004 remains applicable. */
     }
     requirement def <'E-007'> MissionEvidence {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain at least 30 days of timestamped position, heading, mission mode, gate progress, battery energy and fault state at 1 Hz in normal operation and at least once per minute in low-energy or survival operation. Every external-command disposition, reset, motor-enable transition and qualification change shall be recorded regardless of periodic sampling cadence. Timestamps shall be UTC within 1 second while GNSS time is valid; invalid time and gaps shall be flagged. After abrupt power removal, all records older than 5 seconds before removal shall remain readable. Reconnection shall not delete retained records. Disqualifying transitions shall be persisted before commanded intervention or motor enable; unknown qualification state on restart shall be nonqualifying. */
+        doc /* Aggregate requirement for MissionEvidence. Acceptance requires all applicable derived leaf results (E-130, E-131, E-132, E-133, E-134, E-135, E-136, E-137, E-138, E-139); this parent has no independent executable pass/fail predicate. Shared verification context: Periodic records contain position, heading, mode, gate progress, battery energy and fault state. Critical events are independent of periodic cadence. Timestamp accuracy is assessed with valid GNSS time. */
     }
     requirement roundTrip : RoundTrip;
     requirement multiDayEndurance : MultiDayEndurance;
@@ -179,7 +175,7 @@ package BlueDogRequirements {
 
     requirement def <'P-001'> Transportability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* One adult operator shall be able to move all mission equipment 100 m, assemble the vessel, launch it, recover it and pack it without another person or powered lifting equipment. Each separately lifted assembly shall have mass at most 15 kg. Setup and pack-down shall each take at most 30 minutes. Demonstration conditions shall be a firm bank or ramp with slope at most 1:12, wind at most 5 m/s and wave height at most 0.2 m; this handling envelope does not claim solo recovery in the sailing survival envelope. */
+        doc /* Aggregate requirement for Transportability. Acceptance requires all applicable derived leaf results (P-101, P-102, P-103, P-104, P-105, P-106); this parent has no independent executable pass/fail predicate. Shared verification context: Demonstrate with one adult, no powered lift, a firm bank or ramp of slope at most 1:12, wind at most 5 m/s and waves at most 0.2 m. This is not a survival-envelope recovery claim. */
     }
     requirement transportability : Transportability;
     #derivation connection deriveTransportability {
@@ -211,7 +207,7 @@ package BlueDogRequirements {
 
     requirement def <'P-003'> Serviceability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* One operator shall be able to replace the battery, each electronics module, each actuator and each serviceable enclosure seal individually within 30 minutes using hand tools, without cutting bonded structural joints or destroying adjacent parts. Following each replacement, the assembly shall pass the N-043 enclosure immersion criterion and a complete commanded-travel check for affected actuators. */
+        doc /* Aggregate requirement for Serviceability. Acceptance requires all applicable derived leaf results (P-107, P-108, P-109, P-110); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise individual replacement of the battery, every electronics module, every actuator and every serviceable enclosure seal by one operator using hand tools. */
     }
     requirement serviceability : Serviceability;
     #derivation connection deriveServiceability {
@@ -223,7 +219,7 @@ package BlueDogRequirements {
 
     requirement def <'S-001'> TrafficSafety {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Within the N-001 operating envelope, the vessel shall track encountered vessels, including non-AIS craft, update collision-risk estimates at least once per second and issue an avoiding-action command within 2 seconds of a collision-risk trigger. Qualification shall include head-on, crossing and overtaking encounters with AIS and non-AIS targets, day and night, using independently recorded target trajectories. Loss of a valid traffic assessment for more than 5 seconds shall trigger a logged traffic-awareness fault within 1 second. Detection range, target signatures, closest-approach margins and maneuver feasibility are unresolved acceptance parameters recorded in the verification plan; this requirement cannot receive a complete pass until those parameters and scenario results are supplied. */
+        doc /* Aggregate requirement for TrafficSafety. Acceptance requires all applicable derived leaf results (S-101, S-102, S-103, S-104); this parent has no independent executable pass/fail predicate. Shared verification context: Use independently recorded head-on, crossing and overtaking AIS and non-AIS targets, day and night in the selected operational profile. Detection ranges, target signatures, closest-approach margins and maneuver feasibility remain unresolved acceptance parameters; tracking and avoidance cannot receive complete passes until these are frozen. */
     }
     requirement trafficSafety : TrafficSafety;
     #derivation connection deriveTrafficSafety {
@@ -235,7 +231,7 @@ package BlueDogRequirements {
 
     requirement def <'S-002'> OperatingBoundary {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall evaluate its position and predicted 60-second trajectory against the uploaded permitted-water polygon and exclusion polygons at least once per second. A predicted boundary crossing shall trigger a logged avoidance command within 2 seconds. Missing or geometrically invalid boundaries shall inhibit mission start. Qualification shall inject trajectories toward each boundary, navigation loss and a no-feasible-maneuver case; the latter two shall produce an explicit degraded-state event rather than a false safe-route verdict. Course coordinates and uncertainty/clearance margins are controlled mission inputs, not arbitrary defaults. */
+        doc /* Aggregate requirement for OperatingBoundary. Acceptance requires all applicable derived leaf results (S-105, S-106, S-107, S-108, S-109); this parent has no independent executable pass/fail predicate. Shared verification context: Use uploaded permitted-water and exclusion polygons, with a 60-second prediction horizon. Inject approaches to every boundary, navigation loss and no-feasible-maneuver cases. Coordinates and uncertainty/clearance margins are controlled mission inputs with no default values. */
     }
     requirement operatingBoundary : OperatingBoundary;
     #derivation connection deriveOperatingBoundary {
@@ -247,7 +243,7 @@ package BlueDogRequirements {
 
     requirement def <'S-003'> SafeRecovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* After accepting an emergency abort, the vessel shall persistently latch the attempt as disqualified within 1 second, before performing the commanded intervention. During active emergency or powered recovery it shall provide position telemetry at least once per 60 seconds while a link is available, taking precedence over low-energy cadence. A physically accessible local isolation control shall remove motor power within 1 second and prevent restart until deliberately reset. Loss of remote control for 5 seconds during manual powered recovery shall command zero thrust within a further 1 second while retaining recording and location reporting; R-004 remains applicable. */
+        doc /* Aggregate requirement for SafeRecovery. Acceptance requires all applicable derived leaf results (S-110, S-111, S-112, S-113, S-114, S-115, E-138, R-101, E-130); this parent has no independent executable pass/fail predicate. Shared verification context: Emergency intervention ends attempt qualification. Exercise active emergency, powered recovery, local isolation and remote-control loss, including coexisting low-energy flags. */
     }
     requirement safeRecovery : SafeRecovery;
     #derivation connection deriveSafeRecovery {
@@ -259,7 +255,7 @@ package BlueDogRequirements {
 
     requirement def <'S-004'> NavigationConspicuity {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall automatically present the lights, shapes and sound signals in the deployment-specific compliance matrix for sailing, powered recovery and stationary modes, without a person aboard. A commanded mode change shall select its corresponding signaling configuration within 1 second; detectable signaling failures shall be logged and reported within 5 seconds. Acceptance shall measure the applicable visibility, arcs, colors and sound performance from that matrix. The matrix remains a deployment hold point under S-005, not a presumed small-craft exemption. */
+        doc /* Aggregate requirement for NavigationConspicuity. Acceptance requires all applicable derived leaf results (S-116, S-117, S-118, S-119, S-120, S-121); this parent has no independent executable pass/fail predicate. Shared verification context: Use the deployment-specific compliance matrix for sailing, powered-recovery and stationary modes, including its visibility, arcs, colors and sound criteria. The matrix remains a deployment hold point under S-005. */
     }
     requirement navigationConspicuity : NavigationConspicuity;
     #derivation connection deriveNavigationConspicuity {
@@ -271,7 +267,7 @@ package BlueDogRequirements {
 
     requirement def <'S-005'> RegulatoryClassification {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Each deployment shall have a dated compliance record identifying the craft, dimensions, operating waters and modes, applicable navigation and radio obligations, and required permissions with their evidence. Deployment release shall be withheld when a required authorization is absent, expired or unresolved. Acceptance is a document review with no unresolved mandatory items; this is a deployment/process requirement, not an onboard component behavior or an assertion of buoy status. */
+        doc /* Aggregate requirement for RegulatoryClassification. Acceptance requires all applicable derived leaf results (S-122, S-123); this parent has no independent executable pass/fail predicate. Shared verification context: Acceptance is deployment document review, not onboard behavior or an assertion of buoy status. */
     }
     requirement regulatoryClassification : RegulatoryClassification;
     #derivation connection deriveRegulatoryClassification {
@@ -358,7 +354,7 @@ package BlueDogRequirements {
 
     requirement def <'C-101'> TelemetryEquipment {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The shore endpoint shall display UTC sample time, position, mission mode, conservative usable battery energy, reserve, faults and age of each current telemetry record. It shall mark records stale above 120 seconds age in normal/emergency/powered-recovery modes and above 600 seconds in explicitly reported low-energy mode only when neither emergency nor powered recovery is active. Emergency or powered-recovery flags take precedence if flags coexist. Missing or unrecognized mode shall use 120 seconds. Stale denotes data age, not a diagnosis of link failure; it clears only upon receipt of a record within its mode threshold. A 24-hour outage/reconnection test shall restore reception, preserve identity/sequence numbers and suppress duplicate presentation as new observations. Delivery cadence shall meet E-005 and S-003. */
+        doc /* Aggregate requirement for TelemetryEquipment. Acceptance requires all applicable derived leaf results (C-201, C-202, C-203, C-204); this parent has no independent executable pass/fail predicate. Shared verification context: Freshness threshold is 120 seconds for normal, emergency, powered recovery or unknown mode, and 600 seconds only for explicitly reported low energy without emergency or powered recovery. Staleness describes data age, not diagnosed link failure. Exercise a 24-hour outage and reconnection. */
     }
     requirement telemetryEquipment : TelemetryEquipment;
     #derivation connection deriveTelemetryEquipment {
@@ -370,7 +366,7 @@ package BlueDogRequirements {
 
     requirement def <'C-102'> CommandIntegrity {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall reject commands with failed authentication, an already-used sequence number or age greater than 30 seconds without changing actuator or mission state. Each command shall be logged with its disposition; an accepted abort/mode-change shall be applied and acknowledged onboard within 1 second of complete receipt, and transmitted acknowledgment shall be queued immediately when a link is available. Replayed, expired and unauthenticated command injections shall cause zero accepted mode changes. Acceptance of external mission/steering control during a qualifying attempt shall permanently disqualify that attempt. */
+        doc /* Aggregate requirement for CommandIntegrity. Acceptance requires all applicable derived leaf results (C-205, C-206, C-207, C-208, C-209, C-210, C-211, E-132, E-138); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise complete command receipt, authentication failure, replayed sequence numbers, age greater than 30 seconds, and external control during a qualifying attempt. */
     }
     requirement commandIntegrity : CommandIntegrity;
     #derivation connection deriveCommandIntegrity {
@@ -568,7 +564,7 @@ package BlueDogRequirements {
 
     requirement def <'N-033'> Visibility {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain navigation and traffic-assessment functions in daylight and darkness at meteorological visibility of at least 1 km. On detecting visibility below 1 km it shall enter and log a restricted-visibility state within 60 seconds, retain collision assessment and avoid claiming normal-envelope availability. Traffic detection/avoidance acceptance remains subject to the unresolved scenario parameters in S-001. */
+        doc /* Aggregate requirement for Visibility. Acceptance requires all applicable derived leaf results (N-101, N-102, N-103, N-104, N-105); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise daylight and darkness at meteorological visibility of at least 1 km, and detected visibility below 1 km. Traffic performance remains subject to unresolved S-001 scenarios. */
     }
     requirement visibility : Visibility;
     #derivation connection deriveVisibility {
@@ -592,7 +588,7 @@ package BlueDogRequirements {
 
     requirement def <'N-035'> EnvelopeTransition {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Within 60 seconds of detecting an upper operational wind or wave limit exceedance for the selected profile, the vessel shall enter and log survival mode with position recording at least once per minute. Calm conditions invoke N-034, not this upper-limit trigger. After 10 continuous minutes inside the selected operational wind/wave limits, full autonomous sailing shall resume within 5 minutes if navigation is valid and no low-energy, emergency-recovery or isolation restriction remains. Otherwise the vessel shall retain and log the blocking mode. Restoration of mode-appropriate control after capsize under N-052 does not bypass this resumption gate or R-004. */
+        doc /* Aggregate requirement for EnvelopeTransition. Acceptance requires all applicable derived leaf results (N-106, N-107, N-108, N-109, N-110, E-130, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: The trigger is a detected upper operational wind or wave limit exceedance for the selected profile; calm invokes N-034. Resumption eligibility requires 10 continuous minutes inside the selected wind/wave limits, valid navigation and no low-energy, emergency-recovery or isolation restriction. */
     }
     requirement envelopeTransition : EnvelopeTransition;
     #derivation connection deriveEnvelopeTransition {
@@ -640,7 +636,7 @@ package BlueDogRequirements {
 
     requirement def <'N-044'> WetMechanicalIntegrity {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* After each wet-exposure campaign, external mechanisms shall complete their full commanded travel without seizure, and structural joints shall show no separation or through-cracks on visual inspection at 5 times magnification. */
+        doc /* Aggregate requirement for WetMechanicalIntegrity. Acceptance requires all applicable derived leaf results (N-111, N-112); this parent has no independent executable pass/fail predicate. Shared verification context: Evaluate after each selected profile wet-exposure campaign under N-002. */
     }
     requirement wetMechanicalIntegrity : WetMechanicalIntegrity;
     #derivation connection deriveWetMechanicalIntegrity {
@@ -652,7 +648,7 @@ package BlueDogRequirements {
 
     requirement def <'N-045'> WetElectricalIntegrity {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* After each wet-exposure campaign, disconnected cable assemblies shall have end-to-end conductor resistance no more than 10 percent above their pre-test value and conductor-to-conductor/conductor-to-case insulation resistance of at least 1 megohm at 50 V DC. Electronics shall be disconnected during insulation measurement. */
+        doc /* Aggregate requirement for WetElectricalIntegrity. Acceptance requires all applicable derived leaf results (N-113, N-114); this parent has no independent executable pass/fail predicate. Shared verification context: Evaluate disconnected cable assemblies after each selected profile wet-exposure campaign under N-002; disconnect electronics for insulation measurement. */
     }
     requirement wetElectricalIntegrity : WetElectricalIntegrity;
     #derivation connection deriveWetElectricalIntegrity {
@@ -664,7 +660,7 @@ package BlueDogRequirements {
 
     requirement def <'N-046'> SolarHeating {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* At 40 degC ambient air and 1000 W/m2 incident solar irradiance for 8 hours, powered electronics shall retain operational functions and battery temperatures shall remain within manufacturer operating limits. Charging shall be inhibited whenever measured battery temperature is outside its permitted charge range. */
+        doc /* Aggregate requirement for SolarHeating. Acceptance requires all applicable derived leaf results (N-115, N-116, N-117); this parent has no independent executable pass/fail predicate. Shared verification context: Expose the powered vessel to 40 degC ambient air and 1000 W/m2 incident solar irradiance for 8 hours; use the installed battery manufacturer temperature limits. */
     }
     requirement solarHeating : SolarHeating;
     #derivation connection deriveSolarHeating {
@@ -688,11 +684,7 @@ package BlueDogRequirements {
 
     requirement def <'N-051'> SelfRighting {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* At minimum and maximum mission loading, the vessel shall self-right from 90 and 180 degrees heel within 60 seconds of release without external action or motor thrust. Acceptance shall include five releases at each angle toward each side in freshwater for Gorge qualification or 35 g/kg saltwater for ocean qualification; dual qualification requires both media; every release shall meet the time limit without loss of rig or ballast or water reaching electronics. */
-        attribute measuredRightingTime : TimeValue;
-        require constraint rightingDeadline {
-            measuredRightingTime >= 0 [s] and measuredRightingTime <= 60 [s]
-        }
+        doc /* Aggregate requirement for SelfRighting. Acceptance requires all applicable derived leaf results (N-118, N-119, N-120, N-121); this parent has no independent executable pass/fail predicate. Shared verification context: Use minimum and maximum mission loading, five releases at each angle of 90 and 180 degrees toward each side, without external action or motor thrust. Use freshwater for Gorge or 35 g/kg saltwater for ocean; dual qualification requires both media. All leaves apply to every release. */
     }
     requirement selfRighting : SelfRighting;
     #derivation connection deriveSelfRighting {
@@ -704,11 +696,7 @@ package BlueDogRequirements {
 
     requirement def <'N-052'> CapsizeControlRecovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* For every N-051 release, the vessel shall restore mode-appropriate autonomous sail/steering control within 120 seconds from release without operator input, preserving gate progress and qualification status. Restoration shall retain active survival, low-energy, recovery and motor-inhibition restrictions. This deadline is not permission to resume normal sailing before N-035 permits it. */
-        attribute measuredControlRecoveryTime : TimeValue;
-        require constraint controlRecoveryDeadline {
-            measuredControlRecoveryTime >= 0 [s] and measuredControlRecoveryTime <= 120 [s]
-        }
+        doc /* Aggregate requirement for CapsizeControlRecovery. Acceptance requires all applicable derived leaf results (N-122, N-123, N-124, N-125); this parent has no independent executable pass/fail predicate. Shared verification context: Apply to every N-051 release without operator input. Mode-appropriate control does not mean normal sailing before the N-035 resumption gate permits it. */
     }
     requirement capsizeControlRecovery : CapsizeControlRecovery;
     #derivation connection deriveCapsizeControlRecovery {
@@ -720,7 +708,7 @@ package BlueDogRequirements {
 
     requirement def <'N-053'> SubmergedWeedPassage {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* For Gorge qualification, the vessel shall complete five consecutive sailing passes through a 5 m long by 1 m wide submerged milfoil-like vegetation test patch without manual clearing or motor use. The patch shall contain 20 flexible branched stems per square metre, each 0.5-1.0 m long, reaching from below the deepest appendage to within 0.1 m of the surface. In 5 m/s mean wind on the same heading as a weed-free reference run, the vessel shall retain at least 50 percent of reference mean water-relative speed through the patch and regain full commanded rudder travel within 5 minutes after each pass. Qualification records shall identify stem material, branch geometry, wet bending stiffness and anchoring so repeated campaigns use the same patch properties; surrogate equivalence to collected local milfoil remains a physical-test validation task. */
+        doc /* Aggregate requirement for SubmergedWeedPassage. Acceptance requires all applicable derived leaf results (N-126, N-127); this parent has no independent executable pass/fail predicate. Shared verification context: Gorge campaign: five consecutive sailing passes without manual clearing or motor use through a 5 m by 1 m patch of 20 flexible branched stems per square metre, each 0.5-1.0 m long, extending from below the deepest appendage to within 0.1 m of the surface. Use 5 m/s mean wind and the weed-free reference heading. Record material, branch geometry, wet bending stiffness and anchoring; equivalence to local milfoil remains a physical-test validation task. */
     }
     requirement submergedWeedPassage : SubmergedWeedPassage;
     #derivation connection deriveSubmergedWeedPassage {
@@ -732,7 +720,7 @@ package BlueDogRequirements {
 
     requirement def <'N-054'> WeedSnagShedding {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* For Gorge qualification, after one wet 1 m branched vegetation stem is draped across each appendage leading edge in separate tests, the vessel shall regain both at least 50 percent of unobstructed reference sailing speed and full commanded rudder travel within 5 minutes in 5 m/s mean wind, without manual assistance or motor use. Removing visible weed alone is not acceptance. Five repetitions per appendage shall pass, using the same heading and water-relative speed reference; stem characteristics shall match the N-053 qualified weed surrogate. */
+        doc /* Aggregate requirement for WeedSnagShedding. Acceptance requires all applicable derived leaf results (N-128, N-129); this parent has no independent executable pass/fail predicate. Shared verification context: Gorge campaign: drape one wet 1 m branched stem over one appendage leading edge at a time, five repetitions per appendage, with N-053 surrogate characteristics, 5 m/s mean wind and the unobstructed reference heading. No manual assistance or motor use. Both leaf criteria apply to every repetition; visible stem removal alone is insufficient. */
     }
     requirement weedSnagShedding : WeedSnagShedding;
     #derivation connection deriveWeedSnagShedding {
@@ -744,7 +732,7 @@ package BlueDogRequirements {
 
     requirement def <'N-055'> WeedBlockageResponse {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* For Gorge qualification, when a vegetation blockage causes commanded rudder motion to remain incomplete for 5 seconds, or speed through water to remain below 25 percent of the preceding weed-free 60-second mean for 60 seconds with mean wind at least 3 m/s, the vessel shall log a suspected fouling fault and enter contingency behavior within a further 10 seconds. It shall retain location reporting and shall not automatically enable the recovery motor during a qualifying attempt. Dense mats are a blockage/avoidance case, not a claimed pass-through capability. */
+        doc /* Aggregate requirement for WeedBlockageResponse. Acceptance requires all applicable derived leaf results (N-130, N-131, N-132, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Gorge trigger: vegetation prevents completion of commanded rudder motion for 5 seconds, or keeps water-relative speed below 25 percent of the preceding weed-free 60-second mean for 60 seconds with mean wind at least 3 m/s. Dense mats are a blockage/avoidance case, not a pass-through claim. */
     }
     requirement weedBlockageResponse : WeedBlockageResponse;
     #derivation connection deriveWeedBlockageResponse {
@@ -756,7 +744,7 @@ package BlueDogRequirements {
 
     requirement def <'N-056'> RecoveryPropulsorWeeds {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* During a separately designated Gorge powered-recovery test, the vessel shall traverse the N-053 patch five times without manual propulsor clearing, retain at least 50 percent of its weed-free mean water-relative powered speed on the same heading and remain within the motor/controller rated current and temperature limits. A locked propulsor shall cause motor shutdown within 2 seconds; recovery-mode weed clearing shall never bypass challenge-mode motor inhibition. */
+        doc /* Aggregate requirement for RecoveryPropulsorWeeds. Acceptance requires all applicable derived leaf results (N-133, N-134, N-135, N-136, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Use a separately designated Gorge powered-recovery test with five passes through the N-053 patch without manual propulsor clearing, on the weed-free powered reference heading. Exercise locked propulsor separately. */
     }
     requirement recoveryPropulsorWeeds : RecoveryPropulsorWeeds;
     #derivation connection deriveRecoveryPropulsorWeeds {
@@ -773,11 +761,7 @@ package BlueDogRequirements {
     }
     requirement def <'E-008'> NavigationAvailability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall provide valid position and heading observations at at least 1710 of the 1800 scheduled one-second epochs in each 30-minute operational qualification run. Missing and invalid epochs count against availability. Observations older than 5 seconds shall be marked invalid and trigger a logged navigation-degraded state within 1 second; stale values shall not be presented as current. Fault-injection tests shall verify the degraded transition separately from the availability run. */
-        attribute validEpochs : Integer;
-        require constraint availabilityFraction {
-            validEpochs >= 1710 and validEpochs <= 1800
-        }
+        doc /* Aggregate requirement for NavigationAvailability. Acceptance requires all applicable derived leaf results (E-140, E-141, E-142, E-143, E-132); this parent has no independent executable pass/fail predicate. Shared verification context: Campaigns use 1800 scheduled one-second epochs in 30 minutes, with missing/invalid epochs counted as failures. Fault injection is separate. */
     }
     requirement navigationAvailability : NavigationAvailability;
     requirement def <'R-003'> LaunchEnergyAdmission {
@@ -800,13 +784,7 @@ package BlueDogRequirements {
     requirement launchEnergyAdmission : LaunchEnergyAdmission;
     requirement def <'R-004'> ChallengeMotorInhibition {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown, including restart and link loss. On an accepted powered-recovery request, nonqualifying status shall be persisted and logged before motor enable. Restart shall require a fresh authenticated recovery command before any motor enable. Tests shall cover qualifying, nonqualifying and unknown status, power loss at the transition and conflicting/stale commands. */
-        attribute qualifying : Boolean;
-        attribute qualificationStateKnown : Boolean;
-        attribute motorEnabled : Boolean;
-        require constraint motorQualificationInvariant {
-            not motorEnabled or (qualificationStateKnown and not qualifying)
-        }
+        doc /* Aggregate requirement for ChallengeMotorInhibition. Acceptance requires all applicable derived leaf results (R-101, R-102, E-138, E-132); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise qualifying, nonqualifying and unknown qualification states, restart, link loss, power loss during transitions and conflicting/stale commands. Shared qualification persistence applies before enabling intervention. */
     }
     requirement challengeMotorInhibition : ChallengeMotorInhibition;
     #derivation connection auditDerivation1 {
@@ -886,5 +864,1854 @@ package BlueDogRequirements {
         doc /* Appendage snags are a consequence of the Gorge submerged-vegetation exposure. */
         end #original source ::> gorgeEnvironment;
         end #derive target ::> weedSnagShedding;
+    }
+
+    // Independently verifiable acceptance leaves.
+    requirement def <'E-101'> EnergyEstimateCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall refresh usable battery-energy estimates at least once per second. Verification uses the shared context of E-001. */
+    }
+    requirement energyEstimateCadence : EnergyEstimateCadence;
+
+    #derivation connection decomposeEnergyEstimateCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-001; the parent supplies shared verification conditions. */
+        end #original source ::> energyAwareness;
+        end #derive target ::> energyEstimateCadence;
+    }
+
+    requirement def <'E-102'> ReserveEstimateCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall refresh protected recovery-reserve estimates at least once per second. Verification uses the shared context of E-001. */
+    }
+    requirement reserveEstimateCadence : ReserveEstimateCadence;
+
+    #derivation connection decomposeReserveEstimateCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-001; the parent supplies shared verification conditions. */
+        end #original source ::> energyAwareness;
+        end #derive target ::> reserveEstimateCadence;
+    }
+
+    requirement def <'E-103'> EnergyEstimateAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Usable-energy estimation error shall not exceed 10 percent of measured usable full-charge energy relative to calibrated charge/discharge integration across operating battery temperatures. Verification uses the shared context of E-001. */
+    }
+    requirement energyEstimateAccuracy : EnergyEstimateAccuracy;
+
+    #derivation connection decomposeEnergyEstimateAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-001; the parent supplies shared verification conditions. */
+        end #original source ::> energyAwareness;
+        end #derive target ::> energyEstimateAccuracy;
+    }
+
+    requirement def <'E-104'> ConservativeEnergyEstimate {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The usable-energy input to admission and low-energy decisions shall equal estimated usable energy minus the EnergyEstimateAccuracy error allowance. Verification uses the shared context of E-001. */
+    }
+    requirement conservativeEnergyEstimate : ConservativeEnergyEstimate;
+
+    #derivation connection decomposeConservativeEnergyEstimate {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-001; the parent supplies shared verification conditions. */
+        end #original source ::> energyAwareness;
+        end #derive target ::> conservativeEnergyEstimate;
+    }
+
+    requirement def <'E-105'> GuidanceUpdateCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* During operational qualification, mission guidance shall update at least once per second. Verification uses the shared context of E-002. */
+    }
+    requirement guidanceUpdateCadence : GuidanceUpdateCadence;
+
+    #derivation connection decomposeGuidanceUpdateCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-002; the parent supplies shared verification conditions. */
+        end #original source ::> navigationAndControl;
+        end #derive target ::> guidanceUpdateCadence;
+    }
+
+    requirement def <'E-106'> SailCommandCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* During operational qualification, commanded sail position shall update at least once per second. Verification uses the shared context of E-002. */
+    }
+    requirement sailCommandCadence : SailCommandCadence;
+
+    #derivation connection decomposeSailCommandCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-002; the parent supplies shared verification conditions. */
+        end #original source ::> navigationAndControl;
+        end #derive target ::> sailCommandCadence;
+    }
+
+    requirement def <'E-107'> SteeringCommandCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* During operational qualification, commanded steering position shall update at least once per second. Verification uses the shared context of E-002. */
+    }
+    requirement steeringCommandCadence : SteeringCommandCadence;
+
+    #derivation connection decomposeSteeringCommandCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-002; the parent supplies shared verification conditions. */
+        end #original source ::> navigationAndControl;
+        end #derive target ::> steeringCommandCadence;
+    }
+
+    requirement def <'E-108'> PositionAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* At every epoch in the common E-002 acceptance set, valid position error shall be at most 10 m against an independent reference. Verification uses the shared context of E-002. */
+    }
+    requirement positionAccuracy : PositionAccuracy;
+
+    #derivation connection decomposePositionAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-002; the parent supplies shared verification conditions. */
+        end #original source ::> navigationAndControl;
+        end #derive target ::> positionAccuracy;
+    }
+
+    requirement def <'E-109'> HeadingAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* At every epoch in the common E-002 acceptance set, valid heading error shall be at most 10 degrees against an independent reference. Verification uses the shared context of E-002. */
+    }
+    requirement headingAccuracy : HeadingAccuracy;
+
+    #derivation connection decomposeHeadingAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-002; the parent supplies shared verification conditions. */
+        end #original source ::> navigationAndControl;
+        end #derive target ::> headingAccuracy;
+    }
+
+    requirement def <'E-110'> RestartDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After a watchdog reset under E-003 preconditions, the vessel shall restore mode-appropriate autonomous control within 30 seconds. Verification uses the shared context of E-003. */
+        attribute measuredRestartTime : TimeValue;
+        require constraint restartDeadline {
+            measuredRestartTime >= 0 [s] and measuredRestartTime <= 30 [s]
+        }
+    }
+    requirement restartDeadline : RestartDeadline;
+
+    #derivation connection decomposeRestartDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-003; the parent supplies shared verification conditions. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> restartDeadline;
+    }
+
+    requirement def <'E-111'> MissionStateRestoration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Within 30 seconds after a watchdog reset under E-003 preconditions, restored mission mode shall equal the last persisted mode. Verification uses the shared context of E-003. */
+    }
+    requirement missionStateRestoration : MissionStateRestoration;
+
+    #derivation connection decomposeMissionStateRestoration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-003; the parent supplies shared verification conditions. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> missionStateRestoration;
+    }
+
+    requirement def <'E-112'> GateProgressRestoration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Within 30 seconds after a watchdog reset under E-003 preconditions, restored gate progress shall equal the last persisted gate progress. Verification uses the shared context of E-003. */
+    }
+    requirement gateProgressRestoration : GateProgressRestoration;
+
+    #derivation connection decomposeGateProgressRestoration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-003; the parent supplies shared verification conditions. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> gateProgressRestoration;
+    }
+
+    requirement def <'E-113'> ResetRestrictionPreservation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After watchdog reset, each active survival, low-energy, recovery and isolation restriction shall remain effective until its own release condition is met. Verification uses the shared context of E-003. */
+    }
+    requirement resetRestrictionPreservation : ResetRestrictionPreservation;
+
+    #derivation connection decomposeResetRestrictionPreservation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-003; the parent supplies shared verification conditions. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> resetRestrictionPreservation;
+    }
+
+    requirement def <'E-114'> LowEnergyEntry {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* When conservative usable energy reaches or falls below protected reserve, the vessel shall set the low-energy flag within 5 seconds. Verification uses the shared context of E-004. */
+    }
+    requirement lowEnergyEntry : LowEnergyEntry;
+
+    #derivation connection decomposeLowEnergyEntry {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-004; the parent supplies shared verification conditions. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> lowEnergyEntry;
+    }
+
+    requirement def <'E-115'> LowEnergyPayloadInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* While the low-energy flag is set, the optional observation payload shall be disabled. Verification uses the shared context of E-004. */
+    }
+    requirement lowEnergyPayloadInhibition : LowEnergyPayloadInhibition;
+
+    #derivation connection decomposeLowEnergyPayloadInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-004; the parent supplies shared verification conditions. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> lowEnergyPayloadInhibition;
+    }
+
+    requirement def <'E-116'> LowEnergyNavigationContinuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* While the low-energy flag is set, autonomous navigation shall remain active. Verification uses the shared context of E-004. */
+    }
+    requirement lowEnergyNavigationContinuity : LowEnergyNavigationContinuity;
+
+    #derivation connection decomposeLowEnergyNavigationContinuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-004; the parent supplies shared verification conditions. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> lowEnergyNavigationContinuity;
+    }
+
+    requirement def <'E-117'> LowEnergyCollisionContinuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* While the low-energy flag is set, collision-response behavior shall remain active. Verification uses the shared context of E-004. */
+    }
+    requirement lowEnergyCollisionContinuity : LowEnergyCollisionContinuity;
+
+    #derivation connection decomposeLowEnergyCollisionContinuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-004; the parent supplies shared verification conditions. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> lowEnergyCollisionContinuity;
+    }
+
+    requirement def <'E-118'> LowEnergyExit {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After conservative usable energy exceeds 1.2 times protected reserve for 10 continuous minutes, the vessel shall clear the low-energy flag independently of survival/recovery flags. Verification uses the shared context of E-004. */
+    }
+    requirement lowEnergyExit : LowEnergyExit;
+
+    #derivation connection decomposeLowEnergyExit {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-004; the parent supplies shared verification conditions. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> lowEnergyExit;
+    }
+
+    requirement def <'E-119'> PayloadRestartPermission {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Payload operation shall remain inhibited whenever a low-energy, survival or recovery restriction is active. Verification uses the shared context of E-004. */
+    }
+    requirement payloadRestartPermission : PayloadRestartPermission;
+
+    #derivation connection decomposePayloadRestartPermission {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-004; the parent supplies shared verification conditions. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> payloadRestartPermission;
+    }
+
+    requirement def <'E-120'> TelemetryDeliveryCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* With a functioning link, current telemetry delivery intervals shall not exceed 60 seconds, except that low-energy operation without emergency/powered recovery permits 300 seconds. Verification uses the shared context of E-005. */
+    }
+    requirement telemetryDeliveryCadence : TelemetryDeliveryCadence;
+
+    #derivation connection decomposeTelemetryDeliveryCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-005; the parent supplies shared verification conditions. */
+        end #original source ::> communications;
+        end #derive target ::> telemetryDeliveryCadence;
+    }
+
+    requirement def <'E-121'> OutageAutonomy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Through a 24-hour telemetry-link outage, autonomous mission control shall continue without operator intervention. Verification uses the shared context of E-005. */
+    }
+    requirement outageAutonomy : OutageAutonomy;
+
+    #derivation connection decomposeOutageAutonomy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-005; the parent supplies shared verification conditions. */
+        end #original source ::> communications;
+        end #derive target ::> outageAutonomy;
+    }
+
+    requirement def <'E-122'> ReconnectCurrentRecord {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After link restoration, a current telemetry record shall arrive within the active TelemetryDeliveryCadence interval. Verification uses the shared context of E-005. */
+    }
+    requirement reconnectCurrentRecord : ReconnectCurrentRecord;
+
+    #derivation connection decomposeReconnectCurrentRecord {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-005; the parent supplies shared verification conditions. */
+        end #original source ::> communications;
+        end #derive target ::> reconnectCurrentRecord;
+    }
+
+    requirement def <'E-123'> BacklogOrdering {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After reconnection, retained backlog records shall be transmitted in ascending acquisition sequence order. Verification uses the shared context of E-005. */
+    }
+    requirement backlogOrdering : BacklogOrdering;
+
+    #derivation connection decomposeBacklogOrdering {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-005; the parent supplies shared verification conditions. */
+        end #original source ::> communications;
+        end #derive target ::> backlogOrdering;
+    }
+
+    requirement def <'E-124'> BacklogCurrentPriority {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* During backlog transfer, current telemetry shall continue to meet TelemetryDeliveryCadence. Verification uses the shared context of E-005. */
+    }
+    requirement backlogCurrentPriority : BacklogCurrentPriority;
+
+    #derivation connection decomposeBacklogCurrentPriority {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-005; the parent supplies shared verification conditions. */
+        end #original source ::> communications;
+        end #derive target ::> backlogCurrentPriority;
+    }
+
+    requirement def <'E-125'> IngressDetection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* In the E-006 injection test, ingress detection shall occur within 60 seconds of injection starting. Verification uses the shared context of E-006. */
+    }
+    requirement ingressDetection : IngressDetection;
+
+    #derivation connection decomposeIngressDetection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-006; the parent supplies shared verification conditions. */
+        end #original source ::> ingressResponse;
+        end #derive target ::> ingressDetection;
+    }
+
+    requirement def <'E-126'> IngressRecoveryRequest {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* In the E-006 test, ingress detection shall set the recovery-request state. Verification uses the shared context of E-006. */
+    }
+    requirement ingressRecoveryRequest : IngressRecoveryRequest;
+
+    #derivation connection decomposeIngressRecoveryRequest {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-006; the parent supplies shared verification conditions. */
+        end #original source ::> ingressResponse;
+        end #derive target ::> ingressRecoveryRequest;
+    }
+
+    requirement def <'E-127'> IngressFlotation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* In the E-006 test, the vessel shall remain afloat for the full 30 minutes. Verification uses the shared context of E-006. */
+    }
+    requirement ingressFlotation : IngressFlotation;
+
+    #derivation connection decomposeIngressFlotation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-006; the parent supplies shared verification conditions. */
+        end #original source ::> ingressResponse;
+        end #derive target ::> ingressFlotation;
+    }
+
+    requirement def <'E-128'> IngressElectronicsProtection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After the E-006 test, enclosed-electronics water-sensitive indicators shall show no liquid ingress. Verification uses the shared context of E-006. */
+    }
+    requirement ingressElectronicsProtection : IngressElectronicsProtection;
+
+    #derivation connection decomposeIngressElectronicsProtection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-006; the parent supplies shared verification conditions. */
+        end #original source ::> ingressResponse;
+        end #derive target ::> ingressElectronicsProtection;
+    }
+
+    requirement def <'E-129'> IngressPositionContinuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Throughout the E-006 test with a functioning link, position reporting shall meet the active TelemetryDeliveryCadence. Verification uses the shared context of E-006. */
+    }
+    requirement ingressPositionContinuity : IngressPositionContinuity;
+
+    #derivation connection decomposeIngressPositionContinuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-006; the parent supplies shared verification conditions. */
+        end #original source ::> ingressResponse;
+        end #derive target ::> ingressPositionContinuity;
+    }
+
+    requirement def <'E-130'> PeriodicLogCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation. Verification uses the shared context of E-007. */
+    }
+    requirement periodicLogCadence : PeriodicLogCadence;
+
+    #derivation connection decomposePeriodicLogCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> periodicLogCadence;
+    }
+
+    requirement def <'E-131'> LogRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Acquired mission records shall remain retrievable onboard for at least 30 days. Verification uses the shared context of E-007. */
+    }
+    requirement logRetention : LogRetention;
+
+    #derivation connection decomposeLogRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> logRetention;
+    }
+
+    requirement def <'E-132'> CriticalEventRecording {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence. Verification uses the shared context of E-007. */
+    }
+    requirement criticalEventRecording : CriticalEventRecording;
+
+    #derivation connection decomposeCriticalEventRecording {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> criticalEventRecording;
+    }
+
+    requirement def <'E-133'> LogTimestampAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* With valid GNSS time, mission-record timestamps shall differ from reference UTC by at most 1 second. Verification uses the shared context of E-007. */
+    }
+    requirement logTimestampAccuracy : LogTimestampAccuracy;
+
+    #derivation connection decomposeLogTimestampAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> logTimestampAccuracy;
+    }
+
+    requirement def <'E-134'> InvalidTimestampMarking {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Each record acquired without valid time shall carry an invalid-time indication. Verification uses the shared context of E-007. */
+    }
+    requirement invalidTimestampMarking : InvalidTimestampMarking;
+
+    #derivation connection decomposeInvalidTimestampMarking {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> invalidTimestampMarking;
+    }
+
+    requirement def <'E-135'> LogGapIndication {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Each detected missing sequence of scheduled records shall have a gap indication in retrieved data. Verification uses the shared context of E-007. */
+    }
+    requirement logGapIndication : LogGapIndication;
+
+    #derivation connection decomposeLogGapIndication {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> logGapIndication;
+    }
+
+    requirement def <'E-136'> LogInterruptionDurability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After watchdog reset or abrupt power removal, every record older than 5 seconds before interruption shall remain readable. Verification uses the shared context of E-007. */
+    }
+    requirement logInterruptionDurability : LogInterruptionDurability;
+
+    #derivation connection decomposeLogInterruptionDurability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> logInterruptionDurability;
+    }
+
+    requirement def <'E-137'> ReconnectLogPreservation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Communication reconnection shall not delete retained mission records. Verification uses the shared context of E-007. */
+    }
+    requirement reconnectLogPreservation : ReconnectLogPreservation;
+
+    #derivation connection decomposeReconnectLogPreservation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> reconnectLogPreservation;
+    }
+
+    requirement def <'E-138'> QualificationPersistence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable. Verification uses the shared context of E-007. */
+    }
+    requirement qualificationPersistence : QualificationPersistence;
+
+    #derivation connection decomposeQualificationPersistence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> qualificationPersistence;
+    }
+
+    requirement def <'E-139'> UnknownQualificationFallback {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* On restart with absent or inconsistent persisted qualification state, the vessel shall adopt nonqualifying status. Verification uses the shared context of E-007. */
+    }
+    requirement unknownQualificationFallback : UnknownQualificationFallback;
+
+    #derivation connection decomposeUnknownQualificationFallback {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-007; the parent supplies shared verification conditions. */
+        end #original source ::> missionEvidence;
+        end #derive target ::> unknownQualificationFallback;
+    }
+
+    requirement def <'E-140'> NavigationValidEpochs {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* In each E-008 campaign, at least 1710 of 1800 scheduled epochs shall contain valid position and heading observations. Verification uses the shared context of E-008. */
+        attribute validEpochs : Integer;
+        require constraint availabilityFraction {
+            validEpochs >= 1710 and validEpochs <= 1800
+        }
+    }
+    requirement navigationValidEpochs : NavigationValidEpochs;
+
+    #derivation connection decomposeNavigationValidEpochs {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-008; the parent supplies shared verification conditions. */
+        end #original source ::> navigationAvailability;
+        end #derive target ::> navigationValidEpochs;
+    }
+
+    requirement def <'E-141'> StaleNavigationInvalidation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Navigation observations older than 5 seconds shall be marked invalid. Verification uses the shared context of E-008. */
+    }
+    requirement staleNavigationInvalidation : StaleNavigationInvalidation;
+
+    #derivation connection decomposeStaleNavigationInvalidation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-008; the parent supplies shared verification conditions. */
+        end #original source ::> navigationAvailability;
+        end #derive target ::> staleNavigationInvalidation;
+    }
+
+    requirement def <'E-142'> NavigationDegradedTransition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* When position or heading becomes invalid due to age, the vessel shall enter navigation-degraded state within 1 second. Verification uses the shared context of E-008. */
+    }
+    requirement navigationDegradedTransition : NavigationDegradedTransition;
+
+    #derivation connection decomposeNavigationDegradedTransition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-008; the parent supplies shared verification conditions. */
+        end #original source ::> navigationAvailability;
+        end #derive target ::> navigationDegradedTransition;
+    }
+
+    requirement def <'E-143'> StaleNavigationUseInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The controller shall not use observations marked invalid as current navigation inputs. Verification uses the shared context of E-008. */
+    }
+    requirement staleNavigationUseInhibition : StaleNavigationUseInhibition;
+
+    #derivation connection decomposeStaleNavigationUseInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-008; the parent supplies shared verification conditions. */
+        end #original source ::> navigationAvailability;
+        end #derive target ::> staleNavigationUseInhibition;
+    }
+
+    requirement def <'P-101'> SoloTransport {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* One adult shall move all mission equipment 100 m without assistance. Verification uses the shared context of P-001. */
+    }
+    requirement soloTransport : SoloTransport;
+
+    #derivation connection decomposeSoloTransport {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-001; the parent supplies shared verification conditions. */
+        end #original source ::> transportability;
+        end #derive target ::> soloTransport;
+    }
+
+    requirement def <'P-102'> LiftMass {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Each separately lifted assembly shall have a mass no greater than 15 kg. Verification uses the shared context of P-001. */
+    }
+    requirement liftMass : LiftMass;
+
+    #derivation connection decomposeLiftMass {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-001; the parent supplies shared verification conditions. */
+        end #original source ::> transportability;
+        end #derive target ::> liftMass;
+    }
+
+    requirement def <'P-103'> SetupDuration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* One adult shall assemble the vessel from its transport configuration within 30 minutes. Verification uses the shared context of P-001. */
+    }
+    requirement setupDuration : SetupDuration;
+
+    #derivation connection decomposeSetupDuration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-001; the parent supplies shared verification conditions. */
+        end #original source ::> transportability;
+        end #derive target ::> setupDuration;
+    }
+
+    requirement def <'P-104'> PackDuration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* One adult shall pack the vessel into its transport configuration within 30 minutes. Verification uses the shared context of P-001. */
+    }
+    requirement packDuration : PackDuration;
+
+    #derivation connection decomposePackDuration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-001; the parent supplies shared verification conditions. */
+        end #original source ::> transportability;
+        end #derive target ::> packDuration;
+    }
+
+    requirement def <'P-105'> SoloLaunch {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* One adult shall launch the assembled vessel without assistance. Verification uses the shared context of P-001. */
+    }
+    requirement soloLaunch : SoloLaunch;
+
+    #derivation connection decomposeSoloLaunch {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-001; the parent supplies shared verification conditions. */
+        end #original source ::> transportability;
+        end #derive target ::> soloLaunch;
+    }
+
+    requirement def <'P-106'> SoloRetrieval {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* One adult shall retrieve the vessel from the water without assistance. Verification uses the shared context of P-001. */
+    }
+    requirement soloRetrieval : SoloRetrieval;
+
+    #derivation connection decomposeSoloRetrieval {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-001; the parent supplies shared verification conditions. */
+        end #original source ::> transportability;
+        end #derive target ::> soloRetrieval;
+    }
+
+    requirement def <'P-107'> ReplacementDuration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Each P-003 replacement shall take no more than 30 minutes. Verification uses the shared context of P-003. */
+    }
+    requirement replacementDuration : ReplacementDuration;
+
+    #derivation connection decomposeReplacementDuration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-003; the parent supplies shared verification conditions. */
+        end #original source ::> serviceability;
+        end #derive target ::> replacementDuration;
+    }
+
+    requirement def <'P-108'> NondestructiveService {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Each P-003 replacement shall leave bonded structural joints and adjacent parts intact. Verification uses the shared context of P-003. */
+    }
+    requirement nondestructiveService : NondestructiveService;
+
+    #derivation connection decomposeNondestructiveService {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-003; the parent supplies shared verification conditions. */
+        end #original source ::> serviceability;
+        end #derive target ::> nondestructiveService;
+    }
+
+    requirement def <'P-109'> PostServiceSealing {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After each P-003 replacement, the assembly shall meet the N-043 immersion criterion. Verification uses the shared context of P-003. */
+    }
+    requirement postServiceSealing : PostServiceSealing;
+
+    #derivation connection decomposePostServiceSealing {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-003; the parent supplies shared verification conditions. */
+        end #original source ::> serviceability;
+        end #derive target ::> postServiceSealing;
+    }
+
+    requirement def <'P-110'> PostServiceActuation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After each P-003 replacement, affected actuators shall complete their full commanded travel. Verification uses the shared context of P-003. */
+    }
+    requirement postServiceActuation : PostServiceActuation;
+
+    #derivation connection decomposePostServiceActuation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of P-003; the parent supplies shared verification conditions. */
+        end #original source ::> serviceability;
+        end #derive target ::> postServiceActuation;
+    }
+
+    requirement def <'S-101'> TrafficTracking {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall maintain a track for every encounter target within the frozen S-001 detection envelope. Verification uses the shared context of S-001. */
+    }
+    requirement trafficTracking : TrafficTracking;
+
+    #derivation connection decomposeTrafficTracking {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-001; the parent supplies shared verification conditions. */
+        end #original source ::> trafficSafety;
+        end #derive target ::> trafficTracking;
+    }
+
+    requirement def <'S-102'> CollisionAssessmentCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall update collision-risk estimates at least once per second. Verification uses the shared context of S-001. */
+    }
+    requirement collisionAssessmentCadence : CollisionAssessmentCadence;
+
+    #derivation connection decomposeCollisionAssessmentCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-001; the parent supplies shared verification conditions. */
+        end #original source ::> trafficSafety;
+        end #derive target ::> collisionAssessmentCadence;
+    }
+
+    requirement def <'S-103'> AvoidanceCommandDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall issue the prescribed avoiding-action command within 2 seconds of each S-001 collision-risk trigger. Verification uses the shared context of S-001. */
+    }
+    requirement avoidanceCommandDeadline : AvoidanceCommandDeadline;
+
+    #derivation connection decomposeAvoidanceCommandDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-001; the parent supplies shared verification conditions. */
+        end #original source ::> trafficSafety;
+        end #derive target ::> avoidanceCommandDeadline;
+    }
+
+    requirement def <'S-104'> TrafficAwarenessFault {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After traffic assessment has been invalid for more than 5 seconds, the vessel shall log a traffic-awareness fault within 1 second. Verification uses the shared context of S-001. */
+    }
+    requirement trafficAwarenessFault : TrafficAwarenessFault;
+
+    #derivation connection decomposeTrafficAwarenessFault {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-001; the parent supplies shared verification conditions. */
+        end #original source ::> trafficSafety;
+        end #derive target ::> trafficAwarenessFault;
+    }
+
+    requirement def <'S-105'> BoundaryEvaluationCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall evaluate its current position and predicted trajectory against the S-002 polygons at least once per second. Verification uses the shared context of S-002. */
+    }
+    requirement boundaryEvaluationCadence : BoundaryEvaluationCadence;
+
+    #derivation connection decomposeBoundaryEvaluationCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-002; the parent supplies shared verification conditions. */
+        end #original source ::> operatingBoundary;
+        end #derive target ::> boundaryEvaluationCadence;
+    }
+
+    requirement def <'S-106'> BoundaryAvoidanceDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall issue an avoidance command within 2 seconds of predicting a boundary crossing. Verification uses the shared context of S-002. */
+    }
+    requirement boundaryAvoidanceDeadline : BoundaryAvoidanceDeadline;
+
+    #derivation connection decomposeBoundaryAvoidanceDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-002; the parent supplies shared verification conditions. */
+        end #original source ::> operatingBoundary;
+        end #derive target ::> boundaryAvoidanceDeadline;
+    }
+
+    requirement def <'S-107'> BoundaryAvoidanceRecording {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Every boundary-avoidance command shall have a corresponding event record. Verification uses the shared context of S-002. */
+    }
+    requirement boundaryAvoidanceRecording : BoundaryAvoidanceRecording;
+
+    #derivation connection decomposeBoundaryAvoidanceRecording {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-002; the parent supplies shared verification conditions. */
+        end #original source ::> operatingBoundary;
+        end #derive target ::> boundaryAvoidanceRecording;
+    }
+
+    requirement def <'S-108'> BoundaryStartInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Missing or geometrically invalid boundaries shall inhibit mission start. Verification uses the shared context of S-002. */
+    }
+    requirement boundaryStartInhibition : BoundaryStartInhibition;
+
+    #derivation connection decomposeBoundaryStartInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-002; the parent supplies shared verification conditions. */
+        end #original source ::> operatingBoundary;
+        end #derive target ::> boundaryStartInhibition;
+    }
+
+    requirement def <'S-109'> BoundaryDegradedEvidence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Navigation loss or absence of a feasible maneuver shall produce an explicit degraded-route verdict instead of a safe-route verdict. Verification uses the shared context of S-002. */
+    }
+    requirement boundaryDegradedEvidence : BoundaryDegradedEvidence;
+
+    #derivation connection decomposeBoundaryDegradedEvidence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-002; the parent supplies shared verification conditions. */
+        end #original source ::> operatingBoundary;
+        end #derive target ::> boundaryDegradedEvidence;
+    }
+
+    requirement def <'S-110'> AbortLatchDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After accepting emergency abort, the vessel shall latch the attempt as disqualified within 1 second. Verification uses the shared context of S-003. */
+    }
+    requirement abortLatchDeadline : AbortLatchDeadline;
+
+    #derivation connection decomposeAbortLatchDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-003; the parent supplies shared verification conditions. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> abortLatchDeadline;
+    }
+
+    requirement def <'S-111'> RecoveryTelemetryCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* During active emergency or powered recovery with a functioning link, the vessel shall deliver position telemetry at least once per 60 seconds, including low-energy operation. Verification uses the shared context of S-003. */
+    }
+    requirement recoveryTelemetryCadence : RecoveryTelemetryCadence;
+
+    #derivation connection decomposeRecoveryTelemetryCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-003; the parent supplies shared verification conditions. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> recoveryTelemetryCadence;
+    }
+
+    requirement def <'S-112'> MotorIsolationDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* A physically accessible local isolation control shall remove motor power within 1 second of activation. Verification uses the shared context of S-003. */
+    }
+    requirement motorIsolationDeadline : MotorIsolationDeadline;
+
+    #derivation connection decomposeMotorIsolationDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-003; the parent supplies shared verification conditions. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> motorIsolationDeadline;
+    }
+
+    requirement def <'S-113'> IsolationRestartInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Motor restart shall remain inhibited after local isolation until deliberate local reset. Verification uses the shared context of S-003. */
+    }
+    requirement isolationRestartInhibition : IsolationRestartInhibition;
+
+    #derivation connection decomposeIsolationRestartInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-003; the parent supplies shared verification conditions. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> isolationRestartInhibition;
+    }
+
+    requirement def <'S-114'> ManualControlLossShutdown {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After remote control has been lost for 5 seconds during manual powered recovery, the vessel shall command zero thrust within a further 1 second. Verification uses the shared context of S-003. */
+    }
+    requirement manualControlLossShutdown : ManualControlLossShutdown;
+
+    #derivation connection decomposeManualControlLossShutdown {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-003; the parent supplies shared verification conditions. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> manualControlLossShutdown;
+    }
+
+    requirement def <'S-115'> ControlLossLocationContinuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Location reporting shall continue at the active telemetry cadence after remote-control loss whenever a telemetry link is available. Verification uses the shared context of S-003. */
+    }
+    requirement controlLossLocationContinuity : ControlLossLocationContinuity;
+
+    #derivation connection decomposeControlLossLocationContinuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-003; the parent supplies shared verification conditions. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> controlLossLocationContinuity;
+    }
+
+    requirement def <'S-116'> NavigationLightPresentation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall present the lights prescribed for its current mode by the S-004 compliance matrix without a person aboard. Verification uses the shared context of S-004. */
+    }
+    requirement navigationLightPresentation : NavigationLightPresentation;
+
+    #derivation connection decomposeNavigationLightPresentation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-004; the parent supplies shared verification conditions. */
+        end #original source ::> navigationConspicuity;
+        end #derive target ::> navigationLightPresentation;
+    }
+
+    requirement def <'S-117'> NavigationShapePresentation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall present the shapes prescribed for its current mode by the S-004 compliance matrix without a person aboard. Verification uses the shared context of S-004. */
+    }
+    requirement navigationShapePresentation : NavigationShapePresentation;
+
+    #derivation connection decomposeNavigationShapePresentation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-004; the parent supplies shared verification conditions. */
+        end #original source ::> navigationConspicuity;
+        end #derive target ::> navigationShapePresentation;
+    }
+
+    requirement def <'S-118'> NavigationSoundPresentation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall present the sound signals prescribed for its current mode by the S-004 compliance matrix without a person aboard. Verification uses the shared context of S-004. */
+    }
+    requirement navigationSoundPresentation : NavigationSoundPresentation;
+
+    #derivation connection decomposeNavigationSoundPresentation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-004; the parent supplies shared verification conditions. */
+        end #original source ::> navigationConspicuity;
+        end #derive target ::> navigationSoundPresentation;
+    }
+
+    requirement def <'S-119'> SignalingModeDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* A commanded mode change shall select the corresponding signaling configuration within 1 second. Verification uses the shared context of S-004. */
+    }
+    requirement signalingModeDeadline : SignalingModeDeadline;
+
+    #derivation connection decomposeSignalingModeDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-004; the parent supplies shared verification conditions. */
+        end #original source ::> navigationConspicuity;
+        end #derive target ::> signalingModeDeadline;
+    }
+
+    requirement def <'S-120'> SignalingFaultRecording {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Each detectable signaling failure shall be logged within 5 seconds of detection. Verification uses the shared context of S-004. */
+    }
+    requirement signalingFaultRecording : SignalingFaultRecording;
+
+    #derivation connection decomposeSignalingFaultRecording {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-004; the parent supplies shared verification conditions. */
+        end #original source ::> navigationConspicuity;
+        end #derive target ::> signalingFaultRecording;
+    }
+
+    requirement def <'S-121'> SignalingFaultReporting {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* With a functioning link, each detected signaling failure shall be reported to shore within 5 seconds. Verification uses the shared context of S-004. */
+    }
+    requirement signalingFaultReporting : SignalingFaultReporting;
+
+    #derivation connection decomposeSignalingFaultReporting {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-004; the parent supplies shared verification conditions. */
+        end #original source ::> navigationConspicuity;
+        end #derive target ::> signalingFaultReporting;
+    }
+
+    requirement def <'S-122'> DeploymentComplianceRecord {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Each deployment shall have a dated compliance record identifying the craft, dimensions, waters, operating modes, applicable navigation and radio obligations, and permission evidence. Verification uses the shared context of S-005. */
+    }
+    requirement deploymentComplianceRecord : DeploymentComplianceRecord;
+
+    #derivation connection decomposeDeploymentComplianceRecord {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-005; the parent supplies shared verification conditions. */
+        end #original source ::> regulatoryClassification;
+        end #derive target ::> deploymentComplianceRecord;
+    }
+
+    requirement def <'S-123'> DeploymentReleaseGate {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Deployment release shall be withheld while any mandatory authorization is absent, expired or unresolved. Verification uses the shared context of S-005. */
+    }
+    requirement deploymentReleaseGate : DeploymentReleaseGate;
+
+    #derivation connection decomposeDeploymentReleaseGate {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of S-005; the parent supplies shared verification conditions. */
+        end #original source ::> regulatoryClassification;
+        end #derive target ::> deploymentReleaseGate;
+    }
+
+    requirement def <'C-201'> TelemetryDisplayContent {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The shore endpoint shall display UTC sample time, position, mode, conservative usable energy, reserve, faults and age from each current telemetry record. Verification uses the shared context of C-101. */
+    }
+    requirement telemetryDisplayContent : TelemetryDisplayContent;
+
+    #derivation connection decomposeTelemetryDisplayContent {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-101; the parent supplies shared verification conditions. */
+        end #original source ::> telemetryEquipment;
+        end #derive target ::> telemetryDisplayContent;
+    }
+
+    requirement def <'C-202'> TelemetryStaleIndication {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The shore endpoint shall indicate stale data when record age exceeds its C-101 mode threshold until receipt of a record within its applicable threshold. Verification uses the shared context of C-101. */
+    }
+    requirement telemetryStaleIndication : TelemetryStaleIndication;
+
+    #derivation connection decomposeTelemetryStaleIndication {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-101; the parent supplies shared verification conditions. */
+        end #original source ::> telemetryEquipment;
+        end #derive target ::> telemetryStaleIndication;
+    }
+
+    requirement def <'C-203'> TelemetryIdentityPreservation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The shore endpoint shall preserve received record identity and sequence numbers across the C-101 outage/reconnection test. Verification uses the shared context of C-101. */
+    }
+    requirement telemetryIdentityPreservation : TelemetryIdentityPreservation;
+
+    #derivation connection decomposeTelemetryIdentityPreservation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-101; the parent supplies shared verification conditions. */
+        end #original source ::> telemetryEquipment;
+        end #derive target ::> telemetryIdentityPreservation;
+    }
+
+    requirement def <'C-204'> TelemetryDuplicateSuppression {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The shore endpoint shall not present a duplicate telemetry record as a new observation. Verification uses the shared context of C-101. */
+    }
+    requirement telemetryDuplicateSuppression : TelemetryDuplicateSuppression;
+
+    #derivation connection decomposeTelemetryDuplicateSuppression {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-101; the parent supplies shared verification conditions. */
+        end #original source ::> telemetryEquipment;
+        end #derive target ::> telemetryDuplicateSuppression;
+    }
+
+    requirement def <'C-205'> UnauthenticatedCommandRejection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Commands failing authentication shall cause zero accepted actuator or mission-state changes. Verification uses the shared context of C-102. */
+    }
+    requirement unauthenticatedCommandRejection : UnauthenticatedCommandRejection;
+
+    #derivation connection decomposeUnauthenticatedCommandRejection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-102; the parent supplies shared verification conditions. */
+        end #original source ::> commandIntegrity;
+        end #derive target ::> unauthenticatedCommandRejection;
+    }
+
+    requirement def <'C-206'> ReplayCommandRejection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Commands with previously used sequence numbers shall cause zero accepted actuator or mission-state changes. Verification uses the shared context of C-102. */
+    }
+    requirement replayCommandRejection : ReplayCommandRejection;
+
+    #derivation connection decomposeReplayCommandRejection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-102; the parent supplies shared verification conditions. */
+        end #original source ::> commandIntegrity;
+        end #derive target ::> replayCommandRejection;
+    }
+
+    requirement def <'C-207'> ExpiredCommandRejection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Commands older than 30 seconds shall cause zero accepted actuator or mission-state changes. Verification uses the shared context of C-102. */
+    }
+    requirement expiredCommandRejection : ExpiredCommandRejection;
+
+    #derivation connection decomposeExpiredCommandRejection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-102; the parent supplies shared verification conditions. */
+        end #original source ::> commandIntegrity;
+        end #derive target ::> expiredCommandRejection;
+    }
+
+    requirement def <'C-208'> AcceptedCommandDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* An accepted abort or mode-change command shall be applied within 1 second of complete receipt. Verification uses the shared context of C-102. */
+    }
+    requirement acceptedCommandDeadline : AcceptedCommandDeadline;
+
+    #derivation connection decomposeAcceptedCommandDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-102; the parent supplies shared verification conditions. */
+        end #original source ::> commandIntegrity;
+        end #derive target ::> acceptedCommandDeadline;
+    }
+
+    requirement def <'C-209'> OnboardAcknowledgmentDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* An accepted abort or mode-change command shall be acknowledged onboard within 1 second of complete receipt. Verification uses the shared context of C-102. */
+    }
+    requirement onboardAcknowledgmentDeadline : OnboardAcknowledgmentDeadline;
+
+    #derivation connection decomposeOnboardAcknowledgmentDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-102; the parent supplies shared verification conditions. */
+        end #original source ::> commandIntegrity;
+        end #derive target ::> onboardAcknowledgmentDeadline;
+    }
+
+    requirement def <'C-210'> AcknowledgmentQueueing {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* An accepted command acknowledgment shall enter the transmit queue in the same command-processing cycle when a link is available. Verification uses the shared context of C-102. */
+    }
+    requirement acknowledgmentQueueing : AcknowledgmentQueueing;
+
+    #derivation connection decomposeAcknowledgmentQueueing {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-102; the parent supplies shared verification conditions. */
+        end #original source ::> commandIntegrity;
+        end #derive target ::> acknowledgmentQueueing;
+    }
+
+    requirement def <'C-211'> ExternalControlDisqualification {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Acceptance of external mission or steering control during a qualifying attempt shall permanently disqualify that attempt. Verification uses the shared context of C-102. */
+    }
+    requirement externalControlDisqualification : ExternalControlDisqualification;
+
+    #derivation connection decomposeExternalControlDisqualification {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of C-102; the parent supplies shared verification conditions. */
+        end #original source ::> commandIntegrity;
+        end #derive target ::> externalControlDisqualification;
+    }
+
+    requirement def <'N-101'> VisibilityNavigationCapability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Navigation shall meet E-002 and E-008 acceptance criteria at visibility of at least 1 km in daylight and darkness. Verification uses the shared context of N-033. */
+    }
+    requirement visibilityNavigationCapability : VisibilityNavigationCapability;
+
+    #derivation connection decomposeVisibilityNavigationCapability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-033; the parent supplies shared verification conditions. */
+        end #original source ::> visibility;
+        end #derive target ::> visibilityNavigationCapability;
+    }
+
+    requirement def <'N-102'> VisibilityTrafficCapability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Traffic assessment shall meet the frozen S-001 criteria at visibility of at least 1 km in daylight and darkness. Verification uses the shared context of N-033. */
+    }
+    requirement visibilityTrafficCapability : VisibilityTrafficCapability;
+
+    #derivation connection decomposeVisibilityTrafficCapability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-033; the parent supplies shared verification conditions. */
+        end #original source ::> visibility;
+        end #derive target ::> visibilityTrafficCapability;
+    }
+
+    requirement def <'N-103'> RestrictedVisibilityEntry {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* On detecting visibility below 1 km, the vessel shall enter restricted-visibility state within 60 seconds. Verification uses the shared context of N-033. */
+    }
+    requirement restrictedVisibilityEntry : RestrictedVisibilityEntry;
+
+    #derivation connection decomposeRestrictedVisibilityEntry {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-033; the parent supplies shared verification conditions. */
+        end #original source ::> visibility;
+        end #derive target ::> restrictedVisibilityEntry;
+    }
+
+    requirement def <'N-104'> RestrictedVisibilityEvidence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Restricted-visibility operation shall be recorded as outside the normal operational envelope. Verification uses the shared context of N-033. */
+    }
+    requirement restrictedVisibilityEvidence : RestrictedVisibilityEvidence;
+
+    #derivation connection decomposeRestrictedVisibilityEvidence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-033; the parent supplies shared verification conditions. */
+        end #original source ::> visibility;
+        end #derive target ::> restrictedVisibilityEvidence;
+    }
+
+    requirement def <'N-105'> RestrictedVisibilityCollisionAssessment {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Collision assessment shall remain active during restricted-visibility operation. Verification uses the shared context of N-033. */
+    }
+    requirement restrictedVisibilityCollisionAssessment : RestrictedVisibilityCollisionAssessment;
+
+    #derivation connection decomposeRestrictedVisibilityCollisionAssessment {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-033; the parent supplies shared verification conditions. */
+        end #original source ::> visibility;
+        end #derive target ::> restrictedVisibilityCollisionAssessment;
+    }
+
+    requirement def <'N-106'> SurvivalEntryDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall enter survival mode within 60 seconds of the N-035 upper-limit trigger. Verification uses the shared context of N-035. */
+    }
+    requirement survivalEntryDeadline : SurvivalEntryDeadline;
+
+    #derivation connection decomposeSurvivalEntryDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-035; the parent supplies shared verification conditions. */
+        end #original source ::> envelopeTransition;
+        end #derive target ::> survivalEntryDeadline;
+    }
+
+    requirement def <'N-107'> SurvivalTransitionRecording {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Every survival-mode entry shall have a corresponding event record. Verification uses the shared context of N-035. */
+    }
+    requirement survivalTransitionRecording : SurvivalTransitionRecording;
+
+    #derivation connection decomposeSurvivalTransitionRecording {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-035; the parent supplies shared verification conditions. */
+        end #original source ::> envelopeTransition;
+        end #derive target ::> survivalTransitionRecording;
+    }
+
+    requirement def <'N-108'> SailingResumptionDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Full autonomous sailing shall resume within 5 minutes of N-035 resumption eligibility becoming continuously true. Verification uses the shared context of N-035. */
+    }
+    requirement sailingResumptionDeadline : SailingResumptionDeadline;
+
+    #derivation connection decomposeSailingResumptionDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-035; the parent supplies shared verification conditions. */
+        end #original source ::> envelopeTransition;
+        end #derive target ::> sailingResumptionDeadline;
+    }
+
+    requirement def <'N-109'> SailingResumptionInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Full autonomous sailing shall remain inhibited while N-035 resumption eligibility is false. Verification uses the shared context of N-035. */
+    }
+    requirement sailingResumptionInhibition : SailingResumptionInhibition;
+
+    #derivation connection decomposeSailingResumptionInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-035; the parent supplies shared verification conditions. */
+        end #original source ::> envelopeTransition;
+        end #derive target ::> sailingResumptionInhibition;
+    }
+
+    requirement def <'N-110'> ResumptionBlockEvidence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Every blocked sailing-resumption attempt shall record the blocking condition. Verification uses the shared context of N-035. */
+    }
+    requirement resumptionBlockEvidence : ResumptionBlockEvidence;
+
+    #derivation connection decomposeResumptionBlockEvidence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-035; the parent supplies shared verification conditions. */
+        end #original source ::> envelopeTransition;
+        end #derive target ::> resumptionBlockEvidence;
+    }
+
+    requirement def <'N-111'> WetMechanismTravel {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After each N-044 exposure, external mechanisms shall complete their full commanded travel without seizure. Verification uses the shared context of N-044. */
+    }
+    requirement wetMechanismTravel : WetMechanismTravel;
+
+    #derivation connection decomposeWetMechanismTravel {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-044; the parent supplies shared verification conditions. */
+        end #original source ::> wetMechanicalIntegrity;
+        end #derive target ::> wetMechanismTravel;
+    }
+
+    requirement def <'N-112'> WetJointIntegrity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After each N-044 exposure, structural joints shall show no separation or through-cracks on visual inspection at 5 times magnification. Verification uses the shared context of N-044. */
+    }
+    requirement wetJointIntegrity : WetJointIntegrity;
+
+    #derivation connection decomposeWetJointIntegrity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-044; the parent supplies shared verification conditions. */
+        end #original source ::> wetMechanicalIntegrity;
+        end #derive target ::> wetJointIntegrity;
+    }
+
+    requirement def <'N-113'> WetConductorResistance {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After each N-045 exposure, end-to-end conductor resistance shall be no more than 10 percent above its pre-test value. Verification uses the shared context of N-045. */
+    }
+    requirement wetConductorResistance : WetConductorResistance;
+
+    #derivation connection decomposeWetConductorResistance {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-045; the parent supplies shared verification conditions. */
+        end #original source ::> wetElectricalIntegrity;
+        end #derive target ::> wetConductorResistance;
+    }
+
+    requirement def <'N-114'> WetInsulationResistance {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After each N-045 exposure, conductor-to-conductor and conductor-to-case insulation resistance shall be at least 1 megohm at 50 V DC. Verification uses the shared context of N-045. */
+    }
+    requirement wetInsulationResistance : WetInsulationResistance;
+
+    #derivation connection decomposeWetInsulationResistance {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-045; the parent supplies shared verification conditions. */
+        end #original source ::> wetElectricalIntegrity;
+        end #derive target ::> wetInsulationResistance;
+    }
+
+    requirement def <'N-115'> HotSunElectronicsOperation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Powered electronics shall retain operational functions throughout the N-046 exposure. Verification uses the shared context of N-046. */
+    }
+    requirement hotSunElectronicsOperation : HotSunElectronicsOperation;
+
+    #derivation connection decomposeHotSunElectronicsOperation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-046; the parent supplies shared verification conditions. */
+        end #original source ::> solarHeating;
+        end #derive target ::> hotSunElectronicsOperation;
+    }
+
+    requirement def <'N-116'> HotSunBatteryTemperature {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Battery temperatures shall remain within manufacturer operating limits throughout the N-046 exposure. Verification uses the shared context of N-046. */
+    }
+    requirement hotSunBatteryTemperature : HotSunBatteryTemperature;
+
+    #derivation connection decomposeHotSunBatteryTemperature {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-046; the parent supplies shared verification conditions. */
+        end #original source ::> solarHeating;
+        end #derive target ::> hotSunBatteryTemperature;
+    }
+
+    requirement def <'N-117'> BatteryChargeTemperatureInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Battery charging shall remain inhibited whenever measured battery temperature is outside the manufacturer permitted charge range. Verification uses the shared context of N-046. */
+    }
+    requirement batteryChargeTemperatureInhibition : BatteryChargeTemperatureInhibition;
+
+    #derivation connection decomposeBatteryChargeTemperatureInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-046; the parent supplies shared verification conditions. */
+        end #original source ::> solarHeating;
+        end #derive target ::> batteryChargeTemperatureInhibition;
+    }
+
+    requirement def <'N-118'> RightingDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall self-right within 60 seconds of each N-051 release. Verification uses the shared context of N-051. */
+        attribute measuredRightingTime : TimeValue;
+        require constraint rightingDeadline {
+            measuredRightingTime >= 0 [s] and measuredRightingTime <= 60 [s]
+        }
+    }
+    requirement rightingDeadline : RightingDeadline;
+
+    #derivation connection decomposeRightingDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-051; the parent supplies shared verification conditions. */
+        end #original source ::> selfRighting;
+        end #derive target ::> rightingDeadline;
+    }
+
+    requirement def <'N-119'> CapsizeRigRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall retain its rig through every N-051 release. Verification uses the shared context of N-051. */
+    }
+    requirement capsizeRigRetention : CapsizeRigRetention;
+
+    #derivation connection decomposeCapsizeRigRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-051; the parent supplies shared verification conditions. */
+        end #original source ::> selfRighting;
+        end #derive target ::> capsizeRigRetention;
+    }
+
+    requirement def <'N-120'> CapsizeBallastRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall retain its ballast through every N-051 release. Verification uses the shared context of N-051. */
+    }
+    requirement capsizeBallastRetention : CapsizeBallastRetention;
+
+    #derivation connection decomposeCapsizeBallastRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-051; the parent supplies shared verification conditions. */
+        end #original source ::> selfRighting;
+        end #derive target ::> capsizeBallastRetention;
+    }
+
+    requirement def <'N-121'> CapsizeElectronicsSealing {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* No water shall reach electronics during any N-051 release. Verification uses the shared context of N-051. */
+    }
+    requirement capsizeElectronicsSealing : CapsizeElectronicsSealing;
+
+    #derivation connection decomposeCapsizeElectronicsSealing {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-051; the parent supplies shared verification conditions. */
+        end #original source ::> selfRighting;
+        end #derive target ::> capsizeElectronicsSealing;
+    }
+
+    requirement def <'N-122'> ControlRecoveryDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall restore mode-appropriate autonomous sail/steering control within 120 seconds from each N-051 release. Verification uses the shared context of N-052. */
+        attribute measuredControlRecoveryTime : TimeValue;
+        require constraint controlRecoveryDeadline {
+            measuredControlRecoveryTime >= 0 [s] and measuredControlRecoveryTime <= 120 [s]
+        }
+    }
+    requirement controlRecoveryDeadline : ControlRecoveryDeadline;
+
+    #derivation connection decomposeControlRecoveryDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-052; the parent supplies shared verification conditions. */
+        end #original source ::> capsizeControlRecovery;
+        end #derive target ::> controlRecoveryDeadline;
+    }
+
+    requirement def <'N-123'> CapsizeGateProgressRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Gate progress shall be preserved through every N-051 release. Verification uses the shared context of N-052. */
+    }
+    requirement capsizeGateProgressRetention : CapsizeGateProgressRetention;
+
+    #derivation connection decomposeCapsizeGateProgressRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-052; the parent supplies shared verification conditions. */
+        end #original source ::> capsizeControlRecovery;
+        end #derive target ::> capsizeGateProgressRetention;
+    }
+
+    requirement def <'N-124'> CapsizeQualificationRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Qualification status shall be preserved through every N-051 release absent an independently disqualifying event. Verification uses the shared context of N-052. */
+    }
+    requirement capsizeQualificationRetention : CapsizeQualificationRetention;
+
+    #derivation connection decomposeCapsizeQualificationRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-052; the parent supplies shared verification conditions. */
+        end #original source ::> capsizeControlRecovery;
+        end #derive target ::> capsizeQualificationRetention;
+    }
+
+    requirement def <'N-125'> CapsizeRestrictionRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Control restoration after each N-051 release shall preserve every active survival, low-energy, recovery and motor-inhibition restriction. Verification uses the shared context of N-052. */
+    }
+    requirement capsizeRestrictionRetention : CapsizeRestrictionRetention;
+
+    #derivation connection decomposeCapsizeRestrictionRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-052; the parent supplies shared verification conditions. */
+        end #original source ::> capsizeControlRecovery;
+        end #derive target ::> capsizeRestrictionRetention;
+    }
+
+    requirement def <'N-126'> WeedPassageSpeed {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* During each N-053 patch passage, mean water-relative sailing speed shall be at least 50 percent of the weed-free reference speed. Verification uses the shared context of N-053. */
+    }
+    requirement weedPassageSpeed : WeedPassageSpeed;
+
+    #derivation connection decomposeWeedPassageSpeed {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-053; the parent supplies shared verification conditions. */
+        end #original source ::> submergedWeedPassage;
+        end #derive target ::> weedPassageSpeed;
+    }
+
+    requirement def <'N-127'> WeedPassageSteering {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After each N-053 patch passage, full commanded rudder travel shall be regained within 5 minutes. Verification uses the shared context of N-053. */
+    }
+    requirement weedPassageSteering : WeedPassageSteering;
+
+    #derivation connection decomposeWeedPassageSteering {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-053; the parent supplies shared verification conditions. */
+        end #original source ::> submergedWeedPassage;
+        end #derive target ::> weedPassageSteering;
+    }
+
+    requirement def <'N-128'> WeedSnagSpeedRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Within 5 minutes of each N-054 snag, water-relative sailing speed shall recover to at least 50 percent of unobstructed reference speed. Verification uses the shared context of N-054. */
+    }
+    requirement weedSnagSpeedRecovery : WeedSnagSpeedRecovery;
+
+    #derivation connection decomposeWeedSnagSpeedRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-054; the parent supplies shared verification conditions. */
+        end #original source ::> weedSnagShedding;
+        end #derive target ::> weedSnagSpeedRecovery;
+    }
+
+    requirement def <'N-129'> WeedSnagSteeringRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Within 5 minutes of each N-054 snag, full commanded rudder travel shall be regained. Verification uses the shared context of N-054. */
+    }
+    requirement weedSnagSteeringRecovery : WeedSnagSteeringRecovery;
+
+    #derivation connection decomposeWeedSnagSteeringRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-054; the parent supplies shared verification conditions. */
+        end #original source ::> weedSnagShedding;
+        end #derive target ::> weedSnagSteeringRecovery;
+    }
+
+    requirement def <'N-130'> WeedBlockageFault {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* A suspected-fouling fault shall be logged within 10 seconds after the N-055 trigger. Verification uses the shared context of N-055. */
+    }
+    requirement weedBlockageFault : WeedBlockageFault;
+
+    #derivation connection decomposeWeedBlockageFault {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-055; the parent supplies shared verification conditions. */
+        end #original source ::> weedBlockageResponse;
+        end #derive target ::> weedBlockageFault;
+    }
+
+    requirement def <'N-131'> WeedBlockageContingency {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall enter fouling-contingency state within 10 seconds after the N-055 trigger. Verification uses the shared context of N-055. */
+    }
+    requirement weedBlockageContingency : WeedBlockageContingency;
+
+    #derivation connection decomposeWeedBlockageContingency {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-055; the parent supplies shared verification conditions. */
+        end #original source ::> weedBlockageResponse;
+        end #derive target ::> weedBlockageContingency;
+    }
+
+    requirement def <'N-132'> WeedBlockageLocation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Location reporting shall continue at the active telemetry cadence during fouling contingency whenever a link is available. Verification uses the shared context of N-055. */
+    }
+    requirement weedBlockageLocation : WeedBlockageLocation;
+
+    #derivation connection decomposeWeedBlockageLocation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-055; the parent supplies shared verification conditions. */
+        end #original source ::> weedBlockageResponse;
+        end #derive target ::> weedBlockageLocation;
+    }
+
+    requirement def <'N-133'> PoweredWeedSpeed {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Mean water-relative powered speed through each N-056 patch passage shall be at least 50 percent of weed-free reference speed. Verification uses the shared context of N-056. */
+    }
+    requirement poweredWeedSpeed : PoweredWeedSpeed;
+
+    #derivation connection decomposePoweredWeedSpeed {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-056; the parent supplies shared verification conditions. */
+        end #original source ::> recoveryPropulsorWeeds;
+        end #derive target ::> poweredWeedSpeed;
+    }
+
+    requirement def <'N-134'> PoweredWeedCurrent {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Motor and controller currents shall remain within their respective rated limits during each N-056 patch passage. Verification uses the shared context of N-056. */
+    }
+    requirement poweredWeedCurrent : PoweredWeedCurrent;
+
+    #derivation connection decomposePoweredWeedCurrent {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-056; the parent supplies shared verification conditions. */
+        end #original source ::> recoveryPropulsorWeeds;
+        end #derive target ::> poweredWeedCurrent;
+    }
+
+    requirement def <'N-135'> PoweredWeedTemperature {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Motor and controller temperatures shall remain within their respective rated limits during each N-056 patch passage. Verification uses the shared context of N-056. */
+    }
+    requirement poweredWeedTemperature : PoweredWeedTemperature;
+
+    #derivation connection decomposePoweredWeedTemperature {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-056; the parent supplies shared verification conditions. */
+        end #original source ::> recoveryPropulsorWeeds;
+        end #derive target ::> poweredWeedTemperature;
+    }
+
+    requirement def <'N-136'> LockedPropulsorShutdown {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* A locked propulsor shall cause motor shutdown within 2 seconds. Verification uses the shared context of N-056. */
+    }
+    requirement lockedPropulsorShutdown : LockedPropulsorShutdown;
+
+    #derivation connection decomposeLockedPropulsorShutdown {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of N-056; the parent supplies shared verification conditions. */
+        end #original source ::> recoveryPropulsorWeeds;
+        end #derive target ::> lockedPropulsorShutdown;
+    }
+
+    requirement def <'R-101'> MotorQualificationInvariant {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown. Verification uses the shared context of R-004. */
+        attribute qualifying : Boolean;
+        attribute qualificationStateKnown : Boolean;
+        attribute motorEnabled : Boolean;
+        require constraint motorQualificationInvariant {
+            not motorEnabled or (qualificationStateKnown and not qualifying)
+        }
+    }
+    requirement motorQualificationInvariant : MotorQualificationInvariant;
+
+    #derivation connection decomposeMotorQualificationInvariant {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of R-004; the parent supplies shared verification conditions. */
+        end #original source ::> challengeMotorInhibition;
+        end #derive target ::> motorQualificationInvariant;
+    }
+
+    requirement def <'R-102'> FreshRecoveryCommand {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* After restart, motor enable shall remain inhibited until a fresh authenticated recovery command is accepted. Verification uses the shared context of R-004. */
+    }
+    requirement freshRecoveryCommand : FreshRecoveryCommand;
+
+    #derivation connection decomposeFreshRecoveryCommand {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of R-004; the parent supplies shared verification conditions. */
+        end #original source ::> challengeMotorInhibition;
+        end #derive target ::> freshRecoveryCommand;
+    }
+
+    requirement def <'E-144'> IngressEventDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* In the E-006 injection test, an ingress event record shall exist within 60 seconds of injection starting. Verification uses the shared context of E-006. */
+    }
+    requirement ingressEventDeadline : IngressEventDeadline;
+
+    #derivation connection decomposeIngressEventDeadline {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-006; the parent supplies shared verification conditions. */
+        end #original source ::> ingressResponse;
+        end #derive target ::> ingressEventDeadline;
+    }
+
+    requirement def <'E-145'> QualificationRestoration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Within 30 seconds after a watchdog reset under E-003 preconditions, qualification status shall equal the valid persisted status, or be nonqualifying when persisted status is absent or inconsistent. Verification uses the shared context of E-003. */
+    }
+    requirement qualificationRestoration : QualificationRestoration;
+
+    #derivation connection decomposeQualificationRestoration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of E-003; the parent supplies shared verification conditions. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> qualificationRestoration;
+    }
+
+    #derivation connection sharedAcceptance1 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* resetRecovery also requires the shared logInterruptionDurability outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> logInterruptionDurability;
+    }
+
+    #derivation connection sharedAcceptance2 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* resetRecovery also requires the shared unknownQualificationFallback outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> unknownQualificationFallback;
+    }
+
+    #derivation connection sharedAcceptance3 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* resetRecovery also requires the shared qualificationPersistence outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> qualificationPersistence;
+    }
+
+    #derivation connection sharedAcceptance4 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* resetRecovery also requires the shared freshRecoveryCommand outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> freshRecoveryCommand;
+    }
+
+    #derivation connection sharedAcceptance5 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* resetRecovery also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> resetRecovery;
+        end #derive target ::> motorQualificationInvariant;
+    }
+
+    #derivation connection sharedAcceptance6 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* commandIntegrity also requires the shared criticalEventRecording outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> commandIntegrity;
+        end #derive target ::> criticalEventRecording;
+    }
+
+    #derivation connection sharedAcceptance7 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* commandIntegrity also requires the shared qualificationPersistence outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> commandIntegrity;
+        end #derive target ::> qualificationPersistence;
+    }
+
+    #derivation connection sharedAcceptance8 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* safeRecovery also requires the shared qualificationPersistence outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> qualificationPersistence;
+    }
+
+    #derivation connection sharedAcceptance9 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* safeRecovery also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> motorQualificationInvariant;
+    }
+
+    #derivation connection sharedAcceptance10 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* safeRecovery also requires the shared periodicLogCadence outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> safeRecovery;
+        end #derive target ::> periodicLogCadence;
+    }
+
+    #derivation connection sharedAcceptance11 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* challengeMotorInhibition also requires the shared qualificationPersistence outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> challengeMotorInhibition;
+        end #derive target ::> qualificationPersistence;
+    }
+
+    #derivation connection sharedAcceptance12 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* challengeMotorInhibition also requires the shared criticalEventRecording outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> challengeMotorInhibition;
+        end #derive target ::> criticalEventRecording;
+    }
+
+    #derivation connection sharedAcceptance13 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* lowEnergyRecovery also requires the shared periodicLogCadence outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> periodicLogCadence;
+    }
+
+    #derivation connection sharedAcceptance14 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* lowEnergyRecovery also requires the shared telemetryDeliveryCadence outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> telemetryDeliveryCadence;
+    }
+
+    #derivation connection sharedAcceptance15 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* lowEnergyRecovery also requires the shared criticalEventRecording outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> criticalEventRecording;
+    }
+
+    #derivation connection sharedAcceptance16 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* lowEnergyRecovery also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> lowEnergyRecovery;
+        end #derive target ::> motorQualificationInvariant;
+    }
+
+    #derivation connection sharedAcceptance17 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* ingressResponse also requires the shared criticalEventRecording outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> ingressResponse;
+        end #derive target ::> criticalEventRecording;
+    }
+
+    #derivation connection sharedAcceptance18 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* ingressResponse also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> ingressResponse;
+        end #derive target ::> motorQualificationInvariant;
+    }
+
+    #derivation connection sharedAcceptance19 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* communications also requires the shared logRetention outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> communications;
+        end #derive target ::> logRetention;
+    }
+
+    #derivation connection sharedAcceptance20 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* communications also requires the shared reconnectLogPreservation outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> communications;
+        end #derive target ::> reconnectLogPreservation;
+    }
+
+    #derivation connection sharedAcceptance21 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* navigationAvailability also requires the shared criticalEventRecording outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> navigationAvailability;
+        end #derive target ::> criticalEventRecording;
+    }
+
+    #derivation connection sharedAcceptance22 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* envelopeTransition also requires the shared periodicLogCadence outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> envelopeTransition;
+        end #derive target ::> periodicLogCadence;
+    }
+
+    #derivation connection sharedAcceptance23 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* envelopeTransition also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> envelopeTransition;
+        end #derive target ::> motorQualificationInvariant;
+    }
+
+    #derivation connection sharedAcceptance24 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* weedBlockageResponse also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> weedBlockageResponse;
+        end #derive target ::> motorQualificationInvariant;
+    }
+
+    #derivation connection sharedAcceptance25 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* recoveryPropulsorWeeds also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. */
+        end #original source ::> recoveryPropulsorWeeds;
+        end #derive target ::> motorQualificationInvariant;
     }
 }

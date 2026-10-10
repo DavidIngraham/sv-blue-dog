@@ -90,3 +90,5 @@ For an individual native run (from the repository root):
 ```
 
 The regression checks include the static-theory reference, disk-diameter sensitivity, insufficient reserve, and invalid diameter, loss factor, density and inflow. Invalid assumptions cannot produce an accepted analysis verdict. Inputs are constrained to nonnegative axial inflow; crosswind/yaw, reverse inflow, ventilation, cavitation, hull interactions and weed loads require further models or measured input data. Equal assumed thrust does not assert equal installed drag for the two architectures.
+
+Evidence flags cover all applicable acceptance leaves of their referenced parents. In particular, weed evidence includes speed, current, temperature and locked-propulsor shutdown, and capsize evidence includes retention/sealing as well as timing. Isolation evidence covers both the motor-power removal deadline and restart inhibition; the analysis now links to those two leaves explicitly. A single passing numeric result does not set an aggregate evidence flag.

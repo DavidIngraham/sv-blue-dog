@@ -76,7 +76,7 @@ for this migration. Nothing is installed globally and no moving nightly tag is u
 The Python client remains pinned to 0.9.2 for interactive modeling; publishing uses the native CLI.
 
 Native dashed `derive` arrows point **from derived to original**, opposite the earlier
-custom diagram convention. All thirty-two requirements and forty-one derivation relationships are regression-checked
+custom diagram convention. All 193 requirements and 238 derivation relationships are regression-checked
 against the source model. Short IDs remain in the linked register; the
 native diagram uses its default monochrome style without our former maturity colors.
 The renderer reports two exposed standard-library elements as intentionally not drawn.
@@ -139,3 +139,7 @@ Executable-criteria tests cover numeric boundaries, navigation epoch counts, lau
 ## Recovery propulsion analysis
 
 `recovery-trade.sysml` contains a native executable analysis case for water and air propeller candidates. The publishing command runs both examples and saves the CLI's unmodified JSON in `docs/analysis/recovery-trade.json`; `--check` also checks this output. All equations stay in SysML, including the shared R-002 reserve calculation. See the [trade study](../docs/recovery-propulsion-trade.md) for assumptions, commands, evidence gates and result interpretation.
+
+## Atomic acceptance leaves
+
+The [decomposition map](../docs/requirement-decomposition.md) explains the 127 acceptance leaves beneath 29 retained parent IDs. Parents supply common test context and link to individual outcomes; derivation is not executable aggregation. Eight native predicates remain, with five moved from bundled parents to the corresponding leaves. The full SVG is a zoomable trace graph; the PNG is a scaled overview because Graphviz limits bitmap width. Use the native register for readable statements.

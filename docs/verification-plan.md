@@ -7,13 +7,13 @@ The model distinguishes high-level mission/environment requirements from quantit
 | Requirement | Inputs supplied by design/test evidence | Native predicate covers | Still requires evidence |
 | --- | --- | --- | --- |
 | P-002 DesktopManufacture | Occupied X/Y/Z of each oriented print job | Each dimension positive and â‰¤250 mm, with unit conversion | All jobs enumerated; slicer supports/brim/raft/clearance included |
-| E-003 ResetRecovery | Measured restart time | 0â€“30 s | Correct restored state, qualification latch and motor inhibition |
+| E-110 RestartDeadline (under E-003) | Measured restart time | 0â€“30 s | Correct restored state, qualification latch and motor inhibition |
 | R-002 RecoveryEnergy | Separate motor and essential electrical powers; reserve energy | Reserve â‰¥1.2Ã—(motor powerÃ—1800 s + essential powerÃ—7200 s) | Measurement conditions, aged/cold battery capacity, reserve enforcement |
-| N-051 SelfRighting | Measured time for one release | 0â€“60 s | Every loading/angle/water trial, no damage or ingress |
-| N-052 CapsizeControlRecovery | Measured time from release | 0â€“120 s | Correct restored control and retained state |
-| E-008 NavigationAvailability | Count of valid one-second epochs in a 30-minute run | At least 1710 and no more than 1800 | Accuracy remains E-002; timestamps, validity, and stale-data transition evidence |
+| N-118 RightingDeadline (under N-051) | Measured time for one release | 0â€“60 s | Every loading/angle/water trial, no damage or ingress |
+| N-122 ControlRecoveryDeadline (under N-052) | Measured time from release | 0â€“120 s | Correct restored control and retained state |
+| E-140 NavigationValidEpochs (under E-008) | Count of valid one-second epochs in a 30-minute run | At least 1710 and no more than 1800 | Accuracy remains E-002; timestamps, validity, and stale-data transition evidence |
 | R-003 LaunchEnergyAdmission | Start-enable state, conservative start energy, reserve, age and validity flags | Start is disabled unless energy > reserve and all inputs are current/valid | Controller must actually enforce inhibition; configured reserve must satisfy R-002 |
-| R-004 ChallengeMotorInhibition | Motor-enable, qualifying and qualification-known states | Enabled motor implies known, nonqualifying status | Temporal ordering, persistence and fresh-command enforcement across resets |
+| R-101 MotorQualificationInvariant (under R-004) | Motor-enable, qualifying and qualification-known states | Enabled motor implies known, nonqualifying status | Temporal ordering, persistence and fresh-command enforcement across resets |
 
 These `require constraint` expressions are in the production SysML definitions. They have no invented observation defaults. The native CLI returns exit 0 for a holding supplied case, 1 for a failing case, and 2 when missing observations prevent evaluation. Only the supplied-observation predicate is executed; passing it is not a full physical compliance verdict.
 
@@ -52,3 +52,7 @@ Next executable opportunities are trajectory gate-crossing/order, motor/qualific
 Accuracy counts all 1800 scheduled epochs, including missing/invalid observations. Deliberate fault-injection runs are assessed separately. Harvest replay cannot exceed a measured installed-harvester resource profile. The 24-hour calm campaign starts with both the protected recovery reserve and sufficient energy for measured calm-mode loads, with harvesting disabled.
 
 Emergency/powered recovery takes priority over low-energy telemetry cadence and shore freshness thresholds. Clearing the low-energy flag depends on energy alone, so it cannot wait on survival exit; payload restoration still respects other active restrictions. Capsize recovery restores mode-appropriate control, while normal sailing waits for the survival exit gate. See the [independent audit and dispositions](requirements-audit.md).
+
+## Separate acceptance verdicts
+
+The [atomic decomposition map](requirement-decomposition.md) records the retained parent IDs and new leaves. Tests of restart timing, righting timing, control restoration timing, navigation epoch count and the motor-state invariant now target their specific leaves. A timing pass cannot stand in for retained state, sealing or motor-interlock evidence. Parent shared conditions remain mandatory for each leaf campaign; evidence must identify the same trial/epoch set where specified. Parent roll-up is not yet executable.
