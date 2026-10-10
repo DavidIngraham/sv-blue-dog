@@ -2,23 +2,25 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**GorgeEnvironment** — The vessel shall operate on the Columbia River reach between The Dalles and Bonneville in freshwater, opposing wind/current, short-period chop, traffic and submerged aquatic vegetation. Gorge-derived parameter requirements and the shared exposure requirements apply together; no dam transit, ice or surf-zone launch is included.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**GorgeWind** — The vessel shall retain the N-001 operational functions in true wind from 3 to 15 m/s (10-minute mean referenced to 10 m above water), including 3-second gusts up to 20 m/s. Qualification shall include upwind, crosswind and downwind headings; this is a functional wind limit, not a guarantee of upstream progress.
+**N-010 GorgeEnvironment** — The vessel shall operate in the freshwater Columbia River reach between The Dalles and Bonneville, including opposing wind/current, short chop, traffic and submerged vegetation.
 
-**GorgeWaves** — The vessel shall retain N-001 operational functions in significant wave heights up to 1 m with peak periods 2-5 s, including individual waves up to 2 m. Wave statistics shall use 20-minute records. Qualification shall include head, beam and following seas and physically realizable wind-wave-current combinations within the profile.
+**N-011 GorgeWind** — The vessel shall retain operational functions in 3–15 m/s mean true wind with 3-second gusts up to 20 m/s.
 
-**GorgeCurrent** — The vessel shall retain navigation and control in currents from 0 to 1.5 m/s from any direction relative to wind and waves. Qualification shall include opposing current. Predicted boundary risk shall invoke S-002; current tolerance alone does not ensure progress or station keeping. Positive upstream speed is not required at every wind speed or heading.
+**N-012 GorgeWaves** — The vessel shall retain operational functions in significant wave heights up to 1 m, peak periods 2–5 s and individual waves up to 2 m.
 
-**GorgeSurvivalWind** — For 24 continuous hours, the vessel shall meet the N-001 survival acceptance outcomes in mean wind up to 25 m/s and 3-second gusts up to 35 m/s, using the operational wind reference convention. The respective wave, current, temperature and humidity limits apply concurrently.
+**N-013 GorgeCurrent** — The vessel shall retain navigation and control in currents from 0 to 1.5 m/s from any direction relative to wind and waves.
 
-**GorgeSurvivalWaves** — For 24 continuous hours, the vessel shall meet the N-001 survival acceptance outcomes in significant wave heights up to 2 m, peak periods 3-7 s and individual waves up to 4 m. Qualification shall include adverse relative directions and physically realizable combinations with profile survival wind and current.
+**N-014 GorgeSurvivalWind** — The vessel shall retain survival functions for 24 continuous hours in mean wind up to 25 m/s and 3-second gusts up to 35 m/s.
 
-**FreshwaterExposure** — For Gorge qualification, following 72 hours continuous freshwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its Gorge functional checks without repair or servicing.
+**N-015 GorgeSurvivalWaves** — The vessel shall retain survival functions for 24 continuous hours in significant wave heights up to 2 m, peak periods 3–7 s and individual waves up to 4 m.
 
-**SubmergedWeedPassage** — Aggregate requirement for SubmergedWeedPassage. Acceptance requires all applicable derived leaf results (N-126, N-127); this parent has no independent executable pass/fail predicate. Shared verification context: Gorge campaign: five consecutive sailing passes without manual clearing or motor use through a 5 m by 1 m patch of 20 flexible branched stems per square metre, each 0.5-1.0 m long, extending from below the deepest appendage to within 0.1 m of the surface. Use 5 m/s mean wind and the weed-free reference heading. Record material, branch geometry, wet bending stiffness and anchoring; equivalence to local milfoil remains a physical-test validation task.
+**N-041 FreshwaterExposure** — For Gorge qualification, following 72 hours continuous freshwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its Gorge functional checks without repair or servicing.
 
-**WeedSnagShedding** — Aggregate requirement for WeedSnagShedding. Acceptance requires all applicable derived leaf results (N-128, N-129); this parent has no independent executable pass/fail predicate. Shared verification context: Gorge campaign: drape one wet 1 m branched stem over one appendage leading edge at a time, five repetitions per appendage, with N-053 surrogate characteristics, 5 m/s mean wind and the unobstructed reference heading. No manual assistance or motor use. Both leaf criteria apply to every repetition; visible stem removal alone is insufficient.
+**N-053 SubmergedWeedPassage** — The vessel shall tolerate submerged milfoil-like vegetation during the specified unassisted Gorge sailing passes.
+
+**N-054 WeedSnagShedding** — The vessel shall recover sailing performance after the specified appendage weed snags without assistance or motor use.
 
 ## N-010 derivation 1
 
@@ -47,7 +49,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::gorgeEnvironment1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 39 node(s) without a position, left undrawn, and 51 edge(s) at them
+%% not represented: 42 node(s) without a position, left undrawn, and 54 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -93,7 +95,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::gorgeEnvironment2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 89 node(s) without a position, left undrawn, and 109 edge(s) at them
+%% not represented: 90 node(s) without a position, left undrawn, and 110 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -139,7 +141,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::gorgeEnvironment3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 59 node(s) without a position, left undrawn, and 80 edge(s) at them
+%% not represented: 61 node(s) without a position, left undrawn, and 86 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

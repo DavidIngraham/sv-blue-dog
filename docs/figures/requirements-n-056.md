@@ -2,17 +2,19 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**RecoveryPropulsorWeeds** — Aggregate requirement for RecoveryPropulsorWeeds. Acceptance requires all applicable derived leaf results (N-133, N-134, N-135, N-136, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Use a separately designated Gorge powered-recovery test with five passes through the N-053 patch without manual propulsor clearing, on the weed-free powered reference heading. Exercise locked propulsor separately.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**PoweredWeedSpeed** — Mean water-relative powered speed through each N-056 patch passage shall be at least 50 percent of weed-free reference speed. Verification uses the shared context of N-056.
+**N-056 RecoveryPropulsorWeeds** — The recovery propulsion system shall tolerate the specified weed encounters within its rated electrical and thermal limits.
 
-**PoweredWeedCurrent** — Motor and controller currents shall remain within their respective rated limits during each N-056 patch passage. Verification uses the shared context of N-056.
+**N-133 PoweredWeedSpeed** — Mean water-relative powered speed through each N-056 patch passage shall be at least 50 percent of weed-free reference speed.
 
-**PoweredWeedTemperature** — Motor and controller temperatures shall remain within their respective rated limits during each N-056 patch passage. Verification uses the shared context of N-056.
+**N-134 PoweredWeedCurrent** — Motor and controller currents shall remain within their respective rated limits during each N-056 patch passage.
 
-**LockedPropulsorShutdown** — A locked propulsor shall cause motor shutdown within 2 seconds. Verification uses the shared context of N-056.
+**N-135 PoweredWeedTemperature** — Motor and controller temperatures shall remain within their respective rated limits during each N-056 patch passage.
 
-**MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown. Verification uses the shared context of R-004.
+**N-136 LockedPropulsorShutdown** — A locked propulsor shall cause motor shutdown within 2 seconds.
+
+**R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
 ## N-056 derivation 1
 
@@ -41,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::recoveryPropulsorWeeds1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 48 node(s) without a position, left undrawn, and 53 edge(s) at them
+%% not represented: 101 node(s) without a position, left undrawn, and 143 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -87,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::recoveryPropulsorWeeds2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 92 node(s) without a position, left undrawn, and 112 edge(s) at them
+%% not represented: 108 node(s) without a position, left undrawn, and 155 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

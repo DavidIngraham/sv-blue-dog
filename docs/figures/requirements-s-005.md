@@ -2,11 +2,13 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**RegulatoryClassification** — Aggregate requirement for RegulatoryClassification. Acceptance requires all applicable derived leaf results (S-122, S-123); this parent has no independent executable pass/fail predicate. Shared verification context: Acceptance is deployment document review, not onboard behavior or an assertion of buoy status.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**DeploymentComplianceRecord** — Each deployment shall have a dated compliance record identifying the craft, dimensions, waters, operating modes, applicable navigation and radio obligations, and permission evidence. Verification uses the shared context of S-005.
+**S-005 RegulatoryClassification** — Deployment shall require documented compliance with applicable navigation, radio and authorization obligations.
 
-**DeploymentReleaseGate** — Deployment release shall be withheld while any mandatory authorization is absent, expired or unresolved. Verification uses the shared context of S-005.
+**S-122 DeploymentComplianceRecord** — Each deployment shall have a dated compliance record identifying the craft, dimensions, waters, operating modes, applicable navigation and radio obligations, and permission evidence.
+
+**S-123 DeploymentReleaseGate** — Deployment release shall be withheld while any mandatory authorization is absent, expired or unresolved.
 
 ## S-005 derivation 1
 
@@ -35,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::regulatoryClassification1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 149 node(s) without a position, left undrawn, and 230 edge(s) at them
+%% not represented: 150 node(s) without a position, left undrawn, and 233 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

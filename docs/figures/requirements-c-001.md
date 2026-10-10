@@ -2,9 +2,11 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**CourseCompletion** — Threshold: Complete a journey from The Dalles to Bonneville and back to The Dalles. Exact start/finish and turnaround gates, permitted corridor, and crossing evidence remain to be agreed.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**RoundTrip** — The vessel shall cross the configured The Dalles departure gate, Bonneville turnaround gate and The Dalles return gate in that order during one attempt, satisfying C-003 through C-006. Acceptance shall use the timestamped trajectory and intervention/propulsion event log; a missing gate crossing or disqualifying event shall prevent a completion verdict.
+**C-001 CourseCompletion** — The vessel shall complete a journey from The Dalles to Bonneville and back to The Dalles.
+
+**M-001 RoundTrip** — The vessel shall cross the configured The Dalles departure, Bonneville turnaround and The Dalles return gates in order during one qualifying attempt.
 
 ## C-001 derivation 1
 
@@ -33,7 +35,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::courseCompletion1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 222 node(s) without a position, left undrawn, and 434 edge(s) at them
+%% not represented: 223 node(s) without a position, left undrawn, and 435 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

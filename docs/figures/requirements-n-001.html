@@ -4,232 +4,49 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N-001 environmental envelope</title>
-<style>
-/* The default OpenSysML document stylesheet. Every value comes from a
-   --sysml-* token on .sysml-document, and the whole sheet is in the
-   opensysml cascade layer, so unlayered reader CSS overrides it without
-   specificity fights or !important. */
-@layer opensysml;
-
-@layer opensysml {
-  .sysml-document {
-    --sysml-font-body: system-ui, sans-serif;
-    --sysml-font-mono: ui-monospace, monospace;
-    --sysml-font-size: 1rem;
-    --sysml-line-height: 1.55;
-    --sysml-measure: 42rem;
-    --sysml-space: 1rem;
-    --sysml-space-tight: 0.35rem;
-    --sysml-text: #16191d;
-    --sysml-muted: #5a6472;
-    --sysml-accent: #1f4e79;
-    --sysml-rule: #cfd6de;
-    --sysml-surface: #f4f6f8;
-    --sysml-cell-padding: 0.35rem 0.6rem;
-    --sysml-code-font-size: 0.9em;
-    --sysml-caption-font-size: 0.9em;
-    --sysml-border-width: 1px;
-    --sysml-table-width: 100%;
-    --sysml-row-indent: 1.25em;
-    --sysml-title-page-height: 60vh;
-    --sysml-group-heading-weight: 600;
-    --sysml-term-weight: 600;
-    --sysml-formula-align: center;
-    --sysml-image-max-width: 100%;
-
-    box-sizing: border-box;
-    max-width: var(--sysml-measure);
-    margin: var(--sysml-space) auto;
-    padding: 0 var(--sysml-space);
-    font-family: var(--sysml-font-body);
-    font-size: var(--sysml-font-size);
-    line-height: var(--sysml-line-height);
-    color: var(--sysml-text);
-  }
-
-  .sysml-document .sysml-title {
-    color: var(--sysml-accent);
-  }
-
-  .sysml-document .sysml-title-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: var(--sysml-title-page-height);
-    text-align: center;
-    break-after: page;
-    page-break-after: always;
-  }
-
-  .sysml-document .sysml-section-number {
-    color: var(--sysml-muted);
-    margin-right: var(--sysml-space-tight);
-  }
-
-  .sysml-document .sysml-toc ol {
-    list-style: none;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-toc > ol {
-    padding-left: 0;
-  }
-
-  .sysml-document .sysml-toc a {
-    color: inherit;
-  }
-
-  .sysml-document .sysml-paragraph {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table {
-    border-collapse: collapse;
-    width: var(--sysml-table-width);
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table th,
-  .sysml-document .sysml-table td {
-    border: var(--sysml-border-width) solid var(--sysml-rule);
-    padding: var(--sysml-cell-padding);
-    text-align: left;
-    vertical-align: top;
-  }
-
-  .sysml-document .sysml-table thead th {
-    background: var(--sysml-surface);
-  }
-
-  /* A sized table lays its columns out at the shares its <col> widths state,
-     breaking a token wider than its cell rather than overflowing it. */
-  .sysml-document .sysml-table-sized {
-    table-layout: fixed;
-  }
-
-  .sysml-document .sysml-table-sized th,
-  .sysml-document .sysml-table-sized td {
-    overflow-wrap: break-word;
-  }
-
-  /* A nested row's first cell is indented one --sysml-row-indent per level of
-     the --sysml-depth the row states. */
-  .sysml-document .sysml-indent {
-    display: inline-block;
-    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
-  }
-
-  .sysml-document .sysml-group-heading th {
-    background: var(--sysml-surface);
-    color: var(--sysml-muted);
-    font-weight: var(--sysml-group-heading-weight);
-  }
-
-  .sysml-document .sysml-caption {
-    color: var(--sysml-muted);
-    font-size: var(--sysml-caption-font-size);
-    text-align: left;
-  }
-
-  .sysml-document .sysml-list {
-    margin: var(--sysml-space) 0;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-definitions {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-entry {
-    margin: var(--sysml-space-tight) 0;
-  }
-
-  .sysml-document .sysml-term {
-    font-weight: var(--sysml-term-weight);
-  }
-
-  .sysml-document .sysml-description {
-    margin: 0 0 0 var(--sysml-space);
-  }
-
-  .sysml-document .sysml-diagram {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image img {
-    max-width: var(--sysml-image-max-width);
-  }
-
-  .sysml-document .sysml-formula {
-    margin: var(--sysml-space) 0;
-    text-align: var(--sysml-formula-align);
-  }
-
-  .sysml-document .sysml-formula .sysml-math {
-    overflow-x: auto;
-  }
-
-  .sysml-document .sysml-diagram pre {
-    overflow-x: auto;
-    font-family: var(--sysml-font-mono);
-  }
-
-  .sysml-document code {
-    font-family: var(--sysml-font-mono);
-    font-size: var(--sysml-code-font-size);
-  }
-
-  .sysml-document .sysml-link,
-  .sysml-document .sysml-ref {
-    color: var(--sysml-accent);
-  }
-}
-</style>
+<link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::EnvironmentalEnvelopeRequirements">
 <h1 class="sysml-title">N-001 environmental envelope</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements14">
 <div class="sysml-entry" data-element="BlueDogRequirements::EnvironmentalEnvelope" data-element-kind="requirementDef">
-<dt class="sysml-term">EnvironmentalEnvelope</dt>
-<dd class="sysml-description">The vessel shall retain the common environmental capabilities specified by the shared exposure requirements in both mission environments, with distinct operational and survival outcomes. Gorge acceptance uses N-010 and its profile leaves; ocean acceptance uses N-020 and its profile leaves. These mission-specific profiles are not interchangeable, and a Gorge release does not require ocean qualification. Qualification shall exercise navigation, sail/steering control, recording and available-link telemetry concurrently; survival acceptance permits loss of course progress but requires flotation, attached rig/ballast, dry electronics and retained mission state. Passing the Gorge profile alone shall not establish ocean capability.</dd>
+<dt class="sysml-term">N-001 EnvironmentalEnvelope</dt>
+<dd class="sysml-description">The vessel shall retain the functions required by its selected environmental profile and operating mode.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::MarineDurability" data-element-kind="requirementDef">
-<dt class="sysml-term">MarineDurability</dt>
-<dd class="sysml-description">The vessel shall retain its required functions and structural integrity during repeated freshwater Gorge service and prolonged saltwater ocean exposure. Qualification uses N-041 freshwater for the Gorge profile and N-042 saltwater for the ocean profile; dual-profile qualification requires both campaigns. Shared sealing, material aging and thermal checks use that selected campaign. Acceptance shall include post-exposure functional checks for the selected profile. Derivation edges indicate reasoning, not unconditional applicability of every descendant to every mission.</dd>
+<dt class="sysml-term">N-002 MarineDurability</dt>
+<dd class="sysml-description">The vessel shall retain required function and structural integrity through its selected wet-exposure campaign.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::StabilityAndFouling" data-element-kind="requirementDef">
-<dt class="sysml-term">StabilityAndFouling</dt>
-<dd class="sysml-description">The vessel shall autonomously recover from capsize and tolerate submerged aquatic vegetation, including milfoil-like stems, without reliance on operator intervention during a qualifying attempt. Derived requirements specify righting, control recovery, weed passage, snag shedding and blockage response. Dense floating mats and fishing-line entanglement are not covered by the submerged-weed passage qualification.</dd>
+<dt class="sysml-term">N-003 StabilityAndFouling</dt>
+<dd class="sysml-description">The vessel shall autonomously tolerate capsize and submerged aquatic vegetation, including milfoil-like stems.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::AirTemperature" data-element-kind="requirementDef">
-<dt class="sysml-term">AirTemperature</dt>
-<dd class="sysml-description">The vessel shall retain operational functions from 0 to 40 degC ambient air temperature. Qualification shall include powered cold and hot endpoints with internal temperatures stabilized to less than 1 degC change per hour, followed by 2 hours of operation at each endpoint. The same temperature range applies during survival, with only the mode-appropriate retained functions required by N-001/N-035.</dd>
+<dt class="sysml-term">N-030 AirTemperature</dt>
+<dd class="sysml-description">The vessel shall retain mode-appropriate functions at ambient air temperatures from 0 to 40 degC.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::WaterTemperature" data-element-kind="requirementDef">
-<dt class="sysml-term">WaterTemperature</dt>
-<dd class="sysml-description">The immersed hull, appendages and installed equipment shall retain operational functions in water from 2 to 30 degC, including 2 hours at each endpoint after thermal stabilization. The same temperature range applies during survival, with only the mode-appropriate retained functions required by N-001/N-035.</dd>
+<dt class="sysml-term">N-031 WaterTemperature</dt>
+<dd class="sysml-description">Immersed hull, appendages and equipment shall retain mode-appropriate functions in water from 2 to 30 degC.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::Humidity" data-element-kind="requirementDef">
-<dt class="sysml-term">Humidity</dt>
-<dd class="sysml-description">The installed equipment shall retain operational functions at 0-100 percent relative humidity, including condensation. Qualification shall include three powered 24-hour cycles between 10 and 40 degC at at least 95 percent relative humidity, with visible condensation on external surfaces during cooling and no liquid water reaching enclosed electronics.</dd>
+<dt class="sysml-term">N-032 Humidity</dt>
+<dd class="sysml-description">Installed equipment shall retain operational functions at 0–100 percent relative humidity, including condensation.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::Visibility" data-element-kind="requirementDef">
-<dt class="sysml-term">Visibility</dt>
-<dd class="sysml-description">Aggregate requirement for Visibility. Acceptance requires all applicable derived leaf results (N-101, N-102, N-103, N-104, N-105); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise daylight and darkness at meteorological visibility of at least 1 km, and detected visibility below 1 km. Traffic performance remains subject to unresolved S-001 scenarios.</dd>
+<dt class="sysml-term">N-033 Visibility</dt>
+<dd class="sysml-description">The vessel shall provide mode-appropriate navigation and traffic response across the specified visibility conditions.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::CalmOperation" data-element-kind="requirementDef">
-<dt class="sysml-term">CalmOperation</dt>
-<dd class="sysml-description">With harvesting disabled, the vessel shall retain navigation, recording and autonomous boundary/traffic contingency functions for 24 continuous hours in mean wind below 3 m/s, without drawing conservative usable energy below the R-002 reserve. Initial conservative usable energy shall cover the reserve plus 24 hours of the measured worst-case electrical load for those calm-mode functions. Acceptance shall record the initial energy, load measurement and full energy history. Neither progress nor station keeping is required; R-004 prohibits automatic motor activation in a qualifying attempt.</dd>
+<dt class="sysml-term">N-034 CalmOperation</dt>
+<dd class="sysml-description">With harvesting disabled and mean wind below 3 m/s, the vessel shall retain calm-mode functions above the R-002 reserve for 24 continuous hours.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::EnvelopeTransition" data-element-kind="requirementDef">
-<dt class="sysml-term">EnvelopeTransition</dt>
-<dd class="sysml-description">Aggregate requirement for EnvelopeTransition. Acceptance requires all applicable derived leaf results (N-106, N-107, N-108, N-109, N-110, E-130, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: The trigger is a detected upper operational wind or wave limit exceedance for the selected profile; calm invokes N-034. Resumption eligibility requires 10 continuous minutes inside the selected wind/wave limits, valid navigation and no low-energy, emergency-recovery or isolation restriction.</dd>
+<dt class="sysml-term">N-035 EnvelopeTransition</dt>
+<dd class="sysml-description">The vessel shall select survival or sailing operation according to the defined environmental transition conditions.</dd>
 </div>
 </dl>
 <section class="sysml-section" id="group1" data-content="section" data-name="group1">
@@ -259,7 +76,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::environmentalEnvelope1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 148 node(s) without a position, left undrawn, and 228 edge(s) at them
+%% not represented: 151 node(s) without a position, left undrawn, and 231 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -305,7 +122,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::environmentalEnvelope2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 148 node(s) without a position, left undrawn, and 228 edge(s) at them
+%% not represented: 152 node(s) without a position, left undrawn, and 237 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -351,7 +168,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::environmentalEnvelope3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 149 node(s) without a position, left undrawn, and 229 edge(s) at them
+%% not represented: 175 node(s) without a position, left undrawn, and 297 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

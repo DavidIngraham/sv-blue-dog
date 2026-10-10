@@ -2,11 +2,13 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**WetMechanicalIntegrity** — Aggregate requirement for WetMechanicalIntegrity. Acceptance requires all applicable derived leaf results (N-111, N-112); this parent has no independent executable pass/fail predicate. Shared verification context: Evaluate after each selected profile wet-exposure campaign under N-002.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**WetMechanismTravel** — After each N-044 exposure, external mechanisms shall complete their full commanded travel without seizure. Verification uses the shared context of N-044.
+**N-044 WetMechanicalIntegrity** — External mechanisms and structural joints shall retain integrity after the selected wet-exposure campaign.
 
-**WetJointIntegrity** — After each N-044 exposure, structural joints shall show no separation or through-cracks on visual inspection at 5 times magnification. Verification uses the shared context of N-044.
+**N-111 WetMechanismTravel** — After each N-044 exposure, external mechanisms shall complete their full commanded travel without seizure.
+
+**N-112 WetJointIntegrity** — After each N-044 exposure, structural joints shall show no separation or through-cracks on visual inspection at 5 times magnification.
 
 ## N-044 derivation 1
 
@@ -35,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::wetMechanicalIntegrity1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 82 node(s) without a position, left undrawn, and 87 edge(s) at them
+%% not represented: 83 node(s) without a position, left undrawn, and 90 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

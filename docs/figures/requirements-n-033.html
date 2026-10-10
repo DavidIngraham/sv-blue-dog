@@ -4,220 +4,37 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N-033 visibility</title>
-<style>
-/* The default OpenSysML document stylesheet. Every value comes from a
-   --sysml-* token on .sysml-document, and the whole sheet is in the
-   opensysml cascade layer, so unlayered reader CSS overrides it without
-   specificity fights or !important. */
-@layer opensysml;
-
-@layer opensysml {
-  .sysml-document {
-    --sysml-font-body: system-ui, sans-serif;
-    --sysml-font-mono: ui-monospace, monospace;
-    --sysml-font-size: 1rem;
-    --sysml-line-height: 1.55;
-    --sysml-measure: 42rem;
-    --sysml-space: 1rem;
-    --sysml-space-tight: 0.35rem;
-    --sysml-text: #16191d;
-    --sysml-muted: #5a6472;
-    --sysml-accent: #1f4e79;
-    --sysml-rule: #cfd6de;
-    --sysml-surface: #f4f6f8;
-    --sysml-cell-padding: 0.35rem 0.6rem;
-    --sysml-code-font-size: 0.9em;
-    --sysml-caption-font-size: 0.9em;
-    --sysml-border-width: 1px;
-    --sysml-table-width: 100%;
-    --sysml-row-indent: 1.25em;
-    --sysml-title-page-height: 60vh;
-    --sysml-group-heading-weight: 600;
-    --sysml-term-weight: 600;
-    --sysml-formula-align: center;
-    --sysml-image-max-width: 100%;
-
-    box-sizing: border-box;
-    max-width: var(--sysml-measure);
-    margin: var(--sysml-space) auto;
-    padding: 0 var(--sysml-space);
-    font-family: var(--sysml-font-body);
-    font-size: var(--sysml-font-size);
-    line-height: var(--sysml-line-height);
-    color: var(--sysml-text);
-  }
-
-  .sysml-document .sysml-title {
-    color: var(--sysml-accent);
-  }
-
-  .sysml-document .sysml-title-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: var(--sysml-title-page-height);
-    text-align: center;
-    break-after: page;
-    page-break-after: always;
-  }
-
-  .sysml-document .sysml-section-number {
-    color: var(--sysml-muted);
-    margin-right: var(--sysml-space-tight);
-  }
-
-  .sysml-document .sysml-toc ol {
-    list-style: none;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-toc > ol {
-    padding-left: 0;
-  }
-
-  .sysml-document .sysml-toc a {
-    color: inherit;
-  }
-
-  .sysml-document .sysml-paragraph {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table {
-    border-collapse: collapse;
-    width: var(--sysml-table-width);
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table th,
-  .sysml-document .sysml-table td {
-    border: var(--sysml-border-width) solid var(--sysml-rule);
-    padding: var(--sysml-cell-padding);
-    text-align: left;
-    vertical-align: top;
-  }
-
-  .sysml-document .sysml-table thead th {
-    background: var(--sysml-surface);
-  }
-
-  /* A sized table lays its columns out at the shares its <col> widths state,
-     breaking a token wider than its cell rather than overflowing it. */
-  .sysml-document .sysml-table-sized {
-    table-layout: fixed;
-  }
-
-  .sysml-document .sysml-table-sized th,
-  .sysml-document .sysml-table-sized td {
-    overflow-wrap: break-word;
-  }
-
-  /* A nested row's first cell is indented one --sysml-row-indent per level of
-     the --sysml-depth the row states. */
-  .sysml-document .sysml-indent {
-    display: inline-block;
-    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
-  }
-
-  .sysml-document .sysml-group-heading th {
-    background: var(--sysml-surface);
-    color: var(--sysml-muted);
-    font-weight: var(--sysml-group-heading-weight);
-  }
-
-  .sysml-document .sysml-caption {
-    color: var(--sysml-muted);
-    font-size: var(--sysml-caption-font-size);
-    text-align: left;
-  }
-
-  .sysml-document .sysml-list {
-    margin: var(--sysml-space) 0;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-definitions {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-entry {
-    margin: var(--sysml-space-tight) 0;
-  }
-
-  .sysml-document .sysml-term {
-    font-weight: var(--sysml-term-weight);
-  }
-
-  .sysml-document .sysml-description {
-    margin: 0 0 0 var(--sysml-space);
-  }
-
-  .sysml-document .sysml-diagram {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image img {
-    max-width: var(--sysml-image-max-width);
-  }
-
-  .sysml-document .sysml-formula {
-    margin: var(--sysml-space) 0;
-    text-align: var(--sysml-formula-align);
-  }
-
-  .sysml-document .sysml-formula .sysml-math {
-    overflow-x: auto;
-  }
-
-  .sysml-document .sysml-diagram pre {
-    overflow-x: auto;
-    font-family: var(--sysml-font-mono);
-  }
-
-  .sysml-document code {
-    font-family: var(--sysml-font-mono);
-    font-size: var(--sysml-code-font-size);
-  }
-
-  .sysml-document .sysml-link,
-  .sysml-document .sysml-ref {
-    color: var(--sysml-accent);
-  }
-}
-</style>
+<link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::VisibilityRequirements">
 <h1 class="sysml-title">N-033 visibility</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements35">
 <div class="sysml-entry" data-element="BlueDogRequirements::Visibility" data-element-kind="requirementDef">
-<dt class="sysml-term">Visibility</dt>
-<dd class="sysml-description">Aggregate requirement for Visibility. Acceptance requires all applicable derived leaf results (N-101, N-102, N-103, N-104, N-105); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise daylight and darkness at meteorological visibility of at least 1 km, and detected visibility below 1 km. Traffic performance remains subject to unresolved S-001 scenarios.</dd>
+<dt class="sysml-term">N-033 Visibility</dt>
+<dd class="sysml-description">The vessel shall provide mode-appropriate navigation and traffic response across the specified visibility conditions.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::VisibilityNavigationCapability" data-element-kind="requirementDef">
-<dt class="sysml-term">VisibilityNavigationCapability</dt>
-<dd class="sysml-description">Navigation shall meet E-002 and E-008 acceptance criteria at visibility of at least 1 km in daylight and darkness. Verification uses the shared context of N-033.</dd>
+<dt class="sysml-term">N-101 VisibilityNavigationCapability</dt>
+<dd class="sysml-description">Navigation shall meet E-002 and E-008 acceptance criteria at visibility of at least 1 km in daylight and darkness.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::VisibilityTrafficCapability" data-element-kind="requirementDef">
-<dt class="sysml-term">VisibilityTrafficCapability</dt>
-<dd class="sysml-description">Traffic assessment shall meet the frozen S-001 criteria at visibility of at least 1 km in daylight and darkness. Verification uses the shared context of N-033.</dd>
+<dt class="sysml-term">N-102 VisibilityTrafficCapability</dt>
+<dd class="sysml-description">Traffic assessment shall meet the frozen S-001 criteria at visibility of at least 1 km in daylight and darkness.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::RestrictedVisibilityEntry" data-element-kind="requirementDef">
-<dt class="sysml-term">RestrictedVisibilityEntry</dt>
-<dd class="sysml-description">On detecting visibility below 1 km, the vessel shall enter restricted-visibility state within 60 seconds. Verification uses the shared context of N-033.</dd>
+<dt class="sysml-term">N-103 RestrictedVisibilityEntry</dt>
+<dd class="sysml-description">On detecting visibility below 1 km, the vessel shall enter restricted-visibility state within 60 seconds.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::RestrictedVisibilityEvidence" data-element-kind="requirementDef">
-<dt class="sysml-term">RestrictedVisibilityEvidence</dt>
-<dd class="sysml-description">Restricted-visibility operation shall be recorded as outside the normal operational envelope. Verification uses the shared context of N-033.</dd>
+<dt class="sysml-term">N-104 RestrictedVisibilityEvidence</dt>
+<dd class="sysml-description">Restricted-visibility operation shall be recorded as outside the normal operational envelope.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::RestrictedVisibilityCollisionAssessment" data-element-kind="requirementDef">
-<dt class="sysml-term">RestrictedVisibilityCollisionAssessment</dt>
-<dd class="sysml-description">Collision assessment shall remain active during restricted-visibility operation. Verification uses the shared context of N-033.</dd>
+<dt class="sysml-term">N-105 RestrictedVisibilityCollisionAssessment</dt>
+<dd class="sysml-description">Collision assessment shall remain active during restricted-visibility operation.</dd>
 </div>
 </dl>
 <section class="sysml-section" id="group1" data-content="section" data-name="group1">
@@ -247,7 +64,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::visibility1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 75 node(s) without a position, left undrawn, and 86 edge(s) at them
+%% not represented: 76 node(s) without a position, left undrawn, and 92 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -293,7 +110,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::visibility2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 76 node(s) without a position, left undrawn, and 87 edge(s) at them
+%% not represented: 77 node(s) without a position, left undrawn, and 93 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

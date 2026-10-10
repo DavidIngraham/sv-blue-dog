@@ -4,228 +4,45 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>E-002 navigation and control</title>
-<style>
-/* The default OpenSysML document stylesheet. Every value comes from a
-   --sysml-* token on .sysml-document, and the whole sheet is in the
-   opensysml cascade layer, so unlayered reader CSS overrides it without
-   specificity fights or !important. */
-@layer opensysml;
-
-@layer opensysml {
-  .sysml-document {
-    --sysml-font-body: system-ui, sans-serif;
-    --sysml-font-mono: ui-monospace, monospace;
-    --sysml-font-size: 1rem;
-    --sysml-line-height: 1.55;
-    --sysml-measure: 42rem;
-    --sysml-space: 1rem;
-    --sysml-space-tight: 0.35rem;
-    --sysml-text: #16191d;
-    --sysml-muted: #5a6472;
-    --sysml-accent: #1f4e79;
-    --sysml-rule: #cfd6de;
-    --sysml-surface: #f4f6f8;
-    --sysml-cell-padding: 0.35rem 0.6rem;
-    --sysml-code-font-size: 0.9em;
-    --sysml-caption-font-size: 0.9em;
-    --sysml-border-width: 1px;
-    --sysml-table-width: 100%;
-    --sysml-row-indent: 1.25em;
-    --sysml-title-page-height: 60vh;
-    --sysml-group-heading-weight: 600;
-    --sysml-term-weight: 600;
-    --sysml-formula-align: center;
-    --sysml-image-max-width: 100%;
-
-    box-sizing: border-box;
-    max-width: var(--sysml-measure);
-    margin: var(--sysml-space) auto;
-    padding: 0 var(--sysml-space);
-    font-family: var(--sysml-font-body);
-    font-size: var(--sysml-font-size);
-    line-height: var(--sysml-line-height);
-    color: var(--sysml-text);
-  }
-
-  .sysml-document .sysml-title {
-    color: var(--sysml-accent);
-  }
-
-  .sysml-document .sysml-title-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: var(--sysml-title-page-height);
-    text-align: center;
-    break-after: page;
-    page-break-after: always;
-  }
-
-  .sysml-document .sysml-section-number {
-    color: var(--sysml-muted);
-    margin-right: var(--sysml-space-tight);
-  }
-
-  .sysml-document .sysml-toc ol {
-    list-style: none;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-toc > ol {
-    padding-left: 0;
-  }
-
-  .sysml-document .sysml-toc a {
-    color: inherit;
-  }
-
-  .sysml-document .sysml-paragraph {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table {
-    border-collapse: collapse;
-    width: var(--sysml-table-width);
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table th,
-  .sysml-document .sysml-table td {
-    border: var(--sysml-border-width) solid var(--sysml-rule);
-    padding: var(--sysml-cell-padding);
-    text-align: left;
-    vertical-align: top;
-  }
-
-  .sysml-document .sysml-table thead th {
-    background: var(--sysml-surface);
-  }
-
-  /* A sized table lays its columns out at the shares its <col> widths state,
-     breaking a token wider than its cell rather than overflowing it. */
-  .sysml-document .sysml-table-sized {
-    table-layout: fixed;
-  }
-
-  .sysml-document .sysml-table-sized th,
-  .sysml-document .sysml-table-sized td {
-    overflow-wrap: break-word;
-  }
-
-  /* A nested row's first cell is indented one --sysml-row-indent per level of
-     the --sysml-depth the row states. */
-  .sysml-document .sysml-indent {
-    display: inline-block;
-    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
-  }
-
-  .sysml-document .sysml-group-heading th {
-    background: var(--sysml-surface);
-    color: var(--sysml-muted);
-    font-weight: var(--sysml-group-heading-weight);
-  }
-
-  .sysml-document .sysml-caption {
-    color: var(--sysml-muted);
-    font-size: var(--sysml-caption-font-size);
-    text-align: left;
-  }
-
-  .sysml-document .sysml-list {
-    margin: var(--sysml-space) 0;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-definitions {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-entry {
-    margin: var(--sysml-space-tight) 0;
-  }
-
-  .sysml-document .sysml-term {
-    font-weight: var(--sysml-term-weight);
-  }
-
-  .sysml-document .sysml-description {
-    margin: 0 0 0 var(--sysml-space);
-  }
-
-  .sysml-document .sysml-diagram {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image img {
-    max-width: var(--sysml-image-max-width);
-  }
-
-  .sysml-document .sysml-formula {
-    margin: var(--sysml-space) 0;
-    text-align: var(--sysml-formula-align);
-  }
-
-  .sysml-document .sysml-formula .sysml-math {
-    overflow-x: auto;
-  }
-
-  .sysml-document .sysml-diagram pre {
-    overflow-x: auto;
-    font-family: var(--sysml-font-mono);
-  }
-
-  .sysml-document code {
-    font-family: var(--sysml-font-mono);
-    font-size: var(--sysml-code-font-size);
-  }
-
-  .sysml-document .sysml-link,
-  .sysml-document .sysml-ref {
-    color: var(--sysml-accent);
-  }
-}
-</style>
+<link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::NavigationAndControlRequirements">
 <h1 class="sysml-title">E-002 navigation and control</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements12">
 <div class="sysml-entry" data-element="BlueDogRequirements::NavigationAndControl" data-element-kind="requirementDef">
-<dt class="sysml-term">NavigationAndControl</dt>
-<dd class="sysml-description">Aggregate requirement for NavigationAndControl. Acceptance requires all applicable derived leaf results (E-105, E-106, E-107, E-108, E-109); this parent has no independent executable pass/fail predicate. Shared verification context: Qualification uses the selected mission profile. Accuracy trials contain 1800 scheduled one-second epochs in 30 minutes; invalid or missing epochs fail. Position and heading criteria use the same set of at least 1710 qualifying epochs, preventing separate selection of different good samples. Fault-injection runs are separate.</dd>
+<dt class="sysml-term">E-002 NavigationAndControl</dt>
+<dd class="sysml-description">The vessel shall provide autonomous navigation and sail/steering control within the selected operational profile.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::TrafficSafety" data-element-kind="requirementDef">
-<dt class="sysml-term">TrafficSafety</dt>
-<dd class="sysml-description">Aggregate requirement for TrafficSafety. Acceptance requires all applicable derived leaf results (S-101, S-102, S-103, S-104); this parent has no independent executable pass/fail predicate. Shared verification context: Use independently recorded head-on, crossing and overtaking AIS and non-AIS targets, day and night in the selected operational profile. Detection ranges, target signatures, closest-approach margins and maneuver feasibility remain unresolved acceptance parameters; tracking and avoidance cannot receive complete passes until these are frozen.</dd>
+<dt class="sysml-term">S-001 TrafficSafety</dt>
+<dd class="sysml-description">The vessel shall assess and respond to collision risks within the deployment-specific traffic envelope.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::NavigationAvailability" data-element-kind="requirementDef">
-<dt class="sysml-term">NavigationAvailability</dt>
-<dd class="sysml-description">Aggregate requirement for NavigationAvailability. Acceptance requires all applicable derived leaf results (E-140, E-141, E-142, E-143, E-132); this parent has no independent executable pass/fail predicate. Shared verification context: Campaigns use 1800 scheduled one-second epochs in 30 minutes, with missing/invalid epochs counted as failures. Fault injection is separate.</dd>
+<dt class="sysml-term">E-008 NavigationAvailability</dt>
+<dd class="sysml-description">The vessel shall maintain valid navigation inputs and reject stale observations.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::GuidanceUpdateCadence" data-element-kind="requirementDef">
-<dt class="sysml-term">GuidanceUpdateCadence</dt>
-<dd class="sysml-description">During operational qualification, mission guidance shall update at least once per second. Verification uses the shared context of E-002.</dd>
+<dt class="sysml-term">E-105 GuidanceUpdateCadence</dt>
+<dd class="sysml-description">During operational qualification, mission guidance shall update at least once per second.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::SailCommandCadence" data-element-kind="requirementDef">
-<dt class="sysml-term">SailCommandCadence</dt>
-<dd class="sysml-description">During operational qualification, commanded sail position shall update at least once per second. Verification uses the shared context of E-002.</dd>
+<dt class="sysml-term">E-106 SailCommandCadence</dt>
+<dd class="sysml-description">During operational qualification, commanded sail position shall update at least once per second.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::SteeringCommandCadence" data-element-kind="requirementDef">
-<dt class="sysml-term">SteeringCommandCadence</dt>
-<dd class="sysml-description">During operational qualification, commanded steering position shall update at least once per second. Verification uses the shared context of E-002.</dd>
+<dt class="sysml-term">E-107 SteeringCommandCadence</dt>
+<dd class="sysml-description">During operational qualification, commanded steering position shall update at least once per second.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::PositionAccuracy" data-element-kind="requirementDef">
-<dt class="sysml-term">PositionAccuracy</dt>
-<dd class="sysml-description">At every epoch in the common E-002 acceptance set, valid position error shall be at most 10 m against an independent reference. Verification uses the shared context of E-002.</dd>
+<dt class="sysml-term">E-108 PositionAccuracy</dt>
+<dd class="sysml-description">At every epoch in the common E-002 acceptance set, valid position error shall be at most 10 m against an independent reference.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::HeadingAccuracy" data-element-kind="requirementDef">
-<dt class="sysml-term">HeadingAccuracy</dt>
-<dd class="sysml-description">At every epoch in the common E-002 acceptance set, valid heading error shall be at most 10 degrees against an independent reference. Verification uses the shared context of E-002.</dd>
+<dt class="sysml-term">E-109 HeadingAccuracy</dt>
+<dd class="sysml-description">At every epoch in the common E-002 acceptance set, valid heading error shall be at most 10 degrees against an independent reference.</dd>
 </div>
 </dl>
 <section class="sysml-section" id="group1" data-content="section" data-name="group1">
@@ -255,7 +72,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::navigationAndControl1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 211 node(s) without a position, left undrawn, and 390 edge(s) at them
+%% not represented: 215 node(s) without a position, left undrawn, and 408 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -301,7 +118,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::navigationAndControl2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 211 node(s) without a position, left undrawn, and 390 edge(s) at them
+%% not represented: 212 node(s) without a position, left undrawn, and 396 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -347,7 +164,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::navigationAndControl3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 213 node(s) without a position, left undrawn, and 392 edge(s) at them
+%% not represented: 214 node(s) without a position, left undrawn, and 398 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

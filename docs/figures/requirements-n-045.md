@@ -2,11 +2,13 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**WetElectricalIntegrity** — Aggregate requirement for WetElectricalIntegrity. Acceptance requires all applicable derived leaf results (N-113, N-114); this parent has no independent executable pass/fail predicate. Shared verification context: Evaluate disconnected cable assemblies after each selected profile wet-exposure campaign under N-002; disconnect electronics for insulation measurement.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**WetConductorResistance** — After each N-045 exposure, end-to-end conductor resistance shall be no more than 10 percent above its pre-test value. Verification uses the shared context of N-045.
+**N-045 WetElectricalIntegrity** — Cable assemblies shall retain electrical integrity after the selected wet-exposure campaign.
 
-**WetInsulationResistance** — After each N-045 exposure, conductor-to-conductor and conductor-to-case insulation resistance shall be at least 1 megohm at 50 V DC. Verification uses the shared context of N-045.
+**N-113 WetConductorResistance** — After each N-045 exposure, end-to-end conductor resistance shall be no more than 10 percent above its pre-test value.
+
+**N-114 WetInsulationResistance** — After each N-045 exposure, conductor-to-conductor and conductor-to-case insulation resistance shall be at least 1 megohm at 50 V DC.
 
 ## N-045 derivation 1
 
@@ -35,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::wetElectricalIntegrity1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 75 node(s) without a position, left undrawn, and 78 edge(s) at them
+%% not represented: 76 node(s) without a position, left undrawn, and 81 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

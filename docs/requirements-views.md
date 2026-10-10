@@ -2,6 +2,8 @@
 
 Each page follows one parent requirement to its immediate derived requirements. Diagrams keep the parent above at most three children; dashed arrows point back to the original requirement. Follow the links on each page for the next level. Shared children can appear under several parents. These are derivation views; architecture satisfaction remains in the [traceability tables](traceability.md).
 
+Read the [qualification conditions and verification specifications](requirements-context.md) alongside the concise statements. Rationale and open issues are presented separately there.
+
 The complete [requirements register](requirements-register.md) provides statements and derivation rationale. All 249 derivations are covered across these views.
 
 ## Mission and challenge

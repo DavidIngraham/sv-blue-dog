@@ -11,61 +11,44 @@ package GorgeChallenge {
     private import RequirementDerivation::*;
     requirement def <'C-000'> TransGorgeChallenge {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Complete the autonomous Trans-Gorge sailing
-         * challenge: The Dalles-Bonneville-The Dalles as the threshold,
-         * then repeat for as long as practical, under the course, autonomy,
-         * propulsion, observation, and emergency intervention rules below.
-         */
+        doc /* The vessel shall complete the Trans-Gorge challenge under C-001 through C-006. */
+        metadata rationale : ModelingMetadata::Rationale { text = "The first The Dalles–Bonneville–The Dalles circuit is the threshold; repeated circuits are the endurance objective."; }
     }
     requirement transGorgeChallenge : TransGorgeChallenge;
     requirement def <'C-001'> CourseCompletion {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Threshold: Complete a journey from The Dalles
-         * to Bonneville and back to The Dalles. Exact start/finish and turnaround
-         * gates, permitted corridor, and crossing evidence remain to be agreed.
-         */
+        doc /* The vessel shall complete a journey from The Dalles to Bonneville and back to The Dalles. */
+        metadata issue : ModelingMetadata::Issue { text = "Start/finish and turnaround gates, permitted corridor and crossing evidence remain to be agreed."; }
     }
     requirement def <'C-002'> RepeatedOperation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Objective beyond the first completed round trip:
-         * repeat The Dalles-Bonneville-The Dalles autonomously for as long as
-         * practical. No fixed objective endurance duration has been selected.
-         */
+        doc /* After its first circuit, the vessel should repeat The Dalles–Bonneville–The Dalles autonomously for as long as practical. */
+        comment notes /* This is an endurance objective, not a finite-duration pass/fail claim. */
+        metadata issue : ModelingMetadata::Issue { text = "No fixed objective endurance duration has been selected."; }
     }
     requirement def <'C-003'> UnassistedAttempt {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* A qualifying attempt shall complete the round trip
-         * without operator intervention. Passive live monitoring is permitted.
-         * Any use of remote emergency abort or manual control disqualifies the
-         * attempt as unassisted. Restart criteria remain to be agreed.
-         */
+        doc /* A qualifying attempt shall complete the round trip without operator intervention. */
+        comment conditions /* Passive live monitoring is permitted. Remote emergency abort or manual control disqualifies the attempt as unassisted. */
+        metadata issue : ModelingMetadata::Issue { text = "Restart criteria remain to be agreed."; }
     }
     requirement def <'C-004'> SailingPropulsion {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* A qualifying challenge attempt shall use sailing
-         * propulsion without auxiliary motor propulsion. Auxiliary motor use is
-         * allowed during development tests, which do not count as challenge attempts.
-         * Motor use during an attempt prevents it from qualifying.
-         * An auxiliary motor may remain installed for vessel recovery.
-         * Recovery propulsion is permitted outside the qualifying attempt; use
-         * during an attempt ends that attempt without qualification.
-         * The restriction concerns propulsion, not electrical power for onboard systems.
-         */
+        doc /* A qualifying attempt shall use sailing propulsion without auxiliary motor propulsion. */
+        comment conditions /* An auxiliary motor may remain installed. Motor use is permitted during separate development tests and vessel recovery; use during an attempt ends its qualification. */
+        comment notes /* The restriction concerns propulsion, not onboard electrical power. */
     }
     requirement def <'C-005'> LiveObservation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Live monitoring shall be available to the operator.
-         * Monitoring-link loss shall not interrupt autonomous mission execution.
-         * Telemetry shall be retained onboard and transmitted when contact returns.
-         * Coverage, update rate, retained data, and outage retention duration are open.
-         */
+        doc /* The vessel shall provide live monitoring with autonomous operation and retained telemetry across communication outages. */
+        comment conditions /* Monitoring-link loss shall not interrupt autonomous mission execution. Retained telemetry shall be transmitted after contact returns. */
+        metadata issue : ModelingMetadata::Issue { text = "Challenge-level coverage, update rate and outage-retention criteria remain to be agreed; vehicle design targets do not amend the challenge automatically."; }
     }
     requirement def <'C-006'> EmergencyIntervention {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Provide remote emergency abort or manual control
-         * when a command link is available. Use disqualifies the attempt as unassisted.
-         * Emergency abort behavior and the subsequent recovery procedure are open.
-         */
+        doc /* The vessel shall permit remote emergency abort or manual control when a command link is available. */
+        comment conditions /* Use disqualifies the attempt as unassisted. */
+        metadata issue : ModelingMetadata::Issue { text = "Challenge-level abort and recovery procedures remain to be agreed."; }
     }
     requirement courseCompletion : CourseCompletion;
     requirement repeatedOperation : RepeatedOperation;
@@ -75,37 +58,37 @@ package GorgeChallenge {
     requirement emergencyIntervention : EmergencyIntervention;
     #derivation connection challengeRuleCourseCompletion {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* This rule refines the overall Trans-Gorge challenge. */
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> courseCompletion;
     }
     #derivation connection challengeRuleRepeatedOperation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* This rule refines the overall Trans-Gorge challenge. */
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> repeatedOperation;
     }
     #derivation connection challengeRuleUnassistedAttempt {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* This rule refines the overall Trans-Gorge challenge. */
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> unassistedAttempt;
     }
     #derivation connection challengeRuleSailingPropulsion {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* This rule refines the overall Trans-Gorge challenge. */
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> sailingPropulsion;
     }
     #derivation connection challengeRuleLiveObservation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* This rule refines the overall Trans-Gorge challenge. */
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> liveObservation;
     }
     #derivation connection challengeRuleEmergencyIntervention {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* This rule refines the overall Trans-Gorge challenge. */
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> emergencyIntervention;
     }

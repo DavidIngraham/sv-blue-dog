@@ -155,3 +155,8 @@ The next lesson was that a measurable paragraph can still hide several requireme
 I have started turning the endurance goal into an [executable energy model](sustained-operations.md). Individual loads now roll up into a budget, and the battery balance follows the order of the day: long periods without harvesting, then a limited charging window. Charging losses, capacity limits, peak demand and the recovery reserve all matter.
 
 The first synthetic example passes the numerical 72-hour checks, but its worst overnight margin is only about 2.7 Wh above the recovery reserve. That makes the next question concrete: measure the loads and establish credible harvesting bounds. The native verification case stays inconclusive until that evidence is accepted. A favorable daily average is useful, but it cannot rescue a boat that runs out of usable energy before sunrise.
+
+
+### Keeping the requirements readable
+
+I found that the requirements were becoming a mixture of obligations, explanations and test instructions. I have separated those: each requirement now has a concise statement, while [qualification conditions, rationale and verification plans](requirements-context.md) live in distinct model elements. The limits still matter; they are easier to find without repeating them in every sentence. A planned verification case remains inconclusive until there is evidence behind it.

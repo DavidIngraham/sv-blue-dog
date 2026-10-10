@@ -148,3 +148,23 @@ The [decomposition map](../docs/requirement-decomposition.md) explains the 127 a
 [energy.sysml](energy.sysml) defines extensible electrical load collections, mode budgets, battery storage, chronological resource intervals, a native analysis case and an evidence-gated verification case. [energy-examples.sysml](energy-examples.sysml) holds the synthetic 72-hour input set separately from the reusable definitions. All accounting and requirement predicates execute in SysML, including collection summation and recursive energy propagation. `ordered nonunique` preserves repeated values in sampled histories.
 
 The [native load table](../docs/energy-budget.md), [analysis JSON](../docs/analysis/sustained-energy.json) and [framework guide](../docs/sustained-operations.md) distinguish conditional numerical feasibility from accepted evidence. Publishing regenerates the table and analysis; `--check` detects stale outputs. The verification case explicitly verifies E-200 and returns inconclusive for the unaccepted synthetic inputs.
+
+## Concise requirements and supporting information
+
+Keep `doc` on a requirement definition to one concise obligation. Put qualification
+conditions in a named `comment conditions`; those definitions remain normative.
+Use `comment notes` for explanatory limitations, `ModelingMetadata::Rationale`
+for justification, and `ModelingMetadata::Issue` for open questions. These are
+native SysML constructs; no project metadata library is needed. Formal `assume`
+and `require` predicates remain in the requirement where already modeled.
+
+`requirement-verification.sysml` owns planned procedures and native `verify`
+links to the parent and applicable leaves, including shared leaves. Its cases
+return inconclusive pending evidence-backed implementation. Do not treat a prose
+parent or an unimplemented case as an executable pass.
+
+The [register](../docs/requirements-register.md) and focused views show concise
+statements. The separate [context report](../docs/requirements-context.md) publishes
+conditions, rationale, notes, issues and verification specifications. Derivation
+rationale is standard metadata on each connection. Publishing renders the native
+document set once per format; HTML files share `figures/sysml-document.css`.

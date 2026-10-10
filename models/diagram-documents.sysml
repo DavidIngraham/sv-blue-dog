@@ -1,145 +1,145 @@
 package BlueDogDiagramDocuments {
     private import DocumentQueries::*;
     calc def Statements1 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::transGorgeChallenge", "GorgeChallenge::courseCompletion", "GorgeChallenge::repeatedOperation", "GorgeChallenge::unassistedAttempt", "GorgeChallenge::sailingPropulsion", "GorgeChallenge::liveObservation", "GorgeChallenge::emergencyIntervention")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::transGorgeChallenge", "GorgeChallenge::courseCompletion", "GorgeChallenge::repeatedOperation", "GorgeChallenge::unassistedAttempt", "GorgeChallenge::sailingPropulsion", "GorgeChallenge::liveObservation", "GorgeChallenge::emergencyIntervention")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements2 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::courseCompletion", "BlueDogRequirements::roundTrip")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::courseCompletion", "BlueDogRequirements::roundTrip")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements3 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::repeatedOperation", "BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::serviceability", "BlueDogRequirements::sustainedEnergyFeasibility")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::repeatedOperation", "BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::serviceability", "BlueDogRequirements::sustainedEnergyFeasibility")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements4 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::unassistedAttempt", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::challengeMotorInhibition", "BlueDogRequirements::commandIntegrity")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::unassistedAttempt", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::challengeMotorInhibition", "BlueDogRequirements::commandIntegrity")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements5 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::sailingPropulsion", "BlueDogRequirements::roundTrip", "BlueDogRequirements::challengeMotorInhibition")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::sailingPropulsion", "BlueDogRequirements::roundTrip", "BlueDogRequirements::challengeMotorInhibition")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements6 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::liveObservation", "BlueDogRequirements::communications")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::liveObservation", "BlueDogRequirements::communications")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements7 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::emergencyIntervention", "BlueDogRequirements::communications", "BlueDogRequirements::safeRecovery", "BlueDogRequirements::commandIntegrity")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::emergencyIntervention", "BlueDogRequirements::communications", "BlueDogRequirements::safeRecovery", "BlueDogRequirements::commandIntegrity")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements8 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDog::Goals::hawaiiVoyage", "BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::communications", "BlueDogRequirements::resetRecovery", "BlueDogRequirements::missionEvidence", "BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::oceanEnvironment", "BlueDogRequirements::operatingBoundary", "BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::serviceability", "BlueDogRequirements::sustainedEnergyFeasibility")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDog::Goals::hawaiiVoyage", "BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::communications", "BlueDogRequirements::resetRecovery", "BlueDogRequirements::missionEvidence", "BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::oceanEnvironment", "BlueDogRequirements::operatingBoundary", "BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::serviceability", "BlueDogRequirements::sustainedEnergyFeasibility")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements9 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::roundTrip", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::resetRecovery", "BlueDogRequirements::communications", "BlueDogRequirements::ingressResponse", "BlueDogRequirements::missionEvidence", "BlueDogRequirements::transportability", "BlueDogRequirements::desktopManufacture", "BlueDogRequirements::operatingBoundary", "BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::gorgeEnvironment")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::roundTrip", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::resetRecovery", "BlueDogRequirements::communications", "BlueDogRequirements::ingressResponse", "BlueDogRequirements::missionEvidence", "BlueDogRequirements::transportability", "BlueDogRequirements::desktopManufacture", "BlueDogRequirements::operatingBoundary", "BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::gorgeEnvironment")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements10 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::energyAwareness", "BlueDogRequirements::lowEnergyRecovery", "BlueDogRequirements::sustainedReserveProtection", "BlueDogRequirements::peakSupplyCapability", "BlueDogRequirements::harvestCampaignCoverage", "BlueDogRequirements::energyEvidenceReadiness")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::energyAwareness", "BlueDogRequirements::lowEnergyRecovery", "BlueDogRequirements::sustainedReserveProtection", "BlueDogRequirements::peakSupplyCapability", "BlueDogRequirements::harvestCampaignCoverage", "BlueDogRequirements::energyEvidenceReadiness")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements11 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::energyAwareness", "BlueDogRequirements::lowEnergyRecovery", "BlueDogRequirements::energyEstimateCadence", "BlueDogRequirements::reserveEstimateCadence", "BlueDogRequirements::energyEstimateAccuracy", "BlueDogRequirements::conservativeEnergyEstimate")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::energyAwareness", "BlueDogRequirements::lowEnergyRecovery", "BlueDogRequirements::energyEstimateCadence", "BlueDogRequirements::reserveEstimateCadence", "BlueDogRequirements::energyEstimateAccuracy", "BlueDogRequirements::conservativeEnergyEstimate")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements12 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::navigationAndControl", "BlueDogRequirements::trafficSafety", "BlueDogRequirements::navigationAvailability", "BlueDogRequirements::guidanceUpdateCadence", "BlueDogRequirements::sailCommandCadence", "BlueDogRequirements::steeringCommandCadence", "BlueDogRequirements::positionAccuracy", "BlueDogRequirements::headingAccuracy")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::navigationAndControl", "BlueDogRequirements::trafficSafety", "BlueDogRequirements::navigationAvailability", "BlueDogRequirements::guidanceUpdateCadence", "BlueDogRequirements::sailCommandCadence", "BlueDogRequirements::steeringCommandCadence", "BlueDogRequirements::positionAccuracy", "BlueDogRequirements::headingAccuracy")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements13 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::trafficSafety", "BlueDogRequirements::navigationConspicuity", "BlueDogRequirements::trafficTracking", "BlueDogRequirements::collisionAssessmentCadence", "BlueDogRequirements::avoidanceCommandDeadline", "BlueDogRequirements::trafficAwarenessFault")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::trafficSafety", "BlueDogRequirements::navigationConspicuity", "BlueDogRequirements::trafficTracking", "BlueDogRequirements::collisionAssessmentCadence", "BlueDogRequirements::avoidanceCommandDeadline", "BlueDogRequirements::trafficAwarenessFault")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements14 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::marineDurability", "BlueDogRequirements::stabilityAndFouling", "BlueDogRequirements::airTemperature", "BlueDogRequirements::waterTemperature", "BlueDogRequirements::humidity", "BlueDogRequirements::visibility", "BlueDogRequirements::calmOperation", "BlueDogRequirements::envelopeTransition")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::marineDurability", "BlueDogRequirements::stabilityAndFouling", "BlueDogRequirements::airTemperature", "BlueDogRequirements::waterTemperature", "BlueDogRequirements::humidity", "BlueDogRequirements::visibility", "BlueDogRequirements::calmOperation", "BlueDogRequirements::envelopeTransition")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements15 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::safeRecovery", "BlueDogRequirements::recoveryPropulsion", "BlueDogRequirements::abortLatchDeadline", "BlueDogRequirements::recoveryTelemetryCadence", "BlueDogRequirements::motorIsolationDeadline", "BlueDogRequirements::isolationRestartInhibition", "BlueDogRequirements::manualControlLossShutdown", "BlueDogRequirements::controlLossLocationContinuity", "BlueDogRequirements::qualificationPersistence", "BlueDogRequirements::motorQualificationInvariant", "BlueDogRequirements::periodicLogCadence")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::safeRecovery", "BlueDogRequirements::recoveryPropulsion", "BlueDogRequirements::abortLatchDeadline", "BlueDogRequirements::recoveryTelemetryCadence", "BlueDogRequirements::motorIsolationDeadline", "BlueDogRequirements::isolationRestartInhibition", "BlueDogRequirements::manualControlLossShutdown", "BlueDogRequirements::controlLossLocationContinuity", "BlueDogRequirements::qualificationPersistence", "BlueDogRequirements::motorQualificationInvariant", "BlueDogRequirements::periodicLogCadence")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements16 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::recoveryPropulsion", "BlueDogRequirements::recoveryEnergy", "BlueDogRequirements::recoveryPropulsorWeeds")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::recoveryPropulsion", "BlueDogRequirements::recoveryEnergy", "BlueDogRequirements::recoveryPropulsorWeeds")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements17 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::communications", "BlueDogRequirements::telemetryEquipment", "BlueDogRequirements::commandIntegrity", "BlueDogRequirements::telemetryDeliveryCadence", "BlueDogRequirements::outageAutonomy", "BlueDogRequirements::reconnectCurrentRecord", "BlueDogRequirements::backlogOrdering", "BlueDogRequirements::backlogCurrentPriority", "BlueDogRequirements::logRetention", "BlueDogRequirements::reconnectLogPreservation")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::communications", "BlueDogRequirements::telemetryEquipment", "BlueDogRequirements::commandIntegrity", "BlueDogRequirements::telemetryDeliveryCadence", "BlueDogRequirements::outageAutonomy", "BlueDogRequirements::reconnectCurrentRecord", "BlueDogRequirements::backlogOrdering", "BlueDogRequirements::backlogCurrentPriority", "BlueDogRequirements::logRetention", "BlueDogRequirements::reconnectLogPreservation")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements18 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::gorgeEnvironment", "BlueDogRequirements::gorgeWind", "BlueDogRequirements::gorgeWaves", "BlueDogRequirements::gorgeCurrent", "BlueDogRequirements::gorgeSurvivalWind", "BlueDogRequirements::gorgeSurvivalWaves", "BlueDogRequirements::freshwaterExposure", "BlueDogRequirements::submergedWeedPassage", "BlueDogRequirements::weedSnagShedding")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::gorgeEnvironment", "BlueDogRequirements::gorgeWind", "BlueDogRequirements::gorgeWaves", "BlueDogRequirements::gorgeCurrent", "BlueDogRequirements::gorgeSurvivalWind", "BlueDogRequirements::gorgeSurvivalWaves", "BlueDogRequirements::freshwaterExposure", "BlueDogRequirements::submergedWeedPassage", "BlueDogRequirements::weedSnagShedding")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements19 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::oceanEnvironment", "BlueDogRequirements::oceanWind", "BlueDogRequirements::oceanWaves", "BlueDogRequirements::oceanCurrent", "BlueDogRequirements::oceanSurvivalWind", "BlueDogRequirements::oceanSurvivalWaves", "BlueDogRequirements::saltwaterExposure")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::oceanEnvironment", "BlueDogRequirements::oceanWind", "BlueDogRequirements::oceanWaves", "BlueDogRequirements::oceanCurrent", "BlueDogRequirements::oceanSurvivalWind", "BlueDogRequirements::oceanSurvivalWaves", "BlueDogRequirements::saltwaterExposure")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements20 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::marineDurability", "BlueDogRequirements::freshwaterExposure", "BlueDogRequirements::saltwaterExposure", "BlueDogRequirements::enclosureSealing", "BlueDogRequirements::wetMechanicalIntegrity", "BlueDogRequirements::wetElectricalIntegrity", "BlueDogRequirements::solarHeating", "BlueDogRequirements::printedMaterialAging")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::marineDurability", "BlueDogRequirements::freshwaterExposure", "BlueDogRequirements::saltwaterExposure", "BlueDogRequirements::enclosureSealing", "BlueDogRequirements::wetMechanicalIntegrity", "BlueDogRequirements::wetElectricalIntegrity", "BlueDogRequirements::solarHeating", "BlueDogRequirements::printedMaterialAging")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements21 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::stabilityAndFouling", "BlueDogRequirements::selfRighting", "BlueDogRequirements::capsizeControlRecovery", "BlueDogRequirements::submergedWeedPassage", "BlueDogRequirements::weedSnagShedding", "BlueDogRequirements::weedBlockageResponse", "BlueDogRequirements::recoveryPropulsorWeeds")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::stabilityAndFouling", "BlueDogRequirements::selfRighting", "BlueDogRequirements::capsizeControlRecovery", "BlueDogRequirements::submergedWeedPassage", "BlueDogRequirements::weedSnagShedding", "BlueDogRequirements::weedBlockageResponse", "BlueDogRequirements::recoveryPropulsorWeeds")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements22 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::recoveryEnergy", "BlueDogRequirements::launchEnergyAdmission", "BlueDogRequirements::sustainedReserveProtection")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::recoveryEnergy", "BlueDogRequirements::launchEnergyAdmission", "BlueDogRequirements::sustainedReserveProtection")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements23 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::resetRecovery", "BlueDogRequirements::restartDeadline", "BlueDogRequirements::missionStateRestoration", "BlueDogRequirements::gateProgressRestoration", "BlueDogRequirements::resetRestrictionPreservation", "BlueDogRequirements::qualificationRestoration", "BlueDogRequirements::logInterruptionDurability", "BlueDogRequirements::unknownQualificationFallback", "BlueDogRequirements::qualificationPersistence", "BlueDogRequirements::freshRecoveryCommand", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::resetRecovery", "BlueDogRequirements::restartDeadline", "BlueDogRequirements::missionStateRestoration", "BlueDogRequirements::gateProgressRestoration", "BlueDogRequirements::resetRestrictionPreservation", "BlueDogRequirements::qualificationRestoration", "BlueDogRequirements::logInterruptionDurability", "BlueDogRequirements::unknownQualificationFallback", "BlueDogRequirements::qualificationPersistence", "BlueDogRequirements::freshRecoveryCommand", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements24 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::lowEnergyRecovery", "BlueDogRequirements::lowEnergyEntry", "BlueDogRequirements::lowEnergyPayloadInhibition", "BlueDogRequirements::lowEnergyNavigationContinuity", "BlueDogRequirements::lowEnergyCollisionContinuity", "BlueDogRequirements::lowEnergyExit", "BlueDogRequirements::payloadRestartPermission", "BlueDogRequirements::periodicLogCadence", "BlueDogRequirements::telemetryDeliveryCadence", "BlueDogRequirements::criticalEventRecording", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::lowEnergyRecovery", "BlueDogRequirements::lowEnergyEntry", "BlueDogRequirements::lowEnergyPayloadInhibition", "BlueDogRequirements::lowEnergyNavigationContinuity", "BlueDogRequirements::lowEnergyCollisionContinuity", "BlueDogRequirements::lowEnergyExit", "BlueDogRequirements::payloadRestartPermission", "BlueDogRequirements::periodicLogCadence", "BlueDogRequirements::telemetryDeliveryCadence", "BlueDogRequirements::criticalEventRecording", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements25 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::ingressResponse", "BlueDogRequirements::ingressDetection", "BlueDogRequirements::ingressRecoveryRequest", "BlueDogRequirements::ingressFlotation", "BlueDogRequirements::ingressElectronicsProtection", "BlueDogRequirements::ingressPositionContinuity", "BlueDogRequirements::ingressEventDeadline", "BlueDogRequirements::criticalEventRecording", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::ingressResponse", "BlueDogRequirements::ingressDetection", "BlueDogRequirements::ingressRecoveryRequest", "BlueDogRequirements::ingressFlotation", "BlueDogRequirements::ingressElectronicsProtection", "BlueDogRequirements::ingressPositionContinuity", "BlueDogRequirements::ingressEventDeadline", "BlueDogRequirements::criticalEventRecording", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements26 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::missionEvidence", "BlueDogRequirements::periodicLogCadence", "BlueDogRequirements::logRetention", "BlueDogRequirements::criticalEventRecording", "BlueDogRequirements::logTimestampAccuracy", "BlueDogRequirements::invalidTimestampMarking", "BlueDogRequirements::logGapIndication", "BlueDogRequirements::logInterruptionDurability", "BlueDogRequirements::reconnectLogPreservation", "BlueDogRequirements::qualificationPersistence", "BlueDogRequirements::unknownQualificationFallback")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::missionEvidence", "BlueDogRequirements::periodicLogCadence", "BlueDogRequirements::logRetention", "BlueDogRequirements::criticalEventRecording", "BlueDogRequirements::logTimestampAccuracy", "BlueDogRequirements::invalidTimestampMarking", "BlueDogRequirements::logGapIndication", "BlueDogRequirements::logInterruptionDurability", "BlueDogRequirements::reconnectLogPreservation", "BlueDogRequirements::qualificationPersistence", "BlueDogRequirements::unknownQualificationFallback")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements27 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::navigationAvailability", "BlueDogRequirements::navigationValidEpochs", "BlueDogRequirements::staleNavigationInvalidation", "BlueDogRequirements::navigationDegradedTransition", "BlueDogRequirements::staleNavigationUseInhibition", "BlueDogRequirements::criticalEventRecording")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::navigationAvailability", "BlueDogRequirements::navigationValidEpochs", "BlueDogRequirements::staleNavigationInvalidation", "BlueDogRequirements::navigationDegradedTransition", "BlueDogRequirements::staleNavigationUseInhibition", "BlueDogRequirements::criticalEventRecording")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements28 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::transportability", "BlueDogRequirements::soloTransport", "BlueDogRequirements::liftMass", "BlueDogRequirements::setupDuration", "BlueDogRequirements::packDuration", "BlueDogRequirements::soloLaunch", "BlueDogRequirements::soloRetrieval")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::transportability", "BlueDogRequirements::soloTransport", "BlueDogRequirements::liftMass", "BlueDogRequirements::setupDuration", "BlueDogRequirements::packDuration", "BlueDogRequirements::soloLaunch", "BlueDogRequirements::soloRetrieval")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements29 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::serviceability", "BlueDogRequirements::replacementDuration", "BlueDogRequirements::nondestructiveService", "BlueDogRequirements::postServiceSealing", "BlueDogRequirements::postServiceActuation")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::serviceability", "BlueDogRequirements::replacementDuration", "BlueDogRequirements::nondestructiveService", "BlueDogRequirements::postServiceSealing", "BlueDogRequirements::postServiceActuation")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements30 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::operatingBoundary", "BlueDogRequirements::boundaryEvaluationCadence", "BlueDogRequirements::boundaryAvoidanceDeadline", "BlueDogRequirements::boundaryAvoidanceRecording", "BlueDogRequirements::boundaryStartInhibition", "BlueDogRequirements::boundaryDegradedEvidence")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::operatingBoundary", "BlueDogRequirements::boundaryEvaluationCadence", "BlueDogRequirements::boundaryAvoidanceDeadline", "BlueDogRequirements::boundaryAvoidanceRecording", "BlueDogRequirements::boundaryStartInhibition", "BlueDogRequirements::boundaryDegradedEvidence")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements31 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::navigationConspicuity", "BlueDogRequirements::navigationLightPresentation", "BlueDogRequirements::navigationShapePresentation", "BlueDogRequirements::navigationSoundPresentation", "BlueDogRequirements::signalingModeDeadline", "BlueDogRequirements::signalingFaultRecording", "BlueDogRequirements::signalingFaultReporting")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::navigationConspicuity", "BlueDogRequirements::navigationLightPresentation", "BlueDogRequirements::navigationShapePresentation", "BlueDogRequirements::navigationSoundPresentation", "BlueDogRequirements::signalingModeDeadline", "BlueDogRequirements::signalingFaultRecording", "BlueDogRequirements::signalingFaultReporting")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements32 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::deploymentComplianceRecord", "BlueDogRequirements::deploymentReleaseGate")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::deploymentComplianceRecord", "BlueDogRequirements::deploymentReleaseGate")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements33 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::telemetryEquipment", "BlueDogRequirements::telemetryDisplayContent", "BlueDogRequirements::telemetryStaleIndication", "BlueDogRequirements::telemetryIdentityPreservation", "BlueDogRequirements::telemetryDuplicateSuppression")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::telemetryEquipment", "BlueDogRequirements::telemetryDisplayContent", "BlueDogRequirements::telemetryStaleIndication", "BlueDogRequirements::telemetryIdentityPreservation", "BlueDogRequirements::telemetryDuplicateSuppression")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements34 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::commandIntegrity", "BlueDogRequirements::unauthenticatedCommandRejection", "BlueDogRequirements::replayCommandRejection", "BlueDogRequirements::expiredCommandRejection", "BlueDogRequirements::acceptedCommandDeadline", "BlueDogRequirements::onboardAcknowledgmentDeadline", "BlueDogRequirements::acknowledgmentQueueing", "BlueDogRequirements::externalControlDisqualification", "BlueDogRequirements::criticalEventRecording", "BlueDogRequirements::qualificationPersistence")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::commandIntegrity", "BlueDogRequirements::unauthenticatedCommandRejection", "BlueDogRequirements::replayCommandRejection", "BlueDogRequirements::expiredCommandRejection", "BlueDogRequirements::acceptedCommandDeadline", "BlueDogRequirements::onboardAcknowledgmentDeadline", "BlueDogRequirements::acknowledgmentQueueing", "BlueDogRequirements::externalControlDisqualification", "BlueDogRequirements::criticalEventRecording", "BlueDogRequirements::qualificationPersistence")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements35 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::visibility", "BlueDogRequirements::visibilityNavigationCapability", "BlueDogRequirements::visibilityTrafficCapability", "BlueDogRequirements::restrictedVisibilityEntry", "BlueDogRequirements::restrictedVisibilityEvidence", "BlueDogRequirements::restrictedVisibilityCollisionAssessment")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::visibility", "BlueDogRequirements::visibilityNavigationCapability", "BlueDogRequirements::visibilityTrafficCapability", "BlueDogRequirements::restrictedVisibilityEntry", "BlueDogRequirements::restrictedVisibilityEvidence", "BlueDogRequirements::restrictedVisibilityCollisionAssessment")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements36 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::envelopeTransition", "BlueDogRequirements::survivalEntryDeadline", "BlueDogRequirements::survivalTransitionRecording", "BlueDogRequirements::sailingResumptionDeadline", "BlueDogRequirements::sailingResumptionInhibition", "BlueDogRequirements::resumptionBlockEvidence", "BlueDogRequirements::periodicLogCadence", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::envelopeTransition", "BlueDogRequirements::survivalEntryDeadline", "BlueDogRequirements::survivalTransitionRecording", "BlueDogRequirements::sailingResumptionDeadline", "BlueDogRequirements::sailingResumptionInhibition", "BlueDogRequirements::resumptionBlockEvidence", "BlueDogRequirements::periodicLogCadence", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements37 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::wetMechanicalIntegrity", "BlueDogRequirements::wetMechanismTravel", "BlueDogRequirements::wetJointIntegrity")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::wetMechanicalIntegrity", "BlueDogRequirements::wetMechanismTravel", "BlueDogRequirements::wetJointIntegrity")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements38 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::wetElectricalIntegrity", "BlueDogRequirements::wetConductorResistance", "BlueDogRequirements::wetInsulationResistance")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::wetElectricalIntegrity", "BlueDogRequirements::wetConductorResistance", "BlueDogRequirements::wetInsulationResistance")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements39 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::solarHeating", "BlueDogRequirements::hotSunElectronicsOperation", "BlueDogRequirements::hotSunBatteryTemperature", "BlueDogRequirements::batteryChargeTemperatureInhibition")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::solarHeating", "BlueDogRequirements::hotSunElectronicsOperation", "BlueDogRequirements::hotSunBatteryTemperature", "BlueDogRequirements::batteryChargeTemperatureInhibition")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements40 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::selfRighting", "BlueDogRequirements::rightingDeadline", "BlueDogRequirements::capsizeRigRetention", "BlueDogRequirements::capsizeBallastRetention", "BlueDogRequirements::capsizeElectronicsSealing")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::selfRighting", "BlueDogRequirements::rightingDeadline", "BlueDogRequirements::capsizeRigRetention", "BlueDogRequirements::capsizeBallastRetention", "BlueDogRequirements::capsizeElectronicsSealing")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements41 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::capsizeControlRecovery", "BlueDogRequirements::controlRecoveryDeadline", "BlueDogRequirements::capsizeGateProgressRetention", "BlueDogRequirements::capsizeQualificationRetention", "BlueDogRequirements::capsizeRestrictionRetention")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::capsizeControlRecovery", "BlueDogRequirements::controlRecoveryDeadline", "BlueDogRequirements::capsizeGateProgressRetention", "BlueDogRequirements::capsizeQualificationRetention", "BlueDogRequirements::capsizeRestrictionRetention")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements42 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::submergedWeedPassage", "BlueDogRequirements::weedPassageSpeed", "BlueDogRequirements::weedPassageSteering")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::submergedWeedPassage", "BlueDogRequirements::weedPassageSpeed", "BlueDogRequirements::weedPassageSteering")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements43 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::weedSnagShedding", "BlueDogRequirements::weedSnagSpeedRecovery", "BlueDogRequirements::weedSnagSteeringRecovery")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::weedSnagShedding", "BlueDogRequirements::weedSnagSpeedRecovery", "BlueDogRequirements::weedSnagSteeringRecovery")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements44 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::weedBlockageResponse", "BlueDogRequirements::weedBlockageFault", "BlueDogRequirements::weedBlockageContingency", "BlueDogRequirements::weedBlockageLocation", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::weedBlockageResponse", "BlueDogRequirements::weedBlockageFault", "BlueDogRequirements::weedBlockageContingency", "BlueDogRequirements::weedBlockageLocation", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements45 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::recoveryPropulsorWeeds", "BlueDogRequirements::poweredWeedSpeed", "BlueDogRequirements::poweredWeedCurrent", "BlueDogRequirements::poweredWeedTemperature", "BlueDogRequirements::lockedPropulsorShutdown", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::recoveryPropulsorWeeds", "BlueDogRequirements::poweredWeedSpeed", "BlueDogRequirements::poweredWeedCurrent", "BlueDogRequirements::poweredWeedTemperature", "BlueDogRequirements::lockedPropulsorShutdown", "BlueDogRequirements::motorQualificationInvariant")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements46 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::challengeMotorInhibition", "BlueDogRequirements::motorQualificationInvariant", "BlueDogRequirements::freshRecoveryCommand", "BlueDogRequirements::qualificationPersistence", "BlueDogRequirements::criticalEventRecording")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::challengeMotorInhibition", "BlueDogRequirements::motorQualificationInvariant", "BlueDogRequirements::freshRecoveryCommand", "BlueDogRequirements::qualificationPersistence", "BlueDogRequirements::criticalEventRecording")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements47 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::sustainedEnergyFeasibility", "BlueDogRequirements::sustainedReserveProtection", "BlueDogRequirements::repeatableCycleBalance", "BlueDogRequirements::peakSupplyCapability", "BlueDogRequirements::energyEvidenceReadiness")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::sustainedEnergyFeasibility", "BlueDogRequirements::sustainedReserveProtection", "BlueDogRequirements::repeatableCycleBalance", "BlueDogRequirements::peakSupplyCapability", "BlueDogRequirements::energyEvidenceReadiness")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
 
     part def ArchitectureDiagram :> Document {
@@ -175,8 +175,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements1;
         }
@@ -218,8 +221,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements2;
         }
@@ -239,8 +245,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements3;
         }
@@ -266,8 +275,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements4;
         }
@@ -293,8 +305,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements5;
         }
@@ -317,8 +332,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements6;
         }
@@ -338,8 +356,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements7;
         }
@@ -365,8 +386,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements8;
         }
@@ -437,8 +461,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements9;
         }
@@ -506,8 +533,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements10;
         }
@@ -537,8 +567,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements11;
         }
@@ -565,8 +598,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements12;
         }
@@ -603,8 +639,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements13;
         }
@@ -631,8 +670,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements14;
         }
@@ -675,8 +717,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements15;
         }
@@ -717,8 +762,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements16;
         }
@@ -741,8 +789,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements17;
         }
@@ -779,8 +830,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements18;
         }
@@ -817,8 +871,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements19;
         }
@@ -842,8 +899,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements20;
         }
@@ -883,8 +943,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements21;
         }
@@ -926,8 +989,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements22;
         }
@@ -944,8 +1010,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements23;
         }
@@ -983,8 +1052,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements24;
         }
@@ -1022,8 +1094,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements25;
         }
@@ -1054,8 +1129,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements26;
         }
@@ -1093,8 +1171,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements27;
         }
@@ -1118,8 +1199,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements28;
         }
@@ -1143,8 +1227,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements29;
         }
@@ -1168,8 +1255,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements30;
         }
@@ -1193,8 +1283,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements31;
         }
@@ -1218,8 +1311,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements32;
         }
@@ -1236,8 +1332,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements33;
         }
@@ -1261,8 +1360,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements34;
         }
@@ -1293,8 +1395,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements35;
         }
@@ -1318,8 +1423,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements36;
         }
@@ -1350,8 +1458,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements37;
         }
@@ -1368,8 +1479,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements38;
         }
@@ -1386,8 +1500,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements39;
         }
@@ -1404,8 +1521,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements40;
         }
@@ -1429,8 +1549,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements41;
         }
@@ -1454,8 +1577,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements42;
         }
@@ -1472,8 +1598,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements43;
         }
@@ -1490,8 +1619,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements44;
         }
@@ -1515,8 +1647,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements45;
         }
@@ -1540,8 +1675,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements46;
         }
@@ -1565,8 +1703,11 @@ package BlueDogDiagramDocuments {
         part navigation : Paragraph {
             part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; }
         }
+        part contextLink : Paragraph {
+            part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; }
+        }
         part statements : Definitions {
-            attribute redefines term = "name";
+            attribute redefines term = "Label";
             attribute redefines description = "documentation";
             calc rows : Statements47;
         }

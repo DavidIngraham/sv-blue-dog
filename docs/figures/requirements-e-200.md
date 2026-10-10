@@ -2,15 +2,17 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**SustainedEnergyFeasibility** — The installed energy architecture shall support the selected bounded repeating mission profile without external charging, while meeting the derived reserve, cycle-balance and peak-supply criteria. The 72-hour campaign is an initial energy demonstration, not proof of indefinite weather availability, functional performance or ocean readiness.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**SustainedReserveProtection** — Conservative stored energy shall remain strictly above the R-002 protected reserve throughout the selected sustained-operation profile. For piecewise-constant net power, check the initial state and every interval endpoint; unmodeled intrainterval dips are outside this claim.
+**E-200 SustainedEnergyFeasibility** — The installed energy architecture shall support the selected bounded repeating profile without external charging, meeting the derived reserve, cycle-balance and peak-supply criteria.
 
-**RepeatableCycleBalance** — Stored energy at the end of the complete repeating profile shall be at least its initial value at the same profile phase. This is a conditional repeatability criterion with fixed capacity, loads and resource bounds; it is not an indefinite endurance verdict.
+**E-201 SustainedReserveProtection** — Conservative stored energy shall remain strictly above the R-002 protected reserve throughout the selected sustained-operation profile.
 
-**PeakSupplyCapability** — The battery supply shall support each selected mode's coincident peak withdrawal power without relying on harvesting. Load power shall include conversion losses and the declared uncertainty allowance.
+**E-202 RepeatableCycleBalance** — Stored energy at the end of the complete repeating profile shall be at least its initial value at the same profile phase.
 
-**EnergyEvidenceReadiness** — An energy case shall be accepted as evidence-backed only after the installed-configuration load coverage, resource bounds, battery derating and interval-resolution evidence have been reviewed and accepted under the sustained-operations evidence checklist.
+**E-203 PeakSupplyCapability** — The battery supply shall support each selected mode’s coincident peak withdrawal power without harvesting.
+
+**E-205 EnergyEvidenceReadiness** — An energy case shall be accepted only after its installed-load coverage, resource bounds, battery derating and interval-resolution evidence have been accepted.
 
 ## E-200 derivation 1
 
@@ -39,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::sustainedEnergyFeasibility1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 47 node(s) without a position, left undrawn, and 53 edge(s) at them
+%% not represented: 48 node(s) without a position, left undrawn, and 54 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -85,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::sustainedEnergyFeasibility2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 49 node(s) without a position, left undrawn, and 55 edge(s) at them
+%% not represented: 50 node(s) without a position, left undrawn, and 56 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

@@ -2,15 +2,17 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**SelfRighting** — Aggregate requirement for SelfRighting. Acceptance requires all applicable derived leaf results (N-118, N-119, N-120, N-121); this parent has no independent executable pass/fail predicate. Shared verification context: Use minimum and maximum mission loading, five releases at each angle of 90 and 180 degrees toward each side, without external action or motor thrust. Use freshwater for Gorge or 35 g/kg saltwater for ocean; dual qualification requires both media. All leaves apply to every release.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**RightingDeadline** — The vessel shall self-right within 60 seconds of each N-051 release. Verification uses the shared context of N-051.
+**N-051 SelfRighting** — The vessel shall recover from the specified capsize releases without external assistance or motor thrust.
 
-**CapsizeRigRetention** — The vessel shall retain its rig through every N-051 release. Verification uses the shared context of N-051.
+**N-118 RightingDeadline** — The vessel shall self-right within 60 seconds of each N-051 release.
 
-**CapsizeBallastRetention** — The vessel shall retain its ballast through every N-051 release. Verification uses the shared context of N-051.
+**N-119 CapsizeRigRetention** — The vessel shall retain its rig through every N-051 release.
 
-**CapsizeElectronicsSealing** — No water shall reach electronics during any N-051 release. Verification uses the shared context of N-051.
+**N-120 CapsizeBallastRetention** — The vessel shall retain its ballast through every N-051 release.
+
+**N-121 CapsizeElectronicsSealing** — No water shall reach electronics during any N-051 release.
 
 ## N-051 derivation 1
 
@@ -39,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::selfRighting1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 70 node(s) without a position, left undrawn, and 90 edge(s) at them
+%% not represented: 71 node(s) without a position, left undrawn, and 95 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -85,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::selfRighting2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 72 node(s) without a position, left undrawn, and 92 edge(s) at them
+%% not represented: 73 node(s) without a position, left undrawn, and 97 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

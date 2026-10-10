@@ -2,15 +2,17 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**CapsizeControlRecovery** — Aggregate requirement for CapsizeControlRecovery. Acceptance requires all applicable derived leaf results (N-122, N-123, N-124, N-125); this parent has no independent executable pass/fail predicate. Shared verification context: Apply to every N-051 release without operator input. Mode-appropriate control does not mean normal sailing before the N-035 resumption gate permits it.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**ControlRecoveryDeadline** — The vessel shall restore mode-appropriate autonomous sail/steering control within 120 seconds from each N-051 release. Verification uses the shared context of N-052.
+**N-052 CapsizeControlRecovery** — The vessel shall restore mode-appropriate control after each specified capsize release.
 
-**CapsizeGateProgressRetention** — Gate progress shall be preserved through every N-051 release. Verification uses the shared context of N-052.
+**N-122 ControlRecoveryDeadline** — The vessel shall restore mode-appropriate autonomous sail/steering control within 120 seconds from each N-051 release.
 
-**CapsizeQualificationRetention** — Qualification status shall be preserved through every N-051 release absent an independently disqualifying event. Verification uses the shared context of N-052.
+**N-123 CapsizeGateProgressRetention** — Gate progress shall be preserved through every N-051 release.
 
-**CapsizeRestrictionRetention** — Control restoration after each N-051 release shall preserve every active survival, low-energy, recovery and motor-inhibition restriction. Verification uses the shared context of N-052.
+**N-124 CapsizeQualificationRetention** — Qualification status shall be preserved through every N-051 release absent an independently disqualifying event.
+
+**N-125 CapsizeRestrictionRetention** — Control restoration after each N-051 release shall preserve every active survival, low-energy, recovery and motor-inhibition restriction.
 
 ## N-052 derivation 1
 
@@ -39,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::capsizeControlRecovery1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 63 node(s) without a position, left undrawn, and 81 edge(s) at them
+%% not represented: 64 node(s) without a position, left undrawn, and 86 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -85,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::capsizeControlRecovery2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 65 node(s) without a position, left undrawn, and 83 edge(s) at them
+%% not represented: 66 node(s) without a position, left undrawn, and 88 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

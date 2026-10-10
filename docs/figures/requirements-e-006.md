@@ -2,23 +2,25 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**IngressResponse** — Aggregate requirement for IngressResponse. Acceptance requires all applicable derived leaf results (E-125, E-126, E-127, E-128, E-129, E-144, E-132, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: All leaves use a 30-minute freshwater injection at 10 mL/min into the normally dry hull. No pump technology is prescribed; R-004 remains applicable.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**IngressDetection** — In the E-006 injection test, ingress detection shall occur within 60 seconds of injection starting. Verification uses the shared context of E-006.
+**E-006 IngressResponse** — The vessel shall retain recoverability during the specified hull-ingress qualification.
 
-**IngressRecoveryRequest** — In the E-006 test, ingress detection shall set the recovery-request state. Verification uses the shared context of E-006.
+**E-125 IngressDetection** — In the E-006 injection test, ingress detection shall occur within 60 seconds of injection starting.
 
-**IngressFlotation** — In the E-006 test, the vessel shall remain afloat for the full 30 minutes. Verification uses the shared context of E-006.
+**E-126 IngressRecoveryRequest** — In the E-006 test, ingress detection shall set the recovery-request state.
 
-**IngressElectronicsProtection** — After the E-006 test, enclosed-electronics water-sensitive indicators shall show no liquid ingress. Verification uses the shared context of E-006.
+**E-127 IngressFlotation** — In the E-006 test, the vessel shall remain afloat for the full 30 minutes.
 
-**IngressPositionContinuity** — Throughout the E-006 test with a functioning link, position reporting shall meet the active TelemetryDeliveryCadence. Verification uses the shared context of E-006.
+**E-128 IngressElectronicsProtection** — After the E-006 test, enclosed-electronics water-sensitive indicators shall show no liquid ingress.
 
-**IngressEventDeadline** — In the E-006 injection test, an ingress event record shall exist within 60 seconds of injection starting. Verification uses the shared context of E-006.
+**E-129 IngressPositionContinuity** — Throughout the E-006 test with a functioning link, position reporting shall meet the active TelemetryDeliveryCadence.
 
-**CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence. Verification uses the shared context of E-007.
+**E-144 IngressEventDeadline** — In the E-006 injection test, an ingress event record shall exist within 60 seconds of injection starting.
 
-**MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown. Verification uses the shared context of R-004.
+**E-132 CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence.
+
+**R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
 ## E-006 derivation 1
 
@@ -47,7 +49,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::ingressResponse1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 179 node(s) without a position, left undrawn, and 305 edge(s) at them
+%% not represented: 188 node(s) without a position, left undrawn, and 338 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -93,7 +95,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::ingressResponse2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 179 node(s) without a position, left undrawn, and 305 edge(s) at them
+%% not represented: 188 node(s) without a position, left undrawn, and 338 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -139,7 +141,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::ingressResponse3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 180 node(s) without a position, left undrawn, and 308 edge(s) at them
+%% not represented: 191 node(s) without a position, left undrawn, and 342 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

@@ -2,11 +2,13 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**SubmergedWeedPassage** — Aggregate requirement for SubmergedWeedPassage. Acceptance requires all applicable derived leaf results (N-126, N-127); this parent has no independent executable pass/fail predicate. Shared verification context: Gorge campaign: five consecutive sailing passes without manual clearing or motor use through a 5 m by 1 m patch of 20 flexible branched stems per square metre, each 0.5-1.0 m long, extending from below the deepest appendage to within 0.1 m of the surface. Use 5 m/s mean wind and the weed-free reference heading. Record material, branch geometry, wet bending stiffness and anchoring; equivalence to local milfoil remains a physical-test validation task.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**WeedPassageSpeed** — During each N-053 patch passage, mean water-relative sailing speed shall be at least 50 percent of the weed-free reference speed. Verification uses the shared context of N-053.
+**N-053 SubmergedWeedPassage** — The vessel shall tolerate submerged milfoil-like vegetation during the specified unassisted Gorge sailing passes.
 
-**WeedPassageSteering** — After each N-053 patch passage, full commanded rudder travel shall be regained within 5 minutes. Verification uses the shared context of N-053.
+**N-126 WeedPassageSpeed** — During each N-053 patch passage, mean water-relative sailing speed shall be at least 50 percent of the weed-free reference speed.
+
+**N-127 WeedPassageSteering** — After each N-053 patch passage, full commanded rudder travel shall be regained within 5 minutes.
 
 ## N-053 derivation 1
 
@@ -35,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::submergedWeedPassage1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 59 node(s) without a position, left undrawn, and 73 edge(s) at them
+%% not represented: 60 node(s) without a position, left undrawn, and 76 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

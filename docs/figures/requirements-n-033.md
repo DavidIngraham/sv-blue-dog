@@ -2,17 +2,19 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**Visibility** — Aggregate requirement for Visibility. Acceptance requires all applicable derived leaf results (N-101, N-102, N-103, N-104, N-105); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise daylight and darkness at meteorological visibility of at least 1 km, and detected visibility below 1 km. Traffic performance remains subject to unresolved S-001 scenarios.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**VisibilityNavigationCapability** — Navigation shall meet E-002 and E-008 acceptance criteria at visibility of at least 1 km in daylight and darkness. Verification uses the shared context of N-033.
+**N-033 Visibility** — The vessel shall provide mode-appropriate navigation and traffic response across the specified visibility conditions.
 
-**VisibilityTrafficCapability** — Traffic assessment shall meet the frozen S-001 criteria at visibility of at least 1 km in daylight and darkness. Verification uses the shared context of N-033.
+**N-101 VisibilityNavigationCapability** — Navigation shall meet E-002 and E-008 acceptance criteria at visibility of at least 1 km in daylight and darkness.
 
-**RestrictedVisibilityEntry** — On detecting visibility below 1 km, the vessel shall enter restricted-visibility state within 60 seconds. Verification uses the shared context of N-033.
+**N-102 VisibilityTrafficCapability** — Traffic assessment shall meet the frozen S-001 criteria at visibility of at least 1 km in daylight and darkness.
 
-**RestrictedVisibilityEvidence** — Restricted-visibility operation shall be recorded as outside the normal operational envelope. Verification uses the shared context of N-033.
+**N-103 RestrictedVisibilityEntry** — On detecting visibility below 1 km, the vessel shall enter restricted-visibility state within 60 seconds.
 
-**RestrictedVisibilityCollisionAssessment** — Collision assessment shall remain active during restricted-visibility operation. Verification uses the shared context of N-033.
+**N-104 RestrictedVisibilityEvidence** — Restricted-visibility operation shall be recorded as outside the normal operational envelope.
+
+**N-105 RestrictedVisibilityCollisionAssessment** — Collision assessment shall remain active during restricted-visibility operation.
 
 ## N-033 derivation 1
 
@@ -41,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::visibility1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 75 node(s) without a position, left undrawn, and 86 edge(s) at them
+%% not represented: 76 node(s) without a position, left undrawn, and 92 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -87,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::visibility2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 76 node(s) without a position, left undrawn, and 87 edge(s) at them
+%% not represented: 77 node(s) without a position, left undrawn, and 93 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

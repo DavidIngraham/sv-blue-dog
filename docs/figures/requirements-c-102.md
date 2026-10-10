@@ -2,25 +2,27 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**CommandIntegrity** — Aggregate requirement for CommandIntegrity. Acceptance requires all applicable derived leaf results (C-205, C-206, C-207, C-208, C-209, C-210, C-211, E-132, E-138); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise complete command receipt, authentication failure, replayed sequence numbers, age greater than 30 seconds, and external control during a qualifying attempt.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**UnauthenticatedCommandRejection** — Commands failing authentication shall cause zero accepted actuator or mission-state changes. Verification uses the shared context of C-102.
+**C-102 CommandIntegrity** — The vessel shall accept external commands only under the specified authentication, freshness and qualification rules.
 
-**ReplayCommandRejection** — Commands with previously used sequence numbers shall cause zero accepted actuator or mission-state changes. Verification uses the shared context of C-102.
+**C-205 UnauthenticatedCommandRejection** — Commands failing authentication shall cause zero accepted actuator or mission-state changes.
 
-**ExpiredCommandRejection** — Commands older than 30 seconds shall cause zero accepted actuator or mission-state changes. Verification uses the shared context of C-102.
+**C-206 ReplayCommandRejection** — Commands with previously used sequence numbers shall cause zero accepted actuator or mission-state changes.
 
-**AcceptedCommandDeadline** — An accepted abort or mode-change command shall be applied within 1 second of complete receipt. Verification uses the shared context of C-102.
+**C-207 ExpiredCommandRejection** — Commands older than 30 seconds shall cause zero accepted actuator or mission-state changes.
 
-**OnboardAcknowledgmentDeadline** — An accepted abort or mode-change command shall be acknowledged onboard within 1 second of complete receipt. Verification uses the shared context of C-102.
+**C-208 AcceptedCommandDeadline** — An accepted abort or mode-change command shall be applied within 1 second of complete receipt.
 
-**AcknowledgmentQueueing** — An accepted command acknowledgment shall enter the transmit queue in the same command-processing cycle when a link is available. Verification uses the shared context of C-102.
+**C-209 OnboardAcknowledgmentDeadline** — An accepted abort or mode-change command shall be acknowledged onboard within 1 second of complete receipt.
 
-**ExternalControlDisqualification** — Acceptance of external mission or steering control during a qualifying attempt shall permanently disqualify that attempt. Verification uses the shared context of C-102.
+**C-210 AcknowledgmentQueueing** — An accepted command acknowledgment shall enter the transmit queue in the same command-processing cycle when a link is available.
 
-**CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence. Verification uses the shared context of E-007.
+**C-211 ExternalControlDisqualification** — Acceptance of external mission or steering control during a qualifying attempt shall permanently disqualify that attempt.
 
-**QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable. Verification uses the shared context of E-007.
+**E-132 CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence.
+
+**E-138 QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable.
 
 ## C-102 derivation 1
 
@@ -49,7 +51,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::commandIntegrity1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 107 node(s) without a position, left undrawn, and 134 edge(s) at them
+%% not represented: 110 node(s) without a position, left undrawn, and 160 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -95,7 +97,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::commandIntegrity2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 107 node(s) without a position, left undrawn, and 134 edge(s) at them
+%% not represented: 110 node(s) without a position, left undrawn, and 160 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -141,7 +143,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::commandIntegrity3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 107 node(s) without a position, left undrawn, and 147 edge(s) at them
+%% not represented: 118 node(s) without a position, left undrawn, and 188 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

@@ -2,27 +2,29 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**MissionEvidence** — Aggregate requirement for MissionEvidence. Acceptance requires all applicable derived leaf results (E-130, E-131, E-132, E-133, E-134, E-135, E-136, E-137, E-138, E-139); this parent has no independent executable pass/fail predicate. Shared verification context: Periodic records contain position, heading, mode, gate progress, battery energy and fault state. Critical events are independent of periodic cadence. Timestamp accuracy is assessed with valid GNSS time.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**PeriodicLogCadence** — Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation. Verification uses the shared context of E-007.
+**E-007 MissionEvidence** — The vessel shall retain time-correlated mission evidence through communication and power interruptions.
 
-**LogRetention** — Acquired mission records shall remain retrievable onboard for at least 30 days. Verification uses the shared context of E-007.
+**E-130 PeriodicLogCadence** — Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation.
 
-**CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence. Verification uses the shared context of E-007.
+**E-131 LogRetention** — Acquired mission records shall remain retrievable onboard for at least 30 days.
 
-**LogTimestampAccuracy** — With valid GNSS time, mission-record timestamps shall differ from reference UTC by at most 1 second. Verification uses the shared context of E-007.
+**E-132 CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence.
 
-**InvalidTimestampMarking** — Each record acquired without valid time shall carry an invalid-time indication. Verification uses the shared context of E-007.
+**E-133 LogTimestampAccuracy** — With valid GNSS time, mission-record timestamps shall differ from reference UTC by at most 1 second.
 
-**LogGapIndication** — Each detected missing sequence of scheduled records shall have a gap indication in retrieved data. Verification uses the shared context of E-007.
+**E-134 InvalidTimestampMarking** — Each record acquired without valid time shall carry an invalid-time indication.
 
-**LogInterruptionDurability** — After watchdog reset or abrupt power removal, every record older than 5 seconds before interruption shall remain readable. Verification uses the shared context of E-007.
+**E-135 LogGapIndication** — Each detected missing sequence of scheduled records shall have a gap indication in retrieved data.
 
-**ReconnectLogPreservation** — Communication reconnection shall not delete retained mission records. Verification uses the shared context of E-007.
+**E-136 LogInterruptionDurability** — After watchdog reset or abrupt power removal, every record older than 5 seconds before interruption shall remain readable.
 
-**QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable. Verification uses the shared context of E-007.
+**E-137 ReconnectLogPreservation** — Communication reconnection shall not delete retained mission records.
 
-**UnknownQualificationFallback** — On restart with absent or inconsistent persisted qualification state, the vessel shall adopt nonqualifying status. Verification uses the shared context of E-007.
+**E-138 QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable.
+
+**E-139 UnknownQualificationFallback** — On restart with absent or inconsistent persisted qualification state, the vessel shall adopt nonqualifying status.
 
 ## E-007 derivation 1
 
@@ -51,7 +53,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionEvidence1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 177 node(s) without a position, left undrawn, and 298 edge(s) at them
+%% not represented: 191 node(s) without a position, left undrawn, and 346 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -97,7 +99,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionEvidence2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 177 node(s) without a position, left undrawn, and 298 edge(s) at them
+%% not represented: 185 node(s) without a position, left undrawn, and 325 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -143,7 +145,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionEvidence3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 177 node(s) without a position, left undrawn, and 298 edge(s) at them
+%% not represented: 189 node(s) without a position, left undrawn, and 333 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -189,7 +191,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionEvidence4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 179 node(s) without a position, left undrawn, and 300 edge(s) at them
+%% not represented: 190 node(s) without a position, left undrawn, and 333 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

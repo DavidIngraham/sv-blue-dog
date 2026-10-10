@@ -4,240 +4,57 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>E-007 mission evidence</title>
-<style>
-/* The default OpenSysML document stylesheet. Every value comes from a
-   --sysml-* token on .sysml-document, and the whole sheet is in the
-   opensysml cascade layer, so unlayered reader CSS overrides it without
-   specificity fights or !important. */
-@layer opensysml;
-
-@layer opensysml {
-  .sysml-document {
-    --sysml-font-body: system-ui, sans-serif;
-    --sysml-font-mono: ui-monospace, monospace;
-    --sysml-font-size: 1rem;
-    --sysml-line-height: 1.55;
-    --sysml-measure: 42rem;
-    --sysml-space: 1rem;
-    --sysml-space-tight: 0.35rem;
-    --sysml-text: #16191d;
-    --sysml-muted: #5a6472;
-    --sysml-accent: #1f4e79;
-    --sysml-rule: #cfd6de;
-    --sysml-surface: #f4f6f8;
-    --sysml-cell-padding: 0.35rem 0.6rem;
-    --sysml-code-font-size: 0.9em;
-    --sysml-caption-font-size: 0.9em;
-    --sysml-border-width: 1px;
-    --sysml-table-width: 100%;
-    --sysml-row-indent: 1.25em;
-    --sysml-title-page-height: 60vh;
-    --sysml-group-heading-weight: 600;
-    --sysml-term-weight: 600;
-    --sysml-formula-align: center;
-    --sysml-image-max-width: 100%;
-
-    box-sizing: border-box;
-    max-width: var(--sysml-measure);
-    margin: var(--sysml-space) auto;
-    padding: 0 var(--sysml-space);
-    font-family: var(--sysml-font-body);
-    font-size: var(--sysml-font-size);
-    line-height: var(--sysml-line-height);
-    color: var(--sysml-text);
-  }
-
-  .sysml-document .sysml-title {
-    color: var(--sysml-accent);
-  }
-
-  .sysml-document .sysml-title-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: var(--sysml-title-page-height);
-    text-align: center;
-    break-after: page;
-    page-break-after: always;
-  }
-
-  .sysml-document .sysml-section-number {
-    color: var(--sysml-muted);
-    margin-right: var(--sysml-space-tight);
-  }
-
-  .sysml-document .sysml-toc ol {
-    list-style: none;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-toc > ol {
-    padding-left: 0;
-  }
-
-  .sysml-document .sysml-toc a {
-    color: inherit;
-  }
-
-  .sysml-document .sysml-paragraph {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table {
-    border-collapse: collapse;
-    width: var(--sysml-table-width);
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table th,
-  .sysml-document .sysml-table td {
-    border: var(--sysml-border-width) solid var(--sysml-rule);
-    padding: var(--sysml-cell-padding);
-    text-align: left;
-    vertical-align: top;
-  }
-
-  .sysml-document .sysml-table thead th {
-    background: var(--sysml-surface);
-  }
-
-  /* A sized table lays its columns out at the shares its <col> widths state,
-     breaking a token wider than its cell rather than overflowing it. */
-  .sysml-document .sysml-table-sized {
-    table-layout: fixed;
-  }
-
-  .sysml-document .sysml-table-sized th,
-  .sysml-document .sysml-table-sized td {
-    overflow-wrap: break-word;
-  }
-
-  /* A nested row's first cell is indented one --sysml-row-indent per level of
-     the --sysml-depth the row states. */
-  .sysml-document .sysml-indent {
-    display: inline-block;
-    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
-  }
-
-  .sysml-document .sysml-group-heading th {
-    background: var(--sysml-surface);
-    color: var(--sysml-muted);
-    font-weight: var(--sysml-group-heading-weight);
-  }
-
-  .sysml-document .sysml-caption {
-    color: var(--sysml-muted);
-    font-size: var(--sysml-caption-font-size);
-    text-align: left;
-  }
-
-  .sysml-document .sysml-list {
-    margin: var(--sysml-space) 0;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-definitions {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-entry {
-    margin: var(--sysml-space-tight) 0;
-  }
-
-  .sysml-document .sysml-term {
-    font-weight: var(--sysml-term-weight);
-  }
-
-  .sysml-document .sysml-description {
-    margin: 0 0 0 var(--sysml-space);
-  }
-
-  .sysml-document .sysml-diagram {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image img {
-    max-width: var(--sysml-image-max-width);
-  }
-
-  .sysml-document .sysml-formula {
-    margin: var(--sysml-space) 0;
-    text-align: var(--sysml-formula-align);
-  }
-
-  .sysml-document .sysml-formula .sysml-math {
-    overflow-x: auto;
-  }
-
-  .sysml-document .sysml-diagram pre {
-    overflow-x: auto;
-    font-family: var(--sysml-font-mono);
-  }
-
-  .sysml-document code {
-    font-family: var(--sysml-font-mono);
-    font-size: var(--sysml-code-font-size);
-  }
-
-  .sysml-document .sysml-link,
-  .sysml-document .sysml-ref {
-    color: var(--sysml-accent);
-  }
-}
-</style>
+<link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::MissionEvidenceRequirements">
 <h1 class="sysml-title">E-007 mission evidence</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements26">
 <div class="sysml-entry" data-element="BlueDogRequirements::MissionEvidence" data-element-kind="requirementDef">
-<dt class="sysml-term">MissionEvidence</dt>
-<dd class="sysml-description">Aggregate requirement for MissionEvidence. Acceptance requires all applicable derived leaf results (E-130, E-131, E-132, E-133, E-134, E-135, E-136, E-137, E-138, E-139); this parent has no independent executable pass/fail predicate. Shared verification context: Periodic records contain position, heading, mode, gate progress, battery energy and fault state. Critical events are independent of periodic cadence. Timestamp accuracy is assessed with valid GNSS time.</dd>
+<dt class="sysml-term">E-007 MissionEvidence</dt>
+<dd class="sysml-description">The vessel shall retain time-correlated mission evidence through communication and power interruptions.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::PeriodicLogCadence" data-element-kind="requirementDef">
-<dt class="sysml-term">PeriodicLogCadence</dt>
-<dd class="sysml-description">Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-130 PeriodicLogCadence</dt>
+<dd class="sysml-description">Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::LogRetention" data-element-kind="requirementDef">
-<dt class="sysml-term">LogRetention</dt>
-<dd class="sysml-description">Acquired mission records shall remain retrievable onboard for at least 30 days. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-131 LogRetention</dt>
+<dd class="sysml-description">Acquired mission records shall remain retrievable onboard for at least 30 days.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::CriticalEventRecording" data-element-kind="requirementDef">
-<dt class="sysml-term">CriticalEventRecording</dt>
-<dd class="sysml-description">Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-132 CriticalEventRecording</dt>
+<dd class="sysml-description">Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::LogTimestampAccuracy" data-element-kind="requirementDef">
-<dt class="sysml-term">LogTimestampAccuracy</dt>
-<dd class="sysml-description">With valid GNSS time, mission-record timestamps shall differ from reference UTC by at most 1 second. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-133 LogTimestampAccuracy</dt>
+<dd class="sysml-description">With valid GNSS time, mission-record timestamps shall differ from reference UTC by at most 1 second.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::InvalidTimestampMarking" data-element-kind="requirementDef">
-<dt class="sysml-term">InvalidTimestampMarking</dt>
-<dd class="sysml-description">Each record acquired without valid time shall carry an invalid-time indication. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-134 InvalidTimestampMarking</dt>
+<dd class="sysml-description">Each record acquired without valid time shall carry an invalid-time indication.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::LogGapIndication" data-element-kind="requirementDef">
-<dt class="sysml-term">LogGapIndication</dt>
-<dd class="sysml-description">Each detected missing sequence of scheduled records shall have a gap indication in retrieved data. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-135 LogGapIndication</dt>
+<dd class="sysml-description">Each detected missing sequence of scheduled records shall have a gap indication in retrieved data.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::LogInterruptionDurability" data-element-kind="requirementDef">
-<dt class="sysml-term">LogInterruptionDurability</dt>
-<dd class="sysml-description">After watchdog reset or abrupt power removal, every record older than 5 seconds before interruption shall remain readable. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-136 LogInterruptionDurability</dt>
+<dd class="sysml-description">After watchdog reset or abrupt power removal, every record older than 5 seconds before interruption shall remain readable.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::ReconnectLogPreservation" data-element-kind="requirementDef">
-<dt class="sysml-term">ReconnectLogPreservation</dt>
-<dd class="sysml-description">Communication reconnection shall not delete retained mission records. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-137 ReconnectLogPreservation</dt>
+<dd class="sysml-description">Communication reconnection shall not delete retained mission records.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::QualificationPersistence" data-element-kind="requirementDef">
-<dt class="sysml-term">QualificationPersistence</dt>
-<dd class="sysml-description">Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-138 QualificationPersistence</dt>
+<dd class="sysml-description">Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::UnknownQualificationFallback" data-element-kind="requirementDef">
-<dt class="sysml-term">UnknownQualificationFallback</dt>
-<dd class="sysml-description">On restart with absent or inconsistent persisted qualification state, the vessel shall adopt nonqualifying status. Verification uses the shared context of E-007.</dd>
+<dt class="sysml-term">E-139 UnknownQualificationFallback</dt>
+<dd class="sysml-description">On restart with absent or inconsistent persisted qualification state, the vessel shall adopt nonqualifying status.</dd>
 </div>
 </dl>
 <section class="sysml-section" id="group1" data-content="section" data-name="group1">
@@ -267,7 +84,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::missionEvidence1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 177 node(s) without a position, left undrawn, and 298 edge(s) at them
+%% not represented: 191 node(s) without a position, left undrawn, and 346 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -313,7 +130,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::missionEvidence2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 177 node(s) without a position, left undrawn, and 298 edge(s) at them
+%% not represented: 185 node(s) without a position, left undrawn, and 325 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -359,7 +176,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::missionEvidence3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 177 node(s) without a position, left undrawn, and 298 edge(s) at them
+%% not represented: 189 node(s) without a position, left undrawn, and 333 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -405,7 +222,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::missionEvidence4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 179 node(s) without a position, left undrawn, and 300 edge(s) at them
+%% not represented: 190 node(s) without a position, left undrawn, and 333 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

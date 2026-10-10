@@ -14,7 +14,7 @@ package BlueDogDocuments {
                     WhereMetadata(source = row.connectorEnd, 'metadata' = "RequirementDerivation::OriginalRequirementMetadata")->ControlFunctions::collect { in e : KerML::Core::Feature; e.ownedReferenceSubsetting.referencedFeature } }),
                 Column(name = "Derived", cell = { in row : KerML::Kernel::Connector;
                     WhereMetadata(source = row.connectorEnd, 'metadata' = "RequirementDerivation::DerivedRequirementMetadata")->ControlFunctions::collect { in e : KerML::Core::Feature; e.ownedReferenceSubsetting.referencedFeature } }),
-                Column(name = "Status", path = "workStatus.status"), Column(name = "Rationale", path = "documentation")))
+                Column(name = "Status", path = "workStatus.status"), Column(name = "Rationale", path = "rationale.text")))
     }
     calc def UseCaseLinks :> Query {
         Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogUseCases")), type = "UseCaseUsage"),
@@ -43,6 +43,9 @@ package BlueDogDocuments {
     }
     part def RequirementsRegister :> Document {
         attribute redefines title = "Requirement derivation register";
+        part context : Paragraph {
+            part link : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification specifications"; attribute redefines target = "requirements-context.md"; }
+        }
         part intro : Paragraph {
             attribute redefines text = "Generated natively by OpenSysML from the project models. Status describes work on the model element, not verification. Derivations record design reasoning, not proof of satisfaction.";
         }
@@ -75,5 +78,61 @@ package BlueDogDocuments {
         }
         part loads : Table { calc rows : EnergyLoads; }
         part totals : Table { calc rows : EnergyTotals; }
+    }
+
+    calc def RequirementDefinitions :> Query {
+        WhereType(source = ModelElements(), type = "RequirementDefinition")
+    }
+    calc def Conditions :> Query {
+        WhereText(source = Project(source = RequirementDefinitions(),
+            columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"),
+                Column(name = "Text", cell = { in row : KerML::Root::Element;
+                    row.ownedElement->ControlFunctions::select { in e : KerML::Root::Element; e.declaredName == "conditions" }->ControlFunctions::collect { in c : KerML::Root::Comment; c.body } }))),
+            columns = ("Text"), operator = "!=", value = "")
+    }
+    calc def Notes :> Query {
+        WhereText(source = Project(source = RequirementDefinitions(),
+            columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"),
+                Column(name = "Text", cell = { in row : KerML::Root::Element;
+                    row.ownedElement->ControlFunctions::select { in e : KerML::Root::Element; e.declaredName == "notes" }->ControlFunctions::collect { in c : KerML::Root::Comment; c.body } }))),
+            columns = ("Text"), operator = "!=", value = "")
+    }
+    calc def RationaleRows :> Query {
+        Project(source = WhereMetadata(source = RequirementDefinitions(), 'metadata' = "ModelingMetadata::Rationale"),
+            columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"), Column(name = "Text", path = "rationale.text")))
+    }
+    calc def IssueRows :> Query {
+        Project(source = WhereMetadata(source = RequirementDefinitions(), 'metadata' = "ModelingMetadata::Issue"),
+            columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"), Column(name = "Text", path = "issue.text")))
+    }
+    calc def VerificationSpecifications :> Query {
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirementVerification")), type = "VerificationCaseDefinition"),
+            properties = ("shortName", "name", "documentation"),
+            columns = (Column(name = "Verifies", cell = { in row : SysML::VerificationCaseDefinition;
+                RelatedElements(source = row, relationshipKind = "verification", direction = "outgoing", maxDepth = 1) })))
+    }
+    part def RequirementContext :> Document {
+        attribute redefines title = "Requirement context and verification specifications";
+        part intro : Paragraph { attribute redefines text = "Requirement statements are in the register and focused views. Qualification conditions below are normative definitions and test applicability; they are not optional rationale. Notes and rationale explain scope and decisions. Verification specifications describe planned evidence collection and return inconclusive until implemented with accepted evidence. No physical compliance is asserted."; }
+        part conditions : Section {
+            attribute redefines title = "Qualification conditions (normative)";
+            part entries : Table { calc rows : Conditions; }
+        }
+        part rationale : Section {
+            attribute redefines title = "Rationale";
+            part entries : Table { calc rows : RationaleRows; }
+        }
+        part notes : Section {
+            attribute redefines title = "Explanatory notes";
+            part entries : Table { calc rows : Notes; }
+        }
+        part issues : Section {
+            attribute redefines title = "Open issues";
+            part entries : Table { calc rows : IssueRows; }
+        }
+        part verificationSpecifications : Section {
+            attribute redefines title = "Verification specifications";
+            part entries : Table { calc rows : VerificationSpecifications; }
+        }
     }
 }

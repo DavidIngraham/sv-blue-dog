@@ -2,27 +2,29 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**ResetRecovery** — Aggregate requirement for ResetRecovery. Acceptance requires all applicable derived leaf results (E-110, E-111, E-112, E-113, E-145, E-136, E-139, E-138, R-102, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Watchdog-reset tests start above protected reserve with valid navigation observations. Normal sailing remains subject to N-035; data and qualification persistence have shared leaf criteria.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**RestartDeadline** — After a watchdog reset under E-003 preconditions, the vessel shall restore mode-appropriate autonomous control within 30 seconds. Verification uses the shared context of E-003.
+**E-003 ResetRecovery** — The vessel shall restore mode-appropriate autonomous operation after a watchdog reset.
 
-**MissionStateRestoration** — Within 30 seconds after a watchdog reset under E-003 preconditions, restored mission mode shall equal the last persisted mode. Verification uses the shared context of E-003.
+**E-110 RestartDeadline** — After a watchdog reset under E-003 preconditions, the vessel shall restore mode-appropriate autonomous control within 30 seconds.
 
-**GateProgressRestoration** — Within 30 seconds after a watchdog reset under E-003 preconditions, restored gate progress shall equal the last persisted gate progress. Verification uses the shared context of E-003.
+**E-111 MissionStateRestoration** — Within 30 seconds after a watchdog reset under E-003 preconditions, restored mission mode shall equal the last persisted mode.
 
-**ResetRestrictionPreservation** — After watchdog reset, each active survival, low-energy, recovery and isolation restriction shall remain effective until its own release condition is met. Verification uses the shared context of E-003.
+**E-112 GateProgressRestoration** — Within 30 seconds after a watchdog reset under E-003 preconditions, restored gate progress shall equal the last persisted gate progress.
 
-**QualificationRestoration** — Within 30 seconds after a watchdog reset under E-003 preconditions, qualification status shall equal the valid persisted status, or be nonqualifying when persisted status is absent or inconsistent. Verification uses the shared context of E-003.
+**E-113 ResetRestrictionPreservation** — After watchdog reset, each active survival, low-energy, recovery and isolation restriction shall remain effective until its own release condition is met.
 
-**LogInterruptionDurability** — After watchdog reset or abrupt power removal, every record older than 5 seconds before interruption shall remain readable. Verification uses the shared context of E-007.
+**E-145 QualificationRestoration** — Within 30 seconds after a watchdog reset under E-003 preconditions, qualification status shall equal the valid persisted status, or be nonqualifying when persisted status is absent or inconsistent.
 
-**UnknownQualificationFallback** — On restart with absent or inconsistent persisted qualification state, the vessel shall adopt nonqualifying status. Verification uses the shared context of E-007.
+**E-136 LogInterruptionDurability** — After watchdog reset or abrupt power removal, every record older than 5 seconds before interruption shall remain readable.
 
-**QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable. Verification uses the shared context of E-007.
+**E-139 UnknownQualificationFallback** — On restart with absent or inconsistent persisted qualification state, the vessel shall adopt nonqualifying status.
 
-**FreshRecoveryCommand** — After restart, motor enable shall remain inhibited until a fresh authenticated recovery command is accepted. Verification uses the shared context of R-004.
+**E-138 QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable.
 
-**MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown. Verification uses the shared context of R-004.
+**R-102 FreshRecoveryCommand** — After restart, motor enable shall remain inhibited until a fresh authenticated recovery command is accepted.
+
+**R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
 ## E-003 derivation 1
 
@@ -51,7 +53,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::resetRecovery1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 194 node(s) without a position, left undrawn, and 346 edge(s) at them
+%% not represented: 204 node(s) without a position, left undrawn, and 377 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -97,7 +99,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::resetRecovery2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 194 node(s) without a position, left undrawn, and 346 edge(s) at them
+%% not represented: 204 node(s) without a position, left undrawn, and 377 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -143,7 +145,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::resetRecovery3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 194 node(s) without a position, left undrawn, and 347 edge(s) at them
+%% not represented: 204 node(s) without a position, left undrawn, and 377 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -189,7 +191,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::resetRecovery4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 196 node(s) without a position, left undrawn, and 350 edge(s) at them
+%% not represented: 206 node(s) without a position, left undrawn, and 379 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

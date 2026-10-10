@@ -4,212 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C-006 emergency intervention</title>
-<style>
-/* The default OpenSysML document stylesheet. Every value comes from a
-   --sysml-* token on .sysml-document, and the whole sheet is in the
-   opensysml cascade layer, so unlayered reader CSS overrides it without
-   specificity fights or !important. */
-@layer opensysml;
-
-@layer opensysml {
-  .sysml-document {
-    --sysml-font-body: system-ui, sans-serif;
-    --sysml-font-mono: ui-monospace, monospace;
-    --sysml-font-size: 1rem;
-    --sysml-line-height: 1.55;
-    --sysml-measure: 42rem;
-    --sysml-space: 1rem;
-    --sysml-space-tight: 0.35rem;
-    --sysml-text: #16191d;
-    --sysml-muted: #5a6472;
-    --sysml-accent: #1f4e79;
-    --sysml-rule: #cfd6de;
-    --sysml-surface: #f4f6f8;
-    --sysml-cell-padding: 0.35rem 0.6rem;
-    --sysml-code-font-size: 0.9em;
-    --sysml-caption-font-size: 0.9em;
-    --sysml-border-width: 1px;
-    --sysml-table-width: 100%;
-    --sysml-row-indent: 1.25em;
-    --sysml-title-page-height: 60vh;
-    --sysml-group-heading-weight: 600;
-    --sysml-term-weight: 600;
-    --sysml-formula-align: center;
-    --sysml-image-max-width: 100%;
-
-    box-sizing: border-box;
-    max-width: var(--sysml-measure);
-    margin: var(--sysml-space) auto;
-    padding: 0 var(--sysml-space);
-    font-family: var(--sysml-font-body);
-    font-size: var(--sysml-font-size);
-    line-height: var(--sysml-line-height);
-    color: var(--sysml-text);
-  }
-
-  .sysml-document .sysml-title {
-    color: var(--sysml-accent);
-  }
-
-  .sysml-document .sysml-title-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: var(--sysml-title-page-height);
-    text-align: center;
-    break-after: page;
-    page-break-after: always;
-  }
-
-  .sysml-document .sysml-section-number {
-    color: var(--sysml-muted);
-    margin-right: var(--sysml-space-tight);
-  }
-
-  .sysml-document .sysml-toc ol {
-    list-style: none;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-toc > ol {
-    padding-left: 0;
-  }
-
-  .sysml-document .sysml-toc a {
-    color: inherit;
-  }
-
-  .sysml-document .sysml-paragraph {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table {
-    border-collapse: collapse;
-    width: var(--sysml-table-width);
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table th,
-  .sysml-document .sysml-table td {
-    border: var(--sysml-border-width) solid var(--sysml-rule);
-    padding: var(--sysml-cell-padding);
-    text-align: left;
-    vertical-align: top;
-  }
-
-  .sysml-document .sysml-table thead th {
-    background: var(--sysml-surface);
-  }
-
-  /* A sized table lays its columns out at the shares its <col> widths state,
-     breaking a token wider than its cell rather than overflowing it. */
-  .sysml-document .sysml-table-sized {
-    table-layout: fixed;
-  }
-
-  .sysml-document .sysml-table-sized th,
-  .sysml-document .sysml-table-sized td {
-    overflow-wrap: break-word;
-  }
-
-  /* A nested row's first cell is indented one --sysml-row-indent per level of
-     the --sysml-depth the row states. */
-  .sysml-document .sysml-indent {
-    display: inline-block;
-    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
-  }
-
-  .sysml-document .sysml-group-heading th {
-    background: var(--sysml-surface);
-    color: var(--sysml-muted);
-    font-weight: var(--sysml-group-heading-weight);
-  }
-
-  .sysml-document .sysml-caption {
-    color: var(--sysml-muted);
-    font-size: var(--sysml-caption-font-size);
-    text-align: left;
-  }
-
-  .sysml-document .sysml-list {
-    margin: var(--sysml-space) 0;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-definitions {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-entry {
-    margin: var(--sysml-space-tight) 0;
-  }
-
-  .sysml-document .sysml-term {
-    font-weight: var(--sysml-term-weight);
-  }
-
-  .sysml-document .sysml-description {
-    margin: 0 0 0 var(--sysml-space);
-  }
-
-  .sysml-document .sysml-diagram {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image img {
-    max-width: var(--sysml-image-max-width);
-  }
-
-  .sysml-document .sysml-formula {
-    margin: var(--sysml-space) 0;
-    text-align: var(--sysml-formula-align);
-  }
-
-  .sysml-document .sysml-formula .sysml-math {
-    overflow-x: auto;
-  }
-
-  .sysml-document .sysml-diagram pre {
-    overflow-x: auto;
-    font-family: var(--sysml-font-mono);
-  }
-
-  .sysml-document code {
-    font-family: var(--sysml-font-mono);
-    font-size: var(--sysml-code-font-size);
-  }
-
-  .sysml-document .sysml-link,
-  .sysml-document .sysml-ref {
-    color: var(--sysml-accent);
-  }
-}
-</style>
+<link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::EmergencyInterventionRequirements">
 <h1 class="sysml-title">C-006 emergency intervention</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements7">
 <div class="sysml-entry" data-element="GorgeChallenge::EmergencyIntervention" data-element-kind="requirementDef">
-<dt class="sysml-term">EmergencyIntervention</dt>
-<dd class="sysml-description">Provide remote emergency abort or manual control when a command link is available. Use disqualifies the attempt as unassisted. Emergency abort behavior and the subsequent recovery procedure are open.</dd>
+<dt class="sysml-term">C-006 EmergencyIntervention</dt>
+<dd class="sysml-description">The vessel shall permit remote emergency abort or manual control when a command link is available.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::Communications" data-element-kind="requirementDef">
-<dt class="sysml-term">Communications</dt>
-<dd class="sysml-description">Aggregate requirement for Communications. Acceptance requires all applicable derived leaf results (E-120, E-121, E-122, E-123, E-124, E-131, E-137); this parent has no independent executable pass/fail predicate. Shared verification context: Link availability is a delivery-test precondition, not a coverage guarantee. Normal cadence is 60 seconds; low-energy alone permits 300 seconds; emergency/powered recovery takes precedence at 60 seconds. Outage tests last 24 hours.</dd>
+<dt class="sysml-term">E-005 Communications</dt>
+<dd class="sysml-description">The vessel shall support live telemetry through link outages and reconnection.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::SafeRecovery" data-element-kind="requirementDef">
-<dt class="sysml-term">SafeRecovery</dt>
-<dd class="sysml-description">Aggregate requirement for SafeRecovery. Acceptance requires all applicable derived leaf results (S-110, S-111, S-112, S-113, S-114, S-115, E-138, R-101, E-130); this parent has no independent executable pass/fail predicate. Shared verification context: Emergency intervention ends attempt qualification. Exercise active emergency, powered recovery, local isolation and remote-control loss, including coexisting low-energy flags.</dd>
+<dt class="sysml-term">S-003 SafeRecovery</dt>
+<dd class="sysml-description">The vessel shall support controlled emergency intervention and powered recovery.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::CommandIntegrity" data-element-kind="requirementDef">
-<dt class="sysml-term">CommandIntegrity</dt>
-<dd class="sysml-description">Aggregate requirement for CommandIntegrity. Acceptance requires all applicable derived leaf results (C-205, C-206, C-207, C-208, C-209, C-210, C-211, E-132, E-138); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise complete command receipt, authentication failure, replayed sequence numbers, age greater than 30 seconds, and external control during a qualifying attempt.</dd>
+<dt class="sysml-term">C-102 CommandIntegrity</dt>
+<dd class="sysml-description">The vessel shall accept external commands only under the specified authentication, freshness and qualification rules.</dd>
 </div>
 </dl>
 <section class="sysml-section" id="group1" data-content="section" data-name="group1">
@@ -239,7 +56,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::emergencyIntervention1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 198 node(s) without a position, left undrawn, and 361 edge(s) at them
+%% not represented: 207 node(s) without a position, left undrawn, and 409 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

@@ -2,15 +2,17 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**Serviceability** — Aggregate requirement for Serviceability. Acceptance requires all applicable derived leaf results (P-107, P-108, P-109, P-110); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise individual replacement of the battery, every electronics module, every actuator and every serviceable enclosure seal by one operator using hand tools.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**ReplacementDuration** — Each P-003 replacement shall take no more than 30 minutes. Verification uses the shared context of P-003.
+**P-003 Serviceability** — The vessel shall support replacement of serviceable equipment without structural damage.
 
-**NondestructiveService** — Each P-003 replacement shall leave bonded structural joints and adjacent parts intact. Verification uses the shared context of P-003.
+**P-107 ReplacementDuration** — Each P-003 replacement shall take no more than 30 minutes.
 
-**PostServiceSealing** — After each P-003 replacement, the assembly shall meet the N-043 immersion criterion. Verification uses the shared context of P-003.
+**P-108 NondestructiveService** — Each P-003 replacement shall leave bonded structural joints and adjacent parts intact.
 
-**PostServiceActuation** — After each P-003 replacement, affected actuators shall complete their full commanded travel. Verification uses the shared context of P-003.
+**P-109 PostServiceSealing** — After each P-003 replacement, the assembly shall meet the N-043 immersion criterion.
+
+**P-110 PostServiceActuation** — After each P-003 replacement, affected actuators shall complete their full commanded travel.
 
 ## P-003 derivation 1
 
@@ -39,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::serviceability1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 56 node(s) without a position, left undrawn, and 66 edge(s) at them
+%% not represented: 57 node(s) without a position, left undrawn, and 71 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -85,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::serviceability2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 58 node(s) without a position, left undrawn, and 68 edge(s) at them
+%% not represented: 59 node(s) without a position, left undrawn, and 73 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

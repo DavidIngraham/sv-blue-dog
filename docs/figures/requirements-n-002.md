@@ -2,21 +2,23 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**MarineDurability** — The vessel shall retain its required functions and structural integrity during repeated freshwater Gorge service and prolonged saltwater ocean exposure. Qualification uses N-041 freshwater for the Gorge profile and N-042 saltwater for the ocean profile; dual-profile qualification requires both campaigns. Shared sealing, material aging and thermal checks use that selected campaign. Acceptance shall include post-exposure functional checks for the selected profile. Derivation edges indicate reasoning, not unconditional applicability of every descendant to every mission.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**FreshwaterExposure** — For Gorge qualification, following 72 hours continuous freshwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its Gorge functional checks without repair or servicing.
+**N-002 MarineDurability** — The vessel shall retain required function and structural integrity through its selected wet-exposure campaign.
 
-**SaltwaterExposure** — For ocean qualification, following 30 days continuous 35 g/kg saltwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its ocean functional checks without repair or servicing. This campaign is an exposure qualification, not proof of the eventual passage duration.
+**N-041 FreshwaterExposure** — For Gorge qualification, following 72 hours continuous freshwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its Gorge functional checks without repair or servicing.
 
-**EnclosureSealing** — Before and after each wet-exposure campaign, installed electronics enclosures, connectors and penetrations shall show no detectable liquid ingress on dry internal water-sensitive indicators after 30 minutes immersion with their highest point 1 m below the water surface.
+**N-042 SaltwaterExposure** — For ocean qualification, following 30 days continuous 35 g/kg saltwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its ocean functional checks without repair or servicing.
 
-**WetMechanicalIntegrity** — Aggregate requirement for WetMechanicalIntegrity. Acceptance requires all applicable derived leaf results (N-111, N-112); this parent has no independent executable pass/fail predicate. Shared verification context: Evaluate after each selected profile wet-exposure campaign under N-002.
+**N-043 EnclosureSealing** — Before and after each wet-exposure campaign, installed electronics enclosures, connectors and penetrations shall show no detectable liquid ingress on dry internal water-sensitive indicators after 30 minutes immersion with their highest point 1 m below the water surface.
 
-**WetElectricalIntegrity** — Aggregate requirement for WetElectricalIntegrity. Acceptance requires all applicable derived leaf results (N-113, N-114); this parent has no independent executable pass/fail predicate. Shared verification context: Evaluate disconnected cable assemblies after each selected profile wet-exposure campaign under N-002; disconnect electronics for insulation measurement.
+**N-044 WetMechanicalIntegrity** — External mechanisms and structural joints shall retain integrity after the selected wet-exposure campaign.
 
-**SolarHeating** — Aggregate requirement for SolarHeating. Acceptance requires all applicable derived leaf results (N-115, N-116, N-117); this parent has no independent executable pass/fail predicate. Shared verification context: Expose the powered vessel to 40 degC ambient air and 1000 W/m2 incident solar irradiance for 8 hours; use the installed battery manufacturer temperature limits.
+**N-045 WetElectricalIntegrity** — Cable assemblies shall retain electrical integrity after the selected wet-exposure campaign.
 
-**PrintedMaterialAging** — Printed structural material shall retain at least 80 percent of unaged failure load after 300 MJ/m2 cumulative UV exposure in the 300-400 nm band followed by the selected profile wet-exposure campaign (N-041 for Gorge; N-042 for ocean). Dual-profile qualification shall evaluate both aging/exposure sequences. Acceptance shall compare the lowest failure load of five aged coupons with the lowest of five unaged coupons of identical geometry, material, print orientation and process under the same loading fixture and rate.
+**N-046 SolarHeating** — The vessel shall retain safe powered operation during the specified solar-heating exposure.
+
+**N-047 PrintedMaterialAging** — Printed structural material shall retain at least 80 percent of unaged failure load after the specified UV and wet-exposure sequence.
 
 ## N-002 derivation 1
 
@@ -45,7 +47,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::marineDurability1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 148 node(s) without a position, left undrawn, and 221 edge(s) at them
+%% not represented: 149 node(s) without a position, left undrawn, and 222 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -91,7 +93,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::marineDurability2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 148 node(s) without a position, left undrawn, and 221 edge(s) at them
+%% not represented: 152 node(s) without a position, left undrawn, and 232 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -137,7 +139,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::marineDurability3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 150 node(s) without a position, left undrawn, and 223 edge(s) at them
+%% not represented: 152 node(s) without a position, left undrawn, and 225 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

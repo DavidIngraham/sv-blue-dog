@@ -2,19 +2,21 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**Transportability** — Aggregate requirement for Transportability. Acceptance requires all applicable derived leaf results (P-101, P-102, P-103, P-104, P-105, P-106); this parent has no independent executable pass/fail predicate. Shared verification context: Demonstrate with one adult, no powered lift, a firm bank or ramp of slope at most 1:12, wind at most 5 m/s and waves at most 0.2 m. This is not a survival-envelope recovery claim.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**SoloTransport** — One adult shall move all mission equipment 100 m without assistance. Verification uses the shared context of P-001.
+**P-001 Transportability** — The vessel shall support transport, assembly, launch and retrieval by one adult under the specified handling conditions.
 
-**LiftMass** — Each separately lifted assembly shall have a mass no greater than 15 kg. Verification uses the shared context of P-001.
+**P-101 SoloTransport** — One adult shall move all mission equipment 100 m without assistance.
 
-**SetupDuration** — One adult shall assemble the vessel from its transport configuration within 30 minutes. Verification uses the shared context of P-001.
+**P-102 LiftMass** — Each separately lifted assembly shall have a mass no greater than 15 kg.
 
-**PackDuration** — One adult shall pack the vessel into its transport configuration within 30 minutes. Verification uses the shared context of P-001.
+**P-103 SetupDuration** — One adult shall assemble the vessel from its transport configuration within 30 minutes.
 
-**SoloLaunch** — One adult shall launch the assembled vessel without assistance. Verification uses the shared context of P-001.
+**P-104 PackDuration** — One adult shall pack the vessel into its transport configuration within 30 minutes.
 
-**SoloRetrieval** — One adult shall retrieve the vessel from the water without assistance. Verification uses the shared context of P-001.
+**P-105 SoloLaunch** — One adult shall launch the assembled vessel without assistance.
+
+**P-106 SoloRetrieval** — One adult shall retrieve the vessel from the water without assistance.
 
 ## P-001 derivation 1
 
@@ -43,7 +45,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::transportability1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 157 node(s) without a position, left undrawn, and 246 edge(s) at them
+%% not represented: 158 node(s) without a position, left undrawn, and 253 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -89,7 +91,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::transportability2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 157 node(s) without a position, left undrawn, and 246 edge(s) at them
+%% not represented: 158 node(s) without a position, left undrawn, and 253 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

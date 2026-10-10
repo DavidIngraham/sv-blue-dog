@@ -2,19 +2,21 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**NavigationConspicuity** — Aggregate requirement for NavigationConspicuity. Acceptance requires all applicable derived leaf results (S-116, S-117, S-118, S-119, S-120, S-121); this parent has no independent executable pass/fail predicate. Shared verification context: Use the deployment-specific compliance matrix for sailing, powered-recovery and stationary modes, including its visibility, arcs, colors and sound criteria. The matrix remains a deployment hold point under S-005.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**NavigationLightPresentation** — The vessel shall present the lights prescribed for its current mode by the S-004 compliance matrix without a person aboard. Verification uses the shared context of S-004.
+**S-004 NavigationConspicuity** — The vessel shall present the navigation signals required for its operating mode.
 
-**NavigationShapePresentation** — The vessel shall present the shapes prescribed for its current mode by the S-004 compliance matrix without a person aboard. Verification uses the shared context of S-004.
+**S-116 NavigationLightPresentation** — The vessel shall present the lights prescribed for its current mode by the S-004 compliance matrix without a person aboard.
 
-**NavigationSoundPresentation** — The vessel shall present the sound signals prescribed for its current mode by the S-004 compliance matrix without a person aboard. Verification uses the shared context of S-004.
+**S-117 NavigationShapePresentation** — The vessel shall present the shapes prescribed for its current mode by the S-004 compliance matrix without a person aboard.
 
-**SignalingModeDeadline** — A commanded mode change shall select the corresponding signaling configuration within 1 second. Verification uses the shared context of S-004.
+**S-118 NavigationSoundPresentation** — The vessel shall present the sound signals prescribed for its current mode by the S-004 compliance matrix without a person aboard.
 
-**SignalingFaultRecording** — Each detectable signaling failure shall be logged within 5 seconds of detection. Verification uses the shared context of S-004.
+**S-119 SignalingModeDeadline** — A commanded mode change shall select the corresponding signaling configuration within 1 second.
 
-**SignalingFaultReporting** — With a functioning link, each detected signaling failure shall be reported to shore within 5 seconds. Verification uses the shared context of S-004.
+**S-120 SignalingFaultRecording** — Each detectable signaling failure shall be logged within 5 seconds of detection.
+
+**S-121 SignalingFaultReporting** — With a functioning link, each detected signaling failure shall be reported to shore within 5 seconds.
 
 ## S-004 derivation 1
 
@@ -43,7 +45,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::navigationConspicuity1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 67 node(s) without a position, left undrawn, and 73 edge(s) at them
+%% not represented: 68 node(s) without a position, left undrawn, and 80 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -89,7 +91,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::navigationConspicuity2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 67 node(s) without a position, left undrawn, and 73 edge(s) at them
+%% not represented: 68 node(s) without a position, left undrawn, and 80 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

@@ -2,19 +2,21 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**TransGorgeChallenge** — Complete the autonomous Trans-Gorge sailing challenge: The Dalles-Bonneville-The Dalles as the threshold, then repeat for as long as practical, under the course, autonomy, propulsion, observation, and emergency intervention rules below.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**CourseCompletion** — Threshold: Complete a journey from The Dalles to Bonneville and back to The Dalles. Exact start/finish and turnaround gates, permitted corridor, and crossing evidence remain to be agreed.
+**C-000 TransGorgeChallenge** — The vessel shall complete the Trans-Gorge challenge under C-001 through C-006.
 
-**RepeatedOperation** — Objective beyond the first completed round trip: repeat The Dalles-Bonneville-The Dalles autonomously for as long as practical. No fixed objective endurance duration has been selected.
+**C-001 CourseCompletion** — The vessel shall complete a journey from The Dalles to Bonneville and back to The Dalles.
 
-**UnassistedAttempt** — A qualifying attempt shall complete the round trip without operator intervention. Passive live monitoring is permitted. Any use of remote emergency abort or manual control disqualifies the attempt as unassisted. Restart criteria remain to be agreed.
+**C-002 RepeatedOperation** — After its first circuit, the vessel should repeat The Dalles–Bonneville–The Dalles autonomously for as long as practical.
 
-**SailingPropulsion** — A qualifying challenge attempt shall use sailing propulsion without auxiliary motor propulsion. Auxiliary motor use is allowed during development tests, which do not count as challenge attempts. Motor use during an attempt prevents it from qualifying. An auxiliary motor may remain installed for vessel recovery. Recovery propulsion is permitted outside the qualifying attempt; use during an attempt ends that attempt without qualification. The restriction concerns propulsion, not electrical power for onboard systems.
+**C-003 UnassistedAttempt** — A qualifying attempt shall complete the round trip without operator intervention.
 
-**LiveObservation** — Live monitoring shall be available to the operator. Monitoring-link loss shall not interrupt autonomous mission execution. Telemetry shall be retained onboard and transmitted when contact returns. Coverage, update rate, retained data, and outage retention duration are open.
+**C-004 SailingPropulsion** — A qualifying attempt shall use sailing propulsion without auxiliary motor propulsion.
 
-**EmergencyIntervention** — Provide remote emergency abort or manual control when a command link is available. Use disqualifies the attempt as unassisted. Emergency abort behavior and the subsequent recovery procedure are open.
+**C-005 LiveObservation** — The vessel shall provide live monitoring with autonomous operation and retained telemetry across communication outages.
+
+**C-006 EmergencyIntervention** — The vessel shall permit remote emergency abort or manual control when a command link is available.
 
 ## C-000 derivation 1
 

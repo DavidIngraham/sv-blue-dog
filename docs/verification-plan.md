@@ -1,5 +1,8 @@
 # Requirement verification and executable criteria
 
+The [generated requirement context](requirements-context.md) separates normative qualification conditions, explanatory notes, standard rationale/issue metadata and planned verification procedures from requirement statements. `requirement-verification.sysml` defines 52 linked verification specifications. These deliberately return **inconclusive** until implemented with accepted evidence; their existence is not a verification result. The executable energy verification case remains separate and retains its evidence gate.
+
+
 The model distinguishes high-level mission/environment requirements from quantitative acceptance leaves. P-002's **250 Ã— 250 Ã— 250 mm usable printer envelope** is user-specified. Other newly selected values (15 kg separately lifted mass, 30-minute setup/service targets, 72-hour endurance campaign, timing/energy thresholds and environmental test severities) are proposed engineering targets for review, not attributed to the user or a standard. Work status remains typed SysML metadata.
 
 ## Native executable predicates

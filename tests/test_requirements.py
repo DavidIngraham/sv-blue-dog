@@ -110,3 +110,26 @@ def test_focused_views_cover_all_derivations(published_model):
             for child, parent in re.findall(r'(n[0-9]+) -\.->\|"derive"\| (n[0-9]+)', diagram):
                 edges.add((nodes[parent], nodes[child]))
     assert edges == set(published_model.edges)
+
+
+def test_statements_exclude_supporting_material(published_model):
+    statement_rows = re.findall(r'^\| [A-Z]-\d+ \| \w+ \| open \| (.*?) \|$',
+                                published_model.markdown, re.M)
+    assert len(statement_rows) == 199
+    assert all(len(text.split()) <= 45 for text in statement_rows)
+    assert all('Verification uses' not in text and 'Aggregate requirement' not in text
+               and 'Shared verification context' not in text for text in statement_rows)
+    context = native('-render-document', 'BlueDogDocuments::RequirementContext')
+    for text in ['Qualification conditions (normative)', '## Rationale', '## Open issues',
+                 '1800 scheduled one-second epochs', '20 flexible branched stems',
+                 '600 seconds', 'V-N-053', 'weedPassageSpeed, weedPassageSteering']:
+        assert text in context
+
+
+def test_planned_verification_cannot_report_a_pass(run_model):
+    code, report = run_model('package VerificationProbe {}', '-analysis',
+                            'BlueDogRequirementVerification::EnergyAwarenessVerification')
+    assert code != 0
+    assert not [d for d in report['diagnostics'] or [] if d['pass'] != 'runtime']
+    values = {v['name']: v['value'] for v in report['checks'][0]['values']}
+    assert values['verdict'] == 'VerdictKind::inconclusive'

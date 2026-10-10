@@ -2,11 +2,13 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**SailingPropulsion** — A qualifying challenge attempt shall use sailing propulsion without auxiliary motor propulsion. Auxiliary motor use is allowed during development tests, which do not count as challenge attempts. Motor use during an attempt prevents it from qualifying. An auxiliary motor may remain installed for vessel recovery. Recovery propulsion is permitted outside the qualifying attempt; use during an attempt ends that attempt without qualification. The restriction concerns propulsion, not electrical power for onboard systems.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**RoundTrip** — The vessel shall cross the configured The Dalles departure gate, Bonneville turnaround gate and The Dalles return gate in that order during one attempt, satisfying C-003 through C-006. Acceptance shall use the timestamped trajectory and intervention/propulsion event log; a missing gate crossing or disqualifying event shall prevent a completion verdict.
+**C-004 SailingPropulsion** — A qualifying attempt shall use sailing propulsion without auxiliary motor propulsion.
 
-**ChallengeMotorInhibition** — Aggregate requirement for ChallengeMotorInhibition. Acceptance requires all applicable derived leaf results (R-101, R-102, E-138, E-132); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise qualifying, nonqualifying and unknown qualification states, restart, link loss, power loss during transitions and conflicting/stale commands. Shared qualification persistence applies before enabling intervention.
+**M-001 RoundTrip** — The vessel shall cross the configured The Dalles departure, Bonneville turnaround and The Dalles return gates in order during one qualifying attempt.
+
+**R-004 ChallengeMotorInhibition** — The vessel shall prevent motor propulsion from qualifying as unassisted sailing.
 
 ## C-004 derivation 1
 
@@ -35,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::sailingPropulsion1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 218 node(s) without a position, left undrawn, and 409 edge(s) at them
+%% not represented: 220 node(s) without a position, left undrawn, and 415 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

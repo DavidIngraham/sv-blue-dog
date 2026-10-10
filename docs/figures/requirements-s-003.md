@@ -2,27 +2,29 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**SafeRecovery** — Aggregate requirement for SafeRecovery. Acceptance requires all applicable derived leaf results (S-110, S-111, S-112, S-113, S-114, S-115, E-138, R-101, E-130); this parent has no independent executable pass/fail predicate. Shared verification context: Emergency intervention ends attempt qualification. Exercise active emergency, powered recovery, local isolation and remote-control loss, including coexisting low-energy flags.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**RecoveryPropulsion** — At maximum mission load, auxiliary powered recovery shall sustain at least 0.5 m/s speed over ground for 30 minutes directly against a 1.5 m/s current, with wind no greater than 5 m/s and waves no greater than 0.2 m. Acceptance shall measure track, current and electrical power. This sheltered recovery target is not a storm-recovery guarantee; motor enable and challenge qualification shall comply with R-004, and isolation/control-loss behavior with S-003.
+**S-003 SafeRecovery** — The vessel shall support controlled emergency intervention and powered recovery.
 
-**AbortLatchDeadline** — After accepting emergency abort, the vessel shall latch the attempt as disqualified within 1 second. Verification uses the shared context of S-003.
+**R-001 RecoveryPropulsion** — At maximum mission load, powered recovery shall sustain at least 0.5 m/s over ground for 30 minutes against a 1.5 m/s current.
 
-**RecoveryTelemetryCadence** — During active emergency or powered recovery with a functioning link, the vessel shall deliver position telemetry at least once per 60 seconds, including low-energy operation. Verification uses the shared context of S-003.
+**S-110 AbortLatchDeadline** — After accepting emergency abort, the vessel shall latch the attempt as disqualified within 1 second.
 
-**MotorIsolationDeadline** — A physically accessible local isolation control shall remove motor power within 1 second of activation. Verification uses the shared context of S-003.
+**S-111 RecoveryTelemetryCadence** — During active emergency or powered recovery with a functioning link, the vessel shall deliver position telemetry at least once per 60 seconds, including low-energy operation.
 
-**IsolationRestartInhibition** — Motor restart shall remain inhibited after local isolation until deliberate local reset. Verification uses the shared context of S-003.
+**S-112 MotorIsolationDeadline** — A physically accessible local isolation control shall remove motor power within 1 second of activation.
 
-**ManualControlLossShutdown** — After remote control has been lost for 5 seconds during manual powered recovery, the vessel shall command zero thrust within a further 1 second. Verification uses the shared context of S-003.
+**S-113 IsolationRestartInhibition** — Motor restart shall remain inhibited after local isolation until deliberate local reset.
 
-**ControlLossLocationContinuity** — Location reporting shall continue at the active telemetry cadence after remote-control loss whenever a telemetry link is available. Verification uses the shared context of S-003.
+**S-114 ManualControlLossShutdown** — After remote control has been lost for 5 seconds during manual powered recovery, the vessel shall command zero thrust within a further 1 second.
 
-**QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable. Verification uses the shared context of E-007.
+**S-115 ControlLossLocationContinuity** — Location reporting shall continue at the active telemetry cadence after remote-control loss whenever a telemetry link is available.
 
-**MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown. Verification uses the shared context of R-004.
+**E-138 QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable.
 
-**PeriodicLogCadence** — Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation. Verification uses the shared context of E-007.
+**R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
+
+**E-130 PeriodicLogCadence** — Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation.
 
 ## S-003 derivation 1
 
@@ -51,7 +53,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::safeRecovery1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 117 node(s) without a position, left undrawn, and 150 edge(s) at them
+%% not represented: 124 node(s) without a position, left undrawn, and 189 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -97,7 +99,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::safeRecovery2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 117 node(s) without a position, left undrawn, and 150 edge(s) at them
+%% not represented: 123 node(s) without a position, left undrawn, and 188 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -143,7 +145,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::safeRecovery3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 117 node(s) without a position, left undrawn, and 158 edge(s) at them
+%% not represented: 127 node(s) without a position, left undrawn, and 195 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -189,7 +191,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::safeRecovery4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 119 node(s) without a position, left undrawn, and 169 edge(s) at them
+%% not represented: 141 node(s) without a position, left undrawn, and 230 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

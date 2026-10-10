@@ -16,14 +16,10 @@ package BlueDog {
     package Goals {
         requirement def <'H-001'> HawaiiVoyage {
             metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-            doc /* Develop SV Blue Dog toward completing an
-             * autonomous sailing voyage to Hawaii. The Gorge challenge is a
-             * proving ground for that end goal, not evidence of ocean readiness.
-             * Departure point, destination gate, route, duration, route/season suitability of the candidate ocean
-             * envelope, assistance/propulsion rules, and acceptance evidence
-             * remain to be agreed; Gorge-specific rules are not automatically
-             * ocean mission rules.
-             */
+            doc /* The vessel shall complete an autonomous sailing voyage to Hawaii. */
+        comment notes /* Gorge-specific challenge rules do not automatically apply to the ocean mission. */
+        metadata rationale : ModelingMetadata::Rationale { text = "The Gorge is a proving ground for the ocean objective, not evidence of ocean readiness."; }
+        metadata issue : ModelingMetadata::Issue { text = "Departure point, destination gate, route, duration, route/season suitability of the candidate ocean envelope, assistance/propulsion rules and acceptance evidence remain to be agreed."; }
         }
         requirement hawaiiVoyage : HawaiiVoyage;
     }

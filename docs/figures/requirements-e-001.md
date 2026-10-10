@@ -2,17 +2,19 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**EnergyAwareness** — Aggregate requirement for EnergyAwareness. Acceptance requires all applicable derived leaf results (E-101, E-102, E-103, E-104); this parent has no independent executable pass/fail predicate. Shared verification context: Energy estimation and conservative decision inputs; accuracy uses calibrated energy integration across operating battery temperatures.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**LowEnergyRecovery** — Aggregate requirement for LowEnergyRecovery. Acceptance requires all applicable derived leaf results (E-114, E-115, E-116, E-117, E-118, E-119, E-130, E-120, E-132, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Reserve means R-002. Emergency/recovery cadence takes precedence; clearing low-energy state is independent of other modes, while payload enabling respects all restrictions.
+**E-001 EnergyAwareness** — The vessel shall maintain conservative estimates of usable energy and protected recovery reserve.
 
-**EnergyEstimateCadence** — The vessel shall refresh usable battery-energy estimates at least once per second. Verification uses the shared context of E-001.
+**E-004 LowEnergyRecovery** — The vessel shall protect essential functions when conservative usable energy reaches the recovery reserve.
 
-**ReserveEstimateCadence** — The vessel shall refresh protected recovery-reserve estimates at least once per second. Verification uses the shared context of E-001.
+**E-101 EnergyEstimateCadence** — The vessel shall refresh usable battery-energy estimates at least once per second.
 
-**EnergyEstimateAccuracy** — Usable-energy estimation error shall not exceed 10 percent of measured usable full-charge energy relative to calibrated charge/discharge integration across operating battery temperatures. Verification uses the shared context of E-001.
+**E-102 ReserveEstimateCadence** — The vessel shall refresh protected recovery-reserve estimates at least once per second.
 
-**ConservativeEnergyEstimate** — The usable-energy input to admission and low-energy decisions shall equal estimated usable energy minus the EnergyEstimateAccuracy error allowance. Verification uses the shared context of E-001.
+**E-103 EnergyEstimateAccuracy** — Usable-energy estimation error shall not exceed 10 percent of measured usable full-charge energy relative to calibrated charge/discharge integration across operating battery temperatures.
+
+**E-104 ConservativeEnergyEstimate** — The usable-energy input to admission and low-energy decisions shall equal estimated usable energy minus the EnergyEstimateAccuracy error allowance.
 
 ## E-001 derivation 1
 
@@ -41,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::energyAwareness1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 109 node(s) without a position, left undrawn, and 128 edge(s) at them
+%% not represented: 143 node(s) without a position, left undrawn, and 229 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -87,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::energyAwareness2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 110 node(s) without a position, left undrawn, and 129 edge(s) at them
+%% not represented: 111 node(s) without a position, left undrawn, and 134 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

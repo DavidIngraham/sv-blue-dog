@@ -4,216 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N-055 weed blockage response</title>
-<style>
-/* The default OpenSysML document stylesheet. Every value comes from a
-   --sysml-* token on .sysml-document, and the whole sheet is in the
-   opensysml cascade layer, so unlayered reader CSS overrides it without
-   specificity fights or !important. */
-@layer opensysml;
-
-@layer opensysml {
-  .sysml-document {
-    --sysml-font-body: system-ui, sans-serif;
-    --sysml-font-mono: ui-monospace, monospace;
-    --sysml-font-size: 1rem;
-    --sysml-line-height: 1.55;
-    --sysml-measure: 42rem;
-    --sysml-space: 1rem;
-    --sysml-space-tight: 0.35rem;
-    --sysml-text: #16191d;
-    --sysml-muted: #5a6472;
-    --sysml-accent: #1f4e79;
-    --sysml-rule: #cfd6de;
-    --sysml-surface: #f4f6f8;
-    --sysml-cell-padding: 0.35rem 0.6rem;
-    --sysml-code-font-size: 0.9em;
-    --sysml-caption-font-size: 0.9em;
-    --sysml-border-width: 1px;
-    --sysml-table-width: 100%;
-    --sysml-row-indent: 1.25em;
-    --sysml-title-page-height: 60vh;
-    --sysml-group-heading-weight: 600;
-    --sysml-term-weight: 600;
-    --sysml-formula-align: center;
-    --sysml-image-max-width: 100%;
-
-    box-sizing: border-box;
-    max-width: var(--sysml-measure);
-    margin: var(--sysml-space) auto;
-    padding: 0 var(--sysml-space);
-    font-family: var(--sysml-font-body);
-    font-size: var(--sysml-font-size);
-    line-height: var(--sysml-line-height);
-    color: var(--sysml-text);
-  }
-
-  .sysml-document .sysml-title {
-    color: var(--sysml-accent);
-  }
-
-  .sysml-document .sysml-title-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: var(--sysml-title-page-height);
-    text-align: center;
-    break-after: page;
-    page-break-after: always;
-  }
-
-  .sysml-document .sysml-section-number {
-    color: var(--sysml-muted);
-    margin-right: var(--sysml-space-tight);
-  }
-
-  .sysml-document .sysml-toc ol {
-    list-style: none;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-toc > ol {
-    padding-left: 0;
-  }
-
-  .sysml-document .sysml-toc a {
-    color: inherit;
-  }
-
-  .sysml-document .sysml-paragraph {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table {
-    border-collapse: collapse;
-    width: var(--sysml-table-width);
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-table th,
-  .sysml-document .sysml-table td {
-    border: var(--sysml-border-width) solid var(--sysml-rule);
-    padding: var(--sysml-cell-padding);
-    text-align: left;
-    vertical-align: top;
-  }
-
-  .sysml-document .sysml-table thead th {
-    background: var(--sysml-surface);
-  }
-
-  /* A sized table lays its columns out at the shares its <col> widths state,
-     breaking a token wider than its cell rather than overflowing it. */
-  .sysml-document .sysml-table-sized {
-    table-layout: fixed;
-  }
-
-  .sysml-document .sysml-table-sized th,
-  .sysml-document .sysml-table-sized td {
-    overflow-wrap: break-word;
-  }
-
-  /* A nested row's first cell is indented one --sysml-row-indent per level of
-     the --sysml-depth the row states. */
-  .sysml-document .sysml-indent {
-    display: inline-block;
-    width: calc(var(--sysml-depth, 0) * var(--sysml-row-indent));
-  }
-
-  .sysml-document .sysml-group-heading th {
-    background: var(--sysml-surface);
-    color: var(--sysml-muted);
-    font-weight: var(--sysml-group-heading-weight);
-  }
-
-  .sysml-document .sysml-caption {
-    color: var(--sysml-muted);
-    font-size: var(--sysml-caption-font-size);
-    text-align: left;
-  }
-
-  .sysml-document .sysml-list {
-    margin: var(--sysml-space) 0;
-    padding-left: var(--sysml-space);
-  }
-
-  .sysml-document .sysml-definitions {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-entry {
-    margin: var(--sysml-space-tight) 0;
-  }
-
-  .sysml-document .sysml-term {
-    font-weight: var(--sysml-term-weight);
-  }
-
-  .sysml-document .sysml-description {
-    margin: 0 0 0 var(--sysml-space);
-  }
-
-  .sysml-document .sysml-diagram {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image {
-    margin: var(--sysml-space) 0;
-  }
-
-  .sysml-document .sysml-image img {
-    max-width: var(--sysml-image-max-width);
-  }
-
-  .sysml-document .sysml-formula {
-    margin: var(--sysml-space) 0;
-    text-align: var(--sysml-formula-align);
-  }
-
-  .sysml-document .sysml-formula .sysml-math {
-    overflow-x: auto;
-  }
-
-  .sysml-document .sysml-diagram pre {
-    overflow-x: auto;
-    font-family: var(--sysml-font-mono);
-  }
-
-  .sysml-document code {
-    font-family: var(--sysml-font-mono);
-    font-size: var(--sysml-code-font-size);
-  }
-
-  .sysml-document .sysml-link,
-  .sysml-document .sysml-ref {
-    color: var(--sysml-accent);
-  }
-}
-</style>
+<link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::WeedBlockageResponseRequirements">
 <h1 class="sysml-title">N-055 weed blockage response</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements44">
 <div class="sysml-entry" data-element="BlueDogRequirements::WeedBlockageResponse" data-element-kind="requirementDef">
-<dt class="sysml-term">WeedBlockageResponse</dt>
-<dd class="sysml-description">Aggregate requirement for WeedBlockageResponse. Acceptance requires all applicable derived leaf results (N-130, N-131, N-132, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Gorge trigger: vegetation prevents completion of commanded rudder motion for 5 seconds, or keeps water-relative speed below 25 percent of the preceding weed-free 60-second mean for 60 seconds with mean wind at least 3 m/s. Dense mats are a blockage/avoidance case, not a pass-through claim.</dd>
+<dt class="sysml-term">N-055 WeedBlockageResponse</dt>
+<dd class="sysml-description">The vessel shall enter autonomous fouling contingency when the defined weed-blockage trigger occurs.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::WeedBlockageFault" data-element-kind="requirementDef">
-<dt class="sysml-term">WeedBlockageFault</dt>
-<dd class="sysml-description">A suspected-fouling fault shall be logged within 10 seconds after the N-055 trigger. Verification uses the shared context of N-055.</dd>
+<dt class="sysml-term">N-130 WeedBlockageFault</dt>
+<dd class="sysml-description">A suspected-fouling fault shall be logged within 10 seconds after the N-055 trigger.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::WeedBlockageContingency" data-element-kind="requirementDef">
-<dt class="sysml-term">WeedBlockageContingency</dt>
-<dd class="sysml-description">The vessel shall enter fouling-contingency state within 10 seconds after the N-055 trigger. Verification uses the shared context of N-055.</dd>
+<dt class="sysml-term">N-131 WeedBlockageContingency</dt>
+<dd class="sysml-description">The vessel shall enter fouling-contingency state within 10 seconds after the N-055 trigger.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::WeedBlockageLocation" data-element-kind="requirementDef">
-<dt class="sysml-term">WeedBlockageLocation</dt>
-<dd class="sysml-description">Location reporting shall continue at the active telemetry cadence during fouling contingency whenever a link is available. Verification uses the shared context of N-055.</dd>
+<dt class="sysml-term">N-132 WeedBlockageLocation</dt>
+<dd class="sysml-description">Location reporting shall continue at the active telemetry cadence during fouling contingency whenever a link is available.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::MotorQualificationInvariant" data-element-kind="requirementDef">
-<dt class="sysml-term">MotorQualificationInvariant</dt>
-<dd class="sysml-description">Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown. Verification uses the shared context of R-004.</dd>
+<dt class="sysml-term">R-101 MotorQualificationInvariant</dt>
+<dd class="sysml-description">Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.</dd>
 </div>
 </dl>
 <section class="sysml-section" id="group1" data-content="section" data-name="group1">
@@ -243,7 +60,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::weedBlockageResponse1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 55 node(s) without a position, left undrawn, and 62 edge(s) at them
+%% not represented: 104 node(s) without a position, left undrawn, and 148 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -289,7 +106,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::weedBlockageResponse2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 95 node(s) without a position, left undrawn, and 118 edge(s) at them
+%% not represented: 111 node(s) without a position, left undrawn, and 160 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT
@@ -302,6 +119,6 @@ flowchart BT
 </section>
 </article>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({maxTextSize: 1361, maxEdges: 4});</script>
+<script>mermaid.initialize({maxTextSize: 1363, maxEdges: 4});</script>
 </body>
 </html>

@@ -2,17 +2,19 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**TrafficSafety** — Aggregate requirement for TrafficSafety. Acceptance requires all applicable derived leaf results (S-101, S-102, S-103, S-104); this parent has no independent executable pass/fail predicate. Shared verification context: Use independently recorded head-on, crossing and overtaking AIS and non-AIS targets, day and night in the selected operational profile. Detection ranges, target signatures, closest-approach margins and maneuver feasibility remain unresolved acceptance parameters; tracking and avoidance cannot receive complete passes until these are frozen.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**NavigationConspicuity** — Aggregate requirement for NavigationConspicuity. Acceptance requires all applicable derived leaf results (S-116, S-117, S-118, S-119, S-120, S-121); this parent has no independent executable pass/fail predicate. Shared verification context: Use the deployment-specific compliance matrix for sailing, powered-recovery and stationary modes, including its visibility, arcs, colors and sound criteria. The matrix remains a deployment hold point under S-005.
+**S-001 TrafficSafety** — The vessel shall assess and respond to collision risks within the deployment-specific traffic envelope.
 
-**TrafficTracking** — The vessel shall maintain a track for every encounter target within the frozen S-001 detection envelope. Verification uses the shared context of S-001.
+**S-004 NavigationConspicuity** — The vessel shall present the navigation signals required for its operating mode.
 
-**CollisionAssessmentCadence** — The vessel shall update collision-risk estimates at least once per second. Verification uses the shared context of S-001.
+**S-101 TrafficTracking** — The vessel shall maintain a track for every encounter target within the frozen S-001 detection envelope.
 
-**AvoidanceCommandDeadline** — The vessel shall issue the prescribed avoiding-action command within 2 seconds of each S-001 collision-risk trigger. Verification uses the shared context of S-001.
+**S-102 CollisionAssessmentCadence** — The vessel shall update collision-risk estimates at least once per second.
 
-**TrafficAwarenessFault** — After traffic assessment has been invalid for more than 5 seconds, the vessel shall log a traffic-awareness fault within 1 second. Verification uses the shared context of S-001.
+**S-103 AvoidanceCommandDeadline** — The vessel shall issue the prescribed avoiding-action command within 2 seconds of each S-001 collision-risk trigger.
+
+**S-104 TrafficAwarenessFault** — After traffic assessment has been invalid for more than 5 seconds, the vessel shall log a traffic-awareness fault within 1 second.
 
 ## S-001 derivation 1
 
@@ -41,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::trafficSafety1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 104 node(s) without a position, left undrawn, and 118 edge(s) at them
+%% not represented: 106 node(s) without a position, left undrawn, and 130 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -87,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::trafficSafety2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 105 node(s) without a position, left undrawn, and 119 edge(s) at them
+%% not represented: 106 node(s) without a position, left undrawn, and 124 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

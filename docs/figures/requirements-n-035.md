@@ -2,21 +2,23 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**EnvelopeTransition** — Aggregate requirement for EnvelopeTransition. Acceptance requires all applicable derived leaf results (N-106, N-107, N-108, N-109, N-110, E-130, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: The trigger is a detected upper operational wind or wave limit exceedance for the selected profile; calm invokes N-034. Resumption eligibility requires 10 continuous minutes inside the selected wind/wave limits, valid navigation and no low-energy, emergency-recovery or isolation restriction.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**SurvivalEntryDeadline** — The vessel shall enter survival mode within 60 seconds of the N-035 upper-limit trigger. Verification uses the shared context of N-035.
+**N-035 EnvelopeTransition** — The vessel shall select survival or sailing operation according to the defined environmental transition conditions.
 
-**SurvivalTransitionRecording** — Every survival-mode entry shall have a corresponding event record. Verification uses the shared context of N-035.
+**N-106 SurvivalEntryDeadline** — The vessel shall enter survival mode within 60 seconds of the N-035 upper-limit trigger.
 
-**SailingResumptionDeadline** — Full autonomous sailing shall resume within 5 minutes of N-035 resumption eligibility becoming continuously true. Verification uses the shared context of N-035.
+**N-107 SurvivalTransitionRecording** — Every survival-mode entry shall have a corresponding event record.
 
-**SailingResumptionInhibition** — Full autonomous sailing shall remain inhibited while N-035 resumption eligibility is false. Verification uses the shared context of N-035.
+**N-108 SailingResumptionDeadline** — Full autonomous sailing shall resume within 5 minutes of N-035 resumption eligibility becoming continuously true.
 
-**ResumptionBlockEvidence** — Every blocked sailing-resumption attempt shall record the blocking condition. Verification uses the shared context of N-035.
+**N-109 SailingResumptionInhibition** — Full autonomous sailing shall remain inhibited while N-035 resumption eligibility is false.
 
-**PeriodicLogCadence** — Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation. Verification uses the shared context of E-007.
+**N-110 ResumptionBlockEvidence** — Every blocked sailing-resumption attempt shall record the blocking condition.
 
-**MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown. Verification uses the shared context of R-004.
+**E-130 PeriodicLogCadence** — Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation.
+
+**R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
 ## N-035 derivation 1
 
@@ -45,7 +47,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::envelopeTransition1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 68 node(s) without a position, left undrawn, and 75 edge(s) at them
+%% not represented: 105 node(s) without a position, left undrawn, and 152 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -91,7 +93,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::envelopeTransition2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 101 node(s) without a position, left undrawn, and 136 edge(s) at them
+%% not represented: 116 node(s) without a position, left undrawn, and 190 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -137,7 +139,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::envelopeTransition3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 95 node(s) without a position, left undrawn, and 115 edge(s) at them
+%% not represented: 111 node(s) without a position, left undrawn, and 159 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

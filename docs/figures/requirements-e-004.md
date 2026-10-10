@@ -2,27 +2,29 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**LowEnergyRecovery** — Aggregate requirement for LowEnergyRecovery. Acceptance requires all applicable derived leaf results (E-114, E-115, E-116, E-117, E-118, E-119, E-130, E-120, E-132, R-101); this parent has no independent executable pass/fail predicate. Shared verification context: Reserve means R-002. Emergency/recovery cadence takes precedence; clearing low-energy state is independent of other modes, while payload enabling respects all restrictions.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**LowEnergyEntry** — When conservative usable energy reaches or falls below protected reserve, the vessel shall set the low-energy flag within 5 seconds. Verification uses the shared context of E-004.
+**E-004 LowEnergyRecovery** — The vessel shall protect essential functions when conservative usable energy reaches the recovery reserve.
 
-**LowEnergyPayloadInhibition** — While the low-energy flag is set, the optional observation payload shall be disabled. Verification uses the shared context of E-004.
+**E-114 LowEnergyEntry** — When conservative usable energy reaches or falls below protected reserve, the vessel shall set the low-energy flag within 5 seconds.
 
-**LowEnergyNavigationContinuity** — While the low-energy flag is set, autonomous navigation shall remain active. Verification uses the shared context of E-004.
+**E-115 LowEnergyPayloadInhibition** — While the low-energy flag is set, the optional observation payload shall be disabled.
 
-**LowEnergyCollisionContinuity** — While the low-energy flag is set, collision-response behavior shall remain active. Verification uses the shared context of E-004.
+**E-116 LowEnergyNavigationContinuity** — While the low-energy flag is set, autonomous navigation shall remain active.
 
-**LowEnergyExit** — After conservative usable energy exceeds 1.2 times protected reserve for 10 continuous minutes, the vessel shall clear the low-energy flag independently of survival/recovery flags. Verification uses the shared context of E-004.
+**E-117 LowEnergyCollisionContinuity** — While the low-energy flag is set, collision-response behavior shall remain active.
 
-**PayloadRestartPermission** — Payload operation shall remain inhibited whenever a low-energy, survival or recovery restriction is active. Verification uses the shared context of E-004.
+**E-118 LowEnergyExit** — After conservative usable energy exceeds 1.2 times protected reserve for 10 continuous minutes, the vessel shall clear the low-energy flag independently of survival/recovery flags.
 
-**PeriodicLogCadence** — Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation. Verification uses the shared context of E-007.
+**E-119 PayloadRestartPermission** — Payload operation shall remain inhibited whenever a low-energy, survival or recovery restriction is active.
 
-**TelemetryDeliveryCadence** — With a functioning link, current telemetry delivery intervals shall not exceed 60 seconds, except that low-energy operation without emergency/powered recovery permits 300 seconds. Verification uses the shared context of E-005.
+**E-130 PeriodicLogCadence** — Periodic mission records shall be acquired at least once per second normally and once per minute in low-energy or survival operation.
 
-**CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence. Verification uses the shared context of E-007.
+**E-120 TelemetryDeliveryCadence** — With a functioning link, current telemetry delivery intervals shall not exceed 60 seconds, except that low-energy operation without emergency/powered recovery permits 300 seconds.
 
-**MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown. Verification uses the shared context of R-004.
+**E-132 CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence.
+
+**R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
 ## E-004 derivation 1
 
@@ -51,7 +53,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 109 node(s) without a position, left undrawn, and 127 edge(s) at them
+%% not represented: 142 node(s) without a position, left undrawn, and 223 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -97,7 +99,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 109 node(s) without a position, left undrawn, and 127 edge(s) at them
+%% not represented: 142 node(s) without a position, left undrawn, and 223 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -143,7 +145,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 131 node(s) without a position, left undrawn, and 177 edge(s) at them
+%% not represented: 142 node(s) without a position, left undrawn, and 223 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -189,7 +191,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 125 node(s) without a position, left undrawn, and 151 edge(s) at them
+%% not represented: 145 node(s) without a position, left undrawn, and 226 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

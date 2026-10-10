@@ -2,13 +2,15 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**SolarHeating** — Aggregate requirement for SolarHeating. Acceptance requires all applicable derived leaf results (N-115, N-116, N-117); this parent has no independent executable pass/fail predicate. Shared verification context: Expose the powered vessel to 40 degC ambient air and 1000 W/m2 incident solar irradiance for 8 hours; use the installed battery manufacturer temperature limits.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**HotSunElectronicsOperation** — Powered electronics shall retain operational functions throughout the N-046 exposure. Verification uses the shared context of N-046.
+**N-046 SolarHeating** — The vessel shall retain safe powered operation during the specified solar-heating exposure.
 
-**HotSunBatteryTemperature** — Battery temperatures shall remain within manufacturer operating limits throughout the N-046 exposure. Verification uses the shared context of N-046.
+**N-115 HotSunElectronicsOperation** — Powered electronics shall retain operational functions throughout the N-046 exposure.
 
-**BatteryChargeTemperatureInhibition** — Battery charging shall remain inhibited whenever measured battery temperature is outside the manufacturer permitted charge range. Verification uses the shared context of N-046.
+**N-116 HotSunBatteryTemperature** — Battery temperatures shall remain within manufacturer operating limits throughout the N-046 exposure.
+
+**N-117 BatteryChargeTemperatureInhibition** — Battery charging shall remain inhibited whenever measured battery temperature is outside the manufacturer permitted charge range.
 
 ## N-046 derivation 1
 
@@ -37,7 +39,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::solarHeating1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 56 node(s) without a position, left undrawn, and 58 edge(s) at them
+%% not represented: 57 node(s) without a position, left undrawn, and 62 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

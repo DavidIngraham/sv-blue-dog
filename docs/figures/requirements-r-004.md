@@ -2,15 +2,17 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**ChallengeMotorInhibition** — Aggregate requirement for ChallengeMotorInhibition. Acceptance requires all applicable derived leaf results (R-101, R-102, E-138, E-132); this parent has no independent executable pass/fail predicate. Shared verification context: Exercise qualifying, nonqualifying and unknown qualification states, restart, link loss, power loss during transitions and conflicting/stale commands. Shared qualification persistence applies before enabling intervention.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown. Verification uses the shared context of R-004.
+**R-004 ChallengeMotorInhibition** — The vessel shall prevent motor propulsion from qualifying as unassisted sailing.
 
-**FreshRecoveryCommand** — After restart, motor enable shall remain inhibited until a fresh authenticated recovery command is accepted. Verification uses the shared context of R-004.
+**R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
-**QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable. Verification uses the shared context of E-007.
+**R-102 FreshRecoveryCommand** — After restart, motor enable shall remain inhibited until a fresh authenticated recovery command is accepted.
 
-**CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence. Verification uses the shared context of E-007.
+**E-138 QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable.
+
+**E-132 CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence.
 
 ## R-004 derivation 1
 
@@ -39,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::challengeMotorInhibition1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 97 node(s) without a position, left undrawn, and 126 edge(s) at them
+%% not represented: 107 node(s) without a position, left undrawn, and 157 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -85,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::challengeMotorInhibition2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 99 node(s) without a position, left undrawn, and 136 edge(s) at them
+%% not represented: 109 node(s) without a position, left undrawn, and 166 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

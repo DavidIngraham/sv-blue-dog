@@ -2,15 +2,17 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**TelemetryEquipment** — Aggregate requirement for TelemetryEquipment. Acceptance requires all applicable derived leaf results (C-201, C-202, C-203, C-204); this parent has no independent executable pass/fail predicate. Shared verification context: Freshness threshold is 120 seconds for normal, emergency, powered recovery or unknown mode, and 600 seconds only for explicitly reported low energy without emergency or powered recovery. Staleness describes data age, not diagnosed link failure. Exercise a 24-hour outage and reconnection.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**TelemetryDisplayContent** — The shore endpoint shall display UTC sample time, position, mode, conservative usable energy, reserve, faults and age from each current telemetry record. Verification uses the shared context of C-101.
+**C-101 TelemetryEquipment** — The shore endpoint shall present current vessel telemetry with explicit data age and identity.
 
-**TelemetryStaleIndication** — The shore endpoint shall indicate stale data when record age exceeds its C-101 mode threshold until receipt of a record within its applicable threshold. Verification uses the shared context of C-101.
+**C-201 TelemetryDisplayContent** — The shore endpoint shall display UTC sample time, position, mode, conservative usable energy, reserve, faults and age from each current telemetry record.
 
-**TelemetryIdentityPreservation** — The shore endpoint shall preserve received record identity and sequence numbers across the C-101 outage/reconnection test. Verification uses the shared context of C-101.
+**C-202 TelemetryStaleIndication** — The shore endpoint shall indicate stale data when record age exceeds its C-101 mode threshold until receipt of a record within its applicable threshold.
 
-**TelemetryDuplicateSuppression** — The shore endpoint shall not present a duplicate telemetry record as a new observation. Verification uses the shared context of C-101.
+**C-203 TelemetryIdentityPreservation** — The shore endpoint shall preserve received record identity and sequence numbers across the C-101 outage/reconnection test.
+
+**C-204 TelemetryDuplicateSuppression** — The shore endpoint shall not present a duplicate telemetry record as a new observation.
 
 ## C-101 derivation 1
 
@@ -39,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::telemetryEquipment1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 113 node(s) without a position, left undrawn, and 144 edge(s) at them
+%% not represented: 114 node(s) without a position, left undrawn, and 149 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -85,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::telemetryEquipment2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 115 node(s) without a position, left undrawn, and 146 edge(s) at them
+%% not represented: 116 node(s) without a position, left undrawn, and 151 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

@@ -2,17 +2,19 @@
 
 [All requirement views](<../requirements-views.md>)
 
-**NavigationAvailability** — Aggregate requirement for NavigationAvailability. Acceptance requires all applicable derived leaf results (E-140, E-141, E-142, E-143, E-132); this parent has no independent executable pass/fail predicate. Shared verification context: Campaigns use 1800 scheduled one-second epochs in 30 minutes, with missing/invalid epochs counted as failures. Fault injection is separate.
+[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
 
-**NavigationValidEpochs** — In each E-008 campaign, at least 1710 of 1800 scheduled epochs shall contain valid position and heading observations. Verification uses the shared context of E-008.
+**E-008 NavigationAvailability** — The vessel shall maintain valid navigation inputs and reject stale observations.
 
-**StaleNavigationInvalidation** — Navigation observations older than 5 seconds shall be marked invalid. Verification uses the shared context of E-008.
+**E-140 NavigationValidEpochs** — In each E-008 campaign, at least 1710 of 1800 scheduled epochs shall contain valid position and heading observations.
 
-**NavigationDegradedTransition** — When position or heading becomes invalid due to age, the vessel shall enter navigation-degraded state within 1 second. Verification uses the shared context of E-008.
+**E-141 StaleNavigationInvalidation** — Navigation observations older than 5 seconds shall be marked invalid.
 
-**StaleNavigationUseInhibition** — The controller shall not use observations marked invalid as current navigation inputs. Verification uses the shared context of E-008.
+**E-142 NavigationDegradedTransition** — When position or heading becomes invalid due to age, the vessel shall enter navigation-degraded state within 1 second.
 
-**CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence. Verification uses the shared context of E-007.
+**E-143 StaleNavigationUseInhibition** — The controller shall not use observations marked invalid as current navigation inputs.
+
+**E-132 CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence.
 
 ## E-008 derivation 1
 
@@ -41,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::navigationAvailability1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 78 node(s) without a position, left undrawn, and 84 edge(s) at them
+%% not represented: 121 node(s) without a position, left undrawn, and 160 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -87,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::navigationAvailability2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 120 node(s) without a position, left undrawn, and 154 edge(s) at them
+%% not represented: 130 node(s) without a position, left undrawn, and 190 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

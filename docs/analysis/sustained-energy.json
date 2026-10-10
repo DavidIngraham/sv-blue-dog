@@ -241,6 +241,7 @@
     "✓ package BlueDogEnergy",
     "✓ package BlueDogEnergyExamples",
     "✓ package BlueDogDiagramDocuments",
+    "✓ package BlueDogRequirementVerification",
     "✓ Created instance of BlueDogEnergyExamples::sailing",
     "  ID: 1",
     "  Use %features BlueDogEnergyExamples::sailing to inspect",

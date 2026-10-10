@@ -1,6 +1,6 @@
 # Atomic requirement decomposition
 
-The 29 parent requirements below retain their original IDs and now decompose into 127 acceptance leaves. Each leaf states one observable result. Parent documentation holds the shared test setup, applicability and test matrix; each leaf explicitly references that context. A single trial can provide evidence for several leaves, but each leaf receives its own verdict.
+The 29 parent requirements below retain their original IDs and now decompose into 127 acceptance leaves. Each leaf states one observable result. Named SysML comments hold the normative qualification conditions, separate from each concise statement. Native verification cases link the parent and applicable leaves to their planned acceptance procedure; see [requirement context](requirements-context.md). A single trial can provide evidence for several leaves, but each leaf receives its own verdict.
 
 A list of test cases, dimensions, sampled fields or operating conditions does not automatically create multiple requirements. For example, P-002 has one print-job fit decision over three axes; authentication, command application and acknowledgment have separate observable outcomes and therefore separate leaves. Speed and steering after a weed snag now have separate results, both required for each repetition.
 
