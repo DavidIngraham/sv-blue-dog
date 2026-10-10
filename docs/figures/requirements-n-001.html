@@ -3,26 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>N-001 environmental envelope</title>
+<title>N-001 EnvironmentalEnvelope relationships</title>
 <link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::EnvironmentalEnvelopeRequirements">
-<h1 class="sysml-title">N-001 environmental envelope</h1>
+<h1 class="sysml-title">N-001 EnvironmentalEnvelope relationships</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="context"><a class="sysml-link" href="../requirements-context.md">Conditions, rationale and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements14">
 <div class="sysml-entry" data-element="BlueDogRequirements::EnvironmentalEnvelope" data-element-kind="requirementDef">
 <dt class="sysml-term">N-001 EnvironmentalEnvelope</dt>
 <dd class="sysml-description">The vessel shall retain the functions required by its selected environmental profile and operating mode.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::MarineDurability" data-element-kind="requirementDef">
-<dt class="sysml-term">N-002 MarineDurability</dt>
-<dd class="sysml-description">The vessel shall retain required function and structural integrity through its selected wet-exposure campaign.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::StabilityAndFouling" data-element-kind="requirementDef">
-<dt class="sysml-term">N-003 StabilityAndFouling</dt>
-<dd class="sysml-description">The vessel shall autonomously tolerate capsize and submerged aquatic vegetation, including milfoil-like stems.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::AirTemperature" data-element-kind="requirementDef">
 <dt class="sysml-term">N-030 AirTemperature</dt>
@@ -50,7 +42,7 @@
 </div>
 </dl>
 <section class="sysml-section" id="group1" data-content="section" data-name="group1">
-<h2>N-001 derivation 1</h2>
+<h2>N-001 relationships 1</h2>
 <figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::environmentalEnvelope1" data-diagram-kind="requirement" data-direction="BT">
 <pre class="mermaid">---
 config:
@@ -76,7 +68,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::environmentalEnvelope1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 161 node(s) without a position, left undrawn, and 249 edge(s) at them
+%% not represented: 85 node(s) without a position, left undrawn, and 99 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -85,18 +77,18 @@ flowchart BT
   n0(&#34;`*«requirement»*
 **environmentalEnvelope : EnvironmentalEnvelope**`&#34;)
   n1(&#34;`*«requirement»*
-**marineDurability : MarineDurability**`&#34;)
-  n2(&#34;`*«requirement»*
-**stabilityAndFouling : StabilityAndFouling**`&#34;)
-  n3(&#34;`*«requirement»*
 **airTemperature : AirTemperature**`&#34;)
+  n2(&#34;`*«requirement»*
+**waterTemperature : WaterTemperature**`&#34;)
+  n3(&#34;`*«requirement»*
+**humidity : Humidity**`&#34;)
   n1 -.-&gt;|&#34;derive&#34;| n0
   n2 -.-&gt;|&#34;derive&#34;| n0
   n3 -.-&gt;|&#34;derive&#34;| n0</pre>
 </figure>
 </section>
 <section class="sysml-section" id="group2" data-content="section" data-name="group2">
-<h2>N-001 derivation 2</h2>
+<h2>N-001 relationships 2</h2>
 <figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::environmentalEnvelope2" data-diagram-kind="requirement" data-direction="BT">
 <pre class="mermaid">---
 config:
@@ -122,7 +114,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::environmentalEnvelope2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 162 node(s) without a position, left undrawn, and 255 edge(s) at them
+%% not represented: 119 node(s) without a position, left undrawn, and 179 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -131,64 +123,47 @@ flowchart BT
   n0(&#34;`*«requirement»*
 **environmentalEnvelope : EnvironmentalEnvelope**`&#34;)
   n1(&#34;`*«requirement»*
-**waterTemperature : WaterTemperature**`&#34;)
-  n2(&#34;`*«requirement»*
-**humidity : Humidity**`&#34;)
-  n3(&#34;`*«requirement»*
 **visibility : Visibility**`&#34;)
+  n2(&#34;`*«requirement»*
+**calmOperation : CalmOperation**`&#34;)
+  n3(&#34;`*«requirement»*
+**envelopeTransition : EnvelopeTransition**`&#34;)
   n1 -.-&gt;|&#34;derive&#34;| n0
   n2 -.-&gt;|&#34;derive&#34;| n0
   n3 -.-&gt;|&#34;derive&#34;| n0</pre>
 </figure>
 </section>
-<section class="sysml-section" id="group3" data-content="section" data-name="group3">
-<h2>N-001 derivation 3</h2>
-<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::environmentalEnvelope3" data-diagram-kind="requirement" data-direction="BT">
-<pre class="mermaid">---
-config:
-  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-  theme: base
-  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
-  themeVariables:
-    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-    fontSize: &#34;14px&#34;
-    primaryColor: &#34;#FFFFFF&#34;
-    secondaryColor: &#34;#FFFFFF&#34;
-    tertiaryColor: &#34;#FFFFFF&#34;
-    background: &#34;#FFFFFF&#34;
-    primaryBorderColor: &#34;#181818&#34;
-    primaryTextColor: &#34;#000000&#34;
-    lineColor: &#34;#181818&#34;
-    textColor: &#34;#000000&#34;
-    noteBkgColor: &#34;#FEFFDD&#34;
-    noteBorderColor: &#34;#181818&#34;
-    noteTextColor: &#34;#000000&#34;
-    clusterBkg: &#34;#FFFFFF&#34;
-    clusterBorder: &#34;#181818&#34;
-    edgeLabelBackground: &#34;#FFFFFF&#34;
----
-%% BlueDogViews::environmentalEnvelope3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 185 node(s) without a position, left undrawn, and 315 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-flowchart BT
-  n0(&#34;`*«requirement»*
-**environmentalEnvelope : EnvironmentalEnvelope**`&#34;)
-  n1(&#34;`*«requirement»*
-**calmOperation : CalmOperation**`&#34;)
-  n2(&#34;`*«requirement»*
-**envelopeTransition : EnvelopeTransition**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0</pre>
-</figure>
+<section class="sysml-section" id="basis" data-content="section" data-name="basis">
+<h2>Design decisions motivated by this requirement</h2>
+<p class="sysml-paragraph" data-content="paragraph" data-name="meaning">Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.</p>
+<table class="sysml-table" data-content="table" data-name="entries" data-query="BlueDogDiagramDocuments::DesignBasis14">
+<thead>
+<tr>
+<th scope="col" data-column="Dependent requirement">Dependent requirement</th>
+<th scope="col" data-column="Design basis">Design basis</th>
+<th scope="col" data-column="Rationale">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="sysml-row" data-element="BlueDogRequirements::deriveMarineDurability" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::marineDurability" data-element-kind="requirementUsage">marineDurability</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::environmentalEnvelope" data-element-kind="requirementUsage">environmentalEnvelope</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">MarineDurability supports environmentalEnvelope. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::deriveStabilityAndFouling" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::stabilityAndFouling" data-element-kind="requirementUsage">stabilityAndFouling</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::environmentalEnvelope" data-element-kind="requirementUsage">environmentalEnvelope</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">StabilityAndFouling supports environmentalEnvelope. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+</tbody>
+</table>
 </section>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-n-002.md">Continue: N-002 marine durability</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next1"><a class="sysml-link" href="requirements-n-003.md">Continue: N-003 stability and fouling</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next5"><a class="sysml-link" href="requirements-n-033.md">Continue: N-033 visibility</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next7"><a class="sysml-link" href="requirements-n-035.md">Continue: N-035 envelope transition</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next3"><a class="sysml-link" href="requirements-n-033.md">Continue: N-033 Visibility</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next5"><a class="sysml-link" href="requirements-n-035.md">Continue: N-035 EnvelopeTransition</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next6"><a class="sysml-link" href="requirements-n-003.md">Continue: N-003 StabilityAndFouling</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next7"><a class="sysml-link" href="requirements-n-002.md">Continue: N-002 MarineDurability</a></p>
 </article>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({maxTextSize: 1344, maxEdges: 4});</script>
+<script>mermaid.initialize({maxTextSize: 1328, maxEdges: 4});</script>
 </body>
 </html>

@@ -1,10 +1,10 @@
-# C-101 telemetry equipment
+# C-101 TelemetryEquipment relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **C-101 TelemetryEquipment** — The shore endpoint shall present current vessel telemetry with explicit data age and identity.
 
@@ -16,7 +16,7 @@
 
 **C-204 TelemetryDuplicateSuppression** — The shore endpoint shall not present a duplicate telemetry record as a new observation.
 
-## C-101 derivation 1
+## C-101 relationships 1
 
 ```mermaid
 ---
@@ -43,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::telemetryEquipment1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 120 node(s) without a position, left undrawn, and 155 edge(s) at them
+%% not represented: 3 node(s) without a position, left undrawn, and 11 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -62,7 +62,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## C-101 derivation 2
+## C-101 relationships 2
 
 ```mermaid
 ---
@@ -89,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::telemetryEquipment2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 122 node(s) without a position, left undrawn, and 157 edge(s) at them
+%% not represented: 5 node(s) without a position, left undrawn, and 13 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

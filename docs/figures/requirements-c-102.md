@@ -1,10 +1,10 @@
-# C-102 command integrity
+# C-102 CommandIntegrity relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **C-102 CommandIntegrity** — The vessel shall accept external commands only under the specified authentication, freshness and qualification rules.
 
@@ -26,7 +26,7 @@
 
 **E-138 QualificationPersistence** — Each disqualifying transition shall be durably stored before its associated commanded intervention or motor enable.
 
-## C-102 derivation 1
+## C-102 relationships 1
 
 ```mermaid
 ---
@@ -53,7 +53,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::commandIntegrity1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 116 node(s) without a position, left undrawn, and 166 edge(s) at them
+%% not represented: 103 node(s) without a position, left undrawn, and 147 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -72,7 +72,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## C-102 derivation 2
+## C-102 relationships 2
 
 ```mermaid
 ---
@@ -99,7 +99,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::commandIntegrity2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 116 node(s) without a position, left undrawn, and 166 edge(s) at them
+%% not represented: 103 node(s) without a position, left undrawn, and 147 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -118,7 +118,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## C-102 derivation 3
+## C-102 relationships 3
 
 ```mermaid
 ---
@@ -145,7 +145,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::commandIntegrity3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 124 node(s) without a position, left undrawn, and 194 edge(s) at them
+%% not represented: 111 node(s) without a position, left undrawn, and 176 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

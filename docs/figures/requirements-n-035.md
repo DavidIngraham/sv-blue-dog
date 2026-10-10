@@ -1,10 +1,10 @@
-# N-035 envelope transition
+# N-035 EnvelopeTransition relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-035 EnvelopeTransition** — The vessel shall select survival or sailing operation according to the defined environmental transition conditions.
 
@@ -22,7 +22,7 @@
 
 **R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
-## N-035 derivation 1
+## N-035 relationships 1
 
 ```mermaid
 ---
@@ -68,7 +68,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-035 derivation 2
+## N-035 relationships 2
 
 ```mermaid
 ---
@@ -114,7 +114,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-035 derivation 3
+## N-035 relationships 3
 
 ```mermaid
 ---

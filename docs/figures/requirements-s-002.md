@@ -1,10 +1,10 @@
-# S-002 operating boundary
+# S-002 OperatingBoundary relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **S-002 OperatingBoundary** — The vessel shall enforce the configured operating boundaries.
 
@@ -18,7 +18,7 @@
 
 **S-109 BoundaryDegradedEvidence** — Navigation loss or absence of a feasible maneuver shall produce an explicit degraded-route verdict instead of a safe-route verdict.
 
-## S-002 derivation 1
+## S-002 relationships 1
 
 ```mermaid
 ---
@@ -45,7 +45,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::operatingBoundary1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 159 node(s) without a position, left undrawn, and 254 edge(s) at them
+%% not represented: 11 node(s) without a position, left undrawn, and 20 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -64,7 +64,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## S-002 derivation 2
+## S-002 relationships 2
 
 ```mermaid
 ---
@@ -91,7 +91,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::operatingBoundary2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 160 node(s) without a position, left undrawn, and 255 edge(s) at them
+%% not represented: 12 node(s) without a position, left undrawn, and 21 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

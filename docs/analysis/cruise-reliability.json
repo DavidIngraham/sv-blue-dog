@@ -157,6 +157,7 @@
     "✓ package BlueDogReliabilityExamples",
     "✓ package BlueDogDFMEA",
     "✓ package BlueDogReliabilityDocuments",
+    "✓ package BlueDogSemanticViews",
     "✓ Created instance of BlueDogReliabilityExamples::gorgeIllustration",
     "  ID: 1",
     "  Use %features BlueDogReliabilityExamples::gorgeIllustration to inspect"

@@ -3,26 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>E-005 communications</title>
+<title>E-005 Communications relationships</title>
 <link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::CommunicationsRequirements">
-<h1 class="sysml-title">E-005 communications</h1>
+<h1 class="sysml-title">E-005 Communications relationships</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="context"><a class="sysml-link" href="../requirements-context.md">Conditions, rationale and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements17">
 <div class="sysml-entry" data-element="BlueDogRequirements::Communications" data-element-kind="requirementDef">
 <dt class="sysml-term">E-005 Communications</dt>
 <dd class="sysml-description">The vessel shall support live telemetry through link outages and reconnection.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::TelemetryEquipment" data-element-kind="requirementDef">
-<dt class="sysml-term">C-101 TelemetryEquipment</dt>
-<dd class="sysml-description">The shore endpoint shall present current vessel telemetry with explicit data age and identity.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::CommandIntegrity" data-element-kind="requirementDef">
-<dt class="sysml-term">C-102 CommandIntegrity</dt>
-<dd class="sysml-description">The vessel shall accept external commands only under the specified authentication, freshness and qualification rules.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::TelemetryDeliveryCadence" data-element-kind="requirementDef">
 <dt class="sysml-term">E-120 TelemetryDeliveryCadence</dt>
@@ -54,7 +46,7 @@
 </div>
 </dl>
 <section class="sysml-section" id="group1" data-content="section" data-name="group1">
-<h2>E-005 derivation 1</h2>
+<h2>E-005 relationships 1</h2>
 <figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::communications1" data-diagram-kind="requirement" data-direction="BT">
 <pre class="mermaid">---
 config:
@@ -80,7 +72,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::communications1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 219 node(s) without a position, left undrawn, and 430 edge(s) at them
+%% not represented: 123 node(s) without a position, left undrawn, and 184 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -89,18 +81,18 @@ flowchart BT
   n0(&#34;`*«requirement»*
 **communications : Communications**`&#34;)
   n1(&#34;`*«requirement»*
-**telemetryEquipment : TelemetryEquipment**`&#34;)
-  n2(&#34;`*«requirement»*
-**commandIntegrity : CommandIntegrity**`&#34;)
-  n3(&#34;`*«requirement»*
 **telemetryDeliveryCadence : TelemetryDeliveryCadence**`&#34;)
+  n2(&#34;`*«requirement»*
+**outageAutonomy : OutageAutonomy**`&#34;)
+  n3(&#34;`*«requirement»*
+**reconnectCurrentRecord : ReconnectCurrentRecord**`&#34;)
   n1 -.-&gt;|&#34;derive&#34;| n0
   n2 -.-&gt;|&#34;derive&#34;| n0
   n3 -.-&gt;|&#34;derive&#34;| n0</pre>
 </figure>
 </section>
 <section class="sysml-section" id="group2" data-content="section" data-name="group2">
-<h2>E-005 derivation 2</h2>
+<h2>E-005 relationships 2</h2>
 <figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::communications2" data-diagram-kind="requirement" data-direction="BT">
 <pre class="mermaid">---
 config:
@@ -126,7 +118,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::communications2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 216 node(s) without a position, left undrawn, and 412 edge(s) at them
+%% not represented: 121 node(s) without a position, left undrawn, and 179 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -135,18 +127,18 @@ flowchart BT
   n0(&#34;`*«requirement»*
 **communications : Communications**`&#34;)
   n1(&#34;`*«requirement»*
-**outageAutonomy : OutageAutonomy**`&#34;)
-  n2(&#34;`*«requirement»*
-**reconnectCurrentRecord : ReconnectCurrentRecord**`&#34;)
-  n3(&#34;`*«requirement»*
 **backlogOrdering : BacklogOrdering**`&#34;)
+  n2(&#34;`*«requirement»*
+**backlogCurrentPriority : BacklogCurrentPriority**`&#34;)
+  n3(&#34;`*«requirement»*
+**logRetention : LogRetention**`&#34;)
   n1 -.-&gt;|&#34;derive&#34;| n0
   n2 -.-&gt;|&#34;derive&#34;| n0
   n3 -.-&gt;|&#34;derive&#34;| n0</pre>
 </figure>
 </section>
 <section class="sysml-section" id="group3" data-content="section" data-name="group3">
-<h2>E-005 derivation 3</h2>
+<h2>E-005 relationships 3</h2>
 <figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::communications3" data-diagram-kind="requirement" data-direction="BT">
 <pre class="mermaid">---
 config:
@@ -172,29 +164,46 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::communications3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 216 node(s) without a position, left undrawn, and 412 edge(s) at them
+%% not represented: 123 node(s) without a position, left undrawn, and 181 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
 flowchart BT
   n0(&#34;`*«requirement»*
 **communications : Communications**`&#34;)
   n1(&#34;`*«requirement»*
-**backlogCurrentPriority : BacklogCurrentPriority**`&#34;)
-  n2(&#34;`*«requirement»*
-**logRetention : LogRetention**`&#34;)
-  n3(&#34;`*«requirement»*
 **reconnectLogPreservation : ReconnectLogPreservation**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0
-  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
+  n1 -.-&gt;|&#34;derive&#34;| n0</pre>
 </figure>
 </section>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-c-101.md">Continue: C-101 telemetry equipment</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next1"><a class="sysml-link" href="requirements-c-102.md">Continue: C-102 command integrity</a></p>
+<section class="sysml-section" id="basis" data-content="section" data-name="basis">
+<h2>Design decisions motivated by this requirement</h2>
+<p class="sysml-paragraph" data-content="paragraph" data-name="meaning">Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.</p>
+<table class="sysml-table" data-content="table" data-name="entries" data-query="BlueDogDiagramDocuments::DesignBasis17">
+<thead>
+<tr>
+<th scope="col" data-column="Dependent requirement">Dependent requirement</th>
+<th scope="col" data-column="Design basis">Design basis</th>
+<th scope="col" data-column="Rationale">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="sysml-row" data-element="BlueDogRequirements::deriveTelemetryEquipment" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::telemetryEquipment" data-element-kind="requirementUsage">telemetryEquipment</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::communications" data-element-kind="requirementUsage">communications</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">TelemetryEquipment supports communications. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::deriveCommandIntegrity" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::commandIntegrity" data-element-kind="requirementUsage">commandIntegrity</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::communications" data-element-kind="requirementUsage">communications</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">CommandIntegrity supports communications. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next7"><a class="sysml-link" href="requirements-c-102.md">Continue: C-102 CommandIntegrity</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next8"><a class="sysml-link" href="requirements-c-101.md">Continue: C-101 TelemetryEquipment</a></p>
 </article>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({maxTextSize: 1341, maxEdges: 4});</script>
+<script>mermaid.initialize({maxTextSize: 1345, maxEdges: 4});</script>
 </body>
 </html>

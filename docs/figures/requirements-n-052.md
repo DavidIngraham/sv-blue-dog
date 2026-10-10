@@ -1,10 +1,10 @@
-# N-052 capsize control recovery
+# N-052 CapsizeControlRecovery relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-052 CapsizeControlRecovery** — The vessel shall restore mode-appropriate control after each specified capsize release.
 
@@ -16,7 +16,7 @@
 
 **N-125 CapsizeRestrictionRetention** — Control restoration after each N-051 release shall preserve every active survival, low-energy, recovery and motor-inhibition restriction.
 
-## N-052 derivation 1
+## N-052 relationships 1
 
 ```mermaid
 ---
@@ -43,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::capsizeControlRecovery1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 70 node(s) without a position, left undrawn, and 92 edge(s) at them
+%% not represented: 70 node(s) without a position, left undrawn, and 91 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -62,7 +62,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-052 derivation 2
+## N-052 relationships 2
 
 ```mermaid
 ---
@@ -89,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::capsizeControlRecovery2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 72 node(s) without a position, left undrawn, and 94 edge(s) at them
+%% not represented: 72 node(s) without a position, left undrawn, and 93 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

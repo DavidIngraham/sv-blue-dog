@@ -2,7 +2,7 @@
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
-Follow a parent to its immediate derived requirements. Each diagram includes at most three children and places the parent above them. Shared requirements may appear under more than one parent. These views express derivation, not verification.
+Follow requirement relationships in small views. Derivation arrows identify required acceptance outcomes; refinement arrows identify a more precise representation. Design choices motivated by a mission are plain dependencies, reported separately. Neither a link nor a successful rendering establishes verification.
 
 [Complete requirements register](<requirements-register.md>)
 

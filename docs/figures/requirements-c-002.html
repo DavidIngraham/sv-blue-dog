@@ -3,126 +3,54 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>C-002 repeated operation</title>
+<title>C-002 RepeatedOperation relationships</title>
 <link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::RepeatedOperationRequirements">
-<h1 class="sysml-title">C-002 repeated operation</h1>
+<h1 class="sysml-title">C-002 RepeatedOperation relationships</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="context"><a class="sysml-link" href="../requirements-context.md">Conditions, rationale and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements3">
 <div class="sysml-entry" data-element="GorgeChallenge::RepeatedOperation" data-element-kind="requirementDef">
 <dt class="sysml-term">C-002 RepeatedOperation</dt>
 <dd class="sysml-description">After its first circuit, the vessel should repeat The Dalles–Bonneville–The Dalles autonomously for as long as practical.</dd>
 </div>
-<div class="sysml-entry" data-element="BlueDogRequirements::MultiDayEndurance" data-element-kind="requirementDef">
-<dt class="sysml-term">M-002 MultiDayEndurance</dt>
-<dd class="sysml-description">The vessel shall operate for 72 continuous hours without servicing or external charging under the specified Gorge energy campaign.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::Serviceability" data-element-kind="requirementDef">
-<dt class="sysml-term">P-003 Serviceability</dt>
-<dd class="sysml-description">The vessel shall support replacement of serviceable equipment without structural damage.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::SustainedEnergyFeasibility" data-element-kind="requirementDef">
-<dt class="sysml-term">E-200 SustainedEnergyFeasibility</dt>
-<dd class="sysml-description">The installed energy architecture shall support the selected bounded repeating profile without external charging, meeting the derived reserve, cycle-balance and peak-supply criteria.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::MissionReliability" data-element-kind="requirementDef">
-<dt class="sysml-term">L-001 MissionReliability</dt>
-<dd class="sysml-description">The vessel shall preserve mission-critical functions throughout each declared unassisted voyage.</dd>
-</div>
 </dl>
-<section class="sysml-section" id="group1" data-content="section" data-name="group1">
-<h2>C-002 derivation 1</h2>
-<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::repeatedOperation1" data-diagram-kind="requirement" data-direction="BT">
-<pre class="mermaid">---
-config:
-  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-  theme: base
-  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
-  themeVariables:
-    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-    fontSize: &#34;14px&#34;
-    primaryColor: &#34;#FFFFFF&#34;
-    secondaryColor: &#34;#FFFFFF&#34;
-    tertiaryColor: &#34;#FFFFFF&#34;
-    background: &#34;#FFFFFF&#34;
-    primaryBorderColor: &#34;#181818&#34;
-    primaryTextColor: &#34;#000000&#34;
-    lineColor: &#34;#181818&#34;
-    textColor: &#34;#000000&#34;
-    noteBkgColor: &#34;#FEFFDD&#34;
-    noteBorderColor: &#34;#181818&#34;
-    noteTextColor: &#34;#000000&#34;
-    clusterBkg: &#34;#FFFFFF&#34;
-    clusterBorder: &#34;#181818&#34;
-    edgeLabelBackground: &#34;#FFFFFF&#34;
----
-%% BlueDogViews::repeatedOperation1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 231 node(s) without a position, left undrawn, and 455 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
-flowchart BT
-  n0(&#34;`*«requirement»*
-**GorgeChallenge::repeatedOperation : RepeatedOperation**`&#34;)
-  n1(&#34;`*«requirement»*
-**BlueDogRequirements::multiDayEndurance : MultiDayEndurance**`&#34;)
-  n2(&#34;`*«requirement»*
-**BlueDogRequirements::serviceability : Serviceability**`&#34;)
-  n3(&#34;`*«requirement»*
-**BlueDogRequirements::sustainedEnergyFeasibility : SustainedEnergyFeasibility**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0
-  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
-</figure>
+<section class="sysml-section" id="basis" data-content="section" data-name="basis">
+<h2>Design decisions motivated by this requirement</h2>
+<p class="sysml-paragraph" data-content="paragraph" data-name="meaning">Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.</p>
+<table class="sysml-table" data-content="table" data-name="entries" data-query="BlueDogDiagramDocuments::DesignBasis3">
+<thead>
+<tr>
+<th scope="col" data-column="Dependent requirement">Dependent requirement</th>
+<th scope="col" data-column="Design basis">Design basis</th>
+<th scope="col" data-column="Rationale">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="sysml-row" data-element="BlueDogRequirements::challengeEndurance" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::multiDayEndurance" data-element-kind="requirementUsage">multiDayEndurance</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="GorgeChallenge::repeatedOperation" data-element-kind="requirementUsage">repeatedOperation</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">Repeated autonomous journeys motivate the existing endurance and harvesting requirement; M-002 defines an initial 72-hour campaign; indefinite operation remains an objective. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::energyDerivation1" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::sustainedEnergyFeasibility" data-element-kind="requirementUsage">sustainedEnergyFeasibility</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="GorgeChallenge::repeatedOperation" data-element-kind="requirementUsage">repeatedOperation</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">Repeated journeys motivate a repeatable energy cycle, beyond a one-off endurance run. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::cruiseReliabilityDerivation5" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::missionReliability" data-element-kind="requirementUsage">missionReliability</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="GorgeChallenge::repeatedOperation" data-element-kind="requirementUsage">repeatedOperation</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">missionReliability is a selected engineering objective supporting repeatedOperation. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+</tbody>
+</table>
 </section>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-m-002.md">Continue: M-002 multi day endurance</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next1"><a class="sysml-link" href="requirements-p-003.md">Continue: P-003 serviceability</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next2"><a class="sysml-link" href="requirements-e-200.md">Continue: E-200 sustained energy feasibility</a></p>
-<section class="sysml-section" id="group2" data-content="section" data-name="group2">
-<h2>C-002 derivation 2</h2>
-<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::repeatedOperation2" data-diagram-kind="requirement" data-direction="BT">
-<pre class="mermaid">---
-config:
-  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-  theme: base
-  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
-  themeVariables:
-    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-    fontSize: &#34;14px&#34;
-    primaryColor: &#34;#FFFFFF&#34;
-    secondaryColor: &#34;#FFFFFF&#34;
-    tertiaryColor: &#34;#FFFFFF&#34;
-    background: &#34;#FFFFFF&#34;
-    primaryBorderColor: &#34;#181818&#34;
-    primaryTextColor: &#34;#000000&#34;
-    lineColor: &#34;#181818&#34;
-    textColor: &#34;#000000&#34;
-    noteBkgColor: &#34;#FEFFDD&#34;
-    noteBorderColor: &#34;#181818&#34;
-    noteTextColor: &#34;#000000&#34;
-    clusterBkg: &#34;#FFFFFF&#34;
-    clusterBorder: &#34;#181818&#34;
-    edgeLabelBackground: &#34;#FFFFFF&#34;
----
-%% BlueDogViews::repeatedOperation2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 230 node(s) without a position, left undrawn, and 450 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-flowchart BT
-  n0(&#34;`*«requirement»*
-**GorgeChallenge::repeatedOperation : RepeatedOperation**`&#34;)
-  n1(&#34;`*«requirement»*
-**BlueDogRequirements::missionReliability : MissionReliability**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0</pre>
-</figure>
-</section>
-<p class="sysml-paragraph" data-content="paragraph" data-name="continueMissionReliability"><a class="sysml-link" href="requirements-l-001.md">Continue: L-001 missionReliability</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-l-001.md">Continue: L-001 MissionReliability</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next1"><a class="sysml-link" href="requirements-e-200.md">Continue: E-200 SustainedEnergyFeasibility</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next2"><a class="sysml-link" href="requirements-m-002.md">Continue: M-002 MultiDayEndurance</a></p>
 </article>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({maxTextSize: 1427, maxEdges: 4});</script>
 </body>
 </html>

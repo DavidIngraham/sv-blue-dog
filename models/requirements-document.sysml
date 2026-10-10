@@ -47,7 +47,7 @@ package BlueDogDocuments {
             part link : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification specifications"; attribute redefines target = "requirements-context.md"; }
         }
         part intro : Paragraph {
-            attribute redefines text = "Generated natively by OpenSysML from the project models. Status describes work on the model element, not verification. Derivations record design reasoning, not proof of satisfaction.";
+            attribute redefines text = "Generated natively by OpenSysML from the project models. Status describes work on the model element, not verification. Derivations express required acceptance outcomes under their stated conditions, not evidence that a vessel satisfies them. Design-basis dependencies and refinements are reported separately.";
         }
         part requirements : Section {
             attribute redefines title = "Requirements";
@@ -149,7 +149,7 @@ package BlueDogDocuments {
     }
     part def RequirementsIndex :> Document {
         attribute redefines title = "Requirements views";
-        part intro : Paragraph { attribute redefines text = "Follow a parent to its immediate derived requirements. Each diagram includes at most three children and places the parent above them. Shared requirements may appear under more than one parent. These views express derivation, not verification."; }
+        part intro : Paragraph { attribute redefines text = "Follow requirement relationships in small views. Derivation arrows identify required acceptance outcomes; refinement arrows identify a more precise representation. Design choices motivated by a mission are plain dependencies, reported separately. Neither a link nor a successful rendering establishes verification."; }
         part register : Paragraph { part link : Link { attribute redefines text = "Complete requirements register"; attribute redefines target = "requirements-register.md"; } }
         part context : Paragraph { part link : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "requirements-context.md"; } }
         part category0 : Section { attribute redefines title = "Mission and challenge";
@@ -215,5 +215,27 @@ package BlueDogDocuments {
             part entry48 : Paragraph { part link : Link { attribute redefines text = "Q-001 cruise performance"; attribute redefines target = "figures/requirements-q-001.md"; } }
             part entry49 : Paragraph { part link : Link { attribute redefines text = "L-001 mission reliability"; attribute redefines target = "figures/requirements-l-001.md"; } }
         }
+    }
+
+    calc def RefinementDependencies :> Query {
+        WhereMetadata(source = WhereType(source = ModelElements(), type = "Dependency"), 'metadata' = "ModelingMetadata::Refinement")
+    }
+    calc def RefinementLinks :> Query {
+        Project(source = RefinementDependencies(), columns = (
+            Column(name = "Refining element", cell = { in row : KerML::Root::Dependency; row.client }),
+            Column(name = "Refined element", cell = { in row : KerML::Root::Dependency; row.supplier }),
+            Column(name = "Rationale", path = "rationale.text")))
+    }
+    calc def DesignBasisLinks :> Query {
+        Project(source = Except(source = WhereType(source = ModelElements(), type = "Dependency"), exclude = RefinementDependencies()), columns = (
+            Column(name = "Dependent requirement", cell = { in row : KerML::Root::Dependency; row.client }),
+            Column(name = "Design basis", cell = { in row : KerML::Root::Dependency; row.supplier }),
+            Column(name = "Rationale", path = "rationale.text")))
+    }
+    part def RelationshipRegister :> Document {
+        attribute redefines title = "Refinements and design-basis dependencies";
+        part meaning : Paragraph { attribute redefines text = "Refinement points from a more precise representation to the element it clarifies. Plain dependency points from a dependent design obligation to its basis; it makes no satisfaction implication. These are model relationships, not completed evidence."; }
+        part refinements : Section { attribute redefines title = "Refinement"; part entries : Table { calc rows : RefinementLinks; } }
+        part designBasis : Section { attribute redefines title = "Plain dependency"; part entries : Table { calc rows : DesignBasisLinks; } }
     }
 }

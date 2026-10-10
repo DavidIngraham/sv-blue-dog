@@ -1,10 +1,10 @@
-# S-004 navigation conspicuity
+# S-004 NavigationConspicuity relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **S-004 NavigationConspicuity** — The vessel shall present the navigation signals required for its operating mode.
 
@@ -20,7 +20,7 @@
 
 **S-121 SignalingFaultReporting** — With a functioning link, each detected signaling failure shall be reported to shore within 5 seconds.
 
-## S-004 derivation 1
+## S-004 relationships 1
 
 ```mermaid
 ---
@@ -47,7 +47,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::navigationConspicuity1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 74 node(s) without a position, left undrawn, and 86 edge(s) at them
+%% not represented: 13 node(s) without a position, left undrawn, and 23 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -66,7 +66,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## S-004 derivation 2
+## S-004 relationships 2
 
 ```mermaid
 ---
@@ -93,7 +93,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::navigationConspicuity2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 74 node(s) without a position, left undrawn, and 86 edge(s) at them
+%% not represented: 13 node(s) without a position, left undrawn, and 23 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

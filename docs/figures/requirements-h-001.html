@@ -3,309 +3,114 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>H-001 hawaii voyage</title>
+<title>H-001 HawaiiVoyage relationships</title>
 <link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::HawaiiVoyageRequirements">
-<h1 class="sysml-title">H-001 hawaii voyage</h1>
+<h1 class="sysml-title">H-001 HawaiiVoyage relationships</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="context"><a class="sysml-link" href="../requirements-context.md">Conditions, rationale and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements8">
 <div class="sysml-entry" data-element="BlueDog::Goals::HawaiiVoyage" data-element-kind="requirementDef">
 <dt class="sysml-term">H-001 HawaiiVoyage</dt>
 <dd class="sysml-description">The vessel shall complete an autonomous sailing voyage to Hawaii.</dd>
 </div>
-<div class="sysml-entry" data-element="BlueDogRequirements::MultiDayEndurance" data-element-kind="requirementDef">
-<dt class="sysml-term">M-002 MultiDayEndurance</dt>
-<dd class="sysml-description">The vessel shall operate for 72 continuous hours without servicing or external charging under the specified Gorge energy campaign.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::NavigationAndControl" data-element-kind="requirementDef">
-<dt class="sysml-term">E-002 NavigationAndControl</dt>
-<dd class="sysml-description">The vessel shall provide autonomous navigation and sail/steering control within the selected operational profile.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::Communications" data-element-kind="requirementDef">
-<dt class="sysml-term">E-005 Communications</dt>
-<dd class="sysml-description">The vessel shall support live telemetry through link outages and reconnection.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::ResetRecovery" data-element-kind="requirementDef">
-<dt class="sysml-term">E-003 ResetRecovery</dt>
-<dd class="sysml-description">The vessel shall restore mode-appropriate autonomous operation after a watchdog reset.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::MissionEvidence" data-element-kind="requirementDef">
-<dt class="sysml-term">E-007 MissionEvidence</dt>
-<dd class="sysml-description">The vessel shall retain time-correlated mission evidence through communication and power interruptions.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::EnvironmentalEnvelope" data-element-kind="requirementDef">
-<dt class="sysml-term">N-001 EnvironmentalEnvelope</dt>
-<dd class="sysml-description">The vessel shall retain the functions required by its selected environmental profile and operating mode.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::OceanEnvironment" data-element-kind="requirementDef">
-<dt class="sysml-term">N-020 OceanEnvironment</dt>
-<dd class="sysml-description">The vessel shall operate on a northeast Pacific passage toward Hawaii amid saltwater, ocean swell, wind seas and prolonged unattended exposure.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::OperatingBoundary" data-element-kind="requirementDef">
-<dt class="sysml-term">S-002 OperatingBoundary</dt>
-<dd class="sysml-description">The vessel shall enforce the configured operating boundaries.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::RegulatoryClassification" data-element-kind="requirementDef">
-<dt class="sysml-term">S-005 RegulatoryClassification</dt>
-<dd class="sysml-description">Deployment shall require documented compliance with applicable navigation, radio and authorization obligations.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::Serviceability" data-element-kind="requirementDef">
-<dt class="sysml-term">P-003 Serviceability</dt>
-<dd class="sysml-description">The vessel shall support replacement of serviceable equipment without structural damage.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::SustainedEnergyFeasibility" data-element-kind="requirementDef">
-<dt class="sysml-term">E-200 SustainedEnergyFeasibility</dt>
-<dd class="sysml-description">The installed energy architecture shall support the selected bounded repeating profile without external charging, meeting the derived reserve, cycle-balance and peak-supply criteria.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::CruisePerformance" data-element-kind="requirementDef">
-<dt class="sysml-term">Q-001 CruisePerformance</dt>
-<dd class="sysml-description">The vessel shall sustain sailing performance sufficient to complete each declared unassisted mission route.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::MissionReliability" data-element-kind="requirementDef">
-<dt class="sysml-term">L-001 MissionReliability</dt>
-<dd class="sysml-description">The vessel shall preserve mission-critical functions throughout each declared unassisted voyage.</dd>
-</div>
 </dl>
-<section class="sysml-section" id="group1" data-content="section" data-name="group1">
-<h2>H-001 derivation 1</h2>
-<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::hawaiiVoyage1" data-diagram-kind="requirement" data-direction="BT">
-<pre class="mermaid">---
-config:
-  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-  theme: base
-  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
-  themeVariables:
-    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-    fontSize: &#34;14px&#34;
-    primaryColor: &#34;#FFFFFF&#34;
-    secondaryColor: &#34;#FFFFFF&#34;
-    tertiaryColor: &#34;#FFFFFF&#34;
-    background: &#34;#FFFFFF&#34;
-    primaryBorderColor: &#34;#181818&#34;
-    primaryTextColor: &#34;#000000&#34;
-    lineColor: &#34;#181818&#34;
-    textColor: &#34;#000000&#34;
-    noteBkgColor: &#34;#FEFFDD&#34;
-    noteBorderColor: &#34;#181818&#34;
-    noteTextColor: &#34;#000000&#34;
-    clusterBkg: &#34;#FFFFFF&#34;
-    clusterBorder: &#34;#181818&#34;
-    edgeLabelBackground: &#34;#FFFFFF&#34;
----
-%% BlueDogViews::hawaiiVoyage1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 237 node(s) without a position, left undrawn, and 479 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
-flowchart BT
-  n0(&#34;`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`&#34;)
-  n1(&#34;`*«requirement»*
-**BlueDogRequirements::multiDayEndurance : MultiDayEndurance**`&#34;)
-  n2(&#34;`*«requirement»*
-**BlueDogRequirements::navigationAndControl : NavigationAndControl**`&#34;)
-  n3(&#34;`*«requirement»*
-**BlueDogRequirements::communications : Communications**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0
-  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
-</figure>
+<section class="sysml-section" id="basis" data-content="section" data-name="basis">
+<h2>Design decisions motivated by this requirement</h2>
+<p class="sysml-paragraph" data-content="paragraph" data-name="meaning">Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.</p>
+<table class="sysml-table" data-content="table" data-name="entries" data-query="BlueDogDiagramDocuments::DesignBasis8">
+<thead>
+<tr>
+<th scope="col" data-column="Dependent requirement">Dependent requirement</th>
+<th scope="col" data-column="Design basis">Design basis</th>
+<th scope="col" data-column="Rationale">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="sysml-row" data-element="BlueDogRequirements::hawaiiMultiDayEndurance" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::multiDayEndurance" data-element-kind="requirementUsage">multiDayEndurance</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">An ocean passage motivates sustained energy autonomy; multi-day operation is an interim capability, not an ocean endurance sizing result. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::hawaiiNavigationAndControl" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::navigationAndControl" data-element-kind="requirementUsage">navigationAndControl</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">An autonomous Hawaii passage needs ocean guidance and sailing control; N-001 specifies its environmental design envelope. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::hawaiiCommunications" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::communications" data-element-kind="requirementUsage">communications</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">The long-term ocean mission motivates review of monitoring coverage and outage behavior without selecting a radio technology. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::hawaiiResetRecovery" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::resetRecovery" data-element-kind="requirementUsage">resetRecovery</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">Extended unattended operation motivates recovery from onboard resets. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::hawaiiMissionEvidence" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::missionEvidence" data-element-kind="requirementUsage">missionEvidence</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">Ocean mission assessment requires retained voyage evidence; E-007 specifies recording and retention acceptance criteria. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::hawaiiEnvironment" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::environmentalEnvelope" data-element-kind="requirementUsage">environmentalEnvelope</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">Ocean operation requires its own environmental envelope; Gorge success does not establish it. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::deriveOceanEnvironment" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::oceanEnvironment" data-element-kind="requirementUsage">oceanEnvironment</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">The Hawaii mission sets the ocean environment; this profile is not a Gorge acceptance prerequisite. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::auditDerivation7" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::operatingBoundary" data-element-kind="requirementUsage">operatingBoundary</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">An ocean route also needs configured boundaries and no-feasible-route behavior; its boundaries differ from the Gorge course. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::auditDerivation8" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::regulatoryClassification" data-element-kind="requirementUsage">regulatoryClassification</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">Deployment permissions and applicable rules depend on the ocean route as well as the Gorge mission. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::auditDerivation9" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::serviceability" data-element-kind="requirementUsage">serviceability</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">Unattended ocean preparation and post-voyage maintenance motivate replaceable modules; this is not at-sea servicing during qualification. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::energyDerivation2" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::sustainedEnergyFeasibility" data-element-kind="requirementUsage">sustainedEnergyFeasibility</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">The ocean ambition requires sustained energy autonomy; route-specific resources remain unresolved. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::cruiseReliabilityDerivation2" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::cruisePerformance" data-element-kind="requirementUsage">cruisePerformance</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">cruisePerformance is a selected engineering objective supporting hawaiiVoyage. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::cruiseReliabilityDerivation4" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::missionReliability" data-element-kind="requirementUsage">missionReliability</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDog::Goals::hawaiiVoyage" data-element-kind="requirementUsage">hawaiiVoyage</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">missionReliability is a selected engineering objective supporting hawaiiVoyage. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+</tbody>
+</table>
 </section>
-<section class="sysml-section" id="group2" data-content="section" data-name="group2">
-<h2>H-001 derivation 2</h2>
-<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::hawaiiVoyage2" data-diagram-kind="requirement" data-direction="BT">
-<pre class="mermaid">---
-config:
-  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-  theme: base
-  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
-  themeVariables:
-    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-    fontSize: &#34;14px&#34;
-    primaryColor: &#34;#FFFFFF&#34;
-    secondaryColor: &#34;#FFFFFF&#34;
-    tertiaryColor: &#34;#FFFFFF&#34;
-    background: &#34;#FFFFFF&#34;
-    primaryBorderColor: &#34;#181818&#34;
-    primaryTextColor: &#34;#000000&#34;
-    lineColor: &#34;#181818&#34;
-    textColor: &#34;#000000&#34;
-    noteBkgColor: &#34;#FEFFDD&#34;
-    noteBorderColor: &#34;#181818&#34;
-    noteTextColor: &#34;#000000&#34;
-    clusterBkg: &#34;#FFFFFF&#34;
-    clusterBorder: &#34;#181818&#34;
-    edgeLabelBackground: &#34;#FFFFFF&#34;
----
-%% BlueDogViews::hawaiiVoyage2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 235 node(s) without a position, left undrawn, and 461 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
-flowchart BT
-  n0(&#34;`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`&#34;)
-  n1(&#34;`*«requirement»*
-**BlueDogRequirements::resetRecovery : ResetRecovery**`&#34;)
-  n2(&#34;`*«requirement»*
-**BlueDogRequirements::missionEvidence : MissionEvidence**`&#34;)
-  n3(&#34;`*«requirement»*
-**BlueDogRequirements::environmentalEnvelope : EnvironmentalEnvelope**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0
-  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
-</figure>
-</section>
-<section class="sysml-section" id="group3" data-content="section" data-name="group3">
-<h2>H-001 derivation 3</h2>
-<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::hawaiiVoyage3" data-diagram-kind="requirement" data-direction="BT">
-<pre class="mermaid">---
-config:
-  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-  theme: base
-  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
-  themeVariables:
-    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-    fontSize: &#34;14px&#34;
-    primaryColor: &#34;#FFFFFF&#34;
-    secondaryColor: &#34;#FFFFFF&#34;
-    tertiaryColor: &#34;#FFFFFF&#34;
-    background: &#34;#FFFFFF&#34;
-    primaryBorderColor: &#34;#181818&#34;
-    primaryTextColor: &#34;#000000&#34;
-    lineColor: &#34;#181818&#34;
-    textColor: &#34;#000000&#34;
-    noteBkgColor: &#34;#FEFFDD&#34;
-    noteBorderColor: &#34;#181818&#34;
-    noteTextColor: &#34;#000000&#34;
-    clusterBkg: &#34;#FFFFFF&#34;
-    clusterBorder: &#34;#181818&#34;
-    edgeLabelBackground: &#34;#FFFFFF&#34;
----
-%% BlueDogViews::hawaiiVoyage3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 225 node(s) without a position, left undrawn, and 429 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
-flowchart BT
-  n0(&#34;`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`&#34;)
-  n1(&#34;`*«requirement»*
-**BlueDogRequirements::oceanEnvironment : OceanEnvironment**`&#34;)
-  n2(&#34;`*«requirement»*
-**BlueDogRequirements::operatingBoundary : OperatingBoundary**`&#34;)
-  n3(&#34;`*«requirement»*
-**BlueDogRequirements::regulatoryClassification : RegulatoryClassification**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0
-  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
-</figure>
-</section>
-<section class="sysml-section" id="group4" data-content="section" data-name="group4">
-<h2>H-001 derivation 4</h2>
-<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::hawaiiVoyage4" data-diagram-kind="requirement" data-direction="BT">
-<pre class="mermaid">---
-config:
-  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-  theme: base
-  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
-  themeVariables:
-    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-    fontSize: &#34;14px&#34;
-    primaryColor: &#34;#FFFFFF&#34;
-    secondaryColor: &#34;#FFFFFF&#34;
-    tertiaryColor: &#34;#FFFFFF&#34;
-    background: &#34;#FFFFFF&#34;
-    primaryBorderColor: &#34;#181818&#34;
-    primaryTextColor: &#34;#000000&#34;
-    lineColor: &#34;#181818&#34;
-    textColor: &#34;#000000&#34;
-    noteBkgColor: &#34;#FEFFDD&#34;
-    noteBorderColor: &#34;#181818&#34;
-    noteTextColor: &#34;#000000&#34;
-    clusterBkg: &#34;#FFFFFF&#34;
-    clusterBorder: &#34;#181818&#34;
-    edgeLabelBackground: &#34;#FFFFFF&#34;
----
-%% BlueDogViews::hawaiiVoyage4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 226 node(s) without a position, left undrawn, and 429 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-flowchart BT
-  n0(&#34;`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`&#34;)
-  n1(&#34;`*«requirement»*
-**BlueDogRequirements::serviceability : Serviceability**`&#34;)
-  n2(&#34;`*«requirement»*
-**BlueDogRequirements::sustainedEnergyFeasibility : SustainedEnergyFeasibility**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0</pre>
-</figure>
-</section>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-m-002.md">Continue: M-002 multi day endurance</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next1"><a class="sysml-link" href="requirements-e-002.md">Continue: E-002 navigation and control</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next2"><a class="sysml-link" href="requirements-e-005.md">Continue: E-005 communications</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next3"><a class="sysml-link" href="requirements-e-003.md">Continue: E-003 reset recovery</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next4"><a class="sysml-link" href="requirements-e-007.md">Continue: E-007 mission evidence</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next5"><a class="sysml-link" href="requirements-n-001.md">Continue: N-001 environmental envelope</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next6"><a class="sysml-link" href="requirements-n-020.md">Continue: N-020 ocean environment</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next7"><a class="sysml-link" href="requirements-s-002.md">Continue: S-002 operating boundary</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next8"><a class="sysml-link" href="requirements-s-005.md">Continue: S-005 regulatory classification</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next9"><a class="sysml-link" href="requirements-p-003.md">Continue: P-003 serviceability</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next10"><a class="sysml-link" href="requirements-e-200.md">Continue: E-200 sustained energy feasibility</a></p>
-<section class="sysml-section" id="group5" data-content="section" data-name="group5">
-<h2>H-001 derivation 5</h2>
-<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::hawaiiVoyage5" data-diagram-kind="requirement" data-direction="BT">
-<pre class="mermaid">---
-config:
-  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-  theme: base
-  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
-  themeVariables:
-    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-    fontSize: &#34;14px&#34;
-    primaryColor: &#34;#FFFFFF&#34;
-    secondaryColor: &#34;#FFFFFF&#34;
-    tertiaryColor: &#34;#FFFFFF&#34;
-    background: &#34;#FFFFFF&#34;
-    primaryBorderColor: &#34;#181818&#34;
-    primaryTextColor: &#34;#000000&#34;
-    lineColor: &#34;#181818&#34;
-    textColor: &#34;#000000&#34;
-    noteBkgColor: &#34;#FEFFDD&#34;
-    noteBorderColor: &#34;#181818&#34;
-    noteTextColor: &#34;#000000&#34;
-    clusterBkg: &#34;#FFFFFF&#34;
-    clusterBorder: &#34;#181818&#34;
-    edgeLabelBackground: &#34;#FFFFFF&#34;
----
-%% BlueDogViews::hawaiiVoyage5 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 224 node(s) without a position, left undrawn, and 421 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-flowchart BT
-  n0(&#34;`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`&#34;)
-  n1(&#34;`*«requirement»*
-**BlueDogRequirements::cruisePerformance : CruisePerformance**`&#34;)
-  n2(&#34;`*«requirement»*
-**BlueDogRequirements::missionReliability : MissionReliability**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0</pre>
-</figure>
-</section>
-<p class="sysml-paragraph" data-content="paragraph" data-name="continueCruisePerformance"><a class="sysml-link" href="requirements-q-001.md">Continue: Q-001 cruisePerformance</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="continueMissionReliability"><a class="sysml-link" href="requirements-l-001.md">Continue: L-001 missionReliability</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-l-001.md">Continue: L-001 MissionReliability</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next1"><a class="sysml-link" href="requirements-q-001.md">Continue: Q-001 CruisePerformance</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next2"><a class="sysml-link" href="requirements-e-200.md">Continue: E-200 SustainedEnergyFeasibility</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next3"><a class="sysml-link" href="requirements-p-003.md">Continue: P-003 Serviceability</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next4"><a class="sysml-link" href="requirements-s-005.md">Continue: S-005 RegulatoryClassification</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next5"><a class="sysml-link" href="requirements-s-002.md">Continue: S-002 OperatingBoundary</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next6"><a class="sysml-link" href="requirements-n-020.md">Continue: N-020 OceanEnvironment</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next7"><a class="sysml-link" href="requirements-n-001.md">Continue: N-001 EnvironmentalEnvelope</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next8"><a class="sysml-link" href="requirements-e-007.md">Continue: E-007 MissionEvidence</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next9"><a class="sysml-link" href="requirements-e-003.md">Continue: E-003 ResetRecovery</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next10"><a class="sysml-link" href="requirements-e-005.md">Continue: E-005 Communications</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next11"><a class="sysml-link" href="requirements-e-002.md">Continue: E-002 NavigationAndControl</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next12"><a class="sysml-link" href="requirements-m-002.md">Continue: M-002 MultiDayEndurance</a></p>
 </article>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({maxTextSize: 1412, maxEdges: 4});</script>
 </body>
 </html>

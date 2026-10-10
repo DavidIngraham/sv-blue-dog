@@ -1,10 +1,10 @@
-# E-004 low energy recovery
+# E-004 LowEnergyRecovery relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **E-004 LowEnergyRecovery** — The vessel shall protect essential functions when conservative usable energy reaches the recovery reserve.
 
@@ -28,7 +28,7 @@
 
 **R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
-## E-004 derivation 1
+## E-004 relationships 1
 
 ```mermaid
 ---
@@ -55,7 +55,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 148 node(s) without a position, left undrawn, and 229 edge(s) at them
+%% not represented: 135 node(s) without a position, left undrawn, and 208 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -74,7 +74,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-004 derivation 2
+## E-004 relationships 2
 
 ```mermaid
 ---
@@ -101,7 +101,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 148 node(s) without a position, left undrawn, and 229 edge(s) at them
+%% not represented: 135 node(s) without a position, left undrawn, and 208 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -120,7 +120,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-004 derivation 3
+## E-004 relationships 3
 
 ```mermaid
 ---
@@ -147,7 +147,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 148 node(s) without a position, left undrawn, and 229 edge(s) at them
+%% not represented: 135 node(s) without a position, left undrawn, and 208 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -166,7 +166,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-004 derivation 4
+## E-004 relationships 4
 
 ```mermaid
 ---
@@ -193,7 +193,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 151 node(s) without a position, left undrawn, and 232 edge(s) at them
+%% not represented: 138 node(s) without a position, left undrawn, and 211 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

@@ -1,14 +1,12 @@
-# S-001 traffic safety
+# S-001 TrafficSafety relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **S-001 TrafficSafety** — The vessel shall assess and respond to collision risks within the deployment-specific traffic envelope.
-
-**S-004 NavigationConspicuity** — The vessel shall present the navigation signals required for its operating mode.
 
 **S-101 TrafficTracking** — The vessel shall maintain a track for every encounter target within the frozen S-001 detection envelope.
 
@@ -18,7 +16,7 @@
 
 **S-104 TrafficAwarenessFault** — After traffic assessment has been invalid for more than 5 seconds, the vessel shall log a traffic-awareness fault within 1 second.
 
-## S-001 derivation 1
+## S-001 relationships 1
 
 ```mermaid
 ---
@@ -45,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::trafficSafety1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 112 node(s) without a position, left undrawn, and 136 edge(s) at them
+%% not represented: 58 node(s) without a position, left undrawn, and 64 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -54,17 +52,17 @@ flowchart BT
   n0("`*«requirement»*
 **trafficSafety : TrafficSafety**`")
   n1("`*«requirement»*
-**navigationConspicuity : NavigationConspicuity**`")
-  n2("`*«requirement»*
 **trafficTracking : TrafficTracking**`")
-  n3("`*«requirement»*
+  n2("`*«requirement»*
 **collisionAssessmentCadence : CollisionAssessmentCadence**`")
+  n3("`*«requirement»*
+**avoidanceCommandDeadline : AvoidanceCommandDeadline**`")
   n1 -.->|"derive"| n0
   n2 -.->|"derive"| n0
   n3 -.->|"derive"| n0
 ```
 
-## S-001 derivation 2
+## S-001 relationships 2
 
 ```mermaid
 ---
@@ -91,19 +89,23 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::trafficSafety2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 112 node(s) without a position, left undrawn, and 130 edge(s) at them
+%% not represented: 60 node(s) without a position, left undrawn, and 66 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
 flowchart BT
   n0("`*«requirement»*
 **trafficSafety : TrafficSafety**`")
   n1("`*«requirement»*
-**avoidanceCommandDeadline : AvoidanceCommandDeadline**`")
-  n2("`*«requirement»*
 **trafficAwarenessFault : TrafficAwarenessFault**`")
   n1 -.->|"derive"| n0
-  n2 -.->|"derive"| n0
 ```
 
-[Continue: S-004 navigation conspicuity](<requirements-s-004.md>)
+## Design decisions motivated by this requirement
+
+Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.
+
+| Dependent requirement | Design basis | Rationale |
+| --- | --- | --- |
+| navigationConspicuity | trafficSafety | NavigationConspicuity supports trafficSafety. This is design motivation or an implementation choice, not a satisfaction implication. |
+
+[Continue: S-004 NavigationConspicuity](<requirements-s-004.md>)

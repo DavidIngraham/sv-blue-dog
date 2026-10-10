@@ -1,10 +1,10 @@
-# E-200 sustained energy feasibility
+# E-200 SustainedEnergyFeasibility relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **E-200 SustainedEnergyFeasibility** — The installed energy architecture shall support the selected bounded repeating profile without external charging, meeting the derived reserve, cycle-balance and peak-supply criteria.
 
@@ -16,7 +16,7 @@
 
 **E-205 EnergyEvidenceReadiness** — An energy case shall be accepted only after its installed-load coverage, resource bounds, battery derating and interval-resolution evidence have been accepted.
 
-## E-200 derivation 1
+## E-200 relationships 1
 
 ```mermaid
 ---
@@ -43,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::sustainedEnergyFeasibility1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 57 node(s) without a position, left undrawn, and 70 edge(s) at them
+%% not represented: 54 node(s) without a position, left undrawn, and 59 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -62,7 +62,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-200 derivation 2
+## E-200 relationships 2
 
 ```mermaid
 ---
@@ -89,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::sustainedEnergyFeasibility2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 59 node(s) without a position, left undrawn, and 72 edge(s) at them
+%% not represented: 56 node(s) without a position, left undrawn, and 61 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

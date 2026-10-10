@@ -1,10 +1,10 @@
-# N-003 stability and fouling
+# N-003 StabilityAndFouling relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-003 StabilityAndFouling** — The vessel shall autonomously tolerate capsize and submerged aquatic vegetation, including milfoil-like stems.
 
@@ -20,7 +20,7 @@
 
 **N-056 RecoveryPropulsorWeeds** — The recovery propulsion system shall tolerate the specified weed encounters within its rated electrical and thermal limits.
 
-## N-003 derivation 1
+## N-003 relationships 1
 
 ```mermaid
 ---
@@ -47,7 +47,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::stabilityAndFouling1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 130 node(s) without a position, left undrawn, and 206 edge(s) at them
+%% not represented: 79 node(s) without a position, left undrawn, and 108 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -66,7 +66,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-003 derivation 2
+## N-003 relationships 2
 
 ```mermaid
 ---
@@ -93,7 +93,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::stabilityAndFouling2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 159 node(s) without a position, left undrawn, and 268 edge(s) at them
+%% not represented: 125 node(s) without a position, left undrawn, and 188 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -112,14 +112,14 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-[Continue: N-051 self righting](<requirements-n-051.md>)
+[Continue: N-051 SelfRighting](<requirements-n-051.md>)
 
-[Continue: N-052 capsize control recovery](<requirements-n-052.md>)
+[Continue: N-052 CapsizeControlRecovery](<requirements-n-052.md>)
 
-[Continue: N-053 submerged weed passage](<requirements-n-053.md>)
+[Continue: N-053 SubmergedWeedPassage](<requirements-n-053.md>)
 
-[Continue: N-054 weed snag shedding](<requirements-n-054.md>)
+[Continue: N-054 WeedSnagShedding](<requirements-n-054.md>)
 
-[Continue: N-055 weed blockage response](<requirements-n-055.md>)
+[Continue: N-055 WeedBlockageResponse](<requirements-n-055.md>)
 
-[Continue: N-056 recovery propulsor weeds](<requirements-n-056.md>)
+[Continue: N-056 RecoveryPropulsorWeeds](<requirements-n-056.md>)

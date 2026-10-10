@@ -13,6 +13,13 @@ package BlueDog {
 
     private import GorgeChallenge::*;
 
+    package DesignIntent {
+        doc /* Owner-imposed project constraints: one-person transport, construction on a
+         * 250 mm cubic desktop printer, and serviceability between deployments. These
+         * remain binding alongside the two mission goals, not consequences of sailing success.
+         */
+    }
+
     package Goals {
         requirement def <'H-001'> HawaiiVoyage {
             metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }

@@ -1,10 +1,10 @@
-# P-003 serviceability
+# P-003 Serviceability relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **P-003 Serviceability** — The vessel shall support replacement of serviceable equipment without structural damage.
 
@@ -16,7 +16,7 @@
 
 **P-110 PostServiceActuation** — After each P-003 replacement, affected actuators shall complete their full commanded travel.
 
-## P-003 derivation 1
+## P-003 relationships 1
 
 ```mermaid
 ---
@@ -43,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::serviceability1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 66 node(s) without a position, left undrawn, and 87 edge(s) at them
+%% not represented: 19 node(s) without a position, left undrawn, and 25 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -62,7 +62,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## P-003 derivation 2
+## P-003 relationships 2
 
 ```mermaid
 ---
@@ -89,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::serviceability2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 68 node(s) without a position, left undrawn, and 89 edge(s) at them
+%% not represented: 21 node(s) without a position, left undrawn, and 27 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

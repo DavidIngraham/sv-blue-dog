@@ -14,6 +14,57 @@ The profile is piecewise constant. Stored energy is monotone within each interva
 
 ## Acceptance and verification
 
+<!-- diagram:energy-semantics -->
+```mermaid
+---
+config:
+  fontFamily: "Helvetica, Arial, sans-serif"
+  theme: base
+  themeCSS: ".edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }"
+  themeVariables:
+    fontFamily: "Helvetica, Arial, sans-serif"
+    fontSize: "14px"
+    primaryColor: "#FFFFFF"
+    secondaryColor: "#FFFFFF"
+    tertiaryColor: "#FFFFFF"
+    background: "#FFFFFF"
+    primaryBorderColor: "#181818"
+    primaryTextColor: "#000000"
+    lineColor: "#181818"
+    textColor: "#000000"
+    noteBkgColor: "#FEFFDD"
+    noteBorderColor: "#181818"
+    noteTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#181818"
+    edgeLabelBackground: "#FFFFFF"
+---
+%% BlueDogSemanticViews::EnergySemantics — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 53 node(s) without a position, left undrawn, and 57 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=360 y=0
+%% layout: n2 x=360 y=200
+%% layout: n9 x=0 y=200
+%% layout: n51 x=0 y=400
+flowchart BT
+  n0("`*«requirement»*
+**BlueDogRequirements::sustainedEnergyFeasibility : SustainedEnergyFeasibility**`")
+  n1("`*«requirement»*
+**BlueDogRequirements::sustainedReserveProtection : SustainedReserveProtection**`")
+  n2["`*«verification def»*
+**BlueDogEnergy::SustainedEnergyVerification**`"]
+  n9["`*«calc def»*
+**BlueDogRequirements::SustainedReserveProtectionCriterion**`"]
+  n51("`*«part»*
+**BlueDog::Architecture::Boat::energy : EnergySubsystem**`")
+  n2 -.->|"verify"| n0
+  n1 -.->|"derive"| n0
+  n9 -.->|"refine"| n1
+  n51 -.->|"satisfy"| n0
+  n51 -.->|"satisfy"| n1
+```
+<!-- /diagram -->
+
 Follow the [energy requirements](figures/requirements-e-200.md) and [qualification conditions](requirements-context.md). The analysis calls the same native criterion calculations as the requirements.
 
 `modeledEnergyFeasible` combines valid inputs, reserve protection, repeatable balance, peak support and campaign coverage. `energyCaseSupported` additionally requires accepted evidence. The native `SustainedEnergyVerification` case explicitly verifies E-200, runs the analysis, and returns inconclusive without accepted evidence, pass for an accepted numerically feasible case, or fail for an accepted numerically failing case. Its objective separately requires `energyCaseSupported`; an inconclusive example is therefore not a successful verification command.

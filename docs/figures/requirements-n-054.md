@@ -1,10 +1,10 @@
-# N-054 weed snag shedding
+# N-054 WeedSnagShedding relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-054 WeedSnagShedding** — The vessel shall recover sailing performance after the specified appendage weed snags without assistance or motor use.
 
@@ -12,7 +12,7 @@
 
 **N-129 WeedSnagSteeringRecovery** — Within 5 minutes of each N-054 snag, full commanded rudder travel shall be regained.
 
-## N-054 derivation 1
+## N-054 relationships 1
 
 ```mermaid
 ---
@@ -39,7 +39,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::weedSnagShedding1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 65 node(s) without a position, left undrawn, and 77 edge(s) at them
+%% not represented: 65 node(s) without a position, left undrawn, and 76 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

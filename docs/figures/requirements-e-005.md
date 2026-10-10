@@ -1,16 +1,12 @@
-# E-005 communications
+# E-005 Communications relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **E-005 Communications** — The vessel shall support live telemetry through link outages and reconnection.
-
-**C-101 TelemetryEquipment** — The shore endpoint shall present current vessel telemetry with explicit data age and identity.
-
-**C-102 CommandIntegrity** — The vessel shall accept external commands only under the specified authentication, freshness and qualification rules.
 
 **E-120 TelemetryDeliveryCadence** — With a functioning link, current telemetry delivery intervals shall not exceed 60 seconds, except that low-energy operation without emergency/powered recovery permits 300 seconds.
 
@@ -26,7 +22,7 @@
 
 **E-137 ReconnectLogPreservation** — Communication reconnection shall not delete retained mission records.
 
-## E-005 derivation 1
+## E-005 relationships 1
 
 ```mermaid
 ---
@@ -53,7 +49,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::communications1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 219 node(s) without a position, left undrawn, and 430 edge(s) at them
+%% not represented: 123 node(s) without a position, left undrawn, and 184 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -62,17 +58,17 @@ flowchart BT
   n0("`*«requirement»*
 **communications : Communications**`")
   n1("`*«requirement»*
-**telemetryEquipment : TelemetryEquipment**`")
-  n2("`*«requirement»*
-**commandIntegrity : CommandIntegrity**`")
-  n3("`*«requirement»*
 **telemetryDeliveryCadence : TelemetryDeliveryCadence**`")
+  n2("`*«requirement»*
+**outageAutonomy : OutageAutonomy**`")
+  n3("`*«requirement»*
+**reconnectCurrentRecord : ReconnectCurrentRecord**`")
   n1 -.->|"derive"| n0
   n2 -.->|"derive"| n0
   n3 -.->|"derive"| n0
 ```
 
-## E-005 derivation 2
+## E-005 relationships 2
 
 ```mermaid
 ---
@@ -99,7 +95,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::communications2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 216 node(s) without a position, left undrawn, and 412 edge(s) at them
+%% not represented: 121 node(s) without a position, left undrawn, and 179 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -108,17 +104,17 @@ flowchart BT
   n0("`*«requirement»*
 **communications : Communications**`")
   n1("`*«requirement»*
-**outageAutonomy : OutageAutonomy**`")
-  n2("`*«requirement»*
-**reconnectCurrentRecord : ReconnectCurrentRecord**`")
-  n3("`*«requirement»*
 **backlogOrdering : BacklogOrdering**`")
+  n2("`*«requirement»*
+**backlogCurrentPriority : BacklogCurrentPriority**`")
+  n3("`*«requirement»*
+**logRetention : LogRetention**`")
   n1 -.->|"derive"| n0
   n2 -.->|"derive"| n0
   n3 -.->|"derive"| n0
 ```
 
-## E-005 derivation 3
+## E-005 relationships 3
 
 ```mermaid
 ---
@@ -145,25 +141,26 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::communications3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 216 node(s) without a position, left undrawn, and 412 edge(s) at them
+%% not represented: 123 node(s) without a position, left undrawn, and 181 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
 flowchart BT
   n0("`*«requirement»*
 **communications : Communications**`")
   n1("`*«requirement»*
-**backlogCurrentPriority : BacklogCurrentPriority**`")
-  n2("`*«requirement»*
-**logRetention : LogRetention**`")
-  n3("`*«requirement»*
 **reconnectLogPreservation : ReconnectLogPreservation**`")
   n1 -.->|"derive"| n0
-  n2 -.->|"derive"| n0
-  n3 -.->|"derive"| n0
 ```
 
-[Continue: C-101 telemetry equipment](<requirements-c-101.md>)
+## Design decisions motivated by this requirement
 
-[Continue: C-102 command integrity](<requirements-c-102.md>)
+Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.
+
+| Dependent requirement | Design basis | Rationale |
+| --- | --- | --- |
+| telemetryEquipment | communications | TelemetryEquipment supports communications. This is design motivation or an implementation choice, not a satisfaction implication. |
+| commandIntegrity | communications | CommandIntegrity supports communications. This is design motivation or an implementation choice, not a satisfaction implication. |
+
+[Continue: C-102 CommandIntegrity](<requirements-c-102.md>)
+
+[Continue: C-101 TelemetryEquipment](<requirements-c-101.md>)

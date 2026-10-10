@@ -1,16 +1,16 @@
-# C-005 live observation
+# C-005 LiveObservation relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **C-005 LiveObservation** — The vessel shall provide live monitoring with autonomous operation and retained telemetry across communication outages.
 
 **E-005 Communications** — The vessel shall support live telemetry through link outages and reconnection.
 
-## C-005 derivation 1
+## C-005 relationships 1
 
 ```mermaid
 ---
@@ -37,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::liveObservation1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 219 node(s) without a position, left undrawn, and 416 edge(s) at them
+%% not represented: 125 node(s) without a position, left undrawn, and 183 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT
@@ -45,7 +45,7 @@ flowchart BT
 **GorgeChallenge::liveObservation : LiveObservation**`")
   n1("`*«requirement»*
 **BlueDogRequirements::communications : Communications**`")
-  n1 -.->|"derive"| n0
+  n1 -.->|"refine"| n0
 ```
 
-[Continue: E-005 communications](<requirements-e-005.md>)
+[Continue: E-005 Communications](<requirements-e-005.md>)

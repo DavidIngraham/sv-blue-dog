@@ -15,7 +15,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = tuple(ROOT / "models" / name for name in (
     "challenge.sysml", "blue-dog.sysml", "requirements.sysml",
-    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml", "cruise-reliability.sysml", "dfmea.sysml", "reliability-documents.sysml"))
+    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml", "cruise-reliability.sysml", "dfmea.sysml", "reliability-documents.sysml", "semantic-views.sysml"))
 
 
 def native(*arguments, models=MODELS):
@@ -80,6 +80,7 @@ def main():
         "BlueDogDFMEA::DesignFailureReview BlueDogDFMEA::starter", "-json")
     outputs[ROOT / "docs/challenge-brief.md"] = native("-render-document", "BlueDogDocuments::ChallengeBrief")
     outputs[ROOT / "docs/requirements-views.md"] = native("-render-document", "BlueDogDocuments::RequirementsIndex")
+    outputs[ROOT / "docs/relationship-register.md"] = native("-render-document", "BlueDogDocuments::RelationshipRegister")
     diagrams = {}
     # Compile the model once per format, rather than once for every view.
     with tempfile.TemporaryDirectory(dir=ROOT / ".tools", prefix="documents-") as scratch:
@@ -137,6 +138,12 @@ def main():
             "requirements-e-200": "SustainedEnergyFeasibilityRequirements",
             "requirements-q-001": "CruisePerformanceRequirements",
             "requirements-l-001": "MissionReliabilityRequirements",
+            "mission-semantics": "MissionSemantics",
+            "energy-semantics": "EnergySemantics",
+            "cruise-semantics": "CruiseSemantics",
+            "reliability-semantics": "ReliabilitySemantics",
+            "manufacturing-semantics": "ManufacturingSemantics",
+            "weed-semantics": "WeedSemantics",
             "architecture": "ArchitectureDiagram", "context": "ContextDiagram",
             "architecture-detail": "DetailDiagram", "use-cases": "UseCasesDiagram",
         }.items():
@@ -145,9 +152,10 @@ def main():
             outputs[ROOT / f"docs/figures/{name}.md"] = markdown
             outputs[ROOT / f"docs/figures/{name}.html"] = (
                 directory / "html" / f"{stem}.html").read_text(encoding="utf-8")
-            diagrams[name] = markdown.split("\n", 1)[1].strip()
+            diagrams[name] = "\n\n".join(re.findall(r"```mermaid\n.*?```", markdown, re.DOTALL))
         for stylesheet in (directory / "html").glob("*.css"):
             outputs[ROOT / "docs/figures" / stylesheet.name] = stylesheet.read_text(encoding="utf-8")
+    generated_paths = set(outputs)
     # Keep hand-written prose; replace only explicitly marked native diagrams.
     for path in (ROOT / "docs").glob("*.md"):
         source = path.read_text(encoding="utf-8")
@@ -157,7 +165,7 @@ def main():
                 lambda match: f"<!-- diagram:{match[1]} -->\n{diagrams[match[1]]}\n<!-- /diagram -->",
                 source, flags=re.DOTALL)
     for path, content in outputs.items():
-        if path.suffix == ".md":
+        if path.suffix == ".md" and path in generated_paths:
             heading, separator, body = content.partition("\n")
             content = heading + separator + "\n<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->\n" + body
         if args.check:

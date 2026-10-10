@@ -1,10 +1,10 @@
-# N-045 wet electrical integrity
+# N-045 WetElectricalIntegrity relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-045 WetElectricalIntegrity** — Cable assemblies shall retain electrical integrity after the selected wet-exposure campaign.
 
@@ -12,7 +12,7 @@
 
 **N-114 WetInsulationResistance** — After each N-045 exposure, conductor-to-conductor and conductor-to-case insulation resistance shall be at least 1 megohm at 50 V DC.
 
-## N-045 derivation 1
+## N-045 relationships 1
 
 ```mermaid
 ---

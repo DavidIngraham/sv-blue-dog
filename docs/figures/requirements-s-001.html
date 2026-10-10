@@ -3,22 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>S-001 traffic safety</title>
+<title>S-001 TrafficSafety relationships</title>
 <link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::TrafficSafetyRequirements">
-<h1 class="sysml-title">S-001 traffic safety</h1>
+<h1 class="sysml-title">S-001 TrafficSafety relationships</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="context"><a class="sysml-link" href="../requirements-context.md">Conditions, rationale and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements13">
 <div class="sysml-entry" data-element="BlueDogRequirements::TrafficSafety" data-element-kind="requirementDef">
 <dt class="sysml-term">S-001 TrafficSafety</dt>
 <dd class="sysml-description">The vessel shall assess and respond to collision risks within the deployment-specific traffic envelope.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::NavigationConspicuity" data-element-kind="requirementDef">
-<dt class="sysml-term">S-004 NavigationConspicuity</dt>
-<dd class="sysml-description">The vessel shall present the navigation signals required for its operating mode.</dd>
 </div>
 <div class="sysml-entry" data-element="BlueDogRequirements::TrafficTracking" data-element-kind="requirementDef">
 <dt class="sysml-term">S-101 TrafficTracking</dt>
@@ -38,7 +34,7 @@
 </div>
 </dl>
 <section class="sysml-section" id="group1" data-content="section" data-name="group1">
-<h2>S-001 derivation 1</h2>
+<h2>S-001 relationships 1</h2>
 <figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::trafficSafety1" data-diagram-kind="requirement" data-direction="BT">
 <pre class="mermaid">---
 config:
@@ -64,7 +60,7 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::trafficSafety1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 112 node(s) without a position, left undrawn, and 136 edge(s) at them
+%% not represented: 58 node(s) without a position, left undrawn, and 64 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -73,18 +69,18 @@ flowchart BT
   n0(&#34;`*«requirement»*
 **trafficSafety : TrafficSafety**`&#34;)
   n1(&#34;`*«requirement»*
-**navigationConspicuity : NavigationConspicuity**`&#34;)
-  n2(&#34;`*«requirement»*
 **trafficTracking : TrafficTracking**`&#34;)
-  n3(&#34;`*«requirement»*
+  n2(&#34;`*«requirement»*
 **collisionAssessmentCadence : CollisionAssessmentCadence**`&#34;)
+  n3(&#34;`*«requirement»*
+**avoidanceCommandDeadline : AvoidanceCommandDeadline**`&#34;)
   n1 -.-&gt;|&#34;derive&#34;| n0
   n2 -.-&gt;|&#34;derive&#34;| n0
   n3 -.-&gt;|&#34;derive&#34;| n0</pre>
 </figure>
 </section>
 <section class="sysml-section" id="group2" data-content="section" data-name="group2">
-<h2>S-001 derivation 2</h2>
+<h2>S-001 relationships 2</h2>
 <figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::trafficSafety2" data-diagram-kind="requirement" data-direction="BT">
 <pre class="mermaid">---
 config:
@@ -110,24 +106,40 @@ config:
     edgeLabelBackground: &#34;#FFFFFF&#34;
 ---
 %% BlueDogViews::trafficSafety2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 112 node(s) without a position, left undrawn, and 130 edge(s) at them
+%% not represented: 60 node(s) without a position, left undrawn, and 66 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
 flowchart BT
   n0(&#34;`*«requirement»*
 **trafficSafety : TrafficSafety**`&#34;)
   n1(&#34;`*«requirement»*
-**avoidanceCommandDeadline : AvoidanceCommandDeadline**`&#34;)
-  n2(&#34;`*«requirement»*
 **trafficAwarenessFault : TrafficAwarenessFault**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0</pre>
+  n1 -.-&gt;|&#34;derive&#34;| n0</pre>
 </figure>
 </section>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-s-004.md">Continue: S-004 navigation conspicuity</a></p>
+<section class="sysml-section" id="basis" data-content="section" data-name="basis">
+<h2>Design decisions motivated by this requirement</h2>
+<p class="sysml-paragraph" data-content="paragraph" data-name="meaning">Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.</p>
+<table class="sysml-table" data-content="table" data-name="entries" data-query="BlueDogDiagramDocuments::DesignBasis13">
+<thead>
+<tr>
+<th scope="col" data-column="Dependent requirement">Dependent requirement</th>
+<th scope="col" data-column="Design basis">Design basis</th>
+<th scope="col" data-column="Rationale">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="sysml-row" data-element="BlueDogRequirements::deriveNavigationConspicuity" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::navigationConspicuity" data-element-kind="requirementUsage">navigationConspicuity</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::trafficSafety" data-element-kind="requirementUsage">trafficSafety</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">NavigationConspicuity supports trafficSafety. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next4"><a class="sysml-link" href="requirements-s-004.md">Continue: S-004 NavigationConspicuity</a></p>
 </article>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({maxTextSize: 1346, maxEdges: 4});</script>
+<script>mermaid.initialize({maxTextSize: 1350, maxEdges: 4});</script>
 </body>
 </html>

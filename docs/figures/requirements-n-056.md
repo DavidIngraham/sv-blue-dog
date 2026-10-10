@@ -1,10 +1,10 @@
-# N-056 recovery propulsor weeds
+# N-056 RecoveryPropulsorWeeds relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-056 RecoveryPropulsorWeeds** — The recovery propulsion system shall tolerate the specified weed encounters within its rated electrical and thermal limits.
 
@@ -18,7 +18,7 @@
 
 **R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
-## N-056 derivation 1
+## N-056 relationships 1
 
 ```mermaid
 ---
@@ -45,7 +45,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::recoveryPropulsorWeeds1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 107 node(s) without a position, left undrawn, and 149 edge(s) at them
+%% not represented: 107 node(s) without a position, left undrawn, and 148 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -64,7 +64,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-056 derivation 2
+## N-056 relationships 2
 
 ```mermaid
 ---
@@ -91,7 +91,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::recoveryPropulsorWeeds2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 114 node(s) without a position, left undrawn, and 161 edge(s) at them
+%% not represented: 114 node(s) without a position, left undrawn, and 160 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

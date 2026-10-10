@@ -1,10 +1,10 @@
-# E-003 reset recovery
+# E-003 ResetRecovery relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **E-003 ResetRecovery** — The vessel shall restore mode-appropriate autonomous operation after a watchdog reset.
 
@@ -28,7 +28,7 @@
 
 **R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
-## E-003 derivation 1
+## E-003 relationships 1
 
 ```mermaid
 ---
@@ -55,7 +55,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::resetRecovery1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 214 node(s) without a position, left undrawn, and 395 edge(s) at them
+%% not represented: 125 node(s) without a position, left undrawn, and 180 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -74,7 +74,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-003 derivation 2
+## E-003 relationships 2
 
 ```mermaid
 ---
@@ -101,7 +101,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::resetRecovery2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 214 node(s) without a position, left undrawn, and 395 edge(s) at them
+%% not represented: 125 node(s) without a position, left undrawn, and 180 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -120,7 +120,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-003 derivation 3
+## E-003 relationships 3
 
 ```mermaid
 ---
@@ -147,7 +147,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::resetRecovery3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 214 node(s) without a position, left undrawn, and 395 edge(s) at them
+%% not represented: 125 node(s) without a position, left undrawn, and 180 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -166,7 +166,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-003 derivation 4
+## E-003 relationships 4
 
 ```mermaid
 ---
@@ -193,7 +193,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::resetRecovery4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 216 node(s) without a position, left undrawn, and 397 edge(s) at them
+%% not represented: 127 node(s) without a position, left undrawn, and 182 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

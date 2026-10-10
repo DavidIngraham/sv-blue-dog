@@ -1,10 +1,10 @@
-# N-055 weed blockage response
+# N-055 WeedBlockageResponse relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-055 WeedBlockageResponse** — The vessel shall enter autonomous fouling contingency when the defined weed-blockage trigger occurs.
 
@@ -16,7 +16,7 @@
 
 **R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
-## N-055 derivation 1
+## N-055 relationships 1
 
 ```mermaid
 ---
@@ -43,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::weedBlockageResponse1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 110 node(s) without a position, left undrawn, and 154 edge(s) at them
+%% not represented: 110 node(s) without a position, left undrawn, and 153 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -62,7 +62,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-055 derivation 2
+## N-055 relationships 2
 
 ```mermaid
 ---
@@ -89,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::weedBlockageResponse2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 117 node(s) without a position, left undrawn, and 166 edge(s) at them
+%% not represented: 117 node(s) without a position, left undrawn, and 165 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

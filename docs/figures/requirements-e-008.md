@@ -1,10 +1,10 @@
-# E-008 navigation availability
+# E-008 NavigationAvailability relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **E-008 NavigationAvailability** — The vessel shall maintain valid navigation inputs and reject stale observations.
 
@@ -18,7 +18,7 @@
 
 **E-132 CriticalEventRecording** — Every external-command disposition, reset, motor-enable transition, ingress detection, recovery request, navigation-degraded transition, low-energy flag transition and qualification change shall have an event record regardless of periodic cadence.
 
-## E-008 derivation 1
+## E-008 relationships 1
 
 ```mermaid
 ---
@@ -64,7 +64,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-008 derivation 2
+## E-008 relationships 2
 
 ```mermaid
 ---

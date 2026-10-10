@@ -1,10 +1,10 @@
-# N-044 wet mechanical integrity
+# N-044 WetMechanicalIntegrity relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-044 WetMechanicalIntegrity** — External mechanisms and structural joints shall retain integrity after the selected wet-exposure campaign.
 
@@ -12,7 +12,7 @@
 
 **N-112 WetJointIntegrity** — After each N-044 exposure, structural joints shall show no separation or through-cracks on visual inspection at 5 times magnification.
 
-## N-044 derivation 1
+## N-044 relationships 1
 
 ```mermaid
 ---

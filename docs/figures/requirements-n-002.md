@@ -1,10 +1,10 @@
-# N-002 marine durability
+# N-002 MarineDurability relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-002 MarineDurability** — The vessel shall retain required function and structural integrity through its selected wet-exposure campaign.
 
@@ -22,7 +22,7 @@
 
 **N-047 PrintedMaterialAging** — Printed structural material shall retain at least 80 percent of unaged failure load after the specified UV and wet-exposure sequence.
 
-## N-002 derivation 1
+## N-002 relationships 1
 
 ```mermaid
 ---
@@ -49,7 +49,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::marineDurability1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 159 node(s) without a position, left undrawn, and 238 edge(s) at them
+%% not represented: 96 node(s) without a position, left undrawn, and 110 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -68,7 +68,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-002 derivation 2
+## N-002 relationships 2
 
 ```mermaid
 ---
@@ -95,7 +95,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::marineDurability2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 162 node(s) without a position, left undrawn, and 248 edge(s) at them
+%% not represented: 99 node(s) without a position, left undrawn, and 120 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -114,7 +114,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-002 derivation 3
+## N-002 relationships 3
 
 ```mermaid
 ---
@@ -141,7 +141,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::marineDurability3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 162 node(s) without a position, left undrawn, and 241 edge(s) at them
+%% not represented: 99 node(s) without a position, left undrawn, and 113 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT
@@ -152,8 +152,8 @@ flowchart BT
   n1 -.->|"derive"| n0
 ```
 
-[Continue: N-044 wet mechanical integrity](<requirements-n-044.md>)
+[Continue: N-044 WetMechanicalIntegrity](<requirements-n-044.md>)
 
-[Continue: N-045 wet electrical integrity](<requirements-n-045.md>)
+[Continue: N-045 WetElectricalIntegrity](<requirements-n-045.md>)
 
-[Continue: N-046 solar heating](<requirements-n-046.md>)
+[Continue: N-046 SolarHeating](<requirements-n-046.md>)

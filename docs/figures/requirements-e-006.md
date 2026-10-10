@@ -1,10 +1,10 @@
-# E-006 ingress response
+# E-006 IngressResponse relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **E-006 IngressResponse** — The vessel shall retain recoverability during the specified hull-ingress qualification.
 
@@ -24,7 +24,7 @@
 
 **R-101 MotorQualificationInvariant** — Motor thrust shall remain disabled whenever an attempt is qualifying or qualification status is unknown.
 
-## E-006 derivation 1
+## E-006 relationships 1
 
 ```mermaid
 ---
@@ -51,7 +51,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::ingressResponse1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 198 node(s) without a position, left undrawn, and 356 edge(s) at them
+%% not represented: 121 node(s) without a position, left undrawn, and 178 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -70,7 +70,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-006 derivation 2
+## E-006 relationships 2
 
 ```mermaid
 ---
@@ -97,7 +97,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::ingressResponse2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 198 node(s) without a position, left undrawn, and 356 edge(s) at them
+%% not represented: 121 node(s) without a position, left undrawn, and 178 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -116,7 +116,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-006 derivation 3
+## E-006 relationships 3
 
 ```mermaid
 ---
@@ -143,7 +143,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::ingressResponse3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 201 node(s) without a position, left undrawn, and 360 edge(s) at them
+%% not represented: 124 node(s) without a position, left undrawn, and 182 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

@@ -1,5 +1,6 @@
 package BlueDogRequirements {
     private import RequirementDerivation::*;
+    private import ModelingMetadata::refinement;
     private import ScalarValues::*;
     private import ISQ::*;
     private import SI::*;
@@ -61,126 +62,69 @@ package BlueDogRequirements {
     requirement ingressResponse : IngressResponse;
     requirement missionEvidence : MissionEvidence;
 
-    #derivation connection challengeCourse {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "The vehicle mission implements the independently defined challenge course."; }
-        end #original source ::> GorgeChallenge::courseCompletion;
-        end #derive target ::> roundTrip;
+    #refinement dependency challengeCourse from roundTrip to GorgeChallenge::courseCompletion {
+        metadata rationale : ModelingMetadata::Rationale { text = "Ordered gate crossings make the course-completion obligation more precise; gate locations remain open."; }
     }
-    #derivation connection challengeEndurance {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Repeated autonomous journeys motivate the existing endurance and harvesting requirement; M-002 defines an initial 72-hour campaign; indefinite operation remains an objective."; }
-        end #original source ::> GorgeChallenge::repeatedOperation;
-        end #derive target ::> multiDayEndurance;
+    dependency challengeEndurance from multiDayEndurance to GorgeChallenge::repeatedOperation {
+        metadata rationale : ModelingMetadata::Rationale { text = "Repeated autonomous journeys motivate the existing endurance and harvesting requirement; M-002 defines an initial 72-hour campaign; indefinite operation remains an objective. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection challengeAutonomy {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "The vessel needs onboard guidance and control to complete an unassisted attempt."; }
-        end #original source ::> GorgeChallenge::unassistedAttempt;
-        end #derive target ::> navigationAndControl;
+    dependency challengeAutonomy from navigationAndControl to GorgeChallenge::unassistedAttempt {
+        metadata rationale : ModelingMetadata::Rationale { text = "The vessel needs onboard guidance and control to complete an unassisted attempt. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection challengePropulsion {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Vehicle challenge operation excludes auxiliary motor propulsion; powered development tests are separate."; }
-        end #original source ::> GorgeChallenge::sailingPropulsion;
-        end #derive target ::> roundTrip;
+    dependency challengePropulsion from roundTrip to GorgeChallenge::sailingPropulsion {
+        metadata rationale : ModelingMetadata::Rationale { text = "Vehicle challenge operation excludes auxiliary motor propulsion; powered development tests are separate. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection challengeMonitoring {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Vehicle communications implement live observation and outage data retention."; }
-        end #original source ::> GorgeChallenge::liveObservation;
-        end #derive target ::> communications;
+    #refinement dependency challengeMonitoring from communications to GorgeChallenge::liveObservation {
+        metadata rationale : ModelingMetadata::Rationale { text = "The vehicle telemetry requirement provides a more precise outage-retention and delivery specification for the observation aspect of C-005. Autonomous execution remains separately required."; }
     }
-    #derivation connection challengeOverride {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Vehicle communications provide emergency commands whose use ends attempt qualification."; }
-        end #original source ::> GorgeChallenge::emergencyIntervention;
-        end #derive target ::> communications;
+    dependency challengeOverride from communications to GorgeChallenge::emergencyIntervention {
+        metadata rationale : ModelingMetadata::Rationale { text = "Vehicle communications provide emergency commands whose use ends attempt qualification. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
-    #derivation connection hawaiiMultiDayEndurance {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "An ocean passage motivates sustained energy autonomy; multi-day operation is an interim capability, not an ocean endurance sizing result."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> multiDayEndurance;
+    dependency hawaiiMultiDayEndurance from multiDayEndurance to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "An ocean passage motivates sustained energy autonomy; multi-day operation is an interim capability, not an ocean endurance sizing result. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
-    #derivation connection hawaiiNavigationAndControl {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "An autonomous Hawaii passage needs ocean guidance and sailing control; N-001 specifies its environmental design envelope."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> navigationAndControl;
+    dependency hawaiiNavigationAndControl from navigationAndControl to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "An autonomous Hawaii passage needs ocean guidance and sailing control; N-001 specifies its environmental design envelope. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
-    #derivation connection hawaiiCommunications {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "The long-term ocean mission motivates review of monitoring coverage and outage behavior without selecting a radio technology."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> communications;
+    dependency hawaiiCommunications from communications to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "The long-term ocean mission motivates review of monitoring coverage and outage behavior without selecting a radio technology. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
-    #derivation connection hawaiiResetRecovery {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Extended unattended operation motivates recovery from onboard resets."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> resetRecovery;
+    dependency hawaiiResetRecovery from resetRecovery to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "Extended unattended operation motivates recovery from onboard resets. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
-    #derivation connection hawaiiMissionEvidence {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Ocean mission assessment requires retained voyage evidence; E-007 specifies recording and retention acceptance criteria."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> missionEvidence;
+    dependency hawaiiMissionEvidence from missionEvidence to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "Ocean mission assessment requires retained voyage evidence; E-007 specifies recording and retention acceptance criteria. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     // Derivations: direction is original requirement to derived requirement.
-    #derivation connection roundTripNavigation {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Autonomous completion of the route needs observations, guidance, and actuation."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> navigationAndControl;
+    dependency roundTripNavigation from navigationAndControl to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "Autonomous completion of the route needs observations, guidance, and actuation. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection roundTripReset {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "A reset during an autonomous journey must not leave mission behavior undefined."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> resetRecovery;
+    dependency roundTripReset from resetRecovery to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "A reset during an autonomous journey must not leave mission behavior undefined. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection roundTripCommunications {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Mission supervision and recovery need an agreed operator communication policy."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> communications;
+    dependency roundTripCommunications from communications to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "Mission supervision and recovery need an agreed operator communication policy. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection roundTripIngress {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Recovering the boat after the journey motivates a defined response to small leaks."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> ingressResponse;
+    dependency roundTripIngress from ingressResponse to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "Recovering the boat after the journey motivates a defined response to small leaks. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection roundTripEvidence {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Assessing route completion and learning from the mission requires recorded evidence."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> missionEvidence;
+    dependency roundTripEvidence from missionEvidence to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "Assessing route completion and learning from the mission requires recorded evidence. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection enduranceEnergy {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Multi-day operation with variable harvesting needs energy estimation and load management."; }
-        end #original source ::> multiDayEndurance;
-        end #derive target ::> energyAwareness;
+    dependency enduranceEnergy from energyAwareness to multiDayEndurance {
+        metadata rationale : ModelingMetadata::Rationale { text = "Multi-day operation with variable harvesting needs energy estimation and load management. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection enduranceLimpMode {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Harvest shortfalls need an explicit degraded operating mode."; }
-        end #original source ::> multiDayEndurance;
-        end #derive target ::> lowEnergyRecovery;
+    dependency enduranceLimpMode from lowEnergyRecovery to multiDayEndurance {
+        metadata rationale : ModelingMetadata::Rationale { text = "Harvest shortfalls need an explicit degraded operating mode. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection energyLimpMode {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Available-energy estimates and reserve policy must drive low-energy transitions."; }
-        end #original source ::> energyAwareness;
-        end #derive target ::> lowEnergyRecovery;
+    dependency energyLimpMode from lowEnergyRecovery to energyAwareness {
+        metadata rationale : ModelingMetadata::Rationale { text = "Available-energy estimates and reserve policy must drive low-energy transitions. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'P-001'> Transportability {
@@ -189,11 +133,8 @@ package BlueDogRequirements {
         comment conditions /* Demonstrate with one adult, no powered lift, a firm bank or ramp of slope at most 1:12, wind at most 5 m/s and waves at most 0.2 m. This is not a survival-envelope recovery claim. */
     }
     requirement transportability : Transportability;
-    #derivation connection deriveTransportability {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Transportability refines the responsibilities needed for roundTrip."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> transportability;
+    dependency deriveTransportability from transportability to BlueDog::DesignIntent {
+        metadata rationale : ModelingMetadata::Rationale { text = "The owner requires one-person handling independently of either voyage outcome."; }
     }
 
     requirement def <'P-002'> DesktopManufacture {
@@ -210,11 +151,8 @@ package BlueDogRequirements {
         }
     }
     requirement desktopManufacture : DesktopManufacture;
-    #derivation connection deriveDesktopManufacture {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "David specified desktop manufacture and a 250 mm usable build cube as a project constraint on the vehicle; this is an imposed stakeholder constraint, not a consequence of one-person handling."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> desktopManufacture;
+    dependency deriveDesktopManufacture from desktopManufacture to BlueDog::DesignIntent {
+        metadata rationale : ModelingMetadata::Rationale { text = "The owner selected a 250 mm cubic desktop-printer build volume independently of mission completion."; }
     }
 
     requirement def <'P-003'> Serviceability {
@@ -223,11 +161,8 @@ package BlueDogRequirements {
         comment conditions /* Exercise individual replacement of the battery, every electronics module, every actuator and every serviceable enclosure seal by one operator using hand tools. */
     }
     requirement serviceability : Serviceability;
-    #derivation connection deriveServiceability {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Repeated deployment motivates maintainability between attempts; the timed service target is an engineering allocation, not implied by printer size."; }
-        end #original source ::> GorgeChallenge::repeatedOperation;
-        end #derive target ::> serviceability;
+    dependency deriveServiceability from serviceability to BlueDog::DesignIntent {
+        metadata rationale : ModelingMetadata::Rationale { text = "Between-attempt serviceability is a project lifecycle constraint; it is not entailed by unassisted endurance."; }
     }
 
     requirement def <'S-001'> TrafficSafety {
@@ -237,11 +172,8 @@ package BlueDogRequirements {
         metadata issue : ModelingMetadata::Issue { text = "Detection ranges, target signatures, closest-approach margins and maneuver feasibility remain unresolved acceptance parameters; tracking and avoidance cannot receive complete passes until these are frozen."; }
     }
     requirement trafficSafety : TrafficSafety;
-    #derivation connection deriveTrafficSafety {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "TrafficSafety refines the responsibilities needed for navigationAndControl."; }
-        end #original source ::> navigationAndControl;
-        end #derive target ::> trafficSafety;
+    dependency deriveTrafficSafety from trafficSafety to navigationAndControl {
+        metadata rationale : ModelingMetadata::Rationale { text = "TrafficSafety supports navigationAndControl. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'S-002'> OperatingBoundary {
@@ -250,11 +182,8 @@ package BlueDogRequirements {
         comment conditions /* Use uploaded permitted-water and exclusion polygons, with a 60-second prediction horizon. Inject approaches to every boundary, navigation loss and no-feasible-maneuver cases. Coordinates and uncertainty/clearance margins are controlled mission inputs with no default values. */
     }
     requirement operatingBoundary : OperatingBoundary;
-    #derivation connection deriveOperatingBoundary {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "OperatingBoundary refines the responsibilities needed for roundTrip."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> operatingBoundary;
+    dependency deriveOperatingBoundary from operatingBoundary to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "OperatingBoundary supports roundTrip. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'S-003'> SafeRecovery {
@@ -263,11 +192,8 @@ package BlueDogRequirements {
         comment conditions /* Emergency intervention ends attempt qualification. Exercise active emergency, powered recovery, local isolation and remote-control loss, including coexisting low-energy flags. */
     }
     requirement safeRecovery : SafeRecovery;
-    #derivation connection deriveSafeRecovery {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Permitted emergency intervention requires explicit abort, qualification, isolation and control-loss behavior."; }
-        end #original source ::> GorgeChallenge::emergencyIntervention;
-        end #derive target ::> safeRecovery;
+    dependency deriveSafeRecovery from safeRecovery to GorgeChallenge::emergencyIntervention {
+        metadata rationale : ModelingMetadata::Rationale { text = "Permitted emergency intervention requires explicit abort, qualification, isolation and control-loss behavior. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'S-004'> NavigationConspicuity {
@@ -276,11 +202,8 @@ package BlueDogRequirements {
         comment conditions /* Use the deployment-specific compliance matrix for sailing, powered-recovery and stationary modes, including its visibility, arcs, colors and sound criteria. The matrix remains a deployment hold point under S-005. */
     }
     requirement navigationConspicuity : NavigationConspicuity;
-    #derivation connection deriveNavigationConspicuity {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "NavigationConspicuity refines the responsibilities needed for trafficSafety."; }
-        end #original source ::> trafficSafety;
-        end #derive target ::> navigationConspicuity;
+    dependency deriveNavigationConspicuity from navigationConspicuity to trafficSafety {
+        metadata rationale : ModelingMetadata::Rationale { text = "NavigationConspicuity supports trafficSafety. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'S-005'> RegulatoryClassification {
@@ -289,11 +212,8 @@ package BlueDogRequirements {
         comment conditions /* Acceptance is deployment document review, not onboard behavior or an assertion of buoy status. */
     }
     requirement regulatoryClassification : RegulatoryClassification;
-    #derivation connection deriveRegulatoryClassification {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "RegulatoryClassification refines the responsibilities needed for roundTrip."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> regulatoryClassification;
+    dependency deriveRegulatoryClassification from regulatoryClassification to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "RegulatoryClassification supports roundTrip. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'N-001'> EnvironmentalEnvelope {
@@ -303,11 +223,8 @@ package BlueDogRequirements {
         comment notes /* Profiles are not interchangeable. Gorge release does not require ocean qualification, and Gorge success does not establish ocean capability. */
     }
     requirement environmentalEnvelope : EnvironmentalEnvelope;
-    #derivation connection deriveEnvironmentalEnvelope {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "EnvironmentalEnvelope refines the responsibilities needed for roundTrip."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> environmentalEnvelope;
+    dependency deriveEnvironmentalEnvelope from environmentalEnvelope to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "EnvironmentalEnvelope supports roundTrip. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'N-002'> MarineDurability {
@@ -317,11 +234,8 @@ package BlueDogRequirements {
         comment notes /* A derivation does not make every mission-specific descendant applicable to every deployment. */
     }
     requirement marineDurability : MarineDurability;
-    #derivation connection deriveMarineDurability {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "MarineDurability refines the responsibilities needed for environmentalEnvelope."; }
-        end #original source ::> environmentalEnvelope;
-        end #derive target ::> marineDurability;
+    dependency deriveMarineDurability from marineDurability to environmentalEnvelope {
+        metadata rationale : ModelingMetadata::Rationale { text = "MarineDurability supports environmentalEnvelope. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'N-003'> StabilityAndFouling {
@@ -331,11 +245,8 @@ package BlueDogRequirements {
         comment notes /* Submerged-weed passage qualification does not cover dense floating mats or fishing-line entanglement. */
     }
     requirement stabilityAndFouling : StabilityAndFouling;
-    #derivation connection deriveStabilityAndFouling {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "StabilityAndFouling refines the responsibilities needed for environmentalEnvelope."; }
-        end #original source ::> environmentalEnvelope;
-        end #derive target ::> stabilityAndFouling;
+    dependency deriveStabilityAndFouling from stabilityAndFouling to environmentalEnvelope {
+        metadata rationale : ModelingMetadata::Rationale { text = "StabilityAndFouling supports environmentalEnvelope. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'R-001'> RecoveryPropulsion {
@@ -345,11 +256,8 @@ package BlueDogRequirements {
         comment notes /* This sheltered recovery target is not a storm-recovery guarantee. */
     }
     requirement recoveryPropulsion : RecoveryPropulsion;
-    #derivation connection deriveRecoveryPropulsion {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "RecoveryPropulsion refines the responsibilities needed for safeRecovery."; }
-        end #original source ::> safeRecovery;
-        end #derive target ::> recoveryPropulsion;
+    dependency deriveRecoveryPropulsion from recoveryPropulsion to safeRecovery {
+        metadata rationale : ModelingMetadata::Rationale { text = "RecoveryPropulsion supports safeRecovery. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     calc def RecoveryReserveDemand {
@@ -374,11 +282,8 @@ package BlueDogRequirements {
         }
     }
     requirement recoveryEnergy : RecoveryEnergy;
-    #derivation connection deriveRecoveryEnergy {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "RecoveryEnergy refines the responsibilities needed for recoveryPropulsion."; }
-        end #original source ::> recoveryPropulsion;
-        end #derive target ::> recoveryEnergy;
+    dependency deriveRecoveryEnergy from recoveryEnergy to recoveryPropulsion {
+        metadata rationale : ModelingMetadata::Rationale { text = "RecoveryEnergy supports recoveryPropulsion. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'C-101'> TelemetryEquipment {
@@ -387,11 +292,8 @@ package BlueDogRequirements {
         comment conditions /* Freshness threshold is 120 seconds for normal, emergency, powered recovery or unknown mode, and 600 seconds only for explicitly reported low energy without emergency or powered recovery. Staleness describes data age, not diagnosed link failure. Exercise a 24-hour outage and reconnection. */
     }
     requirement telemetryEquipment : TelemetryEquipment;
-    #derivation connection deriveTelemetryEquipment {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "TelemetryEquipment refines the responsibilities needed for communications."; }
-        end #original source ::> communications;
-        end #derive target ::> telemetryEquipment;
+    dependency deriveTelemetryEquipment from telemetryEquipment to communications {
+        metadata rationale : ModelingMetadata::Rationale { text = "TelemetryEquipment supports communications. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'C-102'> CommandIntegrity {
@@ -400,17 +302,11 @@ package BlueDogRequirements {
         comment conditions /* Exercise complete command receipt, authentication failure, replayed sequence numbers, age greater than 30 seconds, and external control during a qualifying attempt. */
     }
     requirement commandIntegrity : CommandIntegrity;
-    #derivation connection deriveCommandIntegrity {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "CommandIntegrity refines the responsibilities needed for communications."; }
-        end #original source ::> communications;
-        end #derive target ::> commandIntegrity;
+    dependency deriveCommandIntegrity from commandIntegrity to communications {
+        metadata rationale : ModelingMetadata::Rationale { text = "CommandIntegrity supports communications. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection hawaiiEnvironment {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Ocean operation requires its own environmental envelope; Gorge success does not establish it."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> environmentalEnvelope;
+    dependency hawaiiEnvironment from environmentalEnvelope to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "Ocean operation requires its own environmental envelope; Gorge success does not establish it. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'N-010'> GorgeEnvironment {
@@ -420,11 +316,8 @@ package BlueDogRequirements {
         comment notes /* The profile excludes dam transit, ice and surf-zone launch. */
     }
     requirement gorgeEnvironment : GorgeEnvironment;
-    #derivation connection deriveGorgeEnvironment {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "The Gorge mission sets the river environment; it does not impose the ocean profile."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> gorgeEnvironment;
+    dependency deriveGorgeEnvironment from gorgeEnvironment to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "The Gorge mission sets the river environment; it does not impose the ocean profile. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'N-020'> OceanEnvironment {
@@ -434,11 +327,8 @@ package BlueDogRequirements {
         comment notes /* This baseline is neither a hurricane-survival claim nor completed route/season qualification. */
     }
     requirement oceanEnvironment : OceanEnvironment;
-    #derivation connection deriveOceanEnvironment {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "The Hawaii mission sets the ocean environment; this profile is not a Gorge acceptance prerequisite."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> oceanEnvironment;
+    dependency deriveOceanEnvironment from oceanEnvironment to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "The Hawaii mission sets the ocean environment; this profile is not a Gorge acceptance prerequisite. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     requirement def <'N-011'> GorgeWind {
@@ -820,11 +710,8 @@ package BlueDogRequirements {
         end #original source ::> stabilityAndFouling;
         end #derive target ::> recoveryPropulsorWeeds;
     }
-    #derivation connection motorWeedTolerance {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "The recovery propulsor must remain usable in the vegetation encountered by the sailing vessel."; }
-        end #original source ::> recoveryPropulsion;
-        end #derive target ::> recoveryPropulsorWeeds;
+    dependency motorWeedTolerance from recoveryPropulsorWeeds to recoveryPropulsion {
+        metadata rationale : ModelingMetadata::Rationale { text = "The recovery propulsor must remain usable in the vegetation encountered by the sailing vessel. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
     requirement def <'E-008'> NavigationAvailability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -863,53 +750,29 @@ package BlueDogRequirements {
         end #original source ::> navigationAndControl;
         end #derive target ::> navigationAvailability;
     }
-    #derivation connection auditDerivation2 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "LaunchEnergyAdmission isolates a separately verifiable consequence of recoveryEnergy."; }
-        end #original source ::> recoveryEnergy;
-        end #derive target ::> launchEnergyAdmission;
+    dependency auditDerivation2 from launchEnergyAdmission to recoveryEnergy {
+        metadata rationale : ModelingMetadata::Rationale { text = "LaunchEnergyAdmission isolates a separately verifiable consequence of recoveryEnergy. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection auditDerivation3 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "ChallengeMotorInhibition isolates a separately verifiable consequence of GorgeChallenge::sailingPropulsion."; }
-        end #original source ::> GorgeChallenge::sailingPropulsion;
-        end #derive target ::> challengeMotorInhibition;
+    dependency auditDerivation3 from challengeMotorInhibition to GorgeChallenge::sailingPropulsion {
+        metadata rationale : ModelingMetadata::Rationale { text = "ChallengeMotorInhibition isolates a separately verifiable consequence of GorgeChallenge::sailingPropulsion. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection auditDerivation4 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "No-intervention qualification must survive resets and motor-mode transitions."; }
-        end #original source ::> GorgeChallenge::unassistedAttempt;
-        end #derive target ::> challengeMotorInhibition;
+    dependency auditDerivation4 from challengeMotorInhibition to GorgeChallenge::unassistedAttempt {
+        metadata rationale : ModelingMetadata::Rationale { text = "No-intervention qualification must survive resets and motor-mode transitions. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection auditDerivation5 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Accepted external control changes the attempt qualification; communications alone does not supply this rule."; }
-        end #original source ::> GorgeChallenge::unassistedAttempt;
-        end #derive target ::> commandIntegrity;
+    dependency auditDerivation5 from commandIntegrity to GorgeChallenge::unassistedAttempt {
+        metadata rationale : ModelingMetadata::Rationale { text = "Accepted external control changes the attempt qualification; communications alone does not supply this rule. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection auditDerivation6 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "The emergency control channel needs authenticated, fresh commands and persistent qualification changes."; }
-        end #original source ::> GorgeChallenge::emergencyIntervention;
-        end #derive target ::> commandIntegrity;
+    dependency auditDerivation6 from commandIntegrity to GorgeChallenge::emergencyIntervention {
+        metadata rationale : ModelingMetadata::Rationale { text = "The emergency control channel needs authenticated, fresh commands and persistent qualification changes. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection auditDerivation7 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "An ocean route also needs configured boundaries and no-feasible-route behavior; its boundaries differ from the Gorge course."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> operatingBoundary;
+    dependency auditDerivation7 from operatingBoundary to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "An ocean route also needs configured boundaries and no-feasible-route behavior; its boundaries differ from the Gorge course. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection auditDerivation8 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Deployment permissions and applicable rules depend on the ocean route as well as the Gorge mission."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> regulatoryClassification;
+    dependency auditDerivation8 from regulatoryClassification to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "Deployment permissions and applicable rules depend on the ocean route as well as the Gorge mission. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection auditDerivation9 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Unattended ocean preparation and post-voyage maintenance motivate replaceable modules; this is not at-sea servicing during qualification."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> serviceability;
+    dependency auditDerivation9 from serviceability to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "Unattended ocean preparation and post-voyage maintenance motivate replaceable modules; this is not at-sea servicing during qualification. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
     #derivation connection auditDerivation10 {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -2847,18 +2710,12 @@ package BlueDogRequirements {
     }
     requirement energyEvidenceReadiness : EnergyEvidenceReadiness;
 
-    #derivation connection energyDerivation1 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Repeated journeys motivate a repeatable energy cycle, beyond a one-off endurance run."; }
-        end #original source ::> GorgeChallenge::repeatedOperation;
-        end #derive target ::> sustainedEnergyFeasibility;
+    dependency energyDerivation1 from sustainedEnergyFeasibility to GorgeChallenge::repeatedOperation {
+        metadata rationale : ModelingMetadata::Rationale { text = "Repeated journeys motivate a repeatable energy cycle, beyond a one-off endurance run. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
-    #derivation connection energyDerivation2 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "The ocean ambition requires sustained energy autonomy; route-specific resources remain unresolved."; }
-        end #original source ::> BlueDog::Goals::hawaiiVoyage;
-        end #derive target ::> sustainedEnergyFeasibility;
+    dependency energyDerivation2 from sustainedEnergyFeasibility to BlueDog::Goals::hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "The ocean ambition requires sustained energy autonomy; route-specific resources remain unresolved. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     #derivation connection energyDerivation3 {
@@ -2917,11 +2774,8 @@ package BlueDogRequirements {
         end #derive target ::> energyEvidenceReadiness;
     }
 
-    #derivation connection energyDerivation11 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "Sustained operation protects the recovery reserve sized by the existing R-002 policy."; }
-        end #original source ::> recoveryEnergy;
-        end #derive target ::> sustainedReserveProtection;
+    dependency energyDerivation11 from sustainedReserveProtection to recoveryEnergy {
+        metadata rationale : ModelingMetadata::Rationale { text = "Sustained operation protects the recovery reserve sized by the existing R-002 policy. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     calc def SustainedReserveProtectionCriterion {
@@ -3038,35 +2892,20 @@ package BlueDogRequirements {
         metadata rationale : ModelingMetadata::Rationale { text = "Potential harm to other waterway users must not be traded against an attractive aggregate reliability score."; }
     }
     requirement criticalFailureDisposition : CriticalFailureDisposition;
-    #derivation connection cruiseReliabilityDerivation1 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "cruisePerformance supplies an acceptance condition needed to achieve roundTrip."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> cruisePerformance;
+    dependency cruiseReliabilityDerivation1 from cruisePerformance to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "cruisePerformance is a selected engineering objective supporting roundTrip. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection cruiseReliabilityDerivation2 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "cruisePerformance supplies an acceptance condition needed to achieve hawaiiVoyage."; }
-        end #original source ::> hawaiiVoyage;
-        end #derive target ::> cruisePerformance;
+    dependency cruiseReliabilityDerivation2 from cruisePerformance to hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "cruisePerformance is a selected engineering objective supporting hawaiiVoyage. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection cruiseReliabilityDerivation3 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability supplies an acceptance condition needed to achieve roundTrip."; }
-        end #original source ::> roundTrip;
-        end #derive target ::> missionReliability;
+    dependency cruiseReliabilityDerivation3 from missionReliability to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability is a selected engineering objective supporting roundTrip. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection cruiseReliabilityDerivation4 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability supplies an acceptance condition needed to achieve hawaiiVoyage."; }
-        end #original source ::> hawaiiVoyage;
-        end #derive target ::> missionReliability;
+    dependency cruiseReliabilityDerivation4 from missionReliability to hawaiiVoyage {
+        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability is a selected engineering objective supporting hawaiiVoyage. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    #derivation connection cruiseReliabilityDerivation5 {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability supplies an acceptance condition needed to achieve repeatedOperation."; }
-        end #original source ::> repeatedOperation;
-        end #derive target ::> missionReliability;
+    dependency cruiseReliabilityDerivation5 from missionReliability to repeatedOperation {
+        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability is a selected engineering objective supporting repeatedOperation. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
     #derivation connection cruiseReliabilityDerivation6 {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -3132,5 +2971,31 @@ package BlueDogRequirements {
         in exposureHours : Real;
         return verdict : Boolean;
         ratePerHour >= 0 and exposureHours > 0 and ratePerHour * exposureHours <= -OpenSysMLMathFunctions::ln(0.90)
+    }
+
+    // Refine numerical acceptance; these links do not establish physical evidence.
+    #refinement dependency formalizeSustainedReserveProtectionCriterion from SustainedReserveProtectionCriterion to sustainedReserveProtection {
+        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    }
+    #refinement dependency formalizeRepeatableCycleBalanceCriterion from RepeatableCycleBalanceCriterion to repeatableCycleBalance {
+        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    }
+    #refinement dependency formalizePeakSupplyCapabilityCriterion from PeakSupplyCapabilityCriterion to peakSupplyCapability {
+        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    }
+    #refinement dependency formalizeHarvestCampaignCoverageCriterion from HarvestCampaignCoverageCriterion to harvestCampaignCoverage {
+        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    }
+    #refinement dependency formalizeLegProgressCriterion from LegProgressCriterion to legProgress {
+        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    }
+    #refinement dependency formalizePassageDurationCriterion from PassageDurationCriterion to passageDuration {
+        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    }
+    #refinement dependency formalizeMissionReliabilityCriterion from MissionReliabilityCriterion to missionSuccessProbability {
+        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    }
+    #refinement dependency formalizeFailureRateCriterion from FailureRateCriterion to failureRateBudget {
+        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
     }
 }

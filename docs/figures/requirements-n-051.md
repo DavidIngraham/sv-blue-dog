@@ -1,10 +1,10 @@
-# N-051 self righting
+# N-051 SelfRighting relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-051 SelfRighting** — The vessel shall recover from the specified capsize releases without external assistance or motor thrust.
 
@@ -16,7 +16,7 @@
 
 **N-121 CapsizeElectronicsSealing** — No water shall reach electronics during any N-051 release.
 
-## N-051 derivation 1
+## N-051 relationships 1
 
 ```mermaid
 ---
@@ -43,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::selfRighting1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 77 node(s) without a position, left undrawn, and 101 edge(s) at them
+%% not represented: 77 node(s) without a position, left undrawn, and 100 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -62,7 +62,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-051 derivation 2
+## N-051 relationships 2
 
 ```mermaid
 ---
@@ -89,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::selfRighting2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 79 node(s) without a position, left undrawn, and 103 edge(s) at them
+%% not represented: 79 node(s) without a position, left undrawn, and 102 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

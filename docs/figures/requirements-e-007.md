@@ -1,10 +1,10 @@
-# E-007 mission evidence
+# E-007 MissionEvidence relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **E-007 MissionEvidence** — The vessel shall retain time-correlated mission evidence through communication and power interruptions.
 
@@ -28,7 +28,7 @@
 
 **E-139 UnknownQualificationFallback** — On restart with absent or inconsistent persisted qualification state, the vessel shall adopt nonqualifying status.
 
-## E-007 derivation 1
+## E-007 relationships 1
 
 ```mermaid
 ---
@@ -55,7 +55,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionEvidence1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 201 node(s) without a position, left undrawn, and 364 edge(s) at them
+%% not represented: 122 node(s) without a position, left undrawn, and 185 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -74,7 +74,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-007 derivation 2
+## E-007 relationships 2
 
 ```mermaid
 ---
@@ -101,7 +101,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionEvidence2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 195 node(s) without a position, left undrawn, and 343 edge(s) at them
+%% not represented: 108 node(s) without a position, left undrawn, and 157 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -120,7 +120,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-007 derivation 3
+## E-007 relationships 3
 
 ```mermaid
 ---
@@ -147,7 +147,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionEvidence3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 199 node(s) without a position, left undrawn, and 351 edge(s) at them
+%% not represented: 112 node(s) without a position, left undrawn, and 165 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -166,7 +166,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## E-007 derivation 4
+## E-007 relationships 4
 
 ```mermaid
 ---
@@ -193,7 +193,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionEvidence4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 200 node(s) without a position, left undrawn, and 351 edge(s) at them
+%% not represented: 113 node(s) without a position, left undrawn, and 165 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

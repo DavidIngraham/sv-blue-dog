@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cruise acceptance and numerical refinement</title>
+<link rel="stylesheet" href="sysml-document.css">
+</head>
+<body>
+<article class="sysml-document" data-document="BlueDogDiagramDocuments::CruiseSemantics">
+<h1 class="sysml-title">Cruise acceptance and numerical refinement</h1>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogSemanticViews::CruiseSemantics" data-diagram-kind="requirement" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogSemanticViews::CruiseSemantics — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 6 node(s) without a position, left undrawn, and 9 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=360 y=0
+%% layout: n2 x=360 y=200
+%% layout: n5 x=0 y=200
+%% layout: n7 x=0 y=400
+flowchart BT
+  n0(&#34;`*«requirement»*
+**BlueDogRequirements::cruisePerformance : CruisePerformance**`&#34;)
+  n1(&#34;`*«requirement»*
+**BlueDogRequirements::legProgress : LegProgress**`&#34;)
+  n2[&#34;`*«verification def»*
+**BlueDogReliability::VoyageReliabilityVerification**`&#34;]
+  n5[&#34;`*«calc def»*
+**BlueDogRequirements::LegProgressCriterion**`&#34;]
+  n7(&#34;`*«part»*
+**BlueDog::Architecture::missionContext::boat : Boat**`&#34;)
+  n2 -.-&gt;|&#34;verify&#34;| n1
+  n1 -.-&gt;|&#34;derive&#34;| n0
+  n5 -.-&gt;|&#34;refine&#34;| n1
+  n7 -.-&gt;|&#34;satisfy&#34;| n0
+  n7 -.-&gt;|&#34;satisfy&#34;| n1</pre>
+</figure>
+</article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({maxTextSize: 1531, maxEdges: 6});</script>
+</body>
+</html>

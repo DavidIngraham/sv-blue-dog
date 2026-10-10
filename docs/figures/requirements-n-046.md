@@ -1,10 +1,10 @@
-# N-046 solar heating
+# N-046 SolarHeating relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-046 SolarHeating** — The vessel shall retain safe powered operation during the specified solar-heating exposure.
 
@@ -14,7 +14,7 @@
 
 **N-117 BatteryChargeTemperatureInhibition** — Battery charging shall remain inhibited whenever measured battery temperature is outside the manufacturer permitted charge range.
 
-## N-046 derivation 1
+## N-046 relationships 1
 
 ```mermaid
 ---

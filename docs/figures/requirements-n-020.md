@@ -1,10 +1,10 @@
-# N-020 ocean environment
+# N-020 OceanEnvironment relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-020 OceanEnvironment** — The vessel shall operate on a northeast Pacific passage toward Hawaii amid saltwater, ocean swell, wind seas and prolonged unattended exposure.
 
@@ -20,7 +20,7 @@
 
 **N-042 SaltwaterExposure** — For ocean qualification, following 30 days continuous 35 g/kg saltwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its ocean functional checks without repair or servicing.
 
-## N-020 derivation 1
+## N-020 relationships 1
 
 ```mermaid
 ---
@@ -47,7 +47,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::oceanEnvironment1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 85 node(s) without a position, left undrawn, and 111 edge(s) at them
+%% not represented: 36 node(s) without a position, left undrawn, and 42 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -66,7 +66,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-020 derivation 2
+## N-020 relationships 2
 
 ```mermaid
 ---
@@ -93,7 +93,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::oceanEnvironment2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 122 node(s) without a position, left undrawn, and 156 edge(s) at them
+%% not represented: 93 node(s) without a position, left undrawn, and 105 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

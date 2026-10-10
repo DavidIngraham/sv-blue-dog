@@ -1,10 +1,10 @@
-# N-033 visibility
+# N-033 Visibility relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-033 Visibility** — The vessel shall provide mode-appropriate navigation and traffic response across the specified visibility conditions.
 
@@ -18,7 +18,7 @@
 
 **N-105 RestrictedVisibilityCollisionAssessment** — Collision assessment shall remain active during restricted-visibility operation.
 
-## N-033 derivation 1
+## N-033 relationships 1
 
 ```mermaid
 ---
@@ -64,7 +64,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-033 derivation 2
+## N-033 relationships 2
 
 ```mermaid
 ---

@@ -1,10 +1,10 @@
-# N-010 gorge environment
+# N-010 GorgeEnvironment relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-010 GorgeEnvironment** — The vessel shall operate in the freshwater Columbia River reach between The Dalles and Bonneville, including opposing wind/current, short chop, traffic and submerged vegetation.
 
@@ -24,7 +24,7 @@
 
 **N-054 WeedSnagShedding** — The vessel shall recover sailing performance after the specified appendage weed snags without assistance or motor use.
 
-## N-010 derivation 1
+## N-010 relationships 1
 
 ```mermaid
 ---
@@ -51,7 +51,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::gorgeEnvironment1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 53 node(s) without a position, left undrawn, and 72 edge(s) at them
+%% not represented: 40 node(s) without a position, left undrawn, and 51 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -70,7 +70,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-010 derivation 2
+## N-010 relationships 2
 
 ```mermaid
 ---
@@ -97,7 +97,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::gorgeEnvironment2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 101 node(s) without a position, left undrawn, and 128 edge(s) at them
+%% not represented: 96 node(s) without a position, left undrawn, and 115 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -116,7 +116,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## N-010 derivation 3
+## N-010 relationships 3
 
 ```mermaid
 ---
@@ -143,7 +143,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::gorgeEnvironment3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 72 node(s) without a position, left undrawn, and 104 edge(s) at them
+%% not represented: 67 node(s) without a position, left undrawn, and 90 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -158,6 +158,6 @@ flowchart BT
   n2 -.->|"derive"| n0
 ```
 
-[Continue: N-053 submerged weed passage](<requirements-n-053.md>)
+[Continue: N-053 SubmergedWeedPassage](<requirements-n-053.md>)
 
-[Continue: N-054 weed snag shedding](<requirements-n-054.md>)
+[Continue: N-054 WeedSnagShedding](<requirements-n-054.md>)

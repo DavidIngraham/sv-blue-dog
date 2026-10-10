@@ -58,37 +58,37 @@ package GorgeChallenge {
     requirement emergencyIntervention : EmergencyIntervention;
     #derivation connection challengeRuleCourseCompletion {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule is explicitly included in C-000; C-002 retains its objective-only status."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> courseCompletion;
     }
     #derivation connection challengeRuleRepeatedOperation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule is explicitly included in C-000; C-002 retains its objective-only status."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> repeatedOperation;
     }
     #derivation connection challengeRuleUnassistedAttempt {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule is explicitly included in C-000; C-002 retains its objective-only status."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> unassistedAttempt;
     }
     #derivation connection challengeRuleSailingPropulsion {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule is explicitly included in C-000; C-002 retains its objective-only status."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> sailingPropulsion;
     }
     #derivation connection challengeRuleLiveObservation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule is explicitly included in C-000; C-002 retains its objective-only status."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> liveObservation;
     }
     #derivation connection challengeRuleEmergencyIntervention {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "This rule refines the overall Trans-Gorge challenge."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "This rule is explicitly included in C-000; C-002 retains its objective-only status."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> emergencyIntervention;
     }

@@ -97,6 +97,7 @@
     "✓ package BlueDogReliabilityExamples",
     "✓ package BlueDogDFMEA",
     "✓ package BlueDogReliabilityDocuments",
+    "✓ package BlueDogSemanticViews",
     "✓ Created instance of BlueDogDFMEA::starter",
     "  ID: 1",
     "  Use %features BlueDogDFMEA::starter to inspect"

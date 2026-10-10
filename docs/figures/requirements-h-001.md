@@ -1,283 +1,55 @@
-# H-001 hawaii voyage
+# H-001 HawaiiVoyage relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **H-001 HawaiiVoyage** — The vessel shall complete an autonomous sailing voyage to Hawaii.
 
-**M-002 MultiDayEndurance** — The vessel shall operate for 72 continuous hours without servicing or external charging under the specified Gorge energy campaign.
+## Design decisions motivated by this requirement
 
-**E-002 NavigationAndControl** — The vessel shall provide autonomous navigation and sail/steering control within the selected operational profile.
+Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.
 
-**E-005 Communications** — The vessel shall support live telemetry through link outages and reconnection.
+| Dependent requirement | Design basis | Rationale |
+| --- | --- | --- |
+| multiDayEndurance | hawaiiVoyage | An ocean passage motivates sustained energy autonomy; multi-day operation is an interim capability, not an ocean endurance sizing result. This is design motivation or an implementation choice, not a satisfaction implication. |
+| navigationAndControl | hawaiiVoyage | An autonomous Hawaii passage needs ocean guidance and sailing control; N-001 specifies its environmental design envelope. This is design motivation or an implementation choice, not a satisfaction implication. |
+| communications | hawaiiVoyage | The long-term ocean mission motivates review of monitoring coverage and outage behavior without selecting a radio technology. This is design motivation or an implementation choice, not a satisfaction implication. |
+| resetRecovery | hawaiiVoyage | Extended unattended operation motivates recovery from onboard resets. This is design motivation or an implementation choice, not a satisfaction implication. |
+| missionEvidence | hawaiiVoyage | Ocean mission assessment requires retained voyage evidence; E-007 specifies recording and retention acceptance criteria. This is design motivation or an implementation choice, not a satisfaction implication. |
+| environmentalEnvelope | hawaiiVoyage | Ocean operation requires its own environmental envelope; Gorge success does not establish it. This is design motivation or an implementation choice, not a satisfaction implication. |
+| oceanEnvironment | hawaiiVoyage | The Hawaii mission sets the ocean environment; this profile is not a Gorge acceptance prerequisite. This is design motivation or an implementation choice, not a satisfaction implication. |
+| operatingBoundary | hawaiiVoyage | An ocean route also needs configured boundaries and no-feasible-route behavior; its boundaries differ from the Gorge course. This is design motivation or an implementation choice, not a satisfaction implication. |
+| regulatoryClassification | hawaiiVoyage | Deployment permissions and applicable rules depend on the ocean route as well as the Gorge mission. This is design motivation or an implementation choice, not a satisfaction implication. |
+| serviceability | hawaiiVoyage | Unattended ocean preparation and post-voyage maintenance motivate replaceable modules; this is not at-sea servicing during qualification. This is design motivation or an implementation choice, not a satisfaction implication. |
+| sustainedEnergyFeasibility | hawaiiVoyage | The ocean ambition requires sustained energy autonomy; route-specific resources remain unresolved. This is design motivation or an implementation choice, not a satisfaction implication. |
+| cruisePerformance | hawaiiVoyage | cruisePerformance is a selected engineering objective supporting hawaiiVoyage. This is design motivation or an implementation choice, not a satisfaction implication. |
+| missionReliability | hawaiiVoyage | missionReliability is a selected engineering objective supporting hawaiiVoyage. This is design motivation or an implementation choice, not a satisfaction implication. |
 
-**E-003 ResetRecovery** — The vessel shall restore mode-appropriate autonomous operation after a watchdog reset.
+[Continue: L-001 MissionReliability](<requirements-l-001.md>)
 
-**E-007 MissionEvidence** — The vessel shall retain time-correlated mission evidence through communication and power interruptions.
+[Continue: Q-001 CruisePerformance](<requirements-q-001.md>)
 
-**N-001 EnvironmentalEnvelope** — The vessel shall retain the functions required by its selected environmental profile and operating mode.
+[Continue: E-200 SustainedEnergyFeasibility](<requirements-e-200.md>)
 
-**N-020 OceanEnvironment** — The vessel shall operate on a northeast Pacific passage toward Hawaii amid saltwater, ocean swell, wind seas and prolonged unattended exposure.
+[Continue: P-003 Serviceability](<requirements-p-003.md>)
 
-**S-002 OperatingBoundary** — The vessel shall enforce the configured operating boundaries.
+[Continue: S-005 RegulatoryClassification](<requirements-s-005.md>)
 
-**S-005 RegulatoryClassification** — Deployment shall require documented compliance with applicable navigation, radio and authorization obligations.
+[Continue: S-002 OperatingBoundary](<requirements-s-002.md>)
 
-**P-003 Serviceability** — The vessel shall support replacement of serviceable equipment without structural damage.
+[Continue: N-020 OceanEnvironment](<requirements-n-020.md>)
 
-**E-200 SustainedEnergyFeasibility** — The installed energy architecture shall support the selected bounded repeating profile without external charging, meeting the derived reserve, cycle-balance and peak-supply criteria.
+[Continue: N-001 EnvironmentalEnvelope](<requirements-n-001.md>)
 
-**Q-001 CruisePerformance** — The vessel shall sustain sailing performance sufficient to complete each declared unassisted mission route.
+[Continue: E-007 MissionEvidence](<requirements-e-007.md>)
 
-**L-001 MissionReliability** — The vessel shall preserve mission-critical functions throughout each declared unassisted voyage.
+[Continue: E-003 ResetRecovery](<requirements-e-003.md>)
 
-## H-001 derivation 1
+[Continue: E-005 Communications](<requirements-e-005.md>)
 
-```mermaid
----
-config:
-  fontFamily: "Helvetica, Arial, sans-serif"
-  theme: base
-  themeCSS: ".edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }"
-  themeVariables:
-    fontFamily: "Helvetica, Arial, sans-serif"
-    fontSize: "14px"
-    primaryColor: "#FFFFFF"
-    secondaryColor: "#FFFFFF"
-    tertiaryColor: "#FFFFFF"
-    background: "#FFFFFF"
-    primaryBorderColor: "#181818"
-    primaryTextColor: "#000000"
-    lineColor: "#181818"
-    textColor: "#000000"
-    noteBkgColor: "#FEFFDD"
-    noteBorderColor: "#181818"
-    noteTextColor: "#000000"
-    clusterBkg: "#FFFFFF"
-    clusterBorder: "#181818"
-    edgeLabelBackground: "#FFFFFF"
----
-%% BlueDogViews::hawaiiVoyage1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 237 node(s) without a position, left undrawn, and 479 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
-flowchart BT
-  n0("`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`")
-  n1("`*«requirement»*
-**BlueDogRequirements::multiDayEndurance : MultiDayEndurance**`")
-  n2("`*«requirement»*
-**BlueDogRequirements::navigationAndControl : NavigationAndControl**`")
-  n3("`*«requirement»*
-**BlueDogRequirements::communications : Communications**`")
-  n1 -.->|"derive"| n0
-  n2 -.->|"derive"| n0
-  n3 -.->|"derive"| n0
-```
+[Continue: E-002 NavigationAndControl](<requirements-e-002.md>)
 
-## H-001 derivation 2
-
-```mermaid
----
-config:
-  fontFamily: "Helvetica, Arial, sans-serif"
-  theme: base
-  themeCSS: ".edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }"
-  themeVariables:
-    fontFamily: "Helvetica, Arial, sans-serif"
-    fontSize: "14px"
-    primaryColor: "#FFFFFF"
-    secondaryColor: "#FFFFFF"
-    tertiaryColor: "#FFFFFF"
-    background: "#FFFFFF"
-    primaryBorderColor: "#181818"
-    primaryTextColor: "#000000"
-    lineColor: "#181818"
-    textColor: "#000000"
-    noteBkgColor: "#FEFFDD"
-    noteBorderColor: "#181818"
-    noteTextColor: "#000000"
-    clusterBkg: "#FFFFFF"
-    clusterBorder: "#181818"
-    edgeLabelBackground: "#FFFFFF"
----
-%% BlueDogViews::hawaiiVoyage2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 235 node(s) without a position, left undrawn, and 461 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
-flowchart BT
-  n0("`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`")
-  n1("`*«requirement»*
-**BlueDogRequirements::resetRecovery : ResetRecovery**`")
-  n2("`*«requirement»*
-**BlueDogRequirements::missionEvidence : MissionEvidence**`")
-  n3("`*«requirement»*
-**BlueDogRequirements::environmentalEnvelope : EnvironmentalEnvelope**`")
-  n1 -.->|"derive"| n0
-  n2 -.->|"derive"| n0
-  n3 -.->|"derive"| n0
-```
-
-## H-001 derivation 3
-
-```mermaid
----
-config:
-  fontFamily: "Helvetica, Arial, sans-serif"
-  theme: base
-  themeCSS: ".edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }"
-  themeVariables:
-    fontFamily: "Helvetica, Arial, sans-serif"
-    fontSize: "14px"
-    primaryColor: "#FFFFFF"
-    secondaryColor: "#FFFFFF"
-    tertiaryColor: "#FFFFFF"
-    background: "#FFFFFF"
-    primaryBorderColor: "#181818"
-    primaryTextColor: "#000000"
-    lineColor: "#181818"
-    textColor: "#000000"
-    noteBkgColor: "#FEFFDD"
-    noteBorderColor: "#181818"
-    noteTextColor: "#000000"
-    clusterBkg: "#FFFFFF"
-    clusterBorder: "#181818"
-    edgeLabelBackground: "#FFFFFF"
----
-%% BlueDogViews::hawaiiVoyage3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 225 node(s) without a position, left undrawn, and 429 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
-flowchart BT
-  n0("`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`")
-  n1("`*«requirement»*
-**BlueDogRequirements::oceanEnvironment : OceanEnvironment**`")
-  n2("`*«requirement»*
-**BlueDogRequirements::operatingBoundary : OperatingBoundary**`")
-  n3("`*«requirement»*
-**BlueDogRequirements::regulatoryClassification : RegulatoryClassification**`")
-  n1 -.->|"derive"| n0
-  n2 -.->|"derive"| n0
-  n3 -.->|"derive"| n0
-```
-
-## H-001 derivation 4
-
-```mermaid
----
-config:
-  fontFamily: "Helvetica, Arial, sans-serif"
-  theme: base
-  themeCSS: ".edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }"
-  themeVariables:
-    fontFamily: "Helvetica, Arial, sans-serif"
-    fontSize: "14px"
-    primaryColor: "#FFFFFF"
-    secondaryColor: "#FFFFFF"
-    tertiaryColor: "#FFFFFF"
-    background: "#FFFFFF"
-    primaryBorderColor: "#181818"
-    primaryTextColor: "#000000"
-    lineColor: "#181818"
-    textColor: "#000000"
-    noteBkgColor: "#FEFFDD"
-    noteBorderColor: "#181818"
-    noteTextColor: "#000000"
-    clusterBkg: "#FFFFFF"
-    clusterBorder: "#181818"
-    edgeLabelBackground: "#FFFFFF"
----
-%% BlueDogViews::hawaiiVoyage4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 226 node(s) without a position, left undrawn, and 429 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-flowchart BT
-  n0("`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`")
-  n1("`*«requirement»*
-**BlueDogRequirements::serviceability : Serviceability**`")
-  n2("`*«requirement»*
-**BlueDogRequirements::sustainedEnergyFeasibility : SustainedEnergyFeasibility**`")
-  n1 -.->|"derive"| n0
-  n2 -.->|"derive"| n0
-```
-
-[Continue: M-002 multi day endurance](<requirements-m-002.md>)
-
-[Continue: E-002 navigation and control](<requirements-e-002.md>)
-
-[Continue: E-005 communications](<requirements-e-005.md>)
-
-[Continue: E-003 reset recovery](<requirements-e-003.md>)
-
-[Continue: E-007 mission evidence](<requirements-e-007.md>)
-
-[Continue: N-001 environmental envelope](<requirements-n-001.md>)
-
-[Continue: N-020 ocean environment](<requirements-n-020.md>)
-
-[Continue: S-002 operating boundary](<requirements-s-002.md>)
-
-[Continue: S-005 regulatory classification](<requirements-s-005.md>)
-
-[Continue: P-003 serviceability](<requirements-p-003.md>)
-
-[Continue: E-200 sustained energy feasibility](<requirements-e-200.md>)
-
-## H-001 derivation 5
-
-```mermaid
----
-config:
-  fontFamily: "Helvetica, Arial, sans-serif"
-  theme: base
-  themeCSS: ".edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }"
-  themeVariables:
-    fontFamily: "Helvetica, Arial, sans-serif"
-    fontSize: "14px"
-    primaryColor: "#FFFFFF"
-    secondaryColor: "#FFFFFF"
-    tertiaryColor: "#FFFFFF"
-    background: "#FFFFFF"
-    primaryBorderColor: "#181818"
-    primaryTextColor: "#000000"
-    lineColor: "#181818"
-    textColor: "#000000"
-    noteBkgColor: "#FEFFDD"
-    noteBorderColor: "#181818"
-    noteTextColor: "#000000"
-    clusterBkg: "#FFFFFF"
-    clusterBorder: "#181818"
-    edgeLabelBackground: "#FFFFFF"
----
-%% BlueDogViews::hawaiiVoyage5 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 224 node(s) without a position, left undrawn, and 421 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-flowchart BT
-  n0("`*«requirement»*
-**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`")
-  n1("`*«requirement»*
-**BlueDogRequirements::cruisePerformance : CruisePerformance**`")
-  n2("`*«requirement»*
-**BlueDogRequirements::missionReliability : MissionReliability**`")
-  n1 -.->|"derive"| n0
-  n2 -.->|"derive"| n0
-```
-
-[Continue: Q-001 cruisePerformance](<requirements-q-001.md>)
-
-[Continue: L-001 missionReliability](<requirements-l-001.md>)
+[Continue: M-002 MultiDayEndurance](<requirements-m-002.md>)

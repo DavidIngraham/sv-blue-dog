@@ -1,10 +1,10 @@
-# C-000 trans gorge challenge
+# C-000 TransGorgeChallenge relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **C-000 TransGorgeChallenge** — The vessel shall complete the Trans-Gorge challenge under C-001 through C-006.
 
@@ -20,7 +20,7 @@
 
 **C-006 EmergencyIntervention** — The vessel shall permit remote emergency abort or manual control when a command link is available.
 
-## C-000 derivation 1
+## C-000 relationships 1
 
 ```mermaid
 ---
@@ -47,7 +47,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::transGorgeChallenge1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 229 node(s) without a position, left undrawn, and 450 edge(s) at them
+%% not represented: 94 node(s) without a position, left undrawn, and 106 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -66,7 +66,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## C-000 derivation 2
+## C-000 relationships 2
 
 ```mermaid
 ---
@@ -93,7 +93,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::transGorgeChallenge2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 229 node(s) without a position, left undrawn, and 450 edge(s) at them
+%% not represented: 94 node(s) without a position, left undrawn, and 106 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -112,14 +112,14 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-[Continue: C-001 course completion](<requirements-c-001.md>)
+[Continue: C-001 CourseCompletion](<requirements-c-001.md>)
 
-[Continue: C-002 repeated operation](<requirements-c-002.md>)
+[Continue: C-002 RepeatedOperation](<requirements-c-002.md>)
 
-[Continue: C-003 unassisted attempt](<requirements-c-003.md>)
+[Continue: C-003 UnassistedAttempt](<requirements-c-003.md>)
 
-[Continue: C-004 sailing propulsion](<requirements-c-004.md>)
+[Continue: C-004 SailingPropulsion](<requirements-c-004.md>)
 
-[Continue: C-005 live observation](<requirements-c-005.md>)
+[Continue: C-005 LiveObservation](<requirements-c-005.md>)
 
-[Continue: C-006 emergency intervention](<requirements-c-006.md>)
+[Continue: C-006 EmergencyIntervention](<requirements-c-006.md>)

@@ -1,14 +1,12 @@
-# E-001 energy awareness
+# E-001 EnergyAwareness relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **E-001 EnergyAwareness** — The vessel shall maintain conservative estimates of usable energy and protected recovery reserve.
-
-**E-004 LowEnergyRecovery** — The vessel shall protect essential functions when conservative usable energy reaches the recovery reserve.
 
 **E-101 EnergyEstimateCadence** — The vessel shall refresh usable battery-energy estimates at least once per second.
 
@@ -18,7 +16,7 @@
 
 **E-104 ConservativeEnergyEstimate** — The usable-energy input to admission and low-energy decisions shall equal estimated usable energy minus the EnergyEstimateAccuracy error allowance.
 
-## E-001 derivation 1
+## E-001 relationships 1
 
 ```mermaid
 ---
@@ -45,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::energyAwareness1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 149 node(s) without a position, left undrawn, and 235 edge(s) at them
+%% not represented: 10 node(s) without a position, left undrawn, and 18 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -54,17 +52,17 @@ flowchart BT
   n0("`*«requirement»*
 **energyAwareness : EnergyAwareness**`")
   n1("`*«requirement»*
-**lowEnergyRecovery : LowEnergyRecovery**`")
-  n2("`*«requirement»*
 **energyEstimateCadence : EnergyEstimateCadence**`")
-  n3("`*«requirement»*
+  n2("`*«requirement»*
 **reserveEstimateCadence : ReserveEstimateCadence**`")
+  n3("`*«requirement»*
+**energyEstimateAccuracy : EnergyEstimateAccuracy**`")
   n1 -.->|"derive"| n0
   n2 -.->|"derive"| n0
   n3 -.->|"derive"| n0
 ```
 
-## E-001 derivation 2
+## E-001 relationships 2
 
 ```mermaid
 ---
@@ -91,19 +89,23 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::energyAwareness2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 117 node(s) without a position, left undrawn, and 140 edge(s) at them
+%% not represented: 12 node(s) without a position, left undrawn, and 20 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
 flowchart BT
   n0("`*«requirement»*
 **energyAwareness : EnergyAwareness**`")
   n1("`*«requirement»*
-**energyEstimateAccuracy : EnergyEstimateAccuracy**`")
-  n2("`*«requirement»*
 **conservativeEnergyEstimate : ConservativeEnergyEstimate**`")
   n1 -.->|"derive"| n0
-  n2 -.->|"derive"| n0
 ```
 
-[Continue: E-004 low energy recovery](<requirements-e-004.md>)
+## Design decisions motivated by this requirement
+
+Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.
+
+| Dependent requirement | Design basis | Rationale |
+| --- | --- | --- |
+| lowEnergyRecovery | energyAwareness | Available-energy estimates and reserve policy must drive low-energy transitions. This is design motivation or an implementation choice, not a satisfaction implication. |
+
+[Continue: E-004 LowEnergyRecovery](<requirements-e-004.md>)

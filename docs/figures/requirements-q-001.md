@@ -1,10 +1,10 @@
-# Q-001 CruisePerformance
+# Q-001 CruisePerformance relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **Q-001 CruisePerformance** — The vessel shall sustain sailing performance sufficient to complete each declared unassisted mission route.
 
@@ -14,7 +14,7 @@
 
 **Q-103 CruiseEvidence** — The cruise-performance assessment shall use accepted loaded-vessel sailing evidence for its declared mission profile.
 
-## Q-001 derivation 1
+## Q-001 relationships 1
 
 ```mermaid
 ---
@@ -41,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::cruisePerformance1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 48 node(s) without a position, left undrawn, and 57 edge(s) at them
+%% not represented: 7 node(s) without a position, left undrawn, and 11 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

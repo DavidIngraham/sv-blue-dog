@@ -1,10 +1,10 @@
-# N-053 submerged weed passage
+# N-053 SubmergedWeedPassage relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **N-053 SubmergedWeedPassage** — The vessel shall tolerate submerged milfoil-like vegetation during the specified unassisted Gorge sailing passes.
 
@@ -12,7 +12,7 @@
 
 **N-127 WeedPassageSteering** — After each N-053 patch passage, full commanded rudder travel shall be regained within 5 minutes.
 
-## N-053 derivation 1
+## N-053 relationships 1
 
 ```mermaid
 ---
@@ -39,7 +39,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::submergedWeedPassage1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 66 node(s) without a position, left undrawn, and 82 edge(s) at them
+%% not represented: 66 node(s) without a position, left undrawn, and 81 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

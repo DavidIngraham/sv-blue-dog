@@ -1,10 +1,10 @@
-# S-005 regulatory classification
+# S-005 RegulatoryClassification relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **S-005 RegulatoryClassification** — Deployment shall require documented compliance with applicable navigation, radio and authorization obligations.
 
@@ -12,7 +12,7 @@
 
 **S-123 DeploymentReleaseGate** — Deployment release shall be withheld while any mandatory authorization is absent, expired or unresolved.
 
-## S-005 derivation 1
+## S-005 relationships 1
 
 ```mermaid
 ---
@@ -39,7 +39,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::regulatoryClassification1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 160 node(s) without a position, left undrawn, and 251 edge(s) at them
+%% not represented: 1 node(s) without a position, left undrawn, and 3 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

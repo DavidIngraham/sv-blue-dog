@@ -4,7 +4,7 @@
 
 [Qualification conditions, rationale, open issues and verification specifications](<requirements-context.md>)
 
-Generated natively by OpenSysML from the project models. Status describes work on the model element, not verification. Derivations record design reasoning, not proof of satisfaction.
+Generated natively by OpenSysML from the project models. Status describes work on the model element, not verification. Derivations express required acceptance outcomes under their stated conditions, not evidence that a vessel satisfies them. Design-basis dependencies and refinements are reported separately.
 
 ## Requirements
 
@@ -223,49 +223,12 @@ Generated natively by OpenSysML from the project models. Status describes work o
 
 | Original | Derived | Status | Rationale |
 | --- | --- | --- | --- |
-| transGorgeChallenge | courseCompletion | open | This rule refines the overall Trans-Gorge challenge. |
-| transGorgeChallenge | repeatedOperation | open | This rule refines the overall Trans-Gorge challenge. |
-| transGorgeChallenge | unassistedAttempt | open | This rule refines the overall Trans-Gorge challenge. |
-| transGorgeChallenge | sailingPropulsion | open | This rule refines the overall Trans-Gorge challenge. |
-| transGorgeChallenge | liveObservation | open | This rule refines the overall Trans-Gorge challenge. |
-| transGorgeChallenge | emergencyIntervention | open | This rule refines the overall Trans-Gorge challenge. |
-| courseCompletion | roundTrip | open | The vehicle mission implements the independently defined challenge course. |
-| repeatedOperation | multiDayEndurance | open | Repeated autonomous journeys motivate the existing endurance and harvesting requirement; M-002 defines an initial 72-hour campaign; indefinite operation remains an objective. |
-| unassistedAttempt | navigationAndControl | open | The vessel needs onboard guidance and control to complete an unassisted attempt. |
-| sailingPropulsion | roundTrip | open | Vehicle challenge operation excludes auxiliary motor propulsion; powered development tests are separate. |
-| liveObservation | communications | open | Vehicle communications implement live observation and outage data retention. |
-| emergencyIntervention | communications | open | Vehicle communications provide emergency commands whose use ends attempt qualification. |
-| hawaiiVoyage | multiDayEndurance | open | An ocean passage motivates sustained energy autonomy; multi-day operation is an interim capability, not an ocean endurance sizing result. |
-| hawaiiVoyage | navigationAndControl | open | An autonomous Hawaii passage needs ocean guidance and sailing control; N-001 specifies its environmental design envelope. |
-| hawaiiVoyage | communications | open | The long-term ocean mission motivates review of monitoring coverage and outage behavior without selecting a radio technology. |
-| hawaiiVoyage | resetRecovery | open | Extended unattended operation motivates recovery from onboard resets. |
-| hawaiiVoyage | missionEvidence | open | Ocean mission assessment requires retained voyage evidence; E-007 specifies recording and retention acceptance criteria. |
-| roundTrip | navigationAndControl | open | Autonomous completion of the route needs observations, guidance, and actuation. |
-| roundTrip | resetRecovery | open | A reset during an autonomous journey must not leave mission behavior undefined. |
-| roundTrip | communications | open | Mission supervision and recovery need an agreed operator communication policy. |
-| roundTrip | ingressResponse | open | Recovering the boat after the journey motivates a defined response to small leaks. |
-| roundTrip | missionEvidence | open | Assessing route completion and learning from the mission requires recorded evidence. |
-| multiDayEndurance | energyAwareness | open | Multi-day operation with variable harvesting needs energy estimation and load management. |
-| multiDayEndurance | lowEnergyRecovery | open | Harvest shortfalls need an explicit degraded operating mode. |
-| energyAwareness | lowEnergyRecovery | open | Available-energy estimates and reserve policy must drive low-energy transitions. |
-| roundTrip | transportability | open | Transportability refines the responsibilities needed for roundTrip. |
-| roundTrip | desktopManufacture | open | David specified desktop manufacture and a 250 mm usable build cube as a project constraint on the vehicle; this is an imposed stakeholder constraint, not a consequence of one-person handling. |
-| repeatedOperation | serviceability | open | Repeated deployment motivates maintainability between attempts; the timed service target is an engineering allocation, not implied by printer size. |
-| navigationAndControl | trafficSafety | open | TrafficSafety refines the responsibilities needed for navigationAndControl. |
-| roundTrip | operatingBoundary | open | OperatingBoundary refines the responsibilities needed for roundTrip. |
-| emergencyIntervention | safeRecovery | open | Permitted emergency intervention requires explicit abort, qualification, isolation and control-loss behavior. |
-| trafficSafety | navigationConspicuity | open | NavigationConspicuity refines the responsibilities needed for trafficSafety. |
-| roundTrip | regulatoryClassification | open | RegulatoryClassification refines the responsibilities needed for roundTrip. |
-| roundTrip | environmentalEnvelope | open | EnvironmentalEnvelope refines the responsibilities needed for roundTrip. |
-| environmentalEnvelope | marineDurability | open | MarineDurability refines the responsibilities needed for environmentalEnvelope. |
-| environmentalEnvelope | stabilityAndFouling | open | StabilityAndFouling refines the responsibilities needed for environmentalEnvelope. |
-| safeRecovery | recoveryPropulsion | open | RecoveryPropulsion refines the responsibilities needed for safeRecovery. |
-| recoveryPropulsion | recoveryEnergy | open | RecoveryEnergy refines the responsibilities needed for recoveryPropulsion. |
-| communications | telemetryEquipment | open | TelemetryEquipment refines the responsibilities needed for communications. |
-| communications | commandIntegrity | open | CommandIntegrity refines the responsibilities needed for communications. |
-| hawaiiVoyage | environmentalEnvelope | open | Ocean operation requires its own environmental envelope; Gorge success does not establish it. |
-| roundTrip | gorgeEnvironment | open | The Gorge mission sets the river environment; it does not impose the ocean profile. |
-| hawaiiVoyage | oceanEnvironment | open | The Hawaii mission sets the ocean environment; this profile is not a Gorge acceptance prerequisite. |
+| transGorgeChallenge | courseCompletion | open | This rule is explicitly included in C-000; C-002 retains its objective-only status. |
+| transGorgeChallenge | repeatedOperation | open | This rule is explicitly included in C-000; C-002 retains its objective-only status. |
+| transGorgeChallenge | unassistedAttempt | open | This rule is explicitly included in C-000; C-002 retains its objective-only status. |
+| transGorgeChallenge | sailingPropulsion | open | This rule is explicitly included in C-000; C-002 retains its objective-only status. |
+| transGorgeChallenge | liveObservation | open | This rule is explicitly included in C-000; C-002 retains its objective-only status. |
+| transGorgeChallenge | emergencyIntervention | open | This rule is explicitly included in C-000; C-002 retains its objective-only status. |
 | gorgeEnvironment | gorgeWind | open | GorgeWind provides a separately verifiable criterion for gorgeEnvironment. |
 | gorgeEnvironment | gorgeWaves | open | GorgeWaves provides a separately verifiable criterion for gorgeEnvironment. |
 | gorgeEnvironment | gorgeCurrent | open | GorgeCurrent provides a separately verifiable criterion for gorgeEnvironment. |
@@ -295,16 +258,7 @@ Generated natively by OpenSysML from the project models. Status describes work o
 | stabilityAndFouling | weedSnagShedding | open | WeedSnagShedding provides a separately verifiable criterion for stabilityAndFouling. |
 | stabilityAndFouling | weedBlockageResponse | open | WeedBlockageResponse provides a separately verifiable criterion for stabilityAndFouling. |
 | stabilityAndFouling | recoveryPropulsorWeeds | open | RecoveryPropulsorWeeds provides a separately verifiable criterion for stabilityAndFouling. |
-| recoveryPropulsion | recoveryPropulsorWeeds | open | The recovery propulsor must remain usable in the vegetation encountered by the sailing vessel. |
 | navigationAndControl | navigationAvailability | open | NavigationAvailability isolates a separately verifiable consequence of navigationAndControl. |
-| recoveryEnergy | launchEnergyAdmission | open | LaunchEnergyAdmission isolates a separately verifiable consequence of recoveryEnergy. |
-| sailingPropulsion | challengeMotorInhibition | open | ChallengeMotorInhibition isolates a separately verifiable consequence of GorgeChallenge::sailingPropulsion. |
-| unassistedAttempt | challengeMotorInhibition | open | No-intervention qualification must survive resets and motor-mode transitions. |
-| unassistedAttempt | commandIntegrity | open | Accepted external control changes the attempt qualification; communications alone does not supply this rule. |
-| emergencyIntervention | commandIntegrity | open | The emergency control channel needs authenticated, fresh commands and persistent qualification changes. |
-| hawaiiVoyage | operatingBoundary | open | An ocean route also needs configured boundaries and no-feasible-route behavior; its boundaries differ from the Gorge course. |
-| hawaiiVoyage | regulatoryClassification | open | Deployment permissions and applicable rules depend on the ocean route as well as the Gorge mission. |
-| hawaiiVoyage | serviceability | open | Unattended ocean preparation and post-voyage maintenance motivate replaceable modules; this is not at-sea servicing during qualification. |
 | gorgeEnvironment | freshwaterExposure | open | The river profile supplies the freshwater exposure medium. |
 | oceanEnvironment | saltwaterExposure | open | The ocean profile supplies the saltwater exposure medium. |
 | gorgeEnvironment | submergedWeedPassage | open | David identified Columbia River milfoil as a Gorge design condition. |
@@ -461,8 +415,6 @@ Generated natively by OpenSysML from the project models. Status describes work o
 | envelopeTransition | motorQualificationInvariant | open | envelopeTransition also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. |
 | weedBlockageResponse | motorQualificationInvariant | open | weedBlockageResponse also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. |
 | recoveryPropulsorWeeds | motorQualificationInvariant | open | recoveryPropulsorWeeds also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. |
-| repeatedOperation | sustainedEnergyFeasibility | open | Repeated journeys motivate a repeatable energy cycle, beyond a one-off endurance run. |
-| hawaiiVoyage | sustainedEnergyFeasibility | open | The ocean ambition requires sustained energy autonomy; route-specific resources remain unresolved. |
 | sustainedEnergyFeasibility | sustainedReserveProtection | open | This leaf isolates one acceptance outcome of sustained energy feasibility. |
 | sustainedEnergyFeasibility | repeatableCycleBalance | open | This leaf isolates one acceptance outcome of sustained energy feasibility. |
 | sustainedEnergyFeasibility | peakSupplyCapability | open | This leaf isolates one acceptance outcome of sustained energy feasibility. |
@@ -471,12 +423,6 @@ Generated natively by OpenSysML from the project models. Status describes work o
 | multiDayEndurance | peakSupplyCapability | open | The M-002 campaign requires this separately evaluated energy outcome. |
 | multiDayEndurance | harvestCampaignCoverage | open | The M-002 campaign requires this separately evaluated energy outcome. |
 | multiDayEndurance | energyEvidenceReadiness | open | The M-002 campaign requires this separately evaluated energy outcome. |
-| recoveryEnergy | sustainedReserveProtection | open | Sustained operation protects the recovery reserve sized by the existing R-002 policy. |
-| roundTrip | cruisePerformance | open | cruisePerformance supplies an acceptance condition needed to achieve roundTrip. |
-| hawaiiVoyage | cruisePerformance | open | cruisePerformance supplies an acceptance condition needed to achieve hawaiiVoyage. |
-| roundTrip | missionReliability | open | missionReliability supplies an acceptance condition needed to achieve roundTrip. |
-| hawaiiVoyage | missionReliability | open | missionReliability supplies an acceptance condition needed to achieve hawaiiVoyage. |
-| repeatedOperation | missionReliability | open | missionReliability supplies an acceptance condition needed to achieve repeatedOperation. |
 | cruisePerformance | legProgress | open | legProgress supplies an acceptance condition needed to achieve cruisePerformance. |
 | cruisePerformance | passageDuration | open | passageDuration supplies an acceptance condition needed to achieve cruisePerformance. |
 | cruisePerformance | cruiseEvidence | open | cruiseEvidence supplies an acceptance condition needed to achieve cruisePerformance. |

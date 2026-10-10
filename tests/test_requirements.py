@@ -7,8 +7,6 @@ import pytest
 from scripts.render_requirements import native, native_graph, native_register, MODELS
 
 
-ENERGY_LINKS = [('repeatedOperation', 'sustainedEnergyFeasibility'), ('hawaiiVoyage', 'sustainedEnergyFeasibility'), ('sustainedEnergyFeasibility', 'sustainedReserveProtection'), ('sustainedEnergyFeasibility', 'repeatableCycleBalance'), ('sustainedEnergyFeasibility', 'peakSupplyCapability'), ('sustainedEnergyFeasibility', 'energyEvidenceReadiness'), ('multiDayEndurance', 'sustainedReserveProtection'), ('multiDayEndurance', 'peakSupplyCapability'), ('multiDayEndurance', 'harvestCampaignCoverage'), ('multiDayEndurance', 'energyEvidenceReadiness'), ('recoveryEnergy', 'sustainedReserveProtection')]
-RELIABILITY_LINKS = [['roundTrip', 'cruisePerformance'], ['hawaiiVoyage', 'cruisePerformance'], ['roundTrip', 'missionReliability'], ['hawaiiVoyage', 'missionReliability'], ['repeatedOperation', 'missionReliability'], ['cruisePerformance', 'legProgress'], ['cruisePerformance', 'passageDuration'], ['cruisePerformance', 'cruiseEvidence'], ['missionReliability', 'missionSuccessProbability'], ['missionReliability', 'failureRateBudget'], ['missionReliability', 'reliabilityEvidence'], ['missionReliability', 'criticalFailureDisposition']]
 RELIABILITY_IDS = {'L-101', 'Q-101', 'Q-102', 'L-103', 'L-001', 'Q-001', 'L-104', 'Q-103', 'L-102'}
 ENERGY_IDS = {f'E-{i}' for i in range(200, 206)}
 ATOMIC = json.loads(Path(__file__).with_name('atomic_requirements.json').read_text())
@@ -33,27 +31,67 @@ def test_challenge_is_standalone():
 
 def test_diagram_preserves_expected_derivations(published_model):
     expected = {
-        *(("transGorgeChallenge", target) for target in ["courseCompletion", "repeatedOperation", "unassistedAttempt", "sailingPropulsion", "liveObservation", "emergencyIntervention"]),
-        *(("hawaiiVoyage", target) for target in ["multiDayEndurance", "navigationAndControl", "communications", "resetRecovery", "missionEvidence"]),
-        ("courseCompletion", "roundTrip"), ("repeatedOperation", "multiDayEndurance"),
-        ("unassistedAttempt", "navigationAndControl"), ("sailingPropulsion", "roundTrip"),
-        ("liveObservation", "communications"), ("emergencyIntervention", "communications"),
-        ("roundTrip", "navigationAndControl"), ("roundTrip", "resetRecovery"),
-        ("roundTrip", "communications"), ("roundTrip", "ingressResponse"),
-        ("roundTrip", "missionEvidence"), ("multiDayEndurance", "energyAwareness"),
-        ("multiDayEndurance", "lowEnergyRecovery"), ("energyAwareness", "lowEnergyRecovery"),
+        ('cruisePerformance', 'cruiseEvidence'),
+        ('cruisePerformance', 'legProgress'),
+        ('cruisePerformance', 'passageDuration'),
+        ('environmentalEnvelope', 'airTemperature'),
+        ('environmentalEnvelope', 'calmOperation'),
+        ('environmentalEnvelope', 'envelopeTransition'),
+        ('environmentalEnvelope', 'humidity'),
+        ('environmentalEnvelope', 'visibility'),
+        ('environmentalEnvelope', 'waterTemperature'),
+        ('gorgeEnvironment', 'freshwaterExposure'),
+        ('gorgeEnvironment', 'gorgeCurrent'),
+        ('gorgeEnvironment', 'gorgeSurvivalWaves'),
+        ('gorgeEnvironment', 'gorgeSurvivalWind'),
+        ('gorgeEnvironment', 'gorgeWaves'),
+        ('gorgeEnvironment', 'gorgeWind'),
+        ('gorgeEnvironment', 'submergedWeedPassage'),
+        ('gorgeEnvironment', 'weedSnagShedding'),
+        ('marineDurability', 'enclosureSealing'),
+        ('marineDurability', 'freshwaterExposure'),
+        ('marineDurability', 'printedMaterialAging'),
+        ('marineDurability', 'saltwaterExposure'),
+        ('marineDurability', 'solarHeating'),
+        ('marineDurability', 'wetElectricalIntegrity'),
+        ('marineDurability', 'wetMechanicalIntegrity'),
+        ('missionReliability', 'criticalFailureDisposition'),
+        ('missionReliability', 'failureRateBudget'),
+        ('missionReliability', 'missionSuccessProbability'),
+        ('missionReliability', 'reliabilityEvidence'),
+        ('multiDayEndurance', 'energyEvidenceReadiness'),
+        ('multiDayEndurance', 'harvestCampaignCoverage'),
+        ('multiDayEndurance', 'peakSupplyCapability'),
+        ('multiDayEndurance', 'sustainedReserveProtection'),
+        ('navigationAndControl', 'navigationAvailability'),
+        ('oceanEnvironment', 'oceanCurrent'),
+        ('oceanEnvironment', 'oceanSurvivalWaves'),
+        ('oceanEnvironment', 'oceanSurvivalWind'),
+        ('oceanEnvironment', 'oceanWaves'),
+        ('oceanEnvironment', 'oceanWind'),
+        ('oceanEnvironment', 'saltwaterExposure'),
+        ('stabilityAndFouling', 'capsizeControlRecovery'),
+        ('stabilityAndFouling', 'recoveryPropulsorWeeds'),
+        ('stabilityAndFouling', 'selfRighting'),
+        ('stabilityAndFouling', 'submergedWeedPassage'),
+        ('stabilityAndFouling', 'weedBlockageResponse'),
+        ('stabilityAndFouling', 'weedSnagShedding'),
+        ('sustainedEnergyFeasibility', 'energyEvidenceReadiness'),
+        ('sustainedEnergyFeasibility', 'peakSupplyCapability'),
+        ('sustainedEnergyFeasibility', 'repeatableCycleBalance'),
+        ('sustainedEnergyFeasibility', 'sustainedReserveProtection'),
+        ('transGorgeChallenge', 'courseCompletion'),
+        ('transGorgeChallenge', 'emergencyIntervention'),
+        ('transGorgeChallenge', 'liveObservation'),
+        ('transGorgeChallenge', 'repeatedOperation'),
+        ('transGorgeChallenge', 'sailingPropulsion'),
+        ('transGorgeChallenge', 'unassistedAttempt'),
     }
-    expected.update([('roundTrip', 'transportability'), ('transportability', 'desktopManufacture'), ('desktopManufacture', 'serviceability'), ('navigationAndControl', 'trafficSafety'), ('roundTrip', 'operatingBoundary'), ('transportability', 'safeRecovery'), ('trafficSafety', 'navigationConspicuity'), ('roundTrip', 'regulatoryClassification'), ('roundTrip', 'environmentalEnvelope'), ('environmentalEnvelope', 'marineDurability'), ('environmentalEnvelope', 'stabilityAndFouling'), ('safeRecovery', 'recoveryPropulsion'), ('recoveryPropulsion', 'recoveryEnergy'), ('communications', 'telemetryEquipment'), ('communications', 'commandIntegrity'), ('hawaiiVoyage', 'environmentalEnvelope')])
-    expected.update([('environmentalEnvelope', 'gorgeEnvironment'), ('environmentalEnvelope', 'oceanEnvironment'), ('gorgeEnvironment', 'gorgeWind'), ('gorgeEnvironment', 'gorgeWaves'), ('gorgeEnvironment', 'gorgeCurrent'), ('gorgeEnvironment', 'gorgeSurvivalWind'), ('gorgeEnvironment', 'gorgeSurvivalWaves'), ('oceanEnvironment', 'oceanWind'), ('oceanEnvironment', 'oceanWaves'), ('oceanEnvironment', 'oceanCurrent'), ('oceanEnvironment', 'oceanSurvivalWind'), ('oceanEnvironment', 'oceanSurvivalWaves'), ('environmentalEnvelope', 'airTemperature'), ('environmentalEnvelope', 'waterTemperature'), ('environmentalEnvelope', 'humidity'), ('environmentalEnvelope', 'visibility'), ('environmentalEnvelope', 'calmOperation'), ('environmentalEnvelope', 'envelopeTransition'), ('marineDurability', 'freshwaterExposure'), ('marineDurability', 'saltwaterExposure'), ('marineDurability', 'enclosureSealing'), ('marineDurability', 'wetMechanicalIntegrity'), ('marineDurability', 'wetElectricalIntegrity'), ('marineDurability', 'solarHeating'), ('marineDurability', 'printedMaterialAging'), ('stabilityAndFouling', 'selfRighting'), ('stabilityAndFouling', 'capsizeControlRecovery'), ('stabilityAndFouling', 'submergedWeedPassage'), ('stabilityAndFouling', 'weedSnagShedding'), ('stabilityAndFouling', 'weedBlockageResponse'), ('stabilityAndFouling', 'recoveryPropulsorWeeds'), ('recoveryPropulsion', 'recoveryPropulsorWeeds')])
-    expected.difference_update([('transportability', 'desktopManufacture'), ('desktopManufacture', 'serviceability'), ('transportability', 'safeRecovery'), ('environmentalEnvelope', 'gorgeEnvironment'), ('environmentalEnvelope', 'oceanEnvironment')])
-    expected.update([('roundTrip', 'desktopManufacture'), ('repeatedOperation', 'serviceability'), ('emergencyIntervention', 'safeRecovery'), ('roundTrip', 'gorgeEnvironment'), ('hawaiiVoyage', 'oceanEnvironment'), ('navigationAndControl', 'navigationAvailability'), ('recoveryEnergy', 'launchEnergyAdmission'), ('sailingPropulsion', 'challengeMotorInhibition'), ('unassistedAttempt', 'challengeMotorInhibition'), ('unassistedAttempt', 'commandIntegrity'), ('emergencyIntervention', 'commandIntegrity'), ('hawaiiVoyage', 'operatingBoundary'), ('hawaiiVoyage', 'regulatoryClassification'), ('hawaiiVoyage', 'serviceability'), ('gorgeEnvironment', 'freshwaterExposure'), ('oceanEnvironment', 'saltwaterExposure'), ('gorgeEnvironment', 'submergedWeedPassage'), ('gorgeEnvironment', 'weedSnagShedding')])
     expected.update((r['parent'], r['usage']) for r in ATOMIC['leaves'])
     expected.update(tuple(edge) for edge in ATOMIC['shared_links'])
-    expected.update(ENERGY_LINKS)
-    expected.update(tuple(edge) for edge in RELIABILITY_LINKS)
     assert set(published_model.edges) == expected
     assert len(published_model.edges) == len(expected)
-    assert len({name for edge in published_model.edges for name in edge}) == 66 + len(ATOMIC['leaves']) + len(ENERGY_IDS) + len(RELIABILITY_IDS)
+
 
 def test_use_case_and_satisfaction_traceability():
     text = native("-render-document", "BlueDogDocuments::Traceability")
@@ -72,9 +110,17 @@ def test_use_case_and_satisfaction_traceability():
     context = native('-render', 'BlueDogArchitectureViews::context', '-render-form', 'dot')
     assert 'OtherVessel' in context
 
-def test_exactly_two_top_level_drivers(published_model):
-    roots = {source for source, _ in published_model.edges} - {target for _, target in published_model.edges}
-    assert roots == {'transGorgeChallenge', 'hawaiiVoyage'}
+def test_mission_drivers_do_not_entail_owner_constraints(published_model):
+    # Two mission goals do not mean every requirement is a logical consequence of them.
+    edges = set(published_model.edges)
+    for constraint in ['transportability', 'desktopManufacture', 'serviceability']:
+        assert not any(child == constraint for _, child in edges)
+    report = native('-render-document', 'BlueDogDocuments::RelationshipRegister')
+    for constraint in ['transportability', 'desktopManufacture', 'serviceability']:
+        assert f'| {constraint} | DesignIntent |' in report
+    assert '| multiDayEndurance | hawaiiVoyage |' in report
+    assert ('sailingPropulsion', 'roundTrip') not in edges
+    assert ('hawaiiVoyage', 'sustainedEnergyFeasibility') not in edges
 
 def test_register_preserves_ids_status_and_relationships(published_model):
     ids = re.findall(r"^\| ([CHEMPNSRQL]-[0-9]+) \|", published_model.markdown, re.MULTILINE)
@@ -101,6 +147,7 @@ def test_register_preserves_ids_status_and_relationships(published_model):
 def test_focused_views_cover_all_derivations(published_model):
     # The full native graph is an oracle only; readers receive bounded views.
     edges = set()
+    refinements = set()
     pages = list(Path('docs/figures').glob('requirements-*.md'))
     assert len(pages) == 49
     assert not Path('docs/figures/requirements-derivation.md').exists()
@@ -113,7 +160,10 @@ def test_focused_views_cover_all_derivations(published_model):
             assert 'flowchart BT' in diagram
             for child, parent in re.findall(r'(n[0-9]+) -\.->\|"derive"\| (n[0-9]+)', diagram):
                 edges.add((nodes[parent], nodes[child]))
+            for detail, abstract in re.findall(r'(n[0-9]+) -\.->\|"refine"\| (n[0-9]+)', diagram):
+                refinements.add((nodes[detail], nodes[abstract]))
     assert edges == set(published_model.edges)
+    assert refinements == {('roundTrip', 'courseCompletion'), ('communications', 'liveObservation')}
 
 
 def test_statements_exclude_supporting_material(published_model):

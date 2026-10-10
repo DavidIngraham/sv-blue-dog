@@ -3,83 +3,54 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>C-003 unassisted attempt</title>
+<title>C-003 UnassistedAttempt relationships</title>
 <link rel="stylesheet" href="sysml-document.css">
 </head>
 <body>
 <article class="sysml-document" data-document="BlueDogDiagramDocuments::UnassistedAttemptRequirements">
-<h1 class="sysml-title">C-003 unassisted attempt</h1>
+<h1 class="sysml-title">C-003 UnassistedAttempt relationships</h1>
 <p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="context"><a class="sysml-link" href="../requirements-context.md">Conditions, rationale and verification</a></p>
 <dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::Statements4">
 <div class="sysml-entry" data-element="GorgeChallenge::UnassistedAttempt" data-element-kind="requirementDef">
 <dt class="sysml-term">C-003 UnassistedAttempt</dt>
 <dd class="sysml-description">A qualifying attempt shall complete the round trip without operator intervention.</dd>
 </div>
-<div class="sysml-entry" data-element="BlueDogRequirements::NavigationAndControl" data-element-kind="requirementDef">
-<dt class="sysml-term">E-002 NavigationAndControl</dt>
-<dd class="sysml-description">The vessel shall provide autonomous navigation and sail/steering control within the selected operational profile.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::ChallengeMotorInhibition" data-element-kind="requirementDef">
-<dt class="sysml-term">R-004 ChallengeMotorInhibition</dt>
-<dd class="sysml-description">The vessel shall prevent motor propulsion from qualifying as unassisted sailing.</dd>
-</div>
-<div class="sysml-entry" data-element="BlueDogRequirements::CommandIntegrity" data-element-kind="requirementDef">
-<dt class="sysml-term">C-102 CommandIntegrity</dt>
-<dd class="sysml-description">The vessel shall accept external commands only under the specified authentication, freshness and qualification rules.</dd>
-</div>
 </dl>
-<section class="sysml-section" id="group1" data-content="section" data-name="group1">
-<h2>C-003 derivation 1</h2>
-<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::unassistedAttempt1" data-diagram-kind="requirement" data-direction="BT">
-<pre class="mermaid">---
-config:
-  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-  theme: base
-  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
-  themeVariables:
-    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
-    fontSize: &#34;14px&#34;
-    primaryColor: &#34;#FFFFFF&#34;
-    secondaryColor: &#34;#FFFFFF&#34;
-    tertiaryColor: &#34;#FFFFFF&#34;
-    background: &#34;#FFFFFF&#34;
-    primaryBorderColor: &#34;#181818&#34;
-    primaryTextColor: &#34;#000000&#34;
-    lineColor: &#34;#181818&#34;
-    textColor: &#34;#000000&#34;
-    noteBkgColor: &#34;#FEFFDD&#34;
-    noteBorderColor: &#34;#181818&#34;
-    noteTextColor: &#34;#000000&#34;
-    clusterBkg: &#34;#FFFFFF&#34;
-    clusterBorder: &#34;#181818&#34;
-    edgeLabelBackground: &#34;#FFFFFF&#34;
----
-%% BlueDogViews::unassistedAttempt1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 230 node(s) without a position, left undrawn, and 450 edge(s) at them
-%% layout: n0 x=0 y=0
-%% layout: n1 x=0 y=200
-%% layout: n2 x=300 y=200
-%% layout: n3 x=600 y=200
-flowchart BT
-  n0(&#34;`*«requirement»*
-**GorgeChallenge::unassistedAttempt : UnassistedAttempt**`&#34;)
-  n1(&#34;`*«requirement»*
-**BlueDogRequirements::navigationAndControl : NavigationAndControl**`&#34;)
-  n2(&#34;`*«requirement»*
-**BlueDogRequirements::challengeMotorInhibition : ChallengeMotorInhibition**`&#34;)
-  n3(&#34;`*«requirement»*
-**BlueDogRequirements::commandIntegrity : CommandIntegrity**`&#34;)
-  n1 -.-&gt;|&#34;derive&#34;| n0
-  n2 -.-&gt;|&#34;derive&#34;| n0
-  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
-</figure>
+<section class="sysml-section" id="basis" data-content="section" data-name="basis">
+<h2>Design decisions motivated by this requirement</h2>
+<p class="sysml-paragraph" data-content="paragraph" data-name="meaning">Plain dependencies record design basis, not derivation or refinement. The native GeneralView renderer does not draw these dependencies; their actual endpoints and rationale are reported here.</p>
+<table class="sysml-table" data-content="table" data-name="entries" data-query="BlueDogDiagramDocuments::DesignBasis4">
+<thead>
+<tr>
+<th scope="col" data-column="Dependent requirement">Dependent requirement</th>
+<th scope="col" data-column="Design basis">Design basis</th>
+<th scope="col" data-column="Rationale">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="sysml-row" data-element="BlueDogRequirements::challengeAutonomy" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::navigationAndControl" data-element-kind="requirementUsage">navigationAndControl</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="GorgeChallenge::unassistedAttempt" data-element-kind="requirementUsage">unassistedAttempt</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">The vessel needs onboard guidance and control to complete an unassisted attempt. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::auditDerivation4" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::challengeMotorInhibition" data-element-kind="requirementUsage">challengeMotorInhibition</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="GorgeChallenge::unassistedAttempt" data-element-kind="requirementUsage">unassistedAttempt</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">No-intervention qualification must survive resets and motor-mode transitions. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+<tr class="sysml-row" data-element="BlueDogRequirements::auditDerivation5" data-element-kind="dependency">
+<td class="sysml-cell" data-column="Dependent requirement" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="BlueDogRequirements::commandIntegrity" data-element-kind="requirementUsage">commandIntegrity</span></td>
+<td class="sysml-cell" data-column="Design basis" data-value-kind="element"><span class="sysml-value sysml-element" data-value-kind="element" data-element="GorgeChallenge::unassistedAttempt" data-element-kind="requirementUsage">unassistedAttempt</span></td>
+<td class="sysml-cell" data-column="Rationale" data-value-kind="string"><span class="sysml-value" data-value-kind="string">Accepted external control changes the attempt qualification; communications alone does not supply this rule. This is design motivation or an implementation choice, not a satisfaction implication.</span></td>
+</tr>
+</tbody>
+</table>
 </section>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-e-002.md">Continue: E-002 navigation and control</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next1"><a class="sysml-link" href="requirements-r-004.md">Continue: R-004 challenge motor inhibition</a></p>
-<p class="sysml-paragraph" data-content="paragraph" data-name="next2"><a class="sysml-link" href="requirements-c-102.md">Continue: C-102 command integrity</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next0"><a class="sysml-link" href="requirements-c-102.md">Continue: C-102 CommandIntegrity</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next1"><a class="sysml-link" href="requirements-r-004.md">Continue: R-004 ChallengeMotorInhibition</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="next2"><a class="sysml-link" href="requirements-e-002.md">Continue: E-002 NavigationAndControl</a></p>
 </article>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({maxTextSize: 1433, maxEdges: 4});</script>
 </body>
 </html>

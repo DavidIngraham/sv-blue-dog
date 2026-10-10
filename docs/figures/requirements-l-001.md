@@ -1,10 +1,10 @@
-# L-001 MissionReliability
+# L-001 MissionReliability relationships
 
 <!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->
 
 [All requirement views](<../requirements-views.md>)
 
-[Qualification conditions, rationale, open issues and verification](<../requirements-context.md>)
+[Conditions, rationale and verification](<../requirements-context.md>)
 
 **L-001 MissionReliability** — The vessel shall preserve mission-critical functions throughout each declared unassisted voyage.
 
@@ -16,7 +16,7 @@
 
 **L-104 CriticalFailureDisposition** — Each identified safety-critical failure mode shall have an accepted disposition before an unassisted launch.
 
-## L-001 derivation 1
+## L-001 relationships 1
 
 ```mermaid
 ---
@@ -43,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionReliability1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 48 node(s) without a position, left undrawn, and 58 edge(s) at them
+%% not represented: 11 node(s) without a position, left undrawn, and 20 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -62,7 +62,7 @@ flowchart BT
   n3 -.->|"derive"| n0
 ```
 
-## L-001 derivation 2
+## L-001 relationships 2
 
 ```mermaid
 ---
@@ -89,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::missionReliability2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 49 node(s) without a position, left undrawn, and 52 edge(s) at them
+%% not represented: 7 node(s) without a position, left undrawn, and 9 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT
