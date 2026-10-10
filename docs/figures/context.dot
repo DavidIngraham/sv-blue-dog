@@ -1,0 +1,19 @@
+// view: BlueDogArchitectureViews::context
+// kind: interconnection
+// stated: render Views::asInterconnectionDiagram
+// layout: dot
+digraph "BlueDogArchitectureViews::context" {
+  graph [fontname="Helvetica"];
+  node [shape=box, style=filled, fillcolor=white, color="#181818", fontname="Helvetica", fontsize=14, penwidth=0.5];
+  edge [color="#181818", fontname="Helvetica", fontsize=13, penwidth=1];
+  subgraph "cluster_n0" {
+    label=<<font point-size="10"><i>«part»</i></font><br/><b>missionContext</b>>;
+    color=black;
+    penwidth=0.5;
+    "n0" [shape=point, style=invis, width=0, height=0, label=""];
+    "n1" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>boat : Boat</b>>];
+    "n2" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>operator : Operator</b>>];
+    "n3" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>shoreSupport : ShoreSupport</b>>];
+    "n4" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>environment : Environment</b>>];
+  }
+}

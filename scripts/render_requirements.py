@@ -14,7 +14,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = tuple(ROOT / "models" / name for name in (
     "challenge.sysml", "blue-dog.sysml", "requirements.sysml",
-    "requirements-view.sysml", "requirements-document.sysml"))
+    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml"))
 
 
 def native(*arguments, models=MODELS):
@@ -44,6 +44,9 @@ def main():
     native("-validate")
     outputs = {ROOT / "docs/figures/requirements-derivation.dot": native_graph(),
                ROOT / "docs/requirements-register.md": native_register()}
+    for name in ("architecture", "context"):
+        outputs[ROOT / f"docs/figures/{name}.dot"] = native(
+            "-render", f"BlueDogArchitectureViews::{name}", "-render-form", "dot")
     for path, content in outputs.items():
         if args.check:
             if not path.exists() or path.read_text(encoding="utf-8") != content:
@@ -64,6 +67,11 @@ def main():
         layout = layout.rstrip().removesuffix("}") + '\n{ rank=sink; ' + '; '.join(roots) + '; }\n}\n'
         for extension in ("svg", "png"):
             subprocess.run([dot, "-Grankdir=BT", f"-T{extension}", "-o", str(source_path.with_suffix('.' + extension))], input=layout, text=True, encoding="utf-8", check=True)
+        for name in ("architecture", "context"):
+            source = ROOT / f"docs/figures/{name}.dot"
+            for extension in ("svg", "png"):
+                subprocess.run([dot, f"-T{extension}", str(source), "-o",
+                                str(source.with_suffix("." + extension))], check=True)
     print("Native model validation and document generation passed; satisfaction is not evaluated.")
 
 

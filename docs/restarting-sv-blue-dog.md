@@ -36,6 +36,10 @@ The electronics sketch separates the autopilot, communications, AIS, and air-dat
 
 The detailed candidate parts are in the [project notes](project-status.md). What interests me now is how those pieces fit together: what information the boat needs to sail, how it uses that information, and how much energy it takes to keep the whole system running. The hardware list was a starting point for that work.
 
+The current [logical architecture](architecture.md) captures the boat's subsystem responsibilities alongside its operator, shore support, and environment. Interfaces are the next layer to define.
+
+![SV Blue Dog logical subsystems](figures/architecture.svg)
+
 ## Could it do something useful while it was out there?
 
 I also liked the possibility of collecting interesting data. One idea was a persistent swell monitor: could the boat keep station in an area and measure conditions over time?
