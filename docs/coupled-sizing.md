@@ -53,3 +53,6 @@ The STEP contains a printed/ribbed 300 mm segment, not a complete boat wing. [Ex
 The [full-angle diagnostic](hydrostatics.md) now computes native SysML immersed volumes and gravity/buoyancy moments, with numerical heave and pitch equilibrium. It exposes a recovery sensitivity to wing buoyancy that the old CG screen misses. The next solve must use geometry-consistent mass and explicit flooded/retained-water cases; the diagnostic has not yet replaced the historical solver's stability constraints.
 
 [wing-actuator.sysml](../models/wing-actuator.sysml) separates output-shaft torque, motor and gearbox efficiencies, moving duty, powered holding and controller consumption. Its accounting example verifies arithmetic only; it is not a selected actuator or a mission energy estimate. These functions still need to be connected to the candidate-specific aerodynamic moments in the coupled search.
+
+The [generated coupled-input report](coupled-inputs.md) records the current geometry-consistent native mass replay and bounded VSPAERO response grid. These replace input approximations for the next solver; they do not yet establish a feasible vessel.
+
