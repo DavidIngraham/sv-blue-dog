@@ -68,3 +68,18 @@ uv run python scripts/render_requirements.py --check
 When preparing on Windows and solving in WSL, use a separate uv environment such as `UV_PROJECT_ENVIRONMENT=.tools/solver-venv`; never reuse the Windows `.venv` binaries in Linux. Both use `uv.lock`. The C source, shared library, exported contract and environments remain ignored in `.tools/`. The ABI adapter copies outputs before the next native call and serializes runtime access.
 
 The search record includes normalized source hashes, dependency lock, renderer pin and driver hashes. Changes to these inputs require preparation and a new search; the publisher refuses stale results. Publishing replays the saved candidates but does not silently launch a new optimization. Test the C adapter in Linux; Windows pytest explicitly skips that adapter test file while still comparing saved compiled results against native interpretation. Read [the search method and limitations](../docs/design-search.md) before interpreting numerical feasibility as design evidence.
+
+### Hull-length sensitivity
+
+`hull-length-study.sysml` removes only the exploratory length cap, using the mass-implied ceiling while retaining the original physics and other bounds. Its saved subjects and native document are loaded explicitly by the publisher; they do not change baseline search inputs.
+
+After preparing the base C kernel, run the study preparation with the native CLI, the search in Linux/GCC, then publication with the native CLI:
+
+```sh
+uv run python -m scripts.study_hull_length --prepare
+uv run python -m scripts.study_hull_length --starts 5 --sweep-starts 3 --budget 350
+uv run python -m scripts.study_hull_length --publish
+uv run python scripts/render_requirements.py
+```
+
+The free-length studies minimize length only if a numerically feasible candidate exists; otherwise they retain the best progress found. Fixed-length cases vary the remaining design and trim values. Both the original result hash and the study sources are checked before publishing the comparison.

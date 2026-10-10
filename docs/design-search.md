@@ -60,3 +60,19 @@ The selected candidates sit on several declared limits, including wing height, h
 The next useful evidence is a resistance curve for candidate hulls and a credible low-Re wing polar. Then we can test sensitivity to hull/wing limits, current exposure and the planning speed allowance. The current's spatial and temporal variation needs a route study; changing a constant in this screen would not establish that a route is navigable. We should retain the failed cases as regression examples for any future OpenSysML nonlinear-optimization integration.
 
 Run instructions are in the [modeling guide](../models/README.md#coupled-design-search).
+
+## Does a longer hull solve it?
+
+Removing the exploratory 3.5 m waterline-length cap did **not** recover mission feasibility. Five starts for each free-length study returned to the same best lengths: about 2.02 m for the broader scenario set and 2.89 m for nominal 5 m/s wind. Those lengths are already below the old cap. No feasible candidate was found, so there is no supported minimum mission-achieving length to report.
+
+The study changes only the length search domain; it reoptimizes the other dimensions and trim within their existing bounds. It retains the handling, rig, appendage, energy and progress constraints. Instead of an arbitrary larger cap, it uses a ceiling implied by the current shell-mass model: body mass is at least `2 × skin areal mass × length × beam`. The 15 kg body limit, 1.2 kg/m² skin assumption and 0.20 m minimum beam give a generous 31.25 m ceiling. Other component masses tighten that limit. This is a search-domain bound, not a recommendation for a 31 m vessel.
+
+![Native replay of the hull-length sensitivity study](figures/hull-length.png)
+
+To check for missed longer-hull solutions, three starts also reoptimized each of six fixed lengths under nominal wind. The [native replay table](hull-length-results.md) reports the selected results. Worst upstream VMG deteriorates from roughly −0.42 m/s at 3.5 m to −0.46 at 5 m, −0.58 at 8 m, −0.70 at 12 m and −1.18 at 20 m. All remain below the +0.50 m/s target. These are local search results, not a mathematical infeasibility proof.
+
+Length reduces the model's wave-resistance term at a given speed, but adds wetted surface and shell mass. At long lengths, the retained handling limit also restricts the remaining hardware budget; the 20 m candidate reaches the body-mass limit with a much smaller wing. The simplified shell and resistance assumptions are being extrapolated here; they do not include a structural stiffness or hull-form design analysis.
+
+The useful conclusion is that **length alone is not the limiting design allowance in this model**. A next design-space experiment should investigate rig area and height together with stability, alongside validation of hull resistance and the wing polar. Simply making the hull longer does not close the modeled progress gap.
+
+The [study definition](../models/hull-length-study.sysml), [reproducible search record](analysis/hull-length.json) and [native audit](analysis/hull-length-audit.json) preserve this comparison separately from the original search.

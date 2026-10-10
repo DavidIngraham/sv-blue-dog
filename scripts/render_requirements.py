@@ -134,6 +134,11 @@ def main():
     outputs[ROOT / "docs/analysis/design-search-audit.json"] = audit
     outputs[ROOT / "docs/design-search-results.md"] = native("-render-document", "BlueDogDesignSearchDocuments::SearchReport")
     outputs[ROOT / "docs/figures/design-search.png"] = search_figure(audit, search)
+    try:
+        from .study_hull_length import publication_outputs
+    except ImportError:
+        from study_hull_length import publication_outputs
+    outputs.update(publication_outputs())
     diagrams = {}
     # Compile the model once per format, rather than once for every view.
     with tempfile.TemporaryDirectory(dir=ROOT / ".tools", prefix="documents-") as scratch:
