@@ -1,0 +1,204 @@
+{
+  "status": "holds",
+  "exit": 0,
+  "checks": [
+    {
+      "subject": "RecoveryPropulsionTrade::RecoverySizing",
+      "status": "holds",
+      "values": [
+        {
+          "name": "idealPower",
+          "value": "10.125742828579597 [W]"
+        },
+        {
+          "name": "electricalPower",
+          "value": "20.251485657159193 [W]"
+        },
+        {
+          "name": "requiredReserve",
+          "value": "130143.20901946386 [SI::J]"
+        },
+        {
+          "name": "reserveMargin",
+          "value": "229856.79098053614 [J]"
+        },
+        {
+          "name": "energyFits",
+          "value": "true"
+        },
+        {
+          "name": "qualificationEvidenceComplete",
+          "value": "false"
+        },
+        {
+          "name": "modeledGatesMet",
+          "value": "false"
+        },
+        {
+          "name": "objective sizingObjective",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ RecoveryPropulsionTrade::RecoverySizing on object #1 of \"RecoveryPropulsionTrade::waterExample\"",
+        "  idealPower = 10.125742828579597 [W]",
+        "  electricalPower = 20.251485657159193 [W]",
+        "  requiredReserve = 130143.20901946386 [SI::J]",
+        "  reserveMargin = 229856.79098053614 [J]",
+        "  energyFits = true",
+        "  qualificationEvidenceComplete = false",
+        "  modeledGatesMet = false",
+        "  objective sizingObjective: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "RecoveryPropulsionTrade::RecoverySizing",
+      "status": "holds",
+      "values": [
+        {
+          "name": "idealPower",
+          "value": "48.79913294493845 [W]"
+        },
+        {
+          "name": "electricalPower",
+          "value": "97.5982658898769 [W]"
+        },
+        {
+          "name": "requiredReserve",
+          "value": "297212.2543221341 [SI::J]"
+        },
+        {
+          "name": "reserveMargin",
+          "value": "62787.745677865925 [J]"
+        },
+        {
+          "name": "energyFits",
+          "value": "true"
+        },
+        {
+          "name": "qualificationEvidenceComplete",
+          "value": "false"
+        },
+        {
+          "name": "modeledGatesMet",
+          "value": "false"
+        },
+        {
+          "name": "objective sizingObjective",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ RecoveryPropulsionTrade::RecoverySizing on object #2 of \"RecoveryPropulsionTrade::airExample\"",
+        "  idealPower = 48.79913294493845 [W]",
+        "  electricalPower = 97.5982658898769 [W]",
+        "  requiredReserve = 297212.2543221341 [SI::J]",
+        "  reserveMargin = 62787.745677865925 [J]",
+        "  energyFits = true",
+        "  qualificationEvidenceComplete = false",
+        "  modeledGatesMet = false",
+        "  objective sizingObjective: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "output": [
+    "✓ package GorgeChallenge",
+    "✓ package BlueDog",
+    "✓ package BlueDogRequirements",
+    "✓ package BlueDogViews",
+    "✓ package BlueDogDocuments",
+    "✓ package BlueDogArchitectureViews",
+    "✓ package BlueDogUseCases",
+    "✓ package BlueDogUseCaseViews",
+    "✓ package BlueDogSatisfaction",
+    "✓ package RecoveryPropulsionTrade",
+    "✓ Created instance of RecoveryPropulsionTrade::waterExample",
+    "  ID: 1",
+    "  Use %features RecoveryPropulsionTrade::waterExample to inspect",
+    "✓ Created instance of RecoveryPropulsionTrade::airExample",
+    "  ID: 2",
+    "  Use %features RecoveryPropulsionTrade::airExample to inspect"
+  ],
+  "errors": null
+}

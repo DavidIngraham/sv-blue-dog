@@ -329,6 +329,14 @@ package BlueDogRequirements {
         end #derive target ::> recoveryPropulsion;
     }
 
+    calc def RecoveryReserveDemand {
+        doc /* R-002 reserve policy: 30 minutes motor operation plus two hours essential loads, with a 20 percent allowance. Powers are non-overlapping electrical demands. */
+        in motorPower : PowerValue;
+        in essentialPower : PowerValue;
+        return reserve : EnergyValue;
+        1.2 * (motorPower * 1800 [s] + essentialPower * 7200 [s])
+    }
+
     requirement def <'R-002'> RecoveryEnergy {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* Before starting an attempt, conservative usable battery energy shall exceed a protected reserve of at least 1.2 times the sum of 30 minutes of measured worst-case electrical motor power in the R-001 recovery test and 2 hours of essential navigation/control/recording/telemetry electrical power. Motor and essential power shall be separate, non-overlapping measurements. Throughout the attempt, reserve crossing shall trigger E-004. Acceptance shall evaluate the energy inequality using measured usable battery energy at the lowest operating battery temperature and end-of-service capacity. */
@@ -337,7 +345,7 @@ package BlueDogRequirements {
         attribute reserveEnergy : EnergyValue;
         require constraint reserveSizing {
             motorPower > 0 [W] and essentialPower > 0 [W] and
-            reserveEnergy >= 1.2 * (motorPower * 1800 [s] + essentialPower * 7200 [s])
+            reserveEnergy >= RecoveryReserveDemand(motorPower, essentialPower)
         }
     }
     requirement recoveryEnergy : RecoveryEnergy;
