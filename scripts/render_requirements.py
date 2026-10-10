@@ -17,15 +17,21 @@ except ImportError:  # Direct script invocation
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = ROOT / "models/requirements.sysml"
+CHALLENGE = ROOT / "models/challenge.sysml"
 MATURITIES = {"CONFIRMED INTENT", "LEGACY INTENT", "PROPOSED"}
 
 
 def load_model(source):
     """Reject engine diagnostics before consuming a potentially partial model."""
-    model = opensysml.loads(source)
+    model = (opensysml.parse_sources(source) if isinstance(source, list)
+             else opensysml.loads(source))
     if not model.ok:
         raise ValueError("OpenSysML model errors: " + "; ".join(map(str, model.errors)))
     return model
+
+
+def project_sources():
+    return [(path.name, path.read_text(encoding="utf-8-sig")) for path in (CHALLENGE, MODEL)]
 
 
 def extract(source):
@@ -60,7 +66,10 @@ def extract(source):
 
     scope = single([e for e in elements if e["@type"] == "Package"
                     and e.get("declaredName") == "Requirements"], "Requirements package")
-    children = members(scope)
+    challenge_scopes = [e for e in elements if e["@type"] == "Package"
+                        and e.get("qualifiedName") == "GorgeChallenge"]
+    children = [member for package in challenge_scopes + [scope]
+                for member in members(package)]
     if any(e["@type"] == "Package" for e in children):
         raise ValueError("Nested requirement packages are not supported by this renderer")
     definitions, requirements, edges = {}, {}, []
@@ -147,7 +156,7 @@ def native_graph():
     if not binary.exists():
         raise SystemExit("Run uv run python scripts/install_renderer.py first.")
     result = subprocess.run(
-        [str(binary), str(MODEL), str(ROOT / "models/requirements-view.sysml"),
+        [str(binary), str(CHALLENGE), str(MODEL), str(ROOT / "models/requirements-view.sysml"),
          "-render", "BlueDogViews::requirements", "-render-form", "dot"],
         check=True, capture_output=True, text=True, encoding="utf-8")
     if result.stderr:
@@ -158,7 +167,7 @@ def native_graph():
 
 
 def table(requirements, edges):
-    lines = ["# Requirement derivation register", "", "Generated from `models/requirements.sysml`; edit the model and regenerate.", "", "## Requirements", "", "| ID | Requirement | Maturity | Statement |", "| --- | --- | --- | --- |"]
+    lines = ["# Requirement derivation register", "", "Generated from `models/challenge.sysml` and `models/requirements.sysml`; edit the models and regenerate. C-IDs identify challenge rules; M/E-IDs identify vehicle requirements.", "", "## Requirements", "", "| ID | Requirement | Maturity | Statement |", "| --- | --- | --- | --- |"]
     for req in requirements.values():
         lines.append(f'| {req["id"]} | {req["name"]} | {req["status"]} | {req["statement"].replace("|", "&#124;")} |')
     lines += ["", "## Proposed derivations", "", "Direction: original requirement to derived requirement. These relationships record design reasoning, not proof of satisfaction.", "", "| Original | Derived | Rationale |", "| --- | --- | --- |"]
@@ -171,8 +180,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Check model-derived DOT and register freshness without rendering")
     args = parser.parse_args()
-    source = MODEL.read_text(encoding="utf-8-sig")
-    requirements, edges = extract(source)
+    requirements, edges = extract(project_sources())
     # Analyze the mission/architecture through the same OpenSysML runtime.
     load_model((ROOT / "models/blue-dog.sysml").read_text(encoding="utf-8-sig"))
     outputs = {ROOT / "docs/figures/requirements-derivation.dot": native_graph(),

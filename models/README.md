@@ -1,6 +1,6 @@
 # Learning SysML v2 through SV Blue Dog
 
-Start with [blue-dog.sysml](blue-dog.sysml), [requirements.sysml](requirements.sysml) and the [mission decision record](../docs/mission-and-requirements.md).
+Start with the independent [challenge.sysml](challenge.sysml) and [challenge brief](../docs/challenge-brief.md), then [blue-dog.sysml](blue-dog.sysml), [requirements.sysml](requirements.sysml) and the [mission decision record](../docs/mission-and-requirements.md).
 
 The textual model is the editable architecture source in Git. It currently contains mission action decomposition, a logical parts hierarchy, and textual requirement definitions/usages. It is a discussion model, not a complete executable mission or verified design.
 
@@ -52,7 +52,10 @@ The renderer writes SVG, PNG, and DOT to `docs/figures/` and the readable requir
 ## Native requirements view
 
 `requirements-view.sysml` declares `BlueDogViews::requirements` as an OMG
-`GeneralView` filtered to requirement usages. OpenSysML selects the nodes and
+`GeneralView` filtered to requirement usages. It exposes both the independent
+`GorgeChallenge` package and the vehicle requirements. `requirements.sysml` imports
+`GorgeChallenge`; the tooling loads both source files together, resolving cross-file
+derivation endpoints. The challenge can also be analyzed by itself. OpenSysML selects the nodes and
 relationships and writes DOT; Python no longer constructs diagram nodes or edges.
 Graphviz converts that unmodified DOT to SVG/PNG with a left-to-right layout.
 
@@ -65,7 +68,7 @@ for this migration. Nothing is installed globally and no moving nightly tag is u
 The Python client and its analysis service remain pinned to 0.9.2 for register generation.
 
 Native dashed `derive` arrows point **from derived to original**, opposite the earlier
-custom diagram convention. All nine nodes and eight relationships are regression-checked
+custom diagram convention. All fifteen nodes and fourteen relationships are regression-checked
 against the source model. Maturity and short IDs remain in the linked register; the
 native diagram uses its default monochrome style without our former maturity colors.
 The renderer reports two exposed standard-library elements as intentionally not drawn.

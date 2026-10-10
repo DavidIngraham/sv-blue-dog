@@ -1,7 +1,7 @@
 import unittest
 import re
 
-from scripts.render_requirements import extract, MODEL, native_graph
+from scripts.render_requirements import extract, MODEL, CHALLENGE, native_graph, project_sources, load_model
 
 
 BASE = """package Requirements {
@@ -20,9 +20,10 @@ BASE = """package Requirements {
 
 class DerivationTests(unittest.TestCase):
     def test_native_diagram_preserves_all_derivations(self):
-        requirements, edges = extract(MODEL.read_text(encoding="utf-8-sig"))
+        requirements, edges = extract(project_sources())
         dot = native_graph()
-        nodes = dict(re.findall(r'"(n[0-9]+)" \[.*?<b>([A-Za-z0-9_]+) :', dot))
+        nodes = dict(re.findall(r'"(n[0-9]+)" \[.*?<b>([A-Za-z0-9_:]+) :', dot))
+        nodes = {key: name.rsplit("::", 1)[-1] for key, name in nodes.items()}
         self.assertEqual(set(nodes.values()), set(requirements))
         links = re.findall(r'"(n[0-9]+)" -> "(n[0-9]+)" \[label="derive"', dot)
         # Native notation points from derived to original.
@@ -31,15 +32,27 @@ class DerivationTests(unittest.TestCase):
         self.assertEqual(len(links), len(edges))
 
     def test_project_model_preserves_complete_graph(self):
-        requirements, edges = extract(MODEL.read_text(encoding="utf-8-sig"))
+        requirements, edges = extract(project_sources())
         self.assertEqual({r["id"] for r in requirements.values()},
-                         {"M-001", "M-002", *(f"E-00{i}" for i in range(1, 8))})
+                         {"M-001", "M-002", *(f"E-00{i}" for i in range(1, 8)), *(f"C-00{i}" for i in range(1, 7))})
         self.assertEqual({(e["source"], e["target"]) for e in edges}, {
+            ("courseCompletion", "roundTrip"), ("repeatedOperation", "multiDayEndurance"),
+            ("unassistedAttempt", "navigationAndControl"), ("sailingPropulsion", "roundTrip"),
+            ("liveObservation", "communications"), ("emergencyIntervention", "communications"),
             ("roundTrip", "navigationAndControl"), ("roundTrip", "resetRecovery"),
             ("roundTrip", "communications"), ("roundTrip", "ingressResponse"),
             ("roundTrip", "missionEvidence"), ("multiDayEndurance", "energyAwareness"),
             ("multiDayEndurance", "lowEnergyRecovery"), ("energyAwareness", "lowEnergyRecovery"),
         })
+
+    def test_challenge_is_independent_of_vehicle(self):
+        source = CHALLENGE.read_text(encoding="utf-8-sig")
+        self.assertTrue(load_model(source).ok)
+        self.assertNotIn("BlueDog", source)
+
+    def test_vehicle_import_needs_challenge(self):
+        with self.assertRaises(ValueError):
+            load_model(MODEL.read_text(encoding="utf-8-sig"))
 
     def test_duplicate_requirement_id_fails(self):
         with self.assertRaisesRegex(ValueError, "Duplicate"):

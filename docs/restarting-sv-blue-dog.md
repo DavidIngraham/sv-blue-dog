@@ -44,9 +44,13 @@ That adds another question to the journey. Completing a course gives the robot a
 
 ## Using SysML v2 to work through the requirements
 
-Learning SysML v2 is now another goal for the project. I want to use it to decompose the mission and connect the electronics requirements back to the reasons for them. I started with sysmlpy, which I have been using at work. Exploring requirement derivation led me further into the language and its standard libraries. I am now moving the project to OpenMBEE’s OpenSysML implementation so I can build toward executable models as well as diagrams. The current mission and requirements are still a discussion model; they do not yet demonstrate that the boat can complete the mission.
+Learning SysML v2 is now another goal for the project. I want to use it to decompose the mission and connect the electronics requirements back to the reasons for them. I started with sysmlpy, which I have been using at work. Exploring requirement derivation led me further into the language and its standard libraries. I am now moving the project to OpenMBEE's OpenSysML implementation so I can build toward executable models as well as diagrams. The current mission and requirements are still a discussion model; they do not yet demonstrate that the boat can complete the mission.
 
-The first derivation view starts with the Bonneville-to-The-Dalles round trip and multi-day endurance with energy harvesting. The native OpenSysML diagram shows proposed derivations, with arrows pointing from each derived requirement back to its original. The linked register distinguishes confirmed intent, older requirements, and new proposals. None of these links establishes that the boat satisfies a requirement.
+The challenge is becoming more concrete: sail from The Dalles to Bonneville and back without intervention. One round trip is the threshold; keeping the boat going for repeated trips is the objective. I want to watch it live, but it needs to keep sailing if the monitoring link drops. The longer-term ambition is a voyage to Hawai'i, with the Gorge serving as a torture test for the system.
+
+I have separated the [challenge brief](challenge-brief.md) from the vehicle design. Its own SysML file defines what counts, and the boat requirements import it. That lets me work on how to build Blue Dog without quietly changing the challenge to fit the design. Microtransat remains the inspiration for the brief. An auxiliary motor can help during testing, but motor propulsion will not count toward a qualifying attempt.
+
+The native OpenSysML diagram shows proposed derivations from those challenge rules into vehicle requirements, with arrows pointing from each derived requirement back to its original. The linked register distinguishes confirmed intent, older requirements, and new proposals. None of these links establishes that the boat satisfies a requirement.
 
 ![SV Blue Dog requirement derivation](figures/requirements-derivation.svg)
 

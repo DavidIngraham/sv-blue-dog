@@ -4,6 +4,7 @@ A small sailing-robot project balancing efficiency, reliability, and ease of man
 
 The recovered December 2023 brief describes a one-metre monohull with a printable hull, ballasted fin keel, low-power electronics, and self-righting and failure-recovery goals. These are design intentions; build and test status still need documenting.
 
+- [Independent Gorge challenge brief](docs/challenge-brief.md)
 - [Mission and requirements](docs/mission-and-requirements.md)
 - [Requirements derivation diagram](docs/mission-and-requirements.md#requirement-derivation)
 - [SysML v2 architecture and learning guide](models/README.md)

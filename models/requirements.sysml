@@ -1,18 +1,12 @@
 package BlueDog {
     package Requirements {
         private import RequirementDerivation::*;
+        private import GorgeChallenge::*;
         requirement def <'M-001'> RoundTrip {
-            doc /* CONFIRMED INTENT: Threshold: The vessel shall complete an autonomous
-             * sailing journey from The Dalles to Bonneville and back to The Dalles.
-             * Objective: After the first round trip, the vessel shall autonomously
-             * repeat The Dalles-Bonneville-The Dalles route for as long as practical.
-             * No fixed objective endurance duration is specified.
-             * A qualifying round trip shall be completed without operator intervention.
-             * Live operator monitoring shall be available without directing the vessel.
-             * Use of a remote emergency override shall disqualify that attempt
-             * as an unassisted round trip.
-             * Exact endpoints, completion criteria, termination conditions, and
-             * monitoring coverage and update interval remain to be agreed.
+            doc /* CONFIRMED INTENT: SV Blue Dog shall complete the imported Gorge
+             * challenge threshold and pursue its repeated-operation objective,
+             * observing the imported autonomy, propulsion, monitoring, and emergency
+             * intervention rules. Challenge rules are owned by challenge.sysml.
              */
         }
         requirement def <'M-002'> MultiDayEndurance {
@@ -80,6 +74,37 @@ package BlueDog {
         requirement communications : Communications;
         requirement ingressResponse : IngressResponse;
         requirement missionEvidence : MissionEvidence;
+
+        #derivation connection challengeCourse {
+            doc /* PROPOSED: The vehicle mission implements the independently defined challenge course. */
+            end #original source ::> GorgeChallenge::courseCompletion;
+            end #derive target ::> roundTrip;
+        }
+        #derivation connection challengeEndurance {
+            doc /* PROPOSED: Repeated autonomous journeys motivate the existing endurance and harvesting requirement; quantitative sizing remains open. */
+            end #original source ::> GorgeChallenge::repeatedOperation;
+            end #derive target ::> multiDayEndurance;
+        }
+        #derivation connection challengeAutonomy {
+            doc /* PROPOSED: The vessel needs onboard guidance and control to complete an unassisted attempt. */
+            end #original source ::> GorgeChallenge::unassistedAttempt;
+            end #derive target ::> navigationAndControl;
+        }
+        #derivation connection challengePropulsion {
+            doc /* PROPOSED: Vehicle challenge operation excludes auxiliary motor propulsion; powered development tests are separate. */
+            end #original source ::> GorgeChallenge::sailingPropulsion;
+            end #derive target ::> roundTrip;
+        }
+        #derivation connection challengeMonitoring {
+            doc /* PROPOSED: Vehicle communications implement live observation and outage data retention. */
+            end #original source ::> GorgeChallenge::liveObservation;
+            end #derive target ::> communications;
+        }
+        #derivation connection challengeOverride {
+            doc /* PROPOSED: Vehicle communications provide emergency commands whose use ends attempt qualification. */
+            end #original source ::> GorgeChallenge::emergencyIntervention;
+            end #derive target ::> communications;
+        }
 
         // Proposed derivations: direction is original requirement to derived requirement.
         #derivation connection roundTripNavigation {

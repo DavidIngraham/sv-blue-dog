@@ -1,12 +1,18 @@
 # Requirement derivation register
 
-Generated from `models/requirements.sysml`; edit the model and regenerate.
+Generated from `models/challenge.sysml` and `models/requirements.sysml`; edit the models and regenerate. C-IDs identify challenge rules; M/E-IDs identify vehicle requirements.
 
 ## Requirements
 
 | ID | Requirement | Maturity | Statement |
 | --- | --- | --- | --- |
-| M-001 | RoundTrip | CONFIRMED INTENT | Threshold: The vessel shall complete an autonomous sailing journey from The Dalles to Bonneville and back to The Dalles. Objective: After the first round trip, the vessel shall autonomously repeat The Dalles-Bonneville-The Dalles route for as long as practical. No fixed objective endurance duration is specified. A qualifying round trip shall be completed without operator intervention. Live operator monitoring shall be available without directing the vessel. Use of a remote emergency override shall disqualify that attempt as an unassisted round trip. Exact endpoints, completion criteria, termination conditions, and monitoring coverage and update interval remain to be agreed. |
+| C-001 | CourseCompletion | CONFIRMED INTENT | Threshold: Complete a journey from The Dalles to Bonneville and back to The Dalles. Exact start/finish and turnaround gates, permitted corridor, and crossing evidence remain to be agreed. |
+| C-002 | RepeatedOperation | CONFIRMED INTENT | Objective beyond the first completed round trip: repeat The Dalles-Bonneville-The Dalles autonomously for as long as practical. No fixed objective endurance duration has been selected. |
+| C-003 | UnassistedAttempt | CONFIRMED INTENT | A qualifying attempt shall complete the round trip without operator intervention. Passive live monitoring is permitted. Any use of remote emergency abort or manual control disqualifies the attempt as unassisted. Restart criteria remain to be agreed. |
+| C-004 | SailingPropulsion | CONFIRMED INTENT | A qualifying challenge attempt shall use sailing propulsion without auxiliary motor propulsion. Auxiliary motor use is allowed during development tests, which do not count as challenge attempts. Motor use during an attempt prevents it from qualifying. Whether a disabled motor may remain installed remains to be agreed. The restriction concerns propulsion, not electrical power for onboard systems. |
+| C-005 | LiveObservation | CONFIRMED INTENT | Live monitoring shall be available to the operator. Monitoring-link loss shall not interrupt autonomous mission execution. Telemetry shall be retained onboard and transmitted when contact returns. Coverage, update rate, retained data, and outage retention duration are open. |
+| C-006 | EmergencyIntervention | CONFIRMED INTENT | Provide remote emergency abort or manual control when a command link is available. Use disqualifies the attempt as unassisted. Emergency abort behavior and the subsequent recovery procedure are open. |
+| M-001 | RoundTrip | CONFIRMED INTENT | SV Blue Dog shall complete the imported Gorge challenge threshold and pursue its repeated-operation objective, observing the imported autonomy, propulsion, monitoring, and emergency intervention rules. Challenge rules are owned by challenge.sysml. |
 | M-002 | MultiDayEndurance | CONFIRMED INTENT | The boat shall support multi-day missions using onboard energy storage and energy harvesting. Duration, harvest conditions, and energy reserve TBD. |
 | E-001 | EnergyAwareness | PROPOSED | Estimate available energy and manage electrical loads so recovery functions retain an agreed reserve. Estimation accuracy, reserve, and load priorities TBD. |
 | E-002 | NavigationAndControl | PROPOSED | Acquire navigation and sailing observations, execute mission guidance, and command sail/steering actuators. Accuracy, rates, actuation interfaces, and envelope TBD. |
@@ -22,6 +28,12 @@ Direction: original requirement to derived requirement. These relationships reco
 
 | Original | Derived | Rationale |
 | --- | --- | --- |
+| C-001 | M-001 | PROPOSED: The vehicle mission implements the independently defined challenge course. |
+| C-002 | M-002 | PROPOSED: Repeated autonomous journeys motivate the existing endurance and harvesting requirement; quantitative sizing remains open. |
+| C-003 | E-002 | PROPOSED: The vessel needs onboard guidance and control to complete an unassisted attempt. |
+| C-004 | M-001 | PROPOSED: Vehicle challenge operation excludes auxiliary motor propulsion; powered development tests are separate. |
+| C-005 | E-005 | PROPOSED: Vehicle communications implement live observation and outage data retention. |
+| C-006 | E-005 | PROPOSED: Vehicle communications provide emergency commands whose use ends attempt qualification. |
 | M-001 | E-002 | PROPOSED: Autonomous completion of the route needs observations, guidance, and actuation. |
 | M-001 | E-003 | PROPOSED: A reset during an autonomous journey must not leave mission behavior undefined. |
 | M-001 | E-005 | PROPOSED: Mission supervision and recovery need an agreed operator communication policy. |
