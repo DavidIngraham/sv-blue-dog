@@ -3,16 +3,21 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import opensysml
 
+try:
+    from .install_renderer import binary_path
+except ImportError:  # Direct script invocation
+    from install_renderer import binary_path
+
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = ROOT / "models/requirements.sysml"
-COLORS = {"CONFIRMED INTENT": "#dbeafe", "LEGACY INTENT": "#fef3c7", "PROPOSED": "#e2e8f0"}
+MATURITIES = {"CONFIRMED INTENT", "LEGACY INTENT", "PROPOSED"}
 
 
 def load_model(source):
@@ -66,7 +71,7 @@ def extract(source):
         if not name or not short_id:
             raise ValueError("Every requirement definition needs a short ID and name")
         status, separator, statement = documentation(definition).partition(": ")
-        if not separator or status not in COLORS:
+        if not separator or status not in MATURITIES:
             raise ValueError(f"Unknown requirement maturity: {name}")
         if any(d["id"] == short_id or d["name"] == name for d in definitions.values()):
             raise ValueError(f"Duplicate definition name or ID: {name}")
@@ -136,20 +141,20 @@ def extract(source):
     return requirements, edges
 
 
-def graph(requirements, edges):
-    lines = ['digraph Requirements {',
-             'graph [rankdir=LR, bgcolor="white", pad=0.3, nodesep=0.3, ranksep=0.8,',
-             ' fontname="Arial", fontsize=18, labelloc=t, label="SV Blue Dog | Requirement derivation"];',
-             'node [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, color="#475569", margin="0.18,0.12"];',
-             'edge [color="#64748b", style=dashed, arrowsize=0.7];']
-    for name, req in requirements.items():
-        title = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", req["name"])
-        label = f'{req["id"]} | {title}\n{req["status"].lower()}'
-        lines.append(f'{json.dumps(name)} [label={json.dumps(label)}, fillcolor="{COLORS[req["status"]]}"];')
-    for edge in edges:
-        lines.append(f'{json.dumps(edge["source"])} -> {json.dumps(edge["target"])} [tooltip={json.dumps(edge["rationale"])}];')
-    lines.append('labelloc=b; label="SV Blue Dog | Requirement derivation\\nDashed arrows: original to derived requirement (all links proposed)\\nBlue: confirmed intent | Amber: legacy intent | Gray: proposed\\nIntent is not verification; acceptance thresholds remain open";\n}')
-    return "\n".join(lines) + "\n"
+def native_graph():
+    """Return native DOT unchanged; OpenSysML selects nodes and relationships."""
+    binary = binary_path()
+    if not binary.exists():
+        raise SystemExit("Run uv run python scripts/install_renderer.py first.")
+    result = subprocess.run(
+        [str(binary), str(MODEL), str(ROOT / "models/requirements-view.sysml"),
+         "-render", "BlueDogViews::requirements", "-render-form", "dot"],
+        check=True, capture_output=True, text=True, encoding="utf-8")
+    if result.stderr:
+        print(result.stderr.strip(), file=sys.stderr)
+    if "// kind: requirement" not in result.stdout:
+        raise ValueError("Native renderer did not produce a requirement graph")
+    return result.stdout
 
 
 def table(requirements, edges):
@@ -170,7 +175,7 @@ def main():
     requirements, edges = extract(source)
     # Analyze the mission/architecture through the same OpenSysML runtime.
     load_model((ROOT / "models/blue-dog.sysml").read_text(encoding="utf-8-sig"))
-    outputs = {ROOT / "docs/figures/requirements-derivation.dot": graph(requirements, edges),
+    outputs = {ROOT / "docs/figures/requirements-derivation.dot": native_graph(),
                ROOT / "docs/requirements-register.md": table(requirements, edges)}
     for path, content in outputs.items():
         if args.check:
@@ -185,7 +190,7 @@ def main():
             raise SystemExit("Install Graphviz and ensure dot is on PATH, then rerun.")
         source_path = ROOT / "docs/figures/requirements-derivation.dot"
         for extension in ("svg", "png"):
-            subprocess.run([dot, f"-T{extension}", str(source_path), "-o", str(source_path.with_suffix('.' + extension))], check=True)
+            subprocess.run([dot, "-Grankdir=LR", f"-T{extension}", str(source_path), "-o", str(source_path.with_suffix('.' + extension))], check=True)
     print(f"Checked {len(requirements)} requirements and {len(edges)} explicit derivations; no cycles or unresolved endpoints.")
     print("OpenSysML analysis and project graph checks passed; requirement satisfaction is not evaluated.")
 

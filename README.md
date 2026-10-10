@@ -33,5 +33,6 @@ The GitHub Pages site reads `docs/restarting-sv-blue-dog.md` from this repositor
 
 OpenSysML 0.9.2 replaces the earlier sysmlpy dependency. The package-free Python
 environment remains managed by uv. Run `uv sync --locked`, then
-`uv run python scripts/render_requirements.py` to analyze the models and generate
+`uv run python scripts/install_renderer.py` to install the pinned native renderer,
+then `uv run python scripts/render_requirements.py` to analyze the models and generate
 the diagram and register. See [tooling setup and limitations](models/README.md#reproducible-tooling).

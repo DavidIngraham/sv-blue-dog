@@ -33,6 +33,7 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Graph
 
 ```sh
 uv sync --locked
+uv run python scripts/install_renderer.py
 uv run python scripts/render_requirements.py
 uv run python -m unittest discover -s tests -v
 uv run python scripts/render_requirements.py --check
@@ -48,24 +49,32 @@ No model is sent to a hosted analysis service by this workflow.
 
 The renderer writes SVG, PNG, and DOT to `docs/figures/` and the readable requirement/derivation register to `docs/requirements-register.md`. Commit these with model changes so GitHub and the website can display them without a Python runtime. `--check` checks DOT and register freshness; it does not compare rendered image pixels. Graphviz is a system dependency outside the uv lockfile, so its version and fonts can affect layout.
 
-## Renderer scope and validation limits
+## Native requirements view
 
-OpenSysML loads and analyzes both project models. Error diagnostics stop generation.
-The project renderer reads the engine's public API-JSON export: requirement IDs,
-documentation, resolved metadata types, and reference-subsetting targets. It keeps
-Graphviz for the existing project-specific layout and generates the Markdown register
-from those same model elements. There is no handwritten edge list or source-text parser.
+`requirements-view.sysml` declares `BlueDogViews::requirements` as an OMG
+`GeneralView` filtered to requirement usages. OpenSysML selects the nodes and
+relationships and writes DOT; Python no longer constructs diagram nodes or edges.
+Graphviz converts that unmodified DOT to SVG/PNG with a left-to-right layout.
 
-The API-JSON mapping is experimental upstream and emits an explicit warning. We pin
-OpenSysML 0.9.2 and check the complete project graph when upgrading. This renderer
-supports one flat Requirements package, locally typed requirement usages, and explicit
-metadata-tagged connections with one original and one derived end. It rejects missing
-roles, unresolved endpoints, duplicate IDs/edges, and cycles. This is a narrow project
-publishing adapter, not a general implementation of Requirement Derivation semantics.
+The native CLI is pinned separately to `nightly-20261009-28106371e`. Release 0.9.2
+renders this view as a containment tree without derivation links; the dated nightly
+supports requirement graphs. `scripts/install_renderer.py` downloads the CLI to
+`.tools/`, verifies a committed SHA-256 archive digest, and extracts only its executable.
+The installer supports Windows x64 and Linux/macOS x64/ARM64; Windows was exercised
+for this migration. Nothing is installed globally and no moving nightly tag is used.
+The Python client and its analysis service remain pinned to 0.9.2 for register generation.
 
-The migration preserved all nine requirement usages and eight links, and both models
-loaded without OpenSysML diagnostics. The generated SVG, PNG, and DOT stayed unchanged;
-the register only lost redundant whitespace. Model source files were not rewritten.
+Native dashed `derive` arrows point **from derived to original**, opposite the earlier
+custom diagram convention. All nine nodes and eight relationships are regression-checked
+against the source model. Maturity and short IDs remain in the linked register; the
+native diagram uses its default monochrome style without our former maturity colors.
+The renderer reports two exposed standard-library elements as intentionally not drawn.
+
+The Markdown register still uses the Python client's experimental API-JSON export,
+which retains IDs, documentation, metadata types and reference bindings. Its narrow
+project adapter checks missing roles, unresolved endpoints, duplicate IDs/edges and
+cycles. That adapter no longer drives diagram construction. `--check` regenerates
+native DOT for comparison as well as checking register freshness.
 
 Passing analysis does not establish mission feasibility or requirement satisfaction.
 Requirements currently carry prose and unresolved thresholds, not executable acceptance
@@ -73,7 +82,7 @@ constraints. The mission decomposition does not yet define an executable sequenc
 
 ## References
 
-- [OpenMBEE/OpenSysML](https://github.com/Open-MBEE/OpenSysML), pinned to 0.9.2.
+- [OpenMBEE/OpenSysML](https://github.com/Open-MBEE/OpenSysML), Python client 0.9.2; native renderer `nightly-20261009-28106371e`.
 - [Official SysML v2 release repository](https://github.com/Systems-Modeling/SysML-v2-Release).
 - [Official requirement derivation example](https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml/src/examples/Requirements%20Examples/RequirementDerivationExample.sysml).
 

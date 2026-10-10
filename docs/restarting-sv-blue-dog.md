@@ -46,7 +46,7 @@ That adds another question to the journey. Completing a course gives the robot a
 
 Learning SysML v2 is now another goal for the project. I want to use it to decompose the mission and connect the electronics requirements back to the reasons for them. I started with sysmlpy, which I have been using at work. Exploring requirement derivation led me further into the language and its standard libraries. I am now moving the project to OpenMBEE’s OpenSysML implementation so I can build toward executable models as well as diagrams. The current mission and requirements are still a discussion model; they do not yet demonstrate that the boat can complete the mission.
 
-The first derivation view starts with the Bonneville-to-The-Dalles round trip and multi-day endurance with energy harvesting. The arrows are proposed reasoning to work through, while the colors distinguish confirmed intent, older requirements, and new proposals. None of these links establishes that the boat satisfies a requirement.
+The first derivation view starts with the Bonneville-to-The-Dalles round trip and multi-day endurance with energy harvesting. The native OpenSysML diagram shows proposed derivations, with arrows pointing from each derived requirement back to its original. The linked register distinguishes confirmed intent, older requirements, and new proposals. None of these links establishes that the boat satisfies a requirement.
 
 ![SV Blue Dog requirement derivation](figures/requirements-derivation.svg)
 

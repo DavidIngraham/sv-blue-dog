@@ -26,11 +26,11 @@ Self-righting, weed resistance, printable hull geometry, and collision-avoidance
 
 ## Requirement derivation
 
-![Requirement derivation: original requirements on the left lead to proposed derived electronics requirements](figures/requirements-derivation.svg)
+![Native requirements diagram with derive arrows from derived requirements to their originals](figures/requirements-derivation.svg)
 
 [PNG version](figures/requirements-derivation.png) · [Generated requirement statements and derivation rationale](requirements-register.md)
 
-Every dashed arrow comes from an explicit `#derivation` connection in the SysML model, with `#original` and `#derive` ends. Arrows read from original to derived requirement. This is a generated traceability view, not a claim of a complete standard graphical notation implementation.
+Every dashed arrow comes from an explicit `#derivation` connection in the SysML model, with `#original` and `#derive` ends. Native OpenSysML arrows read from derived to original requirement. Maturity and short IDs are listed in the register rather than encoded as node colors. This is a generated traceability view, not a claim of a complete standard graphical notation implementation.
 
 All eight derivation relationships are proposed reasoning for us to review. Node maturity is separate: a legacy requirement can have a newly proposed derivation. The two mission requirements remain independent inputs; the round-trip route alone does not imply a particular endurance. Low-energy recovery has two parents because it follows both the endurance objective and the energy-management policy. No link means "verified" or "satisfied."
 

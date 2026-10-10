@@ -1,24 +1,27 @@
-digraph Requirements {
-graph [rankdir=LR, bgcolor="white", pad=0.3, nodesep=0.3, ranksep=0.8,
- fontname="Arial", fontsize=18, labelloc=t, label="SV Blue Dog | Requirement derivation"];
-node [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, color="#475569", margin="0.18,0.12"];
-edge [color="#64748b", style=dashed, arrowsize=0.7];
-"roundTrip" [label="M-001 | Round Trip\nconfirmed intent", fillcolor="#dbeafe"];
-"multiDayEndurance" [label="M-002 | Multi Day Endurance\nconfirmed intent", fillcolor="#dbeafe"];
-"energyAwareness" [label="E-001 | Energy Awareness\nproposed", fillcolor="#e2e8f0"];
-"navigationAndControl" [label="E-002 | Navigation And Control\nproposed", fillcolor="#e2e8f0"];
-"resetRecovery" [label="E-003 | Reset Recovery\nlegacy intent", fillcolor="#fef3c7"];
-"lowEnergyRecovery" [label="E-004 | Low Energy Recovery\nlegacy intent", fillcolor="#fef3c7"];
-"communications" [label="E-005 | Communications\nlegacy intent", fillcolor="#fef3c7"];
-"ingressResponse" [label="E-006 | Ingress Response\nlegacy intent", fillcolor="#fef3c7"];
-"missionEvidence" [label="E-007 | Mission Evidence\nproposed", fillcolor="#e2e8f0"];
-"roundTrip" -> "navigationAndControl" [tooltip="PROPOSED: Autonomous completion of the route needs observations, guidance, and actuation."];
-"roundTrip" -> "resetRecovery" [tooltip="PROPOSED: A reset during an autonomous journey must not leave mission behavior undefined."];
-"roundTrip" -> "communications" [tooltip="PROPOSED: Mission supervision and recovery need an agreed operator communication policy."];
-"roundTrip" -> "ingressResponse" [tooltip="PROPOSED: Recovering the boat after the journey motivates a defined response to small leaks."];
-"roundTrip" -> "missionEvidence" [tooltip="PROPOSED: Assessing route completion and learning from the mission requires recorded evidence."];
-"multiDayEndurance" -> "energyAwareness" [tooltip="PROPOSED: Multi-day operation with variable harvesting needs energy estimation and load management."];
-"multiDayEndurance" -> "lowEnergyRecovery" [tooltip="PROPOSED: Harvest shortfalls need an explicit degraded operating mode."];
-"energyAwareness" -> "lowEnergyRecovery" [tooltip="PROPOSED: Available-energy estimates and reserve policy must drive low-energy transitions."];
-labelloc=b; label="SV Blue Dog | Requirement derivation\nDashed arrows: original to derived requirement (all links proposed)\nBlue: confirmed intent | Amber: legacy intent | Gray: proposed\nIntent is not verification; acceptance thresholds remain open";
+// view: BlueDogViews::requirements
+// kind: requirement
+// stated: view def GeneralView, filter @RequirementUsage
+// not represented: 2 exposed standard library element(s) not drawn; a requirement rendering draws the model's own elements
+// layout: dot
+digraph "BlueDogViews::requirements" {
+  graph [fontname="Helvetica"];
+  node [shape=box, style=filled, fillcolor=white, color="#181818", fontname="Helvetica", fontsize=14, penwidth=0.5];
+  edge [color="#181818", fontname="Helvetica", fontsize=13, penwidth=1];
+  "n0" [style="rounded,filled", label=<<font point-size="10"><i>«requirement»</i></font><br/><b>roundTrip : RoundTrip</b>>];
+  "n1" [style="rounded,filled", label=<<font point-size="10"><i>«requirement»</i></font><br/><b>multiDayEndurance : MultiDayEndurance</b>>];
+  "n2" [style="rounded,filled", label=<<font point-size="10"><i>«requirement»</i></font><br/><b>energyAwareness : EnergyAwareness</b>>];
+  "n3" [style="rounded,filled", label=<<font point-size="10"><i>«requirement»</i></font><br/><b>navigationAndControl : NavigationAndControl</b>>];
+  "n4" [style="rounded,filled", label=<<font point-size="10"><i>«requirement»</i></font><br/><b>resetRecovery : ResetRecovery</b>>];
+  "n5" [style="rounded,filled", label=<<font point-size="10"><i>«requirement»</i></font><br/><b>lowEnergyRecovery : LowEnergyRecovery</b>>];
+  "n6" [style="rounded,filled", label=<<font point-size="10"><i>«requirement»</i></font><br/><b>communications : Communications</b>>];
+  "n7" [style="rounded,filled", label=<<font point-size="10"><i>«requirement»</i></font><br/><b>ingressResponse : IngressResponse</b>>];
+  "n8" [style="rounded,filled", label=<<font point-size="10"><i>«requirement»</i></font><br/><b>missionEvidence : MissionEvidence</b>>];
+  "n3" -> "n0" [label="derive", arrowhead=vee, style=dashed];
+  "n4" -> "n0" [label="derive", arrowhead=vee, style=dashed];
+  "n6" -> "n0" [label="derive", arrowhead=vee, style=dashed];
+  "n7" -> "n0" [label="derive", arrowhead=vee, style=dashed];
+  "n8" -> "n0" [label="derive", arrowhead=vee, style=dashed];
+  "n2" -> "n1" [label="derive", arrowhead=vee, style=dashed];
+  "n5" -> "n1" [label="derive", arrowhead=vee, style=dashed];
+  "n5" -> "n2" [label="derive", arrowhead=vee, style=dashed];
 }

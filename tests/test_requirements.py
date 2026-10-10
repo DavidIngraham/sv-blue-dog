@@ -1,6 +1,7 @@
 import unittest
+import re
 
-from scripts.render_requirements import extract, MODEL
+from scripts.render_requirements import extract, MODEL, native_graph
 
 
 BASE = """package Requirements {
@@ -18,6 +19,17 @@ BASE = """package Requirements {
 
 
 class DerivationTests(unittest.TestCase):
+    def test_native_diagram_preserves_all_derivations(self):
+        requirements, edges = extract(MODEL.read_text(encoding="utf-8-sig"))
+        dot = native_graph()
+        nodes = dict(re.findall(r'"(n[0-9]+)" \[.*?<b>([A-Za-z0-9_]+) :', dot))
+        self.assertEqual(set(nodes.values()), set(requirements))
+        links = re.findall(r'"(n[0-9]+)" -> "(n[0-9]+)" \[label="derive"', dot)
+        # Native notation points from derived to original.
+        self.assertEqual({(nodes[b], nodes[a]) for a, b in links},
+                         {(e["source"], e["target"]) for e in edges})
+        self.assertEqual(len(links), len(edges))
+
     def test_project_model_preserves_complete_graph(self):
         requirements, edges = extract(MODEL.read_text(encoding="utf-8-sig"))
         self.assertEqual({r["id"] for r in requirements.values()},
