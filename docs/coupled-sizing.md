@@ -47,3 +47,9 @@ uv run python -m pytest tests/test_wing_analysis.py
 The STEP contains a printed/ribbed 300 mm segment, not a complete boat wing. [Extracted sections](figures/wing-sections.png) retain missing outer-envelope samples as missing data. The reference VSP wing uses the complete midspan section in a rectangular planform; it does not claim to reproduce the swept prototype planform. Both ends of the section are rounded, so the wake-shedding assumption needs validation before these potential-flow results enter the optimizer.
 
 [Generated wing-analysis results](wing-analysis-results.md) distinguish the geometry extraction, numerical mesh sensitivity and physical evidence gaps. The coupled optimization remains incomplete until the integration gates above are met.
+
+## Current coupling progress
+
+The [full-angle diagnostic](hydrostatics.md) now computes native SysML immersed volumes and gravity/buoyancy moments, with numerical heave and pitch equilibrium. It exposes a recovery sensitivity to wing buoyancy that the old CG screen misses. The next solve must use geometry-consistent mass and explicit flooded/retained-water cases; the diagnostic has not yet replaced the historical solver's stability constraints.
+
+[wing-actuator.sysml](../models/wing-actuator.sysml) separates output-shaft torque, motor and gearbox efficiencies, moving duty, powered holding and controller consumption. Its accounting example verifies arithmetic only; it is not a selected actuator or a mission energy estimate. These functions still need to be connected to the candidate-specific aerodynamic moments in the coupled search.

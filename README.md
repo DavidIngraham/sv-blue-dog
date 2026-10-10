@@ -21,3 +21,5 @@ The current [two-metre mission-sizing study](docs/mission-sizing.md) compares re
 The [sail architecture trade](docs/sail-trade.md) compares tail-controlled and cambered rigid wings with a triangular soft sail, separating development preference from requirement evidence.
 
 The [coupled sizing workflow](docs/coupled-sizing.md) develops the CAD-derived fixed-camber wing, OpenVSP analysis and full-angle recovery inputs needed for size optimization.
+
+The [static recovery diagnostic](docs/hydrostatics.md) evaluates sealed-wing and lost-buoyancy cases through full heel angles, including pitch equilibrium and numerical geometry sensitivity.

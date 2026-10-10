@@ -1,0 +1,107 @@
+{
+  "status": "holds",
+  "exit": 0,
+  "checks": [
+    {
+      "subject": "BlueDogWingActuator::accountingExample",
+      "status": "holds",
+      "values": [
+        {
+          "name": "locked",
+          "value": "[0.1325, 1.725, 1.725]"
+        },
+        {
+          "name": "poweredHold",
+          "value": "[2.0925, 2.1, 1.725]"
+        },
+        {
+          "name": "lockedWhPerDay",
+          "value": "3.18"
+        },
+        {
+          "name": "poweredHoldWhPerDay",
+          "value": "50.22"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogWingActuator::accountingExample",
+        "  locked = [0.1325, 1.725, 1.725]",
+        "  poweredHold = [2.0925, 2.1, 1.725]",
+        "  lockedWhPerDay = 3.18",
+        "  poweredHoldWhPerDay = 50.22",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "output": [
+    "✓ package GorgeChallenge",
+    "✓ package BlueDog",
+    "✓ package BlueDogRequirements",
+    "✓ package BlueDogViews",
+    "✓ package BlueDogDocuments",
+    "✓ package BlueDogArchitectureViews",
+    "✓ package BlueDogUseCases",
+    "✓ package BlueDogUseCaseViews",
+    "✓ package BlueDogSatisfaction",
+    "✓ package RecoveryPropulsionTrade",
+    "✓ package BlueDogEnergy",
+    "✓ package BlueDogEnergyExamples",
+    "✓ package BlueDogDiagramDocuments",
+    "✓ package BlueDogRequirementVerification",
+    "✓ package BlueDogReliability",
+    "✓ package BlueDogReliabilityExamples",
+    "✓ package BlueDogDFMEA",
+    "✓ package BlueDogReliabilityDocuments",
+    "✓ package BlueDogSemanticViews",
+    "✓ package BlueDogSailing",
+    "✓ package BlueDogSailingExamples",
+    "✓ package BlueDogSailingDocuments",
+    "✓ package BlueDogSizing",
+    "✓ package BlueDogSizingExamples",
+    "✓ package BlueDogSizingDocuments",
+    "✓ package BlueDogDesignSearch",
+    "✓ package BlueDogDesignPhysics",
+    "✓ package BlueDogDesignResults",
+    "✓ package BlueDogDesignSearchDocuments",
+    "✓ package BlueDogStructure",
+    "✓ package BlueDogStructureDocuments",
+    "✓ package BlueDogStructureViews",
+    "✓ package BlueDogWingActuator"
+  ],
+  "errors": null
+}
