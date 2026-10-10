@@ -146,6 +146,12 @@ def main():
         from scripts.study_open_sizing import publication_outputs as sizing_outputs
     outputs.update(sizing_outputs())
     try:
+        from .study_sail_trade import publication_outputs as sail_trade_outputs
+    except ImportError:
+        from scripts.study_sail_trade import publication_outputs as sail_trade_outputs
+    outputs.update(sail_trade_outputs())
+
+    try:
         from .study_mission_sizing import publish as publish_mission
     except ImportError:
         from scripts.study_mission_sizing import publish as publish_mission

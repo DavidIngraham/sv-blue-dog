@@ -124,3 +124,15 @@ uv run python -m pytest tests/test_mission_sizing.py
 ```
 
 Run the same pytest file under Linux for the compiled ABI, signed-current and independent mass-moment checks. The numerical record includes source/driver hashes; stale results cannot be published. The 2 m waterline stays fixed until the baseline is credible. Expandable search brackets are enlarged when active; a remaining numerical boundary is reported rather than interpreted as a physical limit.
+
+
+## Sail architecture trade
+
+`models/sail-trade.sysml` contains the three candidate definitions, qualitative trade assessment, evidence gates and geometry input contract. The native document and analysis JSON are generated without changing the existing numerical sizing studies:
+
+```powershell
+uv run python -m scripts.study_sail_trade
+uv run python -m pytest tests/test_sail_trade.py
+```
+
+The full documentation publisher also runs this analysis. Missing qualification evidence does not imply requirement failure; the development preference remains explicitly provisional.

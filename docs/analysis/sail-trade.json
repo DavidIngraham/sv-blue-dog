@@ -1,0 +1,347 @@
+{
+  "status": "holds",
+  "exit": 0,
+  "checks": [
+    {
+      "subject": "BlueDogSailTrade::tailAssessment",
+      "status": "holds",
+      "values": [
+        {
+          "name": "candidateName",
+          "value": "\"Tail-controlled rigid wing\""
+        },
+        {
+          "name": "gateCount",
+          "value": "7"
+        },
+        {
+          "name": "knownFailure",
+          "value": "false"
+        },
+        {
+          "name": "evidenceComplete",
+          "value": "false"
+        },
+        {
+          "name": "qualified",
+          "value": "false"
+        },
+        {
+          "name": "requirementVerdict",
+          "value": "\"Inconclusive: evidence missing\""
+        },
+        {
+          "name": "developmentDecision",
+          "value": "\"Lead development candidate\""
+        },
+        {
+          "name": "objective assess",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailTrade::tailAssessment",
+        "  candidateName = \"Tail-controlled rigid wing\"",
+        "  gateCount = 7",
+        "  knownFailure = false",
+        "  evidenceComplete = false",
+        "  qualified = false",
+        "  requirementVerdict = \"Inconclusive: evidence missing\"",
+        "  developmentDecision = \"Lead development candidate\"",
+        "  objective assess: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailTrade::camberAssessment",
+      "status": "holds",
+      "values": [
+        {
+          "name": "candidateName",
+          "value": "\"Original cambered wing concept\""
+        },
+        {
+          "name": "gateCount",
+          "value": "7"
+        },
+        {
+          "name": "knownFailure",
+          "value": "false"
+        },
+        {
+          "name": "evidenceComplete",
+          "value": "false"
+        },
+        {
+          "name": "qualified",
+          "value": "false"
+        },
+        {
+          "name": "requirementVerdict",
+          "value": "\"Inconclusive: evidence missing\""
+        },
+        {
+          "name": "developmentDecision",
+          "value": "\"Retain comparison candidate\""
+        },
+        {
+          "name": "objective assess",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailTrade::camberAssessment",
+        "  candidateName = \"Original cambered wing concept\"",
+        "  gateCount = 7",
+        "  knownFailure = false",
+        "  evidenceComplete = false",
+        "  qualified = false",
+        "  requirementVerdict = \"Inconclusive: evidence missing\"",
+        "  developmentDecision = \"Retain comparison candidate\"",
+        "  objective assess: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailTrade::softAssessment",
+      "status": "holds",
+      "values": [
+        {
+          "name": "candidateName",
+          "value": "\"Triangular soft sail\""
+        },
+        {
+          "name": "gateCount",
+          "value": "7"
+        },
+        {
+          "name": "knownFailure",
+          "value": "false"
+        },
+        {
+          "name": "evidenceComplete",
+          "value": "false"
+        },
+        {
+          "name": "qualified",
+          "value": "false"
+        },
+        {
+          "name": "requirementVerdict",
+          "value": "\"Inconclusive: evidence missing\""
+        },
+        {
+          "name": "developmentDecision",
+          "value": "\"Deprioritize for long unattended service; retain prototype benchmark\""
+        },
+        {
+          "name": "objective assess",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailTrade::softAssessment",
+        "  candidateName = \"Triangular soft sail\"",
+        "  gateCount = 7",
+        "  knownFailure = false",
+        "  evidenceComplete = false",
+        "  qualified = false",
+        "  requirementVerdict = \"Inconclusive: evidence missing\"",
+        "  developmentDecision = \"Deprioritize for long unattended service; retain prototype benchmark\"",
+        "  objective assess: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailTrade::buoyancyIllustration",
+      "status": "holds",
+      "values": [
+        {
+          "name": "positiveMomentNm",
+          "value": "98.0665"
+        },
+        {
+          "name": "negativeMomentNm",
+          "value": "-98.0665"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailTrade::buoyancyIllustration",
+        "  positiveMomentNm = 98.0665",
+        "  negativeMomentNm = -98.0665",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "output": [
+    "✓ package GorgeChallenge",
+    "✓ package BlueDog",
+    "✓ package BlueDogRequirements",
+    "✓ package BlueDogViews",
+    "✓ package BlueDogDocuments",
+    "✓ package BlueDogArchitectureViews",
+    "✓ package BlueDogUseCases",
+    "✓ package BlueDogUseCaseViews",
+    "✓ package BlueDogSatisfaction",
+    "✓ package RecoveryPropulsionTrade",
+    "✓ package BlueDogEnergy",
+    "✓ package BlueDogEnergyExamples",
+    "✓ package BlueDogDiagramDocuments",
+    "✓ package BlueDogRequirementVerification",
+    "✓ package BlueDogReliability",
+    "✓ package BlueDogReliabilityExamples",
+    "✓ package BlueDogDFMEA",
+    "✓ package BlueDogReliabilityDocuments",
+    "✓ package BlueDogSemanticViews",
+    "✓ package BlueDogSailing",
+    "✓ package BlueDogSailingExamples",
+    "✓ package BlueDogSailingDocuments",
+    "✓ package BlueDogSizing",
+    "✓ package BlueDogSizingExamples",
+    "✓ package BlueDogSizingDocuments",
+    "✓ package BlueDogDesignSearch",
+    "✓ package BlueDogDesignPhysics",
+    "✓ package BlueDogDesignResults",
+    "✓ package BlueDogDesignSearchDocuments",
+    "✓ package BlueDogSailTrade",
+    "✓ package BlueDogSailTradeDocuments"
+  ],
+  "errors": null
+}
