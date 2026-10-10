@@ -61,7 +61,11 @@ The two graph roots are C-000 (Trans-Gorge challenge) and H-001 (Hawaii voyage).
 Vehicle requirements live in the distinct `BlueDogRequirements` package; files
 do not reopen or merge separate declarations of the `BlueDog` package. OpenSysML selects the nodes and
 relationships and writes DOT; Python no longer constructs diagram nodes or edges.
-Graphviz converts that unmodified DOT to SVG/PNG with a left-to-right layout.
+Graphviz converts the native DOT to SVG/PNG with high-level requirements above their derived requirements.
+Graphviz uses `rankdir=BT` because native derive arrows point from derived to
+original; the arrows therefore point upward while the hierarchy reads top-down.
+A rendering-only rank constraint aligns both mission drivers on the top row;
+the saved native DOT and all native nodes and edges remain unchanged.
 
 The native CLI is pinned separately to `nightly-20261009-28106371e`. Release 0.9.2
 renders this view as a containment tree without derivation links; the dated nightly

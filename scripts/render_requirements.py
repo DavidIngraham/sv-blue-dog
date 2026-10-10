@@ -1,5 +1,6 @@
 """Validate and publish requirements with the pinned native OpenSysML CLI."""
 import argparse
+import re
 import shutil
 import subprocess
 import sys
@@ -55,8 +56,14 @@ def main():
         if not dot:
             raise SystemExit("Install Graphviz and ensure dot is on PATH, then rerun.")
         source_path = ROOT / "docs/figures/requirements-derivation.dot"
+        # Align the two mission drivers at the top without changing native edges.
+        layout = source_path.read_text(encoding="utf-8")
+        roots = re.findall(r'"(n[0-9]+)" \[.*?<b>(?:GorgeChallenge::transGorgeChallenge|BlueDog::Goals::hawaiiVoyage) :', layout)
+        if len(roots) != 2:
+            raise SystemExit("Expected both top-level requirements in the native diagram.")
+        layout = layout.rstrip().removesuffix("}") + '\n{ rank=sink; ' + '; '.join(roots) + '; }\n}\n'
         for extension in ("svg", "png"):
-            subprocess.run([dot, "-Grankdir=LR", f"-T{extension}", str(source_path), "-o", str(source_path.with_suffix('.' + extension))], check=True)
+            subprocess.run([dot, "-Grankdir=BT", f"-T{extension}", "-o", str(source_path.with_suffix('.' + extension))], input=layout, text=True, encoding="utf-8", check=True)
     print("Native model validation and document generation passed; satisfaction is not evaluated.")
 
 
