@@ -6,7 +6,7 @@ Tail control and camber are separate design choices: a cambered wing could also 
 
 ## What distinguishes the rigid candidates?
 
-Its distinguishing feature is aerodynamic control of the main wing's incidence. The actuator moves a small tail control surface rather than directly driving the entire loaded wing. Saildrone describes that wing/tail/tab arrangement in its [design history](https://www.saildrone.com/eu-en/news/how-saildrone-wing-was-born). That supports investigating low trim energy; it does not supply a Blue Dog actuator power value or prove that a jammed actuator will feather safely.
+The tail-controlled wing uses aerodynamic control of the main wing's incidence. The actuator moves a small tail control surface rather than directly driving the entire loaded wing. Saildrone describes that wing/tail/tab arrangement in its [design history](https://www.saildrone.com/eu-en/news/how-saildrone-wing-was-born). That supports investigating low trim energy; it does not supply a Blue Dog actuator power value or prove that a jammed actuator will feather safely.
 
 The [Silva et al. wingsail design paper](https://recipp.ipp.pt/bitstream/10400.22/15346/1/CAPL_LSA_MBM_2019.pdf) describes the corresponding moment balance and highlights the tail/counterweight trade: balancing a free wing can add elevated mass and increase its swept envelope. This motivates retaining the tail-controlled candidate, while bearing friction, tail authority, tab faults, submerged loads and counterweight mass must remain explicit design problems.
 
@@ -17,6 +17,34 @@ The closest primary precedent found is Miller, Judge, Sewell and Williamson's [*
 [Crescent-wing research at Chalmers](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) explains how suitable sections exchange leading and trailing edges between tacks. Fixed camber therefore does not inherently require a reversal mechanism. Whether our CAD has the necessary edge geometry remains a geometry check, not an assumed property.
 
 The fixed wing offers fewer tail/control components and relevant small-vessel precedent; the tail-controlled wing offers passive trim-energy potential. Neither advantage establishes an overall winner. Compare full-angle lift, drag and pitching moment versus trim and Reynolds number, on both tacks, including broadside separated flow, mode transitions and depower. The existing symmetric linear-lift sizing model cannot represent the fixed wing's square mode or supply candidate-specific performance evidence.
+
+## Oshen PC13: directly driven ocean-service precedent
+
+The [official PC13 entry](https://www.microtransat.org/content.php?p=2026_oshen_cstar) describes a single DynaRig wingsail driven by a motor inside the hull, a 1.299 m hull, 56 kg displacement, 52.5 W solar and a 100 Ah battery. Its auxiliary thruster was unused during the challenge. Neither the airfoil section nor the gearbox's backdrivability is established by that description. PC13 strengthens the case for direct mast actuation; it does not verify our fixed-camber geometry or energy budget.
+
+The [organizer announced autonomous east-to-west completion on 13 September 2026](https://microtransat.org/content.php?p=news%2F2026-09-13-oshen), with the result provisional pending jury review in that announcement. This is relevant integrated endurance evidence, not a statistical reliability estimate. The [Oshen/MBARI evaluation of other C-Star configurations](https://oceansynchro.io/wp-content/uploads/2026/05/OshenC-Star_ReportFinal-1.pdf) identified light-wind/current navigation limitations and evaluated auxiliary propulsion. An ocean crossing therefore does not establish sail-only upstream Gorge progress. PC13's compact length also does not establish compliance with our one-person handling allocations.
+
+## Non-backdrivable mast-drive option
+
+Evaluate a non-backdrivable reduction gearbox, such as a suitably specified self-locking worm drive, on the fixed-camber candidate. Holding trim with the motor de-energized could remove holding-current consumption. It does not remove electronics standby consumption or the energy needed to reposition the wing. The option remains unselected until actual torque, efficiency, mass and environmental data are available.
+
+Compare candidates over the same wind/trim duty cycle using measured electrical energy:
+
+`E_day [Wh] = sum(E_move [J])/3600 + P_hold [W]*t_hold [h] + P_idle [W]*t_idle [h]`
+
+Here moving, holding and idle intervals partition the day; state powers include the relevant controller/driver consumption. A verified mechanical lock permits zero **motor** holding power, not automatically zero total holding-state power. Include starts, gust corrections, tacks, mode transitions and recovery maneuvers. Savings occur only when avoided holding energy exceeds extra movement and standby losses. This accounting is a proposed measurement method, not a computed Blue Dog energy result or a replacement for the existing energy roll-up.
+
+[SEW's gearbox planning guidance](https://download.sew-eurodrive.com/download/pdf/16934016.pdf) distinguishes starting and running efficiency, and static and dynamic self-locking. We must verify the selected unit's holding behavior across load, lubrication, temperature, wear, vibration and shock rather than infer it from the word "worm".
+
+| Trade consideration | Consequence for the comparison |
+|---|---|
+| Motor-off holding | Potentially low daily energy when trim changes are infrequent; tail control receives no automatic energy advantage. |
+| Reduction and friction | May increase movement losses, breakaway torque and trim time; measure loaded reversals and gust response. |
+| Retained trim after power loss | The wing may remain loaded instead of feathering. Evaluate locked-angle storm and capsize cases. |
+| Emergency release or clutch | Can enable another depower strategy but adds components, energy needs and failure modes; free rotation alone does not prove safe feathering. |
+| Structure and recovery | Add gearbox/drive mass and CG; carry holding and shock loads through mast, bearings and hull. |
+
+The next actuator comparison needs motor-off holding tests, wet-cycle endurance, daily electrical energy, and power-loss/jam recovery behavior. Both rigid candidates remain co-leading, with all physical requirement gates unknown. The mechanism is traced through the existing energy, survival, capsize/control and sail-jam analysis links in the generated report.
 
 ## Does the soft sail fail the requirements?
 
