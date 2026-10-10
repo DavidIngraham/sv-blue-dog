@@ -1,0 +1,153 @@
+{
+  "sourceHashes": {
+    "models/hull-resistance.sysml": "735f1e939bd0f7ea7e83dbd07f62432762db0aa27efbf977e35ca7a84853d59e",
+    "scripts/native_hull_resistance.py": "c498d365188b4832c615389beddf2b11f6a46ffcd475d2c8fada8e7185e81654"
+  },
+  "scope": "Synthetic arithmetic fixtures, not measured resistance validation. Fn 0.65 deliberately exceeds the implementation coverage limit. Not yet connected to coupled search.",
+  "hull": [
+    2,
+    0.6,
+    0.15,
+    0.071973,
+    0.85,
+    1.05,
+    1.1,
+    0.55,
+    0.727
+  ],
+  "density": 1000,
+  "gravity": 9.80665,
+  "cases": [
+    {
+      "speed_m_s": 0.6643035827089899,
+      "outputs": {
+        "resistance_N": 0.10761010202349026,
+        "resistance_weight_ratio": 0.00015246240355905967,
+        "froude": 0.15,
+        "froude_lower": 0.0,
+        "froude_upper": 0.44999999999999996,
+        "lcb_lower": 0.025000000000000022,
+        "lcb_upper": 0.05699999999999994,
+        "cp_lower": 0.031000000000000028,
+        "cp_upper": 0.04899999999999993,
+        "volume_area_lower": 0.12456079793542475,
+        "volume_area_upper": 0.06143920206457526,
+        "beam_length_lower": 0.12999999999999998,
+        "beam_length_upper": 0.066,
+        "center_ratio_lower": 0.034545454545454435,
+        "center_ratio_upper": 0.04745454545454553,
+        "volume_length_lower": 0.087982378006594,
+        "volume_length_upper": 0.02201762199340601,
+        "cm_lower": 0.08099999999999996,
+        "cm_upper": 0.06300000000000006,
+        "beam_draft_lower": 1.54,
+        "beam_draft_upper": 15.379999999999999
+      }
+    },
+    {
+      "speed_m_s": 1.7714762205573067,
+      "outputs": {
+        "resistance_N": 13.889514833094132,
+        "resistance_weight_ratio": 0.01967871766593516,
+        "froude": 0.4,
+        "froude_lower": 0.25,
+        "froude_upper": 0.19999999999999996,
+        "lcb_lower": 0.025000000000000022,
+        "lcb_upper": 0.05699999999999994,
+        "cp_lower": 0.031000000000000028,
+        "cp_upper": 0.04899999999999993,
+        "volume_area_lower": 0.12456079793542475,
+        "volume_area_upper": 0.06143920206457526,
+        "beam_length_lower": 0.12999999999999998,
+        "beam_length_upper": 0.066,
+        "center_ratio_lower": 0.034545454545454435,
+        "center_ratio_upper": 0.04745454545454553,
+        "volume_length_lower": 0.087982378006594,
+        "volume_length_upper": 0.02201762199340601,
+        "cm_lower": 0.08099999999999996,
+        "cm_upper": 0.06300000000000006,
+        "beam_draft_lower": 1.54,
+        "beam_draft_upper": 15.379999999999999
+      }
+    },
+    {
+      "speed_m_s": 1.8821934843421382,
+      "outputs": {
+        "resistance_N": 23.0556003452502,
+        "resistance_weight_ratio": 0.03266526262902915,
+        "froude": 0.425,
+        "froude_lower": 0.275,
+        "froude_upper": 0.175,
+        "lcb_lower": 0.025000000000000022,
+        "lcb_upper": 0.05699999999999994,
+        "cp_lower": 0.031000000000000028,
+        "cp_upper": 0.04899999999999993,
+        "volume_area_lower": 0.12456079793542475,
+        "volume_area_upper": 0.06143920206457526,
+        "beam_length_lower": 0.12999999999999998,
+        "beam_length_upper": 0.066,
+        "center_ratio_lower": 0.034545454545454435,
+        "center_ratio_upper": 0.04745454545454553,
+        "volume_length_lower": 0.087982378006594,
+        "volume_length_upper": 0.02201762199340601,
+        "cm_lower": 0.08099999999999996,
+        "cm_upper": 0.06300000000000006,
+        "beam_draft_lower": 1.54,
+        "beam_draft_upper": 15.379999999999999
+      }
+    },
+    {
+      "speed_m_s": 2.6572143308359597,
+      "outputs": {
+        "resistance_N": 82.40946793096069,
+        "resistance_weight_ratio": 0.1167580489240205,
+        "froude": 0.6,
+        "froude_lower": 0.44999999999999996,
+        "froude_upper": 0.0,
+        "lcb_lower": 0.025000000000000022,
+        "lcb_upper": 0.05699999999999994,
+        "cp_lower": 0.031000000000000028,
+        "cp_upper": 0.04899999999999993,
+        "volume_area_lower": 0.12456079793542475,
+        "volume_area_upper": 0.06143920206457526,
+        "beam_length_lower": 0.12999999999999998,
+        "beam_length_upper": 0.066,
+        "center_ratio_lower": 0.034545454545454435,
+        "center_ratio_upper": 0.04745454545454553,
+        "volume_length_lower": 0.087982378006594,
+        "volume_length_upper": 0.02201762199340601,
+        "cm_lower": 0.08099999999999996,
+        "cm_upper": 0.06300000000000006,
+        "beam_draft_lower": 1.54,
+        "beam_draft_upper": 15.379999999999999
+      }
+    },
+    {
+      "speed_m_s": 2.8786488584056236,
+      "outputs": {
+        "resistance_N": 86.99962024433664,
+        "resistance_weight_ratio": 0.12326139425350183,
+        "froude": 0.65,
+        "froude_lower": 0.5,
+        "froude_upper": -0.050000000000000044,
+        "lcb_lower": 0.025000000000000022,
+        "lcb_upper": 0.05699999999999994,
+        "cp_lower": 0.031000000000000028,
+        "cp_upper": 0.04899999999999993,
+        "volume_area_lower": 0.12456079793542475,
+        "volume_area_upper": 0.06143920206457526,
+        "beam_length_lower": 0.12999999999999998,
+        "beam_length_upper": 0.066,
+        "center_ratio_lower": 0.034545454545454435,
+        "center_ratio_upper": 0.04745454545454553,
+        "volume_length_lower": 0.087982378006594,
+        "volume_length_upper": 0.02201762199340601,
+        "cm_lower": 0.08099999999999996,
+        "cm_upper": 0.06300000000000006,
+        "beam_draft_lower": 1.54,
+        "beam_draft_upper": 15.379999999999999
+      }
+    }
+  ],
+  "qualified": false
+}

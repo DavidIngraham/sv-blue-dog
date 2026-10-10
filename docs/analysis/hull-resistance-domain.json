@@ -1,0 +1,104 @@
+{
+  "sourceHashes": {
+    "models/hull-resistance.sysml": "735f1e939bd0f7ea7e83dbd07f62432762db0aa27efbf977e35ca7a84853d59e",
+    "scripts/native_hull_resistance.py": "c498d365188b4832c615389beddf2b11f6a46ffcd475d2c8fada8e7185e81654",
+    "scripts/hull_features.py": "60b839b7aca9279834f3799f793c150881290da450e5e6443c40757bb654579f",
+    "scripts/audit_hull_resistance.py": "485c680db58c9a64f70349ae88ba46b731eac39ffa979a894a0e701f3e3a520f",
+    "scripts/coupled_model.py": "965530c2c621a750ffd8b4ecaf0c5c80d8487b03257f48b589926a8a76374980",
+    "scripts/coupled_geometry.py": "5605176272abe947390ec928f084c3e93c52c02898041f680783aa78b9c26f1c",
+    "scripts/hydro_geometry.py": "fc09bf7755aa854b84956d2b1622f440e06a54f9e4d13a76927cc09463569d73",
+    "docs/analysis/coupled-sizing-search.json": "05b3c90660ce166e6e289af22ae5ce846db7c3eccffdbc49aab20c416a1fd1a0",
+    "docs/analysis/coupled-mass-reference.json": "2c59b9ee2eee742812528c73efd3a0446989d4bb815c703317b540e393fca830"
+  },
+  "scope": "Upright static canoe-body geometry, mast trim zero and pitch fixed zero. Coefficient outputs outside the screening envelope are diagnostics only, not valid resistance predictions. Native clipped volume independently checks mesh feature extraction.",
+  "qualified": false,
+  "cases": [
+    {
+      "case": "reference",
+      "hullFeatures": [
+        1.991824640454,
+        0.599483360632,
+        0.048263293103290555,
+        0.02889870761589712,
+        0.9370709890919855,
+        0.9959123202269997,
+        0.9959123202269774,
+        0.6537165182339779,
+        0.7670855059086973
+      ],
+      "waterline_m": -0.004380295796709448,
+      "nativeCanoeVolume_m3": 0.028898707616166027,
+      "screen": {
+        "resistance_N": 5.966601911073793,
+        "resistance_weight_ratio": 0.02105367750687961,
+        "froude": 0.4,
+        "froude_lower": 0.25,
+        "froude_upper": 0.19999999999999996,
+        "lcb_lower": -1.6653345369377348e-16,
+        "lcb_upper": 0.08200000000000013,
+        "cp_lower": 0.1347165182339779,
+        "cp_upper": -0.05471651823397794,
+        "volume_area_lower": 0.021495462825646752,
+        "volume_area_upper": 0.16450453717435326,
+        "beam_length_lower": 0.1309719572980876,
+        "beam_length_upper": 0.06502804270191237,
+        "center_ratio_lower": 0.08000000000002239,
+        "center_ratio_upper": 0.0019999999999775753,
+        "volume_length_lower": 0.03406655549388457,
+        "volume_length_upper": 0.07593344450611544,
+        "cm_lower": 0.12108550590869727,
+        "cm_upper": 0.02291449409130275,
+        "beam_draft_lower": 9.961103536159818,
+        "beam_draft_upper": 6.958896463840182
+      },
+      "outsideEnvelope": [
+        "cp_upper"
+      ]
+    },
+    {
+      "case": "coarse_search",
+      "hullFeatures": [
+        0.8,
+        0.650492024446,
+        0.08040414052489037,
+        0.025255932843790033,
+        0.4080599554777633,
+        0.40000000000000363,
+        0.40000000000001346,
+        0.7097442623367253,
+        0.8504546238448724
+      ],
+      "waterline_m": 0.02565938567971036,
+      "nativeCanoeVolume_m3": 0.025255932843669733,
+      "screen": {
+        "resistance_N": 7.074462412091205,
+        "resistance_weight_ratio": 0.028563363960187754,
+        "froude": 0.39999999999999997,
+        "froude_lower": 0.24999999999999997,
+        "froude_upper": 0.2,
+        "lcb_lower": 4.551914400963142e-15,
+        "lcb_upper": 0.08199999999999541,
+        "cp_lower": 0.19074426233672526,
+        "cp_upper": -0.1107442623367253,
+        "volume_area_lower": 0.13195264003862756,
+        "volume_area_upper": 0.05404735996137247,
+        "beam_length_lower": 0.6431150305574999,
+        "beam_length_upper": -0.4471150305574999,
+        "center_ratio_lower": 0.07999999999997542,
+        "center_ratio_upper": 0.0020000000000245377,
+        "volume_length_lower": 0.24674523876868315,
+        "volume_length_upper": -0.13674523876868314,
+        "cm_lower": 0.20445462384487234,
+        "cm_upper": -0.060454623844872324,
+        "beam_draft_lower": 5.630280179596347,
+        "beam_draft_upper": 11.289719820403652
+      },
+      "outsideEnvelope": [
+        "cp_upper",
+        "beam_length_upper",
+        "volume_length_upper",
+        "cm_upper"
+      ]
+    }
+  ]
+}

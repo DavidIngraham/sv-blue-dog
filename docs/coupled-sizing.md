@@ -60,6 +60,8 @@ The STEP contains a printed/ribbed 300 mm segment, not a complete boat wing. [Ex
 
 [Generated wing-analysis results](wing-analysis-results.md) distinguish the geometry extraction, numerical mesh sensitivity and physical evidence gaps. The coupled optimization remains incomplete until the integration gates above are met.
 
+The [hull-resistance implementation and geometry audit](hull-resistance.md) records the replacement regression and why the current hull family must change before another credible minimum-length search. It is not yet wired into the coupled operating kernel.
+
 ## Coupled execution
 
 [Coupled inputs](coupled-inputs.md) records the geometry/mass replay and VSPAERO grid. The [operation model](../models/coupled-operation.sysml) connects these to force balance, drive energy, structural margins and route assessment. [Sensitivity inputs](../models/coupled-uncertainty.sysml) distinguish nominal assumptions from adverse material, aerodynamic and energy cases; these are engineering brackets, not measured probability distributions.
