@@ -160,3 +160,7 @@ The first synthetic example passes the numerical 72-hour checks, but its worst o
 ### Keeping the requirements readable
 
 I found that the requirements were becoming a mixture of obligations, explanations and test instructions. I have separated those: each requirement now has a concise statement, while [qualification conditions, rationale and verification plans](requirements-context.md) live in distinct model elements. The limits still matter; they are easier to find without repeating them in every sentence. A planned verification case remains inconclusive until there is evidence behind it.
+
+### Connecting speed to reliability
+
+I am starting to treat cruise speed as a reliability decision: every slow leg or long wait asks the boat to keep working longer. The [first native analysis](cruise-reliability.md) links passage time to a failure budget. I have also started an [architecture DFMEA](dfmea.md), including weeds, water ingress, power faults and software lockups. The numbers are illustrative and the actions are open; the next step is to replace those assumptions with evidence.

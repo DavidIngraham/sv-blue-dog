@@ -1,0 +1,105 @@
+{
+  "status": "holds",
+  "exit": 0,
+  "checks": [
+    {
+      "subject": "BlueDogDFMEA::DesignFailureReview",
+      "status": "holds",
+      "values": [
+        {
+          "name": "modeCount",
+          "value": "12"
+        },
+        {
+          "name": "safetyCriticalCount",
+          "value": "10"
+        },
+        {
+          "name": "unresolvedCriticalCount",
+          "value": "10"
+        },
+        {
+          "name": "openActionCount",
+          "value": "12"
+        },
+        {
+          "name": "reviewReady",
+          "value": "false"
+        },
+        {
+          "name": "objective inventory",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogDFMEA::DesignFailureReview on object #1 of \"BlueDogDFMEA::starter\"",
+        "  modeCount = 12",
+        "  safetyCriticalCount = 10",
+        "  unresolvedCriticalCount = 10",
+        "  openActionCount = 12",
+        "  reviewReady = false",
+        "  objective inventory: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "output": [
+    "✓ package GorgeChallenge",
+    "✓ package BlueDog",
+    "✓ package BlueDogRequirements",
+    "✓ package BlueDogViews",
+    "✓ package BlueDogDocuments",
+    "✓ package BlueDogArchitectureViews",
+    "✓ package BlueDogUseCases",
+    "✓ package BlueDogUseCaseViews",
+    "✓ package BlueDogSatisfaction",
+    "✓ package RecoveryPropulsionTrade",
+    "✓ package BlueDogEnergy",
+    "✓ package BlueDogEnergyExamples",
+    "✓ package BlueDogDiagramDocuments",
+    "✓ package BlueDogRequirementVerification",
+    "✓ package BlueDogReliability",
+    "✓ package BlueDogReliabilityExamples",
+    "✓ package BlueDogDFMEA",
+    "✓ package BlueDogReliabilityDocuments",
+    "✓ Created instance of BlueDogDFMEA::starter",
+    "  ID: 1",
+    "  Use %features BlueDogDFMEA::starter to inspect"
+  ],
+  "errors": null
+}

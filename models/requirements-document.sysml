@@ -106,7 +106,7 @@ package BlueDogDocuments {
             columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"), Column(name = "Text", path = "issue.text")))
     }
     calc def VerificationSpecifications :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirementVerification")), type = "VerificationCaseDefinition"),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = ("BlueDogRequirementVerification", "BlueDogReliability"))), type = "VerificationCaseDefinition"),
             properties = ("shortName", "name", "documentation"),
             columns = (Column(name = "Verifies", cell = { in row : SysML::VerificationCaseDefinition;
                 RelatedElements(source = row, relationshipKind = "verification", direction = "outgoing", maxDepth = 1) })))

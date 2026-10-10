@@ -45,7 +45,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::transGorgeChallenge1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 220 node(s) without a position, left undrawn, and 432 edge(s) at them
+%% not represented: 229 node(s) without a position, left undrawn, and 450 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -91,7 +91,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::transGorgeChallenge2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 220 node(s) without a position, left undrawn, and 432 edge(s) at them
+%% not represented: 229 node(s) without a position, left undrawn, and 450 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

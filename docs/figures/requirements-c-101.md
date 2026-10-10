@@ -41,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::telemetryEquipment1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 114 node(s) without a position, left undrawn, and 149 edge(s) at them
+%% not represented: 120 node(s) without a position, left undrawn, and 155 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -87,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::telemetryEquipment2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 116 node(s) without a position, left undrawn, and 151 edge(s) at them
+%% not represented: 122 node(s) without a position, left undrawn, and 157 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

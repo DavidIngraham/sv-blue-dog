@@ -37,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::weedSnagShedding1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 59 node(s) without a position, left undrawn, and 71 edge(s) at them
+%% not represented: 65 node(s) without a position, left undrawn, and 77 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

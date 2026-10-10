@@ -53,7 +53,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 142 node(s) without a position, left undrawn, and 223 edge(s) at them
+%% not represented: 148 node(s) without a position, left undrawn, and 229 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -99,7 +99,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 142 node(s) without a position, left undrawn, and 223 edge(s) at them
+%% not represented: 148 node(s) without a position, left undrawn, and 229 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -145,7 +145,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 142 node(s) without a position, left undrawn, and 223 edge(s) at them
+%% not represented: 148 node(s) without a position, left undrawn, and 229 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -191,7 +191,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::lowEnergyRecovery4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 145 node(s) without a position, left undrawn, and 226 edge(s) at them
+%% not represented: 151 node(s) without a position, left undrawn, and 232 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

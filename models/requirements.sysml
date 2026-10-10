@@ -2962,4 +2962,175 @@ package BlueDogRequirements {
         return verdict : Boolean;
         accepted
     }
+    requirement def <'Q-001'> CruisePerformance {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall sustain sailing performance sufficient to complete each declared unassisted mission route. */
+        comment conditions /* The declared route includes sailing legs, current projections, weather holds and maneuvering time. Apply Q-101 through Q-103. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Cruise speed determines exposure to failures; water speed alone does not establish route completion."; }
+    }
+    requirement cruisePerformance : CruisePerformance;
+    requirement def <'Q-101'> LegProgress {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall achieve at least 0.5 m/s mean along-route ground progress on each planned sailing leg. */
+        comment conditions /* Evaluate sailing-only, loaded configuration under the declared wind, wave, current and fouling profile. Include tacking in water-relative velocity made good. Holds are separate exposure intervals, not discarded samples. */
+        metadata rationale : ModelingMetadata::Rationale { text = "0.5 m/s is a proposed design target, not a measured capability or a guarantee throughout the survival envelope."; }
+        metadata issue : ModelingMetadata::Issue { text = "Proposed target pending design review and mission-profile selection."; }
+        attribute groundSpeeds : SpeedValue [1..*] ordered nonunique;
+        require constraint acceptance { LegProgressCriterion(groundSpeeds) }
+    }
+    requirement legProgress : LegProgress;
+    requirement def <'Q-102'> PassageDuration {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall complete the declared route within the qualified unassisted operating duration. */
+        comment conditions /* Passage duration includes every sailing leg, weather hold and maneuver. Qualified duration must come from the same configuration and applicable environment. */
+        metadata rationale : ModelingMetadata::Rationale { text = "A fast moving-leg average cannot conceal long periods waiting for usable wind."; }
+        attribute voyageDuration : TimeValue;
+        attribute qualifiedDuration : TimeValue;
+        require constraint acceptance { PassageDurationCriterion(voyageDuration, qualifiedDuration) }
+    }
+    requirement passageDuration : PassageDuration;
+    requirement def <'Q-103'> CruiseEvidence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The cruise-performance assessment shall use accepted loaded-vessel sailing evidence for its declared mission profile. */
+        comment conditions /* Evidence records route distance, wind/sea state, signed along-route current, sailing polar or measured velocity made good, fouling allowance, holds, uncertainty and configuration. No auxiliary propulsion credit for the Gorge challenge. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Synthetic inputs support sensitivity analysis only."; }
+    }
+    requirement cruiseEvidence : CruiseEvidence;
+    requirement def <'L-001'> MissionReliability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall preserve mission-critical functions throughout each declared unassisted voyage. */
+        comment conditions /* Apply L-101 through L-104 separately to the Gorge and Hawaii profiles. Failure includes loss of required control, mission completion, safety function or required observation service. Recovery that violates the mission rules is not success. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Longer passages impose tighter reliability budgets; Gorge performance does not qualify an ocean mission."; }
+    }
+    requirement missionReliability : MissionReliability;
+    requirement def <'L-101'> MissionSuccessProbability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The lower 95-percent confidence bound on mission reliability shall be at least 0.90 over the declared voyage duration. */
+        comment conditions /* Reliability means absence of mission-critical failure over total elapsed exposure, including holds. Statistical evidence must represent the declared configuration, environment and failure definition. */
+        metadata rationale : ModelingMetadata::Rationale { text = "0.90 at 95-percent confidence is a proposed engineering target. It is not a measured reliability estimate."; }
+        metadata issue : ModelingMetadata::Issue { text = "Proposed target pending design review and mission-profile selection."; }
+        attribute lowerBound : Real;
+        attribute confidence : Real;
+        require constraint acceptance { MissionReliabilityCriterion(lowerBound, confidence) }
+    }
+    requirement missionSuccessProbability : MissionSuccessProbability;
+    requirement def <'L-102'> FailureRateBudget {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The combined mission-critical failure-rate bound shall not exceed the budget derived from L-101 and the Q-102 exposure duration. */
+        comment conditions /* The initial constant-hazard model sums non-overlapping independent critical failure rates plus a separately assessed common-cause contribution. Component bounds require a joint-confidence argument; summing individual 95-percent bounds does not establish a system 95-percent bound. Wear, systematic software faults, variable stress and recovery need a different model when this assumption is unsupported. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Use lambda_max = -ln(0.90)/T. Do not sum DFMEA ordinal rankings or assume missing rates are zero."; }
+        attribute ratePerHour : Real;
+        attribute exposureHours : Real;
+        require constraint acceptance { FailureRateCriterion(ratePerHour, exposureHours) }
+    }
+    requirement failureRateBudget : FailureRateBudget;
+    requirement def <'L-103'> ReliabilityEvidence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The reliability assessment shall use accepted mission-representative evidence supporting its failure-rate bound. */
+        comment conditions /* Document confidence method, censoring, configuration, mission profile, exposure and observed critical failures. The initial zero-failure demonstration is invalid when failures occurred or the constant-hazard assumption is unsupported. */
+        metadata rationale : ModelingMetadata::Rationale { text = "A numerical estimate is not a confidence bound; shorter tests cannot establish an indefinite lifetime."; }
+    }
+    requirement reliabilityEvidence : ReliabilityEvidence;
+    requirement def <'L-104'> CriticalFailureDisposition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Each identified safety-critical failure mode shall have an accepted disposition before an unassisted launch. */
+        comment conditions /* Acceptance requires evidence for prevention, detection and response, or an explicitly reviewed residual risk. The DFMEA starter is incomplete; completing listed rows does not demonstrate hazard coverage. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Potential harm to other waterway users must not be traded against an attractive aggregate reliability score."; }
+    }
+    requirement criticalFailureDisposition : CriticalFailureDisposition;
+    #derivation connection cruiseReliabilityDerivation1 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "cruisePerformance supplies an acceptance condition needed to achieve roundTrip."; }
+        end #original source ::> roundTrip;
+        end #derive target ::> cruisePerformance;
+    }
+    #derivation connection cruiseReliabilityDerivation2 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "cruisePerformance supplies an acceptance condition needed to achieve hawaiiVoyage."; }
+        end #original source ::> hawaiiVoyage;
+        end #derive target ::> cruisePerformance;
+    }
+    #derivation connection cruiseReliabilityDerivation3 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability supplies an acceptance condition needed to achieve roundTrip."; }
+        end #original source ::> roundTrip;
+        end #derive target ::> missionReliability;
+    }
+    #derivation connection cruiseReliabilityDerivation4 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability supplies an acceptance condition needed to achieve hawaiiVoyage."; }
+        end #original source ::> hawaiiVoyage;
+        end #derive target ::> missionReliability;
+    }
+    #derivation connection cruiseReliabilityDerivation5 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability supplies an acceptance condition needed to achieve repeatedOperation."; }
+        end #original source ::> repeatedOperation;
+        end #derive target ::> missionReliability;
+    }
+    #derivation connection cruiseReliabilityDerivation6 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "legProgress supplies an acceptance condition needed to achieve cruisePerformance."; }
+        end #original source ::> cruisePerformance;
+        end #derive target ::> legProgress;
+    }
+    #derivation connection cruiseReliabilityDerivation7 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "passageDuration supplies an acceptance condition needed to achieve cruisePerformance."; }
+        end #original source ::> cruisePerformance;
+        end #derive target ::> passageDuration;
+    }
+    #derivation connection cruiseReliabilityDerivation8 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "cruiseEvidence supplies an acceptance condition needed to achieve cruisePerformance."; }
+        end #original source ::> cruisePerformance;
+        end #derive target ::> cruiseEvidence;
+    }
+    #derivation connection cruiseReliabilityDerivation9 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "missionSuccessProbability supplies an acceptance condition needed to achieve missionReliability."; }
+        end #original source ::> missionReliability;
+        end #derive target ::> missionSuccessProbability;
+    }
+    #derivation connection cruiseReliabilityDerivation10 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "failureRateBudget supplies an acceptance condition needed to achieve missionReliability."; }
+        end #original source ::> missionReliability;
+        end #derive target ::> failureRateBudget;
+    }
+    #derivation connection cruiseReliabilityDerivation11 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "reliabilityEvidence supplies an acceptance condition needed to achieve missionReliability."; }
+        end #original source ::> missionReliability;
+        end #derive target ::> reliabilityEvidence;
+    }
+    #derivation connection cruiseReliabilityDerivation12 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "criticalFailureDisposition supplies an acceptance condition needed to achieve missionReliability."; }
+        end #original source ::> missionReliability;
+        end #derive target ::> criticalFailureDisposition;
+    }
+    calc def LegProgressCriterion {
+        in speeds : SpeedValue [1..*] ordered nonunique;
+        return verdict : Boolean;
+        SequenceFunctions::size(speeds) > 0 and speeds->ControlFunctions::forAll { in speed : SpeedValue; speed >= 0.5 [m/s] }
+    }
+    calc def PassageDurationCriterion {
+        in exposure : TimeValue;
+        in qualified : TimeValue;
+        return verdict : Boolean;
+        exposure > 0 [s] and qualified > 0 [s] and exposure <= qualified
+    }
+    calc def MissionReliabilityCriterion {
+        in lowerBound : Real;
+        in confidence : Real;
+        return verdict : Boolean;
+        lowerBound >= 0.90 and lowerBound <= 1 and confidence >= 0.95 and confidence < 1
+    }
+    calc def FailureRateCriterion {
+        in ratePerHour : Real;
+        in exposureHours : Real;
+        return verdict : Boolean;
+        ratePerHour >= 0 and exposureHours > 0 and ratePerHour * exposureHours <= -OpenSysMLMathFunctions::ln(0.90)
+    }
 }

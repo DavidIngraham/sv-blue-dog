@@ -12,6 +12,8 @@
 
 **E-200 SustainedEnergyFeasibility** — The installed energy architecture shall support the selected bounded repeating profile without external charging, meeting the derived reserve, cycle-balance and peak-supply criteria.
 
+**L-001 MissionReliability** — The vessel shall preserve mission-critical functions throughout each declared unassisted voyage.
+
 ## C-002 derivation 1
 
 ```mermaid
@@ -39,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::repeatedOperation1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 222 node(s) without a position, left undrawn, and 437 edge(s) at them
+%% not represented: 231 node(s) without a position, left undrawn, and 455 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -63,3 +65,43 @@ flowchart BT
 [Continue: P-003 serviceability](<requirements-p-003.md>)
 
 [Continue: E-200 sustained energy feasibility](<requirements-e-200.md>)
+
+## C-002 derivation 2
+
+```mermaid
+---
+config:
+  fontFamily: "Helvetica, Arial, sans-serif"
+  theme: base
+  themeCSS: ".edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }"
+  themeVariables:
+    fontFamily: "Helvetica, Arial, sans-serif"
+    fontSize: "14px"
+    primaryColor: "#FFFFFF"
+    secondaryColor: "#FFFFFF"
+    tertiaryColor: "#FFFFFF"
+    background: "#FFFFFF"
+    primaryBorderColor: "#181818"
+    primaryTextColor: "#000000"
+    lineColor: "#181818"
+    textColor: "#000000"
+    noteBkgColor: "#FEFFDD"
+    noteBorderColor: "#181818"
+    noteTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#181818"
+    edgeLabelBackground: "#FFFFFF"
+---
+%% BlueDogViews::repeatedOperation2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 230 node(s) without a position, left undrawn, and 450 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+flowchart BT
+  n0("`*«requirement»*
+**GorgeChallenge::repeatedOperation : RepeatedOperation**`")
+  n1("`*«requirement»*
+**BlueDogRequirements::missionReliability : MissionReliability**`")
+  n1 -.->|"derive"| n0
+```
+
+[Continue: L-001 missionReliability](<requirements-l-001.md>)

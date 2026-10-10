@@ -47,7 +47,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::envelopeTransition1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 105 node(s) without a position, left undrawn, and 152 edge(s) at them
+%% not represented: 111 node(s) without a position, left undrawn, and 158 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -93,7 +93,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::envelopeTransition2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 116 node(s) without a position, left undrawn, and 190 edge(s) at them
+%% not represented: 122 node(s) without a position, left undrawn, and 196 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -139,7 +139,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::envelopeTransition3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 111 node(s) without a position, left undrawn, and 159 edge(s) at them
+%% not represented: 117 node(s) without a position, left undrawn, and 165 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

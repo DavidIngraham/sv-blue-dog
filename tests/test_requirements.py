@@ -8,6 +8,8 @@ from scripts.render_requirements import native, native_graph, native_register, M
 
 
 ENERGY_LINKS = [('repeatedOperation', 'sustainedEnergyFeasibility'), ('hawaiiVoyage', 'sustainedEnergyFeasibility'), ('sustainedEnergyFeasibility', 'sustainedReserveProtection'), ('sustainedEnergyFeasibility', 'repeatableCycleBalance'), ('sustainedEnergyFeasibility', 'peakSupplyCapability'), ('sustainedEnergyFeasibility', 'energyEvidenceReadiness'), ('multiDayEndurance', 'sustainedReserveProtection'), ('multiDayEndurance', 'peakSupplyCapability'), ('multiDayEndurance', 'harvestCampaignCoverage'), ('multiDayEndurance', 'energyEvidenceReadiness'), ('recoveryEnergy', 'sustainedReserveProtection')]
+RELIABILITY_LINKS = [['roundTrip', 'cruisePerformance'], ['hawaiiVoyage', 'cruisePerformance'], ['roundTrip', 'missionReliability'], ['hawaiiVoyage', 'missionReliability'], ['repeatedOperation', 'missionReliability'], ['cruisePerformance', 'legProgress'], ['cruisePerformance', 'passageDuration'], ['cruisePerformance', 'cruiseEvidence'], ['missionReliability', 'missionSuccessProbability'], ['missionReliability', 'failureRateBudget'], ['missionReliability', 'reliabilityEvidence'], ['missionReliability', 'criticalFailureDisposition']]
+RELIABILITY_IDS = {'L-101', 'Q-101', 'Q-102', 'L-103', 'L-001', 'Q-001', 'L-104', 'Q-103', 'L-102'}
 ENERGY_IDS = {f'E-{i}' for i in range(200, 206)}
 ATOMIC = json.loads(Path(__file__).with_name('atomic_requirements.json').read_text())
 
@@ -24,7 +26,7 @@ def published_model():
 
 
 def test_native_validation():
-    native("-validate")
+    assert not json.loads(native("-validate", "-json"))["diagnostics"]
 
 def test_challenge_is_standalone():
     native("-validate", models=MODELS[:1])
@@ -48,9 +50,10 @@ def test_diagram_preserves_expected_derivations(published_model):
     expected.update((r['parent'], r['usage']) for r in ATOMIC['leaves'])
     expected.update(tuple(edge) for edge in ATOMIC['shared_links'])
     expected.update(ENERGY_LINKS)
+    expected.update(tuple(edge) for edge in RELIABILITY_LINKS)
     assert set(published_model.edges) == expected
     assert len(published_model.edges) == len(expected)
-    assert len({name for edge in published_model.edges for name in edge}) == 66 + len(ATOMIC['leaves']) + len(ENERGY_IDS)
+    assert len({name for edge in published_model.edges for name in edge}) == 66 + len(ATOMIC['leaves']) + len(ENERGY_IDS) + len(RELIABILITY_IDS)
 
 def test_use_case_and_satisfaction_traceability():
     text = native("-render-document", "BlueDogDocuments::Traceability")
@@ -74,7 +77,7 @@ def test_exactly_two_top_level_drivers(published_model):
     assert roots == {'transGorgeChallenge', 'hawaiiVoyage'}
 
 def test_register_preserves_ids_status_and_relationships(published_model):
-    ids = re.findall(r"^\| ([CHEMPNSR]-[0-9]+) \|", published_model.markdown, re.MULTILINE)
+    ids = re.findall(r"^\| ([CHEMPNSRQL]-[0-9]+) \|", published_model.markdown, re.MULTILINE)
     expected = {"H-001", "M-001", "M-002",
                 *(f"C-00{i}" for i in range(7)), *(f"E-00{i}" for i in range(1, 8))}
     expected.update(['P-001', 'P-002', 'P-003', 'S-001', 'S-002', 'S-003', 'S-004', 'S-005', 'N-001', 'N-002', 'N-003', 'R-001', 'R-002', 'C-101', 'C-102'])
@@ -82,6 +85,7 @@ def test_register_preserves_ids_status_and_relationships(published_model):
     expected.update(['E-008', 'R-003', 'R-004'])
     expected.update(r['id'] for r in ATOMIC['leaves'])
     expected.update(ENERGY_IDS)
+    expected.update(RELIABILITY_IDS)
     assert set(ids) == expected
     assert len(ids) == len(expected)
     for source, target in published_model.edges:
@@ -98,7 +102,7 @@ def test_focused_views_cover_all_derivations(published_model):
     # The full native graph is an oracle only; readers receive bounded views.
     edges = set()
     pages = list(Path('docs/figures').glob('requirements-*.md'))
-    assert len(pages) == 47
+    assert len(pages) == 49
     assert not Path('docs/figures/requirements-derivation.md').exists()
     for page in pages:
         import re
@@ -115,7 +119,7 @@ def test_focused_views_cover_all_derivations(published_model):
 def test_statements_exclude_supporting_material(published_model):
     statement_rows = re.findall(r'^\| [A-Z]-\d+ \| \w+ \| open \| (.*?) \|$',
                                 published_model.markdown, re.M)
-    assert len(statement_rows) == 199
+    assert len(statement_rows) == 208
     assert all(len(text.split()) <= 45 for text in statement_rows)
     assert all('Verification uses' not in text and 'Aggregate requirement' not in text
                and 'Shared verification context' not in text for text in statement_rows)

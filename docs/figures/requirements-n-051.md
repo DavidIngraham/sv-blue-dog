@@ -41,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::selfRighting1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 71 node(s) without a position, left undrawn, and 95 edge(s) at them
+%% not represented: 77 node(s) without a position, left undrawn, and 101 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -87,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::selfRighting2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 73 node(s) without a position, left undrawn, and 97 edge(s) at them
+%% not represented: 79 node(s) without a position, left undrawn, and 103 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

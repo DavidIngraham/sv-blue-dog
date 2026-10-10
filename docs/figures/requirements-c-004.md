@@ -37,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::sailingPropulsion1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 220 node(s) without a position, left undrawn, and 415 edge(s) at them
+%% not represented: 230 node(s) without a position, left undrawn, and 433 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

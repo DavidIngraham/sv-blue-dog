@@ -7,7 +7,7 @@ package BlueDogDiagramDocuments {
         Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::courseCompletion", "BlueDogRequirements::roundTrip")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements3 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::repeatedOperation", "BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::serviceability", "BlueDogRequirements::sustainedEnergyFeasibility")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::repeatedOperation", "BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::serviceability", "BlueDogRequirements::sustainedEnergyFeasibility", "BlueDogRequirements::missionReliability")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements4 :> Query {
         Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::unassistedAttempt", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::challengeMotorInhibition", "BlueDogRequirements::commandIntegrity")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
@@ -22,10 +22,10 @@ package BlueDogDiagramDocuments {
         Project(source = RelatedElements(source = Named(qualifiedName = ("GorgeChallenge::emergencyIntervention", "BlueDogRequirements::communications", "BlueDogRequirements::safeRecovery", "BlueDogRequirements::commandIntegrity")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements8 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDog::Goals::hawaiiVoyage", "BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::communications", "BlueDogRequirements::resetRecovery", "BlueDogRequirements::missionEvidence", "BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::oceanEnvironment", "BlueDogRequirements::operatingBoundary", "BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::serviceability", "BlueDogRequirements::sustainedEnergyFeasibility")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDog::Goals::hawaiiVoyage", "BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::communications", "BlueDogRequirements::resetRecovery", "BlueDogRequirements::missionEvidence", "BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::oceanEnvironment", "BlueDogRequirements::operatingBoundary", "BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::serviceability", "BlueDogRequirements::sustainedEnergyFeasibility", "BlueDogRequirements::cruisePerformance", "BlueDogRequirements::missionReliability")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements9 :> Query {
-        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::roundTrip", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::resetRecovery", "BlueDogRequirements::communications", "BlueDogRequirements::ingressResponse", "BlueDogRequirements::missionEvidence", "BlueDogRequirements::transportability", "BlueDogRequirements::desktopManufacture", "BlueDogRequirements::operatingBoundary", "BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::gorgeEnvironment")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::roundTrip", "BlueDogRequirements::navigationAndControl", "BlueDogRequirements::resetRecovery", "BlueDogRequirements::communications", "BlueDogRequirements::ingressResponse", "BlueDogRequirements::missionEvidence", "BlueDogRequirements::transportability", "BlueDogRequirements::desktopManufacture", "BlueDogRequirements::operatingBoundary", "BlueDogRequirements::regulatoryClassification", "BlueDogRequirements::environmentalEnvelope", "BlueDogRequirements::gorgeEnvironment", "BlueDogRequirements::cruisePerformance", "BlueDogRequirements::missionReliability")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
     }
     calc def Statements10 :> Query {
         Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::multiDayEndurance", "BlueDogRequirements::energyAwareness", "BlueDogRequirements::lowEnergyRecovery", "BlueDogRequirements::sustainedReserveProtection", "BlueDogRequirements::peakSupplyCapability", "BlueDogRequirements::harvestCampaignCoverage", "BlueDogRequirements::energyEvidenceReadiness")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
@@ -269,7 +269,9 @@ package BlueDogDiagramDocuments {
         part next2 : Paragraph {
             part next : Link { attribute redefines text = "Continue: E-200 sustained energy feasibility"; attribute redefines target = "requirements-e-200.md"; }
         }
-    }
+            part group2 : Section { attribute redefines title = "C-002 derivation 2"; part diagram : Diagram { attribute redefines direction = "BT"; ref redefines source = BlueDogViews::repeatedOperation2; } }
+        part continueMissionReliability : Paragraph { part link : Link { attribute redefines text = "Continue: L-001 missionReliability"; attribute redefines target = "requirements-l-001.md"; } }
+}
     part def UnassistedAttemptRequirements :> Document {
         attribute redefines title = "C-003 unassisted attempt";
         part navigation : Paragraph {
@@ -455,7 +457,10 @@ package BlueDogDiagramDocuments {
         part next10 : Paragraph {
             part next : Link { attribute redefines text = "Continue: E-200 sustained energy feasibility"; attribute redefines target = "requirements-e-200.md"; }
         }
-    }
+            part group5 : Section { attribute redefines title = "H-001 derivation 5"; part diagram : Diagram { attribute redefines direction = "BT"; ref redefines source = BlueDogViews::hawaiiVoyage5; } }
+        part continueCruisePerformance : Paragraph { part link : Link { attribute redefines text = "Continue: Q-001 cruisePerformance"; attribute redefines target = "requirements-q-001.md"; } }
+        part continueMissionReliability : Paragraph { part link : Link { attribute redefines text = "Continue: L-001 missionReliability"; attribute redefines target = "requirements-l-001.md"; } }
+}
     part def RoundTripRequirements :> Document {
         attribute redefines title = "M-001 round trip";
         part navigation : Paragraph {
@@ -527,7 +532,10 @@ package BlueDogDiagramDocuments {
         part next10 : Paragraph {
             part next : Link { attribute redefines text = "Continue: N-010 gorge environment"; attribute redefines target = "requirements-n-010.md"; }
         }
-    }
+            part group5 : Section { attribute redefines title = "M-001 derivation 5"; part diagram : Diagram { attribute redefines direction = "BT"; ref redefines source = BlueDogViews::roundTrip5; } }
+        part continueCruisePerformance : Paragraph { part link : Link { attribute redefines text = "Continue: Q-001 cruisePerformance"; attribute redefines target = "requirements-q-001.md"; } }
+        part continueMissionReliability : Paragraph { part link : Link { attribute redefines text = "Continue: L-001 missionReliability"; attribute redefines target = "requirements-l-001.md"; } }
+}
     part def MultiDayEnduranceRequirements :> Document {
         attribute redefines title = "M-002 multi day endurance";
         part navigation : Paragraph {
@@ -1726,4 +1734,25 @@ package BlueDogDiagramDocuments {
             }
         }
     }
+    calc def CruisePerformanceStatements :> Query {
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::cruisePerformance", "BlueDogRequirements::legProgress", "BlueDogRequirements::passageDuration", "BlueDogRequirements::cruiseEvidence")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
+    }
+    part def CruisePerformanceRequirements :> Document {
+        attribute redefines title = "Q-001 CruisePerformance";
+        part navigation : Paragraph { part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; } }
+        part contextLink : Paragraph { part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; } }
+        part statements : Definitions { attribute redefines term = "Label"; attribute redefines description = "documentation"; calc rows : CruisePerformanceStatements; }
+            part group1 : Section { attribute redefines title = "Q-001 derivation 1"; part diagram : Diagram { attribute redefines direction = "BT"; ref redefines source = BlueDogViews::cruisePerformance1; } }
+}
+    calc def MissionReliabilityStatements :> Query {
+        Project(source = RelatedElements(source = Named(qualifiedName = ("BlueDogRequirements::missionReliability", "BlueDogRequirements::missionSuccessProbability", "BlueDogRequirements::failureRateBudget", "BlueDogRequirements::reliabilityEvidence", "BlueDogRequirements::criticalFailureDisposition")), relationshipKind = "typing", direction = "outgoing", maxDepth = 1), properties = ("name", "documentation"), columns = (Column(name = "Label", cell = { in row : KerML::Root::Element; row.declaredShortName + " " + row.declaredName })))
+    }
+    part def MissionReliabilityRequirements :> Document {
+        attribute redefines title = "L-001 MissionReliability";
+        part navigation : Paragraph { part index : Link { attribute redefines text = "All requirement views"; attribute redefines target = "../requirements-views.md"; } }
+        part contextLink : Paragraph { part context : Link { attribute redefines text = "Qualification conditions, rationale, open issues and verification"; attribute redefines target = "../requirements-context.md"; } }
+        part statements : Definitions { attribute redefines term = "Label"; attribute redefines description = "documentation"; calc rows : MissionReliabilityStatements; }
+            part group1 : Section { attribute redefines title = "L-001 derivation 1"; part diagram : Diagram { attribute redefines direction = "BT"; ref redefines source = BlueDogViews::missionReliability1; } }
+        part group2 : Section { attribute redefines title = "L-001 derivation 2"; part diagram : Diagram { attribute redefines direction = "BT"; ref redefines source = BlueDogViews::missionReliability2; } }
+}
 }

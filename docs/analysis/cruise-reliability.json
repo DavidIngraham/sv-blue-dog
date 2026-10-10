@@ -1,0 +1,165 @@
+{
+  "status": "holds",
+  "exit": 0,
+  "checks": [
+    {
+      "subject": "BlueDogReliability::CruiseReliability",
+      "status": "holds",
+      "values": [
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "groundSpeeds",
+          "value": "[0.5 [SI::'m/s'], 3.5 [SI::'m/s']]"
+        },
+        {
+          "name": "voyageHours",
+          "value": "69.4920634920635"
+        },
+        {
+          "name": "minimumProgressMet",
+          "value": "true"
+        },
+        {
+          "name": "durationMet",
+          "value": "true"
+        },
+        {
+          "name": "allowableRatePerHour",
+          "value": "0.0015161517785388433"
+        },
+        {
+          "name": "modeledReliability",
+          "value": "0.9591620520875801"
+        },
+        {
+          "name": "rateBudgetMet",
+          "value": "true"
+        },
+        {
+          "name": "requiredZeroFailureHours",
+          "value": "1975.878877008646"
+        },
+        {
+          "name": "demonstrationApplicable",
+          "value": "true"
+        },
+        {
+          "name": "zeroFailureUpperRate",
+          "value": "0.0014978661367769954"
+        },
+        {
+          "name": "demonstratedReliabilityLowerBound",
+          "value": "0.9011443632016465"
+        },
+        {
+          "name": "demonstrationMet",
+          "value": "true"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "modeledFeasible",
+          "value": "true"
+        },
+        {
+          "name": "reliabilitySupported",
+          "value": "false"
+        },
+        {
+          "name": "objective feasibility",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogReliability::CruiseReliability on object #1 of \"BlueDogReliabilityExamples::gorgeIllustration\"",
+        "  inputsValid = true",
+        "  groundSpeeds = [0.5 [SI::'m/s'], 3.5 [SI::'m/s']]",
+        "  voyageHours = 69.4920634920635",
+        "  minimumProgressMet = true",
+        "  durationMet = true",
+        "  allowableRatePerHour = 0.0015161517785388433",
+        "  modeledReliability = 0.9591620520875801",
+        "  rateBudgetMet = true",
+        "  requiredZeroFailureHours = 1975.878877008646",
+        "  demonstrationApplicable = true",
+        "  zeroFailureUpperRate = 0.0014978661367769954",
+        "  demonstratedReliabilityLowerBound = 0.9011443632016465",
+        "  demonstrationMet = true",
+        "  evidenceReady = false",
+        "  modeledFeasible = true",
+        "  reliabilitySupported = false",
+        "  objective feasibility: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "output": [
+    "✓ package GorgeChallenge",
+    "✓ package BlueDog",
+    "✓ package BlueDogRequirements",
+    "✓ package BlueDogViews",
+    "✓ package BlueDogDocuments",
+    "✓ package BlueDogArchitectureViews",
+    "✓ package BlueDogUseCases",
+    "✓ package BlueDogUseCaseViews",
+    "✓ package BlueDogSatisfaction",
+    "✓ package RecoveryPropulsionTrade",
+    "✓ package BlueDogEnergy",
+    "✓ package BlueDogEnergyExamples",
+    "✓ package BlueDogDiagramDocuments",
+    "✓ package BlueDogRequirementVerification",
+    "✓ package BlueDogReliability",
+    "✓ package BlueDogReliabilityExamples",
+    "✓ package BlueDogDFMEA",
+    "✓ package BlueDogReliabilityDocuments",
+    "✓ Created instance of BlueDogReliabilityExamples::gorgeIllustration",
+    "  ID: 1",
+    "  Use %features BlueDogReliabilityExamples::gorgeIllustration to inspect"
+  ],
+  "errors": null
+}

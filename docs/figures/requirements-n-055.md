@@ -41,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::weedBlockageResponse1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 104 node(s) without a position, left undrawn, and 148 edge(s) at them
+%% not represented: 110 node(s) without a position, left undrawn, and 154 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -87,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::weedBlockageResponse2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 111 node(s) without a position, left undrawn, and 160 edge(s) at them
+%% not represented: 117 node(s) without a position, left undrawn, and 166 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

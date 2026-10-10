@@ -37,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::recoveryEnergy1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 69 node(s) without a position, left undrawn, and 80 edge(s) at them
+%% not represented: 75 node(s) without a position, left undrawn, and 86 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

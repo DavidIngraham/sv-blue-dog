@@ -43,7 +43,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::operatingBoundary1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 149 node(s) without a position, left undrawn, and 236 edge(s) at them
+%% not represented: 159 node(s) without a position, left undrawn, and 254 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -89,7 +89,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::operatingBoundary2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 150 node(s) without a position, left undrawn, and 237 edge(s) at them
+%% not represented: 160 node(s) without a position, left undrawn, and 255 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

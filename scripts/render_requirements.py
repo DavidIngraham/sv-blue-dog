@@ -15,7 +15,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = tuple(ROOT / "models" / name for name in (
     "challenge.sysml", "blue-dog.sysml", "requirements.sysml",
-    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml"))
+    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml", "cruise-reliability.sysml", "dfmea.sysml", "reliability-documents.sysml"))
 
 
 def native(*arguments, models=MODELS):
@@ -70,6 +70,14 @@ def main():
         "-render-document", "BlueDogDocuments::Traceability")
     outputs[ROOT / "docs/requirements-context.md"] = native(
         "-render-document", "BlueDogDocuments::RequirementContext")
+    outputs[ROOT / "docs/dfmea.md"] = native("-render-document", "BlueDogReliabilityDocuments::DFMEA")
+    outputs[ROOT / "docs/cruise-reliability-results.md"] = native("-render-document", "BlueDogReliabilityDocuments::CruiseReport")
+    outputs[ROOT / "docs/analysis/cruise-reliability.json"] = native(
+        "-instantiate", "BlueDogReliabilityExamples::gorgeIllustration", "-analysis",
+        "BlueDogReliability::CruiseReliability BlueDogReliabilityExamples::gorgeIllustration", "-json")
+    outputs[ROOT / "docs/analysis/dfmea.json"] = native(
+        "-instantiate", "BlueDogDFMEA::starter", "-analysis",
+        "BlueDogDFMEA::DesignFailureReview BlueDogDFMEA::starter", "-json")
     diagrams = {}
     # Compile the model once per format, rather than once for every view.
     with tempfile.TemporaryDirectory(dir=ROOT / ".tools", prefix="documents-") as scratch:
@@ -125,6 +133,8 @@ def main():
             "requirements-n-056": "RecoveryPropulsorWeedsRequirements",
             "requirements-r-004": "ChallengeMotorInhibitionRequirements",
             "requirements-e-200": "SustainedEnergyFeasibilityRequirements",
+            "requirements-q-001": "CruisePerformanceRequirements",
+            "requirements-l-001": "MissionReliabilityRequirements",
             "architecture": "ArchitectureDiagram", "context": "ContextDiagram",
             "architecture-detail": "DetailDiagram", "use-cases": "UseCasesDiagram",
         }.items():
@@ -151,7 +161,7 @@ def main():
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(content.encode("utf-8"))
-    print("Native validation, publishing, recovery-trade and sustained-energy analyses passed; physical compliance is not evaluated.")
+    print("Native validation, publishing and model analyses passed; physical compliance is not evaluated.")
 
 
 if __name__ == "__main__":

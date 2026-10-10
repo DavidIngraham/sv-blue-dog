@@ -210,3 +210,12 @@ Use-case objectives subset the referenced requirements. Satisfy relationships ex
 | peakSupplyCapability | energy |
 | harvestCampaignCoverage |  |
 | energyEvidenceReadiness |  |
+| cruisePerformance | boat |
+| legProgress | boat |
+| passageDuration | boat |
+| cruiseEvidence |  |
+| missionReliability | boat |
+| missionSuccessProbability | boat |
+| failureRateBudget | boat |
+| reliabilityEvidence |  |
+| criticalFailureDisposition |  |

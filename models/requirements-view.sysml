@@ -1008,4 +1008,58 @@ package BlueDogViews {
         metadata Layout about BlueDogRequirements::sustainedEnergyFeasibility { x = 0; y = 0; }
         metadata Layout about BlueDogRequirements::energyEvidenceReadiness { x = 0; y = 200; }
     }
+    view roundTrip5 : GeneralView {
+        expose BlueDogRequirements::roundTrip;
+        expose BlueDogRequirements::cruisePerformance;
+        expose BlueDogRequirements::missionReliability;
+        filter @SysML::RequirementUsage;
+        metadata Layout about BlueDogRequirements::roundTrip { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::cruisePerformance { x = 0; y = 200; }
+        metadata Layout about BlueDogRequirements::missionReliability { x = 300; y = 200; }
+    }
+    view hawaiiVoyage5 : GeneralView {
+        expose BlueDog::Goals::hawaiiVoyage;
+        expose BlueDogRequirements::cruisePerformance;
+        expose BlueDogRequirements::missionReliability;
+        filter @SysML::RequirementUsage;
+        metadata Layout about BlueDog::Goals::hawaiiVoyage { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::cruisePerformance { x = 0; y = 200; }
+        metadata Layout about BlueDogRequirements::missionReliability { x = 300; y = 200; }
+    }
+    view repeatedOperation2 : GeneralView {
+        expose GorgeChallenge::repeatedOperation;
+        expose BlueDogRequirements::missionReliability;
+        filter @SysML::RequirementUsage;
+        metadata Layout about GorgeChallenge::repeatedOperation { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::missionReliability { x = 0; y = 200; }
+    }
+    view cruisePerformance1 : GeneralView {
+        expose BlueDogRequirements::cruisePerformance;
+        expose BlueDogRequirements::legProgress;
+        expose BlueDogRequirements::passageDuration;
+        expose BlueDogRequirements::cruiseEvidence;
+        filter @SysML::RequirementUsage;
+        metadata Layout about BlueDogRequirements::cruisePerformance { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::legProgress { x = 0; y = 200; }
+        metadata Layout about BlueDogRequirements::passageDuration { x = 300; y = 200; }
+        metadata Layout about BlueDogRequirements::cruiseEvidence { x = 600; y = 200; }
+    }
+    view missionReliability1 : GeneralView {
+        expose BlueDogRequirements::missionReliability;
+        expose BlueDogRequirements::missionSuccessProbability;
+        expose BlueDogRequirements::failureRateBudget;
+        expose BlueDogRequirements::reliabilityEvidence;
+        filter @SysML::RequirementUsage;
+        metadata Layout about BlueDogRequirements::missionReliability { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::missionSuccessProbability { x = 0; y = 200; }
+        metadata Layout about BlueDogRequirements::failureRateBudget { x = 300; y = 200; }
+        metadata Layout about BlueDogRequirements::reliabilityEvidence { x = 600; y = 200; }
+    }
+    view missionReliability2 : GeneralView {
+        expose BlueDogRequirements::missionReliability;
+        expose BlueDogRequirements::criticalFailureDisposition;
+        filter @SysML::RequirementUsage;
+        metadata Layout about BlueDogRequirements::missionReliability { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::criticalFailureDisposition { x = 0; y = 200; }
+    }
 }

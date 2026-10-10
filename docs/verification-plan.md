@@ -1,6 +1,6 @@
 # Requirement verification and executable criteria
 
-The [generated requirement context](requirements-context.md) separates normative qualification conditions, explanatory notes, standard rationale/issue metadata and planned verification procedures from requirement statements. `requirement-verification.sysml` defines 52 linked verification specifications. These deliberately return **inconclusive** until implemented with accepted evidence; their existence is not a verification result. The executable energy verification case remains separate and retains its evidence gate.
+The [generated requirement context](requirements-context.md) separates normative qualification conditions, explanatory notes, standard rationale/issue metadata and planned verification procedures from requirement statements. `requirement-verification.sysml` defines 53 linked planned verification specifications. These deliberately return **inconclusive** until implemented with accepted evidence; their existence is not a verification result. The executable energy verification case remains separate and retains its evidence gate.
 
 
 The model distinguishes high-level mission/environment requirements from quantitative acceptance leaves. P-002's **250 Ã— 250 Ã— 250 mm usable printer envelope** is user-specified. Other newly selected values (15 kg separately lifted mass, 30-minute setup/service targets, 72-hour endurance campaign, timing/energy thresholds and environmental test severities) are proposed engineering targets for review, not attributed to the user or a standard. Work status remains typed SysML metadata.
@@ -65,3 +65,7 @@ The [atomic decomposition map](requirement-decomposition.md) records the retaine
 E-201 through E-205 add five executable acceptance predicates, with E-200 as their sustained-energy parent except that E-204 specifically refines the M-002 campaign. The native analysis uses the same criterion calculations as the requirements, and `BlueDogEnergy::SustainedEnergyVerification` explicitly verifies E-200. See the [energy framework](sustained-operations.md) for load coverage, chronological balance, repeating-cycle assumptions and the evidence acceptance checklist. E-204 also gates this initial combined demonstration analysis; future ocean campaigns need their own resource qualification profile.
 
 Passing the numerical case is conditional on its inputs. The synthetic case deliberately keeps evidence acceptance false; its verification verdict is inconclusive. A finite energy-survival pass without nondecreasing cycle-end energy does not pass E-202. None of these results substitutes for functional mission, navigation or physical endurance evidence.
+
+## Cruise reliability
+
+Q-101, Q-102, L-101 and L-102 have reusable native numerical predicates. `VoyageReliabilityVerification` additionally checks accepted profile/rate evidence and a representative zero-failure demonstration. L-104 has a separate planned disposition verification; it remains inconclusive. See [cruise reliability](cruise-reliability.md) and the [DFMEA](dfmea.md).

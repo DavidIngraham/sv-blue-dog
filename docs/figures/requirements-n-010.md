@@ -49,7 +49,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::gorgeEnvironment1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 42 node(s) without a position, left undrawn, and 54 edge(s) at them
+%% not represented: 53 node(s) without a position, left undrawn, and 72 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -95,7 +95,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::gorgeEnvironment2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 90 node(s) without a position, left undrawn, and 110 edge(s) at them
+%% not represented: 101 node(s) without a position, left undrawn, and 128 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -141,7 +141,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::gorgeEnvironment3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 61 node(s) without a position, left undrawn, and 86 edge(s) at them
+%% not represented: 72 node(s) without a position, left undrawn, and 104 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

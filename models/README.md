@@ -55,7 +55,7 @@ The renderer writes native Mermaid Markdown and standalone HTML to `docs/figures
 
 `requirements-view.sysml` declares bounded native views, grouped by original
 requirement. Each drawing includes one parent and at most three immediate children.
-The [requirements view index](../docs/requirements-views.md) links 47 parent pages,
+The [requirements view index](../docs/requirements-views.md) links 49 parent pages,
 including separate Trans-Gorge and Hawaii entry points, environment, weed tolerance,
 energy, safety, communications and practicality.
 
@@ -168,3 +168,7 @@ statements. The separate [context report](../docs/requirements-context.md) publi
 conditions, rationale, notes, issues and verification specifications. Derivation
 rationale is standard metadata on each connection. Publishing renders the native
 document set once per format; HTML files share `figures/sysml-document.css`.
+
+## Cruise reliability and DFMEA
+
+`cruise-reliability.sysml` supplies route exposure, constant-hazard budgeting and an evidence-gated verification case. `dfmea.sysml` links starter failure modes to architecture parts and requirement usages. `reliability-documents.sysml` renders their tables natively. See the [analysis guide](../docs/cruise-reliability.md).

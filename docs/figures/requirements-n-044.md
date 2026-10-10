@@ -37,7 +37,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::wetMechanicalIntegrity1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 83 node(s) without a position, left undrawn, and 90 edge(s) at them
+%% not represented: 89 node(s) without a position, left undrawn, and 96 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

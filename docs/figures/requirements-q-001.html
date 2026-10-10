@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Q-001 CruisePerformance</title>
+<link rel="stylesheet" href="sysml-document.css">
+</head>
+<body>
+<article class="sysml-document" data-document="BlueDogDiagramDocuments::CruisePerformanceRequirements">
+<h1 class="sysml-title">Q-001 CruisePerformance</h1>
+<p class="sysml-paragraph" data-content="paragraph" data-name="navigation"><a class="sysml-link" href="../requirements-views.md">All requirement views</a></p>
+<p class="sysml-paragraph" data-content="paragraph" data-name="contextLink"><a class="sysml-link" href="../requirements-context.md">Qualification conditions, rationale, open issues and verification</a></p>
+<dl class="sysml-definitions" data-content="definitions" data-name="statements" data-query="BlueDogDiagramDocuments::CruisePerformanceStatements">
+<div class="sysml-entry" data-element="BlueDogRequirements::CruisePerformance" data-element-kind="requirementDef">
+<dt class="sysml-term">Q-001 CruisePerformance</dt>
+<dd class="sysml-description">The vessel shall sustain sailing performance sufficient to complete each declared unassisted mission route.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::LegProgress" data-element-kind="requirementDef">
+<dt class="sysml-term">Q-101 LegProgress</dt>
+<dd class="sysml-description">The vessel shall achieve at least 0.5 m/s mean along-route ground progress on each planned sailing leg.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::PassageDuration" data-element-kind="requirementDef">
+<dt class="sysml-term">Q-102 PassageDuration</dt>
+<dd class="sysml-description">The vessel shall complete the declared route within the qualified unassisted operating duration.</dd>
+</div>
+<div class="sysml-entry" data-element="BlueDogRequirements::CruiseEvidence" data-element-kind="requirementDef">
+<dt class="sysml-term">Q-103 CruiseEvidence</dt>
+<dd class="sysml-description">The cruise-performance assessment shall use accepted loaded-vessel sailing evidence for its declared mission profile.</dd>
+</div>
+</dl>
+<section class="sysml-section" id="group1" data-content="section" data-name="group1">
+<h2>Q-001 derivation 1</h2>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogViews::cruisePerformance1" data-diagram-kind="requirement" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogViews::cruisePerformance1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 48 node(s) without a position, left undrawn, and 57 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+%% layout: n2 x=300 y=200
+%% layout: n3 x=600 y=200
+flowchart BT
+  n0(&#34;`*«requirement»*
+**cruisePerformance : CruisePerformance**`&#34;)
+  n1(&#34;`*«requirement»*
+**legProgress : LegProgress**`&#34;)
+  n2(&#34;`*«requirement»*
+**passageDuration : PassageDuration**`&#34;)
+  n3(&#34;`*«requirement»*
+**cruiseEvidence : CruiseEvidence**`&#34;)
+  n1 -.-&gt;|&#34;derive&#34;| n0
+  n2 -.-&gt;|&#34;derive&#34;| n0
+  n3 -.-&gt;|&#34;derive&#34;| n0</pre>
+</figure>
+</section>
+</article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({maxTextSize: 1312, maxEdges: 4});</script>
+</body>
+</html>

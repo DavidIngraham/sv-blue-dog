@@ -45,7 +45,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::multiDayEndurance1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 228 node(s) without a position, left undrawn, and 457 edge(s) at them
+%% not represented: 237 node(s) without a position, left undrawn, and 475 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -92,7 +92,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::multiDayEndurance2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 216 node(s) without a position, left undrawn, and 407 edge(s) at them
+%% not represented: 225 node(s) without a position, left undrawn, and 425 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

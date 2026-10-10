@@ -519,4 +519,9 @@ package BlueDogRequirementVerification {
         }
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
+    verification def <'V-L-104'> FailureDispositionVerification {
+        doc /* Review the architecture DFMEA, coverage, accepted mitigations, residual-risk approvals and evidence before launch. The starter list is not complete hazard coverage. */
+        objective disposition { verify BlueDogRequirements::criticalFailureDisposition; }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
 }

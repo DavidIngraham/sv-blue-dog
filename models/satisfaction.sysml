@@ -194,4 +194,10 @@ package BlueDogSatisfaction {
     satisfy BlueDogRequirements::sustainedReserveProtection by missionContext.boat.energy;
     satisfy BlueDogRequirements::repeatableCycleBalance by missionContext.boat.energy;
     satisfy BlueDogRequirements::peakSupplyCapability by missionContext.boat.energy;
+    satisfy BlueDogRequirements::cruisePerformance by missionContext.boat;
+    satisfy BlueDogRequirements::legProgress by missionContext.boat;
+    satisfy BlueDogRequirements::passageDuration by missionContext.boat;
+    satisfy BlueDogRequirements::missionReliability by missionContext.boat;
+    satisfy BlueDogRequirements::missionSuccessProbability by missionContext.boat;
+    satisfy BlueDogRequirements::failureRateBudget by missionContext.boat;
 }

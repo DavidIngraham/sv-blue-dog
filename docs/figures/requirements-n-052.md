@@ -41,7 +41,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::capsizeControlRecovery1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 64 node(s) without a position, left undrawn, and 86 edge(s) at them
+%% not represented: 70 node(s) without a position, left undrawn, and 92 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -87,7 +87,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::capsizeControlRecovery2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 66 node(s) without a position, left undrawn, and 88 edge(s) at them
+%% not represented: 72 node(s) without a position, left undrawn, and 94 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

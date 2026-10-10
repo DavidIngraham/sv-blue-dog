@@ -207,6 +207,15 @@ Generated natively by OpenSysML from the project models. Status describes work o
 | E-203 | PeakSupplyCapability | open | The battery supply shall support each selected mode’s coincident peak withdrawal power without harvesting. |
 | E-204 | HarvestCampaignCoverage | open | The qualification energy profile shall contain at least three consecutive 24-hour days, each with harvesting enabled for no more than 6 hours. |
 | E-205 | EnergyEvidenceReadiness | open | An energy case shall be accepted only after its installed-load coverage, resource bounds, battery derating and interval-resolution evidence have been accepted. |
+| Q-001 | CruisePerformance | open | The vessel shall sustain sailing performance sufficient to complete each declared unassisted mission route. |
+| Q-101 | LegProgress | open | The vessel shall achieve at least 0.5 m/s mean along-route ground progress on each planned sailing leg. |
+| Q-102 | PassageDuration | open | The vessel shall complete the declared route within the qualified unassisted operating duration. |
+| Q-103 | CruiseEvidence | open | The cruise-performance assessment shall use accepted loaded-vessel sailing evidence for its declared mission profile. |
+| L-001 | MissionReliability | open | The vessel shall preserve mission-critical functions throughout each declared unassisted voyage. |
+| L-101 | MissionSuccessProbability | open | The lower 95-percent confidence bound on mission reliability shall be at least 0.90 over the declared voyage duration. |
+| L-102 | FailureRateBudget | open | The combined mission-critical failure-rate bound shall not exceed the budget derived from L-101 and the Q-102 exposure duration. |
+| L-103 | ReliabilityEvidence | open | The reliability assessment shall use accepted mission-representative evidence supporting its failure-rate bound. |
+| L-104 | CriticalFailureDisposition | open | Each identified safety-critical failure mode shall have an accepted disposition before an unassisted launch. |
 
 ## Derivations
 
@@ -461,3 +470,15 @@ Generated natively by OpenSysML from the project models. Status describes work o
 | multiDayEndurance | harvestCampaignCoverage | open | The M-002 campaign requires this separately evaluated energy outcome. |
 | multiDayEndurance | energyEvidenceReadiness | open | The M-002 campaign requires this separately evaluated energy outcome. |
 | recoveryEnergy | sustainedReserveProtection | open | Sustained operation protects the recovery reserve sized by the existing R-002 policy. |
+| roundTrip | cruisePerformance | open | cruisePerformance supplies an acceptance condition needed to achieve roundTrip. |
+| hawaiiVoyage | cruisePerformance | open | cruisePerformance supplies an acceptance condition needed to achieve hawaiiVoyage. |
+| roundTrip | missionReliability | open | missionReliability supplies an acceptance condition needed to achieve roundTrip. |
+| hawaiiVoyage | missionReliability | open | missionReliability supplies an acceptance condition needed to achieve hawaiiVoyage. |
+| repeatedOperation | missionReliability | open | missionReliability supplies an acceptance condition needed to achieve repeatedOperation. |
+| cruisePerformance | legProgress | open | legProgress supplies an acceptance condition needed to achieve cruisePerformance. |
+| cruisePerformance | passageDuration | open | passageDuration supplies an acceptance condition needed to achieve cruisePerformance. |
+| cruisePerformance | cruiseEvidence | open | cruiseEvidence supplies an acceptance condition needed to achieve cruisePerformance. |
+| missionReliability | missionSuccessProbability | open | missionSuccessProbability supplies an acceptance condition needed to achieve missionReliability. |
+| missionReliability | failureRateBudget | open | failureRateBudget supplies an acceptance condition needed to achieve missionReliability. |
+| missionReliability | reliabilityEvidence | open | reliabilityEvidence supplies an acceptance condition needed to achieve missionReliability. |
+| missionReliability | criticalFailureDisposition | open | criticalFailureDisposition supplies an acceptance condition needed to achieve missionReliability. |

@@ -67,6 +67,15 @@ Requirement statements are in the register and focused views. Qualification cond
 | E-202 | RepeatableCycleBalance | The repeatability criterion assumes fixed capacity, loads and resource bounds.  |
 | E-203 | PeakSupplyCapability | Load power includes conversion losses and the declared uncertainty allowance.  |
 | E-204 | HarvestCampaignCoverage | Each modeled day is gap-free; the remaining time has harvesting disabled. Enabling harvesting with zero resource still counts as enabled.  |
+| Q-001 | CruisePerformance | The declared route includes sailing legs, current projections, weather holds and maneuvering time. Apply Q-101 through Q-103.  |
+| Q-101 | LegProgress | Evaluate sailing-only, loaded configuration under the declared wind, wave, current and fouling profile. Include tacking in water-relative velocity made good. Holds are separate exposure intervals, not discarded samples.  |
+| Q-102 | PassageDuration | Passage duration includes every sailing leg, weather hold and maneuver. Qualified duration must come from the same configuration and applicable environment.  |
+| Q-103 | CruiseEvidence | Evidence records route distance, wind/sea state, signed along-route current, sailing polar or measured velocity made good, fouling allowance, holds, uncertainty and configuration. No auxiliary propulsion credit for the Gorge challenge.  |
+| L-001 | MissionReliability | Apply L-101 through L-104 separately to the Gorge and Hawaii profiles. Failure includes loss of required control, mission completion, safety function or required observation service. Recovery that violates the mission rules is not success.  |
+| L-101 | MissionSuccessProbability | Reliability means absence of mission-critical failure over total elapsed exposure, including holds. Statistical evidence must represent the declared configuration, environment and failure definition.  |
+| L-102 | FailureRateBudget | The initial constant-hazard model sums non-overlapping independent critical failure rates plus a separately assessed common-cause contribution. Component bounds require a joint-confidence argument; summing individual 95-percent bounds does not establish a system 95-percent bound. Wear, systematic software faults, variable stress and recovery need a different model when this assumption is unsupported.  |
+| L-103 | ReliabilityEvidence | Document confidence method, censoring, configuration, mission profile, exposure and observed critical failures. The initial zero-failure demonstration is invalid when failures occurred or the constant-hazard assumption is unsupported.  |
+| L-104 | CriticalFailureDisposition | Acceptance requires evidence for prevention, detection and response, or an explicitly reviewed residual risk. The DFMEA starter is incomplete; completing listed rows does not demonstrate hazard coverage.  |
 
 ## Rationale
 
@@ -74,6 +83,15 @@ Requirement statements are in the register and focused views. Qualification cond
 | --- | --- | --- |
 | C-000 | TransGorgeChallenge | The first The Dalles–Bonneville–The Dalles circuit is the threshold; repeated circuits are the endurance objective. |
 | H-001 | HawaiiVoyage | The Gorge is a proving ground for the ocean objective, not evidence of ocean readiness. |
+| Q-001 | CruisePerformance | Cruise speed determines exposure to failures; water speed alone does not establish route completion. |
+| Q-101 | LegProgress | 0.5 m/s is a proposed design target, not a measured capability or a guarantee throughout the survival envelope. |
+| Q-102 | PassageDuration | A fast moving-leg average cannot conceal long periods waiting for usable wind. |
+| Q-103 | CruiseEvidence | Synthetic inputs support sensitivity analysis only. |
+| L-001 | MissionReliability | Longer passages impose tighter reliability budgets; Gorge performance does not qualify an ocean mission. |
+| L-101 | MissionSuccessProbability | 0.90 at 95-percent confidence is a proposed engineering target. It is not a measured reliability estimate. |
+| L-102 | FailureRateBudget | Use lambda\_max = -ln(0.90)/T. Do not sum DFMEA ordinal rankings or assume missing rates are zero. |
+| L-103 | ReliabilityEvidence | A numerical estimate is not a confidence bound; shorter tests cannot establish an indefinite lifetime. |
+| L-104 | CriticalFailureDisposition | Potential harm to other waterway users must not be traded against an attractive aggregate reliability score. |
 
 ## Explanatory notes
 
@@ -112,6 +130,8 @@ Requirement statements are in the register and focused views. Qualification cond
 | H-001 | HawaiiVoyage | Departure point, destination gate, route, duration, route/season suitability of the candidate ocean envelope, assistance/propulsion rules and acceptance evidence remain to be agreed. |
 | S-001 | TrafficSafety | Detection ranges, target signatures, closest-approach margins and maneuver feasibility remain unresolved acceptance parameters; tracking and avoidance cannot receive complete passes until these are frozen. |
 | N-053 | SubmergedWeedPassage | Equivalence of the vegetation surrogate to local milfoil requires physical-test validation. |
+| Q-101 | LegProgress | Proposed target pending design review and mission-profile selection. |
+| L-101 | MissionSuccessProbability | Proposed target pending design review and mission-profile selection. |
 
 ## Verification specifications
 
@@ -169,3 +189,5 @@ Requirement statements are in the register and focused views. Qualification cond
 | V-R-004 | ChallengeMotorInhibitionVerification | Apply the R-004 qualification conditions. Assess every applicable acceptance outcome separately: R-101, R-102, E-138, E-132. | challengeMotorInhibition, motorQualificationInvariant, freshRecoveryCommand, qualificationPersistence, criticalEventRecording |
 | V-E-201 | SustainedReserveProtectionVerification | Apply the E-201 qualification conditions. For piecewise-constant net power, check the initial state and every interval endpoint. | sustainedReserveProtection |
 | V-E-205 | EnergyEvidenceReadinessVerification | Apply the E-205 qualification conditions. Use the sustained-operations evidence checklist. | energyEvidenceReadiness |
+| V-L-104 | FailureDispositionVerification | Review the architecture DFMEA, coverage, accepted mitigations, residual-risk approvals and evidence before launch. The starter list is not complete hazard coverage. | criticalFailureDisposition |
+|  | VoyageReliabilityVerification |  | missionSuccessProbability, failureRateBudget, reliabilityEvidence, legProgress, passageDuration, cruiseEvidence |

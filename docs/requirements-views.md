@@ -4,19 +4,19 @@ Each page follows one parent requirement to its immediate derived requirements. 
 
 Read the [qualification conditions and verification specifications](requirements-context.md) alongside the concise statements. Rationale and open issues are presented separately there.
 
-The complete [requirements register](requirements-register.md) provides statements and derivation rationale. All 249 derivations are covered across these views.
+The complete [requirements register](requirements-register.md) provides statements and derivation rationale. All 261 derivations are covered across these views.
 
 ## Mission and challenge
 
 - [C-000 trans gorge challenge](figures/requirements-c-000.md) — 6 immediate derivations
 - [C-001 course completion](figures/requirements-c-001.md) — 1 immediate derivation
-- [C-002 repeated operation](figures/requirements-c-002.md) — 3 immediate derivations
+- [C-002 repeated operation](figures/requirements-c-002.md) — 4 immediate derivations
 - [C-003 unassisted attempt](figures/requirements-c-003.md) — 3 immediate derivations
 - [C-004 sailing propulsion](figures/requirements-c-004.md) — 2 immediate derivations
 - [C-005 live observation](figures/requirements-c-005.md) — 1 immediate derivation
 - [C-006 emergency intervention](figures/requirements-c-006.md) — 3 immediate derivations
-- [H-001 hawaii voyage](figures/requirements-h-001.md) — 11 immediate derivation
-- [M-001 round trip](figures/requirements-m-001.md) — 11 immediate derivation
+- [H-001 hawaii voyage](figures/requirements-h-001.md) — 13 immediate derivations
+- [M-001 round trip](figures/requirements-m-001.md) — 13 immediate derivations
 - [M-002 multi day endurance](figures/requirements-m-002.md) — 6 immediate derivations
 
 ## Energy, autonomy and records
@@ -70,3 +70,10 @@ The complete [requirements register](requirements-register.md) provides statemen
 
 - [C-101 telemetry equipment](figures/requirements-c-101.md) — 4 immediate derivations
 - [C-102 command integrity](figures/requirements-c-102.md) — 9 immediate derivations
+
+## Cruise performance and reliability
+
+- [Q-001 cruise performance](figures/requirements-q-001.md) — 3 immediate derivations
+- [L-001 mission reliability](figures/requirements-l-001.md) — 4 immediate derivations
+
+Read the [cruise and reliability analysis](cruise-reliability.md) and [initial architecture DFMEA](dfmea.md).

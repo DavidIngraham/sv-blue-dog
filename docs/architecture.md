@@ -417,3 +417,7 @@ Environmental qualification targets are decomposed beneath N-001 through N-003; 
 Recovery propulsion medium remains unselected; see the [water/air propeller trade study](recovery-propulsion-trade.md).
 
 The independent requirements audit moved aggregate mission and environmental outcomes to the whole `boat` design allocation, and shore-display behavior to `monitoringStation`. Component responsibilities remain visible in the architecture, but a subsystem is not claimed to independently satisfy a whole-vessel outcome. The launch-energy gate and challenge motor invariant are separately identified requirements.
+
+## Reliability and failure modes
+
+The [initial DFMEA](dfmea.md) links 12 failure modes to logical parts and affected requirements. [Cruise/reliability analysis](cruise-reliability.md) relates sailing performance and holds to failure exposure. Architecture allocations are design intentions; these analyses are not proof of hardware reliability.

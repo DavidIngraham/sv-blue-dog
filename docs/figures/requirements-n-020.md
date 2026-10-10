@@ -45,7 +45,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::oceanEnvironment1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 75 node(s) without a position, left undrawn, and 95 edge(s) at them
+%% not represented: 85 node(s) without a position, left undrawn, and 111 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -91,7 +91,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::oceanEnvironment2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 112 node(s) without a position, left undrawn, and 140 edge(s) at them
+%% not represented: 122 node(s) without a position, left undrawn, and 156 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

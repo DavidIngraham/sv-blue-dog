@@ -47,7 +47,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::marineDurability1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 149 node(s) without a position, left undrawn, and 222 edge(s) at them
+%% not represented: 159 node(s) without a position, left undrawn, and 238 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -93,7 +93,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::marineDurability2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 152 node(s) without a position, left undrawn, and 232 edge(s) at them
+%% not represented: 162 node(s) without a position, left undrawn, and 248 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -139,7 +139,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::marineDurability3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 152 node(s) without a position, left undrawn, and 225 edge(s) at them
+%% not represented: 162 node(s) without a position, left undrawn, and 241 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 flowchart BT

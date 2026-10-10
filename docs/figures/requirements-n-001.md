@@ -49,7 +49,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::environmentalEnvelope1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 151 node(s) without a position, left undrawn, and 231 edge(s) at them
+%% not represented: 161 node(s) without a position, left undrawn, and 249 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -95,7 +95,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::environmentalEnvelope2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 152 node(s) without a position, left undrawn, and 237 edge(s) at them
+%% not represented: 162 node(s) without a position, left undrawn, and 255 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -141,7 +141,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::environmentalEnvelope3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 175 node(s) without a position, left undrawn, and 297 edge(s) at them
+%% not represented: 185 node(s) without a position, left undrawn, and 315 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200

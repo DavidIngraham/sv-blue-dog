@@ -28,6 +28,10 @@
 
 **E-200 SustainedEnergyFeasibility** — The installed energy architecture shall support the selected bounded repeating profile without external charging, meeting the derived reserve, cycle-balance and peak-supply criteria.
 
+**Q-001 CruisePerformance** — The vessel shall sustain sailing performance sufficient to complete each declared unassisted mission route.
+
+**L-001 MissionReliability** — The vessel shall preserve mission-critical functions throughout each declared unassisted voyage.
+
 ## H-001 derivation 1
 
 ```mermaid
@@ -55,7 +59,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::hawaiiVoyage1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 228 node(s) without a position, left undrawn, and 461 edge(s) at them
+%% not represented: 237 node(s) without a position, left undrawn, and 479 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -101,7 +105,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::hawaiiVoyage2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 225 node(s) without a position, left undrawn, and 443 edge(s) at them
+%% not represented: 235 node(s) without a position, left undrawn, and 461 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -147,7 +151,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::hawaiiVoyage3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 215 node(s) without a position, left undrawn, and 411 edge(s) at them
+%% not represented: 225 node(s) without a position, left undrawn, and 429 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -193,7 +197,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::hawaiiVoyage4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 217 node(s) without a position, left undrawn, and 411 edge(s) at them
+%% not represented: 226 node(s) without a position, left undrawn, and 429 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -229,3 +233,49 @@ flowchart BT
 [Continue: P-003 serviceability](<requirements-p-003.md>)
 
 [Continue: E-200 sustained energy feasibility](<requirements-e-200.md>)
+
+## H-001 derivation 5
+
+```mermaid
+---
+config:
+  fontFamily: "Helvetica, Arial, sans-serif"
+  theme: base
+  themeCSS: ".edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }"
+  themeVariables:
+    fontFamily: "Helvetica, Arial, sans-serif"
+    fontSize: "14px"
+    primaryColor: "#FFFFFF"
+    secondaryColor: "#FFFFFF"
+    tertiaryColor: "#FFFFFF"
+    background: "#FFFFFF"
+    primaryBorderColor: "#181818"
+    primaryTextColor: "#000000"
+    lineColor: "#181818"
+    textColor: "#000000"
+    noteBkgColor: "#FEFFDD"
+    noteBorderColor: "#181818"
+    noteTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#181818"
+    edgeLabelBackground: "#FFFFFF"
+---
+%% BlueDogViews::hawaiiVoyage5 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 224 node(s) without a position, left undrawn, and 421 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+%% layout: n2 x=300 y=200
+flowchart BT
+  n0("`*«requirement»*
+**BlueDog::Goals::hawaiiVoyage : HawaiiVoyage**`")
+  n1("`*«requirement»*
+**BlueDogRequirements::cruisePerformance : CruisePerformance**`")
+  n2("`*«requirement»*
+**BlueDogRequirements::missionReliability : MissionReliability**`")
+  n1 -.->|"derive"| n0
+  n2 -.->|"derive"| n0
+```
+
+[Continue: Q-001 cruisePerformance](<requirements-q-001.md>)
+
+[Continue: L-001 missionReliability](<requirements-l-001.md>)

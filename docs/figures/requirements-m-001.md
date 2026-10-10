@@ -28,6 +28,10 @@
 
 **N-010 GorgeEnvironment** — The vessel shall operate in the freshwater Columbia River reach between The Dalles and Bonneville, including opposing wind/current, short chop, traffic and submerged vegetation.
 
+**Q-001 CruisePerformance** — The vessel shall sustain sailing performance sufficient to complete each declared unassisted mission route.
+
+**L-001 MissionReliability** — The vessel shall preserve mission-critical functions throughout each declared unassisted voyage.
+
 ## M-001 derivation 1
 
 ```mermaid
@@ -55,7 +59,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::roundTrip1 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 230 node(s) without a position, left undrawn, and 458 edge(s) at them
+%% not represented: 240 node(s) without a position, left undrawn, and 476 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -101,7 +105,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::roundTrip2 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 224 node(s) without a position, left undrawn, and 431 edge(s) at them
+%% not represented: 234 node(s) without a position, left undrawn, and 449 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -147,7 +151,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::roundTrip3 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 217 node(s) without a position, left undrawn, and 399 edge(s) at them
+%% not represented: 227 node(s) without a position, left undrawn, and 417 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -193,7 +197,7 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 %% BlueDogViews::roundTrip4 — requirement rendering (view def GeneralView, filter @RequirementUsage)
-%% not represented: 216 node(s) without a position, left undrawn, and 391 edge(s) at them
+%% not represented: 226 node(s) without a position, left undrawn, and 409 edge(s) at them
 %% layout: n0 x=0 y=0
 %% layout: n1 x=0 y=200
 %% layout: n2 x=300 y=200
@@ -227,3 +231,49 @@ flowchart BT
 [Continue: N-001 environmental envelope](<requirements-n-001.md>)
 
 [Continue: N-010 gorge environment](<requirements-n-010.md>)
+
+## M-001 derivation 5
+
+```mermaid
+---
+config:
+  fontFamily: "Helvetica, Arial, sans-serif"
+  theme: base
+  themeCSS: ".edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }"
+  themeVariables:
+    fontFamily: "Helvetica, Arial, sans-serif"
+    fontSize: "14px"
+    primaryColor: "#FFFFFF"
+    secondaryColor: "#FFFFFF"
+    tertiaryColor: "#FFFFFF"
+    background: "#FFFFFF"
+    primaryBorderColor: "#181818"
+    primaryTextColor: "#000000"
+    lineColor: "#181818"
+    textColor: "#000000"
+    noteBkgColor: "#FEFFDD"
+    noteBorderColor: "#181818"
+    noteTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#181818"
+    edgeLabelBackground: "#FFFFFF"
+---
+%% BlueDogViews::roundTrip5 — requirement rendering (view def GeneralView, filter @RequirementUsage)
+%% not represented: 225 node(s) without a position, left undrawn, and 408 edge(s) at them
+%% layout: n0 x=0 y=0
+%% layout: n1 x=0 y=200
+%% layout: n2 x=300 y=200
+flowchart BT
+  n0("`*«requirement»*
+**roundTrip : RoundTrip**`")
+  n1("`*«requirement»*
+**cruisePerformance : CruisePerformance**`")
+  n2("`*«requirement»*
+**missionReliability : MissionReliability**`")
+  n1 -.->|"derive"| n0
+  n2 -.->|"derive"| n0
+```
+
+[Continue: Q-001 cruisePerformance](<requirements-q-001.md>)
+
+[Continue: L-001 missionReliability](<requirements-l-001.md>)
