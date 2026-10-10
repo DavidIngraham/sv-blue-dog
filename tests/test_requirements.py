@@ -6,6 +6,8 @@ import unittest
 from scripts.render_requirements import native, native_graph, native_register, MODELS
 
 
+ENERGY_LINKS = [('repeatedOperation', 'sustainedEnergyFeasibility'), ('hawaiiVoyage', 'sustainedEnergyFeasibility'), ('sustainedEnergyFeasibility', 'sustainedReserveProtection'), ('sustainedEnergyFeasibility', 'repeatableCycleBalance'), ('sustainedEnergyFeasibility', 'peakSupplyCapability'), ('sustainedEnergyFeasibility', 'energyEvidenceReadiness'), ('multiDayEndurance', 'sustainedReserveProtection'), ('multiDayEndurance', 'peakSupplyCapability'), ('multiDayEndurance', 'harvestCampaignCoverage'), ('multiDayEndurance', 'energyEvidenceReadiness'), ('recoveryEnergy', 'sustainedReserveProtection')]
+ENERGY_IDS = {f'E-{i}' for i in range(200, 206)}
 ATOMIC = json.loads(Path(__file__).with_name('atomic_requirements.json').read_text())
 
 class PublishingTests(unittest.TestCase):
@@ -42,9 +44,10 @@ class PublishingTests(unittest.TestCase):
         expected.update([('roundTrip', 'desktopManufacture'), ('repeatedOperation', 'serviceability'), ('emergencyIntervention', 'safeRecovery'), ('roundTrip', 'gorgeEnvironment'), ('hawaiiVoyage', 'oceanEnvironment'), ('navigationAndControl', 'navigationAvailability'), ('recoveryEnergy', 'launchEnergyAdmission'), ('sailingPropulsion', 'challengeMotorInhibition'), ('unassistedAttempt', 'challengeMotorInhibition'), ('unassistedAttempt', 'commandIntegrity'), ('emergencyIntervention', 'commandIntegrity'), ('hawaiiVoyage', 'operatingBoundary'), ('hawaiiVoyage', 'regulatoryClassification'), ('hawaiiVoyage', 'serviceability'), ('gorgeEnvironment', 'freshwaterExposure'), ('oceanEnvironment', 'saltwaterExposure'), ('gorgeEnvironment', 'submergedWeedPassage'), ('gorgeEnvironment', 'weedSnagShedding')])
         expected.update((r['parent'], r['usage']) for r in ATOMIC['leaves'])
         expected.update(tuple(edge) for edge in ATOMIC['shared_links'])
+        expected.update(ENERGY_LINKS)
         self.assertEqual(set(self.edges), expected)
         self.assertEqual(len(self.edges), len(expected))
-        self.assertEqual(len({name for edge in self.edges for name in edge}), 66 + len(ATOMIC['leaves']))
+        self.assertEqual(len({name for edge in self.edges for name in edge}), 66 + len(ATOMIC['leaves']) + len(ENERGY_IDS))
 
     def test_use_case_and_satisfaction_traceability(self):
         text = native("-render-document", "BlueDogDocuments::Traceability")
@@ -75,6 +78,7 @@ class PublishingTests(unittest.TestCase):
         expected.update(['N-010', 'N-020', 'N-011', 'N-012', 'N-013', 'N-014', 'N-015', 'N-021', 'N-022', 'N-023', 'N-024', 'N-025', 'N-030', 'N-031', 'N-032', 'N-033', 'N-034', 'N-035', 'N-041', 'N-042', 'N-043', 'N-044', 'N-045', 'N-046', 'N-047', 'N-051', 'N-052', 'N-053', 'N-054', 'N-055', 'N-056'])
         expected.update(['E-008', 'R-003', 'R-004'])
         expected.update(r['id'] for r in ATOMIC['leaves'])
+        expected.update(ENERGY_IDS)
         self.assertEqual(set(ids), expected)
         self.assertEqual(len(ids), len(expected))
         for source, target in self.edges:

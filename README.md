@@ -40,3 +40,5 @@ environment remains managed by uv. Run `uv sync --locked`, then
 `uv run python scripts/install_renderer.py` to install the pinned native renderer,
 then `uv run python scripts/render_requirements.py` to analyze the models and generate
 the diagram and register. See [tooling setup and limitations](models/README.md#reproducible-tooling).
+
+The [sustained-operation energy framework](docs/sustained-operations.md) and [native load roll-up](docs/energy-budget.md) connect the endurance objective to executable energy criteria and an evidence-gated SysML verification case.

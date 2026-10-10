@@ -76,7 +76,7 @@ for this migration. Nothing is installed globally and no moving nightly tag is u
 The Python client remains pinned to 0.9.2 for interactive modeling; publishing uses the native CLI.
 
 Native dashed `derive` arrows point **from derived to original**, opposite the earlier
-custom diagram convention. All 193 requirements and 238 derivation relationships are regression-checked
+custom diagram convention. All 199 requirements and 249 derivation relationships are regression-checked
 against the source model. Short IDs remain in the linked register; the
 native diagram uses its default monochrome style without our former maturity colors.
 The renderer reports two exposed standard-library elements as intentionally not drawn.
@@ -101,7 +101,7 @@ checks are the checks we run. `--check` compares native DOT and Markdown without
 rewriting them or comparing image pixels.
 
 Passing analysis does not establish mission feasibility or requirement satisfaction.
-Eight requirement definitions contain native numeric or state acceptance predicates. Synthetic boundary tests exercise them; they do not establish physical compliance. See [verification plan](../docs/verification-plan.md). The mission decomposition does not yet define an executable sequence.
+Thirteen requirement definitions contain native numeric or state acceptance predicates. Synthetic boundary tests exercise them; they do not establish physical compliance. See [verification plan](../docs/verification-plan.md). The mission decomposition does not yet define an executable sequence.
 
 ## References
 
@@ -142,4 +142,10 @@ Executable-criteria tests cover numeric boundaries, navigation epoch counts, lau
 
 ## Atomic acceptance leaves
 
-The [decomposition map](../docs/requirement-decomposition.md) explains the 127 acceptance leaves beneath 29 retained parent IDs. Parents supply common test context and link to individual outcomes; derivation is not executable aggregation. Eight native predicates remain, with five moved from bundled parents to the corresponding leaves. The full SVG is a zoomable trace graph; the PNG is a scaled overview because Graphviz limits bitmap width. Use the native register for readable statements.
+The [decomposition map](../docs/requirement-decomposition.md) explains the 127 acceptance leaves beneath 29 retained parent IDs. Parents supply common test context and link to individual outcomes; derivation is not executable aggregation. The atomicity pass moved five existing native predicates from bundled parents to the corresponding leaves; the later energy framework adds its own criteria. The full SVG is a zoomable trace graph; the PNG is a scaled overview because Graphviz limits bitmap width. Use the native register for readable statements.
+
+## Sustained-operation energy framework
+
+[energy.sysml](energy.sysml) defines extensible electrical load collections, mode budgets, battery storage, chronological resource intervals, a native analysis case and an evidence-gated verification case. [energy-examples.sysml](energy-examples.sysml) holds the synthetic 72-hour input set separately from the reusable definitions. All accounting and requirement predicates execute in SysML, including collection summation and recursive energy propagation. `ordered nonunique` preserves repeated values in sampled histories.
+
+The [native load table](../docs/energy-budget.md), [analysis JSON](../docs/analysis/sustained-energy.json) and [framework guide](../docs/sustained-operations.md) distinguish conditional numerical feasibility from accepted evidence. Publishing regenerates the table and analysis; `--check` detects stale outputs. The verification case explicitly verifies E-200 and returns inconclusive for the unaccepted synthetic inputs.

@@ -89,3 +89,9 @@ The recovery-propulsion trade now has an [executable SysML analysis case](../mod
 An [independent requirements audit](requirements-audit.md) caught gaps in navigation sampling, energy admission, mode precedence and derivation rationale. The corrected model separates launch energy and motor inhibition, distinguishes Gorge from ocean qualification, and retains physical evidence gaps explicitly.
 
 The next lesson was that a measurable paragraph can still hide several requirements. I have [split 29 bundled requirements into individual acceptance leaves](requirement-decomposition.md), keeping the old IDs as parents. A boat that sheds a weed but still cannot steer should not pass a single vague weed-tolerance check. Speed recovery and steering recovery now get separate results from the same trial, just as restarting on time is separate from preserving mission state. The executable checks now sit on the particular outcomes they measure.
+
+### Can it keep going?
+
+I have started turning the endurance goal into an [executable energy model](sustained-operations.md). Individual loads now roll up into a budget, and the battery balance follows the order of the day: long periods without harvesting, then a limited charging window. Charging losses, capacity limits, peak demand and the recovery reserve all matter.
+
+The first synthetic example passes the numerical 72-hour checks, but its worst overnight margin is only about 2.7 Wh above the recovery reserve. That makes the next question concrete: measure the loads and establish credible harvesting bounds. The native verification case stays inconclusive until that evidence is accepted. A favorable daily average is useful, but it cannot rescue a boat that runs out of usable energy before sunrise.

@@ -2714,4 +2714,176 @@ package BlueDogRequirements {
         end #original source ::> recoveryPropulsorWeeds;
         end #derive target ::> motorQualificationInvariant;
     }
+
+    requirement def <'E-200'> SustainedEnergyFeasibility {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The installed energy architecture shall support the selected bounded repeating mission profile without external charging, while meeting the derived reserve, cycle-balance and peak-supply criteria. The 72-hour campaign is an initial energy demonstration, not proof of indefinite weather availability, functional performance or ocean readiness. */
+    }
+    requirement sustainedEnergyFeasibility : SustainedEnergyFeasibility;
+
+    requirement def <'E-201'> SustainedReserveProtection {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Conservative stored energy shall remain strictly above the R-002 protected reserve throughout the selected sustained-operation profile. For piecewise-constant net power, check the initial state and every interval endpoint; unmodeled intrainterval dips are outside this claim. */
+        attribute samples : EnergyValue [1..*] ordered nonunique;
+        attribute reserve : EnergyValue;
+        attribute verdict : Boolean = SustainedReserveProtectionCriterion(samples, reserve);
+        require constraint { verdict }
+    }
+    requirement sustainedReserveProtection : SustainedReserveProtection;
+
+    requirement def <'E-202'> RepeatableCycleBalance {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Stored energy at the end of the complete repeating profile shall be at least its initial value at the same profile phase. This is a conditional repeatability criterion with fixed capacity, loads and resource bounds; it is not an indefinite endurance verdict. */
+        attribute initialEnergy : EnergyValue;
+        attribute finalEnergy : EnergyValue;
+        attribute verdict : Boolean = RepeatableCycleBalanceCriterion(initialEnergy, finalEnergy);
+        require constraint { verdict }
+    }
+    requirement repeatableCycleBalance : RepeatableCycleBalance;
+
+    requirement def <'E-203'> PeakSupplyCapability {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The battery supply shall support each selected mode's coincident peak withdrawal power without relying on harvesting. Load power shall include conversion losses and the declared uncertainty allowance. */
+        attribute demands : PowerValue [1..*] ordered nonunique;
+        attribute availablePower : PowerValue;
+        attribute verdict : Boolean = PeakSupplyCapabilityCriterion(demands, availablePower);
+        require constraint { verdict }
+    }
+    requirement peakSupplyCapability : PeakSupplyCapability;
+
+    requirement def <'E-204'> HarvestCampaignCoverage {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The qualification energy profile shall cover at least three complete consecutive 24-hour days, with harvesting enabled for no more than 6 hours in each day. Remaining time in each gap-free modeled day is harvesting-disabled time; enabling a harvester with zero resource still counts as enabled. */
+        attribute duration : TimeValue;
+        attribute dayCount : Integer;
+        attribute enabledHours : Real [1..*] ordered nonunique;
+        attribute verdict : Boolean = HarvestCampaignCoverageCriterion(duration, dayCount, enabledHours);
+        require constraint { verdict }
+    }
+    requirement harvestCampaignCoverage : HarvestCampaignCoverage;
+
+    requirement def <'E-205'> EnergyEvidenceReadiness {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* An energy case shall be accepted as evidence-backed only after the installed-configuration load coverage, resource bounds, battery derating and interval-resolution evidence have been reviewed and accepted under the sustained-operations evidence checklist. */
+        attribute accepted : Boolean;
+        attribute verdict : Boolean = EnergyEvidenceReadinessCriterion(accepted);
+        require constraint { verdict }
+    }
+    requirement energyEvidenceReadiness : EnergyEvidenceReadiness;
+
+    #derivation connection energyDerivation1 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Repeated journeys motivate a repeatable energy cycle, beyond a one-off endurance run. */
+        end #original source ::> GorgeChallenge::repeatedOperation;
+        end #derive target ::> sustainedEnergyFeasibility;
+    }
+
+    #derivation connection energyDerivation2 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The ocean ambition requires sustained energy autonomy; route-specific resources remain unresolved. */
+        end #original source ::> BlueDog::Goals::hawaiiVoyage;
+        end #derive target ::> sustainedEnergyFeasibility;
+    }
+
+    #derivation connection energyDerivation3 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of sustained energy feasibility. */
+        end #original source ::> sustainedEnergyFeasibility;
+        end #derive target ::> sustainedReserveProtection;
+    }
+
+    #derivation connection energyDerivation4 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of sustained energy feasibility. */
+        end #original source ::> sustainedEnergyFeasibility;
+        end #derive target ::> repeatableCycleBalance;
+    }
+
+    #derivation connection energyDerivation5 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of sustained energy feasibility. */
+        end #original source ::> sustainedEnergyFeasibility;
+        end #derive target ::> peakSupplyCapability;
+    }
+
+    #derivation connection energyDerivation6 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* This leaf isolates one acceptance outcome of sustained energy feasibility. */
+        end #original source ::> sustainedEnergyFeasibility;
+        end #derive target ::> energyEvidenceReadiness;
+    }
+
+    #derivation connection energyDerivation7 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The M-002 campaign requires this separately evaluated energy outcome. */
+        end #original source ::> multiDayEndurance;
+        end #derive target ::> sustainedReserveProtection;
+    }
+
+    #derivation connection energyDerivation8 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The M-002 campaign requires this separately evaluated energy outcome. */
+        end #original source ::> multiDayEndurance;
+        end #derive target ::> peakSupplyCapability;
+    }
+
+    #derivation connection energyDerivation9 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The M-002 campaign requires this separately evaluated energy outcome. */
+        end #original source ::> multiDayEndurance;
+        end #derive target ::> harvestCampaignCoverage;
+    }
+
+    #derivation connection energyDerivation10 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The M-002 campaign requires this separately evaluated energy outcome. */
+        end #original source ::> multiDayEndurance;
+        end #derive target ::> energyEvidenceReadiness;
+    }
+
+    #derivation connection energyDerivation11 {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Sustained operation protects the recovery reserve sized by the existing R-002 policy. */
+        end #original source ::> recoveryEnergy;
+        end #derive target ::> sustainedReserveProtection;
+    }
+
+    calc def SustainedReserveProtectionCriterion {
+        in samples : EnergyValue [1..*] ordered nonunique;
+        in reserve : EnergyValue;
+        return verdict : Boolean;
+        reserve > 0 [J] and SequenceFunctions::size(samples) > 0 and
+            samples->ControlFunctions::forAll { in e : EnergyValue; e > reserve }
+    }
+
+    calc def RepeatableCycleBalanceCriterion {
+        in initialEnergy : EnergyValue;
+        in finalEnergy : EnergyValue;
+        return verdict : Boolean;
+        initialEnergy > 0 [J] and finalEnergy >= initialEnergy
+    }
+
+    calc def PeakSupplyCapabilityCriterion {
+        in demands : PowerValue [1..*] ordered nonunique;
+        in availablePower : PowerValue;
+        return verdict : Boolean;
+        availablePower > 0 [W] and SequenceFunctions::size(demands) > 0 and
+            demands->ControlFunctions::forAll { in p : PowerValue; p >= 0 [W] and p <= availablePower }
+    }
+
+    calc def HarvestCampaignCoverageCriterion {
+        in duration : TimeValue;
+        in dayCount : Integer;
+        in enabledHours : Real [1..*] ordered nonunique;
+        return verdict : Boolean;
+        dayCount >= 3 and duration == dayCount * 86400 [s] and
+            SequenceFunctions::size(enabledHours) == dayCount and
+            enabledHours->ControlFunctions::forAll { in hours : Real; hours >= 0 and hours <= 6 }
+    }
+
+    calc def EnergyEvidenceReadinessCriterion {
+        in accepted : Boolean;
+        return verdict : Boolean;
+        accepted
+    }
 }

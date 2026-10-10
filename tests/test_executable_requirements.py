@@ -86,3 +86,17 @@ class ExecutableRequirementsTests(unittest.TestCase):
                 code, status = self.evaluate(definition, {})
                 self.assertEqual(code, 2)
                 self.assertNotEqual(status, 'holds')
+
+    def test_sustained_energy_atomic_criteria_boundaries(self):
+        cases = [
+            ('SustainedReserveProtection', {'samples': '(101 [J], 102 [J])', 'reserve': '100 [J]'}, {'samples': '(101 [J], 100 [J], 102 [J])'}),
+            ('RepeatableCycleBalance', {'initialEnergy': '100 [J]', 'finalEnergy': '100 [J]'}, {'finalEnergy': '99 [J]'}),
+            ('PeakSupplyCapability', {'demands': '(10 [W], 10 [W])', 'availablePower': '10 [W]'}, {'demands': '(10 [W], 10.1 [W])'}),
+            ('HarvestCampaignCoverage', {'duration': '259200 [s]', 'dayCount': '3', 'enabledHours': '(6, 6, 6)'}, {'enabledHours': '(6, 6.1, 6)'}),
+            ('EnergyEvidenceReadiness', {'accepted': 'true'}, {'accepted': 'false'}),
+        ]
+        for definition, inputs, failing in cases:
+            with self.subTest(definition=definition):
+                self.assertEqual(self.evaluate(definition, inputs), (0, 'holds'))
+                self.assertEqual(self.evaluate(definition, inputs | failing), (1, 'fails'))
+                self.assertEqual(self.evaluate(definition, {})[0], 2)

@@ -190,4 +190,8 @@ package BlueDogSatisfaction {
     satisfy BlueDogRequirements::freshRecoveryCommand by missionContext.boat.recovery.recoveryController;
     satisfy BlueDogRequirements::ingressEventDeadline by missionContext.boat.recording;
     satisfy BlueDogRequirements::qualificationRestoration by missionContext.boat.recovery.recoveryController;
+    satisfy BlueDogRequirements::sustainedEnergyFeasibility by missionContext.boat.energy;
+    satisfy BlueDogRequirements::sustainedReserveProtection by missionContext.boat.energy;
+    satisfy BlueDogRequirements::repeatableCycleBalance by missionContext.boat.energy;
+    satisfy BlueDogRequirements::peakSupplyCapability by missionContext.boat.energy;
 }

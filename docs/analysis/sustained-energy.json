@@ -1,0 +1,251 @@
+{
+  "status": "holds",
+  "exit": 0,
+  "checks": [
+    {
+      "subject": "BlueDogEnergy::BudgetRollup",
+      "status": "holds",
+      "values": [
+        {
+          "name": "labels",
+          "value": "[\"Guidance and mission computer\", \"Position and wind sensors\", \"Traffic sensing\", \"Sail actuator\", \"Steering actuator\", \"Telemetry radio and command gateway\", \"Navigation signals\", \"Recording electronics\", \"Recovery controller and ingress sensing\", \"Power management quiescent demand\", \"Optional payload absent\"]"
+        },
+        {
+          "name": "averageContributions",
+          "value": "[2.5555555555555554 [W], 0.6388888888888888 [W], 1.2777777777777777 [W], 0.26705555555555555 [W], 0.4440277777777778 [W], 0.2785555555555556 [W], 0.3833333333333333 [W], 0.1597222222222222 [W], 0.12777777777777777 [W], 0.25555555555555554 [W], 0.0 [W]]"
+        },
+        {
+          "name": "peakContributions",
+          "value": "[2.5555555555555554 [W], 0.6388888888888888 [W], 1.2777777777777777 [W], 10.222222222222221 [W], 7.666666666666666 [W], 7.666666666666666 [W], 0.7666666666666666 [W], 0.25555555555555554 [W], 0.12777777777777777 [W], 0.25555555555555554 [W], 0.0 [W]]"
+        },
+        {
+          "name": "coincidentPeak",
+          "value": "31.433333333333326 [W]"
+        },
+        {
+          "name": "averageDemand",
+          "value": "6.388249999999998 [W]"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogEnergy::BudgetRollup on object #1 of \"BlueDogEnergyExamples::sailing\"",
+        "  labels = [\"Guidance and mission computer\", \"Position and wind sensors\", \"Traffic sensing\", \"Sail actuator\", \"Steering actuator\", \"Telemetry radio and command gateway\", \"Navigation signals\", \"Recording electronics\", \"Recovery controller and ingress sensing\", \"Power management quiescent demand\", \"Optional payload absent\"]",
+        "  averageContributions = [2.5555555555555554 [W], 0.6388888888888888 [W], 1.2777777777777777 [W], 0.26705555555555555 [W], 0.4440277777777778 [W], 0.2785555555555556 [W], 0.3833333333333333 [W], 0.1597222222222222 [W], 0.12777777777777777 [W], 0.25555555555555554 [W], 0.0 [W]]",
+        "  peakContributions = [2.5555555555555554 [W], 0.6388888888888888 [W], 1.2777777777777777 [W], 10.222222222222221 [W], 7.666666666666666 [W], 7.666666666666666 [W], 0.7666666666666666 [W], 0.25555555555555554 [W], 0.12777777777777777 [W], 0.25555555555555554 [W], 0.0 [W]]",
+        "  coincidentPeak = 31.433333333333326 [W]",
+        "  averageDemand = 6.388249999999998 [W]",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogEnergy::SustainedOperation",
+      "status": "holds",
+      "values": [
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "campaignDuration",
+          "value": "259200 [s]"
+        },
+        {
+          "name": "usableCapacity",
+          "value": "720000.0 [J]"
+        },
+        {
+          "name": "protectedReserve",
+          "value": "177120.0 [SI::J]"
+        },
+        {
+          "name": "boundaryTimes",
+          "value": "[0 [s], 64800 [s], 86400 [s], 151200 [s], 172800 [s], 237600 [s], 259200 [s]]"
+        },
+        {
+          "name": "energyHistory",
+          "value": "[648000 [J], 186750.00000000012 [J], 720000.0 [J], 258750.00000000012 [J], 720000.0 [J], 258750.00000000012 [J], 720000.0 [J]]"
+        },
+        {
+          "name": "storageRates",
+          "value": "[-7.118055555555554 [W], 24.830575000000003 [W], -7.118055555555554 [W], 24.830575000000003 [W], -7.118055555555554 [W], 24.830575000000003 [W]]"
+        },
+        {
+          "name": "reserveMargins",
+          "value": "[470880.0 [J], 9630.000000000116 [J], 542880.0 [J], 81630.00000000012 [J], 542880.0 [J], 81630.00000000012 [J], 542880.0 [J]]"
+        },
+        {
+          "name": "harvestHoursPerDay",
+          "value": "[6.0, 6.0, 6.0]"
+        },
+        {
+          "name": "consumedEnergy",
+          "value": "1655834.3999999994 [SI::J]"
+        },
+        {
+          "name": "harvestedBusEnergy",
+          "value": "2203200.0 [SI::J]"
+        },
+        {
+          "name": "finalStoredEnergy",
+          "value": "720000.0 [J]"
+        },
+        {
+          "name": "reserveProtected",
+          "value": "true"
+        },
+        {
+          "name": "repeatableBalance",
+          "value": "true"
+        },
+        {
+          "name": "peakSupported",
+          "value": "true"
+        },
+        {
+          "name": "campaignCovered",
+          "value": "true"
+        },
+        {
+          "name": "modeledEnergyFeasible",
+          "value": "true"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "energyCaseSupported",
+          "value": "false"
+        },
+        {
+          "name": "objective feasibility",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogEnergy::SustainedOperation on object #13 of \"BlueDogEnergyExamples::campaign\"",
+        "  inputsValid = true",
+        "  campaignDuration = 259200 [s]",
+        "  usableCapacity = 720000.0 [J]",
+        "  protectedReserve = 177120.0 [SI::J]",
+        "  boundaryTimes = [0 [s], 64800 [s], 86400 [s], 151200 [s], 172800 [s], 237600 [s], 259200 [s]]",
+        "  energyHistory = [648000 [J], 186750.00000000012 [J], 720000.0 [J], 258750.00000000012 [J], 720000.0 [J], 258750.00000000012 [J], 720000.0 [J]]",
+        "  storageRates = [-7.118055555555554 [W], 24.830575000000003 [W], -7.118055555555554 [W], 24.830575000000003 [W], -7.118055555555554 [W], 24.830575000000003 [W]]",
+        "  reserveMargins = [470880.0 [J], 9630.000000000116 [J], 542880.0 [J], 81630.00000000012 [J], 542880.0 [J], 81630.00000000012 [J], 542880.0 [J]]",
+        "  harvestHoursPerDay = [6.0, 6.0, 6.0]",
+        "  consumedEnergy = 1655834.3999999994 [SI::J]",
+        "  harvestedBusEnergy = 2203200.0 [SI::J]",
+        "  finalStoredEnergy = 720000.0 [J]",
+        "  reserveProtected = true",
+        "  repeatableBalance = true",
+        "  peakSupported = true",
+        "  campaignCovered = true",
+        "  modeledEnergyFeasible = true",
+        "  evidenceReady = false",
+        "  energyCaseSupported = false",
+        "  objective feasibility: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "output": [
+    "✓ package GorgeChallenge",
+    "✓ package BlueDog",
+    "✓ package BlueDogRequirements",
+    "✓ package BlueDogViews",
+    "✓ package BlueDogDocuments",
+    "✓ package BlueDogArchitectureViews",
+    "✓ package BlueDogUseCases",
+    "✓ package BlueDogUseCaseViews",
+    "✓ package BlueDogSatisfaction",
+    "✓ package RecoveryPropulsionTrade",
+    "✓ package BlueDogEnergy",
+    "✓ package BlueDogEnergyExamples",
+    "✓ Created instance of BlueDogEnergyExamples::sailing",
+    "  ID: 1",
+    "  Use %features BlueDogEnergyExamples::sailing to inspect",
+    "✓ Created instance of BlueDogEnergyExamples::campaign",
+    "  ID: 13",
+    "  Use %features BlueDogEnergyExamples::campaign to inspect"
+  ],
+  "errors": null
+}

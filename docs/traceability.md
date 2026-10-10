@@ -204,3 +204,9 @@ Use-case objectives subset the referenced requirements. Satisfy relationships ex
 | freshRecoveryCommand | recoveryController |
 | ingressEventDeadline | recording |
 | qualificationRestoration | recoveryController |
+| sustainedEnergyFeasibility | energy |
+| sustainedReserveProtection | energy |
+| repeatableCycleBalance | energy |
+| peakSupplyCapability | energy |
+| harvestCampaignCoverage |  |
+| energyEvidenceReadiness |  |

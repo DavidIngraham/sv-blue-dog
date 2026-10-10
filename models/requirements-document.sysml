@@ -55,4 +55,25 @@ package BlueDogDocuments {
             part entries : Table { calc rows : Derivations; }
         }
     }
+
+    calc def EnergyLoads :> Query {
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogEnergyExamples::sailing"), maxDepth = 1), type = "PartUsage"),
+            columns = (Column(name = "Load", path = "label"),
+                Column(name = "Active power", path = "activePower"), Column(name = "Idle power", path = "idlePower"),
+                Column(name = "Active fraction", path = "activeFraction"), Column(name = "Conversion efficiency", path = "conversionEfficiency"),
+                Column(name = "Uncertainty factor", path = "uncertaintyFactor"),
+                Column(name = "Average bus power", path = "averagePower"), Column(name = "Peak bus power", path = "peakPower")))
+    }
+    calc def EnergyTotals :> Query {
+        Project(source = Named(qualifiedName = "BlueDogEnergyExamples::sailing"),
+            columns = (Column(name = "Budget", path = "name"), Column(name = "Average demand", path = "averagePower"), Column(name = "Coincident peak", path = "peakPower")))
+    }
+    part def EnergyBudget :> Document {
+        attribute redefines title = "Sustained-operation energy roll-up";
+        part caution : Paragraph {
+            attribute redefines text = "Generated natively from the synthetic example. These are illustrative inputs, not measurements or hardware selections. Conversion losses and uncertainty factors are included per load; peak powers are conservatively coincident. See sustained-operations.md for the executable campaign, evidence checklist and limitations.";
+        }
+        part loads : Table { calc rows : EnergyLoads; }
+        part totals : Table { calc rows : EnergyTotals; }
+    }
 }

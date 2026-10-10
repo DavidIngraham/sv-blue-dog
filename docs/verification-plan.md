@@ -45,7 +45,7 @@ For actual evidence, create a SysML requirement usage specializing the relevant 
 | N-051/N-052 | Time-stamped capsize trials across the specified loading/angle/water matrix |
 | N-053â€“N-056 | Documented milfoil-equivalent patch, snag, blocked-rudder and propulsor tests; establish surrogate equivalence before acceptance |
 
-Next executable opportunities are trajectory gate-crossing/order, motor/qualification invariants over event logs, telemetry age/retention, and environmental sample coverage. Those need time-series evidence adapters or executable mission behavior; they are not implemented by the current eight numeric/state predicates. High-level environmental acceptance should aggregate only the selected profile and its applicable shared leaf evidence, not return true merely because they contain prose.
+Next executable opportunities are trajectory gate-crossing/order, motor/qualification invariants over event logs, telemetry age/retention, and environmental sample coverage. Those need time-series evidence adapters or executable mission behavior; they are not implemented by the numeric/state predicates. High-level environmental acceptance should aggregate only the selected profile and its applicable shared leaf evidence, not return true merely because they contain prose.
 
 ## Audit clarifications
 
@@ -56,3 +56,9 @@ Emergency/powered recovery takes priority over low-energy telemetry cadence and 
 ## Separate acceptance verdicts
 
 The [atomic decomposition map](requirement-decomposition.md) records the retained parent IDs and new leaves. Tests of restart timing, righting timing, control restoration timing, navigation epoch count and the motor-state invariant now target their specific leaves. A timing pass cannot stand in for retained state, sealing or motor-interlock evidence. Parent shared conditions remain mandatory for each leaf campaign; evidence must identify the same trial/epoch set where specified. Parent roll-up is not yet executable.
+
+## Sustained energy
+
+E-201 through E-205 add five executable acceptance predicates, with E-200 as their sustained-energy parent except that E-204 specifically refines the M-002 campaign. The native analysis uses the same criterion calculations as the requirements, and `BlueDogEnergy::SustainedEnergyVerification` explicitly verifies E-200. See the [energy framework](sustained-operations.md) for load coverage, chronological balance, repeating-cycle assumptions and the evidence acceptance checklist. E-204 also gates this initial combined demonstration analysis; future ocean campaigns need their own resource qualification profile.
+
+Passing the numerical case is conditional on its inputs. The synthetic case deliberately keeps evidence acceptance false; its verification verdict is inconclusive. A finite energy-survival pass without nondecreasing cycle-end energy does not pass E-202. None of these results substitutes for functional mission, navigation or physical endurance evidence.

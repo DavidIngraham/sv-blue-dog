@@ -14,7 +14,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = tuple(ROOT / "models" / name for name in (
     "challenge.sysml", "blue-dog.sysml", "requirements.sysml",
-    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml"))
+    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml"))
 
 
 def native(*arguments, models=MODELS):
@@ -46,12 +46,21 @@ def native_recovery_trade():
     return native(*arguments, "-json")
 
 
+def native_energy_case():
+    return native("-instantiate", "BlueDogEnergyExamples::sailing", "-analysis",
+                  "BlueDogEnergy::BudgetRollup BlueDogEnergyExamples::sailing",
+                  "-instantiate", "BlueDogEnergyExamples::campaign", "-analysis",
+                  "BlueDogEnergy::SustainedOperation BlueDogEnergyExamples::campaign", "-json")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Check model-derived DOT and register freshness without rendering")
     args = parser.parse_args()
     native("-validate")
-    outputs = {ROOT / "docs/analysis/recovery-trade.json": native_recovery_trade(),
+    outputs = {ROOT / "docs/energy-budget.md": native("-render-document", "BlueDogDocuments::EnergyBudget"),
+               ROOT / "docs/analysis/sustained-energy.json": native_energy_case(),
+               ROOT / "docs/analysis/recovery-trade.json": native_recovery_trade(),
                ROOT / "docs/figures/requirements-derivation.dot": native_graph(),
                ROOT / "docs/requirements-register.md": native_register()}
     views = {"architecture": "BlueDogArchitectureViews::architecture",
@@ -88,7 +97,7 @@ def main():
             for extension in ("svg", "png"):
                 subprocess.run([dot, f"-T{extension}", str(source), "-o",
                                 str(source.with_suffix("." + extension))], check=True)
-    print("Native validation, publishing and recovery-trade analysis passed; physical compliance is not evaluated.")
+    print("Native validation, publishing, recovery-trade and sustained-energy analyses passed; physical compliance is not evaluated.")
 
 
 if __name__ == "__main__":

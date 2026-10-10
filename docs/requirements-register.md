@@ -199,6 +199,12 @@ Generated natively by OpenSysML from the project models. Status describes work o
 | R-102 | FreshRecoveryCommand | open | After restart, motor enable shall remain inhibited until a fresh authenticated recovery command is accepted. Verification uses the shared context of R-004. |
 | E-144 | IngressEventDeadline | open | In the E-006 injection test, an ingress event record shall exist within 60 seconds of injection starting. Verification uses the shared context of E-006. |
 | E-145 | QualificationRestoration | open | Within 30 seconds after a watchdog reset under E-003 preconditions, qualification status shall equal the valid persisted status, or be nonqualifying when persisted status is absent or inconsistent. Verification uses the shared context of E-003. |
+| E-200 | SustainedEnergyFeasibility | open | The installed energy architecture shall support the selected bounded repeating mission profile without external charging, while meeting the derived reserve, cycle-balance and peak-supply criteria. The 72-hour campaign is an initial energy demonstration, not proof of indefinite weather availability, functional performance or ocean readiness. |
+| E-201 | SustainedReserveProtection | open | Conservative stored energy shall remain strictly above the R-002 protected reserve throughout the selected sustained-operation profile. For piecewise-constant net power, check the initial state and every interval endpoint; unmodeled intrainterval dips are outside this claim. |
+| E-202 | RepeatableCycleBalance | open | Stored energy at the end of the complete repeating profile shall be at least its initial value at the same profile phase. This is a conditional repeatability criterion with fixed capacity, loads and resource bounds; it is not an indefinite endurance verdict. |
+| E-203 | PeakSupplyCapability | open | The battery supply shall support each selected mode's coincident peak withdrawal power without relying on harvesting. Load power shall include conversion losses and the declared uncertainty allowance. |
+| E-204 | HarvestCampaignCoverage | open | The qualification energy profile shall cover at least three complete consecutive 24-hour days, with harvesting enabled for no more than 6 hours in each day. Remaining time in each gap-free modeled day is harvesting-disabled time; enabling a harvester with zero resource still counts as enabled. |
+| E-205 | EnergyEvidenceReadiness | open | An energy case shall be accepted as evidence-backed only after the installed-configuration load coverage, resource bounds, battery derating and interval-resolution evidence have been reviewed and accepted under the sustained-operations evidence checklist. |
 
 ## Derivations
 
@@ -442,3 +448,14 @@ Generated natively by OpenSysML from the project models. Status describes work o
 | envelopeTransition | motorQualificationInvariant | open | envelopeTransition also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. |
 | weedBlockageResponse | motorQualificationInvariant | open | weedBlockageResponse also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. |
 | recoveryPropulsorWeeds | motorQualificationInvariant | open | recoveryPropulsorWeeds also requires the shared motorQualificationInvariant outcome; one normative leaf avoids duplicate obligations. |
+| repeatedOperation | sustainedEnergyFeasibility | open | Repeated journeys motivate a repeatable energy cycle, beyond a one-off endurance run. |
+| hawaiiVoyage | sustainedEnergyFeasibility | open | The ocean ambition requires sustained energy autonomy; route-specific resources remain unresolved. |
+| sustainedEnergyFeasibility | sustainedReserveProtection | open | This leaf isolates one acceptance outcome of sustained energy feasibility. |
+| sustainedEnergyFeasibility | repeatableCycleBalance | open | This leaf isolates one acceptance outcome of sustained energy feasibility. |
+| sustainedEnergyFeasibility | peakSupplyCapability | open | This leaf isolates one acceptance outcome of sustained energy feasibility. |
+| sustainedEnergyFeasibility | energyEvidenceReadiness | open | This leaf isolates one acceptance outcome of sustained energy feasibility. |
+| multiDayEndurance | sustainedReserveProtection | open | The M-002 campaign requires this separately evaluated energy outcome. |
+| multiDayEndurance | peakSupplyCapability | open | The M-002 campaign requires this separately evaluated energy outcome. |
+| multiDayEndurance | harvestCampaignCoverage | open | The M-002 campaign requires this separately evaluated energy outcome. |
+| multiDayEndurance | energyEvidenceReadiness | open | The M-002 campaign requires this separately evaluated energy outcome. |
+| recoveryEnergy | sustainedReserveProtection | open | Sustained operation protects the recovery reserve sized by the existing R-002 policy. |

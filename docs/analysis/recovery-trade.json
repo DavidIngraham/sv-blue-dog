@@ -193,6 +193,8 @@
     "✓ package BlueDogUseCaseViews",
     "✓ package BlueDogSatisfaction",
     "✓ package RecoveryPropulsionTrade",
+    "✓ package BlueDogEnergy",
+    "✓ package BlueDogEnergyExamples",
     "✓ Created instance of RecoveryPropulsionTrade::waterExample",
     "  ID: 1",
     "  Use %features RecoveryPropulsionTrade::waterExample to inspect",
