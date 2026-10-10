@@ -16,6 +16,8 @@ Live observation, autonomy, energy, weeds, traffic and recovery all interact. I 
 
 The [energy model](sustained-operations.md) asks whether loads, storage and harvesting support a declared profile. The [recovery propulsion trade](recovery-propulsion-trade.md) compares water and air propellers without pretending an energy calculation alone selects the design. The [cruise/reliability analysis](cruise-reliability.md) makes the cost of a slow passage explicit: every extra hour asks the boat to keep working longer.
 
+I am also [working backward from the mission to the required sailing polar](sailing-performance.md), checking what that demand means for a small displacement hull or a higher-speed concept.
+
 The [architecture DFMEA](dfmea.md) identifies ways those functions can fail and the evidence needed to address them. A persistent swell-monitoring role is a possible future use, not a replacement for the sailing mission.
 
 ## Let evidence change the design

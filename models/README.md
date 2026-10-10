@@ -42,3 +42,5 @@ Update the website publication manifest when adding or removing reader-facing pa
 - [OpenSysML](https://github.com/Open-MBEE/OpenSysML)
 - [Official SysML v2 release](https://github.com/Systems-Modeling/SysML-v2-Release)
 - [Standard modeling metadata](https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml.library/Domain%20Libraries/Metadata/ModelingMetadata.sysml)
+
+Sailing performance uses `sailing-performance.sysml` for inverse polar demand, hull-speed screening and cruise integration. Mathematical figures are rendered from native sensitivity outputs by `scripts/plot_sailing.py`, using the uv-locked Matplotlib dependency; no sailing equations are reimplemented in Python.

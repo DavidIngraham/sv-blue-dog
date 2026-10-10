@@ -241,6 +241,7 @@ flowchart BT
 | --- | --- | --- |
 | Can loads and harvesting sustain operation? | [Energy model guide](sustained-operations.md) | [Load budget](energy-budget.md), [native results](analysis/sustained-energy.json) |
 | Which recovery propulsion medium is practical? | [Water/air propeller trade](recovery-propulsion-trade.md) | [Native candidate results](analysis/recovery-trade.json) |
+| What polar and hull regime could deliver the required progress? | [Sailing-performance guide](sailing-performance.md) | [Polar demand and hull screening](sailing-performance-results.md) |
 | How does cruise speed change reliability exposure? | [Cruise/reliability guide](cruise-reliability.md) | [Results](cruise-reliability-results.md), [native analysis](analysis/cruise-reliability.json) |
 | Which failures need design action? | [DFMEA model](../models/dfmea.sysml) | [DFMEA](dfmea.md), [review results](analysis/dfmea.json) |
 

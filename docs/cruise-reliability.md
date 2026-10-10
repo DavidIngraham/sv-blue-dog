@@ -110,6 +110,8 @@ flowchart BT
 ```
 <!-- /diagram -->
 
+The [polar and hull-speed study](sailing-performance.md) now computes candidate water VMG from sailing angles and speed, then feeds it into this exposure model.
+
 ## Native analysis
 
 [cruise-reliability.sysml](../models/cruise-reliability.sysml) defines `CruiseReliability`, with typed distances, speeds and durations. It executes these relationships:

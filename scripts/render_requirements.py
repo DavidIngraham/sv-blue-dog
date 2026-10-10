@@ -15,7 +15,7 @@ except ImportError:
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = tuple(ROOT / "models" / name for name in (
     "challenge.sysml", "blue-dog.sysml", "requirements.sysml",
-    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml", "cruise-reliability.sysml", "dfmea.sysml", "reliability-documents.sysml", "semantic-views.sysml"))
+    "requirements-view.sysml", "requirements-document.sysml", "architecture-view.sysml", "use-cases.sysml", "satisfaction.sysml", "recovery-trade.sysml", "energy.sysml", "energy-examples.sysml", "diagram-documents.sysml", "requirement-verification.sysml", "cruise-reliability.sysml", "dfmea.sysml", "reliability-documents.sysml", "semantic-views.sysml", "sailing-performance.sysml", "sailing-documents.sysml"))
 
 
 def native(*arguments, models=MODELS):
@@ -54,6 +54,23 @@ def native_energy_case():
                   "BlueDogEnergy::SustainedOperation BlueDogEnergyExamples::campaign", "-json")
 
 
+def native_sailing_case():
+    arguments = []
+    for example, analysis in (
+        ("upstreamHeadwind", "PolarDemandAndHullScreen"),
+        ("upstreamTailwind", "PolarDemandAndHullScreen"),
+        ("downstreamHeadwind", "PolarDemandAndHullScreen"),
+        ("downstreamTailwind", "PolarDemandAndHullScreen"),
+        ("oceanIllustration", "PolarDemandAndHullScreen"),
+        ("gorgeWesterly", "PolarVoyageAssessment"),
+        ("gorgeEasterly", "PolarVoyageAssessment"),
+        ("upstreamHeadwind", "SailingSensitivity"),
+    ):
+        subject = f"BlueDogSailingExamples::{example}"
+        arguments.extend(("-instantiate", subject, "-analysis", f"BlueDogSailing::{analysis} {subject}"))
+    return native(*arguments, "-json")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Check generated diagrams, reports and analyses for freshness")
@@ -81,6 +98,14 @@ def main():
     outputs[ROOT / "docs/challenge-brief.md"] = native("-render-document", "BlueDogDocuments::ChallengeBrief")
     outputs[ROOT / "docs/requirements-views.md"] = native("-render-document", "BlueDogDocuments::RequirementsIndex")
     outputs[ROOT / "docs/relationship-register.md"] = native("-render-document", "BlueDogDocuments::RelationshipRegister")
+    outputs[ROOT / "docs/sailing-performance-results.md"] = native("-render-document", "BlueDogSailingDocuments::SailingReport")
+    outputs[ROOT / "docs/analysis/sailing-performance.json"] = native_sailing_case()
+    try:
+        from .plot_sailing import sailing_figures
+    except ImportError:
+        from plot_sailing import sailing_figures
+    for name, content in sailing_figures(outputs[ROOT / "docs/analysis/sailing-performance.json"]).items():
+        outputs[ROOT / "docs/figures" / name] = content
     diagrams = {}
     # Compile the model once per format, rather than once for every view.
     with tempfile.TemporaryDirectory(dir=ROOT / ".tools", prefix="documents-") as scratch:
@@ -138,6 +163,7 @@ def main():
             "requirements-e-200": "SustainedEnergyFeasibilityRequirements",
             "requirements-q-001": "CruisePerformanceRequirements",
             "requirements-l-001": "MissionReliabilityRequirements",
+            "sailing-integration": "SailingIntegrationDiagram",
             "mission-semantics": "MissionSemantics",
             "energy-semantics": "EnergySemantics",
             "cruise-semantics": "CruiseSemantics",
@@ -169,11 +195,11 @@ def main():
             heading, separator, body = content.partition("\n")
             content = heading + separator + "\n<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->\n" + body
         if args.check:
-            if not path.exists() or path.read_text(encoding="utf-8") != content:
+            if not path.exists() or (path.read_bytes() if isinstance(content, bytes) else path.read_text(encoding="utf-8")) != content:
                 raise SystemExit(f"Stale generated file: {path.relative_to(ROOT)}")
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(content.encode("utf-8"))
+            path.write_bytes(content if isinstance(content, bytes) else content.encode("utf-8"))
     print("Native validation, publishing and model analyses passed; physical compliance is not evaluated.")
 
 

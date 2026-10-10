@@ -1,0 +1,1114 @@
+{
+  "status": "holds",
+  "exit": 0,
+  "checks": [
+    {
+      "subject": "BlueDogSailing::PolarDemandAndHullScreen",
+      "status": "holds",
+      "values": [
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "sampledWindSpeed",
+          "value": "5 [SI::'m/s']"
+        },
+        {
+          "name": "requiredGroundVMG",
+          "value": "0.5 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanPolarSpeed",
+          "value": "3.721614637823934 [SI::'m/s']"
+        },
+        {
+          "name": "requiredOperatingSpeed",
+          "value": "2.977291710259147 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanKnots",
+          "value": "7.23424011672039"
+        },
+        {
+          "name": "requiredSpeedWindRatio",
+          "value": "0.7443229275647868"
+        },
+        {
+          "name": "candidateGroundVMG",
+          "value": "0.6496046148071044 [SI::'m/s']"
+        },
+        {
+          "name": "candidateHours",
+          "value": "42.76105363879873"
+        },
+        {
+          "name": "minimumProgressMet",
+          "value": "true"
+        },
+        {
+          "name": "allocatedDurationMet",
+          "value": "true"
+        },
+        {
+          "name": "waveReference",
+          "value": "1.2493105389262253 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanFroude",
+          "value": "1.1884230414520724"
+        },
+        {
+          "name": "requiredOperatingFroude",
+          "value": "0.9507384331616578"
+        },
+        {
+          "name": "equivalentWaveLength",
+          "value": "8.874052530298792 [m]"
+        },
+        {
+          "name": "exceedsWaveReference",
+          "value": "true"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "modeledFeasible",
+          "value": "true"
+        },
+        {
+          "name": "performanceSupported",
+          "value": "false"
+        },
+        {
+          "name": "objective feasibility",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailing::PolarDemandAndHullScreen on object #43 of \"BlueDogSailingExamples::upstreamHeadwind\"",
+        "  inputsValid = true",
+        "  sampledWindSpeed = 5 [SI::'m/s']",
+        "  requiredGroundVMG = 0.5 [SI::'m/s']",
+        "  requiredCleanPolarSpeed = 3.721614637823934 [SI::'m/s']",
+        "  requiredOperatingSpeed = 2.977291710259147 [SI::'m/s']",
+        "  requiredCleanKnots = 7.23424011672039",
+        "  requiredSpeedWindRatio = 0.7443229275647868",
+        "  candidateGroundVMG = 0.6496046148071044 [SI::'m/s']",
+        "  candidateHours = 42.76105363879873",
+        "  minimumProgressMet = true",
+        "  allocatedDurationMet = true",
+        "  waveReference = 1.2493105389262253 [SI::'m/s']",
+        "  requiredCleanFroude = 1.1884230414520724",
+        "  requiredOperatingFroude = 0.9507384331616578",
+        "  equivalentWaveLength = 8.874052530298792 [m]",
+        "  exceedsWaveReference = true",
+        "  evidenceReady = false",
+        "  modeledFeasible = true",
+        "  performanceSupported = false",
+        "  objective feasibility: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailing::PolarDemandAndHullScreen",
+      "status": "holds",
+      "values": [
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "sampledWindSpeed",
+          "value": "5 [SI::'m/s']"
+        },
+        {
+          "name": "requiredGroundVMG",
+          "value": "0.5 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanPolarSpeed",
+          "value": "3.4352823403481025 [SI::'m/s']"
+        },
+        {
+          "name": "requiredOperatingSpeed",
+          "value": "2.748225872278482 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanKnots",
+          "value": "6.67765465726413"
+        },
+        {
+          "name": "requiredSpeedWindRatio",
+          "value": "0.6870564680696205"
+        },
+        {
+          "name": "candidateGroundVMG",
+          "value": "0.5958975963735234 [SI::'m/s']"
+        },
+        {
+          "name": "candidateHours",
+          "value": "46.61501900129495"
+        },
+        {
+          "name": "minimumProgressMet",
+          "value": "true"
+        },
+        {
+          "name": "allocatedDurationMet",
+          "value": "true"
+        },
+        {
+          "name": "waveReference",
+          "value": "1.2493105389262253 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanFroude",
+          "value": "1.096988561274094"
+        },
+        {
+          "name": "requiredOperatingFroude",
+          "value": "0.8775908490192751"
+        },
+        {
+          "name": "equivalentWaveLength",
+          "value": "7.561084061783603 [m]"
+        },
+        {
+          "name": "exceedsWaveReference",
+          "value": "true"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "modeledFeasible",
+          "value": "true"
+        },
+        {
+          "name": "performanceSupported",
+          "value": "false"
+        },
+        {
+          "name": "objective feasibility",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailing::PolarDemandAndHullScreen on object #2 of \"BlueDogSailingExamples::upstreamTailwind\"",
+        "  inputsValid = true",
+        "  sampledWindSpeed = 5 [SI::'m/s']",
+        "  requiredGroundVMG = 0.5 [SI::'m/s']",
+        "  requiredCleanPolarSpeed = 3.4352823403481025 [SI::'m/s']",
+        "  requiredOperatingSpeed = 2.748225872278482 [SI::'m/s']",
+        "  requiredCleanKnots = 6.67765465726413",
+        "  requiredSpeedWindRatio = 0.6870564680696205",
+        "  candidateGroundVMG = 0.5958975963735234 [SI::'m/s']",
+        "  candidateHours = 46.61501900129495",
+        "  minimumProgressMet = true",
+        "  allocatedDurationMet = true",
+        "  waveReference = 1.2493105389262253 [SI::'m/s']",
+        "  requiredCleanFroude = 1.096988561274094",
+        "  requiredOperatingFroude = 0.8775908490192751",
+        "  equivalentWaveLength = 7.561084061783603 [m]",
+        "  exceedsWaveReference = true",
+        "  evidenceReady = false",
+        "  modeledFeasible = true",
+        "  performanceSupported = false",
+        "  objective feasibility: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailing::PolarDemandAndHullScreen",
+      "status": "holds",
+      "values": [
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "sampledWindSpeed",
+          "value": "5 [SI::'m/s']"
+        },
+        {
+          "name": "requiredGroundVMG",
+          "value": "25/9 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanPolarSpeed",
+          "value": "2.3776982408319576 [SI::'m/s']"
+        },
+        {
+          "name": "requiredOperatingSpeed",
+          "value": "1.9021585926655662 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanKnots",
+          "value": "4.621875630126915"
+        },
+        {
+          "name": "requiredSpeedWindRatio",
+          "value": "0.4755396481663915"
+        },
+        {
+          "name": "candidateGroundVMG",
+          "value": "3.112203461105328 [SI::'m/s']"
+        },
+        {
+          "name": "candidateHours",
+          "value": "8.925437595880135"
+        },
+        {
+          "name": "minimumProgressMet",
+          "value": "true"
+        },
+        {
+          "name": "allocatedDurationMet",
+          "value": "true"
+        },
+        {
+          "name": "waveReference",
+          "value": "1.2493105389262253 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanFroude",
+          "value": "0.7592702764832684"
+        },
+        {
+          "name": "requiredOperatingFroude",
+          "value": "0.6074162211866148"
+        },
+        {
+          "name": "equivalentWaveLength",
+          "value": "3.622201997321034 [m]"
+        },
+        {
+          "name": "exceedsWaveReference",
+          "value": "true"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "modeledFeasible",
+          "value": "true"
+        },
+        {
+          "name": "performanceSupported",
+          "value": "false"
+        },
+        {
+          "name": "objective feasibility",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailing::PolarDemandAndHullScreen on object #3 of \"BlueDogSailingExamples::downstreamHeadwind\"",
+        "  inputsValid = true",
+        "  sampledWindSpeed = 5 [SI::'m/s']",
+        "  requiredGroundVMG = 25/9 [SI::'m/s']",
+        "  requiredCleanPolarSpeed = 2.3776982408319576 [SI::'m/s']",
+        "  requiredOperatingSpeed = 1.9021585926655662 [SI::'m/s']",
+        "  requiredCleanKnots = 4.621875630126915",
+        "  requiredSpeedWindRatio = 0.4755396481663915",
+        "  candidateGroundVMG = 3.112203461105328 [SI::'m/s']",
+        "  candidateHours = 8.925437595880135",
+        "  minimumProgressMet = true",
+        "  allocatedDurationMet = true",
+        "  waveReference = 1.2493105389262253 [SI::'m/s']",
+        "  requiredCleanFroude = 0.7592702764832684",
+        "  requiredOperatingFroude = 0.6074162211866148",
+        "  equivalentWaveLength = 3.622201997321034 [m]",
+        "  exceedsWaveReference = true",
+        "  evidenceReady = false",
+        "  modeledFeasible = true",
+        "  performanceSupported = false",
+        "  objective feasibility: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailing::PolarDemandAndHullScreen",
+      "status": "holds",
+      "values": [
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "sampledWindSpeed",
+          "value": "5 [SI::'m/s']"
+        },
+        {
+          "name": "requiredGroundVMG",
+          "value": "25/9 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanPolarSpeed",
+          "value": "2.1947637174446206 [SI::'m/s']"
+        },
+        {
+          "name": "requiredOperatingSpeed",
+          "value": "1.7558109739556966 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanKnots",
+          "value": "4.266279364363193"
+        },
+        {
+          "name": "requiredSpeedWindRatio",
+          "value": "0.4389527434889241"
+        },
+        {
+          "name": "candidateGroundVMG",
+          "value": "3.2465813303112694 [SI::'m/s']"
+        },
+        {
+          "name": "candidateHours",
+          "value": "8.556008598470735"
+        },
+        {
+          "name": "minimumProgressMet",
+          "value": "true"
+        },
+        {
+          "name": "allocatedDurationMet",
+          "value": "true"
+        },
+        {
+          "name": "waveReference",
+          "value": "1.2493105389262253 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanFroude",
+          "value": "0.7008538030362265"
+        },
+        {
+          "name": "requiredOperatingFroude",
+          "value": "0.5606830424289813"
+        },
+        {
+          "name": "equivalentWaveLength",
+          "value": "3.0862758246014854 [m]"
+        },
+        {
+          "name": "exceedsWaveReference",
+          "value": "true"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "modeledFeasible",
+          "value": "true"
+        },
+        {
+          "name": "performanceSupported",
+          "value": "false"
+        },
+        {
+          "name": "objective feasibility",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailing::PolarDemandAndHullScreen on object #4 of \"BlueDogSailingExamples::downstreamTailwind\"",
+        "  inputsValid = true",
+        "  sampledWindSpeed = 5 [SI::'m/s']",
+        "  requiredGroundVMG = 25/9 [SI::'m/s']",
+        "  requiredCleanPolarSpeed = 2.1947637174446206 [SI::'m/s']",
+        "  requiredOperatingSpeed = 1.7558109739556966 [SI::'m/s']",
+        "  requiredCleanKnots = 4.266279364363193",
+        "  requiredSpeedWindRatio = 0.4389527434889241",
+        "  candidateGroundVMG = 3.2465813303112694 [SI::'m/s']",
+        "  candidateHours = 8.556008598470735",
+        "  minimumProgressMet = true",
+        "  allocatedDurationMet = true",
+        "  waveReference = 1.2493105389262253 [SI::'m/s']",
+        "  requiredCleanFroude = 0.7008538030362265",
+        "  requiredOperatingFroude = 0.5606830424289813",
+        "  equivalentWaveLength = 3.0862758246014854 [m]",
+        "  exceedsWaveReference = true",
+        "  evidenceReady = false",
+        "  modeledFeasible = true",
+        "  performanceSupported = false",
+        "  objective feasibility: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailing::PolarDemandAndHullScreen",
+      "status": "holds",
+      "values": [
+        {
+          "name": "inputsValid",
+          "value": "true"
+        },
+        {
+          "name": "sampledWindSpeed",
+          "value": "5 [SI::'m/s']"
+        },
+        {
+          "name": "requiredGroundVMG",
+          "value": "625/378 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanPolarSpeed",
+          "value": "2.84001516232482 [SI::'m/s']"
+        },
+        {
+          "name": "requiredOperatingSpeed",
+          "value": "2.272012129859856 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanKnots",
+          "value": "5.520547831732911"
+        },
+        {
+          "name": "requiredSpeedWindRatio",
+          "value": "0.568003032464964"
+        },
+        {
+          "name": "candidateGroundVMG",
+          "value": "1.7465813303112694 [SI::'m/s']"
+        },
+        {
+          "name": "candidateHours",
+          "value": "636.1633963607597"
+        },
+        {
+          "name": "minimumProgressMet",
+          "value": "true"
+        },
+        {
+          "name": "allocatedDurationMet",
+          "value": "true"
+        },
+        {
+          "name": "waveReference",
+          "value": "1.2493105389262253 [SI::'m/s']"
+        },
+        {
+          "name": "requiredCleanFroude",
+          "value": "0.9069019190427362"
+        },
+        {
+          "name": "requiredOperatingFroude",
+          "value": "0.7255215352341889"
+        },
+        {
+          "name": "equivalentWaveLength",
+          "value": "5.167738273064548 [m]"
+        },
+        {
+          "name": "exceedsWaveReference",
+          "value": "true"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "modeledFeasible",
+          "value": "true"
+        },
+        {
+          "name": "performanceSupported",
+          "value": "false"
+        },
+        {
+          "name": "objective feasibility",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailing::PolarDemandAndHullScreen on object #5 of \"BlueDogSailingExamples::oceanIllustration\"",
+        "  inputsValid = true",
+        "  sampledWindSpeed = 5 [SI::'m/s']",
+        "  requiredGroundVMG = 625/378 [SI::'m/s']",
+        "  requiredCleanPolarSpeed = 2.84001516232482 [SI::'m/s']",
+        "  requiredOperatingSpeed = 2.272012129859856 [SI::'m/s']",
+        "  requiredCleanKnots = 5.520547831732911",
+        "  requiredSpeedWindRatio = 0.568003032464964",
+        "  candidateGroundVMG = 1.7465813303112694 [SI::'m/s']",
+        "  candidateHours = 636.1633963607597",
+        "  minimumProgressMet = true",
+        "  allocatedDurationMet = true",
+        "  waveReference = 1.2493105389262253 [SI::'m/s']",
+        "  requiredCleanFroude = 0.9069019190427362",
+        "  requiredOperatingFroude = 0.7255215352341889",
+        "  equivalentWaveLength = 5.167738273064548 [m]",
+        "  exceedsWaveReference = true",
+        "  evidenceReady = false",
+        "  modeledFeasible = true",
+        "  performanceSupported = false",
+        "  objective feasibility: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailing::PolarVoyageAssessment",
+      "status": "holds",
+      "values": [
+        {
+          "name": "allocationValid",
+          "value": "true"
+        },
+        {
+          "name": "legBudgetsMet",
+          "value": "true"
+        },
+        {
+          "name": "allocatedHours",
+          "value": "72.0"
+        },
+        {
+          "name": "voyageHours",
+          "value": "61.54045659717509"
+        },
+        {
+          "name": "groundSpeeds",
+          "value": "[0.5958975963735234 [SI::'m/s'], 3.112203461105328 [SI::'m/s']]"
+        },
+        {
+          "name": "allowableRatePerHour",
+          "value": "0.001712052875192068"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "modeledFeasible",
+          "value": "true"
+        },
+        {
+          "name": "voyageSupported",
+          "value": "false"
+        },
+        {
+          "name": "objective feasibility",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailing::PolarVoyageAssessment on object #6 of \"BlueDogSailingExamples::gorgeWesterly\"",
+        "  allocationValid = true",
+        "  legBudgetsMet = true",
+        "  allocatedHours = 72.0",
+        "  voyageHours = 61.54045659717509",
+        "  groundSpeeds = [0.5958975963735234 [SI::'m/s'], 3.112203461105328 [SI::'m/s']]",
+        "  allowableRatePerHour = 0.001712052875192068",
+        "  evidenceReady = false",
+        "  modeledFeasible = true",
+        "  voyageSupported = false",
+        "  objective feasibility: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailing::PolarVoyageAssessment",
+      "status": "holds",
+      "values": [
+        {
+          "name": "allocationValid",
+          "value": "true"
+        },
+        {
+          "name": "legBudgetsMet",
+          "value": "true"
+        },
+        {
+          "name": "allocatedHours",
+          "value": "72.0"
+        },
+        {
+          "name": "voyageHours",
+          "value": "57.31706223726946"
+        },
+        {
+          "name": "groundSpeeds",
+          "value": "[0.6496046148071044 [SI::'m/s'], 3.2465813303112694 [SI::'m/s']]"
+        },
+        {
+          "name": "allowableRatePerHour",
+          "value": "0.001838205091909218"
+        },
+        {
+          "name": "evidenceReady",
+          "value": "false"
+        },
+        {
+          "name": "modeledFeasible",
+          "value": "true"
+        },
+        {
+          "name": "voyageSupported",
+          "value": "false"
+        },
+        {
+          "name": "objective feasibility",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailing::PolarVoyageAssessment on object #40 of \"BlueDogSailingExamples::gorgeEasterly\"",
+        "  allocationValid = true",
+        "  legBudgetsMet = true",
+        "  allocatedHours = 72.0",
+        "  voyageHours = 57.31706223726946",
+        "  groundSpeeds = [0.6496046148071044 [SI::'m/s'], 3.2465813303112694 [SI::'m/s']]",
+        "  allowableRatePerHour = 0.001838205091909218",
+        "  evidenceReady = false",
+        "  modeledFeasible = true",
+        "  voyageSupported = false",
+        "  objective feasibility: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    },
+    {
+      "subject": "BlueDogSailing::SailingSensitivity",
+      "status": "holds",
+      "values": [
+        {
+          "name": "referenceTwaDegrees",
+          "value": "45.0"
+        },
+        {
+          "name": "groundTarget",
+          "value": "0.5 [SI::'m/s']"
+        },
+        {
+          "name": "alongCurrent",
+          "value": "-1.5 [SI::'m/s']"
+        },
+        {
+          "name": "retainedPerformance",
+          "value": "0.8"
+        },
+        {
+          "name": "maneuverRetention",
+          "value": "0.95"
+        },
+        {
+          "name": "beatAngles",
+          "value": "[30.0, 35.0, 40.0, 45.0, 50.0, 55.0, 60.0, 65.0, 70.0, 75.0]"
+        },
+        {
+          "name": "runAngles",
+          "value": "[105.0, 110.0, 115.0, 120.0, 125.0, 130.0, 135.0, 140.0, 145.0, 150.0, 155.0, 160.0, 165.0, 170.0, 175.0, 180.0]"
+        },
+        {
+          "name": "beatSpeeds",
+          "value": "[3.0386856273138196 [SI::'m/s'], 3.2125647072669894 [SI::'m/s'], 3.435282340348101 [SI::'m/s'], 3.721614637823934 [SI::'m/s'], 4.094010070685296 [SI::'m/s'], 4.588017883213415 [SI::'m/s'], 5.263157894736841 [SI::'m/s'], 6.226846271453943 [SI::'m/s'], 7.694222105692332 [SI::'m/s'], 10.167640276727035 [SI::'m/s']]"
+        },
+        {
+          "name": "runSpeeds",
+          "value": "[10.167640276727031 [SI::'m/s'], 7.694222105692336 [SI::'m/s'], 6.226846271453945 [SI::'m/s'], 5.263157894736844 [SI::'m/s'], 4.588017883213418 [SI::'m/s'], 4.094010070685296 [SI::'m/s'], 3.7216146378239343 [SI::'m/s'], 3.4352823403481025 [SI::'m/s'], 3.2125647072669903 [SI::'m/s'], 3.0386856273138196 [SI::'m/s'], 2.903626102532873 [SI::'m/s'], 2.800467822305032 [SI::'m/s'], 2.724411001079166 [SI::'m/s'], 2.6721752944361707 [SI::'m/s'], 2.641631151429862 [SI::'m/s'], 2.6315789473684212 [SI::'m/s']]"
+        },
+        {
+          "name": "waterlines",
+          "value": "[0.5 [m], 0.75 [m], 1.0 [m], 1.25 [m], 1.5 [m], 1.75 [m], 2.0 [m], 2.25 [m], 2.5 [m], 2.75 [m], 3.0 [m], 3.25 [m], 3.5 [m], 3.75 [m], 4.0 [m]]"
+        },
+        {
+          "name": "waveSpeeds",
+          "value": "[0.8833959538825541 [SI::'m/s'], 1.081934663925739 [SI::'m/s'], 1.2493105389262253 [SI::'m/s'], 1.3967716450229684 [SI::'m/s'], 1.5300866753253566 [SI::'m/s'], 1.6526824981454353 [SI::'m/s'], 1.7667919077651082 [SI::'m/s'], 1.873965808389338 [SI::'m/s'], 1.9753334039296604 [SI::'m/s'], 2.0717471521274917 [SI::'m/s'], 2.163869327851478 [SI::'m/s'], 2.252226603538028 [SI::'m/s'], 2.3372460031739224 [SI::'m/s'], 2.4192794557513415 [SI::'m/s'], 2.4986210778524507 [SI::'m/s']]"
+        },
+        {
+          "name": "cleanDemand",
+          "value": "3.721614637823934 [SI::'m/s']"
+        },
+        {
+          "name": "operatingDemand",
+          "value": "2.977291710259147 [SI::'m/s']"
+        },
+        {
+          "name": "computed",
+          "value": "true"
+        },
+        {
+          "name": "objective consistency",
+          "value": "satisfied"
+        },
+        {
+          "name": "assertion validInputs",
+          "value": "satisfied"
+        }
+      ],
+      "lines": [
+        "✓ BlueDogSailing::SailingSensitivity on object #43 of \"BlueDogSailingExamples::upstreamHeadwind\"",
+        "  referenceTwaDegrees = 45.0",
+        "  groundTarget = 0.5 [SI::'m/s']",
+        "  alongCurrent = -1.5 [SI::'m/s']",
+        "  retainedPerformance = 0.8",
+        "  maneuverRetention = 0.95",
+        "  beatAngles = [30.0, 35.0, 40.0, 45.0, 50.0, 55.0, 60.0, 65.0, 70.0, 75.0]",
+        "  runAngles = [105.0, 110.0, 115.0, 120.0, 125.0, 130.0, 135.0, 140.0, 145.0, 150.0, 155.0, 160.0, 165.0, 170.0, 175.0, 180.0]",
+        "  beatSpeeds = [3.0386856273138196 [SI::'m/s'], 3.2125647072669894 [SI::'m/s'], 3.435282340348101 [SI::'m/s'], 3.721614637823934 [SI::'m/s'], 4.094010070685296 [SI::'m/s'], 4.588017883213415 [SI::'m/s'], 5.263157894736841 [SI::'m/s'], 6.226846271453943 [SI::'m/s'], 7.694222105692332 [SI::'m/s'], 10.167640276727035 [SI::'m/s']]",
+        "  runSpeeds = [10.167640276727031 [SI::'m/s'], 7.694222105692336 [SI::'m/s'], 6.226846271453945 [SI::'m/s'], 5.263157894736844 [SI::'m/s'], 4.588017883213418 [SI::'m/s'], 4.094010070685296 [SI::'m/s'], 3.7216146378239343 [SI::'m/s'], 3.4352823403481025 [SI::'m/s'], 3.2125647072669903 [SI::'m/s'], 3.0386856273138196 [SI::'m/s'], 2.903626102532873 [SI::'m/s'], 2.800467822305032 [SI::'m/s'], 2.724411001079166 [SI::'m/s'], 2.6721752944361707 [SI::'m/s'], 2.641631151429862 [SI::'m/s'], 2.6315789473684212 [SI::'m/s']]",
+        "  waterlines = [0.5 [m], 0.75 [m], 1.0 [m], 1.25 [m], 1.5 [m], 1.75 [m], 2.0 [m], 2.25 [m], 2.5 [m], 2.75 [m], 3.0 [m], 3.25 [m], 3.5 [m], 3.75 [m], 4.0 [m]]",
+        "  waveSpeeds = [0.8833959538825541 [SI::'m/s'], 1.081934663925739 [SI::'m/s'], 1.2493105389262253 [SI::'m/s'], 1.3967716450229684 [SI::'m/s'], 1.5300866753253566 [SI::'m/s'], 1.6526824981454353 [SI::'m/s'], 1.7667919077651082 [SI::'m/s'], 1.873965808389338 [SI::'m/s'], 1.9753334039296604 [SI::'m/s'], 2.0717471521274917 [SI::'m/s'], 2.163869327851478 [SI::'m/s'], 2.252226603538028 [SI::'m/s'], 2.3372460031739224 [SI::'m/s'], 2.4192794557513415 [SI::'m/s'], 2.4986210778524507 [SI::'m/s']]",
+        "  cleanDemand = 3.721614637823934 [SI::'m/s']",
+        "  operatingDemand = 2.977291710259147 [SI::'m/s']",
+        "  computed = true",
+        "  objective consistency: satisfied",
+        "  assertion validInputs: satisfied",
+        "  standing: value (observed: 1 run under reverse)"
+      ],
+      "rows": null,
+      "plan": {
+        "engine": "auto",
+        "standing": "value (observed: 1 run under reverse)",
+        "steps": [
+          {
+            "engine": "run",
+            "status": "answered"
+          }
+        ],
+        "workers": 0,
+        "warming": 0
+      },
+      "results": [
+        {
+          "engine": "run",
+          "claim": "value",
+          "strength": "observed",
+          "bounds": [
+            {
+              "name": "steps",
+              "limit": 10000000,
+              "reached": false
+            },
+            {
+              "name": "elements",
+              "limit": 1000000,
+              "reached": false
+            }
+          ],
+          "witness": null,
+          "standing": "value (observed: 1 run under reverse)"
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "output": [
+    "✓ package GorgeChallenge",
+    "✓ package BlueDog",
+    "✓ package BlueDogRequirements",
+    "✓ package BlueDogViews",
+    "✓ package BlueDogDocuments",
+    "✓ package BlueDogArchitectureViews",
+    "✓ package BlueDogUseCases",
+    "✓ package BlueDogUseCaseViews",
+    "✓ package BlueDogSatisfaction",
+    "✓ package RecoveryPropulsionTrade",
+    "✓ package BlueDogEnergy",
+    "✓ package BlueDogEnergyExamples",
+    "✓ package BlueDogDiagramDocuments",
+    "✓ package BlueDogRequirementVerification",
+    "✓ package BlueDogReliability",
+    "✓ package BlueDogReliabilityExamples",
+    "✓ package BlueDogDFMEA",
+    "✓ package BlueDogReliabilityDocuments",
+    "✓ package BlueDogSemanticViews",
+    "✓ package BlueDogSailing",
+    "✓ package BlueDogSailingExamples",
+    "✓ package BlueDogSailingDocuments",
+    "✓ Created instance of BlueDogSailingExamples::upstreamHeadwind",
+    "  ID: 1",
+    "  Use %features BlueDogSailingExamples::upstreamHeadwind to inspect",
+    "✓ Created instance of BlueDogSailingExamples::upstreamTailwind",
+    "  ID: 2",
+    "  Use %features BlueDogSailingExamples::upstreamTailwind to inspect",
+    "✓ Created instance of BlueDogSailingExamples::downstreamHeadwind",
+    "  ID: 3",
+    "  Use %features BlueDogSailingExamples::downstreamHeadwind to inspect",
+    "✓ Created instance of BlueDogSailingExamples::downstreamTailwind",
+    "  ID: 4",
+    "  Use %features BlueDogSailingExamples::downstreamTailwind to inspect",
+    "✓ Created instance of BlueDogSailingExamples::oceanIllustration",
+    "  ID: 5",
+    "  Use %features BlueDogSailingExamples::oceanIllustration to inspect",
+    "✓ Created instance of BlueDogSailingExamples::gorgeWesterly",
+    "  ID: 6",
+    "  Use %features BlueDogSailingExamples::gorgeWesterly to inspect",
+    "✓ Created instance of BlueDogSailingExamples::gorgeEasterly",
+    "  ID: 40",
+    "  Use %features BlueDogSailingExamples::gorgeEasterly to inspect",
+    "✓ Created instance of BlueDogSailingExamples::upstreamHeadwind",
+    "  ID: 43",
+    "  note: BlueDogSailingExamples::upstreamHeadwind now denotes this object; object #1 is displaced from that name and stays reachable as #1",
+    "  Use %features BlueDogSailingExamples::upstreamHeadwind to inspect"
+  ],
+  "errors": null
+}

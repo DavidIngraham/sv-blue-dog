@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polar legs feed the cruise model</title>
+<link rel="stylesheet" href="sysml-document.css">
+</head>
+<body>
+<article class="sysml-document" data-document="BlueDogDiagramDocuments::SailingIntegrationDiagram">
+<h1 class="sysml-title">Polar legs feed the cruise model</h1>
+<figure class="sysml-diagram" data-content="diagram" data-name="diagram" data-view="BlueDogSemanticViews::SailingIntegration" data-diagram-kind="definition" data-direction="BT">
+<pre class="mermaid">---
+config:
+  fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+  theme: base
+  themeCSS: &#34;.edgeLabel rect { opacity: 1 !important; } .cluster-label .nodeLabel { text-align: center; }&#34;
+  themeVariables:
+    fontFamily: &#34;Helvetica, Arial, sans-serif&#34;
+    fontSize: &#34;14px&#34;
+    primaryColor: &#34;#FFFFFF&#34;
+    secondaryColor: &#34;#FFFFFF&#34;
+    tertiaryColor: &#34;#FFFFFF&#34;
+    background: &#34;#FFFFFF&#34;
+    primaryBorderColor: &#34;#181818&#34;
+    primaryTextColor: &#34;#000000&#34;
+    lineColor: &#34;#181818&#34;
+    textColor: &#34;#000000&#34;
+    noteBkgColor: &#34;#FEFFDD&#34;
+    noteBorderColor: &#34;#181818&#34;
+    noteTextColor: &#34;#000000&#34;
+    clusterBkg: &#34;#FFFFFF&#34;
+    clusterBorder: &#34;#181818&#34;
+    edgeLabelBackground: &#34;#FFFFFF&#34;
+---
+%% BlueDogSemanticViews::SailingIntegration — definition rendering (view def GeneralView, filter @PartDefinition)
+%% layout: n0 x=0 y=200
+%% layout: n1 x=0 y=0
+%% layout: n2 x=350 y=200
+%% layout: n3 x=350 y=0
+flowchart BT
+  n0[&#34;`*«part def»*
+**BlueDogSailing::PolarLeg**`&#34;]
+  n1[&#34;`*«part def»*
+**BlueDogReliability::SailingLeg**`&#34;]
+  n2[&#34;`*«part def»*
+**BlueDogSailing::PolarVoyageProfile**`&#34;]
+  n3[&#34;`*«part def»*
+**BlueDogReliability::VoyageProfile**`&#34;]
+  n0 --&gt;|&#34;specialization&#34;| n1
+  n2 --&gt;|&#34;specialization&#34;| n3
+  n2 ---|&#34;◆ legs&#34;| n0
+  n3 ---|&#34;◆ legs&#34;| n1</pre>
+</figure>
+</article>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({maxTextSize: 1249, maxEdges: 5});</script>
+</body>
+</html>

@@ -798,4 +798,8 @@ package BlueDogDiagramDocuments {
         attribute redefines title = "Weed tolerance and design responsibility";
         part diagram : Diagram { attribute redefines direction = "BT"; ref redefines source = BlueDogSemanticViews::WeedSemantics; }
     }
+    part def SailingIntegrationDiagram :> Document {
+        attribute redefines title = "Polar legs feed the cruise model";
+        part diagram : Diagram { attribute redefines direction = "BT"; ref redefines source = BlueDogSemanticViews::SailingIntegration; }
+    }
 }

@@ -98,6 +98,9 @@
     "✓ package BlueDogDFMEA",
     "✓ package BlueDogReliabilityDocuments",
     "✓ package BlueDogSemanticViews",
+    "✓ package BlueDogSailing",
+    "✓ package BlueDogSailingExamples",
+    "✓ package BlueDogSailingDocuments",
     "✓ Created instance of BlueDogDFMEA::starter",
     "  ID: 1",
     "  Use %features BlueDogDFMEA::starter to inspect"

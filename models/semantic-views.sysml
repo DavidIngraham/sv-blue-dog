@@ -75,4 +75,15 @@ package BlueDogSemanticViews {
         metadata Layout about BlueDog::Architecture::missionContext::boat { x = 360; y = 200; }
         metadata Layout about BlueDogRequirementVerification::SubmergedWeedPassageVerification { x = 0; y = 400; }
     }
+    view SailingIntegration : GeneralView {
+        filter @SysML::PartDefinition;
+        expose BlueDogSailing::PolarLeg;
+        expose BlueDogReliability::SailingLeg;
+        expose BlueDogSailing::PolarVoyageProfile;
+        expose BlueDogReliability::VoyageProfile;
+        metadata Layout about BlueDogSailing::PolarLeg { x = 0; y = 200; }
+        metadata Layout about BlueDogReliability::SailingLeg { x = 0; y = 0; }
+        metadata Layout about BlueDogSailing::PolarVoyageProfile { x = 350; y = 200; }
+        metadata Layout about BlueDogReliability::VoyageProfile { x = 350; y = 0; }
+    }
 }
