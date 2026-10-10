@@ -58,3 +58,9 @@ The views are defined in [architecture-view.sysml](../models/architecture-view.s
 Regenerate both diagrams, the requirement diagram, and the register with
 `uv run python scripts/render_requirements.py`. Native DOT, SVG, and PNG are
 committed in `docs/figures/`; `--check` checks the DOT and register for freshness.
+
+## External traffic
+
+The context includes zero or more `OtherVessel` instances: commercial ships, barges and recreational/fishing craft, including non-AIS traffic. These are external participants, not onboard components or controllable resources. Voyage and recovery use cases include traffic; collision avoidance links to S-001 and presentation of navigation signals links to S-004. The operator actor does not imply intervention is required during a qualifying attempt. Encounter geometry and sensor performance remain to be decomposed.
+
+Environmental qualification targets are specified in N-001 through N-003; see [envelope and acceptance criteria](environmental-envelope.md).

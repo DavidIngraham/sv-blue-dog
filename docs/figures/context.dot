@@ -15,5 +15,6 @@ digraph "BlueDogArchitectureViews::context" {
     "n2" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>operator : Operator</b>>];
     "n3" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>shoreSupport : ShoreSupport</b>>];
     "n4" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>environment : Environment</b>>];
+    "n5" [style="rounded,filled", label=<<font point-size="10"><i>«part»</i></font><br/><b>traffic : OtherVessel</b>>];
   }
 }

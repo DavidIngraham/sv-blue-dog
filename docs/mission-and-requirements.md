@@ -20,7 +20,7 @@ C-000, the independent Trans-Gorge challenge, and H-001, the Hawaii voyage goal 
 
 ## Long-term direction
 
-The long-term ambition is to work toward a vessel capable of making a voyage to Hawaiâ€˜i.
+The long-term ambition is to work toward a vessel capable of making a voyage to HawaiÃ¢â‚¬Ëœi.
 The Gorge is intended as a "torture test" for autonomy, endurance, and reliability.
 The current baseline is the repeated Gorge route; an ocean departure point, passage
 route, duration, and ocean-specific acceptance criteria have not been selected.
@@ -59,7 +59,7 @@ For each requirement, agree on an operating condition, measurable outcome, thres
 | --- | --- | --- |
 | M-001 | Mission track and recovery record | Endpoints, corridor, completion time, crossing evidence |
 | M-002 / E-001 | Measured loads and mission energy balance, followed by endurance trial | Days, no-harvest autonomy, harvest scenario, reserve |
-| E-002 | Bench/simulation checks followed by sailing trials | State accuracy, control rates, wind/current/wave envelope |
+| E-002 | Bench/simulation checks followed by sailing trials | State accuracy and control rates; qualification against N-001 |
 | E-003 | Reset injection during representative operating modes | Recovery time, retained state, permitted actuator transients |
 | E-004 | Controlled low-energy test | Trigger thresholds, loads retained, recovery objective |
 | E-005 | Communication and contact-loss tests | Coverage, telemetry interval, outage duration, command policy |
@@ -72,7 +72,7 @@ These are proposed verification approaches; no passing result or satisfaction li
 
 1. How many days should the round-trip energy budget cover, and how long must the boat operate without useful harvested energy?
 2. Which harvesting methods should be considered? Solar has not yet been selected.
-3. What are the departure, turnaround, recovery areas, and operating envelope?
+3. What are the departure, turnaround and recovery areas, and does route evidence support the N-001 design envelope?
 4. What must it do when it loses communications, cannot make progress, or runs short of energy?
 5. What sail/steering mechanism and actuators will the electronics support?
 6. What mass, space, cost, and electrical limits apply to the electronics?
@@ -87,3 +87,5 @@ and recovery motor/energy plus telemetry/command equipment requirements.
 Numeric mass, printer, weather, current, wave and recovery limits remain open.
 See [operating constraints](operating-constraints.md), [architecture and use cases](architecture.md),
 and the native [satisfaction and objective traceability](traceability.md).
+
+Environmental acceptance criteria are now quantitative in N-001 through N-003; see [environmental qualification](environmental-envelope.md) for assumptions and verification scope.

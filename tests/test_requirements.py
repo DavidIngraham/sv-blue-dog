@@ -42,7 +42,7 @@ class PublishingTests(unittest.TestCase):
         for case, requirement in [('prepare', 'transportability'), ('sailGorge', 'roundTrip'),
                                   ('sailOcean', 'hawaiiVoyage'), ('monitor', 'telemetryEquipment'),
                                   ('recover', 'safeRecovery'), ('maintain', 'serviceability'),
-                                  ('avoidTraffic', 'trafficSafety')]:
+                                  ('avoidTraffic', 'trafficSafety'), ('presentNavigationSignals', 'navigationConspicuity')]:
             self.assertRegex(text, rf"\| {case} \|[^\n]+\| {requirement} \|")
         self.assertIn('| recoveryPropulsion | motorSystem |', text)
         self.assertIn('| commandIntegrity | commandGateway |', text)
@@ -50,6 +50,9 @@ class PublishingTests(unittest.TestCase):
         diagram = native('-render', 'BlueDogUseCaseViews::operations', '-render-form', 'dot')
         self.assertIn('// kind: case', diagram)
         self.assertIn('P-001 Transportability', diagram)
+        self.assertIn('OtherVessel', diagram)
+        context = native('-render', 'BlueDogArchitectureViews::context', '-render-form', 'dot')
+        self.assertIn('OtherVessel', context)
 
     def test_exactly_two_top_level_drivers(self):
         roots = {source for source, _ in self.edges} - {target for _, target in self.edges}

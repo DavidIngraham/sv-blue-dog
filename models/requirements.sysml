@@ -28,7 +28,7 @@ package BlueDogRequirements {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* Acquire navigation and sailing observations,
          * execute mission guidance, and command sail/steering actuators.
-         * Accuracy, rates, actuation interfaces, and envelope TBD.
+         * Accuracy, rates and actuation interfaces remain open; the environmental envelope is N-001.
          */
     }
     requirement def <'E-003'> ResetRecovery {
@@ -130,7 +130,7 @@ package BlueDogRequirements {
 
     #derivation connection hawaiiNavigationAndControl {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* An autonomous Hawaii passage needs ocean guidance and sailing control; its operating envelope remains open. */
+        doc /* An autonomous Hawaii passage needs ocean guidance and sailing control; N-001 specifies its environmental design envelope. */
         end #original source ::> BlueDog::Goals::hawaiiVoyage;
         end #derive target ::> navigationAndControl;
     }
@@ -304,7 +304,7 @@ package BlueDogRequirements {
 
     requirement def <'N-001'> EnvironmentalEnvelope {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Define separate Gorge and ocean operating and survival envelopes for wind, gusts, current, waves, water/air temperature, visibility, and debris. Launch readiness and autonomous contingency decisions shall use the applicable envelope; numerical limits require site evidence and testing. */
+        doc /* The vessel shall retain navigation, autonomous sail/steering control, mission recording, and available-link telemetry throughout these operating envelopes: Gorge wind 3-15 m/s with 20 m/s gusts, significant wave height up to 1.0 m with peak periods 2-5 s, and current up to 1.5 m/s; ocean wind 3-15 m/s with 20 m/s gusts, significant wave height up to 3.0 m with peak periods 5-20 s, and current up to 1.0 m/s. Wind is true wind referenced to 10 m above water, with 10-minute means and 3-second gusts; wave statistics use 20-minute records. Both profiles include air 0-40 degC, water 2-30 degC, relative humidity 0-100 percent with condensation, day/night, and visibility at least 1 km. Function shall be retained for 72 continuous hours in Gorge qualification and 30 continuous days in ocean qualification without maintenance or operator intervention, with onboard harvesting permitted. Below 3 m/s wind, the vessel shall retain navigation, recording and autonomous contingency behavior; positive progress or station keeping is not guaranteed. Current limits do not guarantee upstream progress at every wind angle. At an observed operating-limit exceedance, the vessel shall log the event and enter autonomous survival behavior within 60 s; visibility below 1 km shall trigger that behavior within 60 s of detection. Survival shall preserve flotation, attached ballast and rig, sealed electronics, mission state, and at least one time-stamped position record per minute for 24 h in wind up to 25 m/s with 35 m/s gusts, Gorge significant waves up to 2 m (peak periods 3-7 s), or ocean significant waves up to 6 m (peak periods 6-20 s). Qualification shall include individual waves up to twice the respective significant wave height, with wind/waves/current from adverse relative directions. After 10 continuous minutes back inside operating limits, autonomous sailing shall resume within 5 minutes without repair. The respective current, temperature and humidity limits also apply during survival. Survival does not require course progress and does not authorize motor use in a qualifying challenge. These are engineering design targets, not measured route extremes or demonstrated capability. */
     }
     requirement environmentalEnvelope : EnvironmentalEnvelope;
     #derivation connection deriveEnvironmentalEnvelope {
@@ -316,7 +316,7 @@ package BlueDogRequirements {
 
     requirement def <'N-002'> MarineDurability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Hull, seals, connectors, electronics, and exposed materials shall withstand the specified immersion, spray, UV, corrosion, and fatigue exposure. Include freshwater Gorge trials and saltwater ocean service. Specify test severity, duration, inspection criteria, and tolerable ingress. */
+        doc /* The assembled vessel shall meet N-001 following 72 h continuous freshwater exposure for Gorge service and 30 days continuous 35 g/kg saltwater exposure for ocean service, including continuous wetting of underwater parts and at least one complete topside spray wetting per hour. Electronics enclosures, installed connectors and cable penetrations shall admit no detectable liquid water using dry internal indicators after 30 minutes with their highest point 1 m below the water surface, before and after each exposure campaign. External mechanisms shall complete commanded travel without seizure, structural joints shall show no separation or through-cracks, and exposed electrical connections shall retain continuity and insulation resistance of at least 1 megohm when isolated from electronics. With ambient air 40 degC and incident solar irradiance 1000 W/m2 for 8 h, powered electronics shall retain N-001 functions and every battery shall remain within its manufacturer-rated operating temperatures, including automatic charge inhibition outside permitted charging temperatures. Printed structural parts shall retain at least 80 percent of unaged coupon failure load after a recorded cumulative 300 MJ/m2 exposure in the 300-400 nm UV band and the ocean wet-exposure campaign; this is a qualification dose, not an asserted calendar lifetime. */
     }
     requirement marineDurability : MarineDurability;
     #derivation connection deriveMarineDurability {
@@ -328,7 +328,7 @@ package BlueDogRequirements {
 
     requirement def <'N-003'> StabilityAndFouling {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall recover a defined sailing condition after the specified capsize event and tolerate the agreed weed/debris exposure without unacceptable control loss. Establish ballast, stability, recovery time, fouling loads, and test conditions before acceptance. */
+        doc /* At each declared minimum and maximum mission loading condition, the vessel shall self-right from 90 and 180 degrees heel within 60 s of release without external action or motor thrust, and restore autonomous sail/steering control within 120 s. Qualification shall include five releases at each angle to each side, in fresh and 35 g/kg salt water, without water reaching electronics or loss of rig or ballast. After a flexible wet vegetation surrogate 1 m long and 20 mm wide, anchored only by its contact with the vessel, is draped once across each appendage leading edge, the vessel shall autonomously clear it or retain at least 50 percent of its unobstructed speed and full commanded rudder travel within 5 minutes in 5 m/s wind. If this criterion is not met, it shall detect loss of progress and log/enter contingency behavior within a further 60 s without automatically enabling the recovery motor. Floating-log impact, fishing-line entanglement, ice and surf-zone operation are outside this initial qualification envelope; avoidance and recovery remain necessary. */
     }
     requirement stabilityAndFouling : StabilityAndFouling;
     #derivation connection deriveStabilityAndFouling {

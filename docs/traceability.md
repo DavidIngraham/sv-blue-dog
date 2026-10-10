@@ -12,7 +12,8 @@ Use-case objectives subset the referenced requirements. Satisfy relationships ex
 | monitor | Monitor live and reconnect. | telemetryEquipment |
 | recover | Abort and recover. | safeRecovery |
 | maintain | Manufacture and service. | serviceability |
-| avoidTraffic | Avoid collision. | trafficSafety |
+| avoidTraffic | Detect AIS and non-AIS traffic, assess collision risk, maneuver, and monitor separation without depending on operator intervention or cooperation by the other vessel. | trafficSafety |
+| presentNavigationSignals | Present mode-appropriate navigation signals to other vessels during sailing, powered recovery and stationary operation. | navigationConspicuity |
 
 ## Architecture satisfaction allocations
 

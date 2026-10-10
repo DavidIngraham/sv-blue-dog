@@ -78,6 +78,9 @@ package BlueDog {
             part monitoringStation : MonitoringStation;
         }
         part def Environment;
+        part def OtherVessel {
+            doc /* External traffic, including commercial ships, barges, fishing and recreational craft, with or without AIS. Behavior and cooperation are outside Blue Dog control. */
+        }
         part def PrintedHull;
         part def SealedEnclosure;
         part def KeelAndBallast;
@@ -154,6 +157,7 @@ package BlueDog {
             part operator : Operator;
             part shoreSupport : ShoreSupport;
             part environment : Environment;
+            part traffic : OtherVessel [0..*];
         }
     }
 

@@ -69,3 +69,11 @@ The diagram is generated from explicit relationships in the SysML source. The [m
 The original motivation still holds: learn about sailing, see what I can make with desktop tools, and bring a complete autonomous system together. The trans-gorge mission gives that work a direction, and the swell-monitor idea gives me another reason to keep thinking about endurance and station keeping.
 
 I am starting by revisiting the CAD and the old requirements, documenting the current build status, and choosing the next questions to test. This is where I will keep the journey: the designs I try, the things I learn, and how those results change the boat.
+
+### Making the environment and traffic explicit
+
+The model now includes numerical Gorge and ocean operating and survival targets, plus immersion, thermal, material-aging and self-righting acceptance criteria. These are design targets to test, not performance the boat has demonstrated. The [environmental envelope](environmental-envelope.md) explains the baseline and its limits.
+
+Other vessels now appear explicitly in the operating context and the voyage, recovery, collision-avoidance and signaling use cases. The design has to encounter non-AIS traffic as well as vessels broadcasting their position.
+
+Further reading of the Microtransat group uncovered the reported USCG basis for its 2.4 m oceanographic-device interpretation, and a newer discussion pointing to the actual UK small-MASS certification exemption. The [classification research](operating-constraints.md) separates those sources and the unresolved US applicability question.

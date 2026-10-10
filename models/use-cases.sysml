@@ -11,12 +11,14 @@ package BlueDogUseCases {
         doc /* Complete Gorge challenge. */
         subject boat : Boat;
         actor operator : Operator;
+        actor traffic : OtherVessel;
         objective 'M-001 Gorge mission' :> roundTrip;
     }
     use case sailOcean {
         doc /* Sail to Hawaii. */
         subject boat : Boat;
         actor operator : Operator;
+        actor traffic : OtherVessel;
         objective 'H-001 Hawaii voyage' :> BlueDog::Goals::hawaiiVoyage;
     }
     use case monitor {
@@ -29,6 +31,7 @@ package BlueDogUseCases {
         doc /* Abort and recover. */
         subject boat : Boat;
         actor operator : Operator;
+        actor traffic : OtherVessel;
         objective 'S-003 Safe recovery' :> safeRecovery;
     }
     use case maintain {
@@ -38,10 +41,17 @@ package BlueDogUseCases {
         objective 'P-003 Serviceability' :> serviceability;
     }
     use case avoidTraffic {
-        doc /* Avoid collision. */
+        doc /* Detect AIS and non-AIS traffic, assess collision risk, maneuver, and monitor separation without depending on operator intervention or cooperation by the other vessel. */
         subject boat : Boat;
         actor operator : Operator;
+        actor traffic : OtherVessel;
         objective 'S-001 Traffic safety' :> trafficSafety;
+    }
+    use case presentNavigationSignals {
+        doc /* Present mode-appropriate navigation signals to other vessels during sailing, powered recovery and stationary operation. */
+        subject boat : Boat;
+        actor traffic : OtherVessel;
+        objective 'S-004 Navigation conspicuity' :> navigationConspicuity;
     }
 }
 package BlueDogUseCaseViews {
