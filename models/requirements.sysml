@@ -2,9 +2,17 @@ package BlueDog {
     package Requirements {
         private import RequirementDerivation::*;
         requirement def <'M-001'> RoundTrip {
-            doc /* CONFIRMED INTENT: The system shall support an autonomous
-             * sailing mission from the Bonneville area to The Dalles area
-             * and back. Exact endpoints and completion criteria TBD.
+            doc /* CONFIRMED INTENT: Threshold: The vessel shall complete an autonomous
+             * sailing journey from The Dalles to Bonneville and back to The Dalles.
+             * Objective: After the first round trip, the vessel shall autonomously
+             * repeat The Dalles-Bonneville-The Dalles route for as long as practical.
+             * No fixed objective endurance duration is specified.
+             * A qualifying round trip shall be completed without operator intervention.
+             * Live operator monitoring shall be available without directing the vessel.
+             * Use of a remote emergency override shall disqualify that attempt
+             * as an unassisted round trip.
+             * Exact endpoints, completion criteria, termination conditions, and
+             * monitoring coverage and update interval remain to be agreed.
              */
         }
         requirement def <'M-002'> MultiDayEndurance {
@@ -38,9 +46,17 @@ package BlueDog {
              */
         }
         requirement def <'E-005'> Communications {
-            doc /* LEGACY INTENT: Communicate with an operator.
-             * Link coverage, data products, command authority, reporting
-             * interval, and behavior during loss of contact TBD.
+            doc /* CONFIRMED INTENT: Provide live operator monitoring during
+             * autonomous operation. Monitoring shall not require operator
+             * intervention in completing a qualifying round trip.
+             * Loss of the monitoring link shall not interrupt autonomous mission
+             * execution. The vessel shall retain telemetry onboard during an outage
+             * and transmit the retained data when contact returns.
+             * The operator shall have a remote emergency override for mission
+             * abort or manual control when a command link is available.
+             * Using this override ends the attempt's qualification as unassisted.
+             * Link coverage, displayed data, update interval, outage retention
+             * duration, and backlog transmission priority remain to be agreed.
              */
         }
         requirement def <'E-006'> IngressResponse {

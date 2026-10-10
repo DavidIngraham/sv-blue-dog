@@ -1,7 +1,10 @@
 package BlueDog {
     doc /* Working architecture model, 2026-10-09.
-     * Confirmed mission: Bonneville-The Dalles round trip, multi-day
-     * endurance with energy harvesting. SysML v2 learning is a project goal.
+     * Confirmed threshold: The Dalles-Bonneville-The Dalles round trip.
+     * Objective: autonomously repeat the round trip for as long as practical.
+     * Qualifying round trips require no operator intervention; live monitoring is required.
+     * Long-term ambition: a voyage to Hawaii; the Gorge is the torture test.
+     * Multi-day endurance with energy harvesting remains an earlier intent. SysML v2 learning is a project goal.
      * Proposed decomposition below is for discussion, not a selected design.
      * Tool checks are recorded in the modeling guide; satisfaction is not claimed.
      */
@@ -10,7 +13,8 @@ package BlueDog {
         action def TransGorgeMission {
             doc /* Proposed activity decomposition, not execution order.
              * Departure/turnaround coordinates, duration, operating envelope,
-             * recovery criteria, and operator intervention policy are TBD.
+             * recovery criteria, and monitoring service levels are TBD.
+             * No operator intervention is permitted during a qualifying round trip.
              */
             action prepareAndLaunch;
             action sailOutbound;
