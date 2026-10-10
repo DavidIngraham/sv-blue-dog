@@ -1,17 +1,19 @@
 # Requirement derivation register
 
-Generated from `models/challenge.sysml` and `models/requirements.sysml`; edit the models and regenerate. C-IDs identify challenge rules; M/E-IDs identify vehicle requirements.
+Generated from `models/challenge.sysml` , `models/blue-dog.sysml`, and `models/requirements.sysml`; edit the models and regenerate. C-IDs identify challenge rules; H-IDs identify the Hawaii goal; M/E-IDs identify vehicle requirements.
 
 ## Requirements
 
 | ID | Requirement | Maturity | Statement |
 | --- | --- | --- | --- |
+| C-000 | TransGorgeChallenge | CONFIRMED INTENT | Complete the autonomous Trans-Gorge sailing challenge: The Dalles-Bonneville-The Dalles as the threshold, then repeat for as long as practical, under the course, autonomy, propulsion, observation, and emergency intervention rules below. |
 | C-001 | CourseCompletion | CONFIRMED INTENT | Threshold: Complete a journey from The Dalles to Bonneville and back to The Dalles. Exact start/finish and turnaround gates, permitted corridor, and crossing evidence remain to be agreed. |
 | C-002 | RepeatedOperation | CONFIRMED INTENT | Objective beyond the first completed round trip: repeat The Dalles-Bonneville-The Dalles autonomously for as long as practical. No fixed objective endurance duration has been selected. |
 | C-003 | UnassistedAttempt | CONFIRMED INTENT | A qualifying attempt shall complete the round trip without operator intervention. Passive live monitoring is permitted. Any use of remote emergency abort or manual control disqualifies the attempt as unassisted. Restart criteria remain to be agreed. |
 | C-004 | SailingPropulsion | CONFIRMED INTENT | A qualifying challenge attempt shall use sailing propulsion without auxiliary motor propulsion. Auxiliary motor use is allowed during development tests, which do not count as challenge attempts. Motor use during an attempt prevents it from qualifying. An auxiliary motor may remain installed for vessel recovery. Recovery propulsion is permitted outside the qualifying attempt; use during an attempt ends that attempt without qualification. The restriction concerns propulsion, not electrical power for onboard systems. |
 | C-005 | LiveObservation | CONFIRMED INTENT | Live monitoring shall be available to the operator. Monitoring-link loss shall not interrupt autonomous mission execution. Telemetry shall be retained onboard and transmitted when contact returns. Coverage, update rate, retained data, and outage retention duration are open. |
 | C-006 | EmergencyIntervention | CONFIRMED INTENT | Provide remote emergency abort or manual control when a command link is available. Use disqualifies the attempt as unassisted. Emergency abort behavior and the subsequent recovery procedure are open. |
+| H-001 | HawaiiVoyage | CONFIRMED INTENT | Develop SV Blue Dog toward completing an autonomous sailing voyage to Hawaii. The Gorge challenge is a proving ground for that end goal, not evidence of ocean readiness. Departure point, destination gate, route, duration, environmental envelope, assistance/propulsion rules, and acceptance evidence remain to be agreed; Gorge-specific rules are not automatically ocean mission rules. |
 | M-001 | RoundTrip | CONFIRMED INTENT | SV Blue Dog shall complete the imported Gorge challenge threshold and pursue its repeated-operation objective, observing the imported autonomy, propulsion, monitoring, and emergency intervention rules. Challenge rules are owned by challenge.sysml. |
 | M-002 | MultiDayEndurance | CONFIRMED INTENT | The boat shall support multi-day missions using onboard energy storage and energy harvesting. Duration, harvest conditions, and energy reserve TBD. |
 | E-001 | EnergyAwareness | PROPOSED | Estimate available energy and manage electrical loads so recovery functions retain an agreed reserve. Estimation accuracy, reserve, and load priorities TBD. |
@@ -28,12 +30,23 @@ Direction: original requirement to derived requirement. These relationships reco
 
 | Original | Derived | Rationale |
 | --- | --- | --- |
+| C-000 | C-001 | PROPOSED: This rule refines the overall Trans-Gorge challenge. |
+| C-000 | C-002 | PROPOSED: This rule refines the overall Trans-Gorge challenge. |
+| C-000 | C-003 | PROPOSED: This rule refines the overall Trans-Gorge challenge. |
+| C-000 | C-004 | PROPOSED: This rule refines the overall Trans-Gorge challenge. |
+| C-000 | C-005 | PROPOSED: This rule refines the overall Trans-Gorge challenge. |
+| C-000 | C-006 | PROPOSED: This rule refines the overall Trans-Gorge challenge. |
 | C-001 | M-001 | PROPOSED: The vehicle mission implements the independently defined challenge course. |
 | C-002 | M-002 | PROPOSED: Repeated autonomous journeys motivate the existing endurance and harvesting requirement; quantitative sizing remains open. |
 | C-003 | E-002 | PROPOSED: The vessel needs onboard guidance and control to complete an unassisted attempt. |
 | C-004 | M-001 | PROPOSED: Vehicle challenge operation excludes auxiliary motor propulsion; powered development tests are separate. |
 | C-005 | E-005 | PROPOSED: Vehicle communications implement live observation and outage data retention. |
 | C-006 | E-005 | PROPOSED: Vehicle communications provide emergency commands whose use ends attempt qualification. |
+| H-001 | M-002 | PROPOSED: An ocean passage motivates sustained energy autonomy; multi-day operation is an interim capability, not an ocean endurance sizing result. |
+| H-001 | E-002 | PROPOSED: An autonomous Hawaii passage needs ocean guidance and sailing control; its operating envelope remains open. |
+| H-001 | E-005 | PROPOSED: The long-term ocean mission motivates review of monitoring coverage and outage behavior without selecting a radio technology. |
+| H-001 | E-003 | PROPOSED: Extended unattended operation motivates recovery from onboard resets. |
+| H-001 | E-007 | PROPOSED: Ocean mission assessment requires retained voyage evidence; acceptance criteria remain open. |
 | M-001 | E-002 | PROPOSED: Autonomous completion of the route needs observations, guidance, and actuation. |
 | M-001 | E-003 | PROPOSED: A reset during an autonomous journey must not leave mission behavior undefined. |
 | M-001 | E-005 | PROPOSED: Mission supervision and recovery need an agreed operator communication policy. |

@@ -4,7 +4,7 @@ This challenge asks a sailing robot to travel from The Dalles to Bonneville and 
 
 The structure follows the [Microtransat rules](https://microtransat.org/content.php?p=rules&top=rules): course, propulsion, autonomy, safety, and judging. This is an independent project challenge. It does not adopt Microtransat's Atlantic course, boat-size limits, or reporting intervals.
 
-The canonical rules are in [challenge.sysml](../models/challenge.sysml). They stand alone: no Blue Dog architecture is required to read or analyze them. [Vehicle requirements](../models/requirements.sysml) import the challenge and derive implementation responsibilities from it. The agreed intent below still needs measurable acceptance details before it forms a complete competition rulebook.
+The canonical rules are in [challenge.sysml](../models/challenge.sysml). C-000 is the overall challenge requirement; C-001 through C-006 refine it. They stand alone: no Blue Dog architecture is required to read or analyze them. [Vehicle requirements](../models/requirements.sysml) import the challenge and derive implementation responsibilities from it. The agreed intent below still needs measurable acceptance details before it forms a complete competition rulebook.
 
 ## Course and achievement
 

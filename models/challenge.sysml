@@ -8,6 +8,15 @@ package GorgeChallenge {
      * Exact gates, corridor, time limit, environmental envelope, evidence requirements,
      * and restart/recovery procedure remain open; no dam passage is assumed.
      */
+    private import RequirementDerivation::*;
+    requirement def <'C-000'> TransGorgeChallenge {
+        doc /* CONFIRMED INTENT: Complete the autonomous Trans-Gorge sailing
+         * challenge: The Dalles-Bonneville-The Dalles as the threshold,
+         * then repeat for as long as practical, under the course, autonomy,
+         * propulsion, observation, and emergency intervention rules below.
+         */
+    }
+    requirement transGorgeChallenge : TransGorgeChallenge;
     requirement def <'C-001'> CourseCompletion {
         doc /* CONFIRMED INTENT: Threshold: Complete a journey from The Dalles
          * to Bonneville and back to The Dalles. Exact start/finish and turnaround
@@ -57,4 +66,34 @@ package GorgeChallenge {
     requirement sailingPropulsion : SailingPropulsion;
     requirement liveObservation : LiveObservation;
     requirement emergencyIntervention : EmergencyIntervention;
+    #derivation connection challengeRuleCourseCompletion {
+        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> courseCompletion;
+    }
+    #derivation connection challengeRuleRepeatedOperation {
+        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> repeatedOperation;
+    }
+    #derivation connection challengeRuleUnassistedAttempt {
+        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> unassistedAttempt;
+    }
+    #derivation connection challengeRuleSailingPropulsion {
+        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> sailingPropulsion;
+    }
+    #derivation connection challengeRuleLiveObservation {
+        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> liveObservation;
+    }
+    #derivation connection challengeRuleEmergencyIntervention {
+        doc /* PROPOSED: This rule refines the overall Trans-Gorge challenge. */
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> emergencyIntervention;
+    }
 }

@@ -55,7 +55,11 @@ The renderer writes SVG, PNG, and DOT to `docs/figures/` and the readable requir
 `GeneralView` filtered to requirement usages. It exposes both the independent
 `GorgeChallenge` package and the vehicle requirements. `requirements.sysml` imports
 `GorgeChallenge`; the tooling loads both source files together, resolving cross-file
-derivation endpoints. The challenge can also be analyzed by itself. OpenSysML selects the nodes and
+derivation endpoints. The challenge can also be analyzed by itself. The combined source set also includes
+`blue-dog.sysml`, which defines the Hawaii goal and both mission decompositions.
+The two graph roots are C-000 (Trans-Gorge challenge) and H-001 (Hawaii voyage).
+Vehicle requirements live in the distinct `BlueDogRequirements` package; files
+do not reopen or merge separate declarations of the `BlueDog` package. OpenSysML selects the nodes and
 relationships and writes DOT; Python no longer constructs diagram nodes or edges.
 Graphviz converts that unmodified DOT to SVG/PNG with a left-to-right layout.
 
@@ -68,7 +72,7 @@ for this migration. Nothing is installed globally and no moving nightly tag is u
 The Python client and its analysis service remain pinned to 0.9.2 for register generation.
 
 Native dashed `derive` arrows point **from derived to original**, opposite the earlier
-custom diagram convention. All fifteen nodes and fourteen relationships are regression-checked
+custom diagram convention. All seventeen nodes and twenty-five relationships are regression-checked
 against the source model. Maturity and short IDs remain in the linked register; the
 native diagram uses its default monochrome style without our former maturity colors.
 The renderer reports two exposed standard-library elements as intentionally not drawn.

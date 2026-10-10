@@ -14,6 +14,10 @@ Project objectives are to learn sailing, explore desktop manufacturing, build a 
 
 Auxiliary motor propulsion is allowed for development tests but prohibited during a qualifying challenge attempt (C-004). An auxiliary motor may remain installed and be used for vessel recovery outside a qualifying attempt. Using it during an attempt ends that attempt without qualification.
 
+## Two top-level requirements
+
+C-000, the independent Trans-Gorge challenge, and H-001, the Hawaii voyage goal in `blue-dog.sysml`, are the two top-level requirements. The challenge rules refine C-000. Vehicle requirements derive from those rules and H-001, with shared capabilities tracing to both missions. The Hawaii goal is confirmed intent; its detailed derivations remain proposed and its acceptance conditions are open.
+
 ## Long-term direction
 
 The long-term ambition is to work toward a vessel capable of making a voyage to Hawai‘i.
@@ -43,7 +47,7 @@ Self-righting, weed resistance, printable hull geometry, and collision-avoidance
 
 Every dashed arrow comes from an explicit `#derivation` connection in the SysML model, with `#original` and `#derive` ends. Native OpenSysML arrows read from derived to original requirement. Maturity and short IDs are listed in the register rather than encoded as node colors. This is a generated traceability view, not a claim of a complete standard graphical notation implementation.
 
-All fourteen derivation relationships are proposed reasoning for us to review. Node maturity is separate: a legacy requirement can have a newly proposed derivation. The challenge threshold and endurance objective remain separate inputs; the round-trip route alone does not imply a particular endurance. Low-energy recovery has two parents because it follows both the endurance objective and the energy-management policy. No link means "verified" or "satisfied."
+All twenty-five derivation relationships are proposed reasoning for us to review. Node maturity is separate: a legacy requirement can have a newly proposed derivation. The challenge threshold and endurance objective remain separate inputs; the round-trip route alone does not imply a particular endurance. Low-energy recovery has two parents because it follows both the endurance objective and the energy-management policy. No link means "verified" or "satisfied."
 
 Regenerate with `uv run python scripts/render_requirements.py`. The [modeling guide](../models/README.md) records the renderer scope and validation limits.
 

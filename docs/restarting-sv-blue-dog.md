@@ -50,7 +50,9 @@ The challenge is becoming more concrete: sail from The Dalles to Bonneville and 
 
 I have separated the [challenge brief](challenge-brief.md) from the vehicle design. Its own SysML file defines what counts, and the boat requirements import it. That lets me work on how to build Blue Dog without quietly changing the challenge to fit the design. Microtransat remains the inspiration for the brief. An auxiliary motor can help during testing and remain aboard for vessel recovery. Using it during a challenge attempt ends that attempt without qualification.
 
-The native OpenSysML diagram shows proposed derivations from those challenge rules into vehicle requirements, with arrows pointing from each derived requirement back to its original. The linked register distinguishes confirmed intent, older requirements, and new proposals. None of these links establishes that the boat satisfies a requirement.
+The model now has two top-level requirements: the Trans-Gorge challenge and the eventual Hawaii voyage. The Gorge gives me a demanding proving ground while the ocean goal keeps the longer-term design needs visible. Its departure point, route, and acceptance criteria still need definition.
+
+The native OpenSysML diagram shows proposed derivations from both mission drivers into vehicle requirements, with arrows pointing from each derived requirement back to its original. The linked register distinguishes confirmed intent, older requirements, and new proposals. None of these links establishes that the boat satisfies a requirement.
 
 ![SV Blue Dog requirement derivation](figures/requirements-derivation.svg)
 

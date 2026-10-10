@@ -34,8 +34,10 @@ class DerivationTests(unittest.TestCase):
     def test_project_model_preserves_complete_graph(self):
         requirements, edges = extract(project_sources())
         self.assertEqual({r["id"] for r in requirements.values()},
-                         {"M-001", "M-002", *(f"E-00{i}" for i in range(1, 8)), *(f"C-00{i}" for i in range(1, 7))})
+                         {"C-000", "H-001", "M-001", "M-002", *(f"E-00{i}" for i in range(1, 8)), *(f"C-00{i}" for i in range(1, 7))})
         self.assertEqual({(e["source"], e["target"]) for e in edges}, {
+            *(("transGorgeChallenge", target) for target in ["courseCompletion", "repeatedOperation", "unassistedAttempt", "sailingPropulsion", "liveObservation", "emergencyIntervention"]),
+            *(("hawaiiVoyage", target) for target in ["multiDayEndurance", "navigationAndControl", "communications", "resetRecovery", "missionEvidence"]),
             ("courseCompletion", "roundTrip"), ("repeatedOperation", "multiDayEndurance"),
             ("unassistedAttempt", "navigationAndControl"), ("sailingPropulsion", "roundTrip"),
             ("liveObservation", "communications"), ("emergencyIntervention", "communications"),
@@ -44,6 +46,11 @@ class DerivationTests(unittest.TestCase):
             ("roundTrip", "missionEvidence"), ("multiDayEndurance", "energyAwareness"),
             ("multiDayEndurance", "lowEnergyRecovery"), ("energyAwareness", "lowEnergyRecovery"),
         })
+
+    def test_exactly_two_top_level_drivers(self):
+        requirements, edges = extract(project_sources())
+        roots = set(requirements) - {edge["target"] for edge in edges}
+        self.assertEqual(roots, {"transGorgeChallenge", "hawaiiVoyage"})
 
     def test_challenge_is_independent_of_vehicle(self):
         source = CHALLENGE.read_text(encoding="utf-8-sig")
