@@ -127,7 +127,7 @@ package MarineSailing {
         attribute keelRe : Real = v * keelChord / nu_water;
         attribute rudderRe : Real = v * rudder_inflow_ratio * rudderChord / nu_water;
         attribute normalCoefficient : Real = cl*TrigFunctions::cos(alpha)+cd*TrigFunctions::sin(alpha);
-        attribute mastMomentCoefficient : Real = aero#(3)*p#(17)+((if s#(5)<0 ? 1-d#(9) else d#(9))-0.5)*normalCoefficient;
+        attribute mastMomentCoefficient : Real = aero#(3)*q#(24)+((if s#(5)<0 ? 1-d#(9) else d#(9))-0.5)*normalCoefficient;
         attribute wingTorque : Real = MarineActuation::MastTorque(rho_air,va,sail_m2,wingChord,mastMomentCoefficient,friction_Nm);
         attribute wingPower : Real [3] ordered nonunique = MarineActuation::DrivePower(wingTorque,p#(19),p#(3),p#(2),p#(4),p#(5),p#(6),p#(7),p#(8));
         attribute rudderPower : Real [3] ordered nonunique = MarineActuation::DrivePower(rudderTorque,p#(20),p#(3),1,1,0.1,p#(9)*rudderTorque,p#(10),1-p#(10));

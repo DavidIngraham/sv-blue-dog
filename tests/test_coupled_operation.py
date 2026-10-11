@@ -35,9 +35,25 @@ def native_case():
 
 
 def test_compiled_operation_matches_interpreter(native_case):
-    k,args,r=native_case
+    from tools.boat_analysis.evidence.records import input_record as current_record
+    k,_,_=native_case
+    r=current_record('coupled-operation-audit.json')
+    d,p,q,s,a,m,h=r['inputs']
+    args=[np.array(v,dtype=float) for v in [d,p,s,a,m,h]]
+    np.testing.assert_array_equal(k.contract['environment'],q)
     result=k.evaluate(*args)
     for name,value in r['outputs'].items():assert result[name]==pytest.approx(value,abs=1e-10,rel=1e-11)
+
+
+def test_direct_aerodynamic_moment_is_independent_of_lift_credit(native_case):
+    k,args,_=native_case
+    d,p,s,a,m,h=[x.copy() for x in args]
+    d[8]=.5  # Mast through the polar's midchord moment reference.
+    original=k.evaluate(d,p,s,a,m,h)
+    p[16]*=.5
+    lower_lift=k.evaluate(d,p,s,a,m,h)
+    assert lower_lift['wingTorque']==pytest.approx(original['wingTorque'])
+    assert lower_lift['yawResidual']!=pytest.approx(original['yawResidual'])
 
 
 def test_mast_reference_shift_conserves_total_yaw(native_case):

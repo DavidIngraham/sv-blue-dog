@@ -8,9 +8,9 @@ from tools.boat_analysis.aerodynamics.vsp.reference_vsp import build
 from tools.boat_analysis.aerodynamics.vsp.vsp_runtime import ROOT
 
 
-def run_case(aspect,camber,mesh=24,reverse=False):
+def run_case(aspect,camber,mesh=24,reverse=False,*,wake_iterations=5,alpha_start=-12,alpha_end=16,alpha_count=8,beta=0):
     v,wing,_,span,chord,cad_hash=build(1.,aspect,mesh)
-    work=ROOT/'.tools/wing-grid'/f'ar{aspect:g}-camber{camber:g}-reverse{int(reverse)}';work.mkdir(parents=True,exist_ok=True)
+    work=ROOT/'.tools/wing-grid'/f'ar{aspect:g}-camber{camber:g}-reverse{int(reverse)}-m{mesh}-w{wake_iterations}-b{beta:g}';work.mkdir(parents=True,exist_ok=True)
     p=next(p for p in input_record('wing-geometry.json')['profiles'] if p['span_station_mm']==150)
     x=np.array(p['x_mm']);u=(x-x[0])/(x[-1]-x[0]);top=-np.array(p['lower_mm']);bottom=-np.array(p['upper_mm'])
     mean=(top+bottom)/2;half=(top-bottom)/2
@@ -25,15 +25,15 @@ def run_case(aspect,camber,mesh=24,reverse=False):
         v.SetAnalysisInputDefaults(name)
         for key,value in [('GeomSet',v.SET_NONE),('ThinGeomSet',v.SET_ALL),('Symmetry',0)]:v.SetIntAnalysisInput(name,key,[value])
     v.ExecAnalysis('VSPAEROComputeGeometry');name='VSPAEROSweep'
-    for key,value in [('AlphaStart',-12),('AlphaEnd',16),('Sref',1),('bref',span),('cref',chord),('Vinf',5),('Rho',1.225),('ReCref',5*chord/1.5e-5),('MachStart',0),('MachEnd',0),('Xcg',chord/2)]:v.SetDoubleAnalysisInput(name,key,[value])
-    for key,value in [('AlphaNpts',8),('NCPU',2),('WakeNumIter',5),('RefFlag',0)]:v.SetIntAnalysisInput(name,key,[value])
+    for key,value in [('AlphaStart',alpha_start),('AlphaEnd',alpha_end),('BetaStart',beta),('BetaEnd',beta),('Sref',1),('bref',span),('cref',chord),('Vinf',5),('Rho',1.225),('ReCref',5*chord/1.5e-5),('MachStart',0),('MachEnd',0),('Xcg',chord/2)]:v.SetDoubleAnalysisInput(name,key,[value])
+    for key,value in [('AlphaNpts',alpha_count),('BetaNpts',1),('NCPU',2),('WakeNumIter',wake_iterations),('RefFlag',0)]:v.SetIntAnalysisInput(name,key,[value])
     result=v.ExecAnalysis(name);manager=v.ErrorMgrSingleton.getInstance();errors=[]
     while manager.GetNumTotalErrors():errors.append(manager.PopLastError().m_ErrorString)
     rid=v.FindLatestResultsID('VSPAERO_Polar')
     if not result or not rid or errors:raise ValueError((result,rid,errors))
     values={key:list(v.GetDoubleResults(rid,key)) for key in ['Alpha','CLtot','CDi','CMytot']}
-    if any(len(values[k])!=8 or not np.isfinite(values[k]).all() for k in values):raise ValueError('Invalid response grid')
-    return {'aspect':aspect,'camberScale':camber,'reverseChord':reverse,'mesh':mesh,'tool':v.GetVSPVersion(),'cadSha256':cad_hash,'values':values}
+    if any(len(values[k])!=alpha_count or not np.isfinite(values[k]).all() for k in values):raise ValueError('Invalid response grid')
+    return {'aspect':aspect,'camberScale':camber,'reverseChord':reverse,'mesh':mesh,'wakeIterations':wake_iterations,'beta_deg':beta,'tool':v.GetVSPVersion(),'cadSha256':cad_hash,'values':values}
 
 
 def run():

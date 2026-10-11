@@ -48,10 +48,10 @@ package BlueDogConfigurations {
         attribute :>> solarResourceFactor = 0.59999999999999998;
         attribute :>> batteryWhKg = 140;
         attribute :>> laminateKnockdown = 1;
-        attribute :>> profileCd = 0.025000000000000001;
-        attribute :>> wingClLimit = 1;
-        attribute :>> wingLiftScale = 0.84999999999999998;
-        attribute :>> wingDragScale = 1.1499999999999999;
+        attribute :>> profileCd = BlueDogAerodynamicPolicy::sizing.profileCd;
+        attribute :>> wingClLimit = BlueDogAerodynamicPolicy::sizing.clLimit;
+        attribute :>> wingLiftScale = BlueDogAerodynamicPolicy::sizing.liftScale;
+        attribute :>> wingDragScale = BlueDogAerodynamicPolicy::sizing.dragScale;
         attribute :>> wingRateRadS = 0.25;
         attribute :>> rudderRateRadS = 0.59999999999999998;
         attribute :>> driveKgPerNm = 0.14999999999999999;
