@@ -1,8 +1,8 @@
 {
   "sourceHashes": {
     "models/structure.sysml": "f610c6b71a5c3d2a50471d3a73354df931e64089812b37ef1fce87fd3be25c7e",
-    "models/coupled-sizing.sysml": "4715fa71a45379d2797d0e24f9925cfbf43f3fcc496360b9ddc527c7e82e46ca",
-    "models/coupled-uncertainty.sysml": "bdb65a1d191b5144269ceb608b2e15e80bd92991aa5e583ee98535588a14a8ae"
+    "models/coupled-sizing.sysml": "0ccc34089818d6d4aa59c25a8a085fb9a4b80bfe7d7e992533ced7d1e9f7a77e",
+    "models/coupled-uncertainty.sysml": "c26bf3d9bbb58c243cd83f7e6a2346d57d3c8d1a5d4dd2ca3883f0263dd811f3"
   },
   "values": {
     "nominal": [
@@ -30,7 +30,7 @@
       0.2,
       2.5,
       0.6,
-      0.35,
+      1.0,
       1.15,
       0.8,
       0.7,
@@ -70,7 +70,7 @@
       0.2,
       3,
       0.6,
-      0.35,
+      1.0,
       1.15,
       0.8,
       0.7,
@@ -110,7 +110,47 @@
       0.2,
       2.5,
       0.6,
-      0.35,
+      1.0,
+      1.15,
+      0.8,
+      0.7,
+      0.012,
+      1.5e-05,
+      1e-06,
+      1000,
+      1.225,
+      7800,
+      9.80665,
+      1.5,
+      15,
+      0.6
+    ],
+    "hydrodynamic": [
+      1,
+      0.4,
+      0.8,
+      1,
+      0.1,
+      0,
+      0.02,
+      0.98,
+      0.5,
+      0.05,
+      4.5,
+      0.6,
+      140,
+      1,
+      0.025,
+      1,
+      0.85,
+      1.15,
+      0.25,
+      0.6,
+      0.15,
+      0.2,
+      2.5,
+      0.6,
+      1.3,
       1.15,
       0.8,
       0.7,
@@ -150,7 +190,7 @@
       0.2,
       2.5,
       0.6,
-      0.35,
+      1.0,
       1.15,
       0.8,
       0.7,
@@ -190,7 +230,7 @@
       0.2,
       3,
       0.6,
-      0.35,
+      1.3,
       1.15,
       0.8,
       0.7,
@@ -211,7 +251,8 @@
       1,
       100000,
       72,
-      0.5
+      0.5,
+      1
     ],
     "adverseRoute": [
       0.9,
@@ -219,7 +260,8 @@
       1.25,
       100000,
       72,
-      0.5
+      0.5,
+      1
     ]
   },
   "evidence": "Provisional engineering sensitivities; not measured uncertainty distributions."

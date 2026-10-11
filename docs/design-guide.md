@@ -17,7 +17,7 @@ Requirements state obligations concisely. Qualification conditions remain normat
 
 The architecture describes logical responsibilities, not selected boards or a completed physical design. Satisfaction relationships record intended allocations. Mission actions are decomposed, but do not yet form an executable controller. The CAD in this repository is a manufacturing and wing-sail prototype, not the qualified challenge vessel.
 
-The [coupled design search](design-search.md) varies shared hull, wing, appendage and energy-system dimensions. Its [native replay](design-search-results.md) checks saved SciPy candidates against the SysML equations.
+The [coupled sizing workflow](coupled-sizing.md) varies shared hull, CAD-derived wing, appendage and energy-system dimensions. Its [generated results](coupled-results.md) connect OpenVSP interpolation checks, native SysML physics, SciPy sizing, uncertainty replay and full-angle static recovery evidence. The [earlier design search](design-search.md) and [native replay](design-search-results.md) remain documented comparisons using their stated modeling assumptions.
 
 ## Read the relationships
 
@@ -244,7 +244,8 @@ flowchart BT
 | Can loads and harvesting sustain operation? | [Energy model guide](sustained-operations.md) | [Load budget](energy-budget.md), [native results](analysis/sustained-energy.json) |
 | Which recovery propulsion medium is practical? | [Water/air propeller trade](recovery-propulsion-trade.md) | [Native candidate results](analysis/recovery-trade.json) |
 | What polar and hull regime could deliver the required progress? | [Sailing-performance guide](sailing-performance.md) | [Polar demand and hull screening](sailing-performance-results.md) |
-| What sail, keel and rudder could support that sailing point? | [Coupled sizing guide](appendage-sizing.md) | [Sizing loads and gates](appendage-sizing-results.md) |
+| What sail, keel and rudder could support that sailing point? | [Appendage screening guide](appendage-sizing.md) | [Sizing loads and gates](appendage-sizing-results.md) |
+| How small can the coupled vessel be under the declared assumptions? | [Coupled sizing workflow](coupled-sizing.md) | [Search, refined replay and recovery sensitivities](coupled-results.md) |
 | How does cruise speed change reliability exposure? | [Cruise/reliability guide](cruise-reliability.md) | [Results](cruise-reliability-results.md), [native analysis](analysis/cruise-reliability.json) |
 | Which failures need design action? | [DFMEA model](../models/dfmea.sysml) | [DFMEA](dfmea.md), [review results](analysis/dfmea.json) |
 

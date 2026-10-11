@@ -109,3 +109,136 @@ def test_generated_interfaces_are_homogeneous_real_sequences(native_case):
         text=(ROOT/f'.tools/coupled-{name}.c').read_text()
         signature=re.search(r'int sysml_run\((.*?)\) \{',text,re.S)
         assert signature[1].endswith('sysml_seq_real *result')
+
+
+def test_native_hull_resistance_is_in_force_balance_and_domain_outputs(native_case):
+    from scripts.native_hull_resistance import HullResistanceKernel
+    k,args,_=native_case
+    d,p,s,a,m,h=[x.copy() for x in args]
+    base=k.evaluate(d,p,s,a,m,h)
+    bare=HullResistanceKernel().evaluate(h[3:],s[3],p[31],p[34])
+    p[24]=1.3
+    increased=k.evaluate(d,p,s,a,m,h)
+    assert increased['hullDrag']-base['hullDrag']==pytest.approx(.3*bare['resistance_N'])
+    assert increased['resistance']-base['resistance']==pytest.approx(.3*bare['resistance_N'])
+    h[10]=.65
+    outside=k.evaluate(d,p,s,a,m,h)
+    assert outside['delftDomain9']<0
+
+
+def test_loaded_waterline_does_not_move_hardware_lever_arms(native_case):
+    k,args,_=native_case
+    d,p,s,a,m,h=[x.copy() for x in args]
+    s[4]=45.;s[6]=0.;s[7]=3.;d[9]=.1
+    base=k.evaluate(d,p,s,a,m,h)
+    h[3]*=.9
+    changed=k.evaluate(d,p,s,a,m,h)
+    assert changed['yawResidual']==pytest.approx(base['yawResidual'],abs=1e-12)
+    assert changed['hullDrag']!=pytest.approx(base['hullDrag'])
+
+
+def test_shared_search_jacobian_preserves_both_constraint_blocks():
+    from scripts.optimize_coupled import Problem
+    p=Problem.__new__(Problem);p.derivatives=None;calls=[]
+    def constraints(z):
+        calls.append(z.copy())
+        return {'eq':np.array([2*z[0]+3*z[1]]),'ineq':np.array([4*z[0]-5*z[1],z[0]+z[1]])}
+    p.evaluate=constraints;z=np.array([.3,1.])
+    eq,ineq=p.jacobians(z)
+    np.testing.assert_allclose(eq,[[2,3]],atol=1e-9)
+    np.testing.assert_allclose(ineq,[[4,-5],[1,1]],atol=1e-9)
+    assert len(calls)==3
+    p.jacobians(z.copy())
+    assert len(calls)==3
+
+
+def test_panel_fit_uses_actual_deck_area(native_case):
+    from scripts.native_coupled_operation import StructureKernel
+    from scripts.coupled_model import CoupledModel
+    model=CoupledModel();x=model.c['referenceDesign'];_,m,g,_=model.configuration(x,0)
+    kernel=StructureKernel();p=model.parameters
+    before=kernel.evaluate(x,p,list(m.values()),g,[50,60,10],0)
+    smaller=g.copy();smaller[51]*=.8
+    after=kernel.evaluate(x,p,list(m.values()),smaller,[50,60,10],0)
+    assert after['panelAreaMargin']+1==pytest.approx(.8*(before['panelAreaMargin']+1))
+    assert after['bodyHandlingMargin']==before['bodyHandlingMargin']
+    assert g[51]<np.pi*x[0]*x[1]/4
+
+
+def test_design_cache_preserves_state_dependent_results(native_case):
+    from scripts.optimize_coupled import Problem
+    p=Problem(4);z=p.initial();initial=p.evaluate(z);cached=p.design_cache
+    assert len(p.constraint_names)==len(initial['ineq'])==len(set(p.constraint_names))
+    trial=z.copy();trial[29]+=.001
+    used=p.evaluate(trial)
+    assert p.design_cache is cached
+    p.last=None;p.design_cache=None
+    fresh=p.evaluate(trial)
+    np.testing.assert_allclose(used['eq'],fresh['eq'],atol=1e-12)
+    np.testing.assert_allclose(used['ineq'],fresh['ineq'],atol=1e-12)
+
+
+def test_search_energy_reserve_does_not_change_native_acceptance(native_case):
+    from scripts.optimize_coupled import Problem
+    p=Problem(4);r=p.evaluate(p.initial())
+    names=p.model.operation.contract['outputNames'][4:18]
+    selected=r['ineq'][:8*len(names)].reshape(8,len(names))
+    raw=np.array([[row[n] for n in names] for row in r['rows']])
+    difference=raw-selected
+    energy=names.index('cycleMargin')
+    np.testing.assert_allclose(difference[:,energy],.005,atol=1e-12)
+    for direction,raw_route in [('easterly',r['route']),('westerly',r['westerlyRoute'])]:
+        for i,leg in enumerate(['downstream progress','upstream progress']):
+            margin=r['ineq'][p.constraint_names.index(f'{direction} {leg}')]
+            assert raw_route[i]-margin==pytest.approx(.005/p.route.contract['routeParameters'][5])
+    assert p.route.contract['routeParameters'][5]==.5
+    np.testing.assert_allclose(np.delete(difference,energy,axis=1),0,atol=1e-12)
+    for row in r['rows']:
+        assert row['cycleMargin']==pytest.approx(row['cycleEnergy']/100)
+
+
+def test_route_assigns_easterly_upstream_to_windward(native_case):
+    from scripts.native_coupled_operation import RouteKernel
+    kernel=RouteKernel();states=[]
+    for windward in [True,False,True,False]:
+        speed=np.sqrt(2)*(1 if windward else 2)
+        angle=45 if windward else 135
+        for tack in [1,-1]:states.extend([speed,tack*angle,0,0,0,0])
+    water=[1,1,2,2]*2
+    east=kernel.evaluate(water,states)
+    west=kernel.evaluate(water,states,wind_from='west')
+    assert east[3]==pytest.approx(.95*2+.75)
+    assert east[4]==pytest.approx(.95*1-.75)
+    assert west[3]==pytest.approx(.95*1+.75)
+    assert west[4]==pytest.approx(.95*2-.75)
+    assert east[5]>west[5]
+
+
+def test_native_structure_uses_finite_inertia_and_section_modulus(native_case):
+    from scripts.native_coupled_operation import StructureKernel
+    from scripts.coupled_model import CoupledModel
+    model=CoupledModel();x=model.c['referenceDesign'];_,m,g,_=model.configuration(x,0)
+    kernel=StructureKernel();p=model.parameters;loads=[50,60,10]
+    before=kernel.evaluate(x,p,list(m.values()),g,loads,0)
+    stiffer=g.copy();stiffer[56]*=2
+    after=kernel.evaluate(x,p,list(m.values()),stiffer,loads,0)
+    assert 1-after['keelDeflectionMargin']==pytest.approx((1-before['keelDeflectionMargin'])/2)
+    assert after['keelStressMargin']==before['keelStressMargin']
+    stronger=g.copy();stronger[57]*=2
+    after=kernel.evaluate(x,p,list(m.values()),stronger,loads,0)
+    assert 1-after['keelStressMargin']==pytest.approx((1-before['keelStressMargin'])/2)
+    assert after['keelDeflectionMargin']==before['keelDeflectionMargin']
+
+
+def test_search_derivative_does_not_cross_a_polar_interpolation_breakpoint():
+    from scripts.optimize_coupled import Problem
+    p=Problem.__new__(Problem);p.derivatives=None;p.breakpoints={0:np.array([0.,.5,1.])}
+    def constraints(z):
+        value=2*z[0] if z[0]<.5 else 1+5*(z[0]-.5)
+        return {'eq':np.array([value]),'ineq':np.array([value-2,3-value])}
+    p.evaluate=constraints
+    for point,expected in [(.5-1e-6,2.),(.5+1e-6,5.),(.5,5.)]:
+        eq,ineq=p.jacobians(np.array([point]))
+        np.testing.assert_allclose(eq,[[expected]],atol=1e-8)
+        np.testing.assert_allclose(ineq,[[expected],[-expected]],atol=1e-8)
+        np.testing.assert_allclose(p.residual_jacobian(np.array([point])),[[expected],[expected],[0]],atol=1e-8)

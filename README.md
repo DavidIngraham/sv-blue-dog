@@ -16,7 +16,7 @@ The [CAD files](cad/) are a manufacturing and wing-sail prototype, separate from
 
 The GitHub Pages blog imports Markdown from this repository. Requirement statements, model counts and numerical results belong in generated artifacts, not duplicated prose. Publishing commands and source conventions are in the modeling guide.
 
-The current [two-metre mission-sizing study](docs/mission-sizing.md) compares removable assemblies and printed construction options, couples sailing states to route progress, and keeps recovery evidence explicit. The [FDM/glass structural model](docs/structure-sizing.md) supplies its mass and structural screens.
+The historical [two-metre mission-sizing study](docs/mission-sizing.md) compares removable assemblies and printed construction options, couples sailing states to route progress, and keeps recovery evidence explicit. The [FDM/glass structural model](docs/structure-sizing.md) supplies its mass and structural screens.
 
 The [sail architecture trade](docs/sail-trade.md) compares tail-controlled and cambered rigid wings with a triangular soft sail, separating development preference from requirement evidence.
 
@@ -24,4 +24,4 @@ The [coupled sizing workflow](docs/coupled-sizing.md) develops the CAD-derived f
 
 The [static recovery diagnostic](docs/hydrostatics.md) evaluates sealed-wing and lost-buoyancy cases through full heel angles, including pitch equilibrium and numerical geometry sensitivity.
 
-The [coupled sizing results](docs/coupled-results.md) connect the CAD wing, native SysML physics and free-design search. The current boundary-limited result exposes hull-resistance and robustness gaps; it is not a selected minimum-size vessel.
+The [coupled sizing results](docs/coupled-results.md) connect the CAD wing, native SysML physics and free-design search. The exploratory result exposes aerodynamic, recovery and robustness gaps; it is not a selected minimum-size vessel.

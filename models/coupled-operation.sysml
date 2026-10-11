@@ -8,24 +8,37 @@ package BlueDogCoupledOperation {
         doc /* Search brackets are numerical/domain limits, not new vessel requirements.
          * Aspect/camber are limited by the VSPAERO interpolation grid; thickness
          * remains a geometric sensitivity without validated viscous-drag response. */
-        out attribute designLower : Real [28] ordered nonunique = (0.8,0.2,0.02,0.05,0.2,2,0.5,0.5,0.1,-0.4,0.02,0.15,0.005,0.08,0.25,0.5,50,0.05,0.05,0.05,0.2,0.2,0.2,0.2,0.01,0.01,-0.35,0.05);
-        out attribute designUpper : Real [28] ordered nonunique = (4,1.2,0.3,0.5,4,8,1.5,2,0.9,0.4,0.5,1.1,0.2,0.6,0.65,14.5,1000,1,20,10,4,4,8,4,0.23,0.23,0.35,0.9);
-        out attribute routeParameters : Real [6] ordered nonunique = (0.95,0.5,1.0,100000,72,0.5);
+        out attribute designLower : Real [29] ordered nonunique = (0.8,0.2,0.02,0.05,0.2,2,0.5,0.5,0.1,-0.4,0.02,0.15,0.005,0.08,0.25,0.5,50,0.05,0.05,0.05,0.2,0.2,0.2,0.2,0.01,0.01,-0.35,0.05,1.0);
+        out attribute designUpper : Real [29] ordered nonunique = (4,1.2,0.3,0.5,4,8,1.5,2,0.9,0.4,0.5,1.1,0.2,0.6,0.65,14.5,1000,1,20,10,4,4,8,4,0.23,0.23,0.35,0.9,2.0);
+        doc /* Search-only mesh-resolution reserves, not vessel requirements.
+         * Raw native domain margins remain unchanged for independent replay.
+         * Cp and B/L reserves exceed the observed resolution-12 to -16 shifts
+         * (0.00175 and 0.00271); remaining non-invariant coordinates receive
+         * provisional numerical reserves and still require finer validation.
+         * Order: positive resistance, Fn low/high, LCB low/high, Cp low/high,
+         * volume/area low/high, B/L low/high, LCB/LCF low/high,
+         * volume/length low/high, Cm low/high, B/T low/high. */
+        // Search-only mesh/replay reserve: cycleMargin is daily net Wh / 100.
+        // 0.005 therefore reserves 0.5 Wh/day; it is not a physical uncertainty allowance.
+        out attribute cycleEnergySearchReserve : Real = 0.005;
+        out attribute resistanceDomainReserve : Real [19] ordered nonunique = (0,0.002,0.004,0,0,0.003,0.003,0.003,0.003,0.004,0.004,0,0,0.002,0.002,0.002,0.002,0.15,0.15);
+        out attribute routeParameters : Real [7] ordered nonunique = (0.95,0.5,1.0,100000,72,0.5,1.0);
         out attribute structureValues : Real [10] ordered nonunique = (BlueDogStructure::material.laminateModulus, BlueDogStructure::material.laminateAllowable, BlueDogStructure::material.pressure, BlueDogStructure::material.tipProofForce, BlueDogStructure::material.minimumFreeboard, BlueDogStructure::material.reserveFraction, BlueDogStructure::material.launchDepth-BlueDogStructure::material.bottomClearance, BlueDogStructure::material.appendageDeflectionFraction, BlueDogStructure::material.hullDeflectionFraction, BlueDogStructure::material.panelDeflectionFraction);
     }
     calc def Evaluate {
-        in d : Real [28] ordered nonunique;
+        in d : Real [29] ordered nonunique;
         in p : Real [38] ordered nonunique;
         in q : Real [*] ordered nonunique;
         in s : Real [9] ordered nonunique;
         in aero : Real [3] ordered nonunique;
         in massData : Real [21] ordered nonunique;
-        in hydro : Real [3] ordered nonunique;
+        in hydro : Real [12] ordered nonunique;
         doc /* s: wind, windward flag, fouling multiplier, speed, wind-from heading,
          * incidence, leeway, rudder angle, heel (angles degrees). hydro:
-         * waterline Z, restoring moment, wetted hull area. aero moment at midchord.
+         * waterline Z, restoring moment, wetted hull area, then nine upright static
+         * canoe-body metrics from BlueDogHullResistance::Evaluate. aero moment at midchord.
          * Axes and equations preserve the existing body-frame convention. */
-        attribute lwl_m : Real = d#(1);
+        attribute lwl_m : Real = hydro#(4);
         attribute beam_m : Real = d#(2);
         attribute sail_m2 : Real = d#(5);
         attribute sail_AR : Real = d#(6);
@@ -50,7 +63,7 @@ package BlueDogCoupledOperation {
         attribute wing_cl_limit : Real = p#(16);
         attribute foil_cl_limit : Real = p#(27);
         attribute load_factor : Real = p#(36);
-        attribute wave_coefficient : Real = p#(25);
+        attribute residuary_factor : Real = p#(25);
         attribute viscous_form_factor : Real = p#(26);
         attribute solar_resource_factor : Real = p#(12);
         attribute electronics_W : Real = p#(11);
@@ -125,10 +138,11 @@ package BlueDogCoupledOperation {
         attribute logRe : Real = OpenSysMLMathFunctions::ln(hullRe) / OpenSysMLMathFunctions::ln(10);
         attribute cf : Real = 0.075 / ((logRe - 2) * (logRe - 2));
         attribute wetted : Real = hydro#(3);
-        attribute hullDrag : Real = qk * wetted * cf * viscous_form_factor * foul + mass * g * wave_coefficient * fn * fn * fn * fn;
+        attribute delft : Real [21] ordered nonunique = BlueDogHullResistance::Evaluate((hydro#(4),hydro#(5),hydro#(6),hydro#(7),hydro#(8),hydro#(9),hydro#(10),hydro#(11),hydro#(12)),v,rho_water,g);
+        attribute hullDrag : Real = qk * wetted * cf * viscous_form_factor * foul + residuary_factor*delft#(1);
         attribute resistance : Real = hullDrag + dk + dr;
-        attribute sailX : Real = sail_x_fraction * lwl_m;
-        attribute rudderX : Real = -rudder_arm_fraction * lwl_m;
+        attribute sailX : Real = sail_x_fraction * d#(1);
+        attribute rudderX : Real = -rudder_arm_fraction * d#(1);
         attribute heeling : Real = ys * wingZ * ch + ((lk * cb + dk * sb) * keelZ + (lr * cb + dr * sb) * rudderZ + hullDrag * sb * draft / 2) * ch;
         attribute rudderTorque : Real = qr * rudder_m2 * RealFunctions::sqrt(clr * clr + foil_cd0 * foil_cd0) * hinge_fraction * rudderChord + friction_Nm;
         attribute rudderEnvelopeTorque : Real = qr * rudder_m2 * foil_cl_limit * hinge_fraction * rudderChord + friction_Nm;
@@ -169,29 +183,51 @@ package BlueDogCoupledOperation {
         attribute wingResultant : Real = qa*sail_m2*RealFunctions::sqrt(cl*cl+cd*cd);
         attribute keelResultant : Real = RealFunctions::sqrt(lk*lk+dk*dk);
         attribute rudderResultant : Real = RealFunctions::sqrt(lr*lr+dr*dr);
+        attribute delftResistanceMargin : Real = delft#(2);
+        attribute delftDomain4 : Real = delft#(4);
+        attribute delftDomain5 : Real = delft#(5);
+        attribute delftDomain6 : Real = delft#(6);
+        attribute delftDomain7 : Real = delft#(7);
+        attribute delftDomain8 : Real = delft#(8);
+        attribute delftDomain9 : Real = delft#(9);
+        attribute delftDomain10 : Real = delft#(10);
+        attribute delftDomain11 : Real = delft#(11);
+        attribute delftDomain12 : Real = delft#(12);
+        attribute delftDomain13 : Real = delft#(13);
+        attribute delftDomain14 : Real = delft#(14);
+        attribute delftDomain15 : Real = delft#(15);
+        attribute delftDomain16 : Real = delft#(16);
+        attribute delftDomain17 : Real = delft#(17);
+        attribute delftDomain18 : Real = delft#(18);
+        attribute delftDomain19 : Real = delft#(19);
+        attribute delftDomain20 : Real = delft#(20);
+        attribute delftDomain21 : Real = delft#(21);
         return result : Real [*] ordered nonunique;
-        (surgeResidual, swayResidual, yawResidual, rollResidual, wingLiftMargin, keelLiftMargin, rudderLiftMargin, keelAngleMargin, rudderAngleMargin, wingDriveMargin, rudderDriveMargin, froudeMargin, wingReMargin, keelReMargin, rudderReMargin, cycleMargin, reserveMarginScaled, peakMargin, waterVMG, v, cl, cd, clk, clr, drive, resistance, heeling, righting, wingTorque, rudderTorque, averagePower, peakPower, harvestPower, cycleEnergy, reserveMargin, wingRe, keelRe, rudderRe, ys, lk, lr, hullDrag, dk, dr, wingResultant, keelResultant, rudderResultant)
+        (surgeResidual, swayResidual, yawResidual, rollResidual, wingLiftMargin, keelLiftMargin, rudderLiftMargin, keelAngleMargin, rudderAngleMargin, wingDriveMargin, rudderDriveMargin, froudeMargin, wingReMargin, keelReMargin, rudderReMargin, cycleMargin, reserveMarginScaled, peakMargin, waterVMG, v, cl, cd, clk, clr, drive, resistance, heeling, righting, wingTorque, rudderTorque, averagePower, peakPower, harvestPower, cycleEnergy, reserveMargin, wingRe, keelRe, rudderRe, ys, lk, lr, hullDrag, dk, dr, wingResultant, keelResultant, rudderResultant, delftResistanceMargin, delftDomain4, delftDomain5, delftDomain6, delftDomain7, delftDomain8, delftDomain9, delftDomain10, delftDomain11, delftDomain12, delftDomain13, delftDomain14, delftDomain15, delftDomain16, delftDomain17, delftDomain18, delftDomain19, delftDomain20, delftDomain21)
     }
     dependency sustained from Evaluate to BlueDogRequirements::sustainedEnergyFeasibility;
     dependency progress from Evaluate to BlueDogRequirements::legProgress;
     dependency control from Evaluate to BlueDogRequirements::capsizeControlRecovery;
     calc def DesignMargins {
-        in d : Real [28] ordered nonunique;
+        in d : Real [29] ordered nonunique;
         in p : Real [38] ordered nonunique;
         in m : Real [21] ordered nonunique;
-        in g : Real [51] ordered nonunique;
+        in g : Real [60] ordered nonunique;
         in r : Real [10] ordered nonunique;
         in loads : Real [3] ordered nonunique;
         in waterline : Real;
-        doc /* Global bending uses the worst-direction thin-skin section modulus.
+        doc /* g extends the mass geometry vector with deck area at 52 and finite-laminate
+         * I/Z pairs for hull, wing, keel and rudder at 53 through 60.
+         * Inward polygon offsets define the laminate cross section; no thin-wall
+         * stiffness extrapolation is used. Global bending uses worst-direction section modulus.
          * Proof-tip, ballast lateral inertia and operating loads are separate maxima.
          * No FDM bending credit; no buckling, fatigue, impact or joint qualification. */
         attribute modulus : Real = r#(1)*p#(14);
         attribute allowable : Real = r#(2)*p#(14);
-        attribute hullI : Real = g#(9)*m#(18);
-        attribute wingI : Real = g#(21)*m#(19);
-        attribute keelI : Real = g#(33)*m#(20);
-        attribute rudderI : Real = g#(45)*m#(21);
+        attribute hullI : Real = g#(53);
+        attribute wingI : Real = g#(55);
+        attribute keelI : Real = g#(57);
+        attribute rudderI : Real = g#(59);
         attribute wingSpan : Real = RealFunctions::sqrt(d#(5)*d#(6));
         attribute wingForce : Real = loads#(1)*p#(36);
         attribute keelForce : Real = loads#(2)*p#(36);
@@ -201,10 +237,10 @@ package BlueDogCoupledOperation {
         attribute keelTipForce : Real = NumericalFunctions::max(r#(4),d#(16)*p#(35)*p#(36));
         attribute keelMoment : Real = NumericalFunctions::max(keelForce/2,keelTipForce)*d#(12);
         attribute rudderMoment : Real = NumericalFunctions::max(rudderForce/2,r#(4))*d#(14);
-        attribute hullStressMargin : Real = 1-hullMoment/(g#(10)*m#(18)*allowable);
-        attribute wingStressMargin : Real = 1-wingMoment/(g#(22)*m#(19)*allowable);
-        attribute keelStressMargin : Real = 1-keelMoment/(g#(34)*m#(20)*allowable);
-        attribute rudderStressMargin : Real = 1-rudderMoment/(g#(46)*m#(21)*allowable);
+        attribute hullStressMargin : Real = 1-hullMoment/(g#(54)*allowable);
+        attribute wingStressMargin : Real = 1-wingMoment/(g#(56)*allowable);
+        attribute keelStressMargin : Real = 1-keelMoment/(g#(58)*allowable);
+        attribute rudderStressMargin : Real = 1-rudderMoment/(g#(60)*allowable);
         attribute hullDeflectionMargin : Real = 1-5*2*m#(1)*p#(35)*d#(1)*d#(1)/(384*modulus*hullI*r#(9));
         attribute wingDeflectionMargin : Real = 1-NumericalFunctions::max(wingForce/8,r#(4)/3)*wingSpan*wingSpan/(modulus*wingI*r#(8));
         attribute keelDeflectionMargin : Real = 1-NumericalFunctions::max(keelForce/8,keelTipForce/3)*d#(12)*d#(12)/(modulus*keelI*r#(8));
@@ -219,7 +255,7 @@ package BlueDogCoupledOperation {
         attribute freeboardMargin : Real = (d#(4)-waterline)/r#(5)-1;
         attribute reserveVolumeMargin : Real = p#(32)*g#(5)/((1+r#(6))*m#(1))-1;
         attribute launchDepthMargin : Real = (r#(7)-(waterline-(2*g#(51)+d#(3)+d#(12))))/r#(7);
-        attribute panelAreaMargin : Real = p#(38)*TrigFunctions::pi*d#(1)*d#(2)/(4*d#(18))-1;
+        attribute panelAreaMargin : Real = p#(38)*g#(52)/d#(18)-1;
         attribute hullPackingMargin : Real = 1-m#(14)/g#(5);
         attribute wingPackingMargin : Real = 1-m#(15)/g#(17);
         attribute keelPackingMargin : Real = 1-m#(16)/g#(29);
@@ -237,11 +273,12 @@ package BlueDogCoupledOperation {
     calc def Route {
         in water : Real [8] ordered nonunique;
         in states : Real [48] ordered nonunique;
-        in policy : Real [6] ordered nonunique;
+        in policy : Real [7] ordered nonunique;
         doc /* Cases ordered by wind 5 then 8 m/s, windward then leeward, tack + then -.
          * Each state contains speed, heading, incidence, leeway, rudder and heel.
-         * Tack times cancel crosswind displacement. Equal route fractions per wind
-         * and 0.5/1.0 m/s downstream current are illustrative, not weather evidence. */
+         * Tack times cancel crosswind displacement. Equal time fractions per wind
+         * and 0.5/1.0 m/s downstream current are illustrative, not weather evidence.
+         * policy#7 is 1 for easterly (upstream windward), 0 for westerly. */
         attribute cross0 : Real = states#(1)*TrigFunctions::sin(TrigFunctions::rad(states#(2)+states#(4)));
         attribute cross1 : Real = states#(7)*TrigFunctions::sin(TrigFunctions::rad(states#(8)+states#(10)));
         attribute cross2 : Real = states#(13)*TrigFunctions::sin(TrigFunctions::rad(states#(14)+states#(16)));
@@ -254,8 +291,10 @@ package BlueDogCoupledOperation {
         attribute vmg1 : Real = TackAverage(water#(3),water#(4),cross2,cross3);
         attribute vmg2 : Real = TackAverage(water#(5),water#(6),cross4,cross5);
         attribute vmg3 : Real = TackAverage(water#(7),water#(8),cross6,cross7);
-        attribute downstream : Real = policy#(1)*(vmg0+vmg2)/2+(policy#(2)+policy#(3))/2;
-        attribute upstream : Real = policy#(1)*(vmg1+vmg3)/2-(policy#(2)+policy#(3))/2;
+        attribute windwardMean : Real = (vmg0+vmg2)/2;
+        attribute leewardMean : Real = (vmg1+vmg3)/2;
+        attribute downstream : Real = policy#(1)*(if policy#(7)>0.5 ? leewardMean else windwardMean)+(policy#(2)+policy#(3))/2;
+        attribute upstream : Real = policy#(1)*(if policy#(7)>0.5 ? windwardMean else leewardMean)-(policy#(2)+policy#(3))/2;
         attribute duration : Real = if downstream>0 and upstream>0 ? policy#(4)/3600*(1/downstream+1/upstream) else 1000000.0;
         return result : Real [6] ordered nonunique;
         (downstream/policy#(6)-1,upstream/policy#(6)-1,1-duration/policy#(5),downstream,upstream,duration)

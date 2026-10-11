@@ -7,7 +7,7 @@ from scripts.native_design_kernel import ROOT
 from scripts.native_hull_resistance import HullResistanceKernel
 from scripts.study_open_sizing import digest
 model=CoupledModel();kernel=HullResistanceKernel();rows=[]
-for name,x in [('reference',model.c['referenceDesign']),('coarse_search',list(json.loads((ROOT/'docs/analysis/coupled-sizing-search.json').read_text())['design'].values()))]:
+for name,x in [('reference',model.c['referenceDesign']),('coarse_search',[json.loads((ROOT/'docs/analysis/coupled-sizing-search.json').read_text())['design'][n] for n in model.c['designNames']])]:
     bodies,m,_,_=model.configuration(x,0,resolution=16)
     h=equilibrium(model.hydro,bodies,[m['cgX'],m['cgY'],m['cgZ']],m['totalMass'],0,density=1000)
     body=next(b for b in bodies if b.name=='hull')

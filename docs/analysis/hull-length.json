@@ -425,9 +425,9 @@
       "models/sizing-documents.sysml": "c2b2f2a4ba7d0d546c0a3e8165101c6173a373090307e1e355bab9d2a084fb38",
       "models/design-search.sysml": "d9f63729da18b654dc68bdeb2a7c5438f21a778b944517ea192b8550225391b4",
       "models/design-physics.sysml": "d88bdf0a7142b11b6bd76e0df1f53a8ec97aec298c57a891eb5ec09d94be6ec9",
-      "uv.lock": "0bec78a83535ed974fe3aff3be6917ce24d35233545e5418b02a34b188ed2ea8",
       "scripts/install_renderer.py": "fcc5b259d6bf05b337981975b883081cfea6620cb745812a5e274160d9e456a2",
-      "models/hull-length-study.sysml": "f6b7f83c04e93d5e0ef91fc6c2ca587c7d89a34a3463e589c11870e0de35afad"
+      "models/hull-length-study.sysml": "f6b7f83c04e93d5e0ef91fc6c2ca587c7d89a34a3463e589c11870e0de35afad",
+      "docs/analysis/environments/pre-coupled-geometry.uv.lock": "0bec78a83535ed974fe3aff3be6917ce24d35233545e5418b02a34b188ed2ea8"
     },
     "generatedCHash": "bb59d8743114062477c830437bdec0ee7d4503d201a9c9b5ba6308351fa620d2",
     "massImpliedLengthCeiling": 31.25,
@@ -455,7 +455,7 @@
       20
     ]
   },
-  "baselineReportHash": "22fd22749467d55ac9ca6b4fdc17182e3a36af3399cd62c849ec001382d837d2",
+  "baselineReportHash": "776851a46d875a9ccb228f28f1f64f4c24ae30c588a19278ea0f2466e4777371",
   "driverHashes": {
     "scripts/study_hull_length.py": "375c9f8edf57ce962a366800d03c521be1408ec45f2fe05e199e8401e7369f19",
     "scripts/solve_design.py": "097f8cf8121f6beddb27bdd59e97ba54bfd196c02833f515964360bdaaa5cac0",
@@ -9755,5 +9755,16 @@
         }
       ]
     }
+  },
+  "environmentSnapshot": {
+    "originalPath": "uv.lock",
+    "snapshotPath": "docs/analysis/environments/pre-coupled-geometry.uv.lock",
+    "sha256": "0bec78a83535ed974fe3aff3be6917ce24d35233545e5418b02a34b188ed2ea8",
+    "sourceCommit": "8b04d0cb1297f749e8c12cc427d99404ee7c7527",
+    "reason": "Preserve the exact dependency lock used by this historical comparison. The current coupled geometry environment adds Shapely; numerical results are unchanged."
+  },
+  "baselineMetadataMigration": {
+    "originalReportHash": "22fd22749467d55ac9ca6b4fdc17182e3a36af3399cd62c849ec001382d837d2",
+    "reason": "The baseline numerical payload is unchanged; only its environment provenance now points to the preserved original lock."
   }
 }

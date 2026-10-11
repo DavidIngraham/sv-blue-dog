@@ -21,7 +21,7 @@ def prepare():
     c['massNames']=['totalMass','hullMass','wingMass','keelMass','rudderMass','batteryMass','panelMass','wingDriveMass','rudderDriveMass','equipmentMass','cgX','cgY','cgZ','hullMaterialVolume','wingMaterialVolume','keelMaterialVolume','rudderMaterialVolume','hullLaminateThickness','wingLaminateThickness','keelLaminateThickness','rudderLaminateThickness']
     CONTRACT.write_text(json.dumps(c,indent=2)+'\n')
     from .coupled_geometry import build_geometry,ballast_geometry
-    _,vectors=build_geometry(dict(zip(c['designNames'],c['referenceDesign'])))
+    _,vectors,_=build_geometry(dict(zip(c['designNames'],c['referenceDesign'])))
     d=dict(zip(c['designNames'],c['referenceDesign']))
     bulb,center=ballast_geometry(d['ballast_kg']/c['parameterValues'][33],-d['bottom_depth_m']-d['keel_span_m'])
     geometry=np.r_[np.concatenate(list(vectors.values())),center]
@@ -47,7 +47,7 @@ class MassKernel:
         c=self.contract
         p=c['parameterValues'] if parameters is None else parameters
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,p,c['materialValues'],geometry]]
-        if [a.shape for a in arrays]!=[(28,),(38,),(len(c['materialValues']),),(51,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid mass inputs')
+        if [a.shape for a in arrays]!=[(29,),(38,),(len(c['materialValues']),),(51,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid mass inputs')
         d=arrays[0]
         positive=[0,1,2,3,4,5,7,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25]
         if np.any(d[positive]<=0) or d[15]<0 or arrays[1][12]<=0 or arrays[1][0]<0:raise ValueError('Invalid physical mass inputs')

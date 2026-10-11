@@ -1,9 +1,9 @@
 {
   "sourceHashes": {
     "models/hull-resistance.sysml": "735f1e939bd0f7ea7e83dbd07f62432762db0aa27efbf977e35ca7a84853d59e",
-    "scripts/native_hull_resistance.py": "c498d365188b4832c615389beddf2b11f6a46ffcd475d2c8fada8e7185e81654"
+    "scripts/native_hull_resistance.py": "ecfc0f29da326b10c4f63a407802130536cafd7f5e2bc753a26f04c2ba3097c4"
   },
-  "scope": "Synthetic arithmetic fixtures, not measured resistance validation. Fn 0.65 deliberately exceeds the implementation coverage limit. Not yet connected to coupled search.",
+  "scope": "Synthetic arithmetic fixtures, not measured resistance validation. Fn 0.65 deliberately exceeds the implementation coverage limit. The same native calculation is used by the coupled operating model.",
   "hull": [
     2,
     0.6,

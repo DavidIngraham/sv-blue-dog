@@ -74,11 +74,36 @@ def test_geometry_audit_preserves_out_of_domain_findings():
     r=json.loads((ROOT/'docs/analysis/hull-resistance-domain.json').read_text(encoding='utf-8'))
     validate(r['sourceHashes'])
     assert not r['qualified']
-    assert r['cases'][0]['outsideEnvelope']==['cp_upper']
-    assert set(r['cases'][1]['outsideEnvelope'])=={'cp_upper','beam_length_upper','volume_length_upper','cm_upper'}
+    assert r['cases'][0]['outsideEnvelope']==[]
+    for case in r['cases']:
+        assert set(case['outsideEnvelope'])=={n for n,v in list(case['screen'].items())[3:] if v < -1e-12}
     for c in r['cases']:assert c['nativeCanoeVolume_m3']==pytest.approx(c['hullFeatures'][3],rel=1e-9)
 
 
 def test_resistance_publication_is_current():
     from scripts.publish_hull_resistance import publication
     assert (ROOT/'docs/hull-resistance.md').read_text(encoding='utf-8')==publication()
+
+
+def test_fullness_changes_prismatic_coefficient_without_changing_midship():
+    from scripts.hull_features import tapered_hull_geometry,upright_hull_features
+    from scripts.hydro_geometry import hull_geometry
+    from scripts.coupled_geometry import metrics
+    original=hull_geometry(2,.6,.1,.15,resolution=24)
+    a=tapered_hull_geometry(2,.6,.1,.15,1.,resolution=24)
+    b=tapered_hull_geometry(2,.6,.1,.15,2.,resolution=24)
+    np.testing.assert_allclose(metrics(a),metrics(original),rtol=1e-10,atol=1e-10)
+    fa=upright_hull_features(a,0.);fb=upright_hull_features(b,0.)
+    assert fa[7]==pytest.approx(2/3,abs=.003)
+    assert fb[7]==pytest.approx(8/15,abs=.003)
+    assert fa[8]==pytest.approx(fb[8],abs=1e-10)
+    assert metrics(b)[4]<metrics(a)[4]
+
+
+def test_deck_area_follows_fullness_geometry():
+    from scripts.hull_features import deck_area,tapered_hull_geometry
+    a=deck_area(tapered_hull_geometry(2,.6,.1,.15,1.,resolution=32))
+    b=deck_area(tapered_hull_geometry(2,.6,.1,.15,2.,resolution=32))
+    assert a==pytest.approx(np.pi/4*2*.6,rel=.001)
+    assert b==pytest.approx(2/3*2*.6,rel=.001)
+    assert b<a

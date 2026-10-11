@@ -7,7 +7,8 @@ from functools import lru_cache
 import json
 import numpy as np
 from .native_design_kernel import ROOT
-from .hydro_geometry import hull_geometry,ellipsoid
+from .hydro_geometry import ellipsoid
+from .hull_features import tapered_hull_geometry
 
 @lru_cache(maxsize=1)
 def section_data():
@@ -72,22 +73,22 @@ def section_properties(polygon):
 
 def build_geometry(d,resolution=8):
     length,beam,depth,top=d['length_m'],d['beam_m'],d['bottom_depth_m'],d['deck_height_m']
-    hull=hull_geometry(length,beam,depth,top,resolution)
+    hull=tapered_hull_geometry(length,beam,depth,top,d['hull_fullness_exponent'],resolution)
     phi=np.linspace(-np.pi/2,np.pi/2,2*resolution+1)
     hull_section=np.vstack([np.c_[beam/2*np.sin(phi),-depth*np.cos(phi)],[[beam/2,top],[-beam/2,top]]])
     upper,lower=wing_section(d['camber_scale'],d['wing_thickness_scale'])
     chord=np.sqrt(d['sail_m2']/d['sail_AR']);span=np.sqrt(d['sail_m2']*d['sail_AR'])
     upper=upper*chord-[d['mast_fraction']*chord,0];lower=lower*chord-[d['mast_fraction']*chord,0]
     wing=prism(upper,lower,span)+[d['mast_x_fraction']*length,0,top]
-    geometries={'hull':hull,'wing':wing};sections={'hull':section_properties(hull_section),'wing':section_properties(np.vstack([upper,lower[::-1]]))}
+    geometries={'hull':hull,'wing':wing};outlines={'hull':hull_section,'wing':np.vstack([upper,lower[::-1]])}
     for name,x in [('keel',0),('rudder',-d['rudder_arm_fraction']*length)]:
         chord=d[f'{name}_m2']/d[f'{name}_span_m'];span=d[f'{name}_span_m']
         u=np.linspace(0,1,41);thickness=.12*chord*np.sqrt(np.maximum(0,1-(2*u-1)**2))/2
         upper=np.c_[(u-.5)*chord,thickness];lower=np.c_[(u-.5)*chord,-thickness]
         body=prism(upper,lower,span);body[:,:,2]*=-1;body+=[x,0,-depth]
-        geometries[name]=body;sections[name]=section_properties(np.vstack([upper,lower[::-1]]))
-    vectors={name:np.r_[metrics(body),sections[name]] for name,body in geometries.items()}
-    return geometries,vectors
+        geometries[name]=body;outlines[name]=np.vstack([upper,lower[::-1]])
+    vectors={name:np.r_[metrics(body),section_properties(outlines[name])] for name,body in geometries.items()}
+    return geometries,vectors,outlines
 
 
 def ballast_geometry(volume_m3,keel_tip_z,resolution=8):

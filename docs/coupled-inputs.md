@@ -6,11 +6,11 @@
 
 ## Geometry and mass
 
-Calculated mass: **33.10 kg**. Center of gravity: (-0.0124, 0.0042, -0.1216) m in the hull reference frame. The reference plane is not the solved waterline.
+Calculated mass: **32.27 kg**. At mast trim zero, center of gravity: (-0.0127, 0.0043, -0.1262) m in the hull reference frame. The reference plane is not the solved waterline.
 
 | Component | Calculated mass (kg) |
 |---|---:|
-| Hull | 8.188 |
+| Hull | 7.362 |
 | Wing | 4.505 |
 | Keel structure | 3.122 |
 | Rudder structure | 0.042 |
@@ -21,9 +21,9 @@ Calculated mass: **33.10 kg**. Center of gravity: (-0.0124, 0.0042, -0.1216) m i
 | Equipment/attachments | 3.100 |
 | Ballast | 11.674 |
 
-External mesh faces supply skin area; closed volumes supply diaphragm-rib allocations. Native SysML accounts for printed substrate, glass, resin, finish, seam tape and equipment. Thin-wall section properties use the actual reference section, rather than a generic wing thickness. Manufacturing properties and equipment mass scaling are provisional.
+External mesh faces supply skin area; closed volumes supply diaphragm-rib allocations. Native SysML accounts for printed substrate, glass, resin, finish, seam tape and equipment. Structural section properties use finite laminate thickness inside the actual section outline. Inward polygon offsets and area moments replace the earlier thin-wall stiffness extrapolation; FDM stiffness is not credited. Mass retains the declared areal-material allocations. Manufacturing properties and equipment mass scaling are provisional.
 
-The reference wing is a rectangular extrusion of the CAD midsection. Camber, thickness, aspect ratio, area and mast position are independent geometry inputs. The hull is an elliptical-planform sizing family. Keel and rudder use a 12%-thick elliptic section family; section-shape optimization is not implemented.
+The reference wing is a rectangular extrusion of the CAD midsection. Camber, thickness, aspect ratio, area and mast position are independent geometry inputs. The hull has a free longitudinal fullness exponent; all bodies share the same mass, stiffness and buoyancy geometry. Keel and rudder use a 12%-thick elliptic section family; section-shape optimization is not implemented.
 
 The volume-normalized 3:1:1 bulb sits immediately below the keel tip without overlap; its joint still needs structural detailing. Seam/finish mass is included but its displacement is omitted. Flooding, retained water and trim-dependent wing centroid are not yet part of this mass replay.
 
@@ -47,6 +47,10 @@ flowchart TD
   I --> C
   H[Native SysML immersed-volume kernel] --> C
   D[Native SysML drive-power model] --> C
+  C --> R[Finer geometry and uncertainty replay]
+  R --> Q{Selected screens pass?}
+  Q -->|No| C
+  Q -->|Yes| E[Conditional sizing evidence]
 ```
 
 Detailed inputs and provenance: [mass replay](analysis/coupled-mass-reference.json), [VSPAERO grid](analysis/wing-polar-grid.json), [SysML model](../models/coupled-sizing.sysml). See the [workflow](coupled-sizing.md) for the remaining acceptance gates.

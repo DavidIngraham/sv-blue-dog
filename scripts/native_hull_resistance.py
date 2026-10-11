@@ -33,7 +33,7 @@ def prepare():
     rows=[native_value(v['value']) for v in audit['checks'][0]['values']]
     hashes={'models/hull-resistance.sysml':digest(model),'scripts/native_hull_resistance.py':digest(ROOT/'scripts/native_hull_resistance.py')}
     CONTRACT.write_text(json.dumps({'sourceHashes':hashes,'generatedHash':digest(source)},indent=2)+'\n',encoding='utf-8')
-    record={'sourceHashes':hashes,'scope':'Synthetic arithmetic fixtures, not measured resistance validation. Fn 0.65 deliberately exceeds the implementation coverage limit. Not yet connected to coupled search.','hull':h,'density':1000,'gravity':9.80665,'cases':[{'speed_m_s':v,'outputs':dict(zip(NAMES,r))} for v,r in zip(speeds,rows)],'qualified':False}
+    record={'sourceHashes':hashes,'scope':'Synthetic arithmetic fixtures, not measured resistance validation. Fn 0.65 deliberately exceeds the implementation coverage limit. The same native calculation is used by the coupled operating model.','hull':h,'density':1000,'gravity':9.80665,'cases':[{'speed_m_s':v,'outputs':dict(zip(NAMES,r))} for v,r in zip(speeds,rows)],'qualified':False}
     (ROOT/'docs/analysis/hull-resistance-audit.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
 
 

@@ -1,19 +1,19 @@
 # Coupled sizing workflow
 
-The sizing baseline is a fixed-camber rotating-mast wing with a non-backdrivable drive option. Tail control remains an alternative in the [sail trade](sail-trade.md). The objective is minimum practical waterline length after finding a feasible design, followed by mass/energy comparison at comparable lengths. This is preliminary engineering analysis, not vessel qualification.
+The sizing baseline is a fixed-camber rotating-mast wing with a non-backdrivable drive option. Tail control remains an alternative in the [sail trade](sail-trade.md). The objective is minimum practical hull length after finding a feasible design, followed by mass/energy comparison at comparable lengths. This is preliminary engineering analysis, not vessel qualification.
 
 ## Model boundary and acceptance
 
 | Element | Treatment in the coupled study |
 |---|---|
-| Mission | Gorge sail-only round trip; retain explicit route wind/current cases and progress/time constraints. Hawai‘i endurance and survival remain separately tracked objectives. |
+| Mission | Gorge sail-only round trip; check both easterly (upstream windward) and westerly (upstream leeward) profiles with explicit current, progress and time allocations. Hawai‘i endurance and survival remain separately tracked objectives. |
 | Manufacture | 250 mm cubic print-job envelope from the requirements model; include joints, supports and assembly provisions rather than limiting the overall boat to a print bed. |
 | Handling | Existing 15 kg assembly allocation; separately account for hull/body, wing, battery and removable keel assemblies. |
-| Design variables | Waterline, beam, freeboard, wing area/aspect/camber, mast position, keel and rudder geometry, ballast, battery, solar and actuator sizing. Construction recipes are discrete choices. |
+| Design variables | Length, beam, longitudinal fullness, freeboard, wing area/aspect/camber, mast position, keel and rudder geometry, ballast, battery, solar and actuator sizing. Glass areal mass and rib spacing are continuous variables; the FDM/wet-layup material recipe remains an explicit assumption. |
 | Search bounds | Numerical brackets are not requirements. Report and expand active artificial bounds; identify geometry/tool validity limits separately. |
 | Aerodynamics | CAD-derived section and OpenVSP/VSPAERO for appropriate attached-flow conditions. Broadside separated flow requires a distinct evidence-supported model and uncertainty bounds. |
 | Recovery | Geometry-based immersed volumes and full-angle righting curves at multiple trim/flooding states; dynamic recovery remains a separate verification obligation. |
-| Uncertainty | Material properties, aerodynamic coefficients, current/wind exposure and actuator duty are evidence-bounded inputs, not freely optimized improvements. |
+| Uncertainty | Material properties, aerodynamic coefficients, current/wind exposure and actuator duty use explicit provisional sensitivity brackets; they are not freely optimized improvements or calibrated uncertainty distributions. |
 
 ## Implementation and evidence boundary
 
@@ -23,8 +23,8 @@ The historical two-metre study remains a reproducible comparison. The coupled wo
 |---|---|
 | Geometry | Parameterized hull, CAD-midsection wing, elliptic appendages and a volume-normalized ballast bulb; common geometry supplies mass, stiffness and buoyancy inputs. |
 | Aerodynamics | OpenVSP/VSPAERO aspect/camber/incidence grids for both chord orientations; bounded interpolation with independent profile drag, lift caps and discrepancy factors. |
-| Physics | Native SysML mass/CG, force and moment balance, gearbox/motor energy, structural screens, tack weighting and route arithmetic. |
-| Numerical search | SciPy operating-state and shared-design solves. Feasibility precedes length minimization; 28 vessel variables remain free within declared brackets. |
+| Physics | Native SysML mass/CG, force and moment balance, gearbox/motor energy, structural screens, tack weighting and route arithmetic. Geometric polygon offsets supply finite-laminate bending inertia and section modulus; stiffness cannot exceed a solid section. |
+| Numerical search | SciPy operating-state and shared-design solves. Least-squares feasibility, with a constrained nearest-feasible fallback when needed, precedes length minimization; 29 vessel variables remain free within declared brackets. Balanced operating-state warm starts precede the joint solve; design-only recovery calculations are cached. Shared finite-difference derivatives stay within the current piecewise-linear polar interval rather than crossing an interpolation breakpoint. A failed length-minimizer trial gets a separate feasibility-restoration solve with all design variables still free. The report retains the trial diagnostics and the best feasible candidate separately. |
 | Recovery | Native immersed-volume calculations; coarse fixed-pitch search screens followed by finer free-pitch curves. Static screening does not verify dynamic releases. |
 
 The wing's aerodynamic moment contributes to both yaw balance and actuator torque. Its physical rotation also moves its mass and displaced volume. Opposite-tack performance uses the reversed-chord grid with the corresponding camber/sign transformation. The coordinate mapping follows [OpenVSP's body/wind-axis definitions](https://groups.google.com/g/openvsp/c/4HD1bI3jCYo/m/8vUXYf_HEQAJ).
@@ -56,11 +56,11 @@ uv run python -m scripts.publish_wing_analysis
 uv run python -m pytest tests/test_wing_analysis.py
 ```
 
-The STEP contains a printed/ribbed 300 mm segment, not a complete boat wing. [Extracted sections](figures/wing-sections.png) retain missing outer-envelope samples as missing data. The reference VSP wing uses the complete midspan section in a rectangular planform; it does not claim to reproduce the swept prototype planform. Both ends of the section are rounded, so the wake-shedding assumption needs validation before these potential-flow results enter the optimizer.
+The STEP contains a printed/ribbed 300 mm segment, not a complete boat wing. [Extracted sections](figures/wing-sections.png) retain missing outer-envelope samples as missing data. The VSP reference wing uses the complete midspan section in a rectangular planform; it does not claim to reproduce the swept prototype planform. Both ends of the section are rounded, so the wake-shedding assumption needs validation before these potential-flow predictions can support mission qualification; their current optimizer use is explicitly provisional.
 
-[Generated wing-analysis results](wing-analysis-results.md) distinguish the geometry extraction, numerical mesh sensitivity and physical evidence gaps. The coupled optimization remains incomplete until the integration gates above are met.
+[Generated wing-analysis results](wing-analysis-results.md) distinguish the geometry extraction, numerical mesh sensitivity and physical evidence gaps. The [coupled results](coupled-results.md) record which numerical gates pass and which physical evidence remains missing.
 
-The [hull-resistance implementation and geometry audit](hull-resistance.md) records the replacement regression and why the current hull family must change before another credible minimum-length search. It is not yet wired into the coupled operating kernel.
+The [hull-resistance implementation and geometry audit](hull-resistance.md) records the replacement regression and the applicability audit of the variable-fullness hull family. The native coupled operating kernel now uses that regression and exposes its applicability margins as search constraints. Native inputs also declare search-only numerical reserves for mesh-resolution error; finer replay checks the original unmodified domain bounds. The search also reserves 0.5 Wh/day against numerical changes in energy balance (a normalized cycle margin of 0.005); this is not a physical uncertainty allowance. A separate 0.005 m/s search reserve on each leg covers the observed coarse-to-refined progress difference; the finer replay still checks the original 0.5 m/s target. The length minimizer uses a 0.0001 stopping tolerance, with independent equilibrium and constraint checks.
 
 ## Coupled execution
 
@@ -76,6 +76,10 @@ uv run python -m scripts.native_coupled_operation
 uv run python -m scripts.prepare_coupled_uncertainty
 ```
 
-Run `scripts.study_coupled`, `scripts.optimize_coupled` and `scripts.verify_coupled` as Python modules in the Linux SciPy/GCC environment. The first establishes both-tack reference operating states, the second runs shared-design feasibility and length search, and the third performs finer operating/recovery replay and sensitivity cases. Kernel preparation checks the generated C output representation; pytest checks native/interpreted parity, geometry, reference-moment invariance, gearbox accounting and tack weighting.
+Run `scripts.study_coupled`, `scripts.optimize_coupled` and `scripts.verify_coupled` as Python modules in the Linux SciPy/GCC environment. The first establishes both-tack reference operating states, the second runs shared-design feasibility and length search, and the third performs finer operating/recovery replay and sensitivity cases. Operating solves enforce energy constraints first; a failed attempt gets a labelled energy-unconstrained diagnostic, whose energy margins still count in the final verdict. Its independent scenarios use three worker processes by default (`--workers 1` runs sequentially); only the parent process publishes the ordered results. Kernel preparation checks the generated C output representation; pytest checks native/interpreted parity, geometry, reference-moment invariance, gearbox accounting and tack weighting.
 
 The [earlier recovery diagnostic](hydrostatics.md) remains a sensitivity comparison using the old design's mass. It must not be substituted for the new geometry-consistent replay.
+
+The final water-ingress sweep is `python -m scripts.recovery_coupled`. Run `python -m scripts.recovery_pitch_diagnostic` afterward to investigate any missing sealed-wing pitch equilibria over a denser, full pitch range. Its local pitch-stability results do not establish global attitude stability or a dynamic recovery trajectory. Publish the saved evidence with `python -m scripts.publish_hull_resistance` and `python -m scripts.publish_coupled_results`.
+
+After the search, `uv run --project analysis/wing python analysis/wing/check_candidate.py` compares direct VSPAERO results with the interpolated grid at the selected aspect ratio and camber. The comparison preserves the grid’s reference thickness, so it is interpolation evidence rather than aerodynamic validation of the optimized thickness. The results publisher includes this comparison and generates the recovery figure from the current saved curves.

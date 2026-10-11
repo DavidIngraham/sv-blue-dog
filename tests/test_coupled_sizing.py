@@ -28,9 +28,9 @@ def reference():
 
 
 def test_shape_scaling_and_degenerate_foil_tip_cells():
-    _,d=reference();g,v=build_geometry(d)
+    _,d=reference();g,v,_=build_geometry(d)
     assert all(np.isfinite(a).all() for a in v.values())
-    d['wing_thickness_scale']*=1.2;g2,v2=build_geometry(d)
+    d['wing_thickness_scale']*=1.2;g2,v2,_=build_geometry(d)
     assert v2['wing'][4]==pytest.approx(v['wing'][4]*1.2,rel=1e-10)
     for name in ['hull','keel','rudder']:np.testing.assert_array_equal(v2[name],v[name])
     for name in g:
@@ -43,7 +43,7 @@ def test_shape_scaling_and_degenerate_foil_tip_cells():
 @pytest.mark.skipif(sys.platform!='linux',reason='Native C adapter uses Linux/GCC')
 def test_native_mass_derivatives_and_centroid_bookkeeping():
     from scripts.native_coupled import MassKernel
-    k=MassKernel();c,d=reference();_,v=build_geometry(d);geometry=np.r_[np.concatenate(list(v.values())),json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())['ballastCentroid']];x=np.array(c['referenceDesign'])
+    k=MassKernel();c,d=reference();_,v,_=build_geometry(d);geometry=np.r_[np.concatenate(list(v.values())),json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())['ballastCentroid']];x=np.array(c['referenceDesign'])
     base=k.evaluate(x,geometry);p=np.array(k.contract['parameterValues'])
     saved=json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())
     for name,value in base.items():assert value==pytest.approx(saved['mass'][name],rel=1e-11,abs=1e-12)

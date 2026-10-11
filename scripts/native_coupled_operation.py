@@ -10,7 +10,7 @@ CONTRACT=ROOT/'.tools/coupled-operation-contract.json'
 def prepare():
     from .render_requirements import MODELS,native
     from .prepare_design_search import native_value
-    models=MODELS+(ROOT/'models/structure.sysml',ROOT/'models/wing-actuator.sysml',ROOT/'models/coupled-operation.sysml')
+    models=MODELS+(ROOT/'models/structure.sysml',ROOT/'models/wing-actuator.sysml',ROOT/'models/coupled-operation.sysml',ROOT/'models/hull-resistance.sysml')
     audit=json.loads(native('-analysis','BlueDogDesignSearch::SearchInputs','-json',models=models))
     if audit['status']!='holds':raise ValueError('Environment input export failed')
     inputs={v['name']:native_value(v['value']) for v in audit['checks'][0]['values']}
@@ -35,7 +35,7 @@ def prepare():
     c['structureNames']=[n.strip() for n in re.search(r'calc def DesignMargins.*?return result.*?;\s*\((.*?)\)',text,re.S)[1].split(',')]
     CONTRACT.write_text(json.dumps(c,indent=2)+'\n')
     reference=json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())
-    inputs=[list(reference['design'].values()),list(reference['parameters'].values()),c['environment'],[5,1,1,2,0,0,0,0,0],[.6,.02,-.07],list(reference['mass'].values()),[0,0,1]]
+    inputs=[list(reference['design'].values()),list(reference['parameters'].values()),c['environment'],[5,1,1,2,0,0,0,0,0],[.6,.02,-.07],list(reference['mass'].values()),[0,0,1,2,.6,.15,.071973,.85,1.05,1.1,.55,.727]]
     literal=lambda values:'('+','.join(format(v,'.17g') for v in values)+')'
     replay=ROOT/'.tools/coupled-operation-replay.sysml'
     replay.write_text('package CoupledOperationReplay { private import ScalarValues::*; analysis example { out attribute result : Real [*] ordered nonunique = BlueDogCoupledOperation::Evaluate('+','.join(literal(a) for a in inputs)+'); } }')
@@ -58,7 +58,7 @@ class OperationKernel:
         p=np.asarray(parameters)
         if len(p)!=38 or not 0<p[1]<=1 or not 0<p[2]<=1 or min(p[6:8])<0 or sum(p[6:8])>1+1e-12 or not 0<=p[9]<=1:raise ValueError('Invalid drive efficiencies or duty')
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,p,self.contract['environment'],state,aero,mass,hydro]]
-        if [a.shape for a in arrays]!=[(28,),(38,),(len(self.contract['environment']),),(9,),(3,),(21,),(3,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid operation inputs')
+        if [a.shape for a in arrays]!=[(29,),(38,),(len(self.contract['environment']),),(9,),(3,),(21,),(12,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid operation inputs')
         if arrays[3][3]<=0 or arrays[6][2]<=0:raise ValueError('Positive speed and wetted area required')
         args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
         with _LOCK:
@@ -80,7 +80,7 @@ class StructureKernel:
         self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
     def evaluate(self,design,parameters,mass,geometry,loads,waterline):
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,parameters,mass,geometry,self.contract['structure'],loads]]
-        if [a.shape for a in arrays]!=[(28,),(38,),(21,),(51,),(10,),(3,)] or any(not np.isfinite(a).all() for a in arrays) or not np.isfinite(waterline):raise ValueError('Invalid structural inputs')
+        if [a.shape for a in arrays]!=[(29,),(38,),(21,),(60,),(10,),(3,)] or any(not np.isfinite(a).all() for a in arrays) or not np.isfinite(waterline):raise ValueError('Invalid structural inputs')
         args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
         with _LOCK:
             out=Sequence()
@@ -99,9 +99,13 @@ class RouteKernel:
         if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
         self.lib=ct.CDLL(str(library));self.lib.sysml_run.argtypes=[Sequence]*3+[ct.POINTER(Sequence)]
         self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
-    def evaluate(self,water,states,policy=None):
-        arrays=[np.ascontiguousarray(a,dtype=float) for a in [water,states,self.contract['routeParameters'] if policy is None else policy]]
-        if [a.shape for a in arrays]!=[(8,),(48,),(6,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid route inputs')
+    def evaluate(self,water,states,policy=None,wind_from=None):
+        policy=np.array(self.contract['routeParameters'] if policy is None else policy,dtype=float,copy=True)
+        if wind_from is not None:
+            if wind_from not in ('east','west'):raise ValueError('wind_from must be east or west')
+            policy[6]=float(wind_from=='east')
+        arrays=[np.ascontiguousarray(a,dtype=float) for a in [water,states,policy]]
+        if [a.shape for a in arrays]!=[(8,),(48,),(7,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid route inputs')
         args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
         with _LOCK:
             out=Sequence()

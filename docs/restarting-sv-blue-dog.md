@@ -22,4 +22,6 @@ The [architecture DFMEA](dfmea.md) identifies ways those functions can fail and 
 
 ## Let evidence change the design
 
+I am now connecting the CAD-derived fixed-camber wing, OpenVSP/VSPAERO and the [coupled sizing workflow](coupled-sizing.md). Hull dimensions, ballast, appendages, structure and energy can change together. The [generated results](coupled-results.md) show which numerical checks pass and where performance, flooding or uncertain assumptions still demand more work.
+
 The model is a way to make assumptions inspectable. Generated results show what the current inputs imply; they are not physical test results. I want measured sailing performance, manufacturing trials and fault tests to refine those assumptions. The current model and its open issues are linked above, so this article can explain the journey without becoming another requirements document.

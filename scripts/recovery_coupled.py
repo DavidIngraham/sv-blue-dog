@@ -14,7 +14,7 @@ def run():
     hashes={n:digest(ROOT/n) for n in sources}
     for density in [1000.,1025.]:
         for trim in [0.,90.,180.,270.]:
-            original,m,g,_=model.configuration(x,np.deg2rad(trim),resolution=8)
+            original,m,g,_=model.configuration(x,np.deg2rad(trim),resolution=16)
             dry_mass=m['totalMass'];dry_cg=np.array([m['cgX'],m['cgY'],m['cgZ']])
             wing_volume=g[16];material_volume=m['wingMaterialVolume'];void=wing_volume-material_volume
             if not 0<material_volume<wing_volume:raise ValueError('Invalid wing void volume')

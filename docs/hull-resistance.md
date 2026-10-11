@@ -1,10 +1,10 @@
 # Hull resistance
 
-**The coupled search still uses its earlier wave-drag approximation. The replacement below is implemented and checked independently; geometry integration and a new optimization remain outstanding.**
+**The coupled operating kernel now uses native Delft residuary resistance.** Hull fullness is a free design variable; geometry and speed applicability margins are included in the search.
 
 The native [SysML calculation](../models/hull-resistance.sysml) implements equation 1.7 and table 2 of [Keuning and Katgert (2008)](https://www.scribd.com/document/346520042/Keuning-2008-pdf). It calculates upright, untrimmed bare-hull residuary resistance. Viscous hull drag and appendage drag must be added separately. Linear interpolation between published Froude-number rows is our implementation choice.
 
-The adapter rejects negative resistance and coordinates outside the table-1 envelope. Those coordinate bounds are only necessary screens: they do not establish support for every combination inside the box. We restrict use to Froude numbers 0.15–0.60 because higher-speed regressions contain fewer tested hulls. This is an analysis applicability limit, not a vessel requirement or proof of physical infeasibility.
+The standalone adapter rejects negative resistance and coordinates outside the table-1 envelope. The coupled search represents these limits as constraint margins and adds documented mesh-resolution reserves; finer replay checks the original limits. Those coordinate bounds are only necessary screens: they do not establish support for every combination inside the box. We restrict use to Froude numbers 0.15–0.60 because higher-speed regressions contain fewer tested hulls. This is an analysis applicability limit, not a vessel requirement or proof of physical infeasibility.
 
 ## Current hull geometry
 
@@ -12,10 +12,10 @@ The audit extracts static upright canoe-body waterline, displacement, waterplane
 
 | Design | Waterline (m) | Beam/waterline | Prismatic coefficient | Midship coefficient | Outside screening envelope |
 |---|---:|---:|---:|---:|---|
-| reference | 1.992 | 0.301 | 0.654 | 0.767 | cp_upper |
-| coarse_search | 0.800 | 0.813 | 0.710 | 0.850 | cp_upper, beam_length_upper, volume_length_upper, cm_upper |
+| reference | 2.000 | 0.302 | 0.554 | 0.784 | None |
+| coarse_search | 1.804 | 0.363 | 0.532 | 0.780 | None |
 
-The original two-metre family also misses the prismatic-coefficient screen. Replacing the equation alone would therefore be insufficient. The next geometry revision must allow longitudinal fullness to vary, then recompute these coordinates from the loaded hull before feasibility and length minimization. The previous 0.8 m candidate remains an invalid minimum-size conclusion.
+The hull family now varies longitudinal fullness through a section-scale exponent between 1 and 2. The endpoints reproduce elliptical and parabolic section-scale laws; tests check the corresponding prismatic coefficients. Loaded canoe-body metrics are recomputed from the mesh for each candidate. This audit uses finer geometry than the coarse search, so any negative domain margin must be resolved before accepting its result. The previous 0.8 m result from the older drag shortcut is superseded and is not a minimum-size conclusion.
 
 ## Reproduction and evidence
 

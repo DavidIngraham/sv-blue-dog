@@ -123,7 +123,7 @@ uv run python scripts/render_requirements.py
 uv run python -m pytest tests/test_mission_sizing.py
 ```
 
-Run the same pytest file under Linux for the compiled ABI, signed-current and independent mass-moment checks. The numerical record includes source/driver hashes; stale results cannot be published. The 2 m waterline stays fixed until the baseline is credible. Expandable search brackets are enlarged when active; a remaining numerical boundary is reported rather than interpreted as a physical limit.
+Run the same pytest file under Linux for the compiled ABI, signed-current and independent mass-moment checks. The numerical record includes source/driver hashes; stale results cannot be published. This historical baseline fixes the 2 m waterline. The [coupled workflow](../docs/coupled-sizing.md) frees hull length and the other declared vessel variables. Expandable search brackets are enlarged when active; a remaining numerical boundary is reported rather than interpreted as a physical limit.
 
 
 ## Sail architecture trade
@@ -136,3 +136,5 @@ uv run python -m pytest tests/test_sail_trade.py
 ```
 
 The full documentation publisher also runs this analysis. Missing qualification evidence does not imply requirement failure; the development preference remains explicitly provisional.
+
+Historical comparison studies retain their original [dependency lock](../docs/analysis/environments/pre-coupled-geometry.uv.lock). Their JSON provenance records the original path and source commit; adding dependencies to the current coupled workflow does not relabel those studies as newly executed.

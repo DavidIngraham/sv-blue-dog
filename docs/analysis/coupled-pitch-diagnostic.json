@@ -1,0 +1,16 @@
+{
+  "sourceHashes": {
+    "docs/analysis/coupled-recovery.json": "e18049b2f521373a08c623917b4e787c66d8e3137f910491b40caf689d5ec58e",
+    "scripts/recovery_pitch_diagnostic.py": "fd01bf8f882b76e38784212f0dfff6fc62d653f9f5ae694c529ed98abc5fcb8b",
+    "scripts/hydro_geometry.py": "fc09bf7755aa854b84956d2b1622f440e06a54f9e4d13a76927cc09463569d73",
+    "scripts/coupled_model.py": "49816ce209808cbc8840d39ee3716fff51d10e1ebda051fb8c4412c2e5ce5161"
+  },
+  "qualified": false,
+  "pitchRange_deg": [
+    -180,
+    180
+  ],
+  "bracketStep_deg": 2.5,
+  "cases": [],
+  "scope": "Supplemental static root search for missing sealed-wing recovery samples. A finite sign-change grid may still miss tangent roots. Euler-angle coordinates near vertical pitch do not prove a continuous recovery path or global three-dimensional stability."
+}

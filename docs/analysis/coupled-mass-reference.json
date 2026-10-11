@@ -1,9 +1,9 @@
 {
   "sourceHashes": {
-    "models/coupled-sizing.sysml": "4715fa71a45379d2797d0e24f9925cfbf43f3fcc496360b9ddc527c7e82e46ca",
+    "models/coupled-sizing.sysml": "0ccc34089818d6d4aa59c25a8a085fb9a4b80bfe7d7e992533ced7d1e9f7a77e",
     "models/structure.sysml": "f610c6b71a5c3d2a50471d3a73354df931e64089812b37ef1fce87fd3be25c7e",
-    "scripts/coupled_geometry.py": "5605176272abe947390ec928f084c3e93c52c02898041f680783aa78b9c26f1c",
-    "scripts/native_coupled.py": "132d9b37fcf2f361ac563d5d6d245a18864e3572c358a4c80274ff06cbb86dc2",
+    "scripts/coupled_geometry.py": "f9e0dc712ac47c4e02ec5c0f5ea29ce34ba040c86cb35143e05f1ecdc0fddb79",
+    "scripts/native_coupled.py": "ce12d1655939ecd449967ab5e94d3449bd1cf36fe7d5f6ce5fb1b20c05f9aea6",
     "docs/analysis/wing-geometry.json": "1a3836193ed6ddb2fd8e42c920e5b41bf68deb3ec8092317a1fedab53ea3123b"
   },
   "design": {
@@ -34,7 +34,8 @@
     "hull_rib_pitch_m": 0.02975075,
     "foil_rib_pitch_m": 0.04,
     "battery_x_fraction": 0,
-    "battery_z_fraction": 0.1
+    "battery_z_fraction": 0.1,
+    "hull_fullness_exponent": 1.8
   },
   "parameters": {
     "resinGlassRatio": 1,
@@ -61,7 +62,7 @@
     "wingDriveBaseKg": 0.2,
     "fixedEquipmentKg": 2.5,
     "attachmentKg": 0.6,
-    "waveDragCoefficient": 0.35,
+    "residuaryResistanceFactor": 1.0,
     "viscousFormFactor": 1.15,
     "foilClLimit": 0.8,
     "foilEfficiency": 0.7,
@@ -78,14 +79,14 @@
   },
   "geometry": {
     "hull": [
-      2.6384062036482607,
-      -1.0848571123748458e-16,
-      3.4392846977353305e-16,
-      0.06810560011100172,
-      0.1861227396882876,
-      2.34464297675969e-16,
-      -3.1696710506131884e-17,
-      0.06414724670402061,
+      2.3722167249610573,
+      -1.0548524457172534e-16,
+      -7.790205856393389e-17,
+      0.06912604421667468,
+      0.16115670259240944,
+      7.518123095487175e-17,
+      -3.9987332571634804e-17,
+      0.06499376544119326,
       0.013681713776147755,
       0.11706080968723588,
       0.1234794335385049,
@@ -140,8 +141,8 @@
     -0.8177350638321151
   ],
   "mass": {
-    "totalMass": 33.09785619157583,
-    "hullMass": 8.187913240972776,
+    "totalMass": 32.271775524339354,
+    "hullMass": 7.361832573736306,
     "wingMass": 4.505333068448055,
     "keelMass": 3.1220038750413304,
     "rudderMass": 0.04247630239937877,
@@ -150,10 +151,10 @@
     "wingDriveMass": 0.3212860025,
     "rudderDriveMass": 0.2012860025,
     "equipmentMass": 3.1,
-    "cgX": -0.012410098372206782,
-    "cgY": 0.004175752967856176,
-    "cgZ": -0.1215552855144664,
-    "hullMaterialVolume": 0.005492027892447909,
+    "cgX": -0.01272776736243792,
+    "cgY": 0.004282642308211692,
+    "cgZ": -0.12617736935911975,
+    "hullMaterialVolume": 0.004937935789569733,
     "wingMaterialVolume": 0.002823939079211448,
     "keelMaterialVolume": 0.0019339756074109938,
     "rudderMaterialVolume": 2.569081778120018e-05,

@@ -7,6 +7,8 @@ from .native_coupled import MassKernel
 from .native_coupled_operation import OperationKernel
 from .native_hydrostatics import HydroKernel
 from .wing_polar import WingPolar
+from .hull_features import upright_hull_features,deck_area
+from .finite_sections import finite_skin_properties
 
 
 def skin_triangles(t):
@@ -33,17 +35,17 @@ def wet_area(triangles,height):
 class CoupledModel:
     def __init__(self):
         self.mass=MassKernel();self.operation=OperationKernel();self.hydro=HydroKernel();self.polar=WingPolar()
-        self.c=self.mass.contract;self.parameters=np.array(self.c['parameterValues']);self.last=None
+        self.c=self.mass.contract;self.parameters=np.array(self.c['parameterValues']);self.last=None;self.hull_reference=None;self.section_cache=None
     def candidate(self,x,resolution=4):
         if self.last is not None and np.array_equal(x,self.last[0]) and resolution==self.last[1]:return self.last[2]
-        d=dict(zip(self.c['designNames'],x));g,v=build_geometry(d,resolution)
+        d=dict(zip(self.c['designNames'],x));g,v,outlines=build_geometry(d,resolution)
         bulb,center=ballast_geometry(d['ballast_kg']/self.parameters[33],-d['bottom_depth_m']-d['keel_span_m'],resolution)
         g['ballast']=bulb
-        result=(d,g,v,center,skin_triangles(g['hull']))
+        result=(d,g,v,center,skin_triangles(g['hull']),outlines)
         self.last=(np.array(x,copy=True),resolution,result)
         return result
     def configuration(self,x,trim,resolution=4):
-        d,g,v,center,hull_skin=self.candidate(x,resolution)
+        d,g,v,center,hull_skin,outlines=self.candidate(x,resolution)
         rotation=np.array([[np.cos(trim),-np.sin(trim),0],[np.sin(trim),np.cos(trim),0],[0,0,1]])
         mast=np.array([d['mast_x_fraction']*d['length_m'],0,d['deck_height_m']])
         def transform(points):return ((np.asarray(points)-mast)*[1,-1,1])@rotation.T+mast
@@ -51,9 +53,14 @@ class CoupledModel:
         vectors['wing'][1:4]=transform(v['wing'][1:4]);vectors['wing'][5:8]=transform(v['wing'][5:8])
         m=self.mass.evaluate(x,np.r_[np.concatenate(list(vectors.values())),center],self.parameters)
         bodies=[DisplacementBody(name,transform(body) if name=='wing' else body) for name,body in g.items()]
-        return bodies,m,np.r_[np.concatenate(list(vectors.values())),center],hull_skin
+        thicknesses=[m[name+'LaminateThickness'] for name in outlines]
+        key=(tuple(x),resolution,tuple(thicknesses))
+        if self.section_cache is None or self.section_cache[0]!=key:
+            sections=np.concatenate([finite_skin_properties(outlines[name],thickness) for name,thickness in zip(outlines,thicknesses)])
+            self.section_cache=(key,sections)
+        return bodies,m,np.r_[np.concatenate(list(vectors.values())),center,deck_area(g['hull']),self.section_cache[1]],hull_skin
     def at_state(self,x,state,resolution=4,pitch_equilibrium=True):
-        d,g,v,center,hull_skin=self.candidate(x,resolution)
+        d,g,v,center,hull_skin,outlines=self.candidate(x,resolution)
         wind,up,foul,speed,heading,alpha,beta,delta,heel=state
         awx=wind*np.cos(np.deg2rad(heading))+speed*np.cos(np.deg2rad(beta))
         awy=wind*np.sin(np.deg2rad(heading))-speed*np.sin(np.deg2rad(beta))
@@ -73,6 +80,13 @@ class CoupledModel:
         h=hydro_at(pitch)
         wetted=wet_area(pose(hull_skin,heel,pitch),h['waterline_m'])
         aero=self.polar.evaluate(d['sail_AR'],d['camber_scale'],alpha,reverse_flow=reverse_flow)
-        result=self.operation.evaluate(x,self.parameters,state,aero,list(m.values()),[h['waterline_m'],h['righting_Nm'],wetted])
+        key=(tuple(x),resolution,float(self.parameters[31]),mass)
+        if self.hull_reference is None or self.hull_reference[0]!=key:
+            upright=equilibrium(self.hydro,bodies,cg,mass,0.,0.,density=self.parameters[31])
+            hull=next(b for b in bodies if b.name=='hull')
+            features=upright_hull_features(hull.tetrahedra,upright['waterline_m'])
+            self.hull_reference=(key,features)
+        features=self.hull_reference[1]
+        result=self.operation.evaluate(x,self.parameters,state,aero,list(m.values()),np.r_[h['waterline_m'],h['righting_Nm'],wetted,features])
         result.update({'pitch_deg':pitch,'waterline_m':h['waterline_m'],'wetted_m2':wetted,'mast_trim_deg':float(np.rad2deg(trim)),'mass_kg':mass,'mass_residual_kg':h['mass_residual_kg'],'pitch_residual_Nm':h['pitch_torque_Nm']})
         return result

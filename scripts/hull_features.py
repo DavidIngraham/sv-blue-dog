@@ -48,3 +48,28 @@ def upright_hull_features(tetrahedra,waterline):
     # Midship area at half static waterline length, distinct from maximum area.
     amid=area((aft+fore)/2)
     return np.array([length,beam,draft,volume,aw,fore-cb[0],fore-cf[0],volume/(length*amax),amid/(beam*draft)])
+
+
+def tapered_hull_geometry(length,beam,draft,freeboard,fullness,resolution=12):
+    """Convex family: longitudinal section scale cos(station_angle)**fullness.
+
+    Fullness 1 reproduces the original elliptical family; 2 gives a parabolic
+    section scale. The [1,2] bracket preserves concavity before convex meshing.
+    This is a geometry-family limit, not a vessel-length requirement.
+    """
+    from .hydro_geometry import convex_tetrahedra
+    if not 1 <= fullness <= 2:raise ValueError('Fullness exponent outside convex family [1,2]')
+    points=[]
+    for angle in np.linspace(-np.pi/2,np.pi/2,2*resolution+1):
+        x=length/2*np.sin(angle);scale=max(0.,np.cos(angle))**fullness
+        for phi in np.linspace(-np.pi/2,np.pi/2,resolution+1):
+            points.append([x,beam/2*scale*np.sin(phi),-draft*scale*np.cos(phi)])
+        points.extend([[x,-beam/2*scale,freeboard],[x,beam/2*scale,freeboard]])
+    return convex_tetrahedra(np.unique(np.round(points,14),axis=0))
+
+
+def deck_area(tetrahedra):
+    """Area of the flat deck actually present in the sizing mesh."""
+    points=np.unique(np.asarray(tetrahedra).reshape(-1,3),axis=0)
+    top=points[:,2].max()
+    return polygon_area_centroid(points[np.abs(points[:,2]-top)<1e-12],[0,1])[0]

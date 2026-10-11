@@ -9,7 +9,8 @@ def test_coupled_search_preserves_balance_and_explicit_nonqualification():
     assert r['coarseFeasible'] and not r['qualified']
     assert r['maxEquilibriumResidual']<1e-4
     assert r['minimumMargin']>=-1e-4
-    assert len(r['design'])==28 and len(r['stateRows'])==8
+    assert min(r['route'][:3])>=-1e-4 and min(r['westerlyRoute'][:3])>=-1e-4
+    assert len(r['design'])==29 and len(r['stateRows'])==8
     # The report must expose its numerical boundary, not claim a solved minimum.
     assert 'global optimum' in r['scope']
 
@@ -17,12 +18,19 @@ def test_coupled_search_preserves_balance_and_explicit_nonqualification():
 def test_all_declared_sensitivities_are_recorded():
     r=json.loads((ROOT/'docs/analysis/coupled-sizing-replay.json').read_text());validate(r['sourceHashes'])
     assert not r['qualified']
-    assert {c['scenario'] for c in r['scenarios']}=={'nominal','construction','aerodynamic','energy','combined'}
+    assert {c['scenario'] for c in r['scenarios']}=={'nominal','construction','aerodynamic','hydrodynamic','energy','combined'}
     for c in r['scenarios']:
         assert not c['qualified'] and len(c['cases'])==8 and len(c['recovery'])==4
+        for row in c['cases']:
+            assert isinstance(row['energyConstraintsEnforced'],bool)
+            if not row['energyConstraintsEnforced']:
+                assert not row['energyConstrainedAttempt']['screenFeasible']
+                assert 'minimumEnergyMargin' in row['energyConstrainedAttempt']
         for curve in c['recovery']:
             assert len(curve['points'])==49
+            assert curve['failedEquilibria']==sum('failure' in point for point in curve['points'])
             for point in curve['points']:
+                if 'failure' in point:continue
                 assert abs(point['mass_residual_kg'])<1e-5
                 assert abs(point['pitch_torque_Nm'])<1e-4
         if c['sampledStaticScreensPass']:
@@ -30,7 +38,8 @@ def test_all_declared_sensitivities_are_recorded():
             assert c['minimumOperatingMargin']>=-1e-4
             assert min(c['structure'].values())>=-1e-4
             assert min(c['route'][:3])>=-1e-4
-            assert all(curve['minimumInteriorRestoring_Nm']>0 for curve in c['recovery'])
+            assert min(c['westerlyRoute'][:3])>=-1e-4
+            assert all(curve['failedEquilibria']==0 and curve['minimumInteriorRestoring_Nm']>0 for curve in c['recovery'])
 
 
 def test_water_ingress_sensitivity_covers_both_media_and_locked_rig_positions():
@@ -52,3 +61,36 @@ def test_coupled_publications_are_generated_and_current():
     from scripts.publish_coupled_results import publication as results
     assert (ROOT/'docs/coupled-inputs.md').read_text(encoding='utf-8')==inputs()
     assert (ROOT/'docs/coupled-results.md').read_text(encoding='utf-8')==results()
+
+
+def test_missing_pitch_samples_have_full_range_diagnostic():
+    recovery=json.loads((ROOT/'docs/analysis/coupled-recovery.json').read_text())
+    diagnostic=json.loads((ROOT/'docs/analysis/coupled-pitch-diagnostic.json').read_text())
+    validate(diagnostic['sourceHashes'])
+    expected={(c['density_kg_m3'],c['mast_trim_deg'],p['heel_deg']) for c in recovery['cases'] for p in c['points'] if 'failure' in p}
+    actual={(c['density_kg_m3'],c['mast_trim_deg'],c['heel_deg']) for c in diagnostic['cases']}
+    assert expected==actual and not diagnostic['qualified']
+    assert diagnostic['pitchRange_deg']==[-180,180]
+    for c in diagnostic['cases']:
+        for r in c['roots']:
+            assert abs(r['mass_residual_kg'])<1e-5
+            assert abs(r['pitch_torque_Nm'])<1e-4
+
+
+def test_replay_enforces_energy_before_using_a_diagnostic(monkeypatch):
+    from scripts import verify_coupled as replay
+    calls=[]
+    def solve(*args,**kwargs):
+        calls.append(kwargs['require_energy'])
+        return {'screenFeasible':True,'equilibrated':True}
+    monkeypatch.setattr(replay,'solve_state',solve)
+    result=replay.operating_case(None,None,5,True,1,[1,2,3,4,5,6],35)
+    assert calls==[True] and result['energyConstraintsEnforced']
+    calls.clear()
+    def failed(*args,**kwargs):
+        calls.append(kwargs['require_energy'])
+        return {'screenFeasible':not kwargs['require_energy'],'equilibrated':True,'state':[5,1,1,1,2,3,4,5,6],'message':'diagnostic','outputs':{'cycleMargin':-.2,'reserveMarginScaled':-.1,'peakMargin':.3}}
+    monkeypatch.setattr(replay,'solve_state',failed)
+    result=replay.operating_case(None,None,5,True,1,[1,2,3,4,5,6],35)
+    assert calls==[True,False] and not result['energyConstraintsEnforced']
+    assert result['energyConstrainedAttempt']['minimumEnergyMargin']==-.2
