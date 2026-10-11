@@ -12,7 +12,7 @@ The existing [CAD](../cad/) is a separate manufacturing and wing-sail testbed. I
 
 ## Ask what “set and forget” requires
 
-Live observation, autonomy, energy, weeds, traffic and recovery all interact. I use [small requirement views](requirements.md) to follow individual derivations, and [architecture traceability](architecture.md) to show intended responsibilities. Requirement statements stay concise; [conditions, rationale, issues and verification plans](methods/modeling.md) are published separately from the same model.
+Live observation, autonomy, energy, weeds, traffic and recovery all interact. I use [small requirement views](requirements.md) to follow individual derivations, and [architecture traceability](architecture.md) to show intended responsibilities. Requirement statements stay concise; [conditions, rationale, issues and verification plans](methods/modeling.md) remain distinct fields in the authoritative model.
 
 The [energy model](energy.md) asks whether loads, storage and harvesting support a declared profile. The [recovery propulsion trade](recovery-propulsion.md) compares water and air propellers without pretending an energy calculation alone selects the design. The [cruise/reliability analysis](reliability.md) makes the cost of a slow passage explicit: every extra hour asks the boat to keep working longer.
 

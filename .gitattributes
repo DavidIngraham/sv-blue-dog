@@ -13,4 +13,3 @@
 
 # Archived evidence is byte-preserved; hashes include original line endings.
 evidence/runs/**/*.json -text whitespace=cr-at-eol
-
