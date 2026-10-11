@@ -82,7 +82,7 @@ def document(title, body, home, source):
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)} · SV Blue Dog</title>
-<style>body{{font:17px/1.65 system-ui;max-width:1120px;margin:2rem auto;padding:0 1.2rem;color:#183047}}nav,footer{{font-size:.9rem;padding:1rem 0;border-bottom:1px solid #ccd}}footer{{border-top:1px solid #ccd;border-bottom:0;margin-top:3rem}}h1,h2,h3{{line-height:1.25}}pre{{overflow:auto;background:#f4f7fa;padding:1rem}}table{{border-collapse:collapse;display:block;overflow:auto}}td,th{{border:1px solid #bbc;padding:.45rem;text-align:left}}a{{color:#145b90}}.mermaid{{background:white;text-align:center}}.mermaid svg{{max-width:none;height:auto}}.diagram-viewport{{overflow:auto;border:1px solid #dde;max-height:85vh}}.diagram-controls{{display:flex;gap:.5rem;margin:.4rem 0}}button{{font:inherit;padding:.2rem .7rem}}dt{{font-weight:600}}dd{{margin-bottom:1rem}}.diagram-error{{color:#8b2315}}</style></head>
+<style>body{{font:17px/1.65 system-ui;max-width:1120px;margin:2rem auto;padding:0 1.2rem;color:#183047}}nav,footer{{font-size:.9rem;padding:1rem 0;border-bottom:1px solid #ccd}}footer{{border-top:1px solid #ccd;border-bottom:0;margin-top:3rem}}h1,h2,h3{{line-height:1.25}}pre{{overflow:auto;background:#f4f7fa;padding:1rem}}table{{border-collapse:collapse;display:block;overflow:auto}}td,th{{border:1px solid #bbc;padding:.45rem;text-align:left}}img{{max-width:100%;height:auto}}a{{color:#145b90}}.mermaid{{background:white;text-align:center}}.mermaid svg{{max-width:none;height:auto}}.diagram-viewport{{overflow:auto;border:1px solid #dde;max-height:85vh}}.diagram-controls{{display:flex;gap:.5rem;margin:.4rem 0}}button{{font:inherit;padding:.2rem .7rem}}dt{{font-weight:600}}dd{{margin-bottom:1rem}}.diagram-error{{color:#8b2315}}</style></head>
 <body><nav><a href="{escape(home)}">SV Blue Dog</a> · <a href="{escape(source)}">Edit this page</a></nav><main>{body}</main>
 <footer>Views and statements are generated from SysML. Numerical evidence is conditional; design allocations are not verification verdicts.</footer>
 <script type="module">
@@ -123,6 +123,9 @@ def _build(source_dir, output_dir):
         outputs = iter(render_blocks(selected, Path(scratch)))
     output_dir.mkdir(parents=True, exist_ok=True)
     redirects = json.loads((ROOT / "tools/publishing/redirects.json").read_text(encoding="utf-8")) if source_dir == (ROOT / "docs").resolve() else {}
+    if source_dir == (ROOT / "docs").resolve():
+        from tools.boat_analysis.evidence.aerodynamics import render
+        render(output_dir / "assets/vsp")
     rev = revision()
     rendered = {}
     for path, source in zip(pages, sources):

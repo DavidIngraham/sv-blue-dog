@@ -13,3 +13,6 @@
 
 # Archived evidence is byte-preserved; hashes include original line endings.
 evidence/runs/**/*.json -text whitespace=cr-at-eol
+
+# Saved native geometry is evidence; preserve exact bytes.
+evidence/vsp-geometry/*.vsp3 -text

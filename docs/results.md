@@ -17,3 +17,5 @@ package Page_results_0 {
     }
 }
 ```
+
+The [OpenVSP experiment gallery](sail-trade.md#what-we-have-actually-run-in-openvsp) includes the tested geometry, alpha sweeps, mesh sensitivity and induced-drag polars from the archived aerodynamic runs.

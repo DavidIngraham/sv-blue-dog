@@ -1,0 +1,9 @@
+{
+  "source": "Saved reference-64.vsp3 from the original reference sweep; screenshots captured 2026-10-11 using OpenVSP graphics API. Display-only rotations for oblique view.",
+  "run": "../runs/2026-10-10-coupled/wing-vsp-reference-64.json",
+  "files": {
+    "reference-64.vsp3": "71c5ccfe716cc9826591b3c653418fca5ee1a29e11f4fc137ab12f55b1a93b82",
+    "reference-perspective.png": "b1c018bf747c4f4d1385368e5a389951a16c61e0ccb2c74e24f0369cbaac78e2",
+    "reference-planform.png": "c99cbd7ccc7036b41d66665b636a3ed381dbf698178c77cc2baefb056a56fd58"
+  }
+}
