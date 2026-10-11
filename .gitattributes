@@ -10,3 +10,7 @@
 *.py text eol=lf
 *.json text eol=lf
 *.lock text eol=lf
+
+# Archived evidence is byte-preserved; hashes include original line endings.
+evidence/runs/**/*.json -text whitespace=cr-at-eol
+
