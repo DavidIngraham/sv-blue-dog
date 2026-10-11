@@ -2998,4 +2998,102 @@ package BlueDogRequirements {
     #refinement dependency formalizeFailureRateCriterion from FailureRateCriterion to failureRateBudget {
         metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
     }
+    private import RequirementDerivation::*;
+    requirement def <'E-009'> WindObservation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall provide onboard apparent-wind observations for autonomous sail control. */
+        comment conditions /* Qualify the complete installation, including sensor, alignment, vessel-frame transformation and communication interface. Use a calibrated wind reference at the sensor location, speeds 2, 5, 10, 15 and 20 m/s, headings every 30 degrees, heels -20, 0 and 20 degrees, and all intended rig trim positions. Evaluate each 30-minute steady test independently; every scheduled one-second observation must satisfy the applicable criterion. Fault tests inject link loss, frozen timestamps, malformed data and power interruption separately. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Sail trim depends on apparent-wind direction and loading depends on speed. Closed-loop autonomous sailing needs onboard observations independent of shore telemetry. One-second updates align with sail-command cadence; 5 degrees and max(0.5 m/s,5 percent) are initial installed-error allocations to refine with control sensitivity analysis."; }
+        metadata issue : ModelingMetadata::Issue { text = "Validate sensor exposure, mast/wing interference, heel transformation and degraded trim behavior. Local apparent wind is distinct from the 10 m true-wind environmental reference; envelope detection needs a separate estimation model. Extend accuracy qualification beyond 20 m/s if survival control depends on precise wind measurements."; }
+    }
+    requirement windObservation : WindObservation;
+    dependency windForAutonomousControl from windObservation to navigationAndControl {
+        metadata rationale : ModelingMetadata::Rationale { text = "Apparent-wind feedback is the selected implementation for autonomous sail trim. This is a design-basis dependency, not an assertion that every autonomous sailing architecture must use this sensor."; }
+    }
+    dependency windForSailOnlyMission from windObservation to GorgeChallenge::sailingPropulsion;
+    dependency windEnduranceBasis from windSensingEndurance to multiDayEndurance;
+    requirement def <'E-146'> WindSampleCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall deliver apparent-wind observations to sail control at intervals no greater than 1 second. */
+        comment conditions /* E-009 supplies installed measurement and fault-test conditions. E-152 uses the M-002 energy campaign. */
+    }
+    requirement windSampleCadence : WindSampleCadence;
+    #derivation connection decomposeWindSampleCadence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Separately verifiable acceptance criterion for onboard wind observation."; }
+        end #original source ::> windObservation;
+        end #derive target ::> windSampleCadence;
+    }
+    requirement def <'E-147'> WindSpeedAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Installed apparent-wind speed error shall not exceed the greater of 0.5 m/s or 5 percent of reference speed. */
+        comment conditions /* E-009 supplies installed measurement and fault-test conditions. E-152 uses the M-002 energy campaign. */
+    }
+    requirement windSpeedAccuracy : WindSpeedAccuracy;
+    #derivation connection decomposeWindSpeedAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Separately verifiable acceptance criterion for onboard wind observation."; }
+        end #original source ::> windObservation;
+        end #derive target ::> windSpeedAccuracy;
+    }
+    requirement def <'E-148'> WindDirectionAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Installed apparent-wind direction error relative to the vessel heading shall not exceed 5 degrees. */
+        comment conditions /* E-009 supplies installed measurement and fault-test conditions. E-152 uses the M-002 energy campaign. */
+    }
+    requirement windDirectionAccuracy : WindDirectionAccuracy;
+    #derivation connection decomposeWindDirectionAccuracy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Separately verifiable acceptance criterion for onboard wind observation."; }
+        end #original source ::> windObservation;
+        end #derive target ::> windDirectionAccuracy;
+    }
+    requirement def <'E-149'> WindStaleInvalidation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall mark wind observations invalid when their age exceeds 2 seconds. */
+        comment conditions /* E-009 supplies installed measurement and fault-test conditions. E-152 uses the M-002 energy campaign. */
+    }
+    requirement windStaleInvalidation : WindStaleInvalidation;
+    #derivation connection decomposeWindStaleInvalidation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Separately verifiable acceptance criterion for onboard wind observation."; }
+        end #original source ::> windObservation;
+        end #derive target ::> windStaleInvalidation;
+    }
+    requirement def <'E-150'> InvalidWindUseInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Sail control shall exclude invalid wind observations from trim calculations. */
+        comment conditions /* E-009 supplies installed measurement and fault-test conditions. E-152 uses the M-002 energy campaign. */
+    }
+    requirement invalidWindUseInhibition : InvalidWindUseInhibition;
+    #derivation connection decomposeInvalidWindUseInhibition {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Separately verifiable acceptance criterion for onboard wind observation."; }
+        end #original source ::> windObservation;
+        end #derive target ::> invalidWindUseInhibition;
+    }
+    requirement def <'E-151'> WindLossResponse {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall enter its wind-sensing-degraded control state within 1 second after wind observations become invalid. */
+        comment conditions /* E-009 supplies installed measurement and fault-test conditions. E-152 uses the M-002 energy campaign. */
+    }
+    requirement windLossResponse : WindLossResponse;
+    #derivation connection decomposeWindLossResponse {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Separately verifiable acceptance criterion for onboard wind observation."; }
+        end #original source ::> windObservation;
+        end #derive target ::> windLossResponse;
+    }
+    requirement def <'E-152'> WindSensingEndurance {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The wind-sensing installation shall operate throughout the 72-hour M-002 campaign without servicing or external charging. */
+        comment conditions /* E-009 supplies installed measurement and fault-test conditions. E-152 uses the M-002 energy campaign. */
+    }
+    requirement windSensingEndurance : WindSensingEndurance;
+    #derivation connection decomposeWindSensingEndurance {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Separately verifiable acceptance criterion for onboard wind observation."; }
+        end #original source ::> windObservation;
+        end #derive target ::> windSensingEndurance;
+    }
 }

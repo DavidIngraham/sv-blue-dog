@@ -1,57 +1,85 @@
-# E-006 IngressResponse relationships
+# E-006 Ingress response: mission-to-detail thread
 
-Reference view for [virtual design and PDR](../development-plan.md#virtual-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
+Follow this topic from its originating mission or project constraint through the intermediate obligations to its acceptance criteria. Arrows point toward the source: **derive** identifies an acceptance outcome, **refine** adds precision, and **dependency** records a design basis.
 
-[Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
+[All requirement threads](../requirements.md) · [Modeling method](../methods/modeling.md)
 
-```sysml-view Page_requirements_requirements_e_006_0::ingressResponse1 direction=BT statements=true
-package Page_requirements_requirements_e_006_0 {
+```sysml-view Page_requirements_e_006_0::thread direction=BT statements=true
+package Page_requirements_e_006_0 {
     private import StandardViewDefinitions::*;
     private import DiagramLayout::*;
-    view ingressResponse1 : GeneralView {
+    view thread : GeneralView {
         filter @SysML::RequirementUsage;
+        expose BlueDog::Goals::hawaiiVoyage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::courseCompletion;
+        expose GorgeChallenge::emergencyIntervention;
+        expose GorgeChallenge::liveObservation;
+        expose GorgeChallenge::repeatedOperation;
+        expose GorgeChallenge::sailingPropulsion;
+        expose GorgeChallenge::unassistedAttempt;
+        expose BlueDogRequirements::challengeMotorInhibition;
+        expose BlueDogRequirements::multiDayEndurance;
+        expose BlueDogRequirements::roundTrip;
+        expose BlueDogRequirements::safeRecovery;
+        expose BlueDogRequirements::communications;
+        expose BlueDogRequirements::energyAwareness;
+        expose BlueDogRequirements::environmentalEnvelope;
         expose BlueDogRequirements::ingressResponse;
+        expose BlueDogRequirements::missionEvidence;
+        expose BlueDogRequirements::navigationAndControl;
+        expose BlueDogRequirements::recoveryPropulsion;
+        expose BlueDogRequirements::resetRecovery;
+        expose BlueDogRequirements::commandIntegrity;
+        expose BlueDogRequirements::envelopeTransition;
         expose BlueDogRequirements::ingressDetection;
-        expose BlueDogRequirements::ingressRecoveryRequest;
-        expose BlueDogRequirements::ingressFlotation;
-        metadata Layout about BlueDogRequirements::ingressResponse { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::ingressDetection { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::ingressRecoveryRequest { x = 300; y = 200; }
-        metadata Layout about BlueDogRequirements::ingressFlotation { x = 600; y = 200; }
-    }
-}
-```
-
-```sysml-view Page_requirements_requirements_e_006_1::ingressResponse2 direction=BT statements=true
-package Page_requirements_requirements_e_006_1 {
-    private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view ingressResponse2 : GeneralView {
-        filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::ingressResponse;
         expose BlueDogRequirements::ingressElectronicsProtection;
-        expose BlueDogRequirements::ingressPositionContinuity;
         expose BlueDogRequirements::ingressEventDeadline;
-        metadata Layout about BlueDogRequirements::ingressResponse { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::ingressElectronicsProtection { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::ingressPositionContinuity { x = 300; y = 200; }
-        metadata Layout about BlueDogRequirements::ingressEventDeadline { x = 600; y = 200; }
-    }
-}
-```
-
-```sysml-view Page_requirements_requirements_e_006_2::ingressResponse3 direction=BT statements=true
-package Page_requirements_requirements_e_006_2 {
-    private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view ingressResponse3 : GeneralView {
-        filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::ingressResponse;
+        expose BlueDogRequirements::ingressFlotation;
+        expose BlueDogRequirements::ingressPositionContinuity;
+        expose BlueDogRequirements::ingressRecoveryRequest;
+        expose BlueDogRequirements::lowEnergyRecovery;
+        expose BlueDogRequirements::navigationAvailability;
+        expose BlueDogRequirements::stabilityAndFouling;
         expose BlueDogRequirements::criticalEventRecording;
+        expose BlueDogRequirements::recoveryPropulsorWeeds;
+        expose BlueDogRequirements::weedBlockageResponse;
         expose BlueDogRequirements::motorQualificationInvariant;
-        metadata Layout about BlueDogRequirements::ingressResponse { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::criticalEventRecording { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::motorQualificationInvariant { x = 300; y = 200; }
+        metadata Layout about BlueDog::Goals::hawaiiVoyage { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::courseCompletion { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::emergencyIntervention { x = 320; y = 400; }
+        metadata Layout about GorgeChallenge::liveObservation { x = 640; y = 400; }
+        metadata Layout about GorgeChallenge::repeatedOperation { x = 960; y = 400; }
+        metadata Layout about GorgeChallenge::sailingPropulsion { x = 0; y = 580; }
+        metadata Layout about GorgeChallenge::unassistedAttempt { x = 320; y = 580; }
+        metadata Layout about BlueDogRequirements::challengeMotorInhibition { x = 0; y = 800; }
+        metadata Layout about BlueDogRequirements::multiDayEndurance { x = 320; y = 800; }
+        metadata Layout about BlueDogRequirements::roundTrip { x = 640; y = 800; }
+        metadata Layout about BlueDogRequirements::safeRecovery { x = 960; y = 800; }
+        metadata Layout about BlueDogRequirements::communications { x = 0; y = 1200; }
+        metadata Layout about BlueDogRequirements::energyAwareness { x = 320; y = 1200; }
+        metadata Layout about BlueDogRequirements::environmentalEnvelope { x = 640; y = 1200; }
+        metadata Layout about BlueDogRequirements::ingressResponse { x = 960; y = 1200; }
+        metadata Layout about BlueDogRequirements::missionEvidence { x = 0; y = 1380; }
+        metadata Layout about BlueDogRequirements::navigationAndControl { x = 320; y = 1380; }
+        metadata Layout about BlueDogRequirements::recoveryPropulsion { x = 640; y = 1380; }
+        metadata Layout about BlueDogRequirements::resetRecovery { x = 960; y = 1380; }
+        metadata Layout about BlueDogRequirements::commandIntegrity { x = 0; y = 1600; }
+        metadata Layout about BlueDogRequirements::envelopeTransition { x = 320; y = 1600; }
+        metadata Layout about BlueDogRequirements::ingressDetection { x = 640; y = 1600; }
+        metadata Layout about BlueDogRequirements::ingressElectronicsProtection { x = 960; y = 1600; }
+        metadata Layout about BlueDogRequirements::ingressEventDeadline { x = 0; y = 1780; }
+        metadata Layout about BlueDogRequirements::ingressFlotation { x = 320; y = 1780; }
+        metadata Layout about BlueDogRequirements::ingressPositionContinuity { x = 640; y = 1780; }
+        metadata Layout about BlueDogRequirements::ingressRecoveryRequest { x = 960; y = 1780; }
+        metadata Layout about BlueDogRequirements::lowEnergyRecovery { x = 0; y = 1960; }
+        metadata Layout about BlueDogRequirements::navigationAvailability { x = 320; y = 1960; }
+        metadata Layout about BlueDogRequirements::stabilityAndFouling { x = 640; y = 1960; }
+        metadata Layout about BlueDogRequirements::criticalEventRecording { x = 0; y = 2000; }
+        metadata Layout about BlueDogRequirements::recoveryPropulsorWeeds { x = 320; y = 2000; }
+        metadata Layout about BlueDogRequirements::weedBlockageResponse { x = 640; y = 2000; }
+        metadata Layout about BlueDogRequirements::motorQualificationInvariant { x = 0; y = 2400; }
     }
 }
 ```

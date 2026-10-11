@@ -2,6 +2,19 @@
 
 Can the boat get through the night and keep sailing the next day? I combine the mission profile, equipment loads, solar assumptions and usable storage to answer that question. This [virtual-design work](development-plan.md#virtual-design) guides battery and solar sizing; later [bench and water tests](development-plan.md#physical-validation) will check the predicted consumption.
 
+## Wind-sensing configurations
+
+The [wind-observation thread](requirements/requirements-e-009.md) connects autonomous sailing to the observations needed for trim. I will use my battery-powered Bluetooth Portable Mini on the testbed, then move to a vessel-powered ULP Wired Mini for the challenge.
+
+```sysml-report BlueDogWindDocuments::WindEquipment
+```
+
+The testbed sensor carries its own battery and is charged ashore. Its supplier runtime is a planning input for individual tests. The challenge configuration budgets the wired sensor continuously, including conversion losses and an interface allowance. Installed mass includes the mount and cabling; the sizing model accounts for the installation's elevated center of gravity. These allowances and their sources live in the [equipment model](../models/configurations/wind-equipment.sysml), separately from the manufacturer's specifications.
+
+The new component allocation feeds the current energy and mass calculations. The archived optimization results retain their original inputs; the next design search will use the updated budget. Bench measurements will replace the interface, mounting and power allowances before hardware qualification.
+
+## Mission energy flow
+
 ```mermaid
 flowchart TB
     accTitle: Energy through the mission

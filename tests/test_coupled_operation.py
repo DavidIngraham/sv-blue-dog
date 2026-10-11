@@ -31,6 +31,8 @@ def native_case():
     if sys.platform!='linux':pytest.skip('Native operation adapter uses Linux/GCC')
     from tools.boat_analysis.model.operating import OperationKernel
     k=OperationKernel();r=input_record('coupled-operation-audit.json');d,p,q,s,a,m,h=r['inputs']
+    # Archived fixtures predate elevated equipment; preserve their original case.
+    p = [*p, 0, 0, 0]
     return k,[np.array(v,dtype=float) for v in [d,p,s,a,m,h]],r
 
 

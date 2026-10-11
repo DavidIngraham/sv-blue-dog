@@ -47,7 +47,18 @@ def test_native_mass_derivatives_and_centroid_bookkeeping():
     k=MassKernel();c,d=reference();_,v,_=build_geometry(d);geometry=np.r_[np.concatenate(list(v.values())),input_record('coupled-mass-reference.json')['ballastCentroid']];x=np.array(c['referenceDesign'])
     base=k.evaluate(x,geometry);p=np.array(k.contract['parameterValues'])
     saved=input_record('coupled-mass-reference.json')
-    for name,value in base.items():assert value==pytest.approx(saved['mass'][name],rel=1e-11,abs=1e-12)
+    legacy_parameters = [saved['parameters'].get(name, 0) for name in k.contract['parameterNames']]
+    legacy = k.evaluate(x, geometry, legacy_parameters)
+    for name,value in legacy.items():assert value==pytest.approx(saved['mass'][name],rel=1e-11,abs=1e-12)
+    without_sensor = p.copy(); without_sensor[38] = 0
+    bare = k.evaluate(x, geometry, without_sensor)
+    assert base['totalMass'] - bare['totalMass'] == pytest.approx(p[38])
+    assert base['cgZ']*base['totalMass'] - bare['cgZ']*bare['totalMass'] == pytest.approx(p[38]*(d['deck_height_m']+p[40]))
+    relocated = p.copy(); relocated[39] += 0.2; relocated[40] += 0.4
+    moved = k.evaluate(x, geometry, relocated)
+    assert moved['totalMass'] == pytest.approx(base['totalMass'])
+    assert moved['cgX']*moved['totalMass'] - base['cgX']*base['totalMass'] == pytest.approx(p[38]*0.2*d['length_m'])
+    assert moved['cgZ']*moved['totalMass'] - base['cgZ']*base['totalMass'] == pytest.approx(p[38]*0.4)
     x[c['designNames'].index('ballast_kg')]+=1
     ballast=k.evaluate(x,geometry)
     assert ballast['totalMass']-base['totalMass']==pytest.approx(1)

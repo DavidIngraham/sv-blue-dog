@@ -27,6 +27,8 @@ The geographic course map uses an archived OpenStreetMap river centerline in `to
 
 Use a fenced `sysml-view Package::viewName direction=BT` block containing a uniquely named package, imports, and a scoped view. Expose existing model elements and provide layout metadata to keep the diagram focused. Do not declare requirements or calculations in a documentation fence. For a view exposing requirement usages, add `statements=true` to include their authoritative statements below the diagram. Omit that option for mixed architecture/verification views. See [the modeling method](methods/modeling.md) for a working example.
 
+The native requirement diagram currently omits plain design-basis dependencies. The publisher adds those edges between visible nodes from the native RelationshipRegister query, retaining their `dependency` label. It does not reinterpret them as derivations.
+
 The direction follows the semantic arrows. Derivation arrows point from derived requirements toward their source, so `BT` places source requirements above their children. Keep one engineering question per diagram.
 
 Use an empty `sysml-report Package::Document` fence to include a native document query. Reports should support a specific discussion rather than repeat the entire model.

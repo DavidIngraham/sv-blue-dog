@@ -1,3 +1,20 @@
+package BlueDogWindDocuments {
+    private import DocumentQueries::*;
+    calc def Configurations :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogWindEquipment::testbed", "BlueDogWindEquipment::challenge")), columns = (
+            Column(name = "Configuration", path = "name"),
+            Column(name = "Sensor", path = "product"),
+            Column(name = "Interface", path = "dataInterface"),
+            Column(name = "Installed mass kg", path = "installedMassKg"),
+            Column(name = "Vessel bus W", path = "busPowerW"),
+            Column(name = "Internal battery hours (supplier)", path = "internalBatteryRuntimeHours")))
+    }
+    part def WindEquipment :> Document {
+        attribute redefines title = "Wind-sensing configurations";
+        part configurations : Table { calc rows : Configurations; }
+    }
+}
+
 package BlueDogDocuments {
     private import DocumentQueries::*;
     calc def ModelElements :> Query {

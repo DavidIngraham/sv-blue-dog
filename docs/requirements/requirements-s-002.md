@@ -1,39 +1,37 @@
-# S-002 OperatingBoundary relationships
+# S-002 Operating boundary: mission-to-detail thread
 
-Reference view for [virtual design and PDR](../development-plan.md#virtual-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
+Follow this topic from its originating mission or project constraint through the intermediate obligations to its acceptance criteria. Arrows point toward the source: **derive** identifies an acceptance outcome, **refine** adds precision, and **dependency** records a design basis.
 
-[Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
+[All requirement threads](../requirements.md) · [Modeling method](../methods/modeling.md)
 
-```sysml-view Page_requirements_requirements_s_002_0::operatingBoundary1 direction=BT statements=true
-package Page_requirements_requirements_s_002_0 {
+```sysml-view Page_requirements_s_002_0::thread direction=BT statements=true
+package Page_requirements_s_002_0 {
     private import StandardViewDefinitions::*;
     private import DiagramLayout::*;
-    view operatingBoundary1 : GeneralView {
+    view thread : GeneralView {
         filter @SysML::RequirementUsage;
+        expose BlueDog::Goals::hawaiiVoyage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::courseCompletion;
+        expose GorgeChallenge::sailingPropulsion;
+        expose BlueDogRequirements::roundTrip;
         expose BlueDogRequirements::operatingBoundary;
-        expose BlueDogRequirements::boundaryEvaluationCadence;
         expose BlueDogRequirements::boundaryAvoidanceDeadline;
         expose BlueDogRequirements::boundaryAvoidanceRecording;
-        metadata Layout about BlueDogRequirements::operatingBoundary { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::boundaryEvaluationCadence { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::boundaryAvoidanceDeadline { x = 300; y = 200; }
-        metadata Layout about BlueDogRequirements::boundaryAvoidanceRecording { x = 600; y = 200; }
-    }
-}
-```
-
-```sysml-view Page_requirements_requirements_s_002_1::operatingBoundary2 direction=BT statements=true
-package Page_requirements_requirements_s_002_1 {
-    private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view operatingBoundary2 : GeneralView {
-        filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::operatingBoundary;
-        expose BlueDogRequirements::boundaryStartInhibition;
         expose BlueDogRequirements::boundaryDegradedEvidence;
-        metadata Layout about BlueDogRequirements::operatingBoundary { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::boundaryStartInhibition { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::boundaryDegradedEvidence { x = 300; y = 200; }
+        expose BlueDogRequirements::boundaryEvaluationCadence;
+        expose BlueDogRequirements::boundaryStartInhibition;
+        metadata Layout about BlueDog::Goals::hawaiiVoyage { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::courseCompletion { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::sailingPropulsion { x = 320; y = 400; }
+        metadata Layout about BlueDogRequirements::roundTrip { x = 0; y = 800; }
+        metadata Layout about BlueDogRequirements::operatingBoundary { x = 0; y = 1200; }
+        metadata Layout about BlueDogRequirements::boundaryAvoidanceDeadline { x = 0; y = 1600; }
+        metadata Layout about BlueDogRequirements::boundaryAvoidanceRecording { x = 320; y = 1600; }
+        metadata Layout about BlueDogRequirements::boundaryDegradedEvidence { x = 640; y = 1600; }
+        metadata Layout about BlueDogRequirements::boundaryEvaluationCadence { x = 960; y = 1600; }
+        metadata Layout about BlueDogRequirements::boundaryStartInhibition { x = 0; y = 1780; }
     }
 }
 ```

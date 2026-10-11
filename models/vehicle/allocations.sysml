@@ -200,4 +200,12 @@ package BlueDogSatisfaction {
     satisfy BlueDogRequirements::missionReliability by missionContext.boat;
     satisfy BlueDogRequirements::missionSuccessProbability by missionContext.boat;
     satisfy BlueDogRequirements::failureRateBudget by missionContext.boat;
+    satisfy BlueDogRequirements::windObservation by missionContext.boat.navigation.wind;
+    satisfy BlueDogRequirements::windSampleCadence by missionContext.boat.navigation.wind;
+    satisfy BlueDogRequirements::windSpeedAccuracy by missionContext.boat.navigation.wind;
+    satisfy BlueDogRequirements::windDirectionAccuracy by missionContext.boat.navigation.wind;
+    satisfy BlueDogRequirements::windStaleInvalidation by missionContext.boat.navigation.wind;
+    satisfy BlueDogRequirements::invalidWindUseInhibition by missionContext.boat.control;
+    satisfy BlueDogRequirements::windLossResponse by missionContext.boat.control;
+    satisfy BlueDogRequirements::windSensingEndurance by missionContext.boat.navigation.wind;
 }

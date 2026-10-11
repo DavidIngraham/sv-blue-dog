@@ -1,7 +1,7 @@
 package BlueDogEnergyExamples {
     private import SI::*;
-    doc /* Synthetic budgets for exercising the framework, not chosen hardware or
-     * measured loads. A zero payload represents absent optional equipment, not an
+    doc /* Illustrative system budget with an explicit provisional wired wind-sensor allocation.
+     * Other equipment loads remain synthetic; none are accepted measurements. A zero payload represents absent optional equipment, not an
      * unmeasured installed load. Solar resource and battery capacity are illustrative.
      * Recovery motor is excluded from qualifying sailing loads; its reserve is protected.
      */
@@ -15,12 +15,20 @@ package BlueDogEnergyExamples {
             attribute :>> uncertaintyFactor default = 1.15;
         }
         part navigation :> loads {
-            attribute :>> label = "Position and wind sensors";
+            attribute :>> label = "Position and attitude sensors";
             attribute :>> activePower default = 0.5 [W];
             attribute :>> idlePower default = 0.1 [W];
             attribute :>> activeFraction default = 1;
             attribute :>> conversionEfficiency default = 0.9;
             attribute :>> uncertaintyFactor default = 1.15;
+        }
+        part wind :> loads {
+            attribute :>> label = "Calypso ULP Wired Mini with interface allowance";
+            attribute :>> activePower default = BlueDogWindEquipment::challenge.busPowerW * 1 [W];
+            attribute :>> idlePower default = BlueDogWindEquipment::challenge.busPowerW * 1 [W];
+            attribute :>> activeFraction default = 1;
+            attribute :>> conversionEfficiency default = 1;
+            attribute :>> uncertaintyFactor default = 1;
         }
         part traffic :> loads {
             attribute :>> label = "Traffic sensing";

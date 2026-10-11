@@ -27,15 +27,15 @@ def numbers(sequence):
 def test_rollup_and_synthetic_campaign():
     report = json.loads(native_energy_case())
     budget, case = map(check_values, report['checks'])
-    assert float(budget['averageDemand'].split()[0]) == pytest.approx(6.38825, rel=0, abs=5e-08)
-    assert float(budget['coincidentPeak'].split()[0]) == pytest.approx(31.433333333, rel=0, abs=5e-08)
+    assert float(budget['averageDemand'].split()[0]) == pytest.approx(6.38825 + (0.00075 + 0.05)*1.25/0.9, rel=0, abs=5e-08)
+    assert float(budget['coincidentPeak'].split()[0]) == pytest.approx(31.433333333 + (0.00075 + 0.05)*1.25/0.9, rel=0, abs=5e-08)
     assert case['modeledEnergyFeasible'] == 'true'
     assert case['energyCaseSupported'] == 'false'
     assert case['evidenceReady'] == 'false'
     assert case['harvestHoursPerDay'] == '[6.0, 6.0, 6.0]'
     history = numbers(case['energyHistory'])
     assert len(history) == 7
-    assert history[1] == pytest.approx(186750.0, rel=0, abs=5e-08)
+    assert history[1] == pytest.approx(186750.0 - (0.00075 + 0.05)*1.25/0.9*64800/0.9, rel=0, abs=5e-08)
     assert history[-1] == pytest.approx(720000.0, rel=0, abs=5e-08)
     assert max(history) <= 720000.0
 

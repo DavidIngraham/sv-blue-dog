@@ -3,7 +3,7 @@ package MarineSailing {
 
     calc def Evaluate {
         in d : Real [29] ordered nonunique;
-        in p : Real [38] ordered nonunique;
+        in p : Real [41] ordered nonunique;
         in q : Real [*] ordered nonunique;
         in s : Real [9] ordered nonunique;
         in aero : Real [3] ordered nonunique;

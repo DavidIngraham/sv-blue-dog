@@ -1,8 +1,8 @@
-# Focused requirement views
+# Requirements: mission-to-detail threads
 
 This is the reference library behind the story. Start with the [mission](architecture.md); come here when you want to follow a specific obligation into its design and verification links. These views support [requirements review](development-plan.md#mission-definition) and supply criteria for [virtual design](development-plan.md#virtual-design).
 
-Each page scopes a small native view of the authoritative model. Statements come from the requirement definitions; refinement and derivation retain their distinct meanings.
+Each page includes the upstream chain to its mission or project-constraint roots and a broader breakdown of the topic. Large breakdowns share the full upstream context across several diagrams. Statements come from the requirement definitions; derivation, refinement and design-basis dependencies remain distinct.
 
 [How we model requirements](methods/modeling.md) · [Mission and architecture](architecture.md)
 
@@ -46,6 +46,7 @@ Each page scopes a small native view of the authoritative model. Statements come
 ## How does it operate without intervention?
 
 - [E-001 Energy Awareness](requirements/requirements-e-001.md)
+- [E-009 Wind observation](requirements/requirements-e-009.md)
 - [E-002 Navigation And Control](requirements/requirements-e-002.md)
 - [E-005 Communications](requirements/requirements-e-005.md)
 - [E-003 Reset Recovery](requirements/requirements-e-003.md)

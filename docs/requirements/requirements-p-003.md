@@ -1,37 +1,29 @@
-# P-003 Serviceability relationships
+# P-003 Serviceability: mission-to-detail thread
 
-Reference view for [detailed design and build readiness](../development-plan.md#detailed-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
+Follow this topic from its originating mission or project constraint through the intermediate obligations to its acceptance criteria. Arrows point toward the source: **derive** identifies an acceptance outcome, **refine** adds precision, and **dependency** records a design basis.
 
-[Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
+[All requirement threads](../requirements.md) · [Modeling method](../methods/modeling.md)
 
-```sysml-view Page_requirements_requirements_p_003_0::serviceability1 direction=BT statements=true
-package Page_requirements_requirements_p_003_0 {
+This thread starts with an owner-imposed project constraint. It applies alongside the mission goals.
+
+```sysml-view Page_requirements_p_003_0::thread direction=BT statements=true
+package Page_requirements_p_003_0 {
     private import StandardViewDefinitions::*;
     private import DiagramLayout::*;
-    view serviceability1 : GeneralView {
+    view thread : GeneralView {
         filter @SysML::RequirementUsage;
+        expose BlueDog::Goals::hawaiiVoyage;
         expose BlueDogRequirements::serviceability;
-        expose BlueDogRequirements::replacementDuration;
         expose BlueDogRequirements::nondestructiveService;
-        expose BlueDogRequirements::postServiceSealing;
-        metadata Layout about BlueDogRequirements::serviceability { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::replacementDuration { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::nondestructiveService { x = 300; y = 200; }
-        metadata Layout about BlueDogRequirements::postServiceSealing { x = 600; y = 200; }
-    }
-}
-```
-
-```sysml-view Page_requirements_requirements_p_003_1::serviceability2 direction=BT statements=true
-package Page_requirements_requirements_p_003_1 {
-    private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view serviceability2 : GeneralView {
-        filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::serviceability;
         expose BlueDogRequirements::postServiceActuation;
-        metadata Layout about BlueDogRequirements::serviceability { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::postServiceActuation { x = 0; y = 200; }
+        expose BlueDogRequirements::postServiceSealing;
+        expose BlueDogRequirements::replacementDuration;
+        metadata Layout about BlueDog::Goals::hawaiiVoyage { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::serviceability { x = 0; y = 400; }
+        metadata Layout about BlueDogRequirements::nondestructiveService { x = 0; y = 800; }
+        metadata Layout about BlueDogRequirements::postServiceActuation { x = 320; y = 800; }
+        metadata Layout about BlueDogRequirements::postServiceSealing { x = 640; y = 800; }
+        metadata Layout about BlueDogRequirements::replacementDuration { x = 960; y = 800; }
     }
 }
 ```

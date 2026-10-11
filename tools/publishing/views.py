@@ -85,5 +85,7 @@ def render_blocks(blocks, directory):
     validate(models)
     output = directory / "rendered"
     native("-render-documents", output, "-diagram-form", "mermaid", models=models)
-    return [(output / ((block.target.replace('::', '-') if block.report else f"PageBuild{i}-Content") + ".md")).read_text(encoding="utf-8")
+    from .relationships import basis_links, include_basis
+    basis = basis_links((output / 'BlueDogDocuments-RelationshipRegister.md').read_text(encoding='utf-8'))
+    return [include_basis((output / ((block.target.replace('::', '-') if block.report else f"PageBuild{i}-Content") + ".md")).read_text(encoding="utf-8"), basis)
             for i, block in enumerate(blocks)]

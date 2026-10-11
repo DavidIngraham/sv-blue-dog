@@ -58,9 +58,9 @@ class OperationKernel:
         self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
     def evaluate(self,design,parameters,state,aero,mass,hydro):
         p=np.asarray(parameters)
-        if len(p)!=38 or not 0<p[1]<=1 or not 0<p[2]<=1 or min(p[6:8])<0 or sum(p[6:8])>1+1e-12 or not 0<=p[9]<=1:raise ValueError('Invalid drive efficiencies or duty')
+        if len(p)!=41 or not 0<p[1]<=1 or not 0<p[2]<=1 or min(p[6:8])<0 or sum(p[6:8])>1+1e-12 or not 0<=p[9]<=1:raise ValueError('Invalid drive efficiencies or duty')
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,p,self.contract['environment'],state,aero,mass,hydro]]
-        if [a.shape for a in arrays]!=[(29,),(38,),(len(self.contract['environment']),),(9,),(3,),(21,),(12,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid operation inputs')
+        if [a.shape for a in arrays]!=[(29,),(41,),(len(self.contract['environment']),),(9,),(3,),(21,),(12,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid operation inputs')
         if arrays[3][3]<=0 or arrays[6][2]<=0:raise ValueError('Positive speed and wetted area required')
         args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
         with _LOCK:
@@ -82,7 +82,7 @@ class StructureKernel:
         self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
     def evaluate(self,design,parameters,mass,geometry,loads,waterline):
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,parameters,mass,geometry,self.contract['structure'],loads]]
-        if [a.shape for a in arrays]!=[(29,),(38,),(21,),(60,),(10,),(3,)] or any(not np.isfinite(a).all() for a in arrays) or not np.isfinite(waterline):raise ValueError('Invalid structural inputs')
+        if [a.shape for a in arrays]!=[(29,),(41,),(21,),(60,),(10,),(3,)] or any(not np.isfinite(a).all() for a in arrays) or not np.isfinite(waterline):raise ValueError('Invalid structural inputs')
         args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
         with _LOCK:
             out=Sequence()

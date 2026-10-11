@@ -79,10 +79,13 @@ package MarineDesign {
         attribute loadFactor : Real;
         attribute assemblyLimitKg : Real;
         attribute panelCoverage : Real;
+        attribute elevatedEquipmentKg : Real default = 0;
+        attribute elevatedEquipmentXFraction : Real default = 0;
+        attribute elevatedEquipmentAboveDeckM : Real default = 0;
     }
     calc def ParametersVector {
         in value : Parameters;
-        return vector : Real [38] ordered nonunique;
-        (value.resinGlassRatio, value.gearboxEfficiency, value.motorEfficiency, value.wingNoLoadW, value.wingControllerW, value.wingMotorHoldingW, value.wingMoveFraction, value.wingHoldingFraction, value.rudderHoldingWPerNm, value.rudderMoveFraction, value.electronicsW, value.solarResourceFactor, value.batteryWhKg, value.laminateKnockdown, value.profileCd, value.wingClLimit, value.wingLiftScale, value.wingDragScale, value.wingRateRadS, value.rudderRateRadS, value.driveKgPerNm, value.wingDriveBaseKg, value.fixedEquipmentKg, value.attachmentKg, value.residuaryResistanceFactor, value.viscousFormFactor, value.foilClLimit, value.foilEfficiency, value.foilCd, value.airNu, value.waterNu, value.waterDensity, value.airDensity, value.ballastDensity, value.gravity, value.loadFactor, value.assemblyLimitKg, value.panelCoverage)
+        return vector : Real [41] ordered nonunique;
+        (value.resinGlassRatio, value.gearboxEfficiency, value.motorEfficiency, value.wingNoLoadW, value.wingControllerW, value.wingMotorHoldingW, value.wingMoveFraction, value.wingHoldingFraction, value.rudderHoldingWPerNm, value.rudderMoveFraction, value.electronicsW, value.solarResourceFactor, value.batteryWhKg, value.laminateKnockdown, value.profileCd, value.wingClLimit, value.wingLiftScale, value.wingDragScale, value.wingRateRadS, value.rudderRateRadS, value.driveKgPerNm, value.wingDriveBaseKg, value.fixedEquipmentKg, value.attachmentKg, value.residuaryResistanceFactor, value.viscousFormFactor, value.foilClLimit, value.foilEfficiency, value.foilCd, value.airNu, value.waterNu, value.waterDensity, value.airDensity, value.ballastDensity, value.gravity, value.loadFactor, value.assemblyLimitKg, value.panelCoverage, value.elevatedEquipmentKg, value.elevatedEquipmentXFraction, value.elevatedEquipmentAboveDeckM)
     }
 }

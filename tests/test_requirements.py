@@ -131,7 +131,7 @@ def test_register_preserves_ids_status_and_relationships(published_model):
                 *(f"C-00{i}" for i in range(7)), *(f"E-00{i}" for i in range(1, 8))}
     expected.update(['P-001', 'P-002', 'P-003', 'S-001', 'S-002', 'S-003', 'S-004', 'S-005', 'N-001', 'N-002', 'N-003', 'R-001', 'R-002', 'C-101', 'C-102'])
     expected.update(['N-010', 'N-020', 'N-011', 'N-012', 'N-013', 'N-014', 'N-015', 'N-021', 'N-022', 'N-023', 'N-024', 'N-025', 'N-030', 'N-031', 'N-032', 'N-033', 'N-034', 'N-035', 'N-041', 'N-042', 'N-043', 'N-044', 'N-045', 'N-046', 'N-047', 'N-051', 'N-052', 'N-053', 'N-054', 'N-055', 'N-056'])
-    expected.update(['E-008', 'R-003', 'R-004'])
+    expected.update(['E-008', 'E-009', 'R-003', 'R-004'])
     expected.update(r['id'] for r in ATOMIC['leaves'])
     expected.update(ENERGY_IDS)
     expected.update(RELIABILITY_IDS)
@@ -152,14 +152,15 @@ def test_focused_views_cover_all_derivations(published_model, rendered_site):
     edges = set()
     refinements = set()
     pages = list((rendered_site / 'imports/docs/requirements').glob('requirements-*.md'))
-    assert len(pages) == 49
+    assert len(pages) == 50
     assert not Path('docs/figures/requirements-derivation.md').exists()
     for page in pages:
         import re
         for diagram in re.findall(r'```mermaid\n(.*?)```', page.read_text(encoding='utf-8'), re.S):
-            nodes = dict(re.findall(r'(n[0-9]+)\("`.*?\*\*([A-Za-z0-9_:]+) :', diagram, re.S))
+            from tools.publishing.relationships import diagram_nodes
+            nodes = diagram_nodes(diagram)
             nodes = {key: name.rsplit('::', 1)[-1] for key, name in nodes.items()}
-            assert 1 <= len(nodes) <= 4, page
+            assert 1 <= len(nodes) <= 40, page
             assert 'flowchart BT' in diagram
             for child, parent in re.findall(r'(n[0-9]+) -\.->\|"derive"\| (n[0-9]+)', diagram):
                 edges.add((nodes[parent], nodes[child]))
@@ -172,7 +173,7 @@ def test_focused_views_cover_all_derivations(published_model, rendered_site):
 def test_statements_exclude_supporting_material(published_model):
     statement_rows = re.findall(r'^\| [A-Z]-\d+ \| \w+ \| open \| (.*?) \|$',
                                 published_model.markdown, re.M)
-    assert len(statement_rows) == 208
+    assert len(statement_rows) == 216
     assert all(len(text.split()) <= 45 for text in statement_rows)
     assert all('Verification uses' not in text and 'Aggregate requirement' not in text
                and 'Shared verification context' not in text for text in statement_rows)

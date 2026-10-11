@@ -44,7 +44,7 @@ package BlueDogConfigurations {
         attribute :>> wingHoldingFraction = 0.97999999999999998;
         attribute :>> rudderHoldingWPerNm = 0.5;
         attribute :>> rudderMoveFraction = 0.050000000000000003;
-        attribute :>> electronicsW = 4.5;
+        attribute :>> electronicsW = 4.5 + BlueDogWindEquipment::challenge.busPowerW;
         attribute :>> solarResourceFactor = 0.59999999999999998;
         attribute :>> batteryWhKg = 140;
         attribute :>> laminateKnockdown = 1;
@@ -56,7 +56,11 @@ package BlueDogConfigurations {
         attribute :>> rudderRateRadS = 0.59999999999999998;
         attribute :>> driveKgPerNm = 0.14999999999999999;
         attribute :>> wingDriveBaseKg = 0.20000000000000001;
+        // Base equipment excludes the separately located wind-sensing installation.
         attribute :>> fixedEquipmentKg = 2.5;
+        attribute :>> elevatedEquipmentKg = BlueDogWindEquipment::challenge.installedMassKg;
+        attribute :>> elevatedEquipmentXFraction = BlueDogWindEquipment::challenge.xFraction;
+        attribute :>> elevatedEquipmentAboveDeckM = BlueDogWindEquipment::challenge.aboveDeckM;
         attribute :>> attachmentKg = 0.59999999999999998;
         attribute :>> residuaryResistanceFactor = 1;
         attribute :>> viscousFormFactor = 1.1499999999999999;

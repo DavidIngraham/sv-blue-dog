@@ -2,7 +2,7 @@ package MarineStructures {
     private import ScalarValues::*;
     calc def DesignMargins {
         in d : Real [29] ordered nonunique;
-        in p : Real [38] ordered nonunique;
+        in p : Real [41] ordered nonunique;
         in m : Real [21] ordered nonunique;
         in g : Real [60] ordered nonunique;
         in r : Real [10] ordered nonunique;

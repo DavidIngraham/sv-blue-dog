@@ -1,41 +1,38 @@
-# C-000 TransGorgeChallenge relationships
+# C-000 Trans gorge challenge: mission-to-detail thread
 
-Reference view for [mission definition and SRR](../development-plan.md#mission-definition). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
+Follow this topic from its originating mission or project constraint through the intermediate obligations to its acceptance criteria. Arrows point toward the source: **derive** identifies an acceptance outcome, **refine** adds precision, and **dependency** records a design basis.
 
-[Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
+[All requirement threads](../requirements.md) · [Modeling method](../methods/modeling.md)
 
-```sysml-view Page_requirements_requirements_c_000_0::transGorgeChallenge1 direction=BT statements=true
-package Page_requirements_requirements_c_000_0 {
+```sysml-view Page_requirements_c_000_0::thread direction=BT statements=true
+package Page_requirements_c_000_0 {
     private import StandardViewDefinitions::*;
     private import DiagramLayout::*;
-    view transGorgeChallenge1 : GeneralView {
+    view thread : GeneralView {
         filter @SysML::RequirementUsage;
         expose GorgeChallenge::transGorgeChallenge;
         expose GorgeChallenge::courseCompletion;
+        expose GorgeChallenge::emergencyIntervention;
+        expose GorgeChallenge::liveObservation;
         expose GorgeChallenge::repeatedOperation;
+        expose GorgeChallenge::sailingPropulsion;
         expose GorgeChallenge::unassistedAttempt;
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
-        metadata Layout about GorgeChallenge::courseCompletion { x = 0; y = 200; }
-        metadata Layout about GorgeChallenge::repeatedOperation { x = 300; y = 200; }
-        metadata Layout about GorgeChallenge::unassistedAttempt { x = 600; y = 200; }
+        metadata Layout about GorgeChallenge::courseCompletion { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::emergencyIntervention { x = 320; y = 400; }
+        metadata Layout about GorgeChallenge::liveObservation { x = 640; y = 400; }
+        metadata Layout about GorgeChallenge::repeatedOperation { x = 960; y = 400; }
+        metadata Layout about GorgeChallenge::sailingPropulsion { x = 0; y = 580; }
+        metadata Layout about GorgeChallenge::unassistedAttempt { x = 320; y = 580; }
     }
 }
 ```
 
-```sysml-view Page_requirements_requirements_c_000_1::transGorgeChallenge2 direction=BT statements=true
-package Page_requirements_requirements_c_000_1 {
-    private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view transGorgeChallenge2 : GeneralView {
-        filter @SysML::RequirementUsage;
-        expose GorgeChallenge::transGorgeChallenge;
-        expose GorgeChallenge::sailingPropulsion;
-        expose GorgeChallenge::liveObservation;
-        expose GorgeChallenge::emergencyIntervention;
-        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
-        metadata Layout about GorgeChallenge::sailingPropulsion { x = 0; y = 200; }
-        metadata Layout about GorgeChallenge::liveObservation { x = 300; y = 200; }
-        metadata Layout about GorgeChallenge::emergencyIntervention { x = 600; y = 200; }
-    }
-}
-```
+## Continue the breakdown
+
+- [Course completion](requirements-c-001.md)
+- [Emergency intervention](requirements-c-006.md)
+- [Live observation](requirements-c-005.md)
+- [Repeated operation](requirements-c-002.md)
+- [Sailing propulsion](requirements-c-004.md)
+- [Unassisted attempt](requirements-c-003.md)

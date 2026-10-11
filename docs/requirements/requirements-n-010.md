@@ -1,57 +1,54 @@
-# N-010 GorgeEnvironment relationships
+# N-010 Gorge environment: mission-to-detail thread
 
-Reference view for [mission definition and SRR](../development-plan.md#mission-definition). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
+Follow this topic from its originating mission or project constraint through the intermediate obligations to its acceptance criteria. Arrows point toward the source: **derive** identifies an acceptance outcome, **refine** adds precision, and **dependency** records a design basis.
 
-[Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
+[All requirement threads](../requirements.md) · [Modeling method](../methods/modeling.md)
 
-```sysml-view Page_requirements_requirements_n_010_0::gorgeEnvironment1 direction=BT statements=true
-package Page_requirements_requirements_n_010_0 {
+```sysml-view Page_requirements_n_010_0::thread direction=BT statements=true
+package Page_requirements_n_010_0 {
     private import StandardViewDefinitions::*;
     private import DiagramLayout::*;
-    view gorgeEnvironment1 : GeneralView {
+    view thread : GeneralView {
         filter @SysML::RequirementUsage;
+        expose BlueDog::Goals::hawaiiVoyage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::courseCompletion;
+        expose GorgeChallenge::sailingPropulsion;
+        expose BlueDogRequirements::roundTrip;
+        expose BlueDogRequirements::environmentalEnvelope;
         expose BlueDogRequirements::gorgeEnvironment;
-        expose BlueDogRequirements::gorgeWind;
-        expose BlueDogRequirements::gorgeWaves;
         expose BlueDogRequirements::gorgeCurrent;
-        metadata Layout about BlueDogRequirements::gorgeEnvironment { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::gorgeWind { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::gorgeWaves { x = 300; y = 200; }
-        metadata Layout about BlueDogRequirements::gorgeCurrent { x = 600; y = 200; }
-    }
-}
-```
-
-```sysml-view Page_requirements_requirements_n_010_1::gorgeEnvironment2 direction=BT statements=true
-package Page_requirements_requirements_n_010_1 {
-    private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view gorgeEnvironment2 : GeneralView {
-        filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::gorgeEnvironment;
-        expose BlueDogRequirements::gorgeSurvivalWind;
         expose BlueDogRequirements::gorgeSurvivalWaves;
+        expose BlueDogRequirements::gorgeSurvivalWind;
+        expose BlueDogRequirements::gorgeWaves;
+        expose BlueDogRequirements::gorgeWind;
+        expose BlueDogRequirements::marineDurability;
+        expose BlueDogRequirements::stabilityAndFouling;
         expose BlueDogRequirements::freshwaterExposure;
-        metadata Layout about BlueDogRequirements::gorgeEnvironment { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::gorgeSurvivalWind { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::gorgeSurvivalWaves { x = 300; y = 200; }
-        metadata Layout about BlueDogRequirements::freshwaterExposure { x = 600; y = 200; }
-    }
-}
-```
-
-```sysml-view Page_requirements_requirements_n_010_2::gorgeEnvironment3 direction=BT statements=true
-package Page_requirements_requirements_n_010_2 {
-    private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view gorgeEnvironment3 : GeneralView {
-        filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::gorgeEnvironment;
         expose BlueDogRequirements::submergedWeedPassage;
         expose BlueDogRequirements::weedSnagShedding;
-        metadata Layout about BlueDogRequirements::gorgeEnvironment { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::submergedWeedPassage { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::weedSnagShedding { x = 300; y = 200; }
+        metadata Layout about BlueDog::Goals::hawaiiVoyage { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::courseCompletion { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::sailingPropulsion { x = 320; y = 400; }
+        metadata Layout about BlueDogRequirements::roundTrip { x = 0; y = 800; }
+        metadata Layout about BlueDogRequirements::environmentalEnvelope { x = 0; y = 1200; }
+        metadata Layout about BlueDogRequirements::gorgeEnvironment { x = 320; y = 1200; }
+        metadata Layout about BlueDogRequirements::gorgeCurrent { x = 0; y = 1600; }
+        metadata Layout about BlueDogRequirements::gorgeSurvivalWaves { x = 320; y = 1600; }
+        metadata Layout about BlueDogRequirements::gorgeSurvivalWind { x = 640; y = 1600; }
+        metadata Layout about BlueDogRequirements::gorgeWaves { x = 960; y = 1600; }
+        metadata Layout about BlueDogRequirements::gorgeWind { x = 0; y = 1780; }
+        metadata Layout about BlueDogRequirements::marineDurability { x = 320; y = 1780; }
+        metadata Layout about BlueDogRequirements::stabilityAndFouling { x = 640; y = 1780; }
+        metadata Layout about BlueDogRequirements::freshwaterExposure { x = 0; y = 2000; }
+        metadata Layout about BlueDogRequirements::submergedWeedPassage { x = 320; y = 2000; }
+        metadata Layout about BlueDogRequirements::weedSnagShedding { x = 640; y = 2000; }
     }
 }
 ```
+
+## Continue the breakdown
+
+- [Submerged weed passage](requirements-n-053.md)
+- [Weed snag shedding](requirements-n-054.md)

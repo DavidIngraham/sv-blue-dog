@@ -761,6 +761,48 @@
       "name": "QualificationRestoration",
       "parent": "resetRecovery",
       "usage": "qualificationRestoration"
+    },
+    {
+      "id": "E-146",
+      "name": "WindSampleCadence",
+      "usage": "windSampleCadence",
+      "parent": "windObservation"
+    },
+    {
+      "id": "E-147",
+      "name": "WindSpeedAccuracy",
+      "usage": "windSpeedAccuracy",
+      "parent": "windObservation"
+    },
+    {
+      "id": "E-148",
+      "name": "WindDirectionAccuracy",
+      "usage": "windDirectionAccuracy",
+      "parent": "windObservation"
+    },
+    {
+      "id": "E-149",
+      "name": "WindStaleInvalidation",
+      "usage": "windStaleInvalidation",
+      "parent": "windObservation"
+    },
+    {
+      "id": "E-150",
+      "name": "InvalidWindUseInhibition",
+      "usage": "invalidWindUseInhibition",
+      "parent": "windObservation"
+    },
+    {
+      "id": "E-151",
+      "name": "WindLossResponse",
+      "usage": "windLossResponse",
+      "parent": "windObservation"
+    },
+    {
+      "id": "E-152",
+      "name": "WindSensingEndurance",
+      "usage": "windSensingEndurance",
+      "parent": "windObservation"
     }
   ],
   "shared_links": [

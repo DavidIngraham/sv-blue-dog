@@ -1,19 +1,37 @@
-# R-002 RecoveryEnergy relationships
+# R-002 Recovery energy: mission-to-detail thread
 
-Reference view for [virtual design and PDR](../development-plan.md#virtual-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
+Follow this topic from its originating mission or project constraint through the intermediate obligations to its acceptance criteria. Arrows point toward the source: **derive** identifies an acceptance outcome, **refine** adds precision, and **dependency** records a design basis.
 
-[Requirement views](../requirements.md)
+[All requirement threads](../requirements.md) · [Modeling method](../methods/modeling.md)
 
-This obligation also motivates design choices. A rationale-bearing dependency does not assert logical requirement derivation; follow the source model for those decisions.
-
-```sysml-view Page_r_002::obligation direction=BT statements=true
-package Page_r_002 {
+```sysml-view Page_requirements_r_002_0::thread direction=BT statements=true
+package Page_requirements_r_002_0 {
     private import StandardViewDefinitions::*;
     private import DiagramLayout::*;
-    view obligation : GeneralView {
+    view thread : GeneralView {
         filter @SysML::RequirementUsage;
+        expose BlueDog::Goals::hawaiiVoyage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::emergencyIntervention;
+        expose GorgeChallenge::repeatedOperation;
+        expose BlueDogRequirements::multiDayEndurance;
+        expose BlueDogRequirements::safeRecovery;
+        expose BlueDogRequirements::sustainedEnergyFeasibility;
+        expose BlueDogRequirements::recoveryPropulsion;
         expose BlueDogRequirements::recoveryEnergy;
-        metadata Layout about BlueDogRequirements::recoveryEnergy { x = 0; y = 0; }
+        expose BlueDogRequirements::launchEnergyAdmission;
+        expose BlueDogRequirements::sustainedReserveProtection;
+        metadata Layout about BlueDog::Goals::hawaiiVoyage { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::emergencyIntervention { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::repeatedOperation { x = 320; y = 400; }
+        metadata Layout about BlueDogRequirements::multiDayEndurance { x = 0; y = 800; }
+        metadata Layout about BlueDogRequirements::safeRecovery { x = 320; y = 800; }
+        metadata Layout about BlueDogRequirements::sustainedEnergyFeasibility { x = 640; y = 800; }
+        metadata Layout about BlueDogRequirements::recoveryPropulsion { x = 0; y = 1200; }
+        metadata Layout about BlueDogRequirements::recoveryEnergy { x = 0; y = 1600; }
+        metadata Layout about BlueDogRequirements::launchEnergyAdmission { x = 0; y = 2000; }
+        metadata Layout about BlueDogRequirements::sustainedReserveProtection { x = 320; y = 2000; }
     }
 }
 ```

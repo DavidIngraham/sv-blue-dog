@@ -1,55 +1,53 @@
-# N-002 MarineDurability relationships
+# N-002 Marine durability: mission-to-detail thread
 
-Reference view for [detailed design and build readiness](../development-plan.md#detailed-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
+Follow this topic from its originating mission or project constraint through the intermediate obligations to its acceptance criteria. Arrows point toward the source: **derive** identifies an acceptance outcome, **refine** adds precision, and **dependency** records a design basis.
 
-[Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
+[All requirement threads](../requirements.md) · [Modeling method](../methods/modeling.md)
 
-```sysml-view Page_requirements_requirements_n_002_0::marineDurability1 direction=BT statements=true
-package Page_requirements_requirements_n_002_0 {
+```sysml-view Page_requirements_n_002_0::thread direction=BT statements=true
+package Page_requirements_n_002_0 {
     private import StandardViewDefinitions::*;
     private import DiagramLayout::*;
-    view marineDurability1 : GeneralView {
+    view thread : GeneralView {
         filter @SysML::RequirementUsage;
+        expose BlueDog::Goals::hawaiiVoyage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose BlueDogRequirements::oceanEnvironment;
+        expose GorgeChallenge::courseCompletion;
+        expose GorgeChallenge::sailingPropulsion;
+        expose BlueDogRequirements::roundTrip;
+        expose BlueDogRequirements::environmentalEnvelope;
+        expose BlueDogRequirements::gorgeEnvironment;
         expose BlueDogRequirements::marineDurability;
-        expose BlueDogRequirements::freshwaterExposure;
-        expose BlueDogRequirements::saltwaterExposure;
         expose BlueDogRequirements::enclosureSealing;
-        metadata Layout about BlueDogRequirements::marineDurability { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::freshwaterExposure { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::saltwaterExposure { x = 300; y = 200; }
-        metadata Layout about BlueDogRequirements::enclosureSealing { x = 600; y = 200; }
-    }
-}
-```
-
-```sysml-view Page_requirements_requirements_n_002_1::marineDurability2 direction=BT statements=true
-package Page_requirements_requirements_n_002_1 {
-    private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view marineDurability2 : GeneralView {
-        filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::marineDurability;
-        expose BlueDogRequirements::wetMechanicalIntegrity;
-        expose BlueDogRequirements::wetElectricalIntegrity;
-        expose BlueDogRequirements::solarHeating;
-        metadata Layout about BlueDogRequirements::marineDurability { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::wetMechanicalIntegrity { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirements::wetElectricalIntegrity { x = 300; y = 200; }
-        metadata Layout about BlueDogRequirements::solarHeating { x = 600; y = 200; }
-    }
-}
-```
-
-```sysml-view Page_requirements_requirements_n_002_2::marineDurability3 direction=BT statements=true
-package Page_requirements_requirements_n_002_2 {
-    private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view marineDurability3 : GeneralView {
-        filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::marineDurability;
+        expose BlueDogRequirements::freshwaterExposure;
         expose BlueDogRequirements::printedMaterialAging;
-        metadata Layout about BlueDogRequirements::marineDurability { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::printedMaterialAging { x = 0; y = 200; }
+        expose BlueDogRequirements::saltwaterExposure;
+        expose BlueDogRequirements::solarHeating;
+        expose BlueDogRequirements::wetElectricalIntegrity;
+        expose BlueDogRequirements::wetMechanicalIntegrity;
+        metadata Layout about BlueDog::Goals::hawaiiVoyage { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 320; y = 0; }
+        metadata Layout about BlueDogRequirements::oceanEnvironment { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::courseCompletion { x = 320; y = 400; }
+        metadata Layout about GorgeChallenge::sailingPropulsion { x = 640; y = 400; }
+        metadata Layout about BlueDogRequirements::roundTrip { x = 0; y = 800; }
+        metadata Layout about BlueDogRequirements::environmentalEnvelope { x = 0; y = 1200; }
+        metadata Layout about BlueDogRequirements::gorgeEnvironment { x = 320; y = 1200; }
+        metadata Layout about BlueDogRequirements::marineDurability { x = 0; y = 1600; }
+        metadata Layout about BlueDogRequirements::enclosureSealing { x = 0; y = 2000; }
+        metadata Layout about BlueDogRequirements::freshwaterExposure { x = 320; y = 2000; }
+        metadata Layout about BlueDogRequirements::printedMaterialAging { x = 640; y = 2000; }
+        metadata Layout about BlueDogRequirements::saltwaterExposure { x = 960; y = 2000; }
+        metadata Layout about BlueDogRequirements::solarHeating { x = 0; y = 2180; }
+        metadata Layout about BlueDogRequirements::wetElectricalIntegrity { x = 320; y = 2180; }
+        metadata Layout about BlueDogRequirements::wetMechanicalIntegrity { x = 640; y = 2180; }
     }
 }
 ```
+
+## Continue the breakdown
+
+- [Solar heating](requirements-n-046.md)
+- [Wet electrical integrity](requirements-n-045.md)
+- [Wet mechanical integrity](requirements-n-044.md)

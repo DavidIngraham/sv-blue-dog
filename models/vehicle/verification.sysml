@@ -524,4 +524,18 @@ package BlueDogRequirementVerification {
         objective disposition { verify BlueDogRequirements::criticalFailureDisposition; }
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
+    verification def <'V-E-009'> WindObservationVerification {
+        doc /* Run the E-009 installed-flow matrix and fault injections. Record time-correlated reference measurements, delivered observations, validity and control state. Demonstrate E-152 through the M-002 campaign with the same sensor and interface installation. A manufacturer specification alone cannot close installed-error criteria. */
+        objective acceptance {
+            verify BlueDogRequirements::windObservation;
+            verify BlueDogRequirements::windSampleCadence;
+            verify BlueDogRequirements::windSpeedAccuracy;
+            verify BlueDogRequirements::windDirectionAccuracy;
+            verify BlueDogRequirements::windStaleInvalidation;
+            verify BlueDogRequirements::invalidWindUseInhibition;
+            verify BlueDogRequirements::windLossResponse;
+            verify BlueDogRequirements::windSensingEndurance;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
 }
