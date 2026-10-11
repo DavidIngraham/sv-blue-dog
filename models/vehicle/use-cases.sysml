@@ -15,7 +15,8 @@ package BlueDogUseCases {
         objective 'M-001 Gorge mission' :> roundTrip;
     }
     use case sailOcean {
-        doc /* Sail to Hawaii. */
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureOcean; }
+        doc /* Future mission: sail to Hawaii under independently allocated constraints. */
         subject boat : Boat;
         actor operator : Operator;
         actor traffic : OtherVessel;

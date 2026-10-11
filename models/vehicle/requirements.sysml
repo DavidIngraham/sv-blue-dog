@@ -65,8 +65,8 @@ package BlueDogRequirements {
     #refinement dependency challengeCourse from roundTrip to GorgeChallenge::courseCompletion {
         metadata rationale : ModelingMetadata::Rationale { text = "Ordered gate crossings make the course-completion obligation more precise; gate locations remain open."; }
     }
-    dependency challengeEndurance from multiDayEndurance to GorgeChallenge::repeatedOperation {
-        metadata rationale : ModelingMetadata::Rationale { text = "Repeated autonomous journeys motivate the existing endurance and harvesting requirement; M-002 defines an initial 72-hour campaign; indefinite operation remains an objective. This is design motivation or an implementation choice, not a satisfaction implication."; }
+    dependency challengeEndurance from multiDayEndurance to roundTrip {
+        metadata rationale : ModelingMetadata::Rationale { text = "The finite round trip motivates a bounded 72-hour endurance campaign, including holding and contingency exposure. Repeated circuits are a separate future objective. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
     dependency challengeAutonomy from navigationAndControl to GorgeChallenge::unassistedAttempt {
         metadata rationale : ModelingMetadata::Rationale { text = "The vessel needs onboard guidance and control to complete an unassisted attempt. This is design motivation or an implementation choice, not a satisfaction implication."; }
@@ -79,26 +79,6 @@ package BlueDogRequirements {
     }
     dependency challengeOverride from communications to GorgeChallenge::emergencyIntervention {
         metadata rationale : ModelingMetadata::Rationale { text = "Vehicle communications provide emergency commands whose use ends attempt qualification. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-
-    dependency hawaiiMultiDayEndurance from multiDayEndurance to BlueDog::Goals::hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "An ocean passage motivates sustained energy autonomy; multi-day operation is an interim capability, not an ocean endurance sizing result. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-
-    dependency hawaiiNavigationAndControl from navigationAndControl to BlueDog::Goals::hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "An autonomous Hawaii passage needs ocean guidance and sailing control; N-001 specifies its environmental design envelope. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-
-    dependency hawaiiCommunications from communications to BlueDog::Goals::hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "The long-term ocean mission motivates review of monitoring coverage and outage behavior without selecting a radio technology. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-
-    dependency hawaiiResetRecovery from resetRecovery to BlueDog::Goals::hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "Extended unattended operation motivates recovery from onboard resets. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-
-    dependency hawaiiMissionEvidence from missionEvidence to BlueDog::Goals::hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "Ocean mission assessment requires retained voyage evidence; E-007 specifies recording and retention acceptance criteria. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
 
     // Derivations: direction is original requirement to derived requirement.
@@ -305,9 +285,6 @@ package BlueDogRequirements {
     dependency deriveCommandIntegrity from commandIntegrity to communications {
         metadata rationale : ModelingMetadata::Rationale { text = "CommandIntegrity supports communications. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    dependency hawaiiEnvironment from environmentalEnvelope to BlueDog::Goals::hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "Ocean operation requires its own environmental envelope; Gorge success does not establish it. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
 
     requirement def <'N-010'> GorgeEnvironment {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -321,6 +298,7 @@ package BlueDogRequirements {
     }
 
     requirement def <'N-020'> OceanEnvironment {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureOcean; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall operate on a northeast Pacific passage toward Hawaii amid saltwater, ocean swell, wind seas and prolonged unattended exposure. */
         comment conditions /* Ocean-specific parameter limits and applicable shared exposure requirements apply together. */
@@ -399,6 +377,7 @@ package BlueDogRequirements {
     }
 
     requirement def <'N-021'> OceanWind {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureOcean; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall retain operational functions in 3–15 m/s mean true wind with 3-second gusts up to 20 m/s. */
         comment conditions /* Operational functions are defined by N-001. Mean wind uses a 10-minute average referenced to 10 m above water. */
@@ -413,6 +392,7 @@ package BlueDogRequirements {
     }
 
     requirement def <'N-022'> OceanWaves {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureOcean; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall retain operational functions in significant wave heights up to 3 m, peak periods 5–20 s and individual waves up to 6 m. */
         comment conditions /* N-001 defines operational functions. Wave statistics use 20-minute records. */
@@ -426,6 +406,7 @@ package BlueDogRequirements {
     }
 
     requirement def <'N-023'> OceanCurrent {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureOcean; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall retain navigation and control in currents from 0 to 1.0 m/s from any direction relative to wind and waves. */
         comment conditions /* Predicted boundary risk invokes S-002. */
@@ -440,6 +421,7 @@ package BlueDogRequirements {
     }
 
     requirement def <'N-024'> OceanSurvivalWind {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureOcean; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall retain survival functions for 24 continuous hours in mean wind up to 25 m/s and 3-second gusts up to 35 m/s. */
         comment conditions /* Use N-001 survival outcomes and the operational wind reference convention. Selected-profile wave, current, temperature and humidity limits apply concurrently. */
@@ -453,6 +435,7 @@ package BlueDogRequirements {
     }
 
     requirement def <'N-025'> OceanSurvivalWaves {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureOcean; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall retain survival functions for 24 continuous hours in significant wave heights up to 6 m, peak periods 6–20 s and individual waves up to 12 m. */
         comment conditions /* N-001 defines survival outcomes. */
@@ -556,17 +539,12 @@ package BlueDogRequirements {
     }
 
     requirement def <'N-042'> SaltwaterExposure {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureOcean; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* For ocean qualification, following 30 days continuous 35 g/kg saltwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its ocean functional checks without repair or servicing. */
         comment notes /* The exposure campaign does not establish the eventual passage duration. */
     }
     requirement saltwaterExposure : SaltwaterExposure;
-    #derivation connection deriveSaltwaterExposure {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "SaltwaterExposure provides a separately verifiable criterion for marineDurability."; }
-        end #original source ::> marineDurability;
-        end #derive target ::> saltwaterExposure;
-    }
 
     requirement def <'N-043'> EnclosureSealing {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -764,15 +742,6 @@ package BlueDogRequirements {
     }
     dependency auditDerivation6 from commandIntegrity to GorgeChallenge::emergencyIntervention {
         metadata rationale : ModelingMetadata::Rationale { text = "The emergency control channel needs authenticated, fresh commands and persistent qualification changes. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-    dependency auditDerivation7 from operatingBoundary to BlueDog::Goals::hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "An ocean route also needs configured boundaries and no-feasible-route behavior; its boundaries differ from the Gorge course. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-    dependency auditDerivation8 from regulatoryClassification to BlueDog::Goals::hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "Deployment permissions and applicable rules depend on the ocean route as well as the Gorge mission. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-    dependency auditDerivation9 from serviceability to BlueDog::Goals::hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "Unattended ocean preparation and post-voyage maintenance motivate replaceable modules; this is not at-sea servicing during qualification. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
     #derivation connection auditDerivation10 {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -2649,6 +2618,7 @@ package BlueDogRequirements {
     }
 
     requirement def <'E-200'> SustainedEnergyFeasibility {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureEndurance; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The installed energy architecture shall support the selected bounded repeating profile without external charging, meeting the derived reserve, cycle-balance and peak-supply criteria. */
         comment notes /* A 72-hour energy demonstration does not prove indefinite weather availability, functional performance or ocean readiness. */
@@ -2667,6 +2637,7 @@ package BlueDogRequirements {
     requirement sustainedReserveProtection : SustainedReserveProtection;
 
     requirement def <'E-202'> RepeatableCycleBalance {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureEndurance; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* Stored energy at the end of the complete repeating profile shall be at least its initial value at the same profile phase. */
         comment conditions /* The repeatability criterion assumes fixed capacity, loads and resource bounds. */
@@ -2853,7 +2824,7 @@ package BlueDogRequirements {
     requirement def <'L-001'> MissionReliability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall preserve mission-critical functions throughout each declared unassisted voyage. */
-        comment conditions /* Apply L-101 through L-104 separately to the Gorge and Hawaii profiles. Failure includes loss of required control, mission completion, safety function or required observation service. Recovery that violates the mission rules is not success. */
+        comment conditions /* Apply L-101 through L-104 to the finite Gorge attempt. Hawaii reliability targets require a separate future allocation. Failure includes loss of required control, mission completion, safety function or required observation service. Recovery that violates the mission rules is not success. */
         metadata rationale : ModelingMetadata::Rationale { text = "Longer passages impose tighter reliability budgets; Gorge performance does not qualify an ocean mission."; }
     }
     requirement missionReliability : MissionReliability;
@@ -2895,17 +2866,8 @@ package BlueDogRequirements {
     dependency cruiseReliabilityDerivation1 from cruisePerformance to roundTrip {
         metadata rationale : ModelingMetadata::Rationale { text = "cruisePerformance is a selected engineering objective supporting roundTrip. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
-    dependency cruiseReliabilityDerivation2 from cruisePerformance to hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "cruisePerformance is a selected engineering objective supporting hawaiiVoyage. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
     dependency cruiseReliabilityDerivation3 from missionReliability to roundTrip {
         metadata rationale : ModelingMetadata::Rationale { text = "missionReliability is a selected engineering objective supporting roundTrip. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-    dependency cruiseReliabilityDerivation4 from missionReliability to hawaiiVoyage {
-        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability is a selected engineering objective supporting hawaiiVoyage. This is design motivation or an implementation choice, not a satisfaction implication."; }
-    }
-    dependency cruiseReliabilityDerivation5 from missionReliability to repeatedOperation {
-        metadata rationale : ModelingMetadata::Rationale { text = "missionReliability is a selected engineering objective supporting repeatedOperation. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
     #derivation connection cruiseReliabilityDerivation6 {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }

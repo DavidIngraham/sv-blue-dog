@@ -1,10 +1,10 @@
 package BlueDog {
     doc /* Working architecture model, 2026-10-09.
      * Confirmed threshold: The Dalles-Bonneville-The Dalles round trip.
-     * Objective: autonomously repeat the round trip for as long as practical.
+     * Repeated operation is a future endurance objective, outside current acceptance.
      * Qualifying round trips require no operator intervention; live monitoring is required.
-     * Two top-level drivers: GorgeChallenge::transGorgeChallenge and Goals::hawaiiVoyage.
-     * Hawaii is the end goal; the Gorge is the torture test, not proof of ocean readiness.
+     * Current design driver: one finite GorgeChallenge::transGorgeChallenge round trip.
+     * Goals::hawaiiVoyage is a separate future mission with its own constraints.
      * Multi-day endurance with energy harvesting remains an earlier intent. SysML v2 learning is a project goal.
      * Decomposition identifies responsibilities; physical design remains open.
      * Tool checks are recorded in the modeling guide; design satisfaction links
@@ -16,12 +16,13 @@ package BlueDog {
     package DesignIntent {
         doc /* Owner-imposed project constraints: one-person transport, construction on a
          * 250 mm cubic desktop printer, and serviceability between deployments. These
-         * remain binding alongside the two mission goals, not consequences of sailing success.
+         * remain binding alongside the finite Gorge mission, not consequences of sailing success.
          */
     }
 
     package Goals {
         requirement def <'H-001'> HawaiiVoyage {
+            metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureOcean; }
             metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
             doc /* The vessel shall complete an autonomous sailing voyage to Hawaii. */
         comment notes /* Gorge-specific challenge rules do not automatically apply to the ocean mission. */
@@ -56,7 +57,6 @@ package BlueDog {
             action sailOutbound;
             action turnAround;
             action sailHome;
-            action repeatCourse;
             action recoverBoatAndData;
             action manageEnergy;
             action monitorHealthAndRecover;
@@ -141,7 +141,7 @@ package BlueDog {
 
         part def Boat {
             doc /* Logical responsibilities, not separate PCB commitments.
-             * Shared candidate architecture for the Gorge and Hawaii missions.
+             * Candidate architecture for the finite Gorge challenge. Future missions require separate allocation.
              * Interfaces, behavior allocation, and physical realization TBD.
              */
             part hullAndRig : HullAndRig;

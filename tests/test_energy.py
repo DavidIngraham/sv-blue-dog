@@ -55,6 +55,18 @@ def test_no_harvest_exhausts_storage(run_case):
     # Negative balance is exposed as a deficit, not clipped to a reassuring zero.
     assert numbers(v['energyHistory'])[-1] < 0
 
+
+def test_finite_campaign_can_consume_charge_without_being_repeatable(run_case):
+    body = ('part redefines battery { attribute :>> nominalEnergy = 4500000 [J]; } '
+            'attribute :>> initialEnergy = 3600000 [J]; ')
+    body += ' '.join(f'part redefines harvest{i} {{ attribute :>> harvestEnabled = false; }}' for i in range(1, 4))
+    code, _, values = run_case(body)
+    assert code == 1  # The invoked sustained-operation objective still rejects it.
+    assert values['finiteCampaignFeasible'] == 'true'
+    assert values['repeatableBalance'] == 'false'
+    assert values['modeledEnergyFeasible'] == 'false'
+    assert values['finiteCampaignSupported'] == 'false'  # Synthetic evidence.
+
 def test_charge_rate_limit_cannot_hide_behind_available_solar(run_case):
     code, _, v = run_case('part redefines battery { attribute :>> maxChargePower = 1 [W]; }')
     assert code == 1

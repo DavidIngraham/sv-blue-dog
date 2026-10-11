@@ -1,5 +1,7 @@
 # Conservative sizing: reading the results
 
+The project now prioritizes one finite Gorge round trip; Hawaii has separate future constraints. The results on this page retain the assumptions of their recorded runs, including repeatable daily energy balance. They have not been rerun or relabeled as an optimum for the new speed–reliability trade.
+
 The current trial answers part of the question: under the primary assumptions it can balance the modeled sailing states and energy demand and meet the route screen in both directions. The representative westerly passage takes about 48 hours in that calculation, compared with about 67 hours in an easterly. It does **not** yet give me a design to build. Handling is still outside its allocation, added aerodynamic degradation loses easterly upstream progress, and self-righting remains unproven.
 
 For [preliminary design](development-plan.md#virtual-design), I use the archived search, replay and recovery runs to decide what to investigate next. The most useful next evidence is wing force and moment measurements, construction mass/stiffness measurements, and controlled recovery experiments. Those feed the [model-credibility loop](development-plan.md#model-credibility) before another sizing decision.

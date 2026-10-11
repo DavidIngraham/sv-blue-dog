@@ -86,8 +86,10 @@ package BlueDogEnergy {
             scenario.timeline->ControlFunctions::collect { in interval : Interval; interval.budget.peakPower / scenario.battery.dischargeEfficiency + scenario.battery.selfDischargePower },
             scenario.battery.maxDischargePower);
         out attribute campaignCovered : Boolean = BlueDogRequirements::HarvestCampaignCoverageCriterion(campaignDuration, scenario.dayCount, harvestHoursPerDay);
-        return modeledEnergyFeasible : Boolean = inputsValid and reserveProtected and repeatableBalance and peakSupported and campaignCovered;
+        out attribute finiteCampaignFeasible : Boolean = inputsValid and reserveProtected and peakSupported and campaignCovered;
+        return modeledEnergyFeasible : Boolean = finiteCampaignFeasible and repeatableBalance;
         out attribute evidenceReady : Boolean = BlueDogRequirements::EnergyEvidenceReadinessCriterion(scenario.evidenceAccepted);
+        out attribute finiteCampaignSupported : Boolean = finiteCampaignFeasible and evidenceReady;
         out attribute energyCaseSupported : Boolean = modeledEnergyFeasible and evidenceReady;
         objective feasibility {
             doc /* Conditional numerical feasibility only; evidenceReady is separately reported. */
@@ -95,6 +97,7 @@ package BlueDogEnergy {
         }
     }
     dependency sustainedReserveProtectionTrace from SustainedOperation to BlueDogRequirements::sustainedReserveProtection;
+    dependency finiteCampaignTrace from SustainedOperation to BlueDogRequirements::multiDayEndurance;
     dependency repeatableCycleBalanceTrace from SustainedOperation to BlueDogRequirements::repeatableCycleBalance;
     dependency peakSupplyCapabilityTrace from SustainedOperation to BlueDogRequirements::peakSupplyCapability;
     dependency harvestCampaignCoverageTrace from SustainedOperation to BlueDogRequirements::harvestCampaignCoverage;

@@ -4,7 +4,7 @@ Six topic pages connect the mission goals to testable requirements and design ob
 
 ## [Mission, course completion and endurance](requirements/requirements-mission.md)
 
-The Gorge round trip is the first challenge; sustained operation and Hawaii extend the design horizon. These threads connect those goals to course performance and mission reliability.
+One finite Gorge round trip is the current design mission. Hawaii and repeated operation retain separate future constraints.
 
 ## [Autonomous sailing, navigation and wind sensing](requirements/requirements-autonomy.md)
 

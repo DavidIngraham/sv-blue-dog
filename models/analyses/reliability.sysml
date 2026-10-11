@@ -50,8 +50,8 @@ package BlueDogReliability {
         out attribute voyageHours : Real = profile.voyageDuration / (3600 [s]);
         out attribute minimumProgressMet : Boolean = BlueDogRequirements::LegProgressCriterion(groundSpeeds);
         out attribute durationMet : Boolean = BlueDogRequirements::PassageDurationCriterion(profile.voyageDuration, profile.qualifiedDuration);
-        out attribute allowableRatePerHour : Real = if inputsValid ? -OpenSysMLMathFunctions::ln(0.90) / voyageHours else 0;
-        out attribute modeledReliability : Real = if inputsValid ? OpenSysMLMathFunctions::exp(-profile.totalRatePerHour * voyageHours) else 0;
+        out attribute allowableRatePerHour : Real = if inputsValid ? MarineReliability::EqualSurvivalRate(0.90, voyageHours) else 0;
+        out attribute modeledReliability : Real = if inputsValid ? MarineReliability::ConstantHazardSurvival(profile.totalRatePerHour, voyageHours) else 0;
         out attribute rateBudgetMet : Boolean = inputsValid and BlueDogRequirements::FailureRateCriterion(profile.totalRatePerHour, voyageHours);
         out attribute requiredZeroFailureHours : Real = if inputsValid ? -OpenSysMLMathFunctions::ln(0.05) / allowableRatePerHour else 0;
         out attribute demonstrationApplicable : Boolean = inputsValid and profile.observedCriticalFailures == 0;

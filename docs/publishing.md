@@ -57,3 +57,5 @@ Aerodynamic plots are regenerated from hash-checked archived JSON by `tools.boat
 
 
 **Next:** [Return to the series guide](index.md).
+
+The passage-exposure figure is regenerated with `python -m tools.publishing.passage_exposure`. Its contour and example values execute in `BlueDogPassageExposure::Contours`; Python only draws the native results. CI checks the committed figure against that model. Requirement view scopes distinguish current Gorge applicability from deferred missions using `BlueDogMissionScope::Applicability` metadata; shared criteria need not import the deferred mission into a current view.

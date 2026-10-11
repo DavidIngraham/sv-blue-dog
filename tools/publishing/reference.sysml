@@ -24,6 +24,14 @@ package BlueDogDocuments {
         Project(source = WhereType(source = ModelElements(), type = "RequirementDefinition"),
             columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"), Column(name = "Status", path = "workStatus.status"), Column(name = "Statement", path = "documentation")))
     }
+    calc def DeferredRequirements :> Query {
+        Project(source = WhereMetadata(source = WhereType(source = ModelElements(), type = "RequirementDefinition"), 'metadata' = "BlueDogMissionScope::Applicability"),
+            columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name")))
+    }
+    part def FutureMissionRequirements :> Document {
+        attribute redefines title = "Deferred mission requirements";
+        part entries : Table { calc rows : DeferredRequirements; }
+    }
     calc def Derivations :> Query {
         Project(source = WhereType(source = ModelElements(), type = "ConnectionUsage"),
             columns = (

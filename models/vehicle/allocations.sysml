@@ -30,17 +30,11 @@ package BlueDogSatisfaction {
     satisfy BlueDogRequirements::ingressResponse by missionContext.boat;
     satisfy BlueDogRequirements::missionEvidence by missionContext.boat;
     satisfy BlueDogRequirements::gorgeEnvironment by missionContext.boat;
-    satisfy BlueDogRequirements::oceanEnvironment by missionContext.boat;
     satisfy BlueDogRequirements::gorgeWind by missionContext.boat;
     satisfy BlueDogRequirements::gorgeWaves by missionContext.boat;
     satisfy BlueDogRequirements::gorgeCurrent by missionContext.boat;
     satisfy BlueDogRequirements::gorgeSurvivalWind by missionContext.boat;
     satisfy BlueDogRequirements::gorgeSurvivalWaves by missionContext.boat;
-    satisfy BlueDogRequirements::oceanWind by missionContext.boat;
-    satisfy BlueDogRequirements::oceanWaves by missionContext.boat;
-    satisfy BlueDogRequirements::oceanCurrent by missionContext.boat;
-    satisfy BlueDogRequirements::oceanSurvivalWind by missionContext.boat;
-    satisfy BlueDogRequirements::oceanSurvivalWaves by missionContext.boat;
     satisfy BlueDogRequirements::airTemperature by missionContext.boat;
     satisfy BlueDogRequirements::waterTemperature by missionContext.boat;
     satisfy BlueDogRequirements::humidity by missionContext.boat;
@@ -48,7 +42,6 @@ package BlueDogSatisfaction {
     satisfy BlueDogRequirements::calmOperation by missionContext.boat;
     satisfy BlueDogRequirements::envelopeTransition by missionContext.boat;
     satisfy BlueDogRequirements::freshwaterExposure by missionContext.boat;
-    satisfy BlueDogRequirements::saltwaterExposure by missionContext.boat;
     satisfy BlueDogRequirements::enclosureSealing by missionContext.boat.hullAndRig.enclosure;
     satisfy BlueDogRequirements::wetMechanicalIntegrity by missionContext.boat.hullAndRig;
     satisfy BlueDogRequirements::wetElectricalIntegrity by missionContext.boat.communications;
@@ -190,9 +183,7 @@ package BlueDogSatisfaction {
     satisfy BlueDogRequirements::freshRecoveryCommand by missionContext.boat.recovery.recoveryController;
     satisfy BlueDogRequirements::ingressEventDeadline by missionContext.boat.recording;
     satisfy BlueDogRequirements::qualificationRestoration by missionContext.boat.recovery.recoveryController;
-    satisfy BlueDogRequirements::sustainedEnergyFeasibility by missionContext.boat.energy;
     satisfy BlueDogRequirements::sustainedReserveProtection by missionContext.boat.energy;
-    satisfy BlueDogRequirements::repeatableCycleBalance by missionContext.boat.energy;
     satisfy BlueDogRequirements::peakSupplyCapability by missionContext.boat.energy;
     satisfy BlueDogRequirements::cruisePerformance by missionContext.boat;
     satisfy BlueDogRequirements::legProgress by missionContext.boat;

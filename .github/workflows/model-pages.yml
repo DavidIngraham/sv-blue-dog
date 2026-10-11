@@ -29,6 +29,9 @@ jobs:
       - run: uv run python -m tools.boat_analysis.cli install
       - run: uv run python -m tools.boat_analysis.environment.climatology
       - run: uv run python -m tools.boat_analysis.environment.sensitivity
+      - run: uv run python -m tools.publishing.passage_exposure
+      - name: Check passage-exposure plot matches the native model
+        run: git diff --exit-code -- docs/figures/passage-reliability.svg
       - name: Check committed weather views match their model and evidence
         run: git diff --exit-code -- models/evidence/gorge-wind.sysml docs/figures/gorge-wind-seasons.svg docs/figures/weather-performance-sensitivity.svg
       - run: uv run python -m tools.boat_analysis.cli prepare

@@ -1,18 +1,18 @@
 # Mission, context and architecture
 
-What does this little boat actually have to do? I start with the independent Gorge challenge and the longer-term Hawai‘i goal, then work through the people, environment and equipment it will interact with. This is [mission definition](development-plan.md#mission-definition): it sets up the responsibilities and scenarios I will use to compare designs.
+What does this little boat actually have to do? I start with one finite, independent Gorge challenge, then work through the people, environment and equipment it will interact with. This is [mission definition](development-plan.md#mission-definition): it sets up the responsibilities and scenarios I will use to compare designs.
 
 ![Map of the Gorge challenge corridor along the Columbia River, from The Dalles to Bonneville and back.](figures/gorge-course-map.svg)
 
 *The Dalles → Bonneville → The Dalles. River geometry: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).*
 
-The return leg has to make progress over the ground, not just through the water. The representative westerly puts that return downwind against the current, while the outbound leg is windward with it. Easterlies reverse those roles. I will choose a favorable weather window for the challenge and use a separate seasonal profile for winter testing; the [weather analysis](operating-constraints.md#gorge-weather-and-launch-windows) explains the distinction. The challenge is sail-only and unassisted; I want live observation without making a shore connection necessary for control. Year-round operation and Hawai‘i require further readiness evidence.
+The return leg has to make progress over the ground, not just through the water. The representative westerly puts that return downwind against the current, while the outbound leg is windward with it. Easterlies reverse those roles. I will choose a favorable weather window for the challenge and use a separate seasonal profile for winter testing; the [weather analysis](operating-constraints.md#gorge-weather-and-launch-windows) explains the distinction. The challenge is sail-only and unassisted; I want live observation without making a shore connection necessary for control. Year-round operation and Hawai‘i have separate future requirements. For this boat, I want to explore how speed and shorter exposure affect the [chance of completing the round trip](reliability.md#can-a-faster-boat-be-more-likely-to-finish).
 
 ![Vessel concept with wing, hull, rudder, keel, ballast, solar collection and electronics.](figures/boat-concept.svg)
 
 The main systems bring together propulsion, steering, power and recovery. The model views below allocate their responsibilities.
 
-The challenge remains independent of the vehicle so a convenient hardware choice cannot redefine success. The Gorge mission is a proving ground for the eventual ocean voyage. Traffic, shore support and live monitoring belong in the system context; the vessel must make its own decisions during a qualifying attempt.
+The challenge remains independent of the vehicle so a convenient hardware choice cannot redefine success. Hawaii remains a separate future mission with its own constraints; it does not set acceptance criteria for the Gorge vessel. Traffic, shore support and live monitoring belong in the system context; the vessel must make its own decisions during a qualifying attempt.
 
 We decompose responsibilities before choosing hardware. A satisfy link identifies intended responsibility, while a verification case identifies how that allocation will be tested. Neither means the vessel has passed a physical test.
 

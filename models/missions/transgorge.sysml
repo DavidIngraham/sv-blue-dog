@@ -11,8 +11,8 @@ package GorgeChallenge {
     private import RequirementDerivation::*;
     requirement def <'C-000'> TransGorgeChallenge {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall complete the Trans-Gorge challenge under C-001 through C-006. */
-        metadata rationale : ModelingMetadata::Rationale { text = "The first The Dalles–Bonneville–The Dalles circuit is the threshold; repeated circuits are the endurance objective."; }
+        doc /* The vessel shall complete the Trans-Gorge challenge under C-001 and C-003 through C-006. */
+        metadata rationale : ModelingMetadata::Rationale { text = "One The Dalles–Bonneville–The Dalles circuit defines the finite challenge. Repeated circuits are a separate future endurance objective."; }
     }
     requirement transGorgeChallenge : TransGorgeChallenge;
     requirement def <'C-001'> CourseCompletion {
@@ -23,7 +23,7 @@ package GorgeChallenge {
     requirement def <'C-002'> RepeatedOperation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* After its first circuit, the vessel should repeat The Dalles–Bonneville–The Dalles autonomously for as long as practical. */
-        comment notes /* This is an endurance objective, not a finite-duration pass/fail claim. */
+        comment notes /* Future endurance objective, excluded from finite challenge acceptance. */
         metadata issue : ModelingMetadata::Issue { text = "No fixed objective endurance duration has been selected."; }
     }
     requirement def <'C-003'> UnassistedAttempt {
@@ -62,12 +62,7 @@ package GorgeChallenge {
         end #original source ::> transGorgeChallenge;
         end #derive target ::> courseCompletion;
     }
-    #derivation connection challengeRuleRepeatedOperation {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "This rule is explicitly included in C-000; C-002 retains its objective-only status."; }
-        end #original source ::> transGorgeChallenge;
-        end #derive target ::> repeatedOperation;
-    }
+    dependency futureEnduranceBasis from repeatedOperation to courseCompletion;
     #derivation connection challengeRuleUnassistedAttempt {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         metadata rationale : ModelingMetadata::Rationale { text = "This rule is explicitly included in C-000; C-002 retains its objective-only status."; }

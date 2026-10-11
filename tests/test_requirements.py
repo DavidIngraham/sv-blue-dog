@@ -51,7 +51,6 @@ def test_diagram_preserves_expected_derivations(published_model):
         ('marineDurability', 'enclosureSealing'),
         ('marineDurability', 'freshwaterExposure'),
         ('marineDurability', 'printedMaterialAging'),
-        ('marineDurability', 'saltwaterExposure'),
         ('marineDurability', 'solarHeating'),
         ('marineDurability', 'wetElectricalIntegrity'),
         ('marineDurability', 'wetMechanicalIntegrity'),
@@ -83,7 +82,6 @@ def test_diagram_preserves_expected_derivations(published_model):
         ('transGorgeChallenge', 'courseCompletion'),
         ('transGorgeChallenge', 'emergencyIntervention'),
         ('transGorgeChallenge', 'liveObservation'),
-        ('transGorgeChallenge', 'repeatedOperation'),
         ('transGorgeChallenge', 'sailingPropulsion'),
         ('transGorgeChallenge', 'unassistedAttempt'),
     }
@@ -103,6 +101,10 @@ def test_use_case_and_satisfaction_traceability():
     assert '| recoveryPropulsion | boat |' in text
     assert '| commandIntegrity | commandGateway |' in text
     assert '| regulatoryClassification |  |' in text
+    for deferred in ['oceanEnvironment', 'oceanWind', 'oceanWaves', 'oceanCurrent',
+                     'oceanSurvivalWind', 'oceanSurvivalWaves', 'saltwaterExposure',
+                     'sustainedEnergyFeasibility', 'repeatableCycleBalance']:
+        assert f'| {deferred} |  |' in text
     diagram = native('-render', 'Page_architecture_2::operations', '-render-form', 'dot')
     assert '// kind: case' in diagram
     # The published operations view is now scoped to sailing and traffic.
@@ -121,7 +123,8 @@ def test_mission_drivers_do_not_entail_owner_constraints(published_model):
     report = native('-render-document', 'BlueDogDocuments::RelationshipRegister')
     for constraint in ['transportability', 'desktopManufacture', 'serviceability']:
         assert f'| {constraint} | DesignIntent |' in report
-    assert '| multiDayEndurance | hawaiiVoyage |' in report
+    assert '| multiDayEndurance | hawaiiVoyage |' not in report
+    assert '| multiDayEndurance | roundTrip |' in report
     assert ('sailingPropulsion', 'roundTrip') not in edges
     assert ('hawaiiVoyage', 'sustainedEnergyFeasibility') not in edges
 

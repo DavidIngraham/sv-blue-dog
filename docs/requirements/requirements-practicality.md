@@ -44,18 +44,16 @@ package Page_practicality_24 {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDog::Goals::hawaiiVoyage;
         expose BlueDogRequirements::nondestructiveService;
         expose BlueDogRequirements::postServiceActuation;
         expose BlueDogRequirements::postServiceSealing;
         expose BlueDogRequirements::replacementDuration;
         expose BlueDogRequirements::serviceability;
-        metadata Layout about BlueDog::Goals::hawaiiVoyage { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::nondestructiveService { x = 320; y = 0; }
-        metadata Layout about BlueDogRequirements::postServiceActuation { x = 640; y = 0; }
-        metadata Layout about BlueDogRequirements::postServiceSealing { x = 960; y = 0; }
-        metadata Layout about BlueDogRequirements::replacementDuration { x = 0; y = 400; }
-        metadata Layout about BlueDogRequirements::serviceability { x = 320; y = 400; }
+        metadata Layout about BlueDogRequirements::nondestructiveService { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::postServiceActuation { x = 320; y = 0; }
+        metadata Layout about BlueDogRequirements::postServiceSealing { x = 640; y = 0; }
+        metadata Layout about BlueDogRequirements::replacementDuration { x = 960; y = 0; }
+        metadata Layout about BlueDogRequirements::serviceability { x = 0; y = 400; }
     }
 }
 ```

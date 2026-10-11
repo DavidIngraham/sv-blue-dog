@@ -33,11 +33,12 @@ def test_compact_labels_retain_native_identity():
     assert diagram_nodes(result) == {'n0': 'BlueDogRequirements::windObservation'}
 
 
-def test_wind_thread_reaches_both_mission_roots(rendered_site):
+def test_wind_thread_reaches_current_mission_root(rendered_site):
     text=(rendered_site/'imports/docs/requirements/requirements-autonomy.md').read_text()
     text=text.split('## Wind observation', 1)[1]
     diagram=re.search(r'```mermaid\n(.*?)```',text,re.S)[1]
-    for node in ['transGorgeChallenge', 'hawaiiVoyage', 'navigationAndControl',
+    assert 'hawaiiVoyage' not in diagram
+    for node in ['transGorgeChallenge', 'navigationAndControl',
                  'windObservation', 'windSpeedAccuracy', 'windDirectionAccuracy',
                  'windSampleCadence', 'windStaleInvalidation', 'windSensingEndurance']:
         assert node in diagram
@@ -54,15 +55,20 @@ def test_all_requirement_views_include_their_upstream_context(rendered_site):
            for a,b in re.findall(r'"(n\d+)" -> "(n\d+)" \[label="(?:derive|refine)"',dot)
            if a in nodes and b in nodes}
     dependencies={(a,b) for a,b in basis_links(native('-render-document','BlueDogDocuments::RelationshipRegister')) if a in names and b in names}
+    deferred_report=native('-render-document','BlueDogDocuments::FutureMissionRequirements')
+    deferred={name[0].lower()+name[1:] for name in re.findall(r'^\| [A-Z]-\d+ \| (\w+) \|',deferred_report,re.M)}
     edges |= dependencies
     for page in (rendered_site/'imports/docs/requirements').glob('*.md'):
         for diagram in re.findall(r'```mermaid\n(.*?)```',page.read_text(),re.S):
             node_names={n:q.rsplit('::',1)[-1] for n,q in diagram_nodes(diagram).items()}
             visible=set(node_names.values())
+            future_scope=bool(visible & deferred)
             assert visible, page.name
             drawn_dependencies={(node_names[a],node_names[b]) for a,b in re.findall(r'(n\d+) -\.->\|"dependency"\| (n\d+)',diagram)}
             for child,parent in edges:
                 if child in visible:
+                    if parent in deferred and not future_scope:
+                        continue  # Shared criteria do not import a deferred mission.
                     assert parent in visible, (page.name,child,parent)
                     if (child,parent) in dependencies:
                         assert (child,parent) in drawn_dependencies, (page.name,child,parent)
