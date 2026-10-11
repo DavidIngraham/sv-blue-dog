@@ -1,5 +1,7 @@
 # E-008 NavigationAvailability relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes navigation-availability obligations and sensing relationships from the authoritative model and informs sensor availability, degraded navigation behavior and fault scenarios. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_e_008_0::navigationAvailability1 direction=BT statements=true

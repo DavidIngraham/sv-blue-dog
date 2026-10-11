@@ -1,5 +1,7 @@
 # N-003 StabilityAndFouling relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes stability and fouling obligations and their derived requirements from the authoritative model and informs recovery, appendage and weed-tolerance concepts and representative failure scenarios. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_n_003_0::stabilityAndFouling1 direction=BT statements=true

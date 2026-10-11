@@ -1,5 +1,7 @@
 # Coupled sizing method
 
+This is part of [virtual design and PDR](development-plan.md#virtual-design). It takes mission-derived progress criteria, environmental scenarios, candidate geometry and provisional physics as inputs, and informs hull, rig, appendage, ballast and energy sizing. Its conditional results help reject or refine concepts; they are inputs to the future mission simulation, not a replacement for virtual mission validation or physical trials.
+
 We first seek a feasible design, then minimize length while allowing the represented hull, rig, appendage, ballast, structure and energy variables to change together. Numerical brackets describe model coverage and search limits. A bound hit requires investigation before claiming a minimum size.
 
 SysML owns the physical equations, named configurations, bounds, assumptions and acceptance criteria. Python evaluates geometric intersections and section properties, interpolates saved aerodynamic evidence and drives SciPy. Compiled array interfaces are confined to the runtime boundary. Reusable libraries have no dependency on Blue Dog requirements; application analyses connect them to the mission.

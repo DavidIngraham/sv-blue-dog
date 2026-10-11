@@ -1,5 +1,7 @@
 # Reading the design through the model
 
+This method maintains the [engineering record across the V](../development-plan.md#engineering-record), beginning with [mission definition](../development-plan.md#mission-definition). Its inputs are mission intent, requirements, architecture choices and verification plans; it informs how we encode derivation, rationale and evidence so virtual and physical results can be traced to the design decisions they support.
+
 We begin with the challenge and the eventual ocean mission, then make the vehicle's obligations precise enough to evaluate. A requirement statement states the obligation; its conditions identify the qualification context. Rationale explains why an obligation or design choice exists without becoming another acceptance criterion.
 
 For example, the vehicle's ordered gate crossings refine the challenge's course-completion obligation. The statement and relationship below are read from the model at publication time.

@@ -1,5 +1,7 @@
 # C-005 LiveObservation relationships
 
+This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the live-observation obligation and communications relationships from the authoritative model and informs shore monitoring and evidence collection without dependence on operator control. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_c_005_0::liveObservation1 direction=BT statements=true

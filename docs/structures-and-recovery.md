@@ -1,5 +1,7 @@
 # Manufacturing, structure and recovery
 
+This work connects [virtual design](development-plan.md#virtual-design) to [detailed design and CDR](development-plan.md#detailed-design), supported by [model-validation experiments](development-plan.md#model-credibility). Its inputs are candidate geometry, FDM and wet-layup construction, loads, mass distribution and flooding assumptions; it informs hull and appendage construction, joints, ballast and buoyancy, plus the coupon and recovery tests needed to justify them.
+
 The printed prototype taught us to treat construction as part of sizing. Printed walls and ribs, wet glass/epoxy, seams and finish contribute to mass. The source CAD explores manufacturing and wing concepts; it does not define the challenge vessel.
 
 The current stiffness calculation uses finite laminate sections from inward offsets of the actual geometry. This replaced a thin-wall approximation that could predict more stiffness than a solid section. We credit the glass laminate for bending while treating printed support, joints and attachments as separate evidence obligations.

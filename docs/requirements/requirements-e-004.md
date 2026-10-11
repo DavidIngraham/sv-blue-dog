@@ -1,5 +1,7 @@
 # E-004 LowEnergyRecovery relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes low-energy recovery obligations and energy-management relationships from the authoritative model and informs degraded operating modes, reserve use and recovery decisions. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_e_004_0::lowEnergyRecovery1 direction=BT statements=true

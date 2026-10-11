@@ -1,5 +1,7 @@
 # N-046 SolarHeating relationships
 
+This focused view supports [detailed design and build readiness](../development-plan.md#detailed-design). It takes solar-heating obligations and thermal relationships from the authoritative model and informs thermal design, component placement and temperature measurements. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_n_046_0::solarHeating1 direction=BT statements=true

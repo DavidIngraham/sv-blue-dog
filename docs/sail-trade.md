@@ -1,5 +1,7 @@
 # Comparing sail architectures
 
+The sail trade supports [virtual design and PDR](development-plan.md#virtual-design), while the experiments described here build [model credibility](development-plan.md#model-credibility). It takes the sailing, energy, handling and recovery obligations, candidate rig concepts, prior art and recorded VSP runs as inputs; it informs rig selection, trim-actuator requirements and the measurements needed before detailed sizing.
+
 We compare control architecture separately from section camber. A tail-controlled wing and a directly rotated fixed-camber wing solve trim differently; either needs measured aerodynamic moments, actuator losses, structural loads and failure-state behavior. A soft sail remains a useful comparator rather than an assumed failure. The fixed-camber CAD wing is our sizing experiment, not a resolved winner of the trade.
 
 The analysis separates unknown evidence, a demonstrated failure and a development preference. Apply the same durability, energy, progress, recovery, manufacturing, handling and reliability gates to each candidate. Do not turn a qualitative durability concern into a failure rate or an arbitrary weighted score.

@@ -1,5 +1,7 @@
 # H-001 HawaiiVoyage relationships
 
+This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the Hawai‘i objective and related vehicle obligations from the authoritative model and informs ocean mission definition and which Gorge evidence may transfer to later development. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md)
 
 This obligation also motivates design choices. A rationale-bearing dependency does not assert logical requirement derivation; follow the source model for those decisions.

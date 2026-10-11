@@ -1,5 +1,7 @@
 # Sustained operation: follow energy through the mission
 
+This analysis starts in [virtual design](development-plan.md#virtual-design) and develops toward [physical verification](development-plan.md#physical-validation). It takes mission profiles, installed loads, harvesting assumptions and storage characteristics as inputs, and informs battery and solar sizing, actuator duty limits, energy-management behavior and the bench measurements needed to assess those predictions.
+
 The reusable energy framework adds the installed loads once, including standby demand and conversion losses, then propagates stored energy through a chronological mission profile. An explicit timeline prevents declaration order from becoming an accidental mission schedule. Peak supply demand is checked separately from average energy balance.
 
 The framework accounts for usable storage, charge/discharge limits and efficiencies, self-discharge, intermittent harvesting and the recovery reserve. We split intervals where an outage, duty change or burst can change the minimum stored energy; averages alone cannot establish transient capability. The coupled sizing run uses a simpler day/night balance, overnight reserve and peak-demand screen for each sailing state. It does not yet feed a complete voyage weather-and-load timeline into the chronological framework.

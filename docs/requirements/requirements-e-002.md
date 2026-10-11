@@ -1,5 +1,7 @@
 # E-002 NavigationAndControl relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes navigation and control obligations and their derived behaviors from the authoritative model and informs guidance, steering and the closed-loop scenarios used to challenge the design. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_e_002_0::navigationAndControl1 direction=BT statements=true

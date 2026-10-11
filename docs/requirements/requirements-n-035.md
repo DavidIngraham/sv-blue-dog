@@ -1,5 +1,7 @@
 # N-035 EnvelopeTransition relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes envelope-transition obligations and environmental limits from the authoritative model and informs detection and response behavior when operating conditions change. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_n_035_0::envelopeTransition1 direction=BT statements=true

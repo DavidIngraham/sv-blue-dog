@@ -1,5 +1,7 @@
 # E-003 ResetRecovery relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes reset-recovery obligations and mission continuity needs from the authoritative model and informs restart behavior and software, controller and integrated fault-injection tests. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_e_003_0::resetRecovery1 direction=BT statements=true

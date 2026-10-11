@@ -1,5 +1,7 @@
 # Passage time, reliability and failure analysis
 
+Reliability work spans [virtual design](development-plan.md#virtual-design) and [physical V&V](development-plan.md#physical-validation). It takes passage-time estimates, unattended mission scenarios, architecture allocations and failure modes as inputs, and informs fault detection, recovery behavior, design margins and the fault-injection and endurance evidence needed at later gates.
+
 A slower voyage demands more hours of successful unattended operation. We therefore connect sailing progress, passage duration and reliability exposure rather than assigning reliability independently of the mission. The sizing study now uses conservative aerodynamic assumptions for its primary case and re-solves controls under additional stresses. Passage times from those scenarios are conditional estimates, not measured endurance or demonstrated reliability; see the [current outcomes](results.md).
 
 ```sysml-view Page_reliability_0::CruiseSemantics direction=BT

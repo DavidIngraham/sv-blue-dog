@@ -1,5 +1,7 @@
 # C-102 CommandIntegrity relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes command-integrity obligations and communications behavior from the authoritative model and informs command handling, link-fault scenarios and later interface tests. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_c_102_0::commandIntegrity1 direction=BT statements=true

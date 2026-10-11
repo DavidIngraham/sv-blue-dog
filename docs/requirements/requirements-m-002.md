@@ -1,5 +1,7 @@
 # M-002 MultiDayEndurance relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes multi-day endurance obligations and their supporting requirements from the authoritative model and informs mission duration, energy management and integrated endurance test planning. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_m_002_0::multiDayEndurance1 direction=BT statements=true

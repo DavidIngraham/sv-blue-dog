@@ -1,10 +1,46 @@
 # Developing Blue Dog: a V with room to learn
 
+This article is the organizing plan for the series, from [mission definition](#mission-definition) through [physical validation](#physical-validation), with repeated virtual-design and model-credibility loops. Its inputs are the sailing goals, prototype learning needs and current evidence gaps; it informs which analysis, build or test comes next and what evidence each review decision needs.
+
 I want Blue Dog to be both a working autonomous sailboat and a way to learn systems engineering. That calls for a development plan which connects the mission to the experiments, and the experiments back to the design. It should help me and my agents choose the next useful piece of work without creating an enterprise-sized paperwork exercise.
 
 Our plan combines a systems engineering V with repeated model-and-experiment loops. The outer V follows a particular vessel configuration from intent to demonstrated behavior. Inside it, we first verify and validate the simulated vessel: does the proposed design meet its criteria, and does its behavior address the intended mission? Later we ask those questions of the physical vessel. Separately, measurements assess whether the simulation models are credible enough for their intended use. We repeat this process for increasingly capable prototypes; the first build does not have to be the challenge vessel.
 
 This page defines the development approach and proposed review criteria. It does not record completed reviews or introduce new vessel acceptance thresholds. Requirements, allocations and engineering criteria remain in the [SysML model](../models/README.md); [recorded results](results.md) distinguish numerical outcomes from accepted physical evidence. The process diagrams below explain the method, rather than claiming to be executable SysML activities.
+
+## Reading the series through the plan
+
+The [series guide](index.md) groups the articles by the decisions below. These are recurring activities, not claims that a review has passed or that every subsystem has reached the same stage.
+
+<a id="mission-definition"></a>
+### Mission definition and SRR
+
+Start with owner intent, the challenge and the operating context. Refine these into requirements and scenarios, using early simulation to challenge omissions. The [journey](restarting-sv-blue-dog.md), [architecture](architecture.md), [operating constraints](operating-constraints.md) and [focused requirements](requirements.md) inform what we intend to build and how success will be judged.
+
+<a id="virtual-design"></a>
+### Virtual design and PDR
+
+Use requirements, scenarios and declared model assumptions to assess candidate behavior before hardware commitment. The [sizing method](sizing.md), [results](results.md), [sail trade](sail-trade.md), [energy](energy.md), [recovery propulsion](recovery-propulsion.md) and [reliability](reliability.md) inform architecture and sizing decisions. A conditional simulation result remains distinct from physical evidence.
+
+<a id="detailed-design"></a>
+### Detailed design and build readiness
+
+Turn a reviewed concept, interface definitions and supported loads into a buildable configuration. [Manufacturing and recovery](structures-and-recovery.md), subsystem analyses and equipment-level requirement views inform material, geometry, actuator and electrical details. CDR releases a defined scope; unresolved evidence can limit that release to an experiment.
+
+<a id="physical-validation"></a>
+### Physical V&V and progression
+
+Take an identified test article, procedures and criteria into component, subsystem and integrated trials. TRR establishes readiness for each campaign; results inform requirement verification, real mission validation and progression. The current articles describe planned evidence and numerical studies, not a completed physical verification campaign.
+
+<a id="model-credibility"></a>
+### Model validation and feedback
+
+Compare predictions with independent measurements under recorded conditions. The [wing experiments](sail-trade.md), [structural and recovery work](structures-and-recovery.md) and [energy measurements](energy.md) will establish or restrict model applicability. This feedback can reopen virtual design at any stage; it is separate from validating the proposed or real vessel against its mission.
+
+<a id="engineering-record"></a>
+### The engineering record across the V
+
+Use the [modeling method](methods/modeling.md) and [publishing workflow](publishing.md) to preserve requirements, rationale, configurations and evidence links. Their inputs are the engineering work at every stage; their output is a consistent record for review decisions and future iteration.
 
 ## The overall trajectory
 

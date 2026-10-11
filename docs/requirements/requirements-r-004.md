@@ -1,5 +1,7 @@
 # R-004 ChallengeMotorInhibition relationships
 
+This focused view supports [detailed design and build readiness](../development-plan.md#detailed-design). It takes challenge motor-inhibition obligations and propulsion rules from the authoritative model and informs mode interlocks and tests separating qualifying sailing from powered recovery. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_r_004_0::challengeMotorInhibition1 direction=BT statements=true

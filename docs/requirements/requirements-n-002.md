@@ -1,5 +1,7 @@
 # N-002 MarineDurability relationships
 
+This focused view supports [detailed design and build readiness](../development-plan.md#detailed-design). It takes marine-durability obligations and environmental relationships from the authoritative model and informs material, sealing and component choices and their exposure tests. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_n_002_0::marineDurability1 direction=BT statements=true

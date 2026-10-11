@@ -1,5 +1,7 @@
 # Authoring and publishing
 
+Publishing supports the [engineering record across every stage](development-plan.md#engineering-record). Its inputs are authored explanations, scoped SysML views and archived evidence; it informs how agents and readers inspect a consistent design record at reviews without duplicating requirements or mistaking generated figures for new test results.
+
 Our Markdown describes methods and design reasoning. Engineering definitions, assumptions and rationale belong in `models/`. Each page imports those definitions into a small native view; the publisher resolves the view with OpenSysML and inserts its diagram and requirement statements.
 
 ## Inline views

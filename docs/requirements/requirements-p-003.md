@@ -1,5 +1,7 @@
 # P-003 Serviceability relationships
 
+This focused view supports [detailed design and build readiness](../development-plan.md#detailed-design). It takes serviceability obligations and their supporting requirements from the authoritative model and informs access, modularity, assembly details and maintenance demonstrations. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_p_003_0::serviceability1 direction=BT statements=true

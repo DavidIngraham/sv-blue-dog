@@ -1,5 +1,7 @@
 # C-101 TelemetryEquipment relationships
 
+This focused view supports [detailed design and build readiness](../development-plan.md#detailed-design). It takes telemetry obligations and equipment relationships from the authoritative model and informs radio integration, antenna arrangements and communications test planning. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_c_101_0::telemetryEquipment1 direction=BT statements=true

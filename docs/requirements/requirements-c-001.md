@@ -1,5 +1,7 @@
 # C-001 CourseCompletion relationships
 
+This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the challenge course and its vehicle-level refinement from the authoritative model and informs route completion criteria, navigation behavior and mission evidence. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_c_001_0::courseCompletion1 direction=BT statements=true

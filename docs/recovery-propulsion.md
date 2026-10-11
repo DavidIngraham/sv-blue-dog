@@ -1,5 +1,7 @@
 # Comparing recovery propulsion
 
+This trade belongs to [virtual design and PDR](development-plan.md#virtual-design), followed by [detailed implementation and test planning](development-plan.md#detailed-design). Its inputs are the recovery task, hull resistance, weed exposure, energy reserve and candidate drive characteristics; it informs propulsor selection, installation and comparative physical tests while preserving the challenge’s sail-only boundary.
+
 Compare a submerged water propeller and an above-water air propeller against the same installed recovery task. Neither concept is selected by an ideal disk calculation. Keep auxiliary development/recovery operation distinct from a qualifying sail-only challenge attempt.
 
 Start with a hull tow measurement and required recovery conditions. Bench each complete guarded drive, then measure installed thrust, electrical power, temperature and maneuvering performance. The [native analysis](../models/analyses/recovery-propulsion.sysml) estimates reserve demand from illustrative inputs; its evidence gates prevent that estimate becoming physical qualification.

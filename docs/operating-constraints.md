@@ -1,5 +1,7 @@
 # Establishing operating constraints
 
+This work belongs to [mission definition and SRR](development-plan.md#mission-definition), with its conclusions revisited before [physical test readiness](development-plan.md#physical-validation). It takes the proposed waters, operating modes, traffic context and recorded source research as inputs, and informs the operating envelope, equipment obligations and unresolved questions that constrain design and deployment.
+
 We distinguish rules of a voluntary challenge, jurisdiction-specific operating obligations and our own engineering allocations. A size threshold quoted in a race discussion does not by itself establish vessel classification or permission to operate.
 
 The model's [source evidence](../models/vehicle/source-evidence.sysml) preserves the research notes and limitations, including Microtransat discussions and the cited navigation rules. These are inputs to an applicability review, not an authorization to deploy.

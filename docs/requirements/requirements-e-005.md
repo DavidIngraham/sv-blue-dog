@@ -1,5 +1,7 @@
 # E-005 Communications relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes communications obligations and monitoring relationships from the authoritative model and informs link-loss behavior, telemetry architecture and representative communication scenarios. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_e_005_0::communications1 direction=BT statements=true

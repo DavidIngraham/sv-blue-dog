@@ -1,5 +1,7 @@
 # C-000 TransGorgeChallenge relationships
 
+This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the independent Trans-Gorge brief and its supporting obligations from the authoritative model and informs the challenge scope and acceptance structure carried into vehicle design. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_c_000_0::transGorgeChallenge1 direction=BT statements=true

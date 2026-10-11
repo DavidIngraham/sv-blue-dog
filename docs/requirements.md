@@ -1,8 +1,10 @@
 # Focused requirement views
 
+These views support [mission definition and SRR](development-plan.md#mission-definition), then provide criteria for [early virtual V&V](development-plan.md#virtual-design). Their inputs are the mission, operating conditions and owner constraints captured in SysML; they inform requirement derivation, design allocations and the cases that will later need physical evidence.
+
 Each page scopes a small native view of the authoritative model. Statements come from the requirement definitions; refinement and derivation retain their distinct meanings.
 
-[How we model requirements](methods/modeling.md) Â· [Mission and architecture](architecture.md)
+[How we model requirements](methods/modeling.md) · [Mission and architecture](architecture.md)
 
 
 - [C-000 TransGorgeChallenge relationships](requirements/requirements-c-000.md)

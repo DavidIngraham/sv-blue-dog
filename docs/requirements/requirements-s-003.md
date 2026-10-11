@@ -1,5 +1,7 @@
 # S-003 SafeRecovery relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes safe-recovery obligations and health-management relationships from the authoritative model and informs recovery behavior, supporting equipment and controlled recovery exercises. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_s_003_0::safeRecovery1 direction=BT statements=true

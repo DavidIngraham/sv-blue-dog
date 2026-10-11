@@ -1,5 +1,7 @@
 # E-006 IngressResponse relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes ingress-response obligations and health-management relationships from the authoritative model and informs leak detection, autonomous response and controlled fault testing. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_e_006_0::ingressResponse1 direction=BT statements=true

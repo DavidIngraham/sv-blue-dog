@@ -1,5 +1,7 @@
 # N-001 EnvironmentalEnvelope relationships
 
+This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the environmental-envelope obligation and its parameter-specific requirements from the authoritative model and informs simulation conditions and the environments against which the vessel must later be tested. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_n_001_0::environmentalEnvelope1 direction=BT statements=true

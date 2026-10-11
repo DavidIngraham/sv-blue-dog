@@ -1,5 +1,7 @@
 # N-054 WeedSnagShedding relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes weed-snag-shedding obligations and their derived criteria from the authoritative model and informs appendage details, clearing behavior and repeatable snag tests. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_n_054_0::weedSnagShedding1 direction=BT statements=true

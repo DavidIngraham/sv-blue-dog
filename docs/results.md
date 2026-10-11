@@ -1,5 +1,7 @@
 # Conservative sizing: reading the results
 
+This page supplies evidence for [virtual design and PDR](development-plan.md#virtual-design), with open questions feeding the [model-credibility loop](development-plan.md#model-credibility). Its inputs are archived search, replay and recovery runs; it informs which candidate assumptions and design constraints to revisit, and which experiments should precede further design commitment. These are numerical findings, not completed physical V&V.
+
 This run searches the complete 29-variable design with the conservative aerodynamic policy and restricted operating angles. The search and one continuation stopped just outside the coarse feasibility tolerance, so the minimum-length phase did not run. The reported dimensions describe a near-feasible trial, not an established minimum or a qualified boat. A failed local search does not establish that no feasible design exists.
 
 The limiting search margins include additional numerical reserves. In particular, a shortfall against the upstream progress reserve is not automatically a failure of the underlying mission progress requirement. The refined replay below assesses the selected geometry independently, using the actual operating screens and finer geometry.

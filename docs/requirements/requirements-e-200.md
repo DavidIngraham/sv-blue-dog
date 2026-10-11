@@ -1,5 +1,7 @@
 # E-200 SustainedEnergyFeasibility relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes sustained-energy obligations and their model-derived criteria from the authoritative model and informs storage and harvesting sizing, chronological energy analysis and later electrical measurements. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_e_200_0::sustainedEnergyFeasibility1 direction=BT statements=true

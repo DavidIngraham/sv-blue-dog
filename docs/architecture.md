@@ -1,5 +1,7 @@
 # Mission, context and architecture
 
+This article connects [mission definition](development-plan.md#mission-definition) to [virtual design and preliminary review](development-plan.md#virtual-design). Its inputs are the independent challenge, the Hawai‘i goal, operating scenarios and owner constraints; it informs subsystem responsibilities, interfaces and the behaviors our simulated vessel must exercise before hardware decisions.
+
 The challenge remains independent of the vehicle so a convenient hardware choice cannot redefine success. The Gorge mission is a proving ground for the eventual ocean voyage. Traffic, shore support and live monitoring belong in the system context; the vessel must make its own decisions during a qualifying attempt.
 
 We decompose responsibilities before choosing hardware. A satisfy link identifies intended responsibility, while a verification case identifies how that allocation will be tested. Neither means the vessel has passed a physical test.

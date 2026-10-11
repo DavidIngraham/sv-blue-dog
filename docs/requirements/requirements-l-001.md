@@ -1,5 +1,7 @@
 # L-001 MissionReliability relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes mission-reliability obligations and passage-exposure relationships from the authoritative model and informs failure analysis, endurance planning and the evidence needed for unattended operation. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_l_001_0::missionReliability1 direction=BT statements=true

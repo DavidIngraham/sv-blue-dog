@@ -1,5 +1,7 @@
 # S-002 OperatingBoundary relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes operating-boundary obligations and mission constraints from the authoritative model and informs boundary awareness, containment behavior and simulation and field checks. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_s_002_0::operatingBoundary1 direction=BT statements=true

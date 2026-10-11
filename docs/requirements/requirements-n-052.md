@@ -1,5 +1,7 @@
 # N-052 CapsizeControlRecovery relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes capsize-control-recovery obligations and their supporting behaviors from the authoritative model and informs controller and actuator recovery after capsize and the corresponding fault campaign. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
 ```sysml-view Page_requirements_requirements_n_052_0::capsizeControlRecovery1 direction=BT statements=true

@@ -1,12 +1,14 @@
 # SV Blue Dog: learning through an autonomous sailboat
 
-I started Blue Dog to explore how far autonomous sailing and desktop manufacturing could go together. I wanted to learn about sailing, build something interesting, and develop a complete system rather than an isolated mechanism.
+Blue Dog is named after my blue heeler, Ozzy. The name also fits the little vessel I hope to build: small, something like a dog, puttering around the surface of a river or the ocean independently. That image is part of the fun of the project.
+
+I started Blue Dog to explore how far autonomous sailing and desktop manufacturing could go together. I wanted to learn about sailing, build something interesting, and develop a complete system. This introduction supplies the owner intent for [mission definition in the development plan](development-plan.md#mission-definition): the sailing ambition, the manufacturing experiment and what I want to learn. Those inputs shape the mission, prototype sequence and design priorities followed by the rest of the series.
 
 Microtransat was the inspiration. My smaller version was a “trans-gorge” boat: first the Gorge Blowout idea, then a journey from The Dalles to Bonneville and back. The longer-term ambition is Hawaii. The Gorge is a demanding place to learn about the system; completing a river challenge would not by itself establish ocean readiness.
 
 ## Build the process around the mission
 
-I keep the [challenge brief](architecture.md) independent of the vehicle design. That prevents a convenient hardware choice from quietly changing what success means. The [design guide](index.md) follows the current chain from mission to requirements, architecture, analysis and verification.
+I keep the [challenge brief](architecture.md) independent of the vehicle design. That prevents a convenient hardware choice from quietly changing what success means. The [series guide](index.md) follows the development plan through mission definition, early virtual V&V, detailed implementation, physical V&V and model validation.
 
 The existing [CAD](../cad/) is a separate manufacturing and wing-sail testbed. It helps explore what I can print and assemble, but is not a claim that the challenge boat has been designed or qualified. One of the project goals is learning SysML v2 by making these distinctions explicit.
 

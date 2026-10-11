@@ -1,8 +1,8 @@
 # SV Blue Dog
 
-An autonomous sailboat project exploring sailing, desktop manufacturing and complete-system design. The independent Trans-Gorge challenge is the proving ground for a longer-term Hawaii objective.
+Named after my blue heeler, Ozzy, Blue Dog is an autonomous sailboat project exploring sailing, desktop manufacturing and complete-system design. The hope is a small, dog-sized vessel puttering independently around the surface of a river or the ocean. The independent Trans-Gorge challenge is the proving ground for a longer-term Hawaii objective.
 
-Start with the [project journey](docs/restarting-sv-blue-dog.md), [design methods](docs/index.md), and [focused requirements](docs/requirements.md).
+Start with the [project journey](docs/restarting-sv-blue-dog.md), [development series](docs/index.md), and [focused requirements](docs/requirements.md).
 
 The [development plan](docs/development-plan.md) connects mission intent, simulation, physical evidence and lightweight review gates across successive prototypes.
 

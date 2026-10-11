@@ -1,5 +1,7 @@
 # R-002 RecoveryEnergy relationships
 
+This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes recovery-energy obligations and recovery-task relationships from the authoritative model and informs battery reserve allocation and the measurements needed to verify usable recovery energy. The relationships define the design and evidence obligations; they do not record a completed test.
+
 [Requirement views](../requirements.md)
 
 This obligation also motivates design choices. A rationale-bearing dependency does not assert logical requirement derivation; follow the source model for those decisions.
