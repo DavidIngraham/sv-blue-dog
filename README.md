@@ -4,6 +4,8 @@ An autonomous sailboat project exploring sailing, desktop manufacturing and comp
 
 Start with the [project journey](docs/restarting-sv-blue-dog.md), [design methods](docs/index.md), and [focused requirements](docs/requirements.md).
 
+The [development plan](docs/development-plan.md) connects mission intent, simulation, physical evidence and lightweight review gates across successive prototypes.
+
 ## Repository
 
 - `models/`: authoritative requirements, architecture, rationale, analysis contracts and configurations; reusable physics under `models/libraries/`.

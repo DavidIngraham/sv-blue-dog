@@ -3,6 +3,7 @@
 An autonomous sailboat project exploring sailing, desktop manufacturing and complete-system design. Start with the [journey](restarting-sv-blue-dog.md), then follow the [mission and architecture](architecture.md) into [focused requirement views](requirements.md).
 
 - [How we model requirements and rationale](methods/modeling.md)
+- [Development plan: the V, experiments and review gates](development-plan.md)
 - [Coupled sizing](sizing.md) and [recorded outcomes](results.md)
 - [Energy and sustained operation](energy.md)
 - [Structures and recovery](structures-and-recovery.md)
