@@ -1,10 +1,10 @@
 # SV Blue Dog: learning through an autonomous sailboat
 
-Blue Dog is named after my blue heeler, Ozzy. I like the thought of a small, independent creature puttering around the surface of a river or the ocean. Building something with a little of that character is part of the fun.
+SV Blue Dog is my personal project to design and build a small autonomous sailboat that can travel from The Dalles to Bonneville and back without intervention, while I monitor it from shore. Longer term, I’d love to develop something capable of reaching Hawai‘i. It brings together things I want to learn—sailing, desktop manufacturing and digital engineering—with the fun of building a complete robot that can look after itself on the water. The name comes from my blue heeler, Ozzy: another small, independent creature with plenty of energy and ideas of his own.
 
 I started this project because I wanted to explore the limits of autonomous sailing and desktop manufacturing. I wanted to learn about sailing, build something cool, and develop a complete system. Microtransat—the challenge of sending an autonomous sailing boat across the Atlantic—gave me an idea for something closer to home: an even more micro “trans-gorge” boat.
 
-My initial inspiration was the Gorge Blowout course. The challenge I eventually set myself was a journey from The Dalles to Bonneville and back, without intervention but with live monitoring. Beyond that, I would love to work toward a boat that could reach Hawai‘i. The Gorge would be a demanding proving ground along the way.
+My initial inspiration was the Gorge Blowout course. Adding a return journey made it a much more demanding challenge: the boat would have to sail both ways and make progress against the river current. The Gorge would be a proving ground for the longer-term ocean ambition.
 
 ![Route schematic: start at The Dalles, sail downstream toward Bonneville, then return upstream against the current. The ocean ambition is a later development effort.](figures/route-context.svg)
 
