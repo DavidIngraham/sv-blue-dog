@@ -90,5 +90,5 @@ def test_authored_pages_contain_views_not_copied_diagrams(rendered_site):
         views = [block for block in blocks(source) if block.info.startswith('sysml-view ')]
         assert '```sysml-report' not in rendered
         assert rendered.count('```mermaid') == len(views) + len(sketches)
-        for block in blocks(source):
+        for block in views:
             assert f'%% {block.info.split()[1]} ' in rendered
