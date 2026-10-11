@@ -67,6 +67,8 @@ def render(output):
         if hashlib.sha256((source/name).read_bytes()).hexdigest()!=digest:raise ValueError('Changed geometry evidence: '+name)
         shutil.copy2(source/name,output/name)
     (output/'provenance.json').write_text(json.dumps({'source':'evidence/runs/2026-10-10-coupled','referenceMeshes':[16,32,64],'gridCases':len(grid),'gridSamples':sum(len(c['values']['Alpha']) for c in grid),'validated':False},indent=2)+'\n')
+    from tools.boat_analysis.evidence.heel import render as render_heel
+    render_heel(output)
     return output
 
 if __name__=='__main__':

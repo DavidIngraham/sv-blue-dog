@@ -1,0 +1,6 @@
+{
+  "sourceRevision": "ead0fdcb9a110f59e81fbed2248b8dd807078370",
+  "file": "wing-heel-sweep.json",
+  "sha256": "9c41234ee53d013d9157187170382a93de5ba69b763588b9b3bb74b23375400b",
+  "purpose": "Isolated fixed-camber wing heel sensitivity; unvalidated, not optimizer input."
+}

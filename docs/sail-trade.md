@@ -70,3 +70,35 @@ VLM assumes attached, inviscid flow and a prescribed shedding edge. This CAD sec
 `uv run python -m tools.boat_analysis.evidence.aerodynamics` writes plots to `build/vsp-figures`. The standard publishing command generates the same assets for Pages without installing or running VSP. The plotter always reads the archived records, verifies their hashes, and labels them as unvalidated evidence; it does not silently substitute a newer local run.
 
 To recapture the native geometry screenshots on Windows after installing the isolated VSP environment, run `uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.capture` from the repository root. This opens the graphics event loop, captures the archived geometry, and exits. New captures must be reviewed and their evidence manifest updated explicitly.
+
+## Heel and incidence sweeps
+
+The original VSP sweeps held spanwise inflow at zero and did **not** include heel. The boat force-balance model separately applies a cosine projection to upright lift. The new heel study resolves the changed flow direction in VSPAERO instead of assuming that projection is sufficient.
+
+The [SysML analysis case](../models/analyses/wing-heel.sysml) defines coverage and assumptions. This study uses the same fixed-camber rectangular reference wing at AR 4 and area 1 m², with 5 m/s horizontal apparent wind. Apparent-wind angles are 45°, 90° and 135° from the bow; signed heels are −40°, −20°, 0°, 20° and 40°. Each combination sweeps eight nominal upright incidences from −12° to 16°: **15 sweeps and 120 newly solved operating points**. Mesh parameter 24 and five wake iterations match the earlier response-grid settings; this does not establish convergence at high spanwise inflow.
+
+For each nominal incidence, mast trim is fixed relative to the boat while heel changes. The local angle of attack and spanwise inflow therefore change together. A nominal 8° point means the trim that produces 8° incidence upright, not a controller that maintains 8° at every heel. Across the full study the actual solver alpha spans approximately −19.5° to +23.5°, and spanwise angle reaches ±40°. These extremes extend beyond the original alpha grid and are especially vulnerable to separated-flow and stall errors; a converged algebraic solution would not establish their physical validity.
+
+### Frames and loads
+
+The right-handed world frame is **X aft, Y starboard, Z up**. Positive heel rotates about the aft axis and tilts the mast toward port. The wind velocity is horizontal, with direction `(cos(AWA), −sin(AWA), 0)`. Wing axes are chord X, span Y and section-normal Z. We transform wind into those axes using `R = Rx(heel) Rz(nominal incidence − AWA) Rx(90°)` and recover the solver angles from the transformed vector. At beam wind, the solver's spanwise angle is the negative of heel; at zero heel, every case recovers the original incidence and zero spanwise flow.
+
+The direction and moment normalization follow the [VSPAERO solver conventions](https://github.com/OpenVSP/OpenVSP/blob/master/src/vsp_aero/Solver/VSP_Solver.C). Forces and moments are transformed back into world axes after solving. Forward force is `−Fx`; starboard and upward loads retain their signs. All plotted loads use **inviscid surface-integration results**, excluding the unvalidated profile-drag estimate. Moments are dimensionalized before rotation: roll/yaw coefficients use reference span, pitch uses reference chord.
+
+The moment origin is the **wing-root midchord**, not the boat center of gravity. These are isolated-wing loads, not net vessel roll moments or a righting assessment. Positive and negative heel are both sampled; they are not a substitute for modeling the opposite sailing tack.
+
+![Heel and incidence sweeps at 45 degrees apparent wind](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-awa-45.svg)
+
+![Heel and incidence sweeps at beam wind](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-awa-90.svg)
+
+![Heel and incidence sweeps at 135 degrees apparent wind](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-awa-135.svg)
+
+### Compare with the boat model's approximation
+
+The comparison below holds nominal incidence at 8°. The dashed curve uses the upright inviscid lift and drag from this same study, multiplying lift by `cos(heel)` before resolving forward force. This isolates the projection approximation from profile-drag and discrepancy assumptions used elsewhere in the sizing model. The solid curve comes from the coupled local-alpha/spanwise-inflow solutions.
+
+![Solved heel response versus the cosine projection approximation](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-projection-comparison.svg)
+
+The cosine projection overpredicts forward force for the 45° and 90° wind cases and underpredicts it for the 135° case at substantial heel in this fixed-trim comparison. Heel therefore cannot be represented by one direction-independent loss factor. These curves are sensitivity evidence, not an updated validated optimizer polar. The current optimizer is unchanged. Before replacing its projection, we need consistent heel/wind/trim coverage across the full aspect-ratio and camber grid, appropriate force/moment interfaces, and convergence and physical validation. A free-air uniform-flow study does not include the water surface, wave-induced motion, wind shear, mast/hull interference, stall or dynamic roll.
+
+The [archived heel results](../evidence/runs/2026-10-11-heel/wing-heel-sweep.json) include actual solver alpha/beta, dimensional loads, model settings and source hashes; the [manifest](../evidence/runs/2026-10-11-heel/manifest.json) protects the record bytes. Re-run with `uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.heel_sweep`. Plotting and Pages builds use the archived evidence without launching VSP.

@@ -28,9 +28,10 @@ package BlueDogDesignDecisions {
 
     part aerodynamicScope : Decision {
         attribute :>> disposition = "Use OpenVSP/VSPAERO attached-flow evidence with explicit discrepancy factors and applicability limits.";
-        attribute :>> evidenceNeeded = "Low-Reynolds-number viscous drag, stall, broadside response, thickness sensitivity and both-tack moment measurements.";
+        attribute :>> evidenceNeeded = "Low-Reynolds-number viscous drag, stall, broadside response, thickness sensitivity and both-tack moment measurements; converged heel/wind/trim response across the sizing grid.";
         metadata rationale : ModelingMetadata::Rationale { text = "Potential-flow interpolation is suitable for a provisional force-balance model. Mesh convergence and direct candidate checks establish numerical consistency only. Rounded section ends and assumed wake attachment require physical validation; square-sail/downwind performance is not established by VLM."; }
     }
+    dependency heelSensitivityEvidence from aerodynamicScope to BlueDogWingHeel::sweepInputs;
     dependency polarPurpose from aerodynamicScope to BlueDogRequirements::cruiseEvidence;
     dependency polarCalculation from aerodynamicScope to MarineSailing::Evaluate;
 
