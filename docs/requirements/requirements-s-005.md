@@ -1,6 +1,6 @@
 # S-005 RegulatoryClassification relationships
 
-This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes classification obligations and recorded operating-context questions from the authoritative model and informs the applicability review that constrains equipment and deployment decisions. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [mission definition and SRR](../development-plan.md#mission-definition). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 

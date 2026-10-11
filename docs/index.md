@@ -2,7 +2,15 @@
 
 Blue Dog is named after my blue heeler, Ozzy. I hope the vessel will share a little of that character: small, something like a dog, independently puttering around the surface of a river or the ocean.
 
-This guide follows the [development plan](development-plan.md) across the V. It takes the project goals, current model and available evidence as inputs, and helps identify which article supports the next design or review decision. Start with the [project story](restarting-sv-blue-dog.md), then read the plan for the relationship between early virtual V&V, physical V&V and model validation.
+If you are new here, follow the engineering story first:
+
+1. [Why I started—and why I stalled](restarting-sv-blue-dog.md).
+2. [The route and the boat’s responsibilities](architecture.md).
+3. [A development plan with room to learn](development-plan.md).
+4. [What the current sizing study tells me](results.md).
+5. [How the coupled sizing works](sizing.md), then the rig, energy and recovery studies below.
+
+The matrix is a reference for returning readers. The [focused requirement views](requirements.md) are a lookup library, rather than additional chapters to read in order.
 
 | Part of the plan | Read | Decisions informed |
 | --- | --- | --- |
@@ -13,6 +21,6 @@ This guide follows the [development plan](development-plan.md) across the V. It 
 | [Model validation and feedback](development-plan.md#model-credibility) | [Wing analysis and experiments](sail-trade.md), [structural and recovery methods](structures-and-recovery.md), [energy characterization](energy.md) | Where predictions can be trusted and which assumptions need revision |
 | [Engineering record throughout](development-plan.md#engineering-record) | [Modeling method](methods/modeling.md), [authoring and publishing](publishing.md) | How requirements, rationale, configurations and evidence remain connected |
 
-These are recurring activities, not a completion checklist. An article can serve more than one stage, and a testbed can answer a focused question before the challenge vessel is ready for detailed design. Its introduction identifies its inputs and the part of the design it informs.
+These are recurring activities, not a completion checklist. An article can serve more than one stage, and a testbed can answer a focused question before the challenge vessel is ready for detailed design. Each article explains the question it addresses and the design decision it supports.
 
 The SysML model owns engineering facts and rationale. The articles explain our methods and thought process, with scoped views and statements rendered from that model. Current numerical results remain conditional; the series distinguishes virtual findings, planned physical evidence and accepted measurements rather than treating them as interchangeable.

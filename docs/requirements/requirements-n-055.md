@@ -1,6 +1,6 @@
 # N-055 WeedBlockageResponse relationships
 
-This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes weed-blockage-response obligations and health relationships from the authoritative model and informs blockage detection, autonomous response and controlled fault scenarios. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [virtual design and PDR](../development-plan.md#virtual-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 

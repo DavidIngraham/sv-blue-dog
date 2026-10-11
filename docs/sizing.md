@@ -1,6 +1,25 @@
 # Coupled sizing method
 
-This is part of [virtual design and PDR](development-plan.md#virtual-design). It takes mission-derived progress criteria, environmental scenarios, candidate geometry and provisional physics as inputs, and informs hull, rig, appendage, ballast and energy sizing. Its conditional results help reject or refine concepts; they are inputs to the future mission simulation, not a replacement for virtual mission validation or physical trials.
+How small can Blue Dog be and still make headway upriver? For [preliminary design](development-plan.md#virtual-design), I start with the route, wind and current assumptions, then vary the hull, wing, ballast and energy system together. I want to find which designs are worth developing and which assumptions I most need to test.
+
+![Qualitative force sketch: wing drive must overcome hull drag, while the keel resists side force and ballast supplies a restoring moment. Ground progress also includes current.](figures/sailing-forces.svg)
+
+*A good wing is not enough. The whole boat must balance forces and moments, and its velocity through the water must still produce useful progress over the ground.*
+
+```mermaid
+flowchart TB
+    accTitle: How the sizing study makes a candidate
+    accDescr: The outer search changes the design. For each design, geometry and mass feed an inner operating solve. Constraint failures send the outer search back to a revised design. Independent replay and recovery challenge the selected trial.
+    design["Outer search: hull, rig, ballast, structure, energy"] --> physics["Geometry and mass + aerodynamic / water-force models"]
+    physics --> operating["Inner solve: trim and sailing equilibrium in each scenario"]
+    operating --> screens["Progress, loads, energy, handling and recovery screens"]
+    screens -->|revise design| design
+    screens -->|feasible, then reduce length| trial["Selected trial"]
+    screens -->|stop before feasibility: retain best trial| diagnosis["Diagnostic trial: current run"]
+    diagnosis --> replay
+    trial --> replay["Independent finer replay and recovery studies"]
+    replay --> experiment["Identify the next measurement or design change"]
+```
 
 We first seek a feasible design, then minimize length while allowing the represented hull, rig, appendage, ballast, structure and energy variables to change together. Numerical brackets describe model coverage and search limits. A bound hit requires investigation before claiming a minimum size.
 
@@ -13,6 +32,9 @@ The [aerodynamic policy](../models/analyses/aerodynamic-policy.sysml) makes the 
 VSPAERO supplies finite-wing trends within the archived grid. We retain the provisional upright-polar cosine projection in the force balance; the separate heel study demonstrates why this is a limitation. Published crescent-wing results do not match this CAD section closely enough to supply measured coefficients. Representative mesh/wake checks assess numerical sensitivity, while physical section polars, stall and moment measurements remain open evidence needs.
 
 Feasibility restoration precedes the local size search. Derivatives respect interpolation-grid breakpoints. Small mesh reserves protect against numerical drift; they are separate from physical uncertainty. A continuation can start from the best point without changing requirements or bounds; the record retains its exact normalized seed and checkpoint hash. Refined replay re-solves operating states with energy constraints, then reports any energy-unconstrained diagnostic explicitly. A failed local solve is not proof of physical impossibility.
+
+<details>
+<summary>Reproduce the search and refresh aerodynamic evidence</summary>
 
 ## Run the workflow
 
@@ -54,3 +76,8 @@ uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analy
 ```
 
 Run the grid only when its CAD, coverage or solver settings change; it is substantially more expensive than document publication. New evidence is written under `build/analysis`. Regenerate native inputs after changing geometry evidence. Review results and provenance before archiving a new run and projecting it into the model; never overwrite an archived run in place.
+
+
+</details>
+
+**Next:** [Compare the sail concepts](sail-trade.md).

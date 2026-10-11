@@ -1,6 +1,6 @@
 # R-001 RecoveryPropulsion relationships
 
-This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes recovery-propulsion obligations and installed recovery needs from the authoritative model and informs air-versus-water propulsor comparisons and the associated bench and water tests. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [virtual design and PDR](../development-plan.md#virtual-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md)
 

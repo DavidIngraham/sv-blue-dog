@@ -1,53 +1,21 @@
 # Developing Blue Dog: a V with room to learn
 
-This article is the organizing plan for the series, from [mission definition](#mission-definition) through [physical validation](#physical-validation), with repeated virtual-design and model-credibility loops. Its inputs are the sailing goals, prototype learning needs and current evidence gaps; it informs which analysis, build or test comes next and what evidence each review decision needs.
-
-I want Blue Dog to be both a working autonomous sailboat and a way to learn systems engineering. That calls for a development plan which connects the mission to the experiments, and the experiments back to the design. It should help me and my agents choose the next useful piece of work without creating an enterprise-sized paperwork exercise.
+I need a way to decide what to work on next without turning a personal boat project into a paperwork exercise. This plan starts with the sailing goals, the testbed and the gaps in current evidence. It connects each design decision to the simulation or experiment that could change it.
 
 Our plan combines a systems engineering V with repeated model-and-experiment loops. The outer V follows a particular vessel configuration from intent to demonstrated behavior. Inside it, we first verify and validate the simulated vessel: does the proposed design meet its criteria, and does its behavior address the intended mission? Later we ask those questions of the physical vessel. Separately, measurements assess whether the simulation models are credible enough for their intended use. We repeat this process for increasingly capable prototypes; the first build does not have to be the challenge vessel.
 
 This page defines the development approach and proposed review criteria. It does not record completed reviews or introduce new vessel acceptance thresholds. Requirements, allocations and engineering criteria remain in the [SysML model](../models/README.md); [recorded results](results.md) distinguish numerical outcomes from accepted physical evidence. The process diagrams below explain the method, rather than claiming to be executable SysML activities.
 
-## Reading the series through the plan
-
-The [series guide](index.md) groups the articles by the decisions below. These are recurring activities, not claims that a review has passed or that every subsystem has reached the same stage.
-
-<a id="mission-definition"></a>
-### Mission definition and SRR
-
-Start with owner intent, the challenge and the operating context. Refine these into requirements and scenarios, using early simulation to challenge omissions. The [journey](restarting-sv-blue-dog.md), [architecture](architecture.md), [operating constraints](operating-constraints.md) and [focused requirements](requirements.md) inform what we intend to build and how success will be judged.
-
-<a id="virtual-design"></a>
-### Virtual design and PDR
-
-Use requirements, scenarios and declared model assumptions to assess candidate behavior before hardware commitment. The [sizing method](sizing.md), [results](results.md), [sail trade](sail-trade.md), [energy](energy.md), [recovery propulsion](recovery-propulsion.md) and [reliability](reliability.md) inform architecture and sizing decisions. A conditional simulation result remains distinct from physical evidence.
-
-<a id="detailed-design"></a>
-### Detailed design and build readiness
-
-Turn a reviewed concept, interface definitions and supported loads into a buildable configuration. [Manufacturing and recovery](structures-and-recovery.md), subsystem analyses and equipment-level requirement views inform material, geometry, actuator and electrical details. CDR releases a defined scope; unresolved evidence can limit that release to an experiment.
-
-<a id="physical-validation"></a>
-### Physical V&V and progression
-
-Take an identified test article, procedures and criteria into component, subsystem and integrated trials. TRR establishes readiness for each campaign; results inform requirement verification, real mission validation and progression. The current articles describe planned evidence and numerical studies, not a completed physical verification campaign.
-
-<a id="model-credibility"></a>
-### Model validation and feedback
-
-Compare predictions with independent measurements under recorded conditions. The [wing experiments](sail-trade.md), [structural and recovery work](structures-and-recovery.md) and [energy measurements](energy.md) will establish or restrict model applicability. This feedback can reopen virtual design at any stage; it is separate from validating the proposed or real vessel against its mission.
-
-<a id="engineering-record"></a>
-### The engineering record across the V
-
-Use the [modeling method](methods/modeling.md) and [publishing workflow](publishing.md) to preserve requirements, rationale, configurations and evidence links. Their inputs are the engineering work at every stage; their output is a consistent record for review decisions and future iteration.
+**Where I am now:** mission definition and virtual preliminary design, with a separate manufacturing/wing/control testbed in CAD. The sizing study has exposed handling, aerodynamic and recovery uncertainties. My next commitment is to focused experiments that can reduce those uncertainties—not to release a challenge vessel for construction.
 
 ## The overall trajectory
 
 The manufacturing and wing prototype has its own learning mission. The challenge vessel must eventually complete The Dalles–Bonneville–The Dalles without intervention, while allowing live monitoring. Repeated operation is the next objective. Hawai‘i remains the longer-term driver, with its own mission definition and readiness evidence; success in the Gorge does not establish ocean readiness.
 
 ```mermaid
-flowchart LR
+flowchart TB
+    accTitle: Four increasingly capable development increments
+    accDescr: Start with the manufacturing and wing testbed, integrate a local-water demonstrator, attempt the Gorge challenge, and later develop the ocean mission. Evidence from each can reopen earlier design decisions.
     A["Manufacturing and wing testbed<br/>Resolve construction and rig uncertainties"] --> B["Local-water demonstrator<br/>Integrate sailing, autonomy and energy"]
     B --> C["Gorge challenge vessel<br/>Round trip, then repeated operation"]
     C --> D["Ocean development<br/>Define and demonstrate the Hawai‘i mission"]
@@ -63,17 +31,22 @@ Each box contains its own scoped V and review decisions. Progress depends on evi
 Read the solid outer path down through definition and implementation, then up through integration and demonstration. The connections across the V pair design intent with the evidence that will assess it. The central simulation is a reusable collection of mission, physics, control and fault models, not a single all-purpose solver.
 
 ```mermaid
+---
+config:
+  themeVariables:
+    fontSize: "14px"
+---
 block-beta
     columns 9
-    mission["Mission and<br/>use cases"] space:7 demonstration["Mission<br/>demonstration<br/>Progression review"]
+    mission["Mission<br/>intent"] space:7 demonstration["Mission<br/>validation"]
     space:9
-    space requirements["Vessel<br/>requirements<br/>SRR"] space:2 simulation["Virtual vessel<br/>Early design V&V<br/>Before hardware"] space:2 integrated["Physical vessel<br/>Integrated V&V<br/>TRR per campaign"] space
+    space requirements["Vessel<br/>criteria<br/>SRR"] space:2 simulation["Virtual<br/>vessel<br/>Early V&V"] space:2 integrated["Real vessel<br/>V&V / TRR"] space
     space:9
-    space:2 architecture["Subsystems<br/>and interfaces<br/>PDR"] space:3 subsystem["Subsystem and<br/>interface<br/>verification"] space:2
+    space:2 architecture["Subsystems<br/>PDR"] space:3 subsystem["Subsystem<br/>tests"] space:2
     space:9
-    space:3 detail["Detailed design<br/>Scoped CDR"] space component["Component<br/>acceptance<br/>Bench and inspection"] space:3
+    space:3 detail["Detail<br/>CDR"] space component["Component<br/>tests"] space:3
     space:9
-    space:4 build["Build and integrate<br/>Record the actual<br/>configuration"] space:4
+    space:4 build["Build and<br/>integrate"] space:4
     mission --> requirements
     requirements --> architecture
     architecture --> detail
@@ -82,12 +55,12 @@ block-beta
     component --> subsystem
     subsystem --> integrated
     integrated --> demonstration
-    mission -- "physical mission validation" --> demonstration
+    mission -- "validate mission" --> demonstration
     simulation -- "validate requirements" --> requirements
     architecture --> simulation
-    simulation -- "predictions and test scenarios" --> integrated
-    architecture -- "verify allocated behavior" --> subsystem
-    detail -- "verify implementation" --> component
+    simulation -- "test scenarios" --> integrated
+    architecture -- "verify behavior" --> subsystem
+    detail -- "verify detail" --> component
     classDef intent fill:#e9f1fc,stroke:#345b87,color:#183047
     classDef evidence fill:#e7f4ec,stroke:#397251,color:#183047
     classDef learning fill:#fff1ce,stroke:#92712d,color:#183047
@@ -101,6 +74,15 @@ The left-side loop is **early virtual verification and validation**. Requirement
 The right side is **physical verification and validation**: component, subsystem and integrated evidence from the built configuration, culminating in mission behavior. We reuse scenarios and acceptance logic where applicable, while recording whether each result came from simulation or the real system. The simulation also develops test cases and expected responses for that right-hand work.
 
 A third connection, **model validation**, compares physical observations with simulation predictions. It establishes the model's usable domain and discrepancy, and feeds the next virtual-design iteration. This feedback is shown separately below so it cannot be mistaken for either virtual or physical product validation.
+
+## Follow one decision across the V
+
+Take the wing actuator. During virtual design I estimate trim moments and duty cycles, then ask whether the proposed drive supports sailing and energy requirements. That can expose an inadequate allocation before I buy hardware. On the bench I will measure a real drive’s movement energy, holding demand and jam behavior. Those tests verify the implementation; comparing them with the predictions also tests the model. Finally, integrated sailing trials ask whether the complete boat trims reliably in the conditions the mission actually needs.
+
+These are different uses of evidence. A correct calculation does not establish real wing loads, and a good actuator bench result does not establish an autonomous voyage.
+
+<details>
+<summary>Reference: virtual V&V, physical V&V and model validation</summary>
 
 ## Three evidence streams, not one validation label
 
@@ -116,33 +98,25 @@ The outer V and its early simulation loop answer the same design questions at di
 
 ```mermaid
 flowchart TB
-    intent["Mission intent, requirements and scenarios"] --> virtual["EARLY VIRTUAL V&V<br/>Run the simulated vessel<br/>Check criteria and intended behavior"]
-    models["Physics, environment and control models<br/>Declared assumptions and credibility"] --> virtual
-    virtual --> findings["Virtual findings<br/>Requirement gaps, design failures and conditional passes"]
-    findings --> decision["SRR / PDR decision<br/>Refine requirements and design<br/>Select the next experiment or build"]
-    decision --> hardware["Built configuration<br/>Scoped CDR and test-ready procedures"]
-    hardware --> physical["PHYSICAL V&V<br/>Measure compliance and demonstrate intended use"]
-    intent --> physical
-    physical --> actual["Physical findings<br/>Requirement results and mission evidence"]
-    actual --> progression["Results and progression review<br/>Accept only applicable evidence"]
-    models --> predictions["Predictions at the measured conditions"]
-    predictions --> correlation["MODEL VALIDATION<br/>Compare independent measurements and predictions"]
-    actual --> correlation
-    correlation --> revised["Updated model credibility and validity domain<br/>Feed the next virtual V&V iteration"]
-    findings --> iteration["If intent or design is inadequate:<br/>revise and repeat virtual V&V before commitment"]
-    classDef virtualEvidence fill:#fff1ce,stroke:#92712d,color:#183047
-    classDef physicalEvidence fill:#e7f4ec,stroke:#397251,color:#183047
-    classDef credibility fill:#e9f1fc,stroke:#345b87,color:#183047
-    class virtual,findings,decision,iteration virtualEvidence
-    class hardware,physical,actual,progression physicalEvidence
-    class models,predictions,correlation,revised credibility
+    accTitle: Measurements feed the next virtual design iteration
+    accDescr: Compare independent physical measurements with predictions at the same conditions, revise the model's usable domain, and repeat virtual vessel assessment. New experiments can be needed to resolve the remaining discrepancy.
+    measurement["Coupons, rigs and vessel trials: independent measurements"] --> comparison["Compare with predictions at the measured conditions"]
+    comparison --> credibility["Revise model assumptions and usable domain"]
+    credibility --> virtual["Repeat virtual vessel V&V and design decisions"]
+    virtual -->|next evidence needed| measurement
 ```
 
-The diagram is a dependency map, not a requirement to wait for a finished boat before validating any model. Early coupons, wing rigs and actuator experiments also supply physical observations to model validation. A component can already have correlated models while integrated mission simulation still uses provisional assumptions. Hardware-in-the-loop mixes real implementation with a simulated environment: it verifies particular interfaces or controller behavior, not the entire vessel in real weather.
+This is a feedback loop, not a requirement to wait for a finished boat before validating any model. Early coupons, wing rigs and actuator experiments also supply physical observations to model validation. A component can already have correlated models while integrated mission simulation still uses provisional assumptions. Hardware-in-the-loop mixes real implementation with a simulated environment: it verifies particular interfaces or controller behavior, not the entire vessel in real weather.
 
 Model validation is also separate from software verification. Unit tests, analytic benchmarks, native/interpreter comparisons and mesh studies check implementation or numerical behavior. They cannot establish real sail lift, drag or durability. Conversely, a useful force measurement does not establish that the complete boat can sail upstream autonomously.
 
 For each model experiment, define the predicted observable, test configuration, applicable conditions, measurement uncertainty and allowable discrepancy before taking data. Keep calibration data distinct from validation data where practical. A model whose error is acceptable for concept comparison may still be inadequate for final sizing. An inconclusive comparison stays inconclusive; it is not converted into a passing requirement.
+
+
+</details>
+
+<details>
+<summary>Reference: work at each layer and major subsystem</summary>
 
 ## What happens at each layer
 
@@ -173,9 +147,17 @@ Recovery propulsion may support testing and vessel recovery. It cannot contribut
 
 Detailed analysis follows uncertainty, not a fixed tool ladder. Start with estimates and sensitivity studies; add fidelity when it could change an architecture or sizing decision. Before committing geometry, correlate the dominant physical assumptions. Before the mission, obtain integrated evidence in representative conditions. A more detailed simulation is not automatically more credible.
 
+
+</details>
+
 ## Review gates scaled to one project
 
 Each Systems Engineering Technical Review (SETR) is a short, configuration-specific decision supported by linked evidence. No standing board or slide deck is required. I make the commitment decision; an agent prepares the evidence and another review, when requested, can challenge the reasoning. Different subsystems can hold separate scoped reviews.
+
+In practice I need five questions: **SRR**, is the mission clear enough to design against? **PDR**, does the concept justify detailed work? **CDR**, can I build the defined scope? **TRR**, is the next test ready? **Progression review**, what does its evidence justify doing next? A review can send me back around the loop or release only a limited experiment.
+
+<details>
+<summary>Reference: gate entry, exit and permitted commitments</summary>
 
 | Gate | Entry: what is ready to discuss? | Exit: what must support the decision? | Commitment enabled |
 | --- | --- | --- | --- |
@@ -188,6 +170,9 @@ Each Systems Engineering Technical Review (SETR) is a short, configuration-speci
 A decision is **proceed**, **proceed with limitations**, or **iterate**. A limitation states exactly what work is permitted and what remains blocked. A bench rig's CDR does not release the final vessel. Every on-water envelope expansion gets a scoped TRR; completing one trial does not authorize all later conditions.
 
 The review record needs only a scope/configuration reference, criteria with evidence links, discrepancies, the owner's decision and follow-up actions. Every result identifies its evidence type: virtual, physical or mixed; model credibility is recorded separately from the requirement verdict. A changed interface, critical assumption or requirement reopens the affected decision. Unaffected evidence can be reused only with a documented applicability check. These gates are our engineering decisions, not external certification.
+
+
+</details>
 
 ## Traceability without duplicate paperwork
 
@@ -230,3 +215,41 @@ The strongest match is [Airbus's Systems Engineering V-Cycle, printed slide 3 (P
 [EyasSAT's Five V&V Activities, Figure 2 on page 4](https://indico.esa.int/event/94/contributions/3625/attachments/2915/3380/S9_1200_Liefer.pdf#page=4) separates requirements validation, model validation, product verification, product validation and flight certification. We adapt the last activity to a personal-project readiness decision. EyasSAT is a training platform adopted by space organizations, not evidence from a flown mission.
 
 For an industrial account of iteration, [Airbus's 2017 fuel-system presentation, slide 11](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/solutions/aerospace-defense/files/2017/expo-uk/model-based-design-for-fuel-system-development.pdf#page=11) shows distinct model, requirements and test-validation loops; the surrounding presentation describes work on aircraft fuel systems, including A350 modeling. These are references for the method, not proof that their tools or level of formality are appropriate for a small sailboat.
+
+
+## Reading the series through the plan
+
+The [series guide](index.md) groups the articles by the decisions below. These are recurring activities, not claims that a review has passed or that every subsystem has reached the same stage.
+
+<a id="mission-definition"></a>
+### Mission definition and SRR
+
+Start with owner intent, the challenge and the operating context. Refine these into requirements and scenarios, using early simulation to challenge omissions. The [journey](restarting-sv-blue-dog.md), [architecture](architecture.md), [operating constraints](operating-constraints.md) and [focused requirements](requirements.md) inform what we intend to build and how success will be judged.
+
+<a id="virtual-design"></a>
+### Virtual design and PDR
+
+Use requirements, scenarios and declared model assumptions to assess candidate behavior before hardware commitment. The [sizing method](sizing.md), [results](results.md), [sail trade](sail-trade.md), [energy](energy.md), [recovery propulsion](recovery-propulsion.md) and [reliability](reliability.md) inform architecture and sizing decisions. A conditional simulation result remains distinct from physical evidence.
+
+<a id="detailed-design"></a>
+### Detailed design and build readiness
+
+Turn a reviewed concept, interface definitions and supported loads into a buildable configuration. [Manufacturing and recovery](structures-and-recovery.md), subsystem analyses and equipment-level requirement views inform material, geometry, actuator and electrical details. CDR releases a defined scope; unresolved evidence can limit that release to an experiment.
+
+<a id="physical-validation"></a>
+### Physical V&V and progression
+
+Take an identified test article, procedures and criteria into component, subsystem and integrated trials. TRR establishes readiness for each campaign; results inform requirement verification, real mission validation and progression. The current articles describe planned evidence and numerical studies, not a completed physical verification campaign.
+
+<a id="model-credibility"></a>
+### Model validation and feedback
+
+Compare predictions with independent measurements under recorded conditions. The [wing experiments](sail-trade.md), [structural and recovery work](structures-and-recovery.md) and [energy measurements](energy.md) will establish or restrict model applicability. This feedback can reopen virtual design at any stage; it is separate from validating the proposed or real vessel against its mission.
+
+<a id="engineering-record"></a>
+### The engineering record across the V
+
+Use the [modeling method](methods/modeling.md) and [publishing workflow](publishing.md) to preserve requirements, rationale, configurations and evidence links. Their inputs are the engineering work at every stage; their output is a consistent record for review decisions and future iteration.
+
+
+**Next:** [What the current sizing study tells me](results.md).

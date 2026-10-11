@@ -11,6 +11,26 @@ def test_view_blocks_cannot_redeclare_requirements():
         ViewBlock.parse("sysml-view Page::view", "package Page { requirement copied; }")
 
 
+def test_native_publication_adds_context_and_formats_only_report_tables():
+    from tools.publishing.build import materialize
+    source = '# Sailing decision\n\nDrive must balance drag.\n\n```sysml-report Example::Report\n```\n'
+    raw = '| Mass | Passed |\n| --- | --- |\n| 40.94515734520988 | false |\n\nExact identifier: 40.94515734520988\n'
+    result = materialize(source, [raw])
+    assert '| 40.95 | No |' in result
+    assert 'Exact identifier: 40.94515734520988' in result
+    view = source.replace('sysml-report Example::Report', 'sysml-view Example::View')
+    result = materialize(view, ['```mermaid\nflowchart BT\n A --> B\n```'])
+    assert 'accTitle: Sailing decision' in result
+    assert 'accDescr: Drive must balance drag.' in result
+
+
+def test_reference_disclosure_preserves_heading_anchor():
+    from tools.publishing.build import body_html
+    result = body_html('<details>\n<summary>Evidence</summary>\n\n## Wing sweeps\n\nResults.\n\n</details>')
+    assert '<h2 id="wing-sweeps">' in result
+    assert '<details>' in result
+
+
 def test_bad_view_options_fail():
     with pytest.raises(ValueError):
         ViewBlock.parse("sysml-view Page::view direction=sideways", "")

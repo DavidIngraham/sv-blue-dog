@@ -1,6 +1,21 @@
 # Authoring and publishing
 
-Publishing supports the [engineering record across every stage](development-plan.md#engineering-record). Its inputs are authored explanations, scoped SysML views and archived evidence; it informs how agents and readers inspect a consistent design record at reviews without duplicating requirements or mistaking generated figures for new test results.
+How can I explain the project without maintaining a second, drifting copy of the design? I write the story in Markdown and import small views of the real SysML model. This supports the [engineering record across the V](development-plan.md#engineering-record): readers and agents can follow a decision back to its requirements, assumptions and evidence.
+
+```mermaid
+flowchart TB
+    accTitle: What each tool contributes
+    accDescr: SysML records definitions and assumptions. OpenSysML executes calculations and renders views. VSPAERO provides exploratory aerodynamic evidence and SciPy searches designs using the model. Pytest checks implementation. Markdown and Pages communicate the results; none substitutes for physical testing.
+    model["SysML v2: requirements, equations, rationale and cases"] --> native["OpenSysML: execution and model views"]
+    native --> search["Python + SciPy: coupled design search"]
+    vsp["OpenVSP / VSPAERO: exploratory wing evidence"] --> search
+    tests["pytest: implementation and numerical checks"] -. checks .-> search
+    search --> record["Archived runs linked back to the model"]
+    record --> pages["Markdown + Pages: explain decisions and show views"]
+    native --> pages
+```
+
+The arrows show information flow, not physical qualification. Measured evidence is a separate input to model validation and design acceptance.
 
 Our Markdown describes methods and design reasoning. Engineering definitions, assumptions and rationale belong in `models/`. Each page imports those definitions into a small native view; the publisher resolves the view with OpenSysML and inserts its diagram and requirement statements.
 
@@ -33,3 +48,6 @@ The model-and-documentation workflow validates and prepares native calculations,
 The personal blog keeps its existing article identifiers and reads rendered Markdown from the project site's `imports/` directory. Authored pages stay in this repository. Legacy page paths redirect to current methods; superseded numerical studies remain available through Git history rather than masquerading as current results.
 
 Aerodynamic plots are regenerated from hash-checked archived JSON by `tools.boat_analysis.evidence.aerodynamics` and published under `assets/vsp`. Native geometry screenshots and the corresponding VSP model are retained as evidence. Mesh/wake comparisons and sizing outcomes are projected into SysML for native report queries. The plot build does not launch OpenVSP.
+
+
+**Next:** [Return to the series guide](index.md).

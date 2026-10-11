@@ -1,6 +1,6 @@
 # R-002 RecoveryEnergy relationships
 
-This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes recovery-energy obligations and recovery-task relationships from the authoritative model and informs battery reserve allocation and the measurements needed to verify usable recovery energy. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [virtual design and PDR](../development-plan.md#virtual-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md)
 

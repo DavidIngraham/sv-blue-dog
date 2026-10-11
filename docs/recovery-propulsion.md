@@ -1,13 +1,16 @@
 # Comparing recovery propulsion
 
-This trade belongs to [virtual design and PDR](development-plan.md#virtual-design), followed by [detailed implementation and test planning](development-plan.md#detailed-design). Its inputs are the recovery task, hull resistance, weed exposure, energy reserve and candidate drive characteristics; it informs propulsor selection, installation and comparative physical tests while preserving the challenge’s sail-only boundary.
+If a trial goes wrong, I want a practical way to bring the boat back. Should that be a water propeller or an air propeller? This [preliminary-design trade](development-plan.md#virtual-design) starts with resistance, weed exposure and the energy reserve, and should lead to an installed comparison of the two concepts. The motor is for testing and recovery, not the qualifying sailing attempt.
 
-Compare a submerged water propeller and an above-water air propeller against the same installed recovery task. Neither concept is selected by an ideal disk calculation. Keep auxiliary development/recovery operation distinct from a qualifying sail-only challenge attempt.
+I want to compare both drives against the same installed recovery task. An ideal disk calculation can help estimate the scale of the problem, but it cannot tell me which installation will work better on this boat.
 
-Start with a hull tow measurement and required recovery conditions. Bench each complete guarded drive, then measure installed thrust, electrical power, temperature and maneuvering performance. The [native analysis](../models/analyses/recovery-propulsion.sysml) estimates reserve demand from illustrative inputs; its evidence gates prevent that estimate becoming physical qualification.
+My starting point will be a hull tow measurement and the required recovery conditions. Then I can bench each complete guarded drive and compare installed thrust, electrical power, temperature and maneuvering performance. The [native analysis](../models/analyses/recovery-propulsion.sysml) currently estimates reserve demand from illustrative inputs; those estimates help plan the experiment.
 
-Water propulsion offers compact thrust but exposes the rotor and shaft to weeds. Air propulsion avoids submerged rotor fouling while upright but adds windage, guarding, elevated mass and capsize interactions. Both still depend on the hull, keel and rudder passing vegetation. Compare installed performance in identical weed trials, including shutdown, clearing and restart.
+Water propulsion offers compact thrust but exposes the rotor and shaft to weeds. Air propulsion avoids submerged rotor fouling while upright but adds windage, guarding, elevated mass and capsize interactions. Both still depend on the hull, keel and rudder passing vegetation. Identical weed trials, including shutdown, clearing and restart, should reveal how much that distinction matters in practice.
 
-Include sailing drag, rig clearance, isolation, handling, corrosion, servicing and wet restart in the comparison. Trace any proposed tradeoff back to the [recovery obligation](requirements/requirements-r-001.md), [reserve](requirements/requirements-r-002.md), and [weed qualification](requirements/requirements-n-056.md). Do not silently relax a mission condition to make a candidate pass.
+The comparison also needs sailing drag, rig clearance, isolation, handling, corrosion, servicing and wet restart. I keep those tradeoffs linked to the [recovery obligation](requirements/requirements-r-001.md), [reserve](requirements/requirements-r-002.md), and [weed qualification](requirements/requirements-n-056.md), so it stays clear which problem each test is answering.
 
-The ideal actuator-disk calculation is a screening tool with explicit applicability limits. Use actual propeller data and installed measurements for a design decision. The [source notes](../models/vehicle/source-evidence.sysml) retain the prior research and comparison rationale; [energy accounting](energy.md) and [recovery analysis](structures-and-recovery.md) explain the coupled assessments.
+Actual propeller data and installed measurements will decide the selection. The [source notes](../models/vehicle/source-evidence.sysml) retain the prior research and comparison rationale; [energy accounting](energy.md) and [recovery analysis](structures-and-recovery.md) explain how that choice affects the rest of the boat.
+
+
+**Next:** [Construction and self-righting](structures-and-recovery.md).

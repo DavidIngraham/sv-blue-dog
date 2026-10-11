@@ -1,6 +1,6 @@
 # C-002 RepeatedOperation relationships
 
-This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the repeated-operation objective and endurance relationships from the authoritative model and informs the progression from one qualifying trip to sustained autonomous operation. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [mission definition and SRR](../development-plan.md#mission-definition). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md)
 

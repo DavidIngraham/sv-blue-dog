@@ -1,6 +1,6 @@
 # C-004 SailingPropulsion relationships
 
-This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the challenge propulsion rule and motor-related relationships from the authoritative model and informs the separation of qualifying sailing from powered testing and recovery. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [mission definition and SRR](../development-plan.md#mission-definition). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md)
 

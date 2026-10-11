@@ -1,6 +1,6 @@
 # M-001 RoundTrip relationships
 
-This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the vehicle round-trip obligation and challenge relationships from the authoritative model and informs ordered route behavior and verification of a completed journey. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [mission definition and SRR](../development-plan.md#mission-definition). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md)
 

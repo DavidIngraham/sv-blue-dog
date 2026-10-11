@@ -1,29 +1,33 @@
 # Conservative sizing: reading the results
 
-This page supplies evidence for [virtual design and PDR](development-plan.md#virtual-design), with open questions feeding the [model-credibility loop](development-plan.md#model-credibility). Its inputs are archived search, replay and recovery runs; it informs which candidate assumptions and design constraints to revisit, and which experiments should precede further design commitment. These are numerical findings, not completed physical V&V.
+The current trial answers part of the question: under the primary assumptions it can balance the modeled sailing states and energy demand and meet the route screen. It does **not** yet give me a design to build. Handling is still outside its allocation, added aerodynamic degradation loses upstream progress, and self-righting remains unproven.
 
-This run searches the complete 29-variable design with the conservative aerodynamic policy and restricted operating angles. The search and one continuation stopped just outside the coarse feasibility tolerance, so the minimum-length phase did not run. The reported dimensions describe a near-feasible trial, not an established minimum or a qualified boat. A failed local search does not establish that no feasible design exists.
+For [preliminary design](development-plan.md#virtual-design), I use the archived search, replay and recovery runs to decide what to investigate next. The most useful next evidence is wing force and moment measurements, construction mass/stiffness measurements, and controlled recovery experiments. Those feed the [model-credibility loop](development-plan.md#model-credibility) before another sizing decision.
 
-The limiting search margins include additional numerical reserves. In particular, a shortfall against the upstream progress reserve is not automatically a failure of the underlying mission progress requirement. The refined replay below assesses the selected geometry independently, using the actual operating screens and finer geometry.
+The search stopped just outside its coarse feasibility tolerance, before minimizing length. The dimensions below describe a near-feasible trial, not a proven minimum. Refined replay keeps its geometry fixed and re-solves the controls; that is why a primary sailing pass can coexist with an unsuccessful coarse search.
 
-The conservative primary case (stored as `nominal`) and five additional stress cases are reviewed separately. Replay fixes geometry and re-solves controls with finer geometry and free pitch. Durations from infeasible or energy-unconstrained diagnostic cases are numerical outputs, not predictions of successful sustained voyages. The model keeps operating feasibility, sampled static restoring behavior and evidence acceptance distinct: a positive roll result on an unstable pitch branch is not proof of self-righting.
+## Read the candidate and scenario record
 
-The conservative primary replay balances the sailing states and passes the modeled energy and route screens. Its combined verdict still fails because the finer geometry exceeds the body-handling mass allocation. Additional aerodynamic degradation produces a substantial upstream-progress and passage-duration failure; construction and hydrodynamic stresses also lose upstream progress. The energy stress case requires diagnostic controls in all eight states. The combined stress case has negative easterly upstream progress and fails energy screens; its internal duration penalty is not a voyage-time prediction. These are conditional numerical findings, not measured sailing performance.
+```sysml-report BlueDogEvidenceDocuments::CandidateBrief
+```
 
-The build publishes the native record review below. Read the [sizing method](sizing.md) for how the result was obtained and the [current run manifest](../evidence/runs/2026-10-11-conservative/manifest.json) for exact source and evidence hashes. The earlier run remains archived as history and is not relabelled as a result of the revised method.
+Displayed numbers are rounded for reading; the model and archived runs retain their original precision. The concept sketch in the [mission article](architecture.md) explains the parts, but is not a rendering of this trial geometry.
+
+The native tables below are generated from the model. “No” in the combined or accepted-evidence columns matters even when an individual screen passes. In the energy stress case, all eight states needed energy-unconstrained diagnostics; those durations cannot predict sustained operation. The combined case’s duration penalty is not a voyage time. Positive sampled roll moments also do not establish recovery when pitch is unstable.
+
+<details>
+<summary>Candidate dimensions, scenario comparisons and limiting margins</summary>
 
 ```sysml-report BlueDogEvidenceDocuments::Summary
 ```
 
-```sysml-view Page_results_0::candidate direction=TB
-package Page_results_0 {
-    private import StandardViewDefinitions::*;
-    view candidate : GeneralView {
-        expose BlueDogCurrentSizing::candidate;
-    }
-}
-```
+</details>
+
+[Inspect the candidate definition and exact values](../models/evidence/conservative-2026-10-11.sysml). The report is a readable projection; archived evidence retains full precision.
 
 The [ingress assessment](structures-and-recovery.md) finds negative restoring moments with a flooded or water-retaining wing. Even the positive sealed-wing roll samples include pitch-unstable equilibria. Self-righting therefore remains unproven.
 
 The [OpenVSP experiment gallery](sail-trade.md#what-we-have-actually-run-in-openvsp) includes tested geometry, alpha and heel sweeps, mesh/wake sensitivity, induced-drag polars and a direct interpolation check at the trial's aspect ratio and camber. Those experiments support exploratory trends; measured low-Reynolds-number polars, stall, real drag and moment data are still missing. None of these numerical outcomes qualifies the vessel for the challenge.
+
+
+[Run provenance](../evidence/runs/2026-10-11-conservative/manifest.json) · **Next:** [How the sizing search works](sizing.md).

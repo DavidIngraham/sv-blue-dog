@@ -1,6 +1,6 @@
 # H-001 HawaiiVoyage relationships
 
-This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the Hawai‘i objective and related vehicle obligations from the authoritative model and informs ocean mission definition and which Gorge evidence may transfer to later development. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [mission definition and SRR](../development-plan.md#mission-definition). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md)
 

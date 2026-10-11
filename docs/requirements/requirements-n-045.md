@@ -1,6 +1,6 @@
 # N-045 WetElectricalIntegrity relationships
 
-This focused view supports [detailed design and build readiness](../development-plan.md#detailed-design). It takes wet-electrical-integrity obligations and their derived criteria from the authoritative model and informs enclosures, connections, protection and electrical exposure tests. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [detailed design and build readiness](../development-plan.md#detailed-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 

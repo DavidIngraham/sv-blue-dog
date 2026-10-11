@@ -1,6 +1,6 @@
 # N-056 RecoveryPropulsorWeeds relationships
 
-This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes recovery-propulsor weed obligations and recovery relationships from the authoritative model and informs drive installation, protection and comparative installed weed tests. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [virtual design and PDR](../development-plan.md#virtual-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 

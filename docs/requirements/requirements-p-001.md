@@ -1,6 +1,6 @@
 # P-001 Transportability relationships
 
-This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes the owner’s transportability constraint and handling relationships from the authoritative model and informs assembly boundaries, mass allocations and practical handling demonstrations. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [mission definition and SRR](../development-plan.md#mission-definition). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 

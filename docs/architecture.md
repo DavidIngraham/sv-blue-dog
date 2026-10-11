@@ -1,6 +1,14 @@
 # Mission, context and architecture
 
-This article connects [mission definition](development-plan.md#mission-definition) to [virtual design and preliminary review](development-plan.md#virtual-design). Its inputs are the independent challenge, the Hawai‘i goal, operating scenarios and owner constraints; it informs subsystem responsibilities, interfaces and the behaviors our simulated vessel must exercise before hardware decisions.
+What does this little boat actually have to do? I start with the independent Gorge challenge and the longer-term Hawai‘i goal, then work through the people, environment and equipment it will interact with. This is [mission definition](development-plan.md#mission-definition): it sets up the responsibilities and scenarios I will use to compare designs.
+
+![Route orientation: The Dalles to Bonneville downstream, then upstream back to The Dalles against the current.](figures/route-context.svg)
+
+The return leg has to make progress over the ground, not just through the water. In an easterly, it must also work to windward. The challenge is sail-only and unassisted; I want live observation without making a shore connection necessary for control. Hawai‘i is the longer-term objective, with separate readiness evidence.
+
+![Illustrative vessel arrangement with wing, hull, rudder, keel, ballast, solar collection and electronics.](figures/boat-concept.svg)
+
+This is a concept sketch, not the SolidWorks testbed or the selected layout. Below, the model views show responsibilities rather than physical locations.
 
 The challenge remains independent of the vehicle so a convenient hardware choice cannot redefine success. The Gorge mission is a proving ground for the eventual ocean voyage. Traffic, shore support and live monitoring belong in the system context; the vessel must make its own decisions during a qualifying attempt.
 
@@ -17,22 +25,49 @@ package Page_architecture_0 {
 }
 ```
 
-```sysml-view Page_architecture_1::architecture direction=TB
+## Sailing hardware
+
+Hull and rig provide the physical platform; actuation trims and steers it. The diagram names the responsibilities before I choose equipment.
+
+```sysml-view Page_architecture_1::sailing direction=TB
 package Page_architecture_1 {
     private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
-    view architecture : GeneralView {
-        expose BlueDog::Architecture::Boat;
-        expose BlueDog::Architecture::NavigationSignaling;
+    view sailing : GeneralView {
         expose BlueDog::Architecture::HullAndRig;
+        expose BlueDog::Architecture::SailAndSteeringActuation;
         expose BlueDog::Architecture::EnergySubsystem;
+        filter @SysML::PartDefinition;
+    }
+}
+```
+
+## Autonomy and observation
+
+Sensing feeds autonomous decisions; communications let me observe them. Losing a link must not turn shore support into the boat’s controller.
+
+```sysml-view Page_architecture_5::autonomy direction=TB
+package Page_architecture_5 {
+    private import StandardViewDefinitions::*;
+    view autonomy : GeneralView {
         expose BlueDog::Architecture::NavigationAndSensing;
         expose BlueDog::Architecture::GuidanceAndControl;
-        expose BlueDog::Architecture::SailAndSteeringActuation;
         expose BlueDog::Architecture::Communications;
+        filter @SysML::PartDefinition;
+    }
+}
+```
+
+## Recovery and records
+
+Health and recovery address failures, signaling makes the boat observable to traffic, and recording preserves what happened. The optional observation payload remains a later increment.
+
+```sysml-view Page_architecture_6::support direction=TB
+package Page_architecture_6 {
+    private import StandardViewDefinitions::*;
+    view support : GeneralView {
         expose BlueDog::Architecture::HealthAndRecovery;
+        expose BlueDog::Architecture::NavigationSignaling;
         expose BlueDog::Architecture::DataRecording;
-        expose BlueDog::Architecture::ObservationPayload;
         filter @SysML::PartDefinition;
     }
 }
@@ -40,16 +75,41 @@ package Page_architecture_1 {
 
 Use cases connect operator and environmental interactions to the requirements they serve.
 
+## Sail among other vessels
+
+Traffic is an actor in the operating context, not just an environmental number. The sailing and avoidance cases connect that interaction to mission and safety obligations.
+
 ```sysml-view Page_architecture_2::operations direction=TB
 package Page_architecture_2 {
     private import StandardViewDefinitions::*;
-    private import DiagramLayout::*;
     view operations : GeneralView {
-        expose BlueDogUseCases::*;
+        expose BlueDogUseCases::sailGorge;
+        expose BlueDogUseCases::avoidTraffic;
         filter @SysML::UseCaseUsage;
     }
 }
 ```
+
+## Observe and recover
+
+Monitoring supports live observation; recovery is a separate operation that can end a qualifying attempt.
+
+```sysml-view Page_architecture_7::supportOperations direction=TB
+package Page_architecture_7 {
+    private import StandardViewDefinitions::*;
+    view supportOperations : GeneralView {
+        expose BlueDogUseCases::monitor;
+        expose BlueDogUseCases::recover;
+        filter @SysML::UseCaseUsage;
+    }
+}
+```
+
+Launch, service, ocean sailing and navigation signaling remain in the [complete use-case model](../models/vehicle/use-cases.sysml).
+
+## From mission to verification
+
+Read this view from the challenge obligation to its vehicle refinement and planned verification. A satisfy link allocates responsibility; it does not assert a passed test.
 
 ```sysml-view Page_architecture_3::MissionSemantics direction=BT
 package Page_architecture_3 {
@@ -88,3 +148,6 @@ package Page_architecture_4 {
     }
 }
 ```
+
+
+**Next:** [The development plan](development-plan.md).

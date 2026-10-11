@@ -31,12 +31,50 @@ def materialize(source, outputs):
         raise ValueError("Every native block must produce exactly one output")
     for token, output in reversed(list(zip(tokens, outputs))):
         start, end = token.map
+        if token.info.startswith("sysml-report"):
+            output = readable_report(output)
+            output = re.sub(r"(?m)^# (.+)$", r"### \1", output)
+        # Native exports do not supply accessible names. Use the authored context,
+        # keeping the semantic graph itself entirely tool-generated.
+        preceding = "".join(lines[:start])
+        headings = re.findall(r"(?m)^#{1,6} (.+)$", preceding)
+        title = headings[-1] if headings else "Model relationships"
+        paragraphs = re.sub(r"```.*?```", "", preceding, flags=re.S).split("\n\n")
+        prose = [p.strip() for p in paragraphs if p.strip() and not p.lstrip().startswith(("#", "<", "|"))]
+        description = prose[-1] if prose else "Follow the named model elements and labeled relationships."
+        description = re.sub(r"\[([^]]+)\]\([^)]+\)", r"\1", description)
+        description = re.sub(r"\s+", " ", description).replace("{", "(").replace("}", ")")
+        output = re.sub(r"(?m)^(flowchart (?:TB|BT|LR|RL|TD))\s*$",
+                        lambda m: m[1] + "\n    accTitle: " + title + "\n    accDescr: " + description, output)
         lines[start:end] = [re.sub(r"(?m)^#\s*$\n?", "", output).strip() + "\n"]
     return "".join(lines)
 
 
+def readable_report(output):
+    """Format native Markdown tables for readers without changing model/evidence data."""
+    def cell(value):
+        clean = value.strip()
+        if clean in {"true", "false"}:
+            return " " + {"true": "Yes", "false": "No"}[clean] + " "
+        if re.fullmatch(r"-?\d+\.\d{5,}(?:[eE][+-]?\d+)?", clean):
+            return f" {float(clean):.4g} "
+        return re.sub(r"([a-z])([A-Z])", r"\1 \2", value)
+    return "\n".join("|".join(cell(c) for c in line.split("|")) if line.startswith("|") else line
+                     for line in output.splitlines())
+
+
 def body_html(markdown, link=None):
     tokens = PARSER.parse(markdown)
+    used = set()
+    for index, token in enumerate(tokens):
+        if token.type == "heading_open":
+            label = tokens[index + 1].content
+            base = re.sub(r"\s+", "-", re.sub(r"[^\w\s-]", "", label.lower().strip())) or "section"
+            slug, suffix = base, 1
+            while slug in used:
+                slug, suffix = f"{base}-{suffix}", suffix + 1
+            used.add(slug)
+            token.attrSet("id", slug)
     def visit(items):
         for token in items:
             key = "href" if token.type == "link_open" else "src" if token.type == "image" else None
@@ -102,8 +140,30 @@ try {{
       ['Zoom in', () => resize(scale * 1.5)], ['Zoom out', () => resize(scale / 1.5)],
       ['Fit', () => resize(viewport.clientWidth / width)], ['Actual size', () => resize(1)]
     ]) {{ const button = document.createElement('button'); button.textContent = label; button.onclick = action; controls.append(button); }}
-    resize(1);
+    if (!drawing.querySelector('title')) {{
+      const title = document.createElementNS('http://www.w3.org/2000/svg','title');
+      title.id = `diagram-title-${{[...document.querySelectorAll('.mermaid svg')].indexOf(drawing)}}`;
+      title.textContent = 'Development plan: design, simulation and physical evidence';
+      drawing.prepend(title); drawing.setAttribute('aria-labelledby',title.id);
+      const desc = document.createElementNS('http://www.w3.org/2000/svg','desc');
+      desc.id = title.id + '-description';
+      desc.textContent = 'Read down the left from mission through criteria, subsystems and detail to build, then up the right through component and subsystem tests to vessel and mission validation. The virtual vessel checks requirements early and supplies physical test scenarios. Cross-V links pair intent with evidence.';
+      drawing.prepend(desc); drawing.setAttribute('aria-describedby',desc.id);
+    }}
+    drawing.setAttribute('role','img');
+    const fit = () => resize(Math.min(1, (viewport.clientWidth || document.querySelector('main').clientWidth) / width));
+    fit(); viewport.closest('details')?.addEventListener('toggle', fit);
+    window.addEventListener('resize', fit);
   }}
+  const reveal = () => {{
+    if (!location.hash) return;
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    for (let parent = target?.parentElement; parent; parent = parent.parentElement) {{
+      if (parent.tagName === 'DETAILS') parent.open = true;
+    }}
+    target?.scrollIntoView();
+  }};
+  reveal(); window.addEventListener('hashchange', reveal);
   document.documentElement.dataset.diagrams='ready';
 }}
 catch (error) {{ document.documentElement.dataset.diagrams='failed'; console.error(error); }}

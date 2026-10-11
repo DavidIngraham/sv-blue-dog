@@ -1,6 +1,6 @@
 # E-007 MissionEvidence relationships
 
-This focused view supports [detailed design and build readiness](../development-plan.md#detailed-design). It takes mission-evidence obligations and recording relationships from the authoritative model and informs logging, timestamps and the records needed to assess a real attempt. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [detailed design and build readiness](../development-plan.md#detailed-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 

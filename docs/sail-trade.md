@@ -1,23 +1,42 @@
 # Comparing sail architectures
 
-The sail trade supports [virtual design and PDR](development-plan.md#virtual-design), while the experiments described here build [model credibility](development-plan.md#model-credibility). It takes the sailing, energy, handling and recovery obligations, candidate rig concepts, prior art and recorded VSP runs as inputs; it informs rig selection, trim-actuator requirements and the measurements needed before detailed sizing.
+Which rig gives this boat a useful combination of drive, low trim power and recoverability? I am comparing three concepts during [preliminary design](development-plan.md#virtual-design), using the mission requirements, prior art and exploratory aerodynamic runs. The decision is still open: the fixed-camber wing gives me a concrete sizing experiment, while measurements must establish whether it deserves to become the selected rig.
+
+![Three conceptual rigs: a wing trimmed by a tail and elevator, a fixed-camber wing rotated at its mast, and a triangular soft sail controlled by a sheet.](figures/rig-concepts.svg)
+
+*These are control concepts, not selected hardware. Tail control and direct mast rotation have different actuation and failure behavior; a soft sail remains a comparator until the evidence supports a decision.*
 
 We compare control architecture separately from section camber. A tail-controlled wing and a directly rotated fixed-camber wing solve trim differently; either needs measured aerodynamic moments, actuator losses, structural loads and failure-state behavior. A soft sail remains a useful comparator rather than an assumed failure. The fixed-camber CAD wing is our sizing experiment, not a resolved winner of the trade.
 
-The analysis separates unknown evidence, a demonstrated failure and a development preference. Apply the same durability, energy, progress, recovery, manufacturing, handling and reliability gates to each candidate. Do not turn a qualitative durability concern into a failure rate or an arbitrary weighted score.
+I want to compare the rigs on the same terms. A promising lift curve is only part of the answer: the sail also has to survive unattended operation, use manageable trim power and let the boat recover from a capsize. A durability concern is worth investigating, but it is not a measured failure rate. I keep that distinction visible in the trade rather than hiding unknowns inside a weighted score.
 
 ```sysml-report BlueDogSailTradeDocuments::Conclusion
 ```
 
 The candidate definitions and gate logic live in the [trade model](../models/analyses/sail-trade.sysml). The [design decisions](../models/vehicle/decisions.sysml) explain the baseline used for sizing. [Source evidence](../models/vehicle/source-evidence.sysml) preserves the prior-art findings and their limits, including the square-sail precedent, Oshen PC13, tail control and non-backdrivable gearing.
 
+## What changed my sizing assumptions
+
+The useful result from VSP so far is a warning about the model, not a winning rig. Mesh choice affects the reference response, and heel changes the local flow in ways a single cosine factor misses. I therefore tightened operating angles and reduced the performance credited in primary sizing. Measurements are still needed to replace those judgments.
+
+![Reference alpha sweeps: lift and moment change with mesh refinement, so the response is not mesh-independent.](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reference-sweeps.svg)
+
+*Mesh refinement changes the answer. This motivates the additional numerical checks below; agreement between meshes would still not establish real lift, drag or stall.*
+
+![At substantial heel, the simple projection overpredicts forward force at 45 and 90 degree apparent wind and underpredicts it at 135 degrees.](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-projection-comparison.svg)
+
+*The error changes with wind direction. I cannot fix heel effects with one universal loss factor. This is why the sizing assumptions remain conservative while the full force model needs more work.*
+
 ## Obtain comparable evidence
 
-Measure both-tack lift, drag and pitching moment over the intended trim range, including stall, broadside sailing and transitions. Measure electrical energy over the same move/hold/idle duty cycle. A gearbox that holds without motor current still has movement losses, controller demand and a retained-angle failure state.
+I need comparable measurements of both-tack lift, drag and pitching moment over the intended trim range, including stall, broadside sailing and transitions. I also need electrical energy measured over the same move/hold/idle duty cycle. A gearbox that holds without motor current still has movement losses, controller demand and a retained-angle failure state.
 
-For recovery, represent each body with actual mass, center of gravity, geometry and flooding state. Pose the rig at free and locked angles and evaluate both sides of a full roll. Check pitch stability and dynamic release behavior separately from sampled static righting moments. The [structures and recovery method](structures-and-recovery.md) describes that distinction.
+For recovery, I will represent each body with its actual mass, center of gravity, geometry and flooding state. Free and locked rig angles, on both sides of a full roll, expose different failure cases. Pitch stability and dynamic release behavior need their own checks alongside sampled static righting moments. The [structures and recovery method](structures-and-recovery.md) describes that distinction.
 
-Use prototypes to resolve the uncertainties before committing geometry. Published [crescent-wing research](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) includes wind-tunnel comparisons, but its section geometry and test conditions differ from ours. It supports investigating the concept; it does not supply validated coefficients for our CAD. The [sizing workflow](sizing.md) therefore uses explicit conservative assumptions while other concepts remain open. Its numerical results do not complete the trade.
+This is where prototypes can resolve the uncertainties before I commit to geometry. Published [crescent-wing research](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) includes wind-tunnel comparisons, but its section geometry and test conditions differ from ours. It supports investigating the concept; it does not supply validated coefficients for our CAD. The [sizing workflow](sizing.md) therefore uses explicit conservative assumptions while other concepts remain open. Its numerical results do not complete the trade.
+
+<details>
+<summary>Full experiment gallery: geometry, sweeps, convergence, heel and reproduction</summary>
 
 ## What we have actually run in OpenVSP
 
@@ -37,17 +56,21 @@ The response grid holds area at 1 m² and changes aspect ratio through 2, 4, 6 a
 
 ![Sections used in the camber study](https://davidingraham.github.io/sv-blue-dog/assets/vsp/sections.svg)
 
+*Changing camber changes the experiment; these are hypothetical variants of the CAD section, not built wings.*
+
 ### Alpha sweeps and mesh sensitivity
 
 The reference sweeps cover −4° to 12° in 4° increments, with spanwise mesh parameters 16, 32 and 64 and corresponding chordwise tessellation `2 × mesh + 1`. These labels are tessellation settings, not total panel counts. The response grid uses mesh parameter 24 and covers −12° to 16° in 4° increments.
 
 The original reference and response-grid sweeps use 5 m/s, air density 1.225 kg/m³, zero sideslip, Mach zero, and five wake iterations. Reynolds number is supplied as `5 × chord / 1.5e-5`; the reference value is approximately 167,000. Reference area, span and chord are set explicitly. Pitching moment is reported about midchord in the solver's axes.
 
-![Reference alpha sweeps comparing three mesh settings](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reference-sweeps.svg)
+
 
 Lift and pitching moment change with mesh refinement, so these curves should not be called mesh-independent. We check that sensitivity explicitly with mesh settings 24, 48 and 72 and wake counts 5, 15 and 30 at incidences −4°, 0°, 4° and 8°. The representative cases cover forward and reversed chord at zero spanwise inflow and forward chord at 20° spanwise inflow. This is 60 additional operating points, not a convergence certificate for every geometry in the response grid.
 
 ![Representative mesh and wake convergence checks](https://davidingraham.github.io/sv-blue-dog/assets/vsp/convergence.svg)
+
+*Small final mesh/wake increments assess numerical sensitivity at sampled points; they do not validate the physical assumptions.*
 
 ```sysml-report BlueDogEvidenceDocuments::AerodynamicChecks
 ```
@@ -58,19 +81,29 @@ All six final-increment checks pass the model's absolute coefficient-change scre
 
 ![Aspect-ratio alpha sweeps at original camber](https://davidingraham.github.io/sv-blue-dog/assets/vsp/aspect-sweeps.svg)
 
+*Aspect ratio changes the response available to the sizing search. These curves support interpolation within the sampled grid; they do not resolve the rig trade.*
+
 ![Camber alpha sweeps at aspect ratio four](https://davidingraham.github.io/sv-blue-dog/assets/vsp/camber-sweeps.svg)
 
+*Camber is a design variable, with both force and moment consequences. The actuator must be considered alongside useful drive.*
+
 ![Induced-drag polars by aspect ratio](https://davidingraham.github.io/sv-blue-dog/assets/vsp/induced-polars.svg)
+
+*This isolates induced drag. It cannot stand in for the total-drag polar required to predict boat performance.*
 
 The drag plots show **induced drag only**, not total sail drag or boat performance. The reference output also contains a profile-drag estimate, but we have not validated it for this section and Reynolds-number range. It is deliberately excluded from these comparisons.
 
 ![Forward and reversed-chord alpha sweeps](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reverse-sweeps.svg)
+
+*Chord reversal tests a geometric sensitivity; it does not demonstrate reliable opposite-tack performance.*
 
 The direction comparison shows raw solver coordinates. Reversing the chord array is a geometric sensitivity experiment, not a validated opposite-tack polar. The optimization adapter separately transforms angle, lift and moment signs when representing reverse flow; these plots do not apply that transformation.
 
 We also run VSPAERO directly at the selected trial's aspect ratio and camber to check interpolation. The comparison uses the same reference thickness, unit area, mesh and wake settings as the response grid. It does not test the trial's thicker section or validate its physical performance; the alpha range includes points outside the restricted sizing domain.
 
 ![Direct VSPAERO versus interpolation at the selected trial aspect ratio and camber](https://davidingraham.github.io/sv-blue-dog/assets/vsp/candidate-interpolation.svg)
+
+*This checks the response-grid interpolation at the trial’s aspect ratio and camber, not the trial’s full physical wing.*
 
 ### What these results can establish
 
@@ -104,16 +137,27 @@ The moment origin is the **wing-root midchord**, not the boat center of gravity.
 
 ![Heel and incidence sweeps at 45 degrees apparent wind](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-awa-45.svg)
 
+*With wind 45° from the bow, heel changes local incidence and spanwise inflow together. Upright coefficients alone cannot capture that coupling.*
+
 ![Heel and incidence sweeps at beam wind](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-awa-90.svg)
+
+*At beam wind, the spanwise inflow angle is the negative of heel. This is a useful geometry check as well as a load sensitivity study.*
 
 ![Heel and incidence sweeps at 135 degrees apparent wind](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-awa-135.svg)
 
+*The aft-quarter wind case provides a different heel response; the direction-dependent projection error matters to the sailing model.*
+
 ### Compare with the boat model's approximation
 
-The comparison below holds nominal incidence at 8°. The dashed curve uses the upright inviscid lift and drag from this same study, multiplying lift by `cos(heel)` before resolving forward force. This isolates the projection approximation from profile-drag and discrepancy assumptions used elsewhere in the sizing model. The solid curve comes from the coupled local-alpha/spanwise-inflow solutions.
+The heel-projection comparison near the start of this article holds nominal incidence at 8°. The dashed curve uses the upright inviscid lift and drag from this same study, multiplying lift by `cos(heel)` before resolving forward force. This isolates the projection approximation from profile-drag and discrepancy assumptions used elsewhere in the sizing model. The solid curve comes from the coupled local-alpha/spanwise-inflow solutions.
 
-![Solved heel response versus the cosine projection approximation](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-projection-comparison.svg)
+
 
 The cosine projection overpredicts forward force for the 45° and 90° wind cases and underpredicts it for the 135° case at substantial heel in this fixed-trim comparison. Heel therefore cannot be represented by one direction-independent loss factor. The optimizer retains that approximation provisionally, with the tighter angle limits and conservative assumptions described above. Replacing it requires consistent heel/wind/trim coverage across the aspect-ratio and camber grid, force/moment interfaces, and numerical and physical validation. A free-air uniform-flow study does not include the water surface, wave-induced motion, wind shear, mast/hull interference, stall or dynamic roll.
 
 The [archived heel results](../evidence/runs/2026-10-11-heel/wing-heel-sweep.json) include actual solver alpha/beta, dimensional loads, model settings and source hashes; the [manifest](../evidence/runs/2026-10-11-heel/manifest.json) protects the record bytes. Re-run with `uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.heel_sweep`. Plotting and Pages builds use the archived evidence without launching VSP.
+
+
+</details>
+
+**Next:** [Follow the energy through the mission](energy.md).

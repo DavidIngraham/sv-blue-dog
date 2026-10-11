@@ -1,31 +1,39 @@
 # SV Blue Dog: learning through an autonomous sailboat
 
-Blue Dog is named after my blue heeler, Ozzy. The name also fits the little vessel I hope to build: small, something like a dog, puttering around the surface of a river or the ocean independently. That image is part of the fun of the project.
+Blue Dog is named after my blue heeler, Ozzy. I like the thought of a small, independent creature puttering around the surface of a river or the ocean. Building something with a little of that character is part of the fun.
 
-I started Blue Dog to explore how far autonomous sailing and desktop manufacturing could go together. I wanted to learn about sailing, build something interesting, and develop a complete system. This introduction supplies the owner intent for [mission definition in the development plan](development-plan.md#mission-definition): the sailing ambition, the manufacturing experiment and what I want to learn. Those inputs shape the mission, prototype sequence and design priorities followed by the rest of the series.
+I started this project because I wanted to explore the limits of autonomous sailing and desktop manufacturing. I wanted to learn about sailing, build something cool, and develop a complete system. Microtransat—the challenge of sending an autonomous sailing boat across the Atlantic—gave me an idea for something closer to home: an even more micro “trans-gorge” boat.
 
-Microtransat was the inspiration. My smaller version was a “trans-gorge” boat: first the Gorge Blowout idea, then a journey from The Dalles to Bonneville and back. The longer-term ambition is Hawaii. The Gorge is a demanding place to learn about the system; completing a river challenge would not by itself establish ocean readiness.
+My initial inspiration was the Gorge Blowout course. The challenge I eventually set myself was a journey from The Dalles to Bonneville and back, without intervention but with live monitoring. Beyond that, I would love to work toward a boat that could reach Hawai‘i. The Gorge would be a demanding proving ground along the way.
 
-## Build the process around the mission
+![Route schematic: start at The Dalles, sail downstream toward Bonneville, then return upstream against the current. The ocean ambition is a later development effort.](figures/route-context.svg)
 
-I keep the [challenge brief](architecture.md) independent of the vehicle design. That prevents a convenient hardware choice from quietly changing what success means. The [series guide](index.md) follows the development plan through mission definition, early virtual V&V, detailed implementation, physical V&V and model validation.
+*This is a route-orientation sketch, not a navigation chart. The upstream return is what makes “a little boat that sails itself” a much harder sizing problem. The model defines the challenge gates; launch locations and operational permissions need their own planning.*
 
-The existing [CAD](../cad/) is a separate manufacturing and wing-sail testbed. It helps explore what I can print and assemble, but is not a claim that the challenge boat has been designed or qualified. One of the project goals is learning SysML v2 by making these distinctions explicit.
+## A testbed, then a maze of decisions
 
-## Ask what “set and forget” requires
+I began sketching a testbed in SolidWorks to reduce risk around manufacturing techniques, wing-sail design and ArduSail control systems. The [existing CAD](../cad/) comes from that work. It was supposed to help me learn how to print and assemble the boat, explore the rig and get the control system working. It was never intended to be the final challenge vessel.
 
-Live observation, autonomy, energy, weeds, traffic and recovery all interact. I use [small requirement views](requirements.md) to follow individual derivations, and [architecture traceability](architecture.md) to show intended responsibilities. Requirement statements stay concise; [conditions, rationale, issues and verification plans](methods/modeling.md) remain distinct fields in the authoritative model.
+Then I got lost in the configuration decisions. A larger wing could provide more drive, but it also changed the loads, ballast, actuator and recovery problem. More battery could help endurance while making the hull heavier. Changing the hull changed the sailing performance I needed from the wing. I could make individual choices, but I struggled to manage the consequences across the whole design.
 
-The [energy model](energy.md) asks whether loads, storage and harvesting support a declared profile. The [recovery propulsion trade](recovery-propulsion.md) compares water and air propellers without pretending an energy calculation alone selects the design. The [cruise/reliability analysis](reliability.md) makes the cost of a slow passage explicit: every extra hour asks the boat to keep working longer.
+This is a surprisingly complex, high-performance system for something I hope will be small and inexpensive to manufacture. I was trying to push the edge of what was possible, and I stalled out.
 
-I am also [working backward from the mission to the required sailing polar](sizing.md), checking what that demand means for a small displacement hull or a higher-speed concept.
+![Conceptual arrangement of an autonomous sailboat showing wing, hull, rudder, keel and ballast, solar collection, electronics and recovery propulsion. This is an explanatory sketch, not the SolidWorks testbed or an optimized design.](figures/boat-concept.svg)
 
-The [architecture DFMEA](reliability.md) identifies ways those functions can fail and the evidence needed to address them. A persistent swell-monitoring role is a possible future use, not a replacement for the sailing mission.
+*The parts are easy to name; choosing them together is the difficult bit. Their positions here are illustrative, including the unresolved recovery-propulsor installation.*
 
-## Let evidence change the design
+## Using a model to get moving again
 
-I am using the CAD-derived fixed-camber wing to explore the [coupled sizing problem](sizing.md), with hull dimensions, ballast, appendages, structure and energy changing together. OpenVSP/VSPAERO helps reveal finite-wing and heel sensitivities, but it cannot supply validated low-Reynolds-number performance for this rounded-edge section. The heel sweeps also show that a simple cosine correction is incomplete.
+I realized that open-source tools and SysML v2 could give the project some structure. That also made Blue Dog a good excuse to dive into digital engineering: could I connect the mission, requirements, architecture, analysis and eventual tests closely enough to make the next decision clearer?
 
-That changes how I use the optimizer: the primary case now credits less lift, assumes more drag, treats actuator moment independently, and restricts incidence and heel. The assumptions are explicit in SysML. The rerun reached a near-feasible trial but missed the coarse solver tolerance, so it did not establish a minimum length. I then test that geometry under further adverse scenarios and free-pitch recovery. The [generated results](results.md) distinguish a numerical candidate from a design supported by evidence; a solver failure is not proof that the boat is impossible.
+I am especially interested in how that model can structure an agent-driven development project. Agents can help explore alternatives and implement analyses quickly. I still need a shared description of what we are trying to achieve, why a choice was made and what would count as convincing evidence. Otherwise, producing more analysis can simply make the maze bigger.
 
-The finer primary replay can balance sailing and energy and meet the modeled route target, but the handling allocation is still exceeded, additional aerodynamic degradation loses upstream performance, and the recovery studies do not establish self-righting. That makes the next evidence needs concrete. Generated results show what the current inputs imply; they are not physical test results. I want measured sailing performance, manufacturing trials and fault tests to refine those assumptions. The current model and its open issues are linked above, so this article can explain the journey without becoming another requirements document.
+The [development plan](development-plan.md) is my way of keeping that work directed. I use “I” for my goals and design judgments; when I describe work with agents, they help develop and check the engineering record, while I make the commitment decisions. The model is the shared record, not a substitute for that judgment or for testing a real boat.
+
+## Where the project stands
+
+I now have a challenge definition, a connected requirements and architecture model, and a coupled sizing study. The current numerical trial can satisfy the primary modeled sailing and energy screens, but handling, adverse conditions and self-righting still need work. It has not established a minimum-size design. The [results article](results.md) explains those findings and what they suggest testing next.
+
+That feels like useful progress: I can see which assumptions are driving the design and which experiments could change the answer. The next step is to use the testbed and focused measurements to improve those assumptions, then revisit the sizing decisions with better evidence.
+
+**Next:** [The mission and the boat’s responsibilities](architecture.md), then [the development plan](development-plan.md). The [series guide](index.md) separates the main reading path from the technical reference pages.

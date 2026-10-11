@@ -250,6 +250,10 @@ package BlueDogEvidenceDocuments {
         attribute redefines title = "Current static ingress sensitivity";
         part cases : Table { calc rows : Ingress; }
     }
+    part def CandidateBrief :> Document {
+        attribute redefines title = "The trial geometry";
+        part candidate : Table { calc rows : Dimensions; }
+    }
     part def Summary :> Document {
         attribute redefines title = "Conservative sizing and refined replay";
         part search : Table { calc rows : Search; }

@@ -1,6 +1,6 @@
 # S-003 SafeRecovery relationships
 
-This focused view supports [virtual design and PDR](../development-plan.md#virtual-design). It takes safe-recovery obligations and health-management relationships from the authoritative model and informs recovery behavior, supporting equipment and controlled recovery exercises. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [virtual design and PDR](../development-plan.md#virtual-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 

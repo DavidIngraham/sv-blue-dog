@@ -1,6 +1,6 @@
 # S-004 NavigationConspicuity relationships
 
-This focused view supports [detailed design and build readiness](../development-plan.md#detailed-design). It takes navigation-conspicuity obligations and operating-context relationships from the authoritative model and informs signaling equipment, installation and field assessment. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [detailed design and build readiness](../development-plan.md#detailed-design). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 

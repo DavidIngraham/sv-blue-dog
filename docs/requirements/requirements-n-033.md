@@ -1,6 +1,6 @@
 # N-033 Visibility relationships
 
-This focused view supports [mission definition and SRR](../development-plan.md#mission-definition). It takes visibility obligations and their scenario relationships from the authoritative model and informs the operating context for sensing, traffic interactions and later field trials. The relationships define the design and evidence obligations; they do not record a completed test.
+Reference view for [mission definition and SRR](../development-plan.md#mission-definition). Follow the model links below for the obligation, its derivation and planned evidence. A relationship records intent, not a completed test.
 
 [Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
 
