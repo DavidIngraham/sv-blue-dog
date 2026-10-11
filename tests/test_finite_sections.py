@@ -1,8 +1,8 @@
 """Independent analytical checks of finite laminate section geometry."""
 import numpy as np
 import pytest
-from scripts.finite_sections import finite_skin_properties
-from scripts.coupled_geometry import section_properties,build_geometry
+from tools.boat_analysis.geometry.laminate import finite_skin_properties
+from tools.boat_analysis.geometry.vessel import section_properties,build_geometry
 
 
 @pytest.mark.parametrize('thickness',[.01,.2,.8,2.])
@@ -46,8 +46,8 @@ def test_thin_limit_and_solid_saturation():
 
 def test_actual_cad_and_foil_sections_cannot_exceed_their_solid_inertia():
     import json
-    from scripts.native_design_kernel import ROOT
-    d=json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())['design']
+    from tools.boat_analysis.model.runtime import ROOT
+    d=__import__('tools.boat_analysis.evidence.records',fromlist=['baseline_record']).baseline_record('coupled-mass-reference.json')['design']
     _,_,outlines=build_geometry(d)
     for p in outlines.values():
         size=float(np.ptp(p,axis=0).max());solid=finite_skin_properties(p,size)[0]

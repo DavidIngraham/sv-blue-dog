@@ -3,14 +3,18 @@ import json
 import re
 from pathlib import Path
 import pytest
-from scripts.study_sail_trade import MODEL, MODELS_TRADE, ROOT, native, publication_outputs
+from tools.boat_analysis.model.runtime import ROOT, model_files, native
+MODEL = ROOT / "models/analyses/sail-trade.sysml"
+MODELS_TRADE = tuple(p for p in model_files() if p != MODEL) + (MODEL,)
 
 
 def values(check):return {v['name']:v['value'] for v in check['values']}
 
 
 def test_published_assessments_do_not_reject_unknown_candidates():
-    r=json.loads((ROOT/'docs/analysis/sail-trade.json').read_text(encoding='utf-8'))
+    args = [arg for case in ('tailAssessment','camberAssessment','softAssessment','buoyancyIllustration') for arg in ('-analysis', 'BlueDogSailTrade::'+case)]
+    r=json.loads(native(*args, '-json'))
+    assert r['status'] == 'holds'
     for case in r['checks'][:3]:
         v=values(case)
         assert v['knownFailure']=='false'
@@ -38,9 +42,3 @@ def test_soft_sail_can_qualify_or_fail_from_actual_gates(tmp_path,gates,qualifie
     assert result['status']=='holds' and not result.get('diagnostics')
     v=values(result['checks'][0]);assert v['qualified']==qualified;assert v['knownFailure']==failed
     assert decision in v['developmentDecision']
-
-
-def test_native_generated_artifacts_are_current():
-    for path,content in publication_outputs().items():
-        saved=path.read_text(encoding='utf-8').replace('<!-- Generated from SysML by scripts/render_requirements.py; edit the model, not this file. -->\n','')
-        assert saved==content

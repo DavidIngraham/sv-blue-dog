@@ -24,7 +24,7 @@ def test_repository_markdown_links_resolve():
 
 
 def test_generated_index_links_every_focused_requirement_page():
-    index = (ROOT / 'docs/requirements-views.md').read_text(encoding='utf-8')
-    links = set(re.findall(r'figures/(requirements-[a-z]-[0-9]+\.md)', index))
-    pages = {p.name for p in (ROOT / 'docs/figures').glob('requirements-*.md')}
+    index = (ROOT / 'docs/requirements.md').read_text(encoding='utf-8')
+    links = set(re.findall(r'requirements/(requirements-[a-z]-[0-9]+\.md)', index))
+    pages = {p.name for p in (ROOT / 'docs/requirements').glob('requirements-*.md')}
     assert links == pages

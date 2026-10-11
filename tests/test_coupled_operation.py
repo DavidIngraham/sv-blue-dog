@@ -1,11 +1,12 @@
+from tools.boat_analysis.evidence.records import baseline_record as input_record
 """Independent force/moment, submerged-surface and drive-energy checks."""
 import itertools,json,sys
 import numpy as np
 import pytest
-from scripts.native_design_kernel import ROOT
-from scripts.coupled_model import skin_triangles,wet_area
-from scripts.coupled_geometry import ballast_geometry,metrics
-from scripts.hydro_geometry import convex_tetrahedra
+from tools.boat_analysis.model.runtime import ROOT
+from tools.boat_analysis.model.vessel import skin_triangles,wet_area
+from tools.boat_analysis.geometry.vessel import ballast_geometry,metrics
+from tools.boat_analysis.geometry.hydro import convex_tetrahedra
 
 
 def test_wetted_surface_excludes_waterplane_cap():
@@ -28,8 +29,8 @@ def test_ballast_volume_and_nonoverlap():
 @pytest.fixture
 def native_case():
     if sys.platform!='linux':pytest.skip('Native operation adapter uses Linux/GCC')
-    from scripts.native_coupled_operation import OperationKernel
-    k=OperationKernel();r=json.loads((ROOT/'docs/analysis/coupled-operation-audit.json').read_text());d,p,q,s,a,m,h=r['inputs']
+    from tools.boat_analysis.model.operating import OperationKernel
+    k=OperationKernel();r=input_record('coupled-operation-audit.json');d,p,q,s,a,m,h=r['inputs']
     return k,[np.array(v,dtype=float) for v in [d,p,s,a,m,h]],r
 
 
@@ -62,7 +63,7 @@ def test_locked_drive_saves_holding_power_without_free_motion(native_case):
 
 
 def test_route_tack_weights_cancel_crosswind_velocity(native_case):
-    from scripts.native_coupled_operation import RouteKernel
+    from tools.boat_analysis.model.operating import RouteKernel
     k=RouteKernel();states=[]
     for up in [True,False,True,False]:
         angle=45 if up else 135
@@ -75,7 +76,7 @@ def test_route_tack_weights_cancel_crosswind_velocity(native_case):
 
 
 def test_coupled_geometry_mass_and_hydrostatics_share_wing_pose(native_case):
-    from scripts.coupled_model import CoupledModel
+    from tools.boat_analysis.model.vessel import CoupledModel
     model=CoupledModel();x=model.c['referenceDesign'];b1,m1,g1,_=model.configuration(x,0);b2,m2,g2,_=model.configuration(x,np.pi)
     assert m1['totalMass']==pytest.approx(m2['totalMass'])
     assert m1['cgY']==pytest.approx(-m2['cgY'])
@@ -87,8 +88,8 @@ def test_coupled_geometry_mass_and_hydrostatics_share_wing_pose(native_case):
 
 
 def test_structural_stiffness_and_strength_respond_to_material_evidence(native_case):
-    from scripts.native_coupled_operation import StructureKernel
-    from scripts.coupled_model import CoupledModel
+    from tools.boat_analysis.model.operating import StructureKernel
+    from tools.boat_analysis.model.vessel import CoupledModel
     k=StructureKernel();model=CoupledModel();x=model.c['referenceDesign']
     _,m,g,_=model.configuration(x,0);p=model.parameters.copy()
     nominal=k.evaluate(x,p,list(m.values()),g,[50,60,10],0)
@@ -112,7 +113,7 @@ def test_generated_interfaces_are_homogeneous_real_sequences(native_case):
 
 
 def test_native_hull_resistance_is_in_force_balance_and_domain_outputs(native_case):
-    from scripts.native_hull_resistance import HullResistanceKernel
+    from tools.boat_analysis.model.resistance import HullResistanceKernel
     k,args,_=native_case
     d,p,s,a,m,h=[x.copy() for x in args]
     base=k.evaluate(d,p,s,a,m,h)
@@ -138,7 +139,7 @@ def test_loaded_waterline_does_not_move_hardware_lever_arms(native_case):
 
 
 def test_shared_search_jacobian_preserves_both_constraint_blocks():
-    from scripts.optimize_coupled import Problem
+    from tools.boat_analysis.optimization.search import Problem
     p=Problem.__new__(Problem);p.derivatives=None;calls=[]
     def constraints(z):
         calls.append(z.copy())
@@ -153,8 +154,8 @@ def test_shared_search_jacobian_preserves_both_constraint_blocks():
 
 
 def test_panel_fit_uses_actual_deck_area(native_case):
-    from scripts.native_coupled_operation import StructureKernel
-    from scripts.coupled_model import CoupledModel
+    from tools.boat_analysis.model.operating import StructureKernel
+    from tools.boat_analysis.model.vessel import CoupledModel
     model=CoupledModel();x=model.c['referenceDesign'];_,m,g,_=model.configuration(x,0)
     kernel=StructureKernel();p=model.parameters
     before=kernel.evaluate(x,p,list(m.values()),g,[50,60,10],0)
@@ -166,7 +167,7 @@ def test_panel_fit_uses_actual_deck_area(native_case):
 
 
 def test_design_cache_preserves_state_dependent_results(native_case):
-    from scripts.optimize_coupled import Problem
+    from tools.boat_analysis.optimization.search import Problem
     p=Problem(4);z=p.initial();initial=p.evaluate(z);cached=p.design_cache
     assert len(p.constraint_names)==len(initial['ineq'])==len(set(p.constraint_names))
     trial=z.copy();trial[29]+=.001
@@ -179,7 +180,7 @@ def test_design_cache_preserves_state_dependent_results(native_case):
 
 
 def test_search_energy_reserve_does_not_change_native_acceptance(native_case):
-    from scripts.optimize_coupled import Problem
+    from tools.boat_analysis.optimization.search import Problem
     p=Problem(4);r=p.evaluate(p.initial())
     names=p.model.operation.contract['outputNames'][4:18]
     selected=r['ineq'][:8*len(names)].reshape(8,len(names))
@@ -198,7 +199,7 @@ def test_search_energy_reserve_does_not_change_native_acceptance(native_case):
 
 
 def test_route_assigns_easterly_upstream_to_windward(native_case):
-    from scripts.native_coupled_operation import RouteKernel
+    from tools.boat_analysis.model.operating import RouteKernel
     kernel=RouteKernel();states=[]
     for windward in [True,False,True,False]:
         speed=np.sqrt(2)*(1 if windward else 2)
@@ -215,8 +216,8 @@ def test_route_assigns_easterly_upstream_to_windward(native_case):
 
 
 def test_native_structure_uses_finite_inertia_and_section_modulus(native_case):
-    from scripts.native_coupled_operation import StructureKernel
-    from scripts.coupled_model import CoupledModel
+    from tools.boat_analysis.model.operating import StructureKernel
+    from tools.boat_analysis.model.vessel import CoupledModel
     model=CoupledModel();x=model.c['referenceDesign'];_,m,g,_=model.configuration(x,0)
     kernel=StructureKernel();p=model.parameters;loads=[50,60,10]
     before=kernel.evaluate(x,p,list(m.values()),g,loads,0)
@@ -231,7 +232,7 @@ def test_native_structure_uses_finite_inertia_and_section_modulus(native_case):
 
 
 def test_search_derivative_does_not_cross_a_polar_interpolation_breakpoint():
-    from scripts.optimize_coupled import Problem
+    from tools.boat_analysis.optimization.search import Problem
     p=Problem.__new__(Problem);p.derivatives=None;p.breakpoints={0:np.array([0.,.5,1.])}
     def constraints(z):
         value=2*z[0] if z[0]<.5 else 1+5*(z[0]-.5)

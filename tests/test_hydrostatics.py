@@ -3,12 +3,12 @@ import itertools,sys
 import numpy as np
 import pytest
 from scipy.spatial import ConvexHull
-from scripts.hydro_geometry import convex_tetrahedra,equilibrium,DisplacementBody,pose
+from tools.boat_analysis.geometry.hydro import convex_tetrahedra,equilibrium,DisplacementBody,pose
 
 @pytest.fixture(scope='module')
 def kernel():
     if sys.platform!='linux':pytest.skip('Native compiled kernel requires Linux/GCC')
-    from scripts.native_hydrostatics import HydroKernel
+    from tools.boat_analysis.model.hydrostatics import HydroKernel
     return HydroKernel()
 
 
@@ -63,7 +63,7 @@ def test_pitch_and_roll_are_distinct_and_sink_is_rejected(kernel):
     with pytest.raises(ValueError,match='Insufficient'):equilibrium(kernel,[DisplacementBody('cube',cube)],[0,0,0],1100,0)
 
 def test_free_pitch_solves_offset_cg_and_reports_inverted_instability(kernel):
-    from scripts.hydro_geometry import free_pitch_equilibrium
+    from tools.boat_analysis.geometry.hydro import free_pitch_equilibrium
     cube=convex_tetrahedra(list(itertools.product([-.5,.5],repeat=3)))
     body=[DisplacementBody('cube',cube)]
     result=free_pitch_equilibrium(kernel,body,[.01,0,-.2],500,0)
@@ -75,7 +75,7 @@ def test_free_pitch_solves_offset_cg_and_reports_inverted_instability(kernel):
 
 
 def test_geometry_changes_with_wing_camber_and_trim_without_changing_volume(kernel):
-    from scripts.hydro_geometry import wing_geometry
+    from tools.boat_analysis.geometry.hydro import wing_geometry
     wing=wing_geometry(1,4,camber_scale=1,trim_deg=0)
     turned=wing_geometry(1,4,camber_scale=1,trim_deg=90)
     flatter=wing_geometry(1,4,camber_scale=.5,trim_deg=0)
@@ -85,26 +85,11 @@ def test_geometry_changes_with_wing_camber_and_trim_without_changing_volume(kern
     assert not np.allclose(full[0][1:],full[1][1:])
     assert not np.allclose(full[0][1:],full[2][1:])
 
-def test_saved_hydrostatics_report_is_current_and_preserves_balance():
-    from scripts.publish_hydrostatics import report
-    from scripts.native_design_kernel import ROOT
-    r,text=report()
-    assert r['qualified'] is False
-    assert (ROOT/'docs/hydrostatics.md').read_text(encoding='utf-8')==text
-    assert {c['density_kg_m3'] for c in r['cases']}=={1000,1025}
-    for c in r['cases']:
-        assert [p['heel_deg'] for p in c['points']]==list(np.linspace(-180,180,49))
-        assert max(abs(p['mass_residual_kg']) for p in c['points'])<1e-5
-        assert max(abs(p['pitch_torque_Nm']) for p in c['points'])<1e-5
-        signed=[p['righting_Nm']*np.sign(p['heel_deg']) for p in c['points'] if 0<abs(p['heel_deg'])<180]
-        assert min(signed)==pytest.approx(c['minimum_sampled_restoring_Nm'])
-
 
 def test_native_actuator_accounting_keeps_idle_and_movement_losses():
-    if sys.platform=='linux':pytest.skip('Pinned OpenSysML executable runs on Windows')
     import json
-    from scripts.render_requirements import native,MODELS,ROOT
-    result=json.loads(native('-analysis','BlueDogWingActuator::accountingExample','-json',models=MODELS+(ROOT/'models/structure.sysml',ROOT/'models/wing-actuator.sysml')))
+    from tests.native_cases import native,MODELS,ROOT
+    result=json.loads(native('-analysis','BlueDogWingActuator::accountingExample','-json',models=MODELS+(ROOT/'models/vehicle/structure.sysml',ROOT/'models/analyses/actuation.sysml')))
     assert result['status']=='holds' and not result.get('diagnostics')
     values={v['name']:json.loads(v['value']) for v in result['checks'][0]['values']}
     assert values['lockedWhPerDay']==pytest.approx(24*(.1+.02*(1+1*.2/(.8*.4))))

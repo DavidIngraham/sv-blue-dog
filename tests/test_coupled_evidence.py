@@ -1,11 +1,11 @@
 """Reproducible evidence checks; numerical passes cannot become qualification."""
 import json
-from scripts.native_design_kernel import ROOT
-from scripts.study_open_sizing import validate
+from tools.boat_analysis.model.runtime import ROOT
+from tools.boat_analysis.evidence.records import baseline_record
 
 
 def test_coupled_search_preserves_balance_and_explicit_nonqualification():
-    r=json.loads((ROOT/'docs/analysis/coupled-sizing-search.json').read_text());validate(r['sourceHashes'])
+    r=baseline_record('coupled-sizing-search.json')
     assert r['coarseFeasible'] and not r['qualified']
     assert r['maxEquilibriumResidual']<1e-4
     assert r['minimumMargin']>=-1e-4
@@ -16,7 +16,7 @@ def test_coupled_search_preserves_balance_and_explicit_nonqualification():
 
 
 def test_all_declared_sensitivities_are_recorded():
-    r=json.loads((ROOT/'docs/analysis/coupled-sizing-replay.json').read_text());validate(r['sourceHashes'])
+    r=baseline_record('coupled-sizing-replay.json')
     assert not r['qualified']
     assert {c['scenario'] for c in r['scenarios']}=={'nominal','construction','aerodynamic','hydrodynamic','energy','combined'}
     for c in r['scenarios']:
@@ -43,7 +43,7 @@ def test_all_declared_sensitivities_are_recorded():
 
 
 def test_water_ingress_sensitivity_covers_both_media_and_locked_rig_positions():
-    r=json.loads((ROOT/'docs/analysis/coupled-recovery.json').read_text());validate(r['sourceHashes'])
+    r=baseline_record('coupled-recovery.json')
     assert not r['qualified'] and len(r['cases'])==24
     assert {c['density_kg_m3'] for c in r['cases']}=={1000,1025}
     assert {c['mast_trim_deg'] for c in r['cases']}=={0,90,180,270}
@@ -56,17 +56,10 @@ def test_water_ingress_sensitivity_covers_both_media_and_locked_rig_positions():
                 assert abs(p['pitch_torque_Nm'])<1e-4
 
 
-def test_coupled_publications_are_generated_and_current():
-    from scripts.publish_coupled_inputs import publication as inputs
-    from scripts.publish_coupled_results import publication as results
-    assert (ROOT/'docs/coupled-inputs.md').read_text(encoding='utf-8')==inputs()
-    assert (ROOT/'docs/coupled-results.md').read_text(encoding='utf-8')==results()
-
 
 def test_missing_pitch_samples_have_full_range_diagnostic():
-    recovery=json.loads((ROOT/'docs/analysis/coupled-recovery.json').read_text())
-    diagnostic=json.loads((ROOT/'docs/analysis/coupled-pitch-diagnostic.json').read_text())
-    validate(diagnostic['sourceHashes'])
+    recovery=baseline_record('coupled-recovery.json')
+    diagnostic=baseline_record('coupled-pitch-diagnostic.json')
     expected={(c['density_kg_m3'],c['mast_trim_deg'],p['heel_deg']) for c in recovery['cases'] for p in c['points'] if 'failure' in p}
     actual={(c['density_kg_m3'],c['mast_trim_deg'],c['heel_deg']) for c in diagnostic['cases']}
     assert expected==actual and not diagnostic['qualified']
@@ -78,7 +71,7 @@ def test_missing_pitch_samples_have_full_range_diagnostic():
 
 
 def test_replay_enforces_energy_before_using_a_diagnostic(monkeypatch):
-    from scripts import verify_coupled as replay
+    from tools.boat_analysis.optimization import replay
     calls=[]
     def solve(*args,**kwargs):
         calls.append(kwargs['require_energy'])

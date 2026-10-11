@@ -4,8 +4,8 @@ import subprocess
 
 import pytest
 
-from scripts.install_renderer import binary_path
-from scripts.render_requirements import MODELS
+from tools.boat_analysis.model.install import binary_path
+from tests.native_cases import MODELS
 
 
 @pytest.fixture
@@ -24,3 +24,12 @@ def run_model(tmp_path):
         return result.returncode, report
 
     return run
+
+
+@pytest.fixture(scope="session")
+def rendered_site(tmp_path_factory):
+    from tools.publishing.build import build
+    from tools.boat_analysis.model.runtime import ROOT
+    output = tmp_path_factory.mktemp("published-site")
+    build(ROOT / "docs", output)
+    return output

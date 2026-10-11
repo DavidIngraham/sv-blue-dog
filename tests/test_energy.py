@@ -2,7 +2,7 @@
 import json
 import re
 import pytest
-from scripts.render_requirements import native_energy_case
+from tests.native_cases import native_energy_case
 
 
 def check_values(check):

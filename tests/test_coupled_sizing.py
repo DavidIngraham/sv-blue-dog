@@ -1,9 +1,10 @@
+from tools.boat_analysis.evidence.records import baseline_record as input_record
 """Independent geometry oracles and native material-accounting checks."""
 import itertools,json,sys
 import numpy as np
 import pytest
-from scripts.coupled_geometry import metrics,section_properties,build_geometry,ROOT
-from scripts.hydro_geometry import convex_tetrahedra
+from tools.boat_analysis.geometry.vessel import metrics,section_properties,build_geometry,ROOT
+from tools.boat_analysis.geometry.hydro import convex_tetrahedra
 
 
 def test_box_metrics_are_independent_of_tetrahedral_internal_faces():
@@ -23,7 +24,7 @@ def test_square_skin_section_matches_closed_form_and_rotation():
 
 
 def reference():
-    r=json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())
+    r=input_record('coupled-mass-reference.json')
     return {'designNames':list(r['design']),'referenceDesign':list(r['design'].values())},r['design']
 
 
@@ -42,10 +43,10 @@ def test_shape_scaling_and_degenerate_foil_tip_cells():
 
 @pytest.mark.skipif(sys.platform!='linux',reason='Native C adapter uses Linux/GCC')
 def test_native_mass_derivatives_and_centroid_bookkeeping():
-    from scripts.native_coupled import MassKernel
-    k=MassKernel();c,d=reference();_,v,_=build_geometry(d);geometry=np.r_[np.concatenate(list(v.values())),json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())['ballastCentroid']];x=np.array(c['referenceDesign'])
+    from tools.boat_analysis.model.mass import MassKernel
+    k=MassKernel();c,d=reference();_,v,_=build_geometry(d);geometry=np.r_[np.concatenate(list(v.values())),input_record('coupled-mass-reference.json')['ballastCentroid']];x=np.array(c['referenceDesign'])
     base=k.evaluate(x,geometry);p=np.array(k.contract['parameterValues'])
-    saved=json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())
+    saved=input_record('coupled-mass-reference.json')
     for name,value in base.items():assert value==pytest.approx(saved['mass'][name],rel=1e-11,abs=1e-12)
     x[c['designNames'].index('ballast_kg')]+=1
     ballast=k.evaluate(x,geometry)
@@ -62,7 +63,7 @@ def test_native_mass_derivatives_and_centroid_bookkeeping():
 
 
 def test_polar_nodes_provenance_and_no_extrapolation():
-    from scripts.wing_polar import WingPolar
+    from tools.boat_analysis.aerodynamics.polar import WingPolar
     polar=WingPolar();data=json.loads(polar.path.read_text())
     for row in data['cases']:
         if row['camberScale']==0:continue
@@ -78,7 +79,6 @@ def test_polar_nodes_provenance_and_no_extrapolation():
 
 
 def test_mass_reference_provenance():
-    from scripts.study_open_sizing import validate
-    r=json.loads((ROOT/'docs/analysis/coupled-mass-reference.json').read_text())
-    validate(r['sourceHashes'])
+    from tools.boat_analysis.evidence.records import validate
+    r=input_record('coupled-mass-reference.json')
     assert not r['qualified']

@@ -1,7 +1,7 @@
 """Native recovery trade analysis regressions; synthetic inputs, not boat evidence."""
 import json
 import pytest
-from scripts.render_requirements import native_recovery_trade
+from tests.native_cases import native_recovery_trade
 
 
 def check_values(check):

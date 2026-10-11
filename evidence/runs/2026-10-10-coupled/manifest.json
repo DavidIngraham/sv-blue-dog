@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "5ed1a1a78bf2099b71baf455b1a4a47714bc1736",
+  "purpose": "Immutable exploratory coupled sizing run before repository restructuring. Numerical outcomes are not physical qualification.",
+  "files": {
+    "coupled-fixed-design.json": {
+      "sha256": "4c92fb19818f16736780ecc0b9b86f633ab9228191d67ddea873a17ffaef7328",
+      "originalPath": "docs/analysis/coupled-fixed-design.json"
+    },
+    "coupled-mass-reference.json": {
+      "sha256": "a5d1efdbf27c43853e5edea6a9d7db41278dc2b11f39aaac60aadf25f5b26d31",
+      "originalPath": "docs/analysis/coupled-mass-reference.json"
+    },
+    "coupled-operation-audit.json": {
+      "sha256": "a2aed1ad4a891cdd14d26473c156a40ef251810935c1d0739d082cbbaa6875dc",
+      "originalPath": "docs/analysis/coupled-operation-audit.json"
+    },
+    "coupled-pitch-diagnostic.json": {
+      "sha256": "3c51ecad9016675fb4ce628e5fd674479433a41b9e47e8aefcdb30267a1b09e4",
+      "originalPath": "docs/analysis/coupled-pitch-diagnostic.json"
+    },
+    "coupled-recovery.json": {
+      "sha256": "e18049b2f521373a08c623917b4e787c66d8e3137f910491b40caf689d5ec58e",
+      "originalPath": "docs/analysis/coupled-recovery.json"
+    },
+    "coupled-sizing-replay.json": {
+      "sha256": "e98223133169c9af02213d4a8a184c073aca801f9aeb9a694a66f02d989b8f4b",
+      "originalPath": "docs/analysis/coupled-sizing-replay.json"
+    },
+    "coupled-sizing-search.json": {
+      "sha256": "9fb784c2b86c6e766127b3c85efc846d4d5b6c0cb46f0aca77bfc0cb9f08381b",
+      "originalPath": "docs/analysis/coupled-sizing-search.json"
+    },
+    "coupled-uncertainty-inputs.json": {
+      "sha256": "920386299dfdadb03f6b686f623b82213b35227db9a67815eeee37ed648925fe",
+      "originalPath": "docs/analysis/coupled-uncertainty-inputs.json"
+    },
+    "hull-resistance-audit.json": {
+      "sha256": "e843e6d62322ba08a0505992e93977fe3e80ba90bd6a8244662fe05a55039c06",
+      "originalPath": "docs/analysis/hull-resistance-audit.json"
+    },
+    "hull-resistance-domain.json": {
+      "sha256": "da7d34b3a505153cc9617c5f1a1b26a14eab007e12870745cdc73a218eae87a8",
+      "originalPath": "docs/analysis/hull-resistance-domain.json"
+    },
+    "wing-actuator-audit.json": {
+      "sha256": "1a89c84de1dd6f70c0d01bf660606151771bb12f7c43a2ec61f18e78d03b64f9",
+      "originalPath": "docs/analysis/wing-actuator-audit.json"
+    },
+    "wing-candidate-check.json": {
+      "sha256": "50c8824c082ba5c2b64f73130e0db1caa6ddcca4c21f1d320042101cd40868d2",
+      "originalPath": "docs/analysis/wing-candidate-check.json"
+    },
+    "wing-geometry.json": {
+      "sha256": "707a082d3a616713d14ba82e22c14fd1a0afe27bd6a50449cd23f9d2afcbdb35",
+      "originalPath": "docs/analysis/wing-geometry.json"
+    },
+    "wing-polar-grid.json": {
+      "sha256": "74b5275ce74a7460a74b5a7761b6e2bdcfbe9c648800cb0fd914ecccd7a84863",
+      "originalPath": "docs/analysis/wing-polar-grid.json"
+    },
+    "wing-vsp-reference-16.json": {
+      "sha256": "bfa58dd3d71ef04098cd6018a0d0b6cb041bebe406e063399150bd9f76681691",
+      "originalPath": "docs/analysis/wing-vsp-reference-16.json"
+    },
+    "wing-vsp-reference-32.json": {
+      "sha256": "af464495e9ee69b7944c6e6966721413b791e4cdb95bc24d2d1b00741c19a6d7",
+      "originalPath": "docs/analysis/wing-vsp-reference-32.json"
+    },
+    "wing-vsp-reference-64.json": {
+      "sha256": "e5dc15d5058c27a6fcb91a12c89c007fb1f9014c63b4267e27df06a8c87b0e96",
+      "originalPath": "docs/analysis/wing-vsp-reference-64.json"
+    }
+  }
+}

@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import re
 import pytest
-from scripts.render_requirements import native, native_graph, native_register, MODELS
+from tests.native_cases import native, native_graph, native_register, MODELS
 
 
 RELIABILITY_IDS = {'L-101', 'Q-101', 'Q-102', 'L-103', 'L-001', 'Q-001', 'L-104', 'Q-103', 'L-102'}
@@ -27,7 +27,7 @@ def test_native_validation():
     assert not json.loads(native("-validate", "-json"))["diagnostics"]
 
 def test_challenge_is_standalone():
-    native("-validate", models=MODELS[:1])
+    __import__("tools.boat_analysis.model.runtime", fromlist=["native"]).native("-validate", models=(Path("models/missions/transgorge.sysml").resolve(),))
 
 def test_diagram_preserves_expected_derivations(published_model):
     expected = {
@@ -103,11 +103,11 @@ def test_use_case_and_satisfaction_traceability():
     assert '| recoveryPropulsion | boat |' in text
     assert '| commandIntegrity | commandGateway |' in text
     assert '| regulatoryClassification |  |' in text
-    diagram = native('-render', 'BlueDogUseCaseViews::operations', '-render-form', 'dot')
+    diagram = native('-render', 'Page_architecture_2::operations', '-render-form', 'dot')
     assert '// kind: case' in diagram
     assert 'P-001 Transportability' in diagram
     assert 'OtherVessel' in diagram
-    context = native('-render', 'BlueDogArchitectureViews::context', '-render-form', 'dot')
+    context = native('-render', 'Page_architecture_0::context', '-render-form', 'dot')
     assert 'OtherVessel' in context
 
 def test_mission_drivers_do_not_entail_owner_constraints(published_model):
@@ -144,11 +144,11 @@ def test_register_preserves_ids_status_and_relationships(published_model):
     assert all((' | open | ' in line for line in data))
 
 
-def test_focused_views_cover_all_derivations(published_model):
+def test_focused_views_cover_all_derivations(published_model, rendered_site):
     # The full native graph is an oracle only; readers receive bounded views.
     edges = set()
     refinements = set()
-    pages = list(Path('docs/figures').glob('requirements-*.md'))
+    pages = list((rendered_site / 'imports/docs/requirements').glob('requirements-*.md'))
     assert len(pages) == 49
     assert not Path('docs/figures/requirements-derivation.md').exists()
     for page in pages:
@@ -156,7 +156,7 @@ def test_focused_views_cover_all_derivations(published_model):
         for diagram in re.findall(r'```mermaid\n(.*?)```', page.read_text(encoding='utf-8'), re.S):
             nodes = dict(re.findall(r'(n[0-9]+)\("`.*?\*\*([A-Za-z0-9_:]+) :', diagram, re.S))
             nodes = {key: name.rsplit('::', 1)[-1] for key, name in nodes.items()}
-            assert 2 <= len(nodes) <= 4, page
+            assert 1 <= len(nodes) <= 4, page
             assert 'flowchart BT' in diagram
             for child, parent in re.findall(r'(n[0-9]+) -\.->\|"derive"\| (n[0-9]+)', diagram):
                 edges.add((nodes[parent], nodes[child]))

@@ -1,27 +1,29 @@
 # SV Blue Dog
 
-An autonomous sailing project exploring sailing, desktop manufacturing and complete-system design. The model connects the independent Trans-Gorge challenge to the longer-term Hawaii objective.
+An autonomous sailboat project exploring sailing, desktop manufacturing and complete-system design. The independent Trans-Gorge challenge is the proving ground for a longer-term Hawaii objective.
 
-- [Design process and current model](docs/design-guide.md)
-- [Generated challenge brief](docs/challenge-brief.md)
-- [Focused requirement views](docs/requirements-views.md)
-- [Modeling and publishing](models/README.md)
-- [Project article](docs/restarting-sv-blue-dog.md)
+Start with the [project journey](docs/restarting-sv-blue-dog.md), [design methods](docs/index.md), and [focused requirements](docs/requirements.md).
 
 ## Repository
 
-`models/` holds the authoritative SysML. `docs/` contains a short design guide, analysis methods and generated reports. `scripts/` publishes with native OpenSysML; `tests/` exercises model behavior and documentation consistency. Python dependencies use the package-free uv project.
+- `models/`: authoritative requirements, architecture, rationale, analysis contracts and configurations; reusable physics under `models/libraries/`.
+- `tools/boat_analysis/`: numerical search, geometry adapters, VSP integration and evidence handling.
+- `docs/`: authored method and journey pages with inline SysML views.
+- `tools/publishing/`: native-view orchestration and website generation.
+- `evidence/`: immutable recorded runs with provenance.
+- `tests/`: model semantics and numerical/software regression checks.
+- [CAD](cad/): the earlier manufacturing and wing-sail prototype, distinct from the challenge vessel.
 
-The [CAD files](cad/) are a manufacturing and wing-sail prototype, separate from the challenge-vessel design. Assemblies, parts and exchange files remain together to preserve references. Start with [SV Bluedog.SLDASM](cad/SV%20Bluedog.SLDASM); physical build status and geometry qualification are not established by this model.
+## Work locally
 
-The GitHub Pages blog imports Markdown from this repository. Requirement statements, model counts and numerical results belong in generated artifacts, not duplicated prose. Publishing commands and source conventions are in the modeling guide.
+```sh
+uv sync --locked
+uv run python -m tools.boat_analysis.cli install
+uv run python -m tools.boat_analysis.cli validate
+uv run python -m tools.publishing.build
+uv run pytest -q
+```
 
-The historical [two-metre mission-sizing study](docs/mission-sizing.md) compares removable assemblies and printed construction options, couples sailing states to route progress, and keeps recovery evidence explicit. The [FDM/glass structural model](docs/structure-sizing.md) supplies its mass and structural screens.
+Python uses the package-free uv project. The native OpenSysML renderer is pinned separately. See [modeling conventions](models/README.md), [publishing](docs/publishing.md), and [sizing methods](docs/sizing.md).
 
-The [sail architecture trade](docs/sail-trade.md) compares tail-controlled and cambered rigid wings with a triangular soft sail, separating development preference from requirement evidence.
-
-The [coupled sizing workflow](docs/coupled-sizing.md) develops the CAD-derived fixed-camber wing, OpenVSP analysis and full-angle recovery inputs needed for size optimization.
-
-The [static recovery diagnostic](docs/hydrostatics.md) evaluates sealed-wing and lost-buoyancy cases through full heel angles, including pitch equilibrium and numerical geometry sensitivity.
-
-The [coupled sizing results](docs/coupled-results.md) connect the CAD wing, native SysML physics and free-design search. The exploratory result exposes aerodynamic, recovery and robustness gaps; it is not a selected minimum-size vessel.
+Generated pages belong in build artifacts. The model owns design facts; documentation explains how we reason about them. Recorded exploratory outcomes are conditional evidence, not a qualified vessel design.

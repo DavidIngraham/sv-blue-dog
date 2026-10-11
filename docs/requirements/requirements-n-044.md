@@ -1,0 +1,19 @@
+# N-044 WetMechanicalIntegrity relationships
+
+[Requirement views](../requirements.md) · [Modeling method](../methods/modeling.md)
+
+```sysml-view Page_requirements_requirements_n_044_0::wetMechanicalIntegrity1 direction=BT statements=true
+package Page_requirements_requirements_n_044_0 {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view wetMechanicalIntegrity1 : GeneralView {
+        filter @SysML::RequirementUsage;
+        expose BlueDogRequirements::wetMechanicalIntegrity;
+        expose BlueDogRequirements::wetMechanismTravel;
+        expose BlueDogRequirements::wetJointIntegrity;
+        metadata Layout about BlueDogRequirements::wetMechanicalIntegrity { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::wetMechanismTravel { x = 0; y = 200; }
+        metadata Layout about BlueDogRequirements::wetJointIntegrity { x = 300; y = 200; }
+    }
+}
+```

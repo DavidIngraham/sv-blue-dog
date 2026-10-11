@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from scripts.render_requirements import native
+from tests.native_cases import native
 
 
 @pytest.fixture(scope='module')
@@ -40,8 +40,21 @@ def test_formal_refinements_are_distinct_from_design_dependencies(relationship_r
     ('manufacturing-semantics', {'satisfy', 'verify'}),
     ('weed-semantics', {'derive', 'satisfy', 'verify'}),
 ])
-def test_semantic_diagrams_are_small_connected_native_views(slug, kinds):
-    text = Path(f'docs/figures/{slug}.md').read_text(encoding='utf-8')
+def test_semantic_diagrams_are_small_connected_native_views(slug, kinds, rendered_site):
+    locations = {
+        'mission-semantics': ('architecture', 'MissionSemantics'),
+        'manufacturing-semantics': ('architecture', 'ManufacturingSemantics'),
+        'energy-semantics': ('energy', 'EnergySemantics'),
+        'cruise-semantics': ('reliability', 'CruiseSemantics'),
+        'reliability-semantics': ('reliability', 'ReliabilitySemantics'),
+        'weed-semantics': ('reliability', 'WeedSemantics'),
+    }
+    page, view = locations[slug]
+    from tools.publishing.build import blocks
+    authored = Path(f'docs/{page}.md').read_text(encoding='utf-8')
+    index = next(i for i, token in enumerate(blocks(authored)) if token.info.split()[1].endswith('::'+view))
+    rendered = (rendered_site / f'imports/docs/{page}.md').read_text(encoding='utf-8')
+    text = re.findall(r'```mermaid\n(.*?)```', rendered, re.S)[index]
     nodes = set(re.findall(r'^  (n\d+)[(\[]', text, re.M))
     edges = re.findall(r'(n\d+) -\.->\|"(\w+)"\| (n\d+)', text)
     assert 3 <= len(nodes) <= 5
@@ -57,14 +70,13 @@ def test_semantic_diagrams_are_small_connected_native_views(slug, kinds):
     assert seen == nodes
 
 
-def test_authored_pages_embed_the_generated_diagrams_only():
-    count = 0
-    for name in ['design-guide', 'sustained-operations', 'cruise-reliability']:
-        text = Path(f'docs/{name}.md').read_text(encoding='utf-8')
-        assert '<!-- Generated from SysML' not in text
-        for slug, body in re.findall(r'<!-- diagram:([\w-]+) -->(.*?)<!-- /diagram -->', text, re.S):
-            generated = Path(f'docs/figures/{slug}.md').read_text(encoding='utf-8')
-            diagrams = '\n\n'.join(re.findall(r'```mermaid\n.*?```', generated, re.S))
-            assert body.strip() == diagrams
-            count += 1
-    assert count == 7
+
+def test_authored_pages_contain_views_not_copied_diagrams(rendered_site):
+    from tools.publishing.build import blocks
+    for name in ['architecture', 'energy', 'reliability']:
+        source = Path(f'docs/{name}.md').read_text(encoding='utf-8')
+        assert '```mermaid' not in source
+        assert blocks(source)
+        rendered = (rendered_site / f'imports/docs/{name}.md').read_text(encoding='utf-8')
+        assert '```sysml-view' not in rendered
+        assert rendered.count('```mermaid') == len(blocks(source))

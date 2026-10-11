@@ -1,7 +1,7 @@
 """Exercise native cruise/reliability calculations and DFMEA traceability."""
 import json
 import pytest
-from scripts.render_requirements import native
+from tests.native_cases import native
 
 
 @pytest.fixture

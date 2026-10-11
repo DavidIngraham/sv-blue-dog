@@ -1,15 +1,15 @@
+from tools.boat_analysis.evidence.records import baseline_record as input_record
 """Independent regression arithmetic, similarity scaling and coverage checks."""
 import json
 import sys
 import numpy as np
 import pytest
-from scripts.native_design_kernel import ROOT
-from scripts.study_open_sizing import validate
+from tools.boat_analysis.model.runtime import ROOT
+from tools.boat_analysis.evidence.records import validate
 
 
 def evidence():
-    r=json.loads((ROOT/'docs/analysis/hull-resistance-audit.json').read_text(encoding='utf-8'))
-    validate(r['sourceHashes'])
+    r=input_record('hull-resistance-audit.json')
     return r
 
 
@@ -26,7 +26,7 @@ def test_published_equation_and_coefficient_row():
 @pytest.fixture
 def kernel():
     if sys.platform!='linux':pytest.skip('Native adapter requires Linux/GCC')
-    from scripts.native_hull_resistance import HullResistanceKernel
+    from tools.boat_analysis.model.resistance import HullResistanceKernel
     return HullResistanceKernel()
 
 
@@ -60,8 +60,8 @@ def test_domain_extrapolation_is_rejected(kernel):
 
 def test_upright_hull_features_for_rectangular_prism():
     from itertools import product
-    from scripts.hydro_geometry import convex_tetrahedra
-    from scripts.hull_features import upright_hull_features
+    from tools.boat_analysis.geometry.hydro import convex_tetrahedra
+    from tools.boat_analysis.geometry.hull import upright_hull_features
     box=convex_tetrahedra(np.array(list(product([-2.,2.],[-1.,1.],[-1.,1.]))))
     h=upright_hull_features(box,0.)
     np.testing.assert_allclose(h,[4,2,1,8,8,2,2,1,1],atol=1e-10)
@@ -71,8 +71,7 @@ def test_upright_hull_features_for_rectangular_prism():
 
 
 def test_geometry_audit_preserves_out_of_domain_findings():
-    r=json.loads((ROOT/'docs/analysis/hull-resistance-domain.json').read_text(encoding='utf-8'))
-    validate(r['sourceHashes'])
+    r=input_record('hull-resistance-domain.json')
     assert not r['qualified']
     assert r['cases'][0]['outsideEnvelope']==[]
     for case in r['cases']:
@@ -80,15 +79,11 @@ def test_geometry_audit_preserves_out_of_domain_findings():
     for c in r['cases']:assert c['nativeCanoeVolume_m3']==pytest.approx(c['hullFeatures'][3],rel=1e-9)
 
 
-def test_resistance_publication_is_current():
-    from scripts.publish_hull_resistance import publication
-    assert (ROOT/'docs/hull-resistance.md').read_text(encoding='utf-8')==publication()
-
 
 def test_fullness_changes_prismatic_coefficient_without_changing_midship():
-    from scripts.hull_features import tapered_hull_geometry,upright_hull_features
-    from scripts.hydro_geometry import hull_geometry
-    from scripts.coupled_geometry import metrics
+    from tools.boat_analysis.geometry.hull import tapered_hull_geometry,upright_hull_features
+    from tools.boat_analysis.geometry.hydro import hull_geometry
+    from tools.boat_analysis.geometry.vessel import metrics
     original=hull_geometry(2,.6,.1,.15,resolution=24)
     a=tapered_hull_geometry(2,.6,.1,.15,1.,resolution=24)
     b=tapered_hull_geometry(2,.6,.1,.15,2.,resolution=24)
@@ -101,7 +96,7 @@ def test_fullness_changes_prismatic_coefficient_without_changing_midship():
 
 
 def test_deck_area_follows_fullness_geometry():
-    from scripts.hull_features import deck_area,tapered_hull_geometry
+    from tools.boat_analysis.geometry.hull import deck_area,tapered_hull_geometry
     a=deck_area(tapered_hull_geometry(2,.6,.1,.15,1.,resolution=32))
     b=deck_area(tapered_hull_geometry(2,.6,.1,.15,2.,resolution=32))
     assert a==pytest.approx(np.pi/4*2*.6,rel=.001)

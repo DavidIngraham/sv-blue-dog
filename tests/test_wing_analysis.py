@@ -1,12 +1,13 @@
 """Provenance and publication checks for preliminary wing evidence."""
 import hashlib,json,math
 from pathlib import Path
-from scripts.publish_wing_analysis import publication
+from tools.boat_analysis.evidence.records import baseline_record
+import subprocess
 ROOT=Path(__file__).resolve().parents[1]
 
 
 def test_wing_geometry_preserves_missing_data_and_source_identity():
-    r=json.loads((ROOT/'docs/analysis/wing-geometry.json').read_text())
+    r=baseline_record('wing-geometry.json')
     assert hashlib.sha256((ROOT/r['source']).read_bytes()).hexdigest()==r['sha256']
     assert r['units']=='mm'
     for p in r['profiles']:
@@ -19,9 +20,11 @@ def test_wing_geometry_preserves_missing_data_and_source_identity():
 
 
 def test_reference_runs_are_finite_consistent_and_not_qualified():
-    source=hashlib.sha256((ROOT/'analysis/wing/reference_vsp.py').read_bytes().replace(b'\r\n',b'\n')).hexdigest()
+    manifest=json.loads((ROOT/'evidence/runs/2026-10-10-coupled/manifest.json').read_text())
+    driver=subprocess.check_output(['git','show',manifest['sourceRevision']+':analysis/wing/reference_vsp.py'],cwd=ROOT)
+    source=hashlib.sha256(driver.replace(b'\r\n',b'\n')).hexdigest()
     for mesh in [16,32,64]:
-        r=json.loads((ROOT/f'docs/analysis/wing-vsp-reference-{mesh}.json').read_text())
+        r=baseline_record(f'wing-vsp-reference-{mesh}.json')
         assert r['driverSha256']==source
         assert r['validated'] is False
         assert r['mesh']==mesh
@@ -30,7 +33,3 @@ def test_reference_runs_are_finite_consistent_and_not_qualified():
         for key in ['CLtot','CDi','CMytot']:
             assert len(r['results'][key])==len(r['results']['Alpha'])
             assert all(math.isfinite(x) for x in r['results'][key])
-
-
-def test_wing_report_is_generated_from_current_results():
-    assert (ROOT/'docs/wing-analysis-results.md').read_text(encoding='utf-8')==publication()
