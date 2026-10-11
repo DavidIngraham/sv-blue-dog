@@ -10,7 +10,7 @@ My starting point will be a hull tow measurement and the required recovery condi
 
 Water propulsion offers compact thrust but exposes the rotor and shaft to weeds. Air propulsion avoids submerged rotor fouling while upright but adds windage, guarding, elevated mass and capsize interactions. Both still depend on the hull, keel and rudder passing vegetation. Identical weed trials, including shutdown, clearing and restart, should reveal how much that distinction matters in practice.
 
-The comparison also needs sailing drag, rig clearance, isolation, handling, corrosion, servicing and wet restart. I keep those tradeoffs linked to the [recovery obligation](requirements/requirements-r-001.md), [reserve](requirements/requirements-r-002.md), and [weed qualification](requirements/requirements-n-056.md), so it stays clear which problem each test is answering.
+The comparison also needs sailing drag, rig clearance, isolation, handling, corrosion, servicing and wet restart. I keep those tradeoffs linked to the [recovery obligation](requirements/requirements-energy.md#recovery-propulsion-and-reserves), [reserve](requirements/requirements-energy.md#recovery-propulsion-and-reserves), and [weed qualification](requirements/requirements-environment.md#weed-tolerance), so it stays clear which problem each test is answering.
 
 Actual propeller data and installed measurements will decide the selection. The [source notes](../models/vehicle/source-evidence.sysml) retain the prior research and comparison rationale; [energy accounting](energy.md) and [recovery analysis](structures-and-recovery.md) explain how that choice affects the rest of the boat.
 

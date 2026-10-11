@@ -49,7 +49,7 @@ The model's [source evidence](../models/vehicle/source-evidence.sysml) preserves
 
 Review the proposed mission, waters, operating modes and equipment together. Sailing, powered recovery and station keeping can raise different questions. Obtain the underlying determination behind a reported exemption and establish its scope before using it as a design constraint. Treat unresolved classification explicitly rather than choosing a convenient length limit.
 
-The current obligations are shown in the [classification](requirements/requirements-s-005.md) and [conspicuity](requirements/requirements-s-004.md) views. Traffic also belongs in the [operating context and use cases](architecture.md). Changes in an applicability finding should update those model elements and their rationale; publication then rebuilds the affected views.
+The current obligations are shown in the [classification](requirements/requirements-safety.md#conspicuity-classification-and-recovery) and [conspicuity](requirements/requirements-safety.md#conspicuity-classification-and-recovery) views. Traffic also belongs in the [operating context and use cases](architecture.md). Changes in an applicability finding should update those model elements and their rationale; publication then rebuilds the affected views.
 
 
 **Next:** [Look up the requirements](requirements.md).

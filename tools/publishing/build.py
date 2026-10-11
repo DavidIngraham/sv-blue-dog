@@ -106,6 +106,9 @@ def page_link(page, target, image, redirects, rev):
     if path.startswith("docs/"):
         relative = path[5:]
         relative = redirects.get(relative, relative)
+        if '#' in relative:
+            relative, anchor = relative.split('#', 1)
+            suffix = '#' + anchor
         if relative.endswith(".md") and (ROOT / "docs" / relative).is_file():
             return posixpath.relpath(str(PurePosixPath(relative).with_suffix(".html")), page.parent.as_posix()) + suffix
     local = (ROOT / path).resolve()
@@ -201,11 +204,14 @@ def _build(source_dir, output_dir):
         imported.parent.mkdir(parents=True, exist_ok=True)
         imported.write_text(text, encoding="utf-8")
     for old, new in redirects.items():
-        if new not in rendered:
+        destination = urlsplit(new)
+        if destination.path not in rendered:
             raise ValueError(f"Redirect target absent: {old} -> {new}")
         target = output_dir / PurePosixPath(old).with_suffix(".html")
         target.parent.mkdir(parents=True, exist_ok=True)
-        href = posixpath.relpath(str(PurePosixPath(new).with_suffix(".html")), PurePosixPath(old).parent.as_posix())
+        href = posixpath.relpath(str(PurePosixPath(destination.path).with_suffix(".html")), PurePosixPath(old).parent.as_posix())
+        if destination.fragment:
+            href += '#' + destination.fragment
         target.write_text(f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={escape(href)}"><a href="{escape(href)}">This page moved</a>', encoding="utf-8")
         imported = output_dir / "imports/docs" / old
         imported.parent.mkdir(parents=True, exist_ok=True)

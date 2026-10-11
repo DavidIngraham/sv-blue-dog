@@ -34,7 +34,8 @@ def test_compact_labels_retain_native_identity():
 
 
 def test_wind_thread_reaches_both_mission_roots(rendered_site):
-    text=(rendered_site/'imports/docs/requirements/requirements-e-009.md').read_text()
+    text=(rendered_site/'imports/docs/requirements/requirements-autonomy.md').read_text()
+    text=text.split('## Wind observation', 1)[1]
     diagram=re.search(r'```mermaid\n(.*?)```',text,re.S)[1]
     for node in ['transGorgeChallenge', 'hawaiiVoyage', 'navigationAndControl',
                  'windObservation', 'windSpeedAccuracy', 'windDirectionAccuracy',

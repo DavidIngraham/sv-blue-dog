@@ -58,9 +58,12 @@ def render():
         path(coords, '#b5d8e7', 13)
         path(coords, '#508ba6', 1.5)
         parts.append('</g>')
-    # Arrows follow a shared section of river in opposite directions.
+    # Follow the full course corridor, from The Dalles reach to Bonneville.
+    # The challenge model defines the operational gates separately.
     river = next(w['geometry'] for w in data['elements'] if w['id'] == 163640960)
-    outbound = [xy(p['lon'], p['lat']) for p in river[30:47]]
+    start = min(range(len(river)), key=lambda i:
+                (river[i]['lon'] + 121.185)**2 + (river[i]['lat'] - 45.608)**2)
+    outbound = [xy(p['lon'], p['lat']) for p in river[start:]]
     path([(x, y-8) for x, y in outbound], '#ab4e23', 3, 'marker-end="url(#out)"')
     path([(x, y+8) for x, y in reversed(outbound)], '#176a65', 3, 'marker-end="url(#back)"')
     for name, lon, lat, dx, dy in [

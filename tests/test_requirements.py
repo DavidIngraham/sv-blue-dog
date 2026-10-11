@@ -151,8 +151,9 @@ def test_focused_views_cover_all_derivations(published_model, rendered_site):
     # The full native graph is an oracle only; readers receive bounded views.
     edges = set()
     refinements = set()
-    pages = list((rendered_site / 'imports/docs/requirements').glob('requirements-*.md'))
-    assert len(pages) == 50
+    pages = [rendered_site / 'imports/docs/requirements' / p.name
+             for p in Path('docs/requirements').glob('requirements-*.md')]
+    assert len(pages) == 6
     assert not Path('docs/figures/requirements-derivation.md').exists()
     for page in pages:
         import re

@@ -4,7 +4,7 @@ Can the boat get through the night and keep sailing the next day? I combine the 
 
 ## Wind-sensing configurations
 
-The [wind-observation thread](requirements/requirements-e-009.md) connects autonomous sailing to the observations needed for trim. I will use my battery-powered Bluetooth Portable Mini on the testbed, then move to a vessel-powered ULP Wired Mini for the challenge.
+The [wind-observation thread](requirements/requirements-autonomy.md#wind-observation) connects autonomous sailing to the observations needed for trim. I will use my battery-powered Bluetooth Portable Mini on the testbed, then move to a vessel-powered ULP Wired Mini for the challenge.
 
 ```sysml-report BlueDogWindDocuments::WindEquipment
 ```

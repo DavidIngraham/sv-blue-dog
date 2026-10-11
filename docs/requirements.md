@@ -1,73 +1,29 @@
-# Requirements: mission-to-detail threads
+# Requirements: mission to implementation
 
-This is the reference library behind the story. Start with the [mission](architecture.md); come here when you want to follow a specific obligation into its design and verification links. These views support [requirements review](development-plan.md#mission-definition) and supply criteria for [virtual design](development-plan.md#virtual-design).
+Six topic pages connect the mission goals to testable requirements and design obligations. Each contains related breakdowns with their upstream context, generated from the authoritative SysML model. Start with the topic relevant to the design decision you are making.
 
-Each page includes the upstream chain to its mission or project-constraint roots and a broader breakdown of the topic. Large breakdowns share the full upstream context across several diagrams. Statements come from the requirement definitions; derivation, refinement and design-basis dependencies remain distinct.
+## [Mission, course completion and endurance](requirements/requirements-mission.md)
 
-[How we model requirements](methods/modeling.md) · [Mission and architecture](architecture.md)
+The Gorge round trip is the first challenge; sustained operation and Hawaii extend the design horizon. These threads connect those goals to course performance and mission reliability.
 
+## [Autonomous sailing, navigation and wind sensing](requirements/requirements-autonomy.md)
 
-## What must the mission achieve?
+Autonomy turns the mission into onboard decisions. Navigation and wind observations supply the controller; recovery behavior keeps faults from silently becoming mission failures.
 
-- [C-000 Trans Gorge Challenge](requirements/requirements-c-000.md)
-- [C-001 Course Completion](requirements/requirements-c-001.md)
-- [C-005 Live Observation](requirements/requirements-c-005.md)
-- [M-002 Multi Day Endurance](requirements/requirements-m-002.md)
-- [C-101 Telemetry Equipment](requirements/requirements-c-101.md)
-- [C-102 Command Integrity](requirements/requirements-c-102.md)
-- [Q-001 Cruise Performance](requirements/requirements-q-001.md)
-- [L-001 Mission Reliability](requirements/requirements-l-001.md)
-- [C-002 Repeated Operation](requirements/requirements-c-002.md)
-- [C-003 Unassisted Attempt](requirements/requirements-c-003.md)
-- [C-004 Sailing Propulsion](requirements/requirements-c-004.md)
-- [C-006 Emergency Intervention](requirements/requirements-c-006.md)
-- [H-001 Hawaii Voyage](requirements/requirements-h-001.md)
-- [M-001 Round Trip](requirements/requirements-m-001.md)
+## [Energy and recovery propulsion](requirements/requirements-energy.md)
 
-## What conditions must it tolerate?
+The energy budget must support sailing continuously and retain a deliberate recovery capability. These threads separate energy awareness, sustained balance and the motor rules for a qualifying attempt.
 
-- [N-001 Environmental Envelope](requirements/requirements-n-001.md)
-- [N-010 Gorge Environment](requirements/requirements-n-010.md)
-- [N-020 Ocean Environment](requirements/requirements-n-020.md)
-- [N-002 Marine Durability](requirements/requirements-n-002.md)
-- [N-003 Stability And Fouling](requirements/requirements-n-003.md)
-- [N-033 Visibility](requirements/requirements-n-033.md)
-- [N-035 Envelope Transition](requirements/requirements-n-035.md)
-- [N-044 Wet Mechanical Integrity](requirements/requirements-n-044.md)
-- [N-045 Wet Electrical Integrity](requirements/requirements-n-045.md)
-- [N-046 Solar Heating](requirements/requirements-n-046.md)
-- [N-051 Self Righting](requirements/requirements-n-051.md)
-- [N-052 Capsize Control Recovery](requirements/requirements-n-052.md)
-- [N-053 Submerged Weed Passage](requirements/requirements-n-053.md)
-- [N-054 Weed Snag Shedding](requirements/requirements-n-054.md)
-- [N-055 Weed Blockage Response](requirements/requirements-n-055.md)
-- [N-056 Recovery Propulsor Weeds](requirements/requirements-n-056.md)
+## [Environment, durability and self-righting](requirements/requirements-environment.md)
 
-## How does it operate without intervention?
+The Gorge and ocean environments set the loads and exposure conditions. The breakdown connects those environments to measurable limits, capsize recovery and weed tolerance.
 
-- [E-001 Energy Awareness](requirements/requirements-e-001.md)
-- [E-009 Wind observation](requirements/requirements-e-009.md)
-- [E-002 Navigation And Control](requirements/requirements-e-002.md)
-- [E-005 Communications](requirements/requirements-e-005.md)
-- [E-003 Reset Recovery](requirements/requirements-e-003.md)
-- [E-004 Low Energy Recovery](requirements/requirements-e-004.md)
-- [E-006 Ingress Response](requirements/requirements-e-006.md)
-- [E-007 Mission Evidence](requirements/requirements-e-007.md)
-- [E-008 Navigation Availability](requirements/requirements-e-008.md)
-- [E-200 Sustained Energy Feasibility](requirements/requirements-e-200.md)
+## [Traffic safety, communications and monitoring](requirements/requirements-safety.md)
 
-## How do I handle, manufacture and recover it?
+Other river users are part of the operating context. The vessel must remain observable, respect its operating boundary and distinguish monitoring from intervention that ends a qualifying attempt.
 
-- [P-001 Transportability](requirements/requirements-p-001.md)
-- [P-003 Serviceability](requirements/requirements-p-003.md)
-- [R-004 Challenge Motor Inhibition](requirements/requirements-r-004.md)
-- [R-001 Recovery Propulsion](requirements/requirements-r-001.md)
-- [R-002 Recovery Energy](requirements/requirements-r-002.md)
+## [Manufacturing, handling and serviceability](requirements/requirements-practicality.md)
 
-## How does it interact safely with others?
+One-person handling and a 250 mm cubic printer are owner-imposed project constraints. They shape the build and maintenance approach alongside the mission goals.
 
-- [S-001 Traffic Safety](requirements/requirements-s-001.md)
-- [S-003 Safe Recovery](requirements/requirements-s-003.md)
-- [S-002 Operating Boundary](requirements/requirements-s-002.md)
-- [S-004 Navigation Conspicuity](requirements/requirements-s-004.md)
-- [S-005 Regulatory Classification](requirements/requirements-s-005.md)
+[Mission and architecture](architecture.md) · [Development plan](development-plan.md) · [How we model requirements](methods/modeling.md)
