@@ -27,6 +27,10 @@ jobs:
           enable-cache: true
       - run: uv sync --locked
       - run: uv run python -m tools.boat_analysis.cli install
+      - run: uv run python -m tools.boat_analysis.environment.climatology
+      - run: uv run python -m tools.boat_analysis.environment.sensitivity
+      - name: Check committed weather views match their model and evidence
+        run: git diff --exit-code -- models/evidence/gorge-wind.sysml docs/figures/gorge-wind-seasons.svg docs/figures/weather-performance-sensitivity.svg
       - run: uv run python -m tools.boat_analysis.cli prepare
       - run: uv run python -m tools.boat_analysis.cli evidence-check
       - run: uv run pytest -q

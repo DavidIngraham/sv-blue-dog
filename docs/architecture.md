@@ -4,7 +4,7 @@ What does this little boat actually have to do? I start with the independent Gor
 
 ![Route orientation: The Dalles to Bonneville downstream, then upstream back to The Dalles against the current.](figures/route-context.svg)
 
-The return leg has to make progress over the ground, not just through the water. In an easterly, it must also work to windward. The challenge is sail-only and unassisted; I want live observation without making a shore connection necessary for control. Hawai‘i is the longer-term objective, with separate readiness evidence.
+The return leg has to make progress over the ground, not just through the water. The representative westerly puts that return downwind against the current, while the outbound leg is windward with it. Easterlies reverse those roles. I will choose a favorable weather window for the challenge and use a separate seasonal profile for winter testing; the [weather analysis](operating-constraints.md#gorge-weather-and-launch-windows) explains the distinction. The challenge is sail-only and unassisted; I want live observation without making a shore connection necessary for control. Year-round operation and Hawai‘i require further readiness evidence.
 
 ![Illustrative vessel arrangement with wing, hull, rudder, keel, ballast, solar collection and electronics.](figures/boat-concept.svg)
 

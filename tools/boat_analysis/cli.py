@@ -12,6 +12,7 @@ def main():
     solve.add_argument("--budget", type=int, default=40)
     solve.add_argument("--resume", action="store_true")
     solve.add_argument("--resolution", type=int, default=12)
+    solve.add_argument("--route-profile", choices=["challenge", "all-season"], default="challenge")
     operating = commands.add_parser("operating")
     operating.add_argument("--budget", type=int, default=70)
     replay = commands.add_parser("replay")
@@ -35,7 +36,7 @@ def main():
             print(f"Prepared {name}", flush=True)
     elif args.command == "solve":
         from .optimization.search import run
-        run(args.budget, args.resume, args.resolution)
+        run(args.budget, args.resume, args.resolution, args.route_profile)
     elif args.command == "operating":
         from .optimization.operating import run
         run(args.budget)

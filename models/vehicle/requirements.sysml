@@ -2819,7 +2819,7 @@ package BlueDogRequirements {
     requirement def <'Q-001'> CruisePerformance {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall sustain sailing performance sufficient to complete each declared unassisted mission route. */
-        comment conditions /* The declared route includes sailing legs, current projections, weather holds and maneuvering time. Apply Q-101 through Q-103. */
+        comment conditions /* The declared route includes sailing legs, current projections, weather holds and maneuvering time. The Gorge qualifying attempt uses a selected weather window, with westerly flow as the representative sizing case. Winter testing and eventual year-round operation use separate declared profiles. Apply Q-101 through Q-103; see BlueDogWeather::policy. */
         metadata rationale : ModelingMetadata::Rationale { text = "Cruise speed determines exposure to failures; water speed alone does not establish route completion."; }
     }
     requirement cruisePerformance : CruisePerformance;

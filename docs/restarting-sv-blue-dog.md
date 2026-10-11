@@ -6,21 +6,23 @@ I started this project because I wanted to explore the limits of autonomous sail
 
 My initial inspiration was the Gorge Blowout course. Adding a return journey made it a much more demanding challenge: the boat would have to sail both ways and make progress against the river current. The Gorge would be a proving ground for the longer-term ocean ambition.
 
+The picture in my head is the classic westerly Gorge day. With wind from the west, the outbound leg toward Bonneville is windward with the current; the return is downwind against it. I plan to choose a favorable weather window for the qualifying attempt, even though I also want to test in winter. Easterlies reverse that sailing problem and deserve much more attention in winter. The [seasonal weather study](operating-constraints.md#gorge-weather-and-launch-windows) now gives those cases an observed context, rather than treating every wind direction as equally representative. Year-round unattended operation remains a later goal.
+
 ![Route schematic: start at The Dalles, sail downstream toward Bonneville, then return upstream against the current. The ocean ambition is a later development effort.](figures/route-context.svg)
 
-*This is a route-orientation sketch, not a navigation chart. The upstream return is what makes “a little boat that sails itself” a much harder sizing problem. The model defines the challenge gates; launch locations and operational permissions need their own planning.*
+*This is a route-orientation sketch, not a navigation chart. A westerly helps the return sail downwind, but the boat still has to overcome the river current. An easterly makes that same return windward. The model defines the challenge gates; launch locations and operational permissions need their own planning.*
 
 ## A testbed, then a maze of decisions
 
 I began sketching a testbed in SolidWorks to reduce risk around manufacturing techniques, wing-sail design and ArduSail control systems. The [existing CAD](../cad/) comes from that work. It was supposed to help me learn how to print and assemble the boat, explore the rig and get the control system working. It was never intended to be the final challenge vessel.
 
+![Actual SolidWorks testbed assembly: a translucent slender hull, tall crescent wing with internal ribs, mast drive, sensor mast, and deep keel with ballast bulb.](figures/testbed-solidworks.png)
+
+*The original testbed, exported directly from [SV Bluedog.SLDASM](../cad/SV%20Bluedog.SLDASM) in SolidWorks. This is the manufacturing, wing and control experiment that preceded the coupled sizing model; it is not the optimized challenge design.*
+
 Then I got lost in the configuration decisions. A larger wing could provide more drive, but it also changed the loads, ballast, actuator and recovery problem. More battery could help endurance while making the hull heavier. Changing the hull changed the sailing performance I needed from the wing. I could make individual choices, but I struggled to manage the consequences across the whole design.
 
 This is a surprisingly complex, high-performance system for something I hope will be small and inexpensive to manufacture. I was trying to push the edge of what was possible, and I stalled out.
-
-![Conceptual arrangement of an autonomous sailboat showing wing, hull, rudder, keel and ballast, solar collection, electronics and recovery propulsion. This is an explanatory sketch, not the SolidWorks testbed or an optimized design.](figures/boat-concept.svg)
-
-*The parts are easy to name; choosing them together is the difficult bit. Their positions here are illustrative, including the unresolved recovery-propulsor installation.*
 
 ## Using a model to get moving again
 

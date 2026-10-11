@@ -3,7 +3,10 @@ package BlueDogSailingExamples {
     doc /* Synthetic design studies. No measured hull, polar or route is asserted.
      * Wind from west/east denotes idealized alignment with a straight river axis,
      * not a weather forecast or surveyed corridor. Length is waterline length of
-     * the assembled vessel, not a printer-module dimension.
+     * the assembled vessel, not a printer-module dimension. gorgeWesterly is
+     * the representative selected-window challenge illustration; gorgeEasterly
+     * is a reversal/winter sensitivity. Neither is a probability-weighted route.
+     * BlueDogWeather::policy governs seasonal context, not these synthetic speeds.
      */
     part def UpstreamHeadwind :> BlueDogSailing::PolarLeg {
         attribute :>> label default = "Upstream / headwind";

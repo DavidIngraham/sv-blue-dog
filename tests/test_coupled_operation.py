@@ -197,7 +197,7 @@ def test_design_cache_preserves_state_dependent_results(native_case):
 
 def test_search_energy_reserve_does_not_change_native_acceptance(native_case):
     from tools.boat_analysis.optimization.search import Problem
-    p=Problem(4);r=p.evaluate(p.initial())
+    p=Problem(4,route_profile='all-season');r=p.evaluate(p.initial())
     names=p.model.operation.contract['outputNames'][4:18]
     selected=r['ineq'][:8*len(names)].reshape(8,len(names))
     raw=np.array([[row[n] for n in names] for row in r['rows']])

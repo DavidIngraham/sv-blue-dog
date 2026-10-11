@@ -16,11 +16,14 @@ from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate
 
 class Problem:
-    def __init__(self,resolution=12):
+    def __init__(self,resolution=12,route_profile='challenge'):
+        if route_profile not in ('challenge','all-season'):raise ValueError('Unknown route profile')
+        self.route_profile=route_profile
         self.resolution=resolution
         # Numerical allowance for coarse fixed-pitch versus refined free-pitch VMG.
         self.model=CoupledModel();self.structure=StructureKernel();self.route=RouteKernel();c=self.structure.contract
         self.progress_reserve_m_s=c['progressSearchReserve']
+        self.require_east=c['challengeRequiresEastProgress' if route_profile=='challenge' else 'allSeasonRequiresEastProgress']
         self.lo=np.r_[c['designLower'],np.tile(c['stateLower'],8)]
         self.hi=np.r_[c['designUpper'],np.tile(c['stateUpper'],8)]
         self.env=[(w,u,t) for w in c['windSpeeds'] for u in [True,False] for t in [1,-1]]
@@ -72,10 +75,11 @@ class Problem:
         operating[:,names[4:18].index('cycleMargin')]-=k.operation.contract['cycleEnergySearchReserve']
         ineq=operating.ravel()
         route_reserve=np.array([1.,1.,0.])*self.progress_reserve_m_s/self.route.contract['routeParameters'][5]
-        ineq=np.r_[ineq,(np.array([[r[n] for n in names[47:]] for r in rows])-np.array(k.operation.contract['resistanceDomainReserve'])).ravel(),list(margins.values()),route[:3]-route_reserve,west[:3]-route_reserve,righting]
+        route_screens=[('westerly',west)]+([('easterly',route)] if self.require_east else [])
+        ineq=np.r_[ineq,(np.array([[r[n] for n in names[47:]] for r in rows])-np.array(k.operation.contract['resistanceDomainReserve'])).ravel(),list(margins.values()),np.concatenate([r[:3]-route_reserve for _,r in route_screens]),righting]
         self.constraint_names=([f'case {i}: {n}' for i in range(8) for n in names[4:18]]
             +[f'case {i}: {n} (search reserve)' for i in range(8) for n in names[47:]]
-            +list(margins)+[f'{direction} {n}' for direction in ['easterly','westerly'] for n in ['downstream progress','upstream progress','duration']]
+            +list(margins)+[f'{direction} {n}' for direction,_ in route_screens for n in ['downstream progress','upstream progress','duration']]
             +[f'righting trim {trim:g}, heel {heel:g}' for trim in self.structure.contract['coarseTrims'] for heel in self.structure.contract['coarseHeels']])
         result={'eq':eq,'ineq':ineq,'design':x,'states':states,'rows':rows,'structure':margins,'route':route,'westerlyRoute':west,'righting':righting,'mass':reference_mass}
         self.calls+=1
@@ -116,8 +120,8 @@ class Problem:
         r=self.evaluate(z);return bool(np.abs(r['eq']).max()<tolerance and r['ineq'].min()>-tolerance)
 
 
-def run(budget,resume=False,resolution=12):
-    p=Problem(resolution);initial=p.initial()
+def run(budget,resume=False,resolution=12,route_profile='challenge'):
+    p=Problem(resolution,route_profile);initial=p.initial()
     checkpoint_hash=None
     if resume:
         checkpoint=ROOT/'.tools/coupled-search-progress.json'
@@ -173,11 +177,13 @@ def run(budget,resume=False,resolution=12):
     validate(hashes)
 
     report={'sourceHashes':hashes,'geometryResolution':resolution,'progressSearchReserve_m_s':p.progress_reserve_m_s,'budgetPerPhase':budget,'optimizerFtol':1e-4,'cycleEnergySearchReserve':p.model.operation.contract['cycleEnergySearchReserve'],'resistanceDomainReserve':p.model.operation.contract['resistanceDomainReserve'],'designBounds':dict(zip(p.model.c['designNames'],zip(p.lo[:29].tolist(),p.hi[:29].tolist()))),'design':dict(zip(p.model.c['designNames'],r['design'])),'stateRows':r['states'].tolist(),'operating':r['rows'],'structure':r['structure'],'route':r['route'].tolist(),'westerlyRoute':r['westerlyRoute'].tolist(),'rightingScreen':r['righting'],'mass':r['mass'],'maxEquilibriumResidual':float(np.abs(r['eq']).max()),'minimumMargin':float(r['ineq'].min()),'coarseFeasible':p.feasible(best),'optimizerMessage':message,'feasibilityRestorationMessage':repair_message,'lastOptimizerAttempt':last_attempt,'worstConstraints':sorted(zip(p.constraint_names,map(float,r['ineq'])),key=lambda item:item[1])[:12],'feasibilitySqpMessage':feasibility_sqp_message,'feasibilityMessage':str(phase.message),'calls':p.calls,'elapsed_s':time.time()-p.start,'normalizedDesignAndStates':best.tolist(),'qualified':False,'scope':'Delft upright untrimmed bare-hull regression with explicit coordinate screens; free hull-fullness exponent. Fixed-pitch screening search at the recorded geometry resolution; pending refined free-pitch and uncertainty replay. VSPAERO attached-flow only; independent provisional drag and lift caps. No claim of mission qualification or global optimum.'}
-    report.update(resumed=resume,resumeCheckpointSha256=checkpoint_hash,
+    report.update(routeProfile=p.route_profile,requiresEastProgress=p.require_east,
+                  probabilityWeighting='No calibrated mission distribution; separate native probability sensitivity, never averaged hard safety constraints.',
+                  resumed=resume,resumeCheckpointSha256=checkpoint_hash,
                   seedNormalizedDesignAndStates=seed.tolist(),
                   feasibilityInitialNormalizedDesignAndStates=feasibility_initial.tolist())
     output_path('coupled-sizing-search.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n')
     print('FINISHED',report['coarseFeasible'],report['design']['length_m'],report['minimumMargin'],flush=True)
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--budget',type=int,default=40);parser.add_argument('--resume',action='store_true');parser.add_argument('--resolution',type=int,default=12);args=parser.parse_args();run(args.budget,args.resume,args.resolution)
+    parser=argparse.ArgumentParser();parser.add_argument('--budget',type=int,default=40);parser.add_argument('--resume',action='store_true');parser.add_argument('--resolution',type=int,default=12);parser.add_argument('--route-profile',choices=['challenge','all-season'],default='challenge');args=parser.parse_args();run(args.budget,args.resume,args.resolution,args.route_profile)

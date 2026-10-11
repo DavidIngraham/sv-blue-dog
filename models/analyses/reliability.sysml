@@ -7,6 +7,9 @@ package BlueDogReliability {
      * Rates must be mission-critical, non-overlapping and confidence-qualified.
      * No repair, independence of random modes and constant hazard are assumptions.
      * Common-cause exposure is explicit. DFMEA rankings are not failure rates.
+     * Each profile is conditional on its declared weather trajectory. Integrate
+     * route success and survival over trajectories, not hazard at mean successful
+     * duration. BlueDogWeather::policy separates challenge and winter exposure.
      */
     part def SailingLeg {
         attribute distance : LengthValue;

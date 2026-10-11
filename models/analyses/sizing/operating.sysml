@@ -8,6 +8,8 @@ package BlueDogCoupledOperation {
      * Hydrostatic heave/pitch and mast-trim geometry are external geometry solves.
      * No wave-motion, dynamic planing, separated-flow or dynamic recovery claim. */
     analysis Inputs {
+        out attribute challengeRequiresEastProgress : Boolean = BlueDogWeather::policy.challengeRequiresEastProgress;
+        out attribute allSeasonRequiresEastProgress : Boolean = BlueDogWeather::policy.allSeasonRequiresEastProgress;
         out attribute windSpeeds : Real [2] ordered nonunique = BlueDogStudyPlan::operatingCoverage.windSpeeds;
         out attribute stateLower : Real [6] ordered nonunique = BlueDogStudyPlan::operatingCoverage.stateLower;
         out attribute stateUpper : Real [6] ordered nonunique = BlueDogStudyPlan::operatingCoverage.stateUpper;

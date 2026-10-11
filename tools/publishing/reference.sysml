@@ -206,8 +206,8 @@ package BlueDogEvidenceDocuments {
     }
     calc def Passage :> Query {
         Project(source = Cases(), columns = (Column(name = "Scenario", path = "label"),
-            Column(name = "Easterly round trip (h, conditional)", path = "easterlyTimeLabel"),
             Column(name = "Westerly round trip (h, conditional)", path = "westerlyTimeLabel"),
+            Column(name = "Easterly round trip (h, conditional)", path = "easterlyTimeLabel"),
             Column(name = "Mass (kg)", path = "massKg")))
     }
     calc def LimitingScreens :> Query {
@@ -326,5 +326,35 @@ package BlueDogReliabilityDocuments {
         part actions : Section { attribute redefines title = "Detection, actions and evidence"; part rows : Table { calc rows : Actions; } }
         part dispositions : Section { attribute redefines title = "Disposition and evidence"; part rows : Table { calc rows : Dispositions; } }
         part traces : Section { attribute redefines title = "Architecture and requirement links"; part rows : Table { calc rows : Traces; } }
+    }
+}
+
+package BlueDogWeatherDocuments {
+    private import DocumentQueries::*;
+    calc def Cases :> Query {
+        Named(qualifiedName = ("BlueDogWindObservations::KDLS_warm", "BlueDogWindObservations::KDLS_winter", "BlueDogWindObservations::KTTD_warm", "BlueDogWindObservations::KTTD_winter"))
+    }
+    calc def Counts :> Query {
+        Project(source = Cases(), columns = (
+            Column(name = "Station", path = "station"), Column(name = "Season", path = "season"),
+            Column(name = "Calendar hours", path = "expectedHours"),
+            Column(name = "West", path = "westHours"), Column(name = "East", path = "eastHours"),
+            Column(name = "Light", path = "lightHours"), Column(name = "Other", path = "otherHours"),
+            Column(name = "Unknown / absent", path = "unknownHours")))
+    }
+    calc def Windows :> Query {
+        Project(source = Cases(), columns = (
+            Column(name = "Station", path = "station"), Column(name = "Season", path = "season"),
+            Column(name = "Complete windows", path = "selectedWindows"),
+            Column(name = "East encounters", path = "windowsWithEast"),
+            Column(name = "Incomplete windows", path = "incompleteWindows"),
+            Column(name = "Missing-data lower %", path = "encounterLowerPercent"),
+            Column(name = "Missing-data upper %", path = "encounterUpperPercent"),
+            Column(name = "Status", path = "eastEncounterLabel")))
+    }
+    part def Observations :> Document {
+        attribute redefines title = "Gorge station observations: 2015–2024";
+        part counts : Section { attribute redefines title = "Hourly bins"; part rows : Table { calc rows : Counts; } }
+        part windows : Section { attribute redefines title = "72-hour window probe, not mission probability"; part rows : Table { calc rows : Windows; } }
     }
 }

@@ -4,6 +4,10 @@ Can I manufacture the boat this way without making it too heavy—and will it co
 
 Working through the testbed design made construction part of the sizing problem. Printed walls and ribs, wet glass/epoxy, seams and finish contribute to mass. The source CAD explores manufacturing and wing concepts; it does not define the challenge vessel.
 
+![SolidWorks rendering of the original testbed, showing the wing's internal structure and the hull, drive, keel and ballast arrangement.](figures/testbed-solidworks.png)
+
+The [weather-window mission](operating-constraints.md#gorge-weather-and-launch-windows) changes which sailing performance we emphasize, not the need to withstand loads or recover from a capsize. We keep those screens as hard constraints. Winter trials also need material, sealing and recovery evidence applicable to their temperature and weather conditions.
+
 ![Construction section: a glass and epoxy skin surrounds the printed support and hollow interior. Joints and attachments need their own load evidence.](figures/laminate-section.svg)
 
 *The sketch shows the construction idea, not specified layer thicknesses. I count both skin and printed support in mass, while the bending calculation credits the finite glass laminate section.*

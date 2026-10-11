@@ -12,6 +12,8 @@ This page defines the development approach and proposed review criteria. It does
 
 The manufacturing and wing prototype has its own learning mission. The challenge vessel must eventually complete The Dalles–Bonneville–The Dalles without intervention, while allowing live monitoring. Repeated operation is the next objective. Hawai‘i remains the longer-term driver, with its own mission definition and readiness evidence; success in the Gorge does not establish ocean readiness.
 
+The first qualifying attempt will use a selected weather window, with westerlies as the representative Gorge case. Winter development trials and later year-round operation have separate profiles. The [weather study](operating-constraints.md#gorge-weather-and-launch-windows) belongs in mission definition and virtual validation: it asks which environments deserve performance emphasis and how wind shifts change the outcome. Before a challenge launch, the test-readiness decision must connect the actual forecast, permitted window, reserve, abort/recovery plan and trial purpose. A summer direction frequency cannot qualify a winter test or authorize a launch.
+
 ```mermaid
 flowchart TB
     accTitle: Four increasingly capable development increments

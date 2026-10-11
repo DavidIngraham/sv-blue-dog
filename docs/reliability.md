@@ -44,7 +44,9 @@ package Page_reliability_1 {
 }
 ```
 
-The current primary replay meets the modeled route-duration screen, while additional aerodynamic degradation substantially extends the easterly passage and fails that screen. Reliability exposure therefore cannot be based on the primary passage time alone. The DFMEA links functional failure modes to architecture responsibilities, requirements and needed evidence. Its concerns guide design and tests; they are not fabricated failure probabilities. Numerical rate-budget examples remain conditional on their assumptions and evidence disposition.
+The current primary replay meets the modeled route-duration screen in west and east winds, while additional aerodynamic degradation fails the easterly screen. The [weather-window challenge](operating-constraints.md#gorge-weather-and-launch-windows) uses westerly sailing as its representative case, with a separate probability sensitivity for easterly exposure. Weather-route success and hardware survival are different quantities. Ultimately we need to average conditional success and survival over complete trajectories, including unsuccessful routes and time spent holding; applying a hazard rate to an average successful passage time would omit important risk. No weather probability has been accepted as an allocation of the mission reliability target.
+
+The DFMEA links functional failure modes to architecture responsibilities, requirements and needed evidence. Its concerns guide design and tests; they are not fabricated failure probabilities. Numerical rate-budget examples remain conditional on their assumptions and evidence disposition.
 
 Weed contact is a concrete operating interaction. It affects both the sailing appendages and recovery propulsion, so loss of speed, steering and recovery capability are assessed separately.
 

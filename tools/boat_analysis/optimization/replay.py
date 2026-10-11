@@ -25,7 +25,8 @@ def operating_case(model,design,wind,up,tack,state,budget):
     return diagnostic
 
 
-def verify(name,design,initial,scenarios,budget=35):
+def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
+    if route_profile not in ('challenge','all-season'):raise ValueError('Unknown route profile')
     model=CoupledModel();model.parameters=np.array(scenarios['values'][name]);structure=StructureKernel();route=RouteKernel()
     x=np.array([design[n] for n in model.c['designNames']]);rows=[]
     env=[(w,u,t) for w in model.operation.contract['windSpeeds'] for u in [True,False] for t in [1,-1]]
@@ -55,6 +56,11 @@ def verify(name,design,initial,scenarios,budget=35):
     numerical=all(r['equilibrated'] for r in rows)
     operating=min(row['outputs'][n] for row in rows for n in model.operation.contract['outputNames'][4:18]+model.operation.contract['outputNames'][47:])
     result={'scenario':name,'parameters':dict(zip(model.c['parameterNames'],model.parameters)),'cases':rows,'structure':margins,'route':trip.tolist(),'westerlyRoute':west.tolist(),'recovery':recovery,'numericallyBalanced':numerical,'minimumOperatingMargin':operating,'sampledStaticScreensPass':bool(numerical and operating>=-1e-4 and min(margins.values())>=-1e-4 and min(trip[:3])>=-1e-4 and min(west[:3])>=-1e-4 and all(r['failedEquilibria']==0 and r['minimumInteriorRestoring_Nm'] is not None and r['minimumInteriorRestoring_Nm']>0 for r in recovery)),'qualified':False}
+    # Preserve the original strict two-direction field; expose the selected
+    # profile separately so old evidence consumers cannot mistake its meaning.
+    requires_east=structure.contract['challengeRequiresEastProgress' if route_profile=='challenge' else 'allSeasonRequiresEastProgress']
+    common=numerical and operating>=-1e-4 and min(margins.values())>=-1e-4 and all(r['failedEquilibria']==0 and r['minimumInteriorRestoring_Nm'] is not None and r['minimumInteriorRestoring_Nm']>0 for r in recovery)
+    result.update(routeProfile=route_profile,profileSampledStaticScreensPass=bool(common and min(west[:3])>=-1e-4 and (not requires_east or min(trip[:3])>=-1e-4)))
     print('REPLAY',name,result['sampledStaticScreensPass'],'struct',min(margins.items(),key=lambda a:a[1]),'route',trip,'operating',operating,flush=True)
     return result
 
@@ -68,7 +74,7 @@ def run(names,budget,workers=3):
     hashes=source_hashes(sources)
     completed={}
     with ProcessPoolExecutor(max_workers=min(workers,len(names))) as pool:
-        futures={pool.submit(verify,name,saved['design'],saved['stateRows'],scenarios,budget):name for name in names}
+        futures={pool.submit(verify,name,saved['design'],saved['stateRows'],scenarios,budget,saved.get('routeProfile','all-season')):name for name in names}
         for future in as_completed(futures):
             name=futures[future];completed[name]=future.result()
             validate(hashes)

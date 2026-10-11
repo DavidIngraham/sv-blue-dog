@@ -4,6 +4,8 @@ If a trial goes wrong, I want a practical way to bring the boat back. Should tha
 
 I want to compare both drives against the same installed recovery task. An ideal disk calculation can help estimate the scale of the problem, but it cannot tell me which installation will work better on this boat.
 
+Selecting a [westerly challenge window](operating-constraints.md#gorge-weather-and-launch-windows) does not remove the need to recover after a reversal or calm. Both propulsor candidates must use the same declared current, windage and reserve conditions; winter trials need a separate applicable profile. A motor-assisted recovery remains an unsuccessful qualifying attempt, never extra sailing performance hidden in a probability average.
+
 My starting point will be a hull tow measurement and the required recovery conditions. Then I can bench each complete guarded drive and compare installed thrust, electrical power, temperature and maneuvering performance. The [native analysis](../models/analyses/recovery-propulsion.sysml) currently estimates reserve demand from illustrative inputs; those estimates help plan the experiment.
 
 Water propulsion offers compact thrust but exposes the rotor and shaft to weeds. Air propulsion avoids submerged rotor fouling while upright but adds windage, guarding, elevated mass and capsize interactions. Both still depend on the hull, keel and rudder passing vegetation. Identical weed trials, including shutdown, clearing and restart, should reveal how much that distinction matters in practice.

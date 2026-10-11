@@ -10,6 +10,8 @@ We compare control architecture separately from section camber. A tail-controlle
 
 I want to compare the rigs on the same terms. A promising lift curve is only part of the answer: the sail also has to survive unattended operation, use manageable trim power and let the boat recover from a capsize. A durability concern is worth investigating, but it is not a measured failure rate. I keep that distinction visible in the trade rather than hiding unknowns inside a weighted score.
 
+The representative west-wind challenge puts the upstream return on a leeward course. That makes broad-reach/downwind performance important alongside windward efficiency. The [seasonal probability study](operating-constraints.md#gorge-weather-and-launch-windows) keeps easterly upriver performance as a separate sensitivity, especially for winter tests. It does not let us score any rig as a winner from the attached-flow VSPAERO grid: broadside flow and separated downwind operation still need evidence. Durability, controllability and recovery remain acceptance gates, not benefits traded away by a low weather frequency.
+
 ```sysml-report BlueDogSailTradeDocuments::Conclusion
 ```
 

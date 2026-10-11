@@ -18,6 +18,8 @@ The reusable energy framework adds the installed loads once, including standby d
 
 The framework accounts for usable storage, charge/discharge limits and efficiencies, self-discharge, intermittent harvesting and the recovery reserve. We split intervals where an outage, duty change or burst can change the minimum stored energy; averages alone cannot establish transient capability. The coupled sizing run uses a simpler day/night balance, overnight reserve and peak-demand screen for each sailing state. It does not yet feed a complete voyage weather-and-load timeline into the chronological framework.
 
+The [seasonal weather policy](operating-constraints.md#gorge-weather-and-launch-windows) now separates the westerly weather-window challenge from winter testing and later year-round operation. A winter trial cannot inherit a warm-season harvest assumption. Future trajectory replay must couple wind direction and duration to daylight, cloud, actuator duty and holds; probability-weighted daily surplus cannot excuse an empty battery on a particular trip. The archived energy stress cases retain their failed status regardless of how often easterlies occur.
+
 ```sysml-view Page_energy_0::EnergySemantics direction=BT
 package Page_energy_0 {
     private import StandardViewDefinitions::*;

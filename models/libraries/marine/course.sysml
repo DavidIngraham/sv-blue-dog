@@ -13,6 +13,9 @@ package MarineCourse {
          * Each state contains speed, heading, incidence, leeway, rudder and heel.
          * Tack times cancel crosswind displacement. Equal time fractions per wind
          * and 0.5/1.0 m/s downstream current are illustrative, not weather evidence.
+         * This is conditional on one persistent direction, not a probability
+         * distribution. Neither station hourly fractions nor scenario counts
+         * justify treating these equal speed weights as climatology.
          * policy#7 is 1 for easterly (upstream windward), 0 for westerly. */
         attribute cross0 : Real = states#(1)*TrigFunctions::sin(TrigFunctions::rad(states#(2)+states#(4)));
         attribute cross1 : Real = states#(7)*TrigFunctions::sin(TrigFunctions::rad(states#(8)+states#(10)));
