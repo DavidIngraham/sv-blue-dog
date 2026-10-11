@@ -22,7 +22,7 @@ uv run python -m tools.publishing.build
 
 The generated site is written to `build/site`; rendered Markdown for the blog is under `build/site/imports/docs`. Generated files are build artifacts. Author the source pages and models, then rebuild them together. Raw GitHub Markdown displays the view source; the published site displays the resolved diagrams.
 
-A documentation build never runs optimization or VSP. Recorded analysis evidence is retained with its original provenance, and current results must identify their inputs and source revision. See [the sizing method](sizing.md) and [recorded outcomes](results.md).
+A documentation build never runs optimization or VSP. Recorded analysis evidence is retained with its original provenance, and current results must identify their inputs and source revision. The current conservative run and the earlier exploratory run use separate model packages, so updating a report never relabels historical evidence. See [the sizing method](sizing.md) and [recorded outcomes](results.md).
 
 ## GitHub Actions
 
@@ -30,4 +30,4 @@ The model-and-documentation workflow validates and prepares native calculations,
 
 The personal blog keeps its existing article identifiers and reads rendered Markdown from the project site's `imports/` directory. Authored pages stay in this repository. Legacy page paths redirect to current methods; superseded numerical studies remain available through Git history rather than masquerading as current results.
 
-Aerodynamic plots are regenerated from hash-checked archived JSON by `tools.boat_analysis.evidence.aerodynamics` and published under `assets/vsp`. Native geometry screenshots and the corresponding VSP model are retained as evidence. The plot build does not launch OpenVSP.
+Aerodynamic plots are regenerated from hash-checked archived JSON by `tools.boat_analysis.evidence.aerodynamics` and published under `assets/vsp`. Native geometry screenshots and the corresponding VSP model are retained as evidence. Mesh/wake comparisons and sizing outcomes are projected into SysML for native report queries. The plot build does not launch OpenVSP.

@@ -1,6 +1,6 @@
 # Comparing sail architectures
 
-We compare control architecture separately from section camber. A tail-controlled wing and a directly rotated fixed-camber wing solve trim differently; either needs measured aerodynamic moments, actuator losses, structural loads and failure-state behavior. A soft sail remains a useful comparator rather than an assumed failure.
+We compare control architecture separately from section camber. A tail-controlled wing and a directly rotated fixed-camber wing solve trim differently; either needs measured aerodynamic moments, actuator losses, structural loads and failure-state behavior. A soft sail remains a useful comparator rather than an assumed failure. The fixed-camber CAD wing is our sizing experiment, not a resolved winner of the trade.
 
 The analysis separates unknown evidence, a demonstrated failure and a development preference. Apply the same durability, energy, progress, recovery, manufacturing, handling and reliability gates to each candidate. Do not turn a qualitative durability concern into a failure rate or an arbitrary weighted score.
 
@@ -15,11 +15,11 @@ Measure both-tack lift, drag and pitching moment over the intended trim range, i
 
 For recovery, represent each body with actual mass, center of gravity, geometry and flooding state. Pose the rig at free and locked angles and evaluate both sides of a full roll. Check pitch stability and dynamic release behavior separately from sampled static righting moments. The [structures and recovery method](structures-and-recovery.md) describes that distinction.
 
-Use prototypes to resolve the uncertainties before committing geometry. The [sizing workflow](sizing.md) can explore a baseline while other concepts remain open; its numerical results do not complete the trade.
+Use prototypes to resolve the uncertainties before committing geometry. Published [crescent-wing research](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) includes wind-tunnel comparisons, but its section geometry and test conditions differ from ours. It supports investigating the concept; it does not supply validated coefficients for our CAD. The [sizing workflow](sizing.md) therefore uses explicit conservative assumptions while other concepts remain open. Its numerical results do not complete the trade.
 
 ## What we have actually run in OpenVSP
 
-The recorded work uses OpenVSP 3.54.0. There are two experiments: a reference-wing mesh study (three five-point alpha sweeps), and a response grid (25 eight-point sweeps, 200 operating points). The figures below are regenerated from the immutable [run records](../evidence/runs/2026-10-10-coupled/manifest.json) during every site build. No new aerodynamic solve is implied by republishing them.
+The recorded work uses OpenVSP 3.54.0. We use a reference-wing study and a 200-point aspect-ratio/camber grid for finite-wing trends, a separate heel/incidence study to expose the limits of the boat model's projection, and representative mesh/wake checks within the restricted sizing domain. Figures are regenerated from immutable run records during each site build. Publishing them does not rerun the aerodynamic solver.
 
 ### Tested geometry
 
@@ -39,11 +39,18 @@ The response grid holds area at 1 m² and changes aspect ratio through 2, 4, 6 a
 
 The reference sweeps cover −4° to 12° in 4° increments, with spanwise mesh parameters 16, 32 and 64 and corresponding chordwise tessellation `2 × mesh + 1`. These labels are tessellation settings, not total panel counts. The response grid uses mesh parameter 24 and covers −12° to 16° in 4° increments.
 
-All sweeps use 5 m/s, air density 1.225 kg/m³, zero sideslip, Mach zero, and five wake iterations. Reynolds number is supplied as `5 × chord / 1.5e-5`; the reference value is approximately 167,000. Reference area, span and chord are set explicitly. Pitching moment is reported about midchord in the solver's axes.
+The original reference and response-grid sweeps use 5 m/s, air density 1.225 kg/m³, zero sideslip, Mach zero, and five wake iterations. Reynolds number is supplied as `5 × chord / 1.5e-5`; the reference value is approximately 167,000. Reference area, span and chord are set explicitly. Pitching moment is reported about midchord in the solver's axes.
 
 ![Reference alpha sweeps comparing three mesh settings](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reference-sweeps.svg)
 
-Lift and pitching moment change with mesh refinement, so these curves should not be called mesh-independent. The study varies tessellation but does not establish wake-iteration convergence. The markers are actual recorded samples; connecting lines do not imply additional solved points.
+Lift and pitching moment change with mesh refinement, so these curves should not be called mesh-independent. We check that sensitivity explicitly with mesh settings 24, 48 and 72 and wake counts 5, 15 and 30 at incidences −4°, 0°, 4° and 8°. The representative cases cover forward and reversed chord at zero spanwise inflow and forward chord at 20° spanwise inflow. This is 60 additional operating points, not a convergence certificate for every geometry in the response grid.
+
+![Representative mesh and wake convergence checks](https://davidingraham.github.io/sv-blue-dog/assets/vsp/convergence.svg)
+
+```sysml-report BlueDogEvidenceDocuments::AerodynamicChecks
+```
+
+All six final-increment checks pass the model's absolute coefficient-change screens. The coarse grid used for sizing still differs from the finest cases, as the second table shows; it is not mesh-independent. Passing means only that the last sampled increments are small enough for those screens. It does not validate separation, viscosity or the shedding-edge assumption. Markers are recorded samples; connecting lines do not imply additional solved points.
 
 ### Aspect ratio, camber and chord direction
 
@@ -59,9 +66,15 @@ The drag plots show **induced drag only**, not total sail drag or boat performan
 
 The direction comparison shows raw solver coordinates. Reversing the chord array is a geometric sensitivity experiment, not a validated opposite-tack polar. The optimization adapter separately transforms angle, lift and moment signs when representing reverse flow; these plots do not apply that transformation.
 
+We also run VSPAERO directly at the selected trial's aspect ratio and camber to check interpolation. The comparison uses the same reference thickness, unit area, mesh and wake settings as the response grid. It does not test the trial's thicker section or validate its physical performance; the alpha range includes points outside the restricted sizing domain.
+
+![Direct VSPAERO versus interpolation at the selected trial aspect ratio and camber](https://davidingraham.github.io/sv-blue-dog/assets/vsp/candidate-interpolation.svg)
+
 ### What these results can establish
 
-These runs support bounded interpolation and sensitivity studies inside the sampled response grid. The plotted responses show the influence of camber and aspect ratio and the need to retain aerodynamic moments when sizing the trim actuator. They do not select a winning sail architecture.
+These runs support exploratory interpolation and sensitivity studies inside the sampled response grid. The plotted responses show the influence of camber and aspect ratio and the need to retain aerodynamic moments when sizing the trim actuator. They do not select a winning sail architecture or establish reliable performance bounds.
+
+Primary sizing now uses the [conservative aerodynamic policy](../models/analyses/aerodynamic-policy.sysml): reduced lift credit, increased drag, an independent pitching-moment allowance, nominal incidence limited to −4° through 8°, and sailing heel limited to ±20°. The geometry variables remain free. The rerun reached a near-feasible trial but did not clear the coarse acceptance tolerance or establish a minimum length. Additional adverse aerodynamic assumptions are applied in replay. These factors are provisional engineering judgments, not measured confidence intervals or a demonstrated stall boundary; the [current results](results.md) must be read with that qualification.
 
 VLM assumes attached, inviscid flow and a prescribed shedding edge. This CAD section has a rounded edge, making that shedding assumption particularly important. Increasing lift at the high-alpha endpoints does not demonstrate absence of stall. Broadside sailing, separation, real low-Re drag, both-tack transitions, gust response, mast interference and tail/elevator control are not validated here. No tail-controlled wing or soft-sail simulation is included in this dataset. The authoritative [aerodynamic decision and evidence gaps](../models/vehicle/decisions.sysml) retain those limits.
 
@@ -73,7 +86,7 @@ To recapture the native geometry screenshots on Windows after installing the iso
 
 ## Heel and incidence sweeps
 
-The original VSP sweeps held spanwise inflow at zero and did **not** include heel. The boat force-balance model separately applies a cosine projection to upright lift. The new heel study resolves the changed flow direction in VSPAERO instead of assuming that projection is sufficient.
+The response grid holds spanwise inflow at zero. The boat force-balance model applies a cosine projection to upright lift, while the heel study resolves the changed flow direction in VSPAERO to test that approximation. The study motivates restricted operating angles and conservative sizing assumptions; it is not yet a full replacement polar for the optimizer.
 
 The [SysML analysis case](../models/analyses/wing-heel.sysml) defines coverage and assumptions. This study uses the same fixed-camber rectangular reference wing at AR 4 and area 1 m², with 5 m/s horizontal apparent wind. Apparent-wind angles are 45°, 90° and 135° from the bow; signed heels are −40°, −20°, 0°, 20° and 40°. Each combination sweeps eight nominal upright incidences from −12° to 16°: **15 sweeps and 120 newly solved operating points**. Mesh parameter 24 and five wake iterations match the earlier response-grid settings; this does not establish convergence at high spanwise inflow.
 
@@ -99,6 +112,6 @@ The comparison below holds nominal incidence at 8°. The dashed curve uses the u
 
 ![Solved heel response versus the cosine projection approximation](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-projection-comparison.svg)
 
-The cosine projection overpredicts forward force for the 45° and 90° wind cases and underpredicts it for the 135° case at substantial heel in this fixed-trim comparison. Heel therefore cannot be represented by one direction-independent loss factor. These curves are sensitivity evidence, not an updated validated optimizer polar. The current optimizer is unchanged. Before replacing its projection, we need consistent heel/wind/trim coverage across the full aspect-ratio and camber grid, appropriate force/moment interfaces, and convergence and physical validation. A free-air uniform-flow study does not include the water surface, wave-induced motion, wind shear, mast/hull interference, stall or dynamic roll.
+The cosine projection overpredicts forward force for the 45° and 90° wind cases and underpredicts it for the 135° case at substantial heel in this fixed-trim comparison. Heel therefore cannot be represented by one direction-independent loss factor. The optimizer retains that approximation provisionally, with the tighter angle limits and conservative assumptions described above. Replacing it requires consistent heel/wind/trim coverage across the aspect-ratio and camber grid, force/moment interfaces, and numerical and physical validation. A free-air uniform-flow study does not include the water surface, wave-induced motion, wind shear, mast/hull interference, stall or dynamic roll.
 
 The [archived heel results](../evidence/runs/2026-10-11-heel/wing-heel-sweep.json) include actual solver alpha/beta, dimensional loads, model settings and source hashes; the [manifest](../evidence/runs/2026-10-11-heel/manifest.json) protects the record bytes. Re-run with `uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.heel_sweep`. Plotting and Pages builds use the archived evidence without launching VSP.

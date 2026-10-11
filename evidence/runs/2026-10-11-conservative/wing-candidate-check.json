@@ -1,0 +1,264 @@
+{
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/dfmea.sysml": "f6788362c2b868cb462782b7e9b837eb8fafe716368816f7a25cb5a7be7c6a73",
+    "models/analyses/energy.sysml": "65ce46ad0826e96b4e7ebb33b2d1f5ba8a3cd5835ac752947b75574690cf1c9e",
+    "models/analyses/polar-demand.sysml": "c8fef49f41d17e9c6da0bc275087d2382eefd770bfa4bba0386fa45199f551f4",
+    "models/analyses/recovery-propulsion.sysml": "3348c0d85a51123c73ae4dbb13ceca7a2b2b81f62ade87a2ab84c40bd939e309",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "34d471c54b4f6e326de2c149c4be29be4fd6bc00a3763bff725fd2b40540d4a8",
+    "models/analyses/sail-trade.sysml": "29b61e7e9e7618b7b14de64a4500595f08d0316248c9e8ab64eb3675e3e0dfd9",
+    "models/analyses/sizing/evidence.sysml": "b72a53e91bccf33bb53aefe6a60211cd91a787cb5be49a3c7e7737512d412a06",
+    "models/analyses/sizing/inputs.sysml": "440f687882095dba045cbdb189cff0adb50befc84c56fe23c4d30a26e73e68e9",
+    "models/analyses/sizing/operating.sysml": "bac239116bb0d46b374e9ec9f42c2e9dad080301971698059411038cee062070",
+    "models/analyses/sizing/uncertainty.sysml": "593ef4ce75029a99a495b08fd08e08105f86099a3ba22c9d678273fe0693bfd5",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/energy.sysml": "d21797a382a8f5d5a34ef5eafc288480023cd7c4ea3068bf5a54a43dcc22b034",
+    "models/configurations/operating.sysml": "b9af70701d974947c8fdb8486ea4e012566072a1d1393eafc9785f242285ccce",
+    "models/configurations/polar-demand.sysml": "90ba4839e2b2ef782e68836bda3cc4fe83913fee7ef808835ccab2ee860699c4",
+    "models/configurations/reference.sysml": "f26a11f48123e6cfa945ff21c5fcb3425b4a6faf86f2f39bddcc1b69cc89911e",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/course.sysml": "46e521dbcfd065ec61749bfe62da3d75b49b8d98671c011e1940b85637c95e65",
+    "models/libraries/marine/design.sysml": "12f90ba37934e95fffbefe4b4deb9e57c16ebc77347c18d2dc753ba7300e5474",
+    "models/libraries/marine/hull-resistance.sysml": "0ae663362a441fe3ae3342ee687d21dc351b19730b5b97d01611aacd46254203",
+    "models/libraries/marine/hydrostatics.sysml": "1c29aae5c7c0f593bbfea5c0cfe770b325fa2cb4d0a17640b6dad0b64e571dc1",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/sailing.sysml": "ed51dc720006b1b9865d11f181f8ecac08a2e8ce0f59ca5134fffc5809f11f38",
+    "models/libraries/structures/mass-properties.sysml": "5beb197d71826af6de98314b2ba8fe6f0abe74c31872a6afb00ac0956cb8dd85",
+    "models/libraries/structures/scantlings.sysml": "d73ea35b6d5247f451412e227298c4157315e75ef1725d2b349d5f21fbc874b2",
+    "models/missions/transgorge.sysml": "6d15cf55525b93c6407cf74b305ba893b69828da6438aaadd8dcf1e0c85b8382",
+    "models/vehicle/allocations.sysml": "617a049099f227231f3ec3353cc54eb0ff21a878c3d4b41810ab7d9d1c287edd",
+    "models/vehicle/architecture.sysml": "d39c3bc54c53640557751d1839a8344388688ace72c17cad015e67134c6cdb4e",
+    "models/vehicle/decisions.sysml": "ca3601bb37de1013f66b01eb6e6e3df587032a7f0f2c1559e624818b3c3a50fa",
+    "models/vehicle/requirements.sysml": "43e7c532136ee46f00abe3a1ffaf3a17006bbc1c888921967a851f6f717c6a16",
+    "models/vehicle/source-evidence.sysml": "a0c36211ef784210977c638cf4371438a6dd808e1f81410b0351e0850935ae04",
+    "models/vehicle/structure.sysml": "031b8780de2716bd9891139a68055a3932aa5450b664c70a3ce49f359fb48db0",
+    "models/vehicle/use-cases.sysml": "92e77d0b771445d9c7590ca2dd1a8144cdb6595f7a2669f891940e9287312f6f",
+    "models/vehicle/verification.sysml": "626076a333d9536027e10eaed492ce07ac93527a7622b5b86e535d2f36ab6005",
+    "build/analysis/coupled-sizing-search.json": "3d1dd19cc8e6f5604388de8d9f23c06e1e90628596db1808250656c0f2028cea",
+    "evidence/runs/2026-10-10-coupled/wing-polar-grid.json": "1ee81c4c85e8fe8d5bc34164db426c7872e1ddcb90e0c1fb1862cea003c4d365",
+    "tools/boat_analysis/aerodynamics/vsp/check_candidate.py": "fa90545793df58e02a1aedb3586a548ed3a47977f2ed4221dd6c7af58efea95e",
+    "tools/boat_analysis/aerodynamics/vsp/polar_grid.py": "ac4e3101fec372a280aac3a96326c4de57400cd5dada6b7eebc3c9275a466153",
+    "tools/boat_analysis/aerodynamics/vsp/reference_vsp.py": "28aee85925be959476965f44081ebe691ecb74d1c03d32d1925939ecec7d5c7f",
+    "tools/boat_analysis/aerodynamics/vsp/vsp_runtime.py": "a9512bb65f642afb0c3009fd71b3cec279d8692a3b4dcf5bf2674221728207ee",
+    "tools/boat_analysis/aerodynamics/polar.py": "8fba7d59530aee7ee633ba043e35deda51d844f2ebe8de6e630abe2d5e8b9a82"
+  },
+  "design": {
+    "length_m": 2.744498959641627,
+    "beam_m": 0.749422515934342,
+    "bottom_depth_m": 0.044327803861752196,
+    "deck_height_m": 0.08962582871269256,
+    "sail_m2": 1.515919520175065,
+    "sail_AR": 4.889910548873651,
+    "camber_scale": 1.1322960330557514,
+    "wing_thickness_scale": 1.9999993213972829,
+    "mast_fraction": 0.5229813402944042,
+    "mast_x_fraction": -0.02220701537383768,
+    "keel_m2": 0.1017546795096606,
+    "keel_span_m": 0.5573048453208429,
+    "rudder_m2": 0.012079320831068887,
+    "rudder_span_m": 0.13875587935156675,
+    "rudder_arm_fraction": 0.6499973328375426,
+    "ballast_kg": 12.175661579607766,
+    "battery_Wh": 572.7685742741985,
+    "panel_m2": 0.22607287268782394,
+    "wing_torque_Nm": 7.644017761837754,
+    "rudder_torque_Nm": 0.06377555413138856,
+    "hull_glass_kg_m2": 0.4509253105356551,
+    "wing_glass_kg_m2": 0.6272327406955741,
+    "keel_glass_kg_m2": 6.23753943701353,
+    "rudder_glass_kg_m2": 1.1391366089266055,
+    "hull_rib_pitch_m": 0.022358959190431425,
+    "foil_rib_pitch_m": 0.22081818364927483,
+    "battery_x_fraction": 0.0,
+    "battery_z_fraction": 0.05000000359695724,
+    "hull_fullness_exponent": 1.9999996512819562
+  },
+  "validated": false,
+  "cases": [
+    {
+      "aspect": 4.889910548873651,
+      "camberScale": 1.1322960330557514,
+      "reverseChord": false,
+      "mesh": 24,
+      "wakeIterations": 5,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -12.0,
+          -8.0,
+          -4.0,
+          0.0,
+          4.0,
+          8.0,
+          12.0,
+          16.0
+        ],
+        "CLtot": [
+          -0.087299966081,
+          0.19445514103,
+          0.475833482968,
+          0.755718408,
+          1.029540103656,
+          1.299349524507,
+          1.557151659687,
+          1.80896919915
+        ],
+        "CDi": [
+          0.00085984235,
+          0.002907233578,
+          0.015412896204,
+          0.03850914115,
+          0.0714444955,
+          0.115295071033,
+          0.166774246512,
+          0.229490372466
+        ],
+        "CMytot": [
+          -0.298768384653,
+          -0.225514441767,
+          -0.150236127017,
+          -0.074788742898,
+          7.3851811e-05,
+          0.071750088572,
+          0.141129283991,
+          0.203436923098
+        ]
+      },
+      "interpolated": {
+        "CLtot": [
+          -0.0862375867689725,
+          0.1927515605412331,
+          0.47125534146168024,
+          0.7476858311254643,
+          1.020640820308433,
+          1.2857117477160458,
+          1.543491487131447,
+          1.7885493261395422
+        ],
+        "CDi": [
+          0.0021006243655956255,
+          0.004207749558330186,
+          0.01674054745518782,
+          0.03980383860540828,
+          0.07355272965353038,
+          0.11639862017127221,
+          0.16916681955838905,
+          0.22950301647610766
+        ],
+        "CMytot": [
+          -0.2968750700911944,
+          -0.22428703773204572,
+          -0.1497775529227868,
+          -0.0750025433604887,
+          -0.0015384367761377329,
+          0.0701979914029982,
+          0.13761782518714194,
+          0.20134990963877497
+        ]
+      },
+      "maxAbsoluteInterpolationError": {
+        "CLtot": 0.02041987301045789,
+        "CDi": 0.0023925730463890404,
+        "CMytot": 0.0035114588038580585
+      }
+    },
+    {
+      "aspect": 4.889910548873651,
+      "camberScale": 1.1322960330557514,
+      "reverseChord": true,
+      "mesh": 24,
+      "wakeIterations": 5,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -12.0,
+          -8.0,
+          -4.0,
+          0.0,
+          4.0,
+          8.0,
+          12.0,
+          16.0
+        ],
+        "CLtot": [
+          -0.121698324208,
+          0.160140956797,
+          0.441877240306,
+          0.722504092221,
+          0.997503504245,
+          1.268775497149,
+          1.52849146696,
+          1.782362125598
+        ],
+        "CDi": [
+          0.001282903036,
+          0.002031910492,
+          0.013241628026,
+          0.035106265839,
+          0.066935389145,
+          0.109805067137,
+          0.16060036226,
+          0.222817256923
+        ],
+        "CMytot": [
+          -0.293338977527,
+          -0.219873864001,
+          -0.144537932879,
+          -0.06916682671,
+          0.005453558848,
+          0.076778288018,
+          0.145588801625,
+          0.207260867127
+        ]
+      },
+      "interpolated": {
+        "CLtot": [
+          -0.12023918868830995,
+          0.15880811860181598,
+          0.43773160318207993,
+          0.7150172439519437,
+          0.9890573864101563,
+          1.2556928962199865,
+          1.5154634632304933,
+          1.7623863759881557
+        ],
+        "CDi": [
+          0.002399069065066191,
+          0.0032093351739056796,
+          0.014459352548381413,
+          0.03630040412923188,
+          0.06889615378922678,
+          0.11082447412199056,
+          0.1629116014125015,
+          0.22282965895556697
+        ],
+        "CMytot": [
+          -0.29148024561998825,
+          -0.21869647035694056,
+          -0.14413097590316593,
+          -0.06942908351377805,
+          0.0038113832029409117,
+          0.07513082260944792,
+          0.14208812853538128,
+          0.20503792081511102
+        ]
+      },
+      "maxAbsoluteInterpolationError": {
+        "CLtot": 0.019975749609844273,
+        "CDi": 0.002311239152501504,
+        "CMytot": 0.003500673089618739
+      }
+    }
+  ],
+  "scope": "Direct inviscid VSPAERO comparison at candidate aspect ratio and camber, mesh 24. Reference section thickness remains fixed as in the interpolation grid. This checks interpolation, not viscous drag, stall, broadside response, aerodynamic thickness sensitivity or physical sailing performance."
+}

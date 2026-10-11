@@ -26,4 +26,4 @@ uv run pytest -q
 
 Python uses the package-free uv project. The native OpenSysML renderer is pinned separately. See [modeling conventions](models/README.md), [publishing](docs/publishing.md), and [sizing methods](docs/sizing.md).
 
-Generated pages belong in build artifacts. The model owns design facts; documentation explains how we reason about them. Recorded exploratory outcomes are conditional evidence, not a qualified vessel design.
+Generated pages belong in build artifacts. The model owns design facts; documentation explains how we reason about them. Current sizing uses explicit conservative aerodynamic assumptions and refined scenario replay; VSPAERO supplies exploratory finite-wing trends. Recorded outcomes are conditional evidence, not a qualified vessel design.

@@ -1,6 +1,6 @@
 # Passage time, reliability and failure analysis
 
-A slower voyage demands more hours of successful unattended operation. We therefore connect sailing progress, passage duration and reliability exposure rather than assigning reliability independently of the mission.
+A slower voyage demands more hours of successful unattended operation. We therefore connect sailing progress, passage duration and reliability exposure rather than assigning reliability independently of the mission. The sizing study now uses conservative aerodynamic assumptions for its primary case and re-solves controls under additional stresses. Passage times from those scenarios are conditional estimates, not measured endurance or demonstrated reliability; see the [current outcomes](results.md).
 
 ```sysml-view Page_reliability_0::CruiseSemantics direction=BT
 package Page_reliability_0 {
@@ -42,7 +42,7 @@ package Page_reliability_1 {
 }
 ```
 
-The DFMEA links functional failure modes to architecture responsibilities, requirements and needed evidence. Its concerns guide design and tests; they are not fabricated failure probabilities. Numerical rate-budget examples remain conditional on their assumptions and evidence disposition.
+The current primary replay meets the modeled route-duration screen, while additional aerodynamic degradation substantially extends the easterly passage and fails that screen. Reliability exposure therefore cannot be based on the primary passage time alone. The DFMEA links functional failure modes to architecture responsibilities, requirements and needed evidence. Its concerns guide design and tests; they are not fabricated failure probabilities. Numerical rate-budget examples remain conditional on their assumptions and evidence disposition.
 
 Weed contact is a concrete operating interaction. It affects both the sailing appendages and recovery propulsion, so loss of speed, steering and recovery capability are assessed separately.
 

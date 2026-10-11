@@ -1,0 +1,680 @@
+{
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/dfmea.sysml": "f6788362c2b868cb462782b7e9b837eb8fafe716368816f7a25cb5a7be7c6a73",
+    "models/analyses/energy.sysml": "65ce46ad0826e96b4e7ebb33b2d1f5ba8a3cd5835ac752947b75574690cf1c9e",
+    "models/analyses/polar-demand.sysml": "c8fef49f41d17e9c6da0bc275087d2382eefd770bfa4bba0386fa45199f551f4",
+    "models/analyses/recovery-propulsion.sysml": "3348c0d85a51123c73ae4dbb13ceca7a2b2b81f62ade87a2ab84c40bd939e309",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "34d471c54b4f6e326de2c149c4be29be4fd6bc00a3763bff725fd2b40540d4a8",
+    "models/analyses/sail-trade.sysml": "29b61e7e9e7618b7b14de64a4500595f08d0316248c9e8ab64eb3675e3e0dfd9",
+    "models/analyses/sizing/evidence.sysml": "b72a53e91bccf33bb53aefe6a60211cd91a787cb5be49a3c7e7737512d412a06",
+    "models/analyses/sizing/inputs.sysml": "440f687882095dba045cbdb189cff0adb50befc84c56fe23c4d30a26e73e68e9",
+    "models/analyses/sizing/operating.sysml": "bac239116bb0d46b374e9ec9f42c2e9dad080301971698059411038cee062070",
+    "models/analyses/sizing/uncertainty.sysml": "593ef4ce75029a99a495b08fd08e08105f86099a3ba22c9d678273fe0693bfd5",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/energy.sysml": "d21797a382a8f5d5a34ef5eafc288480023cd7c4ea3068bf5a54a43dcc22b034",
+    "models/configurations/operating.sysml": "b9af70701d974947c8fdb8486ea4e012566072a1d1393eafc9785f242285ccce",
+    "models/configurations/polar-demand.sysml": "90ba4839e2b2ef782e68836bda3cc4fe83913fee7ef808835ccab2ee860699c4",
+    "models/configurations/reference.sysml": "f26a11f48123e6cfa945ff21c5fcb3425b4a6faf86f2f39bddcc1b69cc89911e",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/course.sysml": "46e521dbcfd065ec61749bfe62da3d75b49b8d98671c011e1940b85637c95e65",
+    "models/libraries/marine/design.sysml": "12f90ba37934e95fffbefe4b4deb9e57c16ebc77347c18d2dc753ba7300e5474",
+    "models/libraries/marine/hull-resistance.sysml": "0ae663362a441fe3ae3342ee687d21dc351b19730b5b97d01611aacd46254203",
+    "models/libraries/marine/hydrostatics.sysml": "1c29aae5c7c0f593bbfea5c0cfe770b325fa2cb4d0a17640b6dad0b64e571dc1",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/sailing.sysml": "ed51dc720006b1b9865d11f181f8ecac08a2e8ce0f59ca5134fffc5809f11f38",
+    "models/libraries/structures/mass-properties.sysml": "5beb197d71826af6de98314b2ba8fe6f0abe74c31872a6afb00ac0956cb8dd85",
+    "models/libraries/structures/scantlings.sysml": "d73ea35b6d5247f451412e227298c4157315e75ef1725d2b349d5f21fbc874b2",
+    "models/missions/transgorge.sysml": "6d15cf55525b93c6407cf74b305ba893b69828da6438aaadd8dcf1e0c85b8382",
+    "models/vehicle/allocations.sysml": "617a049099f227231f3ec3353cc54eb0ff21a878c3d4b41810ab7d9d1c287edd",
+    "models/vehicle/architecture.sysml": "d39c3bc54c53640557751d1839a8344388688ace72c17cad015e67134c6cdb4e",
+    "models/vehicle/decisions.sysml": "ca3601bb37de1013f66b01eb6e6e3df587032a7f0f2c1559e624818b3c3a50fa",
+    "models/vehicle/requirements.sysml": "43e7c532136ee46f00abe3a1ffaf3a17006bbc1c888921967a851f6f717c6a16",
+    "models/vehicle/source-evidence.sysml": "a0c36211ef784210977c638cf4371438a6dd808e1f81410b0351e0850935ae04",
+    "models/vehicle/structure.sysml": "031b8780de2716bd9891139a68055a3932aa5450b664c70a3ce49f359fb48db0",
+    "models/vehicle/use-cases.sysml": "92e77d0b771445d9c7590ca2dd1a8144cdb6595f7a2669f891940e9287312f6f",
+    "models/vehicle/verification.sysml": "626076a333d9536027e10eaed492ce07ac93527a7622b5b86e535d2f36ab6005",
+    "tools/boat_analysis/aerodynamics/vsp/convergence.py": "bc69472d7b16ccfe0823c935972163f5aee36525778fa050242093f17b242793",
+    "tools/boat_analysis/aerodynamics/vsp/polar_grid.py": "ac4e3101fec372a280aac3a96326c4de57400cd5dada6b7eebc3c9275a466153",
+    "tools/boat_analysis/aerodynamics/vsp/reference_vsp.py": "28aee85925be959476965f44081ebe691ecb74d1c03d32d1925939ecec7d5c7f",
+    "tools/boat_analysis/aerodynamics/vsp/vsp_runtime.py": "a9512bb65f642afb0c3009fd71b3cec279d8692a3b4dcf5bf2674221728207ee",
+    "evidence/runs/2026-10-10-coupled/wing-geometry.json": "1a3836193ed6ddb2fd8e42c920e5b41bf68deb3ec8092317a1fedab53ea3123b"
+  },
+  "settings": {
+    "aspect": 4,
+    "camber": 1,
+    "meshes": [
+      24,
+      48,
+      72
+    ],
+    "wakeIterations": [
+      5,
+      15,
+      30
+    ],
+    "absoluteTolerance": [
+      0.03,
+      0.01,
+      0.02
+    ]
+  },
+  "cases": [
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 24,
+      "wakeIterations": 5,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.368999086928,
+          0.626415554149,
+          0.880749637167,
+          1.126922966679
+        ],
+        "CDi": [
+          0.011223797152,
+          0.032215719603,
+          0.064269413125,
+          0.105963595567
+        ],
+        "CMytot": [
+          -0.144072617664,
+          -0.07314281163,
+          -0.00331555414,
+          0.065288031195
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 24,
+      "wakeIterations": 15,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.368869536422,
+          0.626209667176,
+          0.880442446844,
+          1.127340795257
+        ],
+        "CDi": [
+          0.011240525892,
+          0.032100426833,
+          0.064499909178,
+          0.106362813676
+        ],
+        "CMytot": [
+          -0.144109734928,
+          -0.073315343133,
+          -0.003407745909,
+          0.065230631134
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 24,
+      "wakeIterations": 30,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.368586149352,
+          0.625112185166,
+          0.880206763232,
+          1.126836777013
+        ],
+        "CDi": [
+          0.011186294124,
+          0.032205145053,
+          0.063928114946,
+          0.105516106641
+        ],
+        "CMytot": [
+          -0.144224617869,
+          -0.073519665349,
+          -0.003467686696,
+          0.065086203556
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 48,
+      "wakeIterations": 30,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.345474788968,
+          0.599142815102,
+          0.847961291147,
+          1.090015981992
+        ],
+        "CDi": [
+          0.010205657533,
+          0.031301860554,
+          0.063656121199,
+          0.106630374089
+        ],
+        "CMytot": [
+          -0.137368666585,
+          -0.069269852013,
+          -0.002234423655,
+          0.063204033902
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 72,
+      "wakeIterations": 30,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.331706789267,
+          0.583163513931,
+          0.830252478112,
+          1.077363624402
+        ],
+        "CDi": [
+          0.010420176998,
+          0.032436902946,
+          0.066429412476,
+          0.113056205839
+        ],
+        "CMytot": [
+          -0.134213438109,
+          -0.067123241165,
+          -0.001420886426,
+          0.062567718331
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": true,
+      "mesh": 24,
+      "wakeIterations": 5,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.340389632687,
+          0.598350609836,
+          0.853513706183,
+          1.10097642946
+        ],
+        "CDi": [
+          0.009511891292,
+          0.029318241886,
+          0.060233592731,
+          0.10097978436
+        ],
+        "CMytot": [
+          -0.138669941531,
+          -0.067793968184,
+          0.001863305342,
+          0.070125089369
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": true,
+      "mesh": 24,
+      "wakeIterations": 15,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.340278510213,
+          0.598422643305,
+          0.853518401877,
+          1.101676558592
+        ],
+        "CDi": [
+          0.009522535685,
+          0.029292348707,
+          0.060080469865,
+          0.101512410974
+        ],
+        "CMytot": [
+          -0.1386999519,
+          -0.067862524329,
+          0.001731221203,
+          0.070115862362
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": true,
+      "mesh": 24,
+      "wakeIterations": 30,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.339995233259,
+          0.598563770367,
+          0.85248346152,
+          1.100349139026
+        ],
+        "CDi": [
+          0.009477573321,
+          0.029253432604,
+          0.060099863099,
+          0.100655701259
+        ],
+        "CMytot": [
+          -0.13880744231,
+          -0.067801635546,
+          0.001769248991,
+          0.069873402584
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": true,
+      "mesh": 48,
+      "wakeIterations": 30,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.307692422843,
+          0.561277352438,
+          0.811991823077,
+          1.054304553265
+        ],
+        "CDi": [
+          0.008041517776,
+          0.027444446003,
+          0.058026489162,
+          0.099182788433
+        ],
+        "CMytot": [
+          -0.131037714554,
+          -0.063054392243,
+          0.004021442179,
+          0.069206073881
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": true,
+      "mesh": 72,
+      "wakeIterations": 30,
+      "beta_deg": 0,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.290582122064,
+          0.542367441314,
+          0.791420710726,
+          1.035913516939
+        ],
+        "CDi": [
+          0.008003143767,
+          0.028210978196,
+          0.060190513729,
+          0.10449059896
+        ],
+        "CMytot": [
+          -0.127656048083,
+          -0.060651052689,
+          0.005578615179,
+          0.069129485163
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 24,
+      "wakeIterations": 5,
+      "beta_deg": 20,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.323465105448,
+          0.547245456825,
+          0.765969819218,
+          0.982151949195
+        ],
+        "CDi": [
+          0.009791494575,
+          0.027848521677,
+          0.05477150074,
+          0.091791495865
+        ],
+        "CMytot": [
+          -0.127781051767,
+          -0.065442329802,
+          -0.00354598578,
+          0.055898576594
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 24,
+      "wakeIterations": 15,
+      "beta_deg": 20,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.3233217092,
+          0.546425676832,
+          0.76558093127,
+          0.983644580548
+        ],
+        "CDi": [
+          0.009803368434,
+          0.027829519521,
+          0.054527884738,
+          0.092615596746
+        ],
+        "CMytot": [
+          -0.127825348179,
+          -0.065462213312,
+          -0.003816092424,
+          0.056147078937
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 24,
+      "wakeIterations": 30,
+      "beta_deg": 20,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.323190397243,
+          0.546824187065,
+          0.766408681009,
+          0.980600165323
+        ],
+        "CDi": [
+          0.009760837105,
+          0.027899800833,
+          0.054845579026,
+          0.091680207869
+        ],
+        "CMytot": [
+          -0.127898485831,
+          -0.065382863754,
+          -0.003482000077,
+          0.055404179544
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 48,
+      "wakeIterations": 30,
+      "beta_deg": 20,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.301258002298,
+          0.521478778019,
+          0.738770110678,
+          0.946805149171
+        ],
+        "CDi": [
+          0.008880854145,
+          0.027068380551,
+          0.054542211775,
+          0.091626431736
+        ],
+        "CMytot": [
+          -0.121791207445,
+          -0.061782896208,
+          -0.002609283696,
+          0.054555639433
+        ]
+      }
+    },
+    {
+      "aspect": 4,
+      "camberScale": 1,
+      "reverseChord": false,
+      "mesh": 72,
+      "wakeIterations": 30,
+      "beta_deg": 20,
+      "tool": "OpenVSP 3.54.0",
+      "cadSha256": "cb5b6b3453bee3245ce59570c3ea73af327381a92df8527316ce6e9bd78fdd5e",
+      "values": {
+        "Alpha": [
+          -4.0,
+          0.0,
+          4.0,
+          8.0
+        ],
+        "CLtot": [
+          0.28951741692,
+          0.507219340623,
+          0.722848551935,
+          0.933920211592
+        ],
+        "CDi": [
+          0.008719970881,
+          0.02728855829,
+          0.055647211168,
+          0.094718521622
+        ],
+        "CMytot": [
+          -0.118980285565,
+          -0.059790848804,
+          -0.002054380289,
+          0.054037618738
+        ]
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "reverseChord": false,
+      "beta_deg": 0,
+      "comparison": "wake",
+      "maxAbsoluteDifference": {
+        "CLtot": 0.0010974820100000393,
+        "CDi": 0.000846707035000005,
+        "CMytot": 0.00020432221599998857
+      },
+      "passesScreen": true
+    },
+    {
+      "reverseChord": false,
+      "beta_deg": 0,
+      "comparison": "mesh",
+      "maxAbsoluteDifference": {
+        "CLtot": 0.01770881303500005,
+        "CDi": 0.0064258317499999995,
+        "CMytot": 0.0031552284759999993
+      },
+      "passesScreen": true
+    },
+    {
+      "reverseChord": true,
+      "beta_deg": 0,
+      "comparison": "wake",
+      "maxAbsoluteDifference": {
+        "CLtot": 0.001327419566000021,
+        "CDi": 0.0008567097150000008,
+        "CMytot": 0.00024245977799999818
+      },
+      "passesScreen": true
+    },
+    {
+      "reverseChord": true,
+      "beta_deg": 0,
+      "comparison": "mesh",
+      "maxAbsoluteDifference": {
+        "CLtot": 0.020571112351000065,
+        "CDi": 0.005307810526999995,
+        "CMytot": 0.003381666471000022
+      },
+      "passesScreen": true
+    },
+    {
+      "reverseChord": false,
+      "beta_deg": 20,
+      "comparison": "wake",
+      "maxAbsoluteDifference": {
+        "CLtot": 0.0030444152249999856,
+        "CDi": 0.0009353888770000096,
+        "CMytot": 0.0007428993929999989
+      },
+      "passesScreen": true
+    },
+    {
+      "reverseChord": false,
+      "beta_deg": 20,
+      "comparison": "mesh",
+      "maxAbsoluteDifference": {
+        "CLtot": 0.015921558743000053,
+        "CDi": 0.003092089885999988,
+        "CMytot": 0.0028109218799999974
+      },
+      "passesScreen": true
+    }
+  ],
+  "validated": false,
+  "scope": "Representative numerical checks, not complete design-space convergence or physical validation."
+}

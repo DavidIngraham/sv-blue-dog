@@ -1,0 +1,49 @@
+{
+  "sourceRevision": "bfea3b0dcf95130994ddaf2b8562fb7383ba1bdc",
+  "files": {
+    "coupled-mass-reference.json": {
+      "sha256": "f5044095a30ba1ecc079bc2d186ef404e696e170353abbeab17219c62a23c476"
+    },
+    "coupled-operation-audit.json": {
+      "sha256": "0ad685eb6fc25bd040a0c6c7a9b155dea5e6cc470a575bec682ee75bf069c44d"
+    },
+    "coupled-pitch-diagnostic.json": {
+      "sha256": "72d1e55a47acbcf8120cc75dce1ed39302c5064eca0f9de3efb69e0835a42634"
+    },
+    "coupled-recovery.json": {
+      "sha256": "c168eadfeb4ca373828a4f99fdf6c6b0fc532002b1c6bdb5ef61ff83925f32de"
+    },
+    "coupled-sizing-replay.json": {
+      "sha256": "7258bf7223b6daee4517b1099721e837a39140cfc37b493eacbbd12d80946f53"
+    },
+    "coupled-sizing-search.json": {
+      "sha256": "3d1dd19cc8e6f5604388de8d9f23c06e1e90628596db1808250656c0f2028cea"
+    },
+    "coupled-uncertainty-inputs.json": {
+      "sha256": "0295d88673b782e77b35a9122992e19e6f99a65eb5f803492cbead9c82021a22"
+    },
+    "hull-resistance-audit.json": {
+      "sha256": "67d803f54f32503c45d94280eb729e81f12b240c3c819b7a2d7069100ca45bd9"
+    },
+    "hull-resistance-domain.json": {
+      "sha256": "d7a4c83f586a0a92ef31936b2e18d0707d4229508681a8a39a5858875db5dc1d"
+    },
+    "hydrostatics-audit.json": {
+      "sha256": "b405b2d1bcf8a0dcc0652b227004f430f718404f2d62db35e35344f5fa3ad217"
+    },
+    "optimizer-start.json": {
+      "sha256": "abb3691b51e25e95b5db2f53ed0dee1c2901065c327ea1041ec5fb01f57b478d"
+    },
+    "wing-actuator-audit.json": {
+      "sha256": "ee890f145ed01084394066c5a35f873e1b400d8664cd629bd8e32663a92e1f07"
+    },
+    "wing-candidate-check.json": {
+      "sha256": "33abc8b5beaa8ba520d4577265b6a9361ac972de6d1351e9d5b6acd894a96d27"
+    },
+    "wing-convergence.json": {
+      "sha256": "b318262b656fd935012a55e10b5d62d9218d11dd7871ffb0a94cf6d7b48d9e9b"
+    }
+  },
+  "qualified": false,
+  "scope": "Conservative primary sizing and six-scenario replay; provisional aerodynamic assumptions, not measured confidence bounds."
+}

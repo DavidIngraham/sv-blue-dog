@@ -175,29 +175,89 @@ package BlueDogDocuments {
 package BlueDogEvidenceDocuments {
     private import DocumentQueries::*;
     calc def Cases :> Query {
-        Named(qualifiedName = ("BlueDogRecordedSizing::nominal", "BlueDogRecordedSizing::construction", "BlueDogRecordedSizing::aerodynamic", "BlueDogRecordedSizing::hydrodynamic", "BlueDogRecordedSizing::energy", "BlueDogRecordedSizing::combined"))
+        Named(qualifiedName = ("BlueDogCurrentSizing::nominal", "BlueDogCurrentSizing::construction", "BlueDogCurrentSizing::aerodynamic", "BlueDogCurrentSizing::hydrodynamic", "BlueDogCurrentSizing::energy", "BlueDogCurrentSizing::combined"))
     }
     calc def Outcomes :> Query {
         Project(source = Cases(), columns = (
             Column(name = "Scenario", path = "label"),
-            Column(name = "Operating screens", path = "operatingScreensPass"),
+            Column(name = "Combined replay screens", path = "operatingScreensPass"),
+            Column(name = "Lowest replay margins", path = "limitingScreens"),
             Column(name = "Sampled roll positive", path = "sampledRollPositive"),
             Column(name = "Unstable pitch samples", path = "pitchUnstableSamples"),
             Column(name = "Energy diagnostic cases", path = "diagnosticControlCases"),
             Column(name = "Evidence accepted", path = "evidenceAccepted")))
     }
     calc def Dimensions :> Query {
-        Project(source = Named(qualifiedName = "BlueDogRecordedSizing::candidate"), columns = (
+        Project(source = Named(qualifiedName = "BlueDogCurrentSizing::candidate"), columns = (
             Column(name = "Length (m)", path = "length_m"),
             Column(name = "Beam (m)", path = "beam_m"),
             Column(name = "Wing area (m2)", path = "sail_m2"),
             Column(name = "Ballast (kg)", path = "ballast_kg"),
             Column(name = "Battery (Wh)", path = "battery_Wh")))
     }
+    calc def Search :> Query {
+        Project(source = Named(qualifiedName = "BlueDogCurrentSizing::searchAssessment"), columns = (
+            Column(name = "Search status", path = "solverStatus"),
+            Column(name = "Coarse feasible", path = "coarseFeasible"),
+            Column(name = "Mass (kg)", path = "massKg"),
+            Column(name = "Max equilibrium residual", path = "maximumResidual"),
+            Column(name = "Minimum screen margin", path = "minimumMargin"),
+            Column(name = "Qualified", path = "qualified")))
+    }
+    calc def Passage :> Query {
+        Project(source = Cases(), columns = (Column(name = "Scenario", path = "label"),
+            Column(name = "Easterly round trip (h, conditional)", path = "easterlyTimeLabel"),
+            Column(name = "Westerly round trip (h, conditional)", path = "westerlyTimeLabel"),
+            Column(name = "Mass (kg)", path = "massKg")))
+    }
+    calc def LimitingScreens :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogCurrentSizing::searchConstraint0", "BlueDogCurrentSizing::searchConstraint1", "BlueDogCurrentSizing::searchConstraint2", "BlueDogCurrentSizing::searchConstraint3", "BlueDogCurrentSizing::searchConstraint4", "BlueDogCurrentSizing::searchConstraint5")), columns = (
+            Column(name = "Lowest search screens", path = "label"), Column(name = "Normalized margin", path = "margin")))
+    }
+    calc def ActiveBounds :> Query {
+        Project(source = Named(qualifiedName = "BlueDogCurrentSizing::searchAssessment"), columns = (
+            Column(name = "Active design brackets (not frozen variables)", path = "activeBounds")))
+    }
+    calc def Convergence :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogCurrentSizing::convergence0", "BlueDogCurrentSizing::convergence1", "BlueDogCurrentSizing::convergence2", "BlueDogCurrentSizing::convergence3", "BlueDogCurrentSizing::convergence4", "BlueDogCurrentSizing::convergence5")), columns = (
+            Column(name = "Numerical increment", path = "label"),
+            Column(name = "Max change CL", path = "CLtot"),
+            Column(name = "Max change CDi", path = "CDi"),
+            Column(name = "Max change CMy", path = "CMytot"),
+            Column(name = "Screen passes", path = "passesScreen")))
+    }
+    part def AerodynamicChecks :> Document {
+        attribute redefines title = "Representative numerical sensitivity";
+        part checks : Table { calc rows : Convergence; }
+        part coarse : Table { calc rows : CoarseGrid; }
+    }
+    calc def CoarseGrid :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogCurrentSizing::coarseGrid0", "BlueDogCurrentSizing::coarseGrid1", "BlueDogCurrentSizing::coarseGrid2")), columns = (
+            Column(name = "Coarse grid versus finest case", path = "label"),
+            Column(name = "Max change CL", path = "CLtot"),
+            Column(name = "Max change CDi", path = "CDi"),
+            Column(name = "Max change CMy", path = "CMytot")))
+    }
+    calc def Ingress :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogCurrentSizing::ingress0", "BlueDogCurrentSizing::ingress1", "BlueDogCurrentSizing::ingress2", "BlueDogCurrentSizing::ingress3", "BlueDogCurrentSizing::ingress4", "BlueDogCurrentSizing::ingress5")), columns = (
+            Column(name = "Wing state and water density", path = "label"),
+            Column(name = "Min sampled restoring (Nm)", path = "minimumRestoringNm"),
+            Column(name = "Missing pitch roots", path = "missingPitchRoots"),
+            Column(name = "Unstable pitch samples", path = "unstablePitchSamples"),
+            Column(name = "Retained water (kg)", path = "retainedWaterKg")))
+    }
+    part def Recovery :> Document {
+        attribute redefines title = "Current static ingress sensitivity";
+        part cases : Table { calc rows : Ingress; }
+    }
     part def Summary :> Document {
-        attribute redefines title = "Recorded numerical evidence";
+        attribute redefines title = "Conservative sizing and refined replay";
+        part search : Table { calc rows : Search; }
         part candidate : Table { calc rows : Dimensions; }
+        part passage : Table { calc rows : Passage; }
         part cases : Table { calc rows : Outcomes; }
+        part limiting : Table { calc rows : LimitingScreens; }
+        part bounds : Table { calc rows : ActiveBounds; }
     }
 }
 

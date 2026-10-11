@@ -7,6 +7,7 @@ import subprocess
 from tools.boat_analysis.model.runtime import ROOT
 
 BASELINE = ROOT / "evidence/runs/2026-10-10-coupled"
+CURRENT = ROOT / "evidence/runs/2026-10-11-conservative"
 WORK = ROOT / "build/analysis"
 
 
@@ -21,9 +22,14 @@ def validate(hashes):
 
 
 def baseline_record(name):
-    manifest = json.loads((BASELINE / "manifest.json").read_text(encoding="utf-8"))
+    return run_record(BASELINE, name)
+
+
+def run_record(directory, name):
+    directory = Path(directory)
+    manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
     entry = manifest["files"][name]
-    content = (BASELINE / name).read_bytes()
+    content = (directory / name).read_bytes()
     if hashlib.sha256(content).hexdigest() != entry["sha256"]:
         raise ValueError("Modified archived evidence: " + name)
     return json.loads(content)
@@ -31,19 +37,30 @@ def baseline_record(name):
 
 def verify_baseline_sources():
     """Check archived outputs and recorded hashes without relabelling old runs."""
-    manifest = json.loads((BASELINE / "manifest.json").read_text(encoding="utf-8"))
+    return verify_run_sources(BASELINE)
+
+
+def verify_run_sources(directory):
+    directory = Path(directory)
+    manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
     revision = manifest["sourceRevision"]
     checked = {}
     for name in manifest["files"]:
-        record = baseline_record(name)
+        record = run_record(directory, name)
         for field in ("sourceHashes", "driverHashes"):
             for path, expected in record.get(field, {}).items():
                 key = (path, expected)
                 if key in checked:
                     continue
-                result = subprocess.run(["git", "show", f"{revision}:{path}"], cwd=ROOT,
-                                        capture_output=True, check=True)
-                actual = hashlib.sha256(result.stdout.replace(b"\r\n", b"\n")).hexdigest()
+                if path.startswith("build/analysis/"):
+                    dependency = Path(path).name
+                    run_record(directory, dependency)
+                    content = (directory / dependency).read_bytes()
+                else:
+                    result = subprocess.run(["git", "show", f"{revision}:{path}"], cwd=ROOT,
+                                            capture_output=True, check=True)
+                    content = result.stdout
+                actual = hashlib.sha256(content.replace(b"\r\n", b"\n")).hexdigest()
                 if actual != expected:
                     raise ValueError(f"Archived source mismatch: {name}: {path}")
                 checked[key] = True

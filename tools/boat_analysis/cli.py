@@ -43,8 +43,8 @@ def main():
         from .optimization.replay import run
         run(args.scenarios, args.budget, args.workers)
     elif args.command == "evidence-check":
-        from .evidence.records import verify_baseline_sources
-        print(f"Verified {verify_baseline_sources()} archived source hashes.")
+        from .evidence.records import CURRENT, verify_baseline_sources, verify_run_sources
+        print(f"Verified {verify_baseline_sources() + verify_run_sources(CURRENT)} archived source hashes.")
     else:
         module = {"recovery": "recovery", "pitch": "pitch", "audit": "resistance_audit"}[args.command]
         importlib.import_module(f"tools.boat_analysis.optimization.{module}").run()

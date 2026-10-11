@@ -40,7 +40,12 @@ package Page_structures_and_recovery_1 {
 }
 ```
 
-We solve displaced volume and its centroid at a specified attitude, balance heave and pitch, then inspect full-roll restoring curves for several mast positions. Positive roll moments do not establish a dynamic recovery path, particularly on a pitch-unstable branch. Sealed, freely flooded and retained-water cases answer different questions and remain separate.
+The sizing search uses a coarse fixed-pitch recovery screen alongside sailing, structure and energy constraints. We then solve displaced volume and its centroid at a specified attitude, balance heave and pitch, and inspect full-roll restoring curves for several mast positions at the selected geometry. Positive roll moments do not establish a dynamic recovery path, particularly on a pitch-unstable branch. Sealed, freely flooded and retained-water cases answer different questions and remain separate. Restricting sailing heel in the aerodynamic policy does not restrict the full-roll recovery assessment or relax its requirements.
+
+The current trial has positive sealed-wing roll samples but includes pitch-unstable equilibria, so it has not demonstrated self-righting. It also loses positive sampled restoring behavior when the wing is freely flooded or retains water. Sealed-wing roll results cannot stand in for ingress tolerance. The native summary below combines the four locked mast positions for each state and water density; negative restoring moments and unstable pitch samples remain visible.
+
+```sysml-report BlueDogEvidenceDocuments::Recovery
+```
 
 The model owns material assumptions, numerical allocations, practical handling constraints and their rationale. Wet coupons, assembly proof tests, ingress/drainage and dynamic releases must replace those assumptions with evidence before qualification.
 

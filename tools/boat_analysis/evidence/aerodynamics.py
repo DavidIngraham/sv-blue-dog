@@ -69,6 +69,8 @@ def render(output):
     (output/'provenance.json').write_text(json.dumps({'source':'evidence/runs/2026-10-10-coupled','referenceMeshes':[16,32,64],'gridCases':len(grid),'gridSamples':sum(len(c['values']['Alpha']) for c in grid),'validated':False},indent=2)+'\n')
     from tools.boat_analysis.evidence.heel import render as render_heel
     render_heel(output)
+    from tools.boat_analysis.evidence.convergence import render as render_convergence
+    render_convergence(output)
     return output
 
 if __name__=='__main__':

@@ -11,4 +11,4 @@ An autonomous sailboat project exploring sailing, desktop manufacturing and comp
 - [Operating constraints](operating-constraints.md)
 - [Authoring and publishing](publishing.md)
 
-The SysML model owns design facts and rationale. These pages explain our methods and thought process; their diagrams and statements are rendered from imported model elements.
+The SysML model owns design facts and rationale. These pages explain our methods and thought process; their diagrams and statements are rendered from imported model elements. Current sizing uses explicit conservative aerodynamic assumptions, restricted operating angles and refined scenario replay. The results remain exploratory until measurements establish the relevant performance and uncertainty.
