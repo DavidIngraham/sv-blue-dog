@@ -118,9 +118,13 @@ class Problem:
 
 def run(budget,resume=False,resolution=12):
     p=Problem(resolution);initial=p.initial()
+    checkpoint_hash=None
     if resume:
-        initial=np.array(json.loads((ROOT/'.tools/coupled-search-progress.json').read_text())['bestZ'])
+        checkpoint=ROOT/'.tools/coupled-search-progress.json'
+        checkpoint_hash=digest(checkpoint)
+        initial=np.array(json.loads(checkpoint.read_text())['bestZ'])
         if initial.shape!=p.lo.shape or np.any(initial<0) or np.any(initial>1):raise ValueError('Incompatible numerical checkpoint')
+    seed=initial.copy()
     # Geometrically consistent starting guess only; length remains free.
     physical=p.lo+initial*p.span
     _,_,geometry,_=p.model.configuration(physical[:29],0,resolution=resolution)
@@ -141,6 +145,7 @@ def run(budget,resume=False,resolution=12):
         if np.linalg.norm(p.residual(balanced))<np.linalg.norm(p.residual(initial)):initial=balanced
     def stop_when_feasible(intermediate_result):
         if p.feasible(intermediate_result.x):raise StopIteration
+    feasibility_initial=initial.copy()
     phase=SimpleNamespace(x=initial,message='Saved initial guess passes freshly evaluated feasibility screens') if p.feasible(initial) else least_squares(p.residual,initial,jac=p.residual_jacobian,bounds=(0,1),diff_step=1e-4,max_nfev=budget,callback=stop_when_feasible,ftol=1e-7,xtol=1e-7,gtol=1e-7)
     best=phase.x if np.linalg.norm(p.residual(phase.x))<=p.best[0]+1e-8 else p.best[1]
     constraints=[{'type':'eq','fun':lambda z:p.evaluate(z)['eq'],'jac':lambda z:p.jacobians(z)[0]},{'type':'ineq','fun':lambda z:p.evaluate(z)['ineq']+1e-8,'jac':lambda z:p.jacobians(z)[1]}]
@@ -168,6 +173,9 @@ def run(budget,resume=False,resolution=12):
     validate(hashes)
 
     report={'sourceHashes':hashes,'geometryResolution':resolution,'progressSearchReserve_m_s':p.progress_reserve_m_s,'budgetPerPhase':budget,'optimizerFtol':1e-4,'cycleEnergySearchReserve':p.model.operation.contract['cycleEnergySearchReserve'],'resistanceDomainReserve':p.model.operation.contract['resistanceDomainReserve'],'designBounds':dict(zip(p.model.c['designNames'],zip(p.lo[:29].tolist(),p.hi[:29].tolist()))),'design':dict(zip(p.model.c['designNames'],r['design'])),'stateRows':r['states'].tolist(),'operating':r['rows'],'structure':r['structure'],'route':r['route'].tolist(),'westerlyRoute':r['westerlyRoute'].tolist(),'rightingScreen':r['righting'],'mass':r['mass'],'maxEquilibriumResidual':float(np.abs(r['eq']).max()),'minimumMargin':float(r['ineq'].min()),'coarseFeasible':p.feasible(best),'optimizerMessage':message,'feasibilityRestorationMessage':repair_message,'lastOptimizerAttempt':last_attempt,'worstConstraints':sorted(zip(p.constraint_names,map(float,r['ineq'])),key=lambda item:item[1])[:12],'feasibilitySqpMessage':feasibility_sqp_message,'feasibilityMessage':str(phase.message),'calls':p.calls,'elapsed_s':time.time()-p.start,'normalizedDesignAndStates':best.tolist(),'qualified':False,'scope':'Delft upright untrimmed bare-hull regression with explicit coordinate screens; free hull-fullness exponent. Fixed-pitch screening search at the recorded geometry resolution; pending refined free-pitch and uncertainty replay. VSPAERO attached-flow only; independent provisional drag and lift caps. No claim of mission qualification or global optimum.'}
+    report.update(resumed=resume,resumeCheckpointSha256=checkpoint_hash,
+                  seedNormalizedDesignAndStates=seed.tolist(),
+                  feasibilityInitialNormalizedDesignAndStates=feasibility_initial.tolist())
     output_path('coupled-sizing-search.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n')
     print('FINISHED',report['coarseFeasible'],report['design']['length_m'],report['minimumMargin'],flush=True)
 
