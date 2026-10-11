@@ -11,7 +11,7 @@ The search stopped just outside its coarse feasibility tolerance, before minimiz
 ```sysml-report BlueDogEvidenceDocuments::CandidateBrief
 ```
 
-Displayed numbers are rounded for reading; the model and archived runs retain their original precision. The concept sketch in the [mission article](architecture.md) explains the parts, but is not a rendering of this trial geometry.
+Displayed numbers are rounded for reading; the model and archived runs retain their original precision. The [mission article](architecture.md) introduces the boat’s main systems.
 
 The native tables below are generated from the model. “No” in the combined or accepted-evidence columns matters even when an individual screen passes. In the energy stress case, all eight states needed energy-unconstrained diagnostics; those durations cannot predict sustained operation. The combined case’s duration penalty is not a voyage time. Positive sampled roll moments also do not establish recovery when pitch is unstable.
 
@@ -19,7 +19,7 @@ The archived search required both wind directions to pass. Our new weather-windo
 
 ![Probability sensitivity for the fixed candidate: the primary case passes both direction screens; construction, aerodynamic and hydrodynamic cases pass only the west-wind route. Energy and combined cases have no eligible passing route. Conditional passage times omit failed cases.](figures/weather-performance-sensitivity.svg)
 
-*The six curves represent separate engineering assumptions, not six equally probable weather states. Passing a route screen does not resolve handling or self-righting. The [weather article](operating-constraints.md#gorge-weather-and-launch-windows) explains why hourly east-wind frequency cannot be inserted as a whole-passage probability.*
+*Route-screen coverage and conditional passage time as the assumed easterly passage probability increases. Each curve uses a different engineering scenario; the [weather article](operating-constraints.md#gorge-weather-and-launch-windows) explains the probability model.*
 
 <details>
 <summary>Candidate dimensions, scenario comparisons and limiting margins</summary>

@@ -2,13 +2,15 @@
 
 What does this little boat actually have to do? I start with the independent Gorge challenge and the longer-term Hawai‘i goal, then work through the people, environment and equipment it will interact with. This is [mission definition](development-plan.md#mission-definition): it sets up the responsibilities and scenarios I will use to compare designs.
 
-![Route orientation: The Dalles to Bonneville downstream, then upstream back to The Dalles against the current.](figures/route-context.svg)
+![Map of the Gorge challenge corridor along the Columbia River, from The Dalles to Bonneville and back.](figures/gorge-course-map.svg)
+
+*The Dalles → Bonneville → The Dalles. River geometry: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).*
 
 The return leg has to make progress over the ground, not just through the water. The representative westerly puts that return downwind against the current, while the outbound leg is windward with it. Easterlies reverse those roles. I will choose a favorable weather window for the challenge and use a separate seasonal profile for winter testing; the [weather analysis](operating-constraints.md#gorge-weather-and-launch-windows) explains the distinction. The challenge is sail-only and unassisted; I want live observation without making a shore connection necessary for control. Year-round operation and Hawai‘i require further readiness evidence.
 
-![Illustrative vessel arrangement with wing, hull, rudder, keel, ballast, solar collection and electronics.](figures/boat-concept.svg)
+![Vessel concept with wing, hull, rudder, keel, ballast, solar collection and electronics.](figures/boat-concept.svg)
 
-This is a concept sketch, not the SolidWorks testbed or the selected layout. Below, the model views show responsibilities rather than physical locations.
+The main systems bring together propulsion, steering, power and recovery. The model views below allocate their responsibilities.
 
 The challenge remains independent of the vehicle so a convenient hardware choice cannot redefine success. The Gorge mission is a proving ground for the eventual ocean voyage. Traffic, shore support and live monitoring belong in the system context; the vessel must make its own decisions during a qualifying attempt.
 

@@ -15,13 +15,15 @@ flowchart TB
     native --> pages
 ```
 
-The arrows show information flow, not physical qualification. Measured evidence is a separate input to model validation and design acceptance.
+The arrows follow information from the model and analyses into the engineering record and published articles.
 
 The seasonal weather views follow the same rule: NOAA observations are frozen with hashes, model policy defines the bins and profile scope, and native calculations supply the passage-probability sensitivity. CI regenerates these views and rejects drift from the committed projection and plots. The testbed illustration is exported from the actual read-only SolidWorks assembly with `tools/boat_analysis/cad/export_testbed.ps1`; it is separate from simulated candidate geometry.
 
 Our Markdown describes methods and design reasoning. Engineering definitions, assumptions and rationale belong in `models/`. Each page imports those definitions into a small native view; the publisher resolves the view with OpenSysML and inserts its diagram and requirement statements.
 
 ## Inline views
+
+The geographic course map uses an archived OpenStreetMap river centerline in `tools/publishing/data/gorge-river.json`. Regenerate it with `uv run python -m tools.publishing.course_map`. The map provides geographic context; the [challenge model](../models/missions/transgorge.sysml) defines the mission and tracks the operational gate decisions.
 
 Use a fenced `sysml-view Package::viewName direction=BT` block containing a uniquely named package, imports, and a scoped view. Expose existing model elements and provide layout metadata to keep the diagram focused. Do not declare requirements or calculations in a documentation fence. For a view exposing requirement usages, add `statements=true` to include their authoritative statements below the diagram. Omit that option for mixed architecture/verification views. See [the modeling method](methods/modeling.md) for a working example.
 

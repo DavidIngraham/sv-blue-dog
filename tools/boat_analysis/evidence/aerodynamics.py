@@ -36,7 +36,7 @@ def render(output):
     for r in refs:
         for ax,key in zip(axs,('CLtot','CDi','CMytot')):
             ax.plot(r['results']['Alpha'],r['results'][key],'o-',label=f"Mesh parameter {r['mesh']}")
-    axs[0].legend();fig.supxlabel('OpenVSP 3.54.0 · 5 m/s · CMy about midchord · exploratory VLM; no stall model')
+    axs[0].legend();fig.supxlabel('OpenVSP 3.54.0 · 5 m/s · CMy about midchord · attached-flow VLM')
     save(fig,'reference-sweeps')
     for mode,title in [('aspect','Aspect ratio sensitivity — original camber, forward chord'),('camber','Camber sensitivity — AR 4, forward chord'),('reverse','Chord-direction sensitivity — AR 4, original camber')]:
         fig,axs=axes(title)
@@ -44,13 +44,13 @@ def render(output):
         for r in rows:
             label=f"AR {r['aspect']:g}" if mode=='aspect' else f"Camber ×{r['camberScale']:g}" if mode=='camber' else ('Reversed chord' if r['reverseChord'] else 'Forward chord')
             for ax,key in zip(axs,('CLtot','CDi','CMytot')):ax.plot(r['values']['Alpha'],r['values'][key],'o-',label=label,markersize=3)
-        axs[0].legend(fontsize=9);fig.supxlabel('Recorded samples joined by lines; not a stall prediction. Raw solver axes for both chord directions.')
+        axs[0].legend(fontsize=9);fig.supxlabel('Recorded samples joined by lines · raw solver axes for both chord directions')
         save(fig,mode+'-sweeps')
     fig,ax=plt.subplots(figsize=(8,5),layout='constrained')
     for r in grid:
         if r['camberScale']==1 and not r['reverseChord']:
             ax.plot(r['values']['CDi'],r['values']['CLtot'],'o-',label=f"AR {r['aspect']:g}")
-    ax.set(xlabel='Induced drag coefficient CDi (not total drag)',ylabel='Lift coefficient CL',title='Induced-drag polars — original camber, forward chord')
+    ax.set(xlabel='Induced drag coefficient CDi',ylabel='Lift coefficient CL',title='Induced-drag polars — original camber, forward chord')
     ax.legend();ax.grid(alpha=.2);save(fig,'induced-polars')
     p=next(p for p in geometry['profiles'] if p['span_station_mm']==150)
     x=np.array(p['x_mm']);u=(x-x[0])/(x[-1]-x[0]);top=-np.array(p['lower_mm']);bottom=-np.array(p['upper_mm'])

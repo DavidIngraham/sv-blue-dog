@@ -36,7 +36,7 @@ def run():
         ax.set(xlabel='Assumed full-passage easterly probability', xlim=(0,1))
         ax.grid(alpha=.2)
     fig.legend(*axes[0].get_legend_handles_labels(),loc='outside lower center',ncol=3,frameon=False)
-    fig.suptitle('Fixed candidate: probability sensitivity, not a weather forecast\nMechanical handling and self-righting failures remain unresolved')
+    fig.suptitle('Easterly passage probability and sailing performance\nCurrent candidate across six engineering scenarios')
     path = ROOT/'docs/figures/weather-performance-sensitivity.svg'
     fig.savefig(path, metadata={'Date': None})
     path.write_text('\n'.join(line.rstrip() for line in path.read_text().splitlines())+'\n')

@@ -8,9 +8,9 @@ Working through the testbed design made construction part of the sizing problem.
 
 The [weather-window mission](operating-constraints.md#gorge-weather-and-launch-windows) changes which sailing performance we emphasize, not the need to withstand loads or recover from a capsize. We keep those screens as hard constraints. Winter trials also need material, sealing and recovery evidence applicable to their temperature and weather conditions.
 
-![Construction section: a glass and epoxy skin surrounds the printed support and hollow interior. Joints and attachments need their own load evidence.](figures/laminate-section.svg)
+![Construction section: a glass and epoxy skin surrounds the printed support and hollow interior.](figures/laminate-section.svg)
 
-*The sketch shows the construction idea, not specified layer thicknesses. I count both skin and printed support in mass, while the bending calculation credits the finite glass laminate section.*
+*Glass and epoxy form the outer skin around printed walls and ribs. The mass model includes both; the bending model credits the glass laminate.*
 
 The current stiffness calculation uses finite laminate sections from inward offsets of the actual geometry. This replaced a thin-wall approximation that could predict more stiffness than a solid section. We credit the glass laminate for bending while treating printed support, joints and attachments as separate evidence obligations.
 
@@ -50,9 +50,9 @@ package Page_structures_and_recovery_1 {
 }
 ```
 
-![Recovery concepts: a sealed wing retains air volume, a freely flooded wing exchanges water, and a water-retaining wing carries trapped water. Roll restoration and pitch stability must both be assessed.](figures/recovery-states.svg)
+![Recovery concepts: a sealed wing retains air volume, a freely flooded wing exchanges water, and a water-retaining wing carries trapped water.](figures/recovery-states.svg)
 
-*A wing that helps when sealed can behave very differently after ingress. Coming upright in roll is only part of recovery: an unstable pitch equilibrium still prevents a self-righting claim.*
+*Water ingress changes the wing’s buoyancy and carried mass. Recovery depends on both roll restoration and pitch stability.*
 
 The sizing search uses a coarse fixed-pitch recovery screen alongside sailing, structure and energy constraints. We then solve displaced volume and its centroid at a specified attitude, balance heave and pitch, and inspect full-roll restoring curves for several mast positions at the selected geometry. Positive roll moments do not establish a dynamic recovery path, particularly on a pitch-unstable branch. Sealed, freely flooded and retained-water cases answer different questions and remain separate. Restricting sailing heel in the aerodynamic policy does not restrict the full-roll recovery assessment or relax its requirements.
 

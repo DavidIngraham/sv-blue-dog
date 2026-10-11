@@ -26,7 +26,7 @@ def render(output):
                                    bbox={'facecolor': 'white', 'alpha': .8, 'edgecolor': 'none'})
     axes[0, 0].legend(fontsize=7, loc='lower right')
     fig.suptitle('Representative mesh and wake sensitivity', fontsize=16, weight='bold')
-    fig.supxlabel('AR 4 · original camber · 5 m/s · inviscid attached-flow model\nLast increments: wake 15→30 at mesh 24; mesh 48→72 at wake 30. Numerical checks, not physical validation.', fontsize=10)
+    fig.supxlabel('AR 4 · original camber · 5 m/s · inviscid attached-flow model\nLast increments: wake 15→30 at mesh 24; mesh 48→72 at wake 30.', fontsize=10)
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     for suffix in ('svg', 'png'):
@@ -45,7 +45,7 @@ def render(output):
     axes[0, 0].legend(fontsize=8, loc='lower right')
     design = candidate['design']
     fig.suptitle('Interpolation check at the selected trial geometry', fontsize=16, weight='bold')
-    fig.supxlabel(f"AR {design['sail_AR']:.3f} · camber scale {design['camber_scale']:.3f} · mesh 24 · wake 5\nReference thickness and 1 m² area; does not validate the trial's thickness scale, viscosity or stall.", fontsize=10)
+    fig.supxlabel(f"AR {design['sail_AR']:.3f} · camber scale {design['camber_scale']:.3f} · mesh 24 · wake 5\nReference section thickness · wing area 1 m²", fontsize=10)
     for suffix in ('svg', 'png'):
         fig.savefig(output / f'candidate-interpolation.{suffix}', dpi=140, metadata={'Date': None} if suffix == 'svg' else None)
     plt.close(fig)

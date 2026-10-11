@@ -2,9 +2,9 @@
 
 How small can Blue Dog be and still make headway upriver? For [preliminary design](development-plan.md#virtual-design), I start with the route, wind and current assumptions, then vary the hull, wing, ballast and energy system together. I want to find which designs are worth developing and which assumptions I most need to test.
 
-![Qualitative force sketch: wing drive must overcome hull drag, while the keel resists side force and ballast supplies a restoring moment. Ground progress also includes current.](figures/sailing-forces.svg)
+![Sailing force balance: wing drive must overcome hull drag, while the keel resists side force and ballast supplies a restoring moment. Ground progress also includes current.](figures/sailing-forces.svg)
 
-*A good wing is not enough. The whole boat must balance forces and moments, and its velocity through the water must still produce useful progress over the ground.*
+*Wing drive balances hull drag; the keel resists side force and ballast supplies restoring moment. Current converts speed through the water into progress over the ground.*
 
 ```mermaid
 flowchart TB

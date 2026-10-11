@@ -4,7 +4,7 @@ Which rig gives this boat a useful combination of drive, low trim power and reco
 
 ![Three conceptual rigs: a wing trimmed by a tail and elevator, a fixed-camber wing rotated at its mast, and a triangular soft sail controlled by a sheet.](figures/rig-concepts.svg)
 
-*These are control concepts, not selected hardware. Tail control and direct mast rotation have different actuation and failure behavior; a soft sail remains a comparator until the evidence supports a decision.*
+*Three ways to trim a sail: elevator control, mast rotation and sheet tension.*
 
 We compare control architecture separately from section camber. A tail-controlled wing and a directly rotated fixed-camber wing solve trim differently; either needs measured aerodynamic moments, actuator losses, structural loads and failure-state behavior. A soft sail remains a useful comparator rather than an assumed failure. The fixed-camber CAD wing is our sizing experiment, not a resolved winner of the trade.
 
@@ -21,13 +21,13 @@ The candidate definitions and gate logic live in the [trade model](../models/ana
 
 The useful result from VSP so far is a warning about the model, not a winning rig. Mesh choice affects the reference response, and heel changes the local flow in ways a single cosine factor misses. I therefore tightened operating angles and reduced the performance credited in primary sizing. Measurements are still needed to replace those judgments.
 
-![Reference alpha sweeps: lift and moment change with mesh refinement, so the response is not mesh-independent.](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reference-sweeps.svg)
+![Reference alpha sweeps showing lift and pitching moment at three mesh settings.](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reference-sweeps.svg)
 
-*Mesh refinement changes the answer. This motivates the additional numerical checks below; agreement between meshes would still not establish real lift, drag or stall.*
+*Lift and pitching moment change as the reference-wing mesh is refined.*
 
 ![At substantial heel, the simple projection overpredicts forward force at 45 and 90 degree apparent wind and underpredicts it at 135 degrees.](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-projection-comparison.svg)
 
-*The error changes with wind direction. I cannot fix heel effects with one universal loss factor. This is why the sizing assumptions remain conservative while the full force model needs more work.*
+*The projection error changes with wind direction: it overpredicts forward force at 45° and 90° and underpredicts it at 135° at substantial heel.*
 
 ## Obtain comparable evidence
 
@@ -58,7 +58,7 @@ The response grid holds area at 1 m² and changes aspect ratio through 2, 4, 6 a
 
 ![Sections used in the camber study](https://davidingraham.github.io/sv-blue-dog/assets/vsp/sections.svg)
 
-*Changing camber changes the experiment; these are hypothetical variants of the CAD section, not built wings.*
+*Camber variants generated from the original CAD section while retaining its thickness distribution.*
 
 ### Alpha sweeps and mesh sensitivity
 
@@ -72,7 +72,7 @@ Lift and pitching moment change with mesh refinement, so these curves should not
 
 ![Representative mesh and wake convergence checks](https://davidingraham.github.io/sv-blue-dog/assets/vsp/convergence.svg)
 
-*Small final mesh/wake increments assess numerical sensitivity at sampled points; they do not validate the physical assumptions.*
+*Coefficient changes as mesh resolution and wake iterations increase.*
 
 ```sysml-report BlueDogEvidenceDocuments::AerodynamicChecks
 ```
@@ -83,21 +83,21 @@ All six final-increment checks pass the model's absolute coefficient-change scre
 
 ![Aspect-ratio alpha sweeps at original camber](https://davidingraham.github.io/sv-blue-dog/assets/vsp/aspect-sweeps.svg)
 
-*Aspect ratio changes the response available to the sizing search. These curves support interpolation within the sampled grid; they do not resolve the rig trade.*
+*Alpha sweeps compare aspect ratios 2, 4, 6 and 8 at the original section camber.*
 
 ![Camber alpha sweeps at aspect ratio four](https://davidingraham.github.io/sv-blue-dog/assets/vsp/camber-sweeps.svg)
 
-*Camber is a design variable, with both force and moment consequences. The actuator must be considered alongside useful drive.*
+*Camber changes both sail forces and the moment the trim actuator must resist.*
 
 ![Induced-drag polars by aspect ratio](https://davidingraham.github.io/sv-blue-dog/assets/vsp/induced-polars.svg)
 
-*This isolates induced drag. It cannot stand in for the total-drag polar required to predict boat performance.*
+*Induced drag plotted against lift for each aspect ratio.*
 
 The drag plots show **induced drag only**, not total sail drag or boat performance. The reference output also contains a profile-drag estimate, but we have not validated it for this section and Reynolds-number range. It is deliberately excluded from these comparisons.
 
 ![Forward and reversed-chord alpha sweeps](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reverse-sweeps.svg)
 
-*Chord reversal tests a geometric sensitivity; it does not demonstrate reliable opposite-tack performance.*
+*Alpha sweeps with the chord facing forward and reversed.*
 
 The direction comparison shows raw solver coordinates. Reversing the chord array is a geometric sensitivity experiment, not a validated opposite-tack polar. The optimization adapter separately transforms angle, lift and moment signs when representing reverse flow; these plots do not apply that transformation.
 
@@ -105,7 +105,7 @@ We also run VSPAERO directly at the selected trial's aspect ratio and camber to 
 
 ![Direct VSPAERO versus interpolation at the selected trial aspect ratio and camber](https://davidingraham.github.io/sv-blue-dog/assets/vsp/candidate-interpolation.svg)
 
-*This checks the response-grid interpolation at the trial’s aspect ratio and camber, not the trial’s full physical wing.*
+*Direct VSPAERO results compared with grid interpolation at the trial’s aspect ratio and camber.*
 
 ### What these results can establish
 
@@ -117,7 +117,7 @@ VLM assumes attached, inviscid flow and a prescribed shedding edge. This CAD sec
 
 ### Reproduce the figures
 
-`uv run python -m tools.boat_analysis.evidence.aerodynamics` writes plots to `build/vsp-figures`. The standard publishing command generates the same assets for Pages without installing or running VSP. The plotter always reads the archived records, verifies their hashes, and labels them as unvalidated evidence; it does not silently substitute a newer local run.
+`uv run python -m tools.boat_analysis.evidence.aerodynamics` writes plots to `build/vsp-figures`. The standard publishing command generates the same assets for Pages without installing or running VSP. The plotter reads the archived records, verifies their hashes, and labels the figures with the solver settings and quantities shown.
 
 To recapture the native geometry screenshots on Windows after installing the isolated VSP environment, run `uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.capture` from the repository root. This opens the graphics event loop, captures the archived geometry, and exits. New captures must be reviewed and their evidence manifest updated explicitly.
 
@@ -139,15 +139,15 @@ The moment origin is the **wing-root midchord**, not the boat center of gravity.
 
 ![Heel and incidence sweeps at 45 degrees apparent wind](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-awa-45.svg)
 
-*With wind 45° from the bow, heel changes local incidence and spanwise inflow together. Upright coefficients alone cannot capture that coupling.*
+*With wind 45° from the bow, heel changes local incidence and spanwise inflow together.*
 
 ![Heel and incidence sweeps at beam wind](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-awa-90.svg)
 
-*At beam wind, the spanwise inflow angle is the negative of heel. This is a useful geometry check as well as a load sensitivity study.*
+*At beam wind, the spanwise inflow angle is the negative of heel.*
 
 ![Heel and incidence sweeps at 135 degrees apparent wind](https://davidingraham.github.io/sv-blue-dog/assets/vsp/heel-awa-135.svg)
 
-*The aft-quarter wind case provides a different heel response; the direction-dependent projection error matters to the sailing model.*
+*Wing forces and moments as heel changes with wind 135° from the bow.*
 
 ### Compare with the boat model's approximation
 
