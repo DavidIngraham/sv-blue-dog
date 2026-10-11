@@ -52,9 +52,12 @@ def test_semantic_diagrams_are_small_connected_native_views(slug, kinds, rendere
     page, view = locations[slug]
     from tools.publishing.build import blocks
     authored = Path(f'docs/{page}.md').read_text(encoding='utf-8')
-    index = next(i for i, token in enumerate(blocks(authored)) if token.info.split()[1].endswith('::'+view))
+    target = next(token.info.split()[1] for token in blocks(authored) if token.info.split()[1].endswith('::'+view))
     rendered = (rendered_site / f'imports/docs/{page}.md').read_text(encoding='utf-8')
-    text = re.findall(r'```mermaid\n(.*?)```', rendered, re.S)[index]
+    # Explanatory sketches can precede native views. Select by native provenance,
+    # not by a position shared with the authored SysML-only block list.
+    text = next(diagram for diagram in re.findall(r'```mermaid\n(.*?)```', rendered, re.S)
+                if f'%% {target} ' in diagram)
     nodes = set(re.findall(r'^  (n\d+)[(\[]', text, re.M))
     edges = re.findall(r'(n\d+) -\.->\|"(\w+)"\| (n\d+)', text)
     assert 3 <= len(nodes) <= 5
@@ -75,8 +78,15 @@ def test_authored_pages_contain_views_not_copied_diagrams(rendered_site):
     from tools.publishing.build import blocks
     for name in ['architecture', 'energy', 'reliability']:
         source = Path(f'docs/{name}.md').read_text(encoding='utf-8')
-        assert '```mermaid' not in source
+        sketches = re.findall(r'```mermaid\n(.*?)```', source, re.S)
+        for sketch in sketches:
+            # Method illustrations may coexist with native semantics, but must
+            # not copy the generated model's identities or requirement edges.
+            assert 'accTitle:' in sketch and 'accDescr:' in sketch
+            assert not re.search(r'BlueDog\w*::|GorgeChallenge::|[CHEMPNSRQL]-\d{3}|"(?:derive|refine|satisfy|verify)"', sketch)
         assert blocks(source)
         rendered = (rendered_site / f'imports/docs/{name}.md').read_text(encoding='utf-8')
         assert '```sysml-view' not in rendered
-        assert rendered.count('```mermaid') == len(blocks(source))
+        assert rendered.count('```mermaid') == len(blocks(source)) + len(sketches)
+        for block in blocks(source):
+            assert f'%% {block.info.split()[1]} ' in rendered

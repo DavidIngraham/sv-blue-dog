@@ -105,7 +105,10 @@ def test_use_case_and_satisfaction_traceability():
     assert '| regulatoryClassification |  |' in text
     diagram = native('-render', 'Page_architecture_2::operations', '-render-form', 'dot')
     assert '// kind: case' in diagram
-    assert 'P-001 Transportability' in diagram
+    # The published operations view is now scoped to sailing and traffic.
+    # Preparation/transportability remains checked in the full register above.
+    assert 'M-001 Gorge mission' in diagram
+    assert 'S-001 Traffic safety' in diagram
     assert 'OtherVessel' in diagram
     context = native('-render', 'Page_architecture_0::context', '-render-form', 'dot')
     assert 'OtherVessel' in context
