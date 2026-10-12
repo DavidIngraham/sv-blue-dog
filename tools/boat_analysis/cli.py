@@ -13,6 +13,12 @@ def main():
     solve.add_argument("--resume", action="store_true")
     solve.add_argument("--resolution", type=int, default=12)
     solve.add_argument("--route-profile", choices=["challenge", "all-season"], default="challenge")
+    continuation = commands.add_parser("continue-sizing")
+    continuation.add_argument("--target", type=float, default=1.2)
+    continuation.add_argument("--step", type=float, default=.2)
+    continuation.add_argument("--minimum-step", type=float, default=.025)
+    continuation.add_argument("--budget", type=int, default=60)
+    continuation.add_argument("--extensions", type=int, default=2)
     operating = commands.add_parser("operating")
     operating.add_argument("--budget", type=int, default=70)
     replay = commands.add_parser("replay")
@@ -37,6 +43,9 @@ def main():
     elif args.command == "solve":
         from .optimization.search import run
         run(args.budget, args.resume, args.resolution, args.route_profile)
+    elif args.command == "continue-sizing":
+        from .optimization.continuation import run
+        run(args.target, args.step, args.minimum_step, args.budget, args.extensions)
     elif args.command == "operating":
         from .optimization.operating import run
         run(args.budget)

@@ -1,0 +1,115 @@
+"""Trace fixed-length feasibility without changing physical acceptance criteria."""
+import json
+import time
+import numpy as np
+from scipy.optimize import least_squares
+
+from .search import Problem
+from ..evidence.records import CURRENT, run_record, output_path, source_hashes, validate
+from ..model.runtime import ROOT
+
+
+def solve_stage(problem, seed, length, budget=60, extensions=2):
+    """Remove length from the unknowns; extend only while violations improve."""
+    fixed = (length - problem.lo[0]) / problem.span[0]
+    if not 0 <= fixed <= 1:
+        raise ValueError('Requested length outside the model search bounds')
+    def expand(y):
+        return np.r_[fixed, y]
+    def residual(y):
+        return problem.residual(expand(y))
+    def jacobian(y):
+        return problem.residual_jacobian(expand(y))[:, 1:]
+    best = np.clip(np.asarray(seed)[1:], 0, 1)
+    history = []
+    for chunk in range(extensions + 1):
+        before = float(np.linalg.norm(residual(best)))
+        if problem.feasible(expand(best)):
+            break
+        def stop(intermediate_result):
+            if problem.feasible(expand(intermediate_result.x)):
+                raise StopIteration
+        result = least_squares(residual, best, jac=jacobian, bounds=(0, 1),
+                               max_nfev=budget, callback=stop,
+                               ftol=1e-8, xtol=1e-8, gtol=1e-8)
+        after = float(np.linalg.norm(residual(result.x)))
+        history.append(dict(chunk=chunk, before=before, after=after,
+                            evaluations=result.nfev, message=str(result.message)))
+        if after < before:
+            best = result.x
+        if problem.feasible(expand(best)) or after >= before * .95:
+            break
+    z = expand(best)
+    r = problem.evaluate(z)
+    return dict(lengthM=length, feasible=problem.feasible(z),
+                merit=float(np.linalg.norm(problem.residual(z))),
+                maxEquilibriumResidual=float(np.max(np.abs(r['eq']))),
+                minimumMargin=float(np.min(r['ineq'])),
+                worstConstraints=sorted(zip(problem.constraint_names, map(float, r['ineq'])), key=lambda x:x[1])[:12],
+                normalizedDesignAndStates=z.tolist(), history=history,
+                design=dict(zip(problem.model.c['designNames'], (problem.lo+z*problem.span)[:29])))
+
+
+def run(target=1.2, step=.2, minimum_step=.025, budget=60, extensions=2):
+    if not 0 < minimum_step <= step or budget < 1 or extensions < 0:
+        raise ValueError('Invalid continuation settings')
+    p = Problem()
+    p.checkpoint_path = ROOT / '.tools/continuation-progress.json'
+    saved = run_record(CURRENT, 'coupled-sizing-search.json')
+    accepted = np.array(saved['normalizedDesignAndStates'])
+    if not p.feasible(accepted):
+        raise ValueError('The archived starting candidate is not currently feasible')
+    length = float((p.lo + accepted*p.span)[0])
+    if not p.lo[0] <= target < length:
+        raise ValueError('Target must be below the seed and within model bounds')
+    hashes = source_hashes(['tools/boat_analysis/optimization/continuation.py',
+                           'tools/boat_analysis/optimization/search.py'])
+    report = dict(sourceHashes=hashes, seedRun=str(CURRENT.name), targetM=target,
+                  settings=dict(stepM=step, minimumStepM=minimum_step, budget=budget, extensions=extensions),
+                  attempts=[], qualified=False, completed=False,
+                  scope='Fixed-length coarse feasibility continuation; no physical requirements relaxed. Not a minimum-size proof or refined verification.')
+    started = time.time()
+    best_infeasible = None
+    def save():
+        validate(hashes)
+        report.update(smallestFeasibleLengthM=length, smallestFeasibleZ=accepted.tolist(),
+                      bestInfeasible=best_infeasible, elapsedSeconds=time.time()-started)
+        output_path('sizing-continuation.json').write_text(json.dumps(report, indent=2)+'\n')
+    save()
+    while length > target + 1e-8:
+        proposed = max(target, round(length-step, 9))
+        # Reach round-number milestones from a non-round starting length.
+        if not report['attempts']:
+            proposed = max(target, round(np.floor((length-1e-8)/step)*step, 9))
+        print(f'CONTINUATION {length:.3f} -> {proposed:.3f} m', flush=True)
+        attempt = solve_stage(p, accepted, proposed, budget, extensions)
+        report['attempts'].append(attempt)
+        if not attempt['feasible']:
+            # A second physically distinct seed retains greater hull volume and
+            # lowers wing/ballast loading. Only an initial guess, never a bound.
+            alternative = accepted.copy()
+            physical = p.lo + alternative*p.span
+            physical[1] *= 1.08
+            physical[4] *= .9
+            physical[15] *= .9
+            alternative = np.clip((physical-p.lo)/p.span, 0, 1)
+            second = solve_stage(p, alternative, proposed, budget, extensions)
+            second['seedVariant'] = 'wider hull, reduced wing and ballast'
+            report['attempts'].append(second)
+            if second['feasible'] or second['merit'] < attempt['merit']:
+                attempt = second
+        if attempt['feasible']:
+            accepted = np.array(attempt['normalizedDesignAndStates'])
+            length = proposed
+            print(f'ACCEPTED {length:.3f} m', flush=True)
+        else:
+            if best_infeasible is None or attempt['merit'] < best_infeasible['merit']:
+                best_infeasible = attempt
+            step /= 2
+            print(f'UNRESOLVED {proposed:.3f} m; next step {step:.3f} m', flush=True)
+        save()
+        if step < minimum_step:
+            break
+    report.update(completed=True, targetReached=length <= target+1e-8)
+    save()
+    print(f'FINISHED smallest coarse-feasible length {length:.3f} m', flush=True)

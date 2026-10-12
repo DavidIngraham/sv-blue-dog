@@ -34,7 +34,8 @@ class Problem:
         axes=self.model.polar.axes
         physical_knots={5:axes[0],6:axes[1],**{29+6*i+2:axes[2] for i in range(8)}}
         self.breakpoints={i:(values-self.lo[i])/self.span[i] for i,values in physical_knots.items()}
-        self.last=None;self.calls=0;self.start=time.time();self.best=None;self.best_feasible=None;self.derivatives=None;self.design_cache=None
+        self.last=None;self.calls=0;self.start=time.time();self.best=None;self.best_feasible=None;self.best_infeasible=None;self.derivatives=None;self.design_cache=None
+        self.checkpoint_path=ROOT/'.tools/coupled-search-progress.json'
     def design_data(self,x):
         if self.design_cache is not None and np.array_equal(x,self.design_cache[0]):return self.design_cache[1]
         k=self.model
@@ -86,10 +87,11 @@ class Problem:
         self.calls+=1
         merit=float(np.linalg.norm(np.r_[eq,np.minimum(ineq,0)]))
         if self.best is None or merit<self.best[0]:self.best=(merit,np.array(z,copy=True))
+        if (np.abs(eq).max()>=1e-4 or ineq.min()<=-1e-4) and (self.best_infeasible is None or merit<self.best_infeasible[0]):self.best_infeasible=(merit,np.array(z,copy=True))
         if np.abs(eq).max()<1e-4 and ineq.min()>-1e-4 and (self.best_feasible is None or x[0]<self.best_feasible[0]):self.best_feasible=(float(x[0]),np.array(z,copy=True))
         if self.calls%40==0:
             print(f'{self.calls} calls, {time.time()-self.start:.0f}s, merit {merit:.5f}, best {self.best[0]:.5f}, L {x[0]:.3f}, min margin {ineq.min():.4f}',flush=True)
-            (ROOT/'.tools/coupled-search-progress.json').write_text(json.dumps({'calls':self.calls,'bestMerit':self.best[0],'bestZ':self.best[1].tolist(),'currentZ':np.asarray(z).tolist(),'bestFeasibleZ':None if self.best_feasible is None else self.best_feasible[1].tolist()})+'\n')
+            self.checkpoint_path.write_text(json.dumps({'calls':self.calls,'bestMerit':self.best[0],'bestZ':self.best[1].tolist(),'currentZ':np.asarray(z).tolist(),'bestFeasibleZ':None if self.best_feasible is None else self.best_feasible[1].tolist(),'bestInfeasibleZ':None if self.best_infeasible is None else self.best_infeasible[1].tolist()})+'\n')
         self.last=(np.array(z,copy=True),result);return result
     def jacobians(self,z):
         if self.derivatives is not None and np.array_equal(z,self.derivatives[0]):return self.derivatives[1:]
@@ -127,7 +129,8 @@ def run(budget,resume=False,resolution=12,route_profile='challenge'):
     if resume:
         checkpoint=ROOT/'.tools/coupled-search-progress.json'
         checkpoint_hash=digest(checkpoint)
-        initial=np.array(json.loads(checkpoint.read_text())['bestZ'])
+        saved_checkpoint=json.loads(checkpoint.read_text())
+        initial=np.array(saved_checkpoint.get('bestFeasibleZ') or saved_checkpoint['bestZ'])
         if initial.shape!=p.lo.shape or np.any(initial<0) or np.any(initial>1):raise ValueError('Incompatible numerical checkpoint')
     seed=initial.copy()
     # Geometrically consistent starting guess only; length remains free.

@@ -23,7 +23,7 @@ flowchart TB
     replay --> experiment["Identify the next measurement or design change"]
 ```
 
-We first seek a feasible design, then minimize length while allowing the represented hull, rig, appendage, ballast, structure and energy variables to change together. Numerical brackets describe model coverage and search limits. A bound hit requires investigation before claiming a minimum size.
+We trace a sequence of feasible designs toward the 1.2 m target. Each stage fixes only hull length and solves for the other 28 design variables and 48 operating-state variables. The preceding feasible design supplies the next starting point. The original free-length minimizer remains available for comparison. Numerical brackets describe model coverage and search limits. A bound hit requires investigation before claiming a minimum size.
 
 SysML owns the physical equations, named configurations, bounds, assumptions and acceptance criteria. Python evaluates geometric intersections and section properties, interpolates saved aerodynamic evidence and drives SciPy. Compiled array interfaces are confined to the runtime boundary. Reusable libraries have no dependency on Blue Dog requirements; application analyses connect them to the mission.
 
@@ -33,11 +33,11 @@ The [weather policy](../models/analyses/weather.sysml) separates a selected-weat
 
 The [seasonal observations and probability method](operating-constraints.md#gorge-weather-and-launch-windows) distinguish hourly wind frequency from whole-passage weather probability. We sweep the latter through the native model, reporting route-screen coverage separately from passage time conditional on passing. Failed or energy-unconstrained cases cannot disappear into an average. Until route and forecast evidence supports a distribution, the optimizer still minimizes length subject to its declared profile; no invented east-wind weight is hidden in its cost function.
 
-The [aerodynamic policy](../models/analyses/aerodynamic-policy.sysml) makes the former adverse aerodynamic assumptions the primary sizing case. It limits nominal incidence and heel, reduces lift credit, increases drag, and assigns an independent pitching-moment allowance. These are engineering assumptions, not measured uncertainty bounds. All 29 geometry, structure and energy variables remain free; the restricted controls prevent the search from relying as heavily on high incidence and large heel.
+The [aerodynamic policy](../models/analyses/aerodynamic-policy.sysml) makes the former adverse aerodynamic assumptions the primary sizing case. It limits nominal incidence and heel, reduces lift credit, increases drag, and assigns an independent pitching-moment allowance. These are engineering assumptions, not measured uncertainty bounds. All represented geometry, structure and energy variables remain adjustable, with length fixed only within each continuation stage; the restricted controls prevent the search from relying as heavily on high incidence and large heel.
 
 VSPAERO supplies finite-wing trends within the archived grid. We retain the provisional upright-polar cosine projection in the force balance; the separate heel study demonstrates why this is a limitation. Published crescent-wing results do not match this CAD section closely enough to supply measured coefficients. Representative mesh/wake checks assess numerical sensitivity, while physical section polars, stall and moment measurements remain open evidence needs.
 
-Feasibility restoration precedes the local size search. Derivatives respect interpolation-grid breakpoints. Small mesh reserves protect against numerical drift; they are separate from physical uncertainty. A continuation can start from the best point without changing requirements or bounds; the record retains its exact normalized seed and checkpoint hash. Refined replay re-solves operating states with peak-power constraints, then identifies any diagnostic solve that removes that check. Finite battery endurance requires chronological mission evaluation. A failed local solve is not proof of physical impossibility.
+Feasibility restoration precedes the local size search. Derivatives respect interpolation-grid breakpoints. Small mesh reserves protect against numerical drift; they are separate from physical uncertainty. Continuation starts from the current archived feasible candidate, targets 0.2 m length reductions, and halves unsuccessful steps down to 0.025 m. Each stage receives 60 residual evaluations, with up to two extensions when violation norm improves by at least 5 percent. A failed stage also tries a wider-hull, reduced-wing/ballast starting guess; those changes are not constraints. Separate records retain the smallest feasible design and best infeasible attempt. No stage relaxes physical acceptance criteria. This is local feasibility tracing, not a proof that a failed length cannot work. Refined replay re-solves operating states with peak-power constraints, then identifies any diagnostic solve that removes that check. Finite battery endurance requires chronological mission evaluation. A failed local solve is not proof of physical impossibility.
 
 <details>
 <summary>Reproduce the search and refresh aerodynamic evidence</summary>
@@ -51,6 +51,8 @@ uv sync --locked
 uv run python -m tools.boat_analysis.cli install
 uv run python -m tools.boat_analysis.cli validate
 uv run python -m tools.boat_analysis.cli prepare
+uv run python -m tools.boat_analysis.cli continue-sizing --target 1.2
+# The original unconstrained-length search remains available:
 uv run python -m tools.boat_analysis.cli solve
 uv run python -m tools.boat_analysis.cli replay
 uv run python -m tools.boat_analysis.cli recovery
@@ -58,7 +60,7 @@ uv run python -m tools.boat_analysis.cli pitch
 uv run python -m tools.boat_analysis.cli audit
 ```
 
-Preparation exports model inputs and compiles native calculations. Solving writes a candidate; replay and recovery are separate assessments. Outputs go to ignored `build/analysis`, not to authored documentation. Accepted records are archived without overwriting earlier runs and projected into named model instances for publication. The current run is identified on the [results page](results.md).
+Continuation writes `build/analysis/sizing-continuation.json` and leaves the replay candidate untouched; a continuation result must be selected explicitly before refined replay. Preparation exports model inputs and compiles native calculations. Solving writes a candidate; replay and recovery are separate assessments. Outputs go to ignored `build/analysis`, not to authored documentation. Accepted records are archived without overwriting earlier runs and projected into named model instances for publication. The current run is identified on the [results page](results.md).
 
 Replay holds the selected geometry fixed and re-solves controls for six hypotheses: the conservative primary case (stored as `nominal`), construction, additional aerodynamic degradation, hydrodynamic degradation, energy degradation, and their combination. These scenarios test sensitivity; they are neither probabilities nor demonstrated worst cases. An operating failure or pitch-unstable recovery sample remains visible even if the coarse sizing screen passed.
 

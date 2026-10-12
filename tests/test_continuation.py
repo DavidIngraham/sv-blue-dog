@@ -1,0 +1,43 @@
+"""Known feasibility problems check fixed-length elimination and failure reporting."""
+from types import SimpleNamespace
+import numpy as np
+import pytest
+from tools.boat_analysis.optimization.continuation import solve_stage
+
+
+class Toy:
+    lo = np.zeros(2)
+    span = np.ones(2)*2
+    model = SimpleNamespace(c={'designNames':['length', 'width']})
+    constraint_names = ['width capacity']
+    def __init__(self, capacity=1):
+        self.capacity = capacity
+    def evaluate(self, z):
+        return {'eq':np.array([z[1]-z[0]]), 'ineq':np.array([self.capacity-z[1]])}
+    def residual(self, z):
+        r=self.evaluate(z)
+        return np.r_[r['eq'], np.minimum(r['ineq'],0)]
+    def residual_jacobian(self, z):
+        return np.array([[-1.,1.],[0.,-1. if z[1]>self.capacity else 0.]])
+    def feasible(self, z):
+        r=self.evaluate(z)
+        return abs(r['eq'][0])<1e-4 and r['ineq'][0]>-1e-4
+
+
+def test_length_is_fixed_while_other_variable_finds_equilibrium():
+    r=solve_stage(Toy(),np.array([.9,.9]),1.2,budget=20)
+    assert r['feasible']
+    assert r['design']['length']==1.2
+    assert r['design']['width']==pytest.approx(1.2,abs=2e-4)
+
+
+def test_incompatible_capacity_is_not_reported_as_feasible():
+    r=solve_stage(Toy(.3),np.array([.9,.9]),1.2,budget=20)
+    assert not r['feasible']
+    assert r['design']['length']==1.2
+    assert r['minimumMargin']<0
+
+
+def test_length_outside_model_bounds_rejected():
+    with pytest.raises(ValueError):
+        solve_stage(Toy(),np.array([.9,.9]),3)
