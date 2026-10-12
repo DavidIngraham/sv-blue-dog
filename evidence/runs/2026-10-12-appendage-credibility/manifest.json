@@ -1,0 +1,10 @@
+{
+  "sourceRevision": "99c5a837ef04845e2d582435821f5ccad6aafc54",
+  "files": {
+    "sizing-continuation.json": {
+      "sha256": "4f9f5ec9cb66585dcee6dd97db0a4df3ca08bc8fe358bc7a5423cb7e6c4b8a60"
+    }
+  },
+  "qualified": false,
+  "scope": "Fixed-length coarse feasibility continuation; no physical requirements relaxed. Not a minimum-size proof or refined verification."
+}

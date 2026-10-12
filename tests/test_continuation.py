@@ -71,3 +71,18 @@ def test_retained_target_is_rejected_by_current_geometry_policy():
     assert not p.feasible(z)
     assert r["structure"]["rudderAspectMargin"] < -0.9
     assert r["structure"]["rudderStockMargin"] < 0
+
+
+def test_restored_baseline_passes_current_native_screens():
+    import sys
+    if sys.platform!='linux':
+        pytest.skip('Native C adapter uses Linux/GCC')
+    from tools.boat_analysis.evidence.records import ROOT, run_record, verify_run_sources
+    from tools.boat_analysis.optimization.search import Problem
+    directory=ROOT/'evidence/runs/2026-10-12-appendage-credibility'
+    assert verify_run_sources(directory)>10
+    record=run_record(directory,'sizing-continuation.json')
+    assert record['targetReached'] and record['seedRestoration']['feasible']
+    p=Problem(); z=np.array(record['smallestFeasibleZ'])
+    assert (p.lo+z*p.span)[0]==pytest.approx(2.)
+    assert p.feasible(z)
