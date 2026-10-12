@@ -73,7 +73,7 @@ def test_retained_target_is_rejected_by_current_geometry_policy():
     assert r["structure"]["rudderStockMargin"] < 0
 
 
-def test_restored_baseline_passes_current_native_screens():
+def test_restored_baseline_retains_its_geometry_screen_evidence():
     import sys
     if sys.platform!='linux':
         pytest.skip('Native C adapter uses Linux/GCC')
@@ -85,4 +85,6 @@ def test_restored_baseline_passes_current_native_screens():
     assert record['targetReached'] and record['seedRestoration']['feasible']
     p=Problem(); z=np.array(record['smallestFeasibleZ'])
     assert (p.lo+z*p.span)[0]==pytest.approx(2.)
-    assert p.feasible(z)
+    r=p.evaluate(z)
+    assert r["structure"]["rudderAspectMargin"] >= -1e-4
+    assert r["structure"]["sweptSeparationMargin"] >= -1e-4

@@ -100,3 +100,25 @@ def ballast_geometry(volume_m3,keel_tip_z,resolution=8):
     scale=(volume_m3/metrics(unit)[4])**(1/3)
     center=np.array([0.,0.,keel_tip_z-scale])
     return unit*scale+center,center
+
+
+def operating_envelope(design, density=11340., resolution=12):
+    """Rigid mesh bounds with full wing rotation and rudder steering; no waves/heel.
+
+    Transport bounds describe separate modules, not a packed shipping box.
+    """
+    bodies,_,_=build_geometry(design,resolution)
+    bulb,_=ballast_geometry(design['ballast_kg']/density,-design['bottom_depth_m']-design['keel_span_m'],resolution)
+    bodies['ballast']=bulb
+    lower=[];upper=[]
+    modules={}
+    for name,mesh in bodies.items():
+        points=mesh.reshape(-1,3);lo=points.min(axis=0);hi=points.max(axis=0)
+        modules[name]=(hi-lo).tolist()
+        if name in ('wing','rudder'):
+            pivot=design['mast_x_fraction']*design['length_m'] if name=='wing' else -design['rudder_arm_fraction']*design['length_m']
+            radius=np.linalg.norm(points[:,:2]-[pivot,0],axis=1).max()
+            lo[:2]=[pivot-radius,-radius];hi[:2]=[pivot+radius,radius]
+        lower.append(lo);upper.append(hi)
+    dimensions=np.max(upper,axis=0)-np.min(lower,axis=0)
+    return dict(hullLengthM=design['length_m'],sweptLengthM=float(dimensions[0]),sweptBeamM=float(dimensions[1]),keelToWingHeightM=float(dimensions[2]),moduleDimensionsM=modules)

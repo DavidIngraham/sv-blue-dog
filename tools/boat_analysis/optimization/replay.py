@@ -5,7 +5,7 @@ import argparse,json
 from concurrent.futures import ProcessPoolExecutor,as_completed
 import numpy as np
 from tools.boat_analysis.model.vessel import CoupledModel
-from tools.boat_analysis.model.operating import StructureKernel,RouteKernel
+from tools.boat_analysis.model.operating import StructureKernel,RouteKernel,ConceptKernel
 from tools.boat_analysis.geometry.hydro import free_pitch_equilibrium,DisplacementBody
 from tools.boat_analysis.optimization.operating import solve_state, operating_margin_names
 from tools.boat_analysis.model.runtime import ROOT
@@ -41,6 +41,8 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
     policy=scenarios['values']['adverseRoute' if name=='combined' else 'nominalRoute']
     trip=route.evaluate([r['outputs']['waterVMG'] for r in rows],np.array([r['state'][3:] for r in rows]).ravel(),policy)
     west=route.evaluate([r['outputs']['waterVMG'] for r in rows],np.array([r['state'][3:] for r in rows]).ravel(),policy,wind_from='west')
+    concept=ConceptKernel().evaluate(x,list(m.values()),g,max(west[5],trip[5]) if route_profile=='all-season' else west[5],max(r['outputs']['averagePower'] for r in rows))
+    margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
     recovery=[]
     # Complete curves for the nominal replay; additional evidence cases below.
     for trim in model.operation.contract['recoveryTrims']:
@@ -56,7 +58,7 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
         recovery.append({'trim_deg':trim,'points':points,'failedEquilibria':sum('failure' in p for p in points),'minimumInteriorRestoring_Nm':min(restoring) if restoring else None})
     numerical=all(r['equilibrated'] for r in rows)
     operating=min(row['outputs'][n] for row in rows for n in operating_margin_names(model.operation.contract['outputNames']))
-    result={'scenario':name,'parameters':dict(zip(model.c['parameterNames'],model.parameters)),'cases':rows,'structure':margins,'route':trip.tolist(),'westerlyRoute':west.tolist(),'recovery':recovery,'numericallyBalanced':numerical,'minimumOperatingMargin':operating,'sampledStaticScreensPass':bool(numerical and operating>=-1e-4 and min(margins.values())>=-1e-4 and min(trip[:3])>=-1e-4 and min(west[:3])>=-1e-4 and all(r['failedEquilibria']==0 and r['minimumInteriorRestoring_Nm'] is not None and r['minimumInteriorRestoring_Nm']>0 for r in recovery)),'qualified':False}
+    result={'scenario':name,'parameters':dict(zip(model.c['parameterNames'],model.parameters)),'cases':rows,'structure':margins,'concept':concept,'route':trip.tolist(),'westerlyRoute':west.tolist(),'recovery':recovery,'numericallyBalanced':numerical,'minimumOperatingMargin':operating,'sampledStaticScreensPass':bool(numerical and operating>=-1e-4 and min(margins.values())>=-1e-4 and min(trip[:3])>=-1e-4 and min(west[:3])>=-1e-4 and all(r['failedEquilibria']==0 and r['minimumInteriorRestoring_Nm'] is not None and r['minimumInteriorRestoring_Nm']>0 for r in recovery)),'qualified':False}
     # Preserve the original strict two-direction field; expose the selected
     # profile separately so old evidence consumers cannot mistake its meaning.
     requires_east=structure.contract['challengeRequiresEastProgress' if route_profile=='challenge' else 'allSeasonRequiresEastProgress']

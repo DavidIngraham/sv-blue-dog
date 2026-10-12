@@ -44,6 +44,7 @@ class Result:
     distance_m: float
     evidence_type: str = 'virtual'
     physically_validated: bool = False
+    outside_performance_coverage_seconds: float = 0.
     model_scope: str = 'Conceptual polar and point-mass guidance; wave dynamics and full navigation-rule compliance not verified'
 
 
@@ -76,6 +77,11 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     if not 0 <= maneuver_time <= control_period or control_period <= 0:
         raise ValueError('Maneuver delay must fit the positive control period')
     capacity, stored, reserve, load, maneuver_wh, solar, charging, discharge = inputs['energy']
+    from .candidate import Performance
+    performance = Performance(inputs['performance']) if 'performance' in inputs else None
+    outside_coverage = 0.
+    def sailing_speeds(wind, angles):
+        return performance.speeds(wind,angles) if performance else np.minimum(inputs['dimensions'][2],wind*np.interp(np.abs(angles),inputs['angles'],inputs['speedRatios']))
     if dt <= 0 or hours <= 0 or not 0 < reserve < stored <= capacity or not 0 < discharge <= 1:
         raise ValueError('Invalid mission time or energy inputs')
     if not water.covers(route):
@@ -123,7 +129,10 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             history[-1] = terminal
         else:
             history.append(terminal)
-        return Result(verdict,cause,seconds,crossing_log,history,event_log,minimum,distance)
+        observed=Result(verdict,cause,seconds,crossing_log,history,event_log,minimum,distance)
+        observed.outside_performance_coverage_seconds=outside_coverage
+        if performance:observed.model_scope=inputs['performance']['scope']
+        return observed
     step, next_control, turn_remaining = 0, 0., 0.
     while seconds < hours*3600:
         while event_index < len(event_list) and event_list[event_index].seconds <= seconds:
@@ -152,9 +161,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             headings = np.unique(np.r_[np.arange(0,360,10), desired % 360])
             radians = np.deg2rad(headings)
             wind_angle = 90-state.wind_from_deg
-            relative = np.abs((headings-wind_angle+180)%360-180)
-            speeds = np.minimum(inputs['dimensions'][2],
-                                state.wind_mps*np.interp(relative,inputs['angles'],inputs['speedRatios']))
+            relative = (headings-wind_angle+180)%360-180
+            speeds = sailing_speeds(state.wind_mps,relative)
             if seconds < sensor_until:
                 speeds[:] = 0
             velocities = np.column_stack((np.cos(radians),np.sin(radians)))*speeds[:,None]+current
@@ -215,8 +223,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         elif heading is None:
             mode = 'depowered_drift'
         else:
-            relative = abs((heading-(90-state.wind_from_deg)+180)%360-180)
-            speed = min(inputs['dimensions'][2],state.wind_mps*np.interp(relative,inputs['angles'],inputs['speedRatios']))
+            relative = (heading-(90-state.wind_from_deg)+180)%360-180
+            speed = float(sailing_speeds(state.wind_mps,relative))
             radians = math.radians(heading)
             velocity += speed*np.array([math.cos(radians),math.sin(radians)])
         previous = position.copy(); endpoint = position+velocity*interval
@@ -227,7 +235,12 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             if not safe[0]:
                 return result('incomplete','held_command_exhausts_traffic_margin')
         position = endpoint
-        net = solar*state.solar_fraction*charging-load/discharge
+        if performance and not performance.covered(state.wind_mps):outside_coverage += interval
+        if 'storage' in inputs:
+            bus=solar*state.solar_fraction-load
+            net=(min(bus*charging,inputs['storage']['maxChargeW']) if bus>=0 else bus/discharge)-inputs['storage']['selfDischargeW']
+        else:
+            net = solar*state.solar_fraction*charging-load/discharge
         stored = min(capacity,stored+net*interval/3600)
         minimum=min(minimum,stored);seconds+=interval;distance+=float(np.linalg.norm(position-previous))
         turn_remaining=max(0.,turn_remaining-interval)

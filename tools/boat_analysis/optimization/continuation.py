@@ -79,7 +79,14 @@ def solve_stage(problem, seed, length, budget=60, extensions=2):
             break
     z = expand(best)
     r = problem.evaluate(z)
-    return dict(lengthM=length, feasible=problem.feasible(z),
+    details = {}
+    if 'mass' in r:
+        from ..geometry.vessel import operating_envelope
+        design=dict(zip(problem.model.c['designNames'], (problem.lo+z*problem.span)[:29]))
+        details=dict(mass=r['mass'],concept=r['concept'],westerlyRoute=r['westerlyRoute'].tolist(),
+                     operating=r['rows'],stateRows=r['states'].tolist(),
+                     envelope=operating_envelope(design,problem.model.parameters[33]))
+    return dict(**details,lengthM=length, feasible=problem.feasible(z),
                 merit=float(np.linalg.norm(problem.residual(z))),
                 maxEquilibriumResidual=float(np.max(np.abs(r['eq']))),
                 minimumMargin=float(np.min(r['ineq'])),
@@ -88,17 +95,19 @@ def solve_stage(problem, seed, length, budget=60, extensions=2):
                 design=dict(zip(problem.model.c['designNames'], (problem.lo+z*problem.span)[:29])))
 
 
-def run(target=1.2, step=.2, minimum_step=.025, budget=60, extensions=2):
+def run(target=1.2, step=.2, minimum_step=.025, budget=60, extensions=2, seed_run="2026-10-12-appendage-credibility"):
     if not 0 < minimum_step <= step or budget < 1 or extensions < 0:
         raise ValueError('Invalid continuation settings')
     p = Problem()
     p.checkpoint_path = ROOT / '.tools/continuation-progress.json'
-    saved = run_record(CURRENT, 'coupled-sizing-search.json')
-    accepted = np.array(saved['normalizedDesignAndStates'])
+    seed_directory = ROOT/'evidence/runs'/seed_run
+    saved = run_record(seed_directory, 'sizing-continuation.json')
+    accepted = np.array(saved['smallestFeasibleZ'])
     hashes = source_hashes(list(saved['sourceHashes']) + list(p.structure.contract['sourceHashes']) + [
         'tools/boat_analysis/optimization/continuation.py',
         'tools/boat_analysis/optimization/search.py',
-        str((CURRENT/'coupled-sizing-search.json').relative_to(ROOT))])
+        str((seed_directory/'sizing-continuation.json').relative_to(ROOT)),
+        'tools/boat_analysis/geometry/vessel.py'])
     seed_restoration = None
     if not p.feasible(accepted):
         seed_length = float((p.lo + accepted*p.span)[0])
@@ -112,7 +121,7 @@ def run(target=1.2, step=.2, minimum_step=.025, budget=60, extensions=2):
     length = float((p.lo + accepted*p.span)[0])
     if not p.lo[0] <= target < length:
         raise ValueError('Target must be below the seed and within model bounds')
-    report = dict(sourceHashes=hashes, seedRun=str(CURRENT.name), targetM=target,
+    report = dict(sourceHashes=hashes, seedRun=seed_run, targetM=target,
                   settings=dict(stepM=step, minimumStepM=minimum_step, budget=budget, extensions=extensions),
                   attempts=[], seedRestoration=seed_restoration, qualified=False, completed=False,
                   scope='Fixed-length coarse feasibility continuation; no physical requirements relaxed. Not a minimum-size proof or refined verification.')

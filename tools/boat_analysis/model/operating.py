@@ -35,6 +35,14 @@ def prepare():
         if not signature or not signature[1].endswith('sysml_seq_real *result'):
             raise ValueError('Expected homogeneous Real C output ABI: '+generated.name)
     c['structureNames']=[n.strip() for n in re.search(r'calc def DesignMargins.*?return result.*?;\s*\((.*?)\)',(ROOT/'models/libraries/structures/scantlings.sysml').read_text(),re.S)[1].split(',')]
+    concept_source=ROOT/'.tools/coupled-concept.c'
+    native('-compile','MarineConcept::Evaluate','-source','-o',str(concept_source),models=models)
+    concept=json.loads(native('-analysis','BlueDogConceptCredibility::Inputs','-json',models=models))
+    c['conceptPolicy']=native_value(concept['checks'][0]['values'][0]['value'])
+    sensitivity=json.loads(native('-analysis','BlueDogConceptCredibility::SensitivityInputs','-json',models=models))
+    c['conceptSensitivity']={v['name']:native_value(v['value']) for v in sensitivity['checks'][0]['values']}
+    c['conceptHash']=digest(concept_source)
+    c['conceptNames']=['voyageEnergyMargin','installationVolumeMargin','passageHours','departureWh','requiredWh','batteryVolumeM3','equipmentVolumeM3','availableVolumeM3']
     CONTRACT.write_text(json.dumps(c,indent=2)+'\n')
     reference=input_record('coupled-mass-reference.json')
     inputs=[list(reference['design'].values()),list(reference['parameters'].values()),c['environment'],[5,1,1,2,0,0,0,0,0],[.6,.02,-.07],list(reference['mass'].values()),[0,0,1,2,.6,.15,.071973,.85,1.05,1.1,.55,.727]]
@@ -118,3 +126,27 @@ class RouteKernel:
         return result
 
 if __name__=='__main__':prepare()
+
+
+class ConceptKernel:
+    """Native finite-passage energy and installed-volume screening."""
+    def __init__(self):
+        self.contract=json.loads(CONTRACT.read_text());c=self.contract;validate(c['sourceHashes'])
+        source=ROOT/'.tools/coupled-concept.c'
+        if digest(source)!=c['conceptHash']:raise ValueError('Stale concept kernel')
+        library=ROOT/f".tools/coupled-concept-{c['conceptHash'][:16]}.so"
+        if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
+        self.lib=ct.CDLL(str(library));self.lib.sysml_run.argtypes=[Sequence]*6+[ct.POINTER(Sequence)]
+        self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
+    def evaluate(self,design,mass,geometry,duration,power,policy=None):
+        c=self.contract
+        arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,mass,geometry,c['environment'],c['conceptPolicy'] if policy is None else policy,[duration,power]]]
+        if [a.shape for a in arrays]!=[(29,),(21,),(60,),(24,),(5,),(2,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid concept inputs')
+        args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
+        with _LOCK:
+            out=Sequence()
+            if self.lib.sysml_run(*args,ct.byref(out)):raise ValueError(self.lib.sysml_error().decode())
+            if out.length!=len(c['conceptNames']):raise ValueError('Concept ABI mismatch')
+            values=np.ctypeslib.as_array(out.data,shape=(out.length,)).copy()
+        if not np.isfinite(values).all():raise ValueError('Nonfinite concept output')
+        return dict(zip(c['conceptNames'],values))

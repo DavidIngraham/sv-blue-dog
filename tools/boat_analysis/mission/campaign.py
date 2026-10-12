@@ -77,12 +77,24 @@ def traffic_scenarios(inputs, route, water, groups, seed):
     return sorted(actors,key=lambda a:a.start_seconds)
 
 
-def run(count=32, seed=None, destination=None):
+def run(count=32, seed=None, destination=None, candidate=None):
     paths=[p.relative_to(ROOT).as_posix() for folder in ['models','tools/boat_analysis/mission','tools/boat_analysis/environment']
            for p in (ROOT/folder).rglob('*') if p.suffix in ('.py','.sysml')]
     paths+=['evidence/course/2026-10-11/chart-features.geojson','evidence/course/2026-10-11/chart-extraction.json','uv.lock','tools/boat_analysis/model/runtime.py','tools/boat_analysis/model/install.py','tools/boat_analysis/evidence/records.py']
+    if candidate:
+        candidate=Path(candidate).resolve()
+        paths.append(candidate.relative_to(ROOT).as_posix())
     hashes=source_hashes(paths)
     inputs=mission_inputs()
+    if candidate:
+        from tools.boat_analysis.optimization.search import Problem
+        from tools.boat_analysis.mission.candidate import configure
+        record=json.loads(candidate.read_text())
+        validate(record['sourceHashes'])
+        p=Problem();z=np.array(record['smallestFeasibleZ'])
+        if not p.feasible(z):raise ValueError('Candidate fails current search screens')
+        inputs=configure(inputs,p,p.evaluate(z))
+        hashes.update(record['sourceHashes'])
     course,water,groups,gates,route=build()
     seed=int(inputs['time'][5]) if seed is None else seed
     seeds=np.random.SeedSequence(seed).spawn(count)
@@ -115,6 +127,7 @@ if __name__=='__main__':
     parser.add_argument('--count',type=int,default=32)
     parser.add_argument('--seed',type=int)
     parser.add_argument('--output',type=Path)
+    parser.add_argument('--candidate',type=Path)
     args=parser.parse_args()
     if args.count<1:parser.error('count must be positive')
-    run(args.count,args.seed,args.output)
+    run(args.count,args.seed,args.output,args.candidate)
