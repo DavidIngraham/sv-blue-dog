@@ -16,8 +16,6 @@ The challenge remains independent of the vehicle so a convenient hardware choice
 
 We decompose responsibilities before choosing hardware. A satisfy link identifies intended responsibility, while a verification case identifies how that allocation will be tested. Neither means the vessel has passed a physical test.
 
-Wind sensing now has an explicit [mission-to-observation requirement thread](requirements/requirements-autonomy.md#wind-observation). The navigation subsystem acquires wind observations; control owns stale-data rejection and the degraded response. The [equipment configurations](energy.md#wind-sensing-configurations) separate the Bluetooth testbed sensor from the wired challenge installation.
-
 ```sysml-view Page_architecture_0::context direction=TB
 package Page_architecture_0 {
     private import StandardViewDefinitions::*;
