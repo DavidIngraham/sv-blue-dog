@@ -109,3 +109,19 @@ def test_terminal_history_records_reserve_stop():
     r=simulate(inputs,route,water,gates)
     assert r.history[-1][0]==r.elapsed_seconds
     assert r.history[-1][3]==r.minimum_energy_wh
+
+
+
+def test_wind_sensor_outage_does_not_create_station_keeping():
+    r=simulate(*fixture(),events=[Event(0,'wind_sensor_loss',4*3600)])
+    assert r.outcome=='incomplete'
+    assert r.cause=='no_safe_control_in_controller_search'
+    assert r.distance_m>100  # Current keeps moving the depowered vessel.
+
+
+def test_blocked_traffic_domain_stops_instead_of_inventing_safe_control():
+    actor=Traffic('blocked channel',LineString([(0,0),(1,0)]),0,0,4000,4000,0,stationary_seconds=14400)
+    r=simulate(*fixture(),traffic=[actor])
+    assert r.outcome=='incomplete'
+    assert r.cause=='no_safe_control_in_controller_search'
+    assert r.elapsed_seconds==0
