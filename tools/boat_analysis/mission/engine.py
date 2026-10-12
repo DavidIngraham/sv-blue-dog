@@ -1,0 +1,188 @@
+"""Point-mass sailing mission execution; no implicit station keeping or motor.
+
+The controller selects sailing headings and depowering against a chart domain.
+It is a conceptual guidance policy, not ArduSail or a validated collision system.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+import json
+import math
+from pathlib import Path
+import tempfile
+
+import numpy as np
+from shapely import covers, linestrings, prepare, contains_xy
+from shapely.geometry import Point, LineString
+
+from tools.boat_analysis.environment.course import crossing_direction
+from tools.boat_analysis.environment.trajectories import WeatherHistory
+from tools.boat_analysis.model.runtime import native, native_value, model_files, ROOT
+
+
+def mission_inputs():
+    report = json.loads(native('-analysis', 'BlueDogMissionSimulation::Inputs', '-json'))
+    return {r['name']: native_value(r['value']) for r in report['checks'][0]['values']}
+
+
+@dataclass(frozen=True)
+class Event:
+    seconds: float
+    kind: str
+    duration: float = 0.
+
+
+@dataclass
+class Result:
+    outcome: str
+    cause: str
+    elapsed_seconds: float
+    crossings: list
+    history: list
+    events: list
+    minimum_energy_wh: float
+    distance_m: float
+    evidence_type: str = 'virtual'
+    physically_validated: bool = False
+    model_scope: str = 'Conceptual polar and point-mass guidance; wave dynamics and full navigation-rule compliance not verified'
+
+
+def evaluate_outcome(*facts):
+    """Execute the authoritative SysML classifier on observed simulation facts."""
+    if len(facts) != 7:
+        raise ValueError('MissionOutcome requires seven Boolean facts')
+    expression = ','.join('true' if value else 'false' for value in facts)
+    code = ('package MissionObservation { analysis Evaluate { out attribute result : ScalarValues::String = '
+            'BlueDogMissionSimulation::MissionOutcome(' + expression + '); } }')
+    (ROOT/'.tools').mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=ROOT/'.tools') as directory:
+        path = Path(directory)/'observations.sysml'
+        path.write_text(code, encoding='utf-8')
+        report = json.loads(native('-analysis','MissionObservation::Evaluate','-json',models=(*model_files(),path)))
+    return native_value(report['checks'][0]['values'][0]['value'])
+
+
+def direction(route, distance):
+    a = route.interpolate(max(0, distance - 5))
+    b = route.interpolate(min(route.length, distance + 5))
+    vector = np.array(b.coords[0]) - a.coords[0]
+    return vector / np.linalg.norm(vector)
+
+
+def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), seed=0,
+             stochastic=False, save_every=10, classify=evaluate_outcome):
+    dt, hours, forecast, lookahead, maneuver_time, _ = inputs['time']
+    capacity, stored, reserve, load, maneuver_wh, solar, charging, discharge = inputs['energy']
+    if dt <= 0 or hours <= 0 or not 0 < reserve < stored <= capacity or not 0 < discharge <= 1:
+        raise ValueError('Invalid mission time or energy inputs')
+    if not water.covers(route):
+        raise ValueError('Reference route lies outside permitted analysis domain')
+    weather = weather or WeatherHistory(inputs['weather'], hours, seed, stochastic)
+    first, last = direction(route,0), direction(route,route.length)
+    approach = inputs['gateApproachM']
+    start = np.array(route.coords[0]) - first * approach
+    turnaround = np.array(route.coords[-1]) + last * approach
+    if not water.covers(Point(start)) or not water.covers(Point(turnaround)):
+        raise ValueError('Gate approach/turnaround extension outside chart domain')
+    downstream = LineString([start, *route.coords, turnaround])
+    upstream = LineString(list(downstream.coords)[::-1])
+    leg, position, heading = downstream, start, None
+    phase, seconds, distance, minimum = 0, 0., 0., stored
+    crossing_log, history, event_log = [], [], []
+    traffic_seen = set()
+    event_list = sorted(events, key=lambda e:e.seconds)
+    event_index, comms_until, sensor_until = 0, -1., -1.
+    last_off_line = [position.copy() for _ in range(4)]
+    sequence = list(zip(inputs['gateNames'],inputs['gateDirections']))
+    prepare(water)
+    def result(outcome, cause):
+        kinds = {event['kind'] for event in event_log}
+        verdict = classify(phase == len(sequence), 'operator_intervention' in kinds,
+                           'motor_use' in kinds, outcome == 'safety_violation',
+                           outcome == 'incomplete', minimum >= reserve, outcome == 'censored')
+        if not history or history[-1][0] != seconds:
+            history.append([seconds,*position,stored,cause,seconds>=comms_until])
+        return Result(verdict,cause,seconds,crossing_log,history,event_log,minimum,distance)
+    for step in range(math.ceil(hours*3600/dt)):
+        while event_index < len(event_list) and event_list[event_index].seconds <= seconds:
+            event = event_list[event_index]; event_index += 1
+            event_log.append({'seconds':seconds,'kind':event.kind})
+            if event.kind in ('operator_intervention','motor_use'):
+                return result('disqualified',event.kind)
+            if event.kind == 'communications_loss':
+                comms_until = max(comms_until, seconds+event.duration)
+            elif event.kind == 'wind_sensor_loss':
+                sensor_until = max(sensor_until, seconds+event.duration)
+            elif event.kind == 'terminal_failure':
+                return result('incomplete','terminal_failure')
+            elif event.kind != 'communications_loss':
+                raise ValueError('Unknown mission event: '+event.kind)
+        interval = min(dt,hours*3600-seconds)
+        state = weather.at(seconds)
+        nearest = route.project(Point(position))
+        current = direction(route, nearest)*state.current_mps
+        progress = leg.project(Point(position))
+        target = np.array(leg.interpolate(min(leg.length,progress+lookahead)).coords[0])
+        desired = math.degrees(math.atan2(*(target-position)[::-1]))
+        # Cartesian heading east=0; meteorological wind-from north=0.
+        headings = np.unique(np.r_[np.arange(0,360,10), desired % 360])
+        radians = np.deg2rad(headings)
+        wind_angle = 90-state.wind_from_deg
+        relative = np.abs((headings-wind_angle+180)%360-180)
+        speeds = np.minimum(inputs['dimensions'][2],
+                            state.wind_mps*np.interp(relative,inputs['angles'],inputs['speedRatios']))
+        if seconds < sensor_until:
+            speeds[:] = 0
+        velocities = np.column_stack((np.cos(radians),np.sin(radians)))*speeds[:,None]+current
+        # Explicit depowered choice still drifts with current.
+        velocities = np.vstack((velocities,current));headings=np.r_[headings,np.nan]
+        turn = np.zeros(len(headings),dtype=bool) if heading is None else np.abs((headings-heading+180)%360-180)>30
+        movement = velocities*interval
+        movement[turn] = velocities[turn]*max(0,interval-maneuver_time)+current*min(interval,maneuver_time)
+        endpoints = position+movement
+        segments = linestrings(np.stack((np.tile(position,(len(endpoints),1)),endpoints),axis=1))
+        permitted = covers(water,segments)
+        # Forecast safety can rank choices but cannot override exact step safety.
+        projected = position+velocities*forecast
+        preview = contains_xy(water,projected[:,0],projected[:,1])
+        cost = np.linalg.norm(endpoints-target,axis=1)+turn*10+(~preview)*lookahead
+        mode = 'sailing' if seconds >= sensor_until else 'degraded_drift'
+        for actor_index,actor in enumerate(traffic):
+            safe, penalty = actor.assess(position,endpoints,seconds,interval,forecast,inputs['dimensions'])
+            if actor_index not in traffic_seen and (not safe.all() or np.any(penalty)):
+                traffic_seen.add(actor_index)
+                event_log.append({'seconds':seconds,'kind':'traffic_conflict_predicted','actor':actor.name,'actor_index':actor_index})
+            permitted &= safe;cost += penalty
+        cost[~permitted] = math.inf
+        choice = int(np.argmin(cost))
+        if not math.isfinite(cost[choice]):
+            return result('incomplete','no_safe_control_in_controller_search')
+        previous = position.copy();position = endpoints[choice]
+        if choice == len(headings)-1:
+            mode='depowered_drift'
+        heading = None if math.isnan(headings[choice]) else headings[choice]
+        net = solar*state.solar_fraction*charging-load/discharge
+        stored = min(capacity,stored+net*interval/3600-(maneuver_wh if turn[choice] else 0))
+        minimum=min(minimum,stored);seconds+=interval;distance+=float(np.linalg.norm(position-previous))
+        for actor in traffic:
+            if actor.collides(previous,position,seconds-interval,interval,inputs['dimensions']):
+                return result('safety_violation','traffic_collision')
+        if stored < reserve:
+            return result('incomplete','recovery_reserve_reached')
+        if phase < 4:
+            name, expected = sequence[phase]
+            actual = crossing_direction(gates[name],last_off_line[phase],position)
+            if actual == expected:
+                crossing_log.append({'gate':name,'direction':actual,'seconds':seconds})
+                phase += 1
+                last_off_line = [position.copy() for _ in range(4)]
+                if phase == 2:
+                    leg = upstream
+                if phase == 4:
+                    history.append([seconds,*position,stored,'finished',seconds>=comms_until])
+                    return result('qualified_completion','ordered_gates_without_intervention')
+            elif gates[name].distance(Point(position)) > 1e-6:
+                last_off_line[phase]=position.copy()
+        if step % save_every == 0:
+            history.append([seconds,*position,stored,mode,seconds>=comms_until])
+    return result('censored','computational_horizon')

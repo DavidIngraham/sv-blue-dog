@@ -1,0 +1,420 @@
+{
+  "source": "https://www.charts.noaa.gov/ENCs/ENCProdCat_19115.xml",
+  "retrieved": "2026-10-11",
+  "source_sha256": "35e5cc101c644b51f407a61d77bfa1e48e6075a9ad23810a8968e534a981cf45",
+  "selection": "Catalog cells named Columbia R - Portland to The Dalles intersecting longitude -122 to -121.1. Coverage polygons only; no navigability inferred. S-57 features and updates still require inspection.",
+  "cells": [
+    {
+      "cell": "US5WA3CI",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3CI.zip",
+      "coverage_lat_lon": [
+        [
+          45.6,
+          -121.95
+        ],
+        [
+          45.675,
+          -121.95
+        ],
+        [
+          45.675,
+          -122.025
+        ],
+        [
+          45.6,
+          -122.025
+        ],
+        [
+          45.6,
+          -121.95
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3CJ",
+      "edition_update": "2.1",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3CJ.zip",
+      "coverage_lat_lon": [
+        [
+          45.6,
+          -121.875
+        ],
+        [
+          45.675,
+          -121.875
+        ],
+        [
+          45.675,
+          -121.95
+        ],
+        [
+          45.6,
+          -121.95
+        ],
+        [
+          45.6,
+          -121.875
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3CS",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3CS.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.2612022
+        ],
+        [
+          45.675,
+          -121.275
+        ],
+        [
+          45.6,
+          -121.275
+        ],
+        [
+          45.6,
+          -121.2
+        ],
+        [
+          45.675,
+          -121.2
+        ],
+        [
+          45.675,
+          -121.2612022
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3CT",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3CT.zip",
+      "coverage_lat_lon": [
+        [
+          45.6,
+          -121.1928611
+        ],
+        [
+          45.6,
+          -121.125
+        ],
+        [
+          45.675,
+          -121.125
+        ],
+        [
+          45.675,
+          -121.2
+        ],
+        [
+          45.6,
+          -121.2
+        ],
+        [
+          45.6,
+          -121.1928611
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DJ",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DJ.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.9129948
+        ],
+        [
+          45.675,
+          -121.875
+        ],
+        [
+          45.75,
+          -121.875
+        ],
+        [
+          45.75,
+          -121.95
+        ],
+        [
+          45.675,
+          -121.95
+        ],
+        [
+          45.675,
+          -121.9129948
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DK",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DK.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.8
+        ],
+        [
+          45.75,
+          -121.8
+        ],
+        [
+          45.75,
+          -121.875
+        ],
+        [
+          45.675,
+          -121.875
+        ],
+        [
+          45.675,
+          -121.8
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DL",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DL.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.725
+        ],
+        [
+          45.75,
+          -121.725
+        ],
+        [
+          45.75,
+          -121.8
+        ],
+        [
+          45.675,
+          -121.8
+        ],
+        [
+          45.675,
+          -121.725
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DM",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DM.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.65
+        ],
+        [
+          45.75,
+          -121.65
+        ],
+        [
+          45.75,
+          -121.725
+        ],
+        [
+          45.675,
+          -121.725
+        ],
+        [
+          45.675,
+          -121.65
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DN",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DN.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.575
+        ],
+        [
+          45.75,
+          -121.575
+        ],
+        [
+          45.75,
+          -121.65
+        ],
+        [
+          45.675,
+          -121.65
+        ],
+        [
+          45.675,
+          -121.575
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DO",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DO.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.5702338
+        ],
+        [
+          45.675,
+          -121.5
+        ],
+        [
+          45.75,
+          -121.5
+        ],
+        [
+          45.75,
+          -121.575
+        ],
+        [
+          45.675,
+          -121.575
+        ],
+        [
+          45.675,
+          -121.5702338
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DP",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DP.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.425
+        ],
+        [
+          45.75,
+          -121.425
+        ],
+        [
+          45.75,
+          -121.5
+        ],
+        [
+          45.675,
+          -121.5
+        ],
+        [
+          45.675,
+          -121.425
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DQ",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DQ.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.35
+        ],
+        [
+          45.75,
+          -121.35
+        ],
+        [
+          45.75,
+          -121.425
+        ],
+        [
+          45.675,
+          -121.425
+        ],
+        [
+          45.675,
+          -121.35
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DR",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DR.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.275
+        ],
+        [
+          45.75,
+          -121.275
+        ],
+        [
+          45.75,
+          -121.35
+        ],
+        [
+          45.675,
+          -121.35
+        ],
+        [
+          45.675,
+          -121.275
+        ]
+      ]
+    },
+    {
+      "cell": "US5WA3DS",
+      "edition_update": "2.0",
+      "catalog_timestamp": "2026-10-10T05:05:18Z",
+      "download_url": "https://www.charts.noaa.gov/ENCs/US5WA3DS.zip",
+      "coverage_lat_lon": [
+        [
+          45.675,
+          -121.2612022
+        ],
+        [
+          45.675,
+          -121.2
+        ],
+        [
+          45.75,
+          -121.2
+        ],
+        [
+          45.75,
+          -121.275
+        ],
+        [
+          45.675,
+          -121.275
+        ],
+        [
+          45.675,
+          -121.2612022
+        ]
+      ]
+    }
+  ]
+}

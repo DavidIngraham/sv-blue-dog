@@ -28,10 +28,13 @@ package Page_safety_18 {
         expose BlueDogRequirements::collisionAssessmentCadence;
         expose BlueDogRequirements::navigationAndControl;
         expose BlueDogRequirements::navigationConspicuity;
+        expose GorgeChallenge::navigationRules;
         expose BlueDogRequirements::operatingBoundary;
+        expose GorgeChallenge::restrictedWaters;
         expose BlueDogRequirements::roundTrip;
         expose BlueDogRequirements::trafficAwarenessFault;
         expose BlueDogRequirements::trafficSafety;
+        expose GorgeChallenge::trafficCoexistence;
         expose BlueDogRequirements::trafficTracking;
         expose GorgeChallenge::courseCompletion;
         expose GorgeChallenge::sailingPropulsion;
@@ -55,6 +58,9 @@ package Page_safety_18 {
         metadata Layout about GorgeChallenge::sailingPropulsion { x = 960; y = 1200; }
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 1600; }
         metadata Layout about GorgeChallenge::unassistedAttempt { x = 320; y = 1600; }
+        metadata Layout about GorgeChallenge::navigationRules { x = 0; y = 2000; }
+        metadata Layout about GorgeChallenge::restrictedWaters { x = 320; y = 2000; }
+        metadata Layout about GorgeChallenge::trafficCoexistence { x = 640; y = 2000; }
     }
 }
 ```
@@ -154,6 +160,7 @@ package Page_safety_20 {
         filter @SysML::RequirementUsage;
         expose BlueDogRequirements::navigationAndControl;
         expose BlueDogRequirements::navigationConspicuity;
+        expose GorgeChallenge::navigationRules;
         expose BlueDogRequirements::navigationLightPresentation;
         expose BlueDogRequirements::navigationShapePresentation;
         expose BlueDogRequirements::navigationSoundPresentation;
@@ -162,6 +169,7 @@ package Page_safety_20 {
         expose BlueDogRequirements::signalingFaultReporting;
         expose BlueDogRequirements::signalingModeDeadline;
         expose BlueDogRequirements::trafficSafety;
+        expose GorgeChallenge::trafficCoexistence;
         expose GorgeChallenge::courseCompletion;
         expose GorgeChallenge::sailingPropulsion;
         expose GorgeChallenge::transGorgeChallenge;
@@ -180,6 +188,8 @@ package Page_safety_20 {
         metadata Layout about GorgeChallenge::sailingPropulsion { x = 960; y = 800; }
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 1200; }
         metadata Layout about GorgeChallenge::unassistedAttempt { x = 320; y = 1200; }
+        metadata Layout about GorgeChallenge::navigationRules { x = 0; y = 1600; }
+        metadata Layout about GorgeChallenge::trafficCoexistence { x = 320; y = 1600; }
     }
 }
 ```

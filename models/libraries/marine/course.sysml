@@ -16,6 +16,7 @@ package MarineCourse {
          * This is conditional on one persistent direction, not a probability
          * distribution. Neither station hourly fractions nor scenario counts
          * justify treating these equal speed weights as climatology.
+         * policy#5 is an optional duration budget in hours; zero disables that screen.
          * policy#7 is 1 for easterly (upstream windward), 0 for westerly. */
         attribute cross0 : Real = states#(1)*TrigFunctions::sin(TrigFunctions::rad(states#(2)+states#(4)));
         attribute cross1 : Real = states#(7)*TrigFunctions::sin(TrigFunctions::rad(states#(8)+states#(10)));
@@ -35,6 +36,6 @@ package MarineCourse {
         attribute upstream : Real = policy#(1)*(if policy#(7)>0.5 ? windwardMean else leewardMean)-(policy#(2)+policy#(3))/2;
         attribute duration : Real = if downstream>0 and upstream>0 ? policy#(4)/3600*(1/downstream+1/upstream) else 1000000.0;
         return result : Real [6] ordered nonunique;
-        (downstream/policy#(6)-1,upstream/policy#(6)-1,1-duration/policy#(5),downstream,upstream,duration)
+        (downstream/policy#(6)-1,upstream/policy#(6)-1,(if policy#(5)>0 ? 1-duration/policy#(5) else 1.0),downstream,upstream,duration)
     }
 }

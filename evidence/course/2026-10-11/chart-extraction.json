@@ -1,0 +1,713 @@
+{
+  "gdal_version": "3.12.4",
+  "updates": "GDAL S-57 default APPLY; exchange-set files retained beside base",
+  "layers": [
+    "BCNLAT",
+    "BOYLAT",
+    "LIGHTS",
+    "RESARE",
+    "FAIRWY",
+    "RECTRC",
+    "NAVLNE",
+    "BRIDGE",
+    "DAMCON",
+    "DEPARE",
+    "LNDARE",
+    "OBSTRN",
+    "MORFAC",
+    "LOKBSN",
+    "UNSARE"
+  ],
+  "cells": [
+    {
+      "cell": "US5WA3CI",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3CI.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260121",
+          "DSID_ISDT": "20260121",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 6,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 404,
+          "DSSI_NOLR": 3,
+          "DSSI_NOIN": 79,
+          "DSSI_NOCN": 360,
+          "DSSI_NOED": 437,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 16,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 12000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3CI.000",
+          "sha256": "73e1057f3d1dac092c2baa4c4da654fe05839a9032edd05432acd49386ad9091"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3CJ",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3CJ.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "1",
+          "DSID_UADT": "20260121",
+          "DSID_ISDT": "20260904",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 9,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 335,
+          "DSSI_NOLR": 3,
+          "DSSI_NOIN": 39,
+          "DSSI_NOCN": 334,
+          "DSSI_NOED": 419,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 12000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3CJ.000",
+          "sha256": "172b9768f555bf0a601347d65ea870d65ac43be75fae4762ed9b40295e5dea90"
+        },
+        {
+          "name": "US5WA3CJ.001",
+          "sha256": "6ce4ce9d8b2aaa42a2bdad556154b5683da84e8a154ca406f406ebeeb30076fb"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3CS",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3CS.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260306",
+          "DSID_ISDT": "20260306",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 8,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 97,
+          "DSSI_NOLR": 0,
+          "DSSI_NOIN": 20,
+          "DSSI_NOCN": 87,
+          "DSSI_NOED": 122,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 22000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3CS.000",
+          "sha256": "44300acd917f1a4cd6031dac66d1ee6d49db392e8c1c285bc42ceccd95cccf21"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3CT",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3CT.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260306",
+          "DSID_ISDT": "20260306",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 10,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 430,
+          "DSSI_NOLR": 0,
+          "DSSI_NOIN": 78,
+          "DSSI_NOCN": 423,
+          "DSSI_NOED": 529,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 12000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3CT.000",
+          "sha256": "fd5fc71212150e81379c4c1da5ba6f2f8609f5db86f3365af7080dad65b35a40"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DJ",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DJ.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260305",
+          "DSID_ISDT": "20260305",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 6,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 185,
+          "DSSI_NOLR": 2,
+          "DSSI_NOIN": 43,
+          "DSSI_NOCN": 143,
+          "DSSI_NOED": 181,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 22000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DJ.000",
+          "sha256": "8cf44711edd4dda654aa20c9941eaedc407bcca0c51f640923d8c69c003881ff"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DK",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DK.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260305",
+          "DSID_ISDT": "20260305",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 8,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 219,
+          "DSSI_NOLR": 3,
+          "DSSI_NOIN": 63,
+          "DSSI_NOCN": 150,
+          "DSSI_NOED": 196,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 22000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DK.000",
+          "sha256": "0c752e5218fdf9fca5a83ad2d23b9b87e38dd25dd148863485b28ae420c97ea1"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DL",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DL.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260305",
+          "DSID_ISDT": "20260305",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 6,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 205,
+          "DSSI_NOLR": 2,
+          "DSSI_NOIN": 57,
+          "DSSI_NOCN": 161,
+          "DSSI_NOED": 205,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 22000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DL.000",
+          "sha256": "7640fe36a88e7b5920f054c66c95388594371e1f8c6736caadaf27e87ff2e59b"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DM",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DM.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260305",
+          "DSID_ISDT": "20260305",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 6,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 138,
+          "DSSI_NOLR": 3,
+          "DSSI_NOIN": 32,
+          "DSSI_NOCN": 107,
+          "DSSI_NOED": 144,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 22000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DM.000",
+          "sha256": "a8709bc90e0de4341bfa2355421285c969048a8122222cbdaa8c2449224f146a"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DN",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DN.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260305",
+          "DSID_ISDT": "20260305",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 6,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 190,
+          "DSSI_NOLR": 1,
+          "DSSI_NOIN": 100,
+          "DSSI_NOCN": 94,
+          "DSSI_NOED": 132,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 22000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DN.000",
+          "sha256": "bc1ceeb6f84a9efe13b09a94920e493fb4a67bab1fe3c4ab85ad7a3ef5623a0f"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DO",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DO.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260306",
+          "DSID_ISDT": "20260306",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 13,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 328,
+          "DSSI_NOLR": 2,
+          "DSSI_NOIN": 77,
+          "DSSI_NOCN": 283,
+          "DSSI_NOED": 356,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 12000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DO.000",
+          "sha256": "193c5bb766685b113dfb88cf689aebc17497ad0b0e5566a78c61fabfaa17a34c"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DP",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DP.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260306",
+          "DSID_ISDT": "20260306",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 13,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 290,
+          "DSSI_NOLR": 2,
+          "DSSI_NOIN": 86,
+          "DSSI_NOCN": 214,
+          "DSSI_NOED": 285,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 12000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DP.000",
+          "sha256": "ebfc513b83fc1a61513f9840a27588270a38bd8f990e8963429f56a0fca7bda0"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DQ",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DQ.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260306",
+          "DSID_ISDT": "20260306",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 6,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 129,
+          "DSSI_NOLR": 0,
+          "DSSI_NOIN": 26,
+          "DSSI_NOCN": 94,
+          "DSSI_NOED": 133,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 22000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DQ.000",
+          "sha256": "b7f6ef16775b486ac82517bc0fef90ade9d9c83e9d12e2fef0a5e6e3fd3e3381"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DR",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DR.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260306",
+          "DSID_ISDT": "20260306",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 6,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 214,
+          "DSSI_NOLR": 0,
+          "DSSI_NOIN": 63,
+          "DSSI_NOCN": 149,
+          "DSSI_NOED": 205,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 22000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DR.000",
+          "sha256": "2a19790cb4334a92eb3540478c23bf51ead0c3b24768edcf554034128cdf1e59"
+        }
+      ]
+    },
+    {
+      "cell": "US5WA3DS",
+      "dataset_identification": [
+        {
+          "DSID_EXPP": 1,
+          "DSID_INTU": 5,
+          "DSID_DSNM": "US5WA3DS.000",
+          "DSID_EDTN": "2",
+          "DSID_UPDN": "0",
+          "DSID_UADT": "20260306",
+          "DSID_ISDT": "20260306",
+          "DSID_STED": 3.1,
+          "DSID_PRSP": 1,
+          "DSID_PSDN": "",
+          "DSID_PRED": "2.0",
+          "DSID_PROF": 1,
+          "DSID_AGEN": 550,
+          "DSID_COMT": "Produced by NOAA",
+          "DSSI_DSTR": 2,
+          "DSSI_AALL": 1,
+          "DSSI_NALL": 1,
+          "DSSI_NOMR": 6,
+          "DSSI_NOCR": 0,
+          "DSSI_NOGR": 48,
+          "DSSI_NOLR": 0,
+          "DSSI_NOIN": 8,
+          "DSSI_NOCN": 44,
+          "DSSI_NOED": 63,
+          "DSSI_NOFA": 0,
+          "DSPM_HDAT": 2,
+          "DSPM_VDAT": 24,
+          "DSPM_SDAT": 24,
+          "DSPM_CSCL": 22000,
+          "DSPM_DUNI": 1,
+          "DSPM_HUNI": 1,
+          "DSPM_PUNI": 1,
+          "DSPM_COUN": 1,
+          "DSPM_COMF": 10000000,
+          "DSPM_SOMF": 10,
+          "DSPM_COMT": "Produced by NOAA"
+        }
+      ],
+      "source_files": [
+        {
+          "name": "US5WA3DS.000",
+          "sha256": "fbf6b6fe572f905d2c66de6050332a061b671ceb14e78932347c2aee9e475dfc"
+        }
+      ]
+    }
+  ]
+}

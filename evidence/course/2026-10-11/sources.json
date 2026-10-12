@@ -1,0 +1,94 @@
+{
+  "retrieved": "2026-10-11",
+  "purpose": "Course and traffic scenario evidence; gate decisions live in models/missions/course.sysml",
+  "sources": [
+    {
+      "url": "https://www.charts.noaa.gov/MCD/Dole.shtml",
+      "finding": "Raster chart 18532 was canceled 2024-07-02. Current course geometry uses ENC cells rather than this retired chart."
+    },
+    {
+      "url": "https://www.nauticalcharts.noaa.gov/publications/coast-pilot/files/cp10/CPB10_WEB.pdf",
+      "edition_observed": "Chapter 5 dated 2026-10-04, printed pages 251-252",
+      "finding": "Bonneville Pool connects the two dam reaches. Strong currents require constant piloting near Bonneville/Cascade Rapids. Barge shifting occurs above the Bonneville lock. Hood River has shoals, bridges and tug/barge facilities; these require spatial route representation."
+    },
+    {
+      "url": "https://www.navcen.uscg.gov/sites/default/files/pdf/lightLists/weeklyUpdates/v6WeeklyChanges.pdf",
+      "edition_observed": "2026-10-07",
+      "entries": [
+        {
+          "llnr": 11790,
+          "name": "Bonneville Pool Light 7",
+          "latitude_dms": "45-39-18.450N",
+          "longitude_dms": "121-54-37.902W"
+        },
+        {
+          "llnr": 12130,
+          "name": "Bonneville Pool Lighted Buoy 69",
+          "latitude_dms": "45-36-33.343N",
+          "longitude_dms": "121-08-52.330W"
+        }
+      ],
+      "limitation": "Snapshot; later MSI notices and discrepancies must be checked for launch."
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-II/part-207/section-207.718",
+      "edition_observed": "eCFR current through 2026-10-07",
+      "finding": "Dam restricted waters and lock approach authority are site-specific. The course must exclude both; no dam transit is needed."
+    },
+    {
+      "url": "https://www.navcen.uscg.gov/navigation-rules-amalgamated",
+      "finding": "Scenario acceptance must distinguish lookout, safe speed, collision assessment/action, narrow-channel non-impediment, sailing encounters, overtaking and restricted visibility. A small sailing craft cannot assume priority over a vessel confined to the fairway. No single numerical stand-off supplies compliance."
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-89/subpart-B/section-89.25",
+      "finding": "Columbia River is not in the listed additional waters for Inland Rules 9(a)(ii), 14(d), 15(b). Do not infer the special Western Rivers downbound privilege merely because the river is geographically western."
+    },
+    {
+      "url": "https://www.nwp.usace.army.mil/Media/News-Releases/Article/3046390/corps-updates-safe-lockage-policy-for-recreational-vessels-on-columbia-snake-ri/",
+      "published": "2022-05-27",
+      "finding": "USACE identifies tug/tow blind spots and restricted maneuverability near lock approaches. Traffic geometry must include the complete tow, not just an AIS tug point."
+    },
+    {
+      "url": "https://www.vesselfinder.com/ports/USDLS001",
+      "access": "Search reader returned a cached June 23 snapshot with year unspecified, not a current live traffic sample",
+      "finding": "Visible AIS-derived arrival rows include passenger vessels approximately 67-100 m long and 16-18 m wide. Passenger traffic is an additional scenario class beyond the requested barges and small craft.",
+      "limitation": "Names are subscription-masked and records limited. Does not measure Gorge passage frequency, tow geometry, speed distribution or absent/non-AIS small craft. Do not calibrate arrival rates from these rows."
+    },
+    {
+      "url": "https://www.navcen.uscg.gov/sites/default/files/pdf/lnms/lnm13102026.pdf",
+      "edition_observed": "Week 10/2026",
+      "finding": "Hood River bridge geotechnical work notice described unpowered barges and service vessels January-June 2026. Supports a temporary works encounter scenario, not a claim that that work remains active in October."
+    },
+    {
+      "url": "https://www.oregon.gov/osmb/forms-library/Documents/Publications/GuidetoBoatingORWeb.pdf",
+      "finding": "State boating guide identifies Gorge recreation and fishing at tributary mouths. Supports small-craft encounter locations; does not quantify rates or legal fishing-vessel status."
+    },
+    {
+      "url": "https://www.navcen.uscg.gov/sites/default/files/pdf/lnms/lnm13402026.pdf",
+      "edition_observed": "Northwest District snapshot 2026-10-07, week 40; page 2",
+      "finding": "Bonneville Pool discrepancies: Buoy 4 sinking, Wind Mountain Lower Range Front Light 17 extinguished, Light 22 extinguished. Neither selected gate reference is listed in this snapshot. White Salmon confluence railroad bridge works at Columbia RM 168.2 include a derrick barge and pile driving through 2026-12-31; equipment stays on station outside working hours. Notice requests reduced speed and avoiding the work area.",
+      "notice_position": {
+        "latitude": 45.72833333333333,
+        "longitude": -121.5225
+      },
+      "limitation": "Notice gives a location but not a surveyed work-area polygon. The model uses an explicitly allocated 250 m screening buffer pending current on-site extent. Snapshot absence is not confirmation of aid serviceability or an operational release."
+    }
+  ],
+  "route_bridge_screen": {
+    "method": "Intersect initial reference route with extracted BRIDGE geometry; dimensions in meters as encoded in the cells, not adjusted for pool stage.",
+    "findings": [
+      {
+        "cell": "US5WA3CJ",
+        "name": "Bridge of the Gods",
+        "vertical_clearance_m": 41.1,
+        "horizontal_clearance_m": 199.6
+      },
+      {
+        "cell": "US5WA3DP",
+        "name": "Hood River bridge reach",
+        "finding": "Reference route intersects a fixed-span polygon without a encoded vertical clearance. A separate lifting-span polygon records 20.4 m closed and 45.1 m open vertical clearance, 74.9 m horizontal clearance. These values must not be assigned to the unnamed span."
+      }
+    ],
+    "limitation": "Reference route is a depth/land/exclusion geometry experiment, not an air-draft or bridge-pier clearance solution. Confirm the intended bridge passage, local pool datum/stage and pier geometry before operational course release."
+  }
+}

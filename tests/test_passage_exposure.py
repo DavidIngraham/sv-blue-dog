@@ -22,10 +22,10 @@ def test_gorge_does_not_inherit_future_mission_constraints(run_model):
             out attribute ocean : Boolean = BlueDogMissionScope::current.requiresOceanQualification;
             out attribute indefinite : Boolean = BlueDogMissionScope::current.requiresIndefiniteOperation;
             out attribute cyclicEnergy : Boolean = BlueDogMissionScope::current.requiresRepeatableEnergyBalance;
-            out attribute hours : Real = BlueDogMissionScope::current.enduranceCampaignHours;
+            out attribute deadline : Boolean = BlueDogMissionScope::current.hasCompletionDeadline;
         }
     }'''
     code, report = run_model(source, '-analysis', 'ScopeProbe::Scope')
     assert code == 0
     v = {row['name']: native_value(row['value']) for row in report['checks'][0]['values']}
-    assert v == dict(ocean=False, indefinite=False, cyclicEnergy=False, hours=72)
+    assert v == dict(ocean=False, indefinite=False, cyclicEnergy=False, deadline=False)

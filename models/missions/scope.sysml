@@ -12,9 +12,9 @@ package BlueDogMissionScope {
         attribute requiresOceanQualification : Boolean = false;
         attribute requiresIndefiniteOperation : Boolean = false;
         attribute requiresRepeatableEnergyBalance : Boolean = false;
-        attribute enduranceCampaignHours : Real = 72;
-        metadata rationale : ModelingMetadata::Rationale { text = "Owner decision: focus on the finite Gorge challenge. Retain the existing bounded 72-hour endurance campaign and reserve protection; no Hawaii route, saltwater profile or indefinite operation constraint is inherited. Passage time, speed-dependent failure exposure and weather-window completion should be compared together. Safety dispositions remain independent launch gates."; }
-        metadata issue : ModelingMetadata::Issue { text = "The archived sizing search still enforces nonnegative daily energy balance. It is a conservative research screen, not the finite mission acceptance criterion. A future mission-success search needs finite energy histories, speed/load-dependent failure evidence and a valid planing model before relaxing that screen or comparing hull regimes."; }
+        attribute hasCompletionDeadline : Boolean = false;
+        metadata rationale : ModelingMetadata::Rationale { text = "Owner decision: focus on the finite Gorge challenge. Retain finite battery accounting and reserve protection; no fixed-duration campaign constrains acceptance; no Hawaii route, saltwater profile or indefinite operation constraint is inherited. Passage time, speed-dependent failure exposure and weather-window completion should be compared together. Safety dispositions remain independent launch gates."; }
+        metadata issue : ModelingMetadata::Issue { text = "Archived studies retain their original daily-balance screens. Active Gorge sizing uses instantaneous peak-power checks; chronological mission execution must establish finite energy feasibility. Speed/load-dependent failure evidence and a valid planing model remain necessary for comparing hull regimes."; }
     }
     part future {
         attribute designObjective : String = "Define a separate Hawaii mission and persistent-operation capability";

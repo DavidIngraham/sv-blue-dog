@@ -86,8 +86,8 @@ package BlueDogEnergy {
             scenario.timeline->ControlFunctions::collect { in interval : Interval; interval.budget.peakPower / scenario.battery.dischargeEfficiency + scenario.battery.selfDischargePower },
             scenario.battery.maxDischargePower);
         out attribute campaignCovered : Boolean = BlueDogRequirements::HarvestCampaignCoverageCriterion(campaignDuration, scenario.dayCount, harvestHoursPerDay);
-        out attribute finiteCampaignFeasible : Boolean = inputsValid and reserveProtected and peakSupported and campaignCovered;
-        return modeledEnergyFeasible : Boolean = finiteCampaignFeasible and repeatableBalance;
+        out attribute finiteCampaignFeasible : Boolean = inputsValid and reserveProtected and peakSupported;
+        return modeledEnergyFeasible : Boolean = finiteCampaignFeasible and repeatableBalance and campaignCovered;
         out attribute evidenceReady : Boolean = BlueDogRequirements::EnergyEvidenceReadinessCriterion(scenario.evidenceAccepted);
         out attribute finiteCampaignSupported : Boolean = finiteCampaignFeasible and evidenceReady;
         out attribute energyCaseSupported : Boolean = modeledEnergyFeasible and evidenceReady;

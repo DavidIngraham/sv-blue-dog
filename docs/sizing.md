@@ -1,6 +1,6 @@
 # Coupled sizing method
 
-The design mission is now the finite Gorge round trip. The archived search still includes a nonnegative daily-energy screen for sustained operation. That screen is stricter than finite-campaign acceptance and must be replaced by a chronological mission-energy constraint before this becomes a mission-success optimization. Dynamic planing and speed-dependent failure exposure also need validated models; current results do not select between planing and displacement hulls.
+The design mission is now the finite Gorge round trip. The archived search still includes a nonnegative daily-energy screen for sustained operation. The active static search no longer enforces that screen; it retains peak-power checks. Chronological mission-energy acceptance now belongs to the mission simulation. Integrating that voyage result into the design search remains necessary before calling the search a mission-success optimization. Dynamic planing and speed-dependent failure exposure also need validated models; current results do not select between planing and displacement hulls.
 
 How small can Blue Dog be and still make headway upriver? For [preliminary design](development-plan.md#virtual-design), I start with the route, wind and current assumptions, then vary the hull, wing, ballast and energy system together. I want to find which designs are worth developing and which assumptions I most need to test.
 

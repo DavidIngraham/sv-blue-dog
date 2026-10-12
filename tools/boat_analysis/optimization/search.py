@@ -14,6 +14,7 @@ from tools.boat_analysis.model.operating import StructureKernel,RouteKernel
 from tools.boat_analysis.geometry.hydro import equilibrium
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate
+from tools.boat_analysis.optimization.operating import operating_margin_names
 
 class Problem:
     def __init__(self,resolution=12,route_profile='challenge'):
@@ -71,13 +72,13 @@ class Problem:
         route=self.route.evaluate([r['waterVMG'] for r in rows],states.ravel())
         west=self.route.evaluate([r['waterVMG'] for r in rows],states.ravel(),wind_from='west')
         names=k.operation.contract['outputNames'];eq=np.array([[r[n] for n in names[:4]] for r in rows]).ravel()
-        operating=np.array([[r[n] for n in names[4:18]] for r in rows])
-        operating[:,names[4:18].index('cycleMargin')]-=k.operation.contract['cycleEnergySearchReserve']
+        static_names=operating_margin_names(names)[:12]
+        operating=np.array([[r[n] for n in static_names] for r in rows])
         ineq=operating.ravel()
         route_reserve=np.array([1.,1.,0.])*self.progress_reserve_m_s/self.route.contract['routeParameters'][5]
         route_screens=[('westerly',west)]+([('easterly',route)] if self.require_east else [])
         ineq=np.r_[ineq,(np.array([[r[n] for n in names[47:]] for r in rows])-np.array(k.operation.contract['resistanceDomainReserve'])).ravel(),list(margins.values()),np.concatenate([r[:3]-route_reserve for _,r in route_screens]),righting]
-        self.constraint_names=([f'case {i}: {n}' for i in range(8) for n in names[4:18]]
+        self.constraint_names=([f'case {i}: {n}' for i in range(8) for n in static_names]
             +[f'case {i}: {n} (search reserve)' for i in range(8) for n in names[47:]]
             +list(margins)+[f'{direction} {n}' for direction,_ in route_screens for n in ['downstream progress','upstream progress','duration']]
             +[f'righting trim {trim:g}, heel {heel:g}' for trim in self.structure.contract['coarseTrims'] for heel in self.structure.contract['coarseHeels']])

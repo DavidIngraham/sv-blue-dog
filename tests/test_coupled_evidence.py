@@ -82,7 +82,7 @@ def test_replay_enforces_energy_before_using_a_diagnostic(monkeypatch):
     calls.clear()
     def failed(*args,**kwargs):
         calls.append(kwargs['require_energy'])
-        return {'screenFeasible':not kwargs['require_energy'],'equilibrated':True,'state':[5,1,1,1,2,3,4,5,6],'message':'diagnostic','outputs':{'cycleMargin':-.2,'reserveMarginScaled':-.1,'peakMargin':.3}}
+        return {'screenFeasible':not kwargs['require_energy'],'equilibrated':True,'state':[5,1,1,1,2,3,4,5,6],'message':'diagnostic','outputs':{'cycleMargin':-.8,'reserveMarginScaled':-.7,'peakMargin':-.2}}
     monkeypatch.setattr(replay,'solve_state',failed)
     result=replay.operating_case(None,None,5,True,1,[1,2,3,4,5,6],35)
     assert calls==[True,False] and not result['energyConstraintsEnforced']

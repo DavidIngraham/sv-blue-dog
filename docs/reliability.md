@@ -28,7 +28,7 @@ Our native [passage-exposure analysis](../models/analyses/passage-exposure.sysml
 
 ## Finite endurance and future missions
 
-The current mission retains the 72-hour endurance campaign and protected recovery reserve. Its battery may finish below its starting charge if reserve and peak-power requirements remain satisfied throughout the campaign. Repeating the same energy cycle indefinitely is a separate future objective.
+The current mission has no completion deadline and retains protected recovery reserve. Its battery may finish below its starting charge if reserve and peak-power requirements remain satisfied throughout the voyage. Repeating the same energy cycle indefinitely is a separate future objective.
 
 The chronological energy model now reports finite-campaign feasibility separately from repeatable-cycle feasibility. The archived sizing search still imposed nonnegative daily energy balance, so its results describe a more restrictive design screen. Before using that search for this trade, I need to connect it to finite mission energy histories and condition-dependent exposure. No sizing result has been reclassified as a mission-success optimum.
 

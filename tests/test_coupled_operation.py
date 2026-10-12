@@ -197,21 +197,24 @@ def test_design_cache_preserves_state_dependent_results(native_case):
     np.testing.assert_allclose(used['ineq'],fresh['ineq'],atol=1e-12)
 
 
-def test_search_energy_reserve_does_not_change_native_acceptance(native_case):
+def test_finite_search_keeps_peak_but_removes_daily_energy_constraints(native_case):
     from tools.boat_analysis.optimization.search import Problem
     p=Problem(4,route_profile='all-season');r=p.evaluate(p.initial())
-    names=p.model.operation.contract['outputNames'][4:18]
+    from tools.boat_analysis.optimization.operating import operating_margin_names
+    names=operating_margin_names(p.model.operation.contract['outputNames'])[:12]
+    assert 'peakMargin' in names
+    assert 'cycleMargin' not in names and 'reserveMarginScaled' not in names
+    assert not any('cycleMargin' in n or 'reserveMarginScaled' in n for n in p.constraint_names)
+    assert p.route.contract['routeParameters'][4] == 0
     selected=r['ineq'][:8*len(names)].reshape(8,len(names))
     raw=np.array([[row[n] for n in names] for row in r['rows']])
     difference=raw-selected
-    energy=names.index('cycleMargin')
-    np.testing.assert_allclose(difference[:,energy],.005,atol=1e-12)
+    np.testing.assert_allclose(difference,0,atol=1e-12)
     for direction,raw_route in [('easterly',r['route']),('westerly',r['westerlyRoute'])]:
         for i,leg in enumerate(['downstream progress','upstream progress']):
             margin=r['ineq'][p.constraint_names.index(f'{direction} {leg}')]
             assert raw_route[i]-margin==pytest.approx(.005/p.route.contract['routeParameters'][5])
     assert p.route.contract['routeParameters'][5]==.5
-    np.testing.assert_allclose(np.delete(difference,energy,axis=1),0,atol=1e-12)
     for row in r['rows']:
         assert row['cycleMargin']==pytest.approx(row['cycleEnergy']/100)
 

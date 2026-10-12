@@ -13,9 +13,9 @@ package BlueDogRequirements {
     }
     requirement def <'M-002'> MultiDayEndurance {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall operate for 72 continuous hours without servicing or external charging under the specified Gorge energy campaign. */
-        comment conditions /* N-010 operational functions and applicable N-001 shared conditions apply. The campaign comprises three consecutive 24-hour cycles, each with at most 6 hours of harvesting and at least 18 hours with harvesting disabled. Conservative usable energy must remain above the R-002 reserve. */
-        comment notes /* Passing this bounded campaign does not establish indefinite energy balance. */
+        doc /* The vessel shall complete the qualifying round trip without servicing or external charging. */
+        comment conditions /* N-010 operational functions and applicable N-001 shared conditions apply. The mission history includes sailing, maneuvers and holds until completion. Conservative usable energy must remain above the R-002 reserve. No fixed duration or nonnegative daily energy balance is required. */
+        comment notes /* The mission may finish with less stored energy than at departure. */
     }
     requirement def <'E-001'> EnergyAwareness {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -63,10 +63,10 @@ package BlueDogRequirements {
     requirement missionEvidence : MissionEvidence;
 
     #refinement dependency challengeCourse from roundTrip to GorgeChallenge::courseCompletion {
-        metadata rationale : ModelingMetadata::Rationale { text = "Ordered gate crossings make the course-completion obligation more precise; gate locations remain open."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Ordered gate crossings use the marker-referenced proposal in TransGorgeCourse; operational release remains subject to course review."; }
     }
     dependency challengeEndurance from multiDayEndurance to roundTrip {
-        metadata rationale : ModelingMetadata::Rationale { text = "The finite round trip motivates a bounded 72-hour endurance campaign, including holding and contingency exposure. Repeated circuits are a separate future objective. This is design motivation or an implementation choice, not a satisfaction implication."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "The complete finite round trip, including holding and contingency exposure, determines required endurance. Repeated circuits are a separate future objective. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
     dependency challengeAutonomy from navigationAndControl to GorgeChallenge::unassistedAttempt {
         metadata rationale : ModelingMetadata::Rationale { text = "The vessel needs onboard guidance and control to complete an unassisted attempt. This is design motivation or an implementation choice, not a satisfaction implication."; }
@@ -152,6 +152,12 @@ package BlueDogRequirements {
         metadata issue : ModelingMetadata::Issue { text = "Detection ranges, target signatures, closest-approach margins and maneuver feasibility remain unresolved acceptance parameters; tracking and avoidance cannot receive complete passes until these are frozen."; }
     }
     requirement trafficSafety : TrafficSafety;
+    #derivation connection challengeTrafficResponse {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Preventing collisions requires traffic assessment and response; scenario parameters are allocated by Blue Dog analysis."; }
+        end #original source ::> GorgeChallenge::trafficCoexistence;
+        end #derive target ::> trafficSafety;
+    }
     dependency deriveTrafficSafety from trafficSafety to navigationAndControl {
         metadata rationale : ModelingMetadata::Rationale { text = "TrafficSafety supports navigationAndControl. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
@@ -162,6 +168,9 @@ package BlueDogRequirements {
         comment conditions /* Use uploaded permitted-water and exclusion polygons, with a 60-second prediction horizon. Inject approaches to every boundary, navigation loss and no-feasible-maneuver cases. Coordinates and uncertainty/clearance margins are controlled mission inputs with no default values. */
     }
     requirement operatingBoundary : OperatingBoundary;
+    #refinement dependency challengeExclusions from operatingBoundary to GorgeChallenge::restrictedWaters {
+        metadata rationale : ModelingMetadata::Rationale { text = "Configured polygons and predictive boundary handling refine the challenge exclusion obligation."; }
+    }
     dependency deriveOperatingBoundary from operatingBoundary to roundTrip {
         metadata rationale : ModelingMetadata::Rationale { text = "OperatingBoundary supports roundTrip. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
@@ -182,6 +191,12 @@ package BlueDogRequirements {
         comment conditions /* Use the deployment-specific compliance matrix for sailing, powered-recovery and stationary modes, including its visibility, arcs, colors and sound criteria. The matrix remains a deployment hold point under S-005. */
     }
     requirement navigationConspicuity : NavigationConspicuity;
+    #derivation connection challengeNavigationSignals {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Applicable navigation-rule compliance includes presenting the required mode-dependent signals."; }
+        end #original source ::> GorgeChallenge::navigationRules;
+        end #derive target ::> navigationConspicuity;
+    }
     dependency deriveNavigationConspicuity from navigationConspicuity to trafficSafety {
         metadata rationale : ModelingMetadata::Rationale { text = "NavigationConspicuity supports trafficSafety. This is design motivation or an implementation choice, not a satisfaction implication."; }
     }
@@ -528,7 +543,7 @@ package BlueDogRequirements {
 
     requirement def <'N-041'> FreshwaterExposure {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* For Gorge qualification, following 72 hours continuous freshwater exposure, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its Gorge functional checks without repair or servicing. */
+        doc /* For Gorge qualification, following continuous freshwater exposure for the full declared mission history, with submerged parts continuously wet and complete topside spray wetting at least once per hour, the vessel shall pass its Gorge functional checks without repair or servicing. */
     }
     requirement freshwaterExposure : FreshwaterExposure;
     #derivation connection deriveFreshwaterExposure {
@@ -2661,6 +2676,7 @@ package BlueDogRequirements {
     requirement peakSupplyCapability : PeakSupplyCapability;
 
     requirement def <'E-204'> HarvestCampaignCoverage {
+        metadata applicability : BlueDogMissionScope::Applicability { mission = BlueDogMissionScope::MissionKind::futureEndurance; }
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The qualification energy profile shall contain at least three consecutive 24-hour days, each with harvesting enabled for no more than 6 hours. */
         comment conditions /* Each modeled day is gap-free; the remaining time has harvesting disabled. Enabling harvesting with zero resource still counts as enabled. */
@@ -2733,8 +2749,8 @@ package BlueDogRequirements {
 
     #derivation connection energyDerivation9 {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "The M-002 campaign requires this separately evaluated energy outcome."; }
-        end #original source ::> multiDayEndurance;
+        metadata rationale : ModelingMetadata::Rationale { text = "A repeated-day qualification profile belongs to the future sustained-operation study, not finite Gorge completion."; }
+        end #original source ::> sustainedEnergyFeasibility;
         end #derive target ::> harvestCampaignCoverage;
     }
 
@@ -3048,7 +3064,7 @@ package BlueDogRequirements {
     }
     requirement def <'E-152'> WindSensingEndurance {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The wind-sensing installation shall operate throughout the 72-hour M-002 campaign without servicing or external charging. */
+        doc /* The wind-sensing installation shall operate throughout the complete M-002 mission without servicing or external charging. */
         comment conditions /* E-009 supplies installed measurement and fault-test conditions. E-152 uses the M-002 energy campaign. */
     }
     requirement windSensingEndurance : WindSensingEndurance;

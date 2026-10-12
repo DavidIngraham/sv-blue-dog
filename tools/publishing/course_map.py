@@ -4,6 +4,8 @@ Run with ``python -m tools.publishing.course_map``. Coordinates use a local
 equirectangular projection at 45.7 N. Town labels locate their river reaches;
 the mission model owns the challenge definition and operational gate decisions.
 """
+from tools.boat_analysis.environment.routing import build
+from tools.boat_analysis.environment.course import LocalFrame
 from html import escape
 import json
 from math import cos, radians
@@ -58,12 +60,10 @@ def render():
         path(coords, '#b5d8e7', 13)
         path(coords, '#508ba6', 1.5)
         parts.append('</g>')
-    # Follow the full course corridor, from The Dalles reach to Bonneville.
-    # The challenge model defines the operational gates separately.
-    river = next(w['geometry'] for w in data['elements'] if w['id'] == 163640960)
-    start = min(range(len(river)), key=lambda i:
-                (river[i]['lon'] + 121.185)**2 + (river[i]['lat'] - 45.608)**2)
-    outbound = [xy(p['lon'], p['lat']) for p in river[start:]]
+    # Model-defined gates and chart-contained reference route; OSM supplies context.
+    _, _, _, gates, route = build()
+    frame = LocalFrame()
+    outbound = [xy(*frame.unproject(x,y)) for x,y in route.coords]
     path([(x, y-8) for x, y in outbound], '#ab4e23', 3, 'marker-end="url(#out)"')
     path([(x, y+8) for x, y in reversed(outbound)], '#176a65', 3, 'marker-end="url(#back)"')
     for name, lon, lat, dx, dy in [
@@ -78,7 +78,12 @@ def render():
         parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4" fill="#183047"/>')
         path([(x, y), (x+dx, y+dy-8)], '#81929c', 1)
         text(x+dx, y+dy, name, 18)
-    text(230, 397, 'Course corridor along the Columbia River', 18)
+    for name,label in [('westGate','Light 7'),('eastGate','Buoy 69')]:
+        point=gates[name].interpolate(.5,normalized=True)
+        x,y=xy(*frame.unproject(point.x,point.y))
+        parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6" fill="#96396a"/>')
+        text(x-30,y-22,label,15)
+    text(230, 397, 'Chart-based reference course between proposed gates', 18)
     # Geographic distance scale: 111.195 km per latitude degree.
     bar = 10 / 111.195 * scale
     path([(50, 435), (50+bar, 435)], '#183047', 3)
@@ -93,6 +98,7 @@ def render():
     text(397, 442, '1  Downstream to Bonneville', 18)
     path([(320, 474), (380, 474)], '#176a65', 3, 'marker-end="url(#back)"')
     text(397, 481, '2  Upstream to The Dalles', 18)
+    text(32, 518, 'Gate references and route: NOAA ENC · Gate offsets: TransGorgeCourse model', 14)
     text(32, 545, 'River geometry © OpenStreetMap contributors · ODbL · openstreetmap.org/copyright', 14)
     parts += ['</g><defs><clipPath id="mapclip"><rect x="25" y="90" width="1090" '
               'height="315"/></clipPath></defs></svg>']

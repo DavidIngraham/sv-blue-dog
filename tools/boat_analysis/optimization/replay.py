@@ -7,7 +7,7 @@ import numpy as np
 from tools.boat_analysis.model.vessel import CoupledModel
 from tools.boat_analysis.model.operating import StructureKernel,RouteKernel
 from tools.boat_analysis.geometry.hydro import free_pitch_equilibrium,DisplacementBody
-from tools.boat_analysis.optimization.operating import solve_state
+from tools.boat_analysis.optimization.operating import solve_state, operating_margin_names
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate
 
@@ -15,13 +15,14 @@ from tools.boat_analysis.evidence.records import digest,validate
 def operating_case(model,design,wind,up,tack,state,budget):
     constrained=solve_state(model,design,wind,up,budget,tack,resolution=16,initial_state=state,require_energy=True)
     constrained['energyConstraintsEnforced']=True
+    constrained['energyConstraintScope']='Instantaneous peak power only; mission energy history assessed separately'
     if constrained['screenFeasible']:return constrained
     # Keep a balanced performance/energy diagnostic when the constrained attempt fails.
     seed=constrained['state'][3:] if constrained['equilibrated'] else state
     diagnostic=solve_state(model,design,wind,up,budget,tack,resolution=16,initial_state=seed,require_energy=False)
     diagnostic['energyConstraintsEnforced']=False
     diagnostic['energyConstrainedAttempt']={key:constrained[key] for key in ['equilibrated','screenFeasible','message']}
-    diagnostic['energyConstrainedAttempt']['minimumEnergyMargin']=min(constrained['outputs'][n] for n in ['cycleMargin','reserveMarginScaled','peakMargin'])
+    diagnostic['energyConstrainedAttempt']['minimumEnergyMargin']=constrained['outputs']['peakMargin']
     return diagnostic
 
 
@@ -54,7 +55,7 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
         restoring=[p['righting_Nm']*np.sign(p['heel_deg']) for p in points if 'failure' not in p and 0<abs(p['heel_deg'])<180]
         recovery.append({'trim_deg':trim,'points':points,'failedEquilibria':sum('failure' in p for p in points),'minimumInteriorRestoring_Nm':min(restoring) if restoring else None})
     numerical=all(r['equilibrated'] for r in rows)
-    operating=min(row['outputs'][n] for row in rows for n in model.operation.contract['outputNames'][4:18]+model.operation.contract['outputNames'][47:])
+    operating=min(row['outputs'][n] for row in rows for n in operating_margin_names(model.operation.contract['outputNames']))
     result={'scenario':name,'parameters':dict(zip(model.c['parameterNames'],model.parameters)),'cases':rows,'structure':margins,'route':trip.tolist(),'westerlyRoute':west.tolist(),'recovery':recovery,'numericallyBalanced':numerical,'minimumOperatingMargin':operating,'sampledStaticScreensPass':bool(numerical and operating>=-1e-4 and min(margins.values())>=-1e-4 and min(trip[:3])>=-1e-4 and min(west[:3])>=-1e-4 and all(r['failedEquilibria']==0 and r['minimumInteriorRestoring_Nm'] is not None and r['minimumInteriorRestoring_Nm']>0 for r in recovery)),'qualified':False}
     # Preserve the original strict two-direction field; expose the selected
     # profile separately so old evidence consumers cannot mistake its meaning.

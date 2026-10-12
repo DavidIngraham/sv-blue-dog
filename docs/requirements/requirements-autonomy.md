@@ -40,6 +40,7 @@ package Page_autonomy_3 {
         expose BlueDogRequirements::staleNavigationUseInhibition;
         expose BlueDogRequirements::steeringCommandCadence;
         expose BlueDogRequirements::trafficSafety;
+        expose GorgeChallenge::trafficCoexistence;
         expose BlueDogRequirements::windObservation;
         expose GorgeChallenge::courseCompletion;
         expose GorgeChallenge::emergencyIntervention;
@@ -76,6 +77,7 @@ package Page_autonomy_3 {
         metadata Layout about GorgeChallenge::sailingPropulsion { x = 640; y = 2400; }
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 960; y = 2400; }
         metadata Layout about GorgeChallenge::unassistedAttempt { x = 0; y = 2800; }
+        metadata Layout about GorgeChallenge::trafficCoexistence { x = 0; y = 3200; }
     }
 }
 ```

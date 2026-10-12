@@ -210,7 +210,7 @@ Our immediate aim is to close the evidence gaps blocking a credible preliminary 
 
 In parallel, develop the electrical bench and simulation interfaces for energy, sensing, communications and autonomy. A local-water demonstrator follows when the integrated test questions and recovery arrangements are ready. This keeps progress possible while the rig and hull evidence matures.
 
-The existing steady-state sizing analysis and per-state energy screens are useful inputs to this campaign, but they are not yet a complete closed-loop, time-dependent virtual vessel. We still need a minimal mission simulation that can exercise wind/current changes, navigation decisions, communications loss, faults and chronological energy use. Its first purpose is to expose missing or unsuitable requirements and reject inadequate concepts. Correlated component models and more detailed dynamics follow where those decisions require them.
+The existing steady-state sizing analysis and per-state energy screens are useful inputs to this campaign, but they are not yet a complete closed-loop, time-dependent virtual vessel. The [minimal mission simulation](mission-simulation.md) now exercises changing wind/current, chart-constrained navigation, communications loss, intervention and chronological energy use. Its conceptual vessel and synthetic traffic/weather assumptions support requirements discovery; they are not accepted design evidence. Its first purpose is to expose missing or unsuitable requirements and reject inadequate concepts. Correlated component models and more detailed dynamics follow where those decisions require them.
 
 ## Diagrams that informed this plan
 
@@ -256,4 +256,4 @@ Compare predictions with independent measurements under recorded conditions. The
 Use the [modeling method](methods/modeling.md) and [publishing workflow](publishing.md) to preserve requirements, rationale, configurations and evidence links. Their inputs are the engineering work at every stage; their output is a consistent record for review decisions and future iteration.
 
 
-**Next:** [What the current sizing study tells me](results.md).
+**Next:** [Sailing the challenge before building the boat](mission-simulation.md).

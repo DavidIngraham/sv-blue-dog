@@ -146,6 +146,7 @@ package Page_energy_10 {
         expose BlueDogRequirements::recoveryEnergy;
         expose BlueDogRequirements::recoveryPropulsion;
         expose BlueDogRequirements::repeatableCycleBalance;
+        expose BlueDogRequirements::harvestCampaignCoverage;
         expose BlueDogRequirements::roundTrip;
         expose BlueDogRequirements::safeRecovery;
         expose BlueDogRequirements::sustainedEnergyFeasibility;
@@ -171,6 +172,7 @@ package Page_energy_10 {
         metadata Layout about GorgeChallenge::repeatedOperation { x = 320; y = 1200; }
         metadata Layout about GorgeChallenge::sailingPropulsion { x = 640; y = 1200; }
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 960; y = 1200; }
+        metadata Layout about BlueDogRequirements::harvestCampaignCoverage { x = 0; y = 1600; }
     }
 }
 ```

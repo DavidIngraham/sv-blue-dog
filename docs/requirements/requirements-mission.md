@@ -32,6 +32,7 @@ package Page_mission_0 {
         expose BlueDogRequirements::multiDayEndurance;
         expose BlueDogRequirements::navigationAndControl;
         expose BlueDogRequirements::operatingBoundary;
+        expose GorgeChallenge::restrictedWaters;
         expose BlueDogRequirements::regulatoryClassification;
         expose BlueDogRequirements::resetRecovery;
         expose BlueDogRequirements::roundTrip;
@@ -68,6 +69,7 @@ package Page_mission_0 {
         metadata Layout about GorgeChallenge::sailingPropulsion { x = 320; y = 2000; }
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 640; y = 2000; }
         metadata Layout about GorgeChallenge::unassistedAttempt { x = 960; y = 2000; }
+        metadata Layout about GorgeChallenge::restrictedWaters { x = 0; y = 2400; }
     }
 }
 ```

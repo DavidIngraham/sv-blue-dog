@@ -31,6 +31,11 @@ def test_challenge_is_standalone():
 
 def test_diagram_preserves_expected_derivations(published_model):
     expected = {
+        ('transGorgeChallenge', 'navigationRules'),
+        ('transGorgeChallenge', 'restrictedWaters'),
+        ('transGorgeChallenge', 'trafficCoexistence'),
+        ('trafficCoexistence', 'trafficSafety'),
+        ('navigationRules', 'navigationConspicuity'),
         ('cruisePerformance', 'cruiseEvidence'),
         ('cruisePerformance', 'legProgress'),
         ('cruisePerformance', 'passageDuration'),
@@ -59,7 +64,7 @@ def test_diagram_preserves_expected_derivations(published_model):
         ('missionReliability', 'missionSuccessProbability'),
         ('missionReliability', 'reliabilityEvidence'),
         ('multiDayEndurance', 'energyEvidenceReadiness'),
-        ('multiDayEndurance', 'harvestCampaignCoverage'),
+        ('sustainedEnergyFeasibility', 'harvestCampaignCoverage'),
         ('multiDayEndurance', 'peakSupplyCapability'),
         ('multiDayEndurance', 'sustainedReserveProtection'),
         ('navigationAndControl', 'navigationAvailability'),
@@ -131,7 +136,7 @@ def test_mission_drivers_do_not_entail_owner_constraints(published_model):
 def test_register_preserves_ids_status_and_relationships(published_model):
     ids = re.findall(r"^\| ([CHEMPNSRQL]-[0-9]+) \|", published_model.markdown, re.MULTILINE)
     expected = {"H-001", "M-001", "M-002",
-                *(f"C-00{i}" for i in range(7)), *(f"E-00{i}" for i in range(1, 8))}
+                *(f"C-00{i}" for i in range(10)), *(f"E-00{i}" for i in range(1, 8))}
     expected.update(['P-001', 'P-002', 'P-003', 'S-001', 'S-002', 'S-003', 'S-004', 'S-005', 'N-001', 'N-002', 'N-003', 'R-001', 'R-002', 'C-101', 'C-102'])
     expected.update(['N-010', 'N-020', 'N-011', 'N-012', 'N-013', 'N-014', 'N-015', 'N-021', 'N-022', 'N-023', 'N-024', 'N-025', 'N-030', 'N-031', 'N-032', 'N-033', 'N-034', 'N-035', 'N-041', 'N-042', 'N-043', 'N-044', 'N-045', 'N-046', 'N-047', 'N-051', 'N-052', 'N-053', 'N-054', 'N-055', 'N-056'])
     expected.update(['E-008', 'E-009', 'R-003', 'R-004'])
@@ -171,13 +176,13 @@ def test_focused_views_cover_all_derivations(published_model, rendered_site):
             for detail, abstract in re.findall(r'(n[0-9]+) -\.->\|"refine"\| (n[0-9]+)', diagram):
                 refinements.add((nodes[detail], nodes[abstract]))
     assert edges == set(published_model.edges)
-    assert refinements == {('roundTrip', 'courseCompletion'), ('communications', 'liveObservation')}
+    assert refinements == {('roundTrip', 'courseCompletion'), ('communications', 'liveObservation'), ('operatingBoundary', 'restrictedWaters')}
 
 
 def test_statements_exclude_supporting_material(published_model):
     statement_rows = re.findall(r'^\| [A-Z]-\d+ \| \w+ \| open \| (.*?) \|$',
                                 published_model.markdown, re.M)
-    assert len(statement_rows) == 216
+    assert len(statement_rows) == 219
     assert all(len(text.split()) <= 45 for text in statement_rows)
     assert all('Verification uses' not in text and 'Aggregate requirement' not in text
                and 'Shared verification context' not in text for text in statement_rows)
