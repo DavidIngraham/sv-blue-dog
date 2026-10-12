@@ -19,6 +19,8 @@ class Toy:
         return np.r_[r['eq'], np.minimum(r['ineq'],0)]
     def residual_jacobian(self, z):
         return np.array([[-1.,1.],[0.,-1. if z[1]>self.capacity else 0.]])
+    def jacobians(self, z):
+        return np.array([[-1.,1.]]), np.array([[0.,-1.]])
     def feasible(self, z):
         r=self.evaluate(z)
         return abs(r['eq'][0])<1e-4 and r['ineq'][0]>-1e-4

@@ -2,7 +2,7 @@
 import json
 import time
 import numpy as np
-from scipy.optimize import least_squares
+from scipy.optimize import least_squares, minimize
 
 from .search import Problem
 from ..evidence.records import CURRENT, run_record, output_path, source_hashes, validate
@@ -26,6 +26,23 @@ def solve_stage(problem, seed, length, budget=60, extensions=2):
         before = float(np.linalg.norm(residual(best)))
         if problem.feasible(expand(best)):
             break
+        anchor = best.copy()
+        constraints = [
+            {'type':'eq', 'fun':lambda y:problem.evaluate(expand(y))['eq'],
+             'jac':lambda y:problem.jacobians(expand(y))[0][:, 1:]},
+            {'type':'ineq', 'fun':lambda y:problem.evaluate(expand(y))['ineq'],
+             'jac':lambda y:problem.jacobians(expand(y))[1][:, 1:]}]
+        correction = minimize(lambda y:.5*np.sum((y-anchor)**2), anchor,
+                              jac=lambda y:y-anchor, method='SLSQP',
+                              bounds=[(0,1)]*len(anchor), constraints=constraints,
+                              options={'maxiter':budget, 'ftol':1e-8})
+        corrected = float(np.linalg.norm(residual(correction.x)))
+        history.append(dict(chunk=chunk, method='SLSQP', before=before, after=corrected,
+                            iterations=correction.nit, message=str(correction.message)))
+        if corrected < before or problem.feasible(expand(correction.x)):
+            best = correction.x
+        if problem.feasible(expand(best)):
+            break
         def stop(intermediate_result):
             if problem.feasible(expand(intermediate_result.x)):
                 raise StopIteration
@@ -33,9 +50,9 @@ def solve_stage(problem, seed, length, budget=60, extensions=2):
                                max_nfev=budget, callback=stop,
                                ftol=1e-8, xtol=1e-8, gtol=1e-8)
         after = float(np.linalg.norm(residual(result.x)))
-        history.append(dict(chunk=chunk, before=before, after=after,
+        history.append(dict(chunk=chunk, method='least_squares', before=before, after=after,
                             evaluations=result.nfev, message=str(result.message)))
-        if after < before:
+        if after < float(np.linalg.norm(residual(best))):
             best = result.x
         if problem.feasible(expand(best)) or after >= before * .95:
             break
@@ -62,8 +79,10 @@ def run(target=1.2, step=.2, minimum_step=.025, budget=60, extensions=2):
     length = float((p.lo + accepted*p.span)[0])
     if not p.lo[0] <= target < length:
         raise ValueError('Target must be below the seed and within model bounds')
-    hashes = source_hashes(['tools/boat_analysis/optimization/continuation.py',
-                           'tools/boat_analysis/optimization/search.py'])
+    hashes = source_hashes(list(saved['sourceHashes']) + [
+        'tools/boat_analysis/optimization/continuation.py',
+        'tools/boat_analysis/optimization/search.py',
+        str((CURRENT/'coupled-sizing-search.json').relative_to(ROOT))])
     report = dict(sourceHashes=hashes, seedRun=str(CURRENT.name), targetM=target,
                   settings=dict(stepM=step, minimumStepM=minimum_step, budget=budget, extensions=extensions),
                   attempts=[], qualified=False, completed=False,
