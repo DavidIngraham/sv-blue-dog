@@ -103,8 +103,11 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         verdict = classify(phase == len(sequence), 'operator_intervention' in kinds,
                            'motor_use' in kinds, outcome == 'safety_violation',
                            outcome == 'incomplete', minimum >= reserve, outcome == 'censored')
-        if not history or history[-1][0] != seconds:
-            history.append([seconds,*position,stored,cause,seconds>=comms_until])
+        terminal = [seconds,*position,stored,cause,seconds>=comms_until]
+        if history and history[-1][0] == seconds:
+            history[-1] = terminal
+        else:
+            history.append(terminal)
         return Result(verdict,cause,seconds,crossing_log,history,event_log,minimum,distance)
     step, next_control, turn_remaining = 0, 0., 0.
     while seconds < hours*3600:

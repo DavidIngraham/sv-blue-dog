@@ -142,3 +142,13 @@ def test_intervention_is_applied_at_its_time_between_integration_samples():
     r=simulate(*fixture(),events=[Event(7,'operator_intervention')])
     assert r.outcome=='disqualified'
     assert r.elapsed_seconds==7
+
+
+
+def test_instant_maneuver_charge_updates_terminal_history_at_same_timestamp():
+    inputs,route,water,gates=fixture()
+    inputs['energy'][1]=60.001;inputs['energy'][3]=0;inputs['energy'][5]=0
+    r=simulate(inputs,route,water,gates,save_every=1)
+    assert r.cause=='recovery_reserve_reached'
+    assert r.history[-1][0]==r.elapsed_seconds
+    assert r.history[-1][3]==r.minimum_energy_wh<60

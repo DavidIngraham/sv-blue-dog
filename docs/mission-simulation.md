@@ -34,7 +34,7 @@ flowchart TD
 
 SysML owns the ordered gates and outcome calculation. Python supplies the observed crossing, intervention, collision and reserve facts to that native calculation. A simulated completion remains separate from physical qualification or proof of full navigation-rule compliance.
 
-The controller evaluates sailing headings and a depowered option. Depowering still allows the boat to drift with the current; it does not create free station keeping. Maneuvers cost time and energy. A communications outage does not stop autonomous execution. Operator intervention or motor use ends qualification for that attempt.
+The controller evaluates sailing headings and a depowered option. Depowering still allows the boat to drift with the current; it does not create free station keeping. Maneuvers cost time and energy. The controller updates on its own clock; a smaller integration step does not increase its update rate or shorten a maneuver. Motion steps end at control updates, maneuver completion, weather changes and injected events. Both pieces of the drift-then-sail maneuver must remain in the chart domain. A communications outage does not stop autonomous execution. Operator intervention or motor use ends qualification for that attempt.
 
 There is no 72-hour challenge deadline and no daily energy-balance requirement. A finite trip can finish with less stored energy than it started with. It must still retain the configured recovery reserve. The simulation horizon is a computational setting: reaching it produces a censored result, not a failed challenge deadline.
 
@@ -50,13 +50,15 @@ The useful early outputs are failure mechanisms and sensitivity to assumptions. 
 
 ## First experiment
 
-The [archived campaign](../evidence/runs/2026-10-11-mission/mission-campaign.json) records the source hashes, scenario seeds and voyage histories. The first 32 seeded voyages all completed the simulated gate sequence. Elapsed times ranged from 21.5 to 149.7 hours. In the longest realization, the synthetic wind switched easterly at hour 10 and remained there until hour 140; the upstream finish came after the westerly returned. That is a useful case for comparing future polars and guidance policies, without inventing a challenge deadline.
+The [archived campaign](../evidence/runs/2026-10-11-mission/mission-campaign.json) records the source hashes, scenario seeds and voyage histories. Of 32 seeded voyages, 15 completed the simulated gate sequence and 17 stopped because the simple controller could not find a chart-contained maneuver. This is a route-following limitation to investigate, not a conclusion that a sailing vessel cannot complete the course.
 
-The controller predicted traffic conflicts in 23 encounters across the ensemble and found paths that passed the modeled geometric screens. That is evidence that the encounter mechanism is exercised, not that the vessel obeys every navigation rule. The allocated solar and storage budget kept the recovery reserve protected in these runs; it does not demonstrate the installed boat's endurance.
+Completed voyages took 21.5 to 149.7 hours. In the longest realization, the synthetic wind switched easterly at hour 10 and remained there until hour 140; the upstream finish came after the westerly returned. The controller considered 17 potentially conflicting traffic encounters across the ensemble. Its geometric screens and stops do not establish full Navigation Rules compliance. The allocated electrical budget protected recovery reserve in these cases; it does not demonstrate the installed boat's endurance.
 
-![Thirty-two synthetic voyage tracks, a completion-time histogram and battery histories. The longest voyage is highlighted in orange.](figures/mission-campaign.svg)
+![Thirty-two synthetic voyage tracks, completion times and battery histories. Red crosses mark incomplete runs; the longest voyage is orange.](figures/mission-campaign.svg)
 
-These results are a baseline for finding differences when the boat, weather or controller changes. A perfect completion count in an uncalibrated ensemble is a reason to expand adverse cases and improve model credibility, not a reliability claim.
+A numerical check caught an important distinction: the integration step must not determine how often the controller changes commands. With separate clocks and persistent maneuver delays, the short deterministic test finishes at 1,230, 1,225 and 1,222.5 seconds for 10-, 5- and 2.5-second integration steps. That checks the basic implementation; it does not establish convergence of every full-course encounter. Treat the ensemble times as exploratory until broader sensitivity checks and performance correlation support design comparisons.
+
+The next useful step is to inspect the stopped cases, plan tacks with adequate maneuver room, and rerun the same scenarios. These counts describe this controller and these declared assumptions, not the real boat's mission-success probability.
 
 ## Increasing fidelity without changing the question
 
