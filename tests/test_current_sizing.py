@@ -3,14 +3,14 @@ import json
 import numpy as np
 import pytest
 
-from tools.boat_analysis.evidence.records import CURRENT, digest, run_record, verify_run_sources
+from tools.boat_analysis.evidence.records import CURRENT, AERODYNAMIC_REFERENCE, digest, run_record, verify_run_sources
 from tools.boat_analysis.model.runtime import ROOT, native, native_value
 
 
 def test_current_sources_and_projection_are_reproducible():
     from tools.boat_analysis.evidence.model import model_source
     assert verify_run_sources(CURRENT) > 10
-    assert (ROOT / 'models/evidence/conservative-2026-10-11.sysml').read_text(encoding='utf-8') == model_source(CURRENT, 'BlueDogCurrentSizing')
+    assert (ROOT / 'models/evidence/current-sizing.sysml').read_text(encoding='utf-8') == model_source(CURRENT, 'BlueDogCurrentSizing')
 
 
 def test_full_search_keeps_design_free_and_controls_in_declared_domain():
@@ -26,6 +26,8 @@ def test_full_search_keeps_design_free_and_controls_in_declared_domain():
         assert result['resumeCheckpointSha256'] == digest(CURRENT / 'optimizer-start.json')
         assert result['seedNormalizedDesignAndStates'] == run_record(CURRENT, 'optimizer-start.json')['bestZ']
     assert not result['qualified']
+    assert result['routeProfile'] == 'challenge' and not result['requiresEastProgress']
+    assert 'finite storage/reserve' in result['energyConstraintScope']
     contract = json.loads((ROOT / '.tools/coupled-operation-contract.json').read_text())
     for state in result['stateRows']:
         # Stored states are signed by tack; incidence limits are in tack coordinates.
@@ -44,7 +46,7 @@ def test_current_replay_has_all_scenarios_and_native_reviews_match_evidence():
         assert not case['qualified']
         expected = (case['numericallyBalanced'] and case['minimumOperatingMargin'] >= -1e-4
                     and min(case['structure'].values()) >= -1e-4
-                    and min(case['route'][:3] + case['westerlyRoute'][:3]) >= -1e-4)
+                    and min(case['westerlyRoute'][:3]) >= -1e-4)
         report = json.loads(native('-analysis', f"BlueDogCurrentSizing::{case['scenario']}Review", '-json'))
         values = {v['name']: native_value(v['value']) for v in report['checks'][0]['values']}
         assert values['operatingScreensPass'] == expected
@@ -52,7 +54,7 @@ def test_current_replay_has_all_scenarios_and_native_reviews_match_evidence():
 
 
 def test_convergence_flags_recompute_from_recorded_coefficients():
-    record = run_record(CURRENT, 'wing-convergence.json')
+    record = run_record(AERODYNAMIC_REFERENCE, 'wing-convergence.json')
     assert len(record['cases']) == 15
     assert sum(len(c['values']['Alpha']) for c in record['cases']) == 60
     assert record['validated'] is False

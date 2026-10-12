@@ -1,5 +1,5 @@
 """Plot the current static recovery evidence without implying dynamic stability."""
-from tools.boat_analysis.evidence.records import input_record, input_path, output_path, source_hashes
+from tools.boat_analysis.evidence.records import CURRENT, run_record
 
 import json
 import numpy as np
@@ -11,7 +11,7 @@ from tools.boat_analysis.evidence.records import validate
 
 
 def render(preview=False):
-    data=input_record('coupled-recovery.json')
+    data=run_record(CURRENT, 'coupled-recovery.json')
     plt.rcParams.update({'font.size':10,'svg.hashsalt':'blue-dog-coupled-recovery','svg.fonttype':'none'})
     fig,axes=plt.subplots(3,1,figsize=(10,10),sharex=True,layout='constrained')
     states=[('sealed','Sealed wing'),('free_flooding_homogenized','Freely flooded wing — homogenized buoyancy'),('full_water_retention','Wing retaining its full void volume of water')]
@@ -38,7 +38,8 @@ def render(preview=False):
     fig.suptitle(f"Static recovery sensitivity — {data['design']['length_m']:.3f} m analysis candidate",fontsize=15,fontweight='bold')
     fig.supxlabel('Positive values oppose roll. Solid: freshwater; dashed: seawater. ×: pitch-unstable; ▼: missing pitch root.\nSelected equilibrium branches may jump; no wave dynamics, drainage, slosh or recovery trajectory.',fontsize=10)
     out=ROOT/'docs/figures/coupled-recovery.svg'
-    fig.savefig(out,metadata={'Date':None,'Description':'Generated from build/analysis/coupled-recovery.json; static sensitivity, not recovery qualification.'})
+    fig.savefig(out,metadata={'Date':None,'Description':f'Generated from {CURRENT.relative_to(ROOT).as_posix()}/coupled-recovery.json; static sensitivity, not recovery qualification.'})
+    out.write_text('\n'.join(line.rstrip() for line in out.read_text().splitlines())+'\n')
     if preview:fig.savefig(ROOT/'.tools/coupled-recovery-preview.png',dpi=130)
     plt.close(fig)
 

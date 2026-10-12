@@ -1,0 +1,31 @@
+{
+  "sourceRevision": "554ea8704cdabacbc27c32c53c1f8bd72e143fd1",
+  "files": {
+    "coupled-mass-reference.json": {
+      "sha256": "7ac308a7a61fa65e95f94fff450b8638fd2126b2733faa4b02458ce84f17fe7d"
+    },
+    "coupled-pitch-diagnostic.json": {
+      "sha256": "63a9fb2290f9c309e2b3cbc1913414329152d47d700334747ea0f420ac0cbefe"
+    },
+    "coupled-recovery.json": {
+      "sha256": "825dc80ac2863961d2cd65fa046f5583d0b22685c2e62101e6e1e9a6f5ff5b5e"
+    },
+    "coupled-sizing-replay.json": {
+      "sha256": "4ebf178060211e93a8a5ac1b24c90437b631fd18a756fbed8dbee804d230f64b"
+    },
+    "coupled-sizing-search.json": {
+      "sha256": "3edf5d75661eed3dc9c06e3146cf17e60b9b2e3ebf053a1d8c39a6be5381e810"
+    },
+    "coupled-uncertainty-inputs.json": {
+      "sha256": "873adcbd7e0b89365d9fb5e2f8c8e992248317f57f75a224fee8ce4bc81468c5"
+    },
+    "hull-resistance-domain.json": {
+      "sha256": "fb2b00822da60f9c70300bb3b1e69ff545faf72c60d466a166c11a3c5808879d"
+    }
+  },
+  "qualified": false,
+  "routeProfile": "challenge",
+  "requiresEastProgress": false,
+  "energyConstraintScope": "Instantaneous peak power only; finite storage/reserve requires chronological mission replay",
+  "scope": "Finite Gorge sizing and six-scenario replay; provisional aerodynamic assumptions, not measured confidence bounds."
+}

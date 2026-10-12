@@ -14,7 +14,7 @@ package BlueDogSizingEvidence {
         attribute westerlyHours : Real;
         attribute massKg : Real;
         attribute evidenceAccepted : Boolean;
-        attribute acceptanceRouteMargins : Real [1..*] ordered nonunique = routeMargins;
+        attribute acceptanceRouteMargins : Real [1..*] ordered nonunique default = routeMargins;
         attribute operatingScreensPass : Boolean = numericallyBalanced and
             operatingMargins->ControlFunctions::forAll { in x : Real; x >= -0.0001 } and
             structuralMargins->ControlFunctions::forAll { in x : Real; x >= -0.0001 } and

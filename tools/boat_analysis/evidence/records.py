@@ -7,7 +7,8 @@ import subprocess
 from tools.boat_analysis.model.runtime import ROOT
 
 BASELINE = ROOT / "evidence/runs/2026-10-10-coupled"
-CURRENT = ROOT / "evidence/runs/2026-10-11-conservative"
+AERODYNAMIC_REFERENCE = ROOT / "evidence/runs/2026-10-11-conservative"
+CURRENT = ROOT / "evidence/runs/2026-10-12-gorge"
 WORK = ROOT / "build/analysis"
 
 

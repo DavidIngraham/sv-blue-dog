@@ -205,11 +205,11 @@ package BlueDogEvidenceDocuments {
     calc def Outcomes :> Query {
         Project(source = Cases(), columns = (
             Column(name = "Scenario", path = "label"),
-            Column(name = "Combined replay screens", path = "operatingScreensPass"),
+            Column(name = "Sailing, structure and route", path = "operatingScreensPass"),
             Column(name = "Lowest replay margins", path = "limitingScreens"),
             Column(name = "Sampled roll positive", path = "sampledRollPositive"),
             Column(name = "Unstable pitch samples", path = "pitchUnstableSamples"),
-            Column(name = "Energy diagnostic cases", path = "diagnosticControlCases"),
+            Column(name = "Peak-power diagnostic cases", path = "diagnosticControlCases"),
             Column(name = "Evidence accepted", path = "evidenceAccepted")))
     }
     calc def Dimensions :> Query {

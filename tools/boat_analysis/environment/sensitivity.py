@@ -1,6 +1,6 @@
-"""Plot native persistent-regime sensitivity of the archived candidate.
+"""Plot native persistent-regime sensitivity of the current recorded candidate.
 
-This reinterprets existing evidence; it does not rerun the optimizer or qualify it.
+This evaluates the recorded scenario results; it does not rerun the optimizer or qualify the vessel.
 """
 import json
 

@@ -1,6 +1,6 @@
 # Coupled sizing method
 
-The design mission is now the finite Gorge round trip. The archived search still includes a nonnegative daily-energy screen for sustained operation. The active static search no longer enforces that screen; it retains peak-power checks. Chronological mission-energy acceptance now belongs to the mission simulation. Integrating that voyage result into the design search remains necessary before calling the search a mission-success optimization. Dynamic planing and speed-dependent failure exposure also need validated models; current results do not select between planing and displacement hulls.
+The design mission is the finite Gorge round trip. The static search enforces peak-power capability; daily energy balance and a completion deadline are not acceptance criteria. Chronological mission-energy acceptance now belongs to the mission simulation. Integrating that voyage result into the design search remains necessary before calling the search a mission-success optimization. Dynamic planing and speed-dependent failure exposure also need validated models; current results do not select between planing and displacement hulls.
 
 How small can Blue Dog be and still make headway upriver? For [preliminary design](development-plan.md#virtual-design), I start with the route, wind and current assumptions, then vary the hull, wing, ballast and energy system together. I want to find which designs are worth developing and which assumptions I most need to test.
 
@@ -17,7 +17,7 @@ flowchart TB
     operating --> screens["Progress, loads, energy, handling and recovery screens"]
     screens -->|revise design| design
     screens -->|feasible, then reduce length| trial["Selected trial"]
-    screens -->|stop before feasibility: retain best trial| diagnosis["Diagnostic trial: current run"]
+    screens -->|stop before feasibility: retain best trial| diagnosis["Diagnostic trial"]
     diagnosis --> replay
     trial --> replay["Independent finer replay and recovery studies"]
     replay --> experiment["Identify the next measurement or design change"]
@@ -29,15 +29,15 @@ SysML owns the physical equations, named configurations, bounds, assumptions and
 
 The model combines provisional attached-flow wing forces and moments, underwater appendage forces, hull resistance, static buoyancy, material accounting, laminate screens and actuator energy. Both tacks contribute to progress with weights that cancel crosswind drift. In the representative westerly challenge case, the downstream leg is windward and the upstream return is leeward; an easterly reverses them. River current helps the outbound leg and opposes the return in either case.
 
-The [weather policy](../models/analyses/weather.sysml) separates a selected-weather-window challenge from eventual all-season capability. The default search requires the westerly route to pass; `--route-profile all-season` also requires easterly progress and duration. Both profiles retain every operating, energy, handling, structure and recovery screen, and both report easterly performance. This is a conditional design screen, not proof that a selected window will stay westerly.
+The [weather policy](../models/analyses/weather.sysml) separates a selected-weather-window challenge from eventual all-season capability. The default search requires the westerly route to pass; `--route-profile all-season` also requires easterly progress. Both profiles retain the operating, peak-power, handling, structure and recovery screens, and both report easterly performance. This is a conditional design screen, not proof that a selected window will stay westerly.
 
-The [seasonal observations and probability method](operating-constraints.md#gorge-weather-and-launch-windows) distinguish hourly wind frequency from whole-passage weather probability. We sweep the latter through the native model, reporting route-screen coverage separately from passage time conditional on passing. Failed or energy-unconstrained cases cannot disappear into an average. Until route and forecast evidence supports a distribution, the optimizer still minimizes length subject to its declared profile; no invented east-wind weight is hidden in its cost function. The archived sizing run predates this profile split and required both directions.
+The [seasonal observations and probability method](operating-constraints.md#gorge-weather-and-launch-windows) distinguish hourly wind frequency from whole-passage weather probability. We sweep the latter through the native model, reporting route-screen coverage separately from passage time conditional on passing. Failed or energy-unconstrained cases cannot disappear into an average. Until route and forecast evidence supports a distribution, the optimizer still minimizes length subject to its declared profile; no invented east-wind weight is hidden in its cost function.
 
 The [aerodynamic policy](../models/analyses/aerodynamic-policy.sysml) makes the former adverse aerodynamic assumptions the primary sizing case. It limits nominal incidence and heel, reduces lift credit, increases drag, and assigns an independent pitching-moment allowance. These are engineering assumptions, not measured uncertainty bounds. All 29 geometry, structure and energy variables remain free; the restricted controls prevent the search from relying as heavily on high incidence and large heel.
 
 VSPAERO supplies finite-wing trends within the archived grid. We retain the provisional upright-polar cosine projection in the force balance; the separate heel study demonstrates why this is a limitation. Published crescent-wing results do not match this CAD section closely enough to supply measured coefficients. Representative mesh/wake checks assess numerical sensitivity, while physical section polars, stall and moment measurements remain open evidence needs.
 
-Feasibility restoration precedes the local size search. Derivatives respect interpolation-grid breakpoints. Small mesh reserves protect against numerical drift; they are separate from physical uncertainty. A continuation can start from the best point without changing requirements or bounds; the record retains its exact normalized seed and checkpoint hash. Refined replay re-solves operating states with energy constraints, then reports any energy-unconstrained diagnostic explicitly. A failed local solve is not proof of physical impossibility.
+Feasibility restoration precedes the local size search. Derivatives respect interpolation-grid breakpoints. Small mesh reserves protect against numerical drift; they are separate from physical uncertainty. A continuation can start from the best point without changing requirements or bounds; the record retains its exact normalized seed and checkpoint hash. Refined replay re-solves operating states with peak-power constraints, then identifies any diagnostic solve that removes that check. Finite battery endurance requires chronological mission evaluation. A failed local solve is not proof of physical impossibility.
 
 <details>
 <summary>Reproduce the search and refresh aerodynamic evidence</summary>
@@ -64,7 +64,7 @@ Replay holds the selected geometry fixed and re-solves controls for six hypothes
 
 OpenVSP uses the separate package-free environment under `tools/boat_analysis/aerodynamics/vsp` because the pinned binary has its own Python ABI. Run its modules from the repository root with that uv project. The saved grid permits routine analysis without rerunning VSPAERO. Mesh convergence and a direct candidate comparison test numerical consistency; viscous drag, stall, broadside flow, thickness effects and dynamic sailing still need evidence.
 
-The current search and one continuation stopped just outside the coarse feasibility tolerance; no minimum-length result was established. We retain the selected trial for refined replay rather than relabel its near-pass as success. The reusable geometry checks include analytic section properties, displaced-volume oracles, mass moments, force and torque invariance, and native/interpreted parity. Qualification remains broader than those software checks.
+The [results page](results.md) reports whether the current search reached feasibility and whether length minimization completed. A diagnostic trial remains useful for replay when a search stops before feasibility. The reusable geometry checks include analytic section properties, displaced-volume oracles, mass moments, force and torque invariance, and native/interpreted parity. Qualification remains broader than those software checks.
 
 [Recorded outcomes](results.md) · [Sail concepts](sail-trade.md) · [Structures and recovery](structures-and-recovery.md)
 

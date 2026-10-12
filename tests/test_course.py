@@ -66,3 +66,17 @@ def test_long_passage_has_no_gorge_deadline(run_model):
     assert values['noDeadline'][2] == 1
     assert values['legacyDeadline'][2] < 0
     assert values['activeDeadline'] == 0
+
+
+def test_sizing_and_replay_share_chart_reference_distance(run_model):
+    source = """package SizingCourseProbe { analysis Inputs {
+        out attribute sizing : ScalarValues::Real = BlueDogCoupledOperation::Inputs.routeParameters#(4);
+        out attribute primary : ScalarValues::Real = BlueDogCoupledUncertainty::Inputs.nominalRoute#(4);
+        out attribute adverse : ScalarValues::Real = BlueDogCoupledUncertainty::Inputs.adverseRoute#(4);
+        out attribute chart : ScalarValues::Real = TransGorgeCourse::policy.referenceLegLengthM;
+    } }"""
+    code, report = run_model(source, '-analysis', 'SizingCourseProbe::Inputs')
+    assert code == 0
+    values = {r['name']: native_value(r['value']) for r in report['checks'][0]['values']}
+    assert values['sizing'] == values['primary'] == values['adverse'] == values['chart']
+    assert 68000 < values['chart'] < 69000

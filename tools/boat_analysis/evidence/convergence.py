@@ -4,11 +4,11 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from .records import CURRENT, run_record
+from .records import AERODYNAMIC_REFERENCE, run_record
 
 
 def render(output):
-    record = run_record(CURRENT, 'wing-convergence.json')
+    record = run_record(AERODYNAMIC_REFERENCE, 'wing-convergence.json')
     fig, axes = plt.subplots(3, 3, figsize=(13, 10), layout='constrained')
     for row, (reverse, beta, title) in enumerate([(False, 0, 'Forward'), (True, 0, 'Reversed chord'), (False, 20, 'Forward, beta 20°')]):
         selected = [c for c in record['cases'] if c['reverseChord'] == reverse and c['beta_deg'] == beta]
@@ -32,7 +32,7 @@ def render(output):
     for suffix in ('svg', 'png'):
         fig.savefig(output / f'convergence.{suffix}', dpi=140, metadata={'Date': None} if suffix == 'svg' else None)
     plt.close(fig)
-    candidate = run_record(CURRENT, 'wing-candidate-check.json')
+    candidate = run_record(AERODYNAMIC_REFERENCE, 'wing-candidate-check.json')
     fig, axes = plt.subplots(2, 3, figsize=(13, 7.5), layout='constrained')
     for row, case in enumerate(candidate['cases']):
         for column, (key, label) in enumerate([('CLtot', 'Lift CL'), ('CDi', 'Induced drag CDi'), ('CMytot', 'Pitching moment CMy')]):
@@ -44,7 +44,7 @@ def render(output):
             ax.text(.03, .97, f"Max absolute difference {case['maxAbsoluteInterpolationError'][key]:.3g}", transform=ax.transAxes, va='top', fontsize=8)
     axes[0, 0].legend(fontsize=8, loc='lower right')
     design = candidate['design']
-    fig.suptitle('Interpolation check at the selected trial geometry', fontsize=16, weight='bold')
+    fig.suptitle('Interpolation check at an off-grid reference geometry', fontsize=16, weight='bold')
     fig.supxlabel(f"AR {design['sail_AR']:.3f} · camber scale {design['camber_scale']:.3f} · mesh 24 · wake 5\nReference section thickness · wing area 1 m²", fontsize=10)
     for suffix in ('svg', 'png'):
         fig.savefig(output / f'candidate-interpolation.{suffix}', dpi=140, metadata={'Date': None} if suffix == 'svg' else None)

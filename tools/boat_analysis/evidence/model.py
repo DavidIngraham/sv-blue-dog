@@ -2,7 +2,7 @@
 import argparse
 import json
 
-from .records import BASELINE, CURRENT, run_record
+from .records import BASELINE, CURRENT, AERODYNAMIC_REFERENCE, run_record
 from tools.boat_analysis.model.runtime import ROOT
 
 
@@ -16,7 +16,7 @@ def model_source(directory=BASELINE, package="BlueDogRecordedSizing"):
              f"package {package} {{", "    private import ScalarValues::*;",
              f'    doc /* Exploratory run at source revision {manifest["sourceRevision"]}.',
              f'     * Evidence: {directory.relative_to(ROOT).as_posix()}/manifest.json.',
-             ('     * Frozen conservative-policy rerun; publishing this projection does not execute a new solve. */'
+             ('     * Finite Gorge challenge rerun; publishing this projection does not execute a new solve. */'
               if directory == CURRENT else '     * This projection preserves the recorded run, not a rerun of the current model. */'),
              '    part candidate : MarineDesign::Design {']
     for name, value in search["design"].items():
@@ -41,7 +41,7 @@ def model_source(directory=BASELINE, package="BlueDogRecordedSizing"):
                 label += ' (with numerical search reserve)'
             lines += [f'    part searchConstraint{index} {{', f'        attribute label : String = "{label}";',
                       f'        attribute margin : Real = {literal(margin)};', '    }']
-        convergence = run_record(directory, 'wing-convergence.json')
+        convergence = run_record(AERODYNAMIC_REFERENCE, 'wing-convergence.json')
         for index, check in enumerate(convergence['comparisons']):
             label = f"{'reverse' if check['reverseChord'] else 'forward'}, beta {check['beta_deg']}, {check['comparison']}"
             lines += [f'    part convergence{index} {{', f'        attribute label : String = "{label}";',
@@ -89,11 +89,14 @@ def model_source(directory=BASELINE, package="BlueDogRecordedSizing"):
             "routeMargins": record["route"][:3] + record["westerlyRoute"][:3],
             "restoringMomentsNm": [c["minimumInteriorRestoring_Nm"] for c in record["recovery"]],
         }
-        label = "conservative primary" if directory == CURRENT and name == "nominal" else name
+        label = "primary" if directory == CURRENT and name == "nominal" else name
         lines += [f"    part {name} : BlueDogSizingEvidence::Scenario {{", f'        attribute :>> label = "{label}";']
         if directory == CURRENT:
-            margins = {**record['structure'], 'operating/energy': record['minimumOperatingMargin']}
-            for direction, route in (('easterly', record['route']), ('westerly', record['westerlyRoute'])):
+            margins = {**record['structure'], 'operating/peak power': record['minimumOperatingMargin']}
+            accepted_directions = [('westerly', record['westerlyRoute'])]
+            if search.get('requiresEastProgress', True):
+                accepted_directions.append(('easterly', record['route']))
+            for direction, route in accepted_directions:
                 margins.update({f'{direction} {key}': value for key, value in zip(('downstream progress', 'upstream progress', 'duration'), route[:3])})
             detail = '; '.join(f'{key}: {value:.4g}' for key, value in sorted(margins.items(), key=lambda item: item[1])[:3])
             if not record['numericallyBalanced']:
@@ -102,7 +105,12 @@ def model_source(directory=BASELINE, package="BlueDogRecordedSizing"):
             for direction, route in (('easterly', record['route']), ('westerly', record['westerlyRoute'])):
                 lines += [f'        attribute {direction}DownstreamMps : Real = {literal(route[3])};',
                           f'        attribute {direction}UpstreamMps : Real = {literal(route[4])};',
-                          f'        attribute {direction}TimeLabel : String = if {direction}DownstreamMps <= 0 or {direction}UpstreamMps <= 0 ? "No completion (duration penalty)" else "{route[5]:.4g}";']
+                          f'        attribute {direction}TimeLabel : String = if not numericallyBalanced or diagnosticControlCases > 0 ? "Diagnostic only" else if {direction}DownstreamMps <= 0 or {direction}UpstreamMps <= 0 ? "No completion (duration penalty)" else "{route[5]:.4g}";']
+        if directory == CURRENT:
+            accepted = record['westerlyRoute'][:3]
+            if search.get('requiresEastProgress', True):
+                accepted += record['route'][:3]
+            lines += [f"        attribute :>> acceptanceRouteMargins = {vector(accepted)};"]
         lines += [f"        attribute :>> {key} = {literal(value)};" for key, value in scalar.items()]
         lines += [f"        attribute :>> {key} = {vector(value)};" for key, value in sequence.items()]
         lines += ["    }", f"    analysis {name}Review : BlueDogSizingEvidence::Review {{ subject :>> scenario = {name}; }}"]
@@ -113,9 +121,9 @@ def model_source(directory=BASELINE, package="BlueDogRecordedSizing"):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
-    parser.add_argument("--current", action="store_true", help="Project the current conservative run, preserving historical instances")
+    parser.add_argument("--current", action="store_true", help="Project the current Gorge run, preserving historical instances")
     args = parser.parse_args()
-    path = ROOT / ("models/evidence/conservative-2026-10-11.sysml" if args.current else "models/evidence/coupled-2026-10-10.sysml")
+    path = ROOT / ("models/evidence/current-sizing.sysml" if args.current else "models/evidence/coupled-2026-10-10.sysml")
     source = model_source(CURRENT, "BlueDogCurrentSizing") if args.current else model_source()
     if args.check:
         if path.read_text(encoding="utf-8") != source:

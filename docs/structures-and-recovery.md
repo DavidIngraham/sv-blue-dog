@@ -61,6 +61,13 @@ The current trial has positive sealed-wing roll samples but includes pitch-unsta
 ```sysml-report BlueDogEvidenceDocuments::Recovery
 ```
 
+<details>
+<summary>Static recovery curves for the current candidate</summary>
+
+![Restoring moment versus heel for the current 2.009 m candidate, comparing sealed, freely flooded and water-retaining wing states. Crosses mark pitch-unstable equilibria.](figures/coupled-recovery.svg)
+
+</details>
+
 The model owns material assumptions, numerical allocations, practical handling constraints and their rationale. Wet coupons, assembly proof tests, ingress/drainage and dynamic releases must replace those assumptions with evidence before qualification.
 
 [Sizing method](sizing.md) · [Recorded numerical evidence](results.md)

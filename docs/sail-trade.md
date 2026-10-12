@@ -101,17 +101,17 @@ The drag plots show **induced drag only**, not total sail drag or boat performan
 
 The direction comparison shows raw solver coordinates. Reversing the chord array is a geometric sensitivity experiment, not a validated opposite-tack polar. The optimization adapter separately transforms angle, lift and moment signs when representing reverse flow; these plots do not apply that transformation.
 
-We also run VSPAERO directly at the selected trial's aspect ratio and camber to check interpolation. The comparison uses the same reference thickness, unit area, mesh and wake settings as the response grid. It does not test the trial's thicker section or validate its physical performance; the alpha range includes points outside the restricted sizing domain.
+A direct VSPAERO experiment at aspect ratio 4.890 and camber scale 1.132 checks interpolation between grid samples. The comparison uses the same reference thickness, unit area, mesh and wake settings as the response grid. It does not test a thicker manufactured section or validate physical performance; the alpha range includes points outside the restricted sizing domain.
 
-![Direct VSPAERO versus interpolation at the selected trial aspect ratio and camber](https://davidingraham.github.io/sv-blue-dog/assets/vsp/candidate-interpolation.svg)
+![Direct VSPAERO versus interpolation at aspect ratio 4.890 and camber scale 1.132](https://davidingraham.github.io/sv-blue-dog/assets/vsp/candidate-interpolation.svg)
 
-*Direct VSPAERO results compared with grid interpolation at the trial’s aspect ratio and camber.*
+*Direct VSPAERO results compared with grid interpolation at the off-grid reference geometry.*
 
 ### What these results can establish
 
 These runs support exploratory interpolation and sensitivity studies inside the sampled response grid. The plotted responses show the influence of camber and aspect ratio and the need to retain aerodynamic moments when sizing the trim actuator. They do not select a winning sail architecture or establish reliable performance bounds.
 
-Primary sizing now uses the [conservative aerodynamic policy](../models/analyses/aerodynamic-policy.sysml): reduced lift credit, increased drag, an independent pitching-moment allowance, nominal incidence limited to −4° through 8°, and sailing heel limited to ±20°. The geometry variables remain free. The rerun reached a near-feasible trial but did not clear the coarse acceptance tolerance or establish a minimum length. Additional adverse aerodynamic assumptions are applied in replay. These factors are provisional engineering judgments, not measured confidence intervals or a demonstrated stall boundary; the [current results](results.md) must be read with that qualification.
+Primary sizing now uses the [conservative aerodynamic policy](../models/analyses/aerodynamic-policy.sysml): reduced lift credit, increased drag, an independent pitching-moment allowance, nominal incidence limited to −4° through 8°, and sailing heel limited to ±20°. The geometry variables remain free. The [sizing results](results.md) report the current candidate and convergence outcome. Additional adverse aerodynamic assumptions are applied in replay. These factors are provisional engineering judgments, not measured confidence intervals or a demonstrated stall boundary; the [current results](results.md) must be read with that qualification.
 
 VLM assumes attached, inviscid flow and a prescribed shedding edge. This CAD section has a rounded edge, making that shedding assumption particularly important. Increasing lift at the high-alpha endpoints does not demonstrate absence of stall. Broadside sailing, separation, real low-Re drag, both-tack transitions, gust response, mast interference and tail/elevator control are not validated here. No tail-controlled wing or soft-sail simulation is included in this dataset. The authoritative [aerodynamic decision and evidence gaps](../models/vehicle/decisions.sysml) retain those limits.
 
