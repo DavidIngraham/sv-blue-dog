@@ -86,6 +86,11 @@ def test_profiles_keep_safety_constraints_and_report_east():
     extra = set(annual.constraint_names)-set(challenge.constraint_names)
     assert extra == {'easterly downstream progress','easterly upstream progress','easterly duration'}
     for i,name in enumerate(challenge.constraint_names):
+        if name=='voyageEnergyMargin':
+            # Requiring both directions uses the longer passage for storage.
+            assert b['ineq'][annual.constraint_names.index(name)] <= a['ineq'][i]
+            assert b['concept']['passageHours'] >= a['concept']['passageHours']
+            continue
         assert a['ineq'][i] == pytest.approx(b['ineq'][annual.constraint_names.index(name)])
     np.testing.assert_allclose(a['route'],b['route'])
     np.testing.assert_allclose(a['westerlyRoute'],b['westerlyRoute'])

@@ -194,7 +194,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             cost[~permitted] = math.inf
             choice = int(np.argmin(cost))
             if not math.isfinite(cost[choice]):
-                return result('incomplete','no_safe_control_in_controller_search')
+                return result('incomplete','performance_model_outside_coverage' if performance and not performance.covered(state.wind_mps) else 'no_safe_control_in_controller_search')
             heading = None if math.isnan(headings[choice]) else headings[choice]
             if turn[choice]:
                 turn_remaining = maneuver_time
