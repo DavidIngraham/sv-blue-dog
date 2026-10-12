@@ -2,6 +2,7 @@ package BlueDogMissionSimulation {
     private import ScalarValues::*;
     part scenarioPolicy {
         attribute stepSeconds : Real = 30;
+        attribute controlPeriodSeconds : Real = 30;
         attribute horizonHours : Real = 240;
         attribute seed : Integer = 20261011;
         attribute ensembleCount : Integer = 32;
@@ -10,7 +11,7 @@ package BlueDogMissionSimulation {
         attribute maneuverSeconds : Real = 15;
         attribute gateApproachM : Real = 80;
         attribute completionDeadlineEnabled : Boolean = false;
-        metadata rationale : ModelingMetadata::Rationale { text = "Numerical campaign settings, not challenge requirements. A run that reaches its horizon before finishing is censored, not a failed deadline. Seeded independent scenario streams permit reproducible paired design comparisons. Repeat with smaller time steps and longer horizons before interpreting an ensemble."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Numerical campaign settings, not challenge requirements. A run that reaches its horizon before finishing is censored, not a failed deadline. Seeded independent scenario streams permit reproducible paired design comparisons. Controller updates have their own fixed period; refining integration does not change the guidance policy or shorten maneuver delay. Repeat with smaller time steps and longer horizons before interpreting an ensemble."; }
     }
     part conceptualVessel {
         attribute batteryWh : Real = 500;
@@ -59,6 +60,7 @@ package BlueDogMissionSimulation {
     analysis Inputs {
         out attribute gateNames : String [4] ordered nonunique = TransGorgeCourse::policy.gateNames;
         out attribute gateDirections : Integer [4] ordered nonunique = TransGorgeCourse::policy.gateDirections;
+        out attribute controlPeriodSeconds : Real = scenarioPolicy.controlPeriodSeconds;
         out attribute gateApproachM : Real = scenarioPolicy.gateApproachM;
         out attribute time : Real [6] ordered nonunique = (scenarioPolicy.stepSeconds,scenarioPolicy.horizonHours,scenarioPolicy.forecastSeconds,scenarioPolicy.routeLookaheadM,scenarioPolicy.maneuverSeconds,scenarioPolicy.seed);
         out attribute energy : Real [8] ordered nonunique = (conceptualVessel.batteryWh,conceptualVessel.initialEnergyWh,conceptualVessel.protectedReserveWh,conceptualVessel.baseLoadW,conceptualVessel.maneuverEnergyWh,conceptualVessel.solarPeakW,conceptualVessel.solarEfficiency,conceptualVessel.dischargeEfficiency);

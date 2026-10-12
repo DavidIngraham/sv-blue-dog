@@ -72,6 +72,9 @@ def direction(route, distance):
 def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), seed=0,
              stochastic=False, save_every=10, classify=evaluate_outcome):
     dt, hours, forecast, lookahead, maneuver_time, _ = inputs['time']
+    control_period = inputs['controlPeriodSeconds']
+    if not 0 <= maneuver_time <= control_period or control_period <= 0:
+        raise ValueError('Maneuver delay must fit the positive control period')
     capacity, stored, reserve, load, maneuver_wh, solar, charging, discharge = inputs['energy']
     if dt <= 0 or hours <= 0 or not 0 < reserve < stored <= capacity or not 0 < discharge <= 1:
         raise ValueError('Invalid mission time or energy inputs')
@@ -103,7 +106,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         if not history or history[-1][0] != seconds:
             history.append([seconds,*position,stored,cause,seconds>=comms_until])
         return Result(verdict,cause,seconds,crossing_log,history,event_log,minimum,distance)
-    for step in range(math.ceil(hours*3600/dt)):
+    step, next_control, turn_remaining = 0, 0., 0.
+    while seconds < hours*3600:
         while event_index < len(event_list) and event_list[event_index].seconds <= seconds:
             event = event_list[event_index]; event_index += 1
             event_log.append({'seconds':seconds,'kind':event.kind})
@@ -117,53 +121,98 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 return result('incomplete','terminal_failure')
             elif event.kind != 'communications_loss':
                 raise ValueError('Unknown mission event: '+event.kind)
-        interval = min(dt,hours*3600-seconds)
         state = weather.at(seconds)
         nearest = route.project(Point(position))
         current = direction(route, nearest)*state.current_mps
-        progress = leg.project(Point(position))
-        target = np.array(leg.interpolate(min(leg.length,progress+lookahead)).coords[0])
-        desired = math.degrees(math.atan2(*(target-position)[::-1]))
-        # Cartesian heading east=0; meteorological wind-from north=0.
-        headings = np.unique(np.r_[np.arange(0,360,10), desired % 360])
-        radians = np.deg2rad(headings)
-        wind_angle = 90-state.wind_from_deg
-        relative = np.abs((headings-wind_angle+180)%360-180)
-        speeds = np.minimum(inputs['dimensions'][2],
-                            state.wind_mps*np.interp(relative,inputs['angles'],inputs['speedRatios']))
-        if seconds < sensor_until:
-            speeds[:] = 0
-        velocities = np.column_stack((np.cos(radians),np.sin(radians)))*speeds[:,None]+current
-        # Explicit depowered choice still drifts with current.
-        velocities = np.vstack((velocities,current));headings=np.r_[headings,np.nan]
-        turn = np.zeros(len(headings),dtype=bool) if heading is None else np.abs((headings-heading+180)%360-180)>30
-        movement = velocities*interval
-        movement[turn] = velocities[turn]*max(0,interval-maneuver_time)+current*min(interval,maneuver_time)
-        endpoints = position+movement
-        segments = linestrings(np.stack((np.tile(position,(len(endpoints),1)),endpoints),axis=1))
-        permitted = covers(water,segments)
-        # Forecast safety can rank choices but cannot override exact step safety.
-        projected = position+velocities*forecast
-        preview = contains_xy(water,projected[:,0],projected[:,1])
-        cost = np.linalg.norm(endpoints-target,axis=1)+turn*10+(~preview)*lookahead
-        mode = 'sailing' if seconds >= sensor_until else 'degraded_drift'
-        for actor_index,actor in enumerate(traffic):
-            safe, penalty = actor.assess(position,endpoints,seconds,interval,forecast,inputs['dimensions'])
-            if actor_index not in traffic_seen and (not safe.all() or np.any(penalty)):
-                traffic_seen.add(actor_index)
-                event_log.append({'seconds':seconds,'kind':'traffic_conflict_predicted','actor':actor.name,'actor_index':actor_index})
-            permitted &= safe;cost += penalty
-        cost[~permitted] = math.inf
-        choice = int(np.argmin(cost))
-        if not math.isfinite(cost[choice]):
-            return result('incomplete','no_safe_control_in_controller_search')
-        previous = position.copy();position = endpoints[choice]
-        if choice == len(headings)-1:
-            mode='depowered_drift'
-        heading = None if math.isnan(headings[choice]) else headings[choice]
+        # The sampled controller has a fixed update period independent of the
+        # integration step. Commands and maneuver delay persist between updates.
+        if seconds >= next_control:
+            progress = leg.project(Point(position))
+            target = np.array(leg.interpolate(min(leg.length,progress+lookahead)).coords[0])
+            desired = math.degrees(math.atan2(*(target-position)[::-1]))
+            # Cartesian heading east=0; meteorological wind-from north=0.
+            headings = np.unique(np.r_[np.arange(0,360,10), desired % 360])
+            radians = np.deg2rad(headings)
+            wind_angle = 90-state.wind_from_deg
+            relative = np.abs((headings-wind_angle+180)%360-180)
+            speeds = np.minimum(inputs['dimensions'][2],
+                                state.wind_mps*np.interp(relative,inputs['angles'],inputs['speedRatios']))
+            if seconds < sensor_until:
+                speeds[:] = 0
+            velocities = np.column_stack((np.cos(radians),np.sin(radians)))*speeds[:,None]+current
+            # Explicit depowered choice still drifts with current.
+            velocities = np.vstack((velocities,current));headings=np.r_[headings,np.nan]
+            turn = np.zeros(len(headings),dtype=bool) if heading is None else np.abs((headings-heading+180)%360-180)>30
+            movement = velocities*control_period
+            movement[turn] = velocities[turn]*max(0,control_period-maneuver_time)+current*min(control_period,maneuver_time)
+            endpoints = position+movement
+            segments = linestrings(np.stack((np.tile(position,(len(endpoints),1)),endpoints),axis=1))
+            permitted = covers(water,segments)
+            # A maneuver is drift followed by sailing, not a straight chord.
+            # Check both pieces before choosing a command.
+            pivots = position+np.where(turn,maneuver_time,0)[:,None]*current
+            before = linestrings(np.stack((np.tile(position,(len(endpoints),1)),pivots),axis=1))
+            after = linestrings(np.stack((pivots,endpoints),axis=1))
+            permitted &= covers(water,before) & covers(water,after)
+            # Forecast safety can rank choices but cannot override exact step safety.
+            projected = position+velocities*forecast
+            preview = contains_xy(water,projected[:,0],projected[:,1])
+            cost = np.linalg.norm(endpoints-target,axis=1)+turn*10+(~preview)*lookahead
+            mode = 'sailing' if seconds >= sensor_until else 'degraded_drift'
+            for actor_index,actor in enumerate(traffic):
+                safe, penalty = actor.assess(position,endpoints,seconds,control_period,forecast,inputs['dimensions'])
+                if actor_index not in traffic_seen and (not safe.all() or np.any(penalty)):
+                    traffic_seen.add(actor_index)
+                    event_log.append({'seconds':seconds,'kind':'traffic_conflict_predicted','actor':actor.name,'actor_index':actor_index})
+                permitted &= safe;cost += penalty
+            cost[~permitted] = math.inf
+            choice = int(np.argmin(cost))
+            if not math.isfinite(cost[choice]):
+                return result('incomplete','no_safe_control_in_controller_search')
+            heading = None if math.isnan(headings[choice]) else headings[choice]
+            if turn[choice]:
+                turn_remaining = maneuver_time
+                stored -= maneuver_wh
+                minimum = min(minimum,stored)
+            next_control = seconds+control_period
+        if stored < reserve:
+            return result('incomplete','recovery_reserve_reached')
+        boundaries = [dt, hours*3600-seconds, next_control-seconds,
+                      (math.floor(seconds/3600)+1)*3600-seconds]
+        if event_index < len(event_list):
+            boundaries.append(event_list[event_index].seconds-seconds)
+        if turn_remaining > 0:
+            boundaries.append(turn_remaining)
+        for expiry in (comms_until,sensor_until):
+            if expiry > seconds:boundaries.append(expiry-seconds)
+        interval = min(boundaries)
+        if interval <= 0:
+            raise ValueError('Non-progressing mission clock')
+        mode = 'sailing'
+        velocity = current.copy()
+        if turn_remaining > 0:
+            mode = 'maneuvering_drift'
+        elif seconds < sensor_until:
+            mode = 'degraded_drift'
+        elif heading is None:
+            mode = 'depowered_drift'
+        else:
+            relative = abs((heading-(90-state.wind_from_deg)+180)%360-180)
+            speed = min(inputs['dimensions'][2],state.wind_mps*np.interp(relative,inputs['angles'],inputs['speedRatios']))
+            radians = math.radians(heading)
+            velocity += speed*np.array([math.cos(radians),math.sin(radians)])
+        previous = position.copy(); endpoint = position+velocity*interval
+        if not water.covers(LineString([previous,endpoint])):
+            return result('incomplete','held_command_leaves_chart_domain')
+        for actor in traffic:
+            safe,_ = actor.assess(previous,np.array([endpoint]),seconds,interval,interval,inputs['dimensions'])
+            if not safe[0]:
+                return result('incomplete','held_command_exhausts_traffic_margin')
+        position = endpoint
         net = solar*state.solar_fraction*charging-load/discharge
-        stored = min(capacity,stored+net*interval/3600-(maneuver_wh if turn[choice] else 0))
+        stored = min(capacity,stored+net*interval/3600)
         minimum=min(minimum,stored);seconds+=interval;distance+=float(np.linalg.norm(position-previous))
+        turn_remaining=max(0.,turn_remaining-interval)
         for actor in traffic:
             if actor.collides(previous,position,seconds-interval,interval,inputs['dimensions']):
                 return result('safety_violation','traffic_collision')
@@ -185,4 +234,5 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 last_off_line[phase]=position.copy()
         if step % save_every == 0:
             history.append([seconds,*position,stored,mode,seconds>=comms_until])
+        step += 1
     return result('censored','computational_horizon')

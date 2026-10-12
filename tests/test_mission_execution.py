@@ -12,7 +12,7 @@ def fixture():
     water=box(-1500,-500,500,500)
     gates={'eastGate':LineString([(0,100),(0,-100)]),
            'westGate':LineString([(-1000,100),(-1000,-100)])}
-    inputs={'gateNames':['eastGate','westGate','westGate','eastGate'], 'gateDirections':[-1,-1,1,1], 'gateApproachM':80, 'time':[10,4,30,80,2,1], 'energy':[500,500,60,5,.01,40,.85,.9],
+    inputs={'controlPeriodSeconds':10, 'gateNames':['eastGate','westGate','westGate','eastGate'], 'gateDirections':[-1,-1,1,1], 'gateApproachM':80, 'time':[10,4,30,80,2,1], 'energy':[500,500,60,5,.01,40,.85,.9],
             'dimensions':[2,.8,3], 'angles':[0,35,45,60,90,135,180],
             'speedRatios':[0,0,.28,.36,.45,.38,.3], 'weather':[270,7,.4,36,.2,.85,.8,.15,.8,.08,.03,6,18,8]}
     return inputs,route,water,gates
@@ -125,3 +125,20 @@ def test_blocked_traffic_domain_stops_instead_of_inventing_safe_control():
     assert r.outcome=='incomplete'
     assert r.cause=='no_safe_control_in_controller_search'
     assert r.elapsed_seconds==0
+
+
+
+def test_integration_refinement_preserves_fixed_controller_behavior():
+    results=[]
+    for dt in (10,5,2.5):
+        inputs,route,water,gates=fixture();inputs['time'][0]=dt
+        results.append(simulate(inputs,route,water,gates))
+    assert all(r.outcome=='qualified_completion' for r in results)
+    assert max(r.elapsed_seconds for r in results)-min(r.elapsed_seconds for r in results)<=10
+    assert max(r.distance_m for r in results)/min(r.distance_m for r in results)<1.01
+
+
+def test_intervention_is_applied_at_its_time_between_integration_samples():
+    r=simulate(*fixture(),events=[Event(7,'operator_intervention')])
+    assert r.outcome=='disqualified'
+    assert r.elapsed_seconds==7
