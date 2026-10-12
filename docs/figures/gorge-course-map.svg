@@ -125,7 +125,7 @@
 <polyline points="185.7,197.1 105.7,146.1" fill="none" stroke="#81929c" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
 <text x="105.7" y="154.1" font-size="18" >Stevenson</text>
 <circle cx="157.6" cy="262.4" r="6" fill="#96396a"/>
-<text x="127.6" y="240.4" font-size="15" >Light 7</text>
+<text x="72.6" y="240.4" font-size="15" >Light 7</text>
 <circle cx="1008.0" cy="336.4" r="6" fill="#96396a"/>
 <text x="978.0" y="314.4" font-size="15" >Buoy 69</text>
 <text x="230.0" y="397.0" font-size="18" >Chart-based reference course between proposed gates</text>

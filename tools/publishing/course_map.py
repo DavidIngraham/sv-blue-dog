@@ -82,7 +82,7 @@ def render():
         point=gates[name].interpolate(.5,normalized=True)
         x,y=xy(*frame.unproject(point.x,point.y))
         parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6" fill="#96396a"/>')
-        text(x-30,y-22,label,15)
+        text(x-(85 if name=='westGate' else 30),y-22,label,15)
     text(230, 397, 'Chart-based reference course between proposed gates', 18)
     # Geographic distance scale: 111.195 km per latitude degree.
     bar = 10 / 111.195 * scale
