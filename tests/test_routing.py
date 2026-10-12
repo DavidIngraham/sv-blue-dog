@@ -32,3 +32,15 @@ def test_current_rounding_and_return_remain_chart_clear():
     assert sum(path.length for path in paths)==pytest.approx(2*values['referenceLegLengthM'],abs=.01)
     assert not paths[1].intersects(groups['ROUNDING_EXCLUSION'])
     assert not paths[2].intersects(groups['ROUNDING_EXCLUSION'])
+
+
+def test_commercial_encounters_exclude_archived_reaches_outside_course():
+    from tools.boat_analysis.environment.routing import build
+    from tools.boat_analysis.mission.engine import mission_inputs
+    from tools.boat_analysis.mission.campaign import traffic_scenarios
+    _,water,groups,_,route=build()
+    inputs=mission_inputs()
+    actors=traffic_scenarios(inputs,route,water,groups,20261012)
+    commercial=[a for a in actors if a.name in ('commercial tow','passenger vessel')]
+    assert commercial
+    assert all(route.envelope.covers(a.track) for a in commercial)

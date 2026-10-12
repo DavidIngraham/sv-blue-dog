@@ -38,7 +38,7 @@ def render(source, destination):
     axes[0].set(title='Simulated tracks between the marker-based gates',
                 xlabel='East of local origin (km)',ylabel='North of local origin (km)')
     axes[0].set_aspect('equal',adjustable='datalim')
-    axes[0].text(.01,.02,'Orange: longest realization; blue: others; red ×: incomplete run',
+    axes[0].text(.01,.02,'Orange: longest realization; blue: others; red ×: unfinished run',
                  transform=axes[0].transAxes,fontsize=9)
     completed=[r['elapsed_seconds']/3600 for r in records if r['outcome']=='qualified_completion']
     axes[1].hist(completed,bins='auto',color='#286d8c',edgecolor='white')

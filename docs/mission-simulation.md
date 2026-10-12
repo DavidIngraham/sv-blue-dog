@@ -48,17 +48,19 @@ VesselFinder's accessible record does not provide a complete traffic census or a
 
 The useful early outputs are failure mechanisms and sensitivity to assumptions. The fraction of synthetic scenarios completed must not be presented as the probability that the real boat will complete the Gorge challenge.
 
-## First experiment
+## Current course experiment
 
-The [archived campaign](../evidence/runs/2026-10-11-mission/mission-campaign.json) records the source hashes, scenario seeds and voyage histories. Of 32 seeded voyages, 15 completed the simulated gate sequence and 17 stopped because the simple controller could not find a chart-contained maneuver. This is a route-following limitation to investigate, not a conclusion that a sailing vessel cannot complete the course.
+The [recorded Bingen–Stevenson campaign](../evidence/runs/2026-10-12-bingen-mission/mission-campaign.json) preserves the model inputs, source hashes, seeds and voyage histories. The chart-clear reference circuit is **65.786 km**, including the port rounding of buoy 16. The outbound reference path is 32.648 km; the return path and rounding make the two halves slightly different. Sailing tracks include additional tacks and avoidance.
 
-Completed voyages took 21.5 to 149.7 hours. In the longest realization, the synthetic wind switched easterly at hour 10 and remained there until hour 140; the upstream finish came after the westerly returned. The controller considered 17 potentially conflicting traffic encounters across the ensemble. Its geometric screens and stops do not establish full Navigation Rules compliance. The allocated electrical budget protected recovery reserve in these cases; it does not demonstrate the installed boat's endurance.
+Of 32 seeded voyages, **28 completed**, **three reached the 240-hour numerical horizon**, and **one stopped when the controller could not find a safe maneuver**. Completed voyages took **10.45–30.19 hours**. The horizon is an analysis setting, not a challenge deadline. All three censored cases passed the north and west checkpoints at buoy 16 but did not cross the south checkpoint: the rounding exposes a local guidance limitation worth investigating.
 
-![Thirty-two synthetic voyage tracks, completion times and battery histories. Red crosses mark incomplete runs; the longest voyage is orange.](figures/mission-campaign.svg)
+The controller considered **41 potentially conflicting traffic encounters** across the ensemble. Commercial appearances are restricted to charted recommended-track fragments inside the active route's bounding area; archived chart coverage beyond the course does not dilute those arrivals. These are synthetic scenarios, not AIS replay or proof of Navigation Rules compliance. Stored energy stayed above the conceptual boat's allocated reserve; that does not establish endurance for the optimized candidate.
 
-A numerical check caught an important distinction: the integration step must not determine how often the controller changes commands. With separate clocks and persistent maneuver delays, the short deterministic test finishes at 1,230, 1,225 and 1,222.5 seconds for 10-, 5- and 2.5-second integration steps. That checks the basic implementation; it does not establish convergence of every full-course encounter. Treat the ensemble times as exploratory until broader sensitivity checks and performance correlation support design comparisons.
+![Thirty-two synthetic Bingen–Stevenson voyage tracks, completion times and battery histories. Red crosses mark unfinished runs; the longest realization is orange.](figures/mission-campaign.svg)
 
-The next useful step is to inspect the stopped cases, plan tacks with adequate maneuver room, and rerun the same scenarios. These counts describe this controller and these declared assumptions, not the real boat's mission-success probability.
+A numerical check separates the integration step from how often the controller changes commands. The deterministic test checks that refinement of time integration does not shorten maneuver delays. The rounding test separately requires the north, west and south checkpoints in order while excluding the buoy's clearance disk.
+
+The next useful step is to improve local tack planning around the rounding mark and replay the same seeds, then replace the conceptual polar and electrical budget with a named sizing candidate. These counts describe the controller and declared assumptions, not the real boat's mission-success probability.
 
 ## Increasing fidelity without changing the question
 

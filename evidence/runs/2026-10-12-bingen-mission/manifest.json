@@ -1,0 +1,18 @@
+{
+  "sourceRevision": "6716c9a12301ba3c91d1ceb2190de4ef00a884f9",
+  "files": {
+    "mission-campaign.json": {
+      "sha256": "f9ba5eda9a4aac375dbfdabe7cc23b4d457ffc7803861b3251e18b3503923a1e"
+    }
+  },
+  "scope": "Bingen buoy 39 to Stevenson buoy 16 port rounding and return. Virtual conceptual vessel; uncalibrated weather and traffic; no physical qualification.",
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.5.3",
+      "shapely": "2.2.0",
+      "scipy": "1.18.1"
+    }
+  }
+}
