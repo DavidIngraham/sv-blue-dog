@@ -5,7 +5,7 @@ package BlueDogOperatingEnvironment {
         doc /* Provisional operating and energy allocations. Physical values remain separate from numerical optimizer tolerances. */
         out attribute foil_alpha_limit_deg : Real = 12;
         out attribute rudder_inflow_ratio : Real = 0.8;
-        out attribute hinge_fraction : Real = 0.02;
+        out attribute hinge_fraction : Real = RealFunctions::abs(BlueDogConceptCredibility::policy.rudderStockChordFraction-BlueDogConceptCredibility::policy.rudderLoadChordFraction);
         out attribute friction_Nm : Real = 0.02;
         out attribute max_froude : Real = 0.65;
         out attribute min_wing_Re : Real = 60000;

@@ -5,7 +5,7 @@ package MarineStructures {
         in p : Real [41] ordered nonunique;
         in m : Real [21] ordered nonunique;
         in g : Real [60] ordered nonunique;
-        in r : Real [10] ordered nonunique;
+        in r : Real [12] ordered nonunique;
         in loads : Real [3] ordered nonunique;
         in waterline : Real;
         doc /* g extends the mass geometry vector with deck area at 52 and finite-laminate
@@ -52,7 +52,13 @@ package MarineStructures {
         attribute wingPackingMargin : Real = 1-m#(15)/g#(17);
         attribute keelPackingMargin : Real = 1-m#(16)/g#(29);
         attribute rudderPackingMargin : Real = 1-m#(17)/g#(41);
+        attribute appendages : Real [5] ordered nonunique = MarineAppendages::GeometryMargins(d,r#(11),r#(12));
+        attribute keelAspectMargin : Real = appendages#(1);
+        attribute rudderAspectMargin : Real = appendages#(2);
+        attribute keelRootMargin : Real = appendages#(3);
+        attribute rudderStockMargin : Real = appendages#(4);
+        attribute sweptSeparationMargin : Real = appendages#(5);
         return result : Real [*] ordered nonunique;
-        (hullStressMargin,wingStressMargin,keelStressMargin,rudderStressMargin,hullDeflectionMargin,wingDeflectionMargin,keelDeflectionMargin,rudderDeflectionMargin,panelStressMargin,panelDeflectionMargin,bodyHandlingMargin,wingHandlingMargin,keelHandlingMargin,batteryHandlingMargin,freeboardMargin,reserveVolumeMargin,launchDepthMargin,panelAreaMargin,hullPackingMargin,wingPackingMargin,keelPackingMargin,rudderPackingMargin)
+        (hullStressMargin,wingStressMargin,keelStressMargin,rudderStressMargin,hullDeflectionMargin,wingDeflectionMargin,keelDeflectionMargin,rudderDeflectionMargin,panelStressMargin,panelDeflectionMargin,bodyHandlingMargin,wingHandlingMargin,keelHandlingMargin,batteryHandlingMargin,freeboardMargin,reserveVolumeMargin,launchDepthMargin,panelAreaMargin,hullPackingMargin,wingPackingMargin,keelPackingMargin,rudderPackingMargin,keelAspectMargin,rudderAspectMargin,keelRootMargin,rudderStockMargin,sweptSeparationMargin)
     }
 }

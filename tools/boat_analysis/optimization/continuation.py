@@ -95,18 +95,26 @@ def run(target=1.2, step=.2, minimum_step=.025, budget=60, extensions=2):
     p.checkpoint_path = ROOT / '.tools/continuation-progress.json'
     saved = run_record(CURRENT, 'coupled-sizing-search.json')
     accepted = np.array(saved['normalizedDesignAndStates'])
-    if not p.feasible(accepted):
-        raise ValueError('The archived starting candidate is not currently feasible')
-    length = float((p.lo + accepted*p.span)[0])
-    if not p.lo[0] <= target < length:
-        raise ValueError('Target must be below the seed and within model bounds')
-    hashes = source_hashes(list(saved['sourceHashes']) + [
+    hashes = source_hashes(list(saved['sourceHashes']) + list(p.structure.contract['sourceHashes']) + [
         'tools/boat_analysis/optimization/continuation.py',
         'tools/boat_analysis/optimization/search.py',
         str((CURRENT/'coupled-sizing-search.json').relative_to(ROOT))])
+    seed_restoration = None
+    if not p.feasible(accepted):
+        seed_length = float((p.lo + accepted*p.span)[0])
+        seed_restoration = solve_stage(p, accepted, seed_length, budget, extensions)
+        validate(hashes)
+        seed_restoration.update(sourceHashes=hashes, qualified=False)
+        output_path('sizing-seed-restoration.json').write_text(json.dumps(seed_restoration, indent=2)+'\n')
+        if not seed_restoration['feasible']:
+            raise ValueError('Seed restoration failed under current constraints; inspect sizing-seed-restoration.json before reducing length')
+        accepted = np.array(seed_restoration['normalizedDesignAndStates'])
+    length = float((p.lo + accepted*p.span)[0])
+    if not p.lo[0] <= target < length:
+        raise ValueError('Target must be below the seed and within model bounds')
     report = dict(sourceHashes=hashes, seedRun=str(CURRENT.name), targetM=target,
                   settings=dict(stepM=step, minimumStepM=minimum_step, budget=budget, extensions=extensions),
-                  attempts=[], qualified=False, completed=False,
+                  attempts=[], seedRestoration=seed_restoration, qualified=False, completed=False,
                   scope='Fixed-length coarse feasibility continuation; no physical requirements relaxed. Not a minimum-size proof or refined verification.')
     started = time.time()
     best_infeasible = None

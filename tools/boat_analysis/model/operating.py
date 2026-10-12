@@ -82,7 +82,7 @@ class StructureKernel:
         self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
     def evaluate(self,design,parameters,mass,geometry,loads,waterline):
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,parameters,mass,geometry,self.contract['structure'],loads]]
-        if [a.shape for a in arrays]!=[(29,),(41,),(21,),(60,),(10,),(3,)] or any(not np.isfinite(a).all() for a in arrays) or not np.isfinite(waterline):raise ValueError('Invalid structural inputs')
+        if [a.shape for a in arrays]!=[(29,),(41,),(21,),(60,),(12,),(3,)] or any(not np.isfinite(a).all() for a in arrays) or not np.isfinite(waterline):raise ValueError('Invalid structural inputs')
         args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
         with _LOCK:
             out=Sequence()

@@ -58,7 +58,7 @@ def test_archived_campaign_and_model_projection_agree():
     assert (ROOT/'models/evidence/sizing-continuation.sysml').read_text()==model_source(directory)
 
 
-def test_retained_target_passes_fresh_native_evaluation():
+def test_retained_target_is_rejected_by_current_geometry_policy():
     import sys
     if sys.platform!='linux':
         pytest.skip('Native C adapter uses Linux/GCC')
@@ -67,4 +67,7 @@ def test_retained_target_passes_fresh_native_evaluation():
     record=run_record(ROOT/'evidence/runs/2026-10-12-continuation','sizing-continuation.json')
     p=Problem();z=np.array(record['smallestFeasibleZ'])
     assert (p.lo+z*p.span)[0]==pytest.approx(1.2)
-    assert p.feasible(z)
+    r=p.evaluate(z)
+    assert not p.feasible(z)
+    assert r["structure"]["rudderAspectMargin"] < -0.9
+    assert r["structure"]["rudderStockMargin"] < 0

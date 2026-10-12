@@ -1,5 +1,7 @@
 # Sizing Blue Dog for the Gorge
 
+**Current interpretation:** The archived runs below predate the appendage credibility screens now enforced by search and replay. In particular, the 1.2 m hull candidate fails the new rudder aspect-ratio and stock-location checks. These results document the former model; they do not establish feasibility under the current policy. See the [sizing method](sizing.md) for the new screens and remaining acceptance gaps.
+
 How small can I make the challenge vessel while keeping enough sailing performance, structural capacity and recovery capability? This is a [preliminary-design study](development-plan.md#virtual-design). Its inputs are the finite Gorge mission, chart-based course, manufacturing assumptions and provisional boat physics. Its output is a candidate to challenge with finer analysis and experiments before choosing dimensions for a build.
 
 ## What this search asks
