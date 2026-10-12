@@ -189,6 +189,8 @@ def _build(source_dir, output_dir):
     if source_dir == (ROOT / "docs").resolve():
         from tools.boat_analysis.evidence.aerodynamics import render
         render(output_dir / "assets/vsp")
+        from .concepts import render as render_concepts
+        render_concepts(output_dir / "assets/concepts")
     rev = revision()
     rendered = {}
     for path, source in zip(pages, sources):

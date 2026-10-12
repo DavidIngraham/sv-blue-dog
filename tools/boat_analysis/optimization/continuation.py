@@ -159,6 +159,9 @@ def run(target=1.2, step=.2, minimum_step=.025, budget=60, extensions=2, seed_ru
             accepted = np.array(attempt['normalizedDesignAndStates'])
             length = proposed
             print(f'ACCEPTED {length:.3f} m', flush=True)
+            save()  # Preserve numerical evidence before generating presentation artifacts.
+            from ..geometry.export import export_candidate
+            export_candidate(p.model, attempt['design'], ROOT/'build/analysis/concepts'/f'candidate-{length:.3f}.glb', provenance={'sourceHashes':hashes,'stageLengthM':length,'qualified':False})
         else:
             if best_infeasible is None or attempt['merit'] < best_infeasible['merit']:
                 best_infeasible = attempt

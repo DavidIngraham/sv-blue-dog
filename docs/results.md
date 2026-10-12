@@ -21,6 +21,14 @@ The 1.4 m candidate has a rudder approximately **115 mm chord by 229 mm span**. 
 
 Both the 1.2 m exploration and the subsequent 1.3 m refinement were stopped without an accepted point at those lengths. Their checkpoints are retained. This does **not** establish a minimum feasible size. The accepted 1.4 m state meets the unchanged normalized numerical tolerance of 1e-4; several margins are essentially zero.
 
+## Looking at the boat
+
+[Open the interactive 3D comparison](https://davidingraham.github.io/sv-blue-dog/assets/concepts/). Both candidates open at the same scale; orbit, zoom, switch viewpoints or download the GLB meshes. The waterline and center of gravity come from the native calculations. Rotation rings show the space swept by the wing and rudder.
+
+![Equal-scale isometric, side, front and top sketches of the 2.0 m and 1.4 m concepts.](figures/sizing-concepts.png)
+
+The sketches use the solver's outer-envelope geometry. The deep keel and tall wing explain why a shorter hull is still a substantial object to handle. Equipment installation, joints and manufacturing segmentation remain to be designed.
+
 ## What actually limits this candidate
 
 The tight nominal screens include keel, rudder and panel deflection; upstream progress; voyage energy; keel handling; and the resistance model's applicability boundary. The rudder is also almost exactly at the provisional aspect-ratio cutoff.

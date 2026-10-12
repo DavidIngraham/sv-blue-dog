@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blue Dog · sizing concepts in 3D</title>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
+<style>
+:root{color-scheme:light}body{font:17px/1.55 system-ui,sans-serif;color:#183047;background:#f5f7fa;margin:0}main{max-width:1400px;margin:auto;padding:24px}h1{font-size:clamp(28px,4vw,44px);line-height:1.1}a{color:#176a82}header p{max-width:850px}.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:24px 0}button{font:inherit;border:1px solid #9bb2bd;border-radius:7px;background:white;padding:7px 16px;cursor:pointer}button:hover,button[aria-pressed=true]{background:#dceef0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.card{background:white;border:1px solid #d6e1e7;border-radius:16px;overflow:hidden}.card h2,.card p{margin:16px 22px}.card h2{margin-bottom:0}model-viewer{width:100%;height:560px;background:linear-gradient(#f0f5f9,#fff);--poster-color:transparent}.details{padding:0 22px 20px}.stats{display:flex;gap:20px;flex-wrap:wrap}.stats strong{display:block;font-size:22px}.stats span{font-size:13px;color:#536875}.legend{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0;font-size:14px}.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px}.note{max-width:950px}.status{font-size:14px;color:#536875}.error{color:#b02d20}img{width:100%;background:white;border-radius:12px}summary{cursor:pointer;font-weight:600;margin:20px 0}@media(max-width:800px){.grid{grid-template-columns:1fr}model-viewer{height:480px}main{padding:16px}}@media(prefers-reduced-motion:reduce){model-viewer{--animation-crossfade-duration:0}}
+</style></head>
+<body><main>
+<header><a href="../../results.html">← Sizing study</a><h1>What does the smaller boat look like?</h1>
+<p>The 2.0 m starting concept and 1.4 m analysis baseline, drawn from the same geometry used for mass and buoyancy calculations. Both open at the same camera scale. Drag to orbit, scroll or pinch to zoom; focus a model and use arrow keys to rotate.</p></header>
+<div class="controls" aria-label="Common camera controls">
+<button data-orbit="45deg 72deg 4.8m">Isometric</button><button data-orbit="0deg 90deg 4.8m">Side</button><button data-orbit="90deg 90deg 4.8m">Front</button><button data-orbit="0deg 0deg 4.8m">Top</button>
+<button id="overlays" aria-pressed="true">Waterline & rotation rings</button></div>
+<div class="legend"><span><i style="background:#347ba8"></i>Hull</span><span><i style="background:#ead9a8"></i>Wing</span><span><i style="background:#21857d"></i>Keel</span><span><i style="background:#df773b"></i>Rudder</span><span><i style="background:#576375"></i>Ballast</span><span><i style="background:#ca2567"></i>Center of gravity</span></div>
+<div id="models" class="grid"></div><p id="status" class="status" role="status">Loading candidate geometry…</p>
+<p class="note">The blue plane is the calculated waterline at zero heel and fixed zero pitch. Purple rings show full wing and rudder rotation clearance. The wing is in its neutral reference pose, not a sailing trim. These are outer-envelope concept shapes: no equipment boxes, solar-panel layout, ribs, joints or bearings have been invented. Neither candidate is physically qualified.</p>
+<details><summary>Compare the four fixed views</summary><img src="sizing-concepts.png" alt="Equal-scale isometric, side, front and top views of the 2.0 and 1.4 metre concepts, showing wing, hull, keel, rudder and ballast."></details>
+<p><a href="https://github.com/DavidIngraham/sv-blue-dog/tree/main/evidence/runs/2026-10-12-finite-passage">Analysis evidence</a> · <a href="https://github.com/DavidIngraham/sv-blue-dog/blob/main/tools/boat_analysis/geometry/export.py">Geometry exporter</a></p>
+<script type="module">
+const status=document.querySelector('#status');
+try {
+ const response=await fetch('candidates.json');if(!response.ok)throw Error('Candidate metadata unavailable');
+ const candidates=await response.json();let loaded=0;
+ for(const c of candidates){
+  const card=document.createElement('section');card.className='card';
+  const title=document.createElement('h2');title.textContent=`${c.design.length_m.toFixed(1)} m hull`;card.append(title);
+  const p=document.createElement('p');p.textContent=c.design.length_m<1.5?'Current nominal sizing baseline':'Restored starting concept';card.append(p);
+  const mv=document.createElement('model-viewer');mv.setAttribute('src',c.file);mv.setAttribute('alt',`${title.textContent} Blue Dog concept: wing over hull, keel and ballast below, rudder aft.`);
+  for(const [key,value] of Object.entries({'camera-controls':'','touch-action':'pan-y','camera-orbit':'45deg 72deg 4.8m','camera-target':'0m 0.6m 0m','field-of-view':'35deg','min-camera-orbit':'auto auto 1m','max-camera-orbit':'auto auto 10m','interaction-prompt':'none','exposure':'1'}))mv.setAttribute(key,value);
+  mv.addEventListener('load',()=>{loaded++;status.textContent=`${loaded} of ${candidates.length} models loaded · dimensions in metres`;document.documentElement.dataset.models=loaded===candidates.length?'ready':'loading';});
+  mv.addEventListener('error',()=>{status.textContent='Unable to load a 3D model. Use the fixed views or download the GLB.';status.className='error';document.documentElement.dataset.models='error';});
+  card.append(mv);const details=document.createElement('div');details.className='details';
+  const stats=document.createElement('div');stats.className='stats';
+  for(const [label,value] of [['Mass',`${c.massKg.toFixed(1)} kg`],['Swept length',`${c.envelope.sweptLengthM.toFixed(2)} m`],['Keel to wing top',`${c.envelope.keelToWingHeightM.toFixed(2)} m`]]){const item=document.createElement('div'),strong=document.createElement('strong'),small=document.createElement('span');strong.textContent=value;small.textContent=label;item.append(strong,small);stats.append(item);}
+  details.append(stats);const links=document.createElement('p');for(const [label,file] of [['Download GLB',c.file],['Parameters & provenance',c.metadata]]){const a=document.createElement('a');a.href=file;a.textContent=label;links.append(a,document.createTextNode('  '));}details.append(links);card.append(details);document.querySelector('#models').append(card);
+ }
+ for(const button of document.querySelectorAll('[data-orbit]'))button.onclick=()=>{for(const mv of document.querySelectorAll('model-viewer')){mv.setAttribute('camera-orbit',button.dataset.orbit);mv.setAttribute('camera-target','0m 0.6m 0m');mv.setAttribute('field-of-view','35deg');mv.jumpCameraToGoal();}};
+ document.querySelector('#overlays').onclick=function(){const show=this.getAttribute('aria-pressed')!=='true';this.setAttribute('aria-pressed',String(show));for(const mv of document.querySelectorAll('model-viewer'))for(const m of mv.model?.materials||[]){if(m.name==='waterline'||m.name.endsWith('-sweep')){const color=[...m.pbrMetallicRoughness.baseColorFactor];color[3]=show?(m.name==='waterline'?.22:.7):0;m.pbrMetallicRoughness.setBaseColorFactor(color);}}};
+ setTimeout(()=>{if(loaded<candidates.length)status.textContent='3D loading is taking longer than expected. Fixed views and GLB downloads are available below.';},20000);
+}catch(error){status.textContent=error.message;status.className='error';document.documentElement.dataset.models='error';}
+</script></main></body></html>
