@@ -8,7 +8,7 @@ package BlueDogRequirements {
     private import BlueDog::Goals::*;
     requirement def <'M-001'> RoundTrip {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall cross the configured The Dalles departure, Bonneville turnaround and The Dalles return gates in order during one qualifying attempt. */
+        doc /* The vessel shall cross the configured Bingen departure, buoy 16 rounding checkpoints and Bingen return gates in order during one qualifying attempt. */
         comment conditions /* C-003 through C-006 govern attempt qualification. */
     }
     requirement def <'M-002'> MultiDayEndurance {
@@ -303,7 +303,7 @@ package BlueDogRequirements {
 
     requirement def <'N-010'> GorgeEnvironment {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall operate in the freshwater Columbia River reach between The Dalles and Bonneville, including opposing wind/current, short chop, traffic and submerged vegetation. */
+        doc /* The vessel shall operate in the freshwater Columbia River reach between Bingen and Stevenson, including opposing wind/current, short chop, traffic and submerged vegetation. */
         comment conditions /* Gorge-specific parameter limits and applicable shared exposure requirements apply together. */
         comment notes /* The profile excludes dam transit, ice and surf-zone launch. */
     }

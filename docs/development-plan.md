@@ -12,7 +12,7 @@ This page defines the development approach and proposed review criteria. It does
 
 ## The overall trajectory
 
-The manufacturing and wing prototype has its own learning mission. The current challenge vessel must complete one The Dalles–Bonneville–The Dalles round trip without intervention, while allowing live monitoring. Repeated operation and Hawai‘i are future missions with their own constraints and readiness evidence. They do not drive acceptance of the Gorge design.
+The manufacturing and wing prototype has its own learning mission. The current challenge vessel must complete one Bingen–Stevenson–Bingen round trip without intervention, while allowing live monitoring. Repeated operation and Hawai‘i are future missions with their own constraints and readiness evidence. They do not drive acceptance of the Gorge design.
 
 The first qualifying attempt will use a selected weather window, with westerlies as the representative Gorge case. Winter development trials and later year-round operation have separate profiles. The [weather study](operating-constraints.md#gorge-weather-and-launch-windows) belongs in mission definition and virtual validation: it asks which environments deserve performance emphasis and how wind shifts change the outcome. Before a challenge launch, the test-readiness decision must connect the actual forecast, permitted window, reserve, abort/recovery plan and trial purpose. A summer direction frequency cannot qualify a winter test or authorize a launch.
 

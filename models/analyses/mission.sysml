@@ -54,12 +54,12 @@ package BlueDogMissionSimulation {
         attribute lengthsM : Real [5] ordered nonunique = (180,6,7,8,100);
         attribute beamsM : Real [5] ordered nonunique = (24,2.5,2.5,3,18);
         attribute separationM : Real [5] ordered nonunique = (50,20,30,20,50);
-        metadata rationale : ModelingMetadata::Rationale { text = "Initial encounter hypotheses for the finite mission, not measured traffic distributions. USACE identifies tow blind spots; the commercial footprint includes tug and barges rather than a single AIS point. The accessible VesselFinder The Dalles snapshot includes passenger hulls up to 100 by 18 m but does not establish arrival frequency. Fishing/recreation are supported by the Oregon boating guide. Rates, speeds and separations are scenario allocations; calibrate with time-stamped observations before claiming probability. See evidence/course/2026-10-11/sources.json. Small craft may have no AIS. Add crossing, overtaking, anchored/drifting fishing and changing-course skiing cases independently of the random transit generator."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Initial encounter hypotheses for the finite mission, not measured traffic distributions. USACE identifies tow blind spots; the commercial footprint includes tug and barges rather than a single AIS point. The archived regional VesselFinder snapshot includes passenger hulls up to 100 by 18 m but does not establish arrival frequency. Fishing/recreation are supported by the Oregon boating guide. Rates, speeds and separations are scenario allocations; calibrate with time-stamped observations before claiming probability. See evidence/course/2026-10-11/sources.json. Small craft may have no AIS. Add crossing, overtaking, anchored/drifting fishing and changing-course skiing cases independently of the random transit generator."; }
         metadata issue : ModelingMetadata::Issue { text = "Separation domains are analysis screens, not statutory stand-offs or proof of Navigation Rules compliance. Fishing-vessel privilege depends on actual gear restriction, not the actor's label. Seasonal/daytime concentration, wakes, hidden targets and maneuver response require explicit scenario coverage."; }
     }
     analysis Inputs {
-        out attribute gateNames : String [4] ordered nonunique = TransGorgeCourse::policy.gateNames;
-        out attribute gateDirections : Integer [4] ordered nonunique = TransGorgeCourse::policy.gateDirections;
+        out attribute gateNames : String [5] ordered nonunique = TransGorgeCourse::policy.gateNames;
+        out attribute gateDirections : Integer [5] ordered nonunique = TransGorgeCourse::policy.gateDirections;
         out attribute controlPeriodSeconds : Real = scenarioPolicy.controlPeriodSeconds;
         out attribute gateApproachM : Real = scenarioPolicy.gateApproachM;
         out attribute time : Real [6] ordered nonunique = (scenarioPolicy.stepSeconds,scenarioPolicy.horizonHours,scenarioPolicy.forecastSeconds,scenarioPolicy.routeLookaheadM,scenarioPolicy.maneuverSeconds,scenarioPolicy.seed);

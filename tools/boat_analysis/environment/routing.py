@@ -109,6 +109,21 @@ def reference_route(water, start, finish, spacing):
     return route
 
 
+def rounding_paths(water, gates, route, spacing=40):
+    """Port rounding north-west-south, followed by an independently clear return."""
+    north, west, south = [gates[k].interpolate(.5, normalized=True) for k in
+                          ('westGate', 'turnGate', 'returnGate')]
+    center = ((north.x + south.x)/2, (north.y + south.y)/2)
+    radius = north.distance(south)/2
+    arcs = [LineString([(center[0]+radius*math.cos(a),center[1]+radius*math.sin(a))
+                       for a in np.linspace(start,end,19)])
+            for start,end in ((math.pi/2,math.pi),(math.pi,3*math.pi/2))]
+    if not all(water.covers(arc) for arc in arcs):
+        raise ValueError('Rounding arc outside chart-clear water')
+    back = reference_route(water,south,gates['eastGate'].interpolate(.5,normalized=True),spacing)
+    return [route,*arcs,back]
+
+
 def build():
     values = course_inputs()
     features = json.loads((ROOT/'evidence/course/2026-10-11/chart-features.geojson').read_text())['features']
@@ -117,11 +132,15 @@ def build():
     works = Point(LocalFrame().project(lon,lat)).buffer(radius)
     groups['TEMPORARY_WORKS'] = works
     water = water.difference(works)
-    gates = {k: marker_gate(values[k]) for k in ['eastGate', 'westGate']}
+    gates = {k: marker_gate(values[k]) for k in ['eastGate', 'westGate', 'turnGate', 'returnGate']}
+    marker = Point(LocalFrame().project(*values['westGate'][:2]))
+    groups['ROUNDING_EXCLUSION'] = marker.buffer(values['westGate'][3])
+    water = water.difference(groups['ROUNDING_EXCLUSION'])
     route = reference_route(water, gates['eastGate'].interpolate(.5, normalized=True),
                             gates['westGate'].interpolate(.5, normalized=True), values['routing'][4])
-    if abs(route.length - values['referenceLegLengthM']) > 0.01:
-        raise ValueError('Sizing reference length differs from chart route; update the model allocation')
+    length = sum(p.length for p in rounding_paths(water,gates,route,values['routing'][4]))/2
+    if abs(length - values['referenceLegLengthM']) > 0.01:
+        raise ValueError(f'Sizing reference length differs from chart route: {length}; update the model allocation')
     return values, water, groups, gates, route
 
 

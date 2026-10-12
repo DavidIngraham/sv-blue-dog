@@ -14,29 +14,29 @@ package TransGorgeCourse {
     }
 
     part west : MarkerGate {
-        attribute :>> markerName = "Bonneville Pool Light 7";
-        attribute :>> lightListNumber = 11790;
-        attribute :>> longitudeDeg = -121.9105283;
-        attribute :>> latitudeDeg = 45.655125;
-        attribute :>> bearingFromMarkerDeg = 135;
+        attribute :>> markerName = "Bonneville Pool Lighted Buoy 16";
+        attribute :>> lightListNumber = 11835;
+        attribute :>> longitudeDeg = -121.8676486;
+        attribute :>> latitudeDeg = 45.6918586;
+        attribute :>> bearingFromMarkerDeg = 0;
         attribute :>> nearOffsetM = 80;
         attribute :>> farOffsetM = 220;
-        attribute :>> sourceCell = "US5WA3CJ";
-        attribute :>> sourceEditionUpdate = "2.1";
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed Bonneville-reach virtual turnaround, upstream of the dam/lock approaches. Light 7 supplies a fixed reference; the gate extends southeast into charted water, not to the structure. NOAA ENC coordinates agree with USCG LLNR 11790 in the 2026-10-07 Light List. Offset distances are project allocations, not statutory stand-offs. The gate overlaps the navigation fairway; a crossing must not impede channel traffic."; }
+        attribute :>> sourceCell = "US5WA3DK";
+        attribute :>> sourceEditionUpdate = "2.0";
+        metadata rationale : ModelingMetadata::Rationale { text = "Western rounding mark near Stevenson: NOAA ENC US5WA3DK and USCG LLNR 11835 identify red Lighted Buoy 16. Round to port through north, west and south offset checkpoints in that order. Use the nominal charted position, never contact or attach to the aid. The 80 m exclusion and 220 m checkpoint extent are project allocations, not statutory stand-offs."; }
     }
 
     part east : MarkerGate {
-        attribute :>> markerName = "Bonneville Pool Lighted Buoy 69";
-        attribute :>> lightListNumber = 12130;
-        attribute :>> longitudeDeg = -121.1478525;
-        attribute :>> latitudeDeg = 45.6092578;
+        attribute :>> markerName = "Bonneville Pool Lighted Buoy 39";
+        attribute :>> lightListNumber = 11985;
+        attribute :>> longitudeDeg = -121.461773;
+        attribute :>> latitudeDeg = 45.7035806;
         attribute :>> bearingFromMarkerDeg = 180;
         attribute :>> nearOffsetM = 80;
         attribute :>> farOffsetM = 220;
-        attribute :>> sourceCell = "US5WA3CT";
+        attribute :>> sourceCell = "US5WA3DP";
         attribute :>> sourceEditionUpdate = "2.0";
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed start/finish west of The Dalles highway bridge and dam restrictions. Use the published nominal buoy position, not its instantaneous swinging position. The southward offset lies in charted depth areas; the gate overlaps the fairway. No rounding of, contact with, or attachment to the buoy is required. NOAA ENC and 2026-10-07 Light List LLNR 12130 identify the reference."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Bingen start/finish reference downstream of Bingen Point boat ramp: green Lighted Buoy 39, NOAA ENC US5WA3DP and USCG LLNR 11985. The virtual gate extends south from the nominal charted buoy position. Launch and retrieval at Bingen Point are outside the scored circuit. Confirm the actual buoy and current notices before launch."; }
     }
 
     part temporaryWorks {
@@ -62,12 +62,12 @@ package TransGorgeCourse {
         attribute restrictionClearanceM : Real = 50;
         attribute obstacleClearanceM : Real = 30;
         attribute routingGridM : Real = 40;
-        attribute referenceLegLengthM : Real = 68372.03760925401;
-        metadata referenceLengthBasis : ModelingMetadata::Rationale { text = "Length of the chart-domain reference route generated from this gate and clearance configuration by tools.boat_analysis.environment.routing. This is a nominal sizing-analysis distance, not a prescribed sailing track; tacks and avoidance increase traveled distance. Regeneration checks this value against the chart-derived route."; }
+        attribute referenceLegLengthM : Real = 32893.22318624455;
+        metadata referenceLengthBasis : ModelingMetadata::Rationale { text = "Half the complete chart-domain reference circuit including the buoy rounding generated from this gate and clearance configuration by tools.boat_analysis.environment.routing. This equivalent leg length preserves full circuit distance in the symmetric sizing calculation; the mission simulation uses the distinct legs. This is a nominal sizing-analysis distance, not a prescribed sailing track; tacks and avoidance increase traveled distance. Regeneration checks this value against the chart-derived route."; }
         metadata routingRationale : ModelingMetadata::Rationale { text = "Initial routing allocations for the small-vessel analysis: chart depth at least 2 m, 30 m from charted land/obstructions and 50 m from excluded charted areas. These are project planning margins, not legal stand-off distances. Actual draft, pool stage, maneuvering, uncertainty and bridge clearances require separate assessment. Grid resolution is a numerical setting, not a vessel requirement."; }
-        attribute gateNames : String [4] ordered nonunique = ("eastGate", "westGate", "westGate", "eastGate");
-        attribute gateDirections : Integer [4] ordered nonunique = (-1,-1,1,1);
-        attribute crossingSequence : String = "Cross east gate downstream to start; cross west gate downstream then upstream to turn; cross east gate upstream to finish. Count finite-segment crossings in this order; touching a line without changing side is not a crossing.";
+        attribute gateNames : String [5] ordered nonunique = ("eastGate", "westGate", "turnGate", "returnGate", "eastGate");
+        attribute gateDirections : Integer [5] ordered nonunique = (-1,1,1,1,1);
+        attribute crossingSequence : String = "Cross Bingen gate downstream; pass north, west and south of buoy 16 in order, keeping the buoy to port; cross Bingen gate upstream to finish. Maintain the modeled marker exclusion throughout. Launch and retrieval are outside the scored course.";
         metadata rationale : ModelingMetadata::Rationale { text = "The route stays in Bonneville Pool. Gate segments are defined relative to existing aids, with 80 m minimum nominal marker offset. Chart-derived polygons, water depth and local notices constrain route planning; neither the marker-to-marker chord nor the commercial fairway is the whole permitted sailing corridor. Completion has no elapsed-time deadline. A computational horizon reports censoring rather than failure."; }
         metadata issue : ModelingMetadata::Issue { text = "Gate proposal for mission analysis, not a launch release. Verify complete segment clearance and maneuvering/drift margins, current MSI notices, current pool stage, bridge passage and autonomous traffic avoidance. A route through charted water does not establish safe operation. No universal vessel stand-off distance is inferred from navigation rules."; }
     }
@@ -77,6 +77,8 @@ package TransGorgeCourse {
         out attribute referenceLegLengthM : Real = policy.referenceLegLengthM;
         out attribute temporaryWorks : Real [3] ordered nonunique = (TransGorgeCourse::temporaryWorks.longitudeDeg, TransGorgeCourse::temporaryWorks.latitudeDeg, TransGorgeCourse::temporaryWorks.screeningRadiusM);
         out attribute westGate : Real [5] ordered nonunique = (west.longitudeDeg, west.latitudeDeg, west.bearingFromMarkerDeg, west.nearOffsetM, west.farOffsetM);
+        out attribute turnGate : Real [5] ordered nonunique = (west.longitudeDeg, west.latitudeDeg, 270, west.nearOffsetM, west.farOffsetM);
+        out attribute returnGate : Real [5] ordered nonunique = (west.longitudeDeg, west.latitudeDeg, 180, west.nearOffsetM, west.farOffsetM);
         out attribute eastGate : Real [5] ordered nonunique = (east.longitudeDeg, east.latitudeDeg, east.bearingFromMarkerDeg, east.nearOffsetM, east.farOffsetM);
         out attribute routing : Real [5] ordered nonunique = (policy.minimumChartDepthM, policy.shoreClearanceM, policy.restrictionClearanceM, policy.obstacleClearanceM, policy.routingGridM);
     }

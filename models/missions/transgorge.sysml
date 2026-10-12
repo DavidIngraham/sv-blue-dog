@@ -12,18 +12,18 @@ package GorgeChallenge {
     requirement def <'C-000'> TransGorgeChallenge {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall complete the Trans-Gorge challenge under C-001 and C-003 through C-009. */
-        metadata rationale : ModelingMetadata::Rationale { text = "One The Dalles–Bonneville–The Dalles circuit defines the finite challenge. Repeated circuits are a separate future endurance objective."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "One Bingen–Stevenson–Bingen circuit defines the finite challenge. Repeated circuits are a separate future endurance objective."; }
     }
     requirement transGorgeChallenge : TransGorgeChallenge;
     requirement def <'C-001'> CourseCompletion {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall cross the configured The Dalles departure, Bonneville turnaround and The Dalles finish gates in order during one attempt. */
+        doc /* The vessel shall cross the configured Bingen departure, buoy 16 rounding checkpoints and Bingen finish gates in order during one attempt. */
         comment conditions /* TransGorgeCourse defines nominal marker references and directed finite gate segments. Completion has no elapsed-time deadline. Position history must demonstrate crossings; touching a gate line alone does not count. */
         metadata issue : ModelingMetadata::Issue { text = "The marker-based gate proposal remains subject to the course safety review before launch; route corridor and current notice exclusions must accompany the accepted configuration."; }
     }
     requirement def <'C-002'> RepeatedOperation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* After its first circuit, the vessel should repeat The Dalles–Bonneville–The Dalles autonomously for as long as practical. */
+        doc /* After its first circuit, the vessel should repeat Bingen–Stevenson–Bingen autonomously for as long as practical. */
         comment notes /* Future endurance objective, excluded from finite challenge acceptance. */
         metadata issue : ModelingMetadata::Issue { text = "No fixed objective endurance duration has been selected."; }
     }

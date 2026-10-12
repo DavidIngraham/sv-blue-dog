@@ -89,13 +89,28 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         raise ValueError('Gate approach/turnaround extension outside chart domain')
     downstream = LineString([start, *route.coords, turnaround])
     upstream = LineString(list(downstream.coords)[::-1])
+    legs = None
+    if 'turnGate' in gates:
+        from tools.boat_analysis.environment.routing import rounding_paths
+        paths = rounding_paths(water,gates,route)
+        # Extend each target beyond its checkpoint to establish a crossing.
+        # Retain the real arc/return geometry for the following phase.
+        legs = []
+        for path in paths:
+            end = np.array(path.coords[-1])+direction(path,path.length)*approach
+            extended = LineString([*path.coords,end])
+            if not water.covers(extended):
+                raise ValueError('Rounding checkpoint extension outside chart domain')
+            legs.append(extended)
+        downstream = LineString([start,*legs[0].coords])
+        legs[0] = downstream
     leg, position, heading = downstream, start, None
     phase, seconds, distance, minimum = 0, 0., 0., stored
     crossing_log, history, event_log = [], [], []
     traffic_seen = set()
     event_list = sorted(events, key=lambda e:e.seconds)
     event_index, comms_until, sensor_until = 0, -1., -1.
-    last_off_line = [position.copy() for _ in range(4)]
+    last_off_line = [position.copy() for _ in range(len(inputs['gateNames']))]
     sequence = list(zip(inputs['gateNames'],inputs['gateDirections']))
     prepare(water)
     def result(outcome, cause):
@@ -221,16 +236,18 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 return result('safety_violation','traffic_collision')
         if stored < reserve:
             return result('incomplete','recovery_reserve_reached')
-        if phase < 4:
+        if phase < len(sequence):
             name, expected = sequence[phase]
             actual = crossing_direction(gates[name],last_off_line[phase],position)
             if actual == expected:
                 crossing_log.append({'gate':name,'direction':actual,'seconds':seconds})
                 phase += 1
-                last_off_line = [position.copy() for _ in range(4)]
-                if phase == 2:
+                last_off_line = [position.copy() for _ in range(len(inputs['gateNames']))]
+                if legs is not None and 2 <= phase < len(sequence):
+                    leg = legs[phase-1]
+                elif legs is None and phase == 2:
                     leg = upstream
-                if phase == 4:
+                if phase == len(sequence):
                     history.append([seconds,*position,stored,'finished',seconds>=comms_until])
                     return result('qualified_completion','ordered_gates_without_intervention')
             elif gates[name].distance(Point(position)) > 1e-6:

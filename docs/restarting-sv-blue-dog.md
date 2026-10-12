@@ -1,6 +1,6 @@
 # SV Blue Dog: learning through an autonomous sailboat
 
-SV Blue Dog is my personal project to design and build a small autonomous sailboat that can travel from The Dalles to Bonneville and back without intervention, while I monitor it from shore. Longer term, I’d love to develop something capable of reaching Hawai‘i, as a separate mission with its own constraints. It brings together things I want to learn—sailing, desktop manufacturing and digital engineering—with the fun of building a complete robot that can look after itself on the water. The name comes from my blue heeler, Ozzy: another small, independent creature with plenty of energy and ideas of his own.
+SV Blue Dog is my personal project to design and build a small autonomous sailboat that can travel from Bingen to buoy 16 near Stevenson and back without intervention, while I monitor it from shore. Longer term, I’d love to develop something capable of reaching Hawai‘i, as a separate mission with its own constraints. It brings together things I want to learn—sailing, desktop manufacturing and digital engineering—with the fun of building a complete robot that can look after itself on the water. The name comes from my blue heeler, Ozzy: another small, independent creature with plenty of energy and ideas of his own.
 
 I started this project because I wanted to explore the limits of autonomous sailing and desktop manufacturing. I wanted to learn about sailing, build something cool, and develop a complete system. Microtransat—the challenge of sending an autonomous sailing boat across the Atlantic—gave me an idea for something closer to home: an even more micro “trans-gorge” boat.
 
@@ -8,11 +8,11 @@ My initial inspiration was the Gorge Blowout course. Adding a return journey mad
 
 The picture in my head is the classic westerly Gorge day. With wind from the west, the outbound leg toward Bonneville is windward with the current; the return is downwind against it. I plan to choose a favorable weather window for the qualifying attempt, even though I also want to test in winter. Easterlies reverse that sailing problem and deserve much more attention in winter. The [seasonal weather study](operating-constraints.md#gorge-weather-and-launch-windows) now gives those cases an observed context, rather than treating every wind direction as equally representative. Year-round unattended operation remains a later goal.
 
-![Map of the Columbia River Gorge challenge, from The Dalles past Mosier, Hood River and Cascade Locks toward Bonneville, then back upstream.](figures/gorge-course-map.svg)
+![Map of the Columbia River Gorge challenge, from Bingen past Hood River to Stevenson, then back upstream.](figures/gorge-course-map.svg)
 
-*The challenge follows the Columbia through the Gorge: downstream from The Dalles toward Bonneville, then back upstream. River geometry: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). [Explore the area](https://www.openstreetmap.org/#map=11/45.68/-121.55).*
+*The challenge follows the Columbia through the Gorge: downstream from Bingen to Stevenson, then back upstream. River geometry: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). [Explore the area](https://www.openstreetmap.org/#map=11/45.68/-121.55).*
 
-![The Dalles–Bonneville round trip, with downstream current and a westerly wind.](figures/route-context.svg)
+![Bingen–Stevenson round trip, with downstream current and a westerly wind.](figures/route-context.svg)
 
 *With a westerly, the outbound leg is windward with the current; the return is downwind against it.*
 

@@ -41,7 +41,7 @@ def test_inline_view_resolves_actual_refinement_and_statements(tmp_path):
     result = render_page(source, tmp_path)
     assert 'class="mermaid"' in result
     assert 'refine' in result
-    assert 'The vessel shall cross the configured The Dalles departure' in result
+    assert 'The vessel shall cross the configured Bingen departure' in result
     assert 'flowchart BT' in result
     assert 'BlueDogRequirements::communications' not in result
     assert 'sysml-view' not in result

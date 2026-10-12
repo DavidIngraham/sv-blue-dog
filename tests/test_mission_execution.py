@@ -152,3 +152,22 @@ def test_instant_maneuver_charge_updates_terminal_history_at_same_timestamp():
     assert r.cause=='recovery_reserve_reached'
     assert r.history[-1][0]==r.elapsed_seconds
     assert r.history[-1][3]==r.minimum_energy_wh<60
+
+
+def test_port_rounding_requires_north_west_south_checkpoints():
+    from shapely.geometry import Point
+    inputs,_,water,_=fixture()
+    center=Point(-1000,0)
+    water=water.difference(center.buffer(80))
+    route=LineString([(0,150),(-1000,150)])
+    gates={'eastGate':LineString([(0,250),(0,50)]),
+           'westGate':LineString([(-1000,80),(-1000,220)]),
+           'turnGate':LineString([(-1080,0),(-1220,0)]),
+           'returnGate':LineString([(-1000,-80),(-1000,-220)])}
+    inputs['gateNames']=['eastGate','westGate','turnGate','returnGate','eastGate']
+    inputs['gateDirections']=[-1,1,1,1,1]
+    result=simulate(inputs,route,water,gates)
+    assert result.outcome=='qualified_completion'
+    assert [row['gate'] for row in result.crossings]==inputs['gateNames']
+    track=LineString([row[1:3] for row in result.history])
+    assert track.distance(center)>75

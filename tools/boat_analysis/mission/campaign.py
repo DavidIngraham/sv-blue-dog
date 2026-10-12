@@ -97,7 +97,7 @@ def run(count=32, seed=None, destination=None):
         print(number,result.outcome,result.cause,round(result.elapsed_seconds/3600,2),flush=True)
     validate(hashes)
     report={'sourceHashes':hashes,'seed':seed,'inputs':inputs,'courseInputs':course,
-            'oneWayReferenceM':route.length,'results':records,
+            'oneWayReferenceM':route.length,'equivalentSizingLegM':course['referenceLegLengthM'],'referenceCircuitM':2*course['referenceLegLengthM'],'results':records,
             'outcomes':dict(Counter(r['outcome'] for r in records)),
             'probabilityScope':'Conditional scenario frequencies under uncalibrated weather/traffic hypotheses and conceptual performance; not estimated real mission success probability',
             'evidenceType':'virtual','physicalQualification':False}

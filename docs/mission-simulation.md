@@ -8,7 +8,7 @@ The first boat is deliberately a conceptual configuration. Its polar and equipme
 
 ## A course tied to charted markers
 
-The challenge stays in Bonneville Pool, without passing either dam. The start/finish references Bonneville Pool Lighted Buoy 69 near The Dalles. The western turnaround references Bonneville Pool Light 7. Each is a virtual segment offset from the marker, not a requirement to round or touch it. The model defines the offsets and crossing order.
+The challenge stays in Bonneville Pool. Launch and retrieval use Bingen Point boat ramp outside the scored course. The start/finish gate references green Lighted Buoy 39. At Stevenson, the vessel rounds red Lighted Buoy 16 to port through north, west and south checkpoints in order, maintaining an 80 m nominal marker exclusion. Gate segments extend 80–220 m from each reference. The model owns the geometry and order; current notices and actual buoy positions must be checked before launch.
 
 The course geometry comes from current NOAA electronic charts. The former raster chart 18532 was canceled in 2024. The [source record](../evidence/course/2026-10-11/sources.json) identifies the chart catalog, Light List, Coast Pilot and regulatory sources; the extracted features retain their chart-cell identities and attributes.
 
@@ -16,7 +16,7 @@ The reference-route planner uses charted depth areas, land, obstructions and exc
 
 The October 7 navigation notice adds a stationary construction hazard near the White Salmon confluence: a derrick barge supporting railroad bridge work through December 2026. This scenario excludes an allocated 250 m buffer around the published location until the actual work footprint is confirmed. The same notice lists three discrepant aids elsewhere in Bonneville Pool. The chart and notice snapshot must travel with each experiment.
 
-![The chart-based reference route and proposed marker gates between The Dalles and Bonneville.](figures/gorge-course-map.svg)
+![The chart-based reference route and proposed marker gates between Bingen and Stevenson.](figures/gorge-course-map.svg)
 
 ## One timeline connects the decisions
 
@@ -42,7 +42,7 @@ There is no 72-hour challenge deadline and no daily energy-balance requirement. 
 
 Each realization has reproducible weather and traffic random streams. Weather retains persistent regimes and correlated perturbations rather than drawing an independent wind at every step. Solar input follows a day/night cycle with a cloud factor. These are initial sensitivity hypotheses, not a forecast model or calibrated local probability distribution.
 
-Commercial scenarios use charted recommended-track fragments and represent the complete tow footprint. Small-craft scenarios include local crossings and reversing tracks for fishing and powered recreation, alongside sailing traffic. Passenger vessels are included because the accessible The Dalles AIS-derived port record shows that traffic class too. The model owns the rates, dimensions, speeds and separation allocations.
+Commercial scenarios use charted recommended-track fragments and represent the complete tow footprint. Small-craft scenarios include local crossings and reversing tracks for fishing and powered recreation, alongside sailing traffic. Passenger vessels are included because the regional AIS-derived port record shows that traffic class too. The model owns the rates, dimensions, speeds and separation allocations.
 
 VesselFinder's accessible record does not provide a complete traffic census or an accepted arrival-rate estimate. Small craft may not transmit AIS, and a tug position does not describe the entire tow. The simulator initially has perfect knowledge of scripted traffic; sensor range, occlusion, latency and uncertain intentions need additional cases before these results can support traffic-system acceptance. Geometric separation checks do not establish full Navigation Rules compliance.
 

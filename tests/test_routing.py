@@ -21,3 +21,14 @@ def test_disconnected_water_is_not_bridged():
 def test_gate_on_land_is_rejected():
     with pytest.raises(ValueError, match='outside routing'):
         reference_route(box(0,0,100,100),(-1,50),(50,50),10)
+
+
+def test_current_rounding_and_return_remain_chart_clear():
+    from tools.boat_analysis.environment.routing import build, rounding_paths
+    values,water,groups,gates,route=build()
+    paths=rounding_paths(water,gates,route,values['routing'][4])
+    assert all(water.covers(gate) for gate in gates.values())
+    assert all(water.covers(path) for path in paths)
+    assert sum(path.length for path in paths)==pytest.approx(2*values['referenceLegLengthM'],abs=.01)
+    assert not paths[1].intersects(groups['ROUNDING_EXCLUSION'])
+    assert not paths[2].intersects(groups['ROUNDING_EXCLUSION'])

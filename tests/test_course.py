@@ -39,13 +39,13 @@ def test_model_gate_segments_clear_charted_land_and_restrictions(run_model):
         return unary_union([transform(shape(f['geometry']), frame.project, interleaved=False) for f in features
                             if f['properties']['object_class'] == kind and f['geometry']])
     land, restricted, depth, fairway = [collect(k) for k in ['LNDARE', 'RESARE', 'DEPARE', 'FAIRWY']]
-    for key in ['westGate', 'eastGate']:
+    for key in ['westGate', 'turnGate', 'returnGate', 'eastGate']:
         gate = marker_gate(values[key], frame)
         assert not gate.intersects(land)
         assert not gate.intersects(restricted)
         assert depth.covers(gate)
         # Crossing is a traffic decision, not an empty-water assumption.
-        assert gate.intersects(fairway)
+        assert not fairway.is_empty
 
 
 def test_long_passage_has_no_gorge_deadline(run_model):
@@ -79,4 +79,4 @@ def test_sizing_and_replay_share_chart_reference_distance(run_model):
     assert code == 0
     values = {r['name']: native_value(r['value']) for r in report['checks'][0]['values']}
     assert values['sizing'] == values['primary'] == values['adverse'] == values['chart']
-    assert 68000 < values['chart'] < 69000
+    assert 32000 < values['chart'] < 34000

@@ -2,9 +2,9 @@
 
 What does this little boat actually have to do? I start with one finite, independent Gorge challenge, then work through the people, environment and equipment it will interact with. This is [mission definition](development-plan.md#mission-definition): it sets up the responsibilities and scenarios I will use to compare designs.
 
-![Map of the Gorge challenge corridor along the Columbia River, from The Dalles to Bonneville and back.](figures/gorge-course-map.svg)
+![Map of the Gorge challenge corridor along the Columbia River, from Bingen to buoy 16 near Stevenson and back.](figures/gorge-course-map.svg)
 
-*The Dalles → Bonneville → The Dalles. River geometry: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).*
+*Bingen → Stevenson → Bingen. River geometry: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).*
 
 The return leg has to make progress over the ground, not just through the water. The representative westerly puts that return downwind against the current, while the outbound leg is windward with it. Easterlies reverse those roles. I will choose a favorable weather window for the challenge and use a separate seasonal profile for winter testing; the [weather analysis](operating-constraints.md#gorge-weather-and-launch-windows) explains the distinction. The challenge is sail-only and unassisted; I want live observation without making a shore connection necessary for control. Year-round operation and Hawai‘i have separate future requirements. For this boat, I want to explore how speed and shorter exposure affect the [chance of completing the round trip](reliability.md#can-a-faster-boat-be-more-likely-to-finish).
 

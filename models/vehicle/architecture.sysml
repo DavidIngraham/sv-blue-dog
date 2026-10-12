@@ -1,6 +1,6 @@
 package BlueDog {
     doc /* Working architecture model, 2026-10-09.
-     * Confirmed threshold: The Dalles-Bonneville-The Dalles round trip.
+     * Confirmed threshold: Bingen-Stevenson-Bingen round trip.
      * Repeated operation is a future endurance objective, outside current acceptance.
      * Qualifying round trips require no operator intervention; live monitoring is required.
      * Current design driver: one finite GorgeChallenge::transGorgeChallenge round trip.
