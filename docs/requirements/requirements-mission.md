@@ -87,7 +87,6 @@ package Page_mission_1 {
         expose BlueDogRequirements::cruisePerformance;
         expose BlueDogRequirements::energyAwareness;
         expose BlueDogRequirements::energyEvidenceReadiness;
-        expose BlueDogRequirements::harvestCampaignCoverage;
         expose BlueDogRequirements::legProgress;
         expose BlueDogRequirements::lowEnergyRecovery;
         expose BlueDogRequirements::multiDayEndurance;
@@ -110,7 +109,6 @@ package Page_mission_1 {
         metadata Layout about BlueDogRequirements::cruisePerformance { x = 320; y = 0; }
         metadata Layout about BlueDogRequirements::energyAwareness { x = 640; y = 0; }
         metadata Layout about BlueDogRequirements::energyEvidenceReadiness { x = 960; y = 0; }
-        metadata Layout about BlueDogRequirements::harvestCampaignCoverage { x = 0; y = 400; }
         metadata Layout about BlueDogRequirements::legProgress { x = 320; y = 400; }
         metadata Layout about BlueDogRequirements::lowEnergyRecovery { x = 640; y = 400; }
         metadata Layout about BlueDogRequirements::multiDayEndurance { x = 960; y = 400; }
