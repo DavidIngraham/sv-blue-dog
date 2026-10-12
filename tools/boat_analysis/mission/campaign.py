@@ -38,6 +38,9 @@ def traffic_scenarios(inputs, route, water, groups, seed):
         beam=inputs['trafficBeams'][index];length=inputs['trafficLengths'][index]
         domain=water.buffer(-max(beam/2,length/2))
         if index in (0,4):
+            # The ENC archive covers a larger reach than the active circuit.
+            # Generate commercial appearances only within this route's bounds.
+            domain=domain.intersection(route.envelope)
             tracks=[line for candidate in _lines(groups['RECTRC'])
                     for line in _lines(candidate.intersection(domain)) if line.length>length*2]
         else:
