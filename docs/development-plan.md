@@ -32,7 +32,7 @@ Each box contains its own scoped V and review decisions. Progress depends on evi
 
 ## One V for each configuration
 
-Read the solid outer path down through definition and implementation, then up through integration and demonstration. The connections across the V pair design intent with the evidence that will assess it. The central simulation is a reusable collection of mission, physics, control and fault models, not a single all-purpose solver.
+Read the solid outer path down through definition and implementation, then up through integration and demonstration. The central connections show simulation feeding findings back into requirements and supplying scenarios for physical testing. The central simulation is a reusable collection of mission, physics, control and fault models, not a single all-purpose solver.
 
 ```mermaid
 ---
@@ -59,12 +59,9 @@ block-beta
     component --> subsystem
     subsystem --> integrated
     integrated --> demonstration
-    mission -- "validate mission" --> demonstration
     simulation -- "validate requirements" --> requirements
     architecture --> simulation
     simulation -- "test scenarios" --> integrated
-    architecture -- "verify behavior" --> subsystem
-    detail -- "verify detail" --> component
     classDef intent fill:#e9f1fc,stroke:#345b87,color:#183047
     classDef evidence fill:#e7f4ec,stroke:#397251,color:#183047
     classDef learning fill:#fff1ce,stroke:#92712d,color:#183047
