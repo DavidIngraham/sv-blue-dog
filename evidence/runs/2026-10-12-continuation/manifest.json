@@ -1,0 +1,16 @@
+{
+  "sourceRevision": "e0008e3e8e65d686d8e514d81c0f21a2577471db",
+  "files": {
+    "continuation-before-recovery.json": {
+      "sha256": "fc3b1d83c178de67949278bc254b8101f2d47794d2725af7f661376f09dc2c49"
+    },
+    "continuation-retained-checkpoint.json": {
+      "sha256": "5ff7a18f2fb69169b00f857b9a506deebb7adb9db72d30eee9ca950260e83695"
+    },
+    "sizing-continuation.json": {
+      "sha256": "a2bbd06f9d5d0c65e7e4e5588350553d37e77b219776f62b9b7ebc59587cb787"
+    }
+  },
+  "qualified": false,
+  "scope": "Fixed-length coarse feasibility continuation; no physical requirements relaxed. Not a minimum-size proof or refined verification."
+}

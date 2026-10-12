@@ -383,3 +383,36 @@ package BlueDogWeatherDocuments {
         part windows : Section { attribute redefines title = "72-hour window probe, not mission probability"; part rows : Table { calc rows : Windows; } }
     }
 }
+
+package BlueDogContinuationDocuments {
+    private import DocumentQueries::*;
+    calc def Stages :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogSizingContinuation::stage0", "BlueDogSizingContinuation::stage1", "BlueDogSizingContinuation::stage2", "BlueDogSizingContinuation::stage3", "BlueDogSizingContinuation::stage4")), columns = (
+            Column(name = "Hull length (m)", path = "lengthM"),
+            Column(name = "Coarse feasible", path = "feasible"),
+            Column(name = "Max equilibrium residual", path = "maximumResidual"),
+            Column(name = "Lowest margin", path = "minimumMargin")))
+    }
+    calc def Dimensions :> Query {
+        Project(source = Named(qualifiedName = "BlueDogSizingContinuation::candidate"), columns = (
+            Column(name = "Length (m)", path = "length_m"),
+            Column(name = "Beam (m)", path = "beam_m"),
+            Column(name = "Wing area (m2)", path = "sail_m2"),
+            Column(name = "Ballast (kg)", path = "ballast_kg"),
+            Column(name = "Battery (Wh)", path = "battery_Wh")))
+    }
+    calc def Assessment :> Query {
+        Project(source = Named(qualifiedName = "BlueDogSizingContinuation::assessment"), columns = (
+            Column(name = "Mass (kg)", path = "massKg"),
+            Column(name = "Coarse westerly time (h)", path = "westerlyHours"),
+            Column(name = "Rudder chord (m)", path = "rudderChordM"),
+            Column(name = "Rudder aspect ratio", path = "rudderAspectRatio"),
+            Column(name = "Qualified", path = "qualified")))
+    }
+    part def Summary :> Document {
+        attribute redefines title = "Continuation toward 1.2 m";
+        part stages : Table { calc rows : Stages; }
+        part dimensions : Table { calc rows : Dimensions; }
+        part assessment : Table { calc rows : Assessment; }
+    }
+}

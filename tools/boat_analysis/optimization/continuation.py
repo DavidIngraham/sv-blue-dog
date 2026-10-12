@@ -1,6 +1,7 @@
 """Trace fixed-length feasibility without changing physical acceptance criteria."""
 import json
 import time
+from types import SimpleNamespace
 import numpy as np
 from scipy.optimize import least_squares, minimize
 
@@ -22,6 +23,9 @@ def solve_stage(problem, seed, length, budget=60, extensions=2):
         return problem.residual_jacobian(expand(y))[:, 1:]
     best = np.clip(np.asarray(seed)[1:], 0, 1)
     history = []
+    class FeasibleIterate(Exception):
+        def __init__(self, x):
+            self.x = np.array(x, copy=True)
     for chunk in range(extensions + 1):
         before = float(np.linalg.norm(residual(best)))
         if problem.feasible(expand(best)):
@@ -32,10 +36,25 @@ def solve_stage(problem, seed, length, budget=60, extensions=2):
              'jac':lambda y:problem.jacobians(expand(y))[0][:, 1:]},
             {'type':'ineq', 'fun':lambda y:problem.evaluate(expand(y))['ineq'],
              'jac':lambda y:problem.jacobians(expand(y))[1][:, 1:]}]
-        correction = minimize(lambda y:.5*np.sum((y-anchor)**2), anchor,
-                              jac=lambda y:y-anchor, method='SLSQP',
-                              bounds=[(0,1)]*len(anchor), constraints=constraints,
-                              options={'maxiter':budget, 'ftol':1e-8})
+        iterations = 0
+        best_iterate = anchor.copy()
+        best_merit = before
+        def accept_iterate(y):
+            nonlocal iterations, best_iterate, best_merit
+            iterations += 1
+            merit = float(np.linalg.norm(residual(y)))
+            if merit < best_merit:
+                best_iterate, best_merit = np.array(y, copy=True), merit
+            if problem.feasible(expand(y)):
+                raise FeasibleIterate(y)
+        try:
+            correction = minimize(lambda y:.5*np.sum((y-anchor)**2), anchor,
+                                  jac=lambda y:y-anchor, method='SLSQP', callback=accept_iterate,
+                                  bounds=[(0,1)]*len(anchor), constraints=constraints,
+                                  options={'maxiter':budget, 'ftol':1e-8})
+        except FeasibleIterate as found:
+            correction = SimpleNamespace(x=found.x, nit=iterations,
+                                         message='Stopped at a freshly checked feasible iterate')
         corrected = float(np.linalg.norm(residual(correction.x)))
         history.append(dict(chunk=chunk, method='SLSQP', before=before, after=corrected,
                             iterations=correction.nit, message=str(correction.message)))
@@ -43,6 +62,8 @@ def solve_stage(problem, seed, length, budget=60, extensions=2):
             best = correction.x
         if problem.feasible(expand(best)):
             break
+        if best_merit < float(np.linalg.norm(residual(best))):
+            best = best_iterate
         def stop(intermediate_result):
             if problem.feasible(expand(intermediate_result.x)):
                 raise StopIteration

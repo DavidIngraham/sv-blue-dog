@@ -31,6 +31,7 @@ def test_length_is_fixed_while_other_variable_finds_equilibrium():
     assert r['feasible']
     assert r['design']['length']==1.2
     assert r['design']['width']==pytest.approx(1.2,abs=2e-4)
+    assert 'feasible iterate' in r['history'][0]['message']
 
 
 def test_incompatible_capacity_is_not_reported_as_feasible():
@@ -43,3 +44,27 @@ def test_incompatible_capacity_is_not_reported_as_feasible():
 def test_length_outside_model_bounds_rejected():
     with pytest.raises(ValueError):
         solve_stage(Toy(),np.array([.9,.9]),3)
+
+
+def test_archived_campaign_and_model_projection_agree():
+    from tools.boat_analysis.evidence.continuation import model_source
+    from tools.boat_analysis.evidence.records import ROOT, run_record, verify_run_sources
+    directory=ROOT/'evidence/runs/2026-10-12-continuation'
+    assert verify_run_sources(directory)>10
+    record=run_record(directory,'sizing-continuation.json')
+    assert record['targetReached'] and record['completed'] and not record['qualified']
+    assert [a['lengthM'] for a in record['attempts']]==[2.,1.8,1.6,1.4,1.2]
+    assert all(a['feasible'] and a['maxEquilibriumResidual']<1e-4 and a['minimumMargin']>-1e-4 for a in record['attempts'])
+    assert (ROOT/'models/evidence/sizing-continuation.sysml').read_text()==model_source(directory)
+
+
+def test_retained_target_passes_fresh_native_evaluation():
+    import sys
+    if sys.platform!='linux':
+        pytest.skip('Native C adapter uses Linux/GCC')
+    from tools.boat_analysis.evidence.records import ROOT, run_record
+    from tools.boat_analysis.optimization.search import Problem
+    record=run_record(ROOT/'evidence/runs/2026-10-12-continuation','sizing-continuation.json')
+    p=Problem();z=np.array(record['smallestFeasibleZ'])
+    assert (p.lo+z*p.span)[0]==pytest.approx(1.2)
+    assert p.feasible(z)
