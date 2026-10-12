@@ -77,6 +77,7 @@ package BlueDogSizingContinuation {
         attribute westerlyHours : Real = 23.97409327486867;
         attribute rudderChordM : Real = candidate.rudder_m2 / candidate.rudder_span_m;
         attribute rudderAspectRatio : Real = candidate.rudder_span_m * candidate.rudder_span_m / candidate.rudder_m2;
+        attribute neutralHullRudderLengthM : Real = NumericalFunctions::max(candidate.length_m/2, -candidate.rudder_arm_fraction*candidate.length_m + rudderChordM/2) + NumericalFunctions::max(candidate.length_m/2, candidate.rudder_arm_fraction*candidate.length_m + rudderChordM/2);
         attribute qualified : Boolean = false;
     }
 }

@@ -407,6 +407,7 @@ package BlueDogContinuationDocuments {
             Column(name = "Coarse westerly time (h)", path = "westerlyHours"),
             Column(name = "Rudder chord (m)", path = "rudderChordM"),
             Column(name = "Rudder aspect ratio", path = "rudderAspectRatio"),
+            Column(name = "Hull + neutral rudder extent (m)", path = "neutralHullRudderLengthM"),
             Column(name = "Qualified", path = "qualified")))
     }
     part def Summary :> Document {
