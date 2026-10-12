@@ -46,7 +46,11 @@ def main():
     elif args.command == "evidence-check":
         from .evidence.records import verify_run_sources
         from .model.runtime import ROOT
-        count = sum(verify_run_sources(p.parent) for p in (ROOT/"evidence/runs").glob("*/manifest.json"))
+        import json
+        # Aerodynamic evidence has its own schema and validator.
+        manifests = [p for p in (ROOT/"evidence/runs").glob("*/manifest.json")
+                     if {"files", "sourceRevision"} <= json.loads(p.read_text()).keys()]
+        count = sum(verify_run_sources(p.parent) for p in manifests)
         print(f"Verified {count} archived source hashes.")
     else:
         module = {"recovery": "recovery", "pitch": "pitch", "audit": "resistance_audit"}[args.command]

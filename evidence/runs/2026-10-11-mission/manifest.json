@@ -1,0 +1,19 @@
+{
+  "sourceRevision": "f178e5c9fe291628b7641f364289e94463e55d5c",
+  "files": {
+    "mission-campaign.json": {
+      "sha256": "6b93304a6f1a8139f055ff71a7e02ee42f29b75dc5fc0707d5238e66f3dfdbf7"
+    }
+  },
+  "scope": "Initial virtual mission experiment. Conceptual polar and uncalibrated weather/traffic hypotheses; no physical qualification or navigation-rule compliance claim.",
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.5.3",
+      "shapely": "2.2.0",
+      "scipy": "1.18.1"
+    },
+    "nativeRelease": "nightly-20261009-28106371e"
+  }
+}

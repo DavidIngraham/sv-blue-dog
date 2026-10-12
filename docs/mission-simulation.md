@@ -50,7 +50,7 @@ The useful early outputs are failure mechanisms and sensitivity to assumptions. 
 
 ## First experiment
 
-The first 32 seeded voyages all completed the simulated gate sequence. Elapsed times ranged from 21.5 to 149.7 hours. In the longest realization, the synthetic wind switched easterly at hour 10 and remained there until hour 140; the upstream finish came after the westerly returned. That is a useful case for comparing future polars and guidance policies, without inventing a challenge deadline.
+The [archived campaign](../evidence/runs/2026-10-11-mission/mission-campaign.json) records the source hashes, scenario seeds and voyage histories. The first 32 seeded voyages all completed the simulated gate sequence. Elapsed times ranged from 21.5 to 149.7 hours. In the longest realization, the synthetic wind switched easterly at hour 10 and remained there until hour 140; the upstream finish came after the westerly returned. That is a useful case for comparing future polars and guidance policies, without inventing a challenge deadline.
 
 The controller predicted traffic conflicts in 23 encounters across the ensemble and found paths that passed the modeled geometric screens. That is evidence that the encounter mechanism is exercised, not that the vessel obeys every navigation rule. The allocated solar and storage budget kept the recovery reserve protected in these runs; it does not demonstrate the installed boat's endurance.
 
