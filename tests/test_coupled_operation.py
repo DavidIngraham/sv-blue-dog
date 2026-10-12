@@ -90,7 +90,8 @@ def test_route_tack_weights_cancel_crosswind_velocity(native_case):
     r=k.evaluate([1,3]*4,states)
     assert r[3]==pytest.approx(.95*1.5+.75)
     assert r[4]==pytest.approx(.95*1.5-.75)
-    assert r[5]==pytest.approx(100000/3600*(1/r[3]+1/r[4]))
+    leg_length=k.contract['routeParameters'][3]
+    assert r[5]==pytest.approx(leg_length/3600*(1/r[3]+1/r[4]))
 
 
 def test_coupled_geometry_mass_and_hydrostatics_share_wing_pose(native_case):
