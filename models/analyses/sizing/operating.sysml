@@ -38,7 +38,7 @@ package BlueDogCoupledOperation {
         // 0.005 therefore reserves 0.5 Wh/day; it is not a physical uncertainty allowance.
         out attribute cycleEnergySearchReserve : Real = 0.005;
         out attribute resistanceDomainReserve : Real [19] ordered nonunique = (0,0.002,0.004,0,0,0.003,0.003,0.003,0.003,0.004,0.004,0,0,0.002,0.002,0.002,0.002,0.15,0.15);
-        out attribute routeParameters : Real [7] ordered nonunique = (0.95,0.5,1.0,100000,0,0.5,1.0);
+        out attribute routeParameters : Real [7] ordered nonunique = (0.95,0.5,1.0,TransGorgeCourse::policy.referenceLegLengthM,0,0.5,1.0);
         out attribute structureValues : Real [10] ordered nonunique = (BlueDogStructure::material.laminateModulus, BlueDogStructure::material.laminateAllowable, BlueDogStructure::material.pressure, BlueDogStructure::material.tipProofForce, BlueDogStructure::material.minimumFreeboard, BlueDogStructure::material.reserveFraction, BlueDogStructure::material.launchDepth-BlueDogStructure::material.bottomClearance, BlueDogStructure::material.appendageDeflectionFraction, BlueDogStructure::material.hullDeflectionFraction, BlueDogStructure::material.panelDeflectionFraction);
     }
 

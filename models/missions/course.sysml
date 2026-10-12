@@ -62,6 +62,8 @@ package TransGorgeCourse {
         attribute restrictionClearanceM : Real = 50;
         attribute obstacleClearanceM : Real = 30;
         attribute routingGridM : Real = 40;
+        attribute referenceLegLengthM : Real = 68372.03760925401;
+        metadata referenceLengthBasis : ModelingMetadata::Rationale { text = "Length of the chart-domain reference route generated from this gate and clearance configuration by tools.boat_analysis.environment.routing. This is a nominal sizing-analysis distance, not a prescribed sailing track; tacks and avoidance increase traveled distance. Regeneration checks this value against the chart-derived route."; }
         metadata routingRationale : ModelingMetadata::Rationale { text = "Initial routing allocations for the small-vessel analysis: chart depth at least 2 m, 30 m from charted land/obstructions and 50 m from excluded charted areas. These are project planning margins, not legal stand-off distances. Actual draft, pool stage, maneuvering, uncertainty and bridge clearances require separate assessment. Grid resolution is a numerical setting, not a vessel requirement."; }
         attribute gateNames : String [4] ordered nonunique = ("eastGate", "westGate", "westGate", "eastGate");
         attribute gateDirections : Integer [4] ordered nonunique = (-1,-1,1,1);
@@ -72,6 +74,7 @@ package TransGorgeCourse {
     dependency courseBasis from policy to GorgeChallenge::courseCompletion;
 
     analysis GateGeometry {
+        out attribute referenceLegLengthM : Real = policy.referenceLegLengthM;
         out attribute temporaryWorks : Real [3] ordered nonunique = (TransGorgeCourse::temporaryWorks.longitudeDeg, TransGorgeCourse::temporaryWorks.latitudeDeg, TransGorgeCourse::temporaryWorks.screeningRadiusM);
         out attribute westGate : Real [5] ordered nonunique = (west.longitudeDeg, west.latitudeDeg, west.bearingFromMarkerDeg, west.nearOffsetM, west.farOffsetM);
         out attribute eastGate : Real [5] ordered nonunique = (east.longitudeDeg, east.latitudeDeg, east.bearingFromMarkerDeg, east.nearOffsetM, east.farOffsetM);

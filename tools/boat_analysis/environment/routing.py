@@ -120,6 +120,8 @@ def build():
     gates = {k: marker_gate(values[k]) for k in ['eastGate', 'westGate']}
     route = reference_route(water, gates['eastGate'].interpolate(.5, normalized=True),
                             gates['westGate'].interpolate(.5, normalized=True), values['routing'][4])
+    if abs(route.length - values['referenceLegLengthM']) > 0.01:
+        raise ValueError('Sizing reference length differs from chart route; update the model allocation')
     return values, water, groups, gates, route
 
 

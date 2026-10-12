@@ -14,10 +14,11 @@ package BlueDogSizingEvidence {
         attribute westerlyHours : Real;
         attribute massKg : Real;
         attribute evidenceAccepted : Boolean;
+        attribute acceptanceRouteMargins : Real [1..*] ordered nonunique = routeMargins;
         attribute operatingScreensPass : Boolean = numericallyBalanced and
             operatingMargins->ControlFunctions::forAll { in x : Real; x >= -0.0001 } and
             structuralMargins->ControlFunctions::forAll { in x : Real; x >= -0.0001 } and
-            routeMargins->ControlFunctions::forAll { in x : Real; x >= -0.0001 };
+            acceptanceRouteMargins->ControlFunctions::forAll { in x : Real; x >= -0.0001 };
         attribute sampledRollPositive : Boolean = missingPitchRoots == 0 and
             restoringMomentsNm->ControlFunctions::forAll { in x : Real; x > 0 };
         doc /* Recorded numerical evidence only. Route durations from diagnostic
@@ -35,7 +36,7 @@ package BlueDogSizingEvidence {
     }
     dependency operatingEvidence from Review to BlueDogRequirements::legProgress;
     dependency durationEvidence from Review to BlueDogRequirements::passageDuration;
-    dependency energyEvidence from Review to BlueDogRequirements::sustainedEnergyFeasibility;
+    dependency energyEvidence from Review to BlueDogRequirements::lowEnergyRecovery;
     dependency structureEvidence from Review to BlueDogStructure::structuralIntegrity;
     dependency recoveryEvidence from Review to BlueDogRequirements::selfRighting;
 }
