@@ -48,12 +48,12 @@ def recover_target():
     return record
 
 
-def archive(name, revision, extras=()):
+def archive(name, revision, extras=(), snapshot=False):
     destination = ROOT/'evidence/runs'/name
     if not name or '/' in name or '\\' in name or name in ('.','..') or destination.exists():
         raise ValueError('Expected a new immutable run name')
     record = json.loads((WORK/'sizing-continuation.json').read_text())
-    if not record['completed']:
+    if not record['completed'] and not snapshot:
         raise ValueError('Continuation is still running')
     revision = subprocess.check_output(['git','rev-parse',revision],cwd=ROOT,text=True).strip()
     if any('/' in name or '\\' in name or name in ('.','..') for name in extras):
@@ -76,7 +76,7 @@ def archive(name, revision, extras=()):
             shutil.copyfile(WORK/filename,staged/filename)
             files[filename] = {'sha256':hashlib.sha256((staged/filename).read_bytes()).hexdigest()}
         (staged/'manifest.json').write_text(json.dumps(dict(sourceRevision=revision,files=files,
-            qualified=False,scope=record['scope']),indent=2)+'\n')
+            qualified=False,completed=record['completed'],scope=('Interrupted exploration snapshot; unfinished trials are unresolved. ' if not record['completed'] else '')+record['scope']),indent=2)+'\n')
         verify_run_sources(staged)
         shutil.copytree(staged,destination)
     return destination
@@ -92,7 +92,7 @@ def model_source(directory, package="BlueDogSizingContinuation"):
              '    part summary {',
              f'        attribute targetM : Real = {record["targetM"]};',
              f'        attribute smallestFeasibleM : Real = {record["smallestFeasibleLengthM"]};',
-             f'        attribute targetReached : Boolean = {str(record["targetReached"]).lower()};',
+             f'        attribute targetReached : Boolean = {str(record.get("targetReached",False)).lower()};',
              '        attribute qualified : Boolean = false;', '    }']
     if package != 'BlueDogSizingContinuation':
         names=', '.join(json.dumps(f'{package}::stage{i}') for i in range(len(record['attempts'])))
@@ -138,6 +138,7 @@ if __name__ == '__main__':
     parser.add_argument('--check', action='store_true')
     parser.add_argument('--archive', action='store_true')
     parser.add_argument('--revision')
+    parser.add_argument('--snapshot',action='store_true')
     parser.add_argument('--extra',action='append',default=[])
     parser.add_argument('--package',default='BlueDogSizingContinuation')
     parser.add_argument('--output',default='models/evidence/sizing-continuation.sysml')
@@ -149,7 +150,8 @@ if __name__ == '__main__':
     if args.archive:
         if not args.revision:
             parser.error('--archive requires --revision')
-        archive(args.run,args.revision,args.extra)
+        archive(args.run,args.revision,args.extra,args.snapshot)
+        if args.snapshot:raise SystemExit(0)
     content = model_source(ROOT/'evidence/runs'/args.run,args.package)
     destination = ROOT/args.output
     if args.check:

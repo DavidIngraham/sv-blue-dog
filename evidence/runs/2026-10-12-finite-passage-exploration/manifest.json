@@ -1,0 +1,26 @@
+{
+  "sourceRevision": "79de5376088c4f57c317dd060387aa0dd25f20ba",
+  "files": {
+    "coupled-uncertainty-inputs.json": {
+      "sha256": "dde79cc95176ac23759dbd6704a3b7c294432248a24f23ad14a1835757ad2d21"
+    },
+    "credibility-1p4.json": {
+      "sha256": "b9e12549ea3fe6b706fa752c469d0d586b692e2f35281f528c71fe27954824a4"
+    },
+    "interrupted-sizing-trial.json": {
+      "sha256": "158ac7e44f71126263001875d6e49e620967a888d66a9c50a787c4cc73f8302b"
+    },
+    "mission-candidate-1p4.json": {
+      "sha256": "e6d1ebde889e942a98585db9331203cb79ddb1f07f786a6c57534b51a74247e5"
+    },
+    "sizing-candidate-1p4.json": {
+      "sha256": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88"
+    },
+    "sizing-continuation.json": {
+      "sha256": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88"
+    }
+  },
+  "qualified": false,
+  "completed": false,
+  "scope": "Interrupted exploration snapshot; unfinished trials are unresolved. Fixed-length coarse feasibility continuation; no physical requirements relaxed. Not a minimum-size proof or refined verification."
+}
