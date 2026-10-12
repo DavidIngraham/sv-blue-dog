@@ -8,7 +8,7 @@ from tools.boat_analysis.model.runtime import ROOT
 
 BASELINE = ROOT / "evidence/runs/2026-10-10-coupled"
 AERODYNAMIC_REFERENCE = ROOT / "evidence/runs/2026-10-11-conservative"
-CURRENT = ROOT / "evidence/runs/2026-10-12-gorge"
+CURRENT = ROOT / "evidence/runs/2026-10-12-bingen"
 WORK = ROOT / "build/analysis"
 
 

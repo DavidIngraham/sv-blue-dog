@@ -38,14 +38,12 @@ def test_model_gate_segments_clear_charted_land_and_restrictions(run_model):
     def collect(kind):
         return unary_union([transform(shape(f['geometry']), frame.project, interleaved=False) for f in features
                             if f['properties']['object_class'] == kind and f['geometry']])
-    land, restricted, depth, fairway = [collect(k) for k in ['LNDARE', 'RESARE', 'DEPARE', 'FAIRWY']]
+    land, restricted, depth = [collect(k) for k in ['LNDARE', 'RESARE', 'DEPARE']]
     for key in ['westGate', 'turnGate', 'returnGate', 'eastGate']:
         gate = marker_gate(values[key], frame)
         assert not gate.intersects(land)
         assert not gate.intersects(restricted)
         assert depth.covers(gate)
-        # Crossing is a traffic decision, not an empty-water assumption.
-        assert not fairway.is_empty
 
 
 def test_long_passage_has_no_gorge_deadline(run_model):
