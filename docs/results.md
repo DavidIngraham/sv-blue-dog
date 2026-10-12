@@ -1,73 +1,53 @@
 # Sizing Blue Dog for the Gorge
 
-**Current interpretation:** The new appendage screens admit a restored 2.000 m hull concept. The earlier 1.2 m result fails today's geometry policy. Neither is mission-qualified; the older refined replay also predates the corrected rudder torque arm.
+The current search reaches a **1.4 m hull** with a plausible rudder shape and a battery sized for a finite passage. That is useful progress toward my 1.2 m hope, but it is still a heavy little boat: about **30 kg**, with a **1.46 m swept length**. Smaller trials remain unresolved, and the follow-up checks expose stiffness and pitch-stability problems that matter more than another decimal place of hull length.
 
-How small can I make the challenge vessel while keeping enough sailing performance, structural capacity and recovery capability? This is a [preliminary-design study](development-plan.md#virtual-design). Its inputs are the finite Gorge mission, chart-based course, manufacturing assumptions and provisional boat physics. Its output is a candidate to challenge with finer analysis and experiments before choosing dimensions for a build.
+This is a [preliminary-design study](development-plan.md#virtual-design). Its inputs are the Bingen–Stevenson challenge, chart-derived course, manufacturing assumptions and provisional boat physics. It informs the dimensions and experiments we should pursue next. The [sizing method](sizing.md) describes the calculations; the [mission simulation](mission-simulation.md) checks how a candidate behaves through changing weather and traffic.
 
-## What this search asks
+## Making the smaller concept earn its dimensions
 
-The current search traces fixed-length feasibility stages toward 1.2 m, with the other 28 design variables and all 48 operating-state variables free. Length is fixed only within a stage; physical acceptance criteria remain unchanged. The selected weather-window profile requires progress on both legs in a westerly. Easterly performance is reported as a sensitivity. Safety, handling and structural screens remain mandatory in either wind direction.
+The search starts from the restored 2 m concept and reduces hull length in stages, leaving the other 28 design variables and 48 operating-state variables free. It retains the appendage geometry screens: underwater aspect ratio of at least 2, keel attachment within the hull, rudder stock no farther aft than the transom, and clearance around the rudder's steering disk. These are explicit provisional allocations, not measured performance limits.
 
-The reference distance is 32.893 km per equivalent leg (65.786 km for the full reference circuit, including rounding), taken from the chart-derived route between the proposed gates. Actual sailing tracks include tacks and avoidance. There is no 72-hour deadline and no daily energy-balance constraint. The static solver checks instantaneous peak power; battery capacity and harvesting still need evaluation through the [chronological mission simulation](mission-simulation.md). That simulation currently uses its own conceptual vessel, so its completion counts do not qualify this sizing candidate.
+This run adds two native SysML calculations. The finite-passage screen sizes the battery for 1.25 times the conditional westerly route time, plus six hours of delay and the protected recovery reserve, with no solar credit. The installation screen allocates space for battery and equipment inside the hull. Neither introduces a daily energy-balance requirement or a 72-hour deadline. Their assumptions and derivation links live in [the concept policy](../models/analyses/sizing/credibility.sysml).
 
-## Restoring a credible starting geometry
+![Mass, battery capacity, swept length and no-harvest passage allowance for the accepted sizing stages.](figures/finite-passage-sizing.svg)
 
-The current screen requires underwater aspect ratios of at least 2, a keel root within the hull, a rudder stock at or forward of the transom and 20 mm separation from the rudder's steering disk. These are provisional concept allocations, described in the [sizing method](sizing.md). The rudder torque arm now follows the mid-chord stock and provisional quarter-chord load location instead of assuming an almost balanced rudder.
-
-Restoring the previous reference and stepping to a **2.000 m hull** passes these new coarse screens. Its rudder is approximately **115 mm chord by 230 mm span**, rather than the former 1.15 m chord by 80 mm span. Maximum normalized equilibrium residual is 1.33e-5 and minimum margin is effectively zero; this establishes numerical feasibility, not engineering margin or physical validation. [Reproducible run and source hashes](../evidence/runs/2026-10-12-appendage-credibility/manifest.json) · [Complete design and constraints](../evidence/runs/2026-10-12-appendage-credibility/sizing-continuation.json).
-
-This run stops at 2 m. Candidate-specific voyage energy, foil and actuator evidence, equipment packaging, joints and bearings, and dynamic recovery remain the next credibility work before renewed size reduction. No new refined replay has been performed.
-
-## Earlier 1.2 m result under the former screens
-
-The staged search found coarse-feasible candidates at **2.0, 1.8, 1.6, 1.4 and 1.2 m**. The earlier 2.009 m result was not a demonstrated size limit. Constrained feasibility correction made the first stages straightforward; the 1.4 m stage exhausted its iteration budget but met the existing acceptance tolerance. At 1.2 m, the retained checkpoint passed even though the final solver iterate continued restoring feasibility elsewhere. I stopped that extra work and recomputed every coarse check in a fresh model instance. The solver now stops on a feasible accepted iterate and preserves the best intermediate correction.
-
-```sysml-report BlueDogContinuationDocuments::Summary
+```sysml-report BlueDogFinitePassageDocuments::Summary
 ```
 
-The 1.2 m point has maximum normalized equilibrium residual 5.67e-5 and minimum margin −4.66e-5, both within the unchanged 1e-4 numerical tolerance. Its estimated mass is **22.26 kg**, including **9.63 kg of ballast**, and the coarse persistent-westerly passage estimate is about **24 hours**. These are screening results, not a refined replay or a dynamic recovery demonstration.
+Shortening the hull from 2.0 to 1.4 m removes roughly 4.6 kg, while nominal battery capacity rises from about 325 to 343 Wh. The smaller candidate takes longer in the conditional sailing calculation, so it needs more stored energy under the same passage policy. Hull length alone is therefore a poor proxy for portability.
 
-There is a clear practical problem in this solution: its rudder is approximately **1.15 m chord by 0.08 m span**, with aspect ratio about **0.070**. The hull plus the neutral rudder spans about **1.80 m fore–aft**. The objective controls hull length, not the complete vessel's footprint, and the former appendage screens accepted this extreme geometry. This therefore does not yet deliver a practical 1.2 m overall vessel. We need credible appendage geometry and hydrodynamic applicability limits before treating this as a buildable boat. The battery also reaches its **50 Wh lower bound**; the static search has no voyage-energy constraint, so that capacity has not been shown to complete the challenge.
+The 1.4 m candidate has a rudder approximately **115 mm chord by 229 mm span**. Its full rotation-and-steering envelope is about **1.46 m long by 0.76 m wide**, with **2.59 m from keel bottom to wing top**. Those dimensions describe the upright operating geometry, not a packed transport arrangement. The volume screen leaves about 20 litres unallocated; local equipment fit, joints, access and printable segmentation still need a layout.
 
-The current geometry screens now reject this point. Next I will improve foil-model coverage, connect candidate-specific energy demand to the mission simulation, then perform the finer operating and recovery replay. Flooded-wing cases remain failure sensitivities rather than mandatory search constraints. [Recorded continuation and provenance](../evidence/runs/2026-10-12-continuation/manifest.json) · [Model evidence](../models/evidence/sizing-continuation.sysml).
+Both the 1.2 m exploration and the subsequent 1.3 m refinement were stopped without an accepted point at those lengths. Their checkpoints are retained. This does **not** establish a minimum feasible size. The accepted 1.4 m state meets the unchanged normalized numerical tolerance of 1e-4; several margins are essentially zero.
 
-## Earlier 2.009 m reference and refined replay
+## What actually limits this candidate
 
-The earlier free-length run started from the previously feasible geometry and re-evaluated it against the Bingen–Stevenson course. It retains a **2.009 m coarse-feasible candidate**. Length minimization reached a 0.804 m trial before its iteration limit, but that trial missed upstream progress, reserve volume, keel handling, wing drive and keel deflection screens and did not fully balance the operating equations. The subsequent feasibility-restoration phase also reached its evaluation limit. This establishes a candidate for further checks, not a minimum boat size or a design ready to build.
+The tight nominal screens include keel, rudder and panel deflection; upstream progress; voyage energy; keel handling; and the resistance model's applicability boundary. The rudder is also almost exactly at the provisional aspect-ratio cutoff.
 
-```sysml-report BlueDogEvidenceDocuments::CandidateBrief
-```
+The fixed-design sensitivity checks help separate assumptions worth investigating:
 
-The following reports retain the 2.009 m reference run; they do not describe the new 1.2 m point. The finer replay holds the candidate's geometry fixed and re-solves its operating controls across six engineering scenarios: primary, construction, aerodynamic, hydrodynamic, electrical and combined assumptions. These variations expose sensitivity; they are not measured uncertainty bounds.
+- **Stiffness:** the declared lower-stiffness construction case produces deflection margins near −0.43. That is a material-property check at nominal loads, not a fully re-solved uncertain voyage. Laminate and joint measurements are a priority.
+- **Energy:** increasing either the passage multiplier or the delay allocation consumes the nominal battery margin. The 35.7-hour no-harvest allowance is an allocation, not a prediction that every voyage will finish within it.
+- **Packaging:** less generous battery density, equipment packing and usable hull volume still pass the aggregate volume check. Volume is not the immediate size driver in these probes.
+- **Foil applicability:** increasing the minimum underwater aspect ratio from 2 to 3 rejects the current rudder. We need better low-aspect-ratio force and control evidence before deciding whether to change that allocation or the geometry.
 
-<details>
-<summary>Search outcome, scenario comparisons and limiting margins</summary>
+## Following the candidate through a voyage
 
-```sysml-report BlueDogEvidenceDocuments::Summary
-```
+The mission simulation now uses this candidate's sailing states, dimensions, battery, electrical load and solar area. Four seeded weather-and-traffic scenarios produced one virtual completion in about **59.6 hours** and three stops outside the available wind-performance coverage. Stored energy stayed above the protected reserve in all four simulated prefixes, including the completed voyage.
 
-</details>
+Those three stops are **inconclusive model-coverage results**, not demonstrated vessel failures. The available sailing states cover only 5–8 m/s winds; outside that range the simulator credits drift, not invented sailing speed. Within the range it uses an averaged-tack velocity envelope. It does not yet resolve the individual tacking excursions needed to judge clearance near traffic and shore. Four scenarios cannot establish a completion probability, and even the virtual completion needs that finer maneuvering check.
 
-The sailing, structure and route screens use the selected challenge profile. The easterly passage column remains visible without becoming an extra challenge obligation. A diagnostic control solve that drops the peak-power check is identified separately. A route without positive progress has no completion time; its numerical penalty is not a predicted voyage duration.
+The contrast between the 35.7-hour battery allocation and the roughly 60-hour simulated voyage is useful: a static passage estimate cannot replace chronological weather, traffic and charging. The completed scenario relied on its modeled solar input. Broader polar coverage and explicit tacking trajectories are the next mission-model improvements.
 
-The primary finer replay passes the selected westerly sailing, structure and route screens, with a conditional round-trip estimate of **21.4 hours**. Its easterly estimate is 41.2 hours, but upstream progress is only 0.249 m/s against the allocated 0.5 m/s target. These are persistent-wind route calculations, not chronological voyage or endurance predictions.
+## Recovery is still an open design problem
 
-Primary, aerodynamic, hydrodynamic and electrical scenarios pass the selected static profile. Construction and combined sensitivity fail the operating and structural screens, with keel deflection among the limiting results. The construction assumptions therefore remain a priority for coupon and stiffness measurements.
+Across 24 sealed-wing, free-pitch static samples, the roll moments point toward upright and every sample has a pitch equilibrium. **Eight equilibria are pitch-unstable.** Positive roll moments therefore do not demonstrate self-righting. This candidate needs a finer coupled recovery assessment before its dimensions become a build baseline; see the [structure and recovery method](structures-and-recovery.md).
 
-A shorter course reduces passage time, but the current static search has no duration deadline or voyage-energy constraint. Its size-driving wind, current, structural and recovery screens therefore do not relax just because the route is shorter. The former continuation found a smaller point only under its older screens; that point fails the current geometry policy.
+My next step is to improve the evidence that drives the design: construction stiffness and joints, foil forces and rudder loads, coupled recovery, and mission performance over the weather range. Then I can repeat the same continuation with stronger assumptions. The 1.4 m result is a useful analysis baseline, not a commitment to build it.
 
-## What a wind shift changes
+[Current run and provenance](../evidence/runs/2026-10-12-finite-passage/manifest.json) · [Generated model evidence](../models/evidence/finite-passage-sizing.sysml) · [Earlier exploration](../evidence/runs/2026-10-12-finite-passage-exploration/manifest.json)
 
-![Sensitivity of the current candidate's route screens and conditional passage time to an assumed persistent easterly wind.](figures/weather-performance-sensitivity.svg)
-
-This calculation keeps the candidate fixed and sweeps an assumed probability of a wholly easterly passage. It helps compare which engineering assumptions make wind shifts consequential. It does not estimate real mission-success probability or account for changing winds during a voyage. The [weather study](operating-constraints.md#gorge-weather-and-launch-windows) and mission simulation address those distinctions.
-
-## What would justify a build decision
-
-Sailing equilibrium is only one part of the decision. The [recovery assessment](structures-and-recovery.md) checks sealed, flooded and water-retaining wing states. Positive sampled roll moments cannot establish self-righting when pitch is unstable, and static equilibrium does not demonstrate a dynamic capsize recovery.
-
-The [OpenVSP experiments](sail-trade.md#what-we-have-actually-run-in-openvsp) supply numerical wing trends for this study. Measured lift, drag, pitching moment and actuator loads remain important inputs, alongside printed/laminated construction mass and stiffness. Those measurements feed the [model-credibility loop](development-plan.md#model-credibility) before the analysis can support a build commitment.
-
-[2.009 m replay candidate and exact values](../models/evidence/current-sizing.sysml) · [Run provenance](../evidence/runs/2026-10-12-bingen/manifest.json)
+The older [2.009 m refined replay](../evidence/runs/2026-10-12-bingen/manifest.json) and [former 1.2 m result](../evidence/runs/2026-10-12-continuation/manifest.json) remain historical evidence. Their constraint sets differ, so their passes do not qualify this candidate.
 
 **Next:** [How the sizing search works](sizing.md).

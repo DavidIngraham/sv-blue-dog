@@ -88,3 +88,31 @@ def test_restored_baseline_retains_its_geometry_screen_evidence():
     r=p.evaluate(z)
     assert r["structure"]["rudderAspectMargin"] >= -1e-4
     assert r["structure"]["sweptSeparationMargin"] >= -1e-4
+
+
+def test_finite_passage_projection_preserves_interrupted_status_and_lineage():
+    from tools.boat_analysis.evidence.continuation import model_source, compatible_stages
+    from tools.boat_analysis.evidence.records import ROOT, run_record, verify_run_sources
+    directory=ROOT/'evidence/runs/2026-10-12-finite-passage'
+    assert verify_run_sources(directory)>10
+    record=run_record(directory,'sizing-continuation.json')
+    assert not record['completed'] and not record['qualified']
+    assert record['smallestFeasibleLengthM']==pytest.approx(1.4)
+    stages=compatible_stages(directory)
+    assert [s['lengthM'] for s in stages]==pytest.approx([2.,1.8,1.6,1.4])
+    assert all(s['feasible'] for s in stages)
+    assert (ROOT/'models/evidence/finite-passage-sizing.sysml').read_text()==model_source(directory,'BlueDogFinitePassageSizing')
+
+
+def test_finite_passage_baseline_passes_fresh_nominal_screens():
+    import sys
+    if sys.platform!='linux':
+        pytest.skip('Native C adapter uses Linux/GCC')
+    from tools.boat_analysis.evidence.records import ROOT, run_record
+    from tools.boat_analysis.optimization.search import Problem
+    record=run_record(ROOT/'evidence/runs/2026-10-12-finite-passage','sizing-continuation.json')
+    p=Problem();z=np.array(record['smallestFeasibleZ'])
+    assert p.feasible(z)
+    result=p.evaluate(z)
+    assert result['concept']['voyageEnergyMargin']>-1e-4
+    assert result['concept']['installationVolumeMargin']>0

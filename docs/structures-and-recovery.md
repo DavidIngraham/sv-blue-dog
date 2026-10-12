@@ -56,15 +56,17 @@ package Page_structures_and_recovery_1 {
 
 The sizing search uses a coarse fixed-pitch recovery screen alongside sailing, structure and energy constraints. We then solve displaced volume and its centroid at a specified attitude, balance heave and pitch, and inspect full-roll restoring curves for several mast positions at the selected geometry. Positive roll moments do not establish a dynamic recovery path, particularly on a pitch-unstable branch. Sealed, freely flooded and retained-water cases answer different questions and remain separate. Restricting sailing heel in the aerodynamic policy does not restrict the full-roll recovery assessment or relax its requirements.
 
-The current trial has positive sealed-wing roll samples but includes pitch-unstable equilibria, so it has not demonstrated self-righting. It also loses positive sampled restoring behavior when the wing is freely flooded or retains water. Sealed-wing roll results cannot stand in for ingress tolerance. The native summary below combines the four locked mast positions for each state and water density; negative restoring moments and unstable pitch samples remain visible.
+The smaller finite-passage candidates are checked separately from the older full-curve study. Their current sealed-wing probe samples six roll angles at four locked mast positions and records pitch stability as well as restoring direction. See the [current sizing results](results.md) for those outcomes and the material-stiffness sensitivity. Positive roll restoration alone has not established self-righting.
+
+The following archived 2.009 m reference study covers sealed, freely flooded and retained-water states in fresh and salt water. It contains pitch-unstable equilibria and adverse flooded-wing restoring samples. These are historical sensitivity results, not a replay of the smaller candidate; sealed-wing results cannot establish ingress tolerance.
 
 ```sysml-report BlueDogEvidenceDocuments::Recovery
 ```
 
 <details>
-<summary>Static recovery curves for the current candidate</summary>
+<summary>Archived full recovery curves for the 2.009 m reference</summary>
 
-![Restoring moment versus heel for the current 2.009 m candidate, comparing sealed, freely flooded and water-retaining wing states. Crosses mark pitch-unstable equilibria.](figures/coupled-recovery.svg)
+![Restoring moment versus heel for the archived 2.009 m reference, comparing sealed, freely flooded and water-retaining wing states. Crosses mark pitch-unstable equilibria.](figures/coupled-recovery.svg)
 
 </details>
 

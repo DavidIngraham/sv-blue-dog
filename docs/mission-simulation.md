@@ -4,7 +4,7 @@
 
 This is the mission-level loop at the top of our [development V](development-plan.md#mission-definition). Its inputs are the challenge course, a candidate boat, weather histories and traffic scenarios. Its output is a voyage history: where the boat went, what it encountered, how its battery changed, and why the attempt finished or stopped. I use it to discover missing requirements and compare design choices before committing to hardware.
 
-The first boat is deliberately a conceptual configuration. Its polar and equipment budget are declared in the model; they are not the result of our detailed sizing study. Keeping the mission simulation separate lets us replace those assumptions with solved and measured performance later while rerunning the same scenarios.
+The simulator supports both the original conceptual configuration and a named sizing candidate. The candidate supplies solved sailing states, electrical demand, battery capacity, panel area and swept dimensions. Keeping the course and scenario logic separate lets us increase vessel fidelity while rerunning the same seeds.
 
 ## A course tied to charted markers
 
@@ -38,6 +38,12 @@ The controller evaluates sailing headings and a depowered option. Depowering sti
 
 There is no 72-hour challenge deadline and no daily energy-balance requirement. A finite trip can finish with less stored energy than it started with. It must still retain the configured recovery reserve. The simulation horizon is a computational setting: reaching it produces a censored result, not a failed challenge deadline.
 
+## Connecting a sizing candidate
+
+The candidate provider forms an averaged-tack velocity envelope from the four solved operating states at each modeled wind speed. Intermediate directions represent time-sharing between those sailing states; they are not independently solved or measured polar points, and their small-scale tack excursions are not resolved by the point-mass track. Wind interpolation stays inside the solved interval. Outside that interval the simulation credits only drift and reports the unsupported time instead of extrapolating performance. Full polars and explicit tack dynamics are still needed before accepting navigation performance near hazards.
+
+The electrical configuration uses candidate storage, usable fraction, departure charge, panel area and maximum solved operating bus load. It integrates net bus power with charge/discharge efficiency, charge-rate limitation and self-discharge. Maneuver energy remains an explicit additional scenario allowance. The optimizer's no-harvest passage screen and this solar-enabled replay answer different questions; neither is a daily-energy-balance requirement.
+
 ## Weather and traffic ensembles
 
 Each realization has reproducible weather and traffic random streams. Weather retains persistent regimes and correlated perturbations rather than drawing an independent wind at every step. Solar input follows a day/night cycle with a cloud factor. These are initial sensitivity hypotheses, not a forecast model or calibrated local probability distribution.
@@ -48,7 +54,11 @@ VesselFinder's accessible record does not provide a complete traffic census or a
 
 The useful early outputs are failure mechanisms and sensitivity to assumptions. The fraction of synthetic scenarios completed must not be presented as the probability that the real boat will complete the Gorge challenge.
 
-## Current course experiment
+## Current sizing-candidate replay
+
+The 1.4 m candidate was replayed through four seeded scenarios using its own battery, panel area, load and averaged-tack performance. One completed virtually in about 59.6 hours; three stopped outside the 5–8 m/s wind-performance coverage. Stored energy remained above the recovery reserve in every simulated prefix. These are diagnostic results, not a completion probability: the coverage stops are inconclusive, and the completed track still needs explicit tacking and maneuver clearance checks. The [sizing results](results.md) explain the implications; the [archived replay](../evidence/runs/2026-10-12-finite-passage/mission-candidate.json) contains the inputs and histories.
+
+## Original conceptual-vessel course experiment
 
 The [recorded Bingen–Stevenson campaign](../evidence/runs/2026-10-12-bingen-mission/mission-campaign.json) preserves the model inputs, source hashes, seeds and voyage histories. The chart-clear reference circuit is **65.786 km**, including the port rounding of buoy 16. The outbound reference path is 32.648 km; the return path and rounding make the two halves slightly different. Sailing tracks include additional tacks and avoidance.
 
@@ -60,13 +70,13 @@ The controller considered **41 potentially conflicting traffic encounters** acro
 
 A numerical check separates the integration step from how often the controller changes commands. The deterministic test checks that refinement of time integration does not shorten maneuver delays. The rounding test separately requires the north, west and south checkpoints in order while excluding the buoy's clearance disk.
 
-The next useful step is to improve local tack planning around the rounding mark and replay the same seeds, then replace the conceptual polar and electrical budget with a named sizing candidate. These counts describe the controller and declared assumptions, not the real boat's mission-success probability.
+The next useful step is to improve local tack planning around the rounding mark and replay the same seeds, and compare the candidate provider against fuller polars and measured electrical loads. These counts describe the controller and declared assumptions, not the real boat's mission-success probability.
 
 ## Increasing fidelity without changing the question
 
 | Current representation | Evidence or implementation that should replace it |
 | --- | --- |
-| Hypothetical speed polar | Named sizing candidate, then measured speed and maneuver performance |
+| Candidate averaged-tack envelope (or original conceptual polar) | Full candidate polars, explicit tack excursions and measured maneuver performance |
 | Point-mass guidance | Control-software replay and maneuver dynamics |
 | Synthetic weather regimes | Forecast-conditioned, correlated along-route weather/current histories |
 | Scripted traffic with perfect visibility | Time-stamped observations and sensing/intent uncertainty |
@@ -75,6 +85,6 @@ The next useful step is to improve local tack planning around the rounding mark 
 
 The course and scenario contracts stay identifiable through these changes. Virtual results remain separate from physical verification. For SRR, this simulation should expose unsuitable or missing mission criteria; for PDR, its vessel models need enough credibility to justify design decisions.
 
-Run the campaign with `uv run python -m tools.boat_analysis.mission.campaign --count 32`. It records the model inputs, source hashes, seeds, generated traffic counts, gate events and chronological histories. The numerical horizon can be extended without turning incomplete observations into failures.
+Run the original conceptual campaign with `uv run python -m tools.boat_analysis.mission.campaign --count 32`, or add `--candidate build/analysis/sizing-continuation.json` for a freshly checked sizing result. It records the model inputs, source hashes, seeds, generated traffic counts, gate events and chronological histories. The numerical horizon can be extended without turning incomplete observations into failures.
 
 **Next:** [What the sizing study tells us](results.md).

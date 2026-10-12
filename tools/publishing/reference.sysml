@@ -417,3 +417,19 @@ package BlueDogContinuationDocuments {
         part assessment : Table { calc rows : Assessment; }
     }
 }
+
+package BlueDogFinitePassageDocuments {
+    private import DocumentQueries::*;
+    calc def Stages :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogFinitePassageSizing::stage0", "BlueDogFinitePassageSizing::stage1", "BlueDogFinitePassageSizing::stage2", "BlueDogFinitePassageSizing::stage3")), columns = (
+            Column(name = "Hull length (m)", path = "lengthM"),
+            Column(name = "Mass (kg)", path = "massKg"),
+            Column(name = "Battery (Wh)", path = "batteryWh"),
+            Column(name = "Swept length (m)", path = "sweptLengthM"),
+            Column(name = "Nominal coarse pass", path = "feasible")))
+    }
+    part def Summary :> Document {
+        attribute redefines title = "Finite-passage sizing stages";
+        part stages : Table { calc rows : Stages; }
+    }
+}

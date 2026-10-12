@@ -39,6 +39,9 @@ jobs:
       - run: uv run pytest -q
       - name: Exercise the seeded mission campaign
         run: uv run python -m tools.boat_analysis.mission.campaign --count 4
+      - run: uv run python -m tools.publishing.sizing_progress
+      - name: Check sizing plot matches archived evidence
+        run: git diff --exit-code -- docs/figures/finite-passage-sizing.svg
       - run: uv run python -m tools.publishing.course_map
       - name: Check course map matches the model and chart evidence
         run: git diff --exit-code -- docs/figures/gorge-course-map.svg

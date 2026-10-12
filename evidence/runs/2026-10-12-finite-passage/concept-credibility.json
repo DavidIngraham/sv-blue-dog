@@ -1,0 +1,776 @@
+{
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/dfmea.sysml": "f6788362c2b868cb462782b7e9b837eb8fafe716368816f7a25cb5a7be7c6a73",
+    "models/analyses/energy.sysml": "20a4ed6f261ddec7d6dc80e3760c0202a072bde2ba5defaf2a6f2046d3f67bb6",
+    "models/analyses/mission.sysml": "443b0394c573f6845be5ec167e0a0e927dbced988ae6ed98819533ef760bb059",
+    "models/analyses/passage-exposure.sysml": "72f055615ffabba4ec9377d00d2f76ade31ee68091f012b60ed56d5bb1a64f73",
+    "models/analyses/polar-demand.sysml": "c8fef49f41d17e9c6da0bc275087d2382eefd770bfa4bba0386fa45199f551f4",
+    "models/analyses/recovery-propulsion.sysml": "3348c0d85a51123c73ae4dbb13ceca7a2b2b81f62ade87a2ab84c40bd939e309",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "d503cd100a60525df2f86dd1eb575735099293f030891d18760b0113808cd0d0",
+    "models/analyses/sail-trade.sysml": "29b61e7e9e7618b7b14de64a4500595f08d0316248c9e8ab64eb3675e3e0dfd9",
+    "models/analyses/sizing/credibility.sysml": "590c6e859f9bb4302f1f5ca3e0eb72a7c56d816f28bc5615fa71cd35f6628254",
+    "models/analyses/sizing/evidence.sysml": "f0d2a6d886c71d4b7adc632271ff122f7bc57b1a6302db84bf844d74f20fe801",
+    "models/analyses/sizing/inputs.sysml": "934dde8fa12d41656d776b954c7a695f7979e003e629d2677ea4de51b1615925",
+    "models/analyses/sizing/operating.sysml": "795fabd7bfd88e4b5e99c1e8d1e88314d378566ee5fa4e13a3802ea2324d35a9",
+    "models/analyses/sizing/uncertainty.sysml": "78d71e2767b681561768d486ca6d6a9d4e16332fd576fe9cfe1a8e01d3dfcf3b",
+    "models/analyses/weather.sysml": "c2a4008fa04c18d32ff804a0419254a6854a6a6ca6ab767e837149da3036a750",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/energy.sysml": "ffae7ac7db894f0fe961ae0c8a30a3e461e8d3c5f81c8fc54e82401f7a3f5e37",
+    "models/configurations/operating.sysml": "e56ef7842dd7ff2c00054d7df4a8e95a5eda9aafc3804c779fbabc698a04d818",
+    "models/configurations/polar-demand.sysml": "776327bf7cefc8edc26f29000d21261cc3f2d2da9da8dcd8a6e30ffa5ced121e",
+    "models/configurations/reference.sysml": "409baa5254262a527b27af7fce00ffb3da35f249fe54e51f3cf024bdf86671be",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/configurations/wind-equipment.sysml": "3d5508bf915a2747612c755b79a2d0c07314f0536b5b642cf0fb12115de1323b",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/evidence/current-sizing.sysml": "b6176f48be47dde61bd41ea892fec6c68258b72afdf2265ffb1bba5fb642b991",
+    "models/evidence/gorge-wind.sysml": "2eee7571fc7ac02bcd054b0c226b5edb54ff931a31d74c508331ff1bf20ef466",
+    "models/evidence/sizing-continuation.sysml": "b8825d29058049ef75538b8b40b0dceb5bbdcb9aac806457856b9b2a9ccfee2e",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/appendages.sysml": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+    "models/libraries/marine/concept.sysml": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+    "models/libraries/marine/course.sysml": "3b747dd83c30d2877f6436aa8195a0272a9d329430bef2b5e60e88ff90186d21",
+    "models/libraries/marine/design.sysml": "1b1bf4207a20853903a934cdd67a910d24f6f930116219c909c78b5bf3067057",
+    "models/libraries/marine/hull-resistance.sysml": "0ae663362a441fe3ae3342ee687d21dc351b19730b5b97d01611aacd46254203",
+    "models/libraries/marine/hydrostatics.sysml": "1c29aae5c7c0f593bbfea5c0cfe770b325fa2cb4d0a17640b6dad0b64e571dc1",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/reliability.sysml": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+    "models/libraries/marine/sailing.sysml": "2d01adfb8cefe9ec58c7851570357931a21dac8b462524106a79cc25b8fa10b9",
+    "models/libraries/marine/weather.sysml": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+    "models/libraries/structures/mass-properties.sysml": "f34ac343e57871ae81407b57a32679121e36711fce8c0b9e75bec2abb8095dca",
+    "models/libraries/structures/scantlings.sysml": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+    "models/missions/course.sysml": "92e0f633a9b99c9717ebd8bff108316ef54fb68d0c50a7c407b375f65ae14c26",
+    "models/missions/scope.sysml": "3f4058d5a9fc653f77764849708b3729f286fc52e692ec418ea5fd47aad92854",
+    "models/missions/transgorge.sysml": "3357cc0a50a3c073f8c73bed2a1b3f0dc44eddcdf18e6b107d34f11aecec7141",
+    "models/vehicle/allocations.sysml": "15d82ec82b43c9e2917db4cdb797ea1563f5b45c7eebea2ff9cf1ed36aeefcb9",
+    "models/vehicle/architecture.sysml": "27df61bf961562552ccb41d11a23344305827f8a9636f325babc61fe775b6f74",
+    "models/vehicle/decisions.sysml": "ca3601bb37de1013f66b01eb6e6e3df587032a7f0f2c1559e624818b3c3a50fa",
+    "models/vehicle/requirements.sysml": "0b8e73815e18013f8f471d3830e17d100bbc66b67575d5694405da34a7097429",
+    "models/vehicle/source-evidence.sysml": "a0c36211ef784210977c638cf4371438a6dd808e1f81410b0351e0850935ae04",
+    "models/vehicle/structure.sysml": "031b8780de2716bd9891139a68055a3932aa5450b664c70a3ce49f359fb48db0",
+    "models/vehicle/use-cases.sysml": "5323349c3ce729ed3ba56c360838403aaeb599eb720272390e066c741b98872a",
+    "models/vehicle/verification.sysml": "85f0d64f854b443cabbce870e8edfdee08efbc59c80322b9bccfe1be0fd0e31e",
+    "tools/boat_analysis/geometry/laminate.py": "994a8fe663fdc9911292b987f1f69d29080ff257cf972e72065a2d4524c5527c",
+    "uv.lock": "c93f6c3efc01d4c60e505600a9a42824d9c3d429e14309bc83c0fca6a35edf72",
+    "tools/boat_analysis/optimization/search.py": "8b21e68a237db17dfb7db677ed2eec9536871725a827d975c8acd7b456da7e70",
+    "tools/boat_analysis/optimization/operating.py": "0f62f579800d47d5e79bf14837f9da9e3da59d6c2eb99072820860e28ed045a7",
+    "tools/boat_analysis/model/vessel.py": "1f4d94171690ab657ec8f2a9fee3a640669ef784ec8feaa36520d1897dbaba42",
+    "tools/boat_analysis/model/mass.py": "e05afcd211f1fe3810a5209928d0a82820b09fed3d0ecd99e8c622da2fc108fe",
+    "tools/boat_analysis/model/operating.py": "c4a5993cedf77474e0ea53587dd5c8f8dafc970ea1d9a7391990b05a834fcbc7",
+    "tools/boat_analysis/model/hydrostatics.py": "b29e2d9955185a8d2a608c1800882983d084ac4566a1c72f2a495819333d47e1",
+    "tools/boat_analysis/geometry/hydro.py": "55ebd4b84f88803bf69e740bf7276a577ccd54b3d7c761a7dcda82658ba6f03e",
+    "tools/boat_analysis/geometry/vessel.py": "3f9ea410cd71124522473a406bfe559068cb45bd0801dd56a64329fbfcb59a9b",
+    "tools/boat_analysis/geometry/hull.py": "558c055858bd4fd04419dbfec5eebf92c61cf2fe0d73d96561c66e7b236489d6",
+    "tools/boat_analysis/aerodynamics/polar.py": "8fba7d59530aee7ee633ba043e35deda51d844f2ebe8de6e630abe2d5e8b9a82",
+    "evidence/runs/2026-10-10-coupled/wing-polar-grid.json": "1ee81c4c85e8fe8d5bc34164db426c7872e1ddcb90e0c1fb1862cea003c4d365",
+    "evidence/runs/2026-10-10-coupled/wing-geometry.json": "1a3836193ed6ddb2fd8e42c920e5b41bf68deb3ec8092317a1fedab53ea3123b",
+    "tools/boat_analysis/optimization/continuation.py": "9948c56bc5eb548412386a836244ccca80d8b4b1eab48d89dfd70a6ad065eda2",
+    "evidence/runs/2026-10-12-bingen/coupled-sizing-search.json": "cdb8e2991d3b78421667b9472497555e7f2d867daa3304b0577efb36cc8adffb",
+    "evidence/runs/2026-10-12-appendage-credibility/sizing-continuation.json": "4f9f5ec9cb66585dcee6dd97db0a4df3ca08bc8fe358bc7a5423cb7e6c4b8a60",
+    "build/analysis/sizing-candidate-1p4.json": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88",
+    "tools/boat_analysis/optimization/credibility.py": "82bab393044ad4e958bb3abf58690130b963b9f77653ed9a04da5303a916d580",
+    "build/analysis/coupled-uncertainty-inputs.json": "dde79cc95176ac23759dbd6704a3b7c294432248a24f23ad14a1835757ad2d21"
+  },
+  "qualified": false,
+  "concept": {
+    "voyageEnergyMargin": -1.2150509149932985e-07,
+    "installationVolumeMargin": 1.9629070633050338,
+    "passageHours": 35.72391247254426,
+    "departureWh": 246.83253862537308,
+    "requiredWh": 246.83255077588223,
+    "batteryVolumeM3": 0.0017141148515650907,
+    "equipmentVolumeM3": 0.00832431130030564,
+    "availableVolumeM3": 0.029667496784921074
+  },
+  "sensitivity": [
+    {
+      "parameter": "durationMultiplier",
+      "value": 1,
+      "voyageEnergyMargin": 0.32887833745445194,
+      "installationVolumeMargin": 1.9629070633050338,
+      "passageHours": 29.779129978035403,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 213.94470487992788,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "durationMultiplier",
+      "value": 1.25,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 1.9629070633050338,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "durationMultiplier",
+      "value": 1.5,
+      "voyageEnergyMargin": -0.3288785804646349,
+      "installationVolumeMargin": 1.9629070633050338,
+      "passageHours": 41.668694967053106,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 279.72039667183657,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "delayHours",
+      "value": 0,
+      "voyageEnergyMargin": 0.33193309145601435,
+      "installationVolumeMargin": 1.9629070633050338,
+      "passageHours": 29.723912472544253,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 213.63922947977164,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "delayHours",
+      "value": 6,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 1.9629070633050338,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "delayHours",
+      "value": 12,
+      "voyageEnergyMargin": -0.3319333344661973,
+      "installationVolumeMargin": 1.9629070633050338,
+      "passageHours": 41.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 280.0258720719928,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "batteryInstalledWhM3",
+      "value": 150000,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 1.9057699015861975,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0022854864687534542,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "batteryInstalledWhM3",
+      "value": 200000,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 1.9629070633050338,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "batteryInstalledWhM3",
+      "value": 250000,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 1.9971893603363364,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0013712918812520726,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "equipmentInstalledKgM3",
+      "value": 250,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 1.13047593327447,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.01664862260061128,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "equipmentInstalledKgM3",
+      "value": 500,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 1.9629070633050338,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "equipmentInstalledKgM3",
+      "value": 750,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 2.2403841066485555,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.005549540866870427,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "usableHullVolumeFraction",
+      "value": 0.35,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 1.0728821597574019,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.020767247749444752
+    },
+    {
+      "parameter": "usableHullVolumeFraction",
+      "value": 0.5,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 1.9629070633050338,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.029667496784921074
+    },
+    {
+      "parameter": "usableHullVolumeFraction",
+      "value": 0.65,
+      "voyageEnergyMargin": -1.2150509149932985e-07,
+      "installationVolumeMargin": 2.8529319668526663,
+      "passageHours": 35.72391247254426,
+      "departureWh": 246.83253862537308,
+      "requiredWh": 246.83255077588223,
+      "batteryVolumeM3": 0.0017141148515650907,
+      "equipmentVolumeM3": 0.00832431130030564,
+      "availableVolumeM3": 0.038567745820397396
+    }
+  ],
+  "aspectSensitivity": [
+    {
+      "minimumAspectRatio": 1.5,
+      "keel": 1.1756957732237772,
+      "rudder": 0.33355215120516823
+    },
+    {
+      "minimumAspectRatio": 2,
+      "keel": 0.631771829917833,
+      "rudder": 0.0001641134038761205
+    },
+    {
+      "minimumAspectRatio": 3,
+      "keel": 0.08784788661188858,
+      "rudder": -0.3332239243974159
+    }
+  ],
+  "constructionMaterialMargins": {
+    "hullStressMargin": 0.923460821921286,
+    "wingStressMargin": 0.3858007509765128,
+    "keelStressMargin": 0.6848298244238528,
+    "rudderStressMargin": 0.48579694925656447,
+    "hullDeflectionMargin": 0.8754477403554951,
+    "wingDeflectionMargin": -0.4285713040257242,
+    "keelDeflectionMargin": -0.42857170593170646,
+    "rudderDeflectionMargin": -0.42857621765660214,
+    "panelStressMargin": 0.6571426237023101,
+    "panelDeflectionMargin": -0.42857288757509604
+  },
+  "nearSearchBounds": [
+    {
+      "parameter": "wing_glass_kg_m2",
+      "value": 0.2,
+      "lower": 0.2,
+      "upper": 4.0
+    }
+  ],
+  "sealedRecovery": [
+    {
+      "trimDeg": 0,
+      "heel_deg": -150.0,
+      "pitch_deg": 0.45569463052536635,
+      "waterline_m": -0.7496703404568019,
+      "displaced_m3": 0.02989472685296676,
+      "buoyancy_center_m": [
+        -0.0533933120713119,
+        0.7126557507650148,
+        -1.1142925911732535
+      ],
+      "mass_residual_kg": -8.416378705078387e-12,
+      "roll_torque_Nm": 243.72386834026221,
+      "pitch_torque_Nm": 2.5259159208701477e-13,
+      "righting_Nm": -243.71615986762114,
+      "pitch_stable_branches_deg": [],
+      "pitch_stable": false
+    },
+    {
+      "trimDeg": 0,
+      "heel_deg": -90.0,
+      "pitch_deg": -3.330935707288421,
+      "waterline_m": -0.014678861905702875,
+      "displaced_m3": 0.02989472685297231,
+      "buoyancy_center_m": [
+        -0.05545056805881605,
+        0.02005968981897722,
+        -0.10395743471129404
+      ],
+      "mass_residual_kg": -2.8634872251132037e-12,
+      "roll_torque_Nm": 78.99807867299242,
+      "pitch_torque_Nm": 3.837012177221322e-09,
+      "righting_Nm": -78.86461857258341,
+      "pitch_stable_branches_deg": [
+        -3.33093571
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 0,
+      "heel_deg": -30.0,
+      "pitch_deg": -2.1822021823694175,
+      "waterline_m": -0.008110910664893093,
+      "displaced_m3": 0.02989472684952007,
+      "buoyancy_center_m": [
+        -0.0470082626425423,
+        0.032274061981721815,
+        -0.11531892118067133
+      ],
+      "mass_residual_kg": -3.455106423189136e-09,
+      "roll_torque_Nm": 47.78229888618241,
+      "pitch_torque_Nm": 2.093272251413314e-09,
+      "righting_Nm": -47.74764681065135,
+      "pitch_stable_branches_deg": [
+        -2.18220218
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 0,
+      "heel_deg": 30.0,
+      "pitch_deg": -2.1700284868277917,
+      "waterline_m": -0.008104562262658183,
+      "displaced_m3": 0.02989472685166083,
+      "buoyancy_center_m": [
+        -0.04679104744001863,
+        -0.032282928938949275,
+        -0.11530895635084636
+      ],
+      "mass_residual_kg": -1.3143477417543181e-09,
+      "roll_torque_Nm": -44.26092553467543,
+      "pitch_torque_Nm": 1.684616073149847e-09,
+      "righting_Nm": 44.229184272983744,
+      "pitch_stable_branches_deg": [
+        -2.17002849
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 0,
+      "heel_deg": 90.0,
+      "pitch_deg": -2.8822134697948547,
+      "waterline_m": -0.08456741638788053,
+      "displaced_m3": 0.029894726852971246,
+      "buoyancy_center_m": [
+        -0.05472177734686187,
+        -0.4134859215112657,
+        -0.12593092112037008
+      ],
+      "mass_residual_kg": -3.929301328753354e-12,
+      "roll_torque_Nm": -194.3377151674187,
+      "pitch_torque_Nm": 4.383574654709399e-10,
+      "righting_Nm": 194.0918808349716,
+      "pitch_stable_branches_deg": [
+        -2.88221347
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 0,
+      "heel_deg": 150.0,
+      "pitch_deg": 0.4398904645890927,
+      "waterline_m": -0.8099572107963866,
+      "displaced_m3": 0.02989472685292457,
+      "buoyancy_center_m": [
+        -0.053507245218949555,
+        -0.6082560674290289,
+        -1.174580571617965
+      ],
+      "mass_residual_kg": -5.0604853640834335e-11,
+      "roll_torque_Nm": -216.64128637714168,
+      "pitch_torque_Nm": 2.0686380386436551e-13,
+      "righting_Nm": 216.63490149436913,
+      "pitch_stable_branches_deg": [],
+      "pitch_stable": false
+    },
+    {
+      "trimDeg": 90,
+      "heel_deg": -150.0,
+      "pitch_deg": 3.1179562516417922,
+      "waterline_m": -0.7745450883618159,
+      "displaced_m3": 0.02989472685297518,
+      "buoyancy_center_m": [
+        -0.03481037116184067,
+        0.6488946407329839,
+        -1.14405832513759
+      ],
+      "mass_residual_kg": 3.552713678800501e-15,
+      "roll_torque_Nm": 226.4044067587535,
+      "pitch_torque_Nm": 2.207302112644527e-10,
+      "righting_Nm": -226.06925425272388,
+      "pitch_stable_branches_deg": [],
+      "pitch_stable": false
+    },
+    {
+      "trimDeg": 90,
+      "heel_deg": -90.0,
+      "pitch_deg": -10.332066865772497,
+      "waterline_m": -0.1132538746178723,
+      "displaced_m3": 0.02989472685599873,
+      "buoyancy_center_m": [
+        -0.04618711267878374,
+        0.48323645401196885,
+        -0.19162712735993592
+      ],
+      "mass_residual_kg": 3.0235547399115603e-09,
+      "roll_torque_Nm": 214.7862781291801,
+      "pitch_torque_Nm": 5.813961645451115e-13,
+      "righting_Nm": -211.30347850363913,
+      "pitch_stable_branches_deg": [
+        -10.33206687
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 90,
+      "heel_deg": -30.0,
+      "pitch_deg": -1.8021501057982214,
+      "waterline_m": -0.009031173603410339,
+      "displaced_m3": 0.029894726852965528,
+      "buoyancy_center_m": [
+        -0.039877676982666324,
+        0.03555871671989515,
+        -0.11537580389992694
+      ],
+      "mass_residual_kg": -9.64561763794336e-12,
+      "roll_torque_Nm": 47.37205205549389,
+      "pitch_torque_Nm": 1.2280088651506204e-10,
+      "righting_Nm": -47.34862093508898,
+      "pitch_stable_branches_deg": [
+        -1.80215011
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 90,
+      "heel_deg": 30.0,
+      "pitch_deg": -1.8058726703367547,
+      "waterline_m": -0.00937609053386685,
+      "displaced_m3": 0.029894726852955453,
+      "buoyancy_center_m": [
+        -0.039815348302337676,
+        -0.03671180646940138,
+        -0.1155397130015176
+      ],
+      "mass_residual_kg": -1.972111363102158e-11,
+      "roll_torque_Nm": -46.932526430938985,
+      "pitch_torque_Nm": 1.122486550042545e-10,
+      "righting_Nm": 46.90921671554352,
+      "pitch_stable_branches_deg": [
+        -1.80587267
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 90,
+      "heel_deg": 90.0,
+      "pitch_deg": -12.589687271157764,
+      "waterline_m": -0.12499338820024483,
+      "displaced_m3": 0.029894726852975177,
+      "buoyancy_center_m": [
+        -0.04521332431761913,
+        -0.5106981455607248,
+        -0.20614798712569538
+      ],
+      "mass_residual_kg": 0.0,
+      "roll_torque_Nm": -222.8371432214604,
+      "pitch_torque_Nm": -5.639760547460071e-13,
+      "righting_Nm": 217.47924917072194,
+      "pitch_stable_branches_deg": [
+        -12.58968727
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 90,
+      "heel_deg": 150.0,
+      "pitch_deg": 3.092009010353381,
+      "waterline_m": -0.786508216950441,
+      "displaced_m3": 0.029894726852975152,
+      "buoyancy_center_m": [
+        -0.03499213182862049,
+        -0.628161876017621,
+        -1.1560276021368645
+      ],
+      "mass_residual_kg": -2.1316282072803006e-14,
+      "roll_torque_Nm": -221.1038154024736,
+      "pitch_torque_Nm": 2.1499246259937265e-10,
+      "righting_Nm": 220.7819331173688,
+      "pitch_stable_branches_deg": [],
+      "pitch_stable": false
+    },
+    {
+      "trimDeg": 180,
+      "heel_deg": -150.0,
+      "pitch_deg": 1.328270745578245,
+      "waterline_m": -0.8096230910101411,
+      "displaced_m3": 0.029894726852927798,
+      "buoyancy_center_m": [
+        -0.047137495542122675,
+        0.6082518614431358,
+        -1.174168986213929
+      ],
+      "mass_residual_kg": -4.737898962048348e-11,
+      "roll_torque_Nm": 216.64005332037686,
+      "pitch_torque_Nm": 4.162535236496012e-11,
+      "righting_Nm": -216.58184068537395,
+      "pitch_stable_branches_deg": [],
+      "pitch_stable": false
+    },
+    {
+      "trimDeg": 180,
+      "heel_deg": -90.0,
+      "pitch_deg": -3.4410999718521325,
+      "waterline_m": -0.08415422444460849,
+      "displaced_m3": 0.029894726852954967,
+      "buoyancy_center_m": [
+        -0.05156740481171978,
+        0.40965863761366406,
+        -0.12590474134367838
+      ],
+      "mass_residual_kg": -2.020783540501725e-11,
+      "roll_torque_Nm": 193.21568135783443,
+      "pitch_torque_Nm": 1.9414494619729438e-10,
+      "righting_Nm": -192.8673190621522,
+      "pitch_stable_branches_deg": [
+        -3.44109997
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 180,
+      "heel_deg": -30.0,
+      "pitch_deg": -2.029445343701039,
+      "waterline_m": -0.008033392203688103,
+      "displaced_m3": 0.029894726851432726,
+      "buoyancy_center_m": [
+        -0.044273403447335324,
+        0.0323820925264111,
+        -0.11519723328239795
+      ],
+      "mass_residual_kg": -1.5424497235017043e-09,
+      "roll_torque_Nm": 44.28999703825346,
+      "pitch_torque_Nm": 7.140568332064666e-10,
+      "righting_Nm": -44.26221656093306,
+      "pitch_stable_branches_deg": [
+        -2.02944534
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 180,
+      "heel_deg": 30.0,
+      "pitch_deg": -2.0407697228983652,
+      "waterline_m": -0.008038977793252826,
+      "displaced_m3": 0.0298947268529656,
+      "buoyancy_center_m": [
+        -0.04447682547758059,
+        -0.032374326266094204,
+        -0.11520600391809308
+      ],
+      "mass_residual_kg": -9.57456336436735e-12,
+      "roll_torque_Nm": -47.81169307907131,
+      "pitch_torque_Nm": 8.758918307538721e-10,
+      "righting_Nm": 47.78136806907386,
+      "pitch_stable_branches_deg": [
+        -2.04076972
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 180,
+      "heel_deg": 90.0,
+      "pitch_deg": -3.2509719289285606,
+      "waterline_m": -0.013940705130796111,
+      "displaced_m3": 0.029894726852968415,
+      "buoyancy_center_m": [
+        -0.05238760711889978,
+        -0.015353344612248599,
+        -0.10384006424748211
+      ],
+      "mass_residual_kg": -6.760814130757353e-12,
+      "roll_torque_Nm": -77.61833298845409,
+      "pitch_torque_Nm": 7.034153236329388e-10,
+      "righting_Nm": 77.49342248150649,
+      "pitch_stable_branches_deg": [
+        -3.25097193
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 180,
+      "heel_deg": 150.0,
+      "pitch_deg": 1.3855573196772555,
+      "waterline_m": -0.7493259732715298,
+      "displaced_m3": 0.029894726852975197,
+      "buoyancy_center_m": [
+        -0.046756026123083064,
+        -0.7126470888931735,
+        -1.1138655550613996
+      ],
+      "mass_residual_kg": 2.1316282072803006e-14,
+      "roll_torque_Nm": -243.72132896427289,
+      "pitch_torque_Nm": 5.0546626095826496e-11,
+      "righting_Nm": 243.650068916931,
+      "pitch_stable_branches_deg": [],
+      "pitch_stable": false
+    },
+    {
+      "trimDeg": 270,
+      "heel_deg": -150.0,
+      "pitch_deg": -1.361693164574748,
+      "waterline_m": -0.7881668230022703,
+      "displaced_m3": 0.02989472685297518,
+      "buoyancy_center_m": [
+        -0.06564659169216301,
+        0.6281605963585303,
+        -1.1581202148019585
+      ],
+      "mass_residual_kg": 3.552713678800501e-15,
+      "roll_torque_Nm": 221.10344024849957,
+      "pitch_torque_Nm": -6.30172471982604e-12,
+      "righting_Nm": -221.04100090724086,
+      "pitch_stable_branches_deg": [],
+      "pitch_stable": false
+    },
+    {
+      "trimDeg": 270,
+      "heel_deg": -90.0,
+      "pitch_deg": -2.9513515573378006,
+      "waterline_m": -0.12103042662616548,
+      "displaced_m3": 0.029894726852998457,
+      "buoyancy_center_m": [
+        -0.06038997036355022,
+        0.5742578136613385,
+        -0.20591345287140977
+      ],
+      "mass_residual_kg": 2.3280932737179683e-11,
+      "roll_torque_Nm": 241.47074826337712,
+      "pitch_torque_Nm": 9.929462585489544e-13,
+      "righting_Nm": -241.1504643501209,
+      "pitch_stable_branches_deg": [
+        -81.77225817,
+        -2.95135156
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 270,
+      "heel_deg": -30.0,
+      "pitch_deg": -2.4005198501033713,
+      "waterline_m": -0.009797010805973116,
+      "displaced_m3": 0.02989472685296632,
+      "buoyancy_center_m": [
+        -0.051417210742384034,
+        0.0365384810830569,
+        -0.11605241284824384
+      ],
+      "mass_residual_kg": -8.856915201249649e-12,
+      "roll_torque_Nm": 46.88171312606937,
+      "pitch_torque_Nm": 6.463217847718638e-09,
+      "righting_Nm": -46.84057208414969,
+      "pitch_stable_branches_deg": [
+        -2.40051985
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 270,
+      "heel_deg": 30.0,
+      "pitch_deg": -2.4105960995346134,
+      "waterline_m": -0.009435706211677039,
+      "displaced_m3": 0.02989472685297095,
+      "buoyancy_center_m": [
+        -0.051443085733737515,
+        -0.03531916592639021,
+        -0.11588878360398146
+      ],
+      "mass_residual_kg": -4.224176564093796e-12,
+      "roll_torque_Nm": -47.30182363852936,
+      "pitch_torque_Nm": 7.2600332675532e-09,
+      "righting_Nm": 47.259964772477986,
+      "pitch_stable_branches_deg": [
+        -2.4105961
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 270,
+      "heel_deg": 90.0,
+      "pitch_deg": -3.4108156122374385,
+      "waterline_m": -0.11150860046551772,
+      "displaced_m3": 0.02989472685297525,
+      "buoyancy_center_m": [
+        -0.060532976292383696,
+        -0.5328872947211524,
+        -0.19206574875335872
+      ],
+      "mass_residual_kg": 7.460698725481052e-14,
+      "roll_torque_Nm": -229.34227224469876,
+      "pitch_torque_Nm": 1.0234314506973873e-13,
+      "righting_Nm": 228.9360187815674,
+      "pitch_stable_branches_deg": [
+        -3.41081561
+      ],
+      "pitch_stable": true
+    },
+    {
+      "trimDeg": 270,
+      "heel_deg": 150.0,
+      "pitch_deg": -1.3744036269179172,
+      "waterline_m": -0.7762128068065913,
+      "displaced_m3": 0.029894726852975204,
+      "buoyancy_center_m": [
+        -0.06573073235352936,
+        -0.6488971348560753,
+        -1.1461655248305336
+      ],
+      "mass_residual_kg": 2.842170943040401e-14,
+      "roll_torque_Nm": -226.405137953645,
+      "pitch_torque_Nm": -6.5303636609392864e-12,
+      "righting_Nm": 226.34000229968655,
+      "pitch_stable_branches_deg": [],
+      "pitch_stable": false
+    }
+  ],
+  "scope": "Fixed-design one-at-a-time allocation sensitivity and sparse free-pitch static recovery. No reoptimization, dynamic recovery or physical qualification."
+}
