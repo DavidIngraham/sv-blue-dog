@@ -153,6 +153,24 @@ Detailed analysis follows uncertainty, not a fixed tool ladder. Start with estim
 
 </details>
 
+## Let risk select the next investigation
+
+PDR work starts from the risks that could defeat the mission or force a different architecture. The [risk inventory](../models/analyses/development-risks.sysml) links each event to affected requirements, analyses, decisions and existing DFMEA entries. It uses a small extension of the standard [SysML RiskMetadata](https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml.library/Domain%20Libraries/Metadata/RiskMetadata.sysml), with standard status and ownership metadata. The DFMEA describes failure modes; this inventory tracks the development work needed to address them and broader model uncertainty.
+
+The first selection is safety feasibility: traffic sensing and maneuvering, together with casualty recovery. Material/load sensitivity, wing behavior and installed energy follow because they can invalidate the sizing result. Scenario and model credibility apply throughout. These are provisional work priorities, not an SRR disposition or a claim of quantified likelihood. Safety consequences take precedence over cheap, easy tasks; among competing investigations, prefer evidence that can change an imminent decision and is practical to obtain.
+
+```sysml-report BlueDogRiskDocuments::Priorities
+```
+
+### Risk reduction and closure
+
+```sysml-report BlueDogRiskDocuments::Actions
+```
+
+Standard probability and impact fields remain unset until the assessed event, exposure and supporting evidence are defined. Unknown is not zero, and the standard low/medium/high probability values are not substitutes for measurements. We do not multiply ordinal scores into an apparent mission probability. The named owner coordinates the action; I review residual-risk dispositions. Planned tests and successful software checks alone do not reduce a physical risk rating.
+
+For each investigation, record the configuration, predicted observable, uncertainty and decision it could change before running it. Link the resulting evidence back into the model, reassess the risk and select the next action. Close a risk only with supporting evidence and an explicit disposition; otherwise retain it, restrict the concept's scope, or change the architecture. The inventory starts with six risk areas and must grow when analysis or experiments reveal omissions. It does not supersede the DFMEA or authorize field trials.
+
 ## Review gates scaled to one project
 
 Each Systems Engineering Technical Review (SETR) is a short, configuration-specific decision supported by linked evidence. No standing board or slide deck is required. I make the commitment decision; an agent prepares the evidence and another review, when requested, can challenge the reasoning. Different subsystems can hold separate scoped reviews.

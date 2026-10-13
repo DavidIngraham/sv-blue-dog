@@ -551,3 +551,32 @@ package BlueDogRequirementBasisDocuments {
         part decisions : Table { calc rows : Decisions; }
     }
 }
+
+package BlueDogRiskDocuments {
+    private import DocumentQueries::*;
+    calc def PrioritiesRows :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
+            Column(name = "ID", path = "risk.identifier"),
+            Column(name = "Work priority", path = "risk.priority"),
+            Column(name = "Risk event", path = "risk.statement"),
+            Column(name = "Consequence", path = "risk.consequence"),
+            Column(name = "Why investigate now", path = "risk.priorityRationale")))
+    }
+    part def Priorities :> Document {
+        attribute redefines title = "PDR risk priorities";
+        part rows : Table { calc values : PrioritiesRows; }
+    }
+    calc def ActionsRows :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
+            Column(name = "ID", path = "risk.identifier"),
+            Column(name = "Evidence gap", path = "risk.uncertainty"),
+            Column(name = "Reduction action", path = "risk.reductionAction"),
+            Column(name = "Closure evidence", path = "risk.closureEvidence"),
+            Column(name = "Disposition", path = "risk.residualDisposition"),
+            Column(name = "Owner", path = "workStatus.owner")))
+    }
+    part def Actions :> Document {
+        attribute redefines title = "PDR risk actions";
+        part rows : Table { calc values : ActionsRows; }
+    }
+}

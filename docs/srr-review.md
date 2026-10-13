@@ -204,6 +204,8 @@ The SRR preparation defines the course and bridge passage, recovery-site selecti
 ```sysml-report BlueDogSRRReadinessDocuments::Encounters
 ```
 
+PDR investigations are selected through the [model-linked risk inventory](development-plan.md#let-risk-select-the-next-investigation). Priorities remain provisional while SRR disposition is pending.
+
 The largest allocated closing-speed case needs 724 m of acquisition distance; the proposed design envelope rounds this to 750 m. This is an engineering allocation, not a navigation-rule stand-off. Demonstrating detection from a small, moving boat—especially in darkness—is a major PDR feasibility question.
 
 | Next gate | Deliverable | Who does the work |
