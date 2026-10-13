@@ -45,6 +45,7 @@ jobs:
       - run: uv run python -m tools.publishing.course_map
       - name: Check course map matches the model and chart evidence
         run: git diff --exit-code -- docs/figures/gorge-course-map.svg
+      - run: uv run python -m tools.publishing.wave_motion evidence/runs/2026-10-13-wave-motion
       - run: uv run python -m tools.publishing.build
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:

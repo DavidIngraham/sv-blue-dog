@@ -82,7 +82,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     performance = Performance(inputs['performance']) if 'performance' in inputs else None
     outside_coverage = 0.
     wave_effects = None
-    wave_summary = dict(maximumSignificantHeightM=0., maximumAddedResistanceN=0., minimumSpeedRetention=1., contactScreenSeconds=0., outsideWaveCoverageSeconds=0., wakeEncounters=0, samples=[])
+    wave_summary = dict(maximumSignificantHeightM=0., maximumAddedResistanceN=0., minimumSpeedRetention=1., contactScreenSeconds=0., outsideWaveCoverageSeconds=0., outsideMotionCoverageSeconds=0., wakeEncounters=0, samples=[])
     def sailing_speeds(wind, angles):
         speeds = performance.speeds(wind,angles) if performance else np.minimum(inputs['dimensions'][2],wind*np.interp(np.abs(angles),inputs['angles'],inputs['speedRatios']))
         if wave_effects is not None:
@@ -245,11 +245,12 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             # Diagnose the executed heading, including drift, not rejected forecasts.
             actual_heading=float(heading) if heading is not None else math.degrees(math.atan2(current[1],current[0]))
             actual_speed=float(np.linalg.norm(velocity-current))
-            wave_effects.evaluate(state.wind_mps,[actual_heading],[actual_speed])
+            wave_effects.evaluate(state.wind_mps,[actual_heading],[actual_speed],motion_diagnostics=True)
             diagnostic=wave_effects.diagnostics[0]
             wave_summary['maximumSignificantHeightM']=max(wave_summary['maximumSignificantHeightM'],diagnostic['significantHeightM'])
             wave_summary['maximumAddedResistanceN']=max(wave_summary['maximumAddedResistanceN'],diagnostic['addedResistanceN'])
             wave_summary['minimumSpeedRetention']=min(wave_summary['minimumSpeedRetention'],diagnostic['speedRetention'])
+            wave_summary['outsideMotionCoverageSeconds']+=interval*(not diagnostic.get('motionCovered',True))
             wave_summary['contactScreenSeconds']+=interval*diagnostic['contactScreen']
             wave_summary['outsideWaveCoverageSeconds']+=interval*(not diagnostic['covered'])
             if step % save_every == 0:wave_summary['samples'].append(dict(seconds=seconds,**diagnostic))

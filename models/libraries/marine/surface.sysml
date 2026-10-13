@@ -68,4 +68,19 @@ package MarineSurface {
         return result : Real [9] ordered nonunique;
         (height,wavelength,encounter,resistance,discriminant/x#(12),0.1-height/wavelength,x#(9)-height,x#(10)-height,x#(11)-height)
     }
+    calc def HarmonicResponse {
+        in x : Real [7] ordered nonunique;
+        // Wave amplitude, wavenumber, signed encounter frequency, phase,
+        // relative propagation heading, heave gain, slope gain. Wave phase
+        // increases as k*x - omega*t; pitch is rotation about body +y.
+        attribute a : Real = x#(1);
+        attribute phase : Real = x#(4);
+        attribute slope : Real = -a*x#(2)*TrigFunctions::sin(phase)*x#(7);
+        attribute slopeRate : Real = a*x#(2)*x#(3)*TrigFunctions::cos(phase)*x#(7);
+        return result : Real [6] ordered nonunique;
+        (a*TrigFunctions::cos(phase)*x#(6),
+         -slope*TrigFunctions::cos(x#(5)),slope*TrigFunctions::sin(x#(5)),
+         a*x#(3)*TrigFunctions::sin(phase)*x#(6),
+         -slopeRate*TrigFunctions::cos(x#(5)),slopeRate*TrigFunctions::sin(x#(5)))
+    }
 }

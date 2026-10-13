@@ -33,7 +33,7 @@ class SeaHistory:
 class WaveEffects:
     """Mean speed sensitivity, plus coverage and contact diagnostics.
 
-    Does not integrate wave phase or vessel motion. No positive surfing credit.
+    Optional prescribed phase motion screens relative clearance. No surfing credit.
     Current and vessel velocity are projected along each wave's propagation.
     """
     def __init__(self,inputs,weather,traffic=()):
@@ -41,6 +41,8 @@ class WaveEffects:
         self.sea=SeaHistory(weather,self.policy);self.traffic=traffic
         self.kernel=NativeCalculation('MarineSurface::WaveScreen',1)
         self.retention=NativeCalculation('MarineSurface::SpeedRetention',1)
+        from .motion import MotionResponse
+        self.motion=MotionResponse(self.config['motionPolicy']) if 'motionPolicy' in self.config else None
         self.wakes={};self.seen=set();self.components=[];self.diagnostics=[]
 
     def update(self,seconds,position,current):
@@ -58,19 +60,23 @@ class WaveEffects:
             if expiry>seconds:self.components.append((h,t,d))
             else:del self.wakes[i]
 
-    def evaluate(self,wind,headings,speeds):
+    def evaluate(self,wind,headings,speeds,*,motion_diagnostics=False):
         scalar=np.ndim(speeds)==0
         heading=np.atleast_1d(headings);speeds=np.atleast_1d(speeds)
         cfg=self.config;d=cfg['geometry'];drag=np.interp(wind,cfg['winds'],cfg['calmResistanceN'])
         if drag<=0:raise ValueError('Positive calm-water resistance required')
         result=[];self.diagnostics=[]
         for angle,speed in zip(heading,speeds):
+            trains=[]
             added=0.;valid=True;hs2=0.;minimum_contact=np.full(3,np.inf);encounter=0.
             for h,t,propagation in self.components:
                 radians=math.radians(90-propagation)
                 along=float(np.dot(self.current,[math.cos(radians),math.sin(radians)]))
                 cosine=math.cos(radians-math.radians(angle))
                 values=self.kernel([h,t,along,*d[:2],speed,cosine,self.policy[2],*d[2:],9.80665,1000])
+                k=2*math.pi/values[1]
+                signed=math.sqrt(9.80665*k)-k*speed*cosine
+                trains.append((values[0],k,signed,radians-math.radians(angle)))
                 hs2+=values[0]**2;added+=values[3];encounter=max(encounter,values[2])
                 valid &= values[4]>0 and values[5]>=0
                 minimum_contact=np.minimum(minimum_contact,values[6:9])
@@ -79,4 +85,6 @@ class WaveEffects:
             self.diagnostics.append(dict(significantHeightM=math.sqrt(hs2),addedResistanceN=added,
                 speedRetention=retained,covered=bool(valid),encounterRadS=encounter,
                 contactScreen=bool(math.sqrt(hs2)>min(d[2:])),wakeCount=len(self.wakes)))
+            if self.motion is not None and motion_diagnostics:
+                self.diagnostics[-1].update(self.motion.clearance(trains,d,cfg.get('motionPoints')))
         return np.asarray(result)[0] if scalar else np.asarray(result)

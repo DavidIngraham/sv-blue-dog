@@ -120,9 +120,51 @@ def test_mission_executes_scalar_wave_adjusted_speed():
     inputs=dict(controlPeriodSeconds=10,gateNames=['gate'],gateDirections=[1],gateApproachM=20,
         time=[10,10/3600,10,20,0,1],energy=[100,80,10,1,0,0,.8,.9],dimensions=[1.4,.5,3],
         weather=[270,7,0,36,.2,.85,0,.15,.8,.08,0,6,18,8],angles=[0,180],speedRatios=[.2,.2],
-        surfaceEnvironment=dict(seaPolicy=[8000,2,1,.3,2,120,300],winds=[5,8],calmResistanceN=[10,20],geometry=[1.4,.5,.2,.2,.3]))
+        surfaceEnvironment=dict(motionPolicy=[1,1,32,.35],seaPolicy=[8000,2,1,.3,2,120,300],winds=[5,8],calmResistanceN=[10,20],geometry=[1.4,.5,.2,.2,.3]))
     route=LineString([(0,0),(-100,0)]);water=box(-200,-100,100,100)
     result=simulate(inputs,route,water,{'gate':LineString([(0,-100),(0,100)])},classify=lambda *facts:'censored')
     assert result.elapsed_seconds==10
     assert result.surface_summary['maximumSignificantHeightM']>0
     assert result.surface_summary['maximumAddedResistanceN']>0
+    assert 'minimumWingClearanceM' in result.surface_summary['samples'][0]
+
+
+def test_motion_point_velocity_matches_finite_difference():
+    from tools.boat_analysis.environment.motion import point_motion
+    pose=np.array([.2,.13,-.09,.4,-.3,.2]);point=[.3,.1,1.4]
+    position,velocity,_=point_motion(point,pose)
+    later=pose.copy();later[:3]+=pose[3:]*1e-7
+    assert (point_motion(point,later)[0]-position)/1e-7==pytest.approx(velocity,abs=1e-7)
+
+
+def test_wave_following_cancels_center_clearance_but_not_wind_height():
+    from tools.boat_analysis.environment.motion import MotionResponse,point_motion
+    train=[(.2,.3,1.,0.)]
+    follow=MotionResponse([1,0,32,.35]);fixed=MotionResponse([0,0,32,.35])
+    geometry=[1.4,.5,.1,.1,.4]
+    assert follow.clearance(train,geometry)['minimumWingClearanceM']==pytest.approx(.1)
+    assert fixed.clearance(train,geometry)['minimumWingClearanceM']==pytest.approx(-.1)
+    heights=[point_motion([0,0,1],pose)[0][2] for pose,_ in follow.samples(train)]
+    assert max(heights)-min(heights)==pytest.approx(.4)
+    assert follow.clearance([],geometry)['minimumHullClearanceM']==pytest.approx(.1)
+
+
+def test_harmonic_velocity_signed_encounter():
+    from tools.boat_analysis.environment.motion import MotionResponse
+    response=MotionResponse([1,1,32,.35]);kernel=response.kernel
+    x=np.array([.2,.3,-1.2,.7,.4,1.,1.])
+    state=kernel(x);later=x.copy();later[3]-=x[2]*1e-7
+    assert (kernel(later)[:3]-state[:3])/1e-7==pytest.approx(state[3:],abs=1e-7)
+
+
+def test_zero_motion_preserves_strip_solution():
+    from tools.boat_analysis.model.vessel import CoupledModel
+    from tools.boat_analysis.model.surface import SurfaceOperation
+    m=CoupledModel();d=m.c['referenceDesign'];s=[8,1,1,2,50,4,1,-2,0]
+    a=m.polar.evaluate(d[5],d[6],4);h=[0,0,1,2,.6,.15,.071973,.85,1.05,1.1,.55,.727]
+    provider=SurfaceOperation(m.operation,m.polar,[10,.0002,.05,8])
+    args=(d,m.parameters,s,a,[1.]*21,h)
+    baseline=provider.evaluate(*args);moving=provider.evaluate(*args,motion=np.zeros(6))
+    assert moving==pytest.approx(baseline)
+    heave=provider.evaluate(*args,motion=[.2,0,0,0,0,0])
+    assert heave['windRatioMin']>baseline['windRatioMin']

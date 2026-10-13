@@ -52,7 +52,13 @@ The [surface-environment model](../models/analyses/surface-environment.sysml) ow
 
 Wind seas retain energy after a wind reversal, so opposing wave trains can coexist. Effective fetch is a declared scenario input, not a chart-derived distance or an observed wave forecast. Nearby powered traffic triggers a short wake encounter. The wave-current screen applies deep-water dispersion and action-flux transport as an entry-from-still-water sensitivity; it does not claim that a spatially uniform current causes shoaling. The directional resistance coefficient remains uncalibrated. The mission provider translates added resistance into a speed sensitivity using a local quadratic resistance approximation and no surfing credit.
 
-The replay reports sea height, added resistance, retained speed, wave-model coverage, and possible deck/wing contact or appendage exposure. Contact checks use a 2Hs individual-wave screen against static clearances. They identify where a moving-vessel analysis is needed; they do not predict capsizing or demonstrate survival. Wave-driven pitch, roll, heave, slamming, ventilation and controller response still need a seakeeping model and physical evidence. Unsupported breaking/blocking cases stop the replay as model-coverage limits.
+The replay reports sea height, added resistance, retained speed, wave-model coverage, and possible deck/wing contact or appendage exposure. A phase-resolved motion screen now moves the vessel in heave, pitch and roll and compares its points with the local water surface. The wing samples wind at its changing height above **mean water**. Translation and rotational point velocity change apparent wind; rotation also changes incidence and force direction. This avoids subtracting a crest from the clearance of a boat that rises with it.
+
+We compare three prescribed responses: fixed vertical position, heave following, and heave plus wave-slope following. The model defines the response gains, phase resolution and angular coverage limit. These are sensitivity cases, not measured response amplitude operators or bounds on resonance. The [RAO convention](https://www.orcina.com/webhelp/OrcaFlex/Content/html/Vesseltheory,RAOsandphases.htm) relates response amplitude and phase to the local wave. Our initial gains have zero lag; they need replacement with frequency- and direction-dependent hydrodynamic or measured responses.
+
+Clearance checks use a regular equivalent wave of height 2Hs, a bounding deck footprint, and the wing, keel and rudder stations. Mixed trains have deterministic sampled phases rather than a resolved random spectrum. Wing loads use strip polars in the moving plane. Unsupported incidence, profile height or motion angles are reported; clipped coefficients do not establish supported performance. The neutral profile does not describe airflow around individual crests, shielding or breaking waves.
+
+The mission replay uses moving clearances as diagnostics. Its speed still comes from the quasi-steady polar and the existing wave-resistance sensitivity: the oscillating wing loads have **not** been converted into a new dynamic sailing polar. Hydrostatic restoring, inertia, added mass, damping, slamming, emergence-dependent hydrodynamics and controller response are not yet solved together. Neither the phase screen nor a virtual completion establishes survival. Unsupported breaking/blocking cases stop the replay as model-coverage limits.
 
 Run a paired campaign with identical weather and traffic seeds:
 
@@ -61,7 +67,7 @@ uv run python -m tools.boat_analysis.cli prepare
 uv run python -m tools.boat_analysis.mission.surface_campaign --count 4 --budget 25
 ```
 
-The three arms isolate uniform wind/calm water, wind shear/calm water, and wind shear/waves. Fixed-design operating checks also include the 2 m reference. Outputs go to `build/analysis/surface-campaign`; `--reuse` accepts saved operating results only while their source hashes match. This is an environmental sensitivity replay, not a new size optimization.
+The four arms isolate uniform wind/calm water, wind shear/calm water, wind shear/waves, and a paired moving-clearance replay. The last two use identical speed predictions. Fixed-design operating checks also include the 2 m reference. Outputs go to `build/analysis/surface-campaign`; `--reuse` accepts saved operating results only while their source hashes match. This is an environmental sensitivity replay, not a new size optimization.
 
 ## Weather and traffic ensembles
 
@@ -90,9 +96,31 @@ Four paired 1.4 m voyages used identical weather and traffic seeds. Each calm-wa
 
 The completed calm-water voyages took 59.59 hours with uniform wind and 22.48 hours with shear. That reversal does not show a benefit from losing wind: the trajectories encounter different weather and rounding conditions at different times, and the coarse controller and averaged-tack envelope are path-dependent. The pointwise operating results show reduced VMG. Four voyages cannot establish either a monotonic time penalty or a real completion probability.
 
-The wave screen predicts added resistance large enough to consume all available speed margin in some evaluated directions. Its coefficient is not calibrated, so these stops are not proof that the boat cannot complete the challenge. Static wave-clearance screens flag possible contact or appendage exposure throughout these prefixes; vessel motion has not been modeled, and those flags are not failures. I would improve the wave-force evidence, low-wind polar coverage and local guidance before reducing hull length further.
+The wave screen predicts added resistance large enough to consume all available speed margin in some evaluated directions. Its coefficient is not calibrated, so these stops are not proof that the boat cannot complete the challenge. The original static wave-clearance screen flagged possible contact or appendage exposure throughout these prefixes. The phase-response replay below revisits those flags; neither screen treats contact as a demonstrated failure. I would improve the wave-force evidence, low-wind polar coverage and local guidance before reducing hull length further.
 
 [Archived environmental replay](../evidence/runs/2026-10-13-surface-environment/summary.json) · [Run provenance](../evidence/runs/2026-10-13-surface-environment/manifest.json) · [Sizing results](results.md)
+
+## Wave motion and wing loads
+
+The follow-on experiment keeps the 1.4 m geometry and archived sailing controls. It samples 32 phases for each of eight sailing states, three wave directions and three imposed responses. The SysML scenario supplies 0.4 m significant height and a 3 s period. This isolates changes in aerodynamic load without claiming that the boat remains in force balance at each phase.
+
+In the controlled wave case, fixed vertical position flags contact in all 24 direction/operating combinations; heave following flags 16; heave plus slope following flags none. That difference shows how strongly the static screen depended on its motion assumption. It does not establish that the real boat follows waves this well.
+
+Both moving responses put 312 of 768 wing-load phase samples outside the wind-profile or aerodynamic coverage. The plotted load ranges include numerical extensions at those phases and are diagnostic only. We need better near-surface airflow and aerodynamic coverage before using them to update the performance polar.
+
+The four paired voyage prefixes retain exactly the previous tracks, elapsed times and stopping causes because speed is unchanged. Moving-clearance flags fall from 8.76, 9.10, 9.28 and 10.17 hours to 6.76, 5.00, 7.00 and 8.17 hours. However, 7.78, 9.10, 9.28 and 10.17 hours respectively exceed the prescribed response's 0.35 rad angular coverage limit. Those clearance results are also diagnostic, not accepted operating predictions. This identifies the next fidelity gap: a supported vessel response and near-surface aerodynamic model, followed by a phase-averaged sailing solve.
+
+![Phase-dependent wing drive and paired mission contact screening.](figures/wave-motion.png)
+
+[Archived motion experiment](../evidence/runs/2026-10-13-wave-motion/summary.json) · [Phase loads](../evidence/runs/2026-10-13-wave-motion/phase-loads.json) · [Voyage records](../evidence/runs/2026-10-13-wave-motion/missions.json)
+
+Reproduce the motion experiment and figure with:
+
+```sh
+uv run python -m tools.boat_analysis.cli prepare
+uv run python -m tools.boat_analysis.mission.motion_campaign
+uv run python -m tools.publishing.wave_motion build/analysis/wave-motion
+```
 
 ## Original conceptual-vessel course experiment
 

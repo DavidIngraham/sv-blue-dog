@@ -97,7 +97,10 @@ def run(count=4,budget=25,resolution=12,destination=None,reuse=False):
     baseline=deepcopy(configurations[0]['uniformInputs'])
     shear=deepcopy(configurations[0]['inputs']);shear.pop('surfaceEnvironment')
     waves=deepcopy(configurations[0]['inputs'])
-    variants={'uniform-calm':baseline,'shear-calm':shear,'shear-waves':waves}
+    from ..environment.motion import contact_points
+    motion=deepcopy(waves);motion['surfaceEnvironment']['motionPolicy']=policy['motion']
+    motion['surfaceEnvironment']['motionPoints']=contact_points(configurations[0]['design'],motion['surfaceEnvironment']['geometry'])
+    variants={'uniform-calm':baseline,'shear-calm':shear,'shear-waves':waves,'shear-wave-motion':motion}
     campaigns={}
     for name,inputs in variants.items():
         records=[]
