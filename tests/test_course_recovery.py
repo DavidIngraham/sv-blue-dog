@@ -91,3 +91,24 @@ def test_dynamic_reserve_triggers_before_exhaustion(planner):
     assert r.cause == 'course_recovery_reserve_trigger'
     assert r.recovery_summary['outcome'] == 'recovery_approach_reached'
     assert r.minimum_energy_wh >= planner.capability.arrival_allowance_wh
+
+
+def test_forecast_invalidity_aborts_even_without_monitoring_link(planner):
+    r = simulate(*fixture(), recovery_planner=planner,
+        events=[Event(0,'communications_loss',3600), Event(0,'forecast_invalidated')])
+    assert r.outcome == 'disqualified'
+    assert r.cause == 'forecast_no_longer_applicable'
+    assert r.recovery_summary['outcome'] == 'recovery_approach_reached'
+    assert any(e['kind']=='abort_alert_queued' for e in r.events)
+
+
+def test_weather_service_outage_alone_does_not_abort(planner):
+    baseline = simulate(*fixture(), recovery_planner=planner)
+    outage = simulate(*fixture(), recovery_planner=planner, events=[Event(0,'weather_service_loss',3600)])
+    assert (outage.outcome,outage.cause,outage.elapsed_seconds) == (baseline.outcome,baseline.cause,baseline.elapsed_seconds)
+
+
+def test_manual_weather_update_disqualifies(planner):
+    r = simulate(*fixture(), recovery_planner=planner, events=[Event(0,'manual_weather_update')])
+    assert r.outcome == 'disqualified'
+    assert r.cause == 'manual_weather_update'

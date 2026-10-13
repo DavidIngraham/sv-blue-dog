@@ -140,7 +140,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     prepare(water)
     def result(outcome, cause):
         kinds = {event['kind'] for event in event_log}
-        facts = (phase == len(sequence), 'operator_intervention' in kinds,
+        facts = (phase == len(sequence), bool(kinds & {'operator_intervention', 'manual_weather_update'}),
                  'motor_use' in kinds, outcome == 'safety_violation',
                  outcome == 'incomplete', reserve_protected, outcome == 'censored')
         verdict = classify(*facts, True) if safety_abort else classify(*facts)
@@ -194,10 +194,16 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         while event_index < len(event_list) and event_list[event_index].seconds <= seconds:
             event = event_list[event_index]; event_index += 1
             event_log.append({'seconds':seconds,'kind':event.kind})
-            if event.kind in ('operator_intervention','motor_use'):
+            if event.kind in ('operator_intervention','manual_weather_update','motor_use'):
                 return result('disqualified',event.kind)
             if event.kind == 'communications_loss':
                 comms_until = max(comms_until, seconds+event.duration)
+            elif event.kind == 'weather_service_loss':
+                # Loss of access alone does not invalidate the held forecast.
+                # Applicability is a separate scenario/provider decision below.
+                pass
+            elif event.kind == 'forecast_invalidated':
+                return abort('forecast_no_longer_applicable')
             elif event.kind == 'wind_sensor_loss':
                 sensor_until = max(sensor_until, seconds+event.duration)
             elif event.kind in ('safety_capability_loss', 'capsize', 'refuge_entry', 'grounding', 'anchoring', 'shore_attachment'):
