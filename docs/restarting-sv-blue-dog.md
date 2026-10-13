@@ -52,7 +52,7 @@ I realized that open-source tools and SysML v2 could give the project some struc
 
 I am especially interested in how that model can structure an agent-driven development project. Agents can help explore alternatives and implement analyses quickly. I still need a shared description of what we are trying to achieve, why a choice was made and what would count as convincing evidence. Otherwise, producing more analysis can simply make the maze bigger.
 
-The [development plan](development-plan.md) is my way of keeping that work directed. I use “I” for my goals and design judgments; when I describe work with agents, they help develop and check the engineering record, while I make the commitment decisions. The model is the shared record, not a substitute for that judgment or for testing a real boat.
+The [development plan](development-plan.md) gives the project a path from the challenge definition to a boat on the water. At each stage, it identifies the decisions to make, the analyses or tests needed to support them, and what needs to be resolved before moving on. I use that structure to guide both my own work and the tasks I give agents, revisiting earlier decisions as simulations and experiments reveal more about the design.
 
 ## Where the project stands
 
