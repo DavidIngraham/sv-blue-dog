@@ -13,11 +13,16 @@ from scipy.spatial import ConvexHull
 class Performance:
     def __init__(self, record):
         self.winds=np.array(record['winds'],dtype=float)
+        self.valid=np.asarray(record.get('validWinds',[True]*len(self.winds)),dtype=bool)
         self.planes=[ConvexHull(np.array(v)).equations for v in record['velocities']]
         if len(self.winds)!=len(self.planes) or np.any(np.diff(self.winds)<=0):
             raise ValueError('Invalid candidate wind grid')
     def covered(self,wind):
-        return self.winds[0]<=wind<=self.winds[-1]
+        if not self.winds[0]<=wind<=self.winds[-1]:return False
+        exact=np.flatnonzero(np.isclose(self.winds,wind,rtol=0,atol=1e-12))
+        if len(exact):return bool(self.valid[exact[0]])
+        i=np.searchsorted(self.winds,wind)-1
+        return bool(self.valid[i] and self.valid[i+1])
     def speeds(self,wind,angles):
         angles=np.asarray(angles);radians=np.deg2rad(angles)
         directions=np.stack([np.cos(radians),np.sin(radians)],axis=-1)

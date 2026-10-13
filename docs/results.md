@@ -46,11 +46,9 @@ The fixed-design sensitivity checks help separate assumptions worth investigatin
 
 ## Following the candidate through a voyage
 
-The mission simulation now uses this candidate's sailing states, dimensions, battery, electrical load and solar area. Four seeded weather-and-traffic scenarios produced one virtual completion in about **59.6 hours** and three stops outside the available wind-performance coverage. Stored energy stayed above the protected reserve in all four simulated prefixes, including the completed voyage.
+The [environmental mission replay](mission-simulation.md#current-sizing-candidate-replay) now re-solves both candidates with wind speed varying over wing height. For the 1.4 m hull at a 5 m/s reference wind, average water-relative VMG drops from 0.80 to 0.60 m/s upwind and from 1.19 to 0.66 m/s downwind. All tested operating cases still balance forces, but that does not establish route progress against the current or wave tolerance.
 
-Those three stops are **inconclusive model-coverage results**, not demonstrated vessel failures. The available sailing states cover only 5–8 m/s winds; outside that range the simulator credits drift, not invented sailing speed. Within the range it uses an averaged-tack velocity envelope. It does not yet resolve the individual tacking excursions needed to judge clearance near traffic and shore. Four scenarios cannot establish a completion probability, and even the virtual completion needs that finer maneuvering check.
-
-The contrast between the 35.7-hour battery allocation and the roughly 60-hour simulated voyage is useful: a static passage estimate cannot replace chronological weather, traffic and charging. The completed scenario relied on its modeled solar input. Broader polar coverage and explicit tacking trajectories are the next mission-model improvements.
+Four paired voyages compare uniform wind/calm water, wind shear/calm water, and wind shear/waves. Each calm-water arm completed one voyage. The wave-inclusive arm completed none: three trajectories exhausted the controller's safe choices and one left the available wind-performance range. Modeled significant wave heights reached 0.48–0.63 m. Wave-added resistance is still an uncalibrated sensitivity, so this is a reason to improve environmental evidence and guidance before shrinking the boat, not proof of a minimum feasible size. The [replay record](../evidence/runs/2026-10-13-surface-environment/summary.json) preserves the distinctions between controller stops and missing model coverage.
 
 ## Recovery is still an open design problem
 

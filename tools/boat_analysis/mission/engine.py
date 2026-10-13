@@ -5,7 +5,7 @@ It is a conceptual guidance policy, not ArduSail or a validated collision system
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import json
 import math
 from pathlib import Path
@@ -45,6 +45,7 @@ class Result:
     evidence_type: str = 'virtual'
     physically_validated: bool = False
     outside_performance_coverage_seconds: float = 0.
+    surface_summary: dict = field(default_factory=dict)
     model_scope: str = 'Conceptual polar and point-mass guidance; wave dynamics and full navigation-rule compliance not verified'
 
 
@@ -80,13 +81,21 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     from .candidate import Performance
     performance = Performance(inputs['performance']) if 'performance' in inputs else None
     outside_coverage = 0.
+    wave_effects = None
+    wave_summary = dict(maximumSignificantHeightM=0., maximumAddedResistanceN=0., minimumSpeedRetention=1., contactScreenSeconds=0., outsideWaveCoverageSeconds=0., wakeEncounters=0, samples=[])
     def sailing_speeds(wind, angles):
-        return performance.speeds(wind,angles) if performance else np.minimum(inputs['dimensions'][2],wind*np.interp(np.abs(angles),inputs['angles'],inputs['speedRatios']))
+        speeds = performance.speeds(wind,angles) if performance else np.minimum(inputs['dimensions'][2],wind*np.interp(np.abs(angles),inputs['angles'],inputs['speedRatios']))
+        if wave_effects is not None:
+            speeds=wave_effects.evaluate(wind,90-state.wind_from_deg+np.asarray(angles),speeds)
+        return speeds
     if dt <= 0 or hours <= 0 or not 0 < reserve < stored <= capacity or not 0 < discharge <= 1:
         raise ValueError('Invalid mission time or energy inputs')
     if not water.covers(route):
         raise ValueError('Reference route lies outside permitted analysis domain')
     weather = weather or WeatherHistory(inputs['weather'], hours, seed, stochastic)
+    if 'surfaceEnvironment' in inputs:
+        from tools.boat_analysis.environment.surface import WaveEffects
+        wave_effects=WaveEffects(inputs,weather,traffic)
     first, last = direction(route,0), direction(route,route.length)
     approach = inputs['gateApproachM']
     start = np.array(route.coords[0]) - first * approach
@@ -132,6 +141,10 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         observed=Result(verdict,cause,seconds,crossing_log,history,event_log,minimum,distance)
         observed.outside_performance_coverage_seconds=outside_coverage
         if performance:observed.model_scope=inputs['performance']['scope']
+        if wave_effects is not None:
+            wave_summary['wakeEncounters']=len(wave_effects.seen)
+            observed.surface_summary=wave_summary
+            observed.model_scope += '; directional wave resistance sensitivity and geometric contact screens; no wave-driven vessel dynamics'
         return observed
     step, next_control, turn_remaining = 0, 0., 0.
     while seconds < hours*3600:
@@ -151,6 +164,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         state = weather.at(seconds)
         nearest = route.project(Point(position))
         current = direction(route, nearest)*state.current_mps
+        if wave_effects is not None:wave_effects.update(seconds,position,current)
         # The sampled controller has a fixed update period independent of the
         # integration step. Commands and maneuver delay persist between updates.
         if seconds >= next_control:
@@ -227,6 +241,19 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             speed = float(sailing_speeds(state.wind_mps,relative))
             radians = math.radians(heading)
             velocity += speed*np.array([math.cos(radians),math.sin(radians)])
+        if wave_effects is not None:
+            # Diagnose the executed heading, including drift, not rejected forecasts.
+            actual_heading=float(heading) if heading is not None else math.degrees(math.atan2(current[1],current[0]))
+            actual_speed=float(np.linalg.norm(velocity-current))
+            wave_effects.evaluate(state.wind_mps,[actual_heading],[actual_speed])
+            diagnostic=wave_effects.diagnostics[0]
+            wave_summary['maximumSignificantHeightM']=max(wave_summary['maximumSignificantHeightM'],diagnostic['significantHeightM'])
+            wave_summary['maximumAddedResistanceN']=max(wave_summary['maximumAddedResistanceN'],diagnostic['addedResistanceN'])
+            wave_summary['minimumSpeedRetention']=min(wave_summary['minimumSpeedRetention'],diagnostic['speedRetention'])
+            wave_summary['contactScreenSeconds']+=interval*diagnostic['contactScreen']
+            wave_summary['outsideWaveCoverageSeconds']+=interval*(not diagnostic['covered'])
+            if step % save_every == 0:wave_summary['samples'].append(dict(seconds=seconds,**diagnostic))
+            if not diagnostic['covered']:return result('incomplete','wave_model_outside_coverage')
         previous = position.copy(); endpoint = position+velocity*interval
         if not water.covers(LineString([previous,endpoint])):
             return result('incomplete','held_command_leaves_chart_domain')

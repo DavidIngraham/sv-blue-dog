@@ -1,7 +1,7 @@
 package MarineSailing {
     private import ScalarValues::*;
 
-    calc def Evaluate {
+    calc def Core {
         in d : Real [29] ordered nonunique;
         in p : Real [41] ordered nonunique;
         in q : Real [*] ordered nonunique;
@@ -9,6 +9,8 @@ package MarineSailing {
         in aero : Real [3] ordered nonunique;
         in massData : Real [21] ordered nonunique;
         in hydro : Real [12] ordered nonunique;
+        in surface : Real [9] ordered nonunique;
+        // enabled, Fx, Fy, air roll moment, signed mast moment, min Va, max |CL|, added resistance, incidence margin
         doc /* s: wind, windward flag, fouling multiplier, speed, wind-from heading,
          * incidence, leeway, rudder angle, heel (angles degrees). hydro:
          * waterline Z, restoring moment, wetted hull area, then nine upright static
@@ -94,8 +96,8 @@ package MarineSailing {
         attribute qa : Real = 0.5 * rho_air * va * va;
         attribute cl : Real = aero#(1)*p#(17);
         attribute cd : Real = (aero#(2)+p#(15))*p#(18);
-        attribute xs : Real = qa * sail_m2 * (cl * ch * awy - cd * awx) / va;
-        attribute ys : Real = qa * sail_m2 * (cl * ch * awx + cd * awy) / va;
+        attribute xs : Real = if surface#(1)>0.5 ? surface#(2) else qa * sail_m2 * (cl * ch * awy - cd * awx) / va;
+        attribute ys : Real = if surface#(1)>0.5 ? surface#(3) else qa * sail_m2 * (cl * ch * awx + cd * awy) / va;
         attribute drive : Real = xs * cb + ys * sb;
         attribute sideNormal : Real = ys * cb - xs * sb;
         attribute qk : Real = 0.5 * rho_water * v * v;
@@ -116,19 +118,19 @@ package MarineSailing {
         attribute wetted : Real = hydro#(3);
         attribute delft : Real [21] ordered nonunique = MarineResistance::Evaluate((hydro#(4),hydro#(5),hydro#(6),hydro#(7),hydro#(8),hydro#(9),hydro#(10),hydro#(11),hydro#(12)),v,rho_water,g);
         attribute hullDrag : Real = qk * wetted * cf * viscous_form_factor * foul + residuary_factor*delft#(1);
-        attribute resistance : Real = hullDrag + dk + dr;
+        attribute resistance : Real = hullDrag + dk + dr + surface#(8);
         attribute sailX : Real = sail_x_fraction * d#(1);
         attribute rudderX : Real = -rudder_arm_fraction * d#(1);
-        attribute heeling : Real = ys * wingZ * ch + ((lk * cb + dk * sb) * keelZ + (lr * cb + dr * sb) * rudderZ + hullDrag * sb * draft / 2) * ch;
+        attribute heeling : Real = (if surface#(1)>0.5 ? surface#(4) else ys * wingZ * ch) + ((lk * cb + dk * sb) * keelZ + (lr * cb + dr * sb) * rudderZ + hullDrag * sb * draft / 2) * ch;
         attribute rudderTorque : Real = qr * rudder_m2 * RealFunctions::sqrt(clr * clr + foil_cd0 * foil_cd0) * hinge_fraction * rudderChord + friction_Nm;
         attribute rudderEnvelopeTorque : Real = qr * rudder_m2 * foil_cl_limit * hinge_fraction * rudderChord + friction_Nm;
         attribute waterVMG : Real = (if upwind ? 1 else -1) * v * TrigFunctions::cos(theta + beta);
-        attribute wingRe : Real = va * wingChord / nu_air;
+        attribute wingRe : Real = (if surface#(1)>0.5 ? surface#(6) else va) * wingChord / nu_air;
         attribute keelRe : Real = v * keelChord / nu_water;
         attribute rudderRe : Real = v * rudder_inflow_ratio * rudderChord / nu_water;
         attribute normalCoefficient : Real = cl*TrigFunctions::cos(alpha)+cd*TrigFunctions::sin(alpha);
         attribute mastMomentCoefficient : Real = aero#(3)*q#(24)+((if s#(5)<0 ? 1-d#(9) else d#(9))-0.5)*normalCoefficient;
-        attribute wingTorque : Real = MarineActuation::MastTorque(rho_air,va,sail_m2,wingChord,mastMomentCoefficient,friction_Nm);
+        attribute wingTorque : Real = if surface#(1)>0.5 ? RealFunctions::abs(surface#(5))+friction_Nm else MarineActuation::MastTorque(rho_air,va,sail_m2,wingChord,mastMomentCoefficient,friction_Nm);
         attribute wingPower : Real [3] ordered nonunique = MarineActuation::DrivePower(wingTorque,p#(19),p#(3),p#(2),p#(4),p#(5),p#(6),p#(7),p#(8));
         attribute rudderPower : Real [3] ordered nonunique = MarineActuation::DrivePower(rudderTorque,p#(20),p#(3),1,1,0.1,p#(9)*rudderTorque,p#(10),1-p#(10));
         attribute averagePower : Real = electronics_W+wingPower#(1)+rudderPower#(1);
@@ -140,9 +142,9 @@ package MarineSailing {
         attribute reserveMargin : Real = initial_fraction * usable_fraction * battery_Wh + dark_hours * nightRate - reserve_Wh;
         attribute surgeResidual : Real = (drive-resistance)/10;
         attribute swayResidual : Real = (sideNormal-lk-lr)/10;
-        attribute yawResidual : Real = (-ys*sailX+(lr*cb+dr*sb)*rudderX-qa*sail_m2*wingChord*mastMomentCoefficient)/10;
+        attribute yawResidual : Real = (-ys*sailX+(lr*cb+dr*sb)*rudderX-(if surface#(1)>0.5 ? surface#(5) else qa*sail_m2*wingChord*mastMomentCoefficient))/10;
         attribute rollResidual : Real = (righting-heeling)/20;
-        attribute wingLiftMargin : Real = 1-RealFunctions::abs(cl)/wing_cl_limit;
+        attribute wingLiftMargin : Real = if surface#(1)>0.5 ? NumericalFunctions::min(1-surface#(7)/wing_cl_limit,surface#(9)) else 1-RealFunctions::abs(cl)/wing_cl_limit;
         attribute keelLiftMargin : Real = 1-RealFunctions::abs(clk)/foil_cl_limit;
         attribute rudderLiftMargin : Real = 1-RealFunctions::abs(clr)/foil_cl_limit;
         attribute keelAngleMargin : Real = 1-RealFunctions::abs(beta*ch)/foilAlphaLimit;
@@ -156,7 +158,7 @@ package MarineSailing {
         attribute cycleMargin : Real = cycleEnergy/100;
         attribute reserveMarginScaled : Real = reserveMargin/100;
         attribute peakMargin : Real = (discharge_C_rate*battery_Wh-peakPower/discharge_efficiency-self_discharge_W)/100;
-        attribute wingResultant : Real = qa*sail_m2*RealFunctions::sqrt(cl*cl+cd*cd);
+        attribute wingResultant : Real = if surface#(1)>0.5 ? RealFunctions::sqrt(xs*xs+ys*ys) else qa*sail_m2*RealFunctions::sqrt(cl*cl+cd*cd);
         attribute keelResultant : Real = RealFunctions::sqrt(lk*lk+dk*dk);
         attribute rudderResultant : Real = RealFunctions::sqrt(lr*lr+dr*dr);
         attribute delftResistanceMargin : Real = delft#(2);
@@ -184,4 +186,16 @@ package MarineSailing {
 
 
 
+
+    calc def Evaluate {
+        in d : Real [29] ordered nonunique;
+        in p : Real [41] ordered nonunique;
+        in q : Real [*] ordered nonunique;
+        in s : Real [9] ordered nonunique;
+        in aero : Real [3] ordered nonunique;
+        in massData : Real [21] ordered nonunique;
+        in hydro : Real [12] ordered nonunique;
+        return result : Real [*] ordered nonunique;
+        Core(d,p,q,s,aero,massData,hydro,(hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0))
+    }
 }

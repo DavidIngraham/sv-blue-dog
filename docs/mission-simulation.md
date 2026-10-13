@@ -44,6 +44,25 @@ The candidate provider forms an averaged-tack velocity envelope from the four so
 
 The electrical configuration uses candidate storage, usable fraction, departure charge, panel area and maximum solved operating bus load. It integrates net bus power with charge/discharge efficiency, charge-rate limitation and self-discharge. Maneuver energy remains an explicit additional scenario allowance. The optimizer's no-harvest passage screen and this solar-enabled replay answer different questions; neither is a daily-energy-balance requirement.
 
+## Wind at wing height and waves along the route
+
+The environmental replay starts from the archived boat dimensions and re-solves its sailing controls. Wind is explicitly referenced to 10 m above mean water. Eight strips along the wing use a neutral logarithmic profile; each strip samples its own apparent wind, incidence, polar coefficients, force and moment. Local incidence outside the saved aerodynamic grid makes the operating state unsupported. This is a first shear approximation using finite-wing coefficients locally, not a new lifting-line solution or a measured Gorge wind profile.
+
+The [surface-environment model](../models/analyses/surface-environment.sysml) owns roughness, reference height, effective fetch and wake assumptions. Its dependencies link the calculation to progress, wind, wave, current and recovery requirements. The [reusable library](../models/libraries/marine/surface.sysml) owns the executable wind and wave arithmetic. The neutral profile follows the [NREL wind-height discussion](https://www.nrel.gov/docs/fy21osti/78412.pdf); fetch growth uses the [SMB deep-water equations](https://cosefm.cee.wisc.edu/CEE514_Coastal_Engineering/Online_Solver/Wind_Waves.html).
+
+Wind seas retain energy after a wind reversal, so opposing wave trains can coexist. Effective fetch is a declared scenario input, not a chart-derived distance or an observed wave forecast. Nearby powered traffic triggers a short wake encounter. The wave-current screen applies deep-water dispersion and action-flux transport as an entry-from-still-water sensitivity; it does not claim that a spatially uniform current causes shoaling. The directional resistance coefficient remains uncalibrated. The mission provider translates added resistance into a speed sensitivity using a local quadratic resistance approximation and no surfing credit.
+
+The replay reports sea height, added resistance, retained speed, wave-model coverage, and possible deck/wing contact or appendage exposure. Contact checks use a 2Hs individual-wave screen against static clearances. They identify where a moving-vessel analysis is needed; they do not predict capsizing or demonstrate survival. Wave-driven pitch, roll, heave, slamming, ventilation and controller response still need a seakeeping model and physical evidence. Unsupported breaking/blocking cases stop the replay as model-coverage limits.
+
+Run a paired campaign with identical weather and traffic seeds:
+
+```sh
+uv run python -m tools.boat_analysis.cli prepare
+uv run python -m tools.boat_analysis.mission.surface_campaign --count 4 --budget 25
+```
+
+The three arms isolate uniform wind/calm water, wind shear/calm water, and wind shear/waves. Fixed-design operating checks also include the 2 m reference. Outputs go to `build/analysis/surface-campaign`; `--reuse` accepts saved operating results only while their source hashes match. This is an environmental sensitivity replay, not a new size optimization.
+
 ## Weather and traffic ensembles
 
 Each realization has reproducible weather and traffic random streams. Weather retains persistent regimes and correlated perturbations rather than drawing an independent wind at every step. Solar input follows a day/night cycle with a cloud factor. These are initial sensitivity hypotheses, not a forecast model or calibrated local probability distribution.
@@ -56,7 +75,24 @@ The useful early outputs are failure mechanisms and sensitivity to assumptions. 
 
 ## Current sizing-candidate replay
 
-The 1.4 m candidate was replayed through four seeded scenarios using its own battery, panel area, load and averaged-tack performance. One completed virtually in about 59.6 hours; three stopped outside the 5–8 m/s wind-performance coverage. Stored energy remained above the recovery reserve in every simulated prefix. These are diagnostic results, not a completion probability: the coverage stops are inconclusive, and the completed track still needs explicit tacking and maneuver clearance checks. The [sizing results](results.md) explain the implications; the [archived replay](../evidence/runs/2026-10-12-finite-passage/mission-candidate.json) contains the inputs and histories.
+The new environmental replay holds the 1.4 m and 2 m geometries fixed and re-solves controls for uniform and sheared wind. All eight operating cases for each boat found supported force-balance solutions. For the 1.4 m boat, average water-relative VMG across the two tacks changed as follows:
+
+| Reference wind at 10 m | Sailing mode | Uniform wind | Sheared wind |
+| --- | --- | --- | --- |
+| 5 m/s | Upwind | 0.80 m/s | 0.60 m/s |
+| 5 m/s | Downwind | 1.19 m/s | 0.66 m/s |
+| 8 m/s | Upwind | 1.00 m/s | 0.91 m/s |
+| 8 m/s | Downwind | 1.45 m/s | 1.23 m/s |
+
+Four paired 1.4 m voyages used identical weather and traffic seeds. Each calm-water arm completed one voyage and stopped three outside the available wind-performance range. With wind shear and the provisional wave resistance, none completed: three stopped when the controller found no safe move, and one stopped outside wind-performance coverage. The wave-inclusive prefixes lasted 8.76–10.17 hours and reached modeled significant heights of 0.48–0.63 m. One prefix encountered a scripted powerboat wake.
+
+![Re-solved uniform and sheared wind performance for both hulls, paired mission outcomes, and wave-height histories.](figures/surface-environment.png)
+
+The completed calm-water voyages took 59.59 hours with uniform wind and 22.48 hours with shear. That reversal does not show a benefit from losing wind: the trajectories encounter different weather and rounding conditions at different times, and the coarse controller and averaged-tack envelope are path-dependent. The pointwise operating results show reduced VMG. Four voyages cannot establish either a monotonic time penalty or a real completion probability.
+
+The wave screen predicts added resistance large enough to consume all available speed margin in some evaluated directions. Its coefficient is not calibrated, so these stops are not proof that the boat cannot complete the challenge. Static wave-clearance screens flag possible contact or appendage exposure throughout these prefixes; vessel motion has not been modeled, and those flags are not failures. I would improve the wave-force evidence, low-wind polar coverage and local guidance before reducing hull length further.
+
+[Archived environmental replay](../evidence/runs/2026-10-13-surface-environment/summary.json) · [Run provenance](../evidence/runs/2026-10-13-surface-environment/manifest.json) · [Sizing results](results.md)
 
 ## Original conceptual-vessel course experiment
 
