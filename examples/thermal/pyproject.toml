@@ -1,0 +1,19 @@
+[project]
+name = "sysml-thermal-example"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["sysml-python-runtime"]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+sysml-python-runtime = { path = "../../packages/sysml-python", editable = true }
+
+[tool.sysml_python]
+models = ["models/**/*.sysml"]
+generated_package = "generated"
+backend = "opensysml-c"
+
+[tool.sysml_python.exports.joule_heat]
+definition = "Thermal::JouleHeat"

@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sysml-python-runtime"
+version = "0.1.0"
+description = "Declarative typed execution of SysML calculations"
+requires-python = ">=3.12"
+dependencies = ["numpy>=2,<3"]
+
+[tool.setuptools.packages.find]
+include = ["sysml_python*"]
