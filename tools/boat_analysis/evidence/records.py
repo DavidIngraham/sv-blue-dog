@@ -102,3 +102,35 @@ def source_hashes(sources):
 def output_path(name):
     WORK.mkdir(parents=True, exist_ok=True)
     return WORK / name
+
+
+def archive_run(name, filenames, revision, scope):
+    """Archive JSON results plus generated dependencies against one Git revision."""
+    import shutil
+    import tempfile
+    destination = ROOT / 'evidence/runs' / name
+    if not name or '/' in name or '\\' in name or Path(name).name != name or name in ('.', '..') or destination.exists():
+        raise ValueError('Expected a new immutable run name')
+    revision = subprocess.check_output(['git', 'rev-parse', revision], cwd=ROOT, text=True).strip()
+    pending, selected = list(filenames), set()
+    while pending:
+        filename = pending.pop()
+        if '/' in filename or '\\' in filename or Path(filename).name != filename or not filename.endswith('.json'):
+            raise ValueError('Expected a workspace JSON record filename')
+        if filename in selected:
+            continue
+        selected.add(filename)
+        record = json.loads((WORK / filename).read_text(encoding='utf-8'))
+        pending.extend(Path(path).name for field in ('sourceHashes', 'driverHashes')
+                       for path in record.get(field, {}) if path.startswith('build/analysis/'))
+    with tempfile.TemporaryDirectory(dir=WORK) as temporary:
+        staged = Path(temporary)
+        files = {}
+        for filename in sorted(selected):
+            shutil.copyfile(WORK / filename, staged / filename)
+            files[filename] = {'sha256': hashlib.sha256((staged / filename).read_bytes()).hexdigest()}
+        (staged / 'manifest.json').write_text(json.dumps(dict(sourceRevision=revision,
+            files=files, qualified=False, scope=scope), indent=2)+'\n', encoding='utf-8')
+        verify_run_sources(staged)
+        shutil.copytree(staged, destination)
+    return destination
