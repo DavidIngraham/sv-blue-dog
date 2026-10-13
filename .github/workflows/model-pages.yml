@@ -52,6 +52,9 @@ jobs:
         run: git diff --exit-code -- docs/figures/passage-reliability.svg
       - name: Check committed weather views match their model and evidence
         run: git diff --exit-code -- models/evidence/gorge-wind.sysml docs/figures/gorge-wind-seasons.svg docs/figures/weather-performance-sensitivity.svg
+      - run: uv run python -m tools.publishing.frontier --run 2026-10-13-srr-frontier
+      - name: Check SRR sizing views match archived evidence
+        run: git diff --exit-code -- models/evidence/srr-frontier.sysml docs/figures/srr-frontier.svg
       - run: uv run python -m tools.boat_analysis.cli prepare
       - run: uv run python -m tools.boat_analysis.cli evidence-check
       - run: uv run pytest -q

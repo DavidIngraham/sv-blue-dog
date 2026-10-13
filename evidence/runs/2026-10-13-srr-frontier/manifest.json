@@ -1,0 +1,16 @@
+{
+  "sourceRevision": "e97f30978272bb19f99d89b07786d6a529714f9e",
+  "files": {
+    "coupled-uncertainty-inputs.json": {
+      "sha256": "6dbc7d7fe8cf4764edb6451abaee564651ae7f4c1b75fd95433a9033e47fe183"
+    },
+    "srr-candidate-replay.json": {
+      "sha256": "d8a38f64b5cfce9829458188ff119363cdc4196b58c90b320254ffd1a87a3cbc"
+    },
+    "srr-frontier.json": {
+      "sha256": "4d1cae2e9c7364666a16dbd16ba2eaff383869ff40ee1d114acc24e69afb6cfe"
+    }
+  },
+  "qualified": false,
+  "scope": "Local monohull concept alternatives; conditional steady passage, no calibrated mission probability. Cost and construction effort require BOM/process estimates. Hull length and all other design parameters remain free under the swept overall-length cap."
+}

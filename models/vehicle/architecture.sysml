@@ -49,8 +49,10 @@ package BlueDog {
         }
         action def TransGorgeMission {
             doc /* Activity decomposition, not execution order.
-             * Departure/turnaround coordinates, duration, operating envelope,
-             * recovery criteria, and monitoring service levels are TBD.
+             * TransGorgeCourse defines marker-referenced gates, subject to course release review.
+             * The finite challenge has no completion deadline. GorgeChallenge defines
+             * monitoring and recovery obligations; environmental allocations and
+             * real recovery sites remain subject to review.
              * No operator intervention is permitted during a qualifying round trip.
              */
             action prepareAndLaunch;

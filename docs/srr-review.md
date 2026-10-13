@@ -148,11 +148,16 @@ Keep the same realizations across candidates. Record the scenario generator and 
 
 ## 10 · Choose a boat from a frontier
 
-Sweep eligible overall lengths and optimize the remaining parameters at each length. Retain alternatives showing the trade between mission outcomes, passage time, mass, recovery margin, cost and construction effort.
+Sweep overall-length caps while leaving hull length and the remaining parameters free. Retain alternatives showing the trade between mission outcomes, passage time, mass, recovery margin, cost and construction effort.
 
 There is no handicap score and no fixed sailing-speed floor. The reliability target is provisional. The design team chooses the preferred balance and records its rationale.
 
-The existing larger numerical candidate is supporting analysis, not an eligible challenge design. The updated frontier has not yet been demonstrated.
+A retained candidate fits the 1.2 m envelope and passes coarse checks, but its finer replay misses the voyage-energy allocation. Local searches do not establish a minimum feasible size or a calibrated mission probability.
+
+```sysml-report BlueDogSRRFrontierDocuments::SeedReplay
+```
+
+[Alternatives, scope and unresolved searches](results.md)
 
 ## 11 · Keep construction practical
 

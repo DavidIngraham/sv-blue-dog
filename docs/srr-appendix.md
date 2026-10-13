@@ -12,7 +12,7 @@ This appendix identifies the evidence needed to judge the current SRR baseline. 
 | Verification | [Challenge cases](../models/missions/verification.sysml), [vehicle cases](../models/vehicle/verification.sysml) | Methods and missing allocations, not completed verdicts |
 | Recovery | [Native physics](../models/libraries/marine/recovery.sysml), [planner](../tools/boat_analysis/mission/recovery.py), [mission engine](../tools/boat_analysis/mission/engine.py) | Current authority, route feasibility, reserve and casualty capability |
 | Environmental proposal | [Review analysis](../models/analyses/environment-review.sysml) | Evidence applicability, coupled exposure and unaccepted margins |
-| Design | [Sizing method](sizing.md), [results](results.md) | Scope of old results versus the new challenge limit |
+| Design | [Sizing method](sizing.md), [results](results.md) | Eligible local alternatives, refined replay and remaining evidence gaps |
 
 ## Environmental interpretation
 
@@ -26,6 +26,15 @@ The native fetch sensitivity evaluates coupled wind and effective-fetch hypothes
 ```
 
 The [model records the official access sources and remaining assessments](../models/analyses/recovery-site-review.sysml). These are field-survey candidates, not approved safe harbors. Final approach, casualty capture and shore retrieval must be established before their coordinates enter the operational planner. The candidate set must also be checked for gaps along both legs; a nearby point on a map does not establish recovery authority against current.
+
+## Sizing evidence
+
+```sysml-report BlueDogSRRFrontierDocuments::Summary
+```
+
+The study compares local mass and conditional-passage objectives under three overall-length caps. A feasible accepted iterate is retained even if the solver later stops outside feasibility. Solver convergence and physical qualification are separate questions. The finer replay applies only to the explicitly recorded retained seed; no smaller-search failure establishes infeasibility.
+
+[Immutable results and source hashes](../evidence/runs/2026-10-13-srr-frontier/manifest.json) · [Generated native evidence](../models/evidence/srr-frontier.sysml)
 
 ## Review actions
 

@@ -1,0 +1,4821 @@
+{
+  "scenario": "nominal",
+  "parameters": {
+    "resinGlassRatio": 1.0,
+    "gearboxEfficiency": 0.4,
+    "motorEfficiency": 0.8,
+    "wingNoLoadW": 1.0,
+    "wingControllerW": 0.1,
+    "wingMotorHoldingW": 0.0,
+    "wingMoveFraction": 0.02,
+    "wingHoldingFraction": 0.98,
+    "rudderHoldingWPerNm": 0.5,
+    "rudderMoveFraction": 0.05,
+    "electronicsW": 4.570486111111111,
+    "solarResourceFactor": 0.6,
+    "batteryWhKg": 140.0,
+    "laminateKnockdown": 1.0,
+    "profileCd": 0.04,
+    "wingClLimit": 0.9,
+    "wingLiftScale": 0.7,
+    "wingDragScale": 1.4,
+    "wingRateRadS": 0.25,
+    "rudderRateRadS": 0.6,
+    "driveKgPerNm": 0.15,
+    "wingDriveBaseKg": 0.2,
+    "fixedEquipmentKg": 2.5,
+    "attachmentKg": 0.6,
+    "residuaryResistanceFactor": 1.0,
+    "viscousFormFactor": 1.15,
+    "foilClLimit": 0.8,
+    "foilEfficiency": 0.7,
+    "foilCd": 0.012,
+    "airNu": 1.5e-05,
+    "waterNu": 1e-06,
+    "waterDensity": 1000.0,
+    "airDensity": 1.225,
+    "ballastDensity": 7800.0,
+    "gravity": 9.80665,
+    "loadFactor": 1.5,
+    "assemblyLimitKg": 15.0,
+    "panelCoverage": 0.6,
+    "elevatedEquipmentKg": 0.15,
+    "elevatedEquipmentXFraction": 0.0,
+    "elevatedEquipmentAboveDeckM": 0.3
+  },
+  "cases": [
+    {
+      "wind_m_s": 5,
+      "windward": true,
+      "tack": 1,
+      "state": [
+        5.0,
+        1.0,
+        1.0,
+        1.0279468554946163,
+        46.699193291407354,
+        6.897182227718687,
+        4.88891481135461,
+        0.7525651251363179,
+        18.457797317391673
+      ],
+      "outputs": {
+        "surgeResidual": -3.6437991179671946e-05,
+        "swayResidual": -3.4691890974158922e-06,
+        "yawResidual": 1.0540866288677453e-05,
+        "rollResidual": 1.7820413106273136e-05,
+        "wingLiftMargin": 0.20041326415819016,
+        "keelLiftMargin": 0.7382466044352286,
+        "rudderLiftMargin": 0.6979541133173918,
+        "keelAngleMargin": 0.6135487551674383,
+        "rudderAngleMargin": 0.5540611713889187,
+        "wingDriveMargin": 0.8544076117242407,
+        "rudderDriveMargin": 0.4222455430497464,
+        "froudeMargin": 0.5384821016282818,
+        "wingReMargin": 1.0784418353223444,
+        "keelReMargin": 2.4264895183191726,
+        "rudderReMargin": 1.5772847089610997,
+        "cycleMargin": -0.9662312301360284,
+        "reserveMarginScaled": 1.6443331633782219,
+        "peakMargin": 6.410541778499687,
+        "waterVMG": 0.6386740972938165,
+        "v": 1.0279468554946163,
+        "cl": 0.7196280622576289,
+        "cd": 0.2844450176724553,
+        "clk": 0.20940271645181713,
+        "clr": 0.2416367093460866,
+        "drive": 1.3203402790155925,
+        "resistance": 1.3207046589273892,
+        "heeling": 2.0581237832835386,
+        "righting": 2.058480191545664,
+        "wingTorque": 0.0803339308179407,
+        "rudderTorque": 0.05399602554924118,
+        "averagePower": 4.869414291874127,
+        "peakPower": 6.873744013724558,
+        "harvestPower": 5.1,
+        "cycleEnergy": -96.62312301360284,
+        "reserveMargin": 164.4333163378222,
+        "wingRe": 124706.51011934067,
+        "keelRe": 102794.68554957518,
+        "rudderRe": 77318.541268833,
+        "ys": 3.568977525941827,
+        "lk": 2.0988776489760284,
+        "lr": 1.3702308559903562,
+        "hullDrag": 0.9374549007437151,
+        "dk": 0.23214939150262287,
+        "dr": 0.15110036668105137,
+        "wingResultant": 3.8840201736234894,
+        "keelResultant": 2.1116772303896676,
+        "rudderResultant": 1.3785368763726316,
+        "delftResistanceMargin": 0.0023046695757743146,
+        "delftDomain4": 0.14998663394161685,
+        "delftDomain5": 0.30001336605838314,
+        "delftDomain6": -1.27675647831893e-15,
+        "delftDomain7": 0.08200000000000124,
+        "delftDomain8": 0.013039983040352476,
+        "delftDomain9": 0.06696001695964748,
+        "delftDomain10": 0.14367432311867945,
+        "delftDomain11": 0.04232567688132055,
+        "delftDomain12": 0.045787354421028326,
+        "delftDomain13": 0.15021264557897165,
+        "delftDomain14": 0.0800000000000406,
+        "delftDomain15": 0.0019999999999593676,
+        "delftDomain16": 0.059013314134097994,
+        "delftDomain17": 0.05098668586590202,
+        "delftDomain18": 0.13372576544180192,
+        "delftDomain19": 0.010274234558198092,
+        "delftDomain20": 0.9073025466639213,
+        "delftDomain21": 16.012697453336077,
+        "pitch_deg": -0.992029075342906,
+        "waterline_m": -0.0012681041758402045,
+        "wetted_m2": 0.26245914154948297,
+        "mast_trim_deg": 148.32747203060603,
+        "mass_kg": 10.254878614293927,
+        "mass_residual_kg": -2.2034090108036253e-09,
+        "pitch_residual_Nm": 2.4461808120490587e-10
+      },
+      "equilibrated": true,
+      "screenFeasible": true,
+      "message": "Iteration limit reached",
+      "calls": 531,
+      "elapsed_s": 61.994521617889404,
+      "energyConstraintsEnforced": true,
+      "energyConstraintScope": "Instantaneous peak power only; mission energy history assessed separately"
+    },
+    {
+      "wind_m_s": 5,
+      "windward": true,
+      "tack": -1,
+      "state": [
+        5.0,
+        1.0,
+        1.0,
+        1.0151473982528207,
+        -46.64900515513199,
+        -6.089637567485344,
+        -4.296878726000504,
+        -1.5739452711972461,
+        -16.733829029502083
+      ],
+      "outputs": {
+        "surgeResidual": -6.759925952337653e-13,
+        "swayResidual": -3.958722238905921e-12,
+        "yawResidual": -8.276518359551232e-13,
+        "rollResidual": -9.291456493087935e-14,
+        "wingLiftMargin": 0.24928360118261095,
+        "keelLiftMargin": 0.7677383620944942,
+        "rudderLiftMargin": 0.6826609830035997,
+        "keelAngleMargin": 0.6570902207332716,
+        "rudderAngleMargin": 0.5314824808037515,
+        "wingDriveMargin": 0.7370851288746076,
+        "rudderDriveMargin": 0.4343841380978317,
+        "froudeMargin": 0.5442286814003361,
+        "wingReMargin": 1.0778999986731468,
+        "keelReMargin": 2.3838246608464737,
+        "rudderReMargin": 1.5451937061471375,
+        "cycleMargin": -0.9665966261571667,
+        "reserveMarginScaled": 1.644045449975751,
+        "peakMargin": 6.409972895237166,
+        "waterVMG": 0.6395978088553884,
+        "v": 1.0151473982528207,
+        "cl": -0.6756447589356501,
+        "cd": 0.25630495928613983,
+        "clk": -0.18580931032440468,
+        "clr": -0.25387121359712034,
+        "drive": 1.2727336337715978,
+        "resistance": 1.2727336337783577,
+        "heeling": -1.9430632769355625,
+        "righting": -1.9430632769374208,
+        "wingTorque": 0.14506929461168572,
+        "rudderTorque": 0.05482934643329582,
+        "averagePower": 4.870852858886483,
+        "peakPower": 6.924943507351463,
+        "harvestPower": 5.1,
+        "cycleEnergy": -96.65966261571667,
+        "reserveMargin": 164.4045449975751,
+        "wingRe": 124673.9999203888,
+        "keelRe": 101514.73982539421,
+        "rudderRe": 76355.81118441412,
+        "ys": -3.3373867101482233,
+        "lk": -1.8337228782559931,
+        "lr": -1.4174433474406893,
+        "hullDrag": 0.9127799140565125,
+        "dk": 0.204556710526288,
+        "dr": 0.15539700919555724,
+        "wingResultant": 3.625243596232129,
+        "keelResultant": 1.8450970278174477,
+        "rudderResultant": 1.4259361394083505,
+        "delftResistanceMargin": 0.0022069402492681275,
+        "delftDomain4": 0.14625135708978157,
+        "delftDomain5": 0.3037486429102184,
+        "delftDomain6": -1.27675647831893e-15,
+        "delftDomain7": 0.08200000000000124,
+        "delftDomain8": 0.013039983040352476,
+        "delftDomain9": 0.06696001695964748,
+        "delftDomain10": 0.14367432311867945,
+        "delftDomain11": 0.04232567688132055,
+        "delftDomain12": 0.045787354421028326,
+        "delftDomain13": 0.15021264557897165,
+        "delftDomain14": 0.0800000000000406,
+        "delftDomain15": 0.0019999999999593676,
+        "delftDomain16": 0.059013314134097994,
+        "delftDomain17": 0.05098668586590202,
+        "delftDomain18": 0.13372576544180192,
+        "delftDomain19": 0.010274234558198092,
+        "delftDomain20": 0.9073025466639213,
+        "delftDomain21": 16.012697453336077,
+        "pitch_deg": -1.0239950551450014,
+        "waterline_m": -0.001068767959198154,
+        "wetted_m2": 0.2626828592744384,
+        "mast_trim_deg": 392.6020110350023,
+        "mass_kg": 10.254878614293927,
+        "mass_residual_kg": -2.1291999274808404e-09,
+        "pitch_residual_Nm": 3.5878185953019945e-10
+      },
+      "equilibrated": true,
+      "screenFeasible": true,
+      "message": "Iteration limit reached",
+      "calls": 608,
+      "elapsed_s": 70.08426642417908,
+      "energyConstraintsEnforced": true,
+      "energyConstraintScope": "Instantaneous peak power only; mission energy history assessed separately"
+    },
+    {
+      "wind_m_s": 5,
+      "windward": false,
+      "tack": 1,
+      "state": [
+        5.0,
+        0.0,
+        1.0,
+        1.1289219961490051,
+        158.8752470274811,
+        7.999999999998879,
+        -1.4410573171628087,
+        0.11800087095911849,
+        -5.405319935801323
+      ],
+      "outputs": {
+        "surgeResidual": -3.7451585483738724e-06,
+        "swayResidual": -1.0115079719635878e-05,
+        "yawResidual": -1.6580696804290029e-06,
+        "rollResidual": -1.8071776551997765e-06,
+        "wingLiftMargin": 0.16372513950721157,
+        "keelLiftMargin": 0.9190229213622146,
+        "rudderLiftMargin": 0.925653719394289,
+        "keelAngleMargin": 0.8804458953628638,
+        "rudderAngleMargin": 0.8902355743061655,
+        "wingDriveMargin": 0.9410659645218704,
+        "rudderDriveMargin": 0.32115124233469494,
+        "froudeMargin": 0.4931472339223255,
+        "wingReMargin": 0.45272403596981503,
+        "keelReMargin": 2.7630733205008404,
+        "rudderReMargin": 1.8304511879504557,
+        "cycleMargin": -0.9629546505296774,
+        "reserveMarginScaled": 1.6469131473202305,
+        "peakMargin": 6.411154452074909,
+        "waterVMG": 1.0424910175752677,
+        "v": 1.1289219961490051,
+        "cl": 0.7526473744435096,
+        "cd": 0.305389821295537,
+        "clk": -0.0647816629102283,
+        "clr": -0.059477024484568784,
+        "drive": 1.5416650275929824,
+        "resistance": 1.5417024791784661,
+        "heeling": -0.7790587722142291,
+        "righting": -0.7790949157673331,
+        "wingTorque": 0.03251820225625347,
+        "rudderTorque": 0.030283247107746596,
+        "averagePower": 4.856514372164085,
+        "peakPower": 6.818603391954619,
+        "harvestPower": 5.1,
+        "cycleEnergy": -96.29546505296774,
+        "reserveMargin": 164.69131473202305,
+        "wingRe": 87163.4421581889,
+        "keelRe": 112892.19961502521,
+        "rudderRe": 84913.53563851367,
+        "ys": -1.28736569430696,
+        "lk": -0.8219481916515075,
+        "lr": -0.42694074607055926,
+        "hullDrag": 1.2842831236342218,
+        "dk": 0.1650963607839714,
+        "dr": 0.0923229947602728,
+        "wingResultant": 1.991716038380978,
+        "keelResultant": 0.8383648597736516,
+        "rudderResultant": 0.43680880945419487,
+        "delftResistanceMargin": 0.004500388502803091,
+        "delftDomain4": 0.17945429795048842,
+        "delftDomain5": 0.27054570204951156,
+        "delftDomain6": -1.27675647831893e-15,
+        "delftDomain7": 0.08200000000000124,
+        "delftDomain8": 0.013039983040352476,
+        "delftDomain9": 0.06696001695964748,
+        "delftDomain10": 0.14367432311867945,
+        "delftDomain11": 0.04232567688132055,
+        "delftDomain12": 0.045787354421028326,
+        "delftDomain13": 0.15021264557897165,
+        "delftDomain14": 0.0800000000000406,
+        "delftDomain15": 0.0019999999999593676,
+        "delftDomain16": 0.059013314134097994,
+        "delftDomain17": 0.05098668586590202,
+        "delftDomain18": 0.13372576544180192,
+        "delftDomain19": 0.010274234558198092,
+        "delftDomain20": 0.9073025466639213,
+        "delftDomain21": 16.012697453336077,
+        "pitch_deg": -1.0026204900011264,
+        "waterline_m": -0.0004261701839894488,
+        "wetted_m2": 0.2638102957347172,
+        "mast_trim_deg": 35.37188769397739,
+        "mass_kg": 10.254878614293927,
+        "mass_residual_kg": -4.9245940658693144e-11,
+        "pitch_residual_Nm": 3.9111902710164957e-10
+      },
+      "equilibrated": true,
+      "screenFeasible": true,
+      "message": "Iteration limit reached",
+      "calls": 586,
+      "elapsed_s": 69.0010142326355,
+      "energyConstraintsEnforced": true,
+      "energyConstraintScope": "Instantaneous peak power only; mission energy history assessed separately"
+    },
+    {
+      "wind_m_s": 5,
+      "windward": false,
+      "tack": -1,
+      "state": [
+        5.0,
+        0.0,
+        1.0,
+        1.116439702632154,
+        -159.03464717308384,
+        -7.999999999999993,
+        1.537545792090441,
+        -0.3394239569376829,
+        5.872023625098585
+      ],
+      "outputs": {
+        "surgeResidual": -6.271339703589618e-06,
+        "swayResidual": 1.5992480881471537e-05,
+        "yawResidual": 2.3928634835863884e-06,
+        "rollResidual": 3.2142754836816946e-06,
+        "wingLiftMargin": 0.1847642752916402,
+        "keelLiftMargin": 0.9136704183731336,
+        "rudderLiftMargin": 0.9327282719753093,
+        "keelAngleMargin": 0.8725434899761548,
+        "rudderAngleMargin": 0.9006804034861859,
+        "wingDriveMargin": 0.9004244099891455,
+        "rudderDriveMargin": 0.33416099883110895,
+        "froudeMargin": 0.4987514165120803,
+        "wingReMargin": 0.4565018651967143,
+        "keelReMargin": 2.721465675444624,
+        "rudderReMargin": 1.7991553830732032,
+        "cycleMargin": -0.9628947514665899,
+        "reserveMarginScaled": 1.646960311936835,
+        "peakMargin": 6.410969323326794,
+        "waterVMG": 1.0314341748123597,
+        "v": 1.116439702632154,
+        "cl": -0.7337121522375238,
+        "cd": 0.29176811323687446,
+        "clk": 0.06906366530149315,
+        "clr": 0.05381738241975261,
+        "drive": 1.4936420184532828,
+        "resistance": 1.4937047318503187,
+        "heeling": 0.7701945615870777,
+        "righting": 0.7702588470967513,
+        "wingTorque": 0.05494310969016139,
+        "rudderTorque": 0.02913941830447387,
+        "averagePower": 4.856278549081063,
+        "peakPower": 6.835264979284905,
+        "harvestPower": 5.1,
+        "cycleEnergy": -96.28947514665899,
+        "reserveMargin": 164.6960311936835,
+        "wingRe": 87390.11191180286,
+        "keelRe": 111643.97026333872,
+        "rudderRe": 83974.6614921961,
+        "ys": 1.2736267744394476,
+        "lk": 0.8563186003949189,
+        "lr": 0.37751511423388334,
+        "hullDrag": 1.2413502298363133,
+        "dk": 0.1630898732342692,
+        "dr": 0.08926462877973637,
+        "wingResultant": 1.9462632076875068,
+        "keelResultant": 0.8717108764572591,
+        "rudderResultant": 0.38792503841103904,
+        "delftResistanceMargin": 0.004228879316444769,
+        "delftDomain4": 0.17581157926714783,
+        "delftDomain5": 0.27418842073285216,
+        "delftDomain6": -1.27675647831893e-15,
+        "delftDomain7": 0.08200000000000124,
+        "delftDomain8": 0.013039983040352476,
+        "delftDomain9": 0.06696001695964748,
+        "delftDomain10": 0.14367432311867945,
+        "delftDomain11": 0.04232567688132055,
+        "delftDomain12": 0.045787354421028326,
+        "delftDomain13": 0.15021264557897165,
+        "delftDomain14": 0.0800000000000406,
+        "delftDomain15": 0.0019999999999593676,
+        "delftDomain16": 0.059013314134097994,
+        "delftDomain17": 0.05098668586590202,
+        "delftDomain18": 0.13372576544180192,
+        "delftDomain19": 0.010274234558198092,
+        "delftDomain20": 0.9073025466639213,
+        "delftDomain21": 16.012697453336077,
+        "pitch_deg": -0.9684599837579649,
+        "waterline_m": -0.00043109195986664454,
+        "wetted_m2": 0.2638184222443041,
+        "mast_trim_deg": 504.88928961954286,
+        "mass_kg": 10.254878614293927,
+        "mass_residual_kg": -5.5846882673904474e-11,
+        "pitch_residual_Nm": 3.06722405774007e-10
+      },
+      "equilibrated": true,
+      "screenFeasible": true,
+      "message": "Iteration limit reached",
+      "calls": 607,
+      "elapsed_s": 68.2347514629364,
+      "energyConstraintsEnforced": true,
+      "energyConstraintScope": "Instantaneous peak power only; mission energy history assessed separately"
+    },
+    {
+      "wind_m_s": 8,
+      "windward": true,
+      "tack": 1,
+      "state": [
+        8.0,
+        1.0,
+        1.0,
+        1.4002690871540264,
+        79.24958281717454,
+        0.9171957400776147,
+        1.5483915898672755,
+        3.7538906852487557,
+        19.999999999970363
+      ],
+      "outputs": {
+        "surgeResidual": -1.767590303280997e-06,
+        "swayResidual": -1.25329895060311e-05,
+        "yawResidual": 6.932933466652357e-07,
+        "rollResidual": 3.5686905646592494e-06,
+        "wingLiftMargin": 0.40619978687694214,
+        "keelLiftMargin": 0.9178735618383873,
+        "rudderLiftMargin": 0.7187677950834248,
+        "keelAngleMargin": 0.8787489874095405,
+        "rudderAngleMargin": 0.5847903727290508,
+        "wingDriveMargin": -1.2670268809245044e-05,
+        "rudderDriveMargin": 0.0025882815049879104,
+        "froudeMargin": 0.37132037244546523,
+        "wingReMargin": 2.043007736167825,
+        "keelReMargin": 3.66756362385191,
+        "rudderReMargin": 2.510776931183375,
+        "cycleMargin": -0.9713242083397935,
+        "reserveMarginScaled": 1.6403229443201395,
+        "peakMargin": 6.406243109718577,
+        "waterVMG": 0.22392555188109456,
+        "v": 1.4002690871540264,
+        "cl": 0.5344201918107521,
+        "cd": 0.17858237844674807,
+        "clk": 0.06570115052929014,
+        "clr": 0.2249857639332602,
+        "drive": 4.499254908446989,
+        "resistance": 4.499272584350022,
+        "heeling": 2.091500199405231,
+        "righting": 2.091571573216524,
+        "wingTorque": 0.5517798672158617,
+        "rudderTorque": 0.07874676220133285,
+        "averagePower": 4.889465387164542,
+        "peakPower": 7.260624204024503,
+        "harvestPower": 5.1,
+        "cycleEnergy": -97.13242083397935,
+        "reserveMargin": 164.03229443201394,
+        "wingRe": 182580.46417006952,
+        "keelRe": 140026.9087155573,
+        "rudderRe": 105323.30793550126,
+        "ys": 3.6759531421575398,
+        "lk": 1.210547384716637,
+        "lr": 2.345253952573567,
+        "hullDrag": 3.9839546163699544,
+        "dk": 0.2545342312391999,
+        "dr": 0.2607837367408671,
+        "wingResultant": 6.062476832654847,
+        "keelResultant": 1.237017641554404,
+        "rudderResultant": 2.359708511534946,
+        "delftResistanceMargin": 0.02838862415305089,
+        "delftDomain4": 0.25864175791044763,
+        "delftDomain5": 0.19135824208955238,
+        "delftDomain6": -1.27675647831893e-15,
+        "delftDomain7": 0.08200000000000124,
+        "delftDomain8": 0.013039983040352476,
+        "delftDomain9": 0.06696001695964748,
+        "delftDomain10": 0.14367432311867945,
+        "delftDomain11": 0.04232567688132055,
+        "delftDomain12": 0.045787354421028326,
+        "delftDomain13": 0.15021264557897165,
+        "delftDomain14": 0.0800000000000406,
+        "delftDomain15": 0.0019999999999593676,
+        "delftDomain16": 0.059013314134097994,
+        "delftDomain17": 0.05098668586590202,
+        "delftDomain18": 0.13372576544180192,
+        "delftDomain19": 0.010274234558198092,
+        "delftDomain20": 0.9073025466639213,
+        "delftDomain21": 16.012697453336077,
+        "pitch_deg": -0.9702092413924511,
+        "waterline_m": -0.0014808268451866231,
+        "wetted_m2": 0.26224136331984854,
+        "mast_trim_deg": 111.20851048033586,
+        "mass_kg": 10.254878614293927,
+        "mass_residual_kg": -5.665548030719947e-10,
+        "pitch_residual_Nm": 1.8026710685015156e-10
+      },
+      "equilibrated": true,
+      "screenFeasible": true,
+      "message": "Positive directional derivative for linesearch",
+      "calls": 106,
+      "elapsed_s": 11.587437629699707,
+      "energyConstraintsEnforced": true,
+      "energyConstraintScope": "Instantaneous peak power only; mission energy history assessed separately"
+    },
+    {
+      "wind_m_s": 8,
+      "windward": true,
+      "tack": -1,
+      "state": [
+        8.0,
+        1.0,
+        1.0,
+        1.4003034918503523,
+        -78.06333213323587,
+        -1.7907166560604137,
+        -1.674832046127598,
+        -3.7592054833620665,
+        -19.999999999954582
+      ],
+      "outputs": {
+        "surgeResidual": -1.0363673796476292e-06,
+        "swayResidual": 1.1888172161533817e-05,
+        "yawResidual": -3.522906159014738e-07,
+        "rollResidual": -3.1585630294594935e-06,
+        "wingLiftMargin": 0.39922844206762453,
+        "keelLiftMargin": 0.9111671805972612,
+        "rudderLiftMargin": 0.7117795174372326,
+        "keelAngleMargin": 0.8688477237664731,
+        "rudderAngleMargin": 0.57447291937195,
+        "wingDriveMargin": -1.0312512647159267e-05,
+        "rudderDriveMargin": 0.0025435562290991864,
+        "froudeMargin": 0.37130492574891905,
+        "wingReMargin": 2.051935071086727,
+        "keelReMargin": 3.6676783061729976,
+        "rudderReMargin": 2.510863191185323,
+        "cycleMargin": -0.9715140833175372,
+        "reserveMarginScaled": 1.6401734364636484,
+        "peakMargin": 6.406230965570702,
+        "waterVMG": 0.24945961262083272,
+        "v": 1.4003034918503523,
+        "cl": -0.5406944021391379,
+        "cd": 0.182147524260291,
+        "clk": -0.071066255522191,
+        "clr": -0.23057638605021397,
+        "drive": 4.509511578898641,
+        "resistance": 4.509521942572437,
+        "heeling": -2.186424877103152,
+        "righting": -2.186488048363741,
+        "wingTorque": 0.551778566269963,
+        "rudderTorque": 0.0802054150983757,
+        "averagePower": 4.8902129264469965,
+        "peakPower": 7.261717177333302,
+        "harvestPower": 5.1,
+        "cycleEnergy": -97.15140833175371,
+        "reserveMargin": 164.01734364636485,
+        "wingRe": 183116.1042652036,
+        "keelRe": 140030.34918518993,
+        "rudderRe": 105325.8957355597,
+        "ys": -3.8432080315108013,
+        "lk": -1.3094640900770254,
+        "lr": -2.4036487671377182,
+        "hullDrag": 3.9844833786183838,
+        "dk": 0.25781809118765664,
+        "dr": 0.2672204727663967,
+        "wingResultant": 6.17474879747968,
+        "keelResultant": 1.3346034509714482,
+        "rudderResultant": 2.4184569826292486,
+        "delftResistanceMargin": 0.028393929060262637,
+        "delftDomain4": 0.2586517982632026,
+        "delftDomain5": 0.19134820173679734,
+        "delftDomain6": -1.27675647831893e-15,
+        "delftDomain7": 0.08200000000000124,
+        "delftDomain8": 0.013039983040352476,
+        "delftDomain9": 0.06696001695964748,
+        "delftDomain10": 0.14367432311867945,
+        "delftDomain11": 0.04232567688132055,
+        "delftDomain12": 0.045787354421028326,
+        "delftDomain13": 0.15021264557897165,
+        "delftDomain14": 0.0800000000000406,
+        "delftDomain15": 0.0019999999999593676,
+        "delftDomain16": 0.059013314134097994,
+        "delftDomain17": 0.05098668586590202,
+        "delftDomain18": 0.13372576544180192,
+        "delftDomain19": 0.010274234558198092,
+        "delftDomain20": 0.9073025466639213,
+        "delftDomain21": 16.012697453336077,
+        "pitch_deg": -0.9883038683220873,
+        "waterline_m": -0.0014812209995625515,
+        "wetted_m2": 0.26223328096745274,
+        "mast_trim_deg": 426.79006068909604,
+        "mass_kg": 10.254878614293927,
+        "mass_residual_kg": -2.7693936033301725e-10,
+        "pitch_residual_Nm": 2.2315487279711554e-10
+      },
+      "equilibrated": true,
+      "screenFeasible": true,
+      "message": "Positive directional derivative for linesearch",
+      "calls": 106,
+      "elapsed_s": 11.623805522918701,
+      "energyConstraintsEnforced": true,
+      "energyConstraintScope": "Instantaneous peak power only; mission energy history assessed separately"
+    },
+    {
+      "wind_m_s": 8,
+      "windward": false,
+      "tack": 1,
+      "state": [
+        8.0,
+        0.0,
+        1.0,
+        1.3612202678218324,
+        164.6221274368612,
+        7.999999999999819,
+        -3.2984186088947,
+        0.1306242202350809,
+        -20.0
+      ],
+      "outputs": {
+        "surgeResidual": -4.873984127407027e-08,
+        "swayResidual": -1.5815268152863383e-07,
+        "yawResidual": -2.3367535870871815e-08,
+        "rollResidual": -5.177479689422171e-08,
+        "wingLiftMargin": 0.16372513950718026,
+        "keelLiftMargin": 0.8250524132996151,
+        "rudderLiftMargin": 0.8319806916304855,
+        "keelAngleMargin": 0.7417083644132274,
+        "rudderAngleMargin": 0.7519372490674623,
+        "wingDriveMargin": 0.8990244177734119,
+        "rudderDriveMargin": 0.05264239197230125,
+        "froudeMargin": 0.388852143602467,
+        "wingReMargin": 1.4538106035733693,
+        "keelReMargin": 3.5374008927444534,
+        "rudderReMargin": 2.4128731101542,
+        "cycleMargin": -0.9660366833010111,
+        "reserveMarginScaled": 1.6444863498624875,
+        "peakMargin": 6.410761678922523,
+        "waterVMG": 1.2895423089270788,
+        "v": 1.3612202678218324,
+        "cl": 0.7526473744435378,
+        "cd": 0.30538982129555475,
+        "clk": -0.13995806936030794,
+        "clr": -0.13441544669561165,
+        "drive": 3.8604137487594437,
+        "resistance": 3.8604142361578564,
+        "heeling": -2.2593646893587556,
+        "righting": -2.2593657248546934,
+        "wingTorque": 0.055715587421561574,
+        "rudderTorque": 0.05325208251361463,
+        "averagePower": 4.8686483594528,
+        "peakPower": 6.853952975669417,
+        "harvestPower": 5.1,
+        "cycleEnergy": -96.60366833010112,
+        "reserveMargin": 164.44863498624875,
+        "wingRe": 147228.63621440216,
+        "keelRe": 136122.0267823336,
+        "rudderRe": 102386.193304626,
+        "ys": -3.976892764162128,
+        "lk": -2.436916077507437,
+        "lr": -1.3240909847105389,
+        "hullDrag": 3.3866827036050866,
+        "dk": 0.30487343300285563,
+        "dr": 0.16885809954991438,
+        "wingResultant": 5.682549844748788,
+        "keelResultant": 2.4559128199032596,
+        "rudderResultant": 1.334814591460302,
+        "delftResistanceMargin": 0.022842790754741875,
+        "delftDomain4": 0.2472461066583965,
+        "delftDomain5": 0.20275389334160349,
+        "delftDomain6": -1.27675647831893e-15,
+        "delftDomain7": 0.08200000000000124,
+        "delftDomain8": 0.013039983040352476,
+        "delftDomain9": 0.06696001695964748,
+        "delftDomain10": 0.14367432311867945,
+        "delftDomain11": 0.04232567688132055,
+        "delftDomain12": 0.045787354421028326,
+        "delftDomain13": 0.15021264557897165,
+        "delftDomain14": 0.0800000000000406,
+        "delftDomain15": 0.0019999999999593676,
+        "delftDomain16": 0.059013314134097994,
+        "delftDomain17": 0.05098668586590202,
+        "delftDomain18": 0.13372576544180192,
+        "delftDomain19": 0.010274234558198092,
+        "delftDomain20": 0.9073025466639213,
+        "delftDomain21": 16.012697453336077,
+        "pitch_deg": -1.0394250389211328,
+        "waterline_m": -0.0014917045692730614,
+        "wetted_m2": 0.26218535139752275,
+        "mast_trim_deg": 27.094414274252873,
+        "mass_kg": 10.254878614293927,
+        "mass_residual_kg": -1.5113137408206967e-09,
+        "pitch_residual_Nm": 3.10540131712167e-10
+      },
+      "equilibrated": true,
+      "screenFeasible": true,
+      "message": "Positive directional derivative for linesearch",
+      "calls": 443,
+      "elapsed_s": 50.19986867904663,
+      "energyConstraintsEnforced": true,
+      "energyConstraintScope": "Instantaneous peak power only; mission energy history assessed separately"
+    },
+    {
+      "wind_m_s": 8,
+      "windward": false,
+      "tack": -1,
+      "state": [
+        8.0,
+        0.0,
+        1.0,
+        1.3521426492774606,
+        -164.58417773601775,
+        -7.999999999999053,
+        3.4438548253158743,
+        -0.6060189669366665,
+        19.999999999999403
+      ],
+      "outputs": {
+        "surgeResidual": -5.989115625659736e-08,
+        "swayResidual": 1.7545775201632808e-07,
+        "yawResidual": 2.2451565706571586e-08,
+        "rollResidual": 6.044915854541699e-08,
+        "wingLiftMargin": 0.18476427529167205,
+        "keelLiftMargin": 0.8173385000282344,
+        "rudderLiftMargin": 0.8494816393709076,
+        "keelAngleMargin": 0.7303195861327264,
+        "rudderAngleMargin": 0.7777755487399504,
+        "wingDriveMargin": 0.78346881806385,
+        "rudderDriveMargin": 0.06407560463031581,
+        "froudeMargin": 0.39292772728699776,
+        "wingReMargin": 1.457477206009378,
+        "keelReMargin": 3.507142164263181,
+        "rudderReMargin": 2.3901135605304664,
+        "cycleMargin": -0.9657910389791686,
+        "reserveMarginScaled": 1.6446797705883478,
+        "peakMargin": 6.410240127394697,
+        "waterVMG": 1.2795502846179563,
+        "v": 1.3521426492774606,
+        "cl": -0.7337121522374952,
+        "cd": 0.29176811323685703,
+        "clk": 0.14612919997741247,
+        "clr": 0.12041468850327393,
+        "drive": 3.7481155950538483,
+        "resistance": 3.748116193965411,
+        "heeling": 2.2153020548490923,
+        "righting": 2.215303263832263,
+        "wingTorque": 0.11947603302336772,
+        "rudderTorque": 0.049421135017362144,
+        "averagePower": 4.867681255823499,
+        "peakPower": 6.900892613173639,
+        "harvestPower": 5.1,
+        "cycleEnergy": -96.57910389791687,
+        "reserveMargin": 164.46797705883478,
+        "wingRe": 147448.63236056268,
+        "keelRe": 135214.26492789542,
+        "rudderRe": 101703.40681591399,
+        "ys": 3.8994548289824555,
+        "lk": 2.510544051256776,
+        "lr": 1.1704054213665533,
+        "hullDrag": 3.281733731153072,
+        "dk": 0.30815964062485157,
+        "dr": 0.15822282218748718,
+        "wingResultant": 5.540621451173239,
+        "keelResultant": 2.5293860514778728,
+        "rudderResultant": 1.1810517820253237,
+        "delftResistanceMargin": 0.02190018182416243,
+        "delftDomain4": 0.2445969772634515,
+        "delftDomain5": 0.20540302273654848,
+        "delftDomain6": -1.27675647831893e-15,
+        "delftDomain7": 0.08200000000000124,
+        "delftDomain8": 0.013039983040352476,
+        "delftDomain9": 0.06696001695964748,
+        "delftDomain10": 0.14367432311867945,
+        "delftDomain11": 0.04232567688132055,
+        "delftDomain12": 0.045787354421028326,
+        "delftDomain13": 0.15021264557897165,
+        "delftDomain14": 0.0800000000000406,
+        "delftDomain15": 0.0019999999999593676,
+        "delftDomain16": 0.059013314134097994,
+        "delftDomain17": 0.05098668586590202,
+        "delftDomain18": 0.13372576544180192,
+        "delftDomain19": 0.010274234558198092,
+        "delftDomain20": 0.9073025466639213,
+        "delftDomain21": 16.012697453336077,
+        "pitch_deg": -1.000481089653212,
+        "waterline_m": -0.0014836569776918835,
+        "wetted_m2": 0.2622220073323463,
+        "mast_trim_deg": 512.863036490627,
+        "mass_kg": 10.254878614293927,
+        "mass_residual_kg": -1.806826688266483e-09,
+        "pitch_residual_Nm": 2.2492192518486218e-10
+      },
+      "equilibrated": true,
+      "screenFeasible": true,
+      "message": "Iteration limit reached",
+      "calls": 626,
+      "elapsed_s": 72.18736934661865,
+      "energyConstraintsEnforced": true,
+      "energyConstraintScope": "Instantaneous peak power only; mission energy history assessed separately"
+    }
+  ],
+  "structure": {
+    "hullStressMargin": 0.9565414460393695,
+    "wingStressMargin": 0.36082919631099675,
+    "keelStressMargin": 0.6400000000013594,
+    "rudderStressMargin": 0.6399996308875844,
+    "hullDeflectionMargin": 0.9275152321416706,
+    "wingDeflectionMargin": -7.768384049366972e-07,
+    "keelDeflectionMargin": 5.9853233480566814e-12,
+    "rudderDeflectionMargin": -1.1170914759883743e-06,
+    "panelStressMargin": 0.7600002848297056,
+    "panelDeflectionMargin": 1.7801851321941342e-06,
+    "bodyHandlingMargin": 0.6124481213324231,
+    "wingHandlingMargin": 0.9552447575464106,
+    "keelHandlingMargin": 0.9545887599138099,
+    "batteryHandlingMargin": 0.7940597869210948,
+    "freeboardMargin": 0.04175982192202987,
+    "reserveVolumeMargin": 0.003985485354349283,
+    "launchDepthMargin": 0.7405853511407073,
+    "panelAreaMargin": 1.4774565520234204,
+    "hullPackingMargin": 0.9396157291341012,
+    "wingPackingMargin": 0.9569290911324908,
+    "keelPackingMargin": 0.41047324507024585,
+    "rudderPackingMargin": 0.25264038346644024,
+    "keelAspectMargin": -2.2091217743991365e-12,
+    "rudderAspectMargin": 9.177911630686708e-08,
+    "keelRootMargin": 0.916666666666514,
+    "rudderStockMargin": 0.15999243963592202,
+    "sweptSeparationMargin": 0.32249519828173506,
+    "voyageEnergyMargin": -0.0055600033951458275,
+    "installationVolumeMargin": 0.010024365243448737
+  },
+  "concept": {
+    "voyageEnergyMargin": -0.0055600033951458275,
+    "installationVolumeMargin": 0.010024365243448737,
+    "passageHours": 48.17717686801968,
+    "departureWh": 311.38160217530475,
+    "requiredWh": 311.93760251481933,
+    "batteryVolumeM3": 0.002162372237328505,
+    "equipmentVolumeM3": 0.007411432079597535,
+    "availableVolumeM3": 0.009674047969360527
+  },
+  "route": [
+    3.705403776955567,
+    -0.667939080427953,
+    1.0,
+    1.8527018884777835,
+    -0.3339695402139765,
+    1000000.0
+  ],
+  "westerlyRoute": [
+    2.332060919572047,
+    0.705403776955567,
+    1.0,
+    1.1660304597860236,
+    0.3527018884777835,
+    33.74174149441574
+  ],
+  "recovery": [
+    {
+      "trim_deg": 0,
+      "points": [
+        {
+          "heel_deg": -180.0,
+          "pitch_deg": -24.969583654261235,
+          "waterline_m": -0.16653068664599058,
+          "displaced_m3": 0.010254878614293807,
+          "buoyancy_center_m": [
+            -0.03900575678367081,
+            0.030382510104304282,
+            -0.45182450041009414
+          ],
+          "mass_residual_kg": -1.2079226507921703e-13,
+          "roll_torque_Nm": 2.850423872366532,
+          "pitch_torque_Nm": 8.078575919334695e-13,
+          "righting_Nm": -2.5840004901304012,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -172.5,
+          "pitch_deg": -25.52282770765305,
+          "waterline_m": -0.16762739770701632,
+          "displaced_m3": 0.010254878614293762,
+          "buoyancy_center_m": [
+            -0.03908432378264143,
+            0.08032703209645536,
+            -0.445635529159133
+          ],
+          "mass_residual_kg": -1.652011860642233e-13,
+          "roll_torque_Nm": 8.140836396338077,
+          "pitch_torque_Nm": 1.6984607054126853e-13,
+          "righting_Nm": -7.346402204480981,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -165.0,
+          "pitch_deg": -26.57193699329685,
+          "waterline_m": -0.17056108461764677,
+          "displaced_m3": 0.010254878614239179,
+          "buoyancy_center_m": [
+            -0.03903475961326571,
+            0.12850533025360175,
+            -0.4340485349643092
+          ],
+          "mass_residual_kg": -5.474909414715512e-11,
+          "roll_torque_Nm": 13.252554583613232,
+          "pitch_torque_Nm": 4.0392879596673477e-13,
+          "righting_Nm": -11.85273280969827,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -157.5,
+          "pitch_deg": -28.220644970198023,
+          "waterline_m": -0.17539596381576705,
+          "displaced_m3": 0.010254878614282054,
+          "buoyancy_center_m": [
+            -0.03881999457517504,
+            0.17387024015988733,
+            -0.4175636177412902
+          ],
+          "mass_residual_kg": -1.1873169114551274e-11,
+          "roll_torque_Nm": 18.07570736374469,
+          "pitch_torque_Nm": 5.715973527831153e-14,
+          "righting_Nm": -15.9271044995248,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -150.0,
+          "pitch_deg": -30.657656827422837,
+          "waterline_m": -0.18226948131776027,
+          "displaced_m3": 0.010254878614293916,
+          "buoyancy_center_m": [
+            -0.03836423231929429,
+            0.21521099404139468,
+            -0.3969777946391434
+          ],
+          "mass_residual_kg": -1.0658141036401503e-14,
+          "roll_torque_Nm": 22.484067132310102,
+          "pitch_torque_Nm": 5.785000712910104e-11,
+          "righting_Nm": -19.34145427810587,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -142.5,
+          "pitch_deg": -34.192047208672385,
+          "waterline_m": -0.19120318131915884,
+          "displaced_m3": 0.010254878614293387,
+          "buoyancy_center_m": [
+            -0.03751699162505596,
+            0.25091170394739376,
+            -0.3734924956726828
+          ],
+          "mass_residual_kg": -5.400124791776761e-13,
+          "roll_torque_Nm": 26.310837776093024,
+          "pitch_torque_Nm": 4.899405880998131e-15,
+          "righting_Nm": -21.763235340436733,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -135.0,
+          "pitch_deg": -39.35427472586979,
+          "waterline_m": -0.2018437427574535,
+          "displaced_m3": 0.010254878614293955,
+          "buoyancy_center_m": [
+            -0.035973947002013715,
+            0.278209892604279,
+            -0.34893713802828835
+          ],
+          "mass_residual_kg": 2.6645352591003757e-14,
+          "roll_torque_Nm": 29.274161532404047,
+          "pitch_torque_Nm": -7.060588252949528e-13,
+          "righting_Nm": -22.635949098733605,
+          "pitch_stable_branches_deg": [
+            55.39962801
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -127.5,
+          "pitch_deg": 33.170130573104395,
+          "waterline_m": -0.09704101343283732,
+          "displaced_m3": 0.010254878614293842,
+          "buoyancy_center_m": [
+            -0.02048650458767228,
+            0.2277645211050806,
+            -0.18918395398877202
+          ],
+          "mass_residual_kg": -8.526512829121202e-14,
+          "roll_torque_Nm": 24.39695614678064,
+          "pitch_torque_Nm": -9.875024742367344e-13,
+          "righting_Nm": -20.421463733404934,
+          "pitch_stable_branches_deg": [
+            33.17013057
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -120.0,
+          "pitch_deg": 16.44917307852075,
+          "waterline_m": -0.07942870462172454,
+          "displaced_m3": 0.010254878614310254,
+          "buoyancy_center_m": [
+            -0.028850057665341145,
+            0.28820469107088864,
+            -0.16464472780317488
+          ],
+          "mass_residual_kg": 1.6326495710927702e-11,
+          "roll_torque_Nm": 30.64554523297145,
+          "pitch_torque_Nm": -4.1628618635547455e-12,
+          "righting_Nm": -29.39126311309555,
+          "pitch_stable_branches_deg": [
+            16.44917308
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -112.5,
+          "pitch_deg": 9.916067390343015,
+          "waterline_m": -0.06389852845206392,
+          "displaced_m3": 0.010254878614307229,
+          "buoyancy_center_m": [
+            -0.03143202563684051,
+            0.30308529576486953,
+            -0.1300886136365236
+          ],
+          "mass_residual_kg": 1.3301360013429075e-11,
+          "roll_torque_Nm": 32.28395439596688,
+          "pitch_torque_Nm": 2.9271228246807723e-12,
+          "righting_Nm": -31.80166677535943,
+          "pitch_stable_branches_deg": [
+            9.91606739
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -105.0,
+          "pitch_deg": 5.715597669774783,
+          "waterline_m": -0.04929519505799935,
+          "displaced_m3": 0.010254878614293937,
+          "buoyancy_center_m": [
+            -0.032707997807598026,
+            0.2898255254274319,
+            -0.09362765492271131
+          ],
+          "mass_residual_kg": 8.881784197001252e-15,
+          "roll_torque_Nm": 31.061533618434005,
+          "pitch_torque_Nm": 1.197632548688432e-14,
+          "righting_Nm": -30.90711105513097,
+          "pitch_stable_branches_deg": [
+            5.71559767
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -97.5,
+          "pitch_deg": 1.8598937697106166,
+          "waterline_m": -0.029039141833842513,
+          "displaced_m3": 0.010254878613700641,
+          "buoyancy_center_m": [
+            -0.033424210008514255,
+            0.21075877925818975,
+            -0.061878454145443657
+          ],
+          "mass_residual_kg": -5.932871971481291e-10,
+          "roll_torque_Nm": 23.18840303050977,
+          "pitch_torque_Nm": 7.457440129310377e-12,
+          "righting_Nm": -23.17618689834569,
+          "pitch_stable_branches_deg": [
+            1.85989377
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -90.0,
+          "pitch_deg": -1.2091345761921362,
+          "waterline_m": -0.003149302714173644,
+          "displaced_m3": 0.010254878614289042,
+          "buoyancy_center_m": [
+            -0.033628874556089004,
+            0.0013836564194226702,
+            -0.04993540648762659
+          ],
+          "mass_residual_kg": -4.884981308350689e-12,
+          "roll_torque_Nm": 2.1765747430275066,
+          "pitch_torque_Nm": 3.9648496529820497e-10,
+          "righting_Nm": -2.176090089377727,
+          "pitch_stable_branches_deg": [
+            -1.20913458
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -82.5,
+          "pitch_deg": -1.4410444402719458,
+          "waterline_m": -0.004129750882177088,
+          "displaced_m3": 0.010254878614295367,
+          "buoyancy_center_m": [
+            -0.033567038775118505,
+            -0.0028292908561389544,
+            -0.05061540198190395
+          ],
+          "mass_residual_kg": 1.4388490399142029e-12,
+          "roll_torque_Nm": 1.7622259794803108,
+          "pitch_torque_Nm": -5.074619522871248e-10,
+          "righting_Nm": -1.7616686420719498,
+          "pitch_stable_branches_deg": [
+            -1.44104444
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -75.0,
+          "pitch_deg": -1.433519380096952,
+          "waterline_m": -0.004411259923160972,
+          "displaced_m3": 0.010254878614293788,
+          "buoyancy_center_m": [
+            -0.03350090647473293,
+            0.001905912178812752,
+            -0.0506702817919495
+          ],
+          "mass_residual_kg": -1.4033219031261979e-13,
+          "roll_torque_Nm": 2.2127363775681976,
+          "pitch_torque_Nm": -4.878392873552961e-10,
+          "righting_Nm": -2.212043847080434,
+          "pitch_stable_branches_deg": [
+            -1.43351938
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -67.5,
+          "pitch_deg": -1.4123161484548619,
+          "waterline_m": -0.004608696519606336,
+          "displaced_m3": 0.01025487861429393,
+          "buoyancy_center_m": [
+            -0.0334384634316762,
+            0.006453913415791687,
+            -0.05010796316165984
+          ],
+          "mass_residual_kg": 3.552713678800501e-15,
+          "roll_torque_Nm": 2.609839632133431,
+          "pitch_torque_Nm": 2.361375906898e-09,
+          "righting_Nm": -2.6090468015015813,
+          "pitch_stable_branches_deg": [
+            -1.41231615
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -60.0,
+          "pitch_deg": -1.3751128274540323,
+          "waterline_m": -0.004702637228903939,
+          "displaced_m3": 0.010254878614293986,
+          "buoyancy_center_m": [
+            -0.03338293556843196,
+            0.010642254580613991,
+            -0.04896269620175596
+          ],
+          "mass_residual_kg": 5.861977570020827e-14,
+          "roll_torque_Nm": 2.9372235580345363,
+          "pitch_torque_Nm": 9.838818132906768e-10,
+          "righting_Nm": -2.936377660883438,
+          "pitch_stable_branches_deg": [
+            -1.37511283
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -52.5,
+          "pitch_deg": -1.3223543342989508,
+          "waterline_m": -0.00466417774146839,
+          "displaced_m3": 0.010254878614293918,
+          "buoyancy_center_m": [
+            -0.03333709417465099,
+            0.014252068554591957,
+            -0.04729535032074005
+          ],
+          "mass_residual_kg": -8.881784197001252e-15,
+          "roll_torque_Nm": 3.1744828635818068,
+          "pitch_torque_Nm": 5.377092510611137e-10,
+          "righting_Nm": -3.1736374404335375,
+          "pitch_stable_branches_deg": [
+            -1.32235433
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -45.0,
+          "pitch_deg": -1.25892159773706,
+          "waterline_m": -0.004446936548092679,
+          "displaced_m3": 0.01025487861428976,
+          "buoyancy_center_m": [
+            -0.033302154444792655,
+            0.01700212422294568,
+            -0.04520224383588335
+          ],
+          "mass_residual_kg": -4.1673331452329876e-12,
+          "roll_torque_Nm": 3.2954871375459978,
+          "pitch_torque_Nm": 3.5905513750267293e-10,
+          "righting_Nm": -3.294691666720199,
+          "pitch_stable_branches_deg": [
+            -1.2589216
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -37.5,
+          "pitch_deg": -1.1898974684482067,
+          "waterline_m": -0.003982722729920017,
+          "displaced_m3": 0.01025487861429392,
+          "buoyancy_center_m": [
+            -0.03327808852430165,
+            0.018492517594785218,
+            -0.04282297666228238
+          ],
+          "mass_residual_kg": -7.105427357601002e-15,
+          "roll_torque_Nm": 3.262681270792957,
+          "pitch_torque_Nm": 2.743117471143419e-10,
+          "righting_Nm": -3.2619777080046375,
+          "pitch_stable_branches_deg": [
+            -1.18989747
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -30.0,
+          "pitch_deg": -1.1263927370220326,
+          "waterline_m": -0.003165911431968371,
+          "displaced_m3": 0.010254878614320336,
+          "buoyancy_center_m": [
+            -0.03326197556290911,
+            0.01812858504425056,
+            -0.04036523500776521
+          ],
+          "mass_residual_kg": 2.6409097131363524e-11,
+          "roll_torque_Nm": 3.0193881735219046,
+          "pitch_torque_Nm": 2.162918939146996e-10,
+          "righting_Nm": -3.0188047158098383,
+          "pitch_stable_branches_deg": [
+            -1.12639274
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -22.5,
+          "pitch_deg": -1.0877187920356484,
+          "waterline_m": -0.0019162511717265964,
+          "displaced_m3": 0.010254878613764024,
+          "buoyancy_center_m": [
+            -0.03324677599867072,
+            0.015109858303539751,
+            -0.03813565933040864
+          ],
+          "mass_residual_kg": -5.299032324046493e-10,
+          "roll_torque_Nm": 2.4886445386843,
+          "pitch_torque_Nm": 1.26405216108183e-10,
+          "righting_Nm": -2.488196095085858,
+          "pitch_stable_branches_deg": [
+            -1.08771879
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -15.0,
+          "pitch_deg": -1.0700446501906002,
+          "waterline_m": -0.000904744923445197,
+          "displaced_m3": 0.010254878613219286,
+          "buoyancy_center_m": [
+            -0.0332318796105407,
+            0.01046048933340387,
+            -0.03644715039881447
+          ],
+          "mass_residual_kg": -1.0746408207751301e-09,
+          "roll_torque_Nm": 1.777332048703805,
+          "pitch_torque_Nm": 1.6570226192280656e-10,
+          "righting_Nm": -1.7770221038080212,
+          "pitch_stable_branches_deg": [
+            -1.07004465
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -7.5,
+          "pitch_deg": -1.057806483807664,
+          "waterline_m": -0.0004797197005515354,
+          "displaced_m3": 0.01025487861417016,
+          "buoyancy_center_m": [
+            -0.033221706317543405,
+            0.005371021612977474,
+            -0.03539993870934772
+          ],
+          "mass_residual_kg": -1.2376766278521245e-10,
+          "roll_torque_Nm": 1.0093494334209037,
+          "pitch_torque_Nm": 2.1508718444640527e-10,
+          "righting_Nm": -1.0091774183904911,
+          "pitch_stable_branches_deg": [
+            -1.05780648
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 0.0,
+          "pitch_deg": -1.0532098769639149,
+          "waterline_m": -0.00038636350067831584,
+          "displaced_m3": 0.010254878614273311,
+          "buoyancy_center_m": [
+            -0.03321526869709242,
+            3.1848468995845975e-17,
+            -0.03504416505798893
+          ],
+          "mass_residual_kg": -2.0616397478079307e-11,
+          "roll_torque_Nm": 0.2050238017202168,
+          "pitch_torque_Nm": 2.30946016904765e-10,
+          "righting_Nm": -0.2049891642121941,
+          "pitch_stable_branches_deg": [
+            -1.05320988
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 7.5,
+          "pitch_deg": -1.057396254616085,
+          "waterline_m": -0.00047966738336512277,
+          "displaced_m3": 0.010254878614175712,
+          "buoyancy_center_m": [
+            -0.033212031291185426,
+            -0.005371032332920073,
+            -0.035399700881527864
+          ],
+          "mass_residual_kg": -1.1821477130524727e-10,
+          "roll_torque_Nm": -0.6028109221333435,
+          "pitch_torque_Nm": 2.0575381624310383e-10,
+          "righting_Nm": 0.6027082697442933,
+          "pitch_stable_branches_deg": [
+            -1.05739625
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 15.0,
+          "pitch_deg": -1.0692136697726151,
+          "waterline_m": -0.0009045940001054281,
+          "displaced_m3": 0.010254878613341047,
+          "buoyancy_center_m": [
+            -0.03321247254530672,
+            -0.010460526318183864,
+            -0.03644666856573299
+          ],
+          "mass_residual_kg": -9.5288044121844e-10,
+          "roll_torque_Nm": -1.3812601979568315,
+          "pitch_torque_Nm": 1.5139926302087934e-10,
+          "righting_Nm": 1.3810196970940982,
+          "pitch_stable_branches_deg": [
+            -1.06921367
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 22.5,
+          "pitch_deg": -1.0864522343294751,
+          "waterline_m": -0.0019159482167166108,
+          "displaced_m3": 0.010254878610539244,
+          "buoyancy_center_m": [
+            -0.03321760064441892,
+            -0.015109928797200555,
+            -0.03813492472426165
+          ],
+          "mass_residual_kg": -3.75468367508347e-09,
+          "roll_torque_Nm": -2.1098170392984144,
+          "pitch_torque_Nm": 1.0836832554650399e-10,
+          "righting_Nm": 2.1094377437054326,
+          "pitch_stable_branches_deg": [
+            -1.08645223
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 30.0,
+          "pitch_deg": -1.124618788553418,
+          "waterline_m": -0.0031654945639356764,
+          "displaced_m3": 0.010254878614317994,
+          "buoyancy_center_m": [
+            -0.03322249393329326,
+            -0.018128862935009493,
+            -0.04036420578690541
+          ],
+          "mass_residual_kg": 2.4066082460194593e-11,
+          "roll_torque_Nm": -2.6643044785447034,
+          "pitch_torque_Nm": 1.7341664867165374e-10,
+          "righting_Nm": 2.66379125647881,
+          "pitch_stable_branches_deg": [
+            -1.12461879
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 37.5,
+          "pitch_deg": -1.1872535912305755,
+          "waterline_m": -0.003983850635702973,
+          "displaced_m3": 0.010254878614293935,
+          "buoyancy_center_m": [
+            -0.03322737453079852,
+            -0.0184953156487828,
+            -0.04282146235738605
+          ],
+          "mass_residual_kg": 7.105427357601002e-15,
+          "roll_torque_Nm": -2.9376500240384082,
+          "pitch_torque_Nm": 1.6526131539351672e-10,
+          "righting_Nm": 2.937019362655875,
+          "pitch_stable_branches_deg": [
+            -1.18725359
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 45.0,
+          "pitch_deg": -1.2405455907796106,
+          "waterline_m": -0.004560015536696001,
+          "displaced_m3": 0.010254878614293927,
+          "buoyancy_center_m": [
+            -0.03324410059347273,
+            -0.017148501573390654,
+            -0.04519845006838785
+          ],
+          "mass_residual_kg": 0.0,
+          "roll_torque_Nm": -3.0202602819545263,
+          "pitch_torque_Nm": 1.3881541120475125e-10,
+          "righting_Nm": 3.01955237267746,
+          "pitch_stable_branches_deg": [
+            -1.24054559
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 52.5,
+          "pitch_deg": -1.252233160972889,
+          "waterline_m": -0.0051723961838501505,
+          "displaced_m3": 0.010254878613837904,
+          "buoyancy_center_m": [
+            -0.033280435817928514,
+            -0.014871072165183458,
+            -0.04730719869446629
+          ],
+          "mass_residual_kg": -4.560227750971535e-10,
+          "roll_torque_Nm": -2.9871124189056864,
+          "pitch_torque_Nm": 9.329775305655374e-11,
+          "righting_Nm": 2.9863990249584704,
+          "pitch_stable_branches_deg": [
+            -1.25223316
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 60.0,
+          "pitch_deg": -1.2002320675879914,
+          "waterline_m": -0.006043565049078751,
+          "displaced_m3": 0.010254878614293944,
+          "buoyancy_center_m": [
+            -0.033336798264794784,
+            -0.01224996930347884,
+            -0.049052131899978445
+          ],
+          "mass_residual_kg": 1.5987211554602254e-14,
+          "roll_torque_Nm": -2.8938812037559023,
+          "pitch_torque_Nm": 3.3411770594682365e-11,
+          "righting_Nm": 2.89324628229179,
+          "pitch_stable_branches_deg": [
+            -1.20023207
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 67.5,
+          "pitch_deg": -1.0512396969777835,
+          "waterline_m": -0.007470407450691581,
+          "displaced_m3": 0.01025487861297783,
+          "buoyancy_center_m": [
+            -0.03341088324290653,
+            -0.010035073514130709,
+            -0.050413158651344166
+          ],
+          "mass_residual_kg": -1.3160974532411274e-09,
+          "roll_torque_Nm": -2.8130641733410933,
+          "pitch_torque_Nm": 2.9494423403608746e-12,
+          "righting_Nm": 2.8125906998150674,
+          "pitch_stable_branches_deg": [
+            -1.0512397
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 75.0,
+          "pitch_deg": -0.7387113545727976,
+          "waterline_m": -0.010051121152493745,
+          "displaced_m3": 0.010254878615920685,
+          "buoyancy_center_m": [
+            -0.03349755073326358,
+            -0.009949535037213728,
+            -0.051497185403992576
+          ],
+          "mass_residual_kg": 1.6267573954564796e-09,
+          "roll_torque_Nm": -2.9155232680727177,
+          "pitch_torque_Nm": -4.298107785385974e-09,
+          "righting_Nm": 2.915280950570146,
+          "pitch_stable_branches_deg": [
+            -0.73871135
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 82.5,
+          "pitch_deg": -0.08265493764856945,
+          "waterline_m": -0.015294014909762012,
+          "displaced_m3": 0.010254878614296192,
+          "buoyancy_center_m": [
+            -0.033586568827185026,
+            -0.0211518111041933,
+            -0.05286117801870515
+          ],
+          "mass_residual_kg": 2.2648549702353193e-12,
+          "roll_torque_Nm": -4.120387655524983,
+          "pitch_torque_Nm": -5.059997518208625e-12,
+          "righting_Nm": 4.120383368062362,
+          "pitch_stable_branches_deg": [
+            -0.08265494
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 90.0,
+          "pitch_deg": 2.324402464127425,
+          "waterline_m": -0.032759700220170995,
+          "displaced_m3": 0.010254878614293928,
+          "buoyancy_center_m": [
+            -0.033648378508926144,
+            -0.15845435933846674,
+            -0.0607870428957469
+          ],
+          "mass_residual_kg": 1.7763568394002505e-15,
+          "roll_torque_Nm": -17.97254789513322,
+          "pitch_torque_Nm": 8.053534511498483e-12,
+          "righting_Nm": 17.957760302467094,
+          "pitch_stable_branches_deg": [
+            2.32440246
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 97.5,
+          "pitch_deg": 7.140316802679011,
+          "waterline_m": -0.058230701034086105,
+          "displaced_m3": 0.01025487861429392,
+          "buoyancy_center_m": [
+            -0.03325535141011545,
+            -0.3017385836830341,
+            -0.09047666530082886
+          ],
+          "mass_residual_kg": -7.105427357601002e-15,
+          "roll_torque_Nm": -32.39140048374336,
+          "pitch_torque_Nm": -1.0152657742290571e-12,
+          "righting_Nm": 32.140196060936766,
+          "pitch_stable_branches_deg": [
+            7.1403168
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 105.0,
+          "pitch_deg": 12.332890648211265,
+          "waterline_m": -0.07479286257552446,
+          "displaced_m3": 0.010254878614288688,
+          "buoyancy_center_m": [
+            -0.032118735884681386,
+            -0.311693741957699,
+            -0.127583526737974
+          ],
+          "mass_residual_kg": -5.240252676230739e-12,
+          "roll_torque_Nm": -33.36686092844614,
+          "pitch_torque_Nm": -2.100756366085754e-12,
+          "righting_Nm": 32.59685799433134,
+          "pitch_stable_branches_deg": [
+            12.33289065
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 112.5,
+          "pitch_deg": 19.612270981758567,
+          "waterline_m": -0.0900306489849498,
+          "displaced_m3": 0.010254878614293356,
+          "buoyancy_center_m": [
+            -0.029674320780680944,
+            -0.28954596971167496,
+            -0.16179057821372472
+          ],
+          "mass_residual_kg": -5.719869022868806e-13,
+          "roll_torque_Nm": -31.079276883768237,
+          "pitch_torque_Nm": 1.0421036308883025e-11,
+          "righting_Nm": 29.276230905117576,
+          "pitch_stable_branches_deg": [
+            19.61227098
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 120.0,
+          "pitch_deg": 33.34749771743409,
+          "waterline_m": -0.10155507404703643,
+          "displaced_m3": 0.010254878614291502,
+          "buoyancy_center_m": [
+            -0.0234643104144448,
+            -0.23341719547364387,
+            -0.1866820709861485
+          ],
+          "mass_residual_kg": -2.426503442620742e-12,
+          "roll_torque_Nm": -25.340809458589472,
+          "pitch_torque_Nm": -1.6188399160621536e-10,
+          "righting_Nm": 21.168494315676842,
+          "pitch_stable_branches_deg": [
+            33.34749772
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 127.5,
+          "pitch_deg": -38.61330025374593,
+          "waterline_m": -0.21307682501183886,
+          "displaced_m3": 0.010254878614308523,
+          "buoyancy_center_m": [
+            -0.032936355509630484,
+            -0.2787012372332009,
+            -0.3518123223672848
+          ],
+          "mass_residual_kg": 1.4594547792512458e-11,
+          "roll_torque_Nm": -29.769079379160022,
+          "pitch_torque_Nm": -4.246151763531713e-12,
+          "righting_Nm": 23.260833100365144,
+          "pitch_stable_branches_deg": [
+            52.47533572
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 135.0,
+          "pitch_deg": -33.26842815545848,
+          "waterline_m": -0.20006393860509367,
+          "displaced_m3": 0.01025487861429395,
+          "buoyancy_center_m": [
+            -0.0351554531496949,
+            -0.2491230311783249,
+            -0.37675301933133337
+          ],
+          "mass_residual_kg": 2.1316282072803006e-14,
+          "roll_torque_Nm": -26.638959511254626,
+          "pitch_torque_Nm": 2.4497029404990654e-14,
+          "righting_Nm": 22.273094148929356,
+          "pitch_stable_branches_deg": [
+            68.05417499
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 142.5,
+          "pitch_deg": -29.808374980254936,
+          "waterline_m": -0.1891937420682849,
+          "displaced_m3": 0.01025487861429395,
+          "buoyancy_center_m": [
+            -0.03652165942421413,
+            -0.21079111926700622,
+            -0.4003200471279987
+          ],
+          "mass_residual_kg": 2.1316282072803006e-14,
+          "roll_torque_Nm": -22.601383477833124,
+          "pitch_torque_Nm": -4.221730947107094e-10,
+          "righting_Nm": 19.611057734725044,
+          "pitch_stable_branches_deg": [
+            78.77040027
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 150.0,
+          "pitch_deg": -27.53612629483529,
+          "waterline_m": -0.1807140256960278,
+          "displaced_m3": 0.010254878614293965,
+          "buoyancy_center_m": [
+            -0.037427949789907794,
+            -0.1672144931788398,
+            -0.4206069178975282
+          ],
+          "mass_residual_kg": 3.730349362740526e-14,
+          "roll_torque_Nm": -18.01236241050805,
+          "pitch_torque_Nm": 1.382721215303917e-13,
+          "righting_Nm": 15.971913239996969,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 157.5,
+          "pitch_deg": -26.075821869835334,
+          "waterline_m": -0.17434447868889028,
+          "displaced_m3": 0.010254878614294631,
+          "buoyancy_center_m": [
+            -0.03805847243186086,
+            -0.1201586017814961,
+            -0.43646200550414943
+          ],
+          "mass_residual_kg": 7.034373084024992e-13,
+          "roll_torque_Nm": -13.052977038730091,
+          "pitch_torque_Nm": -3.8106490185541015e-15,
+          "righting_Nm": 11.72435555546086,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 165.0,
+          "pitch_deg": -25.222266736863297,
+          "waterline_m": -0.1698850220073625,
+          "displaced_m3": 0.010254878614376278,
+          "buoyancy_center_m": [
+            -0.03850481364523193,
+            -0.07084932812056409,
+            -0.447178964040311
+          ],
+          "mass_residual_kg": 8.235012671775621e-11,
+          "roll_torque_Nm": -7.850396334198038,
+          "pitch_torque_Nm": 8.312658644760162e-13,
+          "righting_Nm": 7.101951436661123,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 172.5,
+          "pitch_deg": -24.868803672470975,
+          "waterline_m": -0.1672800418314515,
+          "displaced_m3": 0.010254878613850212,
+          "buoyancy_center_m": [
+            -0.03881353778033809,
+            -0.02033697057628105,
+            -0.4523547733958145
+          ],
+          "mass_residual_kg": -4.4371439855694916e-10,
+          "roll_torque_Nm": -2.5144151370428887,
+          "pitch_torque_Nm": 6.238576821804287e-13,
+          "righting_Nm": 2.2812612785127597,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 180.0,
+          "pitch_deg": -24.96958365426123,
+          "waterline_m": -0.16653068664599036,
+          "displaced_m3": 0.0102548786142938,
+          "buoyancy_center_m": [
+            -0.039005756783671026,
+            0.030382510104304192,
+            -0.4518245004100941
+          ],
+          "mass_residual_kg": -1.2789769243681803e-13,
+          "roll_torque_Nm": 2.85042387236652,
+          "pitch_torque_Nm": 8.269108370262401e-13,
+          "righting_Nm": -2.5840004901303906,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        }
+      ],
+      "failedEquilibria": 0,
+      "minimumInteriorRestoring_Nm": 0.6027082697442933
+    },
+    {
+      "trim_deg": 90,
+      "points": [
+        {
+          "heel_deg": -180.0,
+          "pitch_deg": -20.367908063998875,
+          "waterline_m": -0.14103881705742735,
+          "displaced_m3": 0.01025487861546415,
+          "buoyancy_center_m": [
+            -0.03615225390763381,
+            0.0066702337721961345,
+            -0.43394899737664266
+          ],
+          "mass_residual_kg": 1.1702230295895788e-09,
+          "roll_torque_Nm": 0.6192236948686457,
+          "pitch_torque_Nm": 2.8024275012250576e-10,
+          "righting_Nm": -0.5805080220313441,
+          "pitch_stable_branches_deg": [
+            79.95512492
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -172.5,
+          "pitch_deg": -20.63280724674956,
+          "waterline_m": -0.1419833364805521,
+          "displaced_m3": 0.010254878614287729,
+          "buoyancy_center_m": [
+            -0.03615224048423533,
+            0.05608702985327054,
+            -0.4302620557501333
+          ],
+          "mass_residual_kg": -6.199485369506874e-12,
+          "roll_torque_Nm": 5.855252156789389,
+          "pitch_torque_Nm": 3.590426167987548e-10,
+          "righting_Nm": -5.47968410286536,
+          "pitch_stable_branches_deg": [
+            79.79524521
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -165.0,
+          "pitch_deg": -21.308309661454533,
+          "waterline_m": -0.14466443519591948,
+          "displaced_m3": 0.01025487861400462,
+          "buoyancy_center_m": [
+            -0.03607916168666704,
+            0.10433576047736577,
+            -0.4208666349368327
+          ],
+          "mass_residual_kg": -2.893081330057612e-10,
+          "roll_torque_Nm": 10.970137592134343,
+          "pitch_torque_Nm": 3.6592301579096985e-10,
+          "righting_Nm": -10.22020291634974,
+          "pitch_stable_branches_deg": [
+            79.3218207
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -157.5,
+          "pitch_deg": -22.474832313194824,
+          "waterline_m": -0.14898674814050544,
+          "displaced_m3": 0.010254878614293953,
+          "buoyancy_center_m": [
+            -0.035914362488136536,
+            0.15044264637557395,
+            -0.40609891024373623
+          ],
+          "mass_residual_kg": 2.4868995751603507e-14,
+          "roll_torque_Nm": 15.861455983663792,
+          "pitch_torque_Nm": 1.0412217378297227e-10,
+          "righting_Nm": -14.656739390724384,
+          "pitch_stable_branches_deg": [
+            78.46685869
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -150.0,
+          "pitch_deg": -24.26588360110599,
+          "waterline_m": -0.15494079490559093,
+          "displaced_m3": 0.01025487861525364,
+          "buoyancy_center_m": [
+            -0.03561519888590012,
+            0.1932710136038237,
+            -0.38652457869484913
+          ],
+          "mass_residual_kg": 9.597123096227733e-10,
+          "roll_torque_Nm": 20.410541443186123,
+          "pitch_torque_Nm": -3.484021959820893e-14,
+          "righting_Nm": -18.607232318529274,
+          "pitch_stable_branches_deg": [
+            77.09190993
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -142.5,
+          "pitch_deg": -26.941768260615966,
+          "waterline_m": -0.16285094979039366,
+          "displaced_m3": 0.01025487861428952,
+          "buoyancy_center_m": [
+            -0.03509663407314026,
+            0.23138363607096726,
+            -0.3630485912751607
+          ],
+          "mass_residual_kg": -4.407141318552021e-12,
+          "roll_torque_Nm": 24.468717060763034,
+          "pitch_torque_Nm": 2.0414191170825544e-13,
+          "righting_Nm": -21.813065307725132,
+          "pitch_stable_branches_deg": [
+            74.93803393
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -135.0,
+          "pitch_deg": -30.940437684354567,
+          "waterline_m": -0.17291691953070568,
+          "displaced_m3": 0.01025487861429145,
+          "buoyancy_center_m": [
+            -0.03417656836481071,
+            0.2626511866721388,
+            -0.3370724222383812
+          ],
+          "mass_residual_kg": -2.4780177909633494e-12,
+          "roll_torque_Nm": 27.817989266587023,
+          "pitch_torque_Nm": 4.097155386906248e-11,
+          "righting_Nm": -23.85955197499867,
+          "pitch_stable_branches_deg": [
+            71.2211323
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -127.5,
+          "pitch_deg": -36.94418382222918,
+          "waterline_m": -0.18425530375978116,
+          "displaced_m3": 0.010254878614293932,
+          "buoyancy_center_m": [
+            -0.03246654477164048,
+            0.28319911357612604,
+            -0.3107628896331816
+          ],
+          "mass_residual_kg": 5.329070518200751e-15,
+          "roll_torque_Nm": 30.065205339400844,
+          "pitch_torque_Nm": 1.0643687087252827e-11,
+          "righting_Nm": -24.028755646756963,
+          "pitch_stable_branches_deg": [
+            61.51313073
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -120.0,
+          "pitch_deg": 20.818554168251943,
+          "waterline_m": -0.09465358954940982,
+          "displaced_m3": 0.010254878614297434,
+          "buoyancy_center_m": [
+            -0.025257010605475673,
+            0.271573260278604,
+            -0.18822103687585195
+          ],
+          "mass_residual_kg": 3.5065284009760944e-12,
+          "roll_torque_Nm": 29.049713040288655,
+          "pitch_torque_Nm": -4.4301843359906276e-10,
+          "righting_Nm": -27.153075653418583,
+          "pitch_stable_branches_deg": [
+            20.81855417
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -112.5,
+          "pitch_deg": 10.753792335506763,
+          "waterline_m": -0.07347124549128119,
+          "displaced_m3": 0.010254878614286346,
+          "buoyancy_center_m": [
+            -0.028961598899171815,
+            0.29222218199635425,
+            -0.15687821943012786
+          ],
+          "mass_residual_kg": -7.581490990560269e-12,
+          "roll_torque_Nm": 31.250216725553706,
+          "pitch_torque_Nm": -2.1230758817658568e-13,
+          "righting_Nm": -30.701401975129972,
+          "pitch_stable_branches_deg": [
+            10.75379234
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -105.0,
+          "pitch_deg": 6.052719712124703,
+          "waterline_m": -0.057248277886530835,
+          "displaced_m3": 0.010254878613057258,
+          "buoyancy_center_m": [
+            -0.03026360477144295,
+            0.27168715194316845,
+            -0.1223109133088264
+          ],
+          "mass_residual_kg": -1.2366694335241846e-09,
+          "roll_torque_Nm": 29.277145304129917,
+          "pitch_torque_Nm": 5.046388057428075e-13,
+          "righting_Nm": -29.113933836397734,
+          "pitch_stable_branches_deg": [
+            6.05271971
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -97.5,
+          "pitch_deg": 3.058037767279481,
+          "waterline_m": -0.04181317827178864,
+          "displaced_m3": 0.01025487861435556,
+          "buoyancy_center_m": [
+            -0.030829386835686284,
+            0.21352248171312896,
+            -0.09195059887517303
+          ],
+          "mass_residual_kg": 6.163247689983109e-11,
+          "roll_torque_Nm": 23.486366626355156,
+          "pitch_torque_Nm": -6.532541174664175e-15,
+          "righting_Nm": -23.452922245060165,
+          "pitch_stable_branches_deg": [
+            3.05803777
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -90.0,
+          "pitch_deg": 1.0845628294790184,
+          "waterline_m": -0.02771057396146415,
+          "displaced_m3": 0.010254878614276855,
+          "buoyancy_center_m": [
+            -0.031026519222046973,
+            0.1377320023115538,
+            -0.06996031348727358
+          ],
+          "mass_residual_kg": -1.7072565583475807e-11,
+          "roll_torque_Nm": 15.888583227210418,
+          "pitch_torque_Nm": -9.038021129226247e-10,
+          "righting_Nm": -15.885736758743992,
+          "pitch_stable_branches_deg": [
+            1.08456283
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -82.5,
+          "pitch_deg": 0.01929481414512338,
+          "waterline_m": -0.01769076355760913,
+          "displaced_m3": 0.01025487861570749,
+          "buoyancy_center_m": [
+            -0.031042505173932245,
+            0.05586508926809156,
+            -0.05779626664247457
+          ],
+          "mass_residual_kg": 1.4135626003053403e-09,
+          "roll_torque_Nm": 7.6448562480128786,
+          "pitch_torque_Nm": -1.463234785281653e-11,
+          "righting_Nm": -7.6448558145266965,
+          "pitch_stable_branches_deg": [
+            0.01929481
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -75.0,
+          "pitch_deg": -0.5882753315768618,
+          "waterline_m": -0.011508979984383714,
+          "displaced_m3": 0.010254878614277558,
+          "buoyancy_center_m": [
+            -0.030991400988588002,
+            0.020563106497477238,
+            -0.05380202459826236
+          ],
+          "mass_residual_kg": -1.6369128275073308e-11,
+          "roll_torque_Nm": 4.049300427388789,
+          "pitch_torque_Nm": -4.2510566131970235e-10,
+          "righting_Nm": -4.049086994079483,
+          "pitch_stable_branches_deg": [
+            -0.58827533
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -67.5,
+          "pitch_deg": -0.8623944877023432,
+          "waterline_m": -0.00868811477462891,
+          "displaced_m3": 0.010254878614300762,
+          "buoyancy_center_m": [
+            -0.030928711798662193,
+            0.015300329928378398,
+            -0.05171288945225995
+          ],
+          "mass_residual_kg": 6.8336447611727635e-12,
+          "roll_torque_Nm": 3.440766115431387,
+          "pitch_torque_Nm": 1.083313078131809e-13,
+          "righting_Nm": -3.4403763676633563,
+          "pitch_stable_branches_deg": [
+            -0.86239449
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -60.0,
+          "pitch_deg": -0.9865607898804722,
+          "waterline_m": -0.007139559423263031,
+          "displaced_m3": 0.01025487861449237,
+          "buoyancy_center_m": [
+            -0.03087041956557241,
+            0.015552402131263784,
+            -0.04978794262249371
+          ],
+          "mass_residual_kg": 1.9844215159992018e-10,
+          "roll_torque_Nm": 3.3542931173728707,
+          "pitch_torque_Nm": 3.033276618769065e-12,
+          "righting_Nm": -3.3537958811921866,
+          "pitch_stable_branches_deg": [
+            -0.98656079
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -52.5,
+          "pitch_deg": -1.0375839226889783,
+          "waterline_m": -0.00608572565015826,
+          "displaced_m3": 0.010254878614293313,
+          "buoyancy_center_m": [
+            -0.030820731595907397,
+            0.017129674001835547,
+            -0.04768141443850961
+          ],
+          "mass_residual_kg": -6.146194664324867e-13,
+          "roll_torque_Nm": 3.3704584795328336,
+          "pitch_torque_Nm": 1.4113555207861949e-11,
+          "righting_Nm": -3.3699058318928876,
+          "pitch_stable_branches_deg": [
+            -1.03758392
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -45.0,
+          "pitch_deg": -1.0458257907927555,
+          "waterline_m": -0.005215031847997912,
+          "displaced_m3": 0.01025487861429385,
+          "buoyancy_center_m": [
+            -0.030781761672431067,
+            0.01865612971593125,
+            -0.04533900131135728
+          ],
+          "mass_residual_kg": -7.638334409421077e-14,
+          "roll_torque_Nm": 3.353319224424192,
+          "pitch_torque_Nm": 2.896311005473606e-11,
+          "righting_Nm": -3.3527606175504663,
+          "pitch_stable_branches_deg": [
+            -1.04582579
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -37.5,
+          "pitch_deg": -1.0270348155346918,
+          "waterline_m": -0.004333208689129538,
+          "displaced_m3": 0.010254878614320643,
+          "buoyancy_center_m": [
+            -0.03075430115432788,
+            0.01935018406220523,
+            -0.042828740962944485
+          ],
+          "mass_residual_kg": 2.6716406864579767e-11,
+          "roll_torque_Nm": 3.227194297894353,
+          "pitch_torque_Nm": 4.735874600259038e-11,
+          "righting_Nm": -3.226675845891634,
+          "pitch_stable_branches_deg": [
+            -1.02703482
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -30.0,
+          "pitch_deg": -0.997127987657059,
+          "waterline_m": -0.003270078024675516,
+          "displaced_m3": 0.010254878614292548,
+          "buoyancy_center_m": [
+            -0.030736220617598255,
+            0.018467235552590597,
+            -0.04031605010715267
+          ],
+          "mass_residual_kg": -1.3802292642139946e-12,
+          "roll_torque_Nm": 2.920554402951875,
+          "pitch_torque_Nm": 5.814016083294237e-11,
+          "righting_Nm": -2.9201121396627925,
+          "pitch_stable_branches_deg": [
+            -0.99712799
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -22.5,
+          "pitch_deg": -0.9761655544206183,
+          "waterline_m": -0.0019075515388994077,
+          "displaced_m3": 0.010254878614250274,
+          "buoyancy_center_m": [
+            -0.03072174713547915,
+            0.01516187763906549,
+            -0.038074636779698516
+          ],
+          "mass_residual_kg": -4.3653969328261155e-11,
+          "roll_torque_Nm": 2.352107773480671,
+          "pitch_torque_Nm": 4.3212759870403515e-11,
+          "righting_Nm": -2.3517664089380803,
+          "pitch_stable_branches_deg": [
+            -0.97616555
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -15.0,
+          "pitch_deg": -0.9624039794006861,
+          "waterline_m": -0.0008862006713476375,
+          "displaced_m3": 0.010254878613424032,
+          "buoyancy_center_m": [
+            -0.030710946369469576,
+            0.01046510763300368,
+            -0.0363870840044419
+          ],
+          "mass_residual_kg": -8.698943787521785e-10,
+          "roll_torque_Nm": 1.6295764001838602,
+          "pitch_torque_Nm": 6.402325853915868e-11,
+          "righting_Nm": -1.6293465186559264,
+          "pitch_stable_branches_deg": [
+            -0.96240398
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -7.5,
+          "pitch_deg": -0.9514120125858476,
+          "waterline_m": -0.00046696511196897057,
+          "displaced_m3": 0.010254878614186063,
+          "buoyancy_center_m": [
+            -0.030705097016237717,
+            0.005373708442652502,
+            -0.03534058251789453
+          ],
+          "mass_residual_kg": -1.0786394000206201e-10,
+          "roll_torque_Nm": 0.857483681110659,
+          "pitch_torque_Nm": 8.541515337245897e-11,
+          "righting_Nm": -0.857365464668393,
+          "pitch_stable_branches_deg": [
+            -0.95141201
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 0.0,
+          "pitch_deg": -0.9473622206907565,
+          "waterline_m": -0.00037643602260962686,
+          "displaced_m3": 0.010254878614278441,
+          "buoyancy_center_m": [
+            -0.03070257570576415,
+            3.334068736236416e-17,
+            -0.034985122178943416
+          ],
+          "mass_residual_kg": -1.5486278925891384e-11,
+          "roll_torque_Nm": 0.0515750705141486,
+          "pitch_torque_Nm": 9.285626214883269e-11,
+          "righting_Nm": -0.05156802055177662,
+          "pitch_stable_branches_deg": [
+            -0.94736222
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 7.5,
+          "pitch_deg": -0.9513197052658567,
+          "waterline_m": -0.00046695474772698195,
+          "displaced_m3": 0.010254878614182387,
+          "buoyancy_center_m": [
+            -0.030702907295579417,
+            -0.005373710691625944,
+            -0.0353405330517129
+          ],
+          "mass_residual_kg": -1.1153922230278113e-10,
+          "roll_torque_Nm": -0.7552162300082581,
+          "pitch_torque_Nm": 8.465356794717937e-11,
+          "righting_Nm": 0.7551121328048752,
+          "pitch_stable_branches_deg": [
+            -0.95131971
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 15.0,
+          "pitch_deg": -0.9622169282649793,
+          "waterline_m": -0.0008861702056525048,
+          "displaced_m3": 0.010254878612931518,
+          "buoyancy_center_m": [
+            -0.030706553468936353,
+            -0.010465115351999569,
+            -0.03638698375257504
+          ],
+          "mass_residual_kg": -1.3624088524011313e-09,
+          "roll_torque_Nm": -1.529941791197311,
+          "pitch_torque_Nm": 6.292524724338388e-11,
+          "righting_Nm": 1.529726048836654,
+          "pitch_stable_branches_deg": [
+            -0.96221693
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 22.5,
+          "pitch_deg": -0.9725691037755094,
+          "waterline_m": -0.001932800231189036,
+          "displaced_m3": 0.010254878614171977,
+          "buoyancy_center_m": [
+            -0.030716280203377227,
+            -0.01524159479321813,
+            -0.038076044689271275
+          ],
+          "mass_residual_kg": -1.21950449738506e-10,
+          "roll_torque_Nm": -2.26482630514927,
+          "pitch_torque_Nm": 4.143427553560119e-11,
+          "righting_Nm": 2.264500025377394,
+          "pitch_stable_branches_deg": [
+            -0.9725691
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 30.0,
+          "pitch_deg": -0.9862598704122731,
+          "waterline_m": -0.003359295996829558,
+          "displaced_m3": 0.0102548786142805,
+          "buoyancy_center_m": [
+            -0.030730774006145278,
+            -0.018725497656351023,
+            -0.04033493498780478
+          ],
+          "mass_residual_kg": -1.3427481349026493e-11,
+          "roll_torque_Nm": -2.857196148527008,
+          "pitch_torque_Nm": 4.992385717050851e-11,
+          "righting_Nm": 2.856772859707759,
+          "pitch_stable_branches_deg": [
+            -0.98625987
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 37.5,
+          "pitch_deg": -1.0061178028932736,
+          "waterline_m": -0.004520926180722024,
+          "displaced_m3": 0.010254878612816964,
+          "buoyancy_center_m": [
+            -0.030749291105061912,
+            -0.01985375962362214,
+            -0.04289132566634477
+          ],
+          "mass_residual_kg": -1.4769625522603747e-09,
+          "roll_torque_Nm": -3.196002371275475,
+          "pitch_torque_Nm": 3.415539153173164e-11,
+          "righting_Nm": 3.19550963068446,
+          "pitch_stable_branches_deg": [
+            -1.0061178
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 45.0,
+          "pitch_deg": -1.0114947251455848,
+          "waterline_m": -0.005542316202924059,
+          "displaced_m3": 0.010254878614293866,
+          "buoyancy_center_m": [
+            -0.03077765746036175,
+            -0.019489686109699148,
+            -0.04548078835381124
+          ],
+          "mass_residual_kg": -6.217248937900877e-14,
+          "roll_torque_Nm": -3.3642084969886548,
+          "pitch_torque_Nm": 1.581582656229319e-11,
+          "righting_Nm": 3.3636842648913343,
+          "pitch_stable_branches_deg": [
+            -1.01149473
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 52.5,
+          "pitch_deg": -0.9852111038399612,
+          "waterline_m": -0.006606472309513231,
+          "displaced_m3": 0.010254878614292291,
+          "buoyancy_center_m": [
+            -0.030818140693241847,
+            -0.018434121947527304,
+            -0.04795140245745503
+          ],
+          "mass_residual_kg": -1.6360246490876307e-12,
+          "roll_torque_Nm": -3.438847771379824,
+          "pitch_torque_Nm": 5.089393953494614e-12,
+          "righting_Nm": 3.4383393947406615,
+          "pitch_stable_branches_deg": [
+            -0.9852111
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 60.0,
+          "pitch_deg": -0.9088558291324363,
+          "waterline_m": -0.00793499387737297,
+          "displaced_m3": 0.010254878614332144,
+          "buoyancy_center_m": [
+            -0.03087016008538309,
+            -0.01760206996544224,
+            -0.050259573608540664
+          ],
+          "mass_residual_kg": 3.821654104285699e-11,
+          "roll_torque_Nm": -3.508844953239139,
+          "pitch_torque_Nm": 4.257039332156154e-13,
+          "righting_Nm": 3.508403515147802,
+          "pitch_stable_branches_deg": [
+            -0.90885583
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 67.5,
+          "pitch_deg": -0.746040667265873,
+          "waterline_m": -0.00989470267734973,
+          "displaced_m3": 0.010254878614292669,
+          "buoyancy_center_m": [
+            -0.030932038908423727,
+            -0.01873790443249863,
+            -0.05251214379616549
+          ],
+          "mass_residual_kg": -1.2576606422953773e-12,
+          "roll_torque_Nm": -3.7469954014290865,
+          "pitch_torque_Nm": -3.3626462560387702e-09,
+          "righting_Nm": 3.746677767587357,
+          "pitch_stable_branches_deg": [
+            -0.74604067
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 75.0,
+          "pitch_deg": -0.3996630949367841,
+          "waterline_m": -0.013416811029176533,
+          "displaced_m3": 0.010254878614293752,
+          "buoyancy_center_m": [
+            -0.03100100115512938,
+            -0.027285659775302163,
+            -0.05519151214575496
+          ],
+          "mass_residual_kg": -1.758593271006248e-13,
+          "roll_torque_Nm": -4.698663535378801,
+          "pitch_torque_Nm": -1.7906784116616945e-11,
+          "righting_Nm": 4.698549225064243,
+          "pitch_stable_branches_deg": [
+            -0.39966309
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 82.5,
+          "pitch_deg": 0.2648432388228948,
+          "waterline_m": -0.020494578403179888,
+          "displaced_m3": 0.010254878614293948,
+          "buoyancy_center_m": [
+            -0.03105602973584166,
+            -0.07214432292494627,
+            -0.06061218866910154
+          ],
+          "mass_residual_kg": 1.9539925233402755e-14,
+          "roll_torque_Nm": -9.26852995134168,
+          "pitch_torque_Nm": 1.036061030301738e-11,
+          "righting_Nm": 9.268430933694043,
+          "pitch_stable_branches_deg": [
+            0.26484324
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 90.0,
+          "pitch_deg": 1.557037850643113,
+          "waterline_m": -0.03149540202100193,
+          "displaced_m3": 0.010254878613481006,
+          "buoyancy_center_m": [
+            -0.031044261253229826,
+            -0.1547559093800753,
+            -0.07492488882097882
+          ],
+          "mass_residual_kg": -8.129212858420942e-10,
+          "roll_torque_Nm": -17.600609555549614,
+          "pitch_torque_Nm": 2.7164483717978524e-13,
+          "righting_Nm": 17.594110891881197,
+          "pitch_stable_branches_deg": [
+            1.55703785
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 97.5,
+          "pitch_deg": 3.7796752833311165,
+          "waterline_m": -0.046144672315859815,
+          "displaced_m3": 0.010254878615189736,
+          "buoyancy_center_m": [
+            -0.030833467639318882,
+            -0.22770110750933356,
+            -0.0988565483147713
+          ],
+          "mass_residual_kg": 8.958096486821887e-10,
+          "roll_torque_Nm": -24.92571818122099,
+          "pitch_torque_Nm": -4.0500666526055436e-11,
+          "righting_Nm": 24.871502627148427,
+          "pitch_stable_branches_deg": [
+            3.77967528
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 105.0,
+          "pitch_deg": 7.219046079984673,
+          "waterline_m": -0.0623310812548113,
+          "displaced_m3": 0.010254878613990086,
+          "buoyancy_center_m": [
+            -0.030199046423420382,
+            -0.27895113892371226,
+            -0.1303746280881861
+          ],
+          "mass_residual_kg": -3.0384050830889464e-10,
+          "roll_torque_Nm": -30.034352681237937,
+          "pitch_torque_Nm": 1.720235842661566e-12,
+          "righting_Nm": 29.796269875791598,
+          "pitch_stable_branches_deg": [
+            7.21904608
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 112.5,
+          "pitch_deg": 12.96978383087228,
+          "waterline_m": -0.08015416684846896,
+          "displaced_m3": 0.010254878614293724,
+          "buoyancy_center_m": [
+            -0.0286161441184566,
+            -0.290253508991944,
+            -0.16459221850793868
+          ],
+          "mass_residual_kg": -2.042810365310288e-13,
+          "roll_torque_Nm": -31.09170899567325,
+          "pitch_torque_Nm": 3.496711421052678e-10,
+          "righting_Nm": 30.298514792100807,
+          "pitch_stable_branches_deg": [
+            12.96978383
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 120.0,
+          "pitch_deg": 28.08261079863949,
+          "waterline_m": -0.10333852026985926,
+          "displaced_m3": 0.010254878614137887,
+          "buoyancy_center_m": [
+            -0.022827765688043924,
+            -0.2509754676043856,
+            -0.19207630999392694
+          ],
+          "mass_residual_kg": -1.560405138434362e-10,
+          "roll_torque_Nm": -27.029850381870766,
+          "pitch_torque_Nm": 5.715973527831153e-14,
+          "righting_Nm": 23.847620067071833,
+          "pitch_stable_branches_deg": [
+            28.0826108
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 127.5,
+          "pitch_deg": -35.16293299162591,
+          "waterline_m": -0.1836332249451631,
+          "displaced_m3": 0.01025487861429396,
+          "buoyancy_center_m": [
+            -0.03224565761783941,
+            -0.28044918668060637,
+            -0.3170155207465535
+          ],
+          "mass_residual_kg": 3.197442310920451e-14,
+          "roll_torque_Nm": -29.851450003733433,
+          "pitch_torque_Nm": 7.13135744900839e-14,
+          "righting_Nm": 24.404087112949227,
+          "pitch_stable_branches_deg": [
+            64.0145887
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 135.0,
+          "pitch_deg": -29.64093513912775,
+          "waterline_m": -0.17189135056420587,
+          "displaced_m3": 0.010254878614241934,
+          "buoyancy_center_m": [
+            -0.03388532497869345,
+            -0.2564771973588838,
+            -0.3436534260887138
+          ],
+          "mass_residual_kg": -5.199396468924533e-11,
+          "roll_torque_Nm": -27.270033988277003,
+          "pitch_torque_Nm": -1.7066318256653277e-10,
+          "righting_Nm": 23.701526682807057,
+          "pitch_stable_branches_deg": [
+            71.89092453
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 142.5,
+          "pitch_deg": -26.009088113514267,
+          "waterline_m": -0.1619667957532402,
+          "displaced_m3": 0.01025487861427382,
+          "buoyancy_center_m": [
+            -0.03480934659647031,
+            -0.22278183951802172,
+            -0.36930526622868776
+          ],
+          "mass_residual_kg": -2.0108359422010835e-11,
+          "roll_torque_Nm": -23.68550325139161,
+          "pitch_torque_Nm": 4.028400391042908e-14,
+          "righting_Nm": 21.2867421060758,
+          "pitch_stable_branches_deg": [
+            75.25756847
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 150.0,
+          "pitch_deg": -23.604180717834065,
+          "waterline_m": -0.1543248286711816,
+          "displaced_m3": 0.010254878613320547,
+          "buoyancy_center_m": [
+            -0.03536737869272537,
+            -0.18288443118574593,
+            -0.39198988667619217
+          ],
+          "mass_residual_kg": -9.733795991451188e-10,
+          "roll_torque_Nm": -19.4553349789976,
+          "pitch_torque_Nm": 4.911382206485015e-12,
+          "righting_Nm": 17.827575481716323,
+          "pitch_stable_branches_deg": [
+            77.28092311
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 157.5,
+          "pitch_deg": -22.011959622906158,
+          "waterline_m": -0.1485498738333356,
+          "displaced_m3": 0.010254878614486358,
+          "buoyancy_center_m": [
+            -0.035720749909488765,
+            -0.13874019855666425,
+            -0.41044388234015333
+          ],
+          "mass_residual_kg": 1.9243096005538973e-10,
+          "roll_torque_Nm": -14.779885857882133,
+          "pitch_torque_Nm": 1.298473209287998e-10,
+          "righting_Nm": 13.702515551252247,
+          "pitch_stable_branches_deg": [
+            78.57875059
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 165.0,
+          "pitch_deg": -21.010774804668507,
+          "waterline_m": -0.144390908109414,
+          "displaced_m3": 0.010254878614093198,
+          "buoyancy_center_m": [
+            -0.03594675287812431,
+            -0.0917036852174119,
+            -0.4238736981966889
+          ],
+          "mass_residual_kg": -2.007283228522283e-10,
+          "roll_torque_Nm": -9.799415629117785,
+          "pitch_torque_Nm": 3.008218879579916e-10,
+          "righting_Nm": 9.147882046930148,
+          "pitch_stable_branches_deg": [
+            79.38470084
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 172.5,
+          "pitch_deg": -20.487883594827665,
+          "waterline_m": -0.14184857483171506,
+          "displaced_m3": 0.010254878614289033,
+          "buoyancy_center_m": [
+            -0.03608522741202538,
+            -0.04292089251367932,
+            -0.43179786092918215
+          ],
+          "mass_residual_kg": -4.89386309254769e-12,
+          "roll_torque_Nm": -4.633453995761665,
+          "pitch_torque_Nm": 3.794105358029265e-10,
+          "righting_Nm": 4.34037054881503,
+          "pitch_stable_branches_deg": [
+            79.82358063
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 180.0,
+          "pitch_deg": -20.367908063998865,
+          "waterline_m": -0.14103881705742735,
+          "displaced_m3": 0.01025487861546415,
+          "buoyancy_center_m": [
+            -0.036152253907633776,
+            0.006670233772196063,
+            -0.43394899737664283
+          ],
+          "mass_residual_kg": 1.1702230295895788e-09,
+          "roll_torque_Nm": 0.619223694868638,
+          "pitch_torque_Nm": 2.8024002823034963e-10,
+          "righting_Nm": -0.5805080220313369,
+          "pitch_stable_branches_deg": [
+            79.95512492
+          ],
+          "pitch_stable": false
+        }
+      ],
+      "failedEquilibria": 0,
+      "minimumInteriorRestoring_Nm": 0.7551121328048752
+    },
+    {
+      "trim_deg": 180,
+      "points": [
+        {
+          "heel_deg": -180.0,
+          "pitch_deg": -23.529774478505132,
+          "waterline_m": -0.15821748028487626,
+          "displaced_m3": 0.010254878614287689,
+          "buoyancy_center_m": [
+            -0.03794787463995657,
+            -0.030350496582783014,
+            -0.44539346049072126
+          ],
+          "mass_residual_kg": -6.23856521997368e-12,
+          "roll_torque_Nm": -2.847204400387658,
+          "pitch_torque_Nm": 1.7550760622597749e-12,
+          "righting_Nm": 2.610467143187467,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -172.5,
+          "pitch_deg": -23.418691817926955,
+          "waterline_m": -0.1589178150024878,
+          "displaced_m3": 0.010254878614293566,
+          "buoyancy_center_m": [
+            -0.03776234905206729,
+            0.02031980991118879,
+            -0.44592480293603304
+          ],
+          "mass_residual_kg": -3.623767952376511e-13,
+          "roll_torque_Nm": 2.512689357593671,
+          "pitch_torque_Nm": 1.0043782056046167e-12,
+          "righting_Nm": -2.305706606428576,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -165.0,
+          "pitch_deg": -23.75151821983144,
+          "waterline_m": -0.16147962202195582,
+          "displaced_m3": 0.010254878613414486,
+          "buoyancy_center_m": [
+            -0.03747859155755954,
+            0.07079286216917376,
+            -0.44067080372616874
+          ],
+          "mass_residual_kg": -8.794405204071154e-10,
+          "roll_torque_Nm": 7.844717778359997,
+          "pitch_torque_Nm": 7.49609099792714e-13,
+          "righting_Nm": -7.180276511985157,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -157.5,
+          "pitch_deg": -24.575823344272365,
+          "waterline_m": -0.16590070594897285,
+          "displaced_m3": 0.010254878614316914,
+          "buoyancy_center_m": [
+            -0.037077438355451284,
+            0.12007133778762939,
+            -0.4297918270811399
+          ],
+          "mass_residual_kg": 2.298605750183924e-11,
+          "roll_torque_Nm": 13.044201247481203,
+          "pitch_torque_Nm": 3.5112408813819937e-12,
+          "righting_Nm": -11.86254900821398,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -150.0,
+          "pitch_deg": -25.998763938862204,
+          "waterline_m": -0.1722039564223108,
+          "displaced_m3": 0.010254878614294156,
+          "buoyancy_center_m": [
+            -0.03651609533316563,
+            0.1671058988654558,
+            -0.4136811112678056
+          ],
+          "mass_residual_kg": 2.291500322826323e-13,
+          "roll_torque_Nm": 18.001441514206263,
+          "pitch_torque_Nm": 5.378458900473504e-13,
+          "righting_Nm": -16.17975869594834,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -142.5,
+          "pitch_deg": -28.23600635421853,
+          "waterline_m": -0.18062025072235222,
+          "displaced_m3": 0.010254878614293963,
+          "buoyancy_center_m": [
+            -0.035709348805665155,
+            0.2106698464027986,
+            -0.3930367527111128
+          ],
+          "mass_residual_kg": 3.552713678800501e-14,
+          "roll_torque_Nm": 22.58918755032093,
+          "pitch_torque_Nm": 3.048519214843281e-14,
+          "righting_Nm": -19.901216843059125,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -135.0,
+          "pitch_deg": -31.695728722883175,
+          "waterline_m": -0.19156226379787566,
+          "displaced_m3": 0.010254878614296253,
+          "buoyancy_center_m": [
+            -0.034479604354476966,
+            0.24896987763008574,
+            -0.3690156999064576
+          ],
+          "mass_residual_kg": 2.325251102774928e-12,
+          "roll_torque_Nm": 26.62355747070673,
+          "pitch_torque_Nm": -1.0861607217055312e-09,
+          "righting_Nm": -22.65266132431769,
+          "pitch_stable_branches_deg": [
+            74.42455387
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -127.5,
+          "pitch_deg": -37.147289052419424,
+          "waterline_m": -0.20494780800272444,
+          "displaced_m3": 0.010254878614293932,
+          "buoyancy_center_m": [
+            -0.03243013912125517,
+            0.27835912242423033,
+            -0.34357457163651856
+          ],
+          "mass_residual_kg": 5.329070518200751e-15,
+          "roll_torque_Nm": 29.73467425940653,
+          "pitch_torque_Nm": -6.5102216589840715e-12,
+          "righting_Nm": -23.701086611274285,
+          "pitch_stable_branches_deg": [
+            55.60332886
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -120.0,
+          "pitch_deg": 33.63740011622997,
+          "waterline_m": -0.10489079638682045,
+          "displaced_m3": 0.010254878614277645,
+          "buoyancy_center_m": [
+            -0.02248126722202884,
+            0.23730663046296818,
+            -0.19061226916381085
+          ],
+          "mass_residual_kg": -1.6282086789942696e-11,
+          "roll_torque_Nm": 25.73195439855207,
+          "pitch_torque_Nm": -2.732951203940348e-10,
+          "righting_Nm": -21.423391684926003,
+          "pitch_stable_branches_deg": [
+            33.63740012
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -112.5,
+          "pitch_deg": 18.847175224421104,
+          "waterline_m": -0.09165385875644783,
+          "displaced_m3": 0.010254878614280864,
+          "buoyancy_center_m": [
+            -0.028925367179704887,
+            0.2960147975114601,
+            -0.16516036935856765
+          ],
+          "mass_residual_kg": -1.3063328196949442e-11,
+          "roll_torque_Nm": 31.729821054936608,
+          "pitch_torque_Nm": 6.696181331089512e-11,
+          "righting_Nm": -30.02858220179204,
+          "pitch_stable_branches_deg": [
+            18.84717522
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -105.0,
+          "pitch_deg": 11.755592222765666,
+          "waterline_m": -0.07597721123725064,
+          "displaced_m3": 0.01025487861424033,
+          "buoyancy_center_m": [
+            -0.031217447290606437,
+            0.3175929888345616,
+            -0.1298452781749327
+          ],
+          "mass_residual_kg": -5.359623855838436e-11,
+          "roll_torque_Nm": 33.96012462135067,
+          "pitch_torque_Nm": -3.007146454070408e-12,
+          "righting_Nm": -33.247831106262026,
+          "pitch_stable_branches_deg": [
+            11.75559222
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -97.5,
+          "pitch_deg": 6.809064404993845,
+          "waterline_m": -0.05942861388988436,
+          "displaced_m3": 0.01025487861429444,
+          "buoyancy_center_m": [
+            -0.03226405004362854,
+            0.3077871636516016,
+            -0.09169962453494993
+          ],
+          "mass_residual_kg": 5.133671265866724e-13,
+          "roll_torque_Nm": 32.99968200930162,
+          "pitch_torque_Nm": 1.1351106858625837e-10,
+          "righting_Nm": -32.766927455359166,
+          "pitch_stable_branches_deg": [
+            6.8090644
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -90.0,
+          "pitch_deg": 2.137216267883311,
+          "waterline_m": -0.03341507878989597,
+          "displaced_m3": 0.010254878618204961,
+          "buoyancy_center_m": [
+            -0.03262101269536182,
+            0.16212670265129572,
+            -0.06110868365285716
+          ],
+          "mass_residual_kg": 3.911033275016962e-09,
+          "roll_torque_Nm": 18.341860798643694,
+          "pitch_torque_Nm": 2.8457219178601443e-10,
+          "righting_Nm": -18.32910185502904,
+          "pitch_stable_branches_deg": [
+            2.13721627
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -82.5,
+          "pitch_deg": -0.13447313471849517,
+          "waterline_m": -0.015355297747817137,
+          "displaced_m3": 0.010254878614295639,
+          "buoyancy_center_m": [
+            -0.03255659855663862,
+            0.021236851927291474,
+            -0.05288709916129572
+          ],
+          "mass_residual_kg": 1.7106316363424412e-12,
+          "roll_torque_Nm": 4.128939871396614,
+          "pitch_torque_Nm": -1.2234088674067944e-10,
+          "righting_Nm": -4.128928499467174,
+          "pitch_stable_branches_deg": [
+            -0.13447313
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -75.0,
+          "pitch_deg": -0.7442041660533596,
+          "waterline_m": -0.010011133596469306,
+          "displaced_m3": 0.010254878615566157,
+          "buoyancy_center_m": [
+            -0.03247120824367381,
+            0.009883932445297275,
+            -0.05148689790145388
+          ],
+          "mass_residual_kg": 1.2722303210921382e-09,
+          "roll_torque_Nm": 2.908925877426804,
+          "pitch_torque_Nm": -4.716001521248847e-09,
+          "righting_Nm": -2.908680499505782,
+          "pitch_stable_branches_deg": [
+            -0.74420417
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -67.5,
+          "pitch_deg": -1.0302184327263375,
+          "waterline_m": -0.007416380945044037,
+          "displaced_m3": 0.010254878612905817,
+          "buoyancy_center_m": [
+            -0.03238911195353208,
+            0.009971437973602112,
+            -0.05039123016862086
+          ],
+          "mass_residual_kg": -1.3881109595104135e-09,
+          "roll_torque_Nm": 2.8066646012247816,
+          "pitch_torque_Nm": 2.7518329698272835e-12,
+          "righting_Nm": -2.8062109081106024,
+          "pitch_stable_branches_deg": [
+            -1.03021843
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -60.0,
+          "pitch_deg": -1.1637450611788611,
+          "waterline_m": -0.005996996227586319,
+          "displaced_m3": 0.010254878614293923,
+          "buoyancy_center_m": [
+            -0.032319328779821466,
+            0.012207742892033104,
+            -0.04902577315857351
+          ],
+          "mass_residual_kg": -3.552713678800501e-15,
+          "roll_torque_Nm": 2.8896346622359634,
+          "pitch_torque_Nm": 2.6934756020002836e-11,
+          "righting_Nm": -2.8890386317840124,
+          "pitch_stable_branches_deg": [
+            -1.16374506
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -52.5,
+          "pitch_deg": -1.2073324664778535,
+          "waterline_m": -0.005138948548170229,
+          "displaced_m3": 0.010254878613834548,
+          "buoyancy_center_m": [
+            -0.03226646274925464,
+            0.014850062353231787,
+            -0.04727925103974228
+          ],
+          "mass_residual_kg": -4.5938008952361997e-10,
+          "roll_torque_Nm": 2.98499954604385,
+          "pitch_torque_Nm": 6.931679440436155e-11,
+          "righting_Nm": -2.984336861718982,
+          "pitch_stable_branches_deg": [
+            -1.20733247
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -45.0,
+          "pitch_deg": -1.1923506744301675,
+          "waterline_m": -0.004539422607631631,
+          "displaced_m3": 0.010254878614293934,
+          "buoyancy_center_m": [
+            -0.032232486465402284,
+            0.017144896569150032,
+            -0.04517038371847466
+          ],
+          "mass_residual_kg": 7.105427357601002e-15,
+          "roll_torque_Nm": 3.0198977410786885,
+          "pitch_torque_Nm": 9.693039032809824e-11,
+          "righting_Nm": -3.019243844136325,
+          "pitch_stable_branches_deg": [
+            -1.19235067
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -37.5,
+          "pitch_deg": -1.1394838228982622,
+          "waterline_m": -0.0039723422408521935,
+          "displaced_m3": 0.010254878614293906,
+          "buoyancy_center_m": [
+            -0.03221688257670292,
+            0.018502913658872352,
+            -0.04279417374304679
+          ],
+          "mass_residual_kg": -2.1316282072803006e-14,
+          "roll_torque_Nm": 2.938414125561768,
+          "pitch_torque_Nm": 1.1093996925559679e-10,
+          "righting_Nm": -2.9378330404397435,
+          "pitch_stable_branches_deg": [
+            -1.13948382
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -30.0,
+          "pitch_deg": -1.0792773789089907,
+          "waterline_m": -0.0031550364184882522,
+          "displaced_m3": 0.01025487861431674,
+          "buoyancy_center_m": [
+            -0.03221217980021962,
+            0.01813582855537734,
+            -0.04033831454800551
+          ],
+          "mass_residual_kg": 2.2811974531578016e-11,
+          "roll_torque_Nm": 2.6650049831596987,
+          "pitch_torque_Nm": 1.1172387419655648e-10,
+          "righting_Nm": -2.664532184678997,
+          "pitch_stable_branches_deg": [
+            -1.07927738
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -22.5,
+          "pitch_deg": -1.0426479807529023,
+          "waterline_m": -0.0019056765845888329,
+          "displaced_m3": 0.01025487861040582,
+          "buoyancy_center_m": [
+            -0.03220745560967188,
+            0.015112327785808276,
+            -0.03810991492964984
+          ],
+          "mass_residual_kg": -3.888107613647662e-09,
+          "roll_torque_Nm": 2.110058295979686,
+          "pitch_torque_Nm": 7.095863975292714e-11,
+          "righting_Nm": -2.1097089283836126,
+          "pitch_stable_branches_deg": [
+            -1.04264798
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -15.0,
+          "pitch_deg": -1.0260207721555736,
+          "waterline_m": -0.0008969159893779595,
+          "displaced_m3": 0.010254878613332838,
+          "buoyancy_center_m": [
+            -0.03220255179348306,
+            0.010462420421866217,
+            -0.03642201159250124
+          ],
+          "mass_residual_kg": -9.610889861733085e-10,
+          "roll_torque_Nm": 1.381450680396991,
+          "pitch_torque_Nm": 1.0166321640914244e-10,
+          "righting_Nm": -1.381229186978975,
+          "pitch_stable_branches_deg": [
+            -1.02602077
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -7.5,
+          "pitch_deg": -1.014627479000094,
+          "waterline_m": -0.00047434723363880266,
+          "displaced_m3": 0.01025487861418023,
+          "buoyancy_center_m": [
+            -0.03220213925317107,
+            0.00537213472479654,
+            -0.035375286333826084
+          ],
+          "mass_residual_kg": -1.1369749586265243e-10,
+          "roll_torque_Nm": 0.6029217852808815,
+          "pitch_torque_Nm": 1.3834724575390032e-10,
+          "righting_Nm": -0.6028272513739977,
+          "pitch_stable_branches_deg": [
+            -1.01462748
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 0.0,
+          "pitch_deg": -1.0105874898594993,
+          "waterline_m": -0.00038218819859193315,
+          "displaced_m3": 0.010254878614275462,
+          "buoyancy_center_m": [
+            -0.03220525105595353,
+            3.0070675090478984e-17,
+            -0.0350198317124087
+          ],
+          "mass_residual_kg": -1.8465229345565604e-11,
+          "roll_torque_Nm": -0.20502380172027077,
+          "pitch_torque_Nm": 1.5472432647878342e-10,
+          "righting_Nm": 0.2049919109067401,
+          "pitch_stable_branches_deg": [
+            -1.01058749
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 7.5,
+          "pitch_deg": -1.0150202092273932,
+          "waterline_m": -0.00047439488259928435,
+          "displaced_m3": 0.010254878614176071,
+          "buoyancy_center_m": [
+            -0.03221142361148834,
+            -0.005372124739612665,
+            -0.03537550709314759
+          ],
+          "mass_residual_kg": -1.1785594722368842e-10,
+          "roll_torque_Nm": -1.0094603704603842,
+          "pitch_torque_Nm": 1.4421836713462976e-10,
+          "righting_Nm": 1.009301971606892,
+          "pitch_stable_branches_deg": [
+            -1.01502021
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 15.0,
+          "pitch_deg": -1.0268164237210178,
+          "waterline_m": -0.00089705447343382,
+          "displaced_m3": 0.010254878613233931,
+          "buoyancy_center_m": [
+            -0.03222117616780404,
+            -0.010462386035768448,
+            -0.03642245891060909
+          ],
+          "mass_residual_kg": -1.0599965349911145e-09,
+          "roll_torque_Nm": -1.7775227924855137,
+          "pitch_torque_Nm": 1.1063293982038757e-10,
+          "righting_Nm": 1.7772373530938907,
+          "pitch_stable_branches_deg": [
+            -1.02681642
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 22.5,
+          "pitch_deg": -1.043860974107536,
+          "waterline_m": -0.0019059555914537514,
+          "displaced_m3": 0.010254878613744902,
+          "buoyancy_center_m": [
+            -0.032235456531623824,
+            -0.015112262377194815,
+            -0.03811059706954141
+          ],
+          "mass_residual_kg": -5.49025713780793e-10,
+          "roll_torque_Nm": -2.4888863067655973,
+          "pitch_torque_Nm": 8.188758113814032e-11,
+          "righting_Nm": 2.4884732563079632,
+          "pitch_stable_branches_deg": [
+            -1.04386097
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 30.0,
+          "pitch_deg": -1.0809761156651592,
+          "waterline_m": -0.003155421386367198,
+          "displaced_m3": 0.010254878614318744,
+          "buoyancy_center_m": [
+            -0.032250072299682436,
+            -0.01813557234886076,
+            -0.0403392701541428
+          ],
+          "mass_residual_kg": 2.48157050464215e-11,
+          "roll_torque_Nm": -3.020090858834576,
+          "pitch_torque_Nm": 1.373004060306604e-10,
+          "righting_Nm": 3.019553376663689,
+          "pitch_stable_branches_deg": [
+            -1.08097612
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 37.5,
+          "pitch_deg": -1.1419218368902893,
+          "waterline_m": -0.003971825049991122,
+          "displaced_m3": 0.010254878614293939,
+          "buoyancy_center_m": [
+            -0.032265585354339134,
+            -0.018501069743947572,
+            -0.042795535564941097
+          ],
+          "mass_residual_kg": 1.0658141036401503e-14,
+          "roll_torque_Nm": -3.2635413262715343,
+          "pitch_torque_Nm": 1.7005946688630755e-10,
+          "righting_Nm": 3.26289318118019,
+          "pitch_stable_branches_deg": [
+            -1.14192184
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 45.0,
+          "pitch_deg": -1.208162388468242,
+          "waterline_m": -0.00443522485742338,
+          "displaced_m3": 0.01025487861429081,
+          "buoyancy_center_m": [
+            -0.032288738821796205,
+            -0.01701055874623848,
+            -0.045173189660491615
+          ],
+          "mass_residual_kg": -3.1175062531474396e-12,
+          "roll_torque_Nm": -3.2963353638609125,
+          "pitch_torque_Nm": 2.185842714885755e-10,
+          "righting_Nm": 3.295602555087475,
+          "pitch_stable_branches_deg": [
+            -1.20816239
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 52.5,
+          "pitch_deg": -1.2689563297692452,
+          "waterline_m": -0.004651675254901603,
+          "displaced_m3": 0.01025487861429389,
+          "buoyancy_center_m": [
+            -0.032322342030566435,
+            -0.014259292576238668,
+            -0.04726475376265104
+          ],
+          "mass_residual_kg": -3.730349362740526e-14,
+          "roll_torque_Nm": -3.1752093545815043,
+          "pitch_torque_Nm": 3.2771037181134056e-10,
+          "righting_Nm": 3.1744306500436874,
+          "pitch_stable_branches_deg": [
+            -1.26895633
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 60.0,
+          "pitch_deg": -1.3195006290075795,
+          "waterline_m": -0.004689509471229801,
+          "displaced_m3": 0.010254878614294003,
+          "buoyancy_center_m": [
+            -0.032366394504937585,
+            -0.010647660805415354,
+            -0.04893078727624102
+          ],
+          "mass_residual_kg": 7.638334409421077e-14,
+          "roll_torque_Nm": -2.937767240466935,
+          "pitch_torque_Nm": 6.017526516022276e-10,
+          "righting_Nm": 2.9369882320829785,
+          "pitch_stable_branches_deg": [
+            -1.31950063
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 67.5,
+          "pitch_deg": -1.3549609533827196,
+          "waterline_m": -0.004595370025638979,
+          "displaced_m3": 0.01025487861429393,
+          "buoyancy_center_m": [
+            -0.032419740184330956,
+            -0.006457163682721504,
+            -0.05007499960284832
+          ],
+          "mass_residual_kg": 3.552713678800501e-15,
+          "roll_torque_Nm": -2.6101664984949484,
+          "pitch_torque_Nm": 1.471214284326505e-09,
+          "righting_Nm": 2.6094366608326727,
+          "pitch_stable_branches_deg": [
+            -1.35496095
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 75.0,
+          "pitch_deg": -1.3748646463040508,
+          "waterline_m": -0.004398581036805975,
+          "displaced_m3": 0.0102548786142936,
+          "buoyancy_center_m": [
+            -0.03247969954535681,
+            -0.001907100156458111,
+            -0.05063650858720757
+          ],
+          "mass_residual_kg": -3.268496584496461e-13,
+          "roll_torque_Nm": -2.2128558477344638,
+          "pitch_torque_Nm": -3.462848905116944e-09,
+          "righting_Nm": 2.21221879275746,
+          "pitch_stable_branches_deg": [
+            -1.37486465
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 82.5,
+          "pitch_deg": -1.3811417712393708,
+          "waterline_m": -0.0041195864076553484,
+          "displaced_m3": 0.010254878614295375,
+          "buoyancy_center_m": [
+            -0.032543157051850055,
+            0.0028297684969875677,
+            -0.050580840158564025
+          ],
+          "mass_residual_kg": 1.4477308241112041e-12,
+          "roll_torque_Nm": -1.7621779450481754,
+          "pitch_torque_Nm": -4.199438650348552e-10,
+          "righting_Nm": 1.7616659921668363,
+          "pitch_stable_branches_deg": [
+            -1.38114177
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 90.0,
+          "pitch_deg": -1.1909657795744382,
+          "waterline_m": -0.0030348598164926617,
+          "displaced_m3": 0.010254878614291852,
+          "buoyancy_center_m": [
+            -0.03260297698004641,
+            -0.0006674382172527294,
+            -0.049916938913344644
+          ],
+          "mass_residual_kg": -2.0747847884194925e-12,
+          "roll_torque_Nm": -2.1045475394671556,
+          "pitch_torque_Nm": 5.896538409683183e-10,
+          "righting_Nm": 2.10409290075936,
+          "pitch_stable_branches_deg": [
+            -1.19096578
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 97.5,
+          "pitch_deg": 1.6525666335381533,
+          "waterline_m": -0.029484053713586245,
+          "displaced_m3": 0.010254878613913018,
+          "buoyancy_center_m": [
+            -0.0324195410982247,
+            -0.21407793177584908,
+            -0.06216332966480221
+          ],
+          "mass_residual_kg": -3.809095261431139e-10,
+          "roll_torque_Nm": -23.522196940827406,
+          "pitch_torque_Nm": 5.3656660073397865e-11,
+          "righting_Nm": 23.512413525894708,
+          "pitch_stable_branches_deg": [
+            1.65256663
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 105.0,
+          "pitch_deg": 5.277798187765369,
+          "waterline_m": -0.04975810067197573,
+          "displaced_m3": 0.01025487861429395,
+          "buoyancy_center_m": [
+            -0.031766097839279896,
+            -0.29417648385603434,
+            -0.09464046081345356
+          ],
+          "mass_residual_kg": 2.1316282072803006e-14,
+          "roll_torque_Nm": -31.499092127098464,
+          "pitch_torque_Nm": 1.088756862444029e-15,
+          "righting_Nm": 31.36554909723151,
+          "pitch_stable_branches_deg": [
+            5.27779819
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 112.5,
+          "pitch_deg": 9.157795311117901,
+          "waterline_m": -0.06408073001910841,
+          "displaced_m3": 0.010254878614692918,
+          "buoyancy_center_m": [
+            -0.030618832868851444,
+            -0.3080834694586921,
+            -0.13199635334395168
+          ],
+          "mass_residual_kg": 3.9899106241136906e-10,
+          "roll_torque_Nm": -32.78660075963028,
+          "pitch_torque_Nm": 4.526506655611051e-12,
+          "righting_Nm": 32.36869512218557,
+          "pitch_stable_branches_deg": [
+            9.15779531
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 120.0,
+          "pitch_deg": 15.183250489223067,
+          "waterline_m": -0.07937048251194041,
+          "displaced_m3": 0.010254878614778046,
+          "buoyancy_center_m": [
+            -0.02831532459949178,
+            -0.2948467138485592,
+            -0.1677659395382927
+          ],
+          "mass_residual_kg": 4.841194112259473e-10,
+          "roll_torque_Nm": -31.313506932604575,
+          "pitch_torque_Nm": -3.9047829368810125e-10,
+          "righting_Nm": 30.22044947986773,
+          "pitch_stable_branches_deg": [
+            15.18325049
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 127.5,
+          "pitch_deg": 33.1478402974688,
+          "waterline_m": -0.10010525824847198,
+          "displaced_m3": 0.010254878614293576,
+          "buoyancy_center_m": [
+            -0.019639419786469565,
+            -0.23256564593877932,
+            -0.19314247812840463
+          ],
+          "mass_residual_kg": -3.517186542012496e-13,
+          "roll_torque_Nm": -24.879786092553523,
+          "pitch_torque_Nm": 1.088756862444029e-15,
+          "righting_Nm": 20.830910547736394,
+          "pitch_stable_branches_deg": [
+            33.1478403
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 135.0,
+          "pitch_deg": -37.99811888056088,
+          "waterline_m": -0.19409739741673845,
+          "displaced_m3": 0.010254878614294022,
+          "buoyancy_center_m": [
+            -0.03537120084431049,
+            -0.2772675797405175,
+            -0.34087832936176854
+          ],
+          "mass_residual_kg": 9.414691248821327e-14,
+          "roll_torque_Nm": -29.179396891893656,
+          "pitch_torque_Nm": -6.36922764529757e-12,
+          "righting_Nm": 22.994268332038505,
+          "pitch_stable_branches_deg": [
+            59.16723699
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 142.5,
+          "pitch_deg": -32.73599416965067,
+          "waterline_m": -0.18319872297417988,
+          "displaced_m3": 0.010254878614282066,
+          "buoyancy_center_m": [
+            -0.0367578834250027,
+            -0.25036082698695156,
+            -0.3658583691082842
+          ],
+          "mass_residual_kg": -1.1860734616675472e-11,
+          "roll_torque_Nm": -26.25543828070708,
+          "pitch_torque_Nm": -2.395265097376864e-14,
+          "righting_Nm": 22.08531925720628,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 150.0,
+          "pitch_deg": -29.1792634433173,
+          "waterline_m": -0.17411876469926785,
+          "displaced_m3": 0.010254878614293165,
+          "buoyancy_center_m": [
+            -0.037485846214075025,
+            -0.21485080465084508,
+            -0.38974138212966297
+          ],
+          "mass_residual_kg": -7.620570841027074e-13,
+          "roll_torque_Nm": -22.447844324126812,
+          "pitch_torque_Nm": -6.913606076519585e-14,
+          "righting_Nm": 19.59918115707731,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 157.5,
+          "pitch_deg": -26.75367475559362,
+          "waterline_m": -0.16720638998204698,
+          "displaced_m3": 0.01025487861410912,
+          "buoyancy_center_m": [
+            -0.03785822946289967,
+            -0.17362120181833143,
+            -0.41065400963136073
+          ],
+          "mass_residual_kg": -1.8480683650068386e-10,
+          "roll_torque_Nm": -18.05066257225775,
+          "pitch_torque_Nm": 7.191239076442812e-13,
+          "righting_Nm": 16.118340475998696,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 165.0,
+          "pitch_deg": -25.122187295955214,
+          "waterline_m": -0.16235027068540428,
+          "displaced_m3": 0.010254878613898713,
+          "buoyancy_center_m": [
+            -0.038019031632106876,
+            -0.12834092238334924,
+            -0.4273810299430288
+          ],
+          "mass_residual_kg": -3.952145277708041e-10,
+          "roll_torque_Nm": -13.236020740423243,
+          "pitch_torque_Nm": -1.5041176054664262e-12,
+          "righting_Nm": 11.983952258064825,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 172.5,
+          "pitch_deg": -24.083092861363745,
+          "waterline_m": -0.1593702890697736,
+          "displaced_m3": 0.010254878614278998,
+          "buoyancy_center_m": [
+            -0.03803778608493731,
+            -0.08023473649978739,
+            -0.43912600424839865
+          ],
+          "mass_residual_kg": -1.4930279235159105e-11,
+          "roll_torque_Nm": -8.13155459685692,
+          "pitch_torque_Nm": 3.8019389636545495e-12,
+          "righting_Nm": 7.423740416501468,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 180.0,
+          "pitch_deg": -23.529774478505132,
+          "waterline_m": -0.15821748028487617,
+          "displaced_m3": 0.010254878614287696,
+          "buoyancy_center_m": [
+            -0.037947874639956615,
+            -0.030350496582783104,
+            -0.44539346049072104
+          ],
+          "mass_residual_kg": -6.231459792616079e-12,
+          "roll_torque_Nm": -2.8472044003876698,
+          "pitch_torque_Nm": 1.761608603434439e-12,
+          "righting_Nm": 2.6104671431874777,
+          "pitch_stable_branches_deg": [],
+          "pitch_stable": false
+        }
+      ],
+      "failedEquilibria": 0,
+      "minimumInteriorRestoring_Nm": 0.6028272513739977
+    },
+    {
+      "trim_deg": 270,
+      "points": [
+        {
+          "heel_deg": -180.0,
+          "pitch_deg": -26.96146839539235,
+          "waterline_m": -0.18000708961537307,
+          "displaced_m3": 0.010254878614293942,
+          "buoyancy_center_m": [
+            -0.040487657717120804,
+            -0.0066998270517612335,
+            -0.4628764644864903
+          ],
+          "mass_residual_kg": 1.4210854715202004e-14,
+          "roll_torque_Nm": -0.622199772703487,
+          "pitch_torque_Nm": 5.98816274344216e-15,
+          "righting_Nm": 0.5545738953492841,
+          "pitch_stable_branches_deg": [
+            73.09296907
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -172.5,
+          "pitch_deg": -27.11039493678832,
+          "waterline_m": -0.1808748530804783,
+          "displaced_m3": 0.010254878614293965,
+          "buoyancy_center_m": [
+            -0.040383580340340404,
+            0.04317047328133683,
+            -0.46085216707403964
+          ],
+          "mass_residual_kg": 3.730349362740526e-14,
+          "roll_torque_Nm": 4.658553336582514,
+          "pitch_torque_Nm": 5.389346469097944e-14,
+          "righting_Nm": -4.146718744537072,
+          "pitch_stable_branches_deg": [
+            72.9069525
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -165.0,
+          "pitch_deg": -27.706051297643143,
+          "waterline_m": -0.18347367020173466,
+          "displaced_m3": 0.010254878614294008,
+          "buoyancy_center_m": [
+            -0.04012931031013341,
+            0.09222220585850925,
+            -0.453391033033311
+          ],
+          "mass_residual_kg": 8.171241461241152e-14,
+          "roll_torque_Nm": 9.851561178871785,
+          "pitch_torque_Nm": 1.5786974505438423e-14,
+          "righting_Nm": -8.722025767117268,
+          "pitch_stable_branches_deg": [
+            72.26245655
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -157.5,
+          "pitch_deg": -28.800275299565843,
+          "waterline_m": -0.18780793786539385,
+          "displaced_m3": 0.010254878614294747,
+          "buoyancy_center_m": [
+            -0.03969781093363358,
+            0.13945368484838255,
+            -0.44077337308192016
+          ],
+          "mass_residual_kg": 8.206768598029157e-13,
+          "roll_torque_Nm": 14.851638323860769,
+          "pitch_torque_Nm": -1.464377979987219e-13,
+          "righting_Nm": -13.014555494510882,
+          "pitch_stable_branches_deg": [
+            71.05646866
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -150.0,
+          "pitch_deg": -30.50685721239499,
+          "waterline_m": -0.1938119288018527,
+          "displaced_m3": 0.010254878614293935,
+          "buoyancy_center_m": [
+            -0.03903414092999116,
+            0.1838748531933542,
+            -0.42352129975043473
+          ],
+          "mass_residual_kg": 7.105427357601002e-15,
+          "roll_torque_Nm": 19.554937765672037,
+          "pitch_torque_Nm": 2.0543753237456385e-11,
+          "righting_Nm": -16.847916669817746,
+          "pitch_stable_branches_deg": [
+            69.06457431
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -142.5,
+          "pitch_deg": -32.997007706912505,
+          "waterline_m": -0.20159375597275306,
+          "displaced_m3": 0.010254878614283855,
+          "buoyancy_center_m": [
+            -0.038037688393049704,
+            0.224230781215287,
+            -0.40243230337209146
+          ],
+          "mass_residual_kg": -1.007194327939942e-11,
+          "roll_torque_Nm": 23.831217529911097,
+          "pitch_torque_Nm": -4.191713920409512e-14,
+          "righting_Nm": -19.987218567898516,
+          "pitch_stable_branches_deg": [
+            65.8105469
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -135.0,
+          "pitch_deg": -36.51753444408691,
+          "waterline_m": -0.2111835706711054,
+          "displaced_m3": 0.010254878615142484,
+          "buoyancy_center_m": [
+            -0.03653338148194384,
+            0.25882197144961683,
+            -0.3786743045488675
+          ],
+          "mass_residual_kg": 8.485567803973026e-10,
+          "roll_torque_Nm": 27.50583855434498,
+          "pitch_torque_Nm": -3.3152646461420683e-13,
+          "righting_Nm": -22.10574894444067,
+          "pitch_stable_branches_deg": [
+            60.14867776
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -127.5,
+          "pitch_deg": -41.443410892191935,
+          "waterline_m": -0.22198283463554241,
+          "displaced_m3": 0.010254878614328002,
+          "buoyancy_center_m": [
+            -0.034219522583009,
+            0.28504962810383194,
+            -0.35393516164616645
+          ],
+          "mass_residual_kg": 3.4074076893375604e-11,
+          "roll_torque_Nm": 30.31409802066828,
+          "pitch_torque_Nm": 1.0397628036340477e-13,
+          "righting_Nm": -22.72374504069013,
+          "pitch_stable_branches_deg": [
+            48.75777506
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": -120.0,
+          "pitch_deg": 30.04953983209496,
+          "waterline_m": -0.08995358904430868,
+          "displaced_m3": 0.01025487861426905,
+          "buoyancy_center_m": [
+            -0.025548834388825086,
+            0.22212608433234382,
+            -0.17430587575938794
+          ],
+          "mass_residual_kg": -2.4876101178961108e-11,
+          "roll_torque_Nm": 24.128583149349144,
+          "pitch_torque_Nm": -1.567809881919402e-13,
+          "righting_Nm": -20.88552696834845,
+          "pitch_stable_branches_deg": [
+            30.04953983
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -112.5,
+          "pitch_deg": 17.646979199018364,
+          "waterline_m": -0.07731194673727258,
+          "displaced_m3": 0.01025487861429437,
+          "buoyancy_center_m": [
+            -0.03125986246494959,
+            0.25861642025530496,
+            -0.1511036210462118
+          ],
+          "mass_residual_kg": 4.440892098500626e-13,
+          "roll_torque_Nm": 27.910093360120683,
+          "pitch_torque_Nm": 4.68652125168445e-10,
+          "righting_Nm": -26.59671195703875,
+          "pitch_stable_branches_deg": [
+            17.6469792
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -105.0,
+          "pitch_deg": 10.363876004137689,
+          "waterline_m": -0.06041407685533576,
+          "displaced_m3": 0.010254878614278078,
+          "buoyancy_center_m": [
+            -0.03369202365548303,
+            0.2517412313812039,
+            -0.12236120739440069
+          ],
+          "mass_residual_kg": -1.5848655721129035e-11,
+          "roll_torque_Nm": 27.297960974187028,
+          "pitch_torque_Nm": -1.0740967512912203e-09,
+          "righting_Nm": -26.852597184306244,
+          "pitch_stable_branches_deg": [
+            10.363876
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -97.5,
+          "pitch_deg": 5.675559719168734,
+          "waterline_m": -0.04445209144867087,
+          "displaced_m3": 0.010254878614296054,
+          "buoyancy_center_m": [
+            -0.03473579067114896,
+            0.2092761883964012,
+            -0.094985452878734
+          ],
+          "mass_residual_kg": 2.1262991367621e-12,
+          "roll_torque_Nm": 23.072797664903515,
+          "pitch_torque_Nm": 2.770886214920054e-13,
+          "righting_Nm": -22.9596912482835,
+          "pitch_stable_branches_deg": [
+            5.67555972
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -90.0,
+          "pitch_deg": 2.6048057566740526,
+          "waterline_m": -0.030374806372520484,
+          "displaced_m3": 0.01025487861386419,
+          "buoyancy_center_m": [
+            -0.035106206176535086,
+            0.14623686992648066,
+            -0.07350983052748214
+          ],
+          "mass_residual_kg": -4.297362465877086e-10,
+          "roll_torque_Nm": 16.74388378879039,
+          "pitch_torque_Nm": -5.982174580698718e-12,
+          "righting_Nm": -16.726583361715207,
+          "pitch_stable_branches_deg": [
+            2.60480576
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -82.5,
+          "pitch_deg": 0.620454980890189,
+          "waterline_m": -0.02007238531949564,
+          "displaced_m3": 0.010254878617271557,
+          "buoyancy_center_m": [
+            -0.035151267928819896,
+            0.07085248283351925,
+            -0.06032041861077234
+          ],
+          "mass_residual_kg": 2.9776288101857062e-09,
+          "roll_torque_Nm": 9.13861475584818,
+          "pitch_torque_Nm": 1.2450397443714011e-09,
+          "righting_Nm": -9.13807893276882,
+          "pitch_stable_branches_deg": [
+            0.62045498
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -75.0,
+          "pitch_deg": -0.2949993185709133,
+          "waterline_m": -0.01342008933496762,
+          "displaced_m3": 0.010254878614293606,
+          "buoyancy_center_m": [
+            -0.03508917188916423,
+            0.02729085040756704,
+            -0.0551663247343253
+          ],
+          "mass_residual_kg": -3.2152058793144533e-13,
+          "roll_torque_Nm": 4.6991855365309325,
+          "pitch_torque_Nm": -3.5117852598132156e-12,
+          "righting_Nm": -4.699123250823972,
+          "pitch_stable_branches_deg": [
+            -0.29499932
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -67.5,
+          "pitch_deg": -0.7675657944628823,
+          "waterline_m": -0.009986176187217439,
+          "displaced_m3": 0.01025487861429209,
+          "buoyancy_center_m": [
+            -0.03500582632147706,
+            0.018927351540403408,
+            -0.052570992026184475
+          ],
+          "mass_residual_kg": -1.8385293287792592e-12,
+          "roll_torque_Nm": 3.766047340298485,
+          "pitch_torque_Nm": -3.855343576514292e-09,
+          "righting_Nm": -3.7657094036872225,
+          "pitch_stable_branches_deg": [
+            -0.76756579
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -60.0,
+          "pitch_deg": -1.0006834430138534,
+          "waterline_m": -0.008043466259458135,
+          "displaced_m3": 0.010254878614326517,
+          "buoyancy_center_m": [
+            -0.03492916254797009,
+            0.01776912797090038,
+            -0.05034898448027848
+          ],
+          "mass_residual_kg": 3.2589042575636995e-11,
+          "roll_torque_Nm": 3.5256453095110043,
+          "pitch_torque_Nm": 1.5264371211465287e-12,
+          "righting_Nm": -3.52510760244067,
+          "pitch_stable_branches_deg": [
+            -1.00068344
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -52.5,
+          "pitch_deg": -1.1184366359240658,
+          "waterline_m": -0.006709333464718951,
+          "displaced_m3": 0.010254878614292764,
+          "buoyancy_center_m": [
+            -0.03486381799914727,
+            0.01855497230902846,
+            -0.048052646829657396
+          ],
+          "mass_residual_kg": -1.163513729807164e-12,
+          "roll_torque_Nm": 3.4510012094827007,
+          "pitch_torque_Nm": 2.2156746529167212e-11,
+          "righting_Nm": -3.450343735109759,
+          "pitch_stable_branches_deg": [
+            -1.11843664
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -45.0,
+          "pitch_deg": -1.1681604331749567,
+          "waterline_m": -0.005631055531818516,
+          "displaced_m3": 0.010254878614293885,
+          "buoyancy_center_m": [
+            -0.03481243790098775,
+            0.01956743630725172,
+            -0.04558530712138206
+          ],
+          "mass_residual_kg": -4.263256414560601e-14,
+          "roll_torque_Nm": 3.372027523772652,
+          "pitch_torque_Nm": 8.194419649498741e-11,
+          "righting_Nm": -3.371326704896788,
+          "pitch_stable_branches_deg": [
+            -1.16816043
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -37.5,
+          "pitch_deg": -1.1742374182118636,
+          "waterline_m": -0.00459350819045977,
+          "displaced_m3": 0.010254878613116686,
+          "buoyancy_center_m": [
+            -0.03477603017816193,
+            0.01989598721230625,
+            -0.04299484227373749
+          ],
+          "mass_residual_kg": -1.1772414154620492e-09,
+          "roll_torque_Nm": 3.200249031243363,
+          "pitch_torque_Nm": 1.8195141371635248e-10,
+          "righting_Nm": -3.199576975736173,
+          "pitch_stable_branches_deg": [
+            -1.17423742
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -30.0,
+          "pitch_deg": -1.1580994123955362,
+          "waterline_m": -0.003417478326864959,
+          "displaced_m3": 0.01025487861428291,
+          "buoyancy_center_m": [
+            -0.034752215784154335,
+            0.018742471967809166,
+            -0.040435734284012016
+          ],
+          "mass_residual_kg": -1.1018741474799754e-11,
+          "roll_torque_Nm": 2.858903187224527,
+          "pitch_torque_Nm": 2.656468756245811e-10,
+          "righting_Nm": -2.8583192030411353,
+          "pitch_stable_branches_deg": [
+            -1.15809941
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -22.5,
+          "pitch_deg": -1.145182186376061,
+          "waterline_m": -0.001979285195032162,
+          "displaced_m3": 0.010254878614187958,
+          "buoyancy_center_m": [
+            -0.03473416448081384,
+            0.015248760071428027,
+            -0.03817498372074935
+          ],
+          "mass_residual_kg": -1.0597034361126134e-10,
+          "roll_torque_Nm": 2.2655468885584784,
+          "pitch_torque_Nm": 2.063591650586227e-10,
+          "righting_Nm": -2.265094374054146,
+          "pitch_stable_branches_deg": [
+            -1.14518219
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -15.0,
+          "pitch_deg": -1.1339775603832314,
+          "waterline_m": -0.0009167209975752979,
+          "displaced_m3": 0.010254878612902576,
+          "buoyancy_center_m": [
+            -0.034722397986286964,
+            0.010457583064221693,
+            -0.036485063922099326
+          ],
+          "mass_residual_kg": -1.3913510343854796e-09,
+          "roll_torque_Nm": 1.5291842991013207,
+          "pitch_torque_Nm": 2.9965637373674524e-10,
+          "righting_Nm": -1.5288848111778741,
+          "pitch_stable_branches_deg": [
+            -1.13397756
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": -7.5,
+          "pitch_deg": -1.1213678474481878,
+          "waterline_m": -0.0004881247485190776,
+          "displaced_m3": 0.010254878614152675,
+          "buoyancy_center_m": [
+            -0.03471805495992096,
+            0.005369327468993998,
+            -0.0354376238688116
+          ],
+          "mass_residual_kg": -1.4125234315542912e-10,
+          "roll_torque_Nm": 0.7547754268159278,
+          "pitch_torque_Nm": 3.9915187523276163e-10,
+          "righting_Nm": -0.7546308745751897,
+          "pitch_stable_branches_deg": [
+            -1.12136785
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 0.0,
+          "pitch_deg": -1.1168025144577929,
+          "waterline_m": -0.00039305039189640507,
+          "displaced_m3": 0.01025487861427029,
+          "buoyancy_center_m": [
+            -0.03471764163179953,
+            3.1266978038156204e-17,
+            -0.0350818649687445
+          ],
+          "mass_residual_kg": -2.3637980461899133e-11,
+          "roll_torque_Nm": -0.05157507051420228,
+          "pitch_torque_Nm": 4.397527073901619e-10,
+          "righting_Nm": 0.05156527327783752,
+          "pitch_stable_branches_deg": [
+            -1.11680251
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 7.5,
+          "pitch_deg": -1.1214776563506066,
+          "waterline_m": -0.0004881397868190047,
+          "displaced_m3": 0.010254878614156235,
+          "buoyancy_center_m": [
+            -0.0347206353593358,
+            -0.0053693244855187025,
+            -0.03543769040935824
+          ],
+          "mass_residual_kg": -1.3769252404927101e-10,
+          "roll_torque_Nm": -0.8570428040525244,
+          "pitch_torque_Nm": 4.0380413330598493e-10,
+          "righting_Nm": 0.8568786337352711,
+          "pitch_stable_branches_deg": [
+            -1.12147766
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 15.0,
+          "pitch_deg": -1.1341999457027625,
+          "waterline_m": -0.0009167639130186768,
+          "displaced_m3": 0.01025487861337125,
+          "buoyancy_center_m": [
+            -0.034727573598638956,
+            -0.010457572747033173,
+            -0.036485198700506906
+          ],
+          "mass_residual_kg": -9.226770458781175e-10,
+          "roll_torque_Nm": -1.628818646795651,
+          "pitch_torque_Nm": 3.077338608992175e-10,
+          "righting_Nm": 1.6284995205416901,
+          "pitch_stable_branches_deg": [
+            -1.13419995
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 22.5,
+          "pitch_deg": -1.1498032474229936,
+          "waterline_m": -0.0019512898861634303,
+          "displaced_m3": 0.01025487861425572,
+          "buoyancy_center_m": [
+            -0.03474045906475362,
+            -0.015160303836023823,
+            -0.03817393645256019
+          ],
+          "mass_residual_kg": -3.820765925865999e-11,
+          "roll_torque_Nm": -2.3519495023964083,
+          "pitch_torque_Nm": 2.227389676756619e-10,
+          "righting_Nm": 2.3514759312659166,
+          "pitch_stable_branches_deg": [
+            -1.14980325
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 30.0,
+          "pitch_deg": -1.1728301064206619,
+          "waterline_m": -0.0033232654411326215,
+          "displaced_m3": 0.01025487861429285,
+          "buoyancy_center_m": [
+            -0.03475795340382439,
+            -0.018468338746274307,
+            -0.04041780814050333
+          ],
+          "mass_residual_kg": -1.078248601515952e-12,
+          "roll_torque_Nm": -2.920665346733895,
+          "pitch_torque_Nm": 3.2444954500832065e-10,
+          "righting_Nm": 2.9200534733187062,
+          "pitch_stable_branches_deg": [
+            -1.17283011
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 37.5,
+          "pitch_deg": -1.2035384536901084,
+          "waterline_m": -0.00439958561613279,
+          "displaced_m3": 0.010254878614301978,
+          "buoyancy_center_m": [
+            -0.03478039503192124,
+            -0.01937082758259582,
+            -0.04293419519341109
+          ],
+          "mass_residual_kg": 8.050449196161935e-12,
+          "roll_torque_Nm": -3.229270334273169,
+          "pitch_torque_Nm": 2.7052232885460544e-10,
+          "righting_Nm": 3.2285579191748575,
+          "pitch_stable_branches_deg": [
+            -1.20353845
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 45.0,
+          "pitch_deg": -1.2172238187955275,
+          "waterline_m": -0.005297883428995394,
+          "displaced_m3": 0.010254878614293899,
+          "buoyancy_center_m": [
+            -0.03481464380467271,
+            -0.018707877893114715,
+            -0.04544711512058925
+          ],
+          "mass_residual_kg": -2.842170943040401e-14,
+          "roll_torque_Nm": -3.358523331888394,
+          "pitch_torque_Nm": 1.6551989514834718e-10,
+          "righting_Nm": 3.3577654567524493,
+          "pitch_stable_branches_deg": [
+            -1.21722382
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 52.5,
+          "pitch_deg": -1.1941446650662892,
+          "waterline_m": -0.006185512189726208,
+          "displaced_m3": 0.010254878614293658,
+          "buoyancy_center_m": [
+            -0.03486300929827645,
+            -0.017222878956723198,
+            -0.04778919044708747
+          ],
+          "mass_residual_kg": -2.7000623958883807e-13,
+          "roll_torque_Nm": -3.3798317295260047,
+          "pitch_torque_Nm": 7.188734935659191e-11,
+          "righting_Nm": 3.3790976924729392,
+          "pitch_stable_branches_deg": [
+            -1.19414467
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 60.0,
+          "pitch_deg": -1.1133689612034947,
+          "waterline_m": -0.007252638754985179,
+          "displaced_m3": 0.01025487861408554,
+          "buoyancy_center_m": [
+            -0.0349243557154292,
+            -0.015697540123037798,
+            -0.04988937246228684
+          ],
+          "mass_residual_kg": -2.0838797354372218e-10,
+          "roll_torque_Nm": -3.368889065369656,
+          "pitch_torque_Nm": 1.3750999172668088e-11,
+          "righting_Nm": 3.3682530377089384,
+          "pitch_stable_branches_deg": [
+            -1.11336896
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 67.5,
+          "pitch_deg": -0.9356102226563852,
+          "waterline_m": -0.008801748367756523,
+          "displaced_m3": 0.010254878614299471,
+          "buoyancy_center_m": [
+            -0.034995642941734934,
+            -0.015499525529676051,
+            -0.05179539786121525
+          ],
+          "mass_residual_kg": 5.544009695768182e-12,
+          "roll_torque_Nm": -3.460798421339587,
+          "pitch_torque_Nm": 3.37514627357649e-13,
+          "righting_Nm": 3.4603370173878805,
+          "pitch_stable_branches_deg": [
+            -0.93561022
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 75.0,
+          "pitch_deg": -0.5623666104057164,
+          "waterline_m": -0.011575832933582034,
+          "displaced_m3": 0.010254878614277681,
+          "buoyancy_center_m": [
+            -0.03507089026837238,
+            -0.020735156754423705,
+            -0.05383104221173904
+          ],
+          "mass_residual_kg": -1.624655965315469e-11,
+          "roll_torque_Nm": -4.066602834451563,
+          "pitch_torque_Nm": -2.918200462193043e-10,
+          "righting_Nm": 4.066406953562515,
+          "pitch_stable_branches_deg": [
+            -0.56236661
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 82.5,
+          "pitch_deg": 0.2494403692010597,
+          "waterline_m": -0.017453744869560125,
+          "displaced_m3": 0.01025487861581838,
+          "buoyancy_center_m": [
+            -0.03512815149942634,
+            -0.055261172970512674,
+            -0.05764299436455385
+          ],
+          "mass_residual_kg": 1.524451676004901e-09,
+          "roll_torque_Nm": -7.584122798443568,
+          "pitch_torque_Nm": 1.1705769406566979e-11,
+          "righting_Nm": 7.584050925920464,
+          "pitch_stable_branches_deg": [
+            0.24944037
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 90.0,
+          "pitch_deg": 1.9439706267688226,
+          "waterline_m": -0.026800018844042095,
+          "displaced_m3": 0.01025487861428893,
+          "buoyancy_center_m": [
+            -0.03508157657657677,
+            -0.13142060779800666,
+            -0.06895741082500868
+          ],
+          "mass_residual_kg": -4.9968917892329046e-12,
+          "roll_torque_Nm": -15.253871492730495,
+          "pitch_torque_Nm": -7.621298037108203e-15,
+          "righting_Nm": 15.245092543091038,
+          "pitch_stable_branches_deg": [
+            1.94397063
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 97.5,
+          "pitch_deg": 4.718091539109799,
+          "waterline_m": -0.040295467821280594,
+          "displaced_m3": 0.010254878614294582,
+          "buoyancy_center_m": [
+            -0.034740849339491356,
+            -0.19792908632729506,
+            -0.08888635176131103
+          ],
+          "mass_residual_kg": 6.554756737386924e-13,
+          "roll_torque_Nm": -21.918201142230313,
+          "pitch_torque_Nm": 8.818930585796635e-14,
+          "righting_Nm": 21.84393053920031,
+          "pitch_stable_branches_deg": [
+            4.71809154
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 105.0,
+          "pitch_deg": 8.883387390712818,
+          "waterline_m": -0.05559938462049067,
+          "displaced_m3": 0.010254878615656465,
+          "buoyancy_center_m": [
+            -0.03381168983742597,
+            -0.24722011703132485,
+            -0.1155893752105574
+          ],
+          "mass_residual_kg": 1.3625385264504075e-09,
+          "roll_torque_Nm": -26.81659334657027,
+          "pitch_torque_Nm": 1.7365671955982264e-12,
+          "righting_Nm": 26.494919773709455,
+          "pitch_stable_branches_deg": [
+            8.88338739
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 112.5,
+          "pitch_deg": 15.275301897196558,
+          "waterline_m": -0.0721278742053983,
+          "displaced_m3": 0.010254878614331778,
+          "buoyancy_center_m": [
+            -0.03171104733014308,
+            -0.2628578918526277,
+            -0.14503836897268457
+          ],
+          "mass_residual_kg": 3.785061153394054e-11,
+          "roll_torque_Nm": -28.297167365602235,
+          "pitch_torque_Nm": -5.046388057428075e-13,
+          "righting_Nm": 27.297458856488156,
+          "pitch_stable_branches_deg": [
+            15.2753019
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 120.0,
+          "pitch_deg": 26.129102832627623,
+          "waterline_m": -0.08713632832386584,
+          "displaced_m3": 0.010254878614293915,
+          "buoyancy_center_m": [
+            -0.026873434672546312,
+            -0.23590964610295168,
+            -0.17055773927947043
+          ],
+          "mass_residual_kg": -1.2434497875801753e-14,
+          "roll_torque_Nm": -25.46316582583144,
+          "pitch_torque_Nm": 5.1171572534869364e-14,
+          "righting_Nm": 22.860932057527187,
+          "pitch_stable_branches_deg": [
+            26.12910283
+          ],
+          "pitch_stable": true
+        },
+        {
+          "heel_deg": 127.5,
+          "pitch_deg": -42.85855816720914,
+          "waterline_m": -0.22162753655429335,
+          "displaced_m3": 0.010254878614296498,
+          "buoyancy_center_m": [
+            -0.034409311621759905,
+            -0.2894478220455046,
+            -0.3478170492930967
+          ],
+          "mass_residual_kg": 2.5703883466121624e-12,
+          "roll_torque_Nm": -30.693612988850596,
+          "pitch_torque_Nm": 5.198814018170239e-12,
+          "righting_Nm": 22.499494748942443,
+          "pitch_stable_branches_deg": [
+            45.54722548
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 135.0,
+          "pitch_deg": -37.63262255189657,
+          "waterline_m": -0.2114415739211414,
+          "displaced_m3": 0.010254878613483625,
+          "buoyancy_center_m": [
+            -0.03678100072350117,
+            -0.2657511353519098,
+            -0.3724072864649153
+          ],
+          "mass_residual_kg": -8.103029358608183e-10,
+          "roll_torque_Nm": -28.12973872003607,
+          "pitch_torque_Nm": -3.7017733323096987e-14,
+          "righting_Nm": 22.277124805156767,
+          "pitch_stable_branches_deg": [
+            58.87363891
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 142.5,
+          "pitch_deg": -33.83454307362014,
+          "waterline_m": -0.2018795184363444,
+          "displaced_m3": 0.010254878614293316,
+          "buoyancy_center_m": [
+            -0.03829494419300636,
+            -0.23326821441412277,
+            -0.396511824624037
+          ],
+          "mass_residual_kg": -6.110667527536862e-13,
+          "roll_torque_Nm": -24.658241576536106,
+          "pitch_torque_Nm": -2.204732646449159e-13,
+          "righting_Nm": 20.482342055311463,
+          "pitch_stable_branches_deg": [
+            65.18048257
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 150.0,
+          "pitch_deg": -31.124450596245556,
+          "waterline_m": -0.19396003695190642,
+          "displaced_m3": 0.01025487861429388,
+          "buoyancy_center_m": [
+            -0.03926535602122826,
+            -0.1945545092426411,
+            -0.4183541706418791
+          ],
+          "mass_residual_kg": -4.796163466380676e-14,
+          "roll_torque_Nm": -20.539617470663526,
+          "pitch_torque_Nm": 2.0341244461041795e-10,
+          "righting_Nm": 17.58286927889598,
+          "pitch_stable_branches_deg": [
+            68.69885361
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 157.5,
+          "pitch_deg": -29.23836598958763,
+          "waterline_m": -0.1878271075206202,
+          "displaced_m3": 0.010254878614294034,
+          "buoyancy_center_m": [
+            -0.03988310665782151,
+            -0.15137199738111337,
+            -0.43666170001535143
+          ],
+          "mass_residual_kg": 1.0658141036401503e-13,
+          "roll_torque_Nm": -15.954917101870919,
+          "pitch_torque_Nm": 1.6004725877927228e-13,
+          "righting_Nm": 13.922184151316396,
+          "pitch_stable_branches_deg": [
+            70.8355795
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 165.0,
+          "pitch_deg": -27.98411303031076,
+          "waterline_m": -0.18347685223617938,
+          "displaced_m3": 0.010254878614294041,
+          "buoyancy_center_m": [
+            -0.040257673228387345,
+            -0.10496601190886146,
+            -0.4505396363668931
+          ],
+          "mass_residual_kg": 1.1368683772161603e-13,
+          "roll_torque_Nm": -11.033519461270165,
+          "pitch_torque_Nm": -1.0942006467562492e-13,
+          "righting_Nm": 9.743455363424811,
+          "pitch_stable_branches_deg": [
+            72.13461964
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 172.5,
+          "pitch_deg": -27.245609034867456,
+          "waterline_m": -0.18087507073168493,
+          "displaced_m3": 0.010254878614293955,
+          "buoyancy_center_m": [
+            -0.04044904408998412,
+            -0.05640633711104499,
+            -0.45939414794554045
+          ],
+          "mass_residual_kg": 2.6645352591003757e-14,
+          "roll_torque_Nm": -5.8873636121905,
+          "pitch_torque_Nm": -3.211832744209886e-14,
+          "righting_Nm": 5.234173741563553,
+          "pitch_stable_branches_deg": [
+            72.84799053
+          ],
+          "pitch_stable": false
+        },
+        {
+          "heel_deg": 180.0,
+          "pitch_deg": -26.96146839539236,
+          "waterline_m": -0.180007089615373,
+          "displaced_m3": 0.010254878614293942,
+          "buoyancy_center_m": [
+            -0.04048765771712076,
+            -0.006699827051761329,
+            -0.46287646448649
+          ],
+          "mass_residual_kg": 1.4210854715202004e-14,
+          "roll_torque_Nm": -0.6221997727034971,
+          "pitch_torque_Nm": 2.177513724888058e-15,
+          "righting_Nm": 0.5545738953492931,
+          "pitch_stable_branches_deg": [
+            73.09296907
+          ],
+          "pitch_stable": false
+        }
+      ],
+      "failedEquilibria": 0,
+      "minimumInteriorRestoring_Nm": 0.7546308745751897
+    }
+  ],
+  "numericallyBalanced": true,
+  "minimumOperatingMargin": -1.2670268809245044e-05,
+  "sampledStaticScreensPass": false,
+  "qualified": false,
+  "routeProfile": "challenge",
+  "profileSampledStaticScreensPass": false,
+  "design": {
+    "length_m": 1.1999999999991275,
+    "beam_m": 0.25848311276235153,
+    "bottom_depth_m": 0.07707028971753256,
+    "deck_height_m": 0.051701627595423176,
+    "sail_m2": 0.25259079569544945,
+    "sail_AR": 2.341980758978876,
+    "camber_scale": 1.5,
+    "wing_thickness_scale": 2.0,
+    "mast_fraction": 0.5238422485213118,
+    "mast_x_fraction": -0.1481170636448525,
+    "keel_m2": 0.02,
+    "keel_span_m": 0.19999999999977908,
+    "rudder_m2": 0.017679746777796716,
+    "rudder_span_m": 0.188041210379152,
+    "rudder_arm_fraction": 0.420003780182039,
+    "ballast_kg": 0.5,
+    "battery_Wh": 432.474447465701,
+    "panel_m2": 0.05,
+    "wing_torque_Nm": 0.8276593141577997,
+    "rudder_torque_Nm": 0.34378095116731916,
+    "hull_glass_kg_m2": 0.452496128293465,
+    "wing_glass_kg_m2": 0.2,
+    "keel_glass_kg_m2": 1.759204999774262,
+    "rudder_glass_kg_m2": 2.1618823079598486,
+    "hull_rib_pitch_m": 0.022436816975681086,
+    "foil_rib_pitch_m": 0.2299999999996331,
+    "battery_x_fraction": -2.528793840994581e-11,
+    "battery_z_fraction": 0.05,
+    "hull_fullness_exponent": 2.0
+  },
+  "normalizedDesignAndStates": [
+    0.12499999999972737,
+    0.0584831127623515,
+    0.20382246327690204,
+    0.003781394656495947,
+    0.013839683077749857,
+    0.05699679316314602,
+    1.0,
+    1.0,
+    0.5298028106516397,
+    0.31485367044393436,
+    0.0,
+    0.05263157894713589,
+    0.06502434245023957,
+    0.20777155842144618,
+    0.4250094504550974,
+    0.0,
+    0.4026046815428432,
+    0.0,
+    0.03898041674976439,
+    0.029525723735408963,
+    0.06644634955091185,
+    0.0,
+    0.19989807689413616,
+    0.5162848178841707,
+    0.05653098625309585,
+    0.9999999999983322,
+    0.4999999999638744,
+    0.0,
+    1.0,
+    0.16844677007968162,
+    0.3888885502380979,
+    0.762660503017768,
+    0.6806483192934449,
+    0.5293842659415845,
+    0.9248612081476917,
+    0.16978920508021303,
+    0.3919015623522023,
+    0.8403930565118705,
+    0.6790045416927531,
+    0.5315376763215817,
+    0.91875912422255,
+    0.192863187756552,
+    0.8047323459940943,
+    1.0,
+    0.43888404793629454,
+    0.5023658995750759,
+    0.36251983732349996,
+    0.19200780436397064,
+    0.7930679431905706,
+    1.0,
+    0.43740170677192175,
+    0.5067310038743721,
+    0.35492112774577733,
+    0.25047148701569094,
+    0.8718728957851056,
+    0.40984720032866034,
+    0.5643175436044499,
+    0.5748288277669126,
+    1.0,
+    0.25047477748138314,
+    0.8542641670694192,
+    0.48261856250597723,
+    0.5696195343865221,
+    0.5749248679823258,
+    1.0,
+    0.24222659670232244,
+    0.8706396533865574,
+    0.9999999999999438,
+    0.36284205901178007,
+    0.5026031160614133,
+    0.0,
+    0.24033939582076397,
+    0.8701077047748588,
+    1.0,
+    0.3567917437394309,
+    0.5121176323200373,
+    2.9884108987173925e-13
+  ],
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/dfmea.sysml": "f6788362c2b868cb462782b7e9b837eb8fafe716368816f7a25cb5a7be7c6a73",
+    "models/analyses/energy.sysml": "0a1fc9435697450907604405c21e87882add03071f1024f73bf26ab2c845bc36",
+    "models/analyses/environment-review.sysml": "24209c839a3b89453885abdea09fd1a88950c5d24aa68f9328d29e4318146fc6",
+    "models/analyses/mission.sysml": "9f16ba963fb4dc8d43f3f7854bbb0ba0cb43f549d61cfe8bc7d8dc942b03d499",
+    "models/analyses/passage-exposure.sysml": "72f055615ffabba4ec9377d00d2f76ade31ee68091f012b60ed56d5bb1a64f73",
+    "models/analyses/polar-demand.sysml": "2ae69be8debe151f0c081cc37da56074c878a77ff50a647ab5e4364a9a866905",
+    "models/analyses/recovery-propulsion.sysml": "bb79e2d030eda65bf8c2d243d62d9e51a02a9b114f7fb5659fece646a8ab6829",
+    "models/analyses/recovery-site-review.sysml": "e55e63e9a5ea4d79833739359d400d72a9e04d9590b99cd271a6003ee4b1b619",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "d82e06121ab8bb8a472e4a1c83b2e2f96faf517f9f3e65390a9d1c64d0e6a4a3",
+    "models/analyses/sail-trade.sysml": "29b61e7e9e7618b7b14de64a4500595f08d0316248c9e8ab64eb3675e3e0dfd9",
+    "models/analyses/sizing/credibility.sysml": "590c6e859f9bb4302f1f5ca3e0eb72a7c56d816f28bc5615fa71cd35f6628254",
+    "models/analyses/sizing/evidence.sysml": "f0d2a6d886c71d4b7adc632271ff122f7bc57b1a6302db84bf844d74f20fe801",
+    "models/analyses/sizing/inputs.sysml": "934dde8fa12d41656d776b954c7a695f7979e003e629d2677ea4de51b1615925",
+    "models/analyses/sizing/operating.sysml": "8f838ddc4ea64ace87ec37591524c1c69953c95d682597d739de966ba5cb57ad",
+    "models/analyses/sizing/uncertainty.sysml": "78d71e2767b681561768d486ca6d6a9d4e16332fd576fe9cfe1a8e01d3dfcf3b",
+    "models/analyses/surface-environment.sysml": "5778f163047634797e8ef65a8783a5e783676df530bc0caa0247a679c00222ea",
+    "models/analyses/wave-performance.sysml": "383e94db89dfe142db9e46398de22a707c543f754d3f778aa600a695689d6b3d",
+    "models/analyses/weather.sysml": "44ecf6b6d1e331fa5185398873d42e553128533c925d292dfc4287851ff1ee4c",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/energy.sysml": "9a67f9f74fa51fb67f2749cf3b4e12615014f383b365a48043f3461999d6c7b8",
+    "models/configurations/operating.sysml": "2f3019e2b9c4a9985d7a5eabfbd39dde694903dc378d8381c1b550f3c48c59d0",
+    "models/configurations/polar-demand.sysml": "776327bf7cefc8edc26f29000d21261cc3f2d2da9da8dcd8a6e30ffa5ced121e",
+    "models/configurations/reference.sysml": "409baa5254262a527b27af7fce00ffb3da35f249fe54e51f3cf024bdf86671be",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/configurations/wind-equipment.sysml": "3d5508bf915a2747612c755b79a2d0c07314f0536b5b642cf0fb12115de1323b",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/evidence/current-sizing.sysml": "b6176f48be47dde61bd41ea892fec6c68258b72afdf2265ffb1bba5fb642b991",
+    "models/evidence/finite-passage-sizing.sysml": "7c0cac2c4733ba43b652edc7bc547265087434656a11694670ff5347c2028f56",
+    "models/evidence/gorge-wind.sysml": "2eee7571fc7ac02bcd054b0c226b5edb54ff931a31d74c508331ff1bf20ef466",
+    "models/evidence/sizing-continuation.sysml": "b8825d29058049ef75538b8b40b0dceb5bbdcb9aac806457856b9b2a9ccfee2e",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/appendages.sysml": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+    "models/libraries/marine/concept.sysml": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+    "models/libraries/marine/course.sysml": "c4b6f1afa8975d13038a2ed46d944bf103341a55d276dcdf8a8a0bfdc1a7cf4c",
+    "models/libraries/marine/design.sysml": "1b1bf4207a20853903a934cdd67a910d24f6f930116219c909c78b5bf3067057",
+    "models/libraries/marine/hull-resistance.sysml": "0ae663362a441fe3ae3342ee687d21dc351b19730b5b97d01611aacd46254203",
+    "models/libraries/marine/hydrostatics.sysml": "1c29aae5c7c0f593bbfea5c0cfe770b325fa2cb4d0a17640b6dad0b64e571dc1",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/recovery.sysml": "898ad56842913630ac9e3d67b0787c40756bbddb44d8ac697923c43c05f7620d",
+    "models/libraries/marine/reliability.sysml": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+    "models/libraries/marine/sailing.sysml": "61d1dd02717844c279d57a9dc26bd266653cb364694246c438e26373abf9801c",
+    "models/libraries/marine/surface.sysml": "17a13e495a47feec618692109b452e4ab58a72fe1b0e6053b1f96836eaba5d30",
+    "models/libraries/marine/wave-performance.sysml": "1f97d6656ef778f04523bbc1f27a3cad808cbdbde5cd5f0bb95ae37e6daaba07",
+    "models/libraries/marine/weather.sysml": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+    "models/libraries/structures/mass-properties.sysml": "f34ac343e57871ae81407b57a32679121e36711fce8c0b9e75bec2abb8095dca",
+    "models/libraries/structures/scantlings.sysml": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+    "models/missions/course.sysml": "92e0f633a9b99c9717ebd8bff108316ef54fb68d0c50a7c407b375f65ae14c26",
+    "models/missions/scope.sysml": "3f4058d5a9fc653f77764849708b3729f286fc52e692ec418ea5fd47aad92854",
+    "models/missions/transgorge.sysml": "34c61af13b63d30ace7f49cab02cc2dbfe2b22ba8279aa9cc3ed5b2acb3a74fa",
+    "models/missions/verification.sysml": "6ebe93300b753bd290296ddc9826d115d36cbe33f589230fb6017313ef15b15d",
+    "models/vehicle/allocations.sysml": "15d82ec82b43c9e2917db4cdb797ea1563f5b45c7eebea2ff9cf1ed36aeefcb9",
+    "models/vehicle/architecture.sysml": "27df61bf961562552ccb41d11a23344305827f8a9636f325babc61fe775b6f74",
+    "models/vehicle/decisions.sysml": "ca3601bb37de1013f66b01eb6e6e3df587032a7f0f2c1559e624818b3c3a50fa",
+    "models/vehicle/requirements.sysml": "e04ff8e08ad8e0a0c69e0aa0ef9a6e0ca714d7826a2c18a341954bb65cf48ca3",
+    "models/vehicle/source-evidence.sysml": "a0c36211ef784210977c638cf4371438a6dd808e1f81410b0351e0850935ae04",
+    "models/vehicle/structure.sysml": "031b8780de2716bd9891139a68055a3932aa5450b664c70a3ce49f359fb48db0",
+    "models/vehicle/use-cases.sysml": "5323349c3ce729ed3ba56c360838403aaeb599eb720272390e066c741b98872a",
+    "models/vehicle/verification.sysml": "3f77f64f66e5271e2deb0896818873a84a8dfc2708fc976c6688fd1a6216ee9b",
+    "tools/boat_analysis/optimization/replay.py": "c0dc66db683a9d381392e5054eaa04c8cf869e6997b0692e87ba18eb5bf91eb9",
+    "tools/boat_analysis/optimization/operating.py": "0f62f579800d47d5e79bf14837f9da9e3da59d6c2eb99072820860e28ed045a7",
+    "tools/boat_analysis/model/vessel.py": "bcd07b81e7589e91046ecf0e5aef7dea26758f653f95654de51626ac16cdc8b1",
+    "tools/boat_analysis/geometry/hydro.py": "55ebd4b84f88803bf69e740bf7276a577ccd54b3d7c761a7dcda82658ba6f03e",
+    "build/analysis/coupled-uncertainty-inputs.json": "6dbc7d7fe8cf4764edb6451abaee564651ae7f4c1b75fd95433a9033e47fe183"
+  },
+  "coarseEnvelope": {
+    "hullLengthM": 1.1999999999991275,
+    "sweptLengthM": 1.19999999999912,
+    "sweptBeamM": 0.3440706417279904,
+    "keelToWingHeightM": 1.132661810380056,
+    "moduleDimensionsM": {
+      "hull": [
+        1.19999999999912,
+        0.25848311276236,
+        0.12877191731294999
+      ],
+      "wing": [
+        0.3284105492497807,
+        0.07616549096674896,
+        0.769131187388671
+      ],
+      "keel": [
+        0.10000000000011046,
+        0.012000000000013255,
+        0.19999999999977908
+      ],
+      "rudder": [
+        0.09402059656044875,
+        0.011282471587253848,
+        0.188041210379152
+      ],
+      "ballast": [
+        0.10427611703595083,
+        0.034758705678650276,
+        0.03475870567865025
+      ]
+    }
+  },
+  "retainedSeedMassKg": 10.252018537728546,
+  "geometryResolution": 16,
+  "operatingSolveBudgetPerPhase": 20,
+  "sourceRevision": "e97f30978272bb19f99d89b07786d6a529714f9e",
+  "scope": "Refined static replay of the explicitly recorded retained seed. Not a replay of every frontier alternative or physical qualification."
+}

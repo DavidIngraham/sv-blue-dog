@@ -464,3 +464,32 @@ package BlueDogRecoverySiteDocuments {
         part candidates : Table { calc rows : Candidates; }
     }
 }
+
+package BlueDogSRRFrontierDocuments {
+    private import DocumentQueries::*;
+    calc def Alternatives :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogSRRFrontier::point0", "BlueDogSRRFrontier::point1", "BlueDogSRRFrontier::point2", "BlueDogSRRFrontier::point3", "BlueDogSRRFrontier::point4", "BlueDogSRRFrontier::point5")), columns = (
+            Column(name = "Length cap (m)", path = "capM"),
+            Column(name = "Objective", path = "optimizationObjective"),
+            Column(name = "Coarse feasible", path = "feasible"),
+            Column(name = "Mass (kg)", path = "massKg"),
+            Column(name = "Conditional passage (h)", path = "conditionalPassageHours"),
+            Column(name = "Overall length (m)", path = "overallLengthM")))
+    }
+    part def Summary :> Document {
+        attribute redefines title = "Bounded local sizing alternatives";
+        part alternatives : Table { calc rows : Alternatives; }
+    }
+    calc def Replay :> Query {
+        Project(source = Named(qualifiedName = "BlueDogSRRFrontier::retainedSeedReplay"), columns = (
+            Column(name = "Mass (kg)", path = "massKg"),
+            Column(name = "Westerly passage (h)", path = "westerlyHours"),
+            Column(name = "Voyage energy margin", path = "voyageEnergyMargin"),
+            Column(name = "Refined screens pass", path = "profileScreensPass"),
+            Column(name = "Qualified", path = "qualified")))
+    }
+    part def SeedReplay :> Document {
+        attribute redefines title = "Refined replay of the retained seed";
+        part replay : Table { calc rows : Replay; }
+    }
+}

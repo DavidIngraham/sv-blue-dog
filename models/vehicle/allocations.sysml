@@ -199,4 +199,25 @@ package BlueDogSatisfaction {
     satisfy BlueDogRequirements::invalidWindUseInhibition by missionContext.boat.control;
     satisfy BlueDogRequirements::windLossResponse by missionContext.boat.control;
     satisfy BlueDogRequirements::windSensingEndurance by missionContext.boat.navigation.wind;
+
+    // Logical responsibility allocations for the SRR challenge baseline.
+    // These assert intended design responsibility, not demonstrated compliance.
+    satisfy GorgeChallenge::overallLength by missionContext.boat;
+    satisfy GorgeChallenge::trafficNonInterference by missionContext.boat.control.collisionAvoidance;
+    satisfy GorgeChallenge::safetyCapabilityAbort by missionContext.boat.recovery.recoveryController;
+    satisfy GorgeChallenge::autonomousShoreRecovery by missionContext.boat.recovery.recoveryController;
+    satisfy GorgeChallenge::abortAlert by missionContext.boat.communications;
+    satisfy GorgeChallenge::noLittering by missionContext.boat;
+    satisfy GorgeChallenge::casualtyFlotation by missionContext.boat.hullAndRig;
+    satisfy GorgeChallenge::majorComponentRetention by missionContext.boat.hullAndRig;
+    satisfy GorgeChallenge::capsizeRecovery by missionContext.boat;
+    satisfy GorgeChallenge::unattachedPassage by missionContext.boat.control.missionManager;
+    satisfy GorgeChallenge::communicationOutageAutonomy by missionContext.boat.control.missionManager;
+    satisfy GorgeChallenge::forecastAdmission by missionContext.boat.control.missionManager;
+    satisfy GorgeChallenge::weatherOutageContinuation by missionContext.boat.control.missionManager;
+    satisfy GorgeChallenge::courseRecoveryReserve by missionContext.boat.energy.powerManagement;
+    satisfy GorgeChallenge::reserveAbort by missionContext.boat.recovery.recoveryController;
+    satisfy GorgeChallenge::nightOperation by missionContext.boat;
+    satisfy GorgeChallenge::abortPersistence by missionContext.boat.recovery.recoveryController;
+    satisfy GorgeChallenge::recoveryConspicuity by missionContext.boat.signaling;
 }
