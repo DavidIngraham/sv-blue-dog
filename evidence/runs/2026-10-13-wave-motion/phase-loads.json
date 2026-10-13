@@ -1,0 +1,1452 @@
+{
+  "policy": [
+    1,
+    1,
+    32,
+    0.35
+  ],
+  "significantHeightM": 0.4,
+  "periodS": 3,
+  "results": [
+    {
+      "wind": 5.0,
+      "heading": 54.773139868402204,
+      "sea": "head",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 3.5632248995062543,
+      "meanDriveN": 3.5632248995062543,
+      "minDriveN": 3.5632248995062543,
+      "maxDriveN": 3.5632248995062543,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 54.773139868402204,
+      "sea": "head",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 3.5632248995062543,
+      "meanDriveN": 3.4885895400631135,
+      "minDriveN": 2.802375503534314,
+      "maxDriveN": 4.076183475456565,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009744,
+      "minimumAppendageImmersionM": 0.18648045938226754,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 54.773139868402204,
+      "sea": "head",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 3.5632248995062543,
+      "meanDriveN": 3.3239583595709363,
+      "minDriveN": 3.2505813525409057,
+      "maxDriveN": 3.3898030482036856,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": 54.773139868402204,
+      "sea": "beam",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 3.5632248995062543,
+      "meanDriveN": 3.5632248995062543,
+      "minDriveN": 3.5632248995062543,
+      "maxDriveN": 3.5632248995062543,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3234394120622276,
+      "minimumWingClearanceM": -0.32481656497434164,
+      "minimumAppendageImmersionM": -0.08888594764319063,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 54.773139868402204,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 3.5632248995062543,
+      "meanDriveN": 3.4885895400631135,
+      "minDriveN": 2.802375503534314,
+      "maxDriveN": 4.076183475456565,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.02994236706708786,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": 54.773139868402204,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 3.5632248995062543,
+      "meanDriveN": 3.1186396181657416,
+      "minDriveN": 2.599104613648145,
+      "maxDriveN": 4.1896979854474,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.07261675744587015,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": 54.773139868402204,
+      "sea": "following",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 3.5632248995062543,
+      "meanDriveN": 3.5632248995062543,
+      "minDriveN": 3.5632248995062543,
+      "maxDriveN": 3.5632248995062543,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 54.773139868402204,
+      "sea": "following",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 3.5632248995062543,
+      "meanDriveN": 3.4885895400631135,
+      "minDriveN": 2.802375503534314,
+      "maxDriveN": 4.076183475456565,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009762,
+      "minimumAppendageImmersionM": 0.18648045938226762,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 54.773139868402204,
+      "sea": "following",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 3.5632248995062543,
+      "meanDriveN": 3.57345954679607,
+      "minDriveN": 2.405841062694688,
+      "maxDriveN": 4.480269289679008,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": -57.32084370148799,
+      "sea": "head",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 3.623064554964729,
+      "meanDriveN": 3.623064554964729,
+      "minDriveN": 3.623064554964729,
+      "maxDriveN": 3.623064554964729,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -57.32084370148799,
+      "sea": "head",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 3.623064554964729,
+      "meanDriveN": 3.5453802094055566,
+      "minDriveN": 2.82811702907921,
+      "maxDriveN": 4.159993330137166,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009744,
+      "minimumAppendageImmersionM": 0.18648045938226754,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -57.32084370148799,
+      "sea": "head",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 3.623064554964729,
+      "meanDriveN": 3.356917135810205,
+      "minDriveN": 3.2792809359370514,
+      "maxDriveN": 3.5222392965217546,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": -57.32084370148799,
+      "sea": "beam",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 3.623064554964729,
+      "meanDriveN": 3.623064554964729,
+      "minDriveN": 3.623064554964729,
+      "maxDriveN": 3.623064554964729,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3234394120622276,
+      "minimumWingClearanceM": -0.32481656497434164,
+      "minimumAppendageImmersionM": -0.08888594764319063,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -57.32084370148799,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 3.623064554964729,
+      "meanDriveN": 3.5453802094055566,
+      "minDriveN": 2.82811702907921,
+      "maxDriveN": 4.159993330137166,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.02994236706708786,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": -57.32084370148799,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 3.623064554964729,
+      "meanDriveN": 3.827454389829329,
+      "minDriveN": 1.6234497474371354,
+      "maxDriveN": 5.75385290730772,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.07261675744587015,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": -57.32084370148799,
+      "sea": "following",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 3.623064554964729,
+      "meanDriveN": 3.623064554964729,
+      "minDriveN": 3.623064554964729,
+      "maxDriveN": 3.623064554964729,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -57.32084370148799,
+      "sea": "following",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 3.623064554964729,
+      "meanDriveN": 3.5453802094055566,
+      "minDriveN": 2.82811702907921,
+      "maxDriveN": 4.159993330137166,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009762,
+      "minimumAppendageImmersionM": 0.18648045938226762,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -57.32084370148799,
+      "sea": "following",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 3.623064554964729,
+      "meanDriveN": 3.6492586201294457,
+      "minDriveN": 2.3707989494121726,
+      "maxDriveN": 4.632693148325966,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": 131.27203501980162,
+      "sea": "head",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 3.9958092191225436,
+      "meanDriveN": 3.9958092191225436,
+      "minDriveN": 3.9958092191225436,
+      "maxDriveN": 3.9958092191225436,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 131.27203501980162,
+      "sea": "head",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 3.9958092191225436,
+      "meanDriveN": 3.898682441642151,
+      "minDriveN": 2.8761821745105105,
+      "maxDriveN": 4.793030970168102,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009744,
+      "minimumAppendageImmersionM": 0.18648045938226754,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 131.27203501980162,
+      "sea": "head",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 3.9958092191225436,
+      "meanDriveN": 3.3649721293201167,
+      "minDriveN": 2.453720253759099,
+      "maxDriveN": 5.196705034581512,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": 131.27203501980162,
+      "sea": "beam",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 3.9958092191225436,
+      "meanDriveN": 3.9958092191225436,
+      "minDriveN": 3.9958092191225436,
+      "maxDriveN": 3.9958092191225436,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3234394120622276,
+      "minimumWingClearanceM": -0.32481656497434164,
+      "minimumAppendageImmersionM": -0.08888594764319063,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 131.27203501980162,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 3.9958092191225436,
+      "meanDriveN": 3.898682441642151,
+      "minDriveN": 2.8761821745105105,
+      "maxDriveN": 4.793030970168102,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.02994236706708786,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": 131.27203501980162,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 3.9958092191225436,
+      "meanDriveN": 3.828760761970928,
+      "minDriveN": 2.938065455555417,
+      "maxDriveN": 4.628541982568868,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.07261675744587015,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": 131.27203501980162,
+      "sea": "following",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 3.9958092191225436,
+      "meanDriveN": 3.9958092191225436,
+      "minDriveN": 3.9958092191225436,
+      "maxDriveN": 3.9958092191225436,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 131.27203501980162,
+      "sea": "following",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 3.9958092191225436,
+      "meanDriveN": 3.898682441642151,
+      "minDriveN": 2.8761821745105105,
+      "maxDriveN": 4.793030970168102,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009762,
+      "minimumAppendageImmersionM": 0.18648045938226762,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": 131.27203501980162,
+      "sea": "following",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 3.9958092191225436,
+      "meanDriveN": 4.173670879365292,
+      "minDriveN": 1.6771448170898469,
+      "maxDriveN": 6.351467168689317,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": -118.3734576722002,
+      "sea": "head",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 4.362030675583186,
+      "meanDriveN": 4.362030675583186,
+      "minDriveN": 4.362030675583186,
+      "maxDriveN": 4.362030675583186,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -118.3734576722002,
+      "sea": "head",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 4.362030675583186,
+      "meanDriveN": 4.253205038906041,
+      "minDriveN": 3.131957131939856,
+      "maxDriveN": 5.23112333570736,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009744,
+      "minimumAppendageImmersionM": 0.18648045938226754,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -118.3734576722002,
+      "sea": "head",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 4.362030675583186,
+      "meanDriveN": 3.6873234509225905,
+      "minDriveN": 2.733926710717554,
+      "maxDriveN": 5.555451795331008,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": -118.3734576722002,
+      "sea": "beam",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 4.362030675583186,
+      "meanDriveN": 4.362030675583186,
+      "minDriveN": 4.362030675583186,
+      "maxDriveN": 4.362030675583186,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3234394120622276,
+      "minimumWingClearanceM": -0.32481656497434164,
+      "minimumAppendageImmersionM": -0.08888594764319063,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -118.3734576722002,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 4.362030675583186,
+      "meanDriveN": 4.253205038906041,
+      "minDriveN": 3.131957131939856,
+      "maxDriveN": 5.23112333570736,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.02994236706708786,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": -118.3734576722002,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 4.362030675583186,
+      "meanDriveN": 4.34904334690812,
+      "minDriveN": 2.6506750538460655,
+      "maxDriveN": 5.864904022171934,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.07261675744587015,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 5.0,
+      "heading": -118.3734576722002,
+      "sea": "following",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 4.362030675583186,
+      "meanDriveN": 4.362030675583186,
+      "minDriveN": 4.362030675583186,
+      "maxDriveN": 4.362030675583186,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -118.3734576722002,
+      "sea": "following",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 4.362030675583186,
+      "meanDriveN": 4.253205038906041,
+      "minDriveN": 3.131957131939856,
+      "maxDriveN": 5.23112333570736,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009762,
+      "minimumAppendageImmersionM": 0.18648045938226762,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 5.0,
+      "heading": -118.3734576722002,
+      "sea": "following",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 4.362030675583186,
+      "meanDriveN": 4.554816594312714,
+      "minDriveN": 1.846272487340169,
+      "maxDriveN": 6.8319006412847125,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": 43.33492367091199,
+      "sea": "head",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 6.08708410113285,
+      "meanDriveN": 6.08708410113285,
+      "minDriveN": 6.08708410113285,
+      "maxDriveN": 6.08708410113285,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 43.33492367091199,
+      "sea": "head",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 6.08708410113285,
+      "meanDriveN": 5.965089848621339,
+      "minDriveN": 4.829251804444982,
+      "maxDriveN": 6.942947182971571,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009744,
+      "minimumAppendageImmersionM": 0.18648045938226754,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 43.33492367091199,
+      "sea": "head",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 6.08708410113285,
+      "meanDriveN": 5.794196396649845,
+      "minDriveN": 5.412375907003629,
+      "maxDriveN": 6.20240166341425,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": 43.33492367091199,
+      "sea": "beam",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 6.08708410113285,
+      "meanDriveN": 6.08708410113285,
+      "minDriveN": 6.08708410113285,
+      "maxDriveN": 6.08708410113285,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3234394120622276,
+      "minimumWingClearanceM": -0.32481656497434164,
+      "minimumAppendageImmersionM": -0.08888594764319063,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 43.33492367091199,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 6.08708410113285,
+      "meanDriveN": 5.965089848621339,
+      "minDriveN": 4.829251804444982,
+      "maxDriveN": 6.942947182971571,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.02994236706708786,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": 43.33492367091199,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 6.08708410113285,
+      "meanDriveN": 5.410645314737995,
+      "minDriveN": 4.815764900364684,
+      "maxDriveN": 6.545700835835607,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.07261675744587015,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": 43.33492367091199,
+      "sea": "following",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 6.08708410113285,
+      "meanDriveN": 6.08708410113285,
+      "minDriveN": 6.08708410113285,
+      "maxDriveN": 6.08708410113285,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 43.33492367091199,
+      "sea": "following",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 6.08708410113285,
+      "meanDriveN": 5.965089848621339,
+      "minDriveN": 4.829251804444982,
+      "maxDriveN": 6.942947182971571,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009762,
+      "minimumAppendageImmersionM": 0.18648045938226762,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 43.33492367091199,
+      "sea": "following",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 6.08708410113285,
+      "meanDriveN": 6.05748009017896,
+      "minDriveN": 4.45304070579243,
+      "maxDriveN": 7.31910109303143,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": -40.962526797034066,
+      "sea": "head",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 5.659820492431277,
+      "meanDriveN": 5.659820492431277,
+      "minDriveN": 5.659820492431277,
+      "maxDriveN": 5.659820492431277,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -40.962526797034066,
+      "sea": "head",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 5.659820492431277,
+      "meanDriveN": 5.54475946999821,
+      "minDriveN": 4.498049866313165,
+      "maxDriveN": 6.441223201630379,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009744,
+      "minimumAppendageImmersionM": 0.18648045938226754,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -40.962526797034066,
+      "sea": "head",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 5.659820492431277,
+      "meanDriveN": 5.379924210330954,
+      "minDriveN": 4.987405637663481,
+      "maxDriveN": 5.780985114491708,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": -40.962526797034066,
+      "sea": "beam",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 5.659820492431277,
+      "meanDriveN": 5.659820492431277,
+      "minDriveN": 5.659820492431277,
+      "maxDriveN": 5.659820492431277,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3234394120622276,
+      "minimumWingClearanceM": -0.32481656497434164,
+      "minimumAppendageImmersionM": -0.08888594764319063,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -40.962526797034066,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 5.659820492431277,
+      "meanDriveN": 5.54475946999821,
+      "minDriveN": 4.498049866313165,
+      "maxDriveN": 6.441223201630379,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.02994236706708786,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": -40.962526797034066,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 5.659820492431277,
+      "meanDriveN": 5.80305996767242,
+      "minDriveN": 3.0338626150416745,
+      "maxDriveN": 8.24744563797514,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.07261675744587015,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": -40.962526797034066,
+      "sea": "following",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 5.659820492431277,
+      "meanDriveN": 5.659820492431277,
+      "minDriveN": 5.659820492431277,
+      "maxDriveN": 5.659820492431277,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -40.962526797034066,
+      "sea": "following",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 5.659820492431277,
+      "meanDriveN": 5.54475946999821,
+      "minDriveN": 4.498049866313165,
+      "maxDriveN": 6.441223201630379,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009762,
+      "minimumAppendageImmersionM": 0.18648045938226762,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -40.962526797034066,
+      "sea": "following",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 5.659820492431277,
+      "meanDriveN": 5.602014410511328,
+      "minDriveN": 4.152139050173192,
+      "maxDriveN": 6.7422664314704175,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": 154.8945182515215,
+      "sea": "head",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 8.374442187080579,
+      "meanDriveN": 8.374442187080579,
+      "minDriveN": 8.374442187080579,
+      "maxDriveN": 8.374442187080579,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 154.8945182515215,
+      "sea": "head",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 8.374442187080579,
+      "meanDriveN": 8.190612011531366,
+      "minDriveN": 6.358969479830066,
+      "maxDriveN": 9.78104986090191,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009744,
+      "minimumAppendageImmersionM": 0.18648045938226754,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 154.8945182515215,
+      "sea": "head",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 8.374442187080579,
+      "meanDriveN": 7.419055519464619,
+      "minDriveN": 6.705000921988611,
+      "maxDriveN": 8.86306919178654,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": 154.8945182515215,
+      "sea": "beam",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 8.374442187080579,
+      "meanDriveN": 8.374442187080579,
+      "minDriveN": 8.374442187080579,
+      "maxDriveN": 8.374442187080579,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3234394120622276,
+      "minimumWingClearanceM": -0.32481656497434164,
+      "minimumAppendageImmersionM": -0.08888594764319063,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 154.8945182515215,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 8.374442187080579,
+      "meanDriveN": 8.190612011531366,
+      "minDriveN": 6.358969479830066,
+      "maxDriveN": 9.78104986090191,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.02994236706708786,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": 154.8945182515215,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 8.374442187080579,
+      "meanDriveN": 8.388997290836027,
+      "minDriveN": 5.536141509347579,
+      "maxDriveN": 10.621923521246913,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.07261675744587015,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": 154.8945182515215,
+      "sea": "following",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 8.374442187080579,
+      "meanDriveN": 8.374442187080579,
+      "minDriveN": 8.374442187080579,
+      "maxDriveN": 8.374442187080579,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 154.8945182515215,
+      "sea": "following",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 8.374442187080579,
+      "meanDriveN": 8.190612011531366,
+      "minDriveN": 6.358969479830066,
+      "maxDriveN": 9.78104986090191,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009762,
+      "minimumAppendageImmersionM": 0.18648045938226762,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": 154.8945182515215,
+      "sea": "following",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 8.374442187080579,
+      "meanDriveN": 8.277716143895368,
+      "minDriveN": 5.14706623707958,
+      "maxDriveN": 11.28858846528226,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": -153.78760096732634,
+      "sea": "head",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 8.16339289043563,
+      "meanDriveN": 8.16339289043563,
+      "minDriveN": 8.16339289043563,
+      "maxDriveN": 8.16339289043563,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -153.78760096732634,
+      "sea": "head",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 8.16339289043563,
+      "meanDriveN": 7.982947503698425,
+      "minDriveN": 6.183716460967778,
+      "maxDriveN": 9.545712111091426,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009744,
+      "minimumAppendageImmersionM": 0.18648045938226754,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -153.78760096732634,
+      "sea": "head",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 8.16339289043563,
+      "meanDriveN": 7.213549873710272,
+      "minDriveN": 6.483649622199981,
+      "maxDriveN": 8.699572865398004,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": -153.78760096732634,
+      "sea": "beam",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 8.16339289043563,
+      "meanDriveN": 8.16339289043563,
+      "minDriveN": 8.16339289043563,
+      "maxDriveN": 8.16339289043563,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3234394120622276,
+      "minimumWingClearanceM": -0.32481656497434164,
+      "minimumAppendageImmersionM": -0.08888594764319063,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -153.78760096732634,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 8.16339289043563,
+      "meanDriveN": 7.982947503698425,
+      "minDriveN": 6.183716460967778,
+      "maxDriveN": 9.545712111091426,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.02994236706708786,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": -153.78760096732634,
+      "sea": "beam",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 8.16339289043563,
+      "meanDriveN": 7.785213663944939,
+      "minDriveN": 6.931857904094839,
+      "maxDriveN": 8.61560051758715,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.07261675744587015,
+      "minimumWingClearanceM": 0.07518343502565838,
+      "minimumAppendageImmersionM": 0.31111405235680933,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    },
+    {
+      "wind": 8.0,
+      "heading": -153.78760096732634,
+      "sea": "following",
+      "responseGains": [
+        0,
+        0
+      ],
+      "baselineDriveN": 8.16339289043563,
+      "meanDriveN": 8.16339289043563,
+      "minDriveN": 8.16339289043563,
+      "maxDriveN": 8.16339289043563,
+      "unsupportedPhaseCount": 0,
+      "minimumHullClearanceM": -0.3235502953958513,
+      "minimumWingClearanceM": -0.3247733038016911,
+      "minimumAppendageImmersionM": -0.08761967806470028,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -153.78760096732634,
+      "sea": "following",
+      "responseGains": [
+        1,
+        0
+      ],
+      "baselineDriveN": 8.16339289043563,
+      "meanDriveN": 7.982947503698425,
+      "minDriveN": 6.183716460967778,
+      "maxDriveN": 9.545712111091426,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": -0.049450157948883446,
+      "minimumWingClearanceM": 0.06930065791009762,
+      "minimumAppendageImmersionM": 0.18648045938226762,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.0,
+      "contactScreen": true
+    },
+    {
+      "wind": 8.0,
+      "heading": -153.78760096732634,
+      "sea": "following",
+      "responseGains": [
+        1,
+        1
+      ],
+      "baselineDriveN": 8.16339289043563,
+      "meanDriveN": 8.076544202259058,
+      "minDriveN": 4.966337716297369,
+      "maxDriveN": 11.063091727284782,
+      "unsupportedPhaseCount": 13,
+      "minimumHullClearanceM": 0.05562530971576618,
+      "minimumWingClearanceM": 0.07514017385300786,
+      "minimumAppendageImmersionM": 0.29123647115318657,
+      "motionCovered": true,
+      "maximumMotionAngleRad": 0.17891903330611791,
+      "contactScreen": false
+    }
+  ]
+}

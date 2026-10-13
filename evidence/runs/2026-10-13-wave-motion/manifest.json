@@ -1,0 +1,15 @@
+{
+  "sourceRevision": "86b51c059a9ac6d3d9dadf2aa87442d1c58c87a5",
+  "files": {
+    "missions.json": {
+      "sha256": "289814b08b62fbff99b92bf8e98b46702d63d9738f3ec354925d0a2ee82fd2de"
+    },
+    "phase-loads.json": {
+      "sha256": "7fe6619591d8ecb22cdfbe91d24e2c033a34129ddfc7f7ff6f04f3fe0b5966a8"
+    },
+    "summary.json": {
+      "sha256": "ba793d89bbae5cff501201828b2d2326d1a155337b9b4135b82186a377280f3f"
+    }
+  },
+  "notes": "Prescribed motion sensitivity at archived 1.4 m controls; phase loads do not update mission speed. Three response hypotheses, 72 phase cases, four paired mission prefixes. Unsupported phase loads and response angles remain diagnostic."
+}
