@@ -36,7 +36,7 @@ package Page_practicality_construction {
 
 ## Construction qualification
 
-Wet laminate coupons and glass-to-print bonds establish whether the chosen process can carry the modeled loads. These requirements derive from structural integrity; selecting the construction process does not demonstrate compliance.
+Load, deflection, wet laminate coupon and glass-to-print bond criteria establish whether the chosen process can carry the modeled loads. These requirements derive from structural integrity; selecting the construction process does not demonstrate compliance.
 
 ```sysml-view Page_practicality_materials::thread direction=BT statements=true
 package Page_practicality_materials {
@@ -44,16 +44,40 @@ package Page_practicality_materials {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::courseCompletion;
+        expose GorgeChallenge::sailingPropulsion;
+        expose BlueDogRequirements::roundTrip;
+        expose BlueDogRequirements::environmentalEnvelope;
+        expose BlueDogRequirements::marineDurability;
         expose BlueDogRequirements::wetMechanicalIntegrity;
         expose BlueDogStructure::structuralIntegrity;
         expose BlueDogStructure::wetCouponStrength;
         expose BlueDogStructure::wetCouponStiffness;
         expose BlueDogStructure::bondProof;
-        metadata Layout about BlueDogRequirements::wetMechanicalIntegrity { x = 0; y = 0; }
-        metadata Layout about BlueDogStructure::structuralIntegrity { x = 400; y = 0; }
-        metadata Layout about BlueDogStructure::wetCouponStrength { x = 800; y = 0; }
-        metadata Layout about BlueDogStructure::wetCouponStiffness { x = 0; y = 400; }
-        metadata Layout about BlueDogStructure::bondProof { x = 400; y = 400; }
+        expose BlueDogStructure::bendingStrength;
+        expose BlueDogStructure::appendageDeflection;
+        expose BlueDogStructure::hullDeflection;
+        expose BlueDogStructure::panelStrength;
+        expose BlueDogStructure::panelDeflection;
+        expose BlueDogStructure::rootProofLoad;
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::courseCompletion { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::sailingPropulsion { x = 640; y = 0; }
+        metadata Layout about BlueDogRequirements::roundTrip { x = 960; y = 0; }
+        metadata Layout about BlueDogRequirements::environmentalEnvelope { x = 0; y = 400; }
+        metadata Layout about BlueDogRequirements::marineDurability { x = 320; y = 400; }
+        metadata Layout about BlueDogRequirements::wetMechanicalIntegrity { x = 640; y = 400; }
+        metadata Layout about BlueDogStructure::structuralIntegrity { x = 960; y = 400; }
+        metadata Layout about BlueDogStructure::wetCouponStrength { x = 0; y = 800; }
+        metadata Layout about BlueDogStructure::wetCouponStiffness { x = 320; y = 800; }
+        metadata Layout about BlueDogStructure::bondProof { x = 640; y = 800; }
+        metadata Layout about BlueDogStructure::bendingStrength { x = 960; y = 800; }
+        metadata Layout about BlueDogStructure::appendageDeflection { x = 0; y = 1200; }
+        metadata Layout about BlueDogStructure::hullDeflection { x = 320; y = 1200; }
+        metadata Layout about BlueDogStructure::panelStrength { x = 640; y = 1200; }
+        metadata Layout about BlueDogStructure::panelDeflection { x = 960; y = 1200; }
+        metadata Layout about BlueDogStructure::rootProofLoad { x = 0; y = 1600; }
     }
 }
 ```

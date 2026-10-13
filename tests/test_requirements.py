@@ -8,6 +8,8 @@ from tests.native_cases import native, native_graph, native_register, MODELS
 
 
 RELIABILITY_IDS = {'L-101', 'Q-101', 'Q-102', 'L-103', 'L-001', 'Q-001', 'L-104', 'Q-103', 'L-102'}
+STRUCTURE_LEAVES = {'bendingStrength', 'appendageDeflection', 'hullDeflection', 'panelStrength', 'panelDeflection', 'rootProofLoad', 'wetCouponStrength', 'wetCouponStiffness', 'bondProof'}
+STRUCTURE_IDS = {'T-001', *(f'T-{i}' for i in range(100, 114))}
 ENERGY_IDS = {f'E-{i}' for i in range(200, 206)}
 ATOMIC = json.loads(Path(__file__).with_name('atomic_requirements.json').read_text())
 
@@ -94,6 +96,7 @@ def test_diagram_preserves_expected_derivations(published_model):
     expected.update(('noLittering', name) for name in ['casualtyFlotation', 'majorComponentRetention', 'capsizeRecovery'])
     expected.update((r['parent'], r['usage']) for r in ATOMIC['leaves'])
     expected.update(tuple(edge) for edge in ATOMIC['shared_links'])
+    expected.update(('structuralIntegrity', name) for name in STRUCTURE_LEAVES)
     assert set(published_model.edges) == expected
     assert len(published_model.edges) == len(expected)
 
@@ -136,7 +139,7 @@ def test_mission_drivers_do_not_entail_owner_constraints(published_model):
     assert ('hawaiiVoyage', 'sustainedEnergyFeasibility') not in edges
 
 def test_register_preserves_ids_status_and_relationships(published_model):
-    ids = re.findall(r"^\| ([CHEMPNSRQL]-[0-9]+) \|", published_model.markdown, re.MULTILINE)
+    ids = re.findall(r"^\| ([CHEMPNSRQLT]-[0-9]+) \|", published_model.markdown, re.MULTILINE)
     expected = {"H-001", "M-001", "M-002",
                 *(f"C-00{i}" for i in range(10)), *(f"E-00{i}" for i in range(1, 8))}
     expected.update(['P-001', 'P-002', 'P-003', 'S-001', 'S-002', 'S-003', 'S-004', 'S-005', 'N-001', 'N-002', 'N-003', 'R-001', 'R-002', 'C-101', 'C-102'])
@@ -146,16 +149,20 @@ def test_register_preserves_ids_status_and_relationships(published_model):
     expected.update(f"C-{i:03d}" for i in range(10, 28))
     expected.update(ENERGY_IDS)
     expected.update(RELIABILITY_IDS)
+    expected.update(STRUCTURE_IDS)
     assert set(ids) == expected
     assert len(ids) == len(expected)
     for source, target in published_model.edges:
-        assert f'| {source} | {target} | open |' in published_model.markdown
+        # Construction relations have no status metadata; their requirement
+        # definitions do. Do not manufacture an 'open' value in the publisher.
+        status = '' if source == 'structuralIntegrity' else 'open'
+        assert f'| {source} | {target} | {status} |' in published_model.markdown
     rows = [line for line in published_model.markdown.splitlines() if line.startswith('| ')]
     assert len(rows) == len(expected) + len(published_model.edges) + 4
     data = [line for line in rows if line not in (
         '| ID | Requirement | Status | Statement |',
         '| Original | Derived | Status | Rationale |', '| --- | --- | --- | --- |')]
-    assert all((' | open | ' in line for line in data))
+    assert all(' | open | ' in line or line.startswith('| structuralIntegrity | ') for line in data)
 
 
 def test_focused_views_cover_all_derivations(published_model, rendered_site):
@@ -185,7 +192,7 @@ def test_focused_views_cover_all_derivations(published_model, rendered_site):
 def test_statements_exclude_supporting_material(published_model):
     statement_rows = re.findall(r'^\| [A-Z]-\d+ \| \w+ \| open \| (.*?) \|$',
                                 published_model.markdown, re.M)
-    assert len(statement_rows) == 237
+    assert len(statement_rows) == 237 + len(STRUCTURE_IDS)
     assert all(len(text.split()) <= 45 for text in statement_rows)
     assert all('Verification uses' not in text and 'Aggregate requirement' not in text
                and 'Shared verification context' not in text for text in statement_rows)

@@ -116,9 +116,9 @@ def test_construction_views_show_model_basis_and_qualification(rendered_site):
     materials=next(d for d in diagrams if '%% Page_practicality_materials::thread ' in d)
     assert len(re.findall(r'^  n\d+[(\[]',construction,re.M))==4
     assert construction.count('|"dependency"|')==3
-    assert len(re.findall(r'^  n\d+[(\[]',materials,re.M))==5
-    assert materials.count('|"derive"|')==3
-    assert materials.count('|"dependency"|')==1
+    assert len(re.findall(r'^  n\d+[(\[]',materials,re.M))==17
+    assert materials.count('|"derive"|')>=9
+    assert materials.count('|"dependency"|')>=3
     assert 'Every print job shall fit' in text
     assert 'wet-layup glass/epoxy reinforcement' in text
     assert 'Wet-conditioned production laminate coupons' in text

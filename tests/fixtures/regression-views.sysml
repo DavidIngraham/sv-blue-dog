@@ -4,6 +4,7 @@ package BlueDogViews {
         expose GorgeChallenge::*;
         expose BlueDog::Goals::*;
         expose BlueDogRequirements::*;
+        expose BlueDogStructure::*;
         filter @SysML::RequirementUsage;
     }
 }
