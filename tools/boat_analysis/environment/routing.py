@@ -109,6 +109,40 @@ def reference_route(water, start, finish, spacing):
     return route
 
 
+def bridge_geometry(values=None):
+    values = course_inputs() if values is None else values
+    features = json.loads((ROOT/'evidence/course/2026-10-11/chart-features.geojson').read_text())['features']
+    bridges = [f for f in features if f['properties']['object_class']=='BRIDGE']
+    chosen = next(f for f in bridges if f['properties']['LNAM']==values['bridgeSpanIdentifier'])
+    project = lambda f: transform(shape(f['geometry']), LocalFrame().project, interleaved=False)
+    span = project(chosen)
+    excluded = unary_union([project(f).buffer(values['bridgePierAllowanceM']) for f in bridges
+                            if f['properties']['LNAM'] != values['bridgeSpanIdentifier']])
+    points = np.asarray(span.exterior.coords)[:-1]
+    _, vectors = np.linalg.eigh(np.cov(points.T))
+    normal = vectors[:,0]
+    center = np.array([span.centroid.x, span.centroid.y])
+    approach = values['bridgeApproachM']
+    return span, excluded, center-normal*approach, center+normal*approach
+
+
+def course_route(water, start, finish, spacing, values=None):
+    """Cross the selected closed lift span; never borrow its clearance for another span."""
+    _, _, a, b = bridge_geometry(values)
+    start, finish = Point(start), Point(finish)
+    axis=b-a; center=(a+b)/2
+    side=lambda p: float(np.dot(np.array([p.x,p.y])-center,axis))
+    if side(start)*side(finish)>=0:
+        return reference_route(water,start,finish,spacing)
+    if side(start)>0: a,b=b,a
+    crossing=LineString([a,b])
+    if not water.covers(crossing):
+        raise ValueError('Selected bridge passage is not chart-clear')
+    first=reference_route(water,start,a,spacing)
+    last=reference_route(water,b,finish,spacing)
+    return LineString([*first.coords,*crossing.coords[1:],*list(last.coords)[1:]])
+
+
 def rounding_paths(water, gates, route, spacing=40):
     """Port rounding north-west-south, followed by an independently clear return."""
     north, west, south = [gates[k].interpolate(.5, normalized=True) for k in
@@ -120,7 +154,7 @@ def rounding_paths(water, gates, route, spacing=40):
             for start,end in ((math.pi/2,math.pi),(math.pi,3*math.pi/2))]
     if not all(water.covers(arc) for arc in arcs):
         raise ValueError('Rounding arc outside chart-clear water')
-    back = reference_route(water,south,gates['eastGate'].interpolate(.5,normalized=True),spacing)
+    back = course_route(water,south,gates['eastGate'].interpolate(.5,normalized=True),spacing)
     return [route,*arcs,back]
 
 
@@ -132,12 +166,16 @@ def build():
     works = Point(LocalFrame().project(lon,lat)).buffer(radius)
     groups['TEMPORARY_WORKS'] = works
     water = water.difference(works)
+    span, bridge_exclusions, _, _ = bridge_geometry(values)
+    groups['SELECTED_BRIDGE_SPAN'] = span
+    groups['BRIDGE_EXCLUSIONS'] = bridge_exclusions
+    water = water.difference(bridge_exclusions)
     gates = {k: marker_gate(values[k]) for k in ['eastGate', 'westGate', 'turnGate', 'returnGate']}
     marker = Point(LocalFrame().project(*values['westGate'][:2]))
     groups['ROUNDING_EXCLUSION'] = marker.buffer(values['westGate'][3])
     water = water.difference(groups['ROUNDING_EXCLUSION'])
-    route = reference_route(water, gates['eastGate'].interpolate(.5, normalized=True),
-                            gates['westGate'].interpolate(.5, normalized=True), values['routing'][4])
+    route = course_route(water, gates['eastGate'].interpolate(.5, normalized=True),
+                            gates['westGate'].interpolate(.5, normalized=True), values['routing'][4], values)
     length = sum(p.length for p in rounding_paths(water,gates,route,values['routing'][4]))/2
     if abs(length - values['referenceLegLengthM']) > 0.01:
         raise ValueError(f'Sizing reference length differs from chart route: {length}; update the model allocation')

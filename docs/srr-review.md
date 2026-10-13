@@ -2,7 +2,7 @@
 
 **Design phase:** Mission and requirements · SRR · [Development plan](development-plan.md)
 
-This review asks whether the mission and requirements are clear enough to develop the boat. The model changes are being integrated; **SRR is open**. The [technical appendix](srr-appendix.md) separates evidence, limitations and proposed actions. Your review determines the disposition.
+This review asks whether the mission and requirements are clear enough to develop the boat. The proposed baseline and supporting desktop assessments are prepared for review; **SRR approval is open**. The [technical appendix](srr-appendix.md) separates evidence, limitations and proposed actions. Your review determines the disposition.
 
 ## 1 · A small boat with a definite job
 
@@ -18,7 +18,7 @@ The testbed informs construction and control experiments; it is not the challeng
 
 ![Bingen to Stevenson and back, with marker-referenced gates.](figures/gorge-course-map.svg)
 
-Launch and retrieval at Bingen Point are outside the scored passage. Gate placement, bridge transit and shore recovery approaches need a reviewed course configuration. Current notices belong in launch readiness.
+Launch and retrieval at Bingen Point are outside the scored passage. Both scored legs use the charted Hood River lift span with the bridge closed. Adjacent spans without clearance evidence are excluded from the reference route. The complete reference circuit is approximately 66 km. Current notices belong in launch readiness.
 
 [Course definition](../models/missions/course.sysml) · [Mission simulation](mission-simulation.md)
 
@@ -111,7 +111,9 @@ flowchart TD
     recover --> retrieval["Shore retrieval or suitable deliberate grounding"]
 ```
 
-The implementation now models route-dependent reserve and powered approach. Real pickup sites, final shore capture and impaired-sensing risk remain open evidence items.
+The implementation models route-dependent reserve and powered approach. The desktop assessment selects Bingen and Stevenson as endpoint retrieval candidates, prioritizes Home Valley for intermediate north-bank coverage, and rejects Drano as a default autonomous destination. Spring Creek and Viento remain conditional alternatives. Endpoint-only recovery is not an accepted coverage solution.
+
+The [site assessment and survey acceptance criteria](srr-appendix.md#course-and-recovery-decision) define the physical evidence required before operational routing. Recovery exposure includes transit and arranged pickup delay, rather than a fixed 24-hour survival requirement.
 
 ## 7 · Monitoring does not steer the boat
 
@@ -126,7 +128,7 @@ Autonomous weather polling is allowed; manual data pushes are not. Communication
 ```sysml-report BlueDogSRRDocuments::EnvironmentProposal
 ```
 
-These are **review proposals**, not measured extremes or accepted launch limits. The fetch sensitivity exposed a mismatch in the old wave allocation. Current, wakes and storm recovery require further evidence before acceptance.
+These are **review proposals**, not measured extremes or accepted launch limits. The fetch sensitivity exposed a mismatch in the old wave allocation. The model now uses this same wave allocation, includes calm, and separates operational exposure from casualty recovery. The appendix specifies correlated cases, wake tests and the evidence needed before expanding the on-water envelope.
 
 Darkness is included. Fog matters when it compromises a required safety capability. Calm is a possible waiting state, not an automatic mission failure.
 
@@ -152,10 +154,7 @@ Sweep overall-length caps while leaving hull length and the remaining parameters
 
 There is no handicap score and no fixed sailing-speed floor. The reliability target is provisional. The design team chooses the preferred balance and records its rationale.
 
-A retained candidate fits the 1.2 m envelope and passes coarse checks, but its finer replay misses the voyage-energy allocation. Local searches do not establish a minimum feasible size or a calibrated mission probability.
-
-```sysml-report BlueDogSRRFrontierDocuments::SeedReplay
-```
+The retained 1.2 m design is replayed against the corrected course in the [current SRR evidence](srr-appendix.md#current-baseline-evidence). It is not an accepted vessel design. The earlier frontier is retained as historical exploration; current feasibility comes from the new replay. Local searches do not establish a minimum feasible size or a calibrated mission probability.
 
 [Alternatives, scope and unresolved searches](results.md)
 
@@ -177,19 +176,28 @@ The next experiments should inform structural mass, seams, wing behavior, actuat
 
 [Verification plans](../models/missions/verification.sysml) remain inconclusive until supported by the required evidence.
 
-## 13 · Actions before accepting the baseline
+## 13 · What is resolved, and what comes next
 
-Resolve the course and recovery-site assessment; review environmental allocations and encounter criteria; finish propagating decisions into sizing and all verification consumers; and rerun the published evidence against the final configuration.
+The SRR preparation defines the course and bridge passage, recovery-site selection, environmental design basis, traffic-performance allocations and impaired-sensing risk method. The model, reference routing, verification plans and fresh evidence use the same proposed baseline. These are concrete proposals for your review, not analyses you need to perform.
 
-The absence of a backup recovery detector is a design choice requiring residual-risk analysis. Failure likelihood, traffic exposure, consequences and common causes all matter; low probability has not been established.
+```sysml-report BlueDogSRRReadinessDocuments::Encounters
+```
 
-[Review action detail](srr-appendix.md#review-actions)
+The largest allocated closing-speed case needs 724 m of acquisition distance; the proposed design envelope rounds this to 750 m. This is an engineering allocation, not a navigation-rule stand-off. Demonstrating detection from a small, moving boat—especially in darkness—is a major PDR feasibility question.
+
+| Next gate | Deliverable | Who does the work |
+| --- | --- | --- |
+| PDR | Demonstrate a credible sensing/maneuver architecture and route/casualty recovery coverage; select a feasible design from the frontier | Analysis agent, using owner-supplied field observations and priorities |
+| CDR | Correlate critical loads, construction, propulsion and capsize behavior; release a defined build | Analysis agent integrates experiments conducted with the owner |
+| Each TRR | Confirm actual sites, access, notices, stage, forecast and the tested configuration; accept the scoped residual risk | Agent prepares the evidence; owner reviews and authorizes the trial |
+
+[Completed desktop assessments and explicit gate criteria](srr-appendix.md#review-actions)
 
 ## 14 · Your SRR disposition
 
 The available decisions are **proceed**, **proceed with limitations**, or **iterate**. No decision is recorded yet.
 
-A limited release can authorize concept development and focused experiments. It does not authorize an unattended challenge trial or certify the current numerical design.
+**Recommendation: proceed with limitations** to concept development and supervised component experiments. No unattended on-water operation is included. A limited release can authorize this work. It does not authorize an unattended challenge trial or certify the current numerical design.
 
 Review the baseline and proposed allocations, add actions, and identify the limits of any approval. I will implement the resulting actions and return the changed evidence for review.
 

@@ -22,8 +22,8 @@ package BlueDogMissionSimulation {
         attribute solarPeakW : Real = 40;
         attribute solarEfficiency : Real = 0.85;
         attribute dischargeEfficiency : Real = 0.9;
-        attribute beamM : Real = 0.8;
-        attribute lengthM : Real = 2;
+        attribute beamM : Real = 0.5;
+        attribute lengthM : Real = 1.2;
         attribute speedCapMps : Real = 3;
         attribute polarAnglesDeg : Real [7] ordered nonunique = (0,35,45,60,90,135,180);
         attribute speedWindRatios : Real [7] ordered nonunique = (0,0,0.28,0.36,0.45,0.38,0.30);

@@ -116,5 +116,7 @@ def test_larger_archived_baseline_is_ineligible_under_current_challenge():
     result=p.evaluate(z)
     assert result['envelope']['sweptLengthM'] > p.overall_length_limit_m
     assert result['structure']['overallLengthMargin'] < 0
-    assert result['concept']['voyageEnergyMargin']>-1e-4
+    # Updated course distance may also change energy feasibility; this test
+    # isolates the swept-length rejection rather than inheriting an old verdict.
+    assert np.isfinite(result['concept']['voyageEnergyMargin'])
     assert result['concept']['installationVolumeMargin']>0

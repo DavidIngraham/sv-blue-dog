@@ -453,10 +453,11 @@ package BlueDogSRRDocuments {
 package BlueDogRecoverySiteDocuments {
     private import DocumentQueries::*;
     calc def Candidates :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogRecoverySiteReview::bingen", "BlueDogRecoverySiteReview::stevenson", "BlueDogRecoverySiteReview::springCreek", "BlueDogRecoverySiteReview::viento")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDogRecoverySiteReview::bingen", "BlueDogRecoverySiteReview::stevenson", "BlueDogRecoverySiteReview::springCreek", "BlueDogRecoverySiteReview::viento", "BlueDogRecoverySiteReview::homeValley", "BlueDogRecoverySiteReview::drano")), columns = (
             Column(name = "Candidate", path = "site"),
             Column(name = "Access evidence", path = "evidence"),
             Column(name = "Before routing", path = "outstanding"),
+            Column(name = "Desktop decision", path = "desktopDisposition"),
             Column(name = "Accepted", path = "acceptedForRouting")))
     }
     part def Shortlist :> Document {
@@ -491,5 +492,32 @@ package BlueDogSRRFrontierDocuments {
     part def SeedReplay :> Document {
         attribute redefines title = "Refined replay of the retained seed";
         part replay : Table { calc rows : Replay; }
+    }
+}
+
+package BlueDogSRRReadinessDocuments {
+    private import DocumentQueries::*;
+    calc def EncounterRows :> Query {
+        Project(source = Named(qualifiedName = "BlueDogEncounterReview::criteria"), columns = (
+            Column(name = "Acquisition range m", path = "rangeAllocationM"),
+            Column(name = "Acquisition s", path = "acquisitionSeconds"),
+            Column(name = "Assessment s", path = "assessmentSeconds"),
+            Column(name = "Command s", path = "commandSeconds"),
+            Column(name = "Maneuver s", path = "maneuverSeconds"),
+            Column(name = "Contingency s", path = "reserveSeconds")))
+    }
+    part def Encounters :> Document {
+        attribute redefines title = "Traffic performance design allocation";
+        part budget : Table { calc rows : EncounterRows; }
+    }
+    calc def SiteDecisionRows :> Query {
+        Project(source = Named(qualifiedName = "BlueDogRecoverySiteReview::selection"), columns = (
+            Column(name = "Endpoints", path = "primarySites"),
+            Column(name = "Intermediate coverage", path = "intermediateSites"),
+            Column(name = "Coverage acceptance", path = "coverageDecision")))
+    }
+    part def SiteDecision :> Document {
+        attribute redefines title = "Recovery architecture decision";
+        part selection : Table { calc rows : SiteDecisionRows; }
     }
 }

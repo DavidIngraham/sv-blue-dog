@@ -6,7 +6,7 @@ package GorgeChallengeVerification {
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
     verification def TrafficNonInterferenceVerification {
-        doc /* Review encounter scenarios against applicable navigation obligations, then exercise commercial and non-AIS crossing, overtaking, head-on and constrained-water encounters. Record other-vessel impediment separately from collision and challenge completion. Numeric detection and maneuver allocations require review before a pass. */
+        doc /* Review encounter scenarios against applicable navigation obligations, then exercise commercial and non-AIS crossing, overtaking, head-on and constrained-water encounters. Record other-vessel impediment separately from collision and challenge completion. Use BlueDogEncounterReview target extents, 750 m acquisition envelope and response-time budget; independently observe closest hull approach and other-vessel impediment. Coarse mission truth tracks do not verify sensing. */
         objective acceptance { verify GorgeChallenge::trafficNonInterference; }
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }

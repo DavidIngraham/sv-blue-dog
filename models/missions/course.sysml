@@ -46,6 +46,16 @@ package TransGorgeCourse {
         metadata rationale : ModelingMetadata::Rationale { text = "2026-10-07 Northwest LNM week 40 page 2 locates railroad bridge work at White Salmon confluence, RM 168.2, through 2026-12-31. The derrick barge stays on station outside work hours. Source: https://www.navcen.uscg.gov/sites/default/files/pdf/lnms/lnm13402026.pdf . Exclude a 250 m analysis buffer around the published point for this snapshot."; }
         metadata issue : ModelingMetadata::Issue { text = "The radius is a conservative scenario allocation, not a surveyed work footprint or statutory stand-off. Replace with confirmed work extent and current notices before release; do not silently expire this exclusion using the computer clock."; }
     }
+    part bridgePassage {
+        attribute spanIdentifier : String = "0226241BDFAB1596";
+        attribute closedClearanceM : Real = 20.4;
+        attribute horizontalClearanceM : Real = 74.9;
+        attribute pierAllowanceM : Real = 10;
+        attribute verticalAllowanceM : Real = 2;
+        attribute referenceApproachM : Real = 150;
+        attribute source : String = "https://www.portofhoodriver.com/bridge-lift-request";
+        metadata rationale : ModelingMetadata::Rationale { text = "Select the charted Hood River lifting span, closed, for both legs. ENC US5WA3DP LNAM 0226241BDFAB1596 supplies the polygon and conservative 20.4 m closed clearance; the Port reports 20.42 m at its stated average river height. Adjacent spans without clearance evidence are excluded. No bridge opening is part of the mission. Vertical acceptance subtracts measured pool rise, vessel air draft including motion, and a 2 m project uncertainty allowance from chart clearance. PDR must verify the local stage datum; launch must check current works and pool stage. The 10 m pier allowance is a planning allocation, not a legal stand-off."; }
+    }
     part policy {
         attribute coordinateDatum : String = "WGS84 longitude/latitude degrees; bearings clockwise from true north; offsets in meters";
         attribute chartEvidence : String = "evidence/course/2026-10-11/chart-features.geojson";
@@ -62,7 +72,7 @@ package TransGorgeCourse {
         attribute restrictionClearanceM : Real = 50;
         attribute obstacleClearanceM : Real = 30;
         attribute routingGridM : Real = 40;
-        attribute referenceLegLengthM : Real = 32893.22318624455;
+        attribute referenceLegLengthM : Real = 32994.546297358545;
         metadata referenceLengthBasis : ModelingMetadata::Rationale { text = "Half the complete chart-domain reference circuit including the buoy rounding generated from this gate and clearance configuration by tools.boat_analysis.environment.routing. This equivalent leg length preserves full circuit distance in the symmetric sizing calculation; the mission simulation uses the distinct legs. This is a nominal sizing-analysis distance, not a prescribed sailing track; tacks and avoidance increase traveled distance. Regeneration checks this value against the chart-derived route."; }
         metadata routingRationale : ModelingMetadata::Rationale { text = "Initial routing allocations for the small-vessel analysis: chart depth at least 2 m, 30 m from charted land/obstructions and 50 m from excluded charted areas. These are project planning margins, not legal stand-off distances. Actual draft, pool stage, maneuvering, uncertainty and bridge clearances require separate assessment. Grid resolution is a numerical setting, not a vessel requirement."; }
         attribute gateNames : String [5] ordered nonunique = ("eastGate", "westGate", "turnGate", "returnGate", "eastGate");
@@ -74,6 +84,9 @@ package TransGorgeCourse {
     dependency courseBasis from policy to GorgeChallenge::courseCompletion;
 
     analysis GateGeometry {
+        out attribute bridgeSpanIdentifier : String = bridgePassage.spanIdentifier;
+        out attribute bridgePierAllowanceM : Real = bridgePassage.pierAllowanceM;
+        out attribute bridgeApproachM : Real = bridgePassage.referenceApproachM;
         out attribute referenceLegLengthM : Real = policy.referenceLegLengthM;
         out attribute temporaryWorks : Real [3] ordered nonunique = (TransGorgeCourse::temporaryWorks.longitudeDeg, TransGorgeCourse::temporaryWorks.latitudeDeg, TransGorgeCourse::temporaryWorks.screeningRadiusM);
         out attribute westGate : Real [5] ordered nonunique = (west.longitudeDeg, west.latitudeDeg, west.bearingFromMarkerDeg, west.nearOffsetM, west.farOffsetM);

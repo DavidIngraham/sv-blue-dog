@@ -8,6 +8,7 @@ package BlueDogRecoverySiteReview {
         attribute source : String;
         attribute evidence : String;
         attribute outstanding : String;
+        attribute desktopDisposition : String default = "Conditional field-survey candidate; not operationally released";
         attribute acceptedForRouting : Boolean = false;
     }
     part bingen : Candidate {
@@ -33,6 +34,25 @@ package BlueDogRecoverySiteReview {
         attribute :>> source = "https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=123";
         attribute :>> evidence = "Official park map identifies river access, making it a candidate south-bank retrieval location.";
         attribute :>> outstanding = "Assess accessible carry path, rocky landing and exposure. Cross-river traffic and current may make it inferior to a farther same-bank location.";
+    }
+    part homeValley : Candidate {
+        attribute :>> site = "Home Valley shoreline / Wind River launch sector";
+        attribute :>> source = "https://www.skamaniacounty.gov/departments-offices/public-works/parks-and-campgrounds";
+        attribute :>> evidence = "County-managed Home Valley park provides an intermediate north-bank access sector. County code 12.04.290 separately identifies Wind River launch and permit requirements.";
+        attribute :>> outstanding = "Survey river frontage and separate swim/recreation areas from recovery approaches; establish day/night pickup access and water-level limits. Do not equate beach access with a safe motor approach.";
+    }
+    part drano : Candidate {
+        attribute :>> site = "Drano Lake";
+        attribute :>> source = "https://wdfw.wa.gov/places-to-go/life-outdoors/southwest";
+        attribute :>> evidence = "WDFW identifies heavy fishing use and launch congestion. The lake entrance also adds road/rail bridge passage to casualty recovery.";
+        attribute :>> outstanding = "Excluded from the initial autonomous destination set. Reconsider only with entrance clearance, traffic and capture evidence.";
+        attribute :>> desktopDisposition = "Reject as default autonomous recovery destination";
+    }
+    part selection {
+        attribute primarySites : String = "Bingen harbor at the east end; Stevenson launch at the west end. Carry equipment for ramp or bank capture: Stevenson seasonal docks are not assumed in winter.";
+        attribute intermediateSites : String = "Prioritize a north-bank Home Valley retrieval survey; retain Spring Creek and south-bank Viento as alternatives. Do not route a casualty across the commercial corridor merely because a south-bank site is closer.";
+        attribute coverageDecision : String = "Endpoint-only recovery is not an accepted architecture: between endpoints it can require tens of kilometres of transit, and adverse-current authority is not demonstrated. PDR requires a route/casualty coverage map for each forecast scenario using surveyed approaches. Any uncovered position or loss of recovery authority prevents launch or requires an earlier abort. No arbitrary point on the shoreline counts as retrieval.";
+        attribute fieldProtocol : String = "At each site record WGS84 approach polygon, chart and actual depth at stated pool level, submerged/overhead obstacles, weeds/nets, drift and landing exposure, casualty retention method, legal walking/vehicle access, access hours, and one-person pickup time. Photograph and run a supervised drifting/capsized capture. Owner conducts access/physical observations; analysis agent integrates measured records and repeats route reserve checks.";
     }
     metadata rationale : ModelingMetadata::Rationale { text = "Assess more than the two endpoints so recovery distance can vary with position and remaining authority. These source-backed candidates narrow the field survey; none is yet a safe harbor or an approved numerical destination. Source review date: 2026-10-12."; }
     dependency reserveAssessment from bingen to GorgeChallenge::courseRecoveryReserve;

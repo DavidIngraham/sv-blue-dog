@@ -149,7 +149,7 @@ package BlueDogRequirements {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall assess and respond to collision risks within the deployment-specific traffic envelope. */
         comment conditions /* Use independently recorded head-on, crossing and overtaking AIS and non-AIS targets, day and night in the selected operational profile. */
-        metadata issue : ModelingMetadata::Issue { text = "Detection ranges, target signatures, closest-approach margins and maneuver feasibility remain unresolved acceptance parameters; tracking and avoidance cannot receive complete passes until these are frozen."; }
+        metadata issue : ModelingMetadata::Issue { text = "BlueDogEncounterReview allocates target classes, acquisition range, uncertainty and timing. Hardware sensing and maneuver evidence are PDR/CDR and test-readiness deliverables; the SRR definition is complete but satisfaction is not claimed."; }
     }
     requirement trafficSafety : TrafficSafety;
     #derivation connection challengeTrafficResponse {
@@ -334,7 +334,7 @@ package BlueDogRequirements {
 
     requirement def <'N-011'> GorgeWind {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain operational functions in 3–15 m/s mean true wind with 3-second gusts up to 20 m/s. */
+        doc /* The vessel shall retain operational functions in 0–15 m/s mean true wind with 3-second gusts up to 20 m/s. */
         comment conditions /* Operational functions are defined by N-001. Mean wind uses a 10-minute average referenced to 10 m above water. */
         comment notes /* Wind tolerance does not guarantee upstream progress. */
     }
@@ -348,7 +348,7 @@ package BlueDogRequirements {
 
     requirement def <'N-012'> GorgeWaves {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain operational functions in significant wave heights up to 1 m, peak periods 2–5 s and individual waves up to 2 m. */
+        doc /* The vessel shall retain operational functions in significant wave heights up to 1.5 m, peak periods 1.5–5 s and individual waves up to 3 m. */
         comment conditions /* N-001 defines operational functions. Wave statistics use 20-minute records. */
     }
     requirement gorgeWaves : GorgeWaves;
@@ -375,8 +375,8 @@ package BlueDogRequirements {
 
     requirement def <'N-014'> GorgeSurvivalWind {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain survival functions for 24 continuous hours in mean wind up to 25 m/s and 3-second gusts up to 35 m/s. */
-        comment conditions /* Use N-001 survival outcomes and the operational wind reference convention. Selected-profile wave, current, temperature and humidity limits apply concurrently. */
+        doc /* The vessel shall retain survival functions through the course-derived recovery exposure in mean wind up to 25 m/s and 3-second gusts up to 35 m/s. */
+        comment conditions /* Use N-001 survival outcomes and the operational wind reference convention. Selected-profile wave, current, temperature and humidity limits apply concurrently. BlueDogEnvironmentReview::RecoveryExposureHours includes casualty transit and declared pickup delay. */
     }
     requirement gorgeSurvivalWind : GorgeSurvivalWind;
     #derivation connection deriveGorgeSurvivalWind {
@@ -388,7 +388,7 @@ package BlueDogRequirements {
 
     requirement def <'N-015'> GorgeSurvivalWaves {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall retain survival functions for 24 continuous hours in significant wave heights up to 2 m, peak periods 3–7 s and individual waves up to 4 m. */
+        doc /* The vessel shall retain survival functions through the course-derived recovery exposure in significant wave heights up to 2 m, peak periods 1.5–7 s and individual waves up to 4 m. */
         comment conditions /* N-001 defines survival outcomes. */
     }
     requirement gorgeSurvivalWaves : GorgeSurvivalWaves;
@@ -512,7 +512,7 @@ package BlueDogRequirements {
     requirement def <'N-033'> Visibility {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall provide mode-appropriate navigation and traffic response across the specified visibility conditions. */
-        comment conditions /* Exercise daylight and darkness at meteorological visibility of at least 1 km, and detected visibility below 1 km. Traffic performance remains subject to unresolved S-001 scenarios. */
+        comment conditions /* Exercise daylight and darkness at meteorological visibility of at least 1 km, and detected visibility below 1 km. Apply the BlueDogEncounterReview scenarios and acquisition envelope. */
     }
     requirement visibility : Visibility;
     #derivation connection deriveVisibility {
@@ -524,8 +524,8 @@ package BlueDogRequirements {
 
     requirement def <'N-034'> CalmOperation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* With harvesting disabled and mean wind below 3 m/s, the vessel shall retain calm-mode functions above the R-002 reserve for 24 continuous hours. */
-        comment conditions /* Calm-mode functions are navigation, recording and autonomous boundary/traffic contingency. Initial conservative usable energy must cover the reserve plus 24 hours of measured worst-case calm-mode electrical load. Autonomous safety recovery first terminates qualification under GorgeChallenge::safetyCapabilityAbort, then may enable the motor under R-004. */
+        doc /* While waiting in mean wind below 3 m/s, the vessel shall preserve the course-derived recovery reserve. */
+        comment conditions /* Calm-mode functions are navigation, recording and autonomous boundary/traffic contingency. Waiting may continue only while forecast coverage, traffic/boundary safety and measured calm-mode loads preserve route-dependent recovery authority; no fixed waiting endurance is imposed. Autonomous safety recovery first terminates qualification under GorgeChallenge::safetyCapabilityAbort, then may enable the motor under R-004. */
         comment notes /* Neither progress nor station keeping is required. */
     }
     requirement calmOperation : CalmOperation;

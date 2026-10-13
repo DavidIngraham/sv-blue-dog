@@ -44,3 +44,12 @@ def test_commercial_encounters_exclude_archived_reaches_outside_course():
     commercial=[a for a in actors if a.name in ('commercial tow','passenger vessel')]
     assert commercial
     assert all(route.envelope.covers(a.track) for a in commercial)
+
+
+def test_both_legs_use_the_selected_bridge_span():
+    from tools.boat_analysis.environment.routing import build, rounding_paths
+    values,water,groups,gates,route=build()
+    paths=rounding_paths(water,gates,route,values['routing'][4])
+    for path in (paths[0],paths[-1]):
+        assert path.intersects(groups['SELECTED_BRIDGE_SPAN'])
+        assert not path.intersects(groups['BRIDGE_EXCLUSIONS'])
