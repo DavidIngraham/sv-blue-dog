@@ -2,7 +2,10 @@
 
 **Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
 
-The retained **1.2 m overall-length** candidate has now been replayed on the SRR course through the selected Hood River bridge span. It is about **10.3 kg**, with a conditional westerly passage of **33.85 hours**, but it fails the voyage-energy screen at both coarse and refined resolution. The refined shortfall is **1.27 Wh**. It remains a candidate to improve, not a build baseline.
+The **1.2 m overall-length** candidate now passes the nominal refined Gorge static screens on the selected Hood River bridge route. A 440 Wh battery and 260 mm hull beam clear the previous energy and reserve-buoyancy shortfalls. The candidate weighs **10.313 kg**, predicts a **33.87-hour** conditional westerly passage, and retains **3.97 Wh** beyond the allocated voyage energy. It remains a preliminary design requiring sensitivity studies and physical evidence.
+
+```sysml-report BlueDogSRRCurrentDocuments::Summary
+```
 
 [Current replay, mission outcomes and limitations](srr-appendix.md#current-baseline-evidence)
 
@@ -33,7 +36,7 @@ These figures describe their archived configuration. Their feasibility verdicts 
 ```sysml-report BlueDogSRRFrontierDocuments::SeedReplay
 ```
 
-The retained 1.2 m seed balances its operating cases at the finer geometry resolution. Its conditional westerly passage changes from 33.66 to 33.74 hours. The voyage-energy margin falls to −0.00556, so the candidate does not pass all refined screens. A small numerical shortfall can still matter when other margins are tight; it should be resolved by re-optimization and sensitivity checks, not rounded away.
+In that earlier replay, the retained 1.2 m seed balanced its operating cases, but the voyage-energy margin fell to −0.00556 as conditional passage changed from 33.66 to 33.74 hours. The current battery-and-beam correction above supersedes that failed candidate.
 
 The sampled sealed-body recovery curves have pitch equilibria and positive restoring roll moments at all interior samples across four wing trims. That does not establish dynamic capsize recovery, pitch stability, structural integrity or recovery with damaged equipment. The challenge permits limp recovery to shore; self-righting remains one possible vehicle strategy.
 
@@ -43,7 +46,7 @@ This replay applies to the retained seed, not automatically to every frontier al
 
 ## What needs to improve before selecting a boat
 
-The useful next work is to resolve the refined energy shortfall, test sensitivity to construction and foil assumptions, and connect eligible alternatives to chronological mission and recovery scenarios. Physical measurements of laminate stiffness, joints, actuator loads and wing behavior are still needed to establish model credibility.
+The useful next work is to test sensitivity to construction and foil assumptions, and connect eligible alternatives to chronological mission and recovery scenarios. Physical measurements of laminate stiffness, joints, actuator loads and wing behavior are still needed to establish model credibility.
 
 Cost and construction effort need a bill of materials and process estimates. Recovery needs assessed shore approaches and casualty capabilities. Until those inputs exist, a mass-versus-time plot represents only part of the design decision.
 

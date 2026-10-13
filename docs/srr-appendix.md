@@ -65,15 +65,22 @@ Fog, waves, power faults and common-cause loss of navigation can correlate failu
 
 ## Current baseline evidence
 
-[Current SRR desktop and retained-design replay](../evidence/runs/2026-10-13-srr-readiness/srr-readiness.json) · [Fixed-seed mission campaign](../evidence/runs/2026-10-13-srr-readiness/srr-mission-campaign.json)
+[Current SRR desktop and corrected-design replay](../evidence/runs/2026-10-13-srr-readiness/srr-readiness.json) · [Fixed-seed mission campaign](../evidence/runs/2026-10-13-srr-readiness/srr-mission-campaign.json)
 
-The route audit finds a 65.989 km reference circuit, chart-clear gates and both legs through the selected bridge span. The retained design is 10.252 kg. Its refined operating states are numerically balanced and predict a 33.846 h conditional westerly passage, but the voyage-energy screen requires 312.648 Wh against 311.382 Wh available: a 1.267 Wh shortfall. The coarse replay also fails this allocation. The baseline therefore contains **no accepted feasible design**; a small numerical shortfall is still a failed screen and cannot be rounded into success.
+The route audit finds a 65.989 km reference circuit, chart-clear gates and both legs through the selected bridge span.
+
+```sysml-report BlueDogSRRCurrentDocuments::Summary
+```
+
+The corrected candidate uses a 440 Wh battery and a 260 mm hull beam, up from 432.474 Wh and 258.483 mm. Added battery mass alone reduced reserve buoyancy below its allocation; the slightly wider hull restores that margin and adds installation space. Overall length remains 1.2 m. Total mass is 10.313 kg, approximately 61 g above the retained seed.
+
+The refined operating states balance and predict a 33.869 h conditional westerly passage. The existing 25% passage allowance plus six hours gives a 48.336 h energy basis. Available departure energy is 316.800 Wh against 312.826 Wh required, leaving **3.974 Wh positive headroom**. No challenge requirement or reserve policy was relaxed. The nominal Gorge structural, packaging, operating and sampled static recovery screens pass at the existing numerical tolerance. This clears the original 1.267 Wh deficit; it does not qualify hardware or demonstrate adverse-weather robustness. The all-season easterly-progress screen still fails and remains outside the selected-window Gorge profile.
 
 The impaired-sensing sensitivity spans approximately 0.012% to 12.6% under its explicitly assumed loss rates and recovery durations. This wide range supports collecting rate/exposure evidence; it does not support a claim that the residual risk is negligible.
 
 The 32 fixed-seed conceptual mission scenarios produce 18 simulated completions, 13 incomplete runs and 1 censored run. Incomplete cases stop when the coarse controller finds no safe action; the censored case reaches the computational horizon. These are conditional scenario counts, not a measured completion probability.
 
-The replay reuses a retained geometry as a test input, recomputes current constraints and solves refined operating states; it does not promote an old verdict to the new course. Mission logic uses a separately identified conceptual vessel and cannot qualify the optimized design.
+The replay starts from the retained concept, changes battery capacity and beam, and solves the refined operating states again. The coarse result records the old operating-state seed with the changed design; its residual is diagnostic, not a solved verdict for that design. Acceptance uses the newly balanced refined cases. This is a local repair, not a new frontier search or a reason to freeze either design variable in later optimization. Mission logic uses a separately identified conceptual vessel and cannot qualify the optimized design.
 
 ## Review actions
 
@@ -94,12 +101,14 @@ Your SRR task is to review the proposed baseline and these gate commitments, the
 
 Use the repository's uv-managed environment and pinned native SysML tool. The model validation, pytest suite and publishing workflow are described in [publishing](publishing.md). Native numerical adapters run in the Linux solver environment with GCC.
 
+The regression run passed 400 checks; one historical-route assertion was corrected and passed on rerun. The current-candidate acceptance check separately verifies positive energy, balanced operating cases, passing refined Gorge screens and unchanged qualification status.
+
 The recovery fixtures deliberately use synthetic locations and loads. They check current compensation, increasing reserve with exposure, unavailable recovery authority, explicit capsized performance, autonomous recovery without communications, persistent disqualification and independently observed collision consequences. They do not qualify a real shore location.
 
 The [current SRR mission campaign](../evidence/runs/2026-10-13-srr-readiness/manifest.json) exercises the current course, mission policy and seeded weather/traffic workflow using the conceptual vessel. It is not a mission-performance replay of the optimized 1.2 m candidate. The independently tested casualty routes remain synthetic pending real recovery-site assessment.
 
 ```sh
-uv run python -m tools.boat_analysis.evidence.srr --budget 10
+uv run python -m tools.boat_analysis.evidence.srr --budget 10 --battery-wh 440 --beam-m 0.26
 uv run python -m tools.boat_analysis.mission.campaign --count 32 --output build/analysis/srr-mission-campaign.json
 ```
 

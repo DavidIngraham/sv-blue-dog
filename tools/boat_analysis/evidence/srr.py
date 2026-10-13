@@ -10,7 +10,7 @@ from ..environment.routing import build, rounding_paths
 
 def run(budget=10, battery_wh=None, beam_m=None):
     source=ROOT/'evidence/runs/2026-10-13-srr-frontier/srr-candidate-replay.json'
-    paths=[p.relative_to(ROOT).as_posix() for p in (ROOT/'tools/boat_analysis').rglob('*.py')]
+    paths=[p.relative_to(ROOT).as_posix() for p in (ROOT/'tools/boat_analysis').rglob('*.py') if '.venv' not in p.parts]
     paths += [source.relative_to(ROOT).as_posix(),'evidence/course/2026-10-11/chart-features.geojson',
               'build/analysis/coupled-uncertainty-inputs.json','build/analysis/wing-polar-grid.json',
               'build/analysis/wing-geometry.json','uv.lock']

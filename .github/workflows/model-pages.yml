@@ -55,6 +55,9 @@ jobs:
       - run: uv run python -m tools.publishing.frontier --run 2026-10-13-srr-frontier
       - name: Check SRR sizing views match archived evidence
         run: git diff --exit-code -- models/evidence/srr-frontier.sysml docs/figures/srr-frontier.svg
+      - run: uv run python -m tools.publishing.srr --run 2026-10-13-srr-readiness
+      - name: Check current SRR candidate matches replay evidence
+        run: git diff --exit-code -- models/evidence/srr-current.sysml
       - run: uv run python -m tools.boat_analysis.cli prepare
       - run: uv run python -m tools.boat_analysis.cli evidence-check
       - run: uv run pytest -q

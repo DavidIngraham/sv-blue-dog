@@ -521,3 +521,20 @@ package BlueDogSRRReadinessDocuments {
         part selection : Table { calc rows : SiteDecisionRows; }
     }
 }
+
+package BlueDogSRRCurrentDocuments {
+    private import DocumentQueries::*;
+    calc def CandidateRows :> Query {
+        Project(source = Named(qualifiedName = "BlueDogSRRCurrent::candidate"), columns = (
+            Column(name = "Battery Wh", path = "batteryWh"),
+            Column(name = "Mass kg", path = "massKg"),
+            Column(name = "Passage h", path = "westerlyPassageHours"),
+            Column(name = "Energy headroom Wh", path = "energyHeadroomWh"),
+            Column(name = "Refined static screens pass", path = "staticScreensPass"),
+            Column(name = "Physically qualified", path = "physicallyQualified")))
+    }
+    part def Summary :> Document {
+        attribute redefines title = "Current SRR sizing candidate";
+        part result : Table { calc rows : CandidateRows; }
+    }
+}

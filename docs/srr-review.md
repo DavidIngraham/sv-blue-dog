@@ -154,7 +154,7 @@ Sweep overall-length caps while leaving hull length and the remaining parameters
 
 There is no handicap score and no fixed sailing-speed floor. The reliability target is provisional. The design team chooses the preferred balance and records its rationale.
 
-The retained 1.2 m design is replayed against the corrected course in the [current SRR evidence](srr-appendix.md#current-baseline-evidence). It is not an accepted vessel design. The earlier frontier is retained as historical exploration; current feasibility comes from the new replay. Local searches do not establish a minimum feasible size or a calibrated mission probability.
+The 1.2 m concept, corrected to a 440 Wh battery and 260 mm hull beam, passes nominal refined Gorge static screens against the corrected course in the [current SRR evidence](srr-appendix.md#current-baseline-evidence). It is not an accepted vessel design. The earlier frontier is retained as historical exploration; current feasibility comes from the new replay. Local searches do not establish a minimum feasible size or a calibrated mission probability.
 
 [Alternatives, scope and unresolved searches](results.md)
 

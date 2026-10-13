@@ -1,0 +1,16 @@
+{
+  "sourceRevision": "b2aa167bc0a2cd7958246e20f70a227bc257bc39",
+  "files": {
+    "coupled-uncertainty-inputs.json": {
+      "sha256": "564eca11e972de9b47a949f13dc6481a7040a50e3c5bb22e0292ec08624c35e0"
+    },
+    "srr-mission-campaign.json": {
+      "sha256": "83f032181f30fe69d76ea8ce19c81931d3e5869183c6f993c9ba3daa7b71c63a"
+    },
+    "srr-readiness.json": {
+      "sha256": "107549a93890b79cd186d8cdda973233582e57f7e14a0b9f6aca4d9552fe0f9b"
+    }
+  },
+  "qualified": false,
+  "scope": "Current SRR desktop design basis, 440 Wh / 260 mm beam nominal candidate replay, and separate conceptual mission campaign. No physical qualification or SRR approval."
+}
