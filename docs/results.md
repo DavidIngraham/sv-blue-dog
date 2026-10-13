@@ -23,7 +23,11 @@ Both the 1.2 m exploration and the subsequent 1.3 m refinement were stopped with
 
 ## Looking at the boat
 
-[Open the interactive 3D comparison](https://davidingraham.github.io/sv-blue-dog/assets/concepts/). Both candidates open at the same scale; orbit, zoom, switch viewpoints or download the GLB meshes. The waterline and center of gravity come from the native calculations. Rotation rings show the space swept by the wing and rudder.
+Both candidates open at the same scale in the [blog's interactive comparison](https://davidingraham.github.io/research/?collection=sv-blue-dog&article=design-search-results#looking-at-the-boat). Orbit, zoom, switch viewpoints or download the GLB meshes. The waterline and center of gravity come from the native calculations. Rotation rings show the space swept by the wing and rudder.
+
+```model-comparison
+{"src":"https://davidingraham.github.io/sv-blue-dog/assets/concepts/candidates.json"}
+```
 
 ![Equal-scale isometric, side, front and top sketches of the 2.0 m and 1.4 m concepts.](figures/sizing-concepts.png)
 
