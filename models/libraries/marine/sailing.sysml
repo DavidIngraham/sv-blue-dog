@@ -198,4 +198,18 @@ package MarineSailing {
         return result : Real [*] ordered nonunique;
         Core(d,p,q,s,aero,massData,hydro,(hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0,hydro#(1)*0))
     }
+    calc def InputChecks {
+        doc /* Executable numerical preconditions shared by scalar and batch
+         * operating evaluation. Each output is one for valid, zero otherwise. */
+        in p : Real [41] ordered nonunique;
+        in s : Real [9] ordered nonunique;
+        in hydro : Real [12] ordered nonunique;
+        attribute driveEfficiencies : Real = if p#(2) > 0 and p#(2) <= 1 and p#(3) > 0 and p#(3) <= 1 ? 1.0 else 0.0;
+        attribute wingDuty : Real = if p#(7) >= 0 and p#(8) >= 0 and p#(7)+p#(8) <= 1.000000000001 ? 1.0 else 0.0;
+        attribute rudderDuty : Real = if p#(10) >= 0 and p#(10) <= 1 ? 1.0 else 0.0;
+        attribute positiveSpeed : Real = if s#(4) > 0 ? 1.0 else 0.0;
+        attribute positiveWettedArea : Real = if hydro#(3) > 0 ? 1.0 else 0.0;
+        return result : Real [5] ordered nonunique;
+        (driveEfficiencies,wingDuty,rudderDuty,positiveSpeed,positiveWettedArea)
+    }
 }

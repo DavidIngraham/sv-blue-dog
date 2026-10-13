@@ -42,10 +42,30 @@ package MarineMass {
         attribute moment0 : Real = hullSkinKg*geometry#(2)+hullRibKg*geometry#(2)+wingSkinKg*geometry#(14)+wingRibKg*geometry#(18)+keelSkinKg*geometry#(26)+keelRibKg*geometry#(30)+rudderSkinKg*geometry#(38)+rudderRibKg*geometry#(42)+batteryMass*d#(27)*d#(1)+wingDriveMass*d#(10)*d#(1)+-rudderDriveMass*d#(15)*d#(1)+d#(16)*geometry#(49)+p#(39)*p#(40)*d#(1);
         attribute moment1 : Real = hullSkinKg*geometry#(3)+hullRibKg*geometry#(3)+wingSkinKg*geometry#(15)+wingRibKg*geometry#(19)+keelSkinKg*geometry#(27)+keelRibKg*geometry#(31)+rudderSkinKg*geometry#(39)+rudderRibKg*geometry#(43)+d#(16)*geometry#(50);
         attribute moment2 : Real = hullSkinKg*geometry#(4)+hullRibKg*geometry#(4)+wingSkinKg*geometry#(16)+wingRibKg*geometry#(20)+keelSkinKg*geometry#(28)+keelRibKg*geometry#(32)+rudderSkinKg*geometry#(40)+rudderRibKg*geometry#(44)+d#(16)*geometry#(51)+batteryMass*(-d#(3)+(d#(3)+d#(4))*d#(28))+panelMass*d#(4)+-(wingDriveMass+rudderDriveMass+equipmentMass-p#(39))*d#(3)/2+p#(39)*(d#(4)+p#(41));
+        attribute cgX : Real = moment0/totalMass;
+        attribute cgY : Real = moment1/totalMass;
+        attribute cgZ : Real = moment2/totalMass;
+        attribute hullLaminateThickness : Real = d#(21)/m#(8)+d#(21)*p#(1)/m#(9);
+        attribute wingLaminateThickness : Real = d#(22)/m#(8)+d#(22)*p#(1)/m#(9);
+        attribute keelLaminateThickness : Real = d#(23)/m#(8)+d#(23)*p#(1)/m#(9);
+        attribute rudderLaminateThickness : Real = d#(24)/m#(8)+d#(24)*p#(1)/m#(9);
         return result : Real [*] ordered nonunique;
         (totalMass, hullMass, wingMass, keelMass, rudderMass, batteryMass, panelMass, wingDriveMass, rudderDriveMass, equipmentMass,
-         moment0/totalMass,moment1/totalMass,moment2/totalMass,
-         hullMaterialVolume,wingMaterialVolume,keelMaterialVolume,rudderMaterialVolume,
-         d#(21)/m#(8)+d#(21)*p#(1)/m#(9), d#(22)/m#(8)+d#(22)*p#(1)/m#(9), d#(23)/m#(8)+d#(23)*p#(1)/m#(9), d#(24)/m#(8)+d#(24)*p#(1)/m#(9))
+         cgX,cgY,cgZ,hullMaterialVolume,wingMaterialVolume,keelMaterialVolume,rudderMaterialVolume,
+         hullLaminateThickness,wingLaminateThickness,keelLaminateThickness,rudderLaminateThickness)
+    }
+
+    calc def InputChecks {
+        doc /* Executable preconditions for MassProperties. One denotes a valid
+         * input group, zero an invalid one. These preserve the numerical adapter's
+         * physical domain; they are not vessel acceptance requirements. */
+        in d : Real [29] ordered nonunique;
+        in p : Real [41] ordered nonunique;
+        attribute positiveDimensions : Real = if d#(1) > 0 and d#(2) > 0 and d#(3) > 0 and d#(4) > 0 and d#(5) > 0 and d#(6) > 0 and d#(8) > 0 and d#(11) > 0 and d#(12) > 0 and d#(13) > 0 and d#(14) > 0 and d#(15) > 0 and d#(17) > 0 and d#(18) > 0 and d#(19) > 0 and d#(20) > 0 and d#(21) > 0 and d#(22) > 0 and d#(23) > 0 and d#(24) > 0 and d#(25) > 0 and d#(26) > 0 ? 1.0 else 0.0;
+        attribute nonnegativeBallast : Real = if d#(16) >= 0 ? 1.0 else 0.0;
+        attribute positiveBatterySpecificEnergy : Real = if p#(13) > 0 ? 1.0 else 0.0;
+        attribute nonnegativeResinRatio : Real = if p#(1) >= 0 ? 1.0 else 0.0;
+        return result : Real [4] ordered nonunique;
+        (positiveDimensions,nonnegativeBallast,positiveBatterySpecificEnergy,nonnegativeResinRatio)
     }
 }

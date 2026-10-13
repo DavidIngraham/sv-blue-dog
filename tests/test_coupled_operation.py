@@ -77,7 +77,7 @@ def test_locked_drive_saves_holding_power_without_free_motion(native_case):
     inefficient=k.evaluate(*args)
     assert inefficient['averagePower']>locked['averagePower']
     p[7]=1
-    with pytest.raises(ValueError,match='duty'):k.evaluate(*args)
+    with pytest.raises(ValueError,match='wingDuty'):k.evaluate(*args)
 
 
 def test_route_tack_weights_cancel_crosswind_velocity(native_case):
