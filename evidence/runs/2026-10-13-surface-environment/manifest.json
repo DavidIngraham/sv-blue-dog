@@ -1,0 +1,45 @@
+{
+  "sourceRevision": "a342847b380236732fee6cfe483f5973e4bce9be",
+  "files": {
+    "operating-1.4.json": {
+      "sha256": "19ab04f4eb3f0b1f78323a03484ea8f4cfc0427f8485e53eef49a06b5e5e75a0"
+    },
+    "operating-2.0.json": {
+      "sha256": "3171f41e0772dae0c5d096da992e01672ec7092d8420f3a92f8694cee8e02710"
+    },
+    "shear-calm.json": {
+      "sha256": "704c9206614d4d67249c6273a1018b86b14961da8bb8b0dfc0b5851ec16ce965"
+    },
+    "shear-waves.json": {
+      "sha256": "b684c8c36f8a1a42d3a0ed4524fc3b1e2b252293516b4e0e03fff83ab59bbe8e"
+    },
+    "summary.json": {
+      "sha256": "bdc5dad72ef98bebe0ed018020c5ceb002133889907b1bdb5dfbf947f84764b8"
+    },
+    "uniform-calm.json": {
+      "sha256": "8fb8432c1534e942fd665fb0f83ba9708e6ed8b109b129444f2ca91c6a277998"
+    }
+  },
+  "inputArtifacts": {
+    "evidence/runs/2026-10-12-finite-passage/concept-credibility.json": "b9e12549ea3fe6b706fa752c469d0d586b692e2f35281f528c71fe27954824a4",
+    "evidence/runs/2026-10-12-finite-passage/coupled-uncertainty-inputs.json": "dde79cc95176ac23759dbd6704a3b7c294432248a24f23ad14a1835757ad2d21",
+    "evidence/runs/2026-10-12-finite-passage/interrupted-refinement.json": "b409ac07beb8b7a93aeda1bf3e24790bbf3266749a44b3f67ba1c2f467013d15",
+    "evidence/runs/2026-10-12-finite-passage/manifest.json": "b1221dbc249fb0ba630b6354f0cdc5c8f6452d294abc4923c4c828511aaf1ea5",
+    "evidence/runs/2026-10-12-finite-passage/mission-candidate.json": "e6d1ebde889e942a98585db9331203cb79ddb1f07f786a6c57534b51a74247e5",
+    "evidence/runs/2026-10-12-finite-passage/sizing-candidate-1p4.json": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88",
+    "evidence/runs/2026-10-12-finite-passage/sizing-continuation.json": "3e6e9ab8b711d4685297d7dbc2e2a2e696c5294d3163c9f95db7e87275353d2c",
+    "evidence/runs/2026-10-12-finite-passage-exploration/coupled-uncertainty-inputs.json": "dde79cc95176ac23759dbd6704a3b7c294432248a24f23ad14a1835757ad2d21",
+    "evidence/runs/2026-10-12-finite-passage-exploration/credibility-1p4.json": "b9e12549ea3fe6b706fa752c469d0d586b692e2f35281f528c71fe27954824a4",
+    "evidence/runs/2026-10-12-finite-passage-exploration/interrupted-sizing-trial.json": "9bc0a3802cf8d3a2f4b82ef74f89c4501edd4a04d5a70fb68f5e9ca6aef11420",
+    "evidence/runs/2026-10-12-finite-passage-exploration/manifest.json": "1f07f23e814913309daf2923da648c2713461c5dcfca78467058837daf4ba051",
+    "evidence/runs/2026-10-12-finite-passage-exploration/mission-candidate-1p4.json": "e6d1ebde889e942a98585db9331203cb79ddb1f07f786a6c57534b51a74247e5",
+    "evidence/runs/2026-10-12-finite-passage-exploration/sizing-candidate-1p4.json": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88",
+    "evidence/runs/2026-10-12-finite-passage-exploration/sizing-continuation.json": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88",
+    "evidence/runs/2026-10-10-coupled/wing-polar-grid.json": "1ee81c4c85e8fe8d5bc34164db426c7872e1ddcb90e0c1fb1862cea003c4d365",
+    "evidence/runs/2026-10-10-coupled/wing-geometry.json": "1a3836193ed6ddb2fd8e42c920e5b41bf68deb3ec8092317a1fedab53ea3123b"
+  },
+  "completed": true,
+  "qualified": false,
+  "scope": "Fixed 1.4 m and 2 m operating replay, then 12 paired 1.4 m voyages. Synthetic environmental sensitivity; no physical qualification or size optimization.",
+  "provenanceNote": "Excluded unused, ignored OpenVSP virtual-environment Python files from source hashes during archival packaging; the environmental replay did not execute VSP. Scientific inputs and results are unchanged. Python dependency versions are recorded in uv.lock."
+}

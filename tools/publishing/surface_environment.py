@@ -22,7 +22,7 @@ def render(directory,output):
         ax.bar(x-.18,before,.36,label='Re-solved controls, uniform wind',color='#93abc1')
         ax.bar(x+.18,after,.36,label='Re-solved controls, wind shear',color='#166574')
         ax.set(xticks=x,xticklabels=[f"{c['wind_m_s']:g}\n{'beat' if c['windward'] else 'run'} {'+' if c['tack']>0 else '−'}" for c in r['cases']],
-               ylabel='Water-relative VMG (m/s)',title=f'{length:.1f} m hull — fixed dimensions')
+               xlabel='Wind at 10 m (m/s), mode and tack',ylabel='Water-relative VMG (m/s)',title=f'{length:.1f} m hull — fixed dimensions')
         ax.grid(axis='y',alpha=.2);ax.set_axisbelow(True)
         for i,c in enumerate(r['cases']):
             if not c['screenFeasible']:ax.text(i,after[i],'unsupported',rotation=90,fontsize=8)
@@ -38,10 +38,11 @@ def render(directory,output):
                 samples=v['surface_summary'].get('samples',[])
                 axes[1,1].plot([s['seconds']/3600 for s in samples],[s['significantHeightM'] for s in samples],label=f"Seed {v['index']}")
     axes[1,0].set(xlabel='Elapsed voyage time (h)',ylabel='Paired scenario index',title='1.4 m missions: circle completes; × stops')
+    axes[1,0].set_yticks(range(len(r['results'])))
     axes[1,0].legend(fontsize=8);axes[1,0].grid(alpha=.2)
     axes[1,1].set(xlabel='Elapsed voyage time (h)',ylabel='Modeled significant height (m)',title='Wind seas and scripted wakes')
     axes[1,1].legend(fontsize=8);axes[1,1].grid(alpha=.2)
-    fig.suptitle('Surface-environment sensitivity — synthetic scenarios, not qualification',fontsize=14)
+    fig.suptitle('Surface-environment replay',fontsize=14)
     fig.savefig(output,dpi=160);plt.close(fig)
 
 

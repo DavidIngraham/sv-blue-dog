@@ -15,7 +15,7 @@ from types import SimpleNamespace
 import numpy as np
 
 from ..evidence.continuation import compatible_stages
-from ..evidence.records import run_record,source_hashes,validate
+from ..evidence.records import run_record,source_hashes,validate,input_path
 from ..model.runtime import ROOT
 from ..model.surface import SurfaceOperation,policy_inputs
 from ..model.vessel import CoupledModel
@@ -73,8 +73,14 @@ def run(count=4,budget=25,resolution=12,destination=None,reuse=False):
     stages=[s for s in compatible_stages(source_run) if s['feasible']]
     selected=[stages[-1],stages[0]]
     policy=policy_inputs()
-    paths=[p for p in (ROOT/'tools/boat_analysis').rglob('*.py')]
+    paths=[p for p in (ROOT/'tools/boat_analysis').rglob('*.py') if '.venv' not in p.parts]
     paths += [ROOT/'uv.lock',ROOT/'evidence/course/2026-10-11/chart-features.geojson',ROOT/'evidence/course/2026-10-11/chart-extraction.json']
+    paths += [source_run/'mission-candidate.json',input_path('wing-polar-grid.json'),input_path('wing-geometry.json')]
+    ancestor=source_run;seen=set()
+    while ancestor not in seen and (ancestor/'sizing-continuation.json').exists():
+        seen.add(ancestor)
+        paths.extend([ancestor/'manifest.json',ancestor/'sizing-continuation.json'])
+        ancestor=ROOT/'evidence/runs'/run_record(ancestor,'sizing-continuation.json').get('seedRun','')
     hashes=source_hashes(paths)
     configurations=[]
     for stage in selected:
