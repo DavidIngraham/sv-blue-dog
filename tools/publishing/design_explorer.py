@@ -11,17 +11,16 @@ import subprocess
 from pathlib import Path
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.model.design_types import Design, Parameters
-from tools.boat_analysis.evidence.records import validate
+from tools.boat_analysis.evidence.records import validate, run_record
 from tools.boat_analysis.geometry.vessel import section_data
-from tools.boat_analysis.evidence.continuation import compatible_stages
 
 
 def render(output):
     mass = json.loads((ROOT/'.tools/coupled-contract.json').read_text())
     operation = json.loads((ROOT/'.tools/coupled-operation-contract.json').read_text())
     validate(mass['sourceHashes']); validate(operation['sourceHashes'])
-    stages = [s for s in compatible_stages(ROOT/'evidence/runs/2026-10-12-finite-passage') if s['feasible']]
-    design = Design.from_mapping(stages[-1]['design']).to_mapping()
+    candidate = run_record(ROOT/'evidence/runs/2026-10-13-srr-frontier', 'srr-candidate-replay.json')
+    design = Design.from_mapping(candidate['design']).to_mapping()
     assumptions = Parameters.from_mapping(dict(zip(mass['parameterNames'], mass['parameterValues'], strict=True)))
     text = (ROOT/'models/analyses/sizing/inputs.sysml').read_text()
     materials = re.search(r'out attribute materialValues.*?= \((.*?)\);', text, re.S)[1]
@@ -40,7 +39,7 @@ def render(output):
                                 ('materials', material_names, mass['materialValues'])]:
         fields.extend(dict(name=n, kind=kind, value=v) for n,v in zip(names, values, strict=True))
     record = dict(version=1, revision=subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip(),
-                  baseline='2026-10-12-finite-passage / final retained 1.4 m candidate',
+                  baseline='2026-10-13-srr-frontier / retained 1.2 m seed; refined energy shortfall unresolved',
                   fields=fields, wingSection=dict(u=u.tolist(), mean=mean.tolist(), half=half.tolist()),
                   solverInputs={k:v for k,v in operation.items() if not k.endswith('Hash') and k!='sourceHashes'},
                   sourceHashes={**mass['sourceHashes'], **operation['sourceHashes']})

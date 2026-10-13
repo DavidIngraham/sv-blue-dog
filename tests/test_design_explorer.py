@@ -11,6 +11,9 @@ def test_native_contract_export(tmp_path):
     mass=json.loads((ROOT/'.tools/coupled-contract.json').read_text())
     operation=json.loads((ROOT/'.tools/coupled-operation-contract.json').read_text())
     fields=data['fields']
+    assert '2026-10-13-srr-frontier' in data['baseline']
+    assert next(f['value'] for f in fields if f['name']=='length_m') <= 1.2
+    assert data['solverInputs']['maximumOverallLengthM'] == 1.2
     assert len(fields)==80
     design=[f for f in fields if f['kind']=='design']
     assert [f['name'] for f in design]==mass['designNames']
