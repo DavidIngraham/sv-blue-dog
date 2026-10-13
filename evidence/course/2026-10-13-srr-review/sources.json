@@ -1,0 +1,38 @@
+{
+  "reviewDate": "2026-10-13",
+  "scope": "Desktop SRR design basis. No field survey, operational authorization or statistical traffic calibration.",
+  "sources": [
+    {
+      "url": "https://www.portofhoodriver.com/bridge-lift-request",
+      "finding": "Port identifies 67 ft (20.42 m) closed lift-span clearance at its stated average river height, 246 ft horizontal clearance, and pool-level dependence. Supports using the identified lifting span, not adjacent unassessed spans."
+    },
+    {
+      "url": "https://www.portofklickitat.com/boat-launch-parks",
+      "finding": "Port identifies Bingen ramp/harbor and prohibits overnight parking. Overnight recovery needs independent transport arrangements."
+    },
+    {
+      "url": "https://portofskamania.specialdistrict.org/boat-launch-and-docks",
+      "finding": "Stevenson launch is on Cascade Avenue. Seasonal loading docks are described for May through October; winter recovery cannot assume those docks. Search-index text was accessible; direct page fetch was unavailable."
+    },
+    {
+      "url": "https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=123",
+      "finding": "Viento provides Columbia River access. This establishes a survey candidate, not navigable approach or casualty retention."
+    },
+    {
+      "url": "https://www.skamaniacounty.gov/departments-offices/public-works/parks-and-campgrounds",
+      "finding": "County identifies Home Valley Park and its address; supports an intermediate access-sector survey."
+    },
+    {
+      "url": "https://ecode360.com/46464778",
+      "finding": "County code 12.04.290 identifies Wind River and Drano launch/parking permit requirements. Access does not establish autonomous landing permission."
+    },
+    {
+      "url": "https://wdfw.wa.gov/places-to-go/life-outdoors/southwest",
+      "finding": "WDFW identifies intense fishing use and launch traffic at Drano. This supports rejecting it as a default impaired-recovery destination pending a separate entrance/traffic assessment."
+    },
+    {
+      "path": "evidence/course/2026-10-11/chart-features.geojson",
+      "finding": "Hood River lifting span is LNAM 0226241BDFAB1596, closed vertical clearance 20.4 m, horizontal clearance 74.9 m. Updated route crosses it twice and excludes other bridge footprints."
+    }
+  ]
+}
