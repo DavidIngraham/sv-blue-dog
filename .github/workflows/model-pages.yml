@@ -17,6 +17,9 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -46,6 +49,7 @@ jobs:
       - name: Check course map matches the model and chart evidence
         run: git diff --exit-code -- docs/figures/gorge-course-map.svg
       - run: uv run python -m tools.publishing.wave_motion evidence/runs/2026-10-13-wave-motion
+      - run: uv run python -m tools.publishing.wave_performance evidence/runs/2026-10-13-wave-performance
       - run: uv run python -m tools.publishing.build
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:

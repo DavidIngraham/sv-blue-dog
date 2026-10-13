@@ -80,12 +80,16 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     capacity, stored, reserve, load, maneuver_wh, solar, charging, discharge = inputs['energy']
     from .candidate import Performance
     performance = Performance(inputs['performance']) if 'performance' in inputs else None
+    wave_performance=None
+    if 'wavePerformance' in inputs:
+        from .wave_performance import WavePerformance
+        wave_performance=WavePerformance(inputs['wavePerformance']);performance=wave_performance
     outside_coverage = 0.
     wave_effects = None
     wave_summary = dict(maximumSignificantHeightM=0., maximumAddedResistanceN=0., minimumSpeedRetention=1., contactScreenSeconds=0., outsideWaveCoverageSeconds=0., outsideMotionCoverageSeconds=0., wakeEncounters=0, samples=[])
     def sailing_speeds(wind, angles):
         speeds = performance.speeds(wind,angles) if performance else np.minimum(inputs['dimensions'][2],wind*np.interp(np.abs(angles),inputs['angles'],inputs['speedRatios']))
-        if wave_effects is not None:
+        if wave_effects is not None and wave_performance is None:
             speeds=wave_effects.evaluate(wind,90-state.wind_from_deg+np.asarray(angles),speeds)
         return speeds
     if dt <= 0 or hours <= 0 or not 0 < reserve < stored <= capacity or not 0 < discharge <= 1:
@@ -144,7 +148,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         if wave_effects is not None:
             wave_summary['wakeEncounters']=len(wave_effects.seen)
             observed.surface_summary=wave_summary
-            observed.model_scope += '; directional wave resistance sensitivity and geometric contact screens; no wave-driven vessel dynamics'
+            observed.model_scope += ('; cached cycle-averaged sailing balance with linear wave response' if wave_performance is not None else '; directional wave resistance sensitivity and geometric contact screens')
         return observed
     step, next_control, turn_remaining = 0, 0., 0.
     while seconds < hours*3600:
@@ -165,6 +169,26 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         nearest = route.project(Point(position))
         current = direction(route, nearest)*state.current_mps
         if wave_effects is not None:wave_effects.update(seconds,position,current)
+        if wave_performance is not None:
+            trains=wave_effects.components if wave_effects is not None else []
+            if len(trains)>1:
+                wave_summary['performanceCoverageReason']='mixed wave trains not in regular-wave cache'
+                return result('incomplete','wave_performance_outside_coverage')
+            if trains:
+                height,period,propagation=trains[0]
+                radians=np.deg2rad(90-propagation);along=float(np.dot(current,[np.cos(radians),np.sin(radians)]))
+                geometry=inputs['surfaceEnvironment']['geometry']
+                transformed=wave_effects.kernel([height,period,along,*geometry[:2],0.,1.,0.,*geometry[2:],9.80665,1000.])
+                if transformed[4]<=0 or transformed[5]<0:return result('incomplete','wave_model_outside_coverage')
+                period=2*np.pi/np.sqrt(9.80665*2*np.pi/transformed[1])
+                height=2*transformed[0];wave_direction=(state.wind_from_deg-propagation)%360
+            else:
+                height=0.;period=wave_performance.axes[2][0];wave_direction=0.
+            if not wave_performance.set_condition(state.wind_mps,height,period,wave_direction):
+                wave_summary['performanceCoverageReason']=wave_performance.reason
+                wave_summary['requestedPerformanceCondition']=dict(wind=state.wind_mps,height=height,period=period,direction=wave_direction)
+                return result('incomplete','wave_performance_outside_coverage')
+            load=wave_performance.power
         # The sampled controller has a fixed update period independent of the
         # integration step. Commands and maneuver delay persist between updates.
         if seconds >= next_control:
@@ -247,6 +271,9 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             actual_speed=float(np.linalg.norm(velocity-current))
             wave_effects.evaluate(state.wind_mps,[actual_heading],[actual_speed],motion_diagnostics=True)
             diagnostic=wave_effects.diagnostics[0]
+            if wave_performance is not None:
+                diagnostic['speedRetention']=1.
+                diagnostic['performanceSource']='wave-aware cache; diagnostic resistance not reapplied'
             wave_summary['maximumSignificantHeightM']=max(wave_summary['maximumSignificantHeightM'],diagnostic['significantHeightM'])
             wave_summary['maximumAddedResistanceN']=max(wave_summary['maximumAddedResistanceN'],diagnostic['addedResistanceN'])
             wave_summary['minimumSpeedRetention']=min(wave_summary['minimumSpeedRetention'],diagnostic['speedRetention'])

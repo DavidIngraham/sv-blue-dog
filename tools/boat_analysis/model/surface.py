@@ -77,7 +77,7 @@ class SurfaceOperation:
         self.strip=NativeCalculation('MarineSurface::StripLoad',1)
         self.core=NativeCalculation('MarineSailing::Core',8)
 
-    def evaluate(self,design,parameters,state,aero,mass,hydro,*,motion=None):
+    def evaluate(self,design,parameters,state,aero,mass,hydro,*,motion=None,motion_origin=(0,0,0)):
         d,p,s=np.asarray(design),np.asarray(parameters),np.asarray(state)
         q=self.contract['environment'];height=np.sqrt(d[4]*d[5]);chord=d[4]/height
         theta,beta,heel=np.deg2rad(s[[4,6,8]])
@@ -96,13 +96,15 @@ class SurfaceOperation:
                 # Rotation origin is midships at mean water. Existing steady
                 # heel is retained in the strip point before oscillatory motion.
                 point=[d[9]*d[0],-(d[3]+fraction*height)*np.sin(heel),z]
-                position,velocity,matrix=point_motion(point,motion)
+                position,velocity,matrix=point_motion(point,motion,motion_origin)
                 z=position[2]
             sample=self.wind([s[0],self.policy[0],self.policy[1],z,theta,s[3],beta,float(self.shear),self.policy[2]])
             if motion is not None:
                 # Wind-from vector: point velocity adds to apparent wind.
-                local=matrix.T@(np.array([sample[1],sample[2],0.])+velocity)
-                sample[1:3]=local[:2];sample[3]=np.linalg.norm(local[:2])
+                # Stored wind y is starboard-positive; point positions,
+                # velocities and returned forces use port-positive Cartesian y.
+                local=matrix.T@(np.array([sample[1],-sample[2],0.])+velocity)
+                sample[1:3]=[local[0],-local[1]];sample[3]=np.linalg.norm(local[:2])
             difference=(np.arctan2(sample[2],sample[1])-reference_angle+np.pi)%(2*np.pi)-np.pi
             alpha=s[5]+np.rad2deg(difference)
             # Numerical extension only: a negative incidence margin rejects the

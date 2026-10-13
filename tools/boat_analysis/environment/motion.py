@@ -12,12 +12,13 @@ def rotation(pitch,roll):
     return np.array([[cp,sp*sr,sp*cr],[0,cr,-sr],[-sp,cp*sr,cp*cr]])
 
 
-def point_motion(point,pose):
+def point_motion(point,pose,origin=(0,0,0)):
     heave,pitch,roll,vz,pitch_rate,roll_rate=pose
     matrix=rotation(pitch,roll)
-    offset=matrix@np.asarray(point)
+    origin=np.asarray(origin)
+    offset=matrix@(np.asarray(point)-origin)
     omega=np.array([roll_rate*np.cos(pitch),pitch_rate,-roll_rate*np.sin(pitch)])
-    return offset+np.array([0,0,heave]),np.cross(omega,offset)+[0,0,vz],matrix
+    return origin+offset+np.array([0,0,heave]),np.cross(omega,offset)+[0,0,vz],matrix
 
 
 class MotionResponse:

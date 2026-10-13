@@ -58,7 +58,7 @@ We compare three prescribed responses: fixed vertical position, heave following,
 
 Clearance checks use a regular equivalent wave of height 2Hs, a bounding deck footprint, and the wing, keel and rudder stations. Mixed trains have deterministic sampled phases rather than a resolved random spectrum. Wing loads use strip polars in the moving plane. Unsupported incidence, profile height or motion angles are reported; clipped coefficients do not establish supported performance. The neutral profile does not describe airflow around individual crests, shielding or breaking waves.
 
-The mission replay uses moving clearances as diagnostics. Its speed still comes from the quasi-steady polar and the existing wave-resistance sensitivity: the oscillating wing loads have **not** been converted into a new dynamic sailing polar. Hydrostatic restoring, inertia, added mass, damping, slamming, emergence-dependent hydrodynamics and controller response are not yet solved together. Neither the phase screen nor a virtual completion establishes survival. Unsupported breaking/blocking cases stop the replay as model-coverage limits.
+The prescribed-motion replay uses moving clearances as diagnostics and preserves its original speed model. The newer wave-averaged solver below closes mean sailing balance using calculated wave response. Neither calculation establishes survival: large motion, slamming, wave-resolved steering and dynamic capsize recovery remain outside the current model. Unsupported breaking/blocking cases stop the replay as model-coverage limits.
 
 Run a paired campaign with identical weather and traffic seeds:
 
@@ -102,24 +102,51 @@ The wave screen predicts added resistance large enough to consume all available 
 
 ## Wave motion and wing loads
 
-The follow-on experiment keeps the 1.4 m geometry and archived sailing controls. It samples 32 phases for each of eight sailing states, three wave directions and three imposed responses. The SysML scenario supplies 0.4 m significant height and a 3 s period. This isolates changes in aerodynamic load without claiming that the boat remains in force balance at each phase.
+The initial [prescribed-motion experiment](../evidence/runs/2026-10-13-wave-motion/summary.json) showed why subtracting wave height from static clearance was inadequate: the boat moves with the water, and the wing moves through the wind profile. It motivated the calculated response below. That archive preserves the earlier sensitivity model; it is not the current sailing-performance provider.
 
-In the controlled wave case, fixed vertical position flags contact in all 24 direction/operating combinations; heave following flags 16; heave plus slope following flags none. That difference shows how strongly the static screen depended on its motion assumption. It does not establish that the real boat follows waves this well.
+The current adapter explicitly distinguishes the steady solver's stored crosswind sign from Cartesian point velocity and force. A transverse-motion regression and the vanishing-wave limit check that conversion before accepting a wave-averaged result.
 
-Both moving responses put 312 of 768 wing-load phase samples outside the wind-profile or aerodynamic coverage. The plotted load ranges include numerical extensions at those phases and are diagnostic only. We need better near-surface airflow and aerodynamic coverage before using them to update the performance polar.
+## Wave-averaged sailing performance
 
-The four paired voyage prefixes retain exactly the previous tracks, elapsed times and stopping causes because speed is unchanged. Moving-clearance flags fall from 8.76, 9.10, 9.28 and 10.17 hours to 6.76, 5.00, 7.00 and 8.17 hours. However, 7.78, 9.10, 9.28 and 10.17 hours respectively exceed the prescribed response's 0.35 rad angular coverage limit. Those clearance results are also diagnostic, not accepted operating predictions. This identifies the next fidelity gap: a supported vessel response and near-surface aerodynamic model, followed by a phase-averaged sailing solve.
+The 1.4 m boat now has a coupled mean-performance calculation. Capytaine supplies radiation added mass, damping and total wave excitation, including both incident and scattered-wave forces. A mesh-derived mass-inertia tensor and native hydrostatic restoring matrix complete the heave, roll and pitch response. The response changes with wave period, direction and forward speed. Mesh comparison is checked locally around each operating condition; unsupported cells cannot earn accepted sailing performance.
 
-![Phase-dependent wing drive and paired mission contact screening.](figures/wave-motion.png)
+At each wave phase, the wing samples its changing height and point velocity. Keel and rudder forces use wave orbital flow, vessel motion and immersion. Native SysML calculations supply the foil forces, force-balance corrections and actuator power. SciPy adjusts mean speed, heading, incidence, leeway, rudder and heel until cycle-averaged surge, sway, yaw and roll balance, while maximizing progress. Controls stay fixed within a wave cycle. A doubled phase grid checks the result before it enters the performance cache.
 
-[Archived motion experiment](../evidence/runs/2026-10-13-wave-motion/summary.json) · [Phase loads](../evidence/runs/2026-10-13-wave-motion/phase-loads.json) · [Voyage records](../evidence/runs/2026-10-13-wave-motion/missions.json)
+```mermaid
+flowchart TD
+    geometry["Fixed geometry + component mass distribution"] --> response["Radiation, diffraction + restoring → wave response"]
+    controls["Trial speed, heading, trim, leeway, rudder, heel"] --> response
+    response --> phase["Phase-resolved apparent wind + underwater inflow"]
+    phase --> loads["Wing / foil loads, clearance and actuator power"]
+    loads --> balance["Average forces and moments; check every phase"]
+    balance -->|iterate controls| controls
+    balance -->|converged and covered| cache["Bounded wave-aware speed / power cache"]
+    cache --> voyage["Same course, weather and traffic seeds"]
+```
 
-Reproduce the motion experiment and figure with:
+The [wave-performance policy](../models/analyses/wave-performance.sysml) owns the test waves and acceptance screens. The [reusable equations](../models/libraries/marine/wave-performance.sysml) have no project-specific requirement dependencies. Capytaine's [problem setup](https://capytaine.org/stable/user_manual/problem_setup.html) and [response inputs](https://capytaine.org/stable/user_manual/hydrostatics.html) define the external solver boundary.
+
+This is a linear-response engineering model. Equipment is represented by allocated point masses; structural skin and ribs have distributed inertia. Additional viscous damping is a declared 5% hypothesis. The reference wetted geometry is upright, and the wing inertia uses reference trim. Mean pitch remains constrained as in the preceding operating model; its hydrostatic bias is recorded rather than treated as a solved sailing-pitch equilibrium. The existing uncalibrated mean wave-resistance allowance is applied once inside the sailing balance; first-order radiation/diffraction does not replace it with a validated second-order drift calculation. The mission engine does not apply a second speed penalty.
+
+Near-surface wind and attached-flow polar limits remain enforced. We have not extended a polar merely to make an operating point pass. Mixed seas, wave periods or heights outside the saved sailing cache produce a coverage stop rather than an extrapolated voyage prediction.
+
+The initial run accepted **32 of 32 operating cases**: 5 and 8 m/s reference winds, both tacks and sailing modes, and four wave directions relative to the wind. The regular waves were **0.04 m high with a 3 s period**. VMG was 0.06–1.46% below the archived calm-control reference. These are engineering-model sensitivities, not measured losses or a proof of globally optimal controls. Doubling from 16 to 32 phases changed the checked force/power outputs by at most 0.00070%; all selected points retained the balance and coverage checks.
+
+The four paired Gorge replays stopped **at departure** with `wave_performance_outside_coverage`. Their requested equivalent regular-wave heights were 0.83–0.95 m, with current-adjusted periods of 2.05–2.20 s. The sea generator and its 2Hs regular-wave interpretation remain scenario hypotheses. The small-wave cache cannot answer those conditions, and we do not report new passage times. The next step is to check the sea assumptions against observations and extend the response/performance evidence toward those conditions, using nonlinear motion where the linear model loses coverage.
+
+![Calculated wave response and fixed-candidate sailing performance.](figures/wave-performance.png)
+
+[Run summary and source hashes](../evidence/runs/2026-10-13-wave-performance/summary.json) · [Operating cases](../evidence/runs/2026-10-13-wave-performance/operating.json) · [Mission coverage records](../evidence/runs/2026-10-13-wave-performance/missions.json)
+
+Reproduce the study with the package-free uv environment:
 
 ```sh
+uv sync
 uv run python -m tools.boat_analysis.cli prepare
-uv run python -m tools.boat_analysis.mission.motion_campaign
-uv run python -m tools.publishing.wave_motion build/analysis/wave-motion
+OPENBLAS_NUM_THREADS=1 uv run python -m tools.boat_analysis.hydrodynamics.bem --mesh 7 --output build/analysis/wave-performance/bem.json
+OPENBLAS_NUM_THREADS=1 uv run python -m tools.boat_analysis.hydrodynamics.bem --mesh 9 --output build/analysis/wave-performance/bem-refined.json
+uv run python -m tools.boat_analysis.mission.wave_campaign --budget 8
+uv run python -m tools.publishing.wave_performance build/analysis/wave-performance
 ```
 
 ## Original conceptual-vessel course experiment
