@@ -25,40 +25,94 @@ class OpenSysML:
     def elements(self):
         return json.loads(self.run('-convert', 'api-json'))
 
-    def describe(self, definition):
-        elements = self.elements()
-        by_id = {e['@id']: e for e in elements}
-        resolve = lambda r: by_id[r['@id']]
-        matches = [e for e in elements if e.get('qualifiedName') == definition]
-        if len(matches) != 1 or matches[0]['@type'] != 'CalculationDefinition':
-            raise ValueError(f'Expected one calculation definition: {definition}')
-        members = [resolve(r) for r in matches[0].get('ownedMember', [])]
-        inputs, outputs = [], []
+    def index(self):
+        # A preparation snapshot; create a new backend when sources change.
+        if not hasattr(self, '_index'):
+            self._index = {e['@id']: e for e in self.elements()}
+        return self._index
+
+    def named(self, definition):
+        matches = [e for e in self.index().values() if e.get('qualifiedName') == definition]
+        if len(matches) != 1:
+            raise ValueError(f'Expected one model element: {definition}')
+        return matches[0]
+
+    def members(self, definition):
+        return [self.index()[r['@id']] for r in self.named(definition).get('ownedMember', [])]
+
+    def real_shape(self, feature):
+        resolve = lambda r: self.index()[r['@id']]
+        types = feature.get('type', [])
+        if len(types) != 1 or resolve(types[0]).get('qualifiedName') != 'ScalarValues::Real':
+            raise ValueError(f"Unsupported numerical type: {feature.get('qualifiedName')}")
+        if 'multiplicity' not in feature:
+            return []
+        upper = resolve(feature['upperBound'])
+        if upper['@type'] == 'LiteralInfinity':
+            return [None]
+        if upper['@type'] != 'LiteralInteger' or upper['value'] < 1:
+            raise ValueError('Numerical vector needs a positive fixed multiplicity')
+        if 'lowerBound' in feature and resolve(feature['lowerBound']).get('value') != upper['value']:
+            raise ValueError('Variable multiplicity is not a fixed vector')
+        return [upper['value']]
+
+    def record(self, definition):
+        fields = [e for e in self.members(definition) if e['@type'] == 'AttributeUsage']
+        if not fields or any(self.real_shape(e) for e in fields):
+            raise ValueError(f'{definition}: record requires scalar Real attributes')
+        return {'sysml_id': definition, 'fields': [e['declaredName'] for e in fields]}
+
+    def describe(self, definition, *, output_definition=None):
+        if self.named(definition)['@type'] != 'CalculationDefinition':
+            raise ValueError(f'Expected a calculation: {definition}')
+        members = self.members(definition)
+        inputs = []
         for feature in members:
-            if feature.get('direction') not in ('in','out'):
+            if feature.get('direction') != 'in':
                 continue
-            if feature.get('direction') == 'out' and not feature.get('isResult'):
-                continue
-            types = feature.get('type', [])
-            if len(types) != 1 or resolve(types[0]).get('qualifiedName') != 'ScalarValues::Real' or 'multiplicity' in feature:
-                raise ValueError(f'{definition}: initial public export supports scalar Real only; unsupported feature {feature.get("declaredName")}')
-            field = {'name': feature['declaredName']}
-            if feature.get('direction') == 'in':
-                if 'value' in feature:
-                    if not feature.get('isDefault'):
-                        raise ValueError('Bound input cannot be exposed as an overridable argument')
-                    value = resolve(feature['value'])
-                    if value['@type'] not in ('LiteralInteger', 'LiteralRational') or not isinstance(value.get('value'), (int, float)):
-                        raise NotImplementedError(f'{definition}: nonliteral defaults require model evaluation')
-                    if not math.isfinite(value['value']):
-                        raise ValueError('Default must be finite')
-                    field['default'] = value['value']
-                inputs.append(field)
-            else:
-                outputs.append(field)
-        if len(outputs) != 1:
-            raise ValueError(f'{definition}: expected a named scalar return')
+            field = {'name':feature['declaredName'], 'shape':self.real_shape(feature)}
+            if 'value' in feature:
+                if not feature.get('isDefault'):
+                    raise ValueError('Bound input cannot be exposed as an overridable argument')
+                value = self.index()[feature['value']['@id']]
+                if value['@type'] not in ('LiteralInteger', 'LiteralRational') or not isinstance(value.get('value'), (int, float)):
+                    raise NotImplementedError(f'{definition}: nonliteral parameter defaults require model evaluation')
+                if not math.isfinite(value['value']):
+                    raise ValueError('Default must be finite')
+                field['default'] = value['value']
+            inputs.append(field)
+        members = self.members(output_definition or definition)
+        results = [e for e in members if e.get('isResult')]
+        if len(results) != 1:
+            raise ValueError(f'{definition}: expected one declared return')
+        shape = self.real_shape(results[0])
+        if not shape:
+            outputs = [{'name':results[0]['declaredName']}]
+        else:
+            expression = members[-1]
+            if expression.get('operator') != ',':
+                raise ValueError(f'{definition}: vector return needs an explicit named tuple or output_definition')
+            outputs = []
+            for ref in expression['argument']:
+                item = self.index()[ref['@id']]
+                if item['@type'] != 'FeatureReferenceExpression':
+                    raise ValueError(f'{definition}: name each returned quantity')
+                outputs.append({'name':self.index()[item['referent']['@id']]['declaredName']})
+            if shape[0] is not None and shape[0] != len(outputs):
+                raise ValueError('Return multiplicity differs from named tuple')
+        if len({f['name'] for f in outputs}) != len(outputs):
+            raise ValueError('Duplicate output names')
         return {'definition':definition, 'inputs':inputs, 'outputs':outputs}
+
+    def analysis_values(self, definition):
+        from fractions import Fraction
+        import re
+        report = json.loads(self.run('-analysis', definition, '-json'))
+        if report.get('status') != 'holds':
+            raise ValueError(f'Model default evaluation failed: {definition}')
+        def value(text):
+            return json.loads(re.sub(r'(-?\d+)/(\d+)', lambda m: str(float(Fraction(m[0]))), text))
+        return {v['name']:value(v['value']) for v in report['checks'][0]['values']}
 
     def compile(self, definition, output):
         # Python binds exported defaults before calling C. Remove only their

@@ -60,6 +60,10 @@ jobs:
         run: git diff --exit-code -- models/evidence/srr-current.sysml
       - run: uv run python -m tools.boat_analysis.cli prepare
       - run: uv run python -m tools.boat_analysis.cli evidence-check
+      - name: Check reusable SysML Python interface
+        env:
+          OPENSYSML_BINARY: ${{ github.workspace }}/.tools/nightly-20261009-28106371e/sysml
+        run: uv run pytest packages/sysml-python/tests -q
       - run: uv run pytest -q
       - name: Exercise the seeded mission campaign
         run: uv run python -m tools.boat_analysis.mission.campaign --count 4

@@ -43,31 +43,33 @@ def test_shape_scaling_and_degenerate_foil_tip_cells():
 
 @pytest.mark.skipif(sys.platform!='linux',reason='Native C adapter uses Linux/GCC')
 def test_native_mass_derivatives_and_centroid_bookkeeping():
-    from tools.boat_analysis.model.mass import MassKernel
-    k=MassKernel();c,d=reference();_,v,_=build_geometry(d);geometry=np.r_[np.concatenate(list(v.values())),input_record('coupled-mass-reference.json')['ballastCentroid']];x=np.array(c['referenceDesign'])
-    base=k.evaluate(x,geometry);p=np.array(k.contract['parameterValues'])
+    from tools.boat_analysis.generated import mass
+    c,d=reference();_,v,_=build_geometry(d);geometry=np.r_[np.concatenate(list(v.values())),input_record('coupled-mass-reference.json')['ballastCentroid']];x=np.array(c['referenceDesign'])
+    current=json.loads((ROOT/'.tools/coupled-contract.json').read_text())
+    c.update({key:current[key] for key in ('parameterValues','parameterNames')})
+    base=mass(design=x,geometry=geometry).to_mapping();p=np.array(c['parameterValues'])
     saved=input_record('coupled-mass-reference.json')
-    legacy_parameters = [saved['parameters'].get(name, 0) for name in k.contract['parameterNames']]
-    legacy = k.evaluate(x, geometry, legacy_parameters)
+    legacy_parameters = [saved['parameters'].get(name, 0) for name in c['parameterNames']]
+    legacy = mass(design=x,geometry=geometry,parameters=legacy_parameters).to_mapping()
     for name,value in legacy.items():assert value==pytest.approx(saved['mass'][name],rel=1e-11,abs=1e-12)
     without_sensor = p.copy(); without_sensor[38] = 0
-    bare = k.evaluate(x, geometry, without_sensor)
+    bare = mass(design=x,geometry=geometry,parameters=without_sensor).to_mapping()
     assert base['totalMass'] - bare['totalMass'] == pytest.approx(p[38])
     assert base['cgZ']*base['totalMass'] - bare['cgZ']*bare['totalMass'] == pytest.approx(p[38]*(d['deck_height_m']+p[40]))
     relocated = p.copy(); relocated[39] += 0.2; relocated[40] += 0.4
-    moved = k.evaluate(x, geometry, relocated)
+    moved = mass(design=x,geometry=geometry,parameters=relocated).to_mapping()
     assert moved['totalMass'] == pytest.approx(base['totalMass'])
     assert moved['cgX']*moved['totalMass'] - base['cgX']*base['totalMass'] == pytest.approx(p[38]*0.2*d['length_m'])
     assert moved['cgZ']*moved['totalMass'] - base['cgZ']*base['totalMass'] == pytest.approx(p[38]*0.4)
     x[c['designNames'].index('ballast_kg')]+=1
-    ballast=k.evaluate(x,geometry)
+    ballast=mass(design=x,geometry=geometry).to_mapping()
     assert ballast['totalMass']-base['totalMass']==pytest.approx(1)
     assert ballast['cgZ']*ballast['totalMass']-base['cgZ']*base['totalMass']==pytest.approx(geometry[-1])
     x=np.array(c['referenceDesign']);x[c['designNames'].index('wing_glass_kg_m2')]+=.1
-    glass=k.evaluate(x,geometry)
+    glass=mass(design=x,geometry=geometry).to_mapping()
     assert glass['totalMass']-base['totalMass']==pytest.approx(v['wing'][0]*.1*(1+p[0]))
     x=np.array(c['referenceDesign']);x[c['designNames'].index('battery_Wh')]+=p[12]
-    battery=k.evaluate(x,geometry)
+    battery=mass(design=x,geometry=geometry).to_mapping()
     assert battery['totalMass']-base['totalMass']==pytest.approx(1)
     assert battery['cgZ']*battery['totalMass']-base['cgZ']*base['totalMass']==pytest.approx(-d['bottom_depth_m']+(d['bottom_depth_m']+d['deck_height_m'])*d['battery_z_fraction'])
     assert base['totalMass']==pytest.approx(sum(base[k] for k in ['hullMass','wingMass','keelMass','rudderMass','batteryMass','panelMass','wingDriveMass','rudderDriveMass','equipmentMass'])+d['ballast_kg'])

@@ -149,8 +149,8 @@ def run(budget,resume=False,resolution=12,route_profile='challenge'):
     if needed>1.001:
         physical[0]=min(p.hi[0],physical[0]*needed*1.02)
         initial=(physical-p.lo)/p.span
-    sources=['tools/boat_analysis/geometry/laminate.py','uv.lock','tools/boat_analysis/optimization/search.py','tools/boat_analysis/optimization/operating.py','tools/boat_analysis/model/vessel.py','tools/boat_analysis/model/mass.py','tools/boat_analysis/model/operating.py','tools/boat_analysis/model/hydrostatics.py','tools/boat_analysis/geometry/hydro.py','tools/boat_analysis/geometry/vessel.py','tools/boat_analysis/geometry/hull.py','tools/boat_analysis/aerodynamics/polar.py','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json']
-    hashes={**p.model.mass.contract['sourceHashes'],**p.model.operation.contract['sourceHashes'],**source_hashes(sources),'models/analyses/recovery.sysml':digest(ROOT/'models/analyses/recovery.sysml')}
+    sources=['tools/boat_analysis/geometry/laminate.py','uv.lock','tools/boat_analysis/optimization/search.py','tools/boat_analysis/optimization/operating.py','tools/boat_analysis/model/vessel.py','packages/sysml-python/sysml_python/execution.py','tools/boat_analysis/model/operating.py','tools/boat_analysis/model/hydrostatics.py','tools/boat_analysis/geometry/hydro.py','tools/boat_analysis/geometry/vessel.py','tools/boat_analysis/geometry/hull.py','tools/boat_analysis/aerodynamics/polar.py','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json']
+    hashes={**p.model.c['sourceHashes'],**p.model.operation.contract['sourceHashes'],**source_hashes(sources),'models/analyses/recovery.sysml':digest(ROOT/'models/analyses/recovery.sysml')}
 
     if np.abs(p.evaluate(initial)['eq']).max()>1e-4:
         from tools.boat_analysis.optimization.operating import solve_state

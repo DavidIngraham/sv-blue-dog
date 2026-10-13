@@ -32,31 +32,92 @@ class Project:
         self.backend = OpenSysML(executable, sources)
 
     def prepare(self):
+        self.backend.__dict__.pop('_index', None)
         package = self.config.get('generated_package','generated')
         if any(not n.isidentifier() or keyword.iskeyword(n) for n in package.split('.')):
             raise ValueError('Invalid generated package')
         directory = self.root.joinpath(*package.split('.'))
         directory.mkdir(parents=True, exist_ok=True)
-        exports = self.config['exports']
         manifest = {'schemaVersion':1,'sourceHashes':{str(p):digest(p) for p in self.backend.sources},
                     'compiler':{'path':str(self.backend.executable),'sha256':digest(self.backend.executable)},'exports':{}}
         code = ['# Generated from SysML. Do not edit.', 'from dataclasses import dataclass',
-                'from pathlib import Path', 'from sysml_python.execution import Calculation', '']
-        for name, settings in exports.items():
+                'from pathlib import Path', 'from numpy.typing import ArrayLike',
+                'from sysml_python.records import Record', 'from sysml_python.execution import Calculation', '']
+        record_names, analyses = {}, {}
+        def emit_record(label, record):
+            identifier(label)
+            code.extend(['@dataclass(frozen=True)', f'class {label}(Record):', f"    sysml_id = {record['sysml_id']!r}"])
+            for field in record['fields']:
+                code.append(f'    {identifier(field)}: float')
+            code.append('')
+        for name, settings in self.config['exports'].items():
             identifier(name)
-            if set(settings) != {'definition'}:
-                raise ValueError(f'{name}: only definition is currently supported')
-            schema = self.backend.describe(settings['definition'])
-            for f in schema['inputs']+schema['outputs']: identifier(f['name'])
+            allowed = {'definition','aliases','records','defaults','checks','output_definition','output_record'}
+            if set(settings)-allowed:
+                raise ValueError(f'{name}: unsupported settings {set(settings)-allowed}')
+            schema = self.backend.describe(settings['definition'], output_definition=settings.get('output_definition'))
+            aliases = settings.get('aliases', {})
+            raw_names = {f['name'] for f in schema['inputs']}
+            if set(aliases)-raw_names:
+                raise ValueError('Alias refers to an absent parameter')
+            for f in schema['inputs']:
+                f['nativeName'] = f['name']
+                f['name'] = identifier(aliases.get(f['name'],f['name']))
+            if len({f['name'] for f in schema['inputs']}) != len(schema['inputs']):
+                raise ValueError('Duplicate public input names')
+            by_name = {f['name']:f for f in schema['inputs']}
+            for argument, reference in settings.get('defaults', {}).items():
+                if argument not in by_name:
+                    raise ValueError('Default refers to an absent input: '+argument)
+                analysis, field = reference.rsplit('.',1)
+                if analysis not in analyses:
+                    analyses[analysis] = self.backend.analysis_values(analysis)
+                by_name[argument]['default'] = analyses[analysis][field]
+                by_name[argument]['defaultSource'] = reference
+            for f in schema['inputs']:
+                if f['shape'] == [None]:
+                    if not isinstance(f.get('default'), list):
+                        raise ValueError('Unbounded vector requires a model-evaluated default to fix shape')
+                    f['shape'] = [len(f['default'])]
+            for argument, definition in settings.get('records', {}).items():
+                record = self.backend.record(definition)
+                if argument not in by_name or by_name[argument]['shape'] != [len(record['fields'])]:
+                    raise ValueError('Record fields differ from input dimensions: '+argument)
+                by_name[argument]['record'] = record
+                if definition not in record_names:
+                    label = identifier(definition.rsplit('::',1)[-1])
+                    if label in record_names.values():
+                        raise ValueError('Record class name collision')
+                    record_names[definition] = label
+                    emit_record(label,record)
+            if 'output_record' in settings:
+                record = self.backend.record(settings['output_record'])
+                if record['fields'] != [f['name'] for f in schema['outputs']]:
+                    raise ValueError('Output record differs from named return tuple')
+                schema['outputRecord'] = record
+            for f in schema['outputs']: identifier(f['name'])
             source = directory/(name+'.c')
-            self.backend.compile(schema['definition'], source)
+            self.backend.compile(schema['definition'],source)
             schema.update(source=source.name,sourceHash=digest(source))
+            if checks := settings.get('checks'):
+                check = self.backend.describe(checks)
+                for f in check['inputs']:
+                    f['name'] = aliases.get(f['name'],f['name'])
+                    if f['name'] not in by_name or f['shape'] != by_name[f['name']]['shape']:
+                        raise ValueError('Precondition input differs from calculation')
+                check_source = directory/(name+'-checks.c')
+                self.backend.compile(checks,check_source)
+                check.update(source=check_source.name,sourceHash=digest(check_source))
+                schema['checks'] = check
             manifest['exports'][name] = schema
             result = ''.join(p.capitalize() for p in name.split('_'))+'Result'
-            code += ['@dataclass(frozen=True)',f'class {result}:']
-            code += [f"    {f['name']}: float" for f in schema['outputs']]
-            code += ['',f"_{name} = Calculation(Path(__file__).with_name('manifest.json'), {name!r}, {result})"]
-            arguments = [f['name'] + (f"={f['default']!r}" if 'default' in f else '') for f in schema['inputs']]
+            emit_record(result, {'sysml_id':settings.get('output_record',schema['definition']+'::result'),
+                                'fields':[f['name'] for f in schema['outputs']]})
+            code += [f"_{name} = Calculation(Path(__file__).with_name('manifest.json'), {name!r}, {result})"]
+            arguments = []
+            for f in schema['inputs']:
+                type_name = record_names[f['record']['sysml_id']]+' | ArrayLike' if 'record' in f else ('ArrayLike' if f['shape'] else 'float')
+                arguments.append(f"{f['name']}: {type_name}" + (' = None' if 'default' in f else ''))
             code += [f"def {name}(*, {', '.join(arguments)}) -> {result}:",
                      f"    return _{name}("+', '.join(f"{f['name']}={f['name']}" for f in schema['inputs'])+')',
                      f'{name}.batch = _{name}.batch', '']

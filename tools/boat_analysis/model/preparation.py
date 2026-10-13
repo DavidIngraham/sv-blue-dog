@@ -19,15 +19,9 @@ def prepare_mass():
     models=MODELS+(ROOT/'models/vehicle/structure.sysml',ROOT/'models/analyses/sizing/inputs.sysml')
     c=analysis_values('BlueDogCoupledSizing::Inputs')
     c['sourceHashes']=source_hashes([])
-    compile_model(c, 'mass', path='models/libraries/structures/mass-properties.sysml',
-        definition='MarineMass::MassProperties', aliases={'d':'design','p':'parameters','m':'materials','geometry':'geometry'},
-        source='coupled-mass.c', hash_key='massHash', output_key='massNames',
-        defaults={'parameters':'parameterValues','materials':'materialValues'},
-        records={'design':'designNames','parameters':'parameterNames'}, checks='MarineMass::InputChecks',
-        record_types={'design':'MarineDesign::Design','parameters':'MarineDesign::Parameters'})
-    from .contracts import record_fields
-    if c['massNames'] != record_fields('MarineDesign::MassProperties'):
-        raise ValueError('Mass output order differs from the named mass record')
+    # This is project reference data, not a compiler or execution contract.
+    generated=json.loads((ROOT/'tools/boat_analysis/generated/manifest.json').read_text())
+    c['massNames']=[f['name'] for f in generated['exports']['mass']['outputs']]
     (ROOT/'.tools/coupled-contract.json').write_text(json.dumps(c,indent=2)+'\n')
     from tools.boat_analysis.geometry.vessel import build_geometry,ballast_geometry
     _,vectors,_=build_geometry(dict(zip(c['designNames'],c['referenceDesign'])))
@@ -39,7 +33,7 @@ def prepare_mass():
     report=json.loads(native('-analysis','CoupledMassReplay::reference','-json',models=models+(replay,)))
     if report['status']!='holds':raise ValueError('Reference mass replay failed')
     values=native_value(report['checks'][0]['values'][0]['value'])
-    sources=['models/analyses/sizing/inputs.sysml','models/vehicle/structure.sysml','tools/boat_analysis/geometry/vessel.py','tools/boat_analysis/model/mass.py','build/analysis/wing-geometry.json']
+    sources=['models/analyses/sizing/inputs.sysml','models/vehicle/structure.sysml','tools/boat_analysis/geometry/vessel.py','packages/sysml-python/sysml_python/execution.py','build/analysis/wing-geometry.json']
     saved={'sourceHashes':source_hashes(sources),'design':dict(zip(c['designNames'],c['referenceDesign'])),'parameters':dict(zip(c['parameterNames'],c['parameterValues'])),'geometry':{name:v.tolist() for name,v in vectors.items()},'ballastCentroid':center.tolist(),'mass':dict(zip(c['massNames'],values)),'qualified':False,'scope':'Reference geometry/material accounting only. Not a new optimized or verified vessel. Thin skin plus printed ribs and provisional equipment allocations. Seams/finish mass included, their displacement omitted. A volume-normalized 3:1:1 ballast bulb touches the keel tip without geometric overlap; its junction remains a structural detail.'}
     output_path('coupled-mass-reference.json').write_text(json.dumps(saved,indent=2)+'\n')
 

@@ -1,6 +1,6 @@
 # Reading the design through the model
 
-**Design phase:** Appendix · [Development plan](../development-plan.md)
+**Design phase:** Appendix Ã‚Â· [Development plan](../development-plan.md)
 
 I want to be able to follow a design decision back to the mission that caused it. This is how I use SysML to keep requirements, rationale, architecture and verification connected in the [engineering record](../development-plan.md#engineering-record). It starts with mission intent and ends with links that make later design reviews and test results easier to interpret.
 
@@ -44,9 +44,9 @@ The numerical screening inputs have not changed in this clarification. Archived 
 
 ## Running the calculations
 
-SysML owns the equations. Python assembles geometry, chooses operating cases and coordinates the optimizer. The generated C calculations run through one [native execution layer](../../tools/boat_analysis/model/native_kernel.py). Mass, operating performance, structural margins, route and passage screening use a [shared model boundary](../../tools/boat_analysis/model/boundary.py). Preparation reads argument order, Real types, dimensions and named output tuples from OpenSysML's API element export. Application wiring supplies friendly argument aliases and selects model-exported defaults; adapters no longer repeat vector widths or output labels.
+SysML owns the equations. Python assembles geometry, chooses operating cases and coordinates the optimizer. The generated C calculations run through one [native execution layer](../../tools/boat_analysis/model/native_kernel.py). Operating performance, structural margins, route and passage screening still use the [shared model boundary](../../tools/boat_analysis/model/boundary.py); mass now uses the declarative library described below. Preparation reads argument order, Real types, dimensions and named output tuples from OpenSysML's API element export. Application wiring supplies friendly argument aliases and selects model-exported defaults; adapters no longer repeat vector widths or output labels.
 
-The [mass adapter](../../tools/boat_analysis/model/mass.py) only exposes its typed calling convention. Compilation, contract generation and interpreter reference evidence live in the [preparation pipeline](../../tools/boat_analysis/model/preparation.py), reached through the existing `prepare` command. Generated contracts remain build artifacts. Source fingerprints cover the model and shared boundary implementation.
+Mass now uses a declarative export in [pyproject.toml](../../pyproject.toml). The [reusable SysML/Python library](../../packages/sysml-python/README.md) discovers its vector dimensions, generates named records, evaluates model-owned defaults and compiles its input checks. The handwritten mass adapter is gone. Geometry and interpreter reference experiments remain project-owned in the [reference preparation](../../tools/boat_analysis/model/preparation.py). The other adapters are still being migrated. Generated code and manifests remain build artifacts; fingerprints cover model and runtime sources.
 
 Named Python records for operating state, aerodynamic coefficients, hydrostatic inputs, appendage loads, mass properties and passage conditions are generated from `MarineDesign` alongside `Design` and `Parameters`. The model declares the numerical field order; the boundary packs by field name, including for batches. Mass dictionaries are also packed by name, so insertion order cannot alter the physics. The surface-wind provider uses the same packing contract. Optimizer coordinates, mesh geometry and low-level numerical arrays remain arrays; these records describe quantities exchanged between domain calculations.
 

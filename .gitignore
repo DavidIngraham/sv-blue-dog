@@ -18,3 +18,5 @@ build/
 examples/**/generated/
 packages/**/build/
 packages/**/*.egg-info/
+
+tools/boat_analysis/generated/

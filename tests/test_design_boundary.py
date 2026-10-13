@@ -38,4 +38,4 @@ def test_mass_kernel_accepts_both_typed_inputs():
     model=CoupledModel()
     x=model.c['referenceDesign']
     _,mass,geometry,_=model.configuration(x,0,resolution=4)
-    assert model.mass.evaluate(model.design_record(x),geometry[:51],model.assumptions)==mass
+    assert model.mass(design=model.design_record(x),geometry=geometry[:51],parameters=model.assumptions).to_mapping()==mass

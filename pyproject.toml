@@ -5,6 +5,7 @@ description = "SysML v2 model validation and documentation generation for SV Blu
 requires-python = ">=3.12,<3.14"
 dependencies = [
     "opensysml==0.9.2",
+    "sysml-python-runtime",
 ]
 
 [tool.uv]
@@ -25,3 +26,29 @@ dev = [
 testpaths = ["tests"]
 pythonpath = ["."]
 addopts = "--strict-config --strict-markers"
+
+[tool.sysml_python]
+models = ["models/**/*.sysml"]
+generated_package = "tools.boat_analysis.generated"
+backend = "opensysml-c"
+
+[tool.sysml_python.exports.mass]
+definition = "MarineMass::MassProperties"
+checks = "MarineMass::InputChecks"
+output_record = "MarineDesign::MassProperties"
+
+[tool.sysml_python.exports.mass.aliases]
+d = "design"
+p = "parameters"
+m = "materials"
+
+[tool.sysml_python.exports.mass.records]
+design = "MarineDesign::Design"
+parameters = "MarineDesign::Parameters"
+
+[tool.sysml_python.exports.mass.defaults]
+parameters = "BlueDogCoupledSizing::Inputs.parameterValues"
+materials = "BlueDogCoupledSizing::Inputs.materialValues"
+
+[tool.uv.sources]
+sysml-python-runtime = { path = "packages/sysml-python", editable = true }

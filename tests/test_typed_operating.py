@@ -57,8 +57,9 @@ def test_typed_surface_provider_matches_vector_provider(case):
 
 def test_record_orders_match_physics_contract(case):
     kernel,raw,typed=case
-    from tools.boat_analysis.model.mass import MassKernel
-    assert kernel.contract['MarineDesign::MassPropertiesFields']==MassKernel().contract['massNames']
+    from tools.boat_analysis.generated import MassResult
+    from dataclasses import fields
+    assert kernel.contract['MarineDesign::MassPropertiesFields']==[f.name for f in fields(MassResult)]
     for name,record in typed.items():
         np.testing.assert_array_equal(pack(record,kernel.contract[record.sysml_id+'Fields']),raw[name])
     assert typed['state'].windSpeed_m_s==raw['state'][0]
@@ -81,4 +82,4 @@ def test_coupled_state_and_mass_record_api(case):
     vector=pack(state,model.operating_contract[state.sysml_id+'Fields'])
     assert model.at_state(design,state,pitch_equilibrium=False)==model.at_state(design,vector,pitch_equilibrium=False)
     _,mass,geometry,_=model.configuration(design,0.)
-    assert model.mass.evaluate_record(design,geometry[:51]).to_mapping()==mass
+    assert model.mass(design=design,geometry=geometry[:51]).to_mapping()==mass

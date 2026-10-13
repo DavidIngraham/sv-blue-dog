@@ -38,7 +38,13 @@ def main():
         from .model.runtime import ROOT, validate
         (ROOT / ".tools").mkdir(exist_ok=True)
         validate()
-        for name in ("mass", "operating", "hydrostatics", "resistance", "uncertainty"):
+        from sysml_python import Project
+        from .model.install import binary_path
+        Project(ROOT/'pyproject.toml', executable=binary_path()).prepare()
+        from .model.preparation import prepare_mass
+        prepare_mass()
+        print("Prepared mass reference evidence", flush=True)
+        for name in ("operating", "hydrostatics", "resistance", "uncertainty"):
             importlib.import_module(f"tools.boat_analysis.model.{name}").prepare()
             print(f"Prepared {name}", flush=True)
     elif args.command == "solve":

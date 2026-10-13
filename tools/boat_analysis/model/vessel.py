@@ -1,4 +1,5 @@
 """Coupled geometric pose, buoyancy and native operating equations."""
+import json
 import numpy as np
 from numpy.typing import ArrayLike
 from scipy.optimize import brentq
@@ -6,7 +7,8 @@ from tools.boat_analysis.geometry.vessel import build_geometry,ballast_geometry
 from tools.boat_analysis.geometry.hydro import DisplacementBody,equilibrium,pose
 from tools.boat_analysis.model.design_boundary import design_vector, pack, unpack
 from tools.boat_analysis.model.design_types import Design, Parameters, OperatingState, AeroCoefficients, HydroState
-from tools.boat_analysis.model.mass import MassKernel
+from tools.boat_analysis.generated import mass
+from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.model.operating import OperationKernel
 from tools.boat_analysis.model.hydrostatics import HydroKernel
 from tools.boat_analysis.aerodynamics.polar import WingPolar
@@ -37,9 +39,9 @@ def wet_area(triangles,height):
 
 class CoupledModel:
     def __init__(self):
-        self.mass=MassKernel();self.operation=OperationKernel();self.hydro=HydroKernel();self.polar=WingPolar()
+        self.mass=mass;self.operation=OperationKernel();self.hydro=HydroKernel();self.polar=WingPolar()
         self.operating_contract=self.operation.contract
-        self.c=self.mass.contract;self.parameters=pack(Parameters.from_mapping(dict(zip(self.c['parameterNames'],self.c['parameterValues'],strict=True))),self.c['parameterNames']);self.last=None;self.hull_reference=None;self.section_cache=None
+        self.c=json.loads((ROOT/'.tools/coupled-contract.json').read_text());self.parameters=pack(Parameters.from_mapping(dict(zip(self.c['parameterNames'],self.c['parameterValues'],strict=True))),self.c['parameterNames']);self.last=None;self.hull_reference=None;self.section_cache=None
     def design_record(self, values: ArrayLike) -> Design:
         return unpack(Design, values, self.c['designNames'])
 
@@ -64,7 +66,7 @@ class CoupledModel:
         def transform(points):return ((np.asarray(points)-mast)*[1,-1,1])@rotation.T+mast
         vectors={name:a.copy() for name,a in v.items()}
         vectors['wing'][1:4]=transform(v['wing'][1:4]);vectors['wing'][5:8]=transform(v['wing'][5:8])
-        m=self.mass.evaluate(x,np.r_[np.concatenate(list(vectors.values())),center],self.parameters)
+        m=self.mass(design=x,geometry=np.r_[np.concatenate(list(vectors.values())),center],parameters=self.parameters).to_mapping()
         bodies=[DisplacementBody(name,transform(body) if name=='wing' else body) for name,body in g.items()]
         thicknesses=[m[name+'LaminateThickness'] for name in outlines]
         key=(tuple(x),resolution,tuple(thicknesses))
