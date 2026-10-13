@@ -1,0 +1,10 @@
+{
+  "sourceRevision": "20f2b05b1145aff3bfb31bcc1d09184b9556da46",
+  "files": {
+    "srr-mission-campaign.json": {
+      "sha256": "0fdbbed5aed505904f59381b2acffcd93e9774f7d43c3b3a8dfed51efb96f820"
+    }
+  },
+  "qualified": false,
+  "scope": "Four fixed-seed conceptual-vessel regression voyages against the SRR configuration; not a replay of the optimized candidate, recovery-site qualification or calibrated success probability."
+}

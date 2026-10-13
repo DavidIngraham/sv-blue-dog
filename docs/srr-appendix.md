@@ -57,6 +57,12 @@ Use the repository's uv-managed environment and pinned native SysML tool. The mo
 
 The recovery fixtures deliberately use synthetic locations and loads. They check current compensation, increasing reserve with exposure, unavailable recovery authority, explicit capsized performance, autonomous recovery without communications, persistent disqualification and independently observed collision consequences. They do not qualify a real shore location.
 
+The [recorded SRR mission regression](../evidence/runs/2026-10-13-srr-mission-regression/manifest.json) exercises the current course, mission policy and seeded weather/traffic workflow using the conceptual vessel. It is not a mission-performance replay of the optimized 1.2 m candidate. The independently tested casualty routes remain synthetic pending real recovery-site assessment.
+
+```sh
+uv run python -m tools.boat_analysis.mission.campaign --count 4
+```
+
 ## Review record
 
 **Status: open; no SRR approval recorded.** The final review record must identify the published baseline revision, evidence reviewed, accepted limitations, your disposition and follow-up actions. Updating this page cannot substitute for your approval.
