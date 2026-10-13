@@ -9,7 +9,8 @@ import re
 def diagram_nodes(body):
     """Map native node IDs to model identities, including compact-label exports."""
     saved = dict(re.findall(r'^%% source-node (n\d+) ([\w:]+)$', body, re.M))
-    return saved or dict(re.findall(r'(n\d+)\("`.*?\*\*([\w:]+) :', body, re.S))
+    packages = dict(re.findall(r'(n\d+)\["`\*«package»\*\s*\*\*([\w:]+)\*\*`"\]', body))
+    return packages | (saved or dict(re.findall(r'(n\d+)\("`.*?\*\*([\w:]+) :', body, re.S)))
 
 
 def basis_links(report):
@@ -26,7 +27,7 @@ def include_basis(diagram, links):
         found = diagram_nodes(body).items()
         names = {}
         for node, qualified in found:
-            if not qualified.startswith(('BlueDogRequirements::', 'BlueDog::Goals::', 'GorgeChallenge::')):
+            if not qualified.startswith(('BlueDogRequirements::', 'BlueDog::Goals::', 'GorgeChallenge::', 'BlueDogStructure::', 'BlueDog::DesignIntent')):
                 continue
             name = qualified.rsplit('::', 1)[-1]
             if name in names:

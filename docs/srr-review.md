@@ -162,9 +162,28 @@ The 1.2 m concept, corrected to a 440 Wh battery and 260 mm hull beam, passes no
 
 Individual printed parts fit a 250 × 250 × 250 mm build volume; joined assemblies may be larger and bought components need not be printed. One person handles transport, assembly, launch and retrieval, using simple aids and removable components.
 
+```sysml-view SRR_Construction::thread direction=BT statements=true
+package SRR_Construction {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view thread : GeneralView {
+        expose BlueDog::DesignIntent;
+        expose BlueDogRequirements::desktopManufacture;
+        expose BlueDogStructure::hybridConstruction;
+        expose BlueDogStructure::printTileEnvelope;
+        metadata Layout about BlueDog::DesignIntent { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::desktopManufacture { x = 400; y = 0; }
+        metadata Layout about BlueDogStructure::hybridConstruction { x = 800; y = 0; }
+        metadata Layout about BlueDogStructure::printTileEnvelope { x = 0; y = 400; }
+    }
+}
+```
+
+The selected construction is an FDM substrate with wet-layup glass/epoxy reinforcement. Wet laminate strength, stiffness and glass-to-print bond proof are separate [construction qualification requirements](requirements/requirements-practicality.md#construction-qualification).
+
 The next experiments should inform structural mass, seams, wing behavior, actuator loads and casualty recovery. Their results feed the model before detailed design release.
 
-[Manufacturing requirements](requirements/requirements-practicality.md) · [Structure and recovery methods](structures-and-recovery.md)
+[Construction requirements](requirements/requirements-practicality.md#construction) · [Structure and recovery methods](structures-and-recovery.md)
 
 ## 12 · Three kinds of evidence
 

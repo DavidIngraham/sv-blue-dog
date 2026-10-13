@@ -8,10 +8,61 @@ One-person handling and a 250 mm cubic printer are owner-imposed project constra
 
 Arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision, and **dependency** records a design basis. Each view retains its upstream context; statements are rendered from the model.
 
-- [Transport and manufacture](#transport-and-manufacture)
+- [Construction](#construction)
+- [Construction qualification](#construction-qualification)
+- [Transport and handling](#transport-and-handling)
 - [Serviceability](#serviceability)
 
-## Transport and manufacture
+## Construction
+
+The owner-selected printer envelope and construction process are design constraints. The 230 mm structural tile allocation leaves 20 mm per axis for supports and clearance inside the 250 mm print-job envelope; it does not replace the slicer check.
+
+```sysml-view Page_practicality_construction::thread direction=BT statements=true
+package Page_practicality_construction {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view thread : GeneralView {
+        expose BlueDog::DesignIntent;
+        expose BlueDogRequirements::desktopManufacture;
+        expose BlueDogStructure::hybridConstruction;
+        expose BlueDogStructure::printTileEnvelope;
+        metadata Layout about BlueDog::DesignIntent { x = 0; y = 0; }
+        metadata Layout about BlueDogRequirements::desktopManufacture { x = 400; y = 0; }
+        metadata Layout about BlueDogStructure::hybridConstruction { x = 800; y = 0; }
+        metadata Layout about BlueDogStructure::printTileEnvelope { x = 0; y = 400; }
+    }
+}
+```
+
+## Construction qualification
+
+Wet laminate coupons and glass-to-print bonds establish whether the chosen process can carry the modeled loads. These requirements derive from structural integrity; selecting the construction process does not demonstrate compliance.
+
+```sysml-view Page_practicality_materials::thread direction=BT statements=true
+package Page_practicality_materials {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view thread : GeneralView {
+        filter @SysML::RequirementUsage;
+        expose BlueDogRequirements::wetMechanicalIntegrity;
+        expose BlueDogStructure::structuralIntegrity;
+        expose BlueDogStructure::wetCouponStrength;
+        expose BlueDogStructure::wetCouponStiffness;
+        expose BlueDogStructure::bondProof;
+        metadata Layout about BlueDogRequirements::wetMechanicalIntegrity { x = 0; y = 0; }
+        metadata Layout about BlueDogStructure::structuralIntegrity { x = 400; y = 0; }
+        metadata Layout about BlueDogStructure::wetCouponStrength { x = 800; y = 0; }
+        metadata Layout about BlueDogStructure::wetCouponStiffness { x = 0; y = 400; }
+        metadata Layout about BlueDogStructure::bondProof { x = 400; y = 400; }
+    }
+}
+```
+
+[Structural load and deflection requirements](../structures-and-recovery.md)
+
+<a id="transport-and-manufacture"></a>
+
+## Transport and handling
 
 ```sysml-view Page_practicality_23::thread direction=BT statements=true
 package Page_practicality_23 {

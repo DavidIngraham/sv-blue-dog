@@ -18,7 +18,7 @@ package BlueDogWindDocuments {
 package BlueDogDocuments {
     private import DocumentQueries::*;
     calc def ModelElements :> Query {
-        Descendants(source = Named(qualifiedName = ("GorgeChallenge", "BlueDog::Goals", "BlueDogRequirements")))
+        Descendants(source = Named(qualifiedName = ("GorgeChallenge", "BlueDog::Goals", "BlueDogRequirements", "BlueDogStructure")))
     }
     calc def Requirements :> Query {
         Project(source = WhereType(source = ModelElements(), type = "RequirementDefinition"),

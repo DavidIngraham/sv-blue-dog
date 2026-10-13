@@ -107,3 +107,18 @@ def test_srr_views_stay_scoped_to_review_topics(rendered_site):
     assert 'C-018 CapsizeRecovery' in text
     assert '1.2 m' in text
     assert '250 × 250 × 250 mm' in text
+
+
+def test_construction_views_show_model_basis_and_qualification(rendered_site):
+    text=(rendered_site/'imports/docs/requirements/requirements-practicality.md').read_text(encoding='utf-8')
+    diagrams=re.findall(r'```mermaid\n(.*?)```',text,re.S)
+    construction=next(d for d in diagrams if '%% Page_practicality_construction::thread ' in d)
+    materials=next(d for d in diagrams if '%% Page_practicality_materials::thread ' in d)
+    assert len(re.findall(r'^  n\d+[(\[]',construction,re.M))==4
+    assert construction.count('|"dependency"|')==3
+    assert len(re.findall(r'^  n\d+[(\[]',materials,re.M))==5
+    assert materials.count('|"derive"|')==3
+    assert materials.count('|"dependency"|')==1
+    assert 'Every print job shall fit' in text
+    assert 'wet-layup glass/epoxy reinforcement' in text
+    assert 'Wet-conditioned production laminate coupons' in text
