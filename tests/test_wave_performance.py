@@ -104,7 +104,8 @@ def test_capytaine_long_wave_heave_follows_surface():
     assert abs(response.imag)<.05
 
 
-def test_small_wave_limit_recovers_steady_balance_and_power():
+@pytest.mark.parametrize('typed',[False,True])
+def test_small_wave_limit_recovers_steady_balance_and_power(typed):
     from types import SimpleNamespace
     from tools.boat_analysis.model.vessel import CoupledModel
     from tools.boat_analysis.model.surface import SurfaceOperation
@@ -118,6 +119,12 @@ def test_small_wave_limit_recovers_steady_balance_and_power():
         def mesh_error(self,*args):return 0.
         def samples(self,a,period,speed,direction,count):
             for i in range(count):yield np.zeros(6),-2*np.pi*i/count,(2*np.pi/period)**2/9.80665,2*np.pi/period
+    if typed:
+        from tools.boat_analysis.model.design_boundary import unpack
+        from tools.boat_analysis.model.design_types import OperatingState,AeroCoefficients,MassProperties,HydroState
+        state,aero,mass,hydro=(unpack(t,v,model.operating_contract[t.sysml_id+'Fields'])
+            for t,v in zip((OperatingState,AeroCoefficients,MassProperties,HydroState),(state,aero,mass,hydro),strict=True))
+        design=model.design_record(design)
     steady=SurfaceOperation(model.operation,model.polar,[10,.0002,.05,8]).evaluate(design,model.parameters,state,aero,mass,hydro)
     dynamic=WaveAveragedOperation(model.operation,model.polar,[10,.0002,.05,8],QuietResponse(),1e-9,3,0).evaluate(design,model.parameters,state,aero,mass,hydro)
     for key in ('surgeResidual','swayResidual','yawResidual','rollResidual','averagePower','rudderTorque'):

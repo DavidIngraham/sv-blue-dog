@@ -5,7 +5,7 @@ from scipy.optimize import brentq
 from tools.boat_analysis.geometry.vessel import build_geometry,ballast_geometry
 from tools.boat_analysis.geometry.hydro import DisplacementBody,equilibrium,pose
 from tools.boat_analysis.model.design_boundary import design_vector, pack, unpack
-from tools.boat_analysis.model.design_types import Design, Parameters
+from tools.boat_analysis.model.design_types import Design, Parameters, OperatingState, AeroCoefficients, HydroState
 from tools.boat_analysis.model.mass import MassKernel
 from tools.boat_analysis.model.operating import OperationKernel
 from tools.boat_analysis.model.hydrostatics import HydroKernel
@@ -38,6 +38,7 @@ def wet_area(triangles,height):
 class CoupledModel:
     def __init__(self):
         self.mass=MassKernel();self.operation=OperationKernel();self.hydro=HydroKernel();self.polar=WingPolar()
+        self.operating_contract=self.operation.contract
         self.c=self.mass.contract;self.parameters=pack(Parameters.from_mapping(dict(zip(self.c['parameterNames'],self.c['parameterValues'],strict=True))),self.c['parameterNames']);self.last=None;self.hull_reference=None;self.section_cache=None
     def design_record(self, values: ArrayLike) -> Design:
         return unpack(Design, values, self.c['designNames'])
@@ -71,10 +72,14 @@ class CoupledModel:
             sections=np.concatenate([finite_skin_properties(outlines[name],thickness) for name,thickness in zip(outlines,thicknesses)])
             self.section_cache=(key,sections)
         return bodies,m,np.r_[np.concatenate(list(vectors.values())),center,deck_area(g['hull']),self.section_cache[1]],hull_skin
-    def at_state(self,x: Design | ArrayLike,state: ArrayLike,resolution=4,pitch_equilibrium=True):
+    def at_state(self,x: Design | ArrayLike,state: OperatingState | ArrayLike,resolution=4,pitch_equilibrium=True):
         x=design_vector(x,self.c)
         d,g,v,center,hull_skin,outlines=self.candidate(x,resolution)
-        wind,up,foul,speed,heading,alpha,beta,delta,heel=state
+        if not isinstance(state, OperatingState):
+            state=unpack(OperatingState,state,self.operating_contract['MarineDesign::OperatingStateFields'])
+        wind,up,foul,speed,heading,alpha,beta,delta,heel=(
+            state.windSpeed_m_s,state.windward,state.foulingMultiplier,state.speed_m_s,
+            state.windFrom_deg,state.incidence_deg,state.leeway_deg,state.rudder_deg,state.heel_deg)
         awx=wind*np.cos(np.deg2rad(heading))+speed*np.cos(np.deg2rad(beta))
         awy=wind*np.sin(np.deg2rad(heading))-speed*np.sin(np.deg2rad(beta))
         # VSP X is LE->TE, Y span, Z section-normal. Wing span maps to boat +Z.
@@ -100,6 +105,9 @@ class CoupledModel:
             features=upright_hull_features(hull.tetrahedra,upright['waterline_m'])
             self.hull_reference=(key,features)
         features=self.hull_reference[1]
-        result=self.operation.evaluate(x,self.parameters,state,aero,list(m.values()),np.r_[h['waterline_m'],h['righting_Nm'],wetted,features])
+        aero=unpack(AeroCoefficients,aero,self.operating_contract['MarineDesign::AeroCoefficientsFields'])
+        hydro=unpack(HydroState,np.r_[h['waterline_m'],h['righting_Nm'],wetted,features],
+                     self.operating_contract['MarineDesign::HydroStateFields'])
+        result=self.operation.evaluate(self.design_record(x),self.assumptions,state,aero,m,hydro)
         result.update({'pitch_deg':pitch,'waterline_m':h['waterline_m'],'wetted_m2':wetted,'mast_trim_deg':float(np.rad2deg(trim)),'mass_kg':mass,'mass_residual_kg':h['mass_residual_kg'],'pitch_residual_Nm':h['pitch_torque_Nm']})
         return result

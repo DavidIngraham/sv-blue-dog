@@ -88,4 +88,72 @@ package MarineDesign {
         return vector : Real [41] ordered nonunique;
         (value.resinGlassRatio, value.gearboxEfficiency, value.motorEfficiency, value.wingNoLoadW, value.wingControllerW, value.wingMotorHoldingW, value.wingMoveFraction, value.wingHoldingFraction, value.rudderHoldingWPerNm, value.rudderMoveFraction, value.electronicsW, value.solarResourceFactor, value.batteryWhKg, value.laminateKnockdown, value.profileCd, value.wingClLimit, value.wingLiftScale, value.wingDragScale, value.wingRateRadS, value.rudderRateRadS, value.driveKgPerNm, value.wingDriveBaseKg, value.fixedEquipmentKg, value.attachmentKg, value.residuaryResistanceFactor, value.viscousFormFactor, value.foilClLimit, value.foilEfficiency, value.foilCd, value.airNu, value.waterNu, value.waterDensity, value.airDensity, value.ballastDensity, value.gravity, value.loadFactor, value.assemblyLimitKg, value.panelCoverage, value.elevatedEquipmentKg, value.elevatedEquipmentXFraction, value.elevatedEquipmentAboveDeckM)
     }
+    part def OperatingState {
+        doc /* Named numerical boundary. Declaration order defines the native vector ABI. */
+        attribute windSpeed_m_s : Real;
+        attribute windward : Real;
+        attribute foulingMultiplier : Real;
+        attribute speed_m_s : Real;
+        attribute windFrom_deg : Real;
+        attribute incidence_deg : Real;
+        attribute leeway_deg : Real;
+        attribute rudder_deg : Real;
+        attribute heel_deg : Real;
+    }
+    part def AeroCoefficients {
+        doc /* Named numerical boundary. Declaration order defines the native vector ABI. */
+        attribute liftCoefficient : Real;
+        attribute dragCoefficient : Real;
+        attribute midchordMomentCoefficient : Real;
+    }
+    part def HydroState {
+        doc /* Named numerical boundary. Declaration order defines the native vector ABI. */
+        attribute waterline_m : Real;
+        attribute righting_Nm : Real;
+        attribute wettedHullArea_m2 : Real;
+        attribute waterlineLength_m : Real;
+        attribute waterlineBeam_m : Real;
+        attribute canoeDraft_m : Real;
+        attribute displacementVolume_m3 : Real;
+        attribute waterplaneArea_m2 : Real;
+        attribute lcbAftFP_m : Real;
+        attribute lcfAftFP_m : Real;
+        attribute prismaticCoefficient : Real;
+        attribute midshipCoefficient : Real;
+    }
+    part def AppendageLoads {
+        doc /* Named numerical boundary. Declaration order defines the native vector ABI. */
+        attribute wingResultant : Real;
+        attribute keelResultant : Real;
+        attribute rudderResultant : Real;
+    }
+    part def Passage {
+        doc /* Named numerical boundary. Declaration order defines the native vector ABI. */
+        attribute duration_h : Real;
+        attribute averagePower_W : Real;
+    }
+    part def MassProperties {
+        doc /* Named numerical boundary. Declaration order defines the native vector ABI. */
+        attribute totalMass : Real;
+        attribute hullMass : Real;
+        attribute wingMass : Real;
+        attribute keelMass : Real;
+        attribute rudderMass : Real;
+        attribute batteryMass : Real;
+        attribute panelMass : Real;
+        attribute wingDriveMass : Real;
+        attribute rudderDriveMass : Real;
+        attribute equipmentMass : Real;
+        attribute cgX : Real;
+        attribute cgY : Real;
+        attribute cgZ : Real;
+        attribute hullMaterialVolume : Real;
+        attribute wingMaterialVolume : Real;
+        attribute keelMaterialVolume : Real;
+        attribute rudderMaterialVolume : Real;
+        attribute hullLaminateThickness : Real;
+        attribute wingLaminateThickness : Real;
+        attribute keelLaminateThickness : Real;
+        attribute rudderLaminateThickness : Real;
+    }
 }

@@ -46,7 +46,13 @@ class SurfaceOperation:
         self.strip=NativeCalculation('MarineSurface::StripLoad',1,output_size=4)
         self.core=NativeCalculation('MarineSailing::Core',8)
 
+    def pack(self, design, parameters, state, aero, mass, hydro):
+        return tuple(self.original.kernel.input_vector(name, value) for name,value in
+            zip(('design','parameters','state','aero','mass','hydro'),
+                (design,parameters,state,aero,mass,hydro), strict=True))
+
     def evaluate(self,design,parameters,state,aero,mass,hydro,*,motion=None,motion_origin=(0,0,0)):
+        design,parameters,state,aero,mass,hydro=self.pack(design,parameters,state,aero,mass,hydro)
         d,p,s=np.asarray(design),np.asarray(parameters),np.asarray(state)
         q=self.contract['environment'];height=np.sqrt(d[4]*d[5]);chord=d[4]/height
         theta,beta,heel=np.deg2rad(s[[4,6,8]])

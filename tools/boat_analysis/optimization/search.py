@@ -10,6 +10,7 @@ from types import SimpleNamespace
 import numpy as np
 from scipy.optimize import least_squares,minimize
 from tools.boat_analysis.model.vessel import CoupledModel
+from tools.boat_analysis.model.design_types import AppendageLoads
 from tools.boat_analysis.model.operating import StructureKernel,RouteKernel,ConceptKernel
 from tools.boat_analysis.geometry.hydro import equilibrium
 from tools.boat_analysis.model.runtime import ROOT
@@ -71,11 +72,11 @@ class Problem:
         k=self.model;rows=[]
         for state,(wind,up,_) in zip(states,self.env):rows.append(k.at_state(x,np.r_[wind,int(up),1,state],resolution=self.resolution,pitch_equilibrium=False))
         reference_mass,g,upright,righting=self.design_data(x)
-        loads=[max(row[name] for row in rows) for name in ['wingResultant','keelResultant','rudderResultant']]
-        margins=self.structure.evaluate(x,k.parameters,list(reference_mass.values()),g,loads,upright['waterline_m'])
+        loads=AppendageLoads(**{name:max(row[name] for row in rows) for name in ('wingResultant','keelResultant','rudderResultant')})
+        margins=self.structure.evaluate(x,k.parameters,reference_mass,g,loads,upright['waterline_m'])
         route=self.route.evaluate([r['waterVMG'] for r in rows],states.ravel())
         west=self.route.evaluate([r['waterVMG'] for r in rows],states.ravel(),wind_from='west')
-        concept=self.concept.evaluate(x,list(reference_mass.values()),g,max(west[5],route[5]) if self.require_east else west[5],max(r['averagePower'] for r in rows))
+        concept=self.concept.evaluate(x,reference_mass,g,max(west[5],route[5]) if self.require_east else west[5],max(r['averagePower'] for r in rows))
         margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
         from tools.boat_analysis.geometry.vessel import operating_envelope
         envelope = operating_envelope(dict(zip(k.c['designNames'], x)), k.parameters[33], self.resolution)

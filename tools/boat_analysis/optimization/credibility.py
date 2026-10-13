@@ -20,7 +20,7 @@ def assess(candidate,destination=None):
         for value in p.structure.contract['conceptSensitivity'][name]:
             policy=list(nominal);policy[index]=value
             _,m,g,_=p.model.configuration(r['design'],0,resolution=12)
-            result=p.concept.evaluate(r['design'],list(m.values()),g,r['westerlyRoute'][5],max(row['averagePower'] for row in r['rows']),policy)
+            result=p.concept.evaluate(r['design'],m,g,r['westerlyRoute'][5],max(row['averagePower'] for row in r['rows']),policy)
             sensitivities.append(dict(parameter=name,value=value,**result))
     aspect=[]
     original=p.structure.contract['structure'][10]
@@ -28,7 +28,7 @@ def assess(candidate,destination=None):
     loads=[max(row[n] for row in r['rows']) for n in ['wingResultant','keelResultant','rudderResultant']]
     for ratio in p.structure.contract['conceptSensitivity']['minimumUnderwaterAspectRatio']:
         p.structure.contract['structure'][10]=ratio
-        margins=p.structure.evaluate(r['design'],p.model.parameters,list(m.values()),g,loads,0.)
+        margins=p.structure.evaluate(r['design'],p.model.parameters,m,g,loads,0.)
         aspect.append(dict(minimumAspectRatio=ratio,keel=margins['keelAspectMargin'],rudder=margins['rudderAspectMargin']))
     p.structure.contract['structure'][10]=original
     # Reuse the model's declared construction sensitivity at fixed geometry.
@@ -37,7 +37,7 @@ def assess(candidate,destination=None):
     hashes.update(source_hashes(['build/analysis/coupled-uncertainty-inputs.json']))
     parameters=np.array(uncertainty['values']['construction'])
     bodies,construction_mass,construction_geometry,_=p.model.configuration(r['design'],0,resolution=12)
-    construction=p.structure.evaluate(r['design'],parameters,list(construction_mass.values()),construction_geometry,loads,0.)
+    construction=p.structure.evaluate(r['design'],parameters,construction_mass,construction_geometry,loads,0.)
     # Only material stiffness/strength margins are interpreted here; mass and
     # changed sailing equilibria require a fully re-solved uncertainty replay.
     material={n:v for n,v in construction.items() if 'Stress' in n or 'Deflection' in n}

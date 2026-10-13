@@ -1,5 +1,9 @@
 """Domain facades; generated contracts own argument shapes and preconditions."""
 import numpy as np
+from collections.abc import Mapping
+from numpy.typing import ArrayLike
+from .design_types import (Design, Parameters, OperatingState, AeroCoefficients,
+                           HydroState, MassProperties, AppendageLoads, Passage)
 from .boundary import ModelAdapter
 from .preparation import prepare_operating as prepare
 from .runtime import ROOT
@@ -10,7 +14,10 @@ CONTRACT = ROOT/'.tools/coupled-operation-contract.json'
 class OperationKernel(ModelAdapter):
     model_name = 'operation'
 
-    def evaluate(self, design, parameters, state, aero, mass, hydro):
+    def evaluate(self, design: Design | ArrayLike, parameters: Parameters | ArrayLike,
+                 state: OperatingState | ArrayLike, aero: AeroCoefficients | ArrayLike,
+                 mass: MassProperties | Mapping[str, float] | ArrayLike,
+                 hydro: HydroState | ArrayLike) -> dict[str, float]:
         return self.kernel.evaluate(design=design, parameters=parameters, state=state,
                                     aero=aero, mass=mass, hydro=hydro)
 
@@ -18,7 +25,9 @@ class OperationKernel(ModelAdapter):
 class StructureKernel(ModelAdapter):
     model_name = 'structure'
 
-    def evaluate(self, design, parameters, mass, geometry, loads, waterline):
+    def evaluate(self, design: Design | ArrayLike, parameters: Parameters | ArrayLike,
+                 mass: MassProperties | Mapping[str, float] | ArrayLike, geometry: ArrayLike,
+                 loads: AppendageLoads | ArrayLike, waterline: float) -> dict[str, float]:
         return self.kernel.evaluate(design=design, parameters=parameters, mass=mass,
                                     geometry=geometry, loads=loads, waterline=waterline)
 
@@ -40,9 +49,11 @@ class RouteKernel(ModelAdapter):
 class ConceptKernel(ModelAdapter):
     model_name = 'concept'
 
-    def evaluate(self, design, mass, geometry, duration, power, policy=None):
+    def evaluate(self, design: Design | ArrayLike,
+                 mass: MassProperties | Mapping[str, float] | ArrayLike, geometry: ArrayLike,
+                 duration: float, power: float, policy: ArrayLike | None = None) -> dict[str, float]:
         return self.kernel.evaluate(design=design, mass=mass, geometry=geometry,
-                                    passage=[duration, power], policy=policy)
+                                    passage=Passage(duration_h=duration, averagePower_W=power), policy=policy)
 
 
 if __name__ == '__main__':

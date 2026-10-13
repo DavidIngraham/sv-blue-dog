@@ -69,7 +69,27 @@ class _Record:
         return {f.metadata['sysml_name']: getattr(self, f.name) for f in fields(self)}
 
 SYSML_GENERATOR_VERSION = "dataclass-1"
-SYSML_MODEL_HASH = "sha256:1b1bf4207a20853903a934cdd67a910d24f6f930116219c909c78b5bf3067057"
+SYSML_MODEL_HASH = "sha256:e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057"
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class AeroCoefficients(_Record):
+    sysml_id: ClassVar[str] = "MarineDesign::AeroCoefficients"
+    sysml_types: ClassVar[tuple[str, ...]] = ('MarineDesign::AeroCoefficients',)
+    sysml_withheld_library_attributes: ClassVar[int] = 55
+    dragCoefficient: float = field(metadata={'sysml_name': 'dragCoefficient', 'sysml_id': 'MarineDesign::AeroCoefficients::dragCoefficient', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    liftCoefficient: float = field(metadata={'sysml_name': 'liftCoefficient', 'sysml_id': 'MarineDesign::AeroCoefficients::liftCoefficient', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    midchordMomentCoefficient: float = field(metadata={'sysml_name': 'midchordMomentCoefficient', 'sysml_id': 'MarineDesign::AeroCoefficients::midchordMomentCoefficient', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class AppendageLoads(_Record):
+    sysml_id: ClassVar[str] = "MarineDesign::AppendageLoads"
+    sysml_types: ClassVar[tuple[str, ...]] = ('MarineDesign::AppendageLoads',)
+    sysml_withheld_library_attributes: ClassVar[int] = 55
+    keelResultant: float = field(metadata={'sysml_name': 'keelResultant', 'sysml_id': 'MarineDesign::AppendageLoads::keelResultant', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    rudderResultant: float = field(metadata={'sysml_name': 'rudderResultant', 'sysml_id': 'MarineDesign::AppendageLoads::rudderResultant', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    wingResultant: float = field(metadata={'sysml_name': 'wingResultant', 'sysml_id': 'MarineDesign::AppendageLoads::wingResultant', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -106,6 +126,69 @@ class Design(_Record):
     wing_glass_kg_m2: float = field(metadata={'sysml_name': 'wing_glass_kg_m2', 'sysml_id': 'MarineDesign::Design::wing_glass_kg_m2', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
     wing_thickness_scale: float = field(metadata={'sysml_name': 'wing_thickness_scale', 'sysml_id': 'MarineDesign::Design::wing_thickness_scale', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
     wing_torque_Nm: float = field(metadata={'sysml_name': 'wing_torque_Nm', 'sysml_id': 'MarineDesign::Design::wing_torque_Nm', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class HydroState(_Record):
+    sysml_id: ClassVar[str] = "MarineDesign::HydroState"
+    sysml_types: ClassVar[tuple[str, ...]] = ('MarineDesign::HydroState',)
+    sysml_withheld_library_attributes: ClassVar[int] = 55
+    canoeDraft_m: float = field(metadata={'sysml_name': 'canoeDraft_m', 'sysml_id': 'MarineDesign::HydroState::canoeDraft_m', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    displacementVolume_m3: float = field(metadata={'sysml_name': 'displacementVolume_m3', 'sysml_id': 'MarineDesign::HydroState::displacementVolume_m3', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    lcbAftFP_m: float = field(metadata={'sysml_name': 'lcbAftFP_m', 'sysml_id': 'MarineDesign::HydroState::lcbAftFP_m', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    lcfAftFP_m: float = field(metadata={'sysml_name': 'lcfAftFP_m', 'sysml_id': 'MarineDesign::HydroState::lcfAftFP_m', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    midshipCoefficient: float = field(metadata={'sysml_name': 'midshipCoefficient', 'sysml_id': 'MarineDesign::HydroState::midshipCoefficient', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    prismaticCoefficient: float = field(metadata={'sysml_name': 'prismaticCoefficient', 'sysml_id': 'MarineDesign::HydroState::prismaticCoefficient', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    righting_Nm: float = field(metadata={'sysml_name': 'righting_Nm', 'sysml_id': 'MarineDesign::HydroState::righting_Nm', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    waterlineBeam_m: float = field(metadata={'sysml_name': 'waterlineBeam_m', 'sysml_id': 'MarineDesign::HydroState::waterlineBeam_m', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    waterlineLength_m: float = field(metadata={'sysml_name': 'waterlineLength_m', 'sysml_id': 'MarineDesign::HydroState::waterlineLength_m', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    waterline_m: float = field(metadata={'sysml_name': 'waterline_m', 'sysml_id': 'MarineDesign::HydroState::waterline_m', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    waterplaneArea_m2: float = field(metadata={'sysml_name': 'waterplaneArea_m2', 'sysml_id': 'MarineDesign::HydroState::waterplaneArea_m2', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    wettedHullArea_m2: float = field(metadata={'sysml_name': 'wettedHullArea_m2', 'sysml_id': 'MarineDesign::HydroState::wettedHullArea_m2', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class MassProperties(_Record):
+    sysml_id: ClassVar[str] = "MarineDesign::MassProperties"
+    sysml_types: ClassVar[tuple[str, ...]] = ('MarineDesign::MassProperties',)
+    sysml_withheld_library_attributes: ClassVar[int] = 55
+    batteryMass: float = field(metadata={'sysml_name': 'batteryMass', 'sysml_id': 'MarineDesign::MassProperties::batteryMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    cgX: float = field(metadata={'sysml_name': 'cgX', 'sysml_id': 'MarineDesign::MassProperties::cgX', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    cgY: float = field(metadata={'sysml_name': 'cgY', 'sysml_id': 'MarineDesign::MassProperties::cgY', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    cgZ: float = field(metadata={'sysml_name': 'cgZ', 'sysml_id': 'MarineDesign::MassProperties::cgZ', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    equipmentMass: float = field(metadata={'sysml_name': 'equipmentMass', 'sysml_id': 'MarineDesign::MassProperties::equipmentMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    hullLaminateThickness: float = field(metadata={'sysml_name': 'hullLaminateThickness', 'sysml_id': 'MarineDesign::MassProperties::hullLaminateThickness', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    hullMass: float = field(metadata={'sysml_name': 'hullMass', 'sysml_id': 'MarineDesign::MassProperties::hullMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    hullMaterialVolume: float = field(metadata={'sysml_name': 'hullMaterialVolume', 'sysml_id': 'MarineDesign::MassProperties::hullMaterialVolume', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    keelLaminateThickness: float = field(metadata={'sysml_name': 'keelLaminateThickness', 'sysml_id': 'MarineDesign::MassProperties::keelLaminateThickness', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    keelMass: float = field(metadata={'sysml_name': 'keelMass', 'sysml_id': 'MarineDesign::MassProperties::keelMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    keelMaterialVolume: float = field(metadata={'sysml_name': 'keelMaterialVolume', 'sysml_id': 'MarineDesign::MassProperties::keelMaterialVolume', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    panelMass: float = field(metadata={'sysml_name': 'panelMass', 'sysml_id': 'MarineDesign::MassProperties::panelMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    rudderDriveMass: float = field(metadata={'sysml_name': 'rudderDriveMass', 'sysml_id': 'MarineDesign::MassProperties::rudderDriveMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    rudderLaminateThickness: float = field(metadata={'sysml_name': 'rudderLaminateThickness', 'sysml_id': 'MarineDesign::MassProperties::rudderLaminateThickness', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    rudderMass: float = field(metadata={'sysml_name': 'rudderMass', 'sysml_id': 'MarineDesign::MassProperties::rudderMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    rudderMaterialVolume: float = field(metadata={'sysml_name': 'rudderMaterialVolume', 'sysml_id': 'MarineDesign::MassProperties::rudderMaterialVolume', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    totalMass: float = field(metadata={'sysml_name': 'totalMass', 'sysml_id': 'MarineDesign::MassProperties::totalMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    wingDriveMass: float = field(metadata={'sysml_name': 'wingDriveMass', 'sysml_id': 'MarineDesign::MassProperties::wingDriveMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    wingLaminateThickness: float = field(metadata={'sysml_name': 'wingLaminateThickness', 'sysml_id': 'MarineDesign::MassProperties::wingLaminateThickness', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    wingMass: float = field(metadata={'sysml_name': 'wingMass', 'sysml_id': 'MarineDesign::MassProperties::wingMass', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    wingMaterialVolume: float = field(metadata={'sysml_name': 'wingMaterialVolume', 'sysml_id': 'MarineDesign::MassProperties::wingMaterialVolume', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class OperatingState(_Record):
+    sysml_id: ClassVar[str] = "MarineDesign::OperatingState"
+    sysml_types: ClassVar[tuple[str, ...]] = ('MarineDesign::OperatingState',)
+    sysml_withheld_library_attributes: ClassVar[int] = 55
+    foulingMultiplier: float = field(metadata={'sysml_name': 'foulingMultiplier', 'sysml_id': 'MarineDesign::OperatingState::foulingMultiplier', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    heel_deg: float = field(metadata={'sysml_name': 'heel_deg', 'sysml_id': 'MarineDesign::OperatingState::heel_deg', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    incidence_deg: float = field(metadata={'sysml_name': 'incidence_deg', 'sysml_id': 'MarineDesign::OperatingState::incidence_deg', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    leeway_deg: float = field(metadata={'sysml_name': 'leeway_deg', 'sysml_id': 'MarineDesign::OperatingState::leeway_deg', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    rudder_deg: float = field(metadata={'sysml_name': 'rudder_deg', 'sysml_id': 'MarineDesign::OperatingState::rudder_deg', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    speed_m_s: float = field(metadata={'sysml_name': 'speed_m_s', 'sysml_id': 'MarineDesign::OperatingState::speed_m_s', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    windFrom_deg: float = field(metadata={'sysml_name': 'windFrom_deg', 'sysml_id': 'MarineDesign::OperatingState::windFrom_deg', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    windSpeed_m_s: float = field(metadata={'sysml_name': 'windSpeed_m_s', 'sysml_id': 'MarineDesign::OperatingState::windSpeed_m_s', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    windward: float = field(metadata={'sysml_name': 'windward', 'sysml_id': 'MarineDesign::OperatingState::windward', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -154,3 +237,12 @@ class Parameters(_Record):
     wingMoveFraction: float = field(metadata={'sysml_name': 'wingMoveFraction', 'sysml_id': 'MarineDesign::Parameters::wingMoveFraction', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
     wingNoLoadW: float = field(metadata={'sysml_name': 'wingNoLoadW', 'sysml_id': 'MarineDesign::Parameters::wingNoLoadW', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
     wingRateRadS: float = field(metadata={'sysml_name': 'wingRateRadS', 'sysml_id': 'MarineDesign::Parameters::wingRateRadS', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+
+
+@dataclass(frozen=True, slots=True, kw_only=True)
+class Passage(_Record):
+    sysml_id: ClassVar[str] = "MarineDesign::Passage"
+    sysml_types: ClassVar[tuple[str, ...]] = ('MarineDesign::Passage',)
+    sysml_withheld_library_attributes: ClassVar[int] = 55
+    averagePower_W: float = field(metadata={'sysml_name': 'averagePower_W', 'sysml_id': 'MarineDesign::Passage::averagePower_W', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})
+    duration_h: float = field(metadata={'sysml_name': 'duration_h', 'sysml_id': 'MarineDesign::Passage::duration_h', 'declared_type': 'Real', 'unit': '', 'primitive': 'Real', 'lower': 1, 'upper': 1, 'collection': False})

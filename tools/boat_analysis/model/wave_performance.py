@@ -22,6 +22,7 @@ class WaveAveragedOperation:
         self.wave=NativeCalculation('MarineSurface::WaveScreen',1)
 
     def evaluate(self,design,parameters,state,aero,mass,hydro):
+        design,parameters,state,aero,mass,hydro=self.surface.pack(design,parameters,state,aero,mass,hydro)
         d,p,s=np.array(design),np.array(parameters),np.array(state)
         if self.height==0:
             result=self.surface.evaluate(d,p,s,aero,mass,hydro)

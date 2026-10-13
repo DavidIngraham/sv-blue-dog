@@ -57,8 +57,23 @@ def describe(path, definition, *, named=True, inputs_only=False):
     return arguments, outputs
 
 
+def record_fields(definition):
+    """Declaration order is model-owned; generated dataclass order is irrelevant."""
+    path = ROOT/'models/libraries/marine/design.sysml'
+    elements = _elements(path, digest(path))
+    by_id = {e['@id']: e for e in elements}
+    record = next(e for e in elements if e.get('qualifiedName') == definition)
+    members = [by_id[r['@id']] for r in record['ownedMember']]
+    attributes = [e for e in members if e['@type'] == 'AttributeUsage']
+    if any('multiplicity' in e or len(e.get('type', [])) != 1 or
+           by_id[e['type'][0]['@id']].get('qualifiedName') != 'ScalarValues::Real'
+           for e in attributes):
+        raise ValueError('Numerical record must contain scalar Real attributes: '+definition)
+    return [e['declaredName'] for e in attributes]
+
+
 def compile_model(contract, name, *, path, definition, aliases, source, hash_key,
-                  output_key=None, output_definition=None, defaults=None, records=None, checks=None):
+                  output_key=None, output_definition=None, defaults=None, records=None, checks=None, record_types=None):
     """Application wiring supplies aliases/defaults; the model supplies dimensions."""
     path = ROOT/path
     # Evaluate can delegate to Core, whose explicit output tuple defines labels.
@@ -79,6 +94,18 @@ def compile_model(contract, name, *, path, definition, aliases, source, hash_key
     entry = dict(source=generated.relative_to(ROOT).as_posix(), hashKey=hash_key,
                  arguments=args, outputs=outputs if output_key else None, outputSize=len(outputs),
                  defaults=defaults or {}, records=records or {})
+    entry['recordTypes'] = record_types or {}
+    for argument, record_type in entry['recordTypes'].items():
+        names = record_fields(record_type)
+        shape = next(a['shape'] for a in args if a['name'] == argument)
+        if shape != [len(names)]:
+            raise ValueError(f'{name}.{argument}: record differs from numerical ABI')
+        existing = entry['records'].get(argument)
+        if existing is not None and contract[existing] != names:
+            raise ValueError(f'{name}.{argument}: named and positional contracts disagree')
+        key = record_type+'Fields'
+        contract[key] = names
+        entry['records'][argument] = key
     if output_key:
         contract[output_key] = outputs
     if checks:

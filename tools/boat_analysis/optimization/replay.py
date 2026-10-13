@@ -37,11 +37,11 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
     cg=[m['cgX'],m['cgY'],m['cgZ']]
     upright=free_pitch_equilibrium(model.hydro,bodies,cg,m['totalMass'],0,density=model.parameters[31])
     loads=[max(row['outputs'][n] for row in rows) for n in ['wingResultant','keelResultant','rudderResultant']]
-    margins=structure.evaluate(x,model.parameters,list(m.values()),g,loads,upright['waterline_m'])
+    margins=structure.evaluate(x,model.parameters,m,g,loads,upright['waterline_m'])
     policy=scenarios['values']['adverseRoute' if name=='combined' else 'nominalRoute']
     trip=route.evaluate([r['outputs']['waterVMG'] for r in rows],np.array([r['state'][3:] for r in rows]).ravel(),policy)
     west=route.evaluate([r['outputs']['waterVMG'] for r in rows],np.array([r['state'][3:] for r in rows]).ravel(),policy,wind_from='west')
-    concept=ConceptKernel().evaluate(x,list(m.values()),g,max(west[5],trip[5]) if route_profile=='all-season' else west[5],max(r['outputs']['averagePower'] for r in rows))
+    concept=ConceptKernel().evaluate(x,m,g,max(west[5],trip[5]) if route_profile=='all-season' else west[5],max(r['outputs']['averagePower'] for r in rows))
     margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
     recovery=[]
     # Complete curves for the nominal replay; additional evidence cases below.

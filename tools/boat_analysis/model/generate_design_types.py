@@ -13,6 +13,12 @@ def main():
     command=[str(ROOT/'models/libraries/marine/design.sysml'),
              '--format','dataclass','--definition','MarineDesign::Design',
              '--definition','MarineDesign::Parameters',
+             '--definition','MarineDesign::OperatingState',
+             '--definition','MarineDesign::AeroCoefficients',
+             '--definition','MarineDesign::HydroState',
+             '--definition','MarineDesign::AppendageLoads',
+             '--definition','MarineDesign::Passage',
+             '--definition','MarineDesign::MassProperties',
              '-o',str(ROOT/'tools/boat_analysis/model/design_types.py')]
     return generate(command + (['--check'] if args.check else []))
 

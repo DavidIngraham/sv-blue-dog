@@ -23,7 +23,11 @@ def prepare_mass():
         definition='MarineMass::MassProperties', aliases={'d':'design','p':'parameters','m':'materials','geometry':'geometry'},
         source='coupled-mass.c', hash_key='massHash', output_key='massNames',
         defaults={'parameters':'parameterValues','materials':'materialValues'},
-        records={'design':'designNames','parameters':'parameterNames'}, checks='MarineMass::InputChecks')
+        records={'design':'designNames','parameters':'parameterNames'}, checks='MarineMass::InputChecks',
+        record_types={'design':'MarineDesign::Design','parameters':'MarineDesign::Parameters'})
+    from .contracts import record_fields
+    if c['massNames'] != record_fields('MarineDesign::MassProperties'):
+        raise ValueError('Mass output order differs from the named mass record')
     (ROOT/'.tools/coupled-contract.json').write_text(json.dumps(c,indent=2)+'\n')
     from tools.boat_analysis.geometry.vessel import build_geometry,ballast_geometry
     _,vectors,_=build_geometry(dict(zip(c['designNames'],c['referenceDesign'])))
@@ -53,18 +57,23 @@ def prepare_operating():
         definition='MarineSailing::Evaluate', output_definition='MarineSailing::Core',
         aliases={'d':'design','p':'parameters','q':'environment','s':'state','aero':'aero','massData':'mass','hydro':'hydro'},
         source='coupled-operation.c', hash_key='generatedHash', output_key='outputNames',
-        defaults={'environment':'environment'}, checks='MarineSailing::InputChecks')
+        defaults={'environment':'environment'}, checks='MarineSailing::InputChecks',
+        record_types={n:'MarineDesign::'+t for n,t in dict(design='Design',parameters='Parameters',
+            state='OperatingState',aero='AeroCoefficients',mass='MassProperties',hydro='HydroState').items()})
     compile_model(c, 'structure', path='models/libraries/structures/scantlings.sysml',
         definition='MarineStructures::DesignMargins',
         aliases={'d':'design','p':'parameters','m':'mass','g':'geometry','r':'structure','loads':'loads','waterline':'waterline'},
-        source='coupled-structure.c', hash_key='structureHash', output_key='structureNames', defaults={'structure':'structure'})
+        source='coupled-structure.c', hash_key='structureHash', output_key='structureNames', defaults={'structure':'structure'},
+        record_types={n:'MarineDesign::'+t for n,t in dict(design='Design',parameters='Parameters',
+            mass='MassProperties',loads='AppendageLoads').items()})
     compile_model(c, 'route', path='models/libraries/marine/course.sysml', definition='MarineCourse::Route',
         aliases={'water':'water','states':'states','policy':'policy'}, source='coupled-route.c', hash_key='routeHash',
         defaults={'policy':'routeParameters'})
     compile_model(c, 'concept', path='models/libraries/marine/concept.sysml', definition='MarineConcept::Evaluate',
         aliases={'d':'design','m':'mass','g':'geometry','q':'environment','policy':'policy','voyage':'passage'},
         source='coupled-concept.c', hash_key='conceptHash', output_key='conceptNames',
-        defaults={'environment':'environment','policy':'conceptPolicy'})
+        defaults={'environment':'environment','policy':'conceptPolicy'},
+        record_types={n:'MarineDesign::'+t for n,t in dict(design='Design',mass='MassProperties',passage='Passage').items()})
     names=c['outputNames']
     (ROOT/'.tools/coupled-operation-contract.json').write_text(json.dumps(c,indent=2)+'\n')
     reference=input_record('coupled-mass-reference.json')

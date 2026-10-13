@@ -67,7 +67,7 @@ The introduction embeds a `design-explorer` fence. During the normal site build,
 
 ### Python records from the model
 
-`MarineDesign::Design` and `MarineDesign::Parameters` generate the frozen records
+`MarineDesign` definitions generate the frozen records
 in `tools/boat_analysis/model/design_types.py`. Their fields come from resolved
 SysML type facts; evaluated configurations supply values. `design_boundary.py`
 packs records using the native contract’s field order and rejects missing or
@@ -85,7 +85,9 @@ uv run python -m tools.boat_analysis.model.generate_design_types
 uv run python -m tools.boat_analysis.model.generate_design_types --check
 ```
 
-These snapshots cover the 29 design variables and 41 physical assumptions.
-Geometry results and operating/mission records have not yet migrated to generated
-types. Physical constraints remain native calculations; dataclass construction
+These snapshots cover design variables, physical assumptions, operating state,
+aerodynamic coefficients, hydrostatic inputs, appendage loads, mass properties
+and passage conditions. Geometry arrays and route-case matrices remain numerical
+interfaces. Scalar and batch callers can supply named records; packing follows
+the model declaration order, independently of Python dictionary or dataclass order. Physical constraints remain native calculations; dataclass construction
 checks data representation, not vessel feasibility.

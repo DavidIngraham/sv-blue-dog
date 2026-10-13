@@ -1,5 +1,6 @@
 """Contract-driven numerical calls; domain equations and checks stay in SysML."""
 import json
+from collections.abc import Mapping
 import numpy as np
 from .runtime import ROOT
 from .native_kernel import KernelSpec, NativeKernel, BatchError
@@ -34,6 +35,23 @@ class ModelBoundary:
                 raise ValueError('Stale generated preconditions')
             self.checks = NativeKernel(KernelSpec(source, tuple(check['arguments']), len(check['outputs'])))
 
+    def input_vector(self, name, value):
+        """Pack a named record at the ABI edge, never by dictionary insertion order."""
+        if hasattr(value, 'to_mapping'):
+            expected = self.schema.get('recordTypes', {}).get(name)
+            if expected is not None and value.sysml_id != expected:
+                raise TypeError(f'{name}: expected {expected}, got {value.sysml_id}')
+            value = value.to_mapping()
+        if isinstance(value, Mapping):
+            key = self.schema['records'].get(name)
+            if key is None:
+                raise TypeError(f'{name}: no named record declared in the model')
+            names = self.contract[key]
+            if set(value) != set(names) or len(set(names)) != len(names):
+                raise ValueError('Typed record differs from generated model fields')
+            value = [value[n] for n in names]
+        return value
+
     def _inputs(self, shared, cases):
         if set(shared)&set(cases) or (set(shared)|set(cases))-set(self.names):
             raise ValueError('Unknown or duplicate model arguments')
@@ -47,12 +65,12 @@ class ModelBoundary:
         for arg in self.schema['arguments']:
             name = arg['name']; target = cases if name in cases else shared
             value = target[name]
-            if hasattr(value, 'to_mapping'):
-                names = self.contract[self.schema['records'][name]]
-                mapping = value.to_mapping()
-                if set(mapping) != set(names) or len(set(names)) != len(names):
-                    raise ValueError('Typed record differs from generated model fields')
-                value = [mapping[n] for n in names]
+            if name in cases and isinstance(value, (list, tuple)):
+                value = [self.input_vector(name, row) for row in value]
+                if not len(value):
+                    value = np.empty((0, *arg['shape']))
+            else:
+                value = self.input_vector(name, value)
             array = np.asarray(value, dtype=float)
             shape = tuple(arg['shape'])
             if name in cases:
