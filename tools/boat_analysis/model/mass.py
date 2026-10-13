@@ -1,16 +1,15 @@
 """Native coupled geometry/material accounting; numerical geometry stays external."""
 from tools.boat_analysis.evidence.records import input_record, input_path, output_path, source_hashes
 
-import ctypes as ct
-import json,subprocess,threading
+import json
 import numpy as np
 from numpy.typing import ArrayLike
 from .design_types import Design, Parameters
 from .design_boundary import design_vector, parameter_vector
-from tools.boat_analysis.model.abi import ROOT, Sequence
+from tools.boat_analysis.model.runtime import ROOT
+from .native_kernel import KernelSpec, NativeKernel
 from tools.boat_analysis.evidence.records import digest,validate
 CONTRACT=ROOT/'.tools/coupled-contract.json'
-_LOCK=threading.Lock()
 
 def prepare():
     from tools.boat_analysis.model.runtime import MODELS,native
@@ -41,13 +40,12 @@ def prepare():
 
 class MassKernel:
     def __init__(self):
-        self.contract=json.loads(CONTRACT.read_text());validate(self.contract['sourceHashes'])
-        source=ROOT/'.tools/coupled-mass.c';h=self.contract['massHash']
-        if digest(source)!=h:raise ValueError('Stale mass kernel')
-        library=ROOT/f'.tools/coupled-mass-{h[:16]}.so'
-        if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
-        self.lib=ct.CDLL(str(library));self.lib.sysml_run.argtypes=[Sequence]*4+[ct.POINTER(Sequence)]
-        self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
+        self.contract=json.loads(CONTRACT.read_text(encoding='utf-8'));c=self.contract
+        validate(c['sourceHashes'])
+        source=ROOT/'.tools/coupled-mass.c'
+        if digest(source)!=c['massHash']:raise ValueError('Stale MassKernel source')
+        self.runtime=NativeKernel(KernelSpec(source,('design', 'parameters', 'materials', 'geometry'),len(c['massNames'])))
+
     def evaluate(self,design: Design | ArrayLike,geometry: ArrayLike,parameters: Parameters | ArrayLike | None=None):
         c=self.contract
         design=design_vector(design,c)
@@ -57,13 +55,7 @@ class MassKernel:
         d=arrays[0]
         positive=[0,1,2,3,4,5,7,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25]
         if np.any(d[positive]<=0) or d[15]<0 or arrays[1][12]<=0 or arrays[1][0]<0:raise ValueError('Invalid physical mass inputs')
-        args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
-        with _LOCK:
-            output=Sequence()
-            if self.lib.sysml_run(*args,ct.byref(output)):raise ValueError(self.lib.sysml_error().decode())
-            if output.shape!=2 or output.length!=len(c['massNames']):raise ValueError('Mass ABI mismatch')
-            result=np.ctypeslib.as_array(output.data,shape=(output.length,)).copy()
-        if not np.isfinite(result).all():raise ValueError('Nonfinite mass result')
+        result=self.runtime.evaluate(*arrays)
         return dict(zip(c['massNames'],result))
 
 if __name__=='__main__':prepare()

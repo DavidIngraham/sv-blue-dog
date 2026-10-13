@@ -1,12 +1,11 @@
 """Compile and call the coupled native force/energy calculation."""
 from tools.boat_analysis.evidence.records import input_record, input_path, output_path, source_hashes
 
-import ctypes as ct
-import json,re,subprocess,threading
+import json,re
 import numpy as np
-from tools.boat_analysis.model.abi import ROOT, Sequence
+from tools.boat_analysis.model.runtime import ROOT
+from .native_kernel import KernelSpec, NativeKernel
 from tools.boat_analysis.evidence.records import digest,validate
-_LOCK=threading.Lock()
 CONTRACT=ROOT/'.tools/coupled-operation-contract.json'
 
 def prepare():
@@ -57,58 +56,69 @@ def prepare():
 
 class OperationKernel:
     def __init__(self):
-        self.contract=json.loads(CONTRACT.read_text());c=self.contract;validate(c['sourceHashes'])
+        self.contract=json.loads(CONTRACT.read_text(encoding='utf-8'));c=self.contract
+        validate(c['sourceHashes'])
         source=ROOT/'.tools/coupled-operation.c'
-        if digest(source)!=c['generatedHash']:raise ValueError('Stale operating kernel')
-        library=ROOT/f".tools/coupled-operation-{c['generatedHash'][:16]}.so"
-        if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
-        self.lib=ct.CDLL(str(library));self.lib.sysml_run.argtypes=[Sequence]*7+[ct.POINTER(Sequence)]
-        self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
-    def evaluate(self,design,parameters,state,aero,mass,hydro):
+        if digest(source)!=c['generatedHash']:raise ValueError('Stale OperationKernel source')
+        self.runtime=NativeKernel(KernelSpec(source,('design', 'parameters', 'environment', 'state', 'aero', 'mass', 'hydro'),len(c['outputNames'])))
+
+    def _inputs(self,design,parameters,state,aero,mass,hydro):
         p=np.asarray(parameters)
         if len(p)!=41 or not 0<p[1]<=1 or not 0<p[2]<=1 or min(p[6:8])<0 or sum(p[6:8])>1+1e-12 or not 0<=p[9]<=1:raise ValueError('Invalid drive efficiencies or duty')
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,p,self.contract['environment'],state,aero,mass,hydro]]
         if [a.shape for a in arrays]!=[(29,),(41,),(len(self.contract['environment']),),(9,),(3,),(21,),(12,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid operation inputs')
         if arrays[3][3]<=0 or arrays[6][2]<=0:raise ValueError('Positive speed and wetted area required')
-        args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
-        with _LOCK:
-            out=Sequence()
-            if self.lib.sysml_run(*args,ct.byref(out)):raise ValueError(self.lib.sysml_error().decode())
-            if out.shape!=2 or out.length!=len(self.contract['outputNames']):raise ValueError('Operation ABI mismatch')
-            result=np.ctypeslib.as_array(out.data,shape=(out.length,)).copy()
-        if not np.isfinite(result).all():raise ValueError('Nonfinite operation result')
+        return arrays
+
+    def evaluate(self,design,parameters,state,aero,mass,hydro):
+        result=self.runtime.evaluate(*self._inputs(design,parameters,state,aero,mass,hydro))
         return dict(zip(self.contract['outputNames'],result))
+
+    def evaluate_batch(self, *, shared, cases, chunk_size=256, errors='raise'):
+        """Rows follow contract outputNames; apply the scalar physical checks first."""
+        names=('design','parameters','state','aero','mass','hydro')
+        if set(shared)&set(cases) or set(shared)|set(cases)!=set(names) or not cases:
+            raise ValueError('Supply each operation input once in shared or cases')
+        shared={k:np.asarray(v,dtype=float) for k,v in shared.items()}
+        cases={k:np.asarray(v,dtype=float) for k,v in cases.items()}
+        if any(v.ndim!=2 for v in cases.values()) or any(v.ndim!=1 for v in shared.values()):
+            raise ValueError('Operation batches require shared vectors and case matrices')
+        counts={len(v) for v in cases.values()}
+        if len(counts)!=1:raise ValueError('Unequal batch lengths')
+        # Validate widths even for empty batches.
+        widths=dict(zip(names,(29,41,9,3,21,12)))
+        if any(v.shape[-1]!=widths[k] or not np.isfinite(v).all() for k,v in {**shared,**cases}.items()):
+            raise ValueError('Invalid operation batch inputs')
+        for i in range(next(iter(counts))):
+            try:
+                self._inputs(*(cases[k][i] if k in cases else shared[k] for k in names))
+            except ValueError as exc:
+                raise ValueError(f'Operation batch case {i}: {exc}') from exc
+        return self.runtime.evaluate_batch(shared={**shared,'environment':self.contract['environment']},
+            cases=cases,chunk_size=chunk_size,errors=errors)
 
 class StructureKernel:
     def __init__(self):
-        self.contract=json.loads(CONTRACT.read_text());c=self.contract;validate(c['sourceHashes'])
+        self.contract=json.loads(CONTRACT.read_text(encoding='utf-8'));c=self.contract
+        validate(c['sourceHashes'])
         source=ROOT/'.tools/coupled-structure.c'
-        if digest(source)!=c['structureHash']:raise ValueError('Stale structural kernel')
-        library=ROOT/f".tools/coupled-structure-{c['structureHash'][:16]}.so"
-        if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
-        self.lib=ct.CDLL(str(library));self.lib.sysml_run.argtypes=[Sequence]*6+[ct.c_double,ct.POINTER(Sequence)]
-        self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
+        if digest(source)!=c['structureHash']:raise ValueError('Stale StructureKernel source')
+        self.runtime=NativeKernel(KernelSpec(source,('design', 'parameters', 'mass', 'geometry', 'structure', 'loads', 'waterline'),len(c['structureNames'])))
+
     def evaluate(self,design,parameters,mass,geometry,loads,waterline):
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,parameters,mass,geometry,self.contract['structure'],loads]]
         if [a.shape for a in arrays]!=[(29,),(41,),(21,),(60,),(12,),(3,)] or any(not np.isfinite(a).all() for a in arrays) or not np.isfinite(waterline):raise ValueError('Invalid structural inputs')
-        args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
-        with _LOCK:
-            out=Sequence()
-            if self.lib.sysml_run(*args,waterline,ct.byref(out)):raise ValueError(self.lib.sysml_error().decode())
-            if out.shape!=2 or out.length!=len(self.contract['structureNames']):raise ValueError('Structure ABI mismatch')
-            result=np.ctypeslib.as_array(out.data,shape=(out.length,)).copy()
-        if not np.isfinite(result).all():raise ValueError('Nonfinite structural output')
+        result=self.runtime.evaluate(*arrays,waterline)
         return dict(zip(self.contract['structureNames'],result))
 
 class RouteKernel:
     def __init__(self):
-        self.contract=json.loads(CONTRACT.read_text());c=self.contract;validate(c['sourceHashes'])
+        self.contract=json.loads(CONTRACT.read_text(encoding='utf-8'));c=self.contract
+        validate(c['sourceHashes'])
         source=ROOT/'.tools/coupled-route.c'
-        if digest(source)!=c['routeHash']:raise ValueError('Stale route kernel')
-        library=ROOT/f".tools/coupled-route-{c['routeHash'][:16]}.so"
-        if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
-        self.lib=ct.CDLL(str(library));self.lib.sysml_run.argtypes=[Sequence]*3+[ct.POINTER(Sequence)]
-        self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
+        if digest(source)!=c['routeHash']:raise ValueError('Stale RouteKernel source')
+        self.runtime=NativeKernel(KernelSpec(source,('water', 'states', 'policy'),6))
+
     def evaluate(self,water,states,policy=None,wind_from=None):
         policy=np.array(self.contract['routeParameters'] if policy is None else policy,dtype=float,copy=True)
         if wind_from is not None:
@@ -116,13 +126,7 @@ class RouteKernel:
             policy[6]=float(wind_from=='east')
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [water,states,policy]]
         if [a.shape for a in arrays]!=[(8,),(48,),(7,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid route inputs')
-        args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
-        with _LOCK:
-            out=Sequence()
-            if self.lib.sysml_run(*args,ct.byref(out)):raise ValueError(self.lib.sysml_error().decode())
-            if out.shape!=2 or out.length!=6:raise ValueError('Route ABI mismatch')
-            result=np.ctypeslib.as_array(out.data,shape=(out.length,)).copy()
-        if not np.isfinite(result).all():raise ValueError('Nonfinite route output')
+        result=self.runtime.evaluate(*arrays)
         return result
 
 if __name__=='__main__':prepare()
@@ -131,22 +135,15 @@ if __name__=='__main__':prepare()
 class ConceptKernel:
     """Native finite-passage energy and installed-volume screening."""
     def __init__(self):
-        self.contract=json.loads(CONTRACT.read_text());c=self.contract;validate(c['sourceHashes'])
+        self.contract=json.loads(CONTRACT.read_text(encoding='utf-8'));c=self.contract
+        validate(c['sourceHashes'])
         source=ROOT/'.tools/coupled-concept.c'
-        if digest(source)!=c['conceptHash']:raise ValueError('Stale concept kernel')
-        library=ROOT/f".tools/coupled-concept-{c['conceptHash'][:16]}.so"
-        if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
-        self.lib=ct.CDLL(str(library));self.lib.sysml_run.argtypes=[Sequence]*6+[ct.POINTER(Sequence)]
-        self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
+        if digest(source)!=c['conceptHash']:raise ValueError('Stale ConceptKernel source')
+        self.runtime=NativeKernel(KernelSpec(source,('design', 'mass', 'geometry', 'environment', 'policy', 'passage'),len(c['conceptNames'])))
+
     def evaluate(self,design,mass,geometry,duration,power,policy=None):
         c=self.contract
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,mass,geometry,c['environment'],c['conceptPolicy'] if policy is None else policy,[duration,power]]]
         if [a.shape for a in arrays]!=[(29,),(21,),(60,),(24,),(5,),(2,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid concept inputs')
-        args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
-        with _LOCK:
-            out=Sequence()
-            if self.lib.sysml_run(*args,ct.byref(out)):raise ValueError(self.lib.sysml_error().decode())
-            if out.length!=len(c['conceptNames']):raise ValueError('Concept ABI mismatch')
-            values=np.ctypeslib.as_array(out.data,shape=(out.length,)).copy()
-        if not np.isfinite(values).all():raise ValueError('Nonfinite concept output')
+        values=self.runtime.evaluate(*arrays)
         return dict(zip(c['conceptNames'],values))

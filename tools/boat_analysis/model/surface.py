@@ -3,61 +3,30 @@
 Opt-in provider: historical uniform-flow replay remains reproducible. The local
 finite-wing coefficient approximation does not resolve spanwise circulation.
 """
-import ctypes as ct
 import hashlib
 import json
-import re
-import subprocess
-import threading
 
 import numpy as np
 
-from .abi import Sequence
+from .native_kernel import KernelSpec, NativeKernel
 from .runtime import ROOT, model_files, native, native_value
 
 
-class Number(ct.Structure):
-    _fields_=[('real',ct.c_bool),('integer',ct.c_int64),('value',ct.c_double)]
-
-
-class NumberSequence(ct.Structure):
-    _fields_=[('shape',ct.c_int8),('length',ct.c_int64),('data',ct.POINTER(Number))]
-
-
 class NativeCalculation:
-    def __init__(self, name, arguments):
+    def __init__(self, name, arguments, output_size=None):
         fingerprint=hashlib.sha256(name.encode())
         for path in model_files():
             fingerprint.update(path.read_bytes().replace(b'\r\n',b'\n'))
-        stem=ROOT/'.tools'/('surface-'+name.split('::')[-1]+'-'+fingerprint.hexdigest()[:16])
-        source=stem.with_suffix('.c');library=stem.with_suffix('.so')
-        if not library.exists():
+        source=ROOT/'.tools'/('surface-'+name.split('::')[-1]+'-'+fingerprint.hexdigest()[:16]+'.c')
+        if not source.exists():
             native('-compile',name,'-source','-o',str(source))
-            subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
-        self.lib=ct.CDLL(str(library));self.lock=threading.Lock()
-        signature=re.search(r'int sysml_run\((.*?)\) \{',source.read_text())[1]
-        result_type=signature.split(',')[-1].strip()
-        self.result_type={'sysml_seq_real *result':Sequence,'sysml_seq_num *result':NumberSequence,
-                          'sysml_real *result':ct.c_double}.get(result_type)
-        if self.result_type is None or signature.count('sysml_seq_real v_')!=arguments:
-            raise ValueError('Unsupported native surface ABI: '+signature)
-        self.lib.sysml_run.argtypes=[Sequence]*arguments+[ct.POINTER(self.result_type)]
-        self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
+        self.runtime=NativeKernel(KernelSpec(source,tuple(f'input{i}' for i in range(arguments)),output_size))
 
     def __call__(self,*vectors):
-        arrays=[np.ascontiguousarray(v,dtype=float) for v in vectors]
-        if any(a.ndim!=1 or not np.isfinite(a).all() for a in arrays):
-            raise ValueError('Finite one-dimensional native inputs required')
-        args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
-        with self.lock:
-            out=self.result_type()
-            if self.lib.sysml_run(*args,ct.byref(out)):raise ValueError(self.lib.sysml_error().decode())
-            if self.result_type is ct.c_double:values=np.array([out.value])
-            elif self.result_type is NumberSequence:
-                values=np.array([out.data[i].value if out.data[i].real else out.data[i].integer for i in range(out.length)])
-            else:values=np.ctypeslib.as_array(out.data,shape=(out.length,)).copy()
-        if not np.isfinite(values).all():raise ValueError('Nonfinite surface calculation')
-        return values
+        return self.runtime.evaluate(*vectors)
+
+    def evaluate_batch(self, *, shared, cases, **options):
+        return self.runtime.evaluate_batch(shared=shared,cases=cases,**options)
 
 
 def policy_inputs():
@@ -74,7 +43,7 @@ class SurfaceOperation:
         if self.strips<1 or not 0<policy[1]<policy[2]<policy[0]:
             raise ValueError('Invalid wind height, roughness or quadrature')
         self.wind=NativeCalculation('MarineSurface::WindSample',1)
-        self.strip=NativeCalculation('MarineSurface::StripLoad',1)
+        self.strip=NativeCalculation('MarineSurface::StripLoad',1,output_size=4)
         self.core=NativeCalculation('MarineSailing::Core',8)
 
     def evaluate(self,design,parameters,state,aero,mass,hydro,*,motion=None,motion_origin=(0,0,0)):
@@ -84,7 +53,7 @@ class SurfaceOperation:
         ax=s[0]*np.cos(theta)+s[3]*np.cos(beta)
         ay=s[0]*np.sin(theta)-s[3]*np.sin(beta)
         reference_angle=np.arctan2(ay,ax)
-        loads=[];speeds=[];lift=[];ratios=[];alphas=[];margins=[];height_margins=[]
+        strip_inputs=[];poses=[];speeds=[];lift=[];ratios=[];alphas=[];margins=[];height_margins=[]
         reverse=s[4]<0
         bounds=self.polar.axes[2]
         lower,upper=(-bounds[-1],-bounds[0]) if reverse else (bounds[0],bounds[-1])
@@ -114,13 +83,15 @@ class SurfaceOperation:
             cl=coeff[0]*p[16];cd=(coeff[1]+p[14])*p[17]
             normal=cl*np.cos(np.deg2rad(alpha))+cd*np.sin(np.deg2rad(alpha))
             mast=coeff[2]*q[23]+((1-d[8] if reverse else d[8])-.5)*normal
-            load=self.strip([p[32],d[4]/self.strips,sample[1],sample[2],heel,z,cl,cd,chord,mast])
-            if motion is not None:
-                world=matrix@np.r_[load[:2],0.]
-                load[:2]=world[:2];load[2]=world[1]*z-position[1]*world[2]
-            loads.append(load)
+            strip_inputs.append([p[32],d[4]/self.strips,sample[1],sample[2],heel,z,cl,cd,chord,mast])
+            poses.append((matrix,position,z) if motion is not None else None)
             speeds.append(sample[3]);lift.append(abs(cl));ratios.append(sample[0]);alphas.append(alpha)
             margins.append(margin);height_margins.append(sample[4])
+        loads=self.strip.evaluate_batch(shared={},cases={'input0':strip_inputs}).values
+        if motion is not None:
+            for load,(matrix,position,z) in zip(loads,poses):
+                world=matrix@np.r_[load[:2],0.]
+                load[:2]=world[:2];load[2]=world[1]*z-position[1]*world[2]
         force=np.sum(loads,axis=0)
         extension=[1,*force,min(speeds),max(lift),0,min(*margins,*height_margins)]
         values=self.core(d,p,q,s,aero,mass,hydro,extension)

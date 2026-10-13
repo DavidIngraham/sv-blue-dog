@@ -2,13 +2,13 @@
 from tools.boat_analysis.evidence.records import input_record, input_path, output_path, source_hashes
 
 import ctypes as ct
-import json,subprocess,threading
+import json
 import numpy as np
-from tools.boat_analysis.model.abi import ROOT, Sequence
+from tools.boat_analysis.model.runtime import ROOT
+from .native_kernel import KernelSpec, NativeKernel, load_library
 from tools.boat_analysis.evidence.records import digest
 SOURCE=ROOT/'models/analyses/recovery.sysml'
 CONTRACT=ROOT/'.tools/hydrostatics-contract.json'
-_RUNTIME_LOCK=threading.Lock()
 
 def prepare():
     from tools.boat_analysis.model.runtime import MODELS,native
@@ -28,28 +28,20 @@ class HydroKernel:
         c=json.loads(CONTRACT.read_text());source=ROOT/'.tools/hydrostatics.c'
         if digest(SOURCE)!=c['sourceHash'] or digest(source)!=c['generatedHash']:raise ValueError('Stale hydrostatics kernel')
         batch=ROOT/'tools/boat_analysis/model/hydrostatics_batch.c'
-        library=ROOT/f".tools/hydrostatics-{c['generatedHash'][:12]}-{digest(batch)[:12]}.so"
-        if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(batch),'-I',str(ROOT/'.tools'),'-lm','-o',str(library)],check=True)
-        self.lib=ct.CDLL(str(library));self.lock=_RUNTIME_LOCK
+        # Copy the specialized shim alongside its included generated source.
+        wrapper=source.parent/('mesh-'+digest(batch)[:16]+'.c')
+        wrapper.write_bytes(batch.read_bytes())
+        self.lib,self.lock=load_library(wrapper,dependencies=(source,))
         self.lib.hydro_mesh.argtypes=[ct.POINTER(ct.c_double),ct.c_int64,ct.c_double,ct.POINTER(ct.c_double)]
         self.lib.hydro_mesh.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
         source=ROOT/'.tools/hydrostatics-balance.c'
         if digest(source)!=c['balanceHash']:raise ValueError('Stale balance kernel')
-        library=ROOT/f".tools/hydrostatics-balance-{c['balanceHash'][:16]}.so"
-        if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
-        self.balance_lib=ct.CDLL(str(library));self.balance_lib.sysml_run.argtypes=[Sequence,Sequence,ct.c_double,ct.c_double,ct.POINTER(Sequence)]
-        self.balance_lib.sysml_run.restype=ct.c_int;self.balance_lib.sysml_error.restype=ct.c_char_p
+        self.balance_runtime=NativeKernel(KernelSpec(source,('moments','cg','mass','density'),3))
 
     def balance(self,moments,cg,mass,density):
         arrays=[np.ascontiguousarray(a,dtype=np.float64) for a in [moments,cg]]
         if [a.shape for a in arrays]!=[(4,),(3,)] or any(not np.isfinite(a).all() for a in arrays) or not np.isfinite([mass,density]).all() or min(mass,density)<=0:raise ValueError('Invalid balance inputs')
-        args=[Sequence(2,a.size,a.ctypes.data_as(ct.POINTER(ct.c_double))) for a in arrays]
-        with self.lock:
-            out=Sequence()
-            if self.balance_lib.sysml_run(*args,mass,density,ct.byref(out)):raise ValueError(self.balance_lib.sysml_error().decode())
-            if out.shape!=2 or out.length!=3:raise ValueError('Balance ABI mismatch')
-            result=np.ctypeslib.as_array(out.data,shape=(3,)).copy()
-        return result
+        return self.balance_runtime.evaluate(*arrays,mass,density)
 
     def moments(self,tetrahedra,waterline):
         points=np.ascontiguousarray(tetrahedra,dtype=np.float64)

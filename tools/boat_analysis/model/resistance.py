@@ -1,16 +1,13 @@
 """Native Delft bare-hull regression adapter with explicit applicability screening."""
 from tools.boat_analysis.evidence.records import input_record, input_path, output_path, source_hashes
 
-import ctypes as ct
 import json
 import re
-import subprocess
-import threading
 import numpy as np
-from tools.boat_analysis.model.abi import ROOT, Sequence
+from tools.boat_analysis.model.runtime import ROOT
+from .native_kernel import KernelSpec, NativeKernel
 from tools.boat_analysis.evidence.records import digest, validate
 CONTRACT=ROOT/'.tools/hull-resistance-contract.json'
-_LOCK=threading.Lock()
 NAMES=['resistance_N','resistance_weight_ratio','froude']+[f'{name}_{side}' for name in ['froude','lcb','cp','volume_area','beam_length','center_ratio','volume_length','cm','beam_draft'] for side in ['lower','upper']]
 
 
@@ -41,25 +38,17 @@ def prepare():
 
 class HullResistanceKernel:
     def __init__(self):
-        c=json.loads(CONTRACT.read_text(encoding='utf-8'));validate(c['sourceHashes'])
+        self.contract=json.loads(CONTRACT.read_text(encoding='utf-8'));c=self.contract
+        validate(c['sourceHashes'])
         source=ROOT/'.tools/hull-resistance.c'
-        if digest(source)!=c['generatedHash']:raise ValueError('Stale resistance kernel')
-        library=ROOT/f".tools/hull-resistance-{c['generatedHash'][:16]}.so"
-        if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
-        self.lib=ct.CDLL(str(library))
-        self.lib.sysml_run.argtypes=[Sequence,ct.c_double,ct.c_double,ct.c_double,ct.POINTER(Sequence)]
-        self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
+        if digest(source)!=c['generatedHash']:raise ValueError('Stale HullResistanceKernel source')
+        self.runtime=NativeKernel(KernelSpec(source,('hull', 'speed', 'density', 'gravity'),len(NAMES)))
 
     def evaluate(self,hull,speed,density=1000.,gravity=9.80665,*,require_domain=True):
         h=np.ascontiguousarray(hull,dtype=float)
         if h.shape!=(9,) or not np.isfinite(h).all() or np.any(h<=0) or not np.isfinite([speed,density,gravity]).all() or min(speed,density,gravity)<=0:
             raise ValueError('Positive finite hull dimensions, speed, density and gravity required')
-        with _LOCK:
-            out=Sequence();arg=Sequence(2,h.size,h.ctypes.data_as(ct.POINTER(ct.c_double)))
-            if self.lib.sysml_run(arg,speed,density,gravity,ct.byref(out)):raise ValueError(self.lib.sysml_error().decode())
-            if out.shape!=2 or out.length!=len(NAMES):raise ValueError('Resistance ABI mismatch')
-            values=np.ctypeslib.as_array(out.data,shape=(out.length,)).copy()
-        if not np.isfinite(values).all():raise ValueError('Nonfinite resistance result')
+        values=self.runtime.evaluate(h,speed,density,gravity)
         result=dict(zip(NAMES,values))
         if require_domain:
             failures=[k for k,v in result.items() if k in NAMES[3:] and v < -1e-12]

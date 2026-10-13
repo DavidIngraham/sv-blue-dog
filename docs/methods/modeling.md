@@ -29,3 +29,28 @@ Architecture satisfaction links express intended allocations. Verification cases
 The Markdown source owns this explanation and the scope of each view. The imported SysML owns the requirements, relationships and rationale. The publisher validates temporary view definitions and generates the completed page without editing this source.
 
 Read the normative conditions and supporting metadata in the [vehicle requirements](../../models/vehicle/requirements.sysml), [independent challenge](../../models/missions/transgorge.sysml), and [verification plans](../../models/vehicle/verification.sysml). The [design decisions](../../models/vehicle/decisions.sysml) and [source evidence](../../models/vehicle/source-evidence.sysml) preserve the rationale behind the analysis choices.
+
+
+## Running the calculations
+
+SysML owns the equations. Python assembles geometry, chooses operating cases and coordinates the optimizer. The generated C calculations run through one [native execution layer](../../tools/boat_analysis/model/native_kernel.py). Each adapter supplies a small `KernelSpec`: generated source, ordered argument names and expected output size. The runtime inspects the generated entry-point signature to identify scalar and vector arguments and the supported output type. Domain adapters retain their physical checks and named outputs.
+
+The runtime caches builds using the generated source, wrapper, compiler identity and flags. Calls sharing a loaded library use the same lock because OpenSysML's generated evaluator owns mutable execution state. Results are copied before that state can be reused. Hydrostatics retains its specialized mesh reduction in C and uses the same build and locking machinery.
+
+Independent cases can run in a native batch. Shared inputs and per-case inputs are explicit; there is no implicit broadcasting:
+
+```python
+result = operation.evaluate_batch(
+    shared={"design": design, "parameters": parameters,
+            "aero": aero, "mass": mass, "hydro": hydro},
+    cases={"state": states},  # (number of cases, 9)
+    chunk_size=256,
+)
+# result.values columns follow operation.contract["outputNames"].
+```
+
+The C wrapper calls the same generated calculation for each row and copies its output immediately. It processes bounded chunks, preserves case order and reports the original case index on failure. With `errors="collect"`, native failures produce an error message and a NaN row; those rows must never count as feasible results. Malformed inputs and adapter precondition failures reject the batch before execution. A shared vector has shape `(width,)`; a per-case vector has shape `(cases, width)`. Scalar inputs use a scalar or a `(cases,)` array respectively.
+
+Wing-strip load integration now uses this path. Independent operating-condition sweeps can use it too. A nonlinear solver's next trial still depends on the previous result, and a mission trajectory still advances chronologically; batching does not remove those dependencies. Parallel studies can use separate worker processes, each with its own native state. The runtime itself does not create workers.
+
+Adding a calculation requires an adapter specification, not another compiler/ctypes wrapper. Signature inspection checks the generated ABI; it does not automatically discover the model's physical preconditions or qualification meaning.
