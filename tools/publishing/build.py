@@ -191,6 +191,8 @@ def _build(source_dir, output_dir):
         render(output_dir / "assets/vsp")
         from .concepts import render as render_concepts
         render_concepts(output_dir / "assets/concepts")
+        from .design_explorer import render as render_explorer
+        render_explorer(output_dir / "assets/design-explorer")
     rev = revision()
     rendered = {}
     for path, source in zip(pages, sources):

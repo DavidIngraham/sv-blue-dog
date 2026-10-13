@@ -28,6 +28,22 @@ Then I got lost in the configuration decisions. A larger wing could provide more
 
 This is a surprisingly complex, high-performance system for something I hope will be small and inexpensive to manufacture. I was trying to push the edge of what was possible, and I stalled out.
 
+### Try the configuration decisions
+
+This is the web of choices I was trying to hold in my head. Start with the current 1.4 m sizing candidate and change its wing, hull or appendages. The sketch follows the geometry inputs; the other controls expose the construction and equipment assumptions that feed the full sizing analysis.
+
+```design-explorer
+{"src":"https://davidingraham.github.io/sv-blue-dog/assets/design-explorer/design.json"}
+```
+
+The interesting part is what the sketch cannot tell me on its own. More wing area changes drive and overturning loads. More ballast changes recovery, displacement and drag. A bigger battery changes available energy and the weight the hull has to carry. Those consequences have to agree in the same candidate.
+
+The optimizer starts from a candidate, builds its geometry, and uses native SysML calculations for mass, loads, power and requirement margins. SciPy adjusts the design and the sailing controls to balance surge, side force, yaw and roll across both tacks, upwind and downwind, at the study wind speeds. It checks structural, handling, recovery, course-progress and finite-passage energy constraints alongside that balance.
+
+For the current size-reduction study, I hold hull length at each trial step and let the other 28 design variables and 48 operating-state values move. A constrained correction stays near the previous candidate; a residual-reduction solve helps recover feasibility when needed. Once a candidate passes, I try a shorter hull. Finer geometry, free-pitch replay and mission simulation then challenge the result. Failure to find a solution is a reason to investigate the constraints and search—not proof that no boat of that size can work. The [sizing method](sizing.md) and [current results](results.md) carry the details.
+
+The applet lets you explore and save a proposed configuration. It does not run that coupled optimization in your browser, and a plausible-looking sketch is not a feasible design.
+
 ## Using a model to get moving again
 
 I realized that open-source tools and SysML v2 could give the project some structure. That also made Blue Dog a good excuse to dive into digital engineering: could I connect the mission, requirements, architecture, analysis and eventual tests closely enough to make the next decision clearer?
