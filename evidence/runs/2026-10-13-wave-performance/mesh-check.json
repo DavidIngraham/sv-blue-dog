@@ -1,0 +1,365 @@
+{
+  "maximumRelativeResponseError": 0.48062912799683327,
+  "cases": [
+    {
+      "period": 2,
+      "speed": 0,
+      "direction": 0,
+      "relativeResponseError": 0.01034024457565828
+    },
+    {
+      "period": 2,
+      "speed": 0,
+      "direction": 90,
+      "relativeResponseError": 0.02062844773687744
+    },
+    {
+      "period": 2,
+      "speed": 0,
+      "direction": 180,
+      "relativeResponseError": 0.010320900501020358
+    },
+    {
+      "period": 2,
+      "speed": 0,
+      "direction": 270,
+      "relativeResponseError": 0.02038994970923612
+    },
+    {
+      "period": 2,
+      "speed": 0.75,
+      "direction": 0,
+      "relativeResponseError": 0.01001015958739204
+    },
+    {
+      "period": 2,
+      "speed": 0.75,
+      "direction": 90,
+      "relativeResponseError": 0.12150943194493853
+    },
+    {
+      "period": 2,
+      "speed": 0.75,
+      "direction": 180,
+      "relativeResponseError": 0.01707052905328956
+    },
+    {
+      "period": 2,
+      "speed": 0.75,
+      "direction": 270,
+      "relativeResponseError": 0.1207275159658177
+    },
+    {
+      "period": 2,
+      "speed": 1.5,
+      "direction": 0,
+      "relativeResponseError": 0.012423984237752967
+    },
+    {
+      "period": 2,
+      "speed": 1.5,
+      "direction": 90,
+      "relativeResponseError": 0.23057076162569648
+    },
+    {
+      "period": 2,
+      "speed": 1.5,
+      "direction": 180,
+      "relativeResponseError": 0.010398442978787314
+    },
+    {
+      "period": 2,
+      "speed": 1.5,
+      "direction": 270,
+      "relativeResponseError": 0.2291028091118763
+    },
+    {
+      "period": 2,
+      "speed": 2.25,
+      "direction": 0,
+      "relativeResponseError": 0.01969496804472609
+    },
+    {
+      "period": 2,
+      "speed": 2.25,
+      "direction": 90,
+      "relativeResponseError": 0.3332397000254012
+    },
+    {
+      "period": 2,
+      "speed": 2.25,
+      "direction": 180,
+      "relativeResponseError": 0.003751167102351751
+    },
+    {
+      "period": 2,
+      "speed": 2.25,
+      "direction": 270,
+      "relativeResponseError": 0.3290357942951629
+    },
+    {
+      "period": 2,
+      "speed": 3,
+      "direction": 0,
+      "relativeResponseError": 0.35201686504256435
+    },
+    {
+      "period": 2,
+      "speed": 3,
+      "direction": 90,
+      "relativeResponseError": 0.4163870856345543
+    },
+    {
+      "period": 2,
+      "speed": 3,
+      "direction": 180,
+      "relativeResponseError": 0.003884763759227572
+    },
+    {
+      "period": 2,
+      "speed": 3,
+      "direction": 270,
+      "relativeResponseError": 0.413919540367967
+    },
+    {
+      "period": 3,
+      "speed": 0,
+      "direction": 0,
+      "relativeResponseError": 0.0056315299784809245
+    },
+    {
+      "period": 3,
+      "speed": 0,
+      "direction": 90,
+      "relativeResponseError": 0.016930561361747056
+    },
+    {
+      "period": 3,
+      "speed": 0,
+      "direction": 180,
+      "relativeResponseError": 0.005638057255504953
+    },
+    {
+      "period": 3,
+      "speed": 0,
+      "direction": 270,
+      "relativeResponseError": 0.01657113970783633
+    },
+    {
+      "period": 3,
+      "speed": 0.75,
+      "direction": 0,
+      "relativeResponseError": 0.006634518517741496
+    },
+    {
+      "period": 3,
+      "speed": 0.75,
+      "direction": 90,
+      "relativeResponseError": 0.060455305636123655
+    },
+    {
+      "period": 3,
+      "speed": 0.75,
+      "direction": 180,
+      "relativeResponseError": 0.0064506929596737
+    },
+    {
+      "period": 3,
+      "speed": 0.75,
+      "direction": 270,
+      "relativeResponseError": 0.059402128600855995
+    },
+    {
+      "period": 3,
+      "speed": 1.5,
+      "direction": 0,
+      "relativeResponseError": 0.008881800038339637
+    },
+    {
+      "period": 3,
+      "speed": 1.5,
+      "direction": 90,
+      "relativeResponseError": 0.11778867431663961
+    },
+    {
+      "period": 3,
+      "speed": 1.5,
+      "direction": 180,
+      "relativeResponseError": 0.02351681941095728
+    },
+    {
+      "period": 3,
+      "speed": 1.5,
+      "direction": 270,
+      "relativeResponseError": 0.11614194993578812
+    },
+    {
+      "period": 3,
+      "speed": 2.25,
+      "direction": 0,
+      "relativeResponseError": 0.015668987667078443
+    },
+    {
+      "period": 3,
+      "speed": 2.25,
+      "direction": 90,
+      "relativeResponseError": 0.2018334767312387
+    },
+    {
+      "period": 3,
+      "speed": 2.25,
+      "direction": 180,
+      "relativeResponseError": 0.052619373136271214
+    },
+    {
+      "period": 3,
+      "speed": 2.25,
+      "direction": 270,
+      "relativeResponseError": 0.20136363468476295
+    },
+    {
+      "period": 3,
+      "speed": 3,
+      "direction": 0,
+      "relativeResponseError": 0.48062912799683327
+    },
+    {
+      "period": 3,
+      "speed": 3,
+      "direction": 90,
+      "relativeResponseError": 0.24297181853747113
+    },
+    {
+      "period": 3,
+      "speed": 3,
+      "direction": 180,
+      "relativeResponseError": 0.0102062751992009
+    },
+    {
+      "period": 3,
+      "speed": 3,
+      "direction": 270,
+      "relativeResponseError": 0.23611213499773992
+    },
+    {
+      "period": 5,
+      "speed": 0,
+      "direction": 0,
+      "relativeResponseError": 0.0036636863068403823
+    },
+    {
+      "period": 5,
+      "speed": 0,
+      "direction": 90,
+      "relativeResponseError": 0.006569568339937193
+    },
+    {
+      "period": 5,
+      "speed": 0,
+      "direction": 180,
+      "relativeResponseError": 0.003669129139089022
+    },
+    {
+      "period": 5,
+      "speed": 0,
+      "direction": 270,
+      "relativeResponseError": 0.006297701744570668
+    },
+    {
+      "period": 5,
+      "speed": 0.75,
+      "direction": 0,
+      "relativeResponseError": 0.004216999644118741
+    },
+    {
+      "period": 5,
+      "speed": 0.75,
+      "direction": 90,
+      "relativeResponseError": 0.03840914722862408
+    },
+    {
+      "period": 5,
+      "speed": 0.75,
+      "direction": 180,
+      "relativeResponseError": 0.003386536637836899
+    },
+    {
+      "period": 5,
+      "speed": 0.75,
+      "direction": 270,
+      "relativeResponseError": 0.038367872807623486
+    },
+    {
+      "period": 5,
+      "speed": 1.5,
+      "direction": 0,
+      "relativeResponseError": 0.005231718197334512
+    },
+    {
+      "period": 5,
+      "speed": 1.5,
+      "direction": 90,
+      "relativeResponseError": 0.07703820189398966
+    },
+    {
+      "period": 5,
+      "speed": 1.5,
+      "direction": 180,
+      "relativeResponseError": 0.0034326850793591733
+    },
+    {
+      "period": 5,
+      "speed": 1.5,
+      "direction": 270,
+      "relativeResponseError": 0.07690515765418685
+    },
+    {
+      "period": 5,
+      "speed": 2.25,
+      "direction": 0,
+      "relativeResponseError": 0.008300607009964057
+    },
+    {
+      "period": 5,
+      "speed": 2.25,
+      "direction": 90,
+      "relativeResponseError": 0.12523478709966884
+    },
+    {
+      "period": 5,
+      "speed": 2.25,
+      "direction": 180,
+      "relativeResponseError": 0.005797314265296716
+    },
+    {
+      "period": 5,
+      "speed": 2.25,
+      "direction": 270,
+      "relativeResponseError": 0.12486412372223037
+    },
+    {
+      "period": 5,
+      "speed": 3,
+      "direction": 0,
+      "relativeResponseError": 0.28658019094050025
+    },
+    {
+      "period": 5,
+      "speed": 3,
+      "direction": 90,
+      "relativeResponseError": 0.3066092036092415
+    },
+    {
+      "period": 5,
+      "speed": 3,
+      "direction": 180,
+      "relativeResponseError": 0.020100018393417178
+    },
+    {
+      "period": 5,
+      "speed": 3,
+      "direction": 270,
+      "relativeResponseError": 0.2657285475634047
+    }
+  ]
+}

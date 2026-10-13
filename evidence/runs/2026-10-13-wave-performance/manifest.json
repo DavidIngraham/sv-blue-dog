@@ -1,0 +1,27 @@
+{
+  "sourceRevision": "8f6f098f251a890dffed48879a3027460ce1b4ee",
+  "files": {
+    "bem-refined.json": {
+      "sha256": "7c83a9925b68366050c2d276af710ba85ddbede868340be52cf6e326401eefa0"
+    },
+    "bem.json": {
+      "sha256": "dd780511f2e9fdd9f133221a14ee94764d09b8eb41086c0fd358c64fb54abcb5"
+    },
+    "mesh-check.json": {
+      "sha256": "afa9fbd3b01a6d7b7567eb88146b3fbe88a30b8de28ede147b0c6719b9a16543"
+    },
+    "missions.json": {
+      "sha256": "2f70b1fbeebf58953c105cf3d0d3dace271f46956d235b6ae07df03a1dc51506"
+    },
+    "operating.json": {
+      "sha256": "4f211f4fbe245098ed9b1c7e5ef81166d4a251b8224d462f178de51b8a2b32e7"
+    },
+    "performance.json": {
+      "sha256": "6bf5a3873c715dd7b059b293e73b8181c1ac8329fb4d8d544d23dccd1415aa73"
+    },
+    "summary.json": {
+      "sha256": "afa4e9a237c98e877d6bf90cab4f6da617aa5943584ece18007b52299145d831"
+    }
+  },
+  "notes": "Fixed 1.4 m geometry. Mesh levels 7 and 9, total incident plus diffracted excitation, local mesh coverage. 32 cycle-averaged operating solves for 0.04 m regular waves at 3 s; 16/32 phase check. Four paired Gorge replays stop at departure outside cache coverage. No physical qualification or new size optimization. The original 5-level mesh and interrupted developmental runs are not accepted evidence."
+}
