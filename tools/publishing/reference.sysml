@@ -580,3 +580,18 @@ package BlueDogRiskDocuments {
         part rows : Table { calc values : ActionsRows; }
     }
 }
+
+package BlueDogRiskPlot {
+    private import DocumentQueries::*;
+    calc def Rows :> Query {
+        Project(source = WhereMetadata(source = Descendants(source = Named(qualifiedName = "BlueDogRisks")), 'metadata' = "RiskMetadata::Risk"), columns = (
+            Column(name = "ID", path = "risk.identifier"),
+            Column(name = "Area", path = "name"),
+            Column(name = "Probability", path = "risk.technicalRisk.probability"),
+            Column(name = "Impact", path = "risk.technicalRisk.impact")))
+    }
+    part def Data :> Document {
+        attribute redefines title = "Technical risk coordinates";
+        part data : Table { calc rows : Rows; }
+    }
+}

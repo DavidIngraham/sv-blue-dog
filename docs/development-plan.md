@@ -159,6 +159,12 @@ PDR work starts from the risks that could defeat the mission or force a differen
 
 The first selection is safety feasibility: traffic sensing and maneuvering, together with casualty recovery. Material/load sensitivity, wing behavior and installed energy follow because they can invalidate the sizing result. Scenario and model credibility apply throughout. These are provisional work priorities, not an SRR disposition or a claim of quantified likelihood. Safety consequences take precedence over cheap, easy tasks; among competing investigations, prefer evidence that can change an imminent decision and is practical to obtain.
 
+### Risk cube
+
+![Technical risk cube: likelihood versus consequence, with risks lacking either assessment listed separately.](https://davidingraham.github.io/sv-blue-dog/assets/risk/cube.svg)
+
+The cube reads technical-risk probability and impact from the standard metadata. Its five bands divide the standard 0–1 scale evenly; these are display bins, not an approved risk-acceptance policy. Unassessed risks stay outside the grid. The action priorities below are separate judgments about what to investigate first.
+
 ```sysml-report BlueDogRiskDocuments::Priorities
 ```
 
