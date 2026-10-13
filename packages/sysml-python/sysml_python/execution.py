@@ -1,10 +1,25 @@
 """Named numerical boundaries shared by scalar and batched execution."""
 from collections.abc import Mapping
 import json
+from functools import lru_cache
 from pathlib import Path
 import numpy as np
 from .backends.opensysml import digest
 from .backends.native import NativeKernel, KernelSpec, BatchError
+
+
+@lru_cache(maxsize=1024)
+def _digest_at_revision(path, revision):
+    return digest(path)
+
+
+def checked_digest(path):
+    """Reuse hashes while file identity, size and filesystem timestamps agree."""
+    path = Path(path)
+    stat = path.stat()
+    revision = (stat.st_dev, stat.st_ino, stat.st_size,
+                stat.st_mtime_ns, stat.st_ctime_ns)
+    return _digest_at_revision(str(path), revision)
 
 
 class Calculation:
@@ -16,11 +31,11 @@ class Calculation:
     def load(self):
         contract = json.loads(self.manifest.read_text(encoding='utf-8'))
         for path, expected in contract['sourceHashes'].items():
-            if digest(path) != expected:
+            if checked_digest(path) != expected:
                 raise ValueError(f'Stale SysML source: {path}; prepare the project again')
         schema = contract['exports'][self.name]
         for entry in (schema, schema.get('checks')):
-            if entry and digest(self.manifest.parent/entry['source']) != entry['sourceHash']:
+            if entry and checked_digest(self.manifest.parent/entry['source']) != entry['sourceHash']:
                 raise ValueError('Generated source differs from prepared contract')
         key = json.dumps(schema, sort_keys=True)
         if self._kernel is None or self._schema_key != key:

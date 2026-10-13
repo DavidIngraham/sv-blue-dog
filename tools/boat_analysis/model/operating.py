@@ -3,7 +3,7 @@ import numpy as np
 from collections.abc import Mapping
 from numpy.typing import ArrayLike
 from .design_types import (Design, Parameters, OperatingState, AeroCoefficients,
-                           HydroState, MassProperties, AppendageLoads, Passage)
+                           HydroState, MassProperties)
 from .boundary import ModelAdapter
 from .preparation import prepare_operating as prepare
 from .runtime import ROOT
@@ -22,16 +22,6 @@ class OperationKernel(ModelAdapter):
                                     aero=aero, mass=mass, hydro=hydro)
 
 
-class StructureKernel(ModelAdapter):
-    model_name = 'structure'
-
-    def evaluate(self, design: Design | ArrayLike, parameters: Parameters | ArrayLike,
-                 mass: MassProperties | Mapping[str, float] | ArrayLike, geometry: ArrayLike,
-                 loads: AppendageLoads | ArrayLike, waterline: float) -> dict[str, float]:
-        return self.kernel.evaluate(design=design, parameters=parameters, mass=mass,
-                                    geometry=geometry, loads=loads, waterline=waterline)
-
-
 class RouteKernel(ModelAdapter):
     model_name = 'route'
 
@@ -44,16 +34,6 @@ class RouteKernel(ModelAdapter):
                 raise ValueError('Invalid route policy shape')
             policy[-1] = float(wind_from == 'east')
         return self.kernel.evaluate(water=water, states=states, policy=policy)
-
-
-class ConceptKernel(ModelAdapter):
-    model_name = 'concept'
-
-    def evaluate(self, design: Design | ArrayLike,
-                 mass: MassProperties | Mapping[str, float] | ArrayLike, geometry: ArrayLike,
-                 duration: float, power: float, policy: ArrayLike | None = None) -> dict[str, float]:
-        return self.kernel.evaluate(design=design, mass=mass, geometry=geometry,
-                                    passage=Passage(duration_h=duration, averagePower_W=power), policy=policy)
 
 
 if __name__ == '__main__':

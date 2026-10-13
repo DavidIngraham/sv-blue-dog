@@ -60,3 +60,23 @@ def test_model_default_is_bound_before_native_execution(prepared):
     assert module.heat(current=2,resistance=5).power == 20
     np.testing.assert_array_equal(module.heat.batch(shared={},cases={'current':[1,2]}).values, [[10],[40]])
     assert 'default 10' in source.read_text()
+
+
+def test_source_hash_cache_detects_same_size_rewrite(tmp_path, monkeypatch):
+    from sysml_python import execution
+    source = tmp_path/'source.sysml'
+    source.write_text('first')
+    calls = []
+    original = execution.digest
+    def counted(path):
+        calls.append(path)
+        return original(path)
+    monkeypatch.setattr(execution, 'digest', counted)
+    first = execution.checked_digest(source)
+    assert execution.checked_digest(source) == first
+    assert len(calls) == 1
+    previous = source.stat()
+    source.write_text('other')
+    os.utime(source, ns=(previous.st_atime_ns, previous.st_mtime_ns + 1_000_000_000))
+    assert execution.checked_digest(source) != first
+    assert len(calls) == 2

@@ -54,20 +54,12 @@ def prepare_operating():
         defaults={'environment':'environment'}, checks='MarineSailing::InputChecks',
         record_types={n:'MarineDesign::'+t for n,t in dict(design='Design',parameters='Parameters',
             state='OperatingState',aero='AeroCoefficients',mass='MassProperties',hydro='HydroState').items()})
-    compile_model(c, 'structure', path='models/libraries/structures/scantlings.sysml',
-        definition='MarineStructures::DesignMargins',
-        aliases={'d':'design','p':'parameters','m':'mass','g':'geometry','r':'structure','loads':'loads','waterline':'waterline'},
-        source='coupled-structure.c', hash_key='structureHash', output_key='structureNames', defaults={'structure':'structure'},
-        record_types={n:'MarineDesign::'+t for n,t in dict(design='Design',parameters='Parameters',
-            mass='MassProperties',loads='AppendageLoads').items()})
+    generated=json.loads((ROOT/'tools/boat_analysis/generated/manifest.json').read_text())
+    c['structureNames']=[f['name'] for f in generated['exports']['structure']['outputs']]
+    c['conceptNames']=[f['name'] for f in generated['exports']['concept']['outputs']]
     compile_model(c, 'route', path='models/libraries/marine/course.sysml', definition='MarineCourse::Route',
         aliases={'water':'water','states':'states','policy':'policy'}, source='coupled-route.c', hash_key='routeHash',
         defaults={'policy':'routeParameters'})
-    compile_model(c, 'concept', path='models/libraries/marine/concept.sysml', definition='MarineConcept::Evaluate',
-        aliases={'d':'design','m':'mass','g':'geometry','q':'environment','policy':'policy','voyage':'passage'},
-        source='coupled-concept.c', hash_key='conceptHash', output_key='conceptNames',
-        defaults={'environment':'environment','policy':'conceptPolicy'},
-        record_types={n:'MarineDesign::'+t for n,t in dict(design='Design',mass='MassProperties',passage='Passage').items()})
     names=c['outputNames']
     (ROOT/'.tools/coupled-operation-contract.json').write_text(json.dumps(c,indent=2)+'\n')
     reference=input_record('coupled-mass-reference.json')

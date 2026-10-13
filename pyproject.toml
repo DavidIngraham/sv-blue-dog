@@ -52,3 +52,35 @@ materials = "BlueDogCoupledSizing::Inputs.materialValues"
 
 [tool.uv.sources]
 sysml-python-runtime = { path = "packages/sysml-python", editable = true }
+
+[tool.sysml_python.exports.structure]
+definition = "MarineStructures::DesignMargins"
+[tool.sysml_python.exports.structure.aliases]
+d = "design"
+p = "parameters"
+m = "mass"
+g = "geometry"
+r = "structure"
+[tool.sysml_python.exports.structure.records]
+design = "MarineDesign::Design"
+parameters = "MarineDesign::Parameters"
+mass = "MarineDesign::MassProperties"
+loads = "MarineDesign::AppendageLoads"
+[tool.sysml_python.exports.structure.defaults]
+structure = "BlueDogCoupledOperation::Inputs.structureValues"
+
+[tool.sysml_python.exports.concept]
+definition = "MarineConcept::Evaluate"
+[tool.sysml_python.exports.concept.aliases]
+d = "design"
+m = "mass"
+g = "geometry"
+q = "environment"
+voyage = "passage"
+[tool.sysml_python.exports.concept.records]
+design = "MarineDesign::Design"
+mass = "MarineDesign::MassProperties"
+passage = "MarineDesign::Passage"
+[tool.sysml_python.exports.concept.defaults]
+environment = "BlueDogOperatingEnvironment::Inputs.parameterValues"
+policy = "BlueDogConceptCredibility::Inputs.values"

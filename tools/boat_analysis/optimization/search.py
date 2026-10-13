@@ -11,7 +11,8 @@ import numpy as np
 from scipy.optimize import least_squares,minimize
 from tools.boat_analysis.model.vessel import CoupledModel
 from tools.boat_analysis.model.design_types import AppendageLoads
-from tools.boat_analysis.model.operating import StructureKernel,RouteKernel,ConceptKernel
+from tools.boat_analysis.model.operating import RouteKernel
+from tools.boat_analysis.generated import structure, concept, Passage
 from tools.boat_analysis.geometry.hydro import equilibrium
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate
@@ -23,7 +24,7 @@ class Problem:
         self.route_profile=route_profile
         self.resolution=resolution
         # Numerical allowance for coarse fixed-pitch versus refined free-pitch VMG.
-        self.model=CoupledModel();self.structure=StructureKernel();self.concept=ConceptKernel();self.route=RouteKernel();c=self.structure.contract
+        self.model=CoupledModel();self.structure=structure;self.concept=concept;self.route=RouteKernel();self.context=self.model.operating_contract;c=self.context
         self.overall_length_limit_m = c['maximumOverallLengthM'] if overall_length_limit_m is None else float(overall_length_limit_m)
         if not 0 < self.overall_length_limit_m <= c['maximumOverallLengthM']:
             raise ValueError('Design envelope must respect the challenge overall-length limit')
@@ -48,10 +49,10 @@ class Problem:
         cg=[m['cgX'],m['cgY'],m['cgZ']]
         upright=equilibrium(k.hydro,bodies,cg,m['totalMass'],0,density=k.parameters[31])
         righting=[]
-        for trim in np.deg2rad(self.structure.contract['coarseTrims']):
+        for trim in np.deg2rad(self.context['coarseTrims']):
             bodies,m,_,_=k.configuration(x,trim,resolution=self.resolution)
             cg=[m['cgX'],m['cgY'],m['cgZ']]
-            for heel in self.structure.contract['coarseHeels']:
+            for heel in self.context['coarseHeels']:
                 h=equilibrium(k.hydro,bodies,cg,m['totalMass'],heel,density=k.parameters[31])
                 righting.append(h['righting_Nm']*np.sign(heel)/(m['totalMass']*k.parameters[34]*.1))
         result=(reference_mass,g,upright,righting)
@@ -73,10 +74,10 @@ class Problem:
         for state,(wind,up,_) in zip(states,self.env):rows.append(k.at_state(x,np.r_[wind,int(up),1,state],resolution=self.resolution,pitch_equilibrium=False))
         reference_mass,g,upright,righting=self.design_data(x)
         loads=AppendageLoads(**{name:max(row[name] for row in rows) for name in ('wingResultant','keelResultant','rudderResultant')})
-        margins=self.structure.evaluate(x,k.parameters,reference_mass,g,loads,upright['waterline_m'])
+        margins=self.structure(design=x,parameters=k.parameters,mass=reference_mass,geometry=g,loads=loads,waterline=upright['waterline_m']).to_mapping()
         route=self.route.evaluate([r['waterVMG'] for r in rows],states.ravel())
         west=self.route.evaluate([r['waterVMG'] for r in rows],states.ravel(),wind_from='west')
-        concept=self.concept.evaluate(x,reference_mass,g,max(west[5],route[5]) if self.require_east else west[5],max(r['averagePower'] for r in rows))
+        concept=self.concept(design=x,mass=reference_mass,geometry=g,passage=Passage(duration_h=max(west[5],route[5]) if self.require_east else west[5], averagePower_W=max(r['averagePower'] for r in rows))).to_mapping()
         margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
         from tools.boat_analysis.geometry.vessel import operating_envelope
         envelope = operating_envelope(dict(zip(k.c['designNames'], x)), k.parameters[33], self.resolution)
@@ -91,7 +92,7 @@ class Problem:
         self.constraint_names=([f'case {i}: {n}' for i in range(8) for n in static_names]
             +[f'case {i}: {n} (search reserve)' for i in range(8) for n in names[47:]]
             +list(margins)+[f'{direction} {n}' for direction,_ in route_screens for n in ['downstream progress','upstream progress','duration']]
-            +[f'righting trim {trim:g}, heel {heel:g}' for trim in self.structure.contract['coarseTrims'] for heel in self.structure.contract['coarseHeels']])
+            +[f'righting trim {trim:g}, heel {heel:g}' for trim in self.context['coarseTrims'] for heel in self.context['coarseHeels']])
         result={'eq':eq,'ineq':ineq,'design':x,'states':states,'rows':rows,'structure':margins,'route':route,'westerlyRoute':west,'righting':righting,'mass':reference_mass,'concept':concept,'envelope':envelope}
         self.calls+=1
         merit=float(np.linalg.norm(np.r_[eq,np.minimum(ineq,0)]))

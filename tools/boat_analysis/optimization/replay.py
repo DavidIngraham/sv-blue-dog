@@ -5,7 +5,8 @@ import argparse,json
 from concurrent.futures import ProcessPoolExecutor,as_completed
 import numpy as np
 from tools.boat_analysis.model.vessel import CoupledModel
-from tools.boat_analysis.model.operating import StructureKernel,RouteKernel,ConceptKernel
+from tools.boat_analysis.model.operating import RouteKernel
+from tools.boat_analysis.generated import structure, concept as concept_model, Passage
 from tools.boat_analysis.geometry.hydro import free_pitch_equilibrium,DisplacementBody
 from tools.boat_analysis.optimization.operating import solve_state, operating_margin_names
 from tools.boat_analysis.model.runtime import ROOT
@@ -28,7 +29,7 @@ def operating_case(model,design,wind,up,tack,state,budget):
 
 def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
     if route_profile not in ('challenge','all-season'):raise ValueError('Unknown route profile')
-    model=CoupledModel();model.parameters=np.array(scenarios['values'][name]);structure=StructureKernel();route=RouteKernel()
+    model=CoupledModel();model.parameters=np.array(scenarios['values'][name]);route=RouteKernel()
     x=np.array([design[n] for n in model.c['designNames']]);rows=[]
     env=[(w,u,t) for w in model.operation.contract['windSpeeds'] for u in [True,False] for t in [1,-1]]
     for state,(wind,up,tack) in zip(initial,env):
@@ -37,11 +38,11 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
     cg=[m['cgX'],m['cgY'],m['cgZ']]
     upright=free_pitch_equilibrium(model.hydro,bodies,cg,m['totalMass'],0,density=model.parameters[31])
     loads=[max(row['outputs'][n] for row in rows) for n in ['wingResultant','keelResultant','rudderResultant']]
-    margins=structure.evaluate(x,model.parameters,m,g,loads,upright['waterline_m'])
+    margins=structure(design=x,parameters=model.parameters,mass=m,geometry=g,loads=loads,waterline=upright['waterline_m']).to_mapping()
     policy=scenarios['values']['adverseRoute' if name=='combined' else 'nominalRoute']
     trip=route.evaluate([r['outputs']['waterVMG'] for r in rows],np.array([r['state'][3:] for r in rows]).ravel(),policy)
     west=route.evaluate([r['outputs']['waterVMG'] for r in rows],np.array([r['state'][3:] for r in rows]).ravel(),policy,wind_from='west')
-    concept=ConceptKernel().evaluate(x,m,g,max(west[5],trip[5]) if route_profile=='all-season' else west[5],max(r['outputs']['averagePower'] for r in rows))
+    concept=concept_model(design=x,mass=m,geometry=g,passage=Passage(duration_h=max(west[5],trip[5]) if route_profile=='all-season' else west[5],averagePower_W=max(r['outputs']['averagePower'] for r in rows))).to_mapping()
     margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
     recovery=[]
     # Complete curves for the nominal replay; additional evidence cases below.
@@ -61,7 +62,7 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
     result={'scenario':name,'parameters':dict(zip(model.c['parameterNames'],model.parameters)),'cases':rows,'structure':margins,'concept':concept,'route':trip.tolist(),'westerlyRoute':west.tolist(),'recovery':recovery,'numericallyBalanced':numerical,'minimumOperatingMargin':operating,'sampledStaticScreensPass':bool(numerical and operating>=-1e-4 and min(margins.values())>=-1e-4 and min(trip[:3])>=-1e-4 and min(west[:3])>=-1e-4 and all(r['failedEquilibria']==0 and r['minimumInteriorRestoring_Nm'] is not None and r['minimumInteriorRestoring_Nm']>0 for r in recovery)),'qualified':False}
     # Preserve the original strict two-direction field; expose the selected
     # profile separately so old evidence consumers cannot mistake its meaning.
-    requires_east=structure.contract['challengeRequiresEastProgress' if route_profile=='challenge' else 'allSeasonRequiresEastProgress']
+    requires_east=model.operating_contract['challengeRequiresEastProgress' if route_profile=='challenge' else 'allSeasonRequiresEastProgress']
     common=numerical and operating>=-1e-4 and min(margins.values())>=-1e-4 and all(r['failedEquilibria']==0 and r['minimumInteriorRestoring_Nm'] is not None and r['minimumInteriorRestoring_Nm']>0 for r in recovery)
     result.update(routeProfile=route_profile,profileSampledStaticScreensPass=bool(common and min(west[:3])>=-1e-4 and (not requires_east or min(trip[:3])>=-1e-4)))
     print('REPLAY',name,result['sampledStaticScreensPass'],'struct',min(margins.items(),key=lambda a:a[1]),'route',trip,'operating',operating,flush=True)

@@ -107,16 +107,16 @@ def test_coupled_geometry_mass_and_hydrostatics_share_wing_pose(native_case):
 
 
 def test_structural_stiffness_and_strength_respond_to_material_evidence(native_case):
-    from tools.boat_analysis.model.operating import StructureKernel
+    from tools.boat_analysis.generated import structure
     from tools.boat_analysis.model.vessel import CoupledModel
-    k=StructureKernel();model=CoupledModel();x=model.c['referenceDesign']
+    model=CoupledModel();x=model.c['referenceDesign']
     _,m,g,_=model.configuration(x,0);p=model.parameters.copy()
-    nominal=k.evaluate(x,p,list(m.values()),g,[50,60,10],0)
+    nominal=structure(design=x, parameters=p, mass=list(m.values()), geometry=g, loads=[50,60,10], waterline=0)
     # The CAD crescent's weak-axis stiffness invalidates the previous generic-box screen.
     assert nominal['wingDeflectionMargin']<0
     assert nominal['wingStressMargin']>0
     p[13]=.5
-    weak=k.evaluate(x,p,list(m.values()),g,[50,60,10],0)
+    weak=structure(design=x, parameters=p, mass=list(m.values()), geometry=g, loads=[50,60,10], waterline=0)
     for name in ['wingDeflectionMargin','keelDeflectionMargin','hullStressMargin','rudderStressMargin']:
         assert 1-weak[name]==pytest.approx(2*(1-nominal[name]))
     for name in ['bodyHandlingMargin','freeboardMargin','panelAreaMargin']:
@@ -126,7 +126,8 @@ def test_structural_stiffness_and_strength_respond_to_material_evidence(native_c
 def test_generated_interfaces_are_homogeneous_real_sequences(native_case):
     import re
     for name in ['mass','operation','structure','route']:
-        text=(ROOT/f'.tools/coupled-{name}.c').read_text()
+        path = ROOT/'tools/boat_analysis/generated'/f'{name}.c' if name in ('mass','structure') else ROOT/f'.tools/coupled-{name}.c'
+        text=path.read_text()
         signature=re.search(r'int sysml_run\((.*?)\) \{',text,re.S)
         assert signature[1].endswith('sysml_seq_real *result')
 
@@ -173,13 +174,13 @@ def test_shared_search_jacobian_preserves_both_constraint_blocks():
 
 
 def test_panel_fit_uses_actual_deck_area(native_case):
-    from tools.boat_analysis.model.operating import StructureKernel
+    from tools.boat_analysis.generated import structure
     from tools.boat_analysis.model.vessel import CoupledModel
     model=CoupledModel();x=model.c['referenceDesign'];_,m,g,_=model.configuration(x,0)
-    kernel=StructureKernel();p=model.parameters
-    before=kernel.evaluate(x,p,list(m.values()),g,[50,60,10],0)
+    p=model.parameters
+    before=structure(design=x, parameters=p, mass=list(m.values()), geometry=g, loads=[50,60,10], waterline=0)
     smaller=g.copy();smaller[51]*=.8
-    after=kernel.evaluate(x,p,list(m.values()),smaller,[50,60,10],0)
+    after=structure(design=x, parameters=p, mass=list(m.values()), geometry=smaller, loads=[50,60,10], waterline=0)
     assert after['panelAreaMargin']+1==pytest.approx(.8*(before['panelAreaMargin']+1))
     assert after['bodyHandlingMargin']==before['bodyHandlingMargin']
     assert g[51]<np.pi*x[0]*x[1]/4
@@ -238,17 +239,17 @@ def test_route_assigns_easterly_upstream_to_windward(native_case):
 
 
 def test_native_structure_uses_finite_inertia_and_section_modulus(native_case):
-    from tools.boat_analysis.model.operating import StructureKernel
+    from tools.boat_analysis.generated import structure
     from tools.boat_analysis.model.vessel import CoupledModel
     model=CoupledModel();x=model.c['referenceDesign'];_,m,g,_=model.configuration(x,0)
-    kernel=StructureKernel();p=model.parameters;loads=[50,60,10]
-    before=kernel.evaluate(x,p,list(m.values()),g,loads,0)
+    p=model.parameters;loads=[50,60,10]
+    before=structure(design=x, parameters=p, mass=list(m.values()), geometry=g, loads=loads, waterline=0)
     stiffer=g.copy();stiffer[56]*=2
-    after=kernel.evaluate(x,p,list(m.values()),stiffer,loads,0)
+    after=structure(design=x, parameters=p, mass=list(m.values()), geometry=stiffer, loads=loads, waterline=0)
     assert 1-after['keelDeflectionMargin']==pytest.approx((1-before['keelDeflectionMargin'])/2)
     assert after['keelStressMargin']==before['keelStressMargin']
     stronger=g.copy();stronger[57]*=2
-    after=kernel.evaluate(x,p,list(m.values()),stronger,loads,0)
+    after=structure(design=x, parameters=p, mass=list(m.values()), geometry=stronger, loads=loads, waterline=0)
     assert 1-after['keelStressMargin']==pytest.approx((1-before['keelStressMargin'])/2)
     assert after['keelDeflectionMargin']==before['keelDeflectionMargin']
 

@@ -1,6 +1,6 @@
 # Declarative SysML/Python runtime
 
-This package is being extracted from SV Blue Dog. It is not yet the completed reusable interface. The independent thermal example proves scalar calculation discovery, typed generated results, model-owned defaults, explicit batching and stale-source checks without importing Blue Dog code. Blue Dog now consumes a generated mass export instead of a handwritten mass adapter.
+This package is being extracted from SV Blue Dog. It is not yet the completed reusable interface. The independent thermal example proves scalar calculation discovery, typed generated results, model-owned defaults, explicit batching and stale-source checks without importing Blue Dog code. Blue Dog now consumes generated mass, structural-margin and passage-feasibility exports instead of handwritten adapters.
 
 ```python
 from sysml_python import Project
@@ -22,7 +22,7 @@ The pinned OpenSysML compiler rejects parameter defaults. The backend preserves 
 
 1. Define model-owned export/binding metadata and lower defaults and physical checks explicitly.
 2. Generate typed inputs/outputs and named vector packing from semantic model information; reject unsupported schemas.
-3. Mass is migrated; continue separating project reference experiments from generic preparation.
+3. Mass, structural margins and passage feasibility are migrated; continue separating project reference experiments from generic preparation.
 4. Migrate other supported calculations; delete duplicate runtime and preparation plumbing.
 5. Package the independent uv template, CI and validation examples; verify installed-package behavior outside the repository.
 

@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import numpy as np
 from .search import Problem
+from ..generated import Passage
 from ..model.runtime import ROOT
 from ..evidence.records import validate,source_hashes
 from ..geometry.hydro import free_pitch_equilibrium
@@ -15,38 +16,38 @@ def assess(candidate,destination=None):
     p=Problem();z=np.array(record['smallestFeasibleZ']);r=p.evaluate(z)
     if not p.feasible(z):raise ValueError('Candidate fails current nominal screens')
     sensitivities=[]
-    nominal=p.structure.contract['conceptPolicy']
+    nominal=p.context['conceptPolicy']
     for index,name in enumerate(['durationMultiplier','delayHours','batteryInstalledWhM3','equipmentInstalledKgM3','usableHullVolumeFraction']):
-        for value in p.structure.contract['conceptSensitivity'][name]:
+        for value in p.context['conceptSensitivity'][name]:
             policy=list(nominal);policy[index]=value
             _,m,g,_=p.model.configuration(r['design'],0,resolution=12)
-            result=p.concept.evaluate(r['design'],m,g,r['westerlyRoute'][5],max(row['averagePower'] for row in r['rows']),policy)
+            result=p.concept(design=r['design'],mass=m,geometry=g,passage=Passage(duration_h=r['westerlyRoute'][5],averagePower_W=max(row['averagePower'] for row in r['rows'])),policy=policy)
             sensitivities.append(dict(parameter=name,value=value,**result))
     aspect=[]
-    original=p.structure.contract['structure'][10]
+    original=p.context['structure'][10]
     _,m,g,_=p.model.configuration(r['design'],0,resolution=12)
     loads=[max(row[n] for row in r['rows']) for n in ['wingResultant','keelResultant','rudderResultant']]
-    for ratio in p.structure.contract['conceptSensitivity']['minimumUnderwaterAspectRatio']:
-        p.structure.contract['structure'][10]=ratio
-        margins=p.structure.evaluate(r['design'],p.model.parameters,m,g,loads,0.)
+    for ratio in p.context['conceptSensitivity']['minimumUnderwaterAspectRatio']:
+        p.context['structure'][10]=ratio
+        margins=p.structure(design=r['design'],parameters=p.model.parameters,mass=m,geometry=g,loads=loads,waterline=0.,structure=p.context['structure'])
         aspect.append(dict(minimumAspectRatio=ratio,keel=margins['keelAspectMargin'],rudder=margins['rudderAspectMargin']))
-    p.structure.contract['structure'][10]=original
+    p.context['structure'][10]=original
     # Reuse the model's declared construction sensitivity at fixed geometry.
     from ..evidence.records import input_record
     uncertainty=input_record('coupled-uncertainty-inputs.json')
     hashes.update(source_hashes(['build/analysis/coupled-uncertainty-inputs.json']))
     parameters=np.array(uncertainty['values']['construction'])
     bodies,construction_mass,construction_geometry,_=p.model.configuration(r['design'],0,resolution=12)
-    construction=p.structure.evaluate(r['design'],parameters,construction_mass,construction_geometry,loads,0.)
+    construction=p.structure(design=r['design'],parameters=parameters,mass=construction_mass,geometry=construction_geometry,loads=loads,waterline=0.)
     # Only material stiffness/strength margins are interpreted here; mass and
     # changed sailing equilibria require a fully re-solved uncertainty replay.
     material={n:v for n,v in construction.items() if 'Stress' in n or 'Deflection' in n}
     bounds=[dict(parameter=name,value=float(r['design'][i]),lower=float(p.lo[i]),upper=float(p.hi[i]))
             for i,name in enumerate(p.model.c['designNames']) if min(z[i],1-z[i])<1e-4]
     recovery=[]
-    for trim in p.structure.contract['recoveryTrims']:
+    for trim in p.context['recoveryTrims']:
         bodies,m,_,_=p.model.configuration(r['design'],np.deg2rad(trim),resolution=16)
-        for heel in p.structure.contract['conceptSensitivity']['recoveryProbeHeels']:
+        for heel in p.context['conceptSensitivity']['recoveryProbeHeels']:
             try:
                 state=free_pitch_equilibrium(p.model.hydro,bodies,[m['cgX'],m['cgY'],m['cgZ']],m['totalMass'],heel,density=p.model.parameters[31])
                 recovery.append(dict(trimDeg=trim,**state))

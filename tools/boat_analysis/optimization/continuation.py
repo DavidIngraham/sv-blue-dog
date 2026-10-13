@@ -103,7 +103,7 @@ def run(target=1.2, step=.2, minimum_step=.025, budget=60, extensions=2, seed_ru
     seed_directory = ROOT/'evidence/runs'/seed_run
     saved = run_record(seed_directory, 'sizing-continuation.json')
     accepted = np.array(saved['smallestFeasibleZ'])
-    hashes = source_hashes(list(saved['sourceHashes']) + list(p.structure.contract['sourceHashes']) + [
+    hashes = source_hashes(list(saved['sourceHashes']) + list(p.context['sourceHashes']) + [
         'tools/boat_analysis/optimization/continuation.py',
         'tools/boat_analysis/optimization/search.py',
         str((seed_directory/'sizing-continuation.json').relative_to(ROOT)),

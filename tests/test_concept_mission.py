@@ -15,14 +15,12 @@ def test_velocity_envelope_interpolation_and_no_extrapolation():
 def test_native_passage_energy_and_packaging_oracle():
     import sys
     if sys.platform!='linux':pytest.skip('Native adapter requires GCC')
-    from tools.boat_analysis.model.operating import ConceptKernel
-    k=ConceptKernel()
+    from tools.boat_analysis.generated import concept, Passage
     d=np.ones(29);d[16]=400
     m=np.ones(21);m[13]=.01
     g=np.ones(60);g[4]=.05
-    k.contract['environment']=[0.]*24
-    q=k.contract['environment'];q[14]=.8;q[15]=.8;q[16]=.9;q[19]=.1;q[22]=20
-    r=k.evaluate(d,m,g,20,8,policy=[1.25,6,200000,500,.5])
+    q=[0.]*24;q[14]=.8;q[15]=.8;q[16]=.9;q[19]=.1;q[22]=20
+    r=concept(design=d,mass=m,geometry=g,passage=Passage(duration_h=20,averagePower_W=8),environment=q,policy=[1.25,6,200000,500,.5])
     assert r['passageHours']==31
     assert r['departureWh']==288
     assert r['requiredWh']==pytest.approx(333.1)
@@ -32,7 +30,7 @@ def test_native_passage_energy_and_packaging_oracle():
     assert r['availableVolumeM3']==.02
     assert r['installationVolumeMargin']==pytest.approx(1.2)
     d[16]=500
-    assert k.evaluate(d,m,g,20,8,policy=[1.25,6,200000,500,.5])['voyageEnergyMargin']>0
+    assert concept(design=d,mass=m,geometry=g,passage=Passage(duration_h=20,averagePower_W=8),environment=q,policy=[1.25,6,200000,500,.5])['voyageEnergyMargin']>0
 
 
 def test_candidate_storage_uses_net_bus_power_and_reports_missing_coverage():
