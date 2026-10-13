@@ -14,6 +14,8 @@ The [weather-window mission](operating-constraints.md#gorge-weather-and-launch-w
 
 *Glass and epoxy form the outer skin around printed walls and ribs. The mass model includes both; the bending model credits the glass laminate.*
 
+I initially used 10 GPa stiffness and 50 MPa strength to explore the laminate sizing. Those remain unverified study inputs, not material acceptance floors. Coupon evidence establishes the properties we can credit; geometry and reinforcement must then satisfy the applicable loads and validated functional deformation limits. The [design-basis record](methods/modeling.md#requirements-versus-design-assumptions) separates these inputs from requirements, including the preliminary pressure, freeboard, reserve-buoyancy and launch screens.
+
 The current stiffness calculation uses finite laminate sections from inward offsets of the actual geometry. This replaced a thin-wall approximation that could predict more stiffness than a solid section. We credit the glass laminate for bending while treating printed support, joints and attachments as separate evidence obligations.
 
 ```sysml-view Page_structures_and_recovery_0::StrengthRelationships direction=BT

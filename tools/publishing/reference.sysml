@@ -538,3 +538,16 @@ package BlueDogSRRCurrentDocuments {
         part result : Table { calc rows : CandidateRows; }
     }
 }
+
+package BlueDogRequirementBasisDocuments {
+    private import DocumentQueries::*;
+    calc def Decisions :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogRequirementBasis::materials", "BlueDogRequirementBasis::structuralScreens", "BlueDogRequirementBasis::manufactureAndSites", "BlueDogRequirementBasis::aging", "BlueDogRequirementBasis::retainedAllocations", "BlueDogRequirementBasis::recoveryStrategy")), columns = (
+            Column(name = "Current design basis", path = "disposition"),
+            Column(name = "Evidence needed", path = "evidenceNeeded")))
+    }
+    part def Summary :> Document {
+        attribute redefines title = "Requirements and provisional design basis";
+        part decisions : Table { calc rows : Decisions; }
+    }
+}

@@ -1,8 +1,8 @@
 package BlueDogStructure {
     private import ScalarValues::*;
     private import RequirementDerivation::*;
-    doc /* Owner-selected FDM plus wet-layup construction. Numerical targets are
-     * proposed allocations with open evidence, not certified scantlings. */
+    doc /* Owner-selected FDM plus wet-layup construction. Acceptance uses qualified material evidence and validated load/functional envelopes.
+     * Provisional numerical screening values live in BlueDogStructuralBasis. */
     requirement def <'T-001'> HybridConstruction {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The primary shell structure shall use an FDM substrate with wet-layup glass/epoxy reinforcement. */
@@ -20,79 +20,85 @@ package BlueDogStructure {
     dependency structuralBasis from structuralIntegrity to BlueDogRequirements::wetMechanicalIntegrity;
     requirement def <'T-101'> BendingStrength {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Each primary structural member shall retain nonnegative bending-strength margin under the declared limit-load cases. */
-        comment conditions /* Use the documented wet/jointed laminate allowable. Analyze hull, wing, keel and rudder separately; no FDM strength credit. Grounding and ballast inertia are separate load cases. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Use the documented wet/jointed laminate allowable. Analyze hull, wing, keel and rudder separately; no FDM strength credit. Grounding and ballast inertia are separate load cases."; }
+        doc /* Each primary structural member shall retain nonnegative bending-strength margin under the applicable limit-load cases. */
+        comment conditions /* Assess each member and load direction using qualified wet/jointed allowables. Grounding, ballast inertia and operational loads are distinct cases. The sizing model currently credits glass only; that is an analysis choice. */
         attribute stressPa : Real;
-        require constraint acceptance { RealFunctions::abs(stressPa) <= material.laminateAllowable }
+        attribute qualifiedAllowablePa : Real;
+        attribute evidenceAccepted : Boolean;
+        require constraint acceptance { evidenceAccepted and qualifiedAllowablePa > 0 and RealFunctions::abs(stressPa) <= qualifiedAllowablePa }
     }
     requirement bendingStrength : BendingStrength;
     #derivation connection deriveBendingStrength { end #original source ::> structuralIntegrity; end #derive target ::> bendingStrength; }
     requirement def <'T-102'> AppendageDeflection {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Each wing, keel and rudder tip deflection shall be no greater than 2 percent of its unsupported span under the declared limit loads. */
-        comment conditions /* Proposed stiffness allocation preserves approximate foil geometry. Beam calculations do not cover shell buckling, fatigue or bond failure. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed stiffness allocation preserves approximate foil geometry. Beam calculations do not cover shell buckling, fatigue or bond failure."; }
+        doc /* Each wing, keel and rudder shall remain within its validated functional deformation limit under the applicable load cases. */
+        comment conditions /* Validate the limit against affected functions: foil/control performance, alignment, clearances and sealing as applicable. The preliminary sizing fraction is a screening assumption, not an accepted limit. Assess each member and direction separately. */
         attribute fraction : Real;
-        require constraint acceptance { fraction >= 0 and fraction <= material.appendageDeflectionFraction }
+        attribute validatedMaximumFraction : Real;
+        attribute limitEvidenceAccepted : Boolean;
+        require constraint acceptance { limitEvidenceAccepted and validatedMaximumFraction > 0 and fraction >= 0 and fraction <= validatedMaximumFraction }
     }
     requirement appendageDeflection : AppendageDeflection;
     #derivation connection deriveAppendageDeflection { end #original source ::> structuralIntegrity; end #derive target ::> appendageDeflection; }
     requirement def <'T-103'> HullDeflection {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Hull longitudinal deflection shall be no greater than 0.5 percent of waterline length under the declared wave-bending load. */
-        comment conditions /* Proposed simply supported screening case: twice loaded vessel weight, uniformly distributed over waterline length. Not an ISO scantling assessment. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed simply supported screening case: twice loaded vessel weight, uniformly distributed over waterline length. Not an ISO scantling assessment."; }
+        doc /* The hull shall remain within its validated functional deformation limit under the applicable load cases. */
+        comment conditions /* Validate the limit against affected functions: foil/control performance, alignment, clearances and sealing as applicable. The preliminary sizing fraction is a screening assumption, not an accepted limit. Assess each member and direction separately. */
         attribute fraction : Real;
-        require constraint acceptance { fraction >= 0 and fraction <= material.hullDeflectionFraction }
+        attribute validatedMaximumFraction : Real;
+        attribute limitEvidenceAccepted : Boolean;
+        require constraint acceptance { limitEvidenceAccepted and validatedMaximumFraction > 0 and fraction >= 0 and fraction <= validatedMaximumFraction }
     }
     requirement hullDeflection : HullDeflection;
     #derivation connection deriveHullDeflection { end #original source ::> structuralIntegrity; end #derive target ::> hullDeflection; }
     requirement def <'T-104'> PanelStrength {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Each hull skin panel shall retain nonnegative bending-strength margin under 10 kPa differential pressure. */
-        comment conditions /* Proposed local pressure screen, approximately a metre of freshwater head; not a slamming or full survival-wave load. A simply supported strip spans between printed ribs. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed local pressure screen, approximately a metre of freshwater head; not a slamming or full survival-wave load. A simply supported strip spans between printed ribs."; }
+        doc /* Each hull skin panel shall retain nonnegative bending-strength margin under the applicable differential-pressure cases. */
+        comment conditions /* Determine load cases from immersion, wave/slam exposure and compartment pressures for the selected mission and geometry. The 10 kPa sizing screen is provisional, not a complete pressure envelope. */
         attribute stressPa : Real;
-        require constraint acceptance { RealFunctions::abs(stressPa) <= material.laminateAllowable }
+        attribute qualifiedAllowablePa : Real;
+        attribute evidenceAccepted : Boolean;
+        require constraint acceptance { evidenceAccepted and qualifiedAllowablePa > 0 and RealFunctions::abs(stressPa) <= qualifiedAllowablePa }
     }
     requirement panelStrength : PanelStrength;
     #derivation connection derivePanelStrength { end #original source ::> structuralIntegrity; end #derive target ::> panelStrength; }
     requirement def <'T-105'> PanelDeflection {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Hull skin panel deflection shall be no greater than 1 percent of rib spacing under 10 kPa differential pressure. */
-        comment conditions /* Glass-only flat-strip stiffness is credited; printed ribs supply the assumed support. Rib and bond validation remain required. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Glass-only flat-strip stiffness is credited; printed ribs supply the assumed support. Rib and bond validation remain required."; }
+        doc /* Each hull skin panel shall remain within its validated functional deformation limit under the applicable load cases. */
+        comment conditions /* Validate the limit against affected functions: foil/control performance, alignment, clearances and sealing as applicable. The preliminary sizing fraction is a screening assumption, not an accepted limit. Assess each member and direction separately. */
         attribute fraction : Real;
-        require constraint acceptance { fraction >= 0 and fraction <= material.panelDeflectionFraction }
+        attribute validatedMaximumFraction : Real;
+        attribute limitEvidenceAccepted : Boolean;
+        require constraint acceptance { limitEvidenceAccepted and validatedMaximumFraction > 0 and fraction >= 0 and fraction <= validatedMaximumFraction }
     }
     requirement panelDeflection : PanelDeflection;
     #derivation connection derivePanelDeflection { end #original source ::> structuralIntegrity; end #derive target ::> panelDeflection; }
     requirement def <'T-106'> RootProofLoad {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Each appendage root attachment shall retain its load path under its declared limit-load proof test. */
-        comment conditions /* Independently test the largest calculated bending case, a 100 N tip load, and twice ballast weight transverse at the keel tip. Computed beam stress alone does not verify this attachment. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Independently test the largest calculated bending case, a 100 N tip load, and twice ballast weight transverse at the keel tip. Computed beam stress alone does not verify this attachment."; }
+        doc /* Each appendage root attachment shall retain its load path under its applicable limit-load proof cases. */
+        comment conditions /* Cover operational, handling, grounding and ballast-inertia loads applicable to the selected design. The initial 100 N tip-load and two-times-weight probes are screening cases, not universal requirements. Beam stress alone does not qualify joints or attachments. */
     }
     requirement rootProofLoad : RootProofLoad;
     #derivation connection deriveRootProofLoad { end #original source ::> structuralIntegrity; end #derive target ::> rootProofLoad; }
     requirement def <'T-107'> WetCouponStrength {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Wet-conditioned production laminate coupons shall demonstrate a bending allowable of at least 50 MPa. */
-        comment conditions /* Proposed target for the selected print, layup, joint and cure process after N-044 exposure. A datasheet value for neat resin is not laminate evidence. Use a lower measured allowable and re-size if this target is not substantiated. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed target for the selected print, layup, joint and cure process after N-044 exposure. A datasheet value for neat resin is not laminate evidence. Use a lower measured allowable and re-size if this target is not substantiated."; }
-        attribute allowablePa : Real;
-        require constraint acceptance { allowablePa >= material.laminateAllowable }
+        doc /* Strength allowables credited in structural qualification shall not exceed the qualified wet-conditioned production-laminate bounds. */
+        comment conditions /* Establish directional bounds for the selected layup, print, joints and cure process, including exposure and statistical/design reductions. Lower measured strength requires re-analysis or resizing, not rejection against the provisional 50 MPa input. */
+        attribute creditedAllowablePa : Real;
+        attribute qualifiedAllowablePa : Real;
+        attribute evidenceAccepted : Boolean;
+        require constraint acceptance { evidenceAccepted and qualifiedAllowablePa > 0 and creditedAllowablePa > 0 and creditedAllowablePa <= qualifiedAllowablePa }
     }
     requirement wetCouponStrength : WetCouponStrength;
     #derivation connection deriveWetCouponStrength { end #original source ::> structuralIntegrity; end #derive target ::> wetCouponStrength; }
     requirement def <'T-108'> WetCouponStiffness {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Wet-conditioned production laminate coupons shall demonstrate a flexural modulus of at least 10 GPa. */
-        comment conditions /* Proposed effective laminate target including joints; not a manufacturer claim or demonstrated property. Coupon orientation must cover the modeled primary directions. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed effective laminate target including joints; not a manufacturer claim or demonstrated property. Coupon orientation must cover the modeled primary directions."; }
-        attribute modulusPa : Real;
-        require constraint acceptance { modulusPa >= material.laminateModulus }
+        doc /* Stiffness credited in structural qualification shall not exceed the qualified wet-conditioned production-laminate bounds. */
+        comment conditions /* Establish directional effective stiffness for the modeled layup, joints and exposure. A lower measured modulus can be accommodated by geometry or reinforcement changes; 10 GPa is an unverified analysis input, not a material acceptance floor. */
+        attribute creditedModulusPa : Real;
+        attribute qualifiedModulusPa : Real;
+        attribute evidenceAccepted : Boolean;
+        require constraint acceptance { evidenceAccepted and qualifiedModulusPa > 0 and creditedModulusPa > 0 and creditedModulusPa <= qualifiedModulusPa }
     }
     requirement wetCouponStiffness : WetCouponStiffness;
     #derivation connection deriveWetCouponStiffness { end #original source ::> structuralIntegrity; end #derive target ::> wetCouponStiffness; }
@@ -106,77 +112,52 @@ package BlueDogStructure {
     #derivation connection deriveBondProof { end #original source ::> structuralIntegrity; end #derive target ::> bondProof; }
     requirement def <'T-110'> LoadedFreeboard {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The loaded hull shall retain at least 50 mm of geometric deck-edge freeboard at 20 degrees heel in calm water. */
-        comment conditions /* Proposed reserve geometry screen; not a promise of a dry deck in N-012 waves. Evaluate freeboard*cos(heel)-beam/2*sin(heel). */
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed reserve geometry screen; not a promise of a dry deck in N-012 waves. Evaluate freeboard*cos(heel)-beam/2*sin(heel)."; }
-        attribute freeboardM : Real;
-        require constraint acceptance { freeboardM >= material.minimumFreeboard }
+        doc /* Downflooding openings shall retain positive clearance above the local water surface throughout the applicable intact operating cases. */
+        comment conditions /* Evaluate actual openings, loading, heel, pitch and wave motion. A sealed deck edge may immerse without downflooding; the 50 mm deck-edge screen is not proof of this requirement. */
+        attribute minimumOpeningClearanceM : Real;
+        attribute caseCoverageAccepted : Boolean;
+        require constraint acceptance { caseCoverageAccepted and minimumOpeningClearanceM > 0 }
     }
     requirement loadedFreeboard : LoadedFreeboard;
     dependency basisLoadedFreeboard from loadedFreeboard to BlueDogRequirements::stabilityAndFouling { metadata rationale : ModelingMetadata::Rationale { text = "Selected design allocation; the numerical value is not logically implied by the parent requirement."; } }
     requirement def <'T-111'> ReserveBuoyancy {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Intact enclosed volume above the loaded waterline shall provide reserve displacement of at least 100 percent of loaded vessel mass. */
-        comment conditions /* Proposed intact reserve criterion. Do not credit unsealed printed infill. Damage stability, capsize and downflooding require separate verification. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed intact reserve criterion. Do not credit unsealed printed infill. Damage stability, capsize and downflooding require separate verification."; }
-        attribute fraction : Real;
-        require constraint acceptance { fraction >= material.reserveFraction }
+        doc /* The vessel shall retain sufficient buoyancy to support its loaded weight throughout the applicable casualty-flotation cases. */
+        comment conditions /* Use the declared flooding, capsize, ingress and recovery exposure cases; account for retained water and lost buoyant volume. Do not credit unsealed infill. The intact 100-percent reserve screen is not a casualty-flotation demonstration. */
+        attribute availableBuoyancyN : Real;
+        attribute loadedWeightN : Real;
+        attribute caseCoverageAccepted : Boolean;
+        require constraint acceptance { caseCoverageAccepted and loadedWeightN > 0 and availableBuoyancyN >= loadedWeightN }
     }
     requirement reserveBuoyancy : ReserveBuoyancy;
+    dependency flotationPurpose from reserveBuoyancy to GorgeChallenge::casualtyFlotation;
     dependency basisReserveBuoyancy from reserveBuoyancy to BlueDogRequirements::stabilityAndFouling { metadata rationale : ModelingMetadata::Rationale { text = "Selected design allocation; the numerical value is not logically implied by the parent requirement."; } }
     requirement def <'T-112'> LaunchClearance {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The loaded vessel shall retain at least 0.30 m bottom clearance in 1.50 m water depth. */
-        comment conditions /* Proposed launch/retrieval site allocation supporting P-105 and P-106. The resulting immersed-depth limit is 1.20 m; actual site availability remains unverified. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Proposed launch/retrieval site allocation supporting P-105 and P-106. The resulting immersed-depth limit is 1.20 m; actual site availability remains unverified."; }
+        doc /* The loaded vessel shall retain the site-qualified bottom clearance throughout the selected launch and retrieval paths. */
+        comment conditions /* Use surveyed depth, stage/current uncertainty, vessel motion and actual appendage configuration. The 1.5 m depth and 0.3 m clearance used in preliminary sizing do not qualify a site or impose a universal draft limit. */
+        attribute availableDepthM : Real;
         attribute immersedDepthM : Real;
-        require constraint acceptance { immersedDepthM > 0 and immersedDepthM <= material.launchDepth - material.bottomClearance }
+        attribute requiredClearanceM : Real;
+        attribute siteEvidenceAccepted : Boolean;
+        require constraint acceptance { siteEvidenceAccepted and immersedDepthM > 0 and requiredClearanceM > 0 and availableDepthM - immersedDepthM >= requiredClearanceM }
     }
     requirement launchClearance : LaunchClearance;
     dependency basisLaunchClearance from launchClearance to BlueDogRequirements::soloLaunch { metadata rationale : ModelingMetadata::Rationale { text = "Selected design allocation; the numerical value is not logically implied by the parent requirement."; } }
     requirement def <'T-113'> PrintTileEnvelope {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Each structural print tile shall have positive extents no greater than 230 mm in X, Y and Z before supports and clearance. */
-        comment conditions /* 20 mm total allowance in each axis leaves room within the owner-selected 250 mm cube. CAD/slicer verification must still establish P-002; the mass model only estimates seam density. */
-        metadata rationale : ModelingMetadata::Rationale { text = "20 mm total allowance in each axis leaves room within the owner-selected 250 mm cube. CAD/slicer verification must still establish P-002; the mass model only estimates seam density."; }
-        attribute largestExtentM : Real;
-        require constraint acceptance { largestExtentM > 0 and largestExtentM <= material.printTile }
+        doc /* Each structural tile shall fit the 250 mm cubic print-job envelope in its selected build configuration. */
+        comment conditions /* Include supports, brim, raft and printer clearance in the job extents. The 230 mm tile is a seam/mass-study assumption; larger tiles are permitted when the complete job satisfies P-002. */
+        attribute jobXM : Real;
+        attribute jobYM : Real;
+        attribute jobZM : Real;
+        attribute slicerEvidenceAccepted : Boolean;
+        require constraint acceptance { slicerEvidenceAccepted and jobXM > 0 and jobYM > 0 and jobZM > 0 and jobXM <= 0.25 and jobYM <= 0.25 and jobZM <= 0.25 }
     }
     requirement printTileEnvelope : PrintTileEnvelope;
     dependency basisPrintTileEnvelope from printTileEnvelope to BlueDogRequirements::desktopManufacture { metadata rationale : ModelingMetadata::Rationale { text = "Selected design allocation; the numerical value is not logically implied by the parent requirement."; } }
-    analysis def MaterialInputs {
-        doc /* PETG density: Prusament PETG TDS 2021/10, revision 2022-02-16, 1.27 g/cm3.
-         * Epoxy density: WEST SYSTEM 105/206 TDS 2014, cured specific gravity 1.18.
-         * Glass density 2550 kg/m3 and 1:1 retained mixed-resin/dry-glass mass ratio
-         * are project assumptions. 10 GPa and 50 MPa are proposed effective wet,
-         * jointed laminate targets; no manufacturer qualification is claimed.
-         * 200 g/m2 ply, PETG wall/infill, finishing and seam budgets are process
-         * assumptions. Resin waste in cups/tools is excluded from vessel mass. */
-        out attribute petgDensity : Real = 1270;
-        out attribute glassDensity : Real = 2550;
-        out attribute epoxyDensity : Real = 1180;
-        out attribute resinGlassRatio : Real = 1;
-        out attribute laminateModulus : Real = 10000000000;
-        out attribute laminateAllowable : Real = 50000000;
-        out attribute hullPrintWall : Real = 0.0008;
-        out attribute foilPrintWall : Real = 0.0004;
-        out attribute ribHeight : Real = 0.01;
-        out attribute foilInfill : Real = 0.08;
-        out attribute foilThicknessRatio : Real = 0.12;
-        out attribute finishingMass : Real = 0.10;
-        out attribute tapeWidth : Real = 0.03;
-        out attribute tapeDryMass : Real = 0.20;
-        out attribute printTile : Real = 0.23;
-        out attribute minimumFreeboard : Real = 0.05;
-        out attribute reserveFraction : Real = 1;
-        out attribute launchDepth : Real = 1.5;
-        out attribute bottomClearance : Real = 0.3;
-        out attribute pressure : Real = 10000;
-        out attribute tipProofForce : Real = 100;
-        out attribute appendageDeflectionFraction : Real = 0.02;
-        out attribute hullDeflectionFraction : Real = 0.005;
-        out attribute panelDeflectionFraction : Real = 0.01;
-    }
+    // Compatibility projection for numerical adapters; authority is the analysis basis.
+    analysis def MaterialInputs :> BlueDogStructuralBasis::Inputs;
     analysis material : MaterialInputs;
 
 

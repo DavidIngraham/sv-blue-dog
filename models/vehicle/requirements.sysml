@@ -622,8 +622,12 @@ package BlueDogRequirements {
 
     requirement def <'N-047'> PrintedMaterialAging {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Printed structural material shall retain at least 80 percent of unaged failure load after the specified UV and wet-exposure sequence. */
-        comment conditions /* Apply 300 MJ/m2 cumulative UV exposure in the 300–400 nm band, then N-041 for Gorge or N-042 for ocean. Dual-profile qualification requires both sequences. */
+        doc /* Aged printed structural components shall retain the load capacity credited to them in the qualified design. */
+        comment conditions /* Use exposure representative of the selected mission and intended service interval, followed by N-041 for Gorge or N-042 for ocean. Establish aged directional load bounds for the actual print and joints. The initial 300 MJ/m2 UV dose is a provisional accelerated-test condition, not a mission-derived dose; compare aged capacity with credited demand, not an arbitrary percentage of unaged strength. */
+        attribute creditedLoadCapacityN : Real;
+        attribute qualifiedAgedCapacityN : Real;
+        attribute exposureEvidenceAccepted : Boolean;
+        require constraint acceptance { exposureEvidenceAccepted and creditedLoadCapacityN > 0 and qualifiedAgedCapacityN >= creditedLoadCapacityN }
     }
     requirement printedMaterialAging : PrintedMaterialAging;
     #derivation connection derivePrintedMaterialAging {
@@ -636,14 +640,11 @@ package BlueDogRequirements {
     requirement def <'N-051'> SelfRighting {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall recover from the specified capsize releases without external assistance or motor thrust. */
-        comment conditions /* Use minimum and maximum mission loading, five releases at each angle of 90 and 180 degrees toward each side, without external action or motor thrust. Use freshwater for Gorge or 35 g/kg saltwater for ocean; dual qualification requires both media. All leaves apply to every release. */
+        comment conditions /* Apply to the selected passive-righting concept, not every challenge-compliant vessel. Use minimum and maximum mission loading, five releases at each angle of 90 and 180 degrees toward each side, without external action or motor thrust. Use freshwater for Gorge or 35 g/kg saltwater for ocean; dual qualification requires both media. All leaves apply to every release. */
     }
     requirement selfRighting : SelfRighting;
-    #derivation connection deriveSelfRighting {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        metadata rationale : ModelingMetadata::Rationale { text = "SelfRighting provides a separately verifiable criterion for stabilityAndFouling."; }
-        end #original source ::> stabilityAndFouling;
-        end #derive target ::> selfRighting;
+    dependency selectedRightingStrategy from selfRighting to stabilityAndFouling {
+        metadata rationale : ModelingMetadata::Rationale { text = "Passive self-righting is the current monohull design strategy, not entailed by the challenge. C-018 also permits demonstrated limp recovery after abort; an alternative concept may meet that obligation without self-righting."; }
     }
 
     requirement def <'N-052'> CapsizeControlRecovery {

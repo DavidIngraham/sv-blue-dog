@@ -121,4 +121,4 @@ def test_construction_views_show_model_basis_and_qualification(rendered_site):
     assert materials.count('|"dependency"|')>=3
     assert 'Every print job shall fit' in text
     assert 'wet-layup glass/epoxy reinforcement' in text
-    assert 'Wet-conditioned production laminate coupons' in text
+    assert 'Stiffness credited in structural qualification' in text

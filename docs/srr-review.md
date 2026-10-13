@@ -179,7 +179,9 @@ package SRR_Construction {
 }
 ```
 
-The selected construction is an FDM substrate with wet-layup glass/epoxy reinforcement. Wet laminate strength, stiffness and glass-to-print bond proof are separate [construction qualification requirements](requirements/requirements-practicality.md#construction-qualification).
+The selected construction is an FDM substrate with wet-layup glass/epoxy reinforcement. Evidence-backed laminate properties, functional deformation limits and glass-to-print bond proof are separate [construction qualification requirements](requirements/requirements-practicality.md#construction-qualification).
+
+The 10 GPa/50 MPa inputs and other [preliminary structural screens](methods/modeling.md#requirements-versus-design-assumptions) are not challenge-derived material minima.
 
 The next experiments should inform structural mass, seams, wing behavior, actuator loads and casualty recovery. Their results feed the model before detailed design release.
 

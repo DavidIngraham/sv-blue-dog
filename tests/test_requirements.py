@@ -78,7 +78,6 @@ def test_diagram_preserves_expected_derivations(published_model):
         ('oceanEnvironment', 'saltwaterExposure'),
         ('stabilityAndFouling', 'capsizeControlRecovery'),
         ('stabilityAndFouling', 'recoveryPropulsorWeeds'),
-        ('stabilityAndFouling', 'selfRighting'),
         ('stabilityAndFouling', 'submergedWeedPassage'),
         ('stabilityAndFouling', 'weedBlockageResponse'),
         ('stabilityAndFouling', 'weedSnagShedding'),

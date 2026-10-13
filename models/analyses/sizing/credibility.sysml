@@ -63,5 +63,5 @@ package BlueDogConceptCredibility {
      * packaging of 250 mm printed segments remain acceptance work.
      * Do not promote coarseFeasible to a credible or mission-qualified design.
      * Report hull length separately from the complete operating envelope;
-     * no user-approved whole-vessel length limit has been allocated yet. */
+     * the owner-selected challenge limit is 1.2 m overall. */
 }

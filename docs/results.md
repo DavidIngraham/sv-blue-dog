@@ -2,7 +2,7 @@
 
 **Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
 
-The **1.2 m overall-length** candidate now passes the nominal refined Gorge static screens on the selected Hood River bridge route. A 440 Wh battery and 260 mm hull beam clear the previous energy and reserve-buoyancy shortfalls. The candidate weighs **10.313 kg**, predicts a **33.87-hour** conditional westerly passage, and retains **3.97 Wh** beyond the allocated voyage energy. It remains a preliminary design requiring sensitivity studies and physical evidence.
+The **1.2 m overall-length** candidate now passes the nominal refined Gorge static screens on the selected Hood River bridge route. A 440 Wh battery and 260 mm hull beam clear the previous energy and reserve-buoyancy shortfalls. The candidate weighs **10.313 kg**, predicts a **33.87-hour** conditional westerly passage, and retains **3.97 Wh** beyond the allocated voyage energy. It remains a preliminary design requiring sensitivity studies and physical evidence. Its structural margins use the provisional analysis basis; they do not qualify material properties, functional deformation limits or casualty flotation.
 
 ```sysml-report BlueDogSRRCurrentDocuments::Summary
 ```

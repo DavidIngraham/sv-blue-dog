@@ -31,6 +31,17 @@ The Markdown source owns this explanation and the scope of each view. The import
 Read the normative conditions and supporting metadata in the [vehicle requirements](../../models/vehicle/requirements.sysml), [independent challenge](../../models/missions/transgorge.sysml), and [verification plans](../../models/vehicle/verification.sysml). The [design decisions](../../models/vehicle/decisions.sysml) and [source evidence](../../models/vehicle/source-evidence.sysml) preserve the rationale behind the analysis choices.
 
 
+## Requirements versus design assumptions
+
+A challenge obligation motivates a function; it does not uniquely determine a material modulus, laminate thickness or sensor accuracy. I keep explicit owner constraints, functional acceptance, provisional performance allocations and selected strategies distinct with [requirement-basis metadata](../../models/vehicle/requirement-basis.sysml). A dependency records a selected design basis; a derivation identifies an obligation needed to meet its parent.
+
+The material and geometric constants used in preliminary sizing live in the [structural analysis basis](../../models/analyses/structural-basis.sysml). They let us explore a candidate before measurements exist. Qualification instead checks supported material bounds and applicable load, functional and site limits. Missing evidence cannot produce a passing executable requirement. Lower measured stiffness or strength means revisiting the geometry or reinforcement, not rejecting a material for missing an assumed property.
+
+```sysml-report BlueDogRequirementBasisDocuments::Summary
+```
+
+The numerical screening inputs have not changed in this clarification. Archived runs retain their original revision and claims; their passing screens are not converted into evidence that the current acceptance requirements have been verified. The next sizing refinement should vary the provisional inputs and replace them with evidence-backed values.
+
 ## Running the calculations
 
 SysML owns the equations. Python assembles geometry, chooses operating cases and coordinates the optimizer. The generated C calculations run through one [native execution layer](../../tools/boat_analysis/model/native_kernel.py). Mass, operating performance, structural margins, route and passage screening use a [shared model boundary](../../tools/boat_analysis/model/boundary.py). Preparation reads argument order, Real types, dimensions and named output tuples from OpenSysML's API element export. Application wiring supplies friendly argument aliases and selects model-exported defaults; adapters no longer repeat vector widths or output labels.

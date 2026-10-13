@@ -15,7 +15,7 @@ Arrows point toward the source: **derive** identifies a derived obligation, **re
 
 ## Construction
 
-The owner-selected printer envelope and construction process are design constraints. The 230 mm structural tile allocation leaves 20 mm per axis for supports and clearance inside the 250 mm print-job envelope; it does not replace the slicer check.
+The owner-selected printer envelope and construction process are design constraints. The sizing study assumes 230 mm tiles for seams and mass. Actual tiles may be larger when their complete print job, including supports and clearance, fits the owner-selected 250 mm cube.
 
 ```sysml-view Page_practicality_construction::thread direction=BT statements=true
 package Page_practicality_construction {
@@ -36,7 +36,7 @@ package Page_practicality_construction {
 
 ## Construction qualification
 
-Load, deflection, wet laminate coupon and glass-to-print bond criteria establish whether the chosen process can carry the modeled loads. These requirements derive from structural integrity; selecting the construction process does not demonstrate compliance.
+Load, deflection, wet laminate coupon and glass-to-print bond criteria establish whether the chosen process can carry the modeled loads. These requirements derive from structural integrity; selecting the construction process does not demonstrate compliance. Material strength and stiffness are qualified inputs, not fixed minimum targets. Functional deformation limits require evidence; the preliminary sizing percentages do not close these requirements. See [requirements versus design assumptions](../methods/modeling.md#requirements-versus-design-assumptions).
 
 ```sysml-view Page_practicality_materials::thread direction=BT statements=true
 package Page_practicality_materials {

@@ -406,7 +406,7 @@ package BlueDogRequirementVerification {
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
     verification def <'V-N-047'> PrintedMaterialAgingVerification {
-        doc /* Apply the N-047 qualification conditions. Compare the lowest failure loads of five aged and five unaged coupons with identical geometry, material, print orientation and process, using the same fixture and loading rate. */
+        doc /* Apply the N-047 qualification conditions. Establish aged load-capacity bounds for the production geometry, orientation, material and process under representative exposure. Compare with the capacity credited to each component and verify its demanded loads. Unaged controls characterize degradation; neither an 80-percent ratio nor a fixed coupon count alone establishes qualification. */
         objective acceptance {
             verify BlueDogRequirements::printedMaterialAging;
         }
@@ -535,6 +535,56 @@ package BlueDogRequirementVerification {
             verify BlueDogRequirements::invalidWindUseInhibition;
             verify BlueDogRequirements::windLossResponse;
             verify BlueDogRequirements::windSensingEndurance;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def <'V-T-107'> StructuralMaterialEvidence {
+        doc /* Establish wet-conditioned, directional production material bounds with documented variability and reductions. Compare every property credited by the released structural analysis with its supported bound. Re-run sizing and load checks after any material/process change. */
+        objective acceptance {
+            verify BlueDogStructure::wetCouponStrength;
+            verify BlueDogStructure::wetCouponStiffness;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def <'V-T-102'> FunctionalDeformationEvidence {
+        doc /* Validate member-specific deformation limits against sailing/control, alignment, sealing and clearance functions, then evaluate measured or correlated responses under applicable loads. Provisional numerical percentages cannot set evidence acceptance. */
+        objective acceptance {
+            verify BlueDogStructure::appendageDeflection;
+            verify BlueDogStructure::hullDeflection;
+            verify BlueDogStructure::panelDeflection;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def <'V-T-101'> StructuralLoadEvidence {
+        doc /* Derive applicable operational, handling and casualty loads from the selected configuration and mission cases. Correlate structural predictions with member, panel, attachment and bond tests. A fixed pressure or tip-force screening probe alone is insufficient. */
+        objective acceptance {
+            verify BlueDogStructure::structuralIntegrity;
+            verify BlueDogStructure::bendingStrength;
+            verify BlueDogStructure::panelStrength;
+            verify BlueDogStructure::rootProofLoad;
+            verify BlueDogStructure::bondProof;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def <'V-T-110'> FlotationEvidence {
+        doc /* Assess actual downflooding openings and casualty buoyancy across loading, heel/pitch, wave and ingress cases. Demonstrate flotation through the declared recovery exposure; intact freeboard or volume ratios alone cannot close the case. */
+        objective acceptance {
+            verify BlueDogStructure::loadedFreeboard;
+            verify BlueDogStructure::reserveBuoyancy;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def <'V-T-112'> LaunchSiteEvidence {
+        doc /* Record surveyed launch/retrieval paths, depth/stage uncertainty, motion and installed appendage configuration. Check the site-qualified clearance throughout each path. */
+        objective acceptance {
+            verify BlueDogStructure::launchClearance;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def <'V-T-113'> StructuralPrintEnvelope {
+        doc /* Use actual sliced structural jobs including support and printer clearances; test all three positive extents against the owner 250 mm envelope. The study seam/tile dimension is not an acceptance limit. */
+        objective acceptance {
+            verify BlueDogStructure::printTileEnvelope;
         }
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
