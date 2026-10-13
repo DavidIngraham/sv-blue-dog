@@ -6,6 +6,7 @@ package MarineCourse {
         (a*RealFunctions::abs(lateralB)+b*RealFunctions::abs(lateralA))/(RealFunctions::abs(lateralA)+RealFunctions::abs(lateralB))
     }
     calc def Route {
+        doc /* Policy element 6 scales positive-progress residuals; it is not a minimum ground-speed requirement. */
         in water : Real [8] ordered nonunique;
         in states : Real [48] ordered nonunique;
         in policy : Real [7] ordered nonunique;
@@ -36,6 +37,6 @@ package MarineCourse {
         attribute upstream : Real = policy#(1)*(if policy#(7)>0.5 ? windwardMean else leewardMean)-(policy#(2)+policy#(3))/2;
         attribute duration : Real = if downstream>0 and upstream>0 ? policy#(4)/3600*(1/downstream+1/upstream) else 1000000.0;
         return result : Real [6] ordered nonunique;
-        (downstream/policy#(6)-1,upstream/policy#(6)-1,(if policy#(5)>0 ? 1-duration/policy#(5) else 1.0),downstream,upstream,duration)
+        (downstream/policy#(6),upstream/policy#(6),(if policy#(5)>0 ? 1-duration/policy#(5) else 1.0),downstream,upstream,duration)
     }
 }

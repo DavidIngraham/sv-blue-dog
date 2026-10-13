@@ -234,7 +234,7 @@ package BlueDogRequirementVerification {
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
     verification def <'V-R-002'> RecoveryEnergyVerification {
-        doc /* Apply the R-002 qualification conditions. Measure motor and essential powers; characterize available battery energy at the lowest operating battery temperature and end-of-service capacity. */
+        doc /* Apply the R-002 qualification conditions. Evaluate recovery routes along the course under declared adverse current and casualty conditions. Measure motor and essential powers, bound transit and retrieval exposure, and characterize available battery energy at the lowest operating temperature and end-of-service capacity. Infeasible routes or missing route evidence cannot pass. */
         objective acceptance {
             verify BlueDogRequirements::recoveryEnergy;
         }

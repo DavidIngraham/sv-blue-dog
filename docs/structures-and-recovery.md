@@ -1,5 +1,7 @@
 # Manufacturing, structure and recovery
 
+**Design phase:** Detailed design · CDR · [Development plan](development-plan.md)
+
 Can I manufacture the boat this way without making it too heavy—and will it come back upright? I use the candidate geometry, printed construction, glass laminate and flooding assumptions to connect [sizing](development-plan.md#virtual-design) with [detailed design](development-plan.md#detailed-design). Coupon and recovery experiments will decide how much confidence those calculations deserve.
 
 Working through the testbed design made construction part of the sizing problem. Printed walls and ribs, wet glass/epoxy, seams and finish contribute to mass. The source CAD explores manufacturing and wing concepts; it does not define the challenge vessel.

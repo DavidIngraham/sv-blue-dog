@@ -1,5 +1,7 @@
 # Autonomous sailing, navigation and wind sensing
 
+**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+
 Autonomy turns the mission into onboard decisions. Navigation and wind observations supply the controller; recovery behavior keeps faults from silently becoming mission failures.
 
 [Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
@@ -353,6 +355,30 @@ package Page_autonomy_7 {
         metadata Layout about GorgeChallenge::sailingPropulsion { x = 640; y = 2400; }
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 960; y = 2400; }
         metadata Layout about GorgeChallenge::unassistedAttempt { x = 0; y = 2800; }
+    }
+}
+```
+
+## Onboard decisions during service outages
+
+```sysml-view SRR_Thread_autonomy::thread direction=BT statements=true
+package SRR_Thread_autonomy {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view thread : GeneralView {
+        filter @SysML::RequirementUsage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::communicationOutageAutonomy;
+        expose GorgeChallenge::weatherOutageContinuation;
+        expose GorgeChallenge::forecastAdmission;
+        expose GorgeChallenge::unassistedAttempt;
+        expose GorgeChallenge::liveObservation;
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::communicationOutageAutonomy { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::weatherOutageContinuation { x = 640; y = 0; }
+        metadata Layout about GorgeChallenge::forecastAdmission { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::unassistedAttempt { x = 320; y = 400; }
+        metadata Layout about GorgeChallenge::liveObservation { x = 640; y = 400; }
     }
 }
 ```

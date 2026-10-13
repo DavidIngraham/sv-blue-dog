@@ -1,8 +1,12 @@
 # Sizing Blue Dog for the Gorge
 
+**Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
+
 The current search reaches a **1.4 m hull** with a plausible rudder shape and a battery sized for a finite passage. That is useful progress toward my 1.2 m hope, but it is still a heavy little boat: about **30 kg**, with a **1.46 m swept length**. Smaller trials remain unresolved, and the follow-up checks expose stiffness and pitch-stability problems that matter more than another decimal place of hull length.
 
 This is a [preliminary-design study](development-plan.md#virtual-design). Its inputs are the Bingen–Stevenson challenge, chart-derived course, manufacturing assumptions and provisional boat physics. It informs the dimensions and experiments we should pursue next. The [sizing method](sizing.md) describes the calculations; the [mission simulation](mission-simulation.md) checks how a candidate behaves through changing weather and traffic.
+
+The challenge now imposes a 1.2 m maximum overall length across normal operating configurations. The larger candidate discussed below is evidence from the preceding sizing baseline, not an eligible vessel. Its geometry and physics findings remain useful, but current acceptance requires a new constrained search and paired mission comparison. [The SRR review](srr-review.md) records that distinction.
 
 ## Making the smaller concept earn its dimensions
 

@@ -1,5 +1,7 @@
 # Coupled sizing method
 
+**Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
+
 The design mission is the finite Gorge round trip. The static search enforces peak-power capability and a finite-passage battery allowance; daily energy balance and a completion deadline are not acceptance criteria. Each candidate can then drive the chronological mission simulation. The optimizer uses the passage screen, not a calibrated mission-success probability or an embedded Monte Carlo solve. Dynamic planing and speed-dependent failure exposure also need validated models; current results do not select between planing and displacement hulls.
 
 How small can Blue Dog be and still make headway upriver? For [preliminary design](development-plan.md#virtual-design), I start with the route, wind and current assumptions, then vary the hull, wing, ballast and energy system together. I want to find which designs are worth developing and which assumptions I most need to test.
@@ -16,14 +18,16 @@ flowchart TB
     physics --> operating["Inner solve: trim and sailing equilibrium in each scenario"]
     operating --> screens["Progress, loads, energy, handling and recovery screens"]
     screens -->|revise design| design
-    screens -->|feasible, then reduce length| trial["Selected trial"]
+    screens -->|feasible alternative| trial["Candidate frontier"]
     screens -->|stop before feasibility: retain best trial| diagnosis["Diagnostic trial"]
     diagnosis --> replay
     trial --> replay["Independent finer replay and recovery studies"]
     replay --> experiment["Identify the next measurement or design change"]
 ```
 
-We trace a sequence of feasible designs toward the 1.2 m target. Each stage fixes only hull length and solves for the other 28 design variables and 48 operating-state variables. The preceding feasible design supplies the next starting point. The original free-length minimizer remains available for comparison. Numerical brackets describe model coverage and search limits. A bound hit requires investigation before claiming a minimum size.
+The SRR search treats 1.2 m overall length as a challenge limit, including the modeled wing and rudder sweeps. At each selected overall-length cap, hull length and the other 28 design variables remain free alongside 48 operating-state variables. Separate mass and conditional passage-time objectives retain alternatives for the design team; they do not combine preferences into a handicap score. The earlier fixed-hull-length continuation remains a diagnostic tool, not the new trade policy. Numerical brackets describe model coverage and search limits. A bound hit requires investigation before claiming a minimum size.
+
+Run the provisional search with `python -m tools.boat_analysis.optimization.frontier --caps 0.8 1.0 1.2`. Its local monohull, quasi-steady results require finer replay and paired chronological mission scenarios. They do not yet supply a calibrated completion probability, bill of materials or construction-effort estimate.
 
 The [concept credibility policy](../models/analyses/sizing/credibility.sysml) now screens underwater foil proportions and attachment geometry in both search and refined replay. Keel and rudder aspect ratios must be at least 2; this is a provisional screening allocation, not a validated accuracy boundary. The keel chord must fit beneath the hull, the rudder stock must stay at or forward of the transom (no unmodeled outrigger), and the keel and rudder's full steering disk must have at least 20 mm planform separation. The clearance remains provisional pending deflection and installation analysis. A different architecture can change these allocations with supporting geometry, mass and loads.
 

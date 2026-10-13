@@ -64,7 +64,7 @@ package BlueDogSailing {
             leeway >= 0 [rad] and trueWindAngle + leeway <= TrigFunctions::pi * (1 [rad]) and
             projection > 0.000001 and projection <= 1 and retainedPerformance > 0 and retainedPerformance <= 1 and
             maneuverRetention > 0 and maneuverRetention <= 1 and waterlineLength > 0 [m] and allocatedTime > 0 [s] and
-            BlueDogRequirements::LegProgressCriterion((minimumGroundVMG));
+            minimumGroundVMG >= 0 [m/s];
         attribute timeTarget : SpeedValue = if allocatedTime > 0 [s] ? distance / allocatedTime else 0 [m/s];
         attribute requiredGroundVMG : SpeedValue = if timeTarget > minimumGroundVMG ? timeTarget else minimumGroundVMG;
         attribute requiredCleanPolar : SpeedValue = RequiredPolarSpeed(requiredGroundVMG, currentVMG, retainedPerformance, maneuverRetention, projection);
@@ -89,7 +89,7 @@ package BlueDogSailing {
         out attribute equivalentWaveLength : LengthValue = WaveReferenceLength(requiredCleanPolarSpeed);
         out attribute exceedsWaveReference : Boolean = requiredCleanPolarSpeed > waveReference;
         out attribute evidenceReady : Boolean = leg.polarEvidenceAccepted and leg.hullEvidenceAccepted;
-        return modeledFeasible : Boolean = inputsValid and leg.valid and minimumProgressMet and allocatedDurationMet;
+        return modeledFeasible : Boolean = inputsValid and leg.valid and allocatedDurationMet;
         out attribute performanceSupported : Boolean = modeledFeasible and evidenceReady;
         objective feasibility { require constraint { modeledFeasible } }
     }

@@ -17,12 +17,15 @@ from tools.boat_analysis.evidence.records import digest,validate
 from tools.boat_analysis.optimization.operating import operating_margin_names
 
 class Problem:
-    def __init__(self,resolution=12,route_profile='challenge'):
+    def __init__(self,resolution=12,route_profile='challenge',overall_length_limit_m=None):
         if route_profile not in ('challenge','all-season'):raise ValueError('Unknown route profile')
         self.route_profile=route_profile
         self.resolution=resolution
         # Numerical allowance for coarse fixed-pitch versus refined free-pitch VMG.
         self.model=CoupledModel();self.structure=StructureKernel();self.concept=ConceptKernel();self.route=RouteKernel();c=self.structure.contract
+        self.overall_length_limit_m = c['maximumOverallLengthM'] if overall_length_limit_m is None else float(overall_length_limit_m)
+        if not 0 < self.overall_length_limit_m <= c['maximumOverallLengthM']:
+            raise ValueError('Design envelope must respect the challenge overall-length limit')
         self.progress_reserve_m_s=c['progressSearchReserve']
         self.require_east=c['challengeRequiresEastProgress' if route_profile=='challenge' else 'allSeasonRequiresEastProgress']
         self.lo=np.r_[c['designLower'],np.tile(c['stateLower'],8)]
@@ -74,6 +77,9 @@ class Problem:
         west=self.route.evaluate([r['waterVMG'] for r in rows],states.ravel(),wind_from='west')
         concept=self.concept.evaluate(x,list(reference_mass.values()),g,max(west[5],route[5]) if self.require_east else west[5],max(r['averagePower'] for r in rows))
         margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
+        from tools.boat_analysis.geometry.vessel import operating_envelope
+        envelope = operating_envelope(dict(zip(k.c['designNames'], x)), k.parameters[33], self.resolution)
+        margins['overallLengthMargin'] = (self.overall_length_limit_m-envelope['sweptLengthM'])/self.overall_length_limit_m
         names=k.operation.contract['outputNames'];eq=np.array([[r[n] for n in names[:4]] for r in rows]).ravel()
         static_names=operating_margin_names(names)[:12]
         operating=np.array([[r[n] for n in static_names] for r in rows])
@@ -85,7 +91,7 @@ class Problem:
             +[f'case {i}: {n} (search reserve)' for i in range(8) for n in names[47:]]
             +list(margins)+[f'{direction} {n}' for direction,_ in route_screens for n in ['downstream progress','upstream progress','duration']]
             +[f'righting trim {trim:g}, heel {heel:g}' for trim in self.structure.contract['coarseTrims'] for heel in self.structure.contract['coarseHeels']])
-        result={'eq':eq,'ineq':ineq,'design':x,'states':states,'rows':rows,'structure':margins,'route':route,'westerlyRoute':west,'righting':righting,'mass':reference_mass,'concept':concept}
+        result={'eq':eq,'ineq':ineq,'design':x,'states':states,'rows':rows,'structure':margins,'route':route,'westerlyRoute':west,'righting':righting,'mass':reference_mass,'concept':concept,'envelope':envelope}
         self.calls+=1
         merit=float(np.linalg.norm(np.r_[eq,np.minimum(ineq,0)]))
         if self.best is None or merit<self.best[0]:self.best=(merit,np.array(z,copy=True))

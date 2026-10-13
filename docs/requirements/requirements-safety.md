@@ -1,5 +1,7 @@
 # Traffic safety, communications and monitoring
 
+**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+
 Other river users are part of the operating context. The vessel must remain observable, respect its operating boundary and distinguish monitoring from intervention that ends a qualifying attempt.
 
 [Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
@@ -322,6 +324,34 @@ package Page_safety_22 {
         metadata Layout about GorgeChallenge::sailingPropulsion { x = 320; y = 2400; }
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 640; y = 2400; }
         metadata Layout about GorgeChallenge::unassistedAttempt { x = 960; y = 2400; }
+    }
+}
+```
+
+## Autonomous abort and shore recovery
+
+```sysml-view SRR_Thread_safety::thread direction=BT statements=true
+package SRR_Thread_safety {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view thread : GeneralView {
+        filter @SysML::RequirementUsage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::trafficNonInterference;
+        expose GorgeChallenge::safetyCapabilityAbort;
+        expose GorgeChallenge::autonomousShoreRecovery;
+        expose GorgeChallenge::abortAlert;
+        expose GorgeChallenge::courseRecoveryReserve;
+        expose GorgeChallenge::reserveAbort;
+        expose GorgeChallenge::recoveryConspicuity;
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::trafficNonInterference { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::safetyCapabilityAbort { x = 640; y = 0; }
+        metadata Layout about GorgeChallenge::autonomousShoreRecovery { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::abortAlert { x = 320; y = 400; }
+        metadata Layout about GorgeChallenge::courseRecoveryReserve { x = 640; y = 400; }
+        metadata Layout about GorgeChallenge::reserveAbort { x = 0; y = 800; }
+        metadata Layout about GorgeChallenge::recoveryConspicuity { x = 320; y = 800; }
     }
 }
 ```

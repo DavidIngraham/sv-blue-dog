@@ -1,5 +1,7 @@
 # Manufacturing, handling and serviceability
 
+**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+
 One-person handling and a 250 mm cubic printer are owner-imposed project constraints. They shape the build and maintenance approach alongside the mission goals.
 
 [Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)

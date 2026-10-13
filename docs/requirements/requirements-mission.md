@@ -1,5 +1,7 @@
 # Mission, course completion and endurance
 
+**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+
 One Gorge round trip is the current design mission. These threads connect that finite challenge to course performance and reliability. Hawaii and repeated operation have separate future constraints.
 
 The [ocean envelope](requirements-environment.md#future-hawaii-mission-ocean-conditions) and [repeating-energy objective](requirements-energy.md#sustained-energy-feasibility) are retained as future work. They do not set acceptance criteria for the current Gorge vessel.
@@ -158,6 +160,30 @@ package Page_mission_2 {
         metadata Layout about GorgeChallenge::courseCompletion { x = 640; y = 400; }
         metadata Layout about GorgeChallenge::sailingPropulsion { x = 960; y = 400; }
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 800; }
+    }
+}
+```
+
+## Qualification and launch admission
+
+```sysml-view SRR_Thread_mission::thread direction=BT statements=true
+package SRR_Thread_mission {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view thread : GeneralView {
+        filter @SysML::RequirementUsage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::overallLength;
+        expose GorgeChallenge::unattachedPassage;
+        expose GorgeChallenge::abortPersistence;
+        expose GorgeChallenge::nightOperation;
+        expose GorgeChallenge::forecastAdmission;
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::overallLength { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::unattachedPassage { x = 640; y = 0; }
+        metadata Layout about GorgeChallenge::abortPersistence { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::nightOperation { x = 320; y = 400; }
+        metadata Layout about GorgeChallenge::forecastAdmission { x = 640; y = 400; }
     }
 }
 ```

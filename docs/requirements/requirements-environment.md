@@ -1,5 +1,7 @@
 # Environment, durability and self-righting
 
+**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+
 The Gorge environment sets the current loads and exposure conditions. A separately labeled ocean profile is retained for future Hawaii work. The breakdown connects those environments to measurable limits, capsize recovery and weed tolerance.
 
 [Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
@@ -368,6 +370,28 @@ package Page_environment_17 {
         metadata Layout about GorgeChallenge::sailingPropulsion { x = 960; y = 2800; }
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 3200; }
         metadata Layout about GorgeChallenge::unassistedAttempt { x = 320; y = 3200; }
+    }
+}
+```
+
+## No littering and casualty recovery
+
+```sysml-view SRR_Thread_environment::thread direction=BT statements=true
+package SRR_Thread_environment {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view thread : GeneralView {
+        filter @SysML::RequirementUsage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::noLittering;
+        expose GorgeChallenge::casualtyFlotation;
+        expose GorgeChallenge::majorComponentRetention;
+        expose GorgeChallenge::capsizeRecovery;
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::noLittering { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::casualtyFlotation { x = 640; y = 0; }
+        metadata Layout about GorgeChallenge::majorComponentRetention { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::capsizeRecovery { x = 320; y = 400; }
     }
 }
 ```

@@ -1,5 +1,7 @@
 # Mission, context and architecture
 
+**Design phase:** Mission and requirements · SRR · [Development plan](development-plan.md)
+
 What does this little boat actually have to do? I start with one finite, independent Gorge challenge, then work through the people, environment and equipment it will interact with. This is [mission definition](development-plan.md#mission-definition): it sets up the responsibilities and scenarios I will use to compare designs.
 
 ![Map of the Gorge challenge corridor along the Columbia River, from Bingen to buoy 16 near Stevenson and back.](figures/gorge-course-map.svg)

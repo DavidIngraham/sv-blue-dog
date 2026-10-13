@@ -1,5 +1,7 @@
 # Sustained operation: follow energy through the mission
 
+**Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
+
 For the finite Gorge mission, storage must support the complete voyage while preserving recovery reserve and peak capability. There is no 72-hour acceptance limit. Finishing below the initial battery charge is permitted. Native analysis reports `finiteCampaignFeasible` separately from `modeledEnergyFeasible`, which additionally requires repeatable cycle balance for future sustained operation. Evidence acceptance gates both supported results.
 
 Can the boat get through the night and keep sailing the next day? I combine the mission profile, equipment loads, solar assumptions and usable storage to answer that question. This [virtual-design work](development-plan.md#virtual-design) guides battery and solar sizing; later [bench and water tests](development-plan.md#physical-validation) will check the predicted consumption.

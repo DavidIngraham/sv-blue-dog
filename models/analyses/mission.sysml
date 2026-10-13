@@ -90,9 +90,10 @@ package BlueDogMissionSimulation {
         in executionStopped : Boolean;
         in reserveProtected : Boolean;
         in horizonReached : Boolean;
+        in safetyAbort : Boolean;
         return outcome : String;
         if safetyViolation ? "safety_violation"
-        else if intervention or motorUsed ? "disqualified"
+        else if intervention or motorUsed or safetyAbort ? "disqualified"
         else if executionStopped or not reserveProtected ? "incomplete"
         else if orderedCourseComplete ? "qualified_completion"
         else if horizonReached ? "censored"

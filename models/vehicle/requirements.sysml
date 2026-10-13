@@ -40,7 +40,7 @@ package BlueDogRequirements {
     requirement def <'E-005'> Communications {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall support live telemetry through link outages and reconnection. */
-        comment conditions /* Link availability is a delivery-test precondition, not a coverage guarantee. Normal cadence is 60 seconds; low-energy alone permits 300 seconds; emergency/powered recovery takes precedence at 60 seconds. Outage tests last 24 hours. */
+        comment conditions /* Link availability is a delivery-test precondition, not a coverage guarantee. Normal, low-energy and recovery delivery cadence is 30 seconds, as allocated by GorgeChallenge::liveObservation. Outage tests last 24 hours. */
     }
     requirement def <'E-006'> IngressResponse {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -246,9 +246,9 @@ package BlueDogRequirements {
 
     requirement def <'R-001'> RecoveryPropulsion {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* At maximum mission load, powered recovery shall sustain at least 0.5 m/s over ground for 30 minutes against a 1.5 m/s current. */
-        comment conditions /* Wind must be no greater than 5 m/s and waves no greater than 0.2 m. R-004 governs motor enable and challenge qualification; S-003 governs isolation and control loss. */
-        comment notes /* This sheltered recovery target is not a storm-recovery guarantee. */
+        doc /* At maximum mission load, powered recovery shall reach a suitable shore retrieval location from the declared course recovery cases. */
+        comment conditions /* Use route-specific wind, waves, current and casualty state, with installed propulsion performance. R-004 governs motor enable and challenge qualification; S-003 governs isolation and control loss. Course recovery scenarios must be accepted before qualification. */
+        comment notes /* A sheltered thrust demonstration alone cannot qualify course-wide or capsized recovery. */
     }
     requirement recoveryPropulsion : RecoveryPropulsion;
     dependency deriveRecoveryPropulsion from recoveryPropulsion to safeRecovery {
@@ -256,24 +256,32 @@ package BlueDogRequirements {
     }
 
     calc def RecoveryReserveDemand {
-        doc /* R-002 reserve policy: 30 minutes motor operation plus two hours essential loads, with a 20 percent allowance. Powers are non-overlapping electrical demands. */
+        doc /* R-002 route-dependent reserve. Route traversal and recovery completion determine exposure durations; uncertainty is explicit. Powers are non-overlapping battery withdrawal rates. */
         in motorPower : PowerValue;
         in essentialPower : PowerValue;
+        in poweredDuration : TimeValue;
+        in essentialDuration : TimeValue;
+        in uncertaintyFactor : Real;
         return reserve : EnergyValue;
-        1.2 * (motorPower * 1800 [s] + essentialPower * 7200 [s])
+        uncertaintyFactor * (motorPower * poweredDuration + essentialPower * essentialDuration)
     }
 
     requirement def <'R-002'> RecoveryEnergy {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The protected reserve shall equal or exceed 1.2 × (30 minutes of worst-case recovery motor demand + 2 hours of essential recovery demand). */
-        comment conditions /* Motor demand uses the R-001 case. Essential demand includes navigation, control, recording and telemetry at S-003 recovery cadence. Use separate, non-overlapping power values for the selected installed configuration. */
+        doc /* The protected reserve shall cover the energy required by a viable course-dependent shore recovery route with declared uncertainty allowance. */
+        comment conditions /* Route evaluation supplies powered and essential durations from current position to a suitable retrieval location, including adverse current and final approach. Essential duration includes all powered transit. Powers use the installed configuration; uncertaintyFactor is at least one. An unavailable or infeasible recovery route cannot produce a valid reserve. */
         comment notes /* R-003 governs launch admission; E-004 governs in-mission reserve crossing. */
         attribute motorPower : PowerValue;
         attribute essentialPower : PowerValue;
         attribute reserveEnergy : EnergyValue;
+        attribute poweredDuration : TimeValue;
+        attribute essentialDuration : TimeValue;
+        attribute uncertaintyFactor : Real;
+        attribute routeFeasible : Boolean;
         require constraint reserveSizing {
             motorPower > 0 [W] and essentialPower > 0 [W] and
-            reserveEnergy >= RecoveryReserveDemand(motorPower, essentialPower)
+            routeFeasible and poweredDuration > 0 [s] and essentialDuration >= poweredDuration and uncertaintyFactor >= 1 and
+            reserveEnergy >= RecoveryReserveDemand(motorPower, essentialPower, poweredDuration, essentialDuration, uncertaintyFactor)
         }
     }
     requirement recoveryEnergy : RecoveryEnergy;
@@ -517,7 +525,7 @@ package BlueDogRequirements {
     requirement def <'N-034'> CalmOperation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* With harvesting disabled and mean wind below 3 m/s, the vessel shall retain calm-mode functions above the R-002 reserve for 24 continuous hours. */
-        comment conditions /* Calm-mode functions are navigation, recording and autonomous boundary/traffic contingency. Initial conservative usable energy must cover the reserve plus 24 hours of measured worst-case calm-mode electrical load. R-004 prohibits automatic motor activation in a qualifying attempt. */
+        comment conditions /* Calm-mode functions are navigation, recording and autonomous boundary/traffic contingency. Initial conservative usable energy must cover the reserve plus 24 hours of measured worst-case calm-mode electrical load. Autonomous safety recovery first terminates qualification under GorgeChallenge::safetyCapabilityAbort, then may enable the motor under R-004. */
         comment notes /* Neither progress nor station keeping is required. */
     }
     requirement calmOperation : CalmOperation;
@@ -1037,7 +1045,7 @@ package BlueDogRequirements {
 
     requirement def <'E-120'> TelemetryDeliveryCadence {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* With a functioning link, current telemetry delivery intervals shall not exceed 60 seconds, except that low-energy operation without emergency/powered recovery permits 300 seconds. */
+        doc /* With a functioning link, current position, operating mode and health telemetry delivery intervals shall not exceed 30 seconds. */
     }
     requirement telemetryDeliveryCadence : TelemetryDeliveryCadence;
 
@@ -1613,7 +1621,7 @@ package BlueDogRequirements {
 
     requirement def <'S-111'> RecoveryTelemetryCadence {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* During active emergency or powered recovery with a functioning link, the vessel shall deliver position telemetry at least once per 60 seconds, including low-energy operation. */
+        doc /* During active emergency or powered recovery with a functioning link, the vessel shall deliver position telemetry at least once per 30 seconds, including low-energy operation. */
     }
     requirement recoveryTelemetryCadence : RecoveryTelemetryCadence;
 
@@ -2420,7 +2428,7 @@ package BlueDogRequirements {
 
     requirement def <'R-102'> FreshRecoveryCommand {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* After restart, motor enable shall remain inhibited until a fresh authenticated recovery command is accepted. */
+        doc /* After restart, motor enable shall remain inhibited until recovery is authorized by the onboard safety function or a fresh authenticated operator command. */
     }
     requirement freshRecoveryCommand : FreshRecoveryCommand;
 
@@ -2812,12 +2820,12 @@ package BlueDogRequirements {
     requirement cruisePerformance : CruisePerformance;
     requirement def <'Q-101'> LegProgress {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall achieve at least 0.5 m/s mean along-route ground progress on each planned sailing leg. */
+        doc /* The mission analysis shall evaluate whole-route progress over the declared reproducible scenario ensemble. */
         comment conditions /* Evaluate sailing-only, loaded configuration under the declared wind, wave, current and fouling profile. Include tacking in water-relative velocity made good. Holds are separate exposure intervals, not discarded samples. */
-        metadata rationale : ModelingMetadata::Rationale { text = "0.5 m/s is a proposed design target, not a measured capability or a guarantee throughout the survival envelope."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Owner decision: no fixed minimum sailing speed. Compare complete passage, waiting, aborts, recovery reserve and model coverage using the same versioned scenario set across designs."; }
         metadata issue : ModelingMetadata::Issue { text = "Proposed target pending design review and mission-profile selection."; }
         attribute groundSpeeds : SpeedValue [1..*] ordered nonunique;
-        require constraint acceptance { LegProgressCriterion(groundSpeeds) }
+        comment assessment /* Ground speeds are analysis outputs, not a fixed-speed acceptance predicate. Mission outcomes govern the performance trade. */
     }
     requirement legProgress : LegProgress;
     requirement def <'Q-102'> PassageDuration {
@@ -2846,23 +2854,23 @@ package BlueDogRequirements {
     requirement missionReliability : MissionReliability;
     requirement def <'L-101'> MissionSuccessProbability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The lower 95-percent confidence bound on mission reliability shall be at least 0.90 over the declared voyage duration. */
+        doc /* The reliability study should assess a provisional objective of 0.90 mission reliability at 95-percent confidence over the declared voyage duration. */
         comment conditions /* Reliability means absence of mission-critical failure over total elapsed exposure, including holds. Statistical evidence must represent the declared configuration, environment and failure definition. */
         metadata rationale : ModelingMetadata::Rationale { text = "0.90 at 95-percent confidence is a proposed engineering target. It is not a measured reliability estimate."; }
         metadata issue : ModelingMetadata::Issue { text = "Proposed target pending design review and mission-profile selection."; }
         attribute lowerBound : Real;
         attribute confidence : Real;
-        require constraint acceptance { MissionReliabilityCriterion(lowerBound, confidence) }
+        comment assessment /* MissionReliabilityCriterion is available for study comparisons; this provisional objective is not a challenge acceptance constraint. */
     }
     requirement missionSuccessProbability : MissionSuccessProbability;
     requirement def <'L-102'> FailureRateBudget {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The combined mission-critical failure-rate bound shall not exceed the budget derived from L-101 and the Q-102 exposure duration. */
+        doc /* The reliability study should compare the combined mission-critical failure-rate bound with the provisional L-101 objective over Q-102 exposure. */
         comment conditions /* The initial constant-hazard model sums non-overlapping independent critical failure rates plus a separately assessed common-cause contribution. Component bounds require a joint-confidence argument; summing individual 95-percent bounds does not establish a system 95-percent bound. Wear, systematic software faults, variable stress and recovery need a different model when this assumption is unsupported. */
         metadata rationale : ModelingMetadata::Rationale { text = "Use lambda_max = -ln(0.90)/T. Do not sum DFMEA ordinal rankings or assume missing rates are zero."; }
         attribute ratePerHour : Real;
         attribute exposureHours : Real;
-        require constraint acceptance { FailureRateCriterion(ratePerHour, exposureHours) }
+        comment assessment /* FailureRateCriterion evaluates the provisional study objective; it is not a binding qualification constraint. */
     }
     requirement failureRateBudget : FailureRateBudget;
     requirement def <'L-103'> ReliabilityEvidence {
@@ -2964,17 +2972,17 @@ package BlueDogRequirements {
     #refinement dependency formalizeHarvestCampaignCoverageCriterion from HarvestCampaignCoverageCriterion to harvestCampaignCoverage {
         metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
     }
-    #refinement dependency formalizeLegProgressCriterion from LegProgressCriterion to legProgress {
-        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    dependency studyLegProgressCriterion from LegProgressCriterion to legProgress {
+        metadata rationale : ModelingMetadata::Rationale { text = "Legacy or provisional numerical study screen, retained for comparison with recorded analyses. This is not a current challenge acceptance refinement."; }
     }
     #refinement dependency formalizePassageDurationCriterion from PassageDurationCriterion to passageDuration {
         metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
     }
-    #refinement dependency formalizeMissionReliabilityCriterion from MissionReliabilityCriterion to missionSuccessProbability {
-        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    dependency studyMissionReliabilityCriterion from MissionReliabilityCriterion to missionSuccessProbability {
+        metadata rationale : ModelingMetadata::Rationale { text = "Legacy or provisional numerical study screen, retained for comparison with recorded analyses. This is not a current challenge acceptance refinement."; }
     }
-    #refinement dependency formalizeFailureRateCriterion from FailureRateCriterion to failureRateBudget {
-        metadata rationale : ModelingMetadata::Rationale { text = "Formalizes the numerical acceptance relation on supplied inputs. The requirement qualification conditions, input representativeness and evidence obligations still apply."; }
+    dependency studyFailureRateCriterion from FailureRateCriterion to failureRateBudget {
+        metadata rationale : ModelingMetadata::Rationale { text = "Legacy or provisional numerical study screen, retained for comparison with recorded analyses. This is not a current challenge acceptance refinement."; }
     }
     private import RequirementDerivation::*;
     requirement def <'E-009'> WindObservation {

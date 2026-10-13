@@ -433,3 +433,19 @@ package BlueDogFinitePassageDocuments {
         part stages : Table { calc rows : Stages; }
     }
 }
+
+package BlueDogSRRDocuments {
+    private import DocumentQueries::*;
+    calc def EnvironmentProposalRows :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogEnvironmentReview::proposed")), columns = (
+            Column(name = "Wind upper m/s", path = "operationalWindUpperMps"),
+            Column(name = "Gust upper m/s", path = "operationalGustUpperMps"),
+            Column(name = "Significant wave height m", path = "operationalWaveHeightM"),
+            Column(name = "Peak periods s", path = "operationalPeriodSeconds"),
+            Column(name = "Current sensitivity m/s", path = "currentSensitivityUpperMps")))
+    }
+    part def EnvironmentProposal :> Document {
+        attribute redefines title = "Environmental allocations proposed for review";
+        part allocations : Table { calc rows : EnvironmentProposalRows; }
+    }
+}

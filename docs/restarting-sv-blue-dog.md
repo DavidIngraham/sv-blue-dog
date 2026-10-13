@@ -1,5 +1,7 @@
 # SV Blue Dog: learning through an autonomous sailboat
 
+**Design phase:** Introduction · [Development plan](development-plan.md)
+
 SV Blue Dog is my personal project to design and build a small autonomous sailboat that can travel from Bingen to buoy 16 near Stevenson and back without intervention, while I monitor it from shore. Longer term, I’d love to develop something capable of reaching Hawai‘i, as a separate mission with its own constraints. It brings together things I want to learn—sailing, desktop manufacturing and digital engineering—with the fun of building a complete robot that can look after itself on the water. The name comes from my blue heeler, Ozzy: another small, independent creature with plenty of energy and ideas of his own.
 
 I started this project because I wanted to explore the limits of autonomous sailing and desktop manufacturing. I wanted to learn about sailing, build something cool, and develop a complete system. Microtransat—the challenge of sending an autonomous sailing boat across the Atlantic—gave me an idea for something closer to home: an even more micro “trans-gorge” boat.

@@ -1,5 +1,7 @@
 # Passage time, reliability and failure analysis
 
+**Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
+
 A slower voyage demands more hours of successful unattended operation. I use passage estimates and the architecture to ask what can fail during that exposure, and how the boat should respond. This connects [preliminary design](development-plan.md#virtual-design) to the fault and endurance tests needed for [physical verification](development-plan.md#physical-validation).
 
 The finite Gorge round trip is the current design objective. I connect sailing progress, passage duration and reliability exposure to compare the chance of completing that mission. The sizing study now uses conservative aerodynamic assumptions for its primary case and re-solves controls under additional stresses. Passage times from those scenarios are conditional estimates, not measured endurance or demonstrated reliability; see the [current outcomes](results.md).
@@ -42,12 +44,10 @@ package Page_reliability_0 {
         filter @SysML::RequirementUsage;
         expose BlueDogRequirements::cruisePerformance;
         expose BlueDogRequirements::legProgress;
-        expose BlueDogRequirements::LegProgressCriterion;
         expose BlueDogReliability::VoyageReliabilityVerification;
         expose BlueDog::Architecture::missionContext::boat;
         metadata Layout about BlueDogRequirements::cruisePerformance { x = 0; y = 0; }
         metadata Layout about BlueDogRequirements::legProgress { x = 360; y = 0; }
-        metadata Layout about BlueDogRequirements::LegProgressCriterion { x = 0; y = 200; }
         metadata Layout about BlueDogReliability::VoyageReliabilityVerification { x = 360; y = 200; }
         metadata Layout about BlueDog::Architecture::missionContext::boat { x = 0; y = 400; }
     }
@@ -62,12 +62,10 @@ package Page_reliability_1 {
         filter @SysML::RequirementUsage;
         expose BlueDogRequirements::missionReliability;
         expose BlueDogRequirements::missionSuccessProbability;
-        expose BlueDogRequirements::MissionReliabilityCriterion;
         expose BlueDogReliability::VoyageReliabilityVerification;
         expose BlueDog::Architecture::missionContext::boat;
         metadata Layout about BlueDogRequirements::missionReliability { x = 0; y = 0; }
         metadata Layout about BlueDogRequirements::missionSuccessProbability { x = 360; y = 0; }
-        metadata Layout about BlueDogRequirements::MissionReliabilityCriterion { x = 0; y = 200; }
         metadata Layout about BlueDogReliability::VoyageReliabilityVerification { x = 360; y = 200; }
         metadata Layout about BlueDog::Architecture::missionContext::boat { x = 0; y = 400; }
     }

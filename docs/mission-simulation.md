@@ -1,5 +1,7 @@
 # Sailing the challenge before building the boat
 
+**Design phase:** Mission and requirements · SRR · [Development plan](development-plan.md)
+
 [Previous: development plan](development-plan.md) · [Next: sizing results](results.md)
 
 This is the mission-level loop at the top of our [development V](development-plan.md#mission-definition). Its inputs are the challenge course, a candidate boat, weather histories and traffic scenarios. Its output is a voyage history: where the boat went, what it encountered, how its battery changed, and why the attempt finished or stopped. I use it to discover missing requirements and compare design choices before committing to hardware.
@@ -36,7 +38,11 @@ SysML owns the ordered gates and outcome calculation. Python supplies the observ
 
 The controller evaluates sailing headings and a depowered option. Depowering still allows the boat to drift with the current; it does not create free station keeping. Maneuvers cost time and energy. The controller updates on its own clock; a smaller integration step does not increase its update rate or shorten a maneuver. Motion steps end at control updates, maneuver completion, weather changes and injected events. Both pieces of the drift-then-sail maneuver must remain in the chart domain. A communications outage does not stop autonomous execution. Operator intervention or motor use ends qualification for that attempt.
 
-There is no 72-hour challenge deadline and no daily energy-balance requirement. A finite trip can finish with less stored energy than it started with. It must still retain the configured recovery reserve. The simulation horizon is a computational setting: reaching it produces a censored result, not a failed challenge deadline.
+There is no 72-hour challenge deadline and no daily energy-balance requirement. A finite trip can finish with less stored energy than it started with. It must still protect the energy needed to reach a suitable shore retrieval location from its current position. The simulation horizon is a computational setting: reaching it produces a censored result, not a failed challenge deadline.
+
+Recovery now has an explicit route-planning and execution interface. The [native recovery calculation](../models/libraries/marine/recovery.sysml) resolves along-track and cross-current effects on powered transit; the [Python planner](../tools/boat_analysis/mission/recovery.py) searches chart-clear approaches and accumulates energy with an explicit uncertainty allowance. Capsized performance must be supplied separately. The mission engine can trigger recovery before continued sailing would consume its reserve, terminate qualification, and record the powered transit independently of challenge completion.
+
+The recovery regression scenarios use synthetic pickup locations and propulsion capabilities. They demonstrate the implementation, not suitable real-world refuges. The published historical campaigns have not yet been rerun with assessed shore locations. Reaching a modeled water approach also does not prove final grounding, shore access or vessel retention. Those need their own evidence. During recovery, traffic truth remains in the consequence calculation even when onboard traffic sensing is unavailable; we do not credit an independent backup detector that has not been designed.
 
 ## Connecting a sizing candidate
 

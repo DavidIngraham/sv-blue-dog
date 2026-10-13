@@ -1,5 +1,7 @@
 # Establishing operating constraints
 
+**Design phase:** Mission and requirements · SRR · [Development plan](development-plan.md)
+
 Before I size the boat around a convenient rule of thumb, I need to understand where and how it will operate. At [mission definition](development-plan.md#mission-definition), I bring together the intended waters, traffic, operating modes and source research. The result should tell me which obligations affect the design and which questions must be resolved before a [water trial](development-plan.md#physical-validation).
 
 We distinguish rules of a voluntary challenge, jurisdiction-specific operating obligations and our own engineering allocations. A size threshold quoted in a race discussion does not by itself establish vessel classification or permission to operate.

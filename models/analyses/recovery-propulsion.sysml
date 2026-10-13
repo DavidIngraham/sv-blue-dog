@@ -13,7 +13,7 @@ package RecoveryPropulsionTrade {
 | Criterion / requirement | Submerged water propeller | Above-water air propeller | Evidence needed |
 | --- | --- | --- | --- |
 | Thrust versus energy, R-001/R-002 | Dense working fluid favors compact low-speed thrust; actual losses depend on diameter, pitch, immersion and installation | Lower density drives greater disk area or induced velocity for comparable static thrust; battery demand may dominate | Hull tow test, installed thrust/power curves and recovery run |
-| Milfoil, N-053–N-056 | Blades, shaft and guard can wrap or collect stems; a duct/guard is not automatically weed-proof | Rotor avoids submerged stems while upright, but hull/keel/rudder can still anchor the boat in vegetation | Same patch and snag tests, including restart after blockage |
+| Milfoil, N-053â€“N-056 | Blades, shaft and guard can wrap or collect stems; a duct/guard is not automatically weed-proof | Rotor avoids submerged stems while upright, but hull/keel/rudder can still anchor the boat in vegetation | Same patch and snag tests, including restart after blockage |
 | Sailing drag and packaging | Submerged installation adds drag; folding/retracting concepts introduce moving parts and new failure modes | Adds windage, deck volume, possible sail interference and elevated mass | Coast/tow drag, wind-load and sail-clearance measurements |
 | Capsize and waves, N-051/N-052 | Can ventilate or leave water while heeled; immersed motor/shaft sealing is central | Rotor can strike water, guard or rig during heel/capsize; restart while wet must be qualified | Heel clearances, disabled-rotor immersion, self-righting and post-capsize restart |
 | Steering and reverse | Rudder-in-slipstream or steerable pod possible; reverse depends on selected propeller/drive | Air rudder, vectored thrust or differential thrust may be needed at low boat speed; ordinary air propellers are not assumed efficient in reverse | Low-speed turning, stopping and control-loss tests |
@@ -32,6 +32,9 @@ package RecoveryPropulsionTrade {
         attribute overallEfficiency : Real;
         attribute essentialPower : PowerValue;
         attribute availableReserve : EnergyValue;
+        attribute poweredDuration : TimeValue;
+        attribute essentialDuration : TimeValue;
+        attribute uncertaintyFactor : Real;
         attribute weedEvidenceAccepted : Boolean;
         attribute capsizeEvidenceAccepted : Boolean;
         attribute isolationEvidenceAccepted : Boolean;
@@ -52,11 +55,12 @@ package RecoveryPropulsionTrade {
             candidate.diskDiameter > 0 [m] and candidate.density > 0 [kg/m^3] and
             candidate.axialInflow >= 0 [m/s] and candidate.requiredThrust >= 0 [N] and
             candidate.overallEfficiency > 0 and candidate.overallEfficiency <= 1 and
-            candidate.essentialPower > 0 [W] and candidate.availableReserve >= 0 [J]
+            candidate.essentialPower > 0 [W] and candidate.availableReserve >= 0 [J] and
+            candidate.poweredDuration > 0 [s] and candidate.essentialDuration >= candidate.poweredDuration and candidate.uncertaintyFactor >= 1
         }
         out attribute idealPower : PowerValue = MarinePropulsion::IdealAxialDiskPower(thrustN, diameterM, rho, speed) * 1 [W];
         out attribute electricalPower : PowerValue = idealPower / candidate.overallEfficiency;
-        return requiredReserve : EnergyValue = BlueDogRequirements::RecoveryReserveDemand(electricalPower, candidate.essentialPower);
+        return requiredReserve : EnergyValue = BlueDogRequirements::RecoveryReserveDemand(electricalPower, candidate.essentialPower, candidate.poweredDuration, candidate.essentialDuration, candidate.uncertaintyFactor);
         out attribute reserveMargin : EnergyValue = candidate.availableReserve - requiredReserve;
         out attribute energyFits : Boolean = reserveMargin >= 0 [J];
         out attribute qualificationEvidenceComplete : Boolean = candidate.weedEvidenceAccepted and candidate.capsizeEvidenceAccepted and candidate.isolationEvidenceAccepted and candidate.thrustEvidenceAccepted;
@@ -72,6 +76,10 @@ package RecoveryPropulsionTrade {
         attribute :>> overallEfficiency default = 0.5;
         attribute :>> essentialPower default = 10 [W];
         attribute :>> availableReserve default = 360000 [J];
+        comment syntheticExposure /* Example route durations only; not a challenge allocation. */
+        attribute :>> poweredDuration default = 1800 [s];
+        attribute :>> essentialDuration default = 7200 [s];
+        attribute :>> uncertaintyFactor default = 1.2;
         attribute :>> weedEvidenceAccepted default = false;
         attribute :>> capsizeEvidenceAccepted default = false;
         attribute :>> isolationEvidenceAccepted default = false;
@@ -86,6 +94,10 @@ package RecoveryPropulsionTrade {
         attribute :>> overallEfficiency default = 0.5;
         attribute :>> essentialPower default = 10 [W];
         attribute :>> availableReserve default = 360000 [J];
+        comment syntheticExposure /* Example route durations only; not a challenge allocation. */
+        attribute :>> poweredDuration default = 1800 [s];
+        attribute :>> essentialDuration default = 7200 [s];
+        attribute :>> uncertaintyFactor default = 1.2;
         attribute :>> weedEvidenceAccepted default = false;
         attribute :>> capsizeEvidenceAccepted default = false;
         attribute :>> isolationEvidenceAccepted default = false;

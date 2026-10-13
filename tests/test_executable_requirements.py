@@ -38,10 +38,14 @@ def test_reset_deadline(evaluate, value, expected):
 @pytest.mark.parametrize("change, expected", [
     ({}, (0, 'holds')), ({'reserveEnergy': '302399 [J]'}, (1, 'fails')),
     ({'motorPower': '-100 [W]'}, (1, 'fails')),
-], ids=['boundary', 'insufficient-reserve', 'negative-power'])
+    ({'routeFeasible': 'false'}, (1, 'fails')),
+    ({'poweredDuration': '3600 [s]'}, (1, 'fails')),
+    ({'essentialDuration': '1700 [s]'}, (1, 'fails')),
+    ({'uncertaintyFactor': '0.9'}, (1, 'fails')),
+], ids=['boundary', 'insufficient-reserve', 'negative-power', 'infeasible-route', 'longer-route', 'missing-essential-exposure', 'discounted-uncertainty'])
 def test_recovery_energy_boundary(evaluate, change, expected):
     # 1.2 * (100 W * 1800 s + 10 W * 7200 s) = 302400 J.
-    inputs = dict(motorPower='100 [W]', essentialPower='10 [W]', reserveEnergy='302400 [J]')
+    inputs = dict(motorPower='100 [W]', essentialPower='10 [W]', reserveEnergy='302400 [J]', poweredDuration='1800 [s]', essentialDuration='7200 [s]', uncertaintyFactor='1.2', routeFeasible='true')
     assert evaluate('RecoveryEnergy', inputs | change) == expected
 
 

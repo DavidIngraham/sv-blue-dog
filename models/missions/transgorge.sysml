@@ -3,15 +3,18 @@ package GorgeChallenge {
      * Inspired by the structure of the Microtransat rules:
      * https://microtransat.org/content.php?p=rules&top=rules
      * This is a separate project challenge, not a Microtransat entry or endorsement.
-     * No vessel architecture, hull size, or communications technology is prescribed.
+     * Vessel architecture and communications technology are unrestricted; overall length is limited to 1.2 m.
      * The Gorge is the proving ground for a longer-term voyage toward Hawaii.
      * Marker-referenced virtual gates are defined in TransGorgeCourse.
      * There is no completion deadline. The vehicle defines candidate environmental qualification profiles; no dam passage is permitted.
      */
     private import RequirementDerivation::*;
+    private import ISQ::*;
+    private import SI::*;
+    attribute maximumOverallLength : LengthValue = 1.2 [m];
     requirement def <'C-000'> TransGorgeChallenge {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall complete the Trans-Gorge challenge under C-001 and C-003 through C-009. */
+        doc /* The vessel shall complete the Trans-Gorge challenge under C-001 and C-003 through C-027. */
         metadata rationale : ModelingMetadata::Rationale { text = "One Bingen–Stevenson–Bingen circuit defines the finite challenge. Repeated circuits are a separate future endurance objective."; }
     }
     requirement transGorgeChallenge : TransGorgeChallenge;
@@ -30,7 +33,7 @@ package GorgeChallenge {
     requirement def <'C-003'> UnassistedAttempt {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* A qualifying attempt shall complete the round trip without operator intervention. */
-        comment conditions /* Passive live monitoring is permitted. Remote emergency abort or manual control disqualifies the attempt as unassisted. */
+        comment conditions /* Passive live monitoring and autonomous polling of weather services are permitted. Any operator-supplied update, remote emergency abort or manual control ends qualification. Weather data must be obtained by the system without manual operator submission. */
         comment restartConditions /* After intervention, a new qualifying attempt begins only with a new downstream crossing of the departure gate. Previous partial progress does not transfer. */
     }
     requirement def <'C-004'> SailingPropulsion {
@@ -41,15 +44,15 @@ package GorgeChallenge {
     }
     requirement def <'C-005'> LiveObservation {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall provide live monitoring with autonomous operation and retained telemetry across communication outages. */
+        doc /* The vessel shall deliver position, operating mode and health updates at intervals no greater than 30 seconds while the monitoring link is available. */
         comment conditions /* Monitoring-link loss shall not interrupt autonomous mission execution. Retained telemetry shall be transmitted after contact returns. */
-        metadata issue : ModelingMetadata::Issue { text = "Challenge-level coverage, update rate and outage-retention criteria remain to be agreed; vehicle design targets do not amend the challenge automatically."; }
+        metadata issue : ModelingMetadata::Issue { text = "LTE-M-class throughput is a provisional vehicle design assumption, not a mandated challenge technology. End-to-end delivery qualification and stale-data presentation are allocated to the vehicle."; }
     }
     requirement def <'C-006'> EmergencyIntervention {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall permit remote emergency abort or manual control when a command link is available. */
         comment conditions /* Use disqualifies the attempt as unassisted. */
-        metadata issue : ModelingMetadata::Issue { text = "Challenge-level abort and recovery procedures remain to be agreed."; }
+        metadata issue : ModelingMetadata::Issue { text = "Owner-approved policy: autonomous safety abort does not wait for operator contact. Recovery may use motor propulsion; operator-directed relocation or motor-sailing after abort never restores qualification."; }
     }
     requirement courseCompletion : CourseCompletion;
     requirement repeatedOperation : RepeatedOperation;
@@ -126,5 +129,205 @@ package GorgeChallenge {
         metadata rationale : ModelingMetadata::Rationale { text = "This rule is explicitly included in C-000; C-002 retains its objective-only status."; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> emergencyIntervention;
+    }
+    requirement def <'C-010'> OverallLength {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel overall length shall not exceed 1.2 m. */
+        attribute measuredOverallLength : LengthValue;
+        require constraint lengthLimit { measuredOverallLength > 0 [m] and measuredOverallLength <= maximumOverallLength }
+        comment conditions /* Measure maximum fore-and-aft extent, including rudders, rig projections, antennas and other equipment, across normal operating configurations. Hull arrangement is unrestricted. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Half the Microtransat 2.4 m overall-length entry limit; owner-selected challenge constraint."; }
+    }
+    requirement overallLength : OverallLength;
+    #derivation connection deriveOverallLength {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> overallLength;
+    }
+    requirement def <'C-011'> TrafficNonInterference {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall avoid impeding other waterway users. */
+        comment conditions /* Safety takes precedence over course progress and qualification. Encounter criteria must account for commercial traffic, non-AIS craft and people in the water. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Safe coexistence is a challenge obligation, not an optional vehicle trade."; }
+    }
+    requirement trafficNonInterference : TrafficNonInterference;
+    #derivation connection deriveTrafficNonInterference {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> trafficNonInterference;
+    }
+    requirement def <'C-012'> SafetyCapabilityAbort {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall autonomously terminate qualification when a required safety capability is lost. */
+        comment conditions /* A demonstrated backup preserving the function permits continuation. Darkness alone is not a fault. Fog triggers this rule when it compromises required capability. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Abort is based on capability, not individual component failure."; }
+    }
+    requirement safetyCapabilityAbort : SafetyCapabilityAbort;
+    #derivation connection deriveSafetyCapabilityAbort {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> safetyCapabilityAbort;
+    }
+    requirement def <'C-013'> AutonomousShoreRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Following a safety abort, the vessel shall autonomously initiate recovery toward a suitable shore-accessible retrieval location. */
+        comment conditions /* Do not wait for operator intervention or communications. Select a viable route based on remaining capabilities. Intentional grounding at a suitable accessible shore is permitted. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Owner-selected recovery policy; residual risk of movement after traffic-sensing failure requires explicit analysis and review, not assumed acceptance."; }
+    }
+    requirement autonomousShoreRecovery : AutonomousShoreRecovery;
+    #derivation connection deriveAutonomousShoreRecovery {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> autonomousShoreRecovery;
+    }
+    requirement def <'C-014'> AbortAlert {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall attempt immediate transmission of an abort alert when an abort is declared. */
+        comment conditions /* Queue the alert while communications are unavailable and transmit when contact returns. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Operator awareness supports shore retrieval without being a prerequisite for recovery."; }
+    }
+    requirement abortAlert : AbortAlert;
+    #derivation connection deriveAbortAlert {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> abortAlert;
+    }
+    requirement def <'C-015'> NoLittering {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall support recovery without abandonment of the vessel or its major components in the waterway. */
+        comment conditions /* Apply flotation, retention and post-capsize recovery obligations C-016 through C-018. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Owner intent: no littering. This is a recoverability obligation, not a guarantee against every conceivable casualty."; }
+    }
+    requirement noLittering : NoLittering;
+    #derivation connection deriveNoLittering {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> noLittering;
+    }
+    requirement def <'C-016'> CasualtyFlotation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall remain afloat following capsize or hull flooding. */
+        comment conditions /* Demonstrate in the declared casualty qualification conditions for the interval needed to execute shore recovery. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Derived from recoverability; casualty definition and exposure allocations require SRR review."; }
+    }
+    requirement casualtyFlotation : CasualtyFlotation;
+    #derivation connection deriveCasualtyFlotation {
+        end #original source ::> noLittering;
+        end #derive target ::> casualtyFlotation;
+    }
+    requirement def <'C-017'> MajorComponentRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall retain its rig, ballast and battery following capsize or hull flooding. */
+        comment conditions /* Use the same casualty qualification conditions as C-016. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Retained major components prevent debris and support retrieval."; }
+    }
+    requirement majorComponentRetention : MajorComponentRetention;
+    #derivation connection deriveMajorComponentRetention {
+        end #original source ::> noLittering;
+        end #derive target ::> majorComponentRetention;
+    }
+    requirement def <'C-018'> CapsizeRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall demonstrate autonomous travel to a suitable shore retrieval location following capsize without communications. */
+        comment conditions /* Self-righting is not prescribed; inverted recovery is permitted. Auxiliary propulsion ends qualification. Demonstrate against declared course recovery conditions. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Limp recovery is the required outcome; hull architecture remains open."; }
+    }
+    requirement capsizeRecovery : CapsizeRecovery;
+    #derivation connection deriveCapsizeRecovery {
+        end #original source ::> noLittering;
+        end #derive target ::> capsizeRecovery;
+    }
+    requirement def <'C-019'> UnattachedPassage {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* A qualifying attempt shall remain afloat and unattached throughout the scored passage. */
+        comment conditions /* Grounding, anchoring, attaching to shore or entering designated refuge ends qualification. Safe waiting under sail is permitted and counts toward elapsed exposure. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Refuge does not preserve partial qualifying progress."; }
+    }
+    requirement unattachedPassage : UnattachedPassage;
+    #derivation connection deriveUnattachedPassage {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> unattachedPassage;
+    }
+    requirement def <'C-020'> OutageAutonomy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Loss of communications alone shall not terminate an otherwise safe qualifying attempt. */
+        comment conditions /* Continue navigation and retain telemetry onboard; replay retained data after reconnection. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Onboard safety and recovery do not depend on contact."; }
+    }
+    requirement communicationOutageAutonomy : OutageAutonomy;
+    #derivation connection deriveOutageAutonomy {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> communicationOutageAutonomy;
+    }
+    requirement def <'C-021'> ForecastAdmission {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* Launch authorization shall require a forecast window assessed to support the complete round trip with waiting and recovery margins. */
+        comment conditions /* Use the declared mission configuration and forecast-conditioned scenarios. No fixed completion deadline applies. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Whole-mission assessment replaces an arbitrary sailing-speed floor."; }
+    }
+    requirement forecastAdmission : ForecastAdmission;
+    #derivation connection deriveForecastAdmission {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> forecastAdmission;
+    }
+    requirement def <'C-022'> WeatherOutageContinuation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall permit continued qualification during weather-service outage only while the last forecast remains applicable and required safety capabilities remain available. */
+        comment conditions /* Forecast applicability must cover remaining passage and recovery options; assess against observations. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Loss of data access alone is not an abort trigger."; }
+    }
+    requirement weatherOutageContinuation : WeatherOutageContinuation;
+    #derivation connection deriveWeatherOutageContinuation {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> weatherOutageContinuation;
+    }
+    requirement def <'C-023'> CourseRecoveryReserve {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall protect sufficient energy to reach a suitable shore retrieval location from its current course position. */
+        comment conditions /* Account for adverse current, essential onboard loads and uncertainty along the recovery route. No fixed motor-runtime reserve is substituted for route analysis. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Reserve follows the course and available recovery destinations."; }
+    }
+    requirement courseRecoveryReserve : CourseRecoveryReserve;
+    #derivation connection deriveCourseRecoveryReserve {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> courseRecoveryReserve;
+    }
+    requirement def <'C-024'> ReserveAbort {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall initiate autonomous recovery before further mission continuation would compromise the course-dependent recovery reserve. */
+        comment conditions /* Include the decision and maneuver margin needed to enter recovery. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Protecting reserve requires timely action, not only energy monitoring."; }
+    }
+    requirement reserveAbort : ReserveAbort;
+    #derivation connection deriveReserveAbort {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> reserveAbort;
+    }
+    requirement def <'C-025'> NightOperation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall support qualifying operation in darkness. */
+        comment conditions /* Required navigation, traffic safety and observation functions remain applicable. Nightfall alone does not require refuge. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Passage duration is uncertain and may include overnight sailing."; }
+    }
+    requirement nightOperation : NightOperation;
+    #derivation connection deriveNightOperation {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> nightOperation;
+    }
+    requirement def <'C-026'> AbortPersistence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* An aborted attempt shall remain disqualified until a new attempt begins at the departure gate. */
+        comment conditions /* No autonomous resumption from refuge. Operator-commanded relocation is permitted outside qualification. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Recovery cannot silently resume a partial challenge."; }
+    }
+    requirement abortPersistence : AbortPersistence;
+    #derivation connection deriveAbortPersistence {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> abortPersistence;
+    }
+    requirement def <'C-027'> RecoveryConspicuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
+        doc /* The vessel shall present conspicuous recovery indications during autonomous shore recovery. */
+        comment conditions /* Allocate indications consistently with applicable navigation signals; no light or sound configuration is prescribed here. */
+        metadata rationale : ModelingMetadata::Rationale { text = "Prompt recovery and operator alerts do not replace visibility to other users."; }
+    }
+    requirement recoveryConspicuity : RecoveryConspicuity;
+    #derivation connection deriveRecoveryConspicuity {
+        end #original source ::> transGorgeChallenge;
+        end #derive target ::> recoveryConspicuity;
     }
 }

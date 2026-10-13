@@ -104,7 +104,7 @@ def test_finite_passage_projection_preserves_interrupted_status_and_lineage():
     assert (ROOT/'models/evidence/finite-passage-sizing.sysml').read_text()==model_source(directory,'BlueDogFinitePassageSizing')
 
 
-def test_finite_passage_baseline_passes_fresh_nominal_screens():
+def test_larger_archived_baseline_is_ineligible_under_current_challenge():
     import sys
     if sys.platform!='linux':
         pytest.skip('Native C adapter uses Linux/GCC')
@@ -112,7 +112,9 @@ def test_finite_passage_baseline_passes_fresh_nominal_screens():
     from tools.boat_analysis.optimization.search import Problem
     record=run_record(ROOT/'evidence/runs/2026-10-12-finite-passage','sizing-continuation.json')
     p=Problem();z=np.array(record['smallestFeasibleZ'])
-    assert p.feasible(z)
+    assert not p.feasible(z)
     result=p.evaluate(z)
+    assert result['envelope']['sweptLengthM'] > p.overall_length_limit_m
+    assert result['structure']['overallLengthMargin'] < 0
     assert result['concept']['voyageEnergyMargin']>-1e-4
     assert result['concept']['installationVolumeMargin']>0

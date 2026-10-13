@@ -21,7 +21,10 @@ package BlueDogEnergy {
         attribute initialEnergy : EnergyValue;
         attribute recoveryMotorPower : PowerValue;
         attribute recoveryEssentialPower : PowerValue;
-        attribute reserve : EnergyValue = BlueDogRequirements::RecoveryReserveDemand(recoveryMotorPower, recoveryEssentialPower);
+        attribute recoveryPoweredDuration : TimeValue;
+        attribute recoveryEssentialDuration : TimeValue;
+        attribute recoveryUncertaintyFactor : Real;
+        attribute reserve : EnergyValue = BlueDogRequirements::RecoveryReserveDemand(recoveryMotorPower, recoveryEssentialPower, recoveryPoweredDuration, recoveryEssentialDuration, recoveryUncertaintyFactor);
         attribute dayCount : Integer;
         attribute evidenceAccepted : Boolean;
         doc /* evidenceAccepted requires the review record defined by BlueDogDesignDecisions::energyEvidenceAcceptance.
@@ -65,6 +68,7 @@ package BlueDogEnergy {
             count > 0 and scenario.dayCount > 0 and scenario.battery.valid and
             scenario.initialEnergy > 0 [J] and scenario.initialEnergy <= scenario.battery.capacity and
             scenario.recoveryMotorPower > 0 [W] and scenario.recoveryEssentialPower > 0 [W] and
+            scenario.recoveryPoweredDuration > 0 [s] and scenario.recoveryEssentialDuration >= scenario.recoveryPoweredDuration and scenario.recoveryUncertaintyFactor >= 1 and
             scenario.timeline->ControlFunctions::forAll { in interval : Interval; interval.valid };
         assert constraint validInputs { inputsValid }
         out attribute campaignDuration : TimeValue = TimeAt(scenario, count);

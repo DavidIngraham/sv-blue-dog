@@ -20,12 +20,14 @@ def test_formal_refinements_are_distinct_from_design_dependencies(relationship_r
         ('RepeatableCycleBalanceCriterion', 'repeatableCycleBalance'),
         ('PeakSupplyCapabilityCriterion', 'peakSupplyCapability'),
         ('HarvestCampaignCoverageCriterion', 'harvestCampaignCoverage'),
-        ('LegProgressCriterion', 'legProgress'), ('PassageDurationCriterion', 'passageDuration'),
-        ('MissionReliabilityCriterion', 'missionSuccessProbability'), ('FailureRateCriterion', 'failureRateBudget'),
+        ('PassageDurationCriterion', 'passageDuration'),
     ]:
         assert f'| {source} | {target} |' in refinements
         assert f'| {source} | {target} |' not in dependencies
-    # Numerical screening is a refinement; merely assessing a requirement is not.
+    for source, target in [('LegProgressCriterion', 'legProgress'), ('MissionReliabilityCriterion', 'missionSuccessProbability'), ('FailureRateCriterion', 'failureRateBudget')]:
+        assert f'| {source} | {target} |' in dependencies
+        assert f'| {source} | {target} |' not in refinements
+    # Binding numerical criteria refine; provisional study comparisons do not.
     assert 'CruiseReliability |' not in refinements
     assert 'EnergyEvidenceReadinessCriterion |' not in refinements
     assert '| recoveryPropulsion | safeRecovery |' in dependencies
@@ -35,8 +37,8 @@ def test_formal_refinements_are_distinct_from_design_dependencies(relationship_r
 @pytest.mark.parametrize('slug,kinds', [
     ('mission-semantics', {'derive', 'refine', 'satisfy', 'verify'}),
     ('energy-semantics', {'derive', 'refine', 'satisfy', 'verify'}),
-    ('cruise-semantics', {'derive', 'refine', 'satisfy', 'verify'}),
-    ('reliability-semantics', {'derive', 'refine', 'satisfy', 'verify'}),
+    ('cruise-semantics', {'derive', 'satisfy', 'verify'}),
+    ('reliability-semantics', {'derive', 'satisfy', 'verify'}),
     ('manufacturing-semantics', {'satisfy', 'verify'}),
     ('weed-semantics', {'derive', 'satisfy', 'verify'}),
 ])
@@ -92,3 +94,16 @@ def test_authored_pages_contain_views_not_copied_diagrams(rendered_site):
         assert rendered.count('```mermaid') == len(views) + len(sketches)
         for block in views:
             assert f'%% {block.info.split()[1]} ' in rendered
+
+
+def test_srr_views_stay_scoped_to_review_topics(rendered_site):
+    text = (rendered_site / 'imports/docs/srr-review.md').read_text(encoding='utf-8')
+    assert len(re.findall(r'^## \d+ · ', text, re.M)) == 14
+    diagrams = re.findall(r'```mermaid\n(.*?)```', text, re.S)
+    for target, count in [('SRR_Qualification::scope', 6), ('SRR_Safety::scope', 6), ('SRR_Recovery::scope', 5)]:
+        diagram = next(d for d in diagrams if f'%% {target} ' in d)
+        assert len(re.findall(r'^  n\d+[(\[]', diagram, re.M)) == count
+        assert 'flowchart BT' in diagram
+    assert 'C-018 CapsizeRecovery' in text
+    assert '1.2 m' in text
+    assert '250 × 250 × 250 mm' in text

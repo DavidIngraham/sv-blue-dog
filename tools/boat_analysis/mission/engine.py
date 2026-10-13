@@ -5,7 +5,7 @@ It is a conceptual guidance policy, not ArduSail or a validated collision system
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 import json
 import math
 from pathlib import Path
@@ -46,13 +46,16 @@ class Result:
     physically_validated: bool = False
     outside_performance_coverage_seconds: float = 0.
     surface_summary: dict = field(default_factory=dict)
+    recovery_summary: dict = field(default_factory=dict)
     model_scope: str = 'Conceptual polar and point-mass guidance; wave dynamics and full navigation-rule compliance not verified'
 
 
 def evaluate_outcome(*facts):
     """Execute the authoritative SysML classifier on observed simulation facts."""
-    if len(facts) != 7:
-        raise ValueError('MissionOutcome requires seven Boolean facts')
+    if len(facts) == 7:
+        facts = (*facts, False)
+    if len(facts) != 8:
+        raise ValueError('MissionOutcome requires eight Boolean facts (legacy calls imply no safety abort)')
     expression = ','.join('true' if value else 'false' for value in facts)
     code = ('package MissionObservation { analysis Evaluate { out attribute result : ScalarValues::String = '
             'BlueDogMissionSimulation::MissionOutcome(' + expression + '); } }')
@@ -72,7 +75,7 @@ def direction(route, distance):
 
 
 def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), seed=0,
-             stochastic=False, save_every=10, classify=evaluate_outcome):
+             stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None):
     dt, hours, forecast, lookahead, maneuver_time, _ = inputs['time']
     control_period = inputs['controlPeriodSeconds']
     if not 0 <= maneuver_time <= control_period or control_period <= 0:
@@ -92,7 +95,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         if wave_effects is not None and wave_performance is None:
             speeds=wave_effects.evaluate(wind,90-state.wind_from_deg+np.asarray(angles),speeds)
         return speeds
-    if dt <= 0 or hours <= 0 or not 0 < reserve < stored <= capacity or not 0 < discharge <= 1:
+    if dt <= 0 or hours <= 0 or not 0 < stored <= capacity or (recovery_planner is None and not 0 < reserve < stored) or not 0 < discharge <= 1:
         raise ValueError('Invalid mission time or energy inputs')
     if not water.covers(route):
         raise ValueError('Reference route lies outside permitted analysis domain')
@@ -126,6 +129,9 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     leg, position, heading = downstream, start, None
     phase, seconds, distance, minimum = 0, 0., 0., stored
     crossing_log, history, event_log = [], [], []
+    recovery_summary = {'outcome':'not_exercised', 'modelAvailable':recovery_planner is not None}
+    safety_abort = False
+    reserve_protected = True
     traffic_seen = set()
     event_list = sorted(events, key=lambda e:e.seconds)
     event_index, comms_until, sensor_until = 0, -1., -1.
@@ -134,15 +140,17 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     prepare(water)
     def result(outcome, cause):
         kinds = {event['kind'] for event in event_log}
-        verdict = classify(phase == len(sequence), 'operator_intervention' in kinds,
-                           'motor_use' in kinds, outcome == 'safety_violation',
-                           outcome == 'incomplete', minimum >= reserve, outcome == 'censored')
+        facts = (phase == len(sequence), 'operator_intervention' in kinds,
+                 'motor_use' in kinds, outcome == 'safety_violation',
+                 outcome == 'incomplete', reserve_protected, outcome == 'censored')
+        verdict = classify(*facts, True) if safety_abort else classify(*facts)
         terminal = [seconds,*position,stored,cause,seconds>=comms_until]
         if history and history[-1][0] == seconds:
             history[-1] = terminal
         else:
             history.append(terminal)
         observed=Result(verdict,cause,seconds,crossing_log,history,event_log,minimum,distance)
+        observed.recovery_summary = recovery_summary
         observed.outside_performance_coverage_seconds=outside_coverage
         if performance:observed.model_scope=inputs['performance']['scope']
         if wave_effects is not None:
@@ -150,6 +158,37 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             observed.surface_summary=wave_summary
             observed.model_scope += ('; cached cycle-averaged sailing balance with linear wave response' if wave_performance is not None else '; directional wave resistance sensitivity and geometric contact screens')
         return observed
+    def current_at(point, time):
+        return direction(route, route.project(Point(point)))*weather.at(time).current_mps
+
+    def abort(cause, capsized=False, recover=True):
+        nonlocal safety_abort, recovery_summary, seconds, stored, position, minimum, distance
+        from .recovery import execute_recovery
+        safety_abort = True
+        event_log.append({'seconds':seconds, 'kind':'safety_abort', 'cause':cause})
+        event_log.append({'seconds':seconds, 'kind':'abort_alert_attempt' if seconds >= comms_until else 'abort_alert_queued'})
+        if not recover:
+            recovery_summary = {'outcome':'awaiting_operator_retrieval_or_relocation'}
+            return result('disqualified', cause)
+        if recovery_planner is None:
+            recovery_summary = {'outcome':'recovery_model_unavailable'}
+            return result('disqualified', cause)
+        start_position = position.copy()
+        recovery = execute_recovery(recovery_planner, position, seconds, stored, current_at,
+                                    capsized=capsized, dt=dt,
+                                    horizon_seconds=max(dt, hours*3600-seconds),
+                                    traffic=traffic, dimensions=inputs['dimensions'])
+        recovery_summary = asdict(recovery)
+        if recovery.history:
+            event_log.append({'seconds':seconds, 'kind':'motor_use'})
+        for row in recovery.history:
+            distance += float(np.linalg.norm(np.asarray(row[1:3])-start_position))
+            start_position = np.asarray(row[1:3])
+            history.append([*row, row[0]>=comms_until])
+        seconds, stored, position = recovery.seconds, recovery.energy_wh, np.asarray(recovery.position)
+        minimum = min(minimum, stored)
+        return result('safety_violation' if recovery.collision else 'disqualified', cause)
+
     step, next_control, turn_remaining = 0, 0., 0.
     while seconds < hours*3600:
         while event_index < len(event_list) and event_list[event_index].seconds <= seconds:
@@ -161,6 +200,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 comms_until = max(comms_until, seconds+event.duration)
             elif event.kind == 'wind_sensor_loss':
                 sensor_until = max(sensor_until, seconds+event.duration)
+            elif event.kind in ('safety_capability_loss', 'capsize', 'refuge_entry', 'grounding', 'anchoring', 'shore_attachment'):
+                return abort(event.kind, capsized=event.kind == 'capsize', recover=event.kind in ('safety_capability_loss', 'capsize'))
             elif event.kind == 'terminal_failure':
                 return result('incomplete','terminal_failure')
             elif event.kind != 'communications_loss':
@@ -168,6 +209,15 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         state = weather.at(seconds)
         nearest = route.project(Point(position))
         current = direction(route, nearest)*state.current_mps
+        if recovery_planner is not None:
+            plan = recovery_planner.plan(position, lambda p: current_at(p, seconds))
+            if plan is None:
+                return abort('no_modeled_recovery_route')
+            reserve = plan.reserve_wh
+            decision_allowance = (load/discharge)*control_period/3600 + maneuver_wh
+            if stored <= reserve+decision_allowance:
+                reserve_protected = stored >= reserve
+                return abort('course_recovery_reserve_trigger')
         if wave_effects is not None:wave_effects.update(seconds,position,current)
         if wave_performance is not None:
             trains=wave_effects.components if wave_effects is not None else []
@@ -232,7 +282,9 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             cost[~permitted] = math.inf
             choice = int(np.argmin(cost))
             if not math.isfinite(cost[choice]):
-                return result('incomplete','performance_model_outside_coverage' if performance and not performance.covered(state.wind_mps) else 'no_safe_control_in_controller_search')
+                if performance and not performance.covered(state.wind_mps):
+                    return result('incomplete','performance_model_outside_coverage')
+                return abort('no_safe_control_in_controller_search') if recovery_planner is not None else result('incomplete','no_safe_control_in_controller_search')
             heading = None if math.isnan(headings[choice]) else headings[choice]
             if turn[choice]:
                 turn_remaining = maneuver_time
@@ -240,7 +292,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 minimum = min(minimum,stored)
             next_control = seconds+control_period
         if stored < reserve:
-            return result('incomplete','recovery_reserve_reached')
+            reserve_protected = False
+            return abort('course_recovery_reserve_trigger') if recovery_planner is not None else result('incomplete','recovery_reserve_reached')
         boundaries = [dt, hours*3600-seconds, next_control-seconds,
                       (math.floor(seconds/3600)+1)*3600-seconds]
         if event_index < len(event_list):
@@ -284,11 +337,11 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             if not diagnostic['covered']:return result('incomplete','wave_model_outside_coverage')
         previous = position.copy(); endpoint = position+velocity*interval
         if not water.covers(LineString([previous,endpoint])):
-            return result('incomplete','held_command_leaves_chart_domain')
+            return abort('held_command_leaves_chart_domain') if recovery_planner is not None else result('incomplete','held_command_leaves_chart_domain')
         for actor in traffic:
             safe,_ = actor.assess(previous,np.array([endpoint]),seconds,interval,interval,inputs['dimensions'])
             if not safe[0]:
-                return result('incomplete','held_command_exhausts_traffic_margin')
+                return abort('held_command_exhausts_traffic_margin') if recovery_planner is not None else result('incomplete','held_command_exhausts_traffic_margin')
         position = endpoint
         if performance and not performance.covered(state.wind_mps):outside_coverage += interval
         if 'storage' in inputs:
@@ -303,7 +356,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             if actor.collides(previous,position,seconds-interval,interval,inputs['dimensions']):
                 return result('safety_violation','traffic_collision')
         if stored < reserve:
-            return result('incomplete','recovery_reserve_reached')
+            reserve_protected = False
+            return abort('course_recovery_reserve_trigger') if recovery_planner is not None else result('incomplete','recovery_reserve_reached')
         if phase < len(sequence):
             name, expected = sequence[phase]
             actual = crossing_direction(gates[name],last_off_line[phase],position)

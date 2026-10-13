@@ -1,5 +1,7 @@
 # Requirements: mission to implementation
 
+**Design phase:** Mission and requirements · SRR · [Development plan](development-plan.md)
+
 Six topic pages connect the mission goals to testable requirements and design obligations. Each contains related breakdowns with their upstream context, generated from the authoritative SysML model. Start with the topic relevant to the design decision you are making.
 
 ## [Mission, course completion and endurance](requirements/requirements-mission.md)
@@ -14,7 +16,7 @@ Autonomy turns the mission into onboard decisions. Navigation and wind observati
 
 The energy budget must support sailing continuously and retain a deliberate recovery capability. These threads separate energy awareness, sustained balance and the motor rules for a qualifying attempt.
 
-## [Environment, durability and self-righting](requirements/requirements-environment.md)
+## [Environment, durability and casualty recovery](requirements/requirements-environment.md)
 
 The Gorge and ocean environments set the loads and exposure conditions. The breakdown connects those environments to measurable limits, capsize recovery and weed tolerance.
 

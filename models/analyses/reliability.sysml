@@ -59,8 +59,9 @@ package BlueDogReliability {
         out attribute demonstratedReliabilityLowerBound : Real = if demonstrationApplicable ? OpenSysMLMathFunctions::exp(-zeroFailureUpperRate * voyageHours) else 0;
         out attribute demonstrationMet : Boolean = demonstrationApplicable and BlueDogRequirements::MissionReliabilityCriterion(demonstratedReliabilityLowerBound, 0.95);
         out attribute evidenceReady : Boolean = profile.profileEvidenceAccepted and profile.rateEvidenceAccepted and profile.constantHazardAccepted;
-        return modeledFeasible : Boolean = inputsValid and minimumProgressMet and durationMet and rateBudgetMet;
-        out attribute reliabilitySupported : Boolean = modeledFeasible and demonstrationMet and evidenceReady;
+        comment provisionalScreens /* minimumProgressMet is a legacy comparison and rateBudgetMet evaluates a provisional objective; neither constrains mission feasibility. */
+        return modeledFeasible : Boolean = inputsValid and durationMet;
+        out attribute reliabilitySupported : Boolean = modeledFeasible and rateBudgetMet and demonstrationMet and evidenceReady;
         objective feasibility { require constraint { modeledFeasible } }
     }
     verification def VoyageReliabilityVerification {

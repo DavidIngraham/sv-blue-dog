@@ -90,6 +90,8 @@ def test_diagram_preserves_expected_derivations(published_model):
         ('transGorgeChallenge', 'sailingPropulsion'),
         ('transGorgeChallenge', 'unassistedAttempt'),
     }
+    expected.update(('transGorgeChallenge', name) for name in ['overallLength', 'trafficNonInterference', 'safetyCapabilityAbort', 'autonomousShoreRecovery', 'abortAlert', 'noLittering', 'unattachedPassage', 'communicationOutageAutonomy', 'forecastAdmission', 'weatherOutageContinuation', 'courseRecoveryReserve', 'reserveAbort', 'nightOperation', 'abortPersistence', 'recoveryConspicuity'])
+    expected.update(('noLittering', name) for name in ['casualtyFlotation', 'majorComponentRetention', 'capsizeRecovery'])
     expected.update((r['parent'], r['usage']) for r in ATOMIC['leaves'])
     expected.update(tuple(edge) for edge in ATOMIC['shared_links'])
     assert set(published_model.edges) == expected
@@ -141,6 +143,7 @@ def test_register_preserves_ids_status_and_relationships(published_model):
     expected.update(['N-010', 'N-020', 'N-011', 'N-012', 'N-013', 'N-014', 'N-015', 'N-021', 'N-022', 'N-023', 'N-024', 'N-025', 'N-030', 'N-031', 'N-032', 'N-033', 'N-034', 'N-035', 'N-041', 'N-042', 'N-043', 'N-044', 'N-045', 'N-046', 'N-047', 'N-051', 'N-052', 'N-053', 'N-054', 'N-055', 'N-056'])
     expected.update(['E-008', 'E-009', 'R-003', 'R-004'])
     expected.update(r['id'] for r in ATOMIC['leaves'])
+    expected.update(f"C-{i:03d}" for i in range(10, 28))
     expected.update(ENERGY_IDS)
     expected.update(RELIABILITY_IDS)
     assert set(ids) == expected
@@ -182,7 +185,7 @@ def test_focused_views_cover_all_derivations(published_model, rendered_site):
 def test_statements_exclude_supporting_material(published_model):
     statement_rows = re.findall(r'^\| [A-Z]-\d+ \| \w+ \| open \| (.*?) \|$',
                                 published_model.markdown, re.M)
-    assert len(statement_rows) == 219
+    assert len(statement_rows) == 237
     assert all(len(text.split()) <= 45 for text in statement_rows)
     assert all('Verification uses' not in text and 'Aggregate requirement' not in text
                and 'Shared verification context' not in text for text in statement_rows)

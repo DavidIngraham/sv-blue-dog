@@ -1,5 +1,7 @@
 # Developing Blue Dog: a V with room to learn
 
+**Design phase:** Introduction · [Development plan](development-plan.md)
+
 The current development cycle targets one finite Gorge round trip. Hawaii and indefinite operation belong to future cycles with separately allocated constraints. At the virtual-design gate, compare passage performance and accumulated failure exposure together; physical tests must establish the load, control and reliability assumptions behind that comparison.
 
 I need a way to decide what to work on next without turning a personal boat project into a paperwork exercise. This plan starts with the sailing goals, the testbed and the gaps in current evidence. It connects each design decision to the simulation or experiment that could change it.

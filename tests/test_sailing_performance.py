@@ -97,7 +97,7 @@ def test_wind_strength_changes_required_ratio_not_a_predicted_polar(sailing):
     'attribute :>> maneuverRetention = 0;',
     'attribute :>> maneuverRetention = 1.01;',
     'attribute :>> allocatedTime = 0 [s];',
-    'attribute :>> minimumGroundVMG = 0.49 [m/s];',
+    'attribute :>> minimumGroundVMG = -0.01 [m/s];',
     'attribute :>> cleanPolarSpeed = 0 [m/s];',
     'attribute :>> distance = -1 [m];',
     'attribute :>> trueWindSpeed = 0 [m/s];',
@@ -154,3 +154,10 @@ def test_offshore_probe_is_duration_driven_and_unaccepted(run_model):
     v = {x['name']: x['value'] for x in report['checks'][0]['values']}
     assert number(v, 'requiredGroundVMG') == pytest.approx(4000000 / 2419200)
     assert v['performanceSupported'] == 'false'
+
+
+def test_progress_allocation_has_no_artificial_half_meter_per_second_floor(sailing):
+    code, values = sailing('attribute :>> minimumGroundVMG = 0.49 [m/s];')
+    assert code == 0
+    assert values['modeledFeasible'] == 'true'
+    assert values['performanceSupported'] == 'false'

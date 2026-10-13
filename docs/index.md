@@ -1,25 +1,19 @@
 # SV Blue Dog: the development series
 
+**Design phase:** Introduction · [Development plan](development-plan.md)
+
 Blue Dog is named after my blue heeler, Ozzy. I hope the vessel will share a little of that character: small, something like a dog, independently puttering around the surface of a river or the ocean.
 
-If you are new here, follow the engineering story first:
+The series follows the design phases in the left-hand project index. Start with the introduction, then follow the mission and requirements work into the design studies. The phases organize decisions; they do not imply that a review gate has been passed.
 
-1. [Why I started—and why I stalled](restarting-sv-blue-dog.md).
-2. [The route and the boat’s responsibilities](architecture.md).
-3. [A development plan with room to learn](development-plan.md).
-4. [What the current sizing study tells me](results.md).
-5. [How the coupled sizing works](sizing.md), then the rig, energy and recovery studies below.
-
-The matrix is a reference for returning readers. The [focused requirement views](requirements.md) are a lookup library, rather than additional chapters to read in order.
-
-| Part of the plan | Read | Decisions informed |
+| Phase | Read | What it informs |
 | --- | --- | --- |
-| [Mission definition and SRR](development-plan.md#mission-definition) | [Mission and architecture](architecture.md), [operating constraints](operating-constraints.md), [mission simulation](mission-simulation.md), [focused requirements](requirements.md) | Mission scope, operating scenarios, design obligations and intended responsibilities |
-| [Virtual design and PDR](development-plan.md#virtual-design) | [Coupled sizing](sizing.md), [current results](results.md), [sail trade](sail-trade.md), [energy](energy.md), [recovery propulsion](recovery-propulsion.md), [reliability](reliability.md) | Which concepts and assumptions warrant further development, and what early simulated behavior must be assessed |
-| [Detailed design and build readiness](development-plan.md#detailed-design) | [Manufacturing, structure and recovery](structures-and-recovery.md), equipment and interface views in [requirements](requirements.md) | Construction, component selection, integration details and the scope of a build release |
-| [Physical V&V and progression](development-plan.md#physical-validation) | Test methods and evidence needs in [energy](energy.md), [recovery propulsion](recovery-propulsion.md), [structures and recovery](structures-and-recovery.md), and [reliability](reliability.md) | What to measure, readiness for a bounded test, and what evidence could support progression |
-| [Model validation and feedback](development-plan.md#model-credibility) | [Wing analysis and experiments](sail-trade.md), [structural and recovery methods](structures-and-recovery.md), [energy characterization](energy.md) | Where predictions can be trusted and which assumptions need revision |
-| [Engineering record throughout](development-plan.md#engineering-record) | [Modeling method](methods/modeling.md), [authoring and publishing](publishing.md) | How requirements, rationale, configurations and evidence remain connected |
+| Introduction | [Why Blue Dog?](restarting-sv-blue-dog.md), [development plan](development-plan.md) | Motivation, the challenge and how the project progresses |
+| Mission and requirements · SRR | [Mission and architecture](architecture.md), [operating context](operating-constraints.md), [mission simulation](mission-simulation.md), [requirements](requirements.md), [SRR review](srr-review.md) | The mission baseline and assessable obligations |
+| Concept and preliminary design · PDR | [Sizing findings](results.md), [sizing method](sizing.md), [sail trade](sail-trade.md), [energy](energy.md), [recovery propulsion](recovery-propulsion.md), [reliability](reliability.md) | Candidate selection, tradeoffs and the evidence needed for detailed design |
+| Detailed design · CDR | [Manufacturing, structure and recovery](structures-and-recovery.md) | Construction and interface decisions; build readiness remains to be demonstrated |
+| Integration and validation · TRR and trials | [From virtual evidence to water trials](validation-plan.md) | Bench integration, physical correlation, trial readiness and progression |
+| Appendix | [Modeling method](methods/modeling.md), [publishing workflow](publishing.md), [SRR appendix](srr-appendix.md) | Tooling and traceability methods supporting every phase |
 
 These are recurring activities, not a completion checklist. An article can serve more than one stage, and a testbed can answer a focused question before the challenge vessel is ready for detailed design. Each article explains the question it addresses and the design decision it supports.
 

@@ -66,7 +66,7 @@ def test_positive_but_inadequate_progress_fails(cruise):
 
 def test_common_cause_rate_is_included(cruise):
     code, v = cruise('attribute :>> commonCauseRatePerHour = 0.01;')
-    assert code != 0
+    assert code == 0  # Provisional reliability objective does not reject a feasible passage.
     assert v['rateBudgetMet'] == 'false'
     assert float(v['modeledReliability']) < 0.90
 
@@ -112,3 +112,11 @@ def test_dfmea_starter_stays_open_and_has_real_links():
                   '| powerCommonCause | powerManagement |', '| powerCommonCause | failureRateBudget |',
                   '| motorUncommanded | challengeMotorInhibition |']:
         assert trace in table
+
+
+def test_slow_progress_is_allowed_with_sufficient_qualified_exposure(cruise):
+    code, v = cruise('part redefines upstream { attribute :>> waterVMG = 2.4 [m/s]; } attribute :>> qualifiedDuration = 3600000 [s];')
+    assert code == 0
+    assert v['minimumProgressMet'] == 'false'  # Historical comparison only.
+    assert v['durationMet'] == 'true'
+    assert v['modeledFeasible'] == 'true'

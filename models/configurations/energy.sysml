@@ -116,6 +116,10 @@ package BlueDogEnergyExamples {
         attribute :>> initialEnergy default = 648000 [J];
         attribute :>> recoveryMotorPower default = 50 [W];
         attribute :>> recoveryEssentialPower default = 8 [W];
+        comment recoveryExample /* Synthetic route exposure for evaluator regression, not the challenge reserve policy. */
+        attribute :>> recoveryPoweredDuration default = 1800 [s];
+        attribute :>> recoveryEssentialDuration default = 7200 [s];
+        attribute :>> recoveryUncertaintyFactor default = 1.2;
         ref part :>> timeline default = (dark1, harvest1, dark2, harvest2, dark3, harvest3);
         attribute :>> dayCount default = 3;
         attribute :>> evidenceAccepted default = false;
