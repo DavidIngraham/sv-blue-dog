@@ -140,6 +140,7 @@ package GorgeChallenge {
     }
     requirement overallLength : OverallLength;
     #derivation connection deriveOverallLength {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> overallLength;
     }
@@ -151,6 +152,7 @@ package GorgeChallenge {
     }
     requirement trafficNonInterference : TrafficNonInterference;
     #derivation connection deriveTrafficNonInterference {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> trafficNonInterference;
     }
@@ -162,6 +164,7 @@ package GorgeChallenge {
     }
     requirement safetyCapabilityAbort : SafetyCapabilityAbort;
     #derivation connection deriveSafetyCapabilityAbort {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> safetyCapabilityAbort;
     }
@@ -173,6 +176,7 @@ package GorgeChallenge {
     }
     requirement autonomousShoreRecovery : AutonomousShoreRecovery;
     #derivation connection deriveAutonomousShoreRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> autonomousShoreRecovery;
     }
@@ -184,6 +188,7 @@ package GorgeChallenge {
     }
     requirement abortAlert : AbortAlert;
     #derivation connection deriveAbortAlert {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> abortAlert;
     }
@@ -195,6 +200,7 @@ package GorgeChallenge {
     }
     requirement noLittering : NoLittering;
     #derivation connection deriveNoLittering {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> noLittering;
     }
@@ -206,6 +212,7 @@ package GorgeChallenge {
     }
     requirement casualtyFlotation : CasualtyFlotation;
     #derivation connection deriveCasualtyFlotation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> noLittering;
         end #derive target ::> casualtyFlotation;
     }
@@ -217,6 +224,7 @@ package GorgeChallenge {
     }
     requirement majorComponentRetention : MajorComponentRetention;
     #derivation connection deriveMajorComponentRetention {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> noLittering;
         end #derive target ::> majorComponentRetention;
     }
@@ -228,6 +236,7 @@ package GorgeChallenge {
     }
     requirement capsizeRecovery : CapsizeRecovery;
     #derivation connection deriveCapsizeRecovery {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> noLittering;
         end #derive target ::> capsizeRecovery;
     }
@@ -239,6 +248,7 @@ package GorgeChallenge {
     }
     requirement unattachedPassage : UnattachedPassage;
     #derivation connection deriveUnattachedPassage {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> unattachedPassage;
     }
@@ -250,6 +260,7 @@ package GorgeChallenge {
     }
     requirement communicationOutageAutonomy : OutageAutonomy;
     #derivation connection deriveOutageAutonomy {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> communicationOutageAutonomy;
     }
@@ -261,6 +272,7 @@ package GorgeChallenge {
     }
     requirement forecastAdmission : ForecastAdmission;
     #derivation connection deriveForecastAdmission {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> forecastAdmission;
     }
@@ -272,6 +284,7 @@ package GorgeChallenge {
     }
     requirement weatherOutageContinuation : WeatherOutageContinuation;
     #derivation connection deriveWeatherOutageContinuation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> weatherOutageContinuation;
     }
@@ -283,6 +296,7 @@ package GorgeChallenge {
     }
     requirement courseRecoveryReserve : CourseRecoveryReserve;
     #derivation connection deriveCourseRecoveryReserve {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> courseRecoveryReserve;
     }
@@ -294,6 +308,7 @@ package GorgeChallenge {
     }
     requirement reserveAbort : ReserveAbort;
     #derivation connection deriveReserveAbort {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> reserveAbort;
     }
@@ -305,6 +320,7 @@ package GorgeChallenge {
     }
     requirement nightOperation : NightOperation;
     #derivation connection deriveNightOperation {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> nightOperation;
     }
@@ -316,6 +332,7 @@ package GorgeChallenge {
     }
     requirement abortPersistence : AbortPersistence;
     #derivation connection deriveAbortPersistence {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> abortPersistence;
     }
@@ -327,6 +344,7 @@ package GorgeChallenge {
     }
     requirement recoveryConspicuity : RecoveryConspicuity;
     #derivation connection deriveRecoveryConspicuity {
+        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> recoveryConspicuity;
     }

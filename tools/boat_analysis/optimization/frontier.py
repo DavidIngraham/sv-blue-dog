@@ -6,6 +6,9 @@ must supply the later comparison metrics; no completion probability is inferred.
 import argparse
 import json
 import math
+import platform
+import subprocess
+import scipy
 from pathlib import Path
 
 import numpy as np
@@ -27,33 +30,58 @@ def nondominated(rows, objectives):
 
 def solve(caps, seeds, budget=60, problem_factory=Problem):
     rows = []
-    for cap in caps:
+    warm_seed = None
+    for cap in sorted(set(caps), reverse=True):
         problem = problem_factory(overall_length_limit_m=cap)
-        starting_points = seeds or [problem.initial()]
+        starting_points = seeds or [warm_seed if warm_seed is not None else problem.initial()]
         for seed_index, seed in enumerate(starting_points):
             for objective in ('massKg', 'conditionalPassageHours'):
+                start = np.clip(seed if warm_seed is None else warm_seed, 0, 1) if not seeds else np.clip(seed, 0, 1)
+                if start.shape != problem.lo.shape or not np.isfinite(start).all():
+                    raise ValueError('Seed must contain one finite normalized value per design/state variable')
+                best = None
                 def metrics(z):
                     r = problem.evaluate(z)
                     return {'massKg':r['mass']['totalMass'],
                             'conditionalPassageHours':float(r['westerlyRoute'][5])}
+                def retain(z):
+                    nonlocal best
+                    if problem.feasible(z):
+                        value = metrics(z)[objective]
+                        if best is None or value < best[0]:
+                            best = (value, np.array(z, copy=True))
+                def objective_value(z):
+                    if 'invalidGeometry' in problem.evaluate(z):
+                        return 1e12
+                    return metrics(z)[objective]
+                retain(start)
                 constraints = [
                     {'type':'eq', 'fun':lambda z: problem.evaluate(z)['eq'],
                      'jac':lambda z: problem.jacobians(z)[0]},
                     {'type':'ineq', 'fun':lambda z: problem.evaluate(z)['ineq'],
                      'jac':lambda z: problem.jacobians(z)[1]}]
-                result = minimize(lambda z: metrics(z)[objective], np.clip(seed,0,1),
+                result = minimize(objective_value, start,
                                   method='SLSQP', bounds=[(0,1)]*len(seed),
-                                  constraints=constraints,
+                                  constraints=constraints, callback=retain,
                                   options={'maxiter':budget,'ftol':1e-7})
-                evaluated = problem.evaluate(result.x)
+                retain(result.x)
+                chosen = best[1] if best is not None else result.x
+                if best is not None:
+                    warm_seed = chosen.copy()
+                evaluated = problem.evaluate(chosen)
+                if 'invalidGeometry' in evaluated:
+                    rows.append(dict(capM=cap, seed=seed_index, objective=objective, feasible=False, solverConverged=bool(result.success), message=str(result.message), invalidGeometry=evaluated['invalidGeometry'], z=chosen.tolist()))
+                    continue
                 rows.append(dict(capM=cap, seed=seed_index, objective=objective,
-                    feasible=problem.feasible(result.x), solverConverged=bool(result.success),
+                    feasible=problem.feasible(chosen), solverConverged=bool(result.success),
                     message=str(result.message), iterations=int(result.nit),
-                    z=result.x.tolist(),
+                    z=chosen.tolist(), initialZ=start.tolist(),
+                    selection='best feasible accepted iterate' if best is not None else 'terminal infeasible iterate',
+                    resolution=problem.resolution,
                     design=dict(zip(problem.model.c['designNames'], evaluated['design'].tolist())),
                     overallLengthM=evaluated['envelope']['sweptLengthM'],
                     maxEquilibriumResidual=float(np.max(np.abs(evaluated['eq']))),
-                    minimumMargin=float(np.min(evaluated['ineq'])), **metrics(result.x)))
+                    minimumMargin=float(np.min(evaluated['ineq'])), **metrics(chosen)))
     frontier = nondominated(rows, ('overallLengthM','massKg','conditionalPassageHours'))
     return dict(candidates=rows, frontier=frontier, qualified=False,
         scope='Local monohull concept alternatives; conditional steady passage, no calibrated mission probability. Cost and construction effort require BOM/process estimates. Hull length and all other design parameters remain free under the swept overall-length cap.')
@@ -68,9 +96,15 @@ def main():
     args=parser.parse_args()
     if args.budget<1:parser.error('Positive solve budget required')
     seeds=[np.asarray(z,dtype=float) for z in json.loads(args.seed.read_text())] if args.seed else []
+    paths=subprocess.check_output(['git','ls-files','tools/boat_analysis'],cwd=ROOT,text=True).splitlines()
+    paths=[p for p in paths if p.endswith('.py')]+['uv.lock','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json','build/analysis/coupled-fixed-design.json']
+    hashes=source_hashes(paths)
+    revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     report=solve(args.caps,seeds,args.budget)
-    paths=['tools/boat_analysis/optimization/frontier.py','tools/boat_analysis/optimization/search.py']
-    report['sourceHashes']=source_hashes(paths)
+    report['sourceHashes']=hashes
+    report['sourceRevision']=revision
+    report['runtime']={'python':platform.python_version(),'numpy':np.__version__,'scipy':scipy.__version__}
+    report['suppliedSeeds']=[z.tolist() for z in seeds]
     report['capsM']=args.caps
     report['solverBudget']=args.budget
     args.output.parent.mkdir(parents=True,exist_ok=True)

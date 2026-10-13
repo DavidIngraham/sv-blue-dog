@@ -449,3 +449,18 @@ package BlueDogSRRDocuments {
         part allocations : Table { calc rows : EnvironmentProposalRows; }
     }
 }
+
+package BlueDogRecoverySiteDocuments {
+    private import DocumentQueries::*;
+    calc def Candidates :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogRecoverySiteReview::bingen", "BlueDogRecoverySiteReview::stevenson", "BlueDogRecoverySiteReview::springCreek", "BlueDogRecoverySiteReview::viento")), columns = (
+            Column(name = "Candidate", path = "site"),
+            Column(name = "Access evidence", path = "evidence"),
+            Column(name = "Before routing", path = "outstanding"),
+            Column(name = "Accepted", path = "acceptedForRouting")))
+    }
+    part def Shortlist :> Document {
+        attribute redefines title = "Recovery-site assessment shortlist";
+        part candidates : Table { calc rows : Candidates; }
+    }
+}

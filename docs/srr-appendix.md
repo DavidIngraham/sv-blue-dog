@@ -20,6 +20,13 @@ The [NOAA-hosted gap-flow study](https://repository.library.noaa.gov/view/noaa/2
 
 The native fetch sensitivity evaluates coupled wind and effective-fetch hypotheses. It does not measure directional fetch, shallow-water transformation, current gradients or traffic wakes. The proposed wave margin is an engineering allocation to review. A single numerical envelope cannot replace forecast-conditioned trajectory assessment.
 
+## Course recovery assessment
+
+```sysml-report BlueDogRecoverySiteDocuments::Shortlist
+```
+
+The [model records the official access sources and remaining assessments](../models/analyses/recovery-site-review.sysml). These are field-survey candidates, not approved safe harbors. Final approach, casualty capture and shore retrieval must be established before their coordinates enter the operational planner. The candidate set must also be checked for gaps along both legs; a nearby point on a map does not establish recovery authority against current.
+
 ## Review actions
 
 | Action | Evidence required | Decision affected |
