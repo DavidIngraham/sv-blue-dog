@@ -4,6 +4,9 @@ from tools.boat_analysis.evidence.records import input_record, input_path, outpu
 import ctypes as ct
 import json,subprocess,threading
 import numpy as np
+from numpy.typing import ArrayLike
+from .design_types import Design, Parameters
+from .design_boundary import design_vector, parameter_vector
 from tools.boat_analysis.model.abi import ROOT, Sequence
 from tools.boat_analysis.evidence.records import digest,validate
 CONTRACT=ROOT/'.tools/coupled-contract.json'
@@ -45,9 +48,10 @@ class MassKernel:
         if not library.exists():subprocess.run(['gcc','-O2','-shared','-fPIC',str(source),'-lm','-o',str(library)],check=True)
         self.lib=ct.CDLL(str(library));self.lib.sysml_run.argtypes=[Sequence]*4+[ct.POINTER(Sequence)]
         self.lib.sysml_run.restype=ct.c_int;self.lib.sysml_error.restype=ct.c_char_p
-    def evaluate(self,design,geometry,parameters=None):
+    def evaluate(self,design: Design | ArrayLike,geometry: ArrayLike,parameters: Parameters | ArrayLike | None=None):
         c=self.contract
-        p=c['parameterValues'] if parameters is None else parameters
+        design=design_vector(design,c)
+        p=c['parameterValues'] if parameters is None else parameter_vector(parameters,c)
         arrays=[np.ascontiguousarray(a,dtype=float) for a in [design,p,c['materialValues'],geometry]]
         if [a.shape for a in arrays]!=[(29,),(41,),(len(c['materialValues']),),(51,)] or any(not np.isfinite(a).all() for a in arrays):raise ValueError('Invalid mass inputs')
         d=arrays[0]

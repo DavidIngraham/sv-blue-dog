@@ -10,6 +10,7 @@ import numpy as np
 import subprocess
 from pathlib import Path
 from tools.boat_analysis.model.runtime import ROOT
+from tools.boat_analysis.model.design_types import Design, Parameters
 from tools.boat_analysis.evidence.records import validate
 from tools.boat_analysis.geometry.vessel import section_data
 from tools.boat_analysis.evidence.continuation import compatible_stages
@@ -20,7 +21,8 @@ def render(output):
     operation = json.loads((ROOT/'.tools/coupled-operation-contract.json').read_text())
     validate(mass['sourceHashes']); validate(operation['sourceHashes'])
     stages = [s for s in compatible_stages(ROOT/'evidence/runs/2026-10-12-finite-passage') if s['feasible']]
-    design = stages[-1]['design']
+    design = Design.from_mapping(stages[-1]['design']).to_mapping()
+    assumptions = Parameters.from_mapping(dict(zip(mass['parameterNames'], mass['parameterValues'], strict=True)))
     text = (ROOT/'models/analyses/sizing/inputs.sysml').read_text()
     materials = re.search(r'out attribute materialValues.*?= \((.*?)\);', text, re.S)[1]
     material_names = re.findall(r'material\.(\w+)', materials)
@@ -34,7 +36,7 @@ def render(output):
     for i, name in enumerate(mass['designNames']):
         fields.append(dict(name=name, kind='design', value=design[name],
                            minimum=operation['designLower'][i], maximum=operation['designUpper'][i]))
-    for kind, names, values in [('parameters', mass['parameterNames'], mass['parameterValues']),
+    for kind, names, values in [('parameters', mass['parameterNames'], [assumptions.to_mapping()[n] for n in mass['parameterNames']]),
                                 ('materials', material_names, mass['materialValues'])]:
         fields.extend(dict(name=n, kind=kind, value=v) for n,v in zip(names, values, strict=True))
     record = dict(version=1, revision=subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip(),
