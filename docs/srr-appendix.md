@@ -69,7 +69,9 @@ Fog, waves, power faults and common-cause loss of navigation can correlate failu
 
 The route audit finds a 65.989 km reference circuit, chart-clear gates and both legs through the selected bridge span. The retained design is 10.252 kg. Its refined operating states are numerically balanced and predict a 33.846 h conditional westerly passage, but the voyage-energy screen requires 312.648 Wh against 311.382 Wh available: a 1.267 Wh shortfall. The coarse replay also fails this allocation. The baseline therefore contains **no accepted feasible design**; a small numerical shortfall is still a failed screen and cannot be rounded into success.
 
-The impaired-sensing sensitivity spans approximately 0.012% to 12.6% under its explicitly assumed loss rates and recovery durations. This wide range supports collecting rate/exposure evidence; it does not support a claim that the residual risk is negligible. The 32 fixed-seed conceptual mission scenarios produce 18 simulated completions, 13 incomplete runs and 1 censored run. Incomplete cases stop when the coarse controller finds no safe action; the censored case reaches the computational horizon. These are conditional scenario counts, not a measured completion probability.
+The impaired-sensing sensitivity spans approximately 0.012% to 12.6% under its explicitly assumed loss rates and recovery durations. This wide range supports collecting rate/exposure evidence; it does not support a claim that the residual risk is negligible.
+
+The 32 fixed-seed conceptual mission scenarios produce 18 simulated completions, 13 incomplete runs and 1 censored run. Incomplete cases stop when the coarse controller finds no safe action; the censored case reaches the computational horizon. These are conditional scenario counts, not a measured completion probability.
 
 The replay reuses a retained geometry as a test input, recomputes current constraints and solves refined operating states; it does not promote an old verdict to the new course. Mission logic uses a separately identified conceptual vessel and cannot qualify the optimized design.
 

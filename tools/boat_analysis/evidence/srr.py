@@ -12,7 +12,8 @@ def run(budget=10):
     source=ROOT/'evidence/runs/2026-10-13-srr-frontier/srr-candidate-replay.json'
     paths=[p.relative_to(ROOT).as_posix() for p in (ROOT/'tools/boat_analysis').rglob('*.py')]
     paths += [source.relative_to(ROOT).as_posix(),'evidence/course/2026-10-11/chart-features.geojson',
-              'build/analysis/coupled-uncertainty-inputs.json','uv.lock']
+              'build/analysis/coupled-uncertainty-inputs.json','build/analysis/wing-polar-grid.json',
+              'build/analysis/wing-geometry.json','uv.lock']
     hashes=source_hashes(paths)
     report={'sourceHashes':hashes,'sourceRevision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
             'physicalQualification':False,'srrApproved':False,'analyses':{}}

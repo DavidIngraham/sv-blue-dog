@@ -2,7 +2,9 @@
 
 **Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
 
-The revised search has found a coarse-feasible candidate inside the **1.2 m overall-length limit**: about **10.3 kg**, with a conditional steady-westerly passage of about **33.7 hours**. This is encouraging, but the finer replay misses the voyage-energy screen by **0.56%**. It is a candidate to improve, not a build baseline.
+The retained **1.2 m overall-length** candidate has now been replayed on the SRR course through the selected Hood River bridge span. It is about **10.3 kg**, with a conditional westerly passage of **33.85 hours**, but it fails the voyage-energy screen at both coarse and refined resolution. The refined shortfall is **1.27 Wh**. It remains a candidate to improve, not a build baseline.
+
+[Current replay, mission outcomes and limitations](srr-appendix.md#current-baseline-evidence)
 
 This study takes the finite Bingen–Stevenson challenge, manufacturing assumptions and provisional physics as inputs. It informs concept selection and the measurements needed before detailed design. The [sizing method](sizing.md) explains the calculations; the [mission simulation](mission-simulation.md) adds changing weather, traffic and recovery decisions.
 
@@ -14,7 +16,12 @@ The bounded local study examines 1.2, 1.0 and 0.8 m overall-length caps. It reta
 
 There is no minimum sailing-speed floor, 72-hour challenge deadline or daily energy-neutrality requirement. Stored energy is sized for a finite passage and protected recovery. The passage multiplier and delay allowance remain provisional design allocations in [the concept policy](../models/analyses/sizing/credibility.sysml).
 
-Both feasible outputs remain effectively the same 1.2 m seed: their masses differ by less than 0.1 g and their conditional passage times by about 2.4 minutes. This bounded run has not yet produced a useful spread of design choices. The 1.0 and 0.8 m searches remain unresolved; infeasible terminal points are listed for diagnosis, not offered as alternatives.
+In the earlier route snapshot, both coarse-feasible outputs remained effectively the same 1.2 m seed: their masses differ by less than 0.1 g and their conditional passage times by about 2.4 minutes. This bounded run has not yet produced a useful spread of design choices. The 1.0 and 0.8 m searches remain unresolved; infeasible terminal points are listed for diagnosis, not offered as alternatives.
+
+<details>
+<summary>Earlier search results before the SRR bridge-route correction</summary>
+
+These figures describe their archived configuration. Their feasibility verdicts do not apply to the current course.
 
 ![Coarse-feasible mass and passage-time alternatives, with unresolved length caps identified.](figures/srr-frontier.svg)
 
@@ -31,6 +38,8 @@ The retained 1.2 m seed balances its operating cases at the finer geometry resol
 The sampled sealed-body recovery curves have pitch equilibria and positive restoring roll moments at all interior samples across four wing trims. That does not establish dynamic capsize recovery, pitch stability, structural integrity or recovery with damaged equipment. The challenge permits limp recovery to shore; self-righting remains one possible vehicle strategy.
 
 This replay applies to the retained seed, not automatically to every frontier alternative. It also does not include a calibrated weather-window completion probability. The environmental and traffic campaign must assess each selected candidate with the same scenario realizations before we compare mission outcomes.
+
+</details>
 
 ## What needs to improve before selecting a boat
 
