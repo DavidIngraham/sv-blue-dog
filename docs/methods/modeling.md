@@ -52,7 +52,7 @@ Named Python records for operating state, aerodynamic coefficients, hydrostatic 
 
 Scalar and batch calls share shape, finite-value, default and typed-record handling. Physical mass and operating preconditions are explicit SysML `InputChecks` calculations; the boundary executes them before evaluating the requested calculation. The pinned C generator omits assertions inside calculations, so these checks are compiled and called explicitly. A failed input group produces its model-defined name and, for per-case inputs, its batch index. These numerical preconditions are separate from vessel qualification requirements.
 
-The runtime caches builds using the generated source, wrapper, compiler identity and flags. Calls sharing a loaded library use the same lock because OpenSysML's generated evaluator owns mutable execution state. Results are copied before that state can be reused. Hydrostatics retains its specialized mesh reduction in C and uses the same build and locking machinery.
+Meson builds all exported calculations and input checks together as separate shared libraries, selecting the host compiler, linker and library filenames. The runtime caches immutable build snapshots using the generated sources, wrappers, Meson recipe, compiler identity and flags. Calls sharing a loaded library use the same lock because OpenSysML's generated evaluator owns mutable execution state. Results are copied before that state can be reused. Hydrostatics uses the generated batch calculations with project-owned mesh reduction.
 
 Independent cases can run in a native batch. Shared inputs and per-case inputs are explicit; there is no implicit broadcasting:
 

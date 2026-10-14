@@ -8,9 +8,7 @@ import ctypes as ct
 import hashlib
 import os
 from pathlib import Path
-import platform
 import re
-import subprocess
 import tempfile
 import threading
 from typing import Mapping
@@ -19,6 +17,7 @@ import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
 from .abi import Sequence
+from .build import build_libraries
 
 
 @dataclass(frozen=True)
@@ -50,33 +49,13 @@ _registry_lock = threading.RLock()
 _libraries = {}
 
 
-def load_library(source: Path, *, dependencies=()):
-    """Content-addressed, atomically published build; one lock per library."""
+def load_library(source: Path, *, dependencies=(), built=None):
     source = source.resolve()
-    flags = ('-O2', '-shared', '-fPIC')
-    compiler = subprocess.check_output(['gcc', '-dumpmachine']).strip()
-    version = subprocess.check_output(['gcc', '-dumpfullversion']).strip()
-    key = hashlib.sha256(repr((flags, platform.system(), compiler, version)).encode())
-    for path in (source, *dependencies):
-        key.update(Path(path).read_bytes())
-    library = source.parent / ('native-' + key.hexdigest()[:24] + '.so')
+    library, metadata = built or build_libraries((source,), dependencies=dependencies)[source]
     with _registry_lock:
         if library not in _libraries:
-            if not library.exists():
-                fd, temporary = tempfile.mkstemp(dir=source.parent, suffix='.so')
-                os.close(fd)
-                try:
-                    subprocess.run(['gcc', *flags, str(source), '-I', str(source.parent),
-                                    '-lm', '-o', temporary], check=True, capture_output=True)
-                    os.replace(temporary, library)
-                finally:
-                    Path(temporary).unlink(missing_ok=True)
             lib = ct.CDLL(str(library))
-            lib._sysml_build = {
-                'compilerTarget': compiler.decode(), 'compilerVersion': version.decode(),
-                'flags': list(flags), 'platform': platform.system(), 'machine': platform.machine(),
-                'librarySha256': hashlib.sha256(library.read_bytes()).hexdigest(),
-            }
+            lib._sysml_build = metadata
             lib.sysml_error.restype = ct.c_char_p
             _libraries[library] = (lib, threading.RLock())
         return _libraries[library]
@@ -91,7 +70,7 @@ class NumberSequence(ct.Structure):
 
 
 class NativeKernel:
-    def __init__(self, spec: KernelSpec):
+    def __init__(self, spec: KernelSpec, *, _defer=False):
         self.spec = spec
         text = spec.source.read_text(encoding='utf-8')
         signature = re.search(r'int sysml_run\((.*?)\)\s*\{', text, re.S)
@@ -118,7 +97,12 @@ class NativeKernel:
             with os.fdopen(fd, 'w', encoding='utf-8') as stream:
                 stream.write(shim)
             os.replace(temporary, wrapper)
-        self.lib, self.lock = load_library(wrapper, dependencies=(spec.source,))
+        self.wrapper = wrapper
+        if not _defer:
+            self._load()
+
+    def _load(self, built=None):
+        self.lib, self.lock = load_library(self.wrapper, dependencies=(self.spec.source,), built=built)
         self.lib.sysml_run.argtypes = [Sequence if v else ct.c_double for v in self.vector] + [ct.POINTER(self.result_type)]
         self.lib.sysml_run.restype = ct.c_int
         pointer = ct.POINTER(ct.c_double)
@@ -135,7 +119,7 @@ class NativeKernel:
         value = {'sysml_real': 'out', 'sysml_num': '(out.real ? out.r : out.i)',
                  'sysml_seq_real': 'out.data[j]',
                  'sysml_seq_num': '(out.data[j].real ? out.data[j].r : out.data[j].i)'}[output]
-        return f'''#include "{self.spec.source.resolve().as_posix()}"
+        return f'''#include "{self.spec.source.name}"
 void sysml_python_batch(int64_t count, double **inputs, int64_t *widths, int64_t *strides,
                 int64_t width, double *values, int *status, char *errors) {{
     for (int64_t row = 0; row < count; row++) {{
@@ -230,3 +214,12 @@ void sysml_python_batch(int64_t count, double **inputs, int64_t *widths, int64_t
                     raise BatchError(start+i, message)
                 messages.append(message)
         return BatchResult(result, tuple(messages))
+
+
+def prepare_kernels(specs):
+    """Compile a project's exports and checks together, retaining separate library state."""
+    kernels = [NativeKernel(spec, _defer=True) for spec in specs]
+    built = build_libraries([k.wrapper for k in kernels], dependencies=[k.spec.source for k in kernels])
+    for kernel in kernels:
+        kernel._load(built[kernel.wrapper.resolve()])
+    return {kernel.spec.source.resolve(): kernel for kernel in kernels}

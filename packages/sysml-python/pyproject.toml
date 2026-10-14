@@ -7,7 +7,7 @@ name = "sysml-python-runtime"
 version = "0.1.0"
 description = "Declarative typed execution of SysML calculations"
 requires-python = ">=3.12"
-dependencies = ["numpy>=2,<3"]
+dependencies = ["numpy>=2,<3", "meson>=1.7,<2", "ninja>=1.11", "filelock>=3.16,<4"]
 
 [tool.setuptools.packages.find]
 include = ["sysml_python*"]

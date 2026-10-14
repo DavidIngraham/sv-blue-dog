@@ -1,0 +1,68 @@
+name: Runtime portability
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  runtime:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            compiler: gcc
+            python: .venv/bin/python
+            generated: true
+          - os: macos-14
+            compiler: clang
+            python: .venv/bin/python
+            generated: true
+          - os: windows-2022
+            compiler: gcc
+            python: .venv/Scripts/python.exe
+            generated: true
+          - os: windows-2022
+            compiler: cl
+            python: .venv/Scripts/python.exe
+            generated: false
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    env:
+      CC: ${{ matrix.compiler }}
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff
+        with:
+          version: '0.9.5'
+      - name: Install MinGW GCC
+        if: runner.os == 'Windows' && matrix.compiler == 'gcc'
+        uses: msys2/setup-msys2@ec48f7c5447b3140e2b088413ae3a55687bccb6e # v2
+        with:
+          msystem: MINGW64
+          install: mingw-w64-x86_64-gcc
+          update: false
+      - name: Expose MinGW to native Python
+        if: runner.os == 'Windows' && matrix.compiler == 'gcc'
+        run: echo 'C:/msys64/mingw64/bin' >> "$GITHUB_PATH"
+      - run: uv venv --python 3.12
+      - run: uv pip install -e packages/sysml-python 'pytest>=9,<10'
+      - name: Native ABI and build cache tests
+        run: ${{ matrix.python }} -m pytest packages/sysml-python/tests/test_native.py -q
+      - name: Install pinned OpenSysML
+        if: matrix.generated
+        run: ${{ matrix.python }} -m tools.boat_analysis.model.install
+      - name: Generated model execution
+        if: matrix.generated
+        run: |
+          export OPENSYSML_BINARY="$(${{ matrix.python }} -c 'from tools.boat_analysis.model.install import binary_path; print(binary_path())')"
+          ${{ matrix.python }} -m pytest packages/sysml-python/tests/test_project.py -q

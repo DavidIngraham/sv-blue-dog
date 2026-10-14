@@ -2,7 +2,7 @@
 
 This package-less uv project is an independent starting point for a SysML-backed Python application. `Thermal::JouleHeat` is exported through `pyproject.toml` as `joule_heat`; there is no handwritten calculation adapter. It has no boat geometry, requirements or evidence-store dependency.
 
-The current backend requires Linux, GCC and an explicitly selected OpenSysML executable. In this repository, set `OPENSYSML_BINARY` to the absolute path of the pinned compiler and run from this directory:
+The backend requires a host C compiler and an explicitly selected OpenSysML executable. Meson and Ninja are installed with the runtime. Use GCC on Linux, Clang on macOS, or MinGW-w64 GCC on Windows; the current OpenSysML generated C does not support MSVC. In this repository, set `OPENSYSML_BINARY` to the absolute path of the pinned compiler and run from this directory:
 
 ```sh
 uv sync
@@ -30,4 +30,4 @@ Replace the thermal model with your calculations and update `[tool.sysml_python.
 
 ## Independence check
 
-The repository CI builds a wheel, copies this template into a temporary directory outside the checkout, creates a fresh environment, installs that wheel and pytest, and runs these tests. This exercises the installed package rather than an editable source checkout. Preparation still requires the selected compiler; the wheel does not bundle OpenSysML or GCC.
+The repository CI builds a wheel, copies this template into a temporary directory outside the checkout, creates a fresh environment, installs that wheel and pytest, and runs these tests. This exercises the installed package rather than an editable source checkout. Preparation still requires the selected compiler; the wheel does not bundle OpenSysML or a C compiler.

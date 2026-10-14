@@ -8,7 +8,11 @@ from functools import lru_cache
 from pathlib import Path
 import numpy as np
 from .provenance import digest, project_root
-from .backends.native import NativeKernel, KernelSpec, BatchError
+from .backends.native import prepare_kernels, KernelSpec, BatchError
+import threading
+
+_kernel_groups = {}
+_kernel_groups_lock = threading.RLock()
 
 
 @lru_cache(maxsize=1024)
@@ -140,13 +144,20 @@ class Calculation:
             schema = contract['exports'][self.name]
         self._contract = contract
         self._fingerprint = snapshots[self.manifest][0] if snapshots is not None else checked_digest(self.manifest)
-        key = json.dumps(schema, sort_keys=True)
+        key = (self._fingerprint, json.dumps(schema, sort_keys=True))
         if self._kernel is None or self._schema_key != key:
-            def kernel(entry):
-                return NativeKernel(KernelSpec(self.manifest.parent/entry['source'],
-                                    tuple(f['name'] for f in entry['inputs']),len(entry['outputs'])))
-            self._kernel = kernel(schema)
-            self._checks = kernel(schema['checks']) if 'checks' in schema else None
+            group_key = (self.manifest.resolve(), self._fingerprint)
+            with _kernel_groups_lock:
+                if group_key not in _kernel_groups:
+                    _validate_snapshot(self.manifest, contract)
+                    entries = [entry for value in contract['exports'].values()
+                               for entry in (value, value.get('checks')) if entry]
+                    specs = [KernelSpec(self.manifest.parent/entry['source'],
+                             tuple(f['name'] for f in entry['inputs']), len(entry['outputs'])) for entry in entries]
+                    _kernel_groups[group_key] = prepare_kernels(specs)
+                kernels = _kernel_groups[group_key]
+            self._kernel = kernels[(self.manifest.parent/schema['source']).resolve()]
+            self._checks = kernels[(self.manifest.parent/schema['checks']['source']).resolve()] if 'checks' in schema else None
             self._schema_key = key
         return schema
 

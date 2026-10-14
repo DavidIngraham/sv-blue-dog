@@ -14,7 +14,7 @@ Exports are declared under `[tool.sysml_python.exports.<name>]` with a `definiti
 
 ## Supported models
 
-Scalar and fixed-vector Real inputs, named scalar or explicit tuple returns (including a one-element vector), Linux/GCC native execution, generated immutable input/output records, scalar and shared/per-case batching, model-evaluated default bindings, separately compiled physical input checks, source/compiler provenance in portable generated manifests, and rejection of stale sources. Explicit record bindings preserve model field order independently of Python mapping order. Aliases support existing models with abbreviated parameter names; schemas, dimensions and record fields are never repeated in configuration.
+Scalar and fixed-vector Real inputs, named scalar or explicit tuple returns (including a one-element vector), Meson-managed native execution, generated immutable input/output records, scalar and shared/per-case batching, model-evaluated default bindings, separately compiled physical input checks, source/compiler provenance in portable generated manifests, and rejection of stale sources. Explicit record bindings preserve model field order independently of Python mapping order. Aliases support existing models with abbreviated parameter names; schemas, dimensions and record fields are never repeated in configuration.
 
 The pinned OpenSysML compiler rejects parameter defaults. The backend preserves scalar literal defaults in the generated Python API and compiles a semantic API projection with only those exported parameter defaults removed. The original model remains unchanged; Python supplies every C argument. Nonliteral defaults still require model evaluation and currently fail explicitly. Inline native assertions, nonliteral parameter-default expressions and generalized external bindings are not supported. Evaluated defaults can already be bound declaratively to named analysis outputs.
 
@@ -83,3 +83,31 @@ invalid input shapes, nonfinite values and failed physical preconditions still
 reject the call before numerical execution. Successful rows retain their order.
 Native libraries use a content-addressed cache including source, compiler target,
 compiler version and flags, and serialize calls into each loaded library.
+
+
+## Native toolchains
+
+The first call builds every exported calculation and input check in one Meson
+project, with a separate shared library per target. Meson selects the compiler,
+linker, math library and platform filename. Python interfaces remain unchanged;
+Cython is not needed because OpenSysML already produces C.
+
+Install the runtime normally; Meson, Ninja and filelock are Python dependencies.
+Install a C toolchain separately. Set `CC` before the first call to select one
+(for example `CC=clang`). Meson honors `CFLAGS`, `CPPFLAGS` and `LDFLAGS`.
+`SYSML_BUILD_JOBS` limits parallel compilation (default four). On Windows Meson
+can activate Visual Studio automatically; OpenSysML's current generated code
+requires GNU extensions, so use MinGW-w64 GCC for generated models. MSVC coverage
+is limited to the runtime's portable C ABI fixtures, not OpenSysML-generated C.
+
+CI exercises generated models on Linux/GCC, macOS/Clang and Windows/MinGW GCC,
+plus portable ABI fixtures on Windows/MSVC. The selected OpenSysML executable
+must itself support the host. The wheel includes neither OpenSysML nor a C
+compiler; it builds host libraries locally and is not a precompiled model wheel.
+
+Each immutable build snapshot is locked across processes. Its identity includes
+source contents, recipe, compiler identity and executable hashes, environment
+flags and Meson version. Receipts verify the resulting binary hashes before
+loading. Execution provenance records Meson compiler/machine information,
+resolved build options and target details. Compiler diagnostics are retained in
+errors, with the failed build directory available for inspection.
