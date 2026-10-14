@@ -20,7 +20,7 @@ The pinned OpenSysML compiler rejects parameter defaults. The backend preserves 
 
 ## Current migration boundary
 
-Mass, operating performance, structural margins, passage feasibility, route screening, surface/wave helpers and recovery segments use generated exports. All native execution shares this package's backend; the project's old schema reader, adapter hierarchy and duplicate native runtime have been removed. Resistance screening and specialized hydrostatic mesh integration still have project-owned preparation or binding code that must be migrated.
+Mass, operating performance, structural margins, passage feasibility, route screening, surface/wave helpers, recovery segments and hull resistance use generated exports. All native execution shares this package's backend; the project's old schema reader, adapter hierarchy and duplicate native runtime have been removed. Resistance screening remains project-owned engineering policy over generated results. Specialized hydrostatic mesh integration still has preparation and binding code to migrate.
 
 The [package-less uv template](../../examples/thermal/README.md) has application tests and a CI check that installs a built wheel into a fresh environment outside this repository. Portable manifests, complete execution provenance, broader default lowering, and explicit handling of additional record schemas remain unfinished. The model's equations and schemas belong in SysML; geometry, reference experiments and engineering interpretation remain project-owned.
 

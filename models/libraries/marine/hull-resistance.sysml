@@ -23,6 +23,15 @@ package MarineResistance {
         return result : Real [8] ordered nonunique;
         (a0,a1,a2,a3,a4,a5,a6,a7)
     }
+    calc def InputChecks {
+        in h : Real [9] ordered nonunique;
+        in speed : Real;
+        in density : Real;
+        in gravity : Real;
+        attribute positiveInputs : Real = if h#(1) > 0 and h#(2) > 0 and h#(3) > 0 and h#(4) > 0 and h#(5) > 0 and h#(6) > 0 and h#(7) > 0 and h#(8) > 0 and h#(9) > 0 and speed > 0 and density > 0 and gravity > 0 ? 1.0 else 0.0;
+        return result : Real;
+        positiveInputs
+    }
     calc def Evaluate {
         in h : Real [9] ordered nonunique;
         in speed : Real;
@@ -46,7 +55,28 @@ package MarineResistance {
         attribute beamDraft : Real = h#(2)/h#(3);
         attribute ratio : Real = a#(1) + volumeLength * (a#(2)*lcb + a#(3)*cp + a#(4)*volumeArea + a#(5)*beamLength + a#(6)*centers + a#(7)*beamDraft + a#(8)*cm);
         attribute resistance : Real = ratio*density*gravity*h#(4);
+        attribute resistance_N : Real = resistance;
+        attribute resistance_weight_ratio : Real = ratio;
+        attribute froude : Real = fn;
+        attribute froude_lower : Real = fn-0.15;
+        attribute froude_upper : Real = 0.60-fn;
+        attribute lcb_lower : Real = lcb-0.500;
+        attribute lcb_upper : Real = 0.582-lcb;
+        attribute cp_lower : Real = cp-0.519;
+        attribute cp_upper : Real = 0.599-cp;
+        attribute volume_area_lower : Real = volumeArea-0.079;
+        attribute volume_area_upper : Real = 0.265-volumeArea;
+        attribute beam_length_lower : Real = beamLength-0.170;
+        attribute beam_length_upper : Real = 0.366-beamLength;
+        attribute center_ratio_lower : Real = centers-0.920;
+        attribute center_ratio_upper : Real = 1.002-centers;
+        attribute volume_length_lower : Real = volumeLength-0.120;
+        attribute volume_length_upper : Real = 0.230-volumeLength;
+        attribute cm_lower : Real = cm-0.646;
+        attribute cm_upper : Real = 0.790-cm;
+        attribute beam_draft_lower : Real = beamDraft-2.46;
+        attribute beam_draft_upper : Real = 19.38-beamDraft;
         return result : Real [21] ordered nonunique;
-        (resistance,ratio,fn,fn-0.15,0.60-fn,lcb-0.500,0.582-lcb,cp-0.519,0.599-cp,volumeArea-0.079,0.265-volumeArea,beamLength-0.170,0.366-beamLength,centers-0.920,1.002-centers,volumeLength-0.120,0.230-volumeLength,cm-0.646,0.790-cm,beamDraft-2.46,19.38-beamDraft)
+        (resistance_N,resistance_weight_ratio,froude,froude_lower,froude_upper,lcb_lower,lcb_upper,cp_lower,cp_upper,volume_area_lower,volume_area_upper,beam_length_lower,beam_length_upper,center_ratio_lower,center_ratio_upper,volume_length_lower,volume_length_upper,cm_lower,cm_upper,beam_draft_lower,beam_draft_upper)
     }
 }

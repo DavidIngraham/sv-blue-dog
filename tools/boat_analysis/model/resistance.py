@@ -1,25 +1,15 @@
 """Native Delft bare-hull regression adapter with explicit applicability screening."""
-from tools.boat_analysis.evidence.records import input_record, input_path, output_path, source_hashes
+from tools.boat_analysis.evidence.records import output_path
 
 import json
-import re
-import numpy as np
 from tools.boat_analysis.model.runtime import ROOT
-from sysml_python.backends.native import KernelSpec, NativeKernel
-from tools.boat_analysis.evidence.records import digest, validate
-CONTRACT=ROOT/'.tools/hull-resistance-contract.json'
-NAMES=['resistance_N','resistance_weight_ratio','froude']+[f'{name}_{side}' for name in ['froude','lcb','cp','volume_area','beam_length','center_ratio','volume_length','cm','beam_draft'] for side in ['lower','upper']]
+from tools.boat_analysis.evidence.records import digest
 
 
 def prepare():
     from tools.boat_analysis.model.runtime import native, MODELS
     from tools.boat_analysis.model.runtime import native_value
     model=ROOT/'models/libraries/marine/hull-resistance.sysml'
-    source=ROOT/'.tools/hull-resistance.c'
-    native('-compile','MarineResistance::Evaluate','-source','-o',str(source),models=MODELS)
-    signature=re.search(r'int sysml_run\((.*?)\) \{',source.read_text(encoding='utf-8'),re.S)
-    if not signature or not signature[1].endswith('sysml_seq_real *result'):
-        raise ValueError('Unexpected hull resistance output ABI')
     fixture=ROOT/'.tools/hull-resistance-replay.sysml'
     h=[2,.6,.15,.071973,.85,1.05,1.1,.55,.727]
     speeds=[fn*(9.80665*2)**.5 for fn in [.15,.4,.425,.6,.65]]
@@ -31,30 +21,24 @@ def prepare():
     if audit['status']!='holds':raise ValueError('Hull resistance arithmetic replay failed')
     rows=[native_value(v['value']) for v in audit['checks'][0]['values']]
     hashes={'models/libraries/marine/hull-resistance.sysml':digest(model),'tools/boat_analysis/model/resistance.py':digest(ROOT/'tools/boat_analysis/model/resistance.py')}
-    CONTRACT.write_text(json.dumps({'sourceHashes':hashes,'generatedHash':digest(source)},indent=2)+'\n',encoding='utf-8')
-    record={'sourceHashes':hashes,'scope':'Synthetic arithmetic fixtures, not measured resistance validation. Fn 0.65 deliberately exceeds the implementation coverage limit. The same native calculation is used by the coupled operating model.','hull':h,'density':1000,'gravity':9.80665,'cases':[{'speed_m_s':v,'outputs':dict(zip(NAMES,r))} for v,r in zip(speeds,rows)],'qualified':False}
+    from tools.boat_analysis.generated import HullResistanceResult
+    names = tuple(HullResistanceResult.__dataclass_fields__)
+    record={'sourceHashes':hashes,'scope':'Synthetic arithmetic fixtures, not measured resistance validation. Fn 0.65 deliberately exceeds the implementation coverage limit. The same native calculation is used by the coupled operating model.','hull':h,'density':1000,'gravity':9.80665,'cases':[{'speed_m_s':v,'outputs':dict(zip(names,r))} for v,r in zip(speeds,rows)],'qualified':False}
     output_path('hull-resistance-audit.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
 
 
-class HullResistanceKernel:
-    def __init__(self):
-        self.contract=json.loads(CONTRACT.read_text(encoding='utf-8'));c=self.contract
-        validate(c['sourceHashes'])
-        source=ROOT/'.tools/hull-resistance.c'
-        if digest(source)!=c['generatedHash']:raise ValueError('Stale HullResistanceKernel source')
-        self.runtime=NativeKernel(KernelSpec(source,('hull', 'speed', 'density', 'gravity'),len(NAMES)))
-
-    def evaluate(self,hull,speed,density=1000.,gravity=9.80665,*,require_domain=True):
-        h=np.ascontiguousarray(hull,dtype=float)
-        if h.shape!=(9,) or not np.isfinite(h).all() or np.any(h<=0) or not np.isfinite([speed,density,gravity]).all() or min(speed,density,gravity)<=0:
-            raise ValueError('Positive finite hull dimensions, speed, density and gravity required')
-        values=self.runtime.evaluate(h,speed,density,gravity)
-        result=dict(zip(NAMES,values))
-        if require_domain:
-            failures=[k for k,v in result.items() if k in NAMES[3:] and v < -1e-12]
-            if failures:raise ValueError('Outside Delft screening envelope: '+', '.join(failures))
-            if result['resistance_N']<0:raise ValueError('Negative residuary regression result; no silent clamp')
-        return result
+def evaluate(hull, speed, density=1000., gravity=9.80665, *, require_domain=True):
+    """Evaluate the model and optionally enforce its empirical applicability envelope."""
+    from tools.boat_analysis.generated import hull_resistance
+    result = hull_resistance(hull=hull, speed=speed, density=density, gravity=gravity)
+    if require_domain:
+        failures = [name for name, value in result.items()
+                    if name.endswith(('_lower', '_upper')) and value < -1e-12]
+        if failures:
+            raise ValueError('Outside Delft screening envelope: ' + ', '.join(failures))
+        if result.resistance_N < 0:
+            raise ValueError('Negative residuary regression result; no silent clamp')
+    return result
 
 
-if __name__=='__main__':prepare()
+if __name__ == '__main__': prepare()

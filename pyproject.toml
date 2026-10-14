@@ -160,3 +160,9 @@ s = "MarineDesign::OperatingState"
 aero = "MarineDesign::AeroCoefficients"
 massData = "MarineDesign::MassProperties"
 hydro = "MarineDesign::HydroState"
+
+[tool.sysml_python.exports.hull_resistance]
+definition = "MarineResistance::Evaluate"
+checks = "MarineResistance::InputChecks"
+[tool.sysml_python.exports.hull_resistance.aliases]
+h = "hull"

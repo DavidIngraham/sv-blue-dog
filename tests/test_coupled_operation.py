@@ -133,11 +133,11 @@ def test_generated_interfaces_are_homogeneous_real_sequences(native_case):
 
 
 def test_native_hull_resistance_is_in_force_balance_and_domain_outputs(native_case):
-    from tools.boat_analysis.model.resistance import HullResistanceKernel
+    from tools.boat_analysis.model.resistance import evaluate as evaluate_resistance
     k,args,_=native_case
     d,p,s,a,m,h=[x.copy() for x in args]
     base=k(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)
-    bare=HullResistanceKernel().evaluate(h[3:],s[3],p[31],p[34])
+    bare=evaluate_resistance(h[3:],s[3],p[31],p[34])
     p[24]=1.3
     increased=k(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)
     assert increased['hullDrag']-base['hullDrag']==pytest.approx(.3*bare['resistance_N'])

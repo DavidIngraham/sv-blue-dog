@@ -26,36 +26,36 @@ def test_published_equation_and_coefficient_row():
 @pytest.fixture
 def kernel():
     if sys.platform!='linux':pytest.skip('Native adapter requires Linux/GCC')
-    from tools.boat_analysis.model.resistance import HullResistanceKernel
-    return HullResistanceKernel()
+    from tools.boat_analysis.model.resistance import evaluate
+    return evaluate
 
 
 def test_native_interpreter_parity(kernel):
     r=evidence()
     for c in r['cases']:
-        result=kernel.evaluate(r['hull'],c['speed_m_s'],require_domain=False)
+        result=kernel(r['hull'],c['speed_m_s'],require_domain=False)
         for k,v in c['outputs'].items():assert result[k]==pytest.approx(v,abs=1e-12)
 
 
 def test_froude_interpolation_and_geometric_similarity(kernel):
     r=evidence();h=np.array(r['hull']);g=r['gravity'];v=lambda fn:fn*(g*h[0])**.5
-    f=lambda fn:kernel.evaluate(h,v(fn))['resistance_N']
+    f=lambda fn:kernel(h,v(fn))['resistance_N']
     assert f(.425)==pytest.approx((f(.4)+f(.45))/2,rel=1e-12)
     scale=np.array([2,2,2,8,4,2,2,1,1])
-    enlarged=kernel.evaluate(h*scale,v(.4)*2**.5)
+    enlarged=kernel(h*scale,v(.4)*2**.5)
     assert enlarged['resistance_N']==pytest.approx(8*f(.4))
-    assert kernel.evaluate(h,v(.4),density=1025)['resistance_N']==pytest.approx(1.025*f(.4))
+    assert kernel(h,v(.4),density=1025)['resistance_N']==pytest.approx(1.025*f(.4))
 
 
 def test_domain_extrapolation_is_rejected(kernel):
     r=evidence();h=np.array(r['hull']);v=r['cases'][1]['speed_m_s']
-    with pytest.raises(ValueError,match='froude_upper'):kernel.evaluate(h,r['cases'][-1]['speed_m_s'])
+    with pytest.raises(ValueError,match='froude_upper'):kernel(h,r['cases'][-1]['speed_m_s'])
     broad=h.copy();broad[1]=1.7
-    with pytest.raises(ValueError,match='beam_length_upper'):kernel.evaluate(broad,v)
+    with pytest.raises(ValueError,match='beam_length_upper'):kernel(broad,v)
     high_cp=h.copy();high_cp[7]=.67
-    with pytest.raises(ValueError,match='cp_upper'):kernel.evaluate(high_cp,v)
-    with pytest.raises(ValueError,match='Positive finite'):kernel.evaluate(h,0)
-    with pytest.raises(ValueError,match='Positive finite'):kernel.evaluate(h[:-1],v)
+    with pytest.raises(ValueError,match='cp_upper'):kernel(high_cp,v)
+    with pytest.raises(ValueError,match='Invalid physical inputs'):kernel(h,0)
+    with pytest.raises(ValueError,match='expected'):kernel(h[:-1],v)
 
 
 def test_upright_hull_features_for_rectangular_prism():
