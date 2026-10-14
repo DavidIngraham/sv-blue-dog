@@ -1,6 +1,7 @@
 """Named records at the public boundary; vectors belong to the backend."""
 from collections.abc import Mapping
 from dataclasses import fields
+import numpy as np
 
 
 class Record(Mapping):
@@ -8,6 +9,10 @@ class Record(Mapping):
 
     def to_mapping(self):
         return {f.name:getattr(self, f.name) for f in fields(self)}
+
+    def as_array(self):
+        """Copy model-ordered values for a NumPy algorithm."""
+        return np.asarray(tuple(self.values()), dtype=float)
 
     @classmethod
     def from_mapping(cls, values):

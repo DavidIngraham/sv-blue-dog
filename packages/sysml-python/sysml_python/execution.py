@@ -1,6 +1,9 @@
 """Named numerical boundaries shared by scalar and batched execution."""
 from collections.abc import Mapping
 import json
+import hashlib
+from contextlib import contextmanager
+from contextvars import ContextVar
 from functools import lru_cache
 from pathlib import Path
 import numpy as np
@@ -22,6 +25,46 @@ def checked_digest(path):
     return _digest_at_revision(str(path), revision)
 
 
+_active_session = ContextVar('sysml_execution_session', default=None)
+
+
+def _validate_snapshot(manifest, contract):
+    for path, expected in contract['sourceHashes'].items():
+        if checked_digest(path) != expected:
+            raise ValueError(f'Stale SysML source: {path}; prepare the project again')
+    for schema in contract['exports'].values():
+        _validate_generated(manifest, schema)
+
+
+def _validate_generated(manifest, schema):
+    for entry in (schema, schema.get('checks')):
+        if entry and checked_digest(manifest.parent/entry['source']) != entry['sourceHash']:
+            raise ValueError('Generated source differs from prepared contract')
+
+
+@contextmanager
+def execution_session():
+    """Execute a prepared snapshot; reject source changes before returning.
+
+    Nested sessions share the outer snapshot. Standalone calls still check on
+    every invocation. Use this context (or decorator) around a solve or campaign,
+    not around a generator function whose body runs after it returns.
+    """
+    if _active_session.get() is not None:
+        yield
+        return
+    snapshots = {}
+    token = _active_session.set(snapshots)
+    try:
+        yield
+        for manifest, (fingerprint, contract) in snapshots.items():
+            if checked_digest(manifest) != fingerprint:
+                raise ValueError('Prepared manifest changed during execution session')
+            _validate_snapshot(manifest, contract)
+    finally:
+        _active_session.reset(token)
+
+
 class Calculation:
     def __init__(self, manifest, name, result_type):
         self.manifest = Path(manifest)
@@ -29,14 +72,22 @@ class Calculation:
         self._kernel = self._checks = self._schema_key = None
 
     def load(self):
-        contract = json.loads(self.manifest.read_text(encoding='utf-8'))
-        for path, expected in contract['sourceHashes'].items():
-            if checked_digest(path) != expected:
-                raise ValueError(f'Stale SysML source: {path}; prepare the project again')
-        schema = contract['exports'][self.name]
-        for entry in (schema, schema.get('checks')):
-            if entry and checked_digest(self.manifest.parent/entry['source']) != entry['sourceHash']:
-                raise ValueError('Generated source differs from prepared contract')
+        snapshots = _active_session.get()
+        if snapshots is None:
+            contract = json.loads(self.manifest.read_text(encoding='utf-8'))
+            for path, expected in contract['sourceHashes'].items():
+                if checked_digest(path) != expected:
+                    raise ValueError(f'Stale SysML source: {path}; prepare the project again')
+            schema = contract['exports'][self.name]
+            _validate_generated(self.manifest, schema)
+        else:
+            if self.manifest not in snapshots:
+                data = self.manifest.read_bytes()
+                contract = json.loads(data)
+                _validate_snapshot(self.manifest, contract)
+                snapshots[self.manifest] = (hashlib.sha256(data).hexdigest(), contract)
+            contract = snapshots[self.manifest][1]
+            schema = contract['exports'][self.name]
         key = json.dumps(schema, sort_keys=True)
         if self._kernel is None or self._schema_key != key:
             def kernel(entry):

@@ -90,11 +90,14 @@ class OpenSysML:
             outputs = [{'name':results[0]['declaredName']}]
         else:
             expression = members[-1]
-            if expression.get('operator') != ',':
+            if expression.get('operator') == ',':
+                items = [self.index()[ref['@id']] for ref in expression['argument']]
+            elif shape == [1] and expression.get('@type') == 'FeatureReferenceExpression':
+                items = [expression]
+            else:
                 raise ValueError(f'{definition}: vector return needs an explicit named tuple or output_definition')
             outputs = []
-            for ref in expression['argument']:
-                item = self.index()[ref['@id']]
+            for item in items:
                 if item['@type'] != 'FeatureReferenceExpression':
                     raise ValueError(f'{definition}: name each returned quantity')
                 outputs.append({'name':self.index()[item['referent']['@id']]['declaredName']})

@@ -128,3 +128,52 @@ dimensions = "Plate::Dimensions"
         module.area(dimensions=module.Dimensions(width=-1,height=3))
     with pytest.raises(ValueError, match='case 1.*positiveHeight'):
         module.area.batch(shared={}, cases={'dimensions':[first,module.Dimensions(width=4,height=0)]})
+
+
+def test_single_named_vector_return_and_array_copy(prepared):
+    project, source, _ = prepared
+    source.write_text(source.read_text().replace(
+        'return power : Real = current * current * resistance;',
+        'attribute power : Real = current * current * resistance; return result : Real [1] ordered nonunique; (power)'))
+    package = project.prepare()
+    spec = importlib.util.spec_from_file_location('single_vector_test', package/'__init__.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    result = module.heat(current=2,resistance=10)
+    vector = result.as_array()
+    np.testing.assert_array_equal(vector,[40])
+    vector[0] = 0
+    assert result.power == 40
+
+
+def test_execution_session_checks_before_use_and_after_nested_work(prepared):
+    from sysml_python import execution_session
+    _, source, module = prepared
+    with pytest.raises(ValueError, match='Stale SysML source'):
+        with execution_session():
+            assert module.heat(current=2,resistance=10).power == 40
+            with execution_session():
+                assert module.heat(current=3,resistance=10).power == 90
+            source.write_text(source.read_text().replace('current * current * resistance', '2 * current * current * resistance'))
+            # Native code remains the pinned snapshot; the enclosing operation
+            # must fail its exit check before the result can be accepted.
+            assert module.heat(current=2,resistance=10).power == 40
+    with pytest.raises(ValueError, match='Stale SysML source'):
+        with execution_session():
+            module.heat(current=2,resistance=10)
+
+
+def test_execution_session_decorator_and_exception_cleanup(prepared):
+    from sysml_python import execution_session
+    _, source, module = prepared
+    @execution_session()
+    def calculate():
+        return module.heat(current=2,resistance=10).power
+    assert calculate() == calculate() == 40
+    with pytest.raises(RuntimeError, match='abort'):
+        with execution_session():
+            module.heat(current=2,resistance=10)
+            raise RuntimeError('abort')
+    source.write_text(source.read_text()+'\n// changed\n')
+    with pytest.raises(ValueError, match='Stale SysML source'):
+        module.heat(current=2,resistance=10)
