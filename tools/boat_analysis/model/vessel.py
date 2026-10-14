@@ -5,13 +5,14 @@ import numpy as np
 from numpy.typing import ArrayLike
 from scipy.optimize import brentq
 from tools.boat_analysis.geometry.vessel import build_geometry,ballast_geometry
-from tools.boat_analysis.geometry.hydro import DisplacementBody,equilibrium,pose
+from tools.boat_analysis.geometry.hydro import DisplacementBody, pose
+from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
 from tools.boat_analysis.model.design_boundary import design_vector, pack, unpack
 from tools.boat_analysis.generated import Design, Parameters, OperatingState, AeroCoefficients, HydroState
 from tools.boat_analysis.generated import mass, operation
 from tools.boat_analysis.evidence.records import validate
 from tools.boat_analysis.model.runtime import ROOT
-from tools.boat_analysis.geometry.hydro import MeshHydrostatics
+from tools.boat_analysis.model.hydrostatic_mesh import MeshHydrostatics
 from tools.boat_analysis.aerodynamics.polar import WingPolar
 from tools.boat_analysis.geometry.hull import upright_hull_features,deck_area
 from tools.boat_analysis.geometry.laminate import finite_skin_properties

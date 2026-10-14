@@ -11,7 +11,7 @@ import capytaine as cpt
 from capytaine.bem.airy_waves import froude_krylov_force
 from ..model.runtime import ROOT,native,native_value
 from ..model.vessel import CoupledModel
-from ..geometry.hydro import equilibrium
+from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
 from .inertia import mass_moments
 
 DOFS=('Heave','Roll','Pitch')

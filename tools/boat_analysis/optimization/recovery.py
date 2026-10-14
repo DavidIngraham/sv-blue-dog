@@ -4,7 +4,8 @@ from tools.boat_analysis.evidence.records import input_record, input_path, outpu
 import json
 import numpy as np
 from tools.boat_analysis.model.vessel import CoupledModel
-from tools.boat_analysis.geometry.hydro import DisplacementBody,free_pitch_equilibrium
+from tools.boat_analysis.geometry.hydro import DisplacementBody
+from tools.boat_analysis.model.hydrostatic_mesh import free_pitch_equilibrium
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate
 

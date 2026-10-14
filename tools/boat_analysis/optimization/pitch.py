@@ -8,7 +8,7 @@ import json
 import numpy as np
 from scipy.optimize import brentq
 from tools.boat_analysis.model.vessel import CoupledModel
-from tools.boat_analysis.geometry.hydro import equilibrium
+from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate
 

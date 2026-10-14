@@ -7,7 +7,7 @@ from .search import Problem
 from ..generated import Passage
 from ..model.runtime import ROOT
 from ..evidence.records import validate,source_hashes
-from ..geometry.hydro import free_pitch_equilibrium
+from tools.boat_analysis.model.hydrostatic_mesh import free_pitch_equilibrium
 
 
 def assess(candidate,destination=None):

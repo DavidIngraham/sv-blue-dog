@@ -89,7 +89,7 @@ def source_hashes(sources):
     """Resolve evidence locations explicitly and include the loaded physics model."""
     from tools.boat_analysis.model.runtime import model_files
     paths = [*model_files(), *(ROOT/"packages/sysml-python/sysml_python").rglob("*.py"), ROOT/"pyproject.toml",
-             ROOT / "tools/boat_analysis/model/preparation.py"]
+             ROOT / "tools/boat_analysis/model/preparation.py", ROOT / "tools/boat_analysis/model/hydrostatic_mesh.py"]
     for name in sources:
         path = Path(name)
         if path.as_posix().startswith("build/analysis/"):

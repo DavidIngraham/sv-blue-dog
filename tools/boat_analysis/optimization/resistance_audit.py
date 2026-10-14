@@ -2,7 +2,7 @@ from tools.boat_analysis.evidence.records import input_record, input_path, outpu
 import json
 import numpy as np
 from tools.boat_analysis.model.vessel import CoupledModel
-from tools.boat_analysis.geometry.hydro import equilibrium
+from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
 from tools.boat_analysis.geometry.hull import upright_hull_features
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.model.resistance import evaluate

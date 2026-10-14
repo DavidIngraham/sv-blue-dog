@@ -6,7 +6,8 @@ from concurrent.futures import ProcessPoolExecutor,as_completed
 import numpy as np
 from tools.boat_analysis.model.vessel import CoupledModel
 from tools.boat_analysis.generated import structure, concept as concept_model, Passage, route
-from tools.boat_analysis.geometry.hydro import free_pitch_equilibrium,DisplacementBody
+from tools.boat_analysis.geometry.hydro import DisplacementBody
+from tools.boat_analysis.model.hydrostatic_mesh import free_pitch_equilibrium
 from tools.boat_analysis.optimization.operating import solve_state, operating_margin_names
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate

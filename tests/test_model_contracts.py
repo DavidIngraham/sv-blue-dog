@@ -96,6 +96,9 @@ def test_stale_precondition_code_is_rejected(mass_case,tmp_path):
     contract=json.loads((directory/'manifest.json').read_text())
     for entry in (contract['exports']['mass'],contract['exports']['mass']['checks']):
         entry['source']=str(directory/entry['source'])
+    import os, shutil
+    contract['projectRoot']=os.path.relpath(ROOT,tmp_path)
+    shutil.copyfile(directory/'__init__.py',tmp_path/'__init__.py')
     contract['exports']['mass']['checks']['sourceHash']='incorrect'
     manifest=tmp_path/'manifest.json';manifest.write_text(json.dumps(contract))
     with pytest.raises(ValueError,match='Generated source differs'):

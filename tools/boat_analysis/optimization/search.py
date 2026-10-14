@@ -13,7 +13,7 @@ from scipy.optimize import least_squares,minimize
 from tools.boat_analysis.model.vessel import CoupledModel
 from tools.boat_analysis.generated import AppendageLoads
 from tools.boat_analysis.generated import structure, concept, Passage, route
-from tools.boat_analysis.geometry.hydro import equilibrium
+from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate
 from tools.boat_analysis.optimization.operating import operating_margin_names

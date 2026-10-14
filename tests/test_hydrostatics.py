@@ -3,12 +3,13 @@ import itertools,sys
 import numpy as np
 import pytest
 from scipy.spatial import ConvexHull
-from tools.boat_analysis.geometry.hydro import convex_tetrahedra,equilibrium,DisplacementBody,pose
+from tools.boat_analysis.geometry.hydro import convex_tetrahedra, DisplacementBody, pose
+from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
 
 @pytest.fixture(scope='module')
 def kernel():
     if sys.platform!='linux':pytest.skip('Native compiled kernel requires Linux/GCC')
-    from tools.boat_analysis.geometry.hydro import MeshHydrostatics
+    from tools.boat_analysis.model.hydrostatic_mesh import MeshHydrostatics
     return MeshHydrostatics()
 
 
@@ -63,7 +64,7 @@ def test_pitch_and_roll_are_distinct_and_sink_is_rejected(kernel):
     with pytest.raises(ValueError,match='Insufficient'):equilibrium(kernel,[DisplacementBody('cube',cube)],[0,0,0],1100,0)
 
 def test_free_pitch_solves_offset_cg_and_reports_inverted_instability(kernel):
-    from tools.boat_analysis.geometry.hydro import free_pitch_equilibrium
+    from tools.boat_analysis.model.hydrostatic_mesh import free_pitch_equilibrium
     cube=convex_tetrahedra(list(itertools.product([-.5,.5],repeat=3)))
     body=[DisplacementBody('cube',cube)]
     result=free_pitch_equilibrium(kernel,body,[.01,0,-.2],500,0)
