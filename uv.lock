@@ -526,17 +526,34 @@ wheels = [
 
 [[package]]
 name = "opensysml"
-version = "0.9.2"
-source = { registry = "https://pypi.org/simple" }
+version = "0.10.0"
+source = { url = "https://github.com/Open-MBEE/OpenSysML/archive/62b904178c1c8281439f6b0445c739547c89ae9a.zip", subdirectory = "client/python" }
 dependencies = [
     { name = "grpcio" },
     { name = "protobuf" },
     { name = "sigstore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d9/75/b115d91a33944cb1a291c5c6651bf4a79861c8cee4cda2bf15c37b96e6a9/opensysml-0.9.2.tar.gz", hash = "sha256:cf34f46dec9dc3b63454092275fb1ade45c8e66c0e54a62b8b2a1cdb0e14754f", size = 383790, upload-time = "2026-10-05T14:34:34.546Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/5a/5e/78eec7bf2110c7a564a3752ac67293a3724060abb9125d5d872cd8415bf6/opensysml-0.9.2-py3-none-any.whl", hash = "sha256:c7a74dccb96cdae2e872f94781aa2ab46ca931a51586535114607e72e190eb2d", size = 207091, upload-time = "2026-10-05T14:34:33.513Z" },
+sdist = { hash = "sha256:2d188a0c431fdaf5805b150071d9feaeb1430268605826f64aeef72596e2ebde" }
+
+[package.metadata]
+requires-dist = [
+    { name = "fmpy", marker = "extra == 'fmi'", specifier = ">=0.3.32" },
+    { name = "grpc-stubs", marker = "extra == 'dev'", specifier = ">=1.53.0" },
+    { name = "grpcio", specifier = ">=1.83.0" },
+    { name = "grpcio-tools", marker = "extra == 'dev'", specifier = ">=1.83.0" },
+    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.8.0" },
+    { name = "numpy", marker = "extra == 'dev'", specifier = "<2.5" },
+    { name = "pandas-stubs", marker = "extra == 'dev'", specifier = ">=2.0.0" },
+    { name = "protobuf", specifier = ">=7.35.1" },
+    { name = "psutil", marker = "extra == 'dev'", specifier = ">=5.9.0" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0.0" },
+    { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.10.0" },
+    { name = "sigstore", specifier = ">=4.5.0,<5" },
+    { name = "types-protobuf", marker = "extra == 'dev'", specifier = ">=4.24.0" },
+    { name = "types-psutil", marker = "extra == 'dev'", specifier = ">=5.9.0" },
 ]
+provides-extras = ["fmi", "dev"]
 
 [[package]]
 name = "packaging"
@@ -1013,7 +1030,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "opensysml", specifier = "==0.9.2" },
+    { name = "opensysml", url = "https://github.com/Open-MBEE/OpenSysML/archive/62b904178c1c8281439f6b0445c739547c89ae9a.zip", subdirectory = "client/python" },
     { name = "sysml-python-runtime", editable = "packages/sysml-python" },
 ]
 

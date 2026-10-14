@@ -9,7 +9,7 @@ import numpy as np
 from scipy.spatial import ConvexHull
 import capytaine as cpt
 from capytaine.bem.airy_waves import froude_krylov_force
-from ..model.runtime import ROOT,native,native_value
+from ..model.runtime import ROOT, analysis_values
 from ..model.vessel import CoupledModel
 from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
 from .inertia import mass_moments
@@ -18,8 +18,7 @@ DOFS=('Heave','Roll','Pitch')
 
 
 def policy_inputs():
-    report=json.loads(native('-analysis','BlueDogWavePerformance::Inputs','-json'))
-    return {v['name']:native_value(v['value']) for v in report['checks'][0]['values']}
+    return analysis_values('BlueDogWavePerformance::Inputs')
 
 
 def mesh_part(tetrahedra,name,resolution):

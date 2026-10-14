@@ -4,15 +4,13 @@ This evaluates the recorded scenario results; it does not rerun the optimizer or
 """
 import json
 
-from tools.boat_analysis.model.runtime import ROOT, native, native_value
+from tools.boat_analysis.model.runtime import ROOT, analysis_values
 from tools.boat_analysis.evidence.records import source_hashes
 
 
 def run():
     names = ['primary', 'construction', 'aerodynamic', 'hydrodynamic', 'energy', 'combined']
-    arguments = [item for name in names for item in ('-analysis', 'BlueDogWeather::'+name)]
-    report = json.loads(native(*arguments, '-json'))
-    rows = [{v['name']: native_value(v['value']) for v in check['values']} for check in report['checks']]
+    rows = [analysis_values('BlueDogWeather::'+name) for name in names]
     if len(rows) != len(names):
         raise ValueError('Incomplete native weather assessment')
     record = dict(zip(names, rows))

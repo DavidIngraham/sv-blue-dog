@@ -44,6 +44,21 @@ The numerical screening inputs have not changed in this clarification. Archived 
 
 ## Running the calculations
 
+I use a pinned development revision of OpenSysML for the model engine, Python client and agent MCP server. Native Python analysis calls return typed values, and mission classification calls the model's calculation directly. This removes the temporary SysML wrappers and text-result parsing from those analysis paths. The numerical optimizer remains in SciPy, while the equations and acceptance criteria stay in SysML.
+
+The same native engine supplies document queries and renders the scoped views in these articles. The publishing code handles narrative pages, navigation, interactive plots and the existing blog import. The numerical batch adapter remains useful for repeated compiled evaluations; it is a specialized bridge, rather than a second modeling framework.
+
+For repeatable model analyses, I can save a standalone model snapshot with OpenSysML's native `AnalysisRecords`. Each record identifies its case, execution time, tool and outputs. The source models remain unchanged. For example:
+
+```sh
+uv run python -m tools.boat_analysis.cli record \
+  --case BlueDogEnvironmentReview::FetchSensitivity \
+  --case BlueDogEncounterReview::Acquisition \
+  --output build/analysis/review.sysml
+```
+
+The saved model can be reopened with the same engine and queried through its Python client or MCP server. These records supplement the immutable archives for external simulations and optimizer campaigns; a recorded execution does not imply that a vessel requirement has been physically verified.
+
 SysML owns the equations. Python assembles geometry, chooses operating cases and coordinates the optimizer. All native calculations use the reusable library’s [execution backend](../../packages/sysml-python/sysml_python/backends/native.py). Mass, operating performance, structural margins, passage feasibility, route screening, surface/wave helpers, recovery segments, hull resistance and hydrostatics have declarative exports. The old shared adapter layer, duplicate runtime and custom hydrostatic C shim have been removed. Preparation reads argument order, Real types, dimensions and named output tuples from OpenSysML's API element export. Application wiring supplies friendly argument aliases and selects model-exported defaults; adapters no longer repeat vector widths or output labels.
 
 Mass, operating performance, structural margins, passage feasibility and route screening now use declarative exports in [pyproject.toml](../../pyproject.toml). The [reusable SysML/Python library](../../packages/sysml-python/README.md) discovers their vector dimensions, generates named records, evaluates model-owned defaults and compiles declared input checks. Their handwritten adapters are gone. Surface and wave providers assemble external geometry and quadrature around generated calculations; they no longer compile calculations themselves. Named model results can be copied to arrays for NumPy operations. Geometry and interpreter reference experiments remain project-owned in the [reference preparation](../../tools/boat_analysis/model/preparation.py). Hydrostatic meshes use the same explicit batch API; the project sums the returned tetrahedron moments. Generated code and manifests remain build artifacts; fingerprints cover model and runtime sources.

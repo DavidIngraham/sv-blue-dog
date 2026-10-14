@@ -13,7 +13,7 @@ import urllib.request
 
 import numpy as np
 
-from tools.boat_analysis.model.runtime import ROOT, native, native_value
+from tools.boat_analysis.model.runtime import ROOT, analysis_values
 from tools.boat_analysis.evidence.records import source_hashes
 
 DIRECTORY = ROOT / 'evidence/weather/2015-2024'
@@ -22,10 +22,7 @@ BASE = 'https://www.ncei.noaa.gov/pub/data/noaa/isd-lite'
 
 
 def policy():
-    result = json.loads(native('-analysis', 'BlueDogWeather::Inputs', '-json'))
-    if result['status'] != 'holds':
-        raise ValueError('Weather policy did not evaluate')
-    return {v['name']: native_value(v['value']) for v in result['checks'][0]['values']}
+    return analysis_values('BlueDogWeather::Inputs')
 
 
 def classify(direction, speed, p):

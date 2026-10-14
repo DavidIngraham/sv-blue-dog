@@ -76,6 +76,12 @@ jobs:
         run: ${{ matrix.python }} -m pytest packages/sysml-python/tests/test_native.py -q
       - name: Install pinned OpenSysML
         if: matrix.generated
+        uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+        with:
+          go-version: '1.25.11'
+          cache: false
+      - name: Build pinned OpenSysML
+        if: matrix.generated
         run: ${{ matrix.python }} -m tools.boat_analysis.model.install
       - name: Generated model execution
         if: matrix.generated

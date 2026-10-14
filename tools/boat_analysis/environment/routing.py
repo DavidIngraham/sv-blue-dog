@@ -11,12 +11,11 @@ from shapely import contains_xy, transform, unary_union
 from shapely.geometry import LineString, Point, shape, mapping
 
 from tools.boat_analysis.environment.course import LocalFrame, marker_gate
-from tools.boat_analysis.model.runtime import ROOT, native, native_value
+from tools.boat_analysis.model.runtime import ROOT, analysis_values
 
 
 def course_inputs():
-    report = json.loads(native('-analysis', 'TransGorgeCourse::GateGeometry', '-json'))
-    return {r['name']: native_value(r['value']) for r in report['checks'][0]['values']}
+    return analysis_values('TransGorgeCourse::GateGeometry')
 
 
 def chart_domains(features, settings, frame=LocalFrame()):

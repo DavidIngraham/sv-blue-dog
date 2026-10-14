@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 import numpy as np
 from tools.boat_analysis.aerodynamics.vsp.reference_vsp import build
-from tools.boat_analysis.model.runtime import ROOT, native, native_value
+from tools.boat_analysis.model.runtime import ROOT, analysis_values
 from tools.boat_analysis.evidence.records import digest
 
 
@@ -31,9 +31,7 @@ def inflow(heel, awa, nominal_alpha):
 
 
 def settings():
-    report=json.loads(native('-analysis','BlueDogWingHeel::sweepInputs','-json'))
-    if report['status']!='holds':raise ValueError('Cannot execute heel study inputs')
-    return {v['name']:native_value(v['value']) for v in report['checks'][0]['values']}
+    return analysis_values('BlueDogWingHeel::sweepInputs')
 
 
 def run():

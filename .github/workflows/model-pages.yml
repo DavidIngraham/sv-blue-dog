@@ -29,6 +29,10 @@ jobs:
           version: '0.9.5'
           enable-cache: true
       - run: uv sync --locked
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+        with:
+          go-version: '1.25.11'
+          cache: false
       - run: uv run python -m tools.boat_analysis.cli install
       - run: uv run python -m tools.boat_analysis.environment.climatology
       - run: uv run python -m tools.boat_analysis.environment.sensitivity
@@ -47,11 +51,11 @@ jobs:
       - run: uv run python -m tools.boat_analysis.cli evidence-check
       - name: Check reusable SysML Python interface
         env:
-          OPENSYSML_BINARY: ${{ github.workspace }}/.tools/nightly-20261009-28106371e/sysml
+          OPENSYSML_BINARY: ${{ github.workspace }}/.tools/develop-62b904178/sysml
         run: uv run pytest packages/sysml-python/tests -q
       - name: Verify installed runtime with an independent project
         env:
-          OPENSYSML_BINARY: ${{ github.workspace }}/.tools/nightly-20261009-28106371e/sysml
+          OPENSYSML_BINARY: ${{ github.workspace }}/.tools/develop-62b904178/sysml
         run: |
           uv build packages/sysml-python --wheel --out-dir .tools/runtime-dist
           template_dir=$(mktemp -d)

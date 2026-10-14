@@ -2,13 +2,12 @@
 import json
 import numpy as np
 from tools.boat_analysis.aerodynamics.vsp.polar_grid import run_case
-from tools.boat_analysis.model.runtime import ROOT,native,native_value
+from tools.boat_analysis.model.runtime import ROOT, analysis_values
 from tools.boat_analysis.evidence.records import source_hashes,output_path
 
 
 def run():
-    r=json.loads(native('-analysis','BlueDogAerodynamicPolicy::convergenceInputs','-json'))
-    c={v['name']:native_value(v['value']) for v in r['checks'][0]['values']}
+    c=analysis_values('BlueDogAerodynamicPolicy::convergenceInputs')
     hashes=source_hashes(['tools/boat_analysis/aerodynamics/vsp/convergence.py','tools/boat_analysis/aerodynamics/vsp/polar_grid.py','tools/boat_analysis/aerodynamics/vsp/reference_vsp.py','tools/boat_analysis/aerodynamics/vsp/vsp_runtime.py','build/analysis/wing-geometry.json'])
     rows=[]
     for reverse,beta in [(False,0),(True,0),(False,20)]:

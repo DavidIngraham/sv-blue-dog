@@ -4,17 +4,15 @@ Opt-in provider: historical uniform-flow replay remains reproducible. The local
 finite-wing coefficient approximation does not resolve spanwise circulation.
 """
 from sysml_python import execution_session
-import json
 
 import numpy as np
 
 from tools.boat_analysis.generated import operation, wind_sample, strip_load, sailing_core
-from .runtime import native, native_value
+from .runtime import analysis_values
 
 
 def policy_inputs():
-    report=json.loads(native('-analysis','BlueDogSurfaceEnvironment::Inputs','-json'))
-    return {v['name']:native_value(v['value']) for v in report['checks'][0]['values']}
+    return analysis_values('BlueDogSurfaceEnvironment::Inputs')
 
 
 class SurfaceOperation:

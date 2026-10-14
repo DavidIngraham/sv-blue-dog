@@ -4,6 +4,8 @@ from markdown_it import MarkdownIt
 MODELS = model_files()
 
 def native(*args, models=None):
+    if any(arg in ('-render', '-render-document', '-render-documents') for arg in args):
+        args = (*args, '-render-show', 'qualifiers,typings')
     files = tuple(models) if models is not None else MODELS
     views = ROOT / '.tools/regression-inline-views.sysml'
     bodies = [token.content for path in sorted((ROOT/'docs').rglob('*.md'))

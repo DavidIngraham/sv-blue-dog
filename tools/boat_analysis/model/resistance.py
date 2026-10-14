@@ -7,19 +7,12 @@ from tools.boat_analysis.evidence.records import digest
 
 
 def prepare():
-    from tools.boat_analysis.model.runtime import native, MODELS
-    from tools.boat_analysis.model.runtime import native_value
+    from tools.boat_analysis.model.runtime import load_model, numerical_value
     model=ROOT/'models/libraries/marine/hull-resistance.sysml'
-    fixture=ROOT/'.tools/hull-resistance-replay.sysml'
     h=[2,.6,.15,.071973,.85,1.05,1.1,.55,.727]
     speeds=[fn*(9.80665*2)**.5 for fn in [.15,.4,.425,.6,.65]]
-    text='package HullResistanceReplay { private import ScalarValues::*; analysis example {\n'
-    for i,v in enumerate(speeds):
-        text+=f'out attribute case{i} : Real [*] ordered nonunique = MarineResistance::Evaluate(('+','.join(format(x,'.17g') for x in h)+f'),{v:.17g},1000.0,9.80665);\n'
-    fixture.write_text(text+'} }',encoding='utf-8')
-    audit=json.loads(native('-analysis','HullResistanceReplay::example','-json',models=(*MODELS,fixture)))
-    if audit['status']!='holds':raise ValueError('Hull resistance arithmetic replay failed')
-    rows=[native_value(v['value']) for v in audit['checks'][0]['values']]
+    rows=[numerical_value(load_model().calc('MarineResistance::Evaluate',
+          arguments=[h, v, 1000.0, 9.80665]).value) for v in speeds]
     hashes={'models/libraries/marine/hull-resistance.sysml':digest(model),'tools/boat_analysis/model/resistance.py':digest(ROOT/'tools/boat_analysis/model/resistance.py')}
     from tools.boat_analysis.generated import HullResistanceResult
     names = tuple(HullResistanceResult.__dataclass_fields__)

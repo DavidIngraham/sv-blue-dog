@@ -84,7 +84,9 @@ def render_blocks(blocks, directory):
     models = (*model_files(), ROOT / "tools/publishing/reference.sysml", *paths)
     validate(models)
     output = directory / "rendered"
-    native("-render-documents", output, "-diagram-form", "mermaid", models=models)
+    # Keep identities for compact requirement labels and queried dependency links.
+    native("-render-documents", output, "-diagram-form", "mermaid",
+           "-render-show", "qualifiers,typings", models=models)
     from .relationships import basis_links, include_basis
     basis = basis_links((output / 'BlueDogDocuments-RelationshipRegister.md').read_text(encoding='utf-8'))
     return [include_basis((output / ((block.target.replace('::', '-') if block.report else f"PageBuild{i}-Content") + ".md")).read_text(encoding="utf-8"), basis)

@@ -8,6 +8,9 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True)
     for name in ("install", "validate", "prepare", "recovery", "pitch", "audit", "evidence-check"):
         commands.add_parser(name)
+    record = commands.add_parser("record", help="Execute cases into native AnalysisRecords evidence")
+    record.add_argument("--case", action="append", required=True, dest="cases")
+    record.add_argument("--output", required=True)
     solve = commands.add_parser("solve")
     solve.add_argument("--budget", type=int, default=40)
     solve.add_argument("--resume", action="store_true")
@@ -34,6 +37,9 @@ def main():
         from .model.runtime import validate
         validate()
         print("Model validation passed; this is not physical verification.")
+    elif args.command == "record":
+        from .model.runtime import record_analyses
+        print(record_analyses(args.cases, args.output))
     elif args.command == "prepare":
         from .model.runtime import ROOT, validate
         (ROOT / ".tools").mkdir(exist_ok=True)

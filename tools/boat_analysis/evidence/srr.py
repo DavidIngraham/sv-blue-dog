@@ -4,7 +4,7 @@ import json
 import subprocess
 import numpy as np
 from .records import source_hashes, validate, output_path
-from ..model.runtime import ROOT, native, native_value
+from ..model.runtime import ROOT, analysis_values
 from ..environment.routing import build, rounding_paths
 
 
@@ -18,9 +18,7 @@ def run(budget=10, battery_wh=None, beam_m=None):
     report={'sourceHashes':hashes,'sourceRevision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
             'physicalQualification':False,'srrApproved':False,'analyses':{}}
     for name in ('BlueDogEnvironmentReview::FetchSensitivity','BlueDogEncounterReview::Acquisition','BlueDogRecoveryRisk::Sensitivity'):
-        result=json.loads(native('-analysis',name,'-json'))
-        if result['status']!='holds':raise ValueError(name+' did not evaluate')
-        report['analyses'][name]={v['name']:native_value(v['value']) for v in result['checks'][0]['values']}
+        report['analyses'][name]=analysis_values(name)
     course,water,groups,gates,route=build()
     paths=rounding_paths(water,gates,route,course['routing'][4])
     report['course']={'circuitM':sum(p.length for p in paths),'gateClear':all(water.covers(g) for g in gates.values()),

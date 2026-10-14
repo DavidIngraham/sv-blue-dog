@@ -1,54 +1,66 @@
-"""Install the pinned native renderer locally; never use a moving nightly tag."""
+"""Build the upstream CLI, Python service and MCP from one verified revision."""
 import hashlib
-import io
+import os
 import platform
-import tarfile
+import shutil
+import subprocess
+import tempfile
 import urllib.request
 import zipfile
 from pathlib import Path
 
-RELEASE = "nightly-20261009-28106371e"
+REVISION = "62b904178c1c8281439f6b0445c739547c89ae9a"
+RELEASE = "develop-" + REVISION[:9]
+SOURCE_SHA256 = "2d188a0c431fdaf5805b150071d9feaeb1430268605826f64aeef72596e2ebde"
 ROOT = Path(__file__).resolve().parents[3]
-HASHES = {
-    "windows-amd64": "0e1562e74e2ede1de12937196772b811466f9dccfc566133531e869364a9bb9c",
-    "linux-amd64": "72426e639a52351e5be8b577a58cba043027e0acb4c5de0670638a4e622b1184",
-    "linux-arm64": "16b196a542b6217e790fb0c417509d79810e805b845e1619f7141c539dd1cd11",
-    "darwin-amd64": "b45f6577712bf842d2b6d8aafd082603aceabad2c353ed075406cd88a9ab27d7",
-    "darwin-arm64": "6dade50d74914f9842688f08b2d4e45efa2d72699b83c7989fdad2c50adf1beb",
-}
+COMMANDS = ("sysml", "sysml-grpc", "sysml-mcp")
 
-def binary_path():
-    return ROOT / ".tools" / RELEASE / ("sysml.exe" if platform.system() == "Windows" else "sysml")
+
+def binary_path(command="sysml"):
+    if command not in COMMANDS:
+        raise ValueError(f"Unknown OpenSysML command: {command}")
+    return ROOT / ".tools" / RELEASE / (command + (".exe" if platform.system() == "Windows" else ""))
+
 
 def main():
-    arch = {"x86_64": "amd64", "amd64": "amd64", "aarch64": "arm64", "arm64": "arm64"}[platform.machine().lower()]
-    target = f"{platform.system().lower()}-{arch}"
-    digest = HASHES[target]
-    suffix = ".zip" if target.startswith("windows") else ".tar.gz"
-    name = f"sysml-{target}{suffix}"
-    url = f"https://github.com/Open-MBEE/OpenSysML/releases/download/{RELEASE}/{name}"
-    with urllib.request.urlopen(url, timeout=120) as response:
-        data = response.read()
-    if hashlib.sha256(data).hexdigest() != digest:
-        raise SystemExit("OpenSysML archive checksum mismatch")
-    # Extract only the executable bytes; never extract arbitrary archive paths.
-    if suffix == ".zip":
-        with zipfile.ZipFile(io.BytesIO(data)) as archive:
-            candidates = [n for n in archive.namelist() if Path(n).name in {"sysml.exe", f"sysml-{target}.exe"}]
-            if len(candidates) != 1:
-                raise SystemExit("Expected exactly one sysml executable")
-            executable = archive.read(candidates[0])
-    else:
-        with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as archive:
-            candidates = [m for m in archive.getmembers() if m.isfile() and Path(m.name).name in {"sysml", f"sysml-{target}"}]
-            if len(candidates) != 1:
-                raise SystemExit("Expected exactly one sysml executable")
-            executable = archive.extractfile(candidates[0]).read()
-    path = binary_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(executable)
-    path.chmod(0o755)
-    print(f"Installed {RELEASE}: {path}")
+    go = shutil.which("go")
+    if not go:
+        raise SystemExit("Install Go 1.25 or later to build the pinned OpenSysML development revision.")
+    destination = binary_path().parent
+    destination.mkdir(parents=True, exist_ok=True)
+    archive_path = destination / "source.zip"
+    if not archive_path.exists():
+        with urllib.request.urlopen(f"https://codeload.github.com/Open-MBEE/OpenSysML/zip/{REVISION}", timeout=120) as response:
+            archive_path.write_bytes(response.read())
+    if hashlib.sha256(archive_path.read_bytes()).hexdigest() != SOURCE_SHA256:
+        raise SystemExit("OpenSysML source archive checksum mismatch")
+    with tempfile.TemporaryDirectory(prefix="bluedog-opensysml-") as directory:
+        build(go, archive_path, Path(directory))
+
+
+def build(go, archive_path, source):
+    prefix = f"OpenSysML-{REVISION}/"
+    with zipfile.ZipFile(archive_path) as archive:
+        for member in archive.infolist():
+            if member.is_dir():
+                continue
+            if not member.filename.startswith(prefix):
+                raise ValueError("Unexpected upstream archive root")
+            relative = Path(member.filename[len(prefix):])
+            target = (source / relative).resolve()
+            if not target.is_relative_to(source.resolve()):
+                raise ValueError("Unsafe upstream archive path")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(archive.read(member))
+    env = dict(os.environ, CGO_ENABLED="0")
+    for command in COMMANDS:
+        print(f"Building upstream {command} at {REVISION}", flush=True)
+        subprocess.run([go, "build", "-trimpath", "-ldflags",
+                        f"-s -w -X main.Version={RELEASE} -X main.Commit={REVISION}",
+                        "-o", str(binary_path(command)), f"./cmd/{command}"],
+                       cwd=source, env=env, check=True)
+        print(f"Installed {command} at {REVISION}: {binary_path(command)}", flush=True)
+
 
 if __name__ == "__main__":
     main()

@@ -2,13 +2,11 @@
 
 Run python -m tools.publishing.passage_exposure to regenerate the committed figure.
 """
-import json
-from tools.boat_analysis.model.runtime import ROOT, native, native_value
+from tools.boat_analysis.model.runtime import ROOT, analysis_values
 
 
 def render():
-    report = json.loads(native('-analysis', 'BlueDogPassageExposure::Contours', '-json'))
-    values = {v['name']: native_value(v['value']) for v in report['checks'][0]['values']}
+    values = analysis_values('BlueDogPassageExposure::Contours')
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt

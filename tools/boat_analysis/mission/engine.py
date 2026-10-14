@@ -7,10 +7,7 @@ from __future__ import annotations
 from sysml_python import execution_session
 
 from dataclasses import dataclass, field, asdict
-import json
 import math
-from pathlib import Path
-import tempfile
 
 import numpy as np
 from shapely import covers, linestrings, prepare, contains_xy
@@ -18,12 +15,11 @@ from shapely.geometry import Point, LineString
 
 from tools.boat_analysis.environment.course import crossing_direction
 from tools.boat_analysis.environment.trajectories import WeatherHistory
-from tools.boat_analysis.model.runtime import native, native_value, model_files, ROOT
+from tools.boat_analysis.model.runtime import analysis_values, load_model
 
 
 def mission_inputs():
-    report = json.loads(native('-analysis', 'BlueDogMissionSimulation::Inputs', '-json'))
-    return {r['name']: native_value(r['value']) for r in report['checks'][0]['values']}
+    return analysis_values('BlueDogMissionSimulation::Inputs')
 
 
 @dataclass(frozen=True)
@@ -57,15 +53,9 @@ def evaluate_outcome(*facts):
         facts = (*facts, False)
     if len(facts) != 8:
         raise ValueError('MissionOutcome requires eight Boolean facts (legacy calls imply no safety abort)')
-    expression = ','.join('true' if value else 'false' for value in facts)
-    code = ('package MissionObservation { analysis Evaluate { out attribute result : ScalarValues::String = '
-            'BlueDogMissionSimulation::MissionOutcome(' + expression + '); } }')
-    (ROOT/'.tools').mkdir(exist_ok=True)
-    with tempfile.TemporaryDirectory(dir=ROOT/'.tools') as directory:
-        path = Path(directory)/'observations.sysml'
-        path.write_text(code, encoding='utf-8')
-        report = json.loads(native('-analysis','MissionObservation::Evaluate','-json',models=(*model_files(),path)))
-    return native_value(report['checks'][0]['values'][0]['value'])
+    if any(not isinstance(fact, (bool, np.bool_)) for fact in facts):
+        raise TypeError('MissionOutcome facts must be Boolean')
+    return load_model().calc('BlueDogMissionSimulation::MissionOutcome', arguments=[bool(fact) for fact in facts]).value
 
 
 def direction(route, distance):
