@@ -45,6 +45,7 @@ jobs:
         with:
           version: '0.9.5'
       - name: Install MinGW GCC
+        id: mingw
         if: runner.os == 'Windows' && matrix.compiler == 'gcc'
         uses: msys2/setup-msys2@ec48f7c5447b3140e2b088413ae3a55687bccb6e # v2
         with:
@@ -53,7 +54,10 @@ jobs:
           update: false
       - name: Expose MinGW to native Python
         if: runner.os == 'Windows' && matrix.compiler == 'gcc'
-        run: echo 'C:/msys64/mingw64/bin' >> "$GITHUB_PATH"
+        shell: pwsh
+        run: |
+          Add-Content -LiteralPath $env:GITHUB_PATH -Value '${{ steps.mingw.outputs.msys2-location }}/mingw64/bin'
+          Add-Content -LiteralPath $env:GITHUB_ENV -Value 'CC=${{ steps.mingw.outputs.msys2-location }}/mingw64/bin/gcc.exe'
       - run: uv venv --python 3.12
       - run: uv pip install -e packages/sysml-python 'pytest>=9,<10'
       - name: Native ABI and build cache tests
