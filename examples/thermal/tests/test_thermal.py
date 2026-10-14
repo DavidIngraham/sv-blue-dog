@@ -27,3 +27,8 @@ def test_shared_resistance_and_per_case_current(heat):
 def test_invalid_inputs_are_rejected(heat):
     with pytest.raises(ValueError, match="finite"):
         heat(current=float("nan"))
+
+
+def test_model_physical_check_applies_to_overrides(heat):
+    with pytest.raises(ValueError, match="positiveResistance"):
+        heat(current=2, resistance=-1)

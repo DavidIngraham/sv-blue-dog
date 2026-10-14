@@ -17,6 +17,7 @@ backend = "opensysml-c"
 
 [tool.sysml_python.exports.joule_heat]
 definition = "Thermal::JouleHeat"
+checks = "Thermal::ValidResistance"
 
 [dependency-groups]
 dev = ["pytest>=9,<10"]

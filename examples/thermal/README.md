@@ -9,7 +9,7 @@ uv sync
 uv run pytest -q
 ```
 
-The tests prepare the declared exports and check the model's resistance default, a caller override, shared/per-case batch execution and invalid-input rejection. For application use:
+The tests prepare the declared exports and check the model's resistance default, a caller override, shared/per-case batch execution, invalid-input rejection and the model-defined positive-resistance check. For application use:
 
 ```python
 from sysml_python import Project
@@ -22,7 +22,7 @@ print(joule_heat.batch(shared={"resistance": 5}, cases={"current": [1, 2, 3]}).v
 
 ## Start another project
 
-Copy `models`, `tests` and `pyproject.toml` to a new project directory. Rename the project in `pyproject.toml`. Remove the `[tool.uv.sources]` section that points to this repository's editable package, then select your built wheel with `uv add /absolute/path/to/sysml_python_runtime-0.1.0-py3-none-any.whl`. The runtime has not been published to a package index. Use `uv sync` and `uv run pytest` to manage and test the new environment.
+Copy `.gitignore`, `models`, `tests` and `pyproject.toml` to a new project directory. Rename the project in `pyproject.toml`. Remove the `[tool.uv.sources]` section that points to this repository's editable package, then select your built wheel with `uv add /absolute/path/to/sysml_python_runtime-0.1.0-py3-none-any.whl`. The runtime has not been published to a package index. Use `uv sync` and `uv run pytest` to manage and test the new environment.
 
 Replace the thermal model with your calculations and update `[tool.sysml_python.exports]`. The model supplies the numerical schema; an export supplies its qualified name and any explicit default/check bindings. Keep application scenarios and engineering decisions in the application. Do not commit generated Python/C files, compiler caches, `.venv` or `__pycache__`.
 
