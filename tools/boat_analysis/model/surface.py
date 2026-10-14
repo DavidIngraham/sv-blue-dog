@@ -9,7 +9,7 @@ import json
 import numpy as np
 
 from tools.boat_analysis.generated import operation
-from .native_kernel import KernelSpec, NativeKernel
+from sysml_python.backends.native import KernelSpec, NativeKernel
 from .runtime import ROOT, model_files, native, native_value
 
 

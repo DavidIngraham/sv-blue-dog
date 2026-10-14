@@ -81,17 +81,17 @@ def test_locked_drive_saves_holding_power_without_free_motion(native_case):
 
 
 def test_route_tack_weights_cancel_crosswind_velocity(native_case):
-    from tools.boat_analysis.model.operating import RouteKernel
-    k=RouteKernel();states=[]
+    from tools.boat_analysis.generated import route
+    k=route;states=[]
     for up in [True,False,True,False]:
         angle=45 if up else 135
         states.extend([np.sqrt(2),angle,0,0,0,0])
         states.extend([3*np.sqrt(2),-angle,0,0,0,0])
-    r=k.evaluate([1,3]*4,states)
-    assert r[3]==pytest.approx(.95*1.5+.75)
-    assert r[4]==pytest.approx(.95*1.5-.75)
-    leg_length=k.contract['routeParameters'][3]
-    assert r[5]==pytest.approx(leg_length/3600*(1/r[3]+1/r[4]))
+    r=k(water=[1,3]*4,states=states)
+    assert r.downstream==pytest.approx(.95*1.5+.75)
+    assert r.upstream==pytest.approx(.95*1.5-.75)
+    leg_length=k.prepare_inputs(water=[1,3]*4,states=states)['policy'][3]
+    assert r.duration==pytest.approx(leg_length/3600*(1/r.downstream+1/r.upstream))
 
 
 def test_coupled_geometry_mass_and_hydrostatics_share_wing_pose(native_case):
@@ -126,7 +126,7 @@ def test_structural_stiffness_and_strength_respond_to_material_evidence(native_c
 def test_generated_interfaces_are_homogeneous_real_sequences(native_case):
     import re
     for name in ['mass','operation','structure','route']:
-        path = ROOT/'tools/boat_analysis/generated'/f'{name}.c' if name in ('mass','structure','operation') else ROOT/f'.tools/coupled-{name}.c'
+        path = ROOT/'tools/boat_analysis/generated'/f'{name}.c'
         text=path.read_text()
         signature=re.search(r'int sysml_run\((.*?)\) \{',text,re.S)
         assert signature[1].endswith('sysml_seq_real *result')
@@ -207,7 +207,7 @@ def test_finite_search_keeps_peak_but_removes_daily_energy_constraints(native_ca
     assert 'peakMargin' in names
     assert 'cycleMargin' not in names and 'reserveMarginScaled' not in names
     assert not any('cycleMargin' in n or 'reserveMarginScaled' in n for n in p.constraint_names)
-    assert p.route.contract['routeParameters'][4] == 0
+    assert p.context['routeParameters'][4] == 0
     selected=r['ineq'][:8*len(names)].reshape(8,len(names))
     raw=np.array([[row[n] for n in names] for row in r['rows']])
     difference=raw-selected
@@ -215,27 +215,28 @@ def test_finite_search_keeps_peak_but_removes_daily_energy_constraints(native_ca
     for direction,raw_route in [('easterly',r['route']),('westerly',r['westerlyRoute'])]:
         for i,leg in enumerate(['downstream progress','upstream progress']):
             margin=r['ineq'][p.constraint_names.index(f'{direction} {leg}')]
-            assert raw_route[i]-margin==pytest.approx(.005/p.route.contract['routeParameters'][5])
-    assert p.route.contract['routeParameters'][5]==.5
+            assert raw_route[i]-margin==pytest.approx(.005/p.context['routeParameters'][5])
+    assert p.context['routeParameters'][5]==.5
     for row in r['rows']:
         assert row['cycleMargin']==pytest.approx(row['cycleEnergy']/100)
 
 
 def test_route_assigns_easterly_upstream_to_windward(native_case):
-    from tools.boat_analysis.model.operating import RouteKernel
-    kernel=RouteKernel();states=[]
+    from tools.boat_analysis.generated import route
+    kernel=route;states=[]
     for windward in [True,False,True,False]:
         speed=np.sqrt(2)*(1 if windward else 2)
         angle=45 if windward else 135
         for tack in [1,-1]:states.extend([speed,tack*angle,0,0,0,0])
     water=[1,1,2,2]*2
-    east=kernel.evaluate(water,states)
-    west=kernel.evaluate(water,states,wind_from='west')
-    assert east[3]==pytest.approx(.95*2+.75)
-    assert east[4]==pytest.approx(.95*1-.75)
-    assert west[3]==pytest.approx(.95*1+.75)
-    assert west[4]==pytest.approx(.95*2-.75)
-    assert east[5]>west[5]
+    east=kernel(water=water,states=states)
+    policy=kernel.prepare_inputs(water=water,states=states)['policy'].copy();policy[-1]=0.
+    west=kernel(water=water,states=states,policy=policy)
+    assert east.downstream==pytest.approx(.95*2+.75)
+    assert east.upstream==pytest.approx(.95*1-.75)
+    assert west.downstream==pytest.approx(.95*1+.75)
+    assert west.upstream==pytest.approx(.95*2-.75)
+    assert east.duration>west.duration
 
 
 def test_native_structure_uses_finite_inertia_and_section_modulus(native_case):

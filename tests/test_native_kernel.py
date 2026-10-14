@@ -5,7 +5,7 @@ import sys
 import numpy as np
 import pytest
 
-from tools.boat_analysis.model.native_kernel import BatchError, KernelSpec, NativeKernel
+from sysml_python.backends.native import BatchError, KernelSpec, NativeKernel
 
 pytestmark = pytest.mark.skipif(sys.platform != 'linux', reason='Native runtime requires Linux/GCC')
 

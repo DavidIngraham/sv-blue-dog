@@ -3,7 +3,13 @@ import copy
 import sys
 import numpy as np
 import pytest
-from tools.boat_analysis.model.contracts import describe
+from sysml_python.backends.opensysml import OpenSysML
+from tools.boat_analysis.model.install import binary_path
+
+
+def describe(path, definition):
+    schema = OpenSysML(binary_path(), (path,)).describe(definition)
+    return schema['inputs'], [field['name'] for field in schema['outputs']]
 
 
 def test_schema_follows_model_names_order_and_dimensions(tmp_path):
@@ -22,7 +28,7 @@ def test_schema_follows_model_names_order_and_dimensions(tmp_path):
 def test_unsupported_schema_fails_preparation(tmp_path):
     path=tmp_path/'unsupported.sysml'
     path.write_text('package Unsupported { private import ScalarValues::*; calc def Evaluate { in x : String; return result : Real [2] ordered nonunique; (1.0,2.0) } }',encoding='utf-8')
-    with pytest.raises(ValueError,match='Unsupported numerical input'):
+    with pytest.raises(ValueError,match='Unsupported numerical type'):
         describe(path,'Unsupported::Evaluate')
 
 

@@ -5,7 +5,7 @@ import ctypes as ct
 import json
 import numpy as np
 from tools.boat_analysis.model.runtime import ROOT
-from .native_kernel import KernelSpec, NativeKernel, load_library
+from sysml_python.backends.native import KernelSpec, NativeKernel, load_library
 from tools.boat_analysis.evidence.records import digest
 SOURCE=ROOT/'models/analyses/recovery.sysml'
 CONTRACT=ROOT/'.tools/hydrostatics-contract.json'

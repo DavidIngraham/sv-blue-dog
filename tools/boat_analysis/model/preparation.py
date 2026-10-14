@@ -2,7 +2,6 @@
 import json
 import numpy as np
 from .runtime import ROOT, native, native_value
-from .contracts import compile_model
 from ..evidence.records import input_record, output_path, source_hashes
 
 
@@ -54,9 +53,6 @@ def prepare_operating():
             c[record['sysml_id']+'Fields']=record['fields']
     c['structureNames']=[f['name'] for f in generated['exports']['structure']['outputs']]
     c['conceptNames']=[f['name'] for f in generated['exports']['concept']['outputs']]
-    compile_model(c, 'route', path='models/libraries/marine/course.sysml', definition='MarineCourse::Route',
-        aliases={'water':'water','states':'states','policy':'policy'}, source='coupled-route.c', hash_key='routeHash',
-        defaults={'policy':'routeParameters'})
     names=c['outputNames']
     (ROOT/'.tools/coupled-operation-contract.json').write_text(json.dumps(c,indent=2)+'\n')
     reference=input_record('coupled-mass-reference.json')

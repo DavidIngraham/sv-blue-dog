@@ -5,7 +5,7 @@ import json
 import re
 import numpy as np
 from tools.boat_analysis.model.runtime import ROOT
-from .native_kernel import KernelSpec, NativeKernel
+from sysml_python.backends.native import KernelSpec, NativeKernel
 from tools.boat_analysis.evidence.records import digest, validate
 CONTRACT=ROOT/'.tools/hull-resistance-contract.json'
 NAMES=['resistance_N','resistance_weight_ratio','froude']+[f'{name}_{side}' for name in ['froude','lcb','cp','volume_area','beam_length','center_ratio','volume_length','cm','beam_draft'] for side in ['lower','upper']]

@@ -41,10 +41,12 @@ def main():
         from sysml_python import Project
         from .model.install import binary_path
         Project(ROOT/'pyproject.toml', executable=binary_path()).prepare()
-        from .model.preparation import prepare_mass
+        from .model.preparation import prepare_mass, prepare_operating
         prepare_mass()
         print("Prepared mass reference evidence", flush=True)
-        for name in ("operating", "hydrostatics", "resistance", "uncertainty"):
+        prepare_operating()
+        print("Prepared operating reference evidence", flush=True)
+        for name in ("hydrostatics", "resistance", "uncertainty"):
             importlib.import_module(f"tools.boat_analysis.model.{name}").prepare()
             print(f"Prepared {name}", flush=True)
     elif args.command == "solve":

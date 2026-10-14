@@ -5,8 +5,7 @@ import argparse,json
 from concurrent.futures import ProcessPoolExecutor,as_completed
 import numpy as np
 from tools.boat_analysis.model.vessel import CoupledModel
-from tools.boat_analysis.model.operating import RouteKernel
-from tools.boat_analysis.generated import structure, concept as concept_model, Passage
+from tools.boat_analysis.generated import structure, concept as concept_model, Passage, route
 from tools.boat_analysis.geometry.hydro import free_pitch_equilibrium,DisplacementBody
 from tools.boat_analysis.optimization.operating import solve_state, operating_margin_names
 from tools.boat_analysis.model.runtime import ROOT
@@ -29,7 +28,7 @@ def operating_case(model,design,wind,up,tack,state,budget):
 
 def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
     if route_profile not in ('challenge','all-season'):raise ValueError('Unknown route profile')
-    model=CoupledModel();model.parameters=np.array(scenarios['values'][name]);route=RouteKernel()
+    model=CoupledModel();model.parameters=np.array(scenarios['values'][name])
     x=np.array([design[n] for n in model.c['designNames']]);rows=[]
     env=[(w,u,t) for w in model.operating_contract['windSpeeds'] for u in [True,False] for t in [1,-1]]
     for state,(wind,up,tack) in zip(initial,env):
@@ -40,8 +39,8 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
     loads=[max(row['outputs'][n] for row in rows) for n in ['wingResultant','keelResultant','rudderResultant']]
     margins=structure(design=x,parameters=model.parameters,mass=m,geometry=g,loads=loads,waterline=upright['waterline_m']).to_mapping()
     policy=scenarios['values']['adverseRoute' if name=='combined' else 'nominalRoute']
-    trip=route.evaluate([r['outputs']['waterVMG'] for r in rows],np.array([r['state'][3:] for r in rows]).ravel(),policy)
-    west=route.evaluate([r['outputs']['waterVMG'] for r in rows],np.array([r['state'][3:] for r in rows]).ravel(),policy,wind_from='west')
+    trip=np.array(list(route(water=[r['outputs']['waterVMG'] for r in rows],states=np.array([r['state'][3:] for r in rows]).ravel(),policy=policy).values()))
+    west=np.array(list(route(water=[r['outputs']['waterVMG'] for r in rows],states=np.array([r['state'][3:] for r in rows]).ravel(),policy=[*policy[:-1],0.]).values()))
     concept=concept_model(design=x,mass=m,geometry=g,passage=Passage(duration_h=max(west[5],trip[5]) if route_profile=='all-season' else west[5],averagePower_W=max(r['outputs']['averagePower'] for r in rows))).to_mapping()
     margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
     recovery=[]
@@ -74,7 +73,7 @@ def run(names,budget,workers=3):
     if len(names)!=len(set(names)):raise ValueError('Duplicate sensitivity scenarios')
     saved=input_record('coupled-sizing-search.json')
     scenarios=input_record('coupled-uncertainty-inputs.json')
-    sources=['build/analysis/coupled-sizing-search.json','build/analysis/coupled-uncertainty-inputs.json','tools/boat_analysis/optimization/replay.py','tools/boat_analysis/optimization/operating.py','tools/boat_analysis/model/vessel.py','tools/boat_analysis/model/operating.py']
+    sources=['build/analysis/coupled-sizing-search.json','build/analysis/coupled-uncertainty-inputs.json','tools/boat_analysis/optimization/replay.py','tools/boat_analysis/optimization/operating.py','tools/boat_analysis/model/vessel.py']
     hashes=source_hashes(sources)
     completed={}
     with ProcessPoolExecutor(max_workers=min(workers,len(names))) as pool:

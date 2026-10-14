@@ -11,8 +11,7 @@ import numpy as np
 from scipy.optimize import least_squares,minimize
 from tools.boat_analysis.model.vessel import CoupledModel
 from tools.boat_analysis.model.design_types import AppendageLoads
-from tools.boat_analysis.model.operating import RouteKernel
-from tools.boat_analysis.generated import structure, concept, Passage
+from tools.boat_analysis.generated import structure, concept, Passage, route
 from tools.boat_analysis.geometry.hydro import equilibrium
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate
@@ -24,7 +23,7 @@ class Problem:
         self.route_profile=route_profile
         self.resolution=resolution
         # Numerical allowance for coarse fixed-pitch versus refined free-pitch VMG.
-        self.model=CoupledModel();self.structure=structure;self.concept=concept;self.route=RouteKernel();self.context=self.model.operating_contract;c=self.context
+        self.model=CoupledModel();self.structure=structure;self.concept=concept;self.route=route;self.context=self.model.operating_contract;c=self.context
         self.overall_length_limit_m = c['maximumOverallLengthM'] if overall_length_limit_m is None else float(overall_length_limit_m)
         if not 0 < self.overall_length_limit_m <= c['maximumOverallLengthM']:
             raise ValueError('Design envelope must respect the challenge overall-length limit')
@@ -75,8 +74,8 @@ class Problem:
         reference_mass,g,upright,righting=self.design_data(x)
         loads=AppendageLoads(**{name:max(row[name] for row in rows) for name in ('wingResultant','keelResultant','rudderResultant')})
         margins=self.structure(design=x,parameters=k.parameters,mass=reference_mass,geometry=g,loads=loads,waterline=upright['waterline_m']).to_mapping()
-        route=self.route.evaluate([r['waterVMG'] for r in rows],states.ravel())
-        west=self.route.evaluate([r['waterVMG'] for r in rows],states.ravel(),wind_from='west')
+        route=np.array(list(self.route(water=[r['waterVMG'] for r in rows],states=states.ravel()).values()))
+        west=np.array(list(self.route(water=[r['waterVMG'] for r in rows],states=states.ravel(),policy=[*self.context['routeParameters'][:-1],0.]).values()))
         concept=self.concept(design=x,mass=reference_mass,geometry=g,passage=Passage(duration_h=max(west[5],route[5]) if self.require_east else west[5], averagePower_W=max(r['averagePower'] for r in rows))).to_mapping()
         margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
         from tools.boat_analysis.geometry.vessel import operating_envelope
@@ -86,7 +85,7 @@ class Problem:
         static_names=operating_margin_names(names)[:12]
         operating=np.array([[r[n] for n in static_names] for r in rows])
         ineq=operating.ravel()
-        route_reserve=np.array([1.,1.,0.])*self.progress_reserve_m_s/self.route.contract['routeParameters'][5]
+        route_reserve=np.array([1.,1.,0.])*self.progress_reserve_m_s/self.context['routeParameters'][5]
         route_screens=[('westerly',west)]+([('easterly',route)] if self.require_east else [])
         ineq=np.r_[ineq,(np.array([[r[n] for n in names[47:]] for r in rows])-np.array(k.operating_contract['resistanceDomainReserve'])).ravel(),list(margins.values()),np.concatenate([r[:3]-route_reserve for _,r in route_screens]),righting]
         self.constraint_names=([f'case {i}: {n}' for i in range(8) for n in static_names]
@@ -150,7 +149,7 @@ def run(budget,resume=False,resolution=12,route_profile='challenge'):
     if needed>1.001:
         physical[0]=min(p.hi[0],physical[0]*needed*1.02)
         initial=(physical-p.lo)/p.span
-    sources=['tools/boat_analysis/geometry/laminate.py','uv.lock','tools/boat_analysis/optimization/search.py','tools/boat_analysis/optimization/operating.py','tools/boat_analysis/model/vessel.py','packages/sysml-python/sysml_python/execution.py','tools/boat_analysis/model/operating.py','tools/boat_analysis/model/hydrostatics.py','tools/boat_analysis/geometry/hydro.py','tools/boat_analysis/geometry/vessel.py','tools/boat_analysis/geometry/hull.py','tools/boat_analysis/aerodynamics/polar.py','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json']
+    sources=['tools/boat_analysis/geometry/laminate.py','uv.lock','tools/boat_analysis/optimization/search.py','tools/boat_analysis/optimization/operating.py','tools/boat_analysis/model/vessel.py','packages/sysml-python/sysml_python/execution.py','tools/boat_analysis/model/hydrostatics.py','tools/boat_analysis/geometry/hydro.py','tools/boat_analysis/geometry/vessel.py','tools/boat_analysis/geometry/hull.py','tools/boat_analysis/aerodynamics/polar.py','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json']
     hashes={**p.model.c['sourceHashes'],**p.model.operating_contract['sourceHashes'],**source_hashes(sources),'models/analyses/recovery.sysml':digest(ROOT/'models/analyses/recovery.sysml')}
 
     if np.abs(p.evaluate(initial)['eq']).max()>1e-4:

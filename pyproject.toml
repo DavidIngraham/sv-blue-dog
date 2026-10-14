@@ -104,3 +104,8 @@ mass = "MarineDesign::MassProperties"
 hydro = "MarineDesign::HydroState"
 [tool.sysml_python.exports.operation.defaults]
 environment = "BlueDogOperatingEnvironment::Inputs.parameterValues"
+
+[tool.sysml_python.exports.route]
+definition = "MarineCourse::Route"
+[tool.sysml_python.exports.route.defaults]
+policy = "BlueDogCoupledOperation::Inputs.routeParameters"
