@@ -104,11 +104,11 @@ class NativeKernel:
             raise ValueError('Unsupported native input ABI: ' + signature[1])
         output = fields[-1].strip()
         outputs = {'sysml_seq_real *result': Sequence, 'sysml_seq_num *result': NumberSequence,
-                   'sysml_real *result': ct.c_double}
+                   'sysml_real *result': ct.c_double, 'sysml_num *result': Number}
         if output not in outputs:
             raise ValueError('Unsupported native output ABI: ' + output)
         self.result_type = outputs[output]
-        if self.result_type is ct.c_double and spec.output_size not in (None, 1):
+        if self.result_type in (ct.c_double, Number) and spec.output_size not in (None, 1):
             raise ValueError('Scalar output requires size 1')
         shim = self._shim(output.split(' *')[0])
         wrapper = spec.source.parent / ('batch-' + hashlib.sha256(shim.encode()).hexdigest()[:24] + '.c')
@@ -131,15 +131,17 @@ class NativeKernel:
         for i, vector in enumerate(self.vector):
             args.append(f'(sysml_seq_real){{2, widths[{i}], inputs[{i}] + row * strides[{i}]}}' if vector
                         else f'inputs[{i}][row * strides[{i}]]')
-        check = '' if output == 'sysml_real' else 'if (out.shape != 2 || out.len != width || !out.data) message = "Output ABI mismatch";'
-        value = 'out' if output == 'sysml_real' else ('out.data[j]' if output == 'sysml_seq_real' else '(out.data[j].real ? out.data[j].r : out.data[j].i)')
+        check = '' if output in ('sysml_real', 'sysml_num') else 'if (out.shape != 2 || out.len != width || !out.data) message = "Output ABI mismatch";'
+        value = {'sysml_real': 'out', 'sysml_num': '(out.real ? out.r : out.i)',
+                 'sysml_seq_real': 'out.data[j]',
+                 'sysml_seq_num': '(out.data[j].real ? out.data[j].r : out.data[j].i)'}[output]
         return f'''#include "{self.spec.source.resolve().as_posix()}"
 void sysml_python_batch(int64_t count, double **inputs, int64_t *widths, int64_t *strides,
                 int64_t width, double *values, int *status, char *errors) {{
     for (int64_t row = 0; row < count; row++) {{
         {output} out;
         const char *message = NULL;
-        if (sysml_run({', '.join(args)}, &out)) {{ message = sysml_error(); if (!message) message = "Native calculation failed"; }}
+        if (sysml_run({', '.join([*args, '&out'])})) {{ message = sysml_error(); if (!message) message = "Native calculation failed"; }}
         else {{ {check} }}
         if (!message) for (int64_t j = 0; j < width; j++) {{
             double value = {value};
@@ -170,6 +172,8 @@ void sysml_python_batch(int64_t count, double **inputs, int64_t *widths, int64_t
                 raise ValueError(self.lib.sysml_error().decode())
             if self.result_type is ct.c_double:
                 result = np.array([out.value])
+            elif self.result_type is Number:
+                result = np.array([out.value if out.real else out.integer], dtype=float)
             else:
                 if out.shape != 2 or out.length < 0 or (out.length and not out.data):
                     raise ValueError('Output ABI mismatch')
@@ -195,7 +199,7 @@ void sysml_python_batch(int64_t count, double **inputs, int64_t *widths, int64_t
         if set(shared) & set(cases) or set(shared) | set(cases) != set(self.spec.arguments) or not cases:
             raise ValueError('Supply each argument exactly once in shared or cases')
         width = self.spec.output_size
-        if width is None or width < 1 or (self.result_type is ct.c_double and width != 1):
+        if width is None or width < 1 or (self.result_type in (ct.c_double, Number) and width != 1):
             raise ValueError('Batch requires a fixed positive output size')
         arrays = []; strides = []; widths = []; count = None
         for name, vector in zip(self.spec.arguments, self.vector):

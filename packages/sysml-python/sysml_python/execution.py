@@ -180,7 +180,10 @@ class Calculation:
                 raise TypeError(f"{field['name']}: incompatible SysML record")
             value = value.to_mapping()
         if isinstance(value, Mapping):
-            if not record or set(value) != set(record['fields']):
+            if not record:
+                raise ValueError(f"{field['name']}: mapping differs from model record")
+            value = {**record.get('defaults', {}), **value}
+            if set(value) != set(record['fields']):
                 raise ValueError(f"{field['name']}: mapping differs from model record")
             value = [value[n] for n in record['fields']]
         return value

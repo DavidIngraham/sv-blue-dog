@@ -60,10 +60,27 @@ class OpenSysML:
         element = self.named(definition)
         if element['@type'] not in ('AttributeDefinition', 'PartDefinition') or element.get('ownedSpecialization'):
             raise ValueError(f'{definition}: records require a direct part or attribute definition without inheritance')
-        fields = [e for e in self.members(definition) if e['@type'] == 'AttributeUsage']
+        members = self.members(definition)
+        if any(e['@type'].endswith('Usage') and e['@type'] not in ('AttributeUsage', 'MetadataUsage') for e in members):
+            raise ValueError(f'{definition}: nested or non-attribute record features are unsupported')
+        fields = [e for e in members if e['@type'] == 'AttributeUsage']
         if not fields or any(self.real_shape(e) for e in fields):
             raise ValueError(f'{definition}: record requires scalar Real attributes')
-        return {'sysml_id': definition, 'fields': [e['declaredName'] for e in fields]}
+        defaults = {}
+        for field in fields:
+            if 'value' in field:
+                if not field.get('isDefault'):
+                    raise ValueError(f'{definition}: bound record fields cannot be overridden')
+                defaults[field['declaredName']] = self.literal_default(field)
+        return {'sysml_id': definition, 'fields': [e['declaredName'] for e in fields], 'defaults': defaults}
+
+    def literal_default(self, feature):
+        value = self.index()[feature['value']['@id']]
+        if value['@type'] not in ('LiteralInteger', 'LiteralRational') or not isinstance(value.get('value'), (int, float)):
+            raise NotImplementedError(f"{feature.get('qualifiedName')}: nonliteral defaults require model evaluation")
+        if not math.isfinite(value['value']):
+            raise ValueError('Default must be finite')
+        return value['value']
 
     def describe(self, definition, *, output_definition=None):
         if self.named(definition)['@type'] != 'CalculationDefinition':
@@ -79,12 +96,7 @@ class OpenSysML:
             if 'value' in feature:
                 if not feature.get('isDefault'):
                     raise ValueError('Bound input cannot be exposed as an overridable argument')
-                value = self.index()[feature['value']['@id']]
-                if value['@type'] not in ('LiteralInteger', 'LiteralRational') or not isinstance(value.get('value'), (int, float)):
-                    raise NotImplementedError(f'{definition}: nonliteral parameter defaults require model evaluation')
-                if not math.isfinite(value['value']):
-                    raise ValueError('Default must be finite')
-                field['default'] = value['value']
+                field['default'] = self.literal_default(feature)
             inputs.append(field)
         members = self.members(output_definition or definition)
         results = [e for e in members if e.get('isResult')]

@@ -11,3 +11,6 @@ dependencies = ["numpy>=2,<3"]
 
 [tool.setuptools.packages.find]
 include = ["sysml_python*"]
+
+[tool.setuptools.package-data]
+sysml_python = ["py.typed"]

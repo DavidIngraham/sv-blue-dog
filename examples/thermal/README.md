@@ -12,12 +12,14 @@ uv run pytest -q
 The tests prepare the declared exports and check the model's resistance default, a caller override, shared/per-case batch execution, invalid-input rejection and the model-defined positive-resistance check. For application use:
 
 ```python
-from sysml_python import Project
+from sysml_python import Project, execution_session
 Project("pyproject.toml").prepare()
 from generated import joule_heat
 
-print(joule_heat(current=2).power)
-print(joule_heat.batch(shared={"resistance": 5}, cases={"current": [1, 2, 3]}).values)
+with execution_session() as run:
+    print(joule_heat(current=2).power)
+    print(joule_heat.batch(shared={"resistance": 5}, cases={"current": [1, 2, 3]}).values)
+print(run.to_mapping())
 ```
 
 ## Start another project

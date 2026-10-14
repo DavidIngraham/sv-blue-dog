@@ -253,6 +253,8 @@ def test_generated_batch_signature_is_statically_named(prepared):
 
 @pytest.mark.parametrize('declaration,field,match', [
     ('attribute def Dimensions { attribute values : Real; }','values','conflicts'),
+    ('part def Nested {} part def Dimensions { attribute x : Real; part nested : Nested; }','x','nested'),
+    ('attribute def Dimensions { attribute x : Real = 2; }','x','bound record'),
     ('attribute def Parent { attribute x : Real; } attribute def Dimensions :> Parent { attribute y : Real; }','y','inheritance'),
 ])
 def test_unsupported_record_schemas_fail_explicitly(prepared, declaration, field, match):
@@ -271,3 +273,53 @@ def test_source_aliases_preserve_resolved_discovery_semantics(prepared):
     assert module.heat(current=2,resistance=10).power == 40
     project.prepare()
     assert module.heat(current=2,resistance=10).power == 40
+
+
+@pytest.mark.parametrize('expression,expected', [('if current > 0 ? 1 else 0',[0,1]),('if current > 0 ? 1.5 else 0',[0,1.5])])
+def test_real_scalar_with_compiler_numeric_union(prepared, expression, expected):
+    project, source, _ = prepared
+    source.write_text(source.read_text().replace('current * current * resistance',expression))
+    package = project.prepare()
+    spec = importlib.util.spec_from_file_location('numeric_union_test',package/'__init__.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert module.heat(current=2,resistance=10).power == expected[1]
+    result = module.heat.batch(shared={'resistance':10},cases={'current':[-1,2]})
+    np.testing.assert_array_equal(result.values[:,0],expected)
+
+
+def test_existing_user_package_is_not_overwritten(prepared):
+    project, _, _ = prepared
+    output = project.root/'generated/__init__.py'
+    output.write_text('# application code\n')
+    with pytest.raises(ValueError,match='non-generated'):
+        project.prepare()
+    assert output.read_text() == '# application code\n'
+
+
+def test_constant_calculation_without_inputs(prepared):
+    project, source, _ = prepared
+    source.write_text('package Example { private import ScalarValues::*; calc def Heat { return power : Real = 42.0; } }')
+    package = project.prepare()
+    spec = importlib.util.spec_from_file_location('constant_test',package/'__init__.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert module.heat().power == 42
+    with pytest.raises(ValueError, match='exactly once'):
+        module.heat.batch(shared={},cases={})
+
+
+def test_record_defaults_preserve_model_order_and_named_overrides(prepared):
+    project, source, _ = prepared
+    source.write_text('package Example { private import ScalarValues::*;\n        part def Dimensions { attribute width : Real default 2; attribute height : Real; }\n        calc def Heat { in size : Real [2] ordered nonunique; return power : Real = size#(1)*size#(2); }\n    }')
+    project.path.write_text(project.path.read_text()+'\n[tool.sysml_python.exports.heat.records]\nsize = "Example::Dimensions"\n')
+    package = project.prepare()
+    spec = importlib.util.spec_from_file_location('record_defaults_test',package/'__init__.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    record = module.Dimensions(height=3)
+    np.testing.assert_array_equal(record.as_array(),[2,3])
+    assert module.heat(size=record).power == 6
+    assert module.heat(size={'height':3}).power == 6
+    assert module.heat(size=module.Dimensions(height=3,width=4)).power == 12
+    np.testing.assert_array_equal(module.heat.batch(shared={},cases={'size':[{'height':3},{'height':4,'width':5}]}).values,[[6],[20]])

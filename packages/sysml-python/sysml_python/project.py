@@ -39,6 +39,9 @@ class Project:
         if any(not n.isidentifier() or keyword.iskeyword(n) for n in package.split('.')):
             raise ValueError('Invalid generated package')
         directory = self.root.joinpath(*package.split('.'))
+        generated_python = directory/'__init__.py'
+        if generated_python.exists() and not generated_python.read_text(encoding='utf-8').startswith('# Generated from SysML. Do not edit.'):
+            raise ValueError('Refusing to overwrite a non-generated Python package: '+str(directory))
         directory.mkdir(parents=True, exist_ok=True)
         manifest = {'schemaVersion':2,
                     'projectRoot':Path(os.path.relpath(self.root, directory)).as_posix(),
@@ -47,13 +50,13 @@ class Project:
                     'runtime':{'sourceHashes':runtime_sources()},
                     'sourceHashes':{p.relative_to(self.root).as_posix():digest(p) for p in self.backend.sources},
                     'compiler':{'path':str(self.backend.executable),'sha256':digest(self.backend.executable)},'exports':{}}
-        code = ['# Generated from SysML. Do not edit.', 'from dataclasses import dataclass',
-                'from pathlib import Path', 'from numpy.typing import ArrayLike', 'from typing import TypedDict, Literal, Sequence',
+        code = ['# Generated from SysML. Do not edit.', 'from dataclasses import dataclass, field as _record_field',
+                'from pathlib import Path', 'from numpy.typing import ArrayLike, NDArray', 'import numpy as np', 'from typing import TypedDict, Literal, Sequence',
                 'from sysml_python.backends.native import BatchResult',
                 'from sysml_python.records import Record', 'from sysml_python.execution import Calculation', '']
         record_names, analyses = {}, {}
-        symbols = {'dataclass', 'Path', 'ArrayLike', 'TypedDict', 'Literal', 'Sequence',
-                   'BatchResult', 'Record', 'Calculation'}
+        symbols = {'dataclass', '_record_field', 'Path', 'ArrayLike', 'TypedDict', 'Literal', 'Sequence',
+                   'BatchResult', 'Record', 'Calculation', 'NDArray', 'np'}
         def reserve(label):
             identifier(label)
             if label in symbols:
@@ -70,7 +73,8 @@ class Project:
                     raise ValueError('Record field conflicts with runtime API: '+field)
             code.extend(['@dataclass(frozen=True)', f'class {label}(Record):', f"    sysml_id = {record['sysml_id']!r}"])
             for field in record['fields']:
-                code.append(f'    {identifier(field)}: float')
+                default = f" = _record_field(default={record['defaults'][field]!r}, kw_only=True)" if field in record.get('defaults', {}) else ''
+                code.append(f'    {identifier(field)}: float'+default)
             code.append('')
         for name, settings in self.config['exports'].items():
             identifier(name)
@@ -158,7 +162,7 @@ class Project:
             code += [f'class {calculation}(Calculation):',
                      f"    def __call__(self{', ' if signature else ''}{signature}) -> {result}:",
                      f"        return super().__call__({forwarded})",
-                     f"    def prepare_inputs(self{', ' if signature else ''}{signature}):",
+                     f"    def prepare_inputs(self{', ' if signature else ''}{signature}) -> dict[str, NDArray[np.float64]]:",
                      f"        return super().prepare_inputs({forwarded})",
                      f"    def batch(self, *, shared: {shared_type}, cases: {cases_type}, chunk_size: int = 256, errors: Literal['raise', 'collect'] = 'raise') -> BatchResult:",
                      "        return super().batch(shared=shared, cases=cases, chunk_size=chunk_size, errors=errors)",
