@@ -18,24 +18,28 @@ jobs:
           - os: ubuntu-24.04
             compiler: gcc
             python: .venv/bin/python
+            shell: bash
             generated: true
           - os: macos-14
             compiler: clang
             python: .venv/bin/python
+            shell: bash
             generated: true
           - os: windows-2022
             compiler: gcc
             python: .venv/Scripts/python.exe
+            shell: pwsh
             generated: true
           - os: windows-2022
             compiler: cl
             python: .venv/Scripts/python.exe
+            shell: pwsh
             generated: false
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     defaults:
       run:
-        shell: bash
+        shell: ${{ matrix.shell }}
     env:
       CC: ${{ matrix.compiler }}
       PYTHONUTF8: '1'
@@ -75,6 +79,8 @@ jobs:
         run: ${{ matrix.python }} -m tools.boat_analysis.model.install
       - name: Generated model execution
         if: matrix.generated
-        run: |
-          export OPENSYSML_BINARY="$(${{ matrix.python }} -c 'from tools.boat_analysis.model.install import binary_path; print(binary_path())')"
-          ${{ matrix.python }} -m pytest packages/sysml-python/tests/test_project.py -q
+        run: >-
+          ${{ matrix.python }} -c "import os, subprocess, sys;
+          from tools.boat_analysis.model.install import binary_path;
+          env = dict(os.environ, OPENSYSML_BINARY=str(binary_path()));
+          subprocess.run([sys.executable, '-m', 'pytest', 'packages/sysml-python/tests/test_project.py', '-q'], env=env, check=True)"
