@@ -1,6 +1,7 @@
 package BlueDogWindEquipment {
     private import ScalarValues::*;
-    part def Installation {
+    private import OOSEM::hardware;
+    #hardware part def Installation {
         attribute product : String;
         attribute dataInterface : String;
         attribute sensorMassKg : Real;

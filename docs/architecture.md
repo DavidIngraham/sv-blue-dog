@@ -22,12 +22,59 @@ We decompose responsibilities before choosing hardware. A satisfy link identifie
 package Page_architecture_0 {
     private import StandardViewDefinitions::*;
     private import DiagramLayout::*;
-    view context : GeneralView {
-        expose BlueDog::Architecture::missionContext;
+    view context : OOSEM::SystemContextView {
+        expose BlueDog::Architecture::MissionContext;
         render Views::asInterconnectionDiagram;
     }
 }
 ```
+
+## From use cases to allocated behavior
+
+I am using OpenSysML's OOSEM library to make the steps between mission intent and equipment explicit. The context identifies the boat, operator, shore support, environment and other vessels. Use cases act on that complete context. Logical scenarios then describe the responsibilities needed to carry out those use cases, before I settle the implementation.
+
+The model now refines three use cases with scenario threads. Their actions are allocated to the existing boat architecture; verification cases and the mission simulation are linked to those threads. These are logical sequences, not executable control software or evidence that the boat has passed a test.
+
+### Normal sailing
+
+A sailing cycle carries a typed wind estimate into command selection and a typed command into actuation. The estimate includes its timestamp and validity. Navigation and safety capability are preconditions of this thread; degraded operation belongs to the recovery logic.
+
+```sysml-view Page_architecture_normal::scenario direction=LR
+package Page_architecture_normal {
+    private import OOSEM::*;
+    view scenario : LogicalScenarioView {
+        expose BlueDogMethod::Scenarios::NormalSailing;
+    }
+}
+```
+
+### Traffic encounter
+
+Observe, assess, maneuver and reassess. Both AIS and non-AIS vessels matter. This thread gives the traffic simulation and later sensor testing a common behavioral reference.
+
+```sysml-view Page_architecture_traffic::scenario direction=LR
+package Page_architecture_traffic {
+    private import OOSEM::*;
+    view scenario : LogicalScenarioView {
+        expose BlueDogMethod::Scenarios::TrafficEncounter;
+    }
+}
+```
+
+### Abort and recover
+
+An abort ends the attempt. The boat records and signals the event, selects a reachable shore destination and attempts recovery without waiting for an operator or communications acknowledgment. The recovery leg may use the motor.
+
+```sysml-view Page_architecture_recovery::scenario direction=LR
+package Page_architecture_recovery {
+    private import OOSEM::*;
+    view scenario : LogicalScenarioView {
+        expose BlueDogMethod::Scenarios::AbortAndRecover;
+    }
+}
+```
+
+The initial physical allocation puts autonomous estimation and decisions on an onboard platform. It leaves processor choice, software partitioning and redundancy open. Wind observation also has a concrete allocation to the challenge's wired sensor installation. PDR must develop these coarse allocations into compatible interfaces and implementations, supported by timing, power and failure evidence. The [method model](../models/vehicle/method.sysml) owns those links; the [development plan](development-plan.md) owns review expectations.
 
 ## Sailing hardware
 

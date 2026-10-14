@@ -279,4 +279,18 @@ Compare predictions with independent measurements under recorded conditions. The
 Use the [modeling method](methods/modeling.md) and [publishing workflow](publishing.md) to preserve requirements, rationale, configurations and evidence links. Their inputs are the engineering work at every stage; their output is a consistent record for review decisions and future iteration.
 
 
+
+## OOSEM within the development plan
+
+I use OOSEM to organize the engineering content inside this process. Context and use cases establish what matters outside the boat; logical scenarios identify responsibilities; allocations connect those responsibilities to physical implementation. Analysis and verification link back to the same behavior and requirements. The [architecture article](architecture.md#from-use-cases-to-allocated-behavior) shows the first three threads.
+
+| Review | OOSEM contribution | Decision still needed |
+| --- | --- | --- |
+| SRR | Context, use cases, mission and system requirements, initial verification approach | Is the problem defined clearly enough to design against? |
+| PDR | Logical scenarios, interfaces, candidate physical allocations and trade evidence | Is the proposed architecture credible, with its main risks understood? |
+| CDR | Detailed realization of the allocations and implementation-level verification plans | Is the design ready to build and integrate? |
+| Test readiness and qualification | Integration evidence and verification against the traced obligations | Is the test safe and ready, and what has the resulting evidence established? |
+
+Native method checks help expose inconsistent modeling. They do not approve a review, establish adequate simulation fidelity or substitute for physical qualification. I can iterate on a scenario or allocation after a gate; the affected requirements, analyses and verification plans must be reassessed with it.
+
 **Next:** [Sailing the challenge before building the boat](mission-simulation.md).

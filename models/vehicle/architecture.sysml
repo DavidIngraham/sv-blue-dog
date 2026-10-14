@@ -12,6 +12,7 @@ package BlueDog {
      */
 
     private import GorgeChallenge::*;
+    private import OOSEM::*;
 
     package DesignIntent {
         doc /* Owner-imposed project constraints: one-person transport, construction on a
@@ -77,19 +78,19 @@ package BlueDog {
     }
 
     package Architecture {
-        part def Operator;
+        #user part def Operator;
         part def MonitoringStation;
-        part def ShoreSupport {
+        #externalSystem part def ShoreSupport {
             part monitoringStation : MonitoringStation;
         }
-        part def Environment;
-        part def OtherVessel {
+        #environment part def Environment;
+        #externalSystem part def OtherVessel {
             doc /* External traffic, including commercial ships, barges, fishing and recreational craft, with or without AIS. Behavior and cooperation are outside Blue Dog control. */
         }
-        part def PrintedHull;
-        part def SealedEnclosure;
-        part def KeelAndBallast;
-        part def HandlingInterfaces;
+        #hardware part def PrintedHull;
+        #hardware part def SealedEnclosure;
+        #hardware part def KeelAndBallast;
+        #hardware part def HandlingInterfaces;
         part def HullAndRig {
             part printedHull : PrintedHull;
             part enclosure : SealedEnclosure;
@@ -104,17 +105,17 @@ package BlueDog {
             part harvesting : HarvestingInterface;
             part powerManagement : PowerManagement;
         }
-        part def PositionAndAttitude;
-        part def WindSensing;
-        part def TrafficSensing;
+        #logical part def PositionAndAttitude;
+        #logical part def WindSensing;
+        #logical part def TrafficSensing;
         part def NavigationAndSensing {
             part positionAndAttitude : PositionAndAttitude;
             part wind : WindSensing;
             part traffic : TrafficSensing;
         }
-        part def MissionManager;
-        part def CollisionAvoidance;
-        part def BoundarySupervisor;
+        #logical part def MissionManager;
+        #logical part def CollisionAvoidance;
+        #logical part def BoundarySupervisor;
         part def GuidanceAndControl {
             part missionManager : MissionManager;
             part collisionAvoidance : CollisionAvoidance;
@@ -130,7 +131,7 @@ package BlueDog {
             part commandGateway : CommandGateway;
         }
         part def RecoveryPropulsion;
-        part def RecoveryController;
+        #logical part def RecoveryController;
         part def IngressMonitor;
         part def HealthAndRecovery {
             part motorSystem : RecoveryPropulsion;
@@ -141,10 +142,10 @@ package BlueDog {
         part def DataRecording;
         part def ObservationPayload;
 
-        part def Boat {
-            doc /* Logical responsibilities, not separate PCB commitments.
+        #system part def Boat {
+            doc /* Initial responsibility breakdown with identified hardware concepts.
              * Candidate architecture for the finite Gorge challenge. Future missions require separate allocation.
-             * Interfaces, behavior allocation, and physical realization TBD.
+             * BlueDogMethod allocates initial scenarios; detailed interfaces and physical realization remain open.
              */
             part hullAndRig : HullAndRig;
             part energy : EnergySubsystem;
@@ -157,13 +158,14 @@ package BlueDog {
             part signaling : NavigationSignaling;
             part observationPayload : ObservationPayload [0..1];
         }
-        part missionContext {
-            part boat : Boat;
-            part operator : Operator;
-            part shoreSupport : ShoreSupport;
-            part environment : Environment;
-            part traffic : OtherVessel [0..*];
+        #systemContext part def MissionContext {
+            part boat : Boat :>> systemOfInterest;
+            part operator : Operator :>> users;
+            part shoreSupport : ShoreSupport :> externalSystems;
+            part :>> environment : Environment;
+            part traffic : OtherVessel [0..*] :> externalSystems;
         }
+        part missionContext : MissionContext;
     }
 
 }

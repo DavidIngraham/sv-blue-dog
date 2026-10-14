@@ -209,3 +209,22 @@ def test_planned_verification_cannot_report_a_pass(run_model):
     assert not [d for d in report['diagnostics'] or [] if d['pass'] != 'runtime']
     values = {v['name']: v['value'] for v in report['checks'][0]['values']}
     assert values['verdict'] == 'VerdictKind::inconclusive'
+
+
+@pytest.mark.parametrize("view,actions", [
+    ("normal", ("ObserveWind", "SelectSailingCommand", "ApplySailingCommand")),
+    ("traffic", ("ObserveTraffic", "AssessEncounter", "SelectAvoidanceManeuver", "ExecuteAndReassess")),
+    ("recovery", ("LatchAbort", "RecordAndSignalAbort", "SelectReachableShore", "RecoverAndReassess")),
+])
+def test_oosem_scenarios_render_declared_behavior(view, actions):
+    diagram = native("-render", f"Page_architecture_{view}::scenario", "-render-form", "mermaid")
+    assert "declares no nodes" not in diagram
+    for action in actions:
+        assert action in diagram
+    assert diagram.count(" --> ") == len(actions) - 1
+
+
+def test_oosem_context_exposes_mission_participants():
+    diagram = native("-render", "Page_architecture_0::context", "-render-form", "mermaid")
+    for participant in ("Boat", "Operator", "ShoreSupport", "Environment", "OtherVessel"):
+        assert f": {participant}" in diagram

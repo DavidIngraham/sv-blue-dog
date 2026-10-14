@@ -22,3 +22,7 @@ Use `verify` for verification cases and `satisfy` for intended design allocation
 Reusable library interfaces expose named design properties. Numerical adapters currently use documented SI scalar conventions and vector conversion calculations; this is not full dimensional type checking.
 
 View definitions belong in the [authored Markdown](../docs/publishing.md). Native document queries supporting publication live under `tools/publishing/`. Generated diagrams and pages are build outputs, not hand-maintained copies of the model.
+
+### OOSEM
+
+Use native OOSEM roles and views for context, logical responsibilities, physical elements and scenarios. `vehicle/method.sysml` records package roles, scenario-to-use-case refinements and allocations. Keep logical sequences distinct from executable controllers and physical test evidence. Requirement package classification does not require inventing direct parent derivations for every requirement. SETR approval remains a review of project evidence, not a successful method validation.
