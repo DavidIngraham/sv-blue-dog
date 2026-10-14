@@ -88,18 +88,18 @@ def test_output_abi_mismatch_is_checked(kernel):
 
 
 def test_real_operation_batch_matches_scalar():
-    from tools.boat_analysis.model.operating import OperationKernel
+    from tools.boat_analysis.generated import operation
     from tools.boat_analysis.evidence.records import input_record
-    k = OperationKernel()
+    k = operation
     d, p, _, state, aero, mass, hydro = input_record('coupled-operation-audit.json')['inputs']
     states = np.tile(state, (5, 1)); states[:, 3] = np.linspace(1, 3, 5)
     shared = dict(design=d, parameters=p, aero=aero, mass=mass, hydro=hydro)
-    result = k.evaluate_batch(shared=shared, cases={'state': states}, chunk_size=2)
-    expected = [list(k.evaluate(**shared, state=s).values()) for s in states]
+    result = k.batch(shared=shared, cases={'state': states}, chunk_size=2)
+    expected = [list(k(**shared, state=s).values()) for s in states]
     np.testing.assert_allclose(result.values, expected, rtol=1e-13)
     states[2, 3] = 0
     with pytest.raises(ValueError, match='case 2'):
-        k.evaluate_batch(shared=shared, cases={'state': states})
+        k.batch(shared=shared, cases={'state': states})
 
 
 @pytest.mark.parametrize('name,inputs', [

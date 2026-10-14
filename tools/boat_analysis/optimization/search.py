@@ -82,13 +82,13 @@ class Problem:
         from tools.boat_analysis.geometry.vessel import operating_envelope
         envelope = operating_envelope(dict(zip(k.c['designNames'], x)), k.parameters[33], self.resolution)
         margins['overallLengthMargin'] = (self.overall_length_limit_m-envelope['sweptLengthM'])/self.overall_length_limit_m
-        names=k.operation.contract['outputNames'];eq=np.array([[r[n] for n in names[:4]] for r in rows]).ravel()
+        names=k.operating_contract['outputNames'];eq=np.array([[r[n] for n in names[:4]] for r in rows]).ravel()
         static_names=operating_margin_names(names)[:12]
         operating=np.array([[r[n] for n in static_names] for r in rows])
         ineq=operating.ravel()
         route_reserve=np.array([1.,1.,0.])*self.progress_reserve_m_s/self.route.contract['routeParameters'][5]
         route_screens=[('westerly',west)]+([('easterly',route)] if self.require_east else [])
-        ineq=np.r_[ineq,(np.array([[r[n] for n in names[47:]] for r in rows])-np.array(k.operation.contract['resistanceDomainReserve'])).ravel(),list(margins.values()),np.concatenate([r[:3]-route_reserve for _,r in route_screens]),righting]
+        ineq=np.r_[ineq,(np.array([[r[n] for n in names[47:]] for r in rows])-np.array(k.operating_contract['resistanceDomainReserve'])).ravel(),list(margins.values()),np.concatenate([r[:3]-route_reserve for _,r in route_screens]),righting]
         self.constraint_names=([f'case {i}: {n}' for i in range(8) for n in static_names]
             +[f'case {i}: {n} (search reserve)' for i in range(8) for n in names[47:]]
             +list(margins)+[f'{direction} {n}' for direction,_ in route_screens for n in ['downstream progress','upstream progress','duration']]
@@ -151,7 +151,7 @@ def run(budget,resume=False,resolution=12,route_profile='challenge'):
         physical[0]=min(p.hi[0],physical[0]*needed*1.02)
         initial=(physical-p.lo)/p.span
     sources=['tools/boat_analysis/geometry/laminate.py','uv.lock','tools/boat_analysis/optimization/search.py','tools/boat_analysis/optimization/operating.py','tools/boat_analysis/model/vessel.py','packages/sysml-python/sysml_python/execution.py','tools/boat_analysis/model/operating.py','tools/boat_analysis/model/hydrostatics.py','tools/boat_analysis/geometry/hydro.py','tools/boat_analysis/geometry/vessel.py','tools/boat_analysis/geometry/hull.py','tools/boat_analysis/aerodynamics/polar.py','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json']
-    hashes={**p.model.c['sourceHashes'],**p.model.operation.contract['sourceHashes'],**source_hashes(sources),'models/analyses/recovery.sysml':digest(ROOT/'models/analyses/recovery.sysml')}
+    hashes={**p.model.c['sourceHashes'],**p.model.operating_contract['sourceHashes'],**source_hashes(sources),'models/analyses/recovery.sysml':digest(ROOT/'models/analyses/recovery.sysml')}
 
     if np.abs(p.evaluate(initial)['eq']).max()>1e-4:
         from tools.boat_analysis.optimization.operating import solve_state
@@ -190,7 +190,7 @@ def run(budget,resume=False,resolution=12,route_profile='challenge'):
     r=p.evaluate(best)
     validate(hashes)
 
-    report={'sourceHashes':hashes,'geometryResolution':resolution,'progressSearchReserve_m_s':p.progress_reserve_m_s,'budgetPerPhase':budget,'optimizerFtol':1e-4,'energyConstraintScope':'Peak power and finite no-harvest passage allowance; chronological candidate replay required','resistanceDomainReserve':p.model.operation.contract['resistanceDomainReserve'],'designBounds':dict(zip(p.model.c['designNames'],zip(p.lo[:29].tolist(),p.hi[:29].tolist()))),'design':dict(zip(p.model.c['designNames'],r['design'])),'stateRows':r['states'].tolist(),'operating':r['rows'],'structure':r['structure'],'concept':r['concept'],'route':r['route'].tolist(),'westerlyRoute':r['westerlyRoute'].tolist(),'rightingScreen':r['righting'],'mass':r['mass'],'maxEquilibriumResidual':float(np.abs(r['eq']).max()),'minimumMargin':float(r['ineq'].min()),'coarseFeasible':p.feasible(best),'optimizerMessage':message,'feasibilityRestorationMessage':repair_message,'lastOptimizerAttempt':last_attempt,'worstConstraints':sorted(zip(p.constraint_names,map(float,r['ineq'])),key=lambda item:item[1])[:12],'feasibilitySqpMessage':feasibility_sqp_message,'feasibilityMessage':str(phase.message),'calls':p.calls,'elapsed_s':time.time()-p.start,'normalizedDesignAndStates':best.tolist(),'qualified':False,'scope':'Delft upright untrimmed bare-hull regression with explicit coordinate screens; free hull-fullness exponent. Fixed-pitch screening search at the recorded geometry resolution; pending refined free-pitch and uncertainty replay. VSPAERO attached-flow only; independent provisional drag and lift caps. No claim of mission qualification or global optimum.'}
+    report={'sourceHashes':hashes,'geometryResolution':resolution,'progressSearchReserve_m_s':p.progress_reserve_m_s,'budgetPerPhase':budget,'optimizerFtol':1e-4,'energyConstraintScope':'Peak power and finite no-harvest passage allowance; chronological candidate replay required','resistanceDomainReserve':p.model.operating_contract['resistanceDomainReserve'],'designBounds':dict(zip(p.model.c['designNames'],zip(p.lo[:29].tolist(),p.hi[:29].tolist()))),'design':dict(zip(p.model.c['designNames'],r['design'])),'stateRows':r['states'].tolist(),'operating':r['rows'],'structure':r['structure'],'concept':r['concept'],'route':r['route'].tolist(),'westerlyRoute':r['westerlyRoute'].tolist(),'rightingScreen':r['righting'],'mass':r['mass'],'maxEquilibriumResidual':float(np.abs(r['eq']).max()),'minimumMargin':float(r['ineq'].min()),'coarseFeasible':p.feasible(best),'optimizerMessage':message,'feasibilityRestorationMessage':repair_message,'lastOptimizerAttempt':last_attempt,'worstConstraints':sorted(zip(p.constraint_names,map(float,r['ineq'])),key=lambda item:item[1])[:12],'feasibilitySqpMessage':feasibility_sqp_message,'feasibilityMessage':str(phase.message),'calls':p.calls,'elapsed_s':time.time()-p.start,'normalizedDesignAndStates':best.tolist(),'qualified':False,'scope':'Delft upright untrimmed bare-hull regression with explicit coordinate screens; free hull-fullness exponent. Fixed-pitch screening search at the recorded geometry resolution; pending refined free-pitch and uncertainty replay. VSPAERO attached-flow only; independent provisional drag and lift caps. No claim of mission qualification or global optimum.'}
     report.update(routeProfile=p.route_profile,requiresEastProgress=p.require_east,
                   probabilityWeighting='No calibrated mission distribution; separate native probability sensitivity, never averaged hard safety constraints.',
                   resumed=resume,resumeCheckpointSha256=checkpoint_hash,

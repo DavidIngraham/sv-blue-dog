@@ -1,25 +1,10 @@
 """Domain facades; generated contracts own argument shapes and preconditions."""
 import numpy as np
-from collections.abc import Mapping
-from numpy.typing import ArrayLike
-from .design_types import (Design, Parameters, OperatingState, AeroCoefficients,
-                           HydroState, MassProperties)
 from .boundary import ModelAdapter
 from .preparation import prepare_operating as prepare
 from .runtime import ROOT
 
 CONTRACT = ROOT/'.tools/coupled-operation-contract.json'
-
-
-class OperationKernel(ModelAdapter):
-    model_name = 'operation'
-
-    def evaluate(self, design: Design | ArrayLike, parameters: Parameters | ArrayLike,
-                 state: OperatingState | ArrayLike, aero: AeroCoefficients | ArrayLike,
-                 mass: MassProperties | Mapping[str, float] | ArrayLike,
-                 hydro: HydroState | ArrayLike) -> dict[str, float]:
-        return self.kernel.evaluate(design=design, parameters=parameters, state=state,
-                                    aero=aero, mass=mass, hydro=hydro)
 
 
 class RouteKernel(ModelAdapter):

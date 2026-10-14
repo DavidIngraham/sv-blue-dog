@@ -125,8 +125,8 @@ def test_small_wave_limit_recovers_steady_balance_and_power(typed):
         state,aero,mass,hydro=(unpack(t,v,model.operating_contract[t.sysml_id+'Fields'])
             for t,v in zip((OperatingState,AeroCoefficients,MassProperties,HydroState),(state,aero,mass,hydro),strict=True))
         design=model.design_record(design)
-    steady=SurfaceOperation(model.operation,model.polar,[10,.0002,.05,8]).evaluate(design,model.parameters,state,aero,mass,hydro)
-    dynamic=WaveAveragedOperation(model.operation,model.polar,[10,.0002,.05,8],QuietResponse(),1e-9,3,0).evaluate(design,model.parameters,state,aero,mass,hydro)
+    steady=SurfaceOperation(model.operating_contract,model.polar,[10,.0002,.05,8]).evaluate(design,model.parameters,state,aero,mass,hydro)
+    dynamic=WaveAveragedOperation(model.operating_contract,model.polar,[10,.0002,.05,8],QuietResponse(),1e-9,3,0).evaluate(design,model.parameters,state,aero,mass,hydro)
     for key in ('surgeResidual','swayResidual','yawResidual','rollResidual','averagePower','rudderTorque'):
         assert dynamic[key]==pytest.approx(steady[key],rel=1e-7,abs=1e-7),key
 
@@ -139,7 +139,7 @@ def test_stored_wind_coordinate_matches_cartesian_lift_and_roll_velocity():
     assert np.dot(force[:2],[3,-4])==pytest.approx(0,abs=1e-12)
     m=CoupledModel();d=m.c['referenceDesign'];state=[8,1,1,2,50,4,1,-2,0]
     h=[0,0,1,2,.6,.15,.071973,.85,1.05,1.1,.55,.727];a=m.polar.evaluate(d[5],d[6],4)
-    provider=SurfaceOperation(m.operation,m.polar,[10,.0002,.05,8])
+    provider=SurfaceOperation(m.operating_contract,m.polar,[10,.0002,.05,8])
     quiet=provider.evaluate(d,m.parameters,state,a,[1.]*21,h,motion=np.zeros(6))
     rolling=provider.evaluate(d,m.parameters,state,a,[1.]*21,h,motion=[0,0,0,0,0,.1])
     assert rolling['localAlphaMin']>quiet['localAlphaMin']

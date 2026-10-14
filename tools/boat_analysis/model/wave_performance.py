@@ -9,9 +9,9 @@ from ..environment.motion import point_motion
 
 
 class WaveAveragedOperation:
-    def __init__(self,original,polar,wind_policy,response,height,period,wave_wind_angle,phases=None,resistance_coefficient=1.):
-        self.surface=SurfaceOperation(original,polar,wind_policy)
-        self.contract=original.contract;self.response=response
+    def __init__(self,contract,polar,wind_policy,response,height,period,wave_wind_angle,phases=None,resistance_coefficient=1.):
+        self.surface=SurfaceOperation(contract,polar,wind_policy)
+        self.contract=contract;self.response=response
         self.resistance_coefficient=resistance_coefficient
         self.height=height;self.period=period;self.wave_wind_angle=wave_wind_angle
         self.settings=response.policy['settings'];self.phases=int(phases or self.settings[0])
@@ -20,6 +20,9 @@ class WaveAveragedOperation:
         self.balance=NativeCalculation('MarineWavePerformance::BalanceCorrection',1)
         self.actuation=NativeCalculation('MarineWavePerformance::Actuation',3)
         self.wave=NativeCalculation('MarineSurface::WaveScreen',1)
+
+    def __call__(self, **inputs):
+        return self.evaluate(**inputs)
 
     def evaluate(self,design,parameters,state,aero,mass,hydro):
         design,parameters,state,aero,mass,hydro=self.surface.pack(design,parameters,state,aero,mass,hydro)

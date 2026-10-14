@@ -47,14 +47,11 @@ def prepare_operating():
     c['structure']=c['structureValues']
     c['conceptPolicy']=next(iter(analysis_values('BlueDogConceptCredibility::Inputs').values()))
     c['conceptSensitivity']=analysis_values('BlueDogConceptCredibility::SensitivityInputs')
-    compile_model(c, 'operation', path='models/libraries/marine/sailing.sysml',
-        definition='MarineSailing::Evaluate', output_definition='MarineSailing::Core',
-        aliases={'d':'design','p':'parameters','q':'environment','s':'state','aero':'aero','massData':'mass','hydro':'hydro'},
-        source='coupled-operation.c', hash_key='generatedHash', output_key='outputNames',
-        defaults={'environment':'environment'}, checks='MarineSailing::InputChecks',
-        record_types={n:'MarineDesign::'+t for n,t in dict(design='Design',parameters='Parameters',
-            state='OperatingState',aero='AeroCoefficients',mass='MassProperties',hydro='HydroState').items()})
     generated=json.loads((ROOT/'tools/boat_analysis/generated/manifest.json').read_text())
+    c['outputNames']=[f['name'] for f in generated['exports']['operation']['outputs']]
+    for field in generated['exports']['operation']['inputs']:
+        if record := field.get('record'):
+            c[record['sysml_id']+'Fields']=record['fields']
     c['structureNames']=[f['name'] for f in generated['exports']['structure']['outputs']]
     c['conceptNames']=[f['name'] for f in generated['exports']['concept']['outputs']]
     compile_model(c, 'route', path='models/libraries/marine/course.sysml', definition='MarineCourse::Route',

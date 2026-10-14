@@ -68,8 +68,8 @@ def test_uniform_strip_provider_matches_legacy_upright_loads():
     hydro=[0,0,1,2,.6,.15,.071973,.85,1.05,1.1,.55,.727]
     aero=model.polar.evaluate(d[5],d[6],4)
     mass=[1.]*21
-    base=model.operation.evaluate(d,p,state,aero,mass,hydro)
-    surface=SurfaceOperation(model.operation,model.polar,[10,.0002,.05,8],shear=False)
+    base=dict(model.operation(design=d,parameters=p,state=state,aero=aero,mass=mass,hydro=hydro))
+    surface=SurfaceOperation(model.operating_contract,model.polar,[10,.0002,.05,8],shear=False)
     actual=surface.evaluate(d,p,state,aero,mass,hydro)
     for key in ('surgeResidual','swayResidual','yawResidual','rollResidual','wingTorque','averagePower','wingRe'):
         assert actual[key]==pytest.approx(base[key],rel=1e-10,abs=1e-10)
@@ -80,8 +80,8 @@ def test_quadrature_refinement_and_shear_reduce_drive():
     from tools.boat_analysis.model.surface import SurfaceOperation
     m=CoupledModel();d=m.c['referenceDesign'];s=[8,1,1,2,50,4,1,-2,0]
     a=m.polar.evaluate(d[5],d[6],4);h=[0,0,1,2,.6,.15,.071973,.85,1.05,1.1,.55,.727]
-    uniform=SurfaceOperation(m.operation,m.polar,[10,.0002,.05,8],shear=False).evaluate(d,m.parameters,s,a,[1.]*21,h)
-    outputs=[SurfaceOperation(m.operation,m.polar,[10,.0002,.05,n]).evaluate(d,m.parameters,s,a,[1.]*21,h) for n in (8,16)]
+    uniform=SurfaceOperation(m.operating_contract,m.polar,[10,.0002,.05,8],shear=False).evaluate(d,m.parameters,s,a,[1.]*21,h)
+    outputs=[SurfaceOperation(m.operating_contract,m.polar,[10,.0002,.05,n]).evaluate(d,m.parameters,s,a,[1.]*21,h) for n in (8,16)]
     assert outputs[0]['drive']<uniform['drive']
     assert outputs[0]['drive']==pytest.approx(outputs[1]['drive'],rel=.01)
     assert outputs[0]['windRatioMin']<outputs[0]['windRatioMax']<1
@@ -162,7 +162,7 @@ def test_zero_motion_preserves_strip_solution():
     from tools.boat_analysis.model.surface import SurfaceOperation
     m=CoupledModel();d=m.c['referenceDesign'];s=[8,1,1,2,50,4,1,-2,0]
     a=m.polar.evaluate(d[5],d[6],4);h=[0,0,1,2,.6,.15,.071973,.85,1.05,1.1,.55,.727]
-    provider=SurfaceOperation(m.operation,m.polar,[10,.0002,.05,8])
+    provider=SurfaceOperation(m.operating_contract,m.polar,[10,.0002,.05,8])
     args=(d,m.parameters,s,a,[1.]*21,h)
     baseline=provider.evaluate(*args);moving=provider.evaluate(*args,motion=np.zeros(6))
     assert moving==pytest.approx(baseline)

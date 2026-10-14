@@ -6,7 +6,7 @@ from .runtime import ROOT
 from .native_kernel import KernelSpec, NativeKernel, BatchError
 from ..evidence.records import digest, validate
 
-_CONTRACTS = dict.fromkeys(('operation','route'), 'coupled-operation-contract.json')
+_CONTRACTS = dict.fromkeys(('route',), 'coupled-operation-contract.json')
 
 
 def load_model(name):

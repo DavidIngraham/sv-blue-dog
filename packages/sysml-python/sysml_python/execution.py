@@ -107,6 +107,13 @@ class Calculation:
             if selected: raise BatchError(int(row),message)
             raise ValueError(message)
 
+    def prepare_inputs(self, **inputs):
+        """Return validated named arrays for an external numerical binding."""
+        schema = self.load()
+        shared, _ = self.inputs(schema, inputs, {})
+        self.validate(schema, shared, {})
+        return shared
+
     def __call__(self, **inputs):
         schema = self.load()
         shared, _ = self.inputs(schema,inputs,{})

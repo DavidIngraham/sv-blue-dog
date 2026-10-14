@@ -31,7 +31,7 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
     if route_profile not in ('challenge','all-season'):raise ValueError('Unknown route profile')
     model=CoupledModel();model.parameters=np.array(scenarios['values'][name]);route=RouteKernel()
     x=np.array([design[n] for n in model.c['designNames']]);rows=[]
-    env=[(w,u,t) for w in model.operation.contract['windSpeeds'] for u in [True,False] for t in [1,-1]]
+    env=[(w,u,t) for w in model.operating_contract['windSpeeds'] for u in [True,False] for t in [1,-1]]
     for state,(wind,up,tack) in zip(initial,env):
         rows.append(operating_case(model,x,wind,up,tack,state,budget))
     bodies,m,g,_=model.configuration(x,0,resolution=16)
@@ -46,11 +46,11 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
     margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
     recovery=[]
     # Complete curves for the nominal replay; additional evidence cases below.
-    for trim in model.operation.contract['recoveryTrims']:
+    for trim in model.operating_contract['recoveryTrims']:
         bodies,m,g,_=model.configuration(x,np.deg2rad(trim),resolution=16)
         cg=[m['cgX'],m['cgY'],m['cgZ']]
         points=[]
-        for heel in np.linspace(*model.operation.contract['recoveryHeels'][:2],int(model.operation.contract['recoveryHeels'][2])):
+        for heel in np.linspace(*model.operating_contract['recoveryHeels'][:2],int(model.operating_contract['recoveryHeels'][2])):
             try:points.append(free_pitch_equilibrium(model.hydro,bodies,cg,m['totalMass'],heel,density=model.parameters[31]))
             except ValueError as error:
                 if not str(error).startswith(('No pitch equilibrium','Insufficient enclosed displacement')):raise
@@ -58,7 +58,7 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
         restoring=[p['righting_Nm']*np.sign(p['heel_deg']) for p in points if 'failure' not in p and 0<abs(p['heel_deg'])<180]
         recovery.append({'trim_deg':trim,'points':points,'failedEquilibria':sum('failure' in p for p in points),'minimumInteriorRestoring_Nm':min(restoring) if restoring else None})
     numerical=all(r['equilibrated'] for r in rows)
-    operating=min(row['outputs'][n] for row in rows for n in operating_margin_names(model.operation.contract['outputNames']))
+    operating=min(row['outputs'][n] for row in rows for n in operating_margin_names(model.operating_contract['outputNames']))
     result={'scenario':name,'parameters':dict(zip(model.c['parameterNames'],model.parameters)),'cases':rows,'structure':margins,'concept':concept,'route':trip.tolist(),'westerlyRoute':west.tolist(),'recovery':recovery,'numericallyBalanced':numerical,'minimumOperatingMargin':operating,'sampledStaticScreensPass':bool(numerical and operating>=-1e-4 and min(margins.values())>=-1e-4 and min(trip[:3])>=-1e-4 and min(west[:3])>=-1e-4 and all(r['failedEquilibria']==0 and r['minimumInteriorRestoring_Nm'] is not None and r['minimumInteriorRestoring_Nm']>0 for r in recovery)),'qualified':False}
     # Preserve the original strict two-direction field; expose the selected
     # profile separately so old evidence consumers cannot mistake its meaning.

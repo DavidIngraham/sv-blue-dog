@@ -8,6 +8,7 @@ import json
 
 import numpy as np
 
+from tools.boat_analysis.generated import operation
 from .native_kernel import KernelSpec, NativeKernel
 from .runtime import ROOT, model_files, native, native_value
 
@@ -36,8 +37,8 @@ def policy_inputs():
 
 class SurfaceOperation:
     """Drop-in operating provider, also usable by the existing sizing optimizer."""
-    def __init__(self, original, polar, policy, shear=True, strips=None):
-        self.original=original;self.contract=original.contract;self.polar=polar
+    def __init__(self, contract, polar, policy, shear=True, strips=None):
+        self.contract=contract;self.polar=polar
         self.policy=list(policy);self.shear=shear
         self.strips=int(strips or policy[3])
         if self.strips<1 or not 0<policy[1]<policy[2]<policy[0]:
@@ -47,9 +48,12 @@ class SurfaceOperation:
         self.core=NativeCalculation('MarineSailing::Core',8)
 
     def pack(self, design, parameters, state, aero, mass, hydro):
-        return tuple(self.original.kernel.input_vector(name, value) for name,value in
-            zip(('design','parameters','state','aero','mass','hydro'),
-                (design,parameters,state,aero,mass,hydro), strict=True))
+        values=operation.prepare_inputs(design=design, parameters=parameters, state=state,
+                                        aero=aero, mass=mass, hydro=hydro, environment=self.contract['environment'])
+        return tuple(values[name] for name in ('design','parameters','state','aero','mass','hydro'))
+
+    def __call__(self, **inputs):
+        return self.evaluate(**inputs)
 
     def evaluate(self,design,parameters,state,aero,mass,hydro,*,motion=None,motion_origin=(0,0,0)):
         design,parameters,state,aero,mass,hydro=self.pack(design,parameters,state,aero,mass,hydro)

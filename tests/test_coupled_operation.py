@@ -29,8 +29,8 @@ def test_ballast_volume_and_nonoverlap():
 @pytest.fixture
 def native_case():
     if sys.platform!='linux':pytest.skip('Native operation adapter uses Linux/GCC')
-    from tools.boat_analysis.model.operating import OperationKernel
-    k=OperationKernel();r=input_record('coupled-operation-audit.json');d,p,q,s,a,m,h=r['inputs']
+    from tools.boat_analysis.generated import operation
+    k=operation;r=input_record('coupled-operation-audit.json');d,p,q,s,a,m,h=r['inputs']
     # Archived fixtures predate elevated equipment; preserve their original case.
     p = [*p, 0, 0, 0]
     return k,[np.array(v,dtype=float) for v in [d,p,s,a,m,h]],r
@@ -42,8 +42,8 @@ def test_compiled_operation_matches_interpreter(native_case):
     r=current_record('coupled-operation-audit.json')
     d,p,q,s,a,m,h=r['inputs']
     args=[np.array(v,dtype=float) for v in [d,p,s,a,m,h]]
-    np.testing.assert_array_equal(k.contract['environment'],q)
-    result=k.evaluate(*args)
+    np.testing.assert_array_equal(k.prepare_inputs(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)['environment'],q)
+    result=k(**dict(zip(('design','parameters','state','aero','mass','hydro'),args,strict=True)))
     for name,value in r['outputs'].items():assert result[name]==pytest.approx(value,abs=1e-10,rel=1e-11)
 
 
@@ -51,9 +51,9 @@ def test_direct_aerodynamic_moment_is_independent_of_lift_credit(native_case):
     k,args,_=native_case
     d,p,s,a,m,h=[x.copy() for x in args]
     d[8]=.5  # Mast through the polar's midchord moment reference.
-    original=k.evaluate(d,p,s,a,m,h)
+    original=k(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)
     p[16]*=.5
-    lower_lift=k.evaluate(d,p,s,a,m,h)
+    lower_lift=k(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)
     assert lower_lift['wingTorque']==pytest.approx(original['wingTorque'])
     assert lower_lift['yawResidual']!=pytest.approx(original['yawResidual'])
 
@@ -61,23 +61,23 @@ def test_direct_aerodynamic_moment_is_independent_of_lift_credit(native_case):
 def test_mast_reference_shift_conserves_total_yaw(native_case):
     k,args,_=native_case;d,p,s,a,m,h=args
     # Headwind, zero incidence/heel: chord points aft and positive lift is +Y.
-    original=k.evaluate(*args);change=.12;chord=np.sqrt(d[4]/d[5])
+    original=k(**dict(zip(('design','parameters','state','aero','mass','hydro'),args,strict=True)));change=.12;chord=np.sqrt(d[4]/d[5])
     d[8]+=change;d[9]-=change*chord/d[0]
-    shifted=k.evaluate(*args)
+    shifted=k(**dict(zip(('design','parameters','state','aero','mass','hydro'),args,strict=True)))
     assert shifted['yawResidual']==pytest.approx(original['yawResidual'],abs=1e-12)
     assert shifted['wingTorque']!=pytest.approx(original['wingTorque'])
 
 
 def test_locked_drive_saves_holding_power_without_free_motion(native_case):
     k,args,_=native_case;d,p,s,a,m,h=args
-    locked=k.evaluate(*args);p[5]=2
-    powered=k.evaluate(*args)
+    locked=k(**dict(zip(('design','parameters','state','aero','mass','hydro'),args,strict=True)));p[5]=2
+    powered=k(**dict(zip(('design','parameters','state','aero','mass','hydro'),args,strict=True)))
     assert powered['averagePower']-locked['averagePower']==pytest.approx(2*p[7])
     p[5]=0;p[1]/=2
-    inefficient=k.evaluate(*args)
+    inefficient=k(**dict(zip(('design','parameters','state','aero','mass','hydro'),args,strict=True)))
     assert inefficient['averagePower']>locked['averagePower']
     p[7]=1
-    with pytest.raises(ValueError,match='wingDuty'):k.evaluate(*args)
+    with pytest.raises(ValueError,match='wingDuty'):k(**dict(zip(('design','parameters','state','aero','mass','hydro'),args,strict=True)))
 
 
 def test_route_tack_weights_cancel_crosswind_velocity(native_case):
@@ -126,7 +126,7 @@ def test_structural_stiffness_and_strength_respond_to_material_evidence(native_c
 def test_generated_interfaces_are_homogeneous_real_sequences(native_case):
     import re
     for name in ['mass','operation','structure','route']:
-        path = ROOT/'tools/boat_analysis/generated'/f'{name}.c' if name in ('mass','structure') else ROOT/f'.tools/coupled-{name}.c'
+        path = ROOT/'tools/boat_analysis/generated'/f'{name}.c' if name in ('mass','structure','operation') else ROOT/f'.tools/coupled-{name}.c'
         text=path.read_text()
         signature=re.search(r'int sysml_run\((.*?)\) \{',text,re.S)
         assert signature[1].endswith('sysml_seq_real *result')
@@ -136,14 +136,14 @@ def test_native_hull_resistance_is_in_force_balance_and_domain_outputs(native_ca
     from tools.boat_analysis.model.resistance import HullResistanceKernel
     k,args,_=native_case
     d,p,s,a,m,h=[x.copy() for x in args]
-    base=k.evaluate(d,p,s,a,m,h)
+    base=k(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)
     bare=HullResistanceKernel().evaluate(h[3:],s[3],p[31],p[34])
     p[24]=1.3
-    increased=k.evaluate(d,p,s,a,m,h)
+    increased=k(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)
     assert increased['hullDrag']-base['hullDrag']==pytest.approx(.3*bare['resistance_N'])
     assert increased['resistance']-base['resistance']==pytest.approx(.3*bare['resistance_N'])
     h[10]=.65
-    outside=k.evaluate(d,p,s,a,m,h)
+    outside=k(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)
     assert outside['delftDomain9']<0
 
 
@@ -151,9 +151,9 @@ def test_loaded_waterline_does_not_move_hardware_lever_arms(native_case):
     k,args,_=native_case
     d,p,s,a,m,h=[x.copy() for x in args]
     s[4]=45.;s[6]=0.;s[7]=3.;d[9]=.1
-    base=k.evaluate(d,p,s,a,m,h)
+    base=k(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)
     h[3]*=.9
-    changed=k.evaluate(d,p,s,a,m,h)
+    changed=k(design=d,parameters=p,state=s,aero=a,mass=m,hydro=h)
     assert changed['yawResidual']==pytest.approx(base['yawResidual'],abs=1e-12)
     assert changed['hullDrag']!=pytest.approx(base['hullDrag'])
 
@@ -203,7 +203,7 @@ def test_finite_search_keeps_peak_but_removes_daily_energy_constraints(native_ca
     from tools.boat_analysis.optimization.search import Problem
     p=Problem(4,route_profile='all-season');r=p.evaluate(p.initial())
     from tools.boat_analysis.optimization.operating import operating_margin_names
-    names=operating_margin_names(p.model.operation.contract['outputNames'])[:12]
+    names=operating_margin_names(p.model.operating_contract['outputNames'])[:12]
     assert 'peakMargin' in names
     assert 'cycleMargin' not in names and 'reserveMarginScaled' not in names
     assert not any('cycleMargin' in n or 'reserveMarginScaled' in n for n in p.constraint_names)

@@ -42,27 +42,27 @@ def run(destination,budget=8):
     paths=[f for f in (ROOT/'tools/boat_analysis').rglob('*.py') if '.venv' not in f.parts]
     paths += [destination.resolve()/'bem.json',destination.resolve()/'bem-refined.json',ROOT/'uv.lock',archive/'operating-1.4.json',archive/'shear-waves.json',input_path('wing-polar-grid.json'),input_path('wing-geometry.json')]
     hashes=source_hashes(paths)
-    model.operation=SurfaceOperation(original,model.polar,surface['wind'])
+    model.operation=SurfaceOperation(model.operating_contract,model.polar,surface['wind'])
     for row in saved['cases']:
         current=model.at_state(design,row['state'],resolution=12,pitch_equilibrium=False)
-        if max(abs(current[n]) for n in original.contract['outputNames'][:4])>1e-4:
+        if max(abs(current[n]) for n in model.operating_contract['outputNames'][:4])>1e-4:
             raise ValueError('Archived calm state no longer equilibrates')
         baseline.append(dict(row,outputs=current))
     for direction in p['directions']:
-        for wind in original.contract['windSpeeds']:
+        for wind in model.operating_contract['windSpeeds']:
             calm=[r for r in baseline if r['wind_m_s']==wind]
             for wave_height in (0.,height):
                 rows=[]
                 for old in calm:
                     if wave_height==0:rows.append(old);continue
-                    model.operation=WaveAveragedOperation(original,model.polar,surface['wind'],response,height,period,np.deg2rad(direction),resistance_coefficient=surface['sea'][2])
+                    model.operation=WaveAveragedOperation(model.operating_contract,model.polar,surface['wind'],response,height,period,np.deg2rad(direction),resistance_coefficient=surface['sea'][2])
                     solved=solve_state(model,design,wind,old['windward'],budget,old['tack'],12,old['state'],pitch_equilibrium=False)
                     # Independently double phase resolution at the selected state.
                     provider=model.operation;provider.phases*=2
                     fine=model.at_state(design,solved['state'],resolution=12,pitch_equilibrium=False)
                     provider.phases//=2
                     error=max(abs(fine[n]-solved['outputs'][n])/max(abs(fine[n]),1.) for n in ('drive','resistance','heeling','averagePower'))
-                    refined_equilibrium=max(abs(fine[n]) for n in original.contract['outputNames'][:4])
+                    refined_equilibrium=max(abs(fine[n]) for n in model.operating_contract['outputNames'][:4])
                     solved.update(waveHeightM=height,wavePeriodS=period,waveWindAngleDeg=direction,
                         phaseRelativeError=float(error),refinedBalanceResidual=float(refined_equilibrium),
                         numericalSupport=bool(solved['screenFeasible'] and error<=p['settings'][9] and refined_equilibrium<=1e-3 and fine['waveCoverageMargin']>=0 and fine['profileFailures']==0 and fine['incidenceFailures']==0))

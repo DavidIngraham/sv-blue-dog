@@ -22,7 +22,7 @@ def run(destination,count=4):
     source=json.loads((archive/'operating-1.4.json').read_text())
     waves=json.loads((archive/'shear-waves.json').read_text())
     policy=policy_inputs();m=CoupledModel()
-    provider=SurfaceOperation(m.operation,m.polar,policy['wind'])
+    provider=SurfaceOperation(m.operating_contract,m.polar,policy['wind'])
     design=[source['design'][n] for n in m.c['designNames']]
     response=MotionResponse(policy['motion'])
     d=source['design'];geometry=source['inputs']['surfaceEnvironment']['geometry']
@@ -32,7 +32,8 @@ def run(destination,count=4):
     for row in source['cases']:
         captured=[]
         class Capture:
-            def evaluate(self,*args):
+            def __call__(self,**inputs):
+                args=tuple(inputs[n] for n in ('design','parameters','state','aero','mass','hydro'))
                 captured.append(args)
                 return provider.evaluate(*args)
         m.operation=Capture()

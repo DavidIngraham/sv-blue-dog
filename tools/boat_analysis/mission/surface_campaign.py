@@ -38,10 +38,10 @@ def save(path,data):
 
 def operating(stage,policy,budget,resolution,original_inputs):
     model=CoupledModel();original=model.operation
-    surface=SurfaceOperation(original,model.polar,policy['wind'])
+    surface=SurfaceOperation(model.operating_contract,model.polar,policy['wind'])
     design=[stage['design'][n] for n in model.c['designNames']]
     cases=[];uniform=[];uniform_cases=[]
-    for index,(wind,up,tack) in enumerate((w,u,t) for w in original.contract['windSpeeds'] for u in (True,False) for t in (1,-1)):
+    for index,(wind,up,tack) in enumerate((w,u,t) for w in model.operating_contract['windSpeeds'] for u in (True,False) for t in (1,-1)):
         state=stage['stateRows'][index]
         model.operation=original
         uniform.append(model.at_state(design,np.r_[wind,int(up),1,state],resolution=resolution,pitch_equilibrium=False))
@@ -55,7 +55,7 @@ def operating(stage,policy,budget,resolution,original_inputs):
     inputs=configure(original_inputs,SimpleNamespace(model=model,structure=original),result)
     inputs['performance'].update(validWinds=[all(c['screenFeasible'] for c in cases[i:i+4]) for i in range(0,len(cases),4)],scope=SCOPE)
     waterline=max(r['waterline_m'] for r in outputs);d=stage['design']
-    inputs['surfaceEnvironment']=dict(seaPolicy=policy['sea'],winds=original.contract['windSpeeds'],
+    inputs['surfaceEnvironment']=dict(seaPolicy=policy['sea'],winds=model.operating_contract['windSpeeds'],
         calmResistanceN=[float(np.mean([r['resistance'] for r in outputs[i:i+4]])) for i in range(0,len(outputs),4)],
         geometry=[d['length_m'],d['beam_m'],d['deck_height_m']-waterline,d['deck_height_m']-waterline,
                   waterline+d['bottom_depth_m']+min(d['keel_span_m'],d['rudder_span_m'])])

@@ -14,8 +14,8 @@ def run():
     model=CoupledModel();x=[saved['design'][n] for n in model.c['designNames']];cases=[]
     sources=['build/analysis/coupled-sizing-search.json','tools/boat_analysis/optimization/recovery.py','tools/boat_analysis/model/vessel.py','tools/boat_analysis/geometry/vessel.py','models/analyses/sizing/inputs.sysml','models/analyses/recovery.sysml']
     hashes=source_hashes(sources)
-    for density in model.operation.contract['recoveryDensities']:
-        for trim in model.operation.contract['recoveryTrims']:
+    for density in model.operating_contract['recoveryDensities']:
+        for trim in model.operating_contract['recoveryTrims']:
             original,m,g,_=model.configuration(x,np.deg2rad(trim),resolution=16)
             dry_mass=m['totalMass'];dry_cg=np.array([m['cgX'],m['cgY'],m['cgZ']])
             wing_volume=g[16];material_volume=m['wingMaterialVolume'];void=wing_volume-material_volume
@@ -27,7 +27,7 @@ def run():
                 if state=='full_water_retention':
                     water_mass=density*void;mass+=water_mass;cg=(dry_cg*dry_mass+g[17:20]*water_mass)/mass
                 points=[]
-                for heel in np.linspace(*model.operation.contract['recoveryHeels'][:2],int(model.operation.contract['recoveryHeels'][2])):
+                for heel in np.linspace(*model.operating_contract['recoveryHeels'][:2],int(model.operating_contract['recoveryHeels'][2])):
                     try:points.append(free_pitch_equilibrium(model.hydro,bodies,cg,mass,heel,density=density))
                     except ValueError as e:points.append({'heel_deg':float(heel),'failure':str(e)})
                 failures=sum('failure' in p for p in points)

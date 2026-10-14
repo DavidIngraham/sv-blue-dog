@@ -44,9 +44,9 @@ The numerical screening inputs have not changed in this clarification. Archived 
 
 ## Running the calculations
 
-SysML owns the equations. Python assembles geometry, chooses operating cases and coordinates the optimizer. The generated C calculations run through one [native execution layer](../../tools/boat_analysis/model/native_kernel.py). Operating performance and route screening still use the [shared model boundary](../../tools/boat_analysis/model/boundary.py); mass, structural margins and passage feasibility now use the declarative library described below. Preparation reads argument order, Real types, dimensions and named output tuples from OpenSysML's API element export. Application wiring supplies friendly argument aliases and selects model-exported defaults; adapters no longer repeat vector widths or output labels.
+SysML owns the equations. Python assembles geometry, chooses operating cases and coordinates the optimizer. The migrated calculations use the reusable library’s [native execution backend](../../packages/sysml-python/sysml_python/backends/native.py); the remaining adapters still use the project runtime during migration. Route screening still uses the [shared model boundary](../../tools/boat_analysis/model/boundary.py); mass, operating performance, structural margins and passage feasibility now use the declarative library described below. Preparation reads argument order, Real types, dimensions and named output tuples from OpenSysML's API element export. Application wiring supplies friendly argument aliases and selects model-exported defaults; adapters no longer repeat vector widths or output labels.
 
-Mass, structural margins and passage feasibility now use declarative exports in [pyproject.toml](../../pyproject.toml). The [reusable SysML/Python library](../../packages/sysml-python/README.md) discovers their vector dimensions, generates named records, evaluates model-owned defaults and compiles declared input checks. Their handwritten adapters are gone. Geometry and interpreter reference experiments remain project-owned in the [reference preparation](../../tools/boat_analysis/model/preparation.py). The other adapters are still being migrated. Generated code and manifests remain build artifacts; fingerprints cover model and runtime sources.
+Mass, operating performance, structural margins and passage feasibility now use declarative exports in [pyproject.toml](../../pyproject.toml). The [reusable SysML/Python library](../../packages/sysml-python/README.md) discovers their vector dimensions, generates named records, evaluates model-owned defaults and compiles declared input checks. Their handwritten adapters are gone. Geometry and interpreter reference experiments remain project-owned in the [reference preparation](../../tools/boat_analysis/model/preparation.py). The other adapters are still being migrated. Generated code and manifests remain build artifacts; fingerprints cover model and runtime sources.
 
 Named Python records for operating state, aerodynamic coefficients, hydrostatic inputs, appendage loads, mass properties and passage conditions are generated from `MarineDesign` alongside `Design` and `Parameters`. The model declares the numerical field order; the boundary packs by field name, including for batches. Mass dictionaries are also packed by name, so insertion order cannot alter the physics. The surface-wind provider uses the same packing contract. Optimizer coordinates, mesh geometry and low-level numerical arrays remain arrays; these records describe quantities exchanged between domain calculations.
 
@@ -57,17 +57,17 @@ The runtime caches builds using the generated source, wrapper, compiler identity
 Independent cases can run in a native batch. Shared inputs and per-case inputs are explicit; there is no implicit broadcasting:
 
 ```python
-result = operation.evaluate_batch(
+result = operation.batch(
     shared={"design": design, "parameters": parameters,
             "aero": aero, "mass": mass, "hydro": hydro},
     cases={"state": states},  # (number of cases, 9)
     chunk_size=256,
 )
-# result.values columns follow operation.contract["outputNames"].
+# result.values columns follow the fields of generated OperationResult.
 ```
 
 The C wrapper calls the same generated calculation for each row and copies its output immediately. It processes bounded chunks, preserves case order and reports the original case index on failure. With `errors="collect"`, native failures produce an error message and a NaN row; those rows must never count as feasible results. Malformed inputs and adapter precondition failures reject the batch before execution. A shared vector has shape `(width,)`; a per-case vector has shape `(cases, width)`. Scalar inputs use a scalar or a `(cases,)` array respectively.
 
 Wing-strip load integration now uses this path. Independent operating-condition sweeps can use it too. A nonlinear solver's next trial still depends on the previous result, and a mission trajectory still advances chronologically; batching does not remove those dependencies. Parallel studies can use separate worker processes, each with its own native state. The runtime itself does not create workers.
 
-Adding a supported calculation requires preparation wiring and a small domain facade, not another compiler/ctypes wrapper. The contract reader supports Real scalars, fixed vectors, and unbounded vectors whose size comes from a model-exported default. Unsupported schemas fail preparation. Physical preconditions are explicitly connected to their calculation; the generator does not infer engineering meaning. Hydrostatics' mesh reduction and resistance-domain screening retain their specialized adapters.
+Adding a supported calculation to the declarative library requires its SysML definition and an export declaration. It does not require a handwritten adapter or preparation function. The contract reader supports Real scalars, fixed vectors, and unbounded vectors whose size comes from a model-exported default. Unsupported schemas fail preparation. Physical preconditions are explicitly connected to their calculation; the generator does not infer engineering meaning. Hydrostatics' mesh reduction and resistance-domain screening retain their specialized adapters.

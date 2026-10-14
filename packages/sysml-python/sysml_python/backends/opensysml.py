@@ -117,7 +117,12 @@ class OpenSysML:
     def compile(self, definition, output):
         # Python binds exported defaults before calling C. Remove only their
         # FeatureValues in a generated semantic projection, never in source text.
-        elements = self.elements()
+        if not any(f.get('direction') == 'in' and f.get('isDefault')
+                   for f in self.members(definition)):
+            self.run('-compile', definition, '-source', '-o', output)
+            return
+        from copy import deepcopy
+        elements = deepcopy(list(self.index().values()))
         by_id = {e['@id']: e for e in elements}
         calculation = next(e for e in elements if e.get('qualifiedName') == definition)
         removed = set()

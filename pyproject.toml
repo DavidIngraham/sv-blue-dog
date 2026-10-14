@@ -84,3 +84,23 @@ passage = "MarineDesign::Passage"
 [tool.sysml_python.exports.concept.defaults]
 environment = "BlueDogOperatingEnvironment::Inputs.parameterValues"
 policy = "BlueDogConceptCredibility::Inputs.values"
+
+[tool.sysml_python.exports.operation]
+definition = "MarineSailing::Evaluate"
+output_definition = "MarineSailing::Core"
+checks = "MarineSailing::InputChecks"
+[tool.sysml_python.exports.operation.aliases]
+d = "design"
+p = "parameters"
+q = "environment"
+s = "state"
+massData = "mass"
+[tool.sysml_python.exports.operation.records]
+design = "MarineDesign::Design"
+parameters = "MarineDesign::Parameters"
+state = "MarineDesign::OperatingState"
+aero = "MarineDesign::AeroCoefficients"
+mass = "MarineDesign::MassProperties"
+hydro = "MarineDesign::HydroState"
+[tool.sysml_python.exports.operation.defaults]
+environment = "BlueDogOperatingEnvironment::Inputs.parameterValues"

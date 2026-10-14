@@ -120,7 +120,7 @@ class Project:
                 arguments.append(f"{f['name']}: {type_name}" + (' = None' if 'default' in f else ''))
             code += [f"def {name}(*, {', '.join(arguments)}) -> {result}:",
                      f"    return _{name}("+', '.join(f"{f['name']}={f['name']}" for f in schema['inputs'])+')',
-                     f'{name}.batch = _{name}.batch', '']
+                     f'{name}.batch = _{name}.batch', f'{name}.prepare_inputs = _{name}.prepare_inputs', '']
         (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
         (directory/'__init__.py').write_text('\n'.join(code),encoding='utf-8')
         return directory

@@ -41,7 +41,7 @@ class Performance:
 def configure(inputs,problem,result):
     from ..geometry.vessel import operating_envelope
     out=deepcopy(inputs);d=dict(zip(problem.model.c['designNames'],result['design']))
-    q=problem.model.operation.contract['environment'];parameters=problem.model.parameters
+    q=problem.model.operating_contract['environment'];parameters=problem.model.parameters
     rows=result['rows'];states=result['states'];winds=problem.context['windSpeeds']
     velocities=[]
     for i in range(len(winds)):

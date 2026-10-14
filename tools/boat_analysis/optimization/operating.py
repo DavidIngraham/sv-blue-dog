@@ -19,12 +19,12 @@ def operating_margin_names(names, require_energy=True):
 
 
 def solve_state(model,design,wind,up,budget=70,tack=1,resolution=4,initial_state=None,require_energy=True,pitch_equilibrium=True):
-    contract=model.operation.contract
+    contract=model.operating_contract
     lo=np.array(contract['stateLower'],dtype=float)
     hi=np.array(contract['stateUpper'],dtype=float)
     if not up: lo[1],hi[1]=contract['leewardHeading']
     width=hi-lo;last=None;calls=0;t=time.time()
-    names=model.operation.contract['outputNames'];eq=names[:4];margins=operating_margin_names(names,require_energy)
+    names=model.operating_contract['outputNames'];eq=names[:4];margins=operating_margin_names(names,require_energy)
     def physical_state(z):
         operating=lo+z*width
         operating[1:]*=tack
@@ -53,7 +53,7 @@ def solve_state(model,design,wind,up,budget=70,tack=1,resolution=4,initial_state
 
 def run(budget):
     model=CoupledModel();design=model.c['referenceDesign'];rows=[]
-    for wind,up,tack in [(w,u,t) for w in model.operation.contract['windSpeeds'] for u in [True,False] for t in [1,-1]]:
+    for wind,up,tack in [(w,u,t) for w in model.operating_contract['windSpeeds'] for u in [True,False] for t in [1,-1]]:
         row=solve_state(model,design,wind,up,budget,tack);rows.append(row)
         print('RESULT',wind,up,row['screenFeasible'],row['outputs']['waterVMG'],flush=True)
         (ROOT/'.tools/coupled-fixed-checkpoint.json').write_text(json.dumps(rows,indent=2)+'\n')
