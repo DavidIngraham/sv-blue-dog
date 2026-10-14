@@ -4,7 +4,7 @@ from dataclasses import fields, replace
 import numpy as np
 import pytest
 from tools.boat_analysis.model.design_boundary import pack, unpack
-from tools.boat_analysis.model.design_types import Design, Parameters
+from tools.boat_analysis.generated import Design, Parameters
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.model.vessel import CoupledModel
 

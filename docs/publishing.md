@@ -69,23 +69,20 @@ The introduction embeds a `design-explorer` fence. During the normal site build,
 
 ### Python records from the model
 
-`MarineDesign` definitions generate the frozen records
-in `tools/boat_analysis/model/design_types.py`. Their fields come from resolved
-SysML type facts; evaluated configurations supply values. `design_boundary.py`
-packs records using the native contract’s field order and rejects missing or
-extra fields. The solver can retain NumPy vectors internally.
-
-The publishing workflow pins the generator and matching service to OpenSysML
-commit `6eb9a29cd94f4022dfc9f03bfcb52c5c0b50fbd7` on the personal fork. It builds
-that service and runs generation with `--check` before publishing. The normal
-analysis runtime remains pinned separately. For local regeneration, use that
-checkout’s `client/python` as `PYTHONPATH` and its built `bin/sysml-grpc` as
-`OPENSYSML_BINARY`, then run:
+`MarineDesign` definitions generate frozen records in the ignored
+`tools/boat_analysis/generated` package, alongside the callable calculation APIs.
+The export declarations in `pyproject.toml` select the model definitions; the same
+pinned compiler supplies type facts and executable calculations. Preparation and
+pytest run in the publishing workflow. There is no separate record-generator
+checkout or committed copy of the types.
 
 ```sh
-uv run python -m tools.boat_analysis.model.generate_design_types
-uv run python -m tools.boat_analysis.model.generate_design_types --check
+uv run python -m tools.boat_analysis.cli prepare
 ```
+
+`design_boundary.py` packs records for optimizer vectors using model field names
+and rejects missing or extra fields. The generated execution boundary performs
+its own named packing, shape validation and model-declared physical checks.
 
 These snapshots cover design variables, physical assumptions, operating state,
 aerodynamic coefficients, hydrostatic inputs, appendage loads, mass properties

@@ -10,7 +10,7 @@ import numpy as np
 import subprocess
 from pathlib import Path
 from tools.boat_analysis.model.runtime import ROOT
-from tools.boat_analysis.model.design_types import Design, Parameters
+from tools.boat_analysis.generated import Design, Parameters
 from tools.boat_analysis.evidence.records import validate, run_record
 from tools.boat_analysis.geometry.vessel import section_data
 

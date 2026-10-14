@@ -2,7 +2,7 @@
 from collections.abc import Sequence, Mapping
 from typing import Protocol, TypeVar
 import numpy as np
-from .design_types import Design, Parameters
+from tools.boat_analysis.generated import Design, Parameters
 
 
 class NumericalRecord(Protocol):

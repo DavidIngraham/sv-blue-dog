@@ -11,7 +11,7 @@ from types import SimpleNamespace
 import numpy as np
 from scipy.optimize import least_squares,minimize
 from tools.boat_analysis.model.vessel import CoupledModel
-from tools.boat_analysis.model.design_types import AppendageLoads
+from tools.boat_analysis.generated import AppendageLoads
 from tools.boat_analysis.generated import structure, concept, Passage, route
 from tools.boat_analysis.geometry.hydro import equilibrium
 from tools.boat_analysis.model.runtime import ROOT

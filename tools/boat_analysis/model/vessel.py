@@ -7,11 +7,11 @@ from scipy.optimize import brentq
 from tools.boat_analysis.geometry.vessel import build_geometry,ballast_geometry
 from tools.boat_analysis.geometry.hydro import DisplacementBody,equilibrium,pose
 from tools.boat_analysis.model.design_boundary import design_vector, pack, unpack
-from tools.boat_analysis.model.design_types import Design, Parameters, OperatingState, AeroCoefficients, HydroState
+from tools.boat_analysis.generated import Design, Parameters, OperatingState, AeroCoefficients, HydroState
 from tools.boat_analysis.generated import mass, operation
 from tools.boat_analysis.evidence.records import validate
 from tools.boat_analysis.model.runtime import ROOT
-from tools.boat_analysis.model.hydrostatics import HydroKernel
+from tools.boat_analysis.geometry.hydro import MeshHydrostatics
 from tools.boat_analysis.aerodynamics.polar import WingPolar
 from tools.boat_analysis.geometry.hull import upright_hull_features,deck_area
 from tools.boat_analysis.geometry.laminate import finite_skin_properties
@@ -40,7 +40,7 @@ def wet_area(triangles,height):
 
 class CoupledModel:
     def __init__(self):
-        self.mass=mass;self.operation=operation;self.hydro=HydroKernel();self.polar=WingPolar()
+        self.mass=mass;self.operation=operation;self.hydro=MeshHydrostatics();self.polar=WingPolar()
         self.operating_contract=json.loads((ROOT/'.tools/coupled-operation-contract.json').read_text())
         validate(self.operating_contract['sourceHashes'])
         self.c=json.loads((ROOT/'.tools/coupled-contract.json').read_text());self.parameters=pack(Parameters.from_mapping(dict(zip(self.c['parameterNames'],self.c['parameterValues'],strict=True))),self.c['parameterNames']);self.last=None;self.hull_reference=None;self.section_cache=None

@@ -29,21 +29,6 @@ jobs:
           version: '0.9.5'
           enable-cache: true
       - run: uv sync --locked
-      - name: Check out the pinned Python record generator
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          repository: DavidIngraham/OpenSysML
-          ref: 6eb9a29cd94f4022dfc9f03bfcb52c5c0b50fbd7
-          path: .tools/opensysml-codegen
-          persist-credentials: false
-      - name: Build the matching type-facts service
-        working-directory: .tools/opensysml-codegen
-        run: go build -o bin/sysml-grpc ./cmd/sysml-grpc
-      - name: Check generated Python records match SysML
-        env:
-          PYTHONPATH: .tools/opensysml-codegen/client/python
-          OPENSYSML_BINARY: ${{ github.workspace }}/.tools/opensysml-codegen/bin/sysml-grpc
-        run: uv run python -m tools.boat_analysis.model.generate_design_types --check
       - run: uv run python -m tools.boat_analysis.cli install
       - run: uv run python -m tools.boat_analysis.environment.climatology
       - run: uv run python -m tools.boat_analysis.environment.sensitivity

@@ -166,3 +166,16 @@ definition = "MarineResistance::Evaluate"
 checks = "MarineResistance::InputChecks"
 [tool.sysml_python.exports.hull_resistance.aliases]
 h = "hull"
+
+[tool.sysml_python.exports.wet_moment]
+definition = "MarineHydrostatics::WetMoment"
+[tool.sysml_python.exports.wet_moment.aliases]
+p = "vertices"
+
+[tool.sysml_python.exports.hydrostatic_balance]
+definition = "MarineHydrostatics::Balance"
+checks = "MarineHydrostatics::BalanceChecks"
+[tool.sysml_python.exports.hydrostatic_balance.aliases]
+centerOfGravity = "cg"
+massKg = "mass"
+densityKgM3 = "density"

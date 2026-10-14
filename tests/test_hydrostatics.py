@@ -8,8 +8,8 @@ from tools.boat_analysis.geometry.hydro import convex_tetrahedra,equilibrium,Dis
 @pytest.fixture(scope='module')
 def kernel():
     if sys.platform!='linux':pytest.skip('Native compiled kernel requires Linux/GCC')
-    from tools.boat_analysis.model.hydrostatics import HydroKernel
-    return HydroKernel()
+    from tools.boat_analysis.geometry.hydro import MeshHydrostatics
+    return MeshHydrostatics()
 
 
 def oracle(points,height):
@@ -95,3 +95,16 @@ def test_native_actuator_accounting_keeps_idle_and_movement_losses():
     assert values['lockedWhPerDay']==pytest.approx(24*(.1+.02*(1+1*.2/(.8*.4))))
     assert values['poweredHoldWhPerDay']-values['lockedWhPerDay']==pytest.approx(24*.98*2)
     assert values['locked'][1]==pytest.approx(1.725)
+
+
+def test_mesh_batch_matches_independent_sum_and_checks_inputs(kernel):
+    rng = np.random.default_rng(71)
+    tetrahedra = rng.normal(size=(9, 4, 3))
+    expected = sum((oracle(points, .2) for points in tetrahedra), np.zeros(4))
+    np.testing.assert_allclose(kernel.moments(tetrahedra, .2), expected, atol=1e-10)
+    with pytest.raises(ValueError, match='Nonempty tetrahedra'):
+        kernel.moments(np.empty((0, 4, 3)), 0)
+    with pytest.raises(ValueError, match='finite'):
+        kernel.moments(tetrahedra, np.nan)
+    with pytest.raises(ValueError, match='positiveMassAndDensity'):
+        kernel.balance([1, 0, 0, 0], [0, 0, 0], 0, 1000)

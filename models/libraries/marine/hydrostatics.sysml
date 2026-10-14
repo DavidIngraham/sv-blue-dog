@@ -43,9 +43,14 @@ package MarineHydrostatics {
         attribute wet : Integer [*] ordered nonunique = (1..4)->ControlFunctions::select { in i : Integer; (Vertex(p,i))#(3) <= waterline };
         attribute dry : Integer [*] ordered nonunique = (1..4)->ControlFunctions::select { in i : Integer; (Vertex(p,i))#(3) > waterline };
         attribute count : Integer = SequenceFunctions::size(wet);
+        attribute clipped : Real [4] ordered nonunique = if count == 0 ? (0.0,0.0,0.0,0.0) else
+            if count == 4 ? Moment(p) else PartialMoment(p,waterline,(wet,dry),count);
+        attribute volume : Real = clipped#(1);
+        attribute firstMomentX : Real = clipped#(2);
+        attribute firstMomentY : Real = clipped#(3);
+        attribute firstMomentZ : Real = clipped#(4);
         return moments : Real [4] ordered nonunique;
-        if count == 0 ? (0.0,0.0,0.0,0.0) else
-        if count == 4 ? Moment(p) else PartialMoment(p,waterline,(wet,dry),count)
+        (volume,firstMomentX,firstMomentY,firstMomentZ)
     }
     calc def PartialMoment {
         in p : Real [12] ordered nonunique;
@@ -95,16 +100,23 @@ package MarineHydrostatics {
          NumericalFunctions::sum((1..count)->ControlFunctions::collect { in i : Integer; rows#(4*i-1) }),
          NumericalFunctions::sum((1..count)->ControlFunctions::collect { in i : Integer; rows#(4*i) }))
     }
+    calc def BalanceChecks {
+        in massKg : Real;
+        in densityKgM3 : Real;
+        return positiveMassAndDensity : Real;
+        if massKg > 0 and densityKgM3 > 0 ? 1.0 else 0.0
+    }
     calc def Balance {
         in moments : Real [4] ordered nonunique;
         in centerOfGravity : Real [3] ordered nonunique;
         in massKg : Real;
         in densityKgM3 : Real;
         attribute g : Real = 9.80665;
+        attribute massResidual : Real = densityKgM3*moments#(1)-massKg;
+        attribute rollTorque : Real = g*(densityKgM3*moments#(3)-massKg*centerOfGravity#(2));
+        attribute pitchTorque : Real = -g*(densityKgM3*moments#(2)-massKg*centerOfGravity#(1));
         return values : Real [3] ordered nonunique;
-        (densityKgM3*moments#(1)-massKg,
-         g*(densityKgM3*moments#(3)-massKg*centerOfGravity#(2)),
-         -g*(densityKgM3*moments#(2)-massKg*centerOfGravity#(1)))
+        (massResidual,rollTorque,pitchTorque)
     }
 
 

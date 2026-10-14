@@ -4,7 +4,7 @@ import sys
 import numpy as np
 import pytest
 from tools.boat_analysis.model.design_boundary import pack, unpack
-from tools.boat_analysis.model.design_types import (
+from tools.boat_analysis.generated import (
     Design, Parameters, OperatingState, AeroCoefficients, HydroState, MassProperties)
 
 pytestmark=pytest.mark.skipif(sys.platform!='linux',reason='Native runtime requires GCC')
@@ -34,7 +34,7 @@ def test_named_calls_and_shuffled_mass_match_vectors(case):
     assert kernel(**{**typed,'mass':shuffled})==expected
     # Deliberately different same-width record is not silently accepted.
     with pytest.raises(TypeError,match='incompatible SysML record'):
-        from tools.boat_analysis.model.design_types import AppendageLoads
+        from tools.boat_analysis.generated import AppendageLoads
         kernel(**{**typed,'aero':AppendageLoads(wingResultant=1,keelResultant=2,rudderResultant=3)})
 
 
