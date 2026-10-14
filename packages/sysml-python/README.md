@@ -89,7 +89,8 @@ compiler version and flags, and serialize calls into each loaded library.
 
 The first call builds every exported calculation and input check in one Meson
 project, with a separate shared library per target. Meson selects the compiler,
-linker, math library and platform filename. Python interfaces remain unchanged;
+linker, math library and platform filename. It prefers GNU C11 for OpenSysML
+generated code, with C11 as the fallback for other compilers. Python interfaces remain unchanged;
 Cython is not needed because OpenSysML already produces C.
 
 Install the runtime normally; Meson, Ninja and filelock are Python dependencies.

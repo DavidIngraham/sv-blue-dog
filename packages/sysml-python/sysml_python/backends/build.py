@@ -70,7 +70,7 @@ def build_libraries(sources, *, dependencies=()):
             raise ValueError('Conflicting native source basenames: '+path.name)
         contents[path.name] = data
     identity = _toolchain(_environment())
-    recipe = ["project('sysml_kernels', 'c', default_options: ['c_std=c11', 'optimization=2', 'debug=false'])",
+    recipe = ["project('sysml_kernels', 'c', default_options: ['c_std=gnu11,c11', 'optimization=2', 'debug=false'])",
               "cc = meson.get_compiler('c')", "math = cc.find_library('m', required: false)"]
     for i, source in enumerate(sources):
         if "'" in source.name or '\n' in source.name:
