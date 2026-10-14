@@ -195,8 +195,6 @@ def _build(source_dir, output_dir):
         render_explorer(output_dir / "assets/design-explorer")
         from .risk_cube import render as render_risk_cube
         render_risk_cube(output_dir / "assets/risk")
-        from .development_v import render as render_development_v
-        render_development_v(output_dir / "assets/development")
     rev = revision()
     rendered = {}
     for path, source in zip(pages, sources):

@@ -36,13 +36,43 @@ Each box contains its own scoped V and review decisions. Progress depends on evi
 
 Read the solid outer path down through definition and implementation, then up through integration and demonstration. The central connections show simulation feeding findings back into requirements and supplying scenarios for physical testing. The central simulation is a reusable collection of mission, physics, control and fault models, not a single all-purpose solver.
 
-![Development V: independent owner needs and competition rules govern mission definition and final validation; mission simulation connects architecture with verification and measurements.](https://davidingraham.github.io/sv-blue-dog/assets/development/development-v.svg)
+```mermaid
+---
+config:
+  themeVariables:
+    fontSize: "14px"
+---
+block-beta
+    columns 9
+    mission["Mission<br/>intent"] space:7 demonstration["Mission<br/>validation"]
+    space:9
+    space requirements["Vessel<br/>criteria<br/>SRR"] space:2 simulation["Virtual<br/>vessel<br/>Early V&V"] space:2 integrated["Real vessel<br/>V&V / TRR"] space
+    space:9
+    space:2 architecture["Subsystems<br/>PDR"] space:3 subsystem["Subsystem<br/>tests"] space:2
+    space:9
+    space:3 detail["Detail<br/>CDR"] space component["Component<br/>tests"] space:3
+    space:9
+    space:4 build["Build and<br/>integrate"] space:4
+    mission --> requirements
+    requirements --> architecture
+    architecture --> detail
+    detail --> build
+    build --> component
+    component --> subsystem
+    subsystem --> integrated
+    integrated --> demonstration
+    simulation -- "validate requirements" --> requirements
+    architecture --> simulation
+    simulation -- "test scenarios" --> integrated
+    classDef intent fill:#e9f1fc,stroke:#345b87,color:#183047
+    classDef evidence fill:#e7f4ec,stroke:#397251,color:#183047
+    classDef learning fill:#fff1ce,stroke:#92712d,color:#183047
+    class mission,requirements,architecture,detail intent
+    class component,subsystem,integrated,demonstration evidence
+    class simulation,build learning
+```
 
-The central simulation thread supports **early virtual verification and validation**. Requirements and operating scenarios drive the simulated vessel; we check both compliance with design criteria and whether the resulting behavior would accomplish the intended mission. Findings can change requirements, architecture or controls before hardware exists. This is more than predicting a test result or checking whether the simulator is numerically correct.
-
-Owner needs and competition rules are independent references for both mission definition and final acceptance. The qualifying attempt provides real mission evidence; it is not replaced by a successful simulation. The same mission scenarios run first against concept and behavior models, then against increasingly detailed physical models informed by measurements.
-
-On the right, **plan readiness and execution are separate**: having an agreed test procedure does not mean the test has run, and a completed run does not establish acceptance. Every result retains its configuration and revision. New evidence can reopen a previously accepted or provisionally assumed baseline without erasing its history. Colors identify kinds of work in this process view; current assessments belong in the linked model and evidence reports.
+The left-side loop is **early virtual verification and validation**. Requirements and operating scenarios drive the simulated vessel; we check both compliance with design criteria and whether the resulting behavior would accomplish the intended mission. Findings can change requirements, architecture or controls before hardware exists. This is more than predicting a test result or checking whether the simulator is numerically correct.
 
 The right side is **physical verification and validation**: component, subsystem and integrated evidence from the built configuration, culminating in mission behavior. We reuse scenarios and acceptance logic where applicable, while recording whether each result came from simulation or the real system. The simulation also develops test cases and expected responses for that right-hand work.
 
