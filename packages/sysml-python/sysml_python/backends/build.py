@@ -27,6 +27,14 @@ def _run(*args):
     return result.stdout
 
 
+def _setup(build, source):
+    # Explicit GNU/Clang toolchains must retain their own environment. Force
+    # Visual Studio activation only for MSVC-style (or automatic) selection.
+    compiler = os.environ.get('CC', '')
+    activate = os.name == 'nt' and (not compiler or Path(compiler).stem.lower() in ('cl', 'clang-cl'))
+    _run('setup', build, source, '--backend=ninja', *(('--vsenv',) if activate else ()))
+
+
 def _info(directory, name):
     return json.loads((directory/'meson-info'/('intro-'+name+'.json')).read_text(encoding='utf-8'))
 
@@ -44,7 +52,7 @@ def _toolchain(environment):
         root = Path(temporary)
         (root/'meson.build').write_text("project('sysml_toolchain', 'c', default_options: ['c_std=c11'])\n", encoding='utf-8')
         build = root/'build'
-        _run('setup', build, root, '--backend=ninja', '--vsenv')
+        _setup(build, root)
         compilers = _info(build, 'compilers')['host']
         binaries = {}
         for compiler in compilers.values():
@@ -93,7 +101,7 @@ def build_libraries(sources, *, dependencies=()):
             (build_source/'meson.build').write_text(recipe, encoding='utf-8')
             (build_source/'exports.def').write_text(exports, encoding='utf-8')
             build = build_source/'build'
-            _run('setup', build, build_source, '--backend=ninja', '--vsenv')
+            _setup(build, build_source)
             _run('compile', '-C', build, '-j', os.environ.get('SYSML_BUILD_JOBS', '4'))
             targets = _info(build, 'targets')
             metadata = {**identity, 'platform': platform.system(), 'machine': platform.machine(),
