@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="850" viewBox="0 0 1280 850" role="img" aria-labelledby="title description">
+  <title id="title">$title</title>
+  <desc id="description">Owner needs and competition rules independently govern mission definition and final validation. A central mission simulation thread exchanges models and outcomes with mission, logical and physical architecture. On the right, verification plan readiness and execution are separate. Provisional baselines may reopen when evidence invalidates assumptions. Colors distinguish definition, simulation and physical evidence; they do not indicate completion.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#8b99a8"/></marker>
+    <marker id="simArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#4982ae"/></marker>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#233549;text-anchor:middle;font-size:25px}
+      .small{font-size:22px;fill:#5d6d7d}.label{font-size:23px}.heading{font-size:31px;font-weight:600}
+      .edge{fill:none;stroke:#8b99a8;stroke-width:2;marker-end:url(#arrow)}
+      .exchange{fill:none;stroke:#4982ae;stroke-width:2;marker-start:url(#simArrow);marker-end:url(#simArrow)}
+      .box{stroke:none;rx:12}.simulation{fill:#eef5fb;stroke:#a8c4d9;stroke-width:1.5;rx:10}
+    </style>
+  </defs>
+  <rect width="1280" height="850" fill="#fff"/>
+  <text class="heading" x="640" y="43">$title</text>
+  <text class="small" x="640" y="82">Independent references: owner needs  ·  competition rules</text>
+  <path d="M150 132V103H1130V132" fill="none" stroke="#c5cdd5" stroke-width="1.5"/>
+
+  <!-- Architecture down the left; verification and validation up the right. -->
+  <path class="edge" d="M166 247L243 322"/>
+  <path class="edge" d="M302 409L370 477"/>
+  <path class="edge" d="M448 565L589 636"/>
+  <path class="edge" d="M691 636L832 605"/>
+  <path class="edge" d="M910 477L978 450"/>
+  <path class="edge" d="M1037 322L1114 300"/>
+
+  <rect class="box" x="35" y="145" width="230" height="100" fill="#e9f1fc"/>
+  <text x="150" y="184">Mission definition</text>
+  <text class="small" x="150" y="218">Needs &amp; criteria</text>
+  <rect class="box" x="160" y="325" width="230" height="85" fill="#e9f1fc"/>
+  <text x="275" y="360">Logical architecture</text>
+  <text class="small" x="275" y="393">Revisit with evidence</text>
+  <rect class="box" x="285" y="480" width="230" height="85" fill="#e9f1fc"/>
+  <text class="small" style="fill:#233549" x="400" y="515">Physical architecture</text>
+  <text class="small" x="400" y="548">Revisit with evidence</text>
+  <rect class="box" x="490" y="635" width="300" height="78" fill="#edf0f3"/>
+  <text x="640" y="666">Build &amp; component tests</text>
+  <text class="small" x="640" y="697">Measurements → models</text>
+
+  <rect class="box" x="1015" y="145" width="230" height="145" fill="#edf0f3"/>
+  <text x="1130" y="179">Mission validation</text>
+  <text class="small" x="1130" y="211">Owner acceptance</text>
+  <text class="small" x="1130" y="241">Qualifying competition</text>
+  <text class="label" x="1130" y="278">Plan / Execution</text>
+  <rect class="box" x="890" y="325" width="230" height="115" fill="#edf0f3"/>
+  <text x="1005" y="361">System verification</text>
+  <text class="small" x="1005" y="394">Integrated vessel</text>
+  <text class="label" x="1005" y="428">Plan / Execution</text>
+  <rect class="box" x="765" y="480" width="230" height="115" fill="#edf0f3"/>
+  <text class="small" style="fill:#233549" x="880" y="515">Subsystem verification</text>
+  <text class="small" x="880" y="548">Allocated criteria</text>
+  <text class="label" x="880" y="583">Plan / Execution</text>
+
+  <!-- Persistent mission campaign; architectural models in, mission outcomes back. -->
+  <text x="640" y="150" fill="#386d96">Mission simulation</text>
+  <path d="M640 245V331M640 406V486" fill="none" stroke="#a8c4d9" stroke-width="2" marker-end="url(#simArrow)"/>
+  <rect class="simulation" x="535" y="170" width="210" height="75"/>
+  <text x="640" y="201">Concept model</text>
+  <text class="small" x="640" y="231">Mission feasibility</text>
+  <rect class="simulation" x="535" y="331" width="210" height="75"/>
+  <text x="640" y="363">Behavior model</text>
+  <text class="small" x="640" y="393">Scenarios &amp; failures</text>
+  <rect class="simulation" x="535" y="486" width="210" height="89"/>
+  <text x="640" y="518">Physical models</text>
+  <text class="small" x="640" y="550">Test data updates</text>
+  <path class="exchange" d="M276 207H523"/>
+  <path class="exchange" d="M757 207H1003"/>
+  <path class="exchange" d="M402 369H523"/>
+  <path class="exchange" d="M757 369H878"/>
+  <path d="M515 530H535M745 530H765" stroke="#4982ae" stroke-width="2"/>
+  <path class="edge" d="M640 625V585"/>
+
+  <!-- Iteration reopens affected work without erasing its history. -->
+  <path d="M510 683C268 711 184 646 279 544" fill="none" stroke="#8b99a8" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow)"/>
+  <text class="small" x="282" y="730">Reopen when assumptions fail</text>
+  <text class="small" x="820" y="747">Same cases · models in, outcomes back</text>
+  <line x1="40" y1="775" x2="1240" y2="775" stroke="#d4dbe1"/>
+  <text class="small" x="640" y="808">Plan ready ≠ executed ≠ validated  ·  Completed evidence retains its original revision</text>
+  <text class="small" x="640" y="837">Process view · colors identify work, not completion</text>
+</svg>
