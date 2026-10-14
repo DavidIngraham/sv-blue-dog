@@ -13,6 +13,8 @@ import tempfile
 import threading
 from typing import Mapping
 
+from filelock import FileLock
+
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
@@ -91,12 +93,14 @@ class NativeKernel:
             raise ValueError('Scalar output requires size 1')
         shim = self._shim(output.split(' *')[0])
         wrapper = spec.source.parent / ('batch-' + hashlib.sha256(shim.encode()).hexdigest()[:24] + '.c')
-        if not wrapper.exists():
-            # Concurrent constructors publish complete identical source atomically.
-            fd, temporary = tempfile.mkstemp(dir=wrapper.parent, suffix='.c')
-            with os.fdopen(fd, 'w', encoding='utf-8') as stream:
-                stream.write(shim)
-            os.replace(temporary, wrapper)
+        # Windows cannot replace a file another process is reading. Serialize
+        # publication so concurrent constructors never replace an existing shim.
+        with FileLock(str(wrapper) + '.lock'):
+            if not wrapper.exists():
+                fd, temporary = tempfile.mkstemp(dir=wrapper.parent, suffix='.c')
+                with os.fdopen(fd, 'w', encoding='utf-8') as stream:
+                    stream.write(shim)
+                os.replace(temporary, wrapper)
         self.wrapper = wrapper
         if not _defer:
             self._load()
