@@ -1,6 +1,6 @@
 # Declarative SysML/Python runtime
 
-This package is being extracted from SV Blue Dog. It is not yet the completed reusable interface. The independent thermal example proves scalar calculation discovery, typed generated results, model-owned defaults, explicit batching and stale-source checks without importing Blue Dog code. Blue Dog now consumes generated mass, operating-performance, structural-margin and passage-feasibility exports instead of handwritten adapters.
+This package is being extracted from SV Blue Dog. It is not yet the completed reusable interface. The independent thermal example proves scalar calculation discovery, typed generated results, model-owned defaults, explicit batching and stale-source checks without importing Blue Dog code. Blue Dog now consumes generated mass, operating-performance, structural-margin, passage-feasibility and route exports instead of handwritten adapters.
 
 ```python
 from sysml_python import Project
@@ -18,13 +18,11 @@ Scalar and fixed-vector Real inputs, named scalar or explicit tuple returns, Lin
 
 The pinned OpenSysML compiler rejects parameter defaults. The backend preserves scalar literal defaults in the generated Python API and compiles a semantic API projection with only those exported parameter defaults removed. The original model remains unchanged; Python supplies every C argument. Nonliteral defaults still require model evaluation and currently fail explicitly. Inline native assertions, nonliteral parameter-default expressions, generalized external bindings and portable manifests still need work. Evaluated defaults can already be bound declaratively to named analysis outputs. Do not use this slice as evidence that the entire project goal is complete.
 
-## Remaining migration
+## Current migration boundary
 
-1. Define model-owned export/binding metadata and lower defaults and physical checks explicitly.
-2. Generate typed inputs/outputs and named vector packing from semantic model information; reject unsupported schemas.
-3. Mass, operating performance, structural margins and passage feasibility are migrated; continue separating project reference experiments from generic preparation.
-4. Migrate other supported calculations; delete duplicate runtime and preparation plumbing.
-5. Package the independent uv template, CI and validation examples; verify installed-package behavior outside the repository.
+Mass, operating performance, structural margins, passage feasibility and route screening use generated exports. All native execution shares this package's backend; the project's old schema reader, adapter hierarchy and duplicate native runtime have been removed. Surface/wave helper calculations, resistance screening and specialized hydrostatic mesh integration still have project-owned preparation or binding code that must be migrated.
+
+The [package-less uv template](../../examples/thermal/README.md) has application tests and a CI check that installs a built wheel into a fresh environment outside this repository. Portable manifests, complete execution provenance, broader default lowering, and explicit handling of additional record schemas remain unfinished. The model's equations and schemas belong in SysML; geometry, reference experiments and engineering interpretation remain project-owned.
 
 Generated packages contain rebuildable artifacts. Numerical execution is not physical qualification. Project evidence interpretation is intentionally outside this library.
 

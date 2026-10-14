@@ -64,6 +64,18 @@ jobs:
         env:
           OPENSYSML_BINARY: ${{ github.workspace }}/.tools/nightly-20261009-28106371e/sysml
         run: uv run pytest packages/sysml-python/tests -q
+      - name: Verify installed runtime with an independent project
+        env:
+          OPENSYSML_BINARY: ${{ github.workspace }}/.tools/nightly-20261009-28106371e/sysml
+        run: |
+          uv build packages/sysml-python --wheel --out-dir .tools/runtime-dist
+          template_dir=$(mktemp -d)
+          cp examples/thermal/pyproject.toml "$template_dir/"
+          cp -R examples/thermal/models examples/thermal/tests "$template_dir/"
+          uv venv "$template_dir/.venv" --python 3.12
+          uv pip install --python "$template_dir/.venv/bin/python" .tools/runtime-dist/*.whl 'pytest>=9,<10'
+          cd "$template_dir"
+          .venv/bin/python -m pytest -q
       - run: uv run pytest -q
       - name: Exercise the seeded mission campaign
         run: uv run python -m tools.boat_analysis.mission.campaign --count 4

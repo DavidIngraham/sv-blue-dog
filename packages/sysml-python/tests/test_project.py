@@ -80,3 +80,51 @@ def test_source_hash_cache_detects_same_size_rewrite(tmp_path, monkeypatch):
     os.utime(source, ns=(previous.st_atime_ns, previous.st_mtime_ns + 1_000_000_000))
     assert execution.checked_digest(source) != first
     assert len(calls) == 2
+
+
+def test_independent_records_checks_and_batches(tmp_path):
+    executable = os.environ.get('OPENSYSML_BINARY')
+    if not executable:
+        pytest.skip('Set OPENSYSML_BINARY to the pinned test compiler')
+    (tmp_path/'plate.sysml').write_text("""package Plate {
+        private import ScalarValues::*;
+        attribute def Dimensions { attribute width : Real; attribute height : Real; }
+        calc def Area {
+            in size : Real [2] ordered nonunique;
+            return area : Real = size#(1)*size#(2);
+        }
+        calc def Valid {
+            in size : Real [2] ordered nonunique;
+            attribute positiveWidth : Real = if size#(1)>0 ? 1.0 else 0.0;
+            attribute positiveHeight : Real = if size#(2)>0 ? 1.0 else 0.0;
+            return result : Real [2] ordered nonunique;
+            (positiveWidth,positiveHeight)
+        }
+    }""")
+    config = tmp_path/'pyproject.toml'
+    config.write_text('''[tool.sysml_python]
+models = ["*.sysml"]
+generated_package = "generated"
+[tool.sysml_python.exports.area]
+definition = "Plate::Area"
+checks = "Plate::Valid"
+[tool.sysml_python.exports.area.aliases]
+size = "dimensions"
+[tool.sysml_python.exports.area.records]
+dimensions = "Plate::Dimensions"
+''')
+    package = Project(config, executable=executable).prepare()
+    spec = importlib.util.spec_from_file_location('plate_test', package/'__init__.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    first = module.Dimensions(width=2, height=3)
+    assert module.area(dimensions=first).area == 6
+    assert module.area(dimensions={'height':3, 'width':2}).area == 6
+    packed = module.area.prepare_inputs(dimensions=first)
+    np.testing.assert_array_equal(packed['dimensions'], [2,3])
+    batch = module.area.batch(shared={}, cases={'dimensions':[first,module.Dimensions(width=4,height=5)]})
+    np.testing.assert_array_equal(batch.values, [[6],[20]])
+    with pytest.raises(ValueError, match='positiveWidth'):
+        module.area(dimensions=module.Dimensions(width=-1,height=3))
+    with pytest.raises(ValueError, match='case 1.*positiveHeight'):
+        module.area.batch(shared={}, cases={'dimensions':[first,module.Dimensions(width=4,height=0)]})

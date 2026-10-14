@@ -17,3 +17,11 @@ backend = "opensysml-c"
 
 [tool.sysml_python.exports.joule_heat]
 definition = "Thermal::JouleHeat"
+
+[dependency-groups]
+dev = ["pytest>=9,<10"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "--strict-config --strict-markers"
