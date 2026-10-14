@@ -57,6 +57,9 @@ class OpenSysML:
         return [upper['value']]
 
     def record(self, definition):
+        element = self.named(definition)
+        if element['@type'] not in ('AttributeDefinition', 'PartDefinition') or element.get('ownedSpecialization'):
+            raise ValueError(f'{definition}: records require a direct part or attribute definition without inheritance')
         fields = [e for e in self.members(definition) if e['@type'] == 'AttributeUsage']
         if not fields or any(self.real_shape(e) for e in fields):
             raise ValueError(f'{definition}: record requires scalar Real attributes')
@@ -65,6 +68,8 @@ class OpenSysML:
     def describe(self, definition, *, output_definition=None):
         if self.named(definition)['@type'] != 'CalculationDefinition':
             raise ValueError(f'Expected a calculation: {definition}')
+        if self.named(definition).get('ownedSpecialization'):
+            raise ValueError(f'{definition}: inherited calculation schemas are not supported')
         members = self.members(definition)
         inputs = []
         for feature in members:

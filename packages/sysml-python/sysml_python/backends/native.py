@@ -72,6 +72,11 @@ def load_library(source: Path, *, dependencies=()):
                 finally:
                     Path(temporary).unlink(missing_ok=True)
             lib = ct.CDLL(str(library))
+            lib._sysml_build = {
+                'compilerTarget': compiler.decode(), 'compilerVersion': version.decode(),
+                'flags': list(flags), 'platform': platform.system(), 'machine': platform.machine(),
+                'librarySha256': hashlib.sha256(library.read_bytes()).hexdigest(),
+            }
             lib.sysml_error.restype = ct.c_char_p
             _libraries[library] = (lib, threading.RLock())
         return _libraries[library]

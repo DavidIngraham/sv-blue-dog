@@ -4,7 +4,9 @@ import keyword
 import os
 from pathlib import Path
 import tomllib
-from .backends.opensysml import OpenSysML, digest
+from .backends.opensysml import OpenSysML
+from .provenance import digest, runtime_sources
+from .records import Record
 
 
 def identifier(name):
@@ -32,20 +34,40 @@ class Project:
         self.backend = OpenSysML(executable, sources)
 
     def prepare(self):
-        self.backend.__dict__.pop('_index', None)
+        self.__init__(self.path, executable=self.backend.executable)
         package = self.config.get('generated_package','generated')
         if any(not n.isidentifier() or keyword.iskeyword(n) for n in package.split('.')):
             raise ValueError('Invalid generated package')
         directory = self.root.joinpath(*package.split('.'))
         directory.mkdir(parents=True, exist_ok=True)
-        manifest = {'schemaVersion':1,'sourceHashes':{str(p):digest(p) for p in self.backend.sources},
+        manifest = {'schemaVersion':2,
+                    'projectRoot':Path(os.path.relpath(self.root, directory)).as_posix(),
+                    'configuration':{'path':self.path.relative_to(self.root).as_posix(),'sha256':digest(self.path)},
+                    'modelPatterns':self.config['models'],
+                    'runtime':{'sourceHashes':runtime_sources()},
+                    'sourceHashes':{p.relative_to(self.root).as_posix():digest(p) for p in self.backend.sources},
                     'compiler':{'path':str(self.backend.executable),'sha256':digest(self.backend.executable)},'exports':{}}
         code = ['# Generated from SysML. Do not edit.', 'from dataclasses import dataclass',
-                'from pathlib import Path', 'from numpy.typing import ArrayLike',
+                'from pathlib import Path', 'from numpy.typing import ArrayLike', 'from typing import TypedDict, Literal, Sequence',
+                'from sysml_python.backends.native import BatchResult',
                 'from sysml_python.records import Record', 'from sysml_python.execution import Calculation', '']
         record_names, analyses = {}, {}
-        def emit_record(label, record):
+        symbols = {'dataclass', 'Path', 'ArrayLike', 'TypedDict', 'Literal', 'Sequence',
+                   'BatchResult', 'Record', 'Calculation'}
+        def reserve(label):
             identifier(label)
+            if label in symbols:
+                raise ValueError('Generated symbol collision: '+label)
+            symbols.add(label)
+        for name in self.config['exports']:
+            reserve(name)
+        def emit_record(label, record):
+            reserve(label)
+            if len(set(record['fields'])) != len(record['fields']):
+                raise ValueError('Duplicate record fields')
+            for field in record['fields']:
+                if field.startswith('_') or field in dir(Record) or field == 'sysml_id':
+                    raise ValueError('Record field conflicts with runtime API: '+field)
             code.extend(['@dataclass(frozen=True)', f'class {label}(Record):', f"    sysml_id = {record['sysml_id']!r}"])
             for field in record['fields']:
                 code.append(f'    {identifier(field)}: float')
@@ -63,6 +85,8 @@ class Project:
             for f in schema['inputs']:
                 f['nativeName'] = f['name']
                 f['name'] = identifier(aliases.get(f['name'],f['name']))
+                if f['name'] == 'self':
+                    raise ValueError('Input name self is reserved; supply an alias')
             if len({f['name'] for f in schema['inputs']}) != len(schema['inputs']):
                 raise ValueError('Duplicate public input names')
             by_name = {f['name']:f for f in schema['inputs']}
@@ -113,14 +137,33 @@ class Project:
             result = ''.join(p.capitalize() for p in name.split('_'))+'Result'
             emit_record(result, {'sysml_id':settings.get('output_record',schema['definition']+'::result'),
                                 'fields':[f['name'] for f in schema['outputs']]})
-            code += [f"_{name} = Calculation(Path(__file__).with_name('manifest.json'), {name!r}, {result})"]
-            arguments = []
+            arguments, types = [], {}
             for f in schema['inputs']:
                 type_name = record_names[f['record']['sysml_id']]+' | ArrayLike' if 'record' in f else ('ArrayLike' if f['shape'] else 'float')
-                arguments.append(f"{f['name']}: {type_name}" + (' = None' if 'default' in f else ''))
-            code += [f"def {name}(*, {', '.join(arguments)}) -> {result}:",
-                     f"    return _{name}("+', '.join(f"{f['name']}={f['name']}" for f in schema['inputs'])+')',
-                     f'{name}.batch = _{name}.batch', f'{name}.prepare_inputs = _{name}.prepare_inputs', '']
-        (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+                types[f['name']] = type_name
+                arguments.append(f"{f['name']}: {type_name}" + (' | None = None' if 'default' in f else ''))
+            prefix = ''.join(p.capitalize() for p in name.split('_'))
+            shared_type, cases_type, calculation = prefix+'Inputs', prefix+'Cases', prefix+'Calculation'
+            for label, batch in ((shared_type,False),(cases_type,True)):
+                reserve(label)
+                code.append(f'class {label}(TypedDict, total=False):')
+                for f in schema['inputs']:
+                    annotation = (('Sequence['+record_names[f['record']['sysml_id']]+'] | ArrayLike') if 'record' in f else 'ArrayLike') if batch else types[f['name']]
+                    code.append(f"    {f['name']}: {annotation}")
+                if not schema['inputs']: code.append('    pass')
+                code.append('')
+            reserve(calculation)
+            signature = ('*, '+', '.join(arguments)) if arguments else ''
+            forwarded = ', '.join(f"{f['name']}={f['name']}" for f in schema['inputs'])
+            code += [f'class {calculation}(Calculation):',
+                     f"    def __call__(self{', ' if signature else ''}{signature}) -> {result}:",
+                     f"        return super().__call__({forwarded})",
+                     f"    def prepare_inputs(self{', ' if signature else ''}{signature}):",
+                     f"        return super().prepare_inputs({forwarded})",
+                     f"    def batch(self, *, shared: {shared_type}, cases: {cases_type}, chunk_size: int = 256, errors: Literal['raise', 'collect'] = 'raise') -> BatchResult:",
+                     "        return super().batch(shared=shared, cases=cases, chunk_size=chunk_size, errors=errors)",
+                     f"{name} = {calculation}(Path(__file__).with_name('manifest.json'), {name!r}, {result})", '']
         (directory/'__init__.py').write_text('\n'.join(code),encoding='utf-8')
+        manifest['pythonHash'] = digest(directory/'__init__.py')
+        (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
         return directory
