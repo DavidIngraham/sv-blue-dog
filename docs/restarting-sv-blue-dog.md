@@ -30,6 +30,14 @@ Then I got lost in the configuration decisions. A larger wing could provide more
 
 This is a surprisingly complex, high-performance system for something I hope will be small and inexpensive to manufacture. I was trying to push the edge of what was possible, and I stalled out.
 
+## Using a model to get moving again
+
+I realized that open-source tools and SysML v2 could give the project some structure. That also made Blue Dog a good excuse to dive into digital engineering: could I connect the mission, requirements, architecture, analysis and eventual tests closely enough to make the next decision clearer?
+
+I am especially interested in how that model can structure an agent-driven development project. Agents can help explore alternatives and implement analyses quickly. I still need a shared description of what we are trying to achieve, why a choice was made and what would count as convincing evidence. Otherwise, producing more analysis can simply make the maze bigger.
+
+The [development plan](development-plan.md) gives the project a path from the challenge definition to a boat on the water. At each stage, it identifies the decisions to make, the analyses or tests needed to support them, and what needs to be resolved before moving on. I use that structure to guide both my own work and the tasks I give agents, revisiting earlier decisions as simulations and experiments reveal more about the design.
+
 ### Try the configuration decisions
 
 This is the web of choices I was trying to hold in my head. Start with the recorded 1.2 m sizing candidate and change its wing, hull or appendages. The sketch follows the geometry inputs; the other controls expose the construction and equipment assumptions that feed the full sizing analysis.
@@ -45,14 +53,6 @@ The optimizer starts from a candidate, builds its geometry, and uses native SysM
 The current search sweeps overall-length caps while keeping all 29 design variables and 48 operating-state values free. It optimizes mass and conditional passage time separately and retains feasible alternatives for a design decision. The first bounded run retains a 1.2 m candidate, but its refined replay still misses the energy allocation slightly; the smaller searches remain unresolved. Finer geometry, recovery assessment and mission simulation challenge every candidate. Failure to find a solution is a reason to investigate the constraints and search, not proof that no boat of that size can work. The [sizing method](sizing.md) and [current results](results.md) carry the details.
 
 The applet lets you explore and save a proposed configuration. It does not run that coupled optimization in your browser, and a plausible-looking sketch is not a feasible design.
-
-## Using a model to get moving again
-
-I realized that open-source tools and SysML v2 could give the project some structure. That also made Blue Dog a good excuse to dive into digital engineering: could I connect the mission, requirements, architecture, analysis and eventual tests closely enough to make the next decision clearer?
-
-I am especially interested in how that model can structure an agent-driven development project. Agents can help explore alternatives and implement analyses quickly. I still need a shared description of what we are trying to achieve, why a choice was made and what would count as convincing evidence. Otherwise, producing more analysis can simply make the maze bigger.
-
-The [development plan](development-plan.md) gives the project a path from the challenge definition to a boat on the water. At each stage, it identifies the decisions to make, the analyses or tests needed to support them, and what needs to be resolved before moving on. I use that structure to guide both my own work and the tasks I give agents, revisiting earlier decisions as simulations and experiments reveal more about the design.
 
 ## Where the project stands
 
