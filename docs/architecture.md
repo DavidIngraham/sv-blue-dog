@@ -24,7 +24,6 @@ package Page_architecture_0 {
     private import DiagramLayout::*;
     view context : OOSEM::SystemContextView {
         expose BlueDog::Architecture::MissionContext;
-        render Views::asInterconnectionDiagram;
     }
 }
 ```
