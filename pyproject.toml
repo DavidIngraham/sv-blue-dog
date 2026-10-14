@@ -109,3 +109,54 @@ environment = "BlueDogOperatingEnvironment::Inputs.parameterValues"
 definition = "MarineCourse::Route"
 [tool.sysml_python.exports.route.defaults]
 policy = "BlueDogCoupledOperation::Inputs.routeParameters"
+
+[tool.sysml_python.exports.wind_sample]
+definition = "MarineSurface::WindSample"
+
+[tool.sysml_python.exports.strip_load]
+definition = "MarineSurface::StripLoad"
+
+[tool.sysml_python.exports.fetch_sea]
+definition = "MarineSurface::FetchSea"
+
+[tool.sysml_python.exports.speed_retention]
+definition = "MarineSurface::SpeedRetention"
+
+[tool.sysml_python.exports.wave_screen]
+definition = "MarineSurface::WaveScreen"
+
+[tool.sysml_python.exports.harmonic_response]
+definition = "MarineSurface::HarmonicResponse"
+
+[tool.sysml_python.exports.orbital_velocity]
+definition = "MarineWavePerformance::OrbitalVelocity"
+
+[tool.sysml_python.exports.foil_load]
+definition = "MarineWavePerformance::FoilLoad"
+
+[tool.sysml_python.exports.impedance_term]
+definition = "MarineWavePerformance::ImpedanceTerm"
+
+[tool.sysml_python.exports.balance_correction]
+definition = "MarineWavePerformance::BalanceCorrection"
+
+[tool.sysml_python.exports.wave_actuation]
+definition = "MarineWavePerformance::Actuation"
+
+[tool.sysml_python.exports.recovery_segment]
+definition = "MarineRecovery::Segment"
+[tool.sysml_python.exports.wave_actuation.defaults]
+q = "BlueDogOperatingEnvironment::Inputs.parameterValues"
+
+[tool.sysml_python.exports.sailing_core]
+definition = "MarineSailing::Core"
+checks = "MarineSailing::InputChecks"
+[tool.sysml_python.exports.sailing_core.defaults]
+q = "BlueDogOperatingEnvironment::Inputs.parameterValues"
+[tool.sysml_python.exports.sailing_core.records]
+d = "MarineDesign::Design"
+p = "MarineDesign::Parameters"
+s = "MarineDesign::OperatingState"
+aero = "MarineDesign::AeroCoefficients"
+massData = "MarineDesign::MassProperties"
+hydro = "MarineDesign::HydroState"

@@ -3,8 +3,10 @@
 The outer operating solve closes mean surge/sway/yaw/roll balance. Controls
 remain fixed across a cycle. No wave-resolved steering or second-order BEM drift.
 """
+from sysml_python import execution_session
 import numpy as np
-from .surface import SurfaceOperation,NativeCalculation
+from .surface import SurfaceOperation
+from tools.boat_analysis.generated import orbital_velocity, foil_load, balance_correction, wave_actuation, wave_screen
 from ..environment.motion import point_motion
 
 
@@ -15,15 +17,16 @@ class WaveAveragedOperation:
         self.resistance_coefficient=resistance_coefficient
         self.height=height;self.period=period;self.wave_wind_angle=wave_wind_angle
         self.settings=response.policy['settings'];self.phases=int(phases or self.settings[0])
-        self.orbital=NativeCalculation('MarineWavePerformance::OrbitalVelocity',1)
-        self.foil=NativeCalculation('MarineWavePerformance::FoilLoad',1)
-        self.balance=NativeCalculation('MarineWavePerformance::BalanceCorrection',1)
-        self.actuation=NativeCalculation('MarineWavePerformance::Actuation',3)
-        self.wave=NativeCalculation('MarineSurface::WaveScreen',1)
+        self.orbital=orbital_velocity
+        self.foil=foil_load
+        self.balance=balance_correction
+        self.actuation=wave_actuation
+        self.wave=wave_screen
 
     def __call__(self, **inputs):
         return self.evaluate(**inputs)
 
+    @execution_session()
     def evaluate(self,design,parameters,state,aero,mass,hydro):
         design,parameters,state,aero,mass,hydro=self.surface.pack(design,parameters,state,aero,mass,hydro)
         d,p,s=np.array(design),np.array(parameters),np.array(state)
@@ -49,14 +52,14 @@ class WaveAveragedOperation:
                 point=[x,depth*np.sin(heel),-depth*np.cos(heel)]
                 position,velocity,R=point_motion(point,pose,origin)
                 localphase=phase+k*(position[0]*np.cos(direction)+position[1]*np.sin(direction))
-                orbital=self.orbital([a,k,2*np.pi/self.period,position[2],localphase,direction,p[34]])
+                orbital=self.orbital(x=[a,k,2*np.pi/self.period,position[2],localphase,direction,p[34]]).as_array()
                 flow=R.T@(np.array([s[3]*cb,s[3]*sb,0.])+velocity-orbital)
                 v=np.linalg.norm(flow[:2])*inflow;localbeta=np.arctan2(flow[1],flow[0])
                 root,_,_=point_motion([x,(hydro[0]+d[2])*np.sin(heel),-(hydro[0]+d[2])*np.cos(heel)],pose,origin)
                 eta=a*np.cos(phase+k*(root[0]*np.cos(direction)+root[1]*np.sin(direction)))
                 root_depth=eta-root[2]
                 wet=np.clip(1+root_depth/span,0,1)
-                load=self.foil([p[31],area,span,v,localbeta+steer,heel,p[27],p[28],s[2],p[26],np.deg2rad(q[0]),wet])
+                load=self.foil(x=[p[31],area,span,v,localbeta+steer,heel,p[27],p[28],s[2],p[26],np.deg2rad(q[0]),wet]).as_array()
                 coverage.extend([root_depth,flow[0],load[2],load[3]])
                 forces.append((load,localbeta,position,v))
             lk,dk=forces[0][0][:2];lr,dr=forces[1][0][:2]
@@ -65,8 +68,8 @@ class WaveAveragedOperation:
             kz=hydro[0]+d[2]+d[11]/2;rz=hydro[0]+d[2]+d[13]/2
             old_roll=((out['lk']*cb+out['dk']*sb)*kz+(out['lr']*cb+out['dr']*sb)*rz)*np.cos(heel)
             new_roll=sum((load[0]*np.cos(angle)+load[1]*np.sin(angle))*(-pos[2]) for load,angle,pos,v in forces)
-            corrected=self.balance([*[out[n] for n in self.contract['outputNames'][:4]],out['dk']+out['dr'],dk+dr,out['lk']+out['lr'],lk+lr,old_yaw,new_yaw,old_roll,new_roll])
-            out.update(zip(self.contract['outputNames'][:4],corrected))
+            corrected=self.balance(x=[*[out[n] for n in self.contract['outputNames'][:4]],out['dk']+out['dr'],dk+dr,out['lk']+out['lr'],lk+lr,old_yaw,new_yaw,old_roll,new_roll])
+            out.update(corrected)
             out['resistance']+=dk+dr-out['dk']-out['dr'];out['heeling']+=new_roll-old_roll
             out.update(lk=lk,lr=lr,dk=dk,dr=dr,keelResultant=float(np.hypot(lk,dk)),rudderResultant=float(np.hypot(lr,dr)))
             for prefix,item in zip(('keel','rudder'),forces):
@@ -75,7 +78,7 @@ class WaveAveragedOperation:
             rudder_cl=lr/max(rudder_pressure_area*np.cos(heel),1e-12)
             rudder_torque=rudder_pressure_area*np.hypot(rudder_cl,p[28])*q[2]*d[12]/d[13]+q[3]
             out['rudderTorque']=rudder_torque
-            out['averagePower'],out['peakPower'],out['peakMargin']=self.actuation(p,q,[out['wingTorque'],rudder_torque,d[16]])
+            out['averagePower'],out['peakPower'],out['peakMargin']=self.actuation(p=p,q=q,x=[out['wingTorque'],rudder_torque,d[16]]).as_array()
             out['rudderDriveMargin']=min(out['rudderDriveMargin'],1-p[35]*rudder_torque/d[19])
             out['keelRe']=forces[0][3]*(d[10]/d[11])/p[30]
             out['rudderRe']=forces[1][3]*(d[12]/d[13])/p[30]
@@ -90,7 +93,7 @@ class WaveAveragedOperation:
         # First-order BEM does not supply mean drift resistance. Existing
         # explicit coefficient is applied once here, never again in the mission.
         freeboard=d[3]-hydro[0]
-        added=self.wave([a,self.period,0.,d[0],d[1],s[3],np.cos(direction),self.resistance_coefficient,freeboard,freeboard,hydro[0]+d[2]+min(d[11],d[13]),p[34],p[31]])[3]
+        added=self.wave(x=[a,self.period,0.,d[0],d[1],s[3],np.cos(direction),self.resistance_coefficient,freeboard,freeboard,hydro[0]+d[2]+min(d[11],d[13]),p[34],p[31]]).resistance
         result['surgeResidual']-=added/10;result['resistance']+=added
         margin=float(min(coverage));result['wingLiftMargin']=min(result['wingLiftMargin'],margin)
         result.update(waveCoverageMargin=margin,profileFailures=int(profile),incidenceFailures=int(incidence),phaseCount=self.phases,addedWaveResistanceN=float(added),motionAngleRad=max_angle)

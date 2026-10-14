@@ -14,6 +14,9 @@ package MarineRecovery {
         attribute ground : Real = if authority ? RealFunctions::sqrt(x#(2)*x#(2)-x#(4)*x#(4))+x#(3) else 0;
         attribute feasible : Boolean = authority and ground > 0;
         attribute duration : Real = if feasible ? x#(1)/ground else 0;
-        return result : Real [4] ordered nonunique = (if feasible ? 1 else 0, ground, duration, x#(7)*(x#(5)+x#(6))*duration/3600);
+        attribute feasibleFlag : Real = if feasible ? 1 else 0;
+        attribute protectedEnergy : Real = x#(7)*(x#(5)+x#(6))*duration/3600;
+        return result : Real [4] ordered nonunique;
+        (feasibleFlag,ground,duration,protectedEnergy)
     }
 }

@@ -1,7 +1,8 @@
 """Bounded interpolation of radiation/diffraction coefficients and RAO solve."""
+from sysml_python import execution_session
 import numpy as np
 from scipy.interpolate import RegularGridInterpolator
-from ..model.surface import NativeCalculation
+from tools.boat_analysis.generated import impedance_term
 
 
 class ResponseTable:
@@ -18,8 +19,9 @@ class ResponseTable:
         self.interpolate=RegularGridInterpolator(axes,values,bounds_error=True)
         self.mesh_errors=None
         self.mass=np.array(self.meta['massMatrix']);self.stiffness=np.array(self.meta['stiffness'])
-        self.impedance=NativeCalculation('MarineWavePerformance::ImpedanceTerm',1)
+        self.impedance=impedance_term
 
+    @execution_session()
     def solve(self,period,speed,direction,damping=None):
         x=self.interpolate([[period,speed,np.rad2deg(direction)%360]])[0]
         A=x[:9].reshape(3,3);B=x[9:18].reshape(3,3);F=x[18:21]+1j*x[21:24]
@@ -29,8 +31,8 @@ class ResponseTable:
         Z=np.empty((3,3),complex)
         for i in range(3):
             for j in range(3):
-                real,imag=self.impedance([encounter,self.mass[i,j],A[i,j],self.stiffness[i,j],B[i,j],extra[i,j]])
-                Z[i,j]=real+1j*imag
+                impedance=self.impedance(x=[encounter,self.mass[i,j],A[i,j],self.stiffness[i,j],B[i,j],extra[i,j]])
+                Z[i,j]=impedance.realPart+1j*impedance.imaginaryPart
         result=np.linalg.solve(Z,F)
         if not np.isfinite(result).all() or np.linalg.cond(Z)>1e9:raise ValueError('Singular wave response')
         return result,encounter,k

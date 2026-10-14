@@ -4,6 +4,7 @@ The controller selects sailing headings and depowering against a chart domain.
 It is a conceptual guidance policy, not ArduSail or a validated collision system.
 """
 from __future__ import annotations
+from sysml_python import execution_session
 
 from dataclasses import dataclass, field, asdict
 import json
@@ -74,6 +75,7 @@ def direction(route, distance):
     return vector / np.linalg.norm(vector)
 
 
+@execution_session()
 def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), seed=0,
              stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None):
     dt, hours, forecast, lookahead, maneuver_time, _ = inputs['time']

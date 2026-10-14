@@ -6,7 +6,7 @@ from pathlib import Path
 import json
 import numpy as np
 from ..model.runtime import ROOT
-from ..model.surface import SurfaceOperation,policy_inputs,NativeCalculation
+from ..model.surface import SurfaceOperation,policy_inputs
 from ..model.vessel import CoupledModel
 from ..environment.motion import MotionResponse,contact_points
 from ..environment.routing import build

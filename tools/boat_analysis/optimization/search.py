@@ -3,6 +3,7 @@
 The search uses coarse geometry and fixed-pitch hydrostatic screens for cost.
 A candidate is not accepted as verified until finer, free-pitch replay succeeds.
 """
+from sysml_python import execution_session
 from tools.boat_analysis.evidence.records import input_record, input_path, output_path, source_hashes
 
 import argparse,json,time
@@ -57,6 +58,7 @@ class Problem:
         result=(reference_mass,g,upright,righting)
         self.design_cache=(np.array(x,copy=True),result)
         return result
+    @execution_session()
     def evaluate(self,z):
         try:return self._evaluate(z)
         except ValueError as error:

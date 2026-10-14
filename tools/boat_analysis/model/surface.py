@@ -3,31 +3,13 @@
 Opt-in provider: historical uniform-flow replay remains reproducible. The local
 finite-wing coefficient approximation does not resolve spanwise circulation.
 """
-import hashlib
+from sysml_python import execution_session
 import json
 
 import numpy as np
 
-from tools.boat_analysis.generated import operation
-from sysml_python.backends.native import KernelSpec, NativeKernel
-from .runtime import ROOT, model_files, native, native_value
-
-
-class NativeCalculation:
-    def __init__(self, name, arguments, output_size=None):
-        fingerprint=hashlib.sha256(name.encode())
-        for path in model_files():
-            fingerprint.update(path.read_bytes().replace(b'\r\n',b'\n'))
-        source=ROOT/'.tools'/('surface-'+name.split('::')[-1]+'-'+fingerprint.hexdigest()[:16]+'.c')
-        if not source.exists():
-            native('-compile',name,'-source','-o',str(source))
-        self.runtime=NativeKernel(KernelSpec(source,tuple(f'input{i}' for i in range(arguments)),output_size))
-
-    def __call__(self,*vectors):
-        return self.runtime.evaluate(*vectors)
-
-    def evaluate_batch(self, *, shared, cases, **options):
-        return self.runtime.evaluate_batch(shared=shared,cases=cases,**options)
+from tools.boat_analysis.generated import operation, wind_sample, strip_load, sailing_core
+from .runtime import native, native_value
 
 
 def policy_inputs():
@@ -43,9 +25,9 @@ class SurfaceOperation:
         self.strips=int(strips or policy[3])
         if self.strips<1 or not 0<policy[1]<policy[2]<policy[0]:
             raise ValueError('Invalid wind height, roughness or quadrature')
-        self.wind=NativeCalculation('MarineSurface::WindSample',1)
-        self.strip=NativeCalculation('MarineSurface::StripLoad',1,output_size=4)
-        self.core=NativeCalculation('MarineSailing::Core',8)
+        self.wind=wind_sample
+        self.strip=strip_load
+        self.core=sailing_core
 
     def pack(self, design, parameters, state, aero, mass, hydro):
         values=operation.prepare_inputs(design=design, parameters=parameters, state=state,
@@ -55,6 +37,7 @@ class SurfaceOperation:
     def __call__(self, **inputs):
         return self.evaluate(**inputs)
 
+    @execution_session()
     def evaluate(self,design,parameters,state,aero,mass,hydro,*,motion=None,motion_origin=(0,0,0)):
         design,parameters,state,aero,mass,hydro=self.pack(design,parameters,state,aero,mass,hydro)
         d,p,s=np.asarray(design),np.asarray(parameters),np.asarray(state)
@@ -77,7 +60,7 @@ class SurfaceOperation:
                 point=[d[9]*d[0],-(d[3]+fraction*height)*np.sin(heel),z]
                 position,velocity,matrix=point_motion(point,motion,motion_origin)
                 z=position[2]
-            sample=self.wind([s[0],self.policy[0],self.policy[1],z,theta,s[3],beta,float(self.shear),self.policy[2]])
+            sample=self.wind(x=[s[0],self.policy[0],self.policy[1],z,theta,s[3],beta,float(self.shear),self.policy[2]]).as_array()
             if motion is not None:
                 # Wind-from vector: point velocity adds to apparent wind.
                 # Stored wind y is starboard-positive; point positions,
@@ -97,16 +80,14 @@ class SurfaceOperation:
             poses.append((matrix,position,z) if motion is not None else None)
             speeds.append(sample[3]);lift.append(abs(cl));ratios.append(sample[0]);alphas.append(alpha)
             margins.append(margin);height_margins.append(sample[4])
-        loads=self.strip.evaluate_batch(shared={},cases={'input0':strip_inputs}).values
+        loads=self.strip.batch(shared={},cases={'x':strip_inputs}).values
         if motion is not None:
             for load,(matrix,position,z) in zip(loads,poses):
                 world=matrix@np.r_[load[:2],0.]
                 load[:2]=world[:2];load[2]=world[1]*z-position[1]*world[2]
         force=np.sum(loads,axis=0)
         extension=[1,*force,min(speeds),max(lift),0,min(*margins,*height_margins)]
-        values=self.core(d,p,q,s,aero,mass,hydro,extension)
-        if len(values)!=len(self.contract['outputNames']):raise ValueError('Surface operation ABI mismatch')
-        result=dict(zip(self.contract['outputNames'],values))
+        result=self.core(d=d,p=p,q=q,s=s,aero=aero,massData=mass,hydro=hydro,surface=extension).to_mapping()
         result.update(windRatioMin=min(ratios),windRatioMax=max(ratios),
                       localAlphaMin=min(alphas),localAlphaMax=max(alphas),
                       surfaceIncidenceMargin=min(margins),surfaceHeightMargin=min(height_margins),

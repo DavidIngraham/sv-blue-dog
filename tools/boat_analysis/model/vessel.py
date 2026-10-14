@@ -1,4 +1,5 @@
 """Coupled geometric pose, buoyancy and native operating equations."""
+from sysml_python import execution_session
 import json
 import numpy as np
 from numpy.typing import ArrayLike
@@ -75,6 +76,7 @@ class CoupledModel:
             sections=np.concatenate([finite_skin_properties(outlines[name],thickness) for name,thickness in zip(outlines,thicknesses)])
             self.section_cache=(key,sections)
         return bodies,m,np.r_[np.concatenate(list(vectors.values())),center,deck_area(g['hull']),self.section_cache[1]],hull_skin
+    @execution_session()
     def at_state(self,x: Design | ArrayLike,state: OperatingState | ArrayLike,resolution=4,pitch_equilibrium=True):
         x=design_vector(x,self.c)
         d,g,v,center,hull_skin,outlines=self.candidate(x,resolution)

@@ -3,6 +3,7 @@
 Destinations are explicit assessed water approaches to shore retrieval sites.
 An approach endpoint alone does not establish beaching or land access evidence.
 """
+from sysml_python import execution_session
 from dataclasses import dataclass
 import math
 
@@ -10,7 +11,7 @@ import numpy as np
 from shapely.geometry import LineString, Point
 
 from tools.boat_analysis.environment.routing import reference_route
-from tools.boat_analysis.model.surface import NativeCalculation
+from tools.boat_analysis.generated import recovery_segment
 
 
 @dataclass(frozen=True)
@@ -62,7 +63,7 @@ class RecoveryPlanner:
         for site in self.sites:
             if not site.shore_access_evidence or not site.approach_evidence or not water.covers(Point(site.approach)):
                 raise ValueError('Recovery site requires evidence references and an in-domain approach')
-        self.kernel = kernel or NativeCalculation('MarineRecovery::Segment', 1)
+        self.kernel = kernel or recovery_segment
 
     def segment(self, distance, unit, current, capsized=False):
         c = self.capability
@@ -73,11 +74,12 @@ class RecoveryPlanner:
             raise ValueError('Finite two-dimensional current required')
         along = float(np.dot(current, unit))
         cross = float(current[0]*unit[1]-current[1]*unit[0])
-        values = self.kernel([distance, c.capsized_speed_mps if capsized else c.speed_mps,
+        values = self.kernel(x=[distance, c.capsized_speed_mps if capsized else c.speed_mps,
                               along, cross, c.capsized_motor_w if capsized else c.motor_w,
-                              c.essential_w, c.uncertainty_factor])
+                              c.essential_w, c.uncertainty_factor]).as_array()
         return values if values[0] == 1 else None
 
+    @execution_session()
     def plan(self, position, current, capsized=False):
         """Least reserve among chart-clear routes, under the supplied current field.
 

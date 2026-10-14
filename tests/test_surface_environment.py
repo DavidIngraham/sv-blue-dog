@@ -10,8 +10,11 @@ pytestmark=pytest.mark.skipif(sys.platform!='linux',reason='Native C adapters re
 
 @pytest.fixture(scope='module')
 def kernels():
-    from tools.boat_analysis.model.surface import NativeCalculation
-    return {n:NativeCalculation('MarineSurface::'+n,1) for n in ('WindSample','StripLoad','WaveScreen','FetchSea','SpeedRetention')}
+    from tools.boat_analysis import generated
+    names={'WindSample':'wind_sample','StripLoad':'strip_load','WaveScreen':'wave_screen',
+           'FetchSea':'fetch_sea','SpeedRetention':'speed_retention'}
+    return {name:(lambda values, fn=getattr(generated,export): fn(x=values).as_array())
+            for name,export in names.items()}
 
 
 def test_log_profile_reference_height_and_near_surface(kernels):
@@ -153,8 +156,8 @@ def test_harmonic_velocity_signed_encounter():
     from tools.boat_analysis.environment.motion import MotionResponse
     response=MotionResponse([1,1,32,.35]);kernel=response.kernel
     x=np.array([.2,.3,-1.2,.7,.4,1.,1.])
-    state=kernel(x);later=x.copy();later[3]-=x[2]*1e-7
-    assert (kernel(later)[:3]-state[:3])/1e-7==pytest.approx(state[3:],abs=1e-7)
+    state=kernel(x=x).as_array();later=x.copy();later[3]-=x[2]*1e-7
+    assert (kernel(x=later).as_array()[:3]-state[:3])/1e-7==pytest.approx(state[3:],abs=1e-7)
 
 
 def test_zero_motion_preserves_strip_solution():

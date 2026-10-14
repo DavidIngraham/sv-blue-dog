@@ -3,8 +3,9 @@
 Coordinates: x forward, y port, z up; R = Ry(pitch) Rx(roll).
 Motion is imposed, not a solution of the hydrodynamic equations of motion.
 """
+from sysml_python import execution_session
 import numpy as np
-from ..model.surface import NativeCalculation
+from tools.boat_analysis.generated import harmonic_response
 
 
 def rotation(pitch,roll):
@@ -27,7 +28,7 @@ class MotionResponse:
         self.count=int(count)
         if self.count<8 or min(self.heave,self.slope)<0 or self.limit<=0:
             raise ValueError('Invalid prescribed motion policy')
-        self.kernel=NativeCalculation('MarineSurface::HarmonicResponse',1)
+        self.kernel=harmonic_response
 
     def samples(self,trains):
         # train = amplitude, k, signed encounter rad/s, propagation in body rad.
@@ -36,7 +37,7 @@ class MotionResponse:
             poses=[];waves=[]
             for j,(a,k,frequency,direction) in enumerate(trains):
                 phase=2*np.pi*((index*(2*j+1)/self.count+j*.38196601125)%1)
-                poses.append(self.kernel([a,k,frequency,phase,direction,self.heave,self.slope]))
+                poses.append(self.kernel(x=[a,k,frequency,phase,direction,self.heave,self.slope]).as_array())
                 waves.append((a,k,direction,phase))
             yield np.sum(poses,axis=0) if poses else np.zeros(6),waves
 
@@ -44,6 +45,7 @@ class MotionResponse:
     def elevation(position,waves):
         return sum(a*np.cos(phase+k*(position[0]*np.cos(d)+position[1]*np.sin(d))) for a,k,d,phase in waves)
 
+    @execution_session()
     def clearance(self,trains,geometry,points=None):
         length,beam,freeboard,root,immersion=geometry
         # Hull corners, centerline wing root, and centerline appendage tip.
