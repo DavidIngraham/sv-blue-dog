@@ -29,6 +29,15 @@ class Record(Mapping):
     def from_mapping(cls, values):
         return cls(**values)
 
+    @classmethod
+    def from_array(cls, values):
+        """Decode a numerical vector in generated model field order."""
+        names = [f.name for f in fields(cls)]
+        array = np.asarray(values)
+        if array.shape != (len(names),):
+            raise ValueError(f'{cls.__name__}: expected vector of length {len(names)}')
+        return cls(**dict(zip(names, array, strict=True)))
+
     def __getitem__(self, name):
         if name not in {f.name for f in fields(self)}:
             raise KeyError(name)

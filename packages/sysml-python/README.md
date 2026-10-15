@@ -28,7 +28,7 @@ Generated packages contain rebuildable artifacts. Numerical execution is not phy
 
 Project-owned numerical providers can call an export's `prepare_inputs(**inputs)` to apply the same named record packing, defaults, shape checks and physical preconditions as scalar execution. It returns a dictionary of arrays keyed by public input name. This is useful when a project assembles forces or geometry outside SysML; the provider remains responsible for its external algorithm and result interpretation.
 
-Generated results expose named fields and `to_mapping()`. Use `as_array()` when a numerical algorithm needs model-ordered values; it returns a copy. Preparing exports discovers return names from the model rather than maintaining Python output-label lists.
+Generated records expose named fields and `to_mapping()`. Use `as_array()` when a numerical algorithm needs model-ordered values; it returns a copy. Convert its result back with `RecordType.from_array(values)`, which checks the vector shape and finite Real values using the generated field order. Preparing exports discovers return names from the model rather than maintaining Python output-label lists.
 
 ## Repeated execution
 
