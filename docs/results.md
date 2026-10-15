@@ -11,6 +11,8 @@ The **1.2 m overall-length** candidate passes the nominal refined Gorge static s
 
 This study takes the finite Bingen–Stevenson challenge, manufacturing assumptions and provisional physics as inputs. It informs concept selection and the measurements needed before detailed design. The [sizing method](sizing.md) explains the calculations; the [mission simulation](mission-simulation.md) adds changing weather, traffic and recovery decisions.
 
+The [development spirals](simulation-spirals.md#develop-the-trades-alongside-the-voyage) place these results alongside the open rig and recovery trades and the working assumptions that make each comparison possible.
+
 ## Search for alternatives, then choose a design
 
 Overall length is a constraint on the full operating envelope, including appendage sweeps. Hull length and the other 28 design variables remain free, together with 48 operating-state variables. Separate mass and conditional-passage objectives expose competing choices instead of hiding them in a weighted score. The design team will choose a balance after comparing the candidates.

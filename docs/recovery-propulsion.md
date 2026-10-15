@@ -18,3 +18,5 @@ Actual propeller data and installed measurements will decide the selection. The 
 
 
 **Next:** [Construction and self-righting](structures-and-recovery.md).
+
+The [mission development spirals](simulation-spirals.md#carry-recovery-through-the-voyage) connect this component trade to position-dependent recovery authority and energy reserve.

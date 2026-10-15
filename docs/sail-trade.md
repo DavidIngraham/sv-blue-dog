@@ -19,6 +19,8 @@ The representative west-wind challenge puts the upstream return on a leeward cou
 
 The candidate definitions and gate logic live in the [trade model](../models/analyses/sail-trade.sysml). The [design decisions](../models/vehicle/decisions.sysml) explain the baseline used for sizing. [Source evidence](../models/vehicle/source-evidence.sysml) preserves the prior-art findings and their limits, including the square-sail precedent, Oshen PC13, tail control and non-backdrivable gearing.
 
+The [mission development spirals](simulation-spirals.md#develop-the-trades-alongside-the-voyage) show how this open rig comparison supplies working candidates and how voyage-level consequences guide the next experiments.
+
 ## What changed my sizing assumptions
 
 The useful result from VSP so far is a warning about the model, not a winning rig. Mesh choice affects the reference response, and heel changes the local flow in ways a single cosine factor misses. I therefore tightened operating angles and reduced the performance credited in primary sizing. Measurements are still needed to replace those judgments.

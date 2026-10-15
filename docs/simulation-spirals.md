@@ -6,6 +6,8 @@ I want to understand how a small autonomous sailboat can complete the Gorge roun
 
 I develop that understanding in spirals. Each pass starts with a question the present simulation cannot answer well enough. I refine the relevant behavior or physics, exercise it in a mission, and use the result to choose the next question. The model grows alongside the simulator: requirements become more observable, architecture responsibilities become more explicit, and predictions acquire identifiable assumptions and evidence.
 
+A working configuration lets me investigate coupled behavior while architectural choices remain open. I need to say what I assumed, what that assumption let me calculate, and what would make me revisit it. Trade studies develop alongside the simulation: they supply candidates to exercise, and the mission exposes consequences that a component comparison cannot show.
+
 The development from 9–15 October 2026 gives concrete examples of this pattern. These are overlapping investigations, with different boats and environmental assumptions in different studies. Their results belong to those configurations; they are not successive scores for one unchanged vessel.
 
 ## Establish the mission and a plausible boat
@@ -27,6 +29,18 @@ The Bingen–Stevenson course added a port rounding of buoy 16, represented by o
 The next connection was between the boat being sized and the boat being sailed in simulation. Candidate geometry and solved sailing states supply a bounded performance envelope. Storage, electrical demand, solar area and vessel dimensions travel with that candidate. A larger battery can improve endurance while also increasing mass and changing the sailing solution; the voyage needs to reflect both effects. [Candidate mission capability](https://github.com/DavidIngraham/sv-blue-dog/commit/4480731).
 
 This adds fidelity and traceability together. A passage prediction can be followed back to a particular candidate and its operating solutions. It also makes the limits more visible: an averaged combination of solved sailing states is not a measured polar or a resolved tack. Outside the solved wind range, the model cannot simply invent sailing performance. A coverage gap becomes a reason to extend the analysis or collect measurements, rather than an unexplained failure of the boat. [Performance coverage](https://github.com/DavidIngraham/sv-blue-dog/commit/79de537), [candidate representation](mission-simulation.md#connecting-a-sizing-candidate).
+
+## Develop the trades alongside the voyage
+
+The [sail architecture trade](sail-trade.md) compares a tail-controlled wing, a directly rotated fixed-camber wing and a soft sail. The fixed-camber wing gives the coupled sizing study a concrete geometry, force model and actuation problem. Using it for an experiment does not settle the rig choice. The comparison still needs both-tack performance, trim energy, durability and casualty behavior on comparable terms. [Initial sail trade](https://github.com/DavidIngraham/sv-blue-dog/commit/73f04bb).
+
+Aerodynamic experiments made progress by changing what performance I was willing to credit. Mesh and heel studies exposed sensitivity in the force predictions, leading to a restricted operating domain and explicit conservative aerodynamic assumptions in sizing. This improved the basis for comparing designs without demonstrating a winning rig. A successful attached-flow case cannot settle broadside sailing, stalled flow or installed trim losses. [Conservative sizing basis](https://github.com/DavidIngraham/sv-blue-dog/commit/3eb61d8), [aerodynamic evidence](sail-trade.md#what-changed-my-sizing-assumptions).
+
+The sizing trade also develops from searching for a small feasible boat toward retaining alternatives at overall-length caps, with mass and conditional passage time considered separately. In the bounded archived study, the two coarse-feasible outputs were effectively the same 1.2 m seed; the 1.0 and 0.8 m searches were unresolved. The study provides a method for comparing alternatives, but has not yet produced a useful spread of choices. The current 440 Wh, 260 mm beam candidate is a local refined replay with positive nominal energy headroom, not a globally preferred architecture. [Retaining feasible alternatives](https://github.com/DavidIngraham/sv-blue-dog/commit/e97f309), [current sizing findings](results.md).
+
+The [recovery propulsion trade](recovery-propulsion.md) remains open between water and air propulsion. Illustrative resistance, efficiency and propulsion capability let us estimate reserve and exercise casualty routes before selecting hardware. The mission then asks what a component calculation cannot: can that capability reach a usable shore approach from this position, against this current, with the remaining energy? Installed thrust, electrical demand, weeds, guarding and capsized behavior must inform the comparison. [Initial recovery analysis](https://github.com/DavidIngraham/sv-blue-dog/commit/48ff36e).
+
+For the next comparison, I want feasible alternatives to sail the same declared scenarios with their own mass, performance, energy and recovery characteristics. Cost and construction effort also need explicit estimates. The mission should reveal the consequences of a choice; a favorable result for one provisional configuration should not silently close the alternatives.
 
 ## Let the environment act on the whole boat
 
@@ -51,6 +65,23 @@ The logical scenarios connect normal sailing, traffic encounters and abort/recov
 The value is that I can follow a decision as well as a trajectory. The mission records the facts presented to the supervisor and the resulting decisions. Losing access to a weather service, for example, is different from deciding that the held forecast is no longer applicable. One preserves the attempt; the other initiates abort and recovery. That distinction can be exercised and inspected. [Forecast scenarios](https://github.com/DavidIngraham/sv-blue-dog/commit/7530eca).
 
 The supervisor covers mission policy. The simulation still supplies conceptual heading search, traffic geometry and vessel dynamics, and its scripted traffic is perfectly observed. The next behavioral questions concern uncertain observations, delayed decisions and maneuvers that the actual boat can execute. The [current logical execution](mission-simulation.md#executable-supervisory-logic) describes that boundary.
+
+## Make the working assumptions visible
+
+Each spiral needs enough definition to run an experiment. These assumptions describe the scope of that experiment and the decisions it leaves open.
+
+| Spiral | Working assumptions that enable progress | What they leave open |
+| --- | --- | --- |
+| Mission and coupled sizing | A parameterized monohull, a fixed-camber wing for the sizing experiment, provisional construction properties and representative operating conditions make geometry, forces, mass and power calculable together. | Rig and hull alternatives, measured material properties, detailed construction and the final equipment installation. A feasible candidate does not select the architecture. |
+| Course and chronological voyage | A conceptual polar and load budget, point-mass motion, allocated maneuver timing, synthetic weather and perfectly observed scripted traffic let us exercise navigation and energy over time. | The actual controller, sensing uncertainty, local weather statistics and measured maneuver capability. Completion counts characterize those scenarios. |
+| Candidate mission replay | A small set of solved sailing states supplies an averaged-tack envelope. Allocated electrical loads, storage characteristics and packaging assumptions give the candidate a voyage budget. | Full polars, explicit tack paths, installed loads and detailed fit. The 25% passage-time allowance and six-hour delay used in current sizing are provisional allowances, not measured weather statistics. |
+| Environmental response | Fixed candidate geometry isolates the environmental effect. A neutral wind-height profile, effective-fetch hypotheses and prescribed motion support sensitivity studies; calculated linear wave response and declared damping support the bounded small-wave study. | Observed wind and seas, calibrated wave resistance, nonlinear motion and dynamic recovery. These studies do not reoptimize or select the whole boat. |
+| Casualty recovery | Synthetic shore approaches, declared upright and capsized propulsion capability, and energy allowances make recovery reachability and reserve decisions testable. | Real site suitability, installed drive selection, pickup delay, shore retention and measured casualty capability. |
+| Executable decisions | Supplied observation-validity and conflict facts, explicit events and conceptual guidance let the supervisor exercise sailing permission, abort persistence and alert behavior. | How sensors establish those facts, uncertain or delayed observations, detailed control allocation and physical maneuver execution. |
+
+The assumptions have different purposes. A chosen wing makes one design experiment concrete; a conservative coefficient limits the performance credited; a synthetic traffic process creates repeatable encounters. None becomes a mission requirement merely because a simulation needs a value. The [design-assumption distinctions](methods/modeling.md#requirements-versus-design-assumptions) keep those roles visible.
+
+I can therefore continue developing the mission with an unresolved architecture, provided I retain the configuration and limit each conclusion to what it exercised. When evidence challenges an assumption, the next spiral can change the parameter, compare another concept or narrow the claim. The trade remains open until the evidence supports the choice I actually need to make.
 
 ## Keep the evidence connected through every spiral
 
