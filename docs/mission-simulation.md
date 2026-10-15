@@ -4,9 +4,11 @@
 
 [Previous: development plan](development-plan.md) · [Next: sizing results](results.md)
 
-This is the mission-and-requirements loop in our [maturity assessment](development-plan.md#mission-definition). Its inputs are the challenge course, a candidate boat, weather histories and traffic scenarios. Its output is a voyage history: where the boat went, what it encountered, how its battery changed, and why the attempt finished or stopped. I use it to discover missing requirements and compare design choices before committing to hardware.
+This is the mission-and-requirements loop in our [maturity assessment](development-plan.md#mission-definition). Its inputs are the challenge course, a candidate boat, weather histories and traffic scenarios. The executable supervisor governs event responses, sailing permission and abort decisions as that voyage unfolds. The simulation records a voyage history: where the boat went, what it encountered, how its battery changed, and why the attempt finished or stopped. I use it to discover missing requirements and compare design choices before committing to hardware.
 
 The simulator supports both the original conceptual configuration and a named sizing candidate. The candidate supplies solved sailing states, electrical demand, battery capacity, panel area and swept dimensions. Keeping the course and scenario logic separate lets us increase vessel fidelity while rerunning the same seeds.
+
+The [development spirals](simulation-spirals.md) explain how these capabilities grow together and how each experiment guides the next addition to fidelity.
 
 ## Executable supervisory logic
 
@@ -24,7 +26,7 @@ The challenge stays in Bonneville Pool. Launch and retrieval use Bingen Point bo
 
 The course geometry comes from current NOAA electronic charts. The former raster chart 18532 was canceled in 2024. The [source record](../evidence/course/2026-10-11/sources.json) identifies the chart catalog, Light List, Coast Pilot and regulatory sources; the extracted features retain their chart-cell identities and attributes.
 
-The reference-route planner uses charted depth areas, land, obstructions and exclusions. It finds a connected route with the model's planning clearances and checks every shortcut against that domain. The resulting line guides the simulation; sailing and traffic maneuvers produce a different track. The gates overlap the navigation fairway, so a crossing is a traffic decision. Chart clearance alone does not establish maneuvering room or launch readiness. In particular, the reference line crosses an unnamed fixed-span polygon at the Hood River bridge without encoded vertical clearance; the adjacent lift span’s published clearance cannot be assigned to it. Selecting and validating the actual bridge passage is an open course-release item.
+The reference-route planner uses charted depth areas, land, obstructions and exclusions. It finds a connected route with the model's planning clearances and checks every shortcut against that domain. The resulting line guides the simulation; sailing and traffic maneuvers produce a different track. The gates overlap the navigation fairway, so a crossing is a traffic decision. Chart clearance alone does not establish maneuvering room or launch readiness. Both legs use the selected closed Hood River lift span; unassessed adjacent spans are excluded. Actual air draft, motion, pool stage and notices still determine whether the modeled passage is applicable to a trial. The [course and recovery assessment](srr-appendix.md#course-and-recovery-decision) records that basis.
 
 The October 7 navigation notice adds a stationary construction hazard near the White Salmon confluence: a derrick barge supporting railroad bridge work through December 2026. This scenario excludes an allocated 250 m buffer around the published location until the actual work footprint is confirmed. The same notice lists three discrepant aids elsewhere in Bonneville Pool. The chart and notice snapshot must travel with each experiment.
 
@@ -34,17 +36,22 @@ The October 7 navigation notice adds a stationary construction hazard near the W
 
 ```mermaid
 flowchart TD
-    scenario["Course + boat + weather window + traffic"] --> guidance["Choose sailing heading or depower"]
+    scenario["Course + boat + weather window + traffic"] --> observations["Observations, events and current mission state"]
+    observations --> supervisor["Executable logical supervisor"]
+    supervisor -->|sailing permission| guidance["Choose sailing heading or depower"]
+    supervisor -->|latched abort| recovery["Plan and execute available recovery"]
+    recovery --> evidence
+    guidance -->|no safe control with recovery configured| supervisor
     guidance --> motion["Advance vessel with current and maneuver delay"]
     motion --> checks["Check chart domain, traffic and ordered gates"]
     motion --> energy["Integrate load, maneuver energy and solar collection"]
     checks --> outcome["Complete, incomplete, disqualified, unsafe or censored"]
     energy --> outcome
-    outcome -->|continue| guidance
+    outcome -->|continue| observations
     outcome --> evidence["Versioned voyage history and requirement findings"]
 ```
 
-SysML owns the ordered gates and outcome calculation. Python supplies the observed crossing, intervention, collision and reserve facts to that native calculation. A simulated completion remains separate from physical qualification or proof of full navigation-rule compliance.
+The model owns both the supervisory decisions during a voyage and the outcome criteria used to assess it. The simulator supplies observations to the supervisor and applies its decisions. Ordered crossings, intervention, collision, reserve and abort facts determine the final mission classification. A simulated completion remains separate from physical qualification or proof of full navigation-rule compliance.
 
 The controller evaluates sailing headings and a depowered option. Depowering still allows the boat to drift with the current; it does not create free station keeping. Maneuvers cost time and energy. The controller updates on its own clock; a smaller integration step does not increase its update rate or shorten a maneuver. Motion steps end at control updates, maneuver completion, weather changes and injected events. Both pieces of the drift-then-sail maneuver must remain in the chart domain. A communications outage does not stop autonomous execution. Operator intervention or motor use ends qualification for that attempt.
 
@@ -95,9 +102,10 @@ VesselFinder's accessible record does not provide a complete traffic census or a
 
 The useful early outputs are failure mechanisms and sensitivity to assumptions. The fraction of synthetic scenarios completed must not be presented as the probability that the real boat will complete the Gorge challenge.
 
-## Current sizing-candidate replay
+<a id="current-sizing-candidate-replay"></a>
+## Archived sizing candidate environmental replay
 
-The new environmental replay holds the 1.4 m and 2 m geometries fixed and re-solves controls for uniform and sheared wind. All eight operating cases for each boat found supported force-balance solutions. For the 1.4 m boat, average water-relative VMG across the two tacks changed as follows:
+The archived environmental replay holds the 1.4 m and 2 m geometries fixed and re-solves controls for uniform and sheared wind. All eight operating cases for each boat found supported force-balance solutions. For the 1.4 m boat, average water-relative VMG across the two tacks changed as follows:
 
 | Reference wind at 10 m | Sailing mode | Uniform wind | Sheared wind |
 | --- | --- | --- | --- |

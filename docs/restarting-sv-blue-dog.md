@@ -58,6 +58,8 @@ The applet lets you explore and save a proposed configuration. It does not run t
 
 I now have a challenge definition, a connected requirements and architecture model, and a coupled sizing study. The current numerical trial can satisfy the primary modeled sailing and energy screens, but handling, adverse conditions and self-righting still need work. It has not established a minimum-size design. The [results article](results.md) explains those findings and what they suggest testing next.
 
+The mission simulation also lets me exercise part of the logical architecture. The model decides when sailing is permitted, how events affect the attempt and when recovery must begin. I can follow those decisions alongside the boat’s track and energy history. [Developing the simulation in spirals](simulation-spirals.md) explains how I use each added capability to expose the next question.
+
 That feels like useful progress: I can see which assumptions are driving the design and which experiments could change the answer. The next step is to use the testbed and focused measurements to improve those assumptions, then revisit the sizing decisions with better evidence.
 
 **Next:** [The mission and the boat’s responsibilities](architecture.md), then [the development plan](development-plan.md). The [series guide](index.md) separates the main reading path from the technical reference pages.

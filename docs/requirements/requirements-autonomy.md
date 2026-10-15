@@ -2,7 +2,7 @@
 
 **OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
 
-Autonomy turns the mission into onboard decisions. Navigation and wind observations supply the controller; recovery behavior keeps faults from silently becoming mission failures.
+Autonomy turns the mission into onboard decisions. Navigation and wind observations supply the controller; recovery behavior keeps faults from silently becoming mission failures. The [executable supervisor](../mission-simulation.md#executable-supervisory-logic) exercises part of this behavior in the mission simulation: sailing permission, event responses and latched abort/recovery. Its decision trace provides virtual evidence to inspect alongside these obligations; sensing and physical control require their own evidence.
 
 [Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
 

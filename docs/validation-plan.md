@@ -10,6 +10,12 @@ Before building the challenge vessel, I want experiments that separate plausible
 
 Each experiment needs a declared configuration, predicted result, measurement uncertainty and a decision it will inform. A useful experiment can disprove a prediction. Passing a numerical check is not physical validation.
 
+## Exercise decisions before physical integration
+
+The [executable mission logic](mission-simulation.md#executable-supervisory-logic) is exercised with observation outages, interventions and casualty events. The regression cases check sailing inhibition and restoration, a persistent abort latch, and alert queuing without a monitoring link. An isolated change to the modeled event policy changes the simulated response, checking that the logical model actually governs the behavior.
+
+The next evidence is timed sensor and controller replay: feed recorded observations and faults into the decision loop, compare the resulting commands with the modeled intent, then measure the boat’s response. Preserve observation uncertainty and actuator delay when carrying those results into the [mission development spirals](simulation-spirals.md). Passing a supervisory test does not demonstrate detection range, maneuver authority or physical recovery.
+
 ## Integrate in bounded steps
 
 First establish individual sensors, actuators and electrical behavior on the bench. Then exercise integrated state transitions and faults, including unavailable communications, loss of safety capability and the transition from a qualifying attempt to recovery. Follow with controlled flotation and recovery trials, then short local-water missions before extending the operating envelope.

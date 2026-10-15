@@ -42,9 +42,17 @@ The material and geometric constants used in preliminary sizing live in the [str
 
 The numerical screening inputs have not changed in this clarification. Archived runs retain their original revision and claims; their passing screens are not converted into evidence that the current acceptance requirements have been verified. The next sizing refinement should vary the provisional inputs and replace them with evidence-backed values.
 
+## Following executable decisions
+
+The [mission supervisor](../mission-simulation.md#executable-supervisory-logic) connects logical scenarios to decisions during a simulated voyage. Its actions govern event responses, sailing permission and abort latching. The resulting trace records the input facts and decisions, so a trajectory can be read alongside the behavior that produced it. Scenario dependencies and the mission-manager allocation identify the architectural responsibility being exercised.
+
+For example, a loss of communications can coexist with continued autonomous sailing, while a safety abort queues its alert and proceeds toward recovery. Regression scenarios check these distinctions, including the persistence of an abort after observations recover. A separate model calculation classifies the observed mission outcome. Behavioral execution and outcome assessment answer different questions, and neither supplies the physical evidence for an installed controller.
+
+The [development spirals](../simulation-spirals.md) place this behavior alongside the growth in vessel and environmental fidelity.
+
 ## Running the calculations
 
-I use a pinned development revision of OpenSysML for the model engine, Python client and agent MCP server. Native Python analysis calls return typed values, and mission classification calls the model's calculation directly. This removes the temporary SysML wrappers and text-result parsing from those analysis paths. The numerical optimizer remains in SciPy, while the equations and acceptance criteria stay in SysML.
+I use a pinned development revision of OpenSysML for the model engine, Python client and agent MCP server. Native analysis calls return typed values. The simulator executes the model's supervisory actions during the voyage and its outcome calculation when classifying the result. The numerical optimizer remains in SciPy, while the equations and acceptance criteria stay in SysML.
 
 The same native engine supplies document queries and renders the scoped views in these articles. The publishing code handles narrative pages, navigation, interactive plots and the existing blog import. The numerical batch adapter remains useful for repeated compiled evaluations; it is a specialized bridge, rather than a second modeling framework.
 

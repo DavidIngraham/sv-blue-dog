@@ -4,7 +4,7 @@
 
 Blue Dog is named after my blue heeler, Ozzy. I hope the vessel will share a little of that character: small, something like a dog, independently puttering around the surface of a river or the ocean.
 
-The [introductory story](restarting-sv-blue-dog.md) begins with sailing, desktop manufacturing, an early testbed and the maze of decisions that led me to a connected model. From there, follow the engineering through OOSEM layers. The [running maturity assessment](development-plan.md) explains what is established, what is provisional and what evidence would change the next decision.
+The [introductory story](restarting-sv-blue-dog.md) begins with sailing, desktop manufacturing, an early testbed and the maze of decisions that led me to a connected model. From there, follow the engineering through OOSEM layers. The [running maturity assessment](development-plan.md) explains what is established, what is provisional and what evidence would change the next decision. [Developing the mission simulation in spirals](simulation-spirals.md) follows how mission behavior, vessel physics and traceable evidence grow together.
 
 | Read through the layers | Articles | Question |
 | --- | --- | --- |

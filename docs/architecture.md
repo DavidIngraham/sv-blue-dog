@@ -36,7 +36,7 @@ The model refines three use cases with scenario threads. Their actions are alloc
 
 ### Normal sailing
 
-A sailing cycle carries a typed wind estimate into command selection and a typed command into actuation. The estimate includes its timestamp and validity. Navigation and safety capability are preconditions of this thread; degraded operation belongs to the recovery logic.
+A sailing cycle carries a typed wind estimate into command selection and a typed command into actuation. The estimate includes its timestamp and validity. The executable supervisor inhibits sailing while wind observations are unavailable and permits it when they return. A safety abort follows a separate, latched recovery path. The scenario describes the full observation-to-actuation responsibility; the simulator exercises the supervisory part alongside conceptual guidance.
 
 ```sysml-view Page_architecture_normal::scenario direction=LR
 package Page_architecture_normal {
@@ -49,7 +49,7 @@ package Page_architecture_normal {
 
 ### Traffic encounter
 
-Observe, assess, maneuver and reassess. Both AIS and non-AIS vessels matter. This thread gives the traffic simulation and later sensor testing a common behavioral reference.
+Observe, assess, maneuver and reassess. Both AIS and non-AIS vessels matter. The simulator supplies a predicted-conflict observation, and the supervisor identifies traffic-avoidance mode. Geometric maneuver assessment and heading selection remain in the conceptual guidance model. This thread gives the simulation and later sensor testing a common behavioral reference.
 
 ```sysml-view Page_architecture_traffic::scenario direction=LR
 package Page_architecture_traffic {
