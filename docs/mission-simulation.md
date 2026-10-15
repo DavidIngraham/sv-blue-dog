@@ -32,6 +32,8 @@ The October 7 navigation notice adds a stationary construction hazard near the W
 
 ![The chart-based reference route and proposed marker gates between Bingen and Stevenson.](figures/gorge-course-map.svg)
 
+The solid outbound and dashed return lines share their actual geographic coordinates. [Focused satellite views](architecture.md#start-finish-and-turnaround-in-shore-context) show the Bingen start/finish and Stevenson turnaround with both shorelines. These are reference paths; simulated tacking and avoidance can depart from them within the permitted water domain.
+
 ## One timeline connects the decisions
 
 ```mermaid

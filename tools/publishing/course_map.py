@@ -1,8 +1,8 @@
-"""Render the Gorge overview from the archived OpenStreetMap river centerline.
+"""Render the Gorge overview from charted water polygons and model course geometry.
 
 Run with ``python -m tools.publishing.course_map``. Coordinates use a local
 equirectangular projection at 45.7 N. Town labels locate their river reaches;
-the mission model owns the challenge definition and operational gate decisions.
+the charted water and reference paths share the same projection; the mission model owns the challenge definition and operational gate decisions.
 """
 from tools.boat_analysis.environment.routing import build, rounding_paths
 from tools.boat_analysis.environment.course import LocalFrame
@@ -10,13 +10,13 @@ from html import escape
 import json
 from math import cos, radians
 from pathlib import Path
+from shapely.geometry import shape
+from shapely import unary_union
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = Path(__file__).with_name('data') / 'gorge-river.json'
 
 
 def render():
-    data = json.loads(DATA.read_text(encoding='utf-8'))
     scale = 1050 / (0.53 * cos(radians(45.7)))
 
     def xy(lon, lat):
@@ -53,21 +53,26 @@ def render():
     text(32, 72, 'Columbia River · Oregon–Washington', 18)
     text(620, 122, 'WASHINGTON', 20, 'letter-spacing="3" fill="#65796d"')
     text(620, 365, 'OREGON', 20, 'letter-spacing="3" fill="#65796d"')
-    for way in data['elements']:
-        coords = [xy(p['lon'], p['lat']) for p in way['geometry']]
-        # The source query includes entire ways; clip the drawing to the map.
-        parts.append('<g clip-path="url(#mapclip)">')
-        path(coords, '#b5d8e7', 13)
-        path(coords, '#508ba6', 1.5)
-        parts.append('</g>')
-    # Model-defined gates and chart-contained reference route; OSM supplies context.
+    # DEPARE polygons show water extent, not an artificial stroke around a centerline.
+    features = json.loads((ROOT/'evidence/course/2026-10-11/chart-features.geojson').read_text())['features']
+    river = unary_union([shape(f['geometry']) for f in features
+                         if f['geometry'] and f['properties']['object_class']=='DEPARE'])
+    parts.append('<g clip-path="url(#mapclip)">')
+    for polygon in getattr(river, 'geoms', [river]):
+        rings = [polygon.exterior, *polygon.interiors]
+        commands = []
+        for ring in rings:
+            points = [xy(lon,lat) for lon,lat in ring.coords]
+            commands.append('M'+' L'.join(f'{x:.2f},{y:.2f}' for x,y in points)+' Z')
+        parts.append('<path d="'+' '.join(commands)+'" fill="#b5d8e7" stroke="#508ba6" stroke-width=".7" fill-rule="evenodd"/>')
+    parts.append('</g>')
     values, water, _, gates, route = build()
     frame = LocalFrame()
     outbound = [xy(*frame.unproject(x,y)) for x,y in route.coords]
-    path([(x, y-8) for x, y in outbound], '#ab4e23', 3, 'marker-end="url(#out)"')
+    path(outbound, '#ab4e23', 4, 'marker-end="url(#out)"')
     paths = rounding_paths(water,gates,route,values['routing'][4])
     returning = [xy(*frame.unproject(x,y)) for piece in paths[1:] for x,y in piece.coords]
-    path([(x, y+8) for x,y in returning], '#176a65', 3, 'marker-end="url(#back)"')
+    path(returning, '#176a65', 2.5, 'stroke-dasharray="7 6" marker-end="url(#back)"')
     for name, lon, lat, dx, dy in [
         ('Bingen', -121.46, 45.706, -45, 50),
         ('Hood River', -121.522, 45.709, -55, 76),
@@ -79,11 +84,10 @@ def render():
         path([(x, y), (x+dx, y+dy-8)], '#81929c', 1)
         text(x+dx, y+dy, name, 18)
     for name,label in [('turnGate','Buoy 16'),('eastGate','Buoy 39')]:
-        point=gates[name].interpolate(.5,normalized=True)
-        x,y=xy(*frame.unproject(point.x,point.y))
+        x,y=xy(*values[name][:2])
         parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6" fill="#96396a"/>')
         text(x-(85 if name=='westGate' else 30),y-22,label,15)
-    text(230, 397, 'Chart-based reference course between proposed gates', 18)
+    text(230, 397, 'Shared tracks overlap: solid outbound · dashed return', 18)
     # Geographic distance scale: 111.195 km per latitude degree.
     bar = 10 / 111.195 * scale
     path([(50, 435), (50+bar, 435)], '#183047', 3)
@@ -96,10 +100,10 @@ def render():
     path([(1060, 144), (1069, 131), (1078, 144)], '#183047', 2)
     path([(320, 435), (380, 435)], '#ab4e23', 3, 'marker-end="url(#out)"')
     text(397, 442, '1  Downstream to Stevenson', 18)
-    path([(320, 474), (380, 474)], '#176a65', 3, 'marker-end="url(#back)"')
-    text(397, 481, '2  Upstream to Bingen', 18)
+    path([(320, 474), (380, 474)], '#176a65', 3, 'stroke-dasharray="7 6" marker-end="url(#back)"')
+    text(397, 481, '2  Upstream to Bingen (dashed)', 18)
     text(32, 518, 'Gate references and route: NOAA ENC · Gate offsets: TransGorgeCourse model', 14)
-    text(32, 545, 'River geometry © OpenStreetMap contributors · ODbL · openstreetmap.org/copyright', 14)
+    text(32, 545, 'Water extent: NOAA ENC depth-area polygons · Reference paths, not simulated sailing tracks', 14)
     parts += ['</g><defs><clipPath id="mapclip"><rect x="25" y="90" width="1090" '
               'height="315"/></clipPath></defs></svg>']
     target = ROOT / 'docs/figures/gorge-course-map.svg'

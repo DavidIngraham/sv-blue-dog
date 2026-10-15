@@ -6,7 +6,19 @@ What does this little boat actually have to do? I start with one finite, indepen
 
 ![Map of the Gorge challenge corridor along the Columbia River, from Bingen to buoy 16 near Stevenson and back.](figures/gorge-course-map.svg)
 
-*Bingen → Stevenson → Bingen. River geometry: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).*
+*Bingen → Stevenson → Bingen. Water extent and course references: NOAA electronic navigational charts.*
+
+### Start, finish and turnaround in shore context
+
+The scored course starts and finishes at the proposed gate south of **Buoy 39 near Bingen**. Launch and retrieval at Bingen Point lie outside the scored circuit. The reference paths retain their geographic coordinates; solid orange and dashed cyan strokes distinguish coincident legs without moving either track away from the river.
+
+![Satellite and aerial view of Bingen's start/finish gate, Buoy 39 and both river shores.](figures/course-bingen-satellite.svg)
+
+The western end is a **port rounding of Buoy 16 near Stevenson**, passing the north, west and south checkpoints in order before returning upstream. It is a turnaround, not a separate finish or a shore landing.
+
+![Satellite and aerial view of Buoy 16 near Stevenson, the port-rounding checkpoints and surrounding shoreline.](figures/course-stevenson-satellite.svg)
+
+Imagery: [Esri World Imagery](https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer), with provider credits on each image. These close-ups show shore context; mosaic acquisition dates vary and the imagery is not a current navigation chart. The model's gate offsets remain proposed and require field confirmation. The images show reference paths, not a simulated voyage or an approved launch/recovery approach.
 
 The return leg has to make progress over the ground, not just through the water. The representative westerly puts that return downwind against the current, while the outbound leg is windward with it. Easterlies reverse those roles. I will choose a favorable weather window for the challenge and use a separate seasonal profile for winter testing; the [weather analysis](operating-constraints.md#gorge-weather-and-launch-windows) explains the distinction. The challenge is sail-only and unassisted; I want live observation without making a shore connection necessary for control. Year-round operation and Hawai‘i have separate future requirements. For this boat, I want to explore how speed and shorter exposure affect the [chance of completing the round trip](reliability.md#can-a-faster-boat-be-more-likely-to-finish).
 

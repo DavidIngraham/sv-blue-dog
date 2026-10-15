@@ -1,0 +1,42 @@
+{
+  "service": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+  "attribution": "Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community",
+  "retrievedAt": "2026-10-15T15:09:45.143656+00:00",
+  "imageryDate": "Mosaic acquisition dates vary; retrieval date is not acquisition date.",
+  "views": {
+    "bingen": {
+      "request": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=-13525062.721208183%2C5730474.380433135%2C-13517062.721208183%2C5735474.380433135&bboxSR=3857&imageSR=3857&size=1600%2C1000&format=jpg&f=json",
+      "image": "bingen.jpg",
+      "sha256": "34767f146e2c5a3fb2fa9dd556373b9e79c9278fb0800a02314cf7019d3f38c3",
+      "extent": {
+        "xmin": -13525062.721208185,
+        "ymin": 5730474.380433134,
+        "xmax": -13517062.721208185,
+        "ymax": 5735474.380433134,
+        "spatialReference": {
+          "wkid": 102100,
+          "latestWkid": 3857
+        }
+      },
+      "width": 1600,
+      "height": 1000
+    },
+    "stevenson": {
+      "request": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=-13570244.586325599%2C5728606.102506468%2C-13562244.586325599%2C5733606.102506468&bboxSR=3857&imageSR=3857&size=1600%2C1000&format=jpg&f=json",
+      "image": "stevenson.jpg",
+      "sha256": "5ec84fdebf412567f4e653d816eb9426a61f52532423f6b27f07ce258674e7d7",
+      "extent": {
+        "xmin": -13570244.586325595,
+        "ymin": 5728606.102506468,
+        "xmax": -13562244.586325595,
+        "ymax": 5733606.102506468,
+        "spatialReference": {
+          "wkid": 102100,
+          "latestWkid": 3857
+        }
+      },
+      "width": 1600,
+      "height": 1000
+    }
+  }
+}

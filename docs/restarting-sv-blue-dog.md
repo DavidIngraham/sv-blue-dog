@@ -12,7 +12,7 @@ The picture in my head is the classic westerly Gorge day. With wind from the wes
 
 ![Map of the Columbia River Gorge challenge, from Bingen past Hood River to Stevenson, then back upstream.](figures/gorge-course-map.svg)
 
-*The challenge follows the Columbia through the Gorge: downstream from Bingen to Stevenson, then back upstream. River geometry: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). [Explore the area](https://www.openstreetmap.org/#map=11/45.68/-121.55).*
+*The challenge follows the Columbia through the Gorge: downstream from Bingen to Stevenson, then back upstream. Water extent and course references: NOAA electronic navigational charts. [See the start/finish and turnaround in satellite views](architecture.md#start-finish-and-turnaround-in-shore-context).*
 
 ![Bingen–Stevenson round trip, with downstream current and a westerly wind.](figures/route-context.svg)
 

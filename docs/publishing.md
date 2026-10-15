@@ -27,7 +27,7 @@ Our Markdown describes methods and design reasoning. Engineering definitions, as
 
 ## Inline views
 
-The geographic course map uses an archived OpenStreetMap river centerline in `tools/publishing/data/gorge-river.json`. Regenerate it with `uv run python -m tools.publishing.course_map`. The map provides geographic context; the [challenge model](../models/missions/transgorge.sysml) defines the mission and tracks the operational gate decisions.
+The geographic course map uses NOAA ENC depth-area polygons and the chart-constrained model reference paths, projected together without decorative track offsets. Regenerate it with `uv run python -m tools.publishing.course_map`. Focused satellite/aerial views use `uv run python -m tools.publishing.course_satellite`; source pixels, checksums, credits and the returned EPSG:3857 image extents are retained in `tools/publishing/data/course-imagery`. The overlay uses the returned image extent, including any server aspect-ratio adjustment. Normal builds use these archived images; `--refresh-imagery` explicitly requests new context images from Esri World Imagery. The [challenge model](../models/missions/transgorge.sysml) owns the gates and course definition.
 
 Use a fenced `sysml-view Package::viewName direction=BT` block containing a uniquely named package, imports, and a scoped view. Expose existing model elements and provide layout metadata to keep the diagram focused. Do not declare requirements or calculations in a documentation fence. For a view exposing requirement usages, add `statements=true` to include their authoritative statements below the diagram. Omit that option for mixed architecture/verification views. See [the modeling method](methods/modeling.md) for a working example.
 

@@ -70,8 +70,9 @@ jobs:
       - name: Check sizing plot matches archived evidence
         run: git diff --exit-code -- docs/figures/finite-passage-sizing.svg
       - run: uv run python -m tools.publishing.course_map
+      - run: uv run python -m tools.publishing.course_satellite
       - name: Check course map matches the model and chart evidence
-        run: git diff --exit-code -- docs/figures/gorge-course-map.svg
+        run: git diff --exit-code -- docs/figures/gorge-course-map.svg docs/figures/course-bingen-satellite.svg docs/figures/course-stevenson-satellite.svg
       - run: uv run python -m tools.publishing.wave_motion evidence/runs/2026-10-13-wave-motion
       - run: uv run python -m tools.publishing.wave_performance evidence/runs/2026-10-13-wave-performance
       - run: uv run python -m tools.publishing.build
