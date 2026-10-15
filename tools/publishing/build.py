@@ -193,7 +193,7 @@ def _build(source_dir, output_dir):
         render_concepts(output_dir / "assets/concepts")
         from .design_explorer import render as render_explorer
         render_explorer(output_dir / "assets/design-explorer")
-        from .risk_cube import render as render_risk_cube
+        from .risk_cube import render_all as render_risk_cube
         render_risk_cube(output_dir / "assets/risk")
     rev = revision()
     rendered = {}

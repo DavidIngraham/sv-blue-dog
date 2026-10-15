@@ -1,6 +1,6 @@
 package BlueDogRisks {
     private import ScalarValues::*;
-    doc /* Development risk assessment for the next concept-selection and integrated-test
+    doc /* Technical risk assessment for the next concept-selection and integrated-test
      * planning spiral. Qualitative likelihood rates the prospect that an identified
      * limitation forces redesign or operating-envelope restriction. Consequence rates
      * the credible effect if it is not addressed. These are ordinal engineering
@@ -9,6 +9,7 @@ package BlueDogRisks {
      */
     metadata def Tracking :> RiskMetadata::Risk {
         attribute identifier : String;
+        attribute riskKind : String;
         attribute statement : String;
         attribute consequence : String;
         attribute uncertainty : String;
@@ -29,6 +30,7 @@ package BlueDogRisks {
     part traffic {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
+            riskKind = "technical";
             identifier = "R-001";
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
@@ -51,6 +53,7 @@ package BlueDogRisks {
     part recovery {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
+            riskKind = "technical";
             identifier = "R-002";
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
@@ -75,6 +78,7 @@ package BlueDogRisks {
     part structure {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
+            riskKind = "technical";
             identifier = "R-003";
             likelihoodClass = "Possible";
             consequenceClass = "Critical";
@@ -100,6 +104,7 @@ package BlueDogRisks {
     part wing {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
+            riskKind = "technical";
             identifier = "R-004";
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
@@ -123,6 +128,7 @@ package BlueDogRisks {
     part energy {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
+            riskKind = "technical";
             identifier = "R-005";
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
@@ -146,6 +152,7 @@ package BlueDogRisks {
     part mission {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
+            riskKind = "technical";
             identifier = "R-006";
             likelihoodClass = "Demonstrated";
             consequenceClass = "Major";

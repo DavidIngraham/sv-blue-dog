@@ -557,6 +557,7 @@ package BlueDogRiskDocuments {
     calc def PrioritiesRows :> Query {
         Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
             Column(name = "ID", path = "risk.identifier"),
+            Column(name = "Risk kind", path = "risk.riskKind"),
             Column(name = "Work priority", path = "risk.priority"),
             Column(name = "Risk event", path = "risk.statement"),
             Column(name = "Consequence", path = "risk.consequence"),
@@ -569,6 +570,7 @@ package BlueDogRiskDocuments {
     calc def AssessmentRows :> Query {
         Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
             Column(name = "ID", path = "risk.identifier"),
+            Column(name = "Risk kind", path = "risk.riskKind"),
             Column(name = "Likelihood class", path = "risk.likelihoodClass"),
             Column(name = "Consequence class", path = "risk.consequenceClass"),
             Column(name = "Confidence", path = "risk.confidence"),
@@ -576,12 +578,13 @@ package BlueDogRiskDocuments {
             Column(name = "Evidence references", path = "risk.evidenceReference")))
     }
     part def Assessments :> Document {
-        attribute redefines title = "Qualitative development risk assessments";
+        attribute redefines title = "Qualitative technical risk assessments";
         part rows : Table { calc values : AssessmentRows; }
     }
     calc def ActionsRows :> Query {
         Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
             Column(name = "ID", path = "risk.identifier"),
+            Column(name = "Risk kind", path = "risk.riskKind"),
             Column(name = "Evidence gap", path = "risk.uncertainty"),
             Column(name = "Reduction action", path = "risk.reductionAction"),
             Column(name = "Closure evidence", path = "risk.closureEvidence"),
@@ -599,6 +602,7 @@ package BlueDogRiskPlot {
     calc def Rows :> Query {
         Project(source = WhereMetadata(source = Descendants(source = Named(qualifiedName = "BlueDogRisks")), 'metadata' = "RiskMetadata::Risk"), columns = (
             Column(name = "ID", path = "risk.identifier"),
+            Column(name = "Risk kind", path = "risk.riskKind"),
             Column(name = "Area", path = "name"),
             Column(name = "Likelihood class", path = "risk.likelihoodClass"),
             Column(name = "Consequence class", path = "risk.consequenceClass")))

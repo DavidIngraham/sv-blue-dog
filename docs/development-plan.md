@@ -60,9 +60,11 @@ The next investigation starts from the risks that could defeat the mission or fo
 
 The first selection is safety feasibility: traffic sensing and maneuvering, together with casualty recovery. Material/load sensitivity, wing behavior and installed energy follow because they can invalidate the sizing result. Scenario and model credibility apply throughout. These are provisional work priorities, not a claim of quantified likelihood. Safety consequences take precedence over cheap, easy tasks; among competing investigations, prefer evidence that can change an imminent decision and is practical to obtain.
 
-### Risk cube
+### Technical risk cube
 
-![Qualitative development risk cube: prospect of redesign or operating restriction versus consequence if unresolved.](https://davidingraham.github.io/sv-blue-dog/assets/risk/cube.svg)
+![Qualitative technical risk cube: prospect of redesign or operating restriction versus consequence if unresolved.](https://davidingraham.github.io/sv-blue-dog/assets/risk/technical/cube.svg)
+
+All six current entries are **technical risks**, including uncertainty in model credibility. Safety consequences inform their technical severity; they do not make these entries a separate operational-safety assessment. Cost, schedule and operational risks belong in separate inventories and cubes, with criteria appropriate to each kind. No assessments of those kinds are recorded yet.
 
 **Assessment: 15 October 2026.** The cube assesses the next concept-selection and integrated-test planning spiral. Its vertical axis expresses the prospect that an identified limitation forces redesign or a narrower operating envelope. Its horizontal axis expresses the credible consequence if the issue remains unresolved. These are qualitative engineering judgments, separate from measured probabilities of an accident during a voyage.
 
