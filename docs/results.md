@@ -4,6 +4,8 @@
 
 The **1.2 m overall-length** candidate passes the nominal refined Gorge static screens on the selected Hood River bridge route. It has a 440 Wh battery and a 260 mm hull beam. The candidate weighs **10.313 kg**, predicts a **33.87-hour** conditional westerly passage, and retains **3.97 Wh** beyond the allocated voyage energy. It remains a preliminary design requiring sensitivity studies and physical evidence. Its structural margins use the provisional analysis basis; they do not qualify material properties, functional deformation limits or casualty flotation.
 
+The [candidate power and energy budget](energy.md#current-candidate-budget) breaks the allocated demand into electronics, wind sensing, actuation, discharge losses, self-discharge and protected recovery reserve. It also identifies the unallocated perception hardware.
+
 ```sysml-report BlueDogSRRCurrentDocuments::Summary
 ```
 

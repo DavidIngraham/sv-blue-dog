@@ -1,19 +1,31 @@
-# Sustained operation: follow energy through the mission
+# Power and energy budget for the Gorge candidate
 
 **OOSEM:** Trades, optimization and analysis · [Maturity assessment](development-plan.md)
 
-For the finite Gorge mission, storage must support the complete voyage while preserving recovery reserve and peak capability. There is no 72-hour acceptance limit. Finishing below the initial battery charge is permitted. Native analysis reports `finiteCampaignFeasible` separately from `modeledEnergyFeasible`, which additionally requires repeatable cycle balance for future sustained operation. Evidence acceptance gates both supported results.
+This is the accounting budget for the retained **440 Wh, 1.2 m candidate**. It reconciles the nominal sizing replay's power, passage energy and reserve. Equipment allocations remain provisional: the table is a model budget, not measured installed consumption or a completed hardware selection.
 
-Can the boat get through the night and keep sailing the next day? I combine the mission profile, equipment loads, solar assumptions and usable storage to answer that question. This [virtual-design work](development-plan.md#virtual-design) guides battery and solar sizing; later [bench and water tests](development-plan.md#physical-validation) will check the predicted consumption.
+<a id="installed-load-rollup-and-its-limits"></a>
+## Current candidate budget
 
-## Installed-load rollup and its limits
-
-```sysml-report BlueDogDocuments::EnergyBudget
+```sysml-report BlueDogCandidateEnergyDocuments::Budget
 ```
 
-This is the native [illustrative equipment budget](../models/configurations/energy.sysml), not the installed configuration of the sizing candidate. Average bus demand includes duty, conversion losses and each load's uncertainty factor. The coincident peak assumes all active loads coincide; battery discharge losses and recovery energy are separate. Multiplying average watts by hours gives bus energy in Wh, but the chronological mission must also check storage minima and recovery reachability.
+**How to read it:** the energy column covers **48.34 hours**: the predicted 33.87-hour westerly passage, multiplied by 1.25, plus six hours of delay. The screen carries the maximum sampled average load throughout that exposure. Average contributions use the governing energy case; peak contributions use the governing total-peak case. In this replay both are the 8 m/s windward case on tack −1. These are operating samples, not a proven worst-case electrical surge envelope.
 
-The example assigns **2 W active power to guidance/computing and 1 W to traffic sensing**, before their conversion and uncertainty allowances. Neither is backed by a selected vision processor, camera arrangement or measured detection workload. The [coupled sizing configuration](../models/configurations/reference.sysml) instead uses **4.5 W plus the wired wind-sensor bus load** for electronics, with wing and rudder power calculated separately. These are distinct study configurations; their loads must not be added together or presented as one validated bill of equipment. A reconciled, measured installed budget remains open.
+The electronics line is **4.5 W** plus a separately counted **0.07049 W wind installation**. Wing and rudder values come from the native drive-power calculation using the archived torque and duty assumptions: 2% moving for the wing, 5% for the rudder, with controller and holding demand included. Wind conversion/margin allowances and actuator motor/gearbox losses are already inside their bus loads. Battery withdrawal then applies the separate 90% discharge efficiency once. The bus and battery energy columns are alternative views of the same consumption; do not add them together.
+
+The energy ledger adds **236.39 Wh delivered to loads**, **26.27 Wh discharge losses**, **0.97 Wh self-discharge** and **49.2 Wh protected recovery reserve**. The result is **312.83 Wh required**, leaving **3.97 Wh** from **316.8 Wh at departure**. Storage capacity rows describe successive limits and are not additive. The reserve is a synthetic comparison allocation—50 W motor for half an hour and 8 W essentials for two hours, with a 1.2 allowance—not demonstrated recovery coverage. Recovery propulsion is not a qualifying sailing load; its installed peak and casualty performance remain open.
+
+This finite-passage screen credits **no solar harvest**. The [chronological simulator](mission-simulation.md) separately follows harvest and battery state, and can add explicit maneuver-energy allowances. Its candidate adapter uses maximum sampled average load as well. A simulation trajectory and this conservative static exposure are different assessments; their energy totals must not be combined.
+
+The [native budget](../models/analyses/candidate-energy.sysml) reconstructs the [retained replay](../evidence/runs/2026-10-13-srr-readiness/srr-readiness.json). Its [generated inputs](../models/evidence/srr-current.sysml) retain the archived parameters, governing cases and source revision. Native assertions reconcile average power, peak power, departure energy and required energy with that replay. Updating hardware assumptions requires a new replay; editing this report cannot silently make an archived candidate feasible.
+
+## Equipment still needing an allocation
+
+```sysml-report BlueDogCandidateEnergyDocuments::MissingAllocations
+```
+
+The **4.5 W electronics line is one unresolved allowance**, not a sum of established component budgets. Its function list describes intended coverage, not proof those functions fit. In particular, camera/sonar acquisition and avoidance inference have no separately established load. Unknown demand is not zero, and none of the proposed sensing capabilities is credited as installed. A selected stack must replace the lump with measured component/mode loads, accounting once for any shared processor, then pass sizing and chronological passage/recovery replay.
 
 ## Perception, computing and the avoidance trade
 
@@ -72,6 +84,18 @@ The decision is which combination provides timely observations within the boat's
 4. Reconcile the equipment rollup with sizing, reoptimize credible alternatives and replay their chronological energy and encounters. Select only after both coverage and energy evidence support the declared operating scope; restrict that scope or abort when observations are inadequate.
 
 The [mission simulator](mission-simulation.md) currently receives perfectly observed scripted traffic. It exercises avoidance decisions but cannot establish sensor detection performance. This trade is **open**; the power sensitivity above does not execute or close the sensor-selection experiment. It directly addresses traffic risk R-001 and energy risk R-005 in the [maturity assessment](development-plan.md).
+
+## Illustrative load-accounting example
+
+<details>
+<summary>Separate synthetic example: how duty and conversion allowances roll up</summary>
+
+```sysml-report BlueDogDocuments::EnergyBudget
+```
+
+This [example configuration](../models/configurations/energy.sysml) demonstrates component accounting. It is **not the retained candidate**: its 2 W computer, 1 W traffic sensor and actuator allocations do not feed the candidate's 4.5 W electronics allowance or torque-based actuation calculations. Its totals must not be substituted for, or added to, the candidate budget above.
+
+</details>
 
 ## Wind-sensing configurations
 

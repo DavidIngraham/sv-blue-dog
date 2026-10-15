@@ -1,6 +1,9 @@
 """Render the current SRR candidate record into traceable native model evidence."""
 import argparse
 import json
+import io
+import subprocess
+import tarfile
 from tools.boat_analysis.evidence.records import ROOT, run_record
 
 
@@ -26,10 +29,51 @@ def render(run):
     lines+=['        doc /* Retained concept with revised battery capacity and hull beam; nominal refined static replay.',
             '         * Not a new optimum, hardware selection, dynamic recovery proof or mission qualification. */',
             '    }',
+            *energy_snapshot(record),
             '    dependency energyBasis from candidate to BlueDogConceptCredibility::passagePolicy;',
             '    dependency recoveryBasis from candidate to BlueDogRequirements::lowEnergyRecovery;',
             '}']
     (ROOT/'models/evidence/srr-current.sysml').write_bytes(('\n'.join(lines)+'\n').encode())
+
+
+def energy_snapshot(record):
+    """Project archived inputs; the native model owns all budget calculations."""
+    from tools.boat_analysis.model.runtime import connection, numerical_value
+    revision = record['sourceRevision']
+    archive = subprocess.check_output(['git', 'archive', revision, 'models'], cwd=ROOT)
+    with tarfile.open(fileobj=io.BytesIO(archive)) as tree:
+        sources = [(m.name, tree.extractfile(m).read().decode('utf-8'))
+                   for m in tree.getmembers() if m.isfile() and m.name.endswith('.sysml')]
+    historical = connection().parse_sources(sources, strict=True)
+    environment = numerical_value(historical.run_analysis('BlueDogOperatingEnvironment::Inputs').outputs)
+    policy = numerical_value(historical.run_analysis('BlueDogConceptCredibility::Inputs').outputs)['values']
+    wind = numerical_value(historical.eval('BlueDogWindEquipment::challenge.busPowerW'))
+    values = dict(record['refinedReplay']['parameters'])
+    values.update(windBusW=wind, durationMultiplier=policy[0], delayHours=policy[1],
+                  dischargeEfficiency=environment['discharge_efficiency'],
+                  usableFraction=environment['usable_fraction'], initialFraction=environment['initial_fraction'],
+                  selfDischargeW=environment['self_discharge_W'], reserveWh=environment['reserve_Wh'])
+    lines = ['    part energyInputs {', f'        attribute sourceRevision : String = "{revision}";']
+    for name, value in values.items():
+        lines.append(f'        attribute {name} : Real = {json.dumps(value,allow_nan=False)};')
+    lines += ['    }', '    part def EnergyCase {',
+              '        attribute label : String;', '        attribute wingTorqueNm : Real;',
+              '        attribute rudderTorqueNm : Real;', '        attribute recordedAverageW : Real;',
+              '        attribute recordedPeakW : Real;', '    }']
+    cases = record['refinedReplay']['cases']
+    for i, case in enumerate(cases):
+        output = case['outputs']
+        label = f"{case['wind_m_s']} m/s, {'windward' if case['windward'] else 'leeward'}, tack {case['tack']}"
+        lines += [f'    part energyCase{i} : EnergyCase {{', f'        attribute :>> label = "{label}";']
+        for name, key in [('wingTorqueNm','wingTorque'),('rudderTorqueNm','rudderTorque'),
+                          ('recordedAverageW','averagePower'),('recordedPeakW','peakPower')]:
+            lines.append(f'        attribute :>> {name} = {json.dumps(output[key],allow_nan=False)};')
+        lines.append('    }')
+    average = max(range(len(cases)), key=lambda i: cases[i]['outputs']['averagePower'])
+    peak = max(range(len(cases)), key=lambda i: cases[i]['outputs']['peakPower'])
+    lines += [f'    alias energyGoverningCase for energyCase{average};',
+              f'    alias peakGoverningCase for energyCase{peak};']
+    return lines
 
 
 if __name__=='__main__':

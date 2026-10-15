@@ -628,3 +628,35 @@ package BlueDogRiskPlot {
         part data : Table { calc rows : Rows; }
     }
 }
+
+package BlueDogCandidateEnergyDocuments {
+    private import DocumentQueries::*;
+    calc def Loads :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogCandidateEnergy::electronics", "BlueDogCandidateEnergy::wind", "BlueDogCandidateEnergy::wing", "BlueDogCandidateEnergy::rudder", "BlueDogCandidateEnergy::totals")), columns = (
+            Column(name = "Load", path = "label"), Column(name = "Average bus W", path = "averageBusW"),
+            Column(name = "Peak bus W", path = "peakBusW"), Column(name = "Bus Wh", path = "busWh"),
+            Column(name = "Battery Wh", path = "batteryWh")))
+    }
+    calc def Storage :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogCandidateEnergy::nominal", "BlueDogCandidateEnergy::usable", "BlueDogCandidateEnergy::departure")), columns = (
+            Column(name = "Storage", path = "label"), Column(name = "Wh", path = "energyWh"), Column(name = "Basis", path = "basis")))
+    }
+    calc def Ledger :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogCandidateEnergy::sailing", "BlueDogCandidateEnergy::losses", "BlueDogCandidateEnergy::selfDischarge", "BlueDogCandidateEnergy::reserve", "BlueDogCandidateEnergy::required", "BlueDogCandidateEnergy::headroom")), columns = (
+            Column(name = "Energy account", path = "label"), Column(name = "Wh", path = "energyWh"), Column(name = "Basis", path = "basis")))
+    }
+    calc def Gaps :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogCandidateEnergy::compute", "BlueDogCandidateEnergy::navigation", "BlueDogCandidateEnergy::traffic", "BlueDogCandidateEnergy::communications", "BlueDogCandidateEnergy::housekeeping", "BlueDogCandidateEnergy::recoveryHardware")), columns = (
+            Column(name = "Function", path = "function"), Column(name = "Current accounting", path = "allowance"), Column(name = "Needed to establish installed budget", path = "evidenceNeeded")))
+    }
+    part def Budget :> Document {
+        attribute redefines title = "Retained candidate: sailing power and passage energy";
+        part loads : Table { calc rows : Loads; }
+        part storage : Table { calc rows : Storage; }
+        part ledger : Table { calc rows : Ledger; }
+    }
+    part def MissingAllocations :> Document {
+        attribute redefines title = "Unresolved equipment allocations";
+        part gaps : Table { calc rows : Gaps; }
+    }
+}
