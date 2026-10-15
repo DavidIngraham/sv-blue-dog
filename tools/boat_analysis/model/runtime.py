@@ -67,12 +67,14 @@ def connection():
 
 @lru_cache(maxsize=4)
 def _loaded_model(snapshot):
-    return connection().parse_sources([path for path, _, _ in snapshot], strict=True)
+    return connection().parse_sources(snapshot, strict=True)
 
 
 def load_model(models=None):
     files = model_files() if models is None else tuple(dict.fromkeys(models))
-    snapshot = tuple((str(path), path.stat().st_mtime_ns, path.stat().st_size) for path in files)
+    # Inline source content makes both client and service caches independent of
+    # filesystem timestamp granularity and same-size edits.
+    snapshot = tuple((str(path), path.read_text(encoding="utf-8")) for path in files)
     return _loaded_model(snapshot)
 
 

@@ -6,14 +6,12 @@ import pytest
 
 
 @pytest.fixture
-def evaluate(run_model):
+def evaluate(acceptance_model, acceptance):
     def evaluate(definition, inputs):
-        bindings = '\n'.join(f'attribute :>> {key} = {value};' for key, value in inputs.items())
-        source = ('package CriterionExample { private import SI::*; '
-                  f'requirement sample : BlueDogRequirements::{definition} {{ {bindings} }} }}')
-        code, report = run_model(source, '-requirement', 'CriterionExample::sample')
-        return code, report['status']
-
+        # The native expression evaluator owns quantities, sequences and units.
+        values = {key: acceptance_model.eval(value, context_symbol_id='SharedAcceptanceTests')
+                  for key, value in inputs.items()}
+        return acceptance(definition, **values)
     return evaluate
 
 

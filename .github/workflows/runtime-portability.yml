@@ -74,14 +74,21 @@ jobs:
       - run: uv pip install -e packages/sysml-python 'pytest>=9,<10'
       - name: Native ABI and build cache tests
         run: ${{ matrix.python }} -m pytest packages/sysml-python/tests/test_native.py -q
-      - name: Install pinned OpenSysML
+      - name: Cache pinned OpenSysML toolchain
         if: matrix.generated
+        id: opensysml-cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: .tools/develop-*
+          key: opensysml-v1-${{ runner.os }}-${{ runner.arch }}-go1.25.11-${{ hashFiles('tools/boat_analysis/model/install.py') }}
+      - name: Install pinned OpenSysML
+        if: matrix.generated && steps.opensysml-cache.outputs.cache-hit != 'true'
         uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
         with:
           go-version: '1.25.11'
           cache: false
       - name: Build pinned OpenSysML
-        if: matrix.generated
+        if: matrix.generated && steps.opensysml-cache.outputs.cache-hit != 'true'
         run: ${{ matrix.python }} -m tools.boat_analysis.model.install
       - name: Generated model execution
         if: matrix.generated

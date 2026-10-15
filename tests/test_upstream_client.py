@@ -1,5 +1,6 @@
 """Native typed execution must preserve values, failure verdicts and source edits."""
 from fractions import Fraction
+import os
 
 import pytest
 
@@ -16,7 +17,10 @@ def test_typed_analysis_preserves_strings_and_reloads_edits(tmp_path):
     }'''
     source.write_text(text)
     assert analysis_values('Typed::sample', (source,)) == {'text': '1/3 is a label', 'value': 2.5}
+    before = source.stat()
+    assert load_model((source,)) is load_model((source,))
     source.write_text(text.replace('2.5', '4.5'))
+    os.utime(source, ns=(before.st_atime_ns, before.st_mtime_ns))
     assert analysis_values('Typed::sample', (source,))['value'] == 4.5
 
 

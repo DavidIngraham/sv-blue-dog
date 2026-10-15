@@ -32,7 +32,34 @@ pytest orchestration. The compiled batch adapter serves repeated numerical
 evaluations; prefer native OpenSysML APIs for ordinary model operations.
 
 Run `uv run python -m tools.boat_analysis.cli prepare` after changing model,
-runtime or dependency inputs, then the relevant pytest checks. Before publishing,
-run the full suite and `uv run python -m tools.publishing.build`. Preserve archived
-evidence and its source provenance; software regression results do not establish
+runtime or dependency inputs, then the relevant pytest checks. Run the full suite
+for model, runtime, dependency, test-infrastructure or behavioral changes. For
+prose-only changes, run the publishing build and relevant documentation checks;
+do not rerun the entire engineering suite locally. Always run
+`uv run python -m tools.publishing.build` before publishing. CI remains the full
+regression gate before deployment.
+
+## Build performance and deployment
+
+- Deploy fire-and-forget unless the user explicitly asks to wait. Confirm the
+  push/dispatch, then return; do not poll deployment or sleep waiting for it.
+- Use `pytest --durations=30` and retain JUnit timings when investigating test
+  cost. Separate local tests, CI build, page rendering and deployment timing.
+- Prefer the WSL Linux filesystem for substantial Linux test runs rather than
+  a Windows/OneDrive-mounted checkout. Treat the speed benefit as unmeasured
+  until compared on the same revision; do not move the user's checkout silently.
+- Cache pinned OpenSysML binaries and matching Python client sources by OS,
+  architecture, Go version and installer content (which pins revision/checksum).
+  Never use broad fallback keys across toolchain revisions. Do not cache mutable
+  model state or test outputs as a substitute for executing checks.
+- Share immutable native model loads for parameterized evaluations. Bind fresh
+  inputs for each call; preserve explicit missing-input, interleaving and CLI
+  parity checks. Keep source mutation, parser diagnostics and CLI-contract tests
+  isolated. Test-only wrappers may expose inherited attributes as inputs but
+  must not copy production equations or acceptance constraints.
+- Profile before adding parallel test workers: existing helpers write shared
+  generated files, and process-local native caches are not automatically safe
+  or useful across workers.
+
+Preserve archived evidence and its source provenance; software regression results do not establish
 physical qualification or increase maturity claims about unmeasured behavior.

@@ -2,30 +2,24 @@
 import pytest
 
 
-def evaluate(run_model, definition, **inputs):
-    bindings=' '.join(f'attribute :>> {name} = {str(value).lower()};' for name,value in inputs.items())
-    code,report=run_model('package Check { requirement sample : BlueDogStructure::'+definition+' { '+bindings+' } }', '-requirement','Check::sample')
-    return code,report['status']
-
-
 @pytest.mark.parametrize('definition,credit,bound,value', [
     ('WetCouponStiffness','creditedModulusPa','qualifiedModulusPa',5e9),
     ('WetCouponStrength','creditedAllowablePa','qualifiedAllowablePa',25e6),
 ])
-def test_lower_material_properties_are_allowed_but_overcredit_is_not(run_model,definition,credit,bound,value):
+def test_lower_material_properties_are_allowed_but_overcredit_is_not(acceptance,definition,credit,bound,value):
     data={credit:value,bound:value,'evidenceAccepted':True}
-    assert evaluate(run_model,definition,**data)==(0,'holds')
-    assert evaluate(run_model,definition,**(data|{credit:value*1.01}))==(1,'fails')
-    assert evaluate(run_model,definition,**(data|{'evidenceAccepted':False}))==(1,'fails')
-    assert evaluate(run_model,definition)[1]!='holds'
+    assert acceptance(definition,**data)==(0,'holds')
+    assert acceptance(definition,**(data|{credit:value*1.01}))==(1,'fails')
+    assert acceptance(definition,**(data|{'evidenceAccepted':False}))==(1,'fails')
+    assert acceptance(definition)[1]!='holds'
 
 
 @pytest.mark.parametrize('definition',['AppendageDeflection','HullDeflection','PanelDeflection'])
-def test_functional_limit_replaces_assumed_screen(run_model,definition):
+def test_functional_limit_replaces_assumed_screen(acceptance,definition):
     data=dict(fraction=.025,validatedMaximumFraction=.03,limitEvidenceAccepted=True)
-    assert evaluate(run_model,definition,**data)==(0,'holds')
-    assert evaluate(run_model,definition,**(data|{'fraction':.031}))==(1,'fails')
-    assert evaluate(run_model,definition,**(data|{'limitEvidenceAccepted':False}))==(1,'fails')
+    assert acceptance(definition,**data)==(0,'holds')
+    assert acceptance(definition,**(data|{'fraction':.031}))==(1,'fails')
+    assert acceptance(definition,**(data|{'limitEvidenceAccepted':False}))==(1,'fails')
 
 
 @pytest.mark.parametrize('definition,inputs,change', [
@@ -37,17 +31,32 @@ def test_functional_limit_replaces_assumed_screen(run_model,definition):
     ('BendingStrength',dict(stressPa=20e6,qualifiedAllowablePa=25e6,evidenceAccepted=True),dict(stressPa=26e6)),
     ('PanelStrength',dict(stressPa=20e6,qualifiedAllowablePa=25e6,evidenceAccepted=True),dict(stressPa=-26e6)),
 ])
-def test_design_specific_acceptance(run_model,definition,inputs,change):
-    assert evaluate(run_model,definition,**inputs)==(0,'holds')
-    assert evaluate(run_model,definition,**(inputs|change))==(1,'fails')
-    assert evaluate(run_model,definition)[1]!='holds'
+def test_design_specific_acceptance(acceptance,definition,inputs,change):
+    assert acceptance(definition,**inputs)==(0,'holds')
+    assert acceptance(definition,**(inputs|change))==(1,'fails')
+    assert acceptance(definition)[1]!='holds'
 
 
-def test_aged_capacity_is_compared_with_design_credit(run_model):
+def test_aged_capacity_is_compared_with_design_credit(acceptance):
     for capacity,accepted,expected in [(60,True,'holds'),(49,True,'fails'),(60,False,'fails')]:
-        source=('package Aging { requirement sample : BlueDogRequirements::PrintedMaterialAging { '
-                'attribute :>> creditedLoadCapacityN = 50; '
-                f'attribute :>> qualifiedAgedCapacityN = {capacity}; '
-                f'attribute :>> exposureEvidenceAccepted = {str(accepted).lower()};'+' } }')
-        _,report=run_model(source,'-requirement','Aging::sample')
-        assert report['status']==expected
+        _, status = acceptance('PrintedMaterialAging', creditedLoadCapacityN=50,
+                               qualifiedAgedCapacityN=capacity, exposureEvidenceAccepted=accepted)
+        assert status == expected
+
+
+def test_shared_inputs_do_not_leak(acceptance):
+    good = dict(creditedAllowablePa=20e6, qualifiedAllowablePa=25e6, evidenceAccepted=True)
+    assert acceptance('WetCouponStrength', **good) == (0, 'holds')
+    assert acceptance('WetCouponStrength') == (2, 'unevaluated')
+    assert acceptance('WetCouponStrength', **(good | {'evidenceAccepted': False})) == (1, 'fails')
+    assert acceptance('WetCouponStrength', **good) == (0, 'holds')
+
+
+@pytest.mark.parametrize('accepted,expected', [(True, 'holds'), (False, 'fails')])
+def test_shared_evaluation_matches_cli(acceptance, run_model, accepted, expected):
+    inputs = dict(creditedAllowablePa=20e6, qualifiedAllowablePa=25e6, evidenceAccepted=accepted)
+    bindings = ' '.join(f'attribute :>> {key} = {str(value).lower()};' for key,value in inputs.items())
+    code, report = run_model('package Parity { requirement sample : BlueDogStructure::WetCouponStrength { '
+                             + bindings + ' } }', '-requirement', 'Parity::sample')
+    assert report['status'] == expected
+    assert acceptance('WetCouponStrength', **inputs) == (code, report['status'])

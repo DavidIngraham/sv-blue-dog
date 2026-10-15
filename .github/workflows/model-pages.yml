@@ -28,11 +28,19 @@ jobs:
         with:
           version: '0.12.10'
           enable-cache: true
+      - name: Cache pinned OpenSysML toolchain
+        id: opensysml-cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: .tools/develop-*
+          key: opensysml-v1-${{ runner.os }}-${{ runner.arch }}-go1.25.11-${{ hashFiles('tools/boat_analysis/model/install.py') }}
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+        if: steps.opensysml-cache.outputs.cache-hit != 'true'
         with:
           go-version: '1.25.11'
           cache: false
       - run: python3 tools/boat_analysis/model/install.py
+        if: steps.opensysml-cache.outputs.cache-hit != 'true'
       - run: uv sync --locked
       - name: Select the pinned compiler
         run: python3 -c 'from tools.boat_analysis.model.install import binary_path; print("OPENSYSML_BINARY=" + str(binary_path()))' >> "$GITHUB_ENV"
@@ -63,7 +71,14 @@ jobs:
           uv pip install --python "$template_dir/.venv/bin/python" .tools/runtime-dist/*.whl 'pytest>=9,<10'
           cd "$template_dir"
           .venv/bin/python -m pytest -q
-      - run: uv run pytest -q
+      - run: uv run pytest -q --durations=30 --junitxml=build/test-results.xml
+      - name: Upload test timings
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: regression-timings
+          path: build/test-results.xml
+          if-no-files-found: ignore
       - name: Exercise the seeded mission campaign
         run: uv run python -m tools.boat_analysis.mission.campaign --count 4
       - run: uv run python -m tools.publishing.sizing_progress
