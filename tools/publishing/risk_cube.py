@@ -24,14 +24,15 @@ def read_rows():
         if not line.startswith('|'):
             continue
         cells = [c.strip() for c in line.strip('|').split('|')]
-        if len(cells) == 5 and cells[0].startswith('R-'):
-            identifier, kind, area, likelihood, consequence = cells
+        if len(cells) == 21 and cells[0].startswith('R-'):
+            identifier, kind, area, likelihood, consequence = cells[:5]
             if not kind or not kind.isascii() or not kind.replace("-", "").isalpha():
                 raise ValueError(f"Invalid risk kind: {kind!r}")
             coordinate(likelihood, LIKELIHOOD)
             coordinate(consequence, CONSEQUENCE)
             rows.append(dict(identifier=identifier, kind=kind, area=area,
-                             likelihood=likelihood, consequence=consequence))
+                             likelihood=likelihood, consequence=consequence,
+                             **dict(zip(('status', 'statement', 'effect', 'uncertainty', 'priority', 'priorityRationale', 'reductionAction', 'closureEvidence', 'confidence', 'assessedOn', 'assessor', 'scope', 'basis', 'evidence', 'disposition', 'owner'), cells[5:], strict=True))))
     if not rows or len({r['identifier'] for r in rows}) != len(rows):
         raise ValueError('Risk export must contain distinct identified risks')
     return rows
@@ -91,6 +92,11 @@ def render_all(directory, rows=None):
     # Preserve the existing asset URL as an explicitly technical-only view.
     if 'technical' in paths:
         render(directory, rows, kind='technical')
+    from .build import revision, REPOSITORY
+    (directory / 'risks.json').write_text(json.dumps(dict(
+        version=1, revision=revision(), repository=REPOSITORY,
+        likelihood=list(LIKELIHOOD), consequence=list(CONSEQUENCE), risks=rows
+    ), indent=2)+'\n', encoding='utf-8')
     return paths
 
 

@@ -107,3 +107,7 @@ Coupled-solver regression checks cover uniform and sheared wind, heel and revers
 flow with comparisons within `1e-12`. These checks establish software consistency;
 physical qualification requires measured evidence.
 The compiled batch executor remains in place for repeated optimization calls.
+
+## Interactive risk assessment
+
+The development plan embeds a `risk-explorer` fence. `tools.publishing.risk_cube` exports `assets/risk/risks.json` from the native `BlueDogRiskPlot::Data` report, including risk kind, status, description, assessment evidence and actions. The blog reader filters by kind, status or text and maintains separate cubes by kind. A cube ID opens only the selected risk's details. Static SVG/PNG cubes remain available as export assets. Descriptions and actions are shown only for the selected risk, inside the applet.

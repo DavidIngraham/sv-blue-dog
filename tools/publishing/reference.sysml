@@ -605,7 +605,23 @@ package BlueDogRiskPlot {
             Column(name = "Risk kind", path = "risk.riskKind"),
             Column(name = "Area", path = "name"),
             Column(name = "Likelihood class", path = "risk.likelihoodClass"),
-            Column(name = "Consequence class", path = "risk.consequenceClass")))
+            Column(name = "Consequence class", path = "risk.consequenceClass"),
+            Column(name = "status", path = "workStatus.status"),
+            Column(name = "statement", path = "risk.statement"),
+            Column(name = "effect", path = "risk.consequence"),
+            Column(name = "uncertainty", path = "risk.uncertainty"),
+            Column(name = "priority", path = "risk.priority"),
+            Column(name = "priorityRationale", path = "risk.priorityRationale"),
+            Column(name = "reductionAction", path = "risk.reductionAction"),
+            Column(name = "closureEvidence", path = "risk.closureEvidence"),
+            Column(name = "confidence", path = "risk.confidence"),
+            Column(name = "assessedOn", path = "risk.assessedOn"),
+            Column(name = "assessor", path = "risk.assessor"),
+            Column(name = "scope", path = "risk.assessmentScope"),
+            Column(name = "basis", path = "risk.assessmentBasis"),
+            Column(name = "evidence", path = "risk.evidenceReference"),
+            Column(name = "disposition", path = "risk.residualDisposition"),
+            Column(name = "owner", path = "workStatus.owner")))
     }
     part def Data :> Document {
         attribute redefines title = "Qualitative development risk coordinates";

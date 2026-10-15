@@ -15,6 +15,8 @@ def test_native_risks_have_explicit_qualitative_assessments():
     rows = read_rows()
     assert len(rows) == 6
     assert {r["kind"] for r in rows} == {"technical"}
+    assert all(r['status'].split('::')[-1] == 'open' for r in rows)
+    assert all(r['statement'] and r['basis'] and r['reductionAction'] and r['evidence'] for r in rows)
     assert all(r['likelihood'] in LIKELIHOOD and r['consequence'] in CONSEQUENCE for r in rows)
     assert next(r for r in rows if r['identifier']=='R-006')['likelihood']=='Demonstrated'
 

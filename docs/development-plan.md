@@ -62,7 +62,11 @@ The first selection is safety feasibility: traffic sensing and maneuvering, toge
 
 ### Technical risk cube
 
-![Qualitative technical risk cube: prospect of redesign or operating restriction versus consequence if unresolved.](https://davidingraham.github.io/sv-blue-dog/assets/risk/technical/cube.svg)
+Choose a risk in the cube to read its description, assessment evidence and reduction action in the detail panel below it. Filter by risk type, status or text; each risk type keeps its own cube.
+
+```risk-explorer
+{"src":"https://davidingraham.github.io/sv-blue-dog/assets/risk/risks.json"}
+```
 
 All six current entries are **technical risks**, including uncertainty in model credibility. Safety consequences inform their technical severity; they do not make these entries a separate operational-safety assessment. Cost, schedule and operational risks belong in separate inventories and cubes, with criteria appropriate to each kind. No assessments of those kinds are recorded yet.
 
@@ -74,18 +78,9 @@ Consequences are **Negligible** (no meaningful effect on the decision), **Minor*
 
 The judgments are recorded by the analysis agent with owner review pending. All six risks remain open. Confidence describes the support for the development judgment, not confidence that a physical failure will occur: low for largely unmeasured assumptions, medium for specific but indirect analytical evidence, and high where the limitation is directly demonstrated.
 
-```sysml-report BlueDogRiskDocuments::Assessments
-```
-
 Traffic sensing and casualty recovery lead the safety investigations. The small energy margin warrants early measured-load work alongside them. Structural and wing evidence constrain the design alternatives; scenario coverage constrains every mission conclusion. A populated cell records a judgment, not a completed mitigation.
 
-```sysml-report BlueDogRiskDocuments::Priorities
-```
-
 ### Risk reduction and closure
-
-```sysml-report BlueDogRiskDocuments::Actions
-```
 
 The standard quantitative probability and impact fields remain unset. The qualitative classes live in explicitly named extensions of the same risk metadata. Unknown remains separate from a low assessment, and numerical regression results alone do not justify reducing a rating. The named owner coordinates the action; I review residual-risk dispositions. Planned tests and successful software checks alone do not reduce a physical risk rating.
 
