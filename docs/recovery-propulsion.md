@@ -1,6 +1,6 @@
 # Comparing recovery propulsion
 
-**Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
+**OOSEM:** Candidate physical architectures · [Maturity assessment](development-plan.md)
 
 If a trial goes wrong, I want a practical way to bring the boat back. Should that be a water propeller or an air propeller? This [preliminary-design trade](development-plan.md#virtual-design) starts with resistance, weed exposure and the energy reserve, and should lead to an installed comparison of the two concepts. The motor is for testing and recovery, not the qualifying sailing attempt.
 

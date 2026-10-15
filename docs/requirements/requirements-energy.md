@@ -1,6 +1,6 @@
 # Energy and recovery propulsion
 
-**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
 
 The energy budget must support sailing continuously and retain a deliberate recovery capability. These threads separate energy awareness, sustained balance and the motor rules for a qualifying attempt.
 

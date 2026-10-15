@@ -1,6 +1,6 @@
 # Passage time, reliability and failure analysis
 
-**Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
+**OOSEM:** Trades, optimization and analysis · [Maturity assessment](development-plan.md)
 
 A slower voyage demands more hours of successful unattended operation. I use passage estimates and the architecture to ask what can fail during that exposure, and how the boat should respond. This connects [preliminary design](development-plan.md#virtual-design) to the fault and endurance tests needed for [physical verification](development-plan.md#physical-validation).
 

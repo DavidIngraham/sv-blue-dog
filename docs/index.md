@@ -1,20 +1,22 @@
 # SV Blue Dog: the development series
 
-**Design phase:** Introduction · [Development plan](development-plan.md)
+**Start here:** [Why Blue Dog?](restarting-sv-blue-dog.md) · [Running maturity assessment](development-plan.md)
 
 Blue Dog is named after my blue heeler, Ozzy. I hope the vessel will share a little of that character: small, something like a dog, independently puttering around the surface of a river or the ocean.
 
-The series follows the design phases in the left-hand project index. Start with the introduction, then follow the mission and requirements work into the design studies. The phases organize decisions; they do not imply that a review gate has been passed.
+The [introductory story](restarting-sv-blue-dog.md) remains the beginning: sailing, desktop manufacturing, an early testbed and the maze of decisions that led me to a connected model. From there, follow the engineering through OOSEM layers. The [running maturity assessment](development-plan.md) explains what is established, what is provisional and what evidence would change the next decision.
 
-| Phase | Read | What it informs |
+| Read through the layers | Articles | Question |
 | --- | --- | --- |
-| Introduction | [Why Blue Dog?](restarting-sv-blue-dog.md), [development plan](development-plan.md) | Motivation, the challenge and how the project progresses |
-| Mission and requirements · SRR | [Mission and architecture](architecture.md), [operating context](operating-constraints.md), [mission simulation](mission-simulation.md), [requirements](requirements.md), [SRR review](srr-review.md) | The mission baseline and assessable obligations |
-| Concept and preliminary design · PDR | [Sizing findings](results.md), [sizing method](sizing.md), [sail trade](sail-trade.md), [energy](energy.md), [recovery propulsion](recovery-propulsion.md), [reliability](reliability.md) | Candidate selection, tradeoffs and the evidence needed for detailed design |
-| Detailed design · CDR | [Manufacturing, structure and recovery](structures-and-recovery.md) | Construction and interface decisions; build readiness remains to be demonstrated |
-| Integration and validation · TRR and trials | [From virtual evidence to water trials](validation-plan.md) | Bench integration, physical correlation, trial readiness and progression |
-| Appendix | [Modeling method](methods/modeling.md), [publishing workflow](publishing.md), [SRR appendix](srr-appendix.md) | Tooling and traceability methods supporting every phase |
+| The story and current position | [Why Blue Dog?](restarting-sv-blue-dog.md), [maturity assessment](development-plan.md) | Why build this, and what have I learned so far? |
+| Mission and stakeholder needs | [Mission and context](architecture.md), [operating conditions](operating-constraints.md) | What should the boat accomplish, for whom and in what environment? |
+| System requirements and scenarios | [Requirements](requirements.md), [mission simulation](mission-simulation.md) | What behavior counts as success, and what could we have missed? |
+| Logical architecture | [Use cases and allocated behavior](architecture.md#from-use-cases-to-allocated-behavior) | What responsibilities, information and fault responses make that behavior possible? |
+| Candidate physical architectures | [Structure and recovery](structures-and-recovery.md), [sail concepts](sail-trade.md), [recovery propulsion](recovery-propulsion.md) | How could those responsibilities be realized in a buildable boat? |
+| Trades, optimization and analysis | [Sizing results](results.md), [sizing method](sizing.md), [energy](energy.md), [reliability](reliability.md) | Which choices work under the stated assumptions, and which assumptions dominate? |
+| Verification, validation and learning | [From virtual evidence to water trials](validation-plan.md) | What evidence supports each claim, and what measurement should come next? |
+| Methods and historical assessments | [Modeling](methods/modeling.md), [publishing](publishing.md), [earlier SRR assessment](srr-review.md), [its appendix](srr-appendix.md) | How is the engineering record maintained, and what did earlier assessments conclude? |
 
-These are recurring activities, not a completion checklist. An article can serve more than one stage, and a testbed can answer a focused question before the challenge vessel is ready for detailed design. Each article explains the question it addresses and the design decision it supports.
+These layers are connected activities, not sequential gates or a completion checklist. An article can support several layers. A focused testbed experiment can improve a physical model while the integrated architecture remains provisional.
 
-The SysML model owns engineering facts and rationale. The articles explain our methods and thought process, with scoped views and statements rendered from that model. Current numerical results remain conditional; the series distinguishes virtual findings, planned physical evidence and accepted measurements rather than treating them as interchangeable.
+The SysML model owns engineering facts and rationale. The articles explain the choices and their evidence, with scoped views rendered from that model. Virtual findings, planned experiments and accepted measurements remain distinct. Earlier review pages retain their URLs and evidence, but formal SETR approval is no longer the organizing process.

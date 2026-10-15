@@ -563,7 +563,7 @@ package BlueDogRiskDocuments {
             Column(name = "Why investigate now", path = "risk.priorityRationale")))
     }
     part def Priorities :> Document {
-        attribute redefines title = "PDR risk priorities";
+        attribute redefines title = "Current investigation priorities";
         part rows : Table { calc values : PrioritiesRows; }
     }
     calc def ActionsRows :> Query {
@@ -576,7 +576,7 @@ package BlueDogRiskDocuments {
             Column(name = "Owner", path = "workStatus.owner")))
     }
     part def Actions :> Document {
-        attribute redefines title = "PDR risk actions";
+        attribute redefines title = "Investigation actions";
         part rows : Table { calc values : ActionsRows; }
     }
 }

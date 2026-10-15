@@ -1,6 +1,8 @@
 # Blue Dog system requirements review
 
-**Design phase:** Mission and requirements · SRR · [Development plan](development-plan.md)
+**OOSEM:** Historical assessment · [Maturity assessment](development-plan.md)
+
+> Historical assessment: the review framing below is retained as context. Formal SRR approval is no longer a current project gate; see the [running OOSEM maturity assessment](development-plan.md). Numerical and physical evidence retain their original limitations.
 
 This review asks whether the mission and requirements are clear enough to develop the boat. The proposed baseline and supporting desktop assessments are prepared for review; **SRR approval is open**. The [technical appendix](srr-appendix.md) separates evidence, limitations and proposed actions. Your review determines the disposition.
 

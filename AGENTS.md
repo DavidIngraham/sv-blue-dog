@@ -18,6 +18,14 @@ blog import, navigation, and interactive illustrations. Model facts belong in
 SysML; prose explains the engineering method. Do not create a separate public
 website or framework repository as part of routine Blue Dog work.
 
+Organize current development around OOSEM layers, not formal SETR approval gates.
+When engineering changes affect coverage, traceability, evidence or applicability,
+update the dated assessment in `docs/development-plan.md` with supporting links,
+remaining gaps and the next useful investigation. Keep virtual, physical and
+model-validation evidence distinct. Preserve the introductory story and retain
+older review pages as historical assessments, without treating pending approvals
+as current work gates.
+
 Python owns SciPy search, numerical quadrature, geometry, tool integration and
 pytest orchestration. The compiled batch adapter serves repeated numerical
 evaluations; prefer native OpenSysML APIs for ordinary model operations.
@@ -25,5 +33,5 @@ evaluations; prefer native OpenSysML APIs for ordinary model operations.
 Run `uv run python -m tools.boat_analysis.cli prepare` after changing model,
 runtime or dependency inputs, then the relevant pytest checks. Before publishing,
 run the full suite and `uv run python -m tools.publishing.build`. Preserve archived
-evidence and its source provenance; software regression results are not physical
-qualification or approval of an engineering review gate.
+evidence and its source provenance; software regression results do not establish
+physical qualification or increase maturity claims about unmeasured behavior.

@@ -1,6 +1,6 @@
 # From virtual evidence to water trials
 
-**Design phase:** Integration and validation · TRR and trials · [Development plan](development-plan.md)
+**OOSEM:** Verification, validation and learning · [Maturity assessment](development-plan.md)
 
 This is the integration and validation part of the [development plan](development-plan.md#physical-validation). Its inputs are the selected configuration, model-linked verification cases and explicit prediction limits. It informs whether a bounded physical test is ready, what its results establish, and which model assumptions must change. These are planned activities; the challenge vessel has not completed physical qualification.
 
@@ -16,10 +16,10 @@ First establish individual sensors, actuators and electrical behavior on the ben
 
 The existing manufacturing and wing testbed can support focused experiments. It is not automatically representative of the eventual challenge vessel; any transfer of evidence must identify what geometry, hardware and operating conditions remain applicable.
 
-## The test-readiness decision
+## Update maturity from each experiment
 
-Before each water trial, connect the objective to its verification case, identify the actual test article and instrumentation, and review conditions, boundaries, shore retrieval and emergency response. Authorize only the scope supported by that review. An SRR decision permits design development; it does not authorize an autonomous course attempt.
+Before each water trial, connect the objective to its verification case, identify the actual test article and instrumentation, and check conditions, boundaries, shore retrieval and emergency response. Choose a bounded scope that can answer the question with the available equipment and recovery arrangements.
 
-Afterward, compare measurements with predictions, retain failures and censored observations, and update the model's validity limits. A progression review decides whether to repeat, redesign or expand the trial. Final challenge readiness requires the applicable physical evidence and deployment review, not just a successful simulated voyage.
+Afterward, compare measurements with predictions, retain failures and censored observations, and update the model's validity limits. Update the affected OOSEM layers with what the evidence supports, what failed or remains uncertain, and whether the next useful step is repetition, redesign or a wider trial. A successful simulated voyage alone does not establish readiness for the physical challenge.
 
-See the [development gates](development-plan.md#review-gates-scaled-to-one-project) for the overall process and the [modeling method](methods/modeling.md) for the evidence links.
+See the [running maturity assessment](development-plan.md#how-the-assessment-stays-current) for the update method and the [modeling method](methods/modeling.md) for the evidence links.

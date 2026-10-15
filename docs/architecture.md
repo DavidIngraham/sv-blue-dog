@@ -1,6 +1,6 @@
 # Mission, context and architecture
 
-**Design phase:** Mission and requirements · SRR · [Development plan](development-plan.md)
+**OOSEM:** Mission and context · Logical architecture · [Maturity assessment](development-plan.md)
 
 What does this little boat actually have to do? I start with one finite, independent Gorge challenge, then work through the people, environment and equipment it will interact with. This is [mission definition](development-plan.md#mission-definition): it sets up the responsibilities and scenarios I will use to compare designs.
 
@@ -73,7 +73,7 @@ package Page_architecture_recovery {
 }
 ```
 
-The initial physical allocation puts autonomous estimation and decisions on an onboard platform. It leaves processor choice, software partitioning and redundancy open. Wind observation also has a concrete allocation to the challenge's wired sensor installation. PDR must develop these coarse allocations into compatible interfaces and implementations, supported by timing, power and failure evidence. The [method model](../models/vehicle/method.sysml) owns those links; the [development plan](development-plan.md) owns review expectations.
+The initial physical allocation puts autonomous estimation and decisions on an onboard platform. It leaves processor choice, software partitioning and redundancy open. Wind observation also has a concrete allocation to the challenge's wired sensor installation. Further physical-architecture work must develop these coarse allocations into compatible interfaces and implementations, supported by timing, power and failure evidence. The [method model](../models/vehicle/method.sysml) owns those links; the [development plan](development-plan.md) tracks the maturity and remaining evidence for each layer.
 
 ## Sailing hardware
 

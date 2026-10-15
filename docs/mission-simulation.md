@@ -1,10 +1,10 @@
 # Sailing the challenge before building the boat
 
-**Design phase:** Mission and requirements · SRR · [Development plan](development-plan.md)
+**OOSEM:** System requirements and scenarios · [Maturity assessment](development-plan.md)
 
 [Previous: development plan](development-plan.md) · [Next: sizing results](results.md)
 
-This is the mission-level loop at the top of our [development V](development-plan.md#mission-definition). Its inputs are the challenge course, a candidate boat, weather histories and traffic scenarios. Its output is a voyage history: where the boat went, what it encountered, how its battery changed, and why the attempt finished or stopped. I use it to discover missing requirements and compare design choices before committing to hardware.
+This is the mission-and-requirements loop in our [maturity assessment](development-plan.md#mission-definition). Its inputs are the challenge course, a candidate boat, weather histories and traffic scenarios. Its output is a voyage history: where the boat went, what it encountered, how its battery changed, and why the attempt finished or stopped. I use it to discover missing requirements and compare design choices before committing to hardware.
 
 The simulator supports both the original conceptual configuration and a named sizing candidate. The candidate supplies solved sailing states, electrical demand, battery capacity, panel area and swept dimensions. Keeping the course and scenario logic separate lets us increase vessel fidelity while rerunning the same seeds.
 
@@ -180,7 +180,7 @@ The next useful step is to improve local tack planning around the rounding mark 
 | Allocated electrical budget | Measured installed loads and battery behavior |
 | Chart planning clearances | Configuration-specific maneuver, draft, pool-stage and notice review |
 
-The course and scenario contracts stay identifiable through these changes. Virtual results remain separate from physical verification. For SRR, this simulation should expose unsuitable or missing mission criteria; for PDR, its vessel models need enough credibility to justify design decisions.
+The course and scenario contracts stay identifiable through these changes. Virtual results remain separate from physical verification. At the requirements layer, this simulation should expose unsuitable or missing mission criteria. At the architecture and analysis layers, its vessel models need enough credibility to support the design decisions being made.
 
 Run the original conceptual campaign with `uv run python -m tools.boat_analysis.mission.campaign --count 32`, or add `--candidate build/analysis/sizing-continuation.json` for a freshly checked sizing result. It records the model inputs, source hashes, seeds, generated traffic counts, gate events and chronological histories. The numerical horizon can be extended without turning incomplete observations into failures.
 

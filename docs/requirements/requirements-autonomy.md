@@ -1,6 +1,6 @@
 # Autonomous sailing, navigation and wind sensing
 
-**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
 
 Autonomy turns the mission into onboard decisions. Navigation and wind observations supply the controller; recovery behavior keeps faults from silently becoming mission failures.
 

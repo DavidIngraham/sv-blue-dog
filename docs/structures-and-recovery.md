@@ -1,6 +1,6 @@
 # Manufacturing, structure and recovery
 
-**Design phase:** Detailed design · CDR · [Development plan](development-plan.md)
+**OOSEM:** Candidate physical architectures · [Maturity assessment](development-plan.md)
 
 Can I manufacture the boat this way without making it too heavy—and will it come back upright? I use the candidate geometry, printed construction, glass laminate and flooding assumptions to connect [sizing](development-plan.md#virtual-design) with [detailed design](development-plan.md#detailed-design). Coupon and recovery experiments will decide how much confidence those calculations deserve.
 

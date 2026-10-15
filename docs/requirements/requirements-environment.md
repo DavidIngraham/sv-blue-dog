@@ -1,6 +1,6 @@
 # Environment, durability and self-righting
 
-**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
 
 The Gorge environment sets the current loads and exposure conditions. A separately labeled ocean profile is retained for future Hawaii work. The breakdown connects those environments to measurable limits, capsize recovery and weed tolerance.
 

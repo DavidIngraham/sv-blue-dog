@@ -1,6 +1,8 @@
 # SRR technical appendix
 
-**Design phase:** Appendix · [SRR presentation](srr-review.md)
+**OOSEM:** Historical assessment · [Maturity assessment](development-plan.md)
+
+> Historical assessment: the review framing below is retained as context. Formal SRR approval is no longer a current project gate; see the [running OOSEM maturity assessment](development-plan.md). Numerical and physical evidence retain their original limitations.
 
 This appendix records the desktop assessments, proposed baseline and evidence for SRR review. Requirement statements remain in the model and its generated views. SRR approval and physical qualification are separate decisions.
 

@@ -1,6 +1,6 @@
 # Requirements: mission to implementation
 
-**Design phase:** Mission and requirements · SRR · [Development plan](development-plan.md)
+**OOSEM:** System requirements and scenarios · [Maturity assessment](development-plan.md)
 
 Six topic pages connect the mission goals to testable requirements and design obligations. Each contains related breakdowns with their upstream context, generated from the authoritative SysML model. Start with the topic relevant to the design decision you are making.
 

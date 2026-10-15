@@ -1,8 +1,8 @@
 # Authoring and publishing
 
-**Design phase:** Appendix · [Development plan](development-plan.md)
+**OOSEM:** Methods · [Maturity assessment](development-plan.md)
 
-How can I explain the project without maintaining a second, drifting copy of the design? I write the story in Markdown and import small views of the real SysML model. This supports the [engineering record across the V](development-plan.md#engineering-record): readers and agents can follow a decision back to its requirements, assumptions and evidence.
+How can I explain the project without maintaining a second, drifting copy of the design? I write the story in Markdown and import small views of the real SysML model. This supports the [engineering record across the OOSEM layers](development-plan.md#engineering-record): readers and agents can follow a decision back to its requirements, assumptions and evidence.
 
 ```mermaid
 flowchart TB

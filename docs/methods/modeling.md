@@ -1,8 +1,8 @@
 # Reading the design through the model
 
-**Design phase:** Appendix Ã‚Â· [Development plan](../development-plan.md)
+**OOSEM:** Methods · [Maturity assessment](../development-plan.md)
 
-I want to be able to follow a design decision back to the mission that caused it. This is how I use SysML to keep requirements, rationale, architecture and verification connected in the [engineering record](../development-plan.md#engineering-record). It starts with mission intent and ends with links that make later design reviews and test results easier to interpret.
+I want to be able to follow a design decision back to the mission that caused it. This is how I use SysML to keep requirements, rationale, architecture and verification connected in the [engineering record](../development-plan.md#engineering-record). It starts with mission intent and ends with links that make later design decisions and test results easier to interpret.
 
 We begin with the challenge and the eventual ocean mission, then make the vehicle's obligations precise enough to evaluate. A requirement statement states the obligation; its conditions identify the qualification context. Rationale explains why an obligation or design choice exists without becoming another acceptance criterion.
 

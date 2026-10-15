@@ -4,7 +4,7 @@ Named after my blue heeler, Ozzy, Blue Dog is an autonomous sailboat project exp
 
 Start with the [project journey](docs/restarting-sv-blue-dog.md), [development series](docs/index.md), and [focused requirements](docs/requirements.md).
 
-The [development plan](docs/development-plan.md) connects mission intent, simulation, physical evidence and lightweight review gates across successive prototypes.
+The [running OOSEM maturity assessment](docs/development-plan.md) connects each engineering layer to its current evidence, unresolved questions and next useful investigation.
 
 ## Repository
 

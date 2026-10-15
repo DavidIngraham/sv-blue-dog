@@ -1,6 +1,6 @@
 # Manufacturing, handling and serviceability
 
-**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
 
 One-person handling and a 250 mm cubic printer are owner-imposed project constraints. They shape the build and maintenance approach alongside the mission goals.
 

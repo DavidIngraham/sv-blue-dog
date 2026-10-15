@@ -1,6 +1,6 @@
 # Coupled sizing method
 
-**Design phase:** Concept and preliminary design · PDR · [Development plan](development-plan.md)
+**OOSEM:** Trades, optimization and analysis · [Maturity assessment](development-plan.md)
 
 The design mission is the finite Gorge round trip. The static search enforces peak-power capability and a finite-passage battery allowance; daily energy balance and a completion deadline are not acceptance criteria. Each candidate can then drive the chronological mission simulation. The optimizer uses the passage screen, not a calibrated mission-success probability or an embedded Monte Carlo solve. Dynamic planing and speed-dependent failure exposure also need validated models; current results do not select between planing and displacement hulls.
 

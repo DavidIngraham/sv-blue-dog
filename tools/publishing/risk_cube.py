@@ -54,7 +54,7 @@ def render(directory, rows=None):
             assessed[cell(i), cell(p)].append(row['identifier'])
     with plt.rc_context({'svg.fonttype': 'none', 'svg.hashsalt': 'blue-dog-risk-cube'}):
         fig, (ax, side) = plt.subplots(1, 2, figsize=(11, 6), gridspec_kw={'width_ratios': [1.5, 1]}, layout='constrained')
-        fig.suptitle('PDR technical risk cube', fontsize=19, fontweight='bold')
+        fig.suptitle('Development risk assessment', fontsize=19, fontweight='bold')
         for x in range(5):
             for y in range(5):
                 ax.add_patch(Rectangle((x, y), 1, 1, facecolor='#edf2f7', edgecolor='white', linewidth=2))

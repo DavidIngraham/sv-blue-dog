@@ -1,6 +1,6 @@
 # Mission, course completion and endurance
 
-**Design phase:** Mission and requirements · SRR · [Development plan](../development-plan.md)
+**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
 
 One Gorge round trip is the current design mission. These threads connect that finite challenge to course performance and reliability. Hawaii and repeated operation have separate future constraints.
 
