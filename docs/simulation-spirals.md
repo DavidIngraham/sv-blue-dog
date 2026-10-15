@@ -66,6 +66,10 @@ The value is that I can follow a decision as well as a trajectory. The mission r
 
 The supervisor covers mission policy. The simulation still supplies conceptual heading search, traffic geometry and vessel dynamics, and its scripted traffic is perfectly observed. The next behavioral questions concern uncertain observations, delayed decisions and maneuvers that the actual boat can execute. The [current logical execution](mission-simulation.md#executable-supervisory-logic) describes that boundary.
 
+## Couple perception fidelity to energy
+
+The next [sensing-and-compute trade](energy.md#execute-a-sensing-and-compute-trade) joins two working assumptions: perfectly observed traffic and an allocated electronics load. First establish target-specific detection range, errors, latency and dropouts for candidate sensing combinations; then make those observations drive avoidance while independent ground truth scores consequences. Pair each combination with its installed power, mass and thermal behavior, rerun sizing, and sail the same declared scenarios. The current low electronics allowance does not establish vision feasibility. This spiral remains open until encounter and energy measurements support a choice.
+
 ## Make the working assumptions visible
 
 Each spiral needs enough definition to run an experiment. These assumptions describe the scope of that experiment and the decisions it leaves open.

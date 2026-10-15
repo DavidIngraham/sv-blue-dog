@@ -99,7 +99,7 @@ package BlueDogDocuments {
     part def EnergyBudget :> Document {
         attribute redefines title = "Sustained-operation energy roll-up";
         part caution : Paragraph {
-            attribute redefines text = "Generated natively from the synthetic example. These are illustrative inputs, not measurements or hardware selections. Conversion losses and uncertainty factors are included per load; peak powers are conservatively coincident. See sustained-operations.md for the executable campaign, evidence checklist and limitations.";
+            attribute redefines text = "Generated natively from the synthetic example. These are illustrative inputs, not measurements or hardware selections. Conversion losses and uncertainty factors are included per load; peak powers are conservatively coincident. See the energy article for configuration boundaries, the perception trade and evidence limitations.";
         }
         part loads : Table { calc rows : EnergyLoads; }
         part totals : Table { calc rows : EnergyTotals; }

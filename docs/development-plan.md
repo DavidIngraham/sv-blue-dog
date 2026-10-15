@@ -21,6 +21,8 @@ I organize the work around OOSEM layers: mission and stakeholder needs, system r
 
 The [simulation development spirals](simulation-spirals.md) show how added capability exposes the next question across these layers. The most developed numerical work does not determine the maturity of the whole boat. The immediate limitations span logical behavior, physical interfaces and model credibility. I can make useful progress with a focused testbed experiment while the larger architecture remains provisional.
 
+The [energy rollup and avoidance trade](energy.md#perception-computing-and-the-avoidance-trade) expose a coupled gap across physical architecture, analysis and validation: no selected perception stack has a measured installed power or latency budget, and traffic observations in simulation are perfect. R-001 and R-005 remain open. Compare complementary sensing with measured compute demand, then propagate observation uncertainty and energy through paired mission scenarios before selecting hardware.
+
 ## How the assessment stays current
 
 I assess each layer through four questions:

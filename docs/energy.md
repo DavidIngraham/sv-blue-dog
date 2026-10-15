@@ -6,6 +6,73 @@ For the finite Gorge mission, storage must support the complete voyage while pre
 
 Can the boat get through the night and keep sailing the next day? I combine the mission profile, equipment loads, solar assumptions and usable storage to answer that question. This [virtual-design work](development-plan.md#virtual-design) guides battery and solar sizing; later [bench and water tests](development-plan.md#physical-validation) will check the predicted consumption.
 
+## Installed-load rollup and its limits
+
+```sysml-report BlueDogDocuments::EnergyBudget
+```
+
+This is the native [illustrative equipment budget](../models/configurations/energy.sysml), not the installed configuration of the sizing candidate. Average bus demand includes duty, conversion losses and each load's uncertainty factor. The coincident peak assumes all active loads coincide; battery discharge losses and recovery energy are separate. Multiplying average watts by hours gives bus energy in Wh, but the chronological mission must also check storage minima and recovery reachability.
+
+The example assigns **2 W active power to guidance/computing and 1 W to traffic sensing**, before their conversion and uncertainty allowances. Neither is backed by a selected vision processor, camera arrangement or measured detection workload. The [coupled sizing configuration](../models/configurations/reference.sysml) instead uses **4.5 W plus the wired wind-sensor bus load** for electronics, with wing and rudder power calculated separately. These are distinct study configurations; their loads must not be added together or presented as one validated bill of equipment. A reconciled, measured installed budget remains open.
+
+## Perception, computing and the avoidance trade
+
+**The present budget does not establish adequate power or computing capacity for vision-based avoidance.** A processor allowance must cover the whole pipeline: camera acquisition, detection, tracking, range/motion estimation, sensor fusion and decision latency, alongside navigation and logging. Camera count, field of view, resolution and frame rate affect both coverage and compute. Include carrier electronics, storage, conversion, thermal management and any lens heating or cleaning hardware in the installation. Measure sustained and burst demand at the battery bus under the intended workload and enclosure temperature; advertised inference throughput is not a detection guarantee.
+
+The scale matters. NVIDIA lists [7–25 W power options for Jetson Orin Nano modules](https://developer.nvidia.com/embedded/jetson-modules/). That is an example of a processor class, not a hardware selection or a complete installed demand. Lower-power accelerators and simpler vision pipelines remain alternatives. The [current candidate](results.md) has only 3.97 Wh beyond its allocated voyage demand, so an unaccounted continuous load can overturn its static feasibility.
+
+For a transparent first sensitivity, hold the published 33.87-hour passage fixed and apply the existing 1.25 duration multiplier plus six hours: **48.34 hours** of exposure. The following are hypothetical *additional battery-withdrawal powers*, not sensor specifications or a resized vessel. Their energy is power times exposure; loads specified at a regulated bus would also need battery discharge losses.
+
+| Additional continuous battery demand | Additional energy over 48.34 h |
+| --- | --- |
+| 1 W | 48.3 Wh |
+| 5 W | 241.7 Wh |
+| 10 W | 483.4 Wh |
+| 20 W | 966.8 Wh |
+
+This arithmetic identifies sensitivity, not a feasible battery choice. Resizing changes mass, sailing performance, passage time, packaging and recovery energy. The next comparison must rerun those couplings and the chronological mission. If new compute replaces the existing controller, account for the replacement once rather than adding the full old and new loads. Duty cycling is admissible only when the resulting observation gaps still meet encounter timing needs.
+
+### Coverage requires complementary observations
+
+AIS reports cooperating transmitters. It includes some recreational vessels carrying Class B equipment as well as mandated commercial traffic, but absence of an AIS report does not establish clear water. [USCG carriage requirements](https://www.navcen.uscg.gov/ais-requirements) and [IMO AIS operating guidance](https://www.navcen.uscg.gov/sites/default/files/pdf/ais/references/IMO_A1106_29_Revised_guidelines.pdf) describe that boundary.
+
+| Candidate sensing layer | Useful evidence | What the trade must challenge |
+| --- | --- | --- |
+| AIS | Reported identity, position and motion of equipped traffic | Non-transmitters, stale or incorrect reports, and the full extent of a tug and tow |
+| Visible cameras, with thermal as a separate option | Non-cooperative craft, people, buoys and visible debris | Glare, darkness, fog, spray, fouled lenses, wave occlusion, range ambiguity and low targets from a small boat |
+| Passive acoustics: microphones or hydrophones | Audible signals or machinery/propeller sounds that may cue another sensor | Quiet sailboats, paddlers and debris; wind, flow and own-boat noise; localization and ambiguous sources |
+| Active acoustic ranging/sonar | Returns from targets within the chosen sensor's beam and propagation domain | Above-water versus submerged coverage, near-surface clutter, range, update rate and installation constraints |
+| Radar | Independent ranging and tracking candidate for non-cooperative traffic | Small-target returns, sea clutter, near-field coverage, mounting, mass and power |
+
+Vision and acoustic sensing therefore cannot be credited with capturing everything. [River-watercraft vision experiments](https://publications.ri.cmu.edu/storage/publications/pub_files/2013/5/ARMS2013_VOO.pdf) illustrate both capability and the challenge of water reflections. [NOAA's acoustic work](https://www.fisheries.noaa.gov/new-england-mid-atlantic/science-data/marine-mammal-acoustics) explains how noise masks passive observations; applying passive sensing to Blue Dog would require vessel-specific evidence. Quiet hazards are a reason to investigate complementary sensing, not to assume acoustic detection.
+
+### Hydrophones and forward-looking sonar
+
+A hydrophone is an underwater receiver; a passive sonar system adds acquisition and processing, and potentially an array for bearing estimation. A single receiver detecting a sound does not by itself establish target range or a collision track. Active sonar transmits a pulse and measures returning echoes. [NOAA explains the active/passive distinction](https://oceanservice.noaa.gov/facts/sonar.html). For collision avoidance, evaluate a forward-looking geometry rather than assuming a downward-looking depth sounder observes the path ahead.
+
+For Blue Dog, compare a hydrophone or compact array as a powered-traffic cue, and forward-looking sonar as a candidate for submerged or partly submerged hazards. Neither has selected hardware or a credited detection range. Test quiet targets as well as powered craft, surface/bottom reflections, bubbles and wakes, and masking from water flow, actuators and recovery propulsion. Mounting depth, array aperture, wet connectors, drag and fouling belong in the installation trade. Underwater coverage does not establish coverage of obstacles entirely above water.
+
+Budget receiver preamplifiers, digitizers, continuous processing and data recording for passive sensing; add transmitter peak demand, ping duty and echo processing for active sonar. Passive means no transmitted acoustic pulse, not zero electrical demand. Measure useful range/bearing and update latency alongside average and peak battery-bus demand. Acoustic cues may direct cameras or strengthen a fused track, but any power-saving schedule must preserve the required detection lead time.
+
+### Weed detection and avoidance
+
+Active sonar can detect submerged vegetation: [BioSonics' aquatic-habitat echo sounder](https://www.biosonicsinc.com/products/mx-aquatic-habitat-echosounder/) explicitly supports mapping submerged aquatic vegetation. This supports investigating the sensing principle; it does not establish real-time avoidance performance on Blue Dog. A downward survey image obtained after passing over vegetation is different from a timely forward obstacle observation.
+
+Include dense rooted beds, sparse stems, floating mats and drifting strands as distinct cases. Measure detection distance, missed hazards, false alarms and estimated extent at the depths swept by the keel, rudder and recovery propulsor. Test bottom/surface clutter, turbid water, bubbles, boat motion and different approach angles. A reliable return from a dense bed cannot be generalized to every thin strand. Passive hydrophones do not provide a dependable warning for quiet vegetation; visible cameras may complement sonar for exposed mats.
+
+Avoidance must keep the entire underwater swept volume clear with uncertainty allowance, while respecting current, available sailing directions and turning response. The mission experiment should include weed patches and drifting vegetation as independent ground truth, compare timely avoidance with late/missed observations, and assess loss of propulsion or steering if fouling occurs. Recovery routes must also remain usable. Measure sonar power and processing latency, and check that the transducer mount, cables and any guard do not create new snag points. This remains a testable candidate capability, not credited weed protection.
+
+### Execute a sensing-and-compute trade
+
+The decision is which combination provides timely observations within the boat's mass, energy and operating envelope. Compare AIS plus low-power visible vision; AIS plus visible/thermal vision; and a radar-assisted combination. Evaluate passive acoustics as a cueing supplement and active sonar against a specific near-field or submerged-hazard need. An AIS-only case is a coverage baseline, not an accepted solution.
+
+1. Define encounter cases: tug/tow, fast small powerboat, sailboat, paddler, person in water, floating debris and weed/vegetation hazards, by day/night and adverse visibility. Derive required detection range from closing speed, observation and processing delay, maneuver time and uncertainty margin.
+2. Benchmark candidate sensor/processor combinations on recorded and controlled encounters. Record missed detections by target and condition, false alarms, range/bearing error, track continuity and end-to-end latency, together with average/peak bus power, temperature, mass and cost. Retain held-out cases and configuration provenance.
+3. Replace perfect traffic observations in the mission experiment with measured or explicitly hypothetical detection, error, delay and dropout models. Keep ground truth separate for collision/consequence scoring. Run paired scenarios and include degraded sensing and recovery behavior.
+4. Reconcile the equipment rollup with sizing, reoptimize credible alternatives and replay their chronological energy and encounters. Select only after both coverage and energy evidence support the declared operating scope; restrict that scope or abort when observations are inadequate.
+
+The [mission simulator](mission-simulation.md) currently receives perfectly observed scripted traffic. It exercises avoidance decisions but cannot establish sensor detection performance. This trade is **open**; the power sensitivity above does not execute or close the sensor-selection experiment. It directly addresses traffic risk R-001 and energy risk R-005 in the [maturity assessment](development-plan.md).
+
 ## Wind-sensing configurations
 
 The [wind-observation thread](requirements/requirements-autonomy.md#wind-observation) connects autonomous sailing to the observations needed for trim. I will use my battery-powered Bluetooth Portable Mini on the testbed, then move to a vessel-powered ULP Wired Mini for the challenge.

@@ -10,6 +10,8 @@ The simulator supports both the original conceptual configuration and a named si
 
 The [development spirals](simulation-spirals.md) explain how these capabilities grow together and how each experiment guides the next addition to fidelity.
 
+The [sensing-and-compute trade](energy.md#execute-a-sensing-and-compute-trade) must replace perfect traffic observations with explicit detection, latency, error and dropout behavior, coupled to installed energy demand. Current avoidance results do not qualify a camera, AIS, acoustic or radar implementation.
+
 ## Executable supervisory logic
 
 The [mission supervisor](../models/vehicle/mission-logic.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing permission, operating mode, abort latching and whether an abort alert is attempted or queued. Dependencies connect these actions to the normal-sailing, traffic-encounter and abort/recovery scenarios; the supervisor is allocated to the onboard mission manager.

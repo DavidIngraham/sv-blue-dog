@@ -56,8 +56,9 @@ def readable_report(output):
         clean = value.strip()
         if clean in {"true", "false"}:
             return " " + {"true": "Yes", "false": "No"}[clean] + " "
-        if re.fullmatch(r"-?\d+\.\d{5,}(?:[eE][+-]?\d+)?", clean):
-            return f" {float(clean):.4g} "
+        number = re.fullmatch(r"(-?\d+\.\d{5,}(?:[eE][+-]?\d+)?)(.*)", clean)
+        if number and (not number[2] or number[2].startswith(" \\[")):
+            return f" {float(number[1]):.4g}{number[2]} "
         return re.sub(r"([a-z])([A-Z])", r"\1 \2", value)
     return "\n".join("|".join(cell(c) for c in line.split("|")) if line.startswith("|") else line
                      for line in output.splitlines())
