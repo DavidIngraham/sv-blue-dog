@@ -5,6 +5,17 @@ from tools.boat_analysis.model.runtime import ROOT, native, model_files
 
 LIKELIHOOD = ('Remote', 'Unlikely', 'Possible', 'Likely', 'Demonstrated')
 CONSEQUENCE = ('Negligible', 'Minor', 'Moderate', 'Major', 'Critical')
+# Rows run Remote -> Demonstrated; columns Negligible -> Critical.
+# Ordinal display bands, not a probability calculation or acceptance threshold.
+BANDS = (
+    ('low', 'low', 'low', 'moderate', 'moderate'),
+    ('low', 'low', 'low', 'moderate', 'moderate'),
+    ('low', 'low', 'moderate', 'moderate', 'high'),
+    ('low', 'moderate', 'moderate', 'high', 'high'),
+    ('moderate', 'moderate', 'high', 'high', 'high'),
+)
+BAND_COLORS = {'low': '#b9ddb7', 'moderate': '#f5df8a', 'high': '#eda49e'}
+
 
 
 def coordinate(value, labels):
@@ -62,7 +73,7 @@ def render(directory, rows=None, *, kind="technical"):
         for x in range(5):
             for y in range(5):
                 present = assessed[x, y]
-                ax.add_patch(Rectangle((x, y), 1, 1, facecolor='#d6e7f4' if present else '#edf2f7', edgecolor='white', linewidth=2))
+                ax.add_patch(Rectangle((x, y), 1, 1, facecolor=BAND_COLORS[BANDS[y][x]], edgecolor='white', linewidth=2))
                 if present:
                     ax.text(x+.5, y+.5, fill(', '.join(present), 15), ha='center', va='center', fontsize=10, color='#133e64', fontweight='bold')
         ax.set(xlim=(0,5), ylim=(0,5), aspect='equal', xlabel='Consequence if unresolved →', ylabel='Prospect of redesign or scope restriction →')
@@ -74,6 +85,9 @@ def render(directory, rows=None, *, kind="technical"):
         side.text(0, .98, f'Assessed {kind} risks', fontsize=15, fontweight='bold', va='top', color='#133e64')
         side.text(0, .88, '\n\n'.join(f"{r['identifier']}  {r['area'].capitalize()}" for r in rows), fontsize=12, va='top')
         unknown = ', '.join(r['identifier'] for r in unassessed) or 'None'
+        for index, (band, color) in enumerate(BAND_COLORS.items()):
+            side.add_patch(Rectangle((index*.33, .37), .045, .025, facecolor=color, transform=side.transAxes))
+            side.text(index*.33+.06, .383, band.capitalize(), fontsize=10, va='center')
         side.text(0, .32, fill('Unassessed: '+unknown, 39), fontsize=10, va='top', color='#44566a')
         side.text(0, .22, 'Qualitative engineering judgments.\nDemonstrated = a current limitation\nalready restricts the conclusion.\nNot probabilities of accidents.', fontsize=10, va='top', color='#44566a')
         side.text(0, .07, f'{sum(len(v) for v in assessed.values())} assessed · {len(rows)} total\nNo residual-risk acceptance implied.', fontsize=10, va='top', color='#44566a')
@@ -95,7 +109,7 @@ def render_all(directory, rows=None):
     from .build import revision, REPOSITORY
     (directory / 'risks.json').write_text(json.dumps(dict(
         version=1, revision=revision(), repository=REPOSITORY,
-        likelihood=list(LIKELIHOOD), consequence=list(CONSEQUENCE), risks=rows
+        likelihood=list(LIKELIHOOD), consequence=list(CONSEQUENCE), bands=BANDS, risks=rows
     ), indent=2)+'\n', encoding='utf-8')
     return paths
 
