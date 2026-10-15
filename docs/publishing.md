@@ -80,9 +80,11 @@ checkout or committed copy of the types.
 uv run python -m tools.boat_analysis.cli prepare
 ```
 
-`design_boundary.py` packs records for optimizer vectors using model field names
-and rejects missing or extra fields. The generated execution boundary performs
-its own named packing, shape validation and model-declared physical checks.
+Generated records provide `as_array()` and `from_array()` at numerical boundaries;
+vessel and wind calculations use named fields. The generated execution boundary
+performs named packing, shape validation and model-declared physical checks.
+The sizing model declares equilibrium and constraint output groups explicitly,
+so solver roles do not depend on positions in the calculation's output vector.
 
 These snapshots cover design variables, physical assumptions, operating state,
 aerodynamic coefficients, hydrostatic inputs, appendage loads, mass properties

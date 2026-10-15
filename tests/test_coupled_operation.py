@@ -202,11 +202,16 @@ def test_design_cache_preserves_state_dependent_results(native_case):
 def test_finite_search_keeps_peak_but_removes_daily_energy_constraints(native_case):
     from tools.boat_analysis.optimization.search import Problem
     p=Problem(4,route_profile='all-season');r=p.evaluate(p.initial())
-    from tools.boat_analysis.optimization.operating import operating_margin_names
-    names=operating_margin_names(p.model.operating_contract['outputNames'])[:12]
+    names=p.model.operating_contract['staticMarginOutputs']+[p.model.operating_contract['peakMarginOutput']]
     assert 'peakMargin' in names
     assert 'cycleMargin' not in names and 'reserveMarginScaled' not in names
     assert not any('cycleMargin' in n or 'reserveMarginScaled' in n for n in p.constraint_names)
+    operation=p.model.operation
+    p.model.operation=lambda **inputs:dict(reversed(list(operation(**inputs).items())))
+    p.last=None
+    reordered=p.evaluate(p.initial())
+    np.testing.assert_allclose(reordered['eq'],r['eq'],atol=1e-12)
+    np.testing.assert_allclose(reordered['ineq'],r['ineq'],atol=1e-12)
     assert p.context['routeParameters'][4] == 0
     selected=r['ineq'][:8*len(names)].reshape(8,len(names))
     raw=np.array([[row[n] for n in names] for row in r['rows']])

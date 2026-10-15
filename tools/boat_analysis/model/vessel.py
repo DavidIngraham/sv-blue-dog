@@ -7,7 +7,6 @@ from scipy.optimize import brentq
 from tools.boat_analysis.geometry.vessel import build_geometry,ballast_geometry
 from tools.boat_analysis.geometry.hydro import DisplacementBody, pose
 from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
-from tools.boat_analysis.model.design_boundary import design_vector, pack, unpack
 from tools.boat_analysis.generated import Design, Parameters, OperatingState, AeroCoefficients, HydroState
 from tools.boat_analysis.generated import mass, operation
 from tools.boat_analysis.evidence.records import validate
@@ -44,45 +43,44 @@ class CoupledModel:
         self.mass=mass;self.operation=operation;self.hydro=MeshHydrostatics();self.polar=WingPolar()
         self.operating_contract=json.loads((ROOT/'.tools/coupled-operation-contract.json').read_text())
         validate(self.operating_contract['sourceHashes'])
-        self.c=json.loads((ROOT/'.tools/coupled-contract.json').read_text());self.parameters=pack(Parameters.from_mapping(dict(zip(self.c['parameterNames'],self.c['parameterValues'],strict=True))),self.c['parameterNames']);self.last=None;self.hull_reference=None;self.section_cache=None
-    def design_record(self, values: ArrayLike) -> Design:
-        return unpack(Design, values, self.c['designNames'])
+        self.c=json.loads((ROOT/'.tools/coupled-contract.json').read_text());self.parameters=np.array(self.c['parameterValues'],dtype=float);self.last=None;self.hull_reference=None;self.section_cache=None
+    def design_record(self, values: Design | ArrayLike) -> Design:
+        return values if isinstance(values,Design) else Design.from_array(values)
 
     @property
     def assumptions(self) -> Parameters:
-        return unpack(Parameters, self.parameters, self.c['parameterNames'])
+        return Parameters.from_array(self.parameters)
 
     def candidate(self,x: Design | ArrayLike,resolution=4):
-        x=design_vector(x,self.c)
-        if self.last is not None and np.array_equal(x,self.last[0]) and resolution==self.last[1]:return self.last[2]
-        d=dict(zip(self.c['designNames'],x));g,v,outlines=build_geometry(d,resolution)
-        bulb,center=ballast_geometry(d['ballast_kg']/self.parameters[33],-d['bottom_depth_m']-d['keel_span_m'],resolution)
+        d=self.design_record(x);density=self.assumptions.ballastDensity;key=(d,resolution,density)
+        if self.last is not None and key==self.last[0]:return self.last[1]
+        g,v,outlines=build_geometry(d,resolution)
+        bulb,center=ballast_geometry(d.ballast_kg/density,-d.bottom_depth_m-d.keel_span_m,resolution)
         g['ballast']=bulb
         result=(d,g,v,center,skin_triangles(g['hull']),outlines)
-        self.last=(np.array(x,copy=True),resolution,result)
+        self.last=(key,result)
         return result
     def configuration(self,x: Design | ArrayLike,trim: float,resolution=4):
-        x=design_vector(x,self.c)
         d,g,v,center,hull_skin,outlines=self.candidate(x,resolution)
         rotation=np.array([[np.cos(trim),-np.sin(trim),0],[np.sin(trim),np.cos(trim),0],[0,0,1]])
-        mast=np.array([d['mast_x_fraction']*d['length_m'],0,d['deck_height_m']])
+        mast=np.array([d.mast_x_fraction*d.length_m,0,d.deck_height_m])
         def transform(points):return ((np.asarray(points)-mast)*[1,-1,1])@rotation.T+mast
         vectors={name:a.copy() for name,a in v.items()}
         vectors['wing'][1:4]=transform(v['wing'][1:4]);vectors['wing'][5:8]=transform(v['wing'][5:8])
-        m=self.mass(design=x,geometry=np.r_[np.concatenate(list(vectors.values())),center],parameters=self.parameters).to_mapping()
+        m=self.mass(design=d,geometry=np.r_[np.concatenate(list(vectors.values())),center],parameters=self.assumptions).to_mapping()
         bodies=[DisplacementBody(name,transform(body) if name=='wing' else body) for name,body in g.items()]
         thicknesses=[m[name+'LaminateThickness'] for name in outlines]
-        key=(tuple(x),resolution,tuple(thicknesses))
+        key=(d,resolution,tuple(thicknesses))
         if self.section_cache is None or self.section_cache[0]!=key:
             sections=np.concatenate([finite_skin_properties(outlines[name],thickness) for name,thickness in zip(outlines,thicknesses)])
             self.section_cache=(key,sections)
         return bodies,m,np.r_[np.concatenate(list(vectors.values())),center,deck_area(g['hull']),self.section_cache[1]],hull_skin
     @execution_session()
     def at_state(self,x: Design | ArrayLike,state: OperatingState | ArrayLike,resolution=4,pitch_equilibrium=True):
-        x=design_vector(x,self.c)
         d,g,v,center,hull_skin,outlines=self.candidate(x,resolution)
+        p=self.assumptions
         if not isinstance(state, OperatingState):
-            state=unpack(OperatingState,state,self.operating_contract['MarineDesign::OperatingStateFields'])
+            state=OperatingState.from_array(state)
         wind,up,foul,speed,heading,alpha,beta,delta,heel=(
             state.windSpeed_m_s,state.windward,state.foulingMultiplier,state.speed_m_s,
             state.windFrom_deg,state.incidence_deg,state.leeway_deg,state.rudder_deg,state.heel_deg)
@@ -96,24 +94,23 @@ class CoupledModel:
         cg=np.array([m['cgX'],m['cgY'],m['cgZ']]);mass=m['totalMass']
         cache={}
         def hydro_at(pitch):
-            if pitch not in cache:cache[pitch]=equilibrium(self.hydro,bodies,cg,mass,heel,pitch,density=self.parameters[31])
+            if pitch not in cache:cache[pitch]=equilibrium(self.hydro,bodies,cg,mass,heel,pitch,density=p.waterDensity)
             return cache[pitch]
         pitch=0.
         if pitch_equilibrium:
             pitch=brentq(lambda a:hydro_at(a)['pitch_torque_Nm'],-20,20,xtol=1e-6)
         h=hydro_at(pitch)
         wetted=wet_area(pose(hull_skin,heel,pitch),h['waterline_m'])
-        aero=self.polar.evaluate(d['sail_AR'],d['camber_scale'],alpha,reverse_flow=reverse_flow)
-        key=(tuple(x),resolution,float(self.parameters[31]),mass)
+        aero=self.polar.evaluate(d.sail_AR,d.camber_scale,alpha,reverse_flow=reverse_flow)
+        key=(d,resolution,p.waterDensity,p.ballastDensity,mass)
         if self.hull_reference is None or self.hull_reference[0]!=key:
-            upright=equilibrium(self.hydro,bodies,cg,mass,0.,0.,density=self.parameters[31])
+            upright=equilibrium(self.hydro,bodies,cg,mass,0.,0.,density=p.waterDensity)
             hull=next(b for b in bodies if b.name=='hull')
             features=upright_hull_features(hull.tetrahedra,upright['waterline_m'])
             self.hull_reference=(key,features)
         features=self.hull_reference[1]
-        aero=unpack(AeroCoefficients,aero,self.operating_contract['MarineDesign::AeroCoefficientsFields'])
-        hydro=unpack(HydroState,np.r_[h['waterline_m'],h['righting_Nm'],wetted,features],
-                     self.operating_contract['MarineDesign::HydroStateFields'])
-        result=dict(self.operation(design=self.design_record(x),parameters=self.assumptions,state=state,aero=aero,mass=m,hydro=hydro))
+        aero=AeroCoefficients.from_array(aero)
+        hydro=HydroState.from_array(np.r_[h['waterline_m'],h['righting_Nm'],wetted,features])
+        result=dict(self.operation(design=d,parameters=p,state=state,aero=aero,mass=m,hydro=hydro))
         result.update({'pitch_deg':pitch,'waterline_m':h['waterline_m'],'wetted_m2':wetted,'mast_trim_deg':float(np.rad2deg(trim)),'mass_kg':mass,'mass_residual_kg':h['mass_residual_kg'],'pitch_residual_Nm':h['pitch_torque_Nm']})
         return result

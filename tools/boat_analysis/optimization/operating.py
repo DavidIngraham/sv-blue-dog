@@ -9,13 +9,13 @@ from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest
 
 
-def operating_margin_names(names, require_energy=True):
+def operating_margin_names(contract, require_energy=True):
     """Static screens; finite storage/reserve feasibility belongs to the voyage.
 
     The instantaneous peak capability remains mandatory in normal solves.
     Daily cycle balance and a fixed overnight interval are not Gorge criteria.
     """
-    return names[4:15] + (['peakMargin'] if require_energy else []) + names[47:]
+    return contract['staticMarginOutputs'] + ([contract['peakMarginOutput']] if require_energy else []) + contract['resistanceMarginOutputs']
 
 
 def solve_state(model,design,wind,up,budget=70,tack=1,resolution=4,initial_state=None,require_energy=True,pitch_equilibrium=True):
@@ -24,7 +24,7 @@ def solve_state(model,design,wind,up,budget=70,tack=1,resolution=4,initial_state
     hi=np.array(contract['stateUpper'],dtype=float)
     if not up: lo[1],hi[1]=contract['leewardHeading']
     width=hi-lo;last=None;calls=0;t=time.time()
-    names=model.operating_contract['outputNames'];eq=names[:4];margins=operating_margin_names(names,require_energy)
+    eq=contract['equilibriumOutputs'];margins=operating_margin_names(contract,require_energy)
     def physical_state(z):
         operating=lo+z*width
         operating[1:]*=tack

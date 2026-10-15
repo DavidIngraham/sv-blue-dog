@@ -45,7 +45,7 @@ def run(destination,budget=8):
     model.operation=SurfaceOperation(model.operating_contract,model.polar,surface['wind'])
     for row in saved['cases']:
         current=model.at_state(design,row['state'],resolution=12,pitch_equilibrium=False)
-        if max(abs(current[n]) for n in model.operating_contract['outputNames'][:4])>1e-4:
+        if max(abs(current[n]) for n in model.operating_contract['equilibriumOutputs'])>1e-4:
             raise ValueError('Archived calm state no longer equilibrates')
         baseline.append(dict(row,outputs=current))
     for direction in p['directions']:
@@ -62,7 +62,7 @@ def run(destination,budget=8):
                     fine=model.at_state(design,solved['state'],resolution=12,pitch_equilibrium=False)
                     provider.phases//=2
                     error=max(abs(fine[n]-solved['outputs'][n])/max(abs(fine[n]),1.) for n in ('drive','resistance','heeling','averagePower'))
-                    refined_equilibrium=max(abs(fine[n]) for n in model.operating_contract['outputNames'][:4])
+                    refined_equilibrium=max(abs(fine[n]) for n in model.operating_contract['equilibriumOutputs'])
                     solved.update(waveHeightM=height,wavePeriodS=period,waveWindAngleDeg=direction,
                         phaseRelativeError=float(error),refinedBalanceResidual=float(refined_equilibrium),
                         numericalSupport=bool(solved['screenFeasible'] and error<=p['settings'][9] and refined_equilibrium<=1e-3 and fine['waveCoverageMargin']>=0 and fine['profileFailures']==0 and fine['incidenceFailures']==0))

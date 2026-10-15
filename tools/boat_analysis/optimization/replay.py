@@ -58,7 +58,7 @@ def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
         restoring=[p['righting_Nm']*np.sign(p['heel_deg']) for p in points if 'failure' not in p and 0<abs(p['heel_deg'])<180]
         recovery.append({'trim_deg':trim,'points':points,'failedEquilibria':sum('failure' in p for p in points),'minimumInteriorRestoring_Nm':min(restoring) if restoring else None})
     numerical=all(r['equilibrated'] for r in rows)
-    operating=min(row['outputs'][n] for row in rows for n in operating_margin_names(model.operating_contract['outputNames']))
+    operating=min(row['outputs'][n] for row in rows for n in operating_margin_names(model.operating_contract))
     result={'scenario':name,'parameters':dict(zip(model.c['parameterNames'],model.parameters)),'cases':rows,'structure':margins,'concept':concept,'route':trip.tolist(),'westerlyRoute':west.tolist(),'recovery':recovery,'numericallyBalanced':numerical,'minimumOperatingMargin':operating,'sampledStaticScreensPass':bool(numerical and operating>=-1e-4 and min(margins.values())>=-1e-4 and min(trip[:3])>=-1e-4 and min(west[:3])>=-1e-4 and all(r['failedEquilibria']==0 and r['minimumInteriorRestoring_Nm'] is not None and r['minimumInteriorRestoring_Nm']>0 for r in recovery)),'qualified':False}
     # Preserve the original strict two-direction field; expose the selected
     # profile separately so old evidence consumers cannot mistake its meaning.

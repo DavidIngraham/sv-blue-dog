@@ -8,6 +8,13 @@ package BlueDogCoupledOperation {
      * Hydrostatic heave/pitch and mast-trim geometry are external geometry solves.
      * No wave-motion, dynamic planing, separated-flow or dynamic recovery claim. */
     analysis Inputs {
+        doc /* Named numerical roles for the finite-voyage search. Residuals are
+         * normalized by the sailing calculations; nonnegative margins pass.
+         * Daily energy balance is diagnostic, not a Gorge constraint. */
+        out attribute equilibriumOutputs : String [4] ordered nonunique = ("surgeResidual", "swayResidual", "yawResidual", "rollResidual");
+        out attribute staticMarginOutputs : String [11] ordered nonunique = ("wingLiftMargin", "keelLiftMargin", "rudderLiftMargin", "keelAngleMargin", "rudderAngleMargin", "wingDriveMargin", "rudderDriveMargin", "froudeMargin", "wingReMargin", "keelReMargin", "rudderReMargin");
+        out attribute peakMarginOutput : String = "peakMargin";
+        out attribute resistanceMarginOutputs : String [19] ordered nonunique = ("delftResistanceMargin", "delftDomain4", "delftDomain5", "delftDomain6", "delftDomain7", "delftDomain8", "delftDomain9", "delftDomain10", "delftDomain11", "delftDomain12", "delftDomain13", "delftDomain14", "delftDomain15", "delftDomain16", "delftDomain17", "delftDomain18", "delftDomain19", "delftDomain20", "delftDomain21");
         out attribute maximumOverallLengthM : Real = GorgeChallenge::maximumOverallLength / (1 [SI::m]);
         out attribute challengeRequiresEastProgress : Boolean = BlueDogWeather::policy.challengeRequiresEastProgress;
         out attribute allSeasonRequiresEastProgress : Boolean = BlueDogWeather::policy.allSeasonRequiresEastProgress;

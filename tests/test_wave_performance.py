@@ -120,9 +120,8 @@ def test_small_wave_limit_recovers_steady_balance_and_power(typed):
         def samples(self,a,period,speed,direction,count):
             for i in range(count):yield np.zeros(6),-2*np.pi*i/count,(2*np.pi/period)**2/9.80665,2*np.pi/period
     if typed:
-        from tools.boat_analysis.model.design_boundary import unpack
         from tools.boat_analysis.generated import OperatingState,AeroCoefficients,MassProperties,HydroState
-        state,aero,mass,hydro=(unpack(t,v,model.operating_contract[t.sysml_id+'Fields'])
+        state,aero,mass,hydro=(t.from_array(v)
             for t,v in zip((OperatingState,AeroCoefficients,MassProperties,HydroState),(state,aero,mass,hydro),strict=True))
         design=model.design_record(design)
     steady=SurfaceOperation(model.operating_contract,model.polar,[10,.0002,.05,8]).evaluate(design,model.parameters,state,aero,mass,hydro)

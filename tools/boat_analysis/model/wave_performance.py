@@ -68,7 +68,7 @@ class WaveAveragedOperation:
             kz=hydro[0]+d[2]+d[11]/2;rz=hydro[0]+d[2]+d[13]/2
             old_roll=((out['lk']*cb+out['dk']*sb)*kz+(out['lr']*cb+out['dr']*sb)*rz)*np.cos(heel)
             new_roll=sum((load[0]*np.cos(angle)+load[1]*np.sin(angle))*(-pos[2]) for load,angle,pos,v in forces)
-            corrected=self.balance(x=[*[out[n] for n in self.contract['outputNames'][:4]],out['dk']+out['dr'],dk+dr,out['lk']+out['lr'],lk+lr,old_yaw,new_yaw,old_roll,new_roll])
+            corrected=self.balance(x=[*[out[n] for n in self.contract['equilibriumOutputs']],out['dk']+out['dr'],dk+dr,out['lk']+out['lr'],lk+lr,old_yaw,new_yaw,old_roll,new_roll])
             out.update(corrected)
             out['resistance']+=dk+dr-out['dk']-out['dr'];out['heeling']+=new_roll-old_roll
             out.update(lk=lk,lr=lr,dk=dk,dr=dr,keelResultant=float(np.hypot(lk,dk)),rudderResultant=float(np.hypot(lr,dr)))

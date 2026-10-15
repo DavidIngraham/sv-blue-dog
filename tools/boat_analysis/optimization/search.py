@@ -16,7 +16,6 @@ from tools.boat_analysis.generated import structure, concept, Passage, route
 from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
 from tools.boat_analysis.model.runtime import ROOT
 from tools.boat_analysis.evidence.records import digest,validate
-from tools.boat_analysis.optimization.operating import operating_margin_names
 
 class Problem:
     def __init__(self,resolution=12,route_profile='challenge',overall_length_limit_m=None):
@@ -83,15 +82,15 @@ class Problem:
         from tools.boat_analysis.geometry.vessel import operating_envelope
         envelope = operating_envelope(dict(zip(k.c['designNames'], x)), k.parameters[33], self.resolution)
         margins['overallLengthMargin'] = (self.overall_length_limit_m-envelope['sweptLengthM'])/self.overall_length_limit_m
-        names=k.operating_contract['outputNames'];eq=np.array([[r[n] for n in names[:4]] for r in rows]).ravel()
-        static_names=operating_margin_names(names)[:12]
+        eq=np.array([[r[n] for n in self.context['equilibriumOutputs']] for r in rows]).ravel()
+        static_names=self.context['staticMarginOutputs']+[self.context['peakMarginOutput']]
         operating=np.array([[r[n] for n in static_names] for r in rows])
         ineq=operating.ravel()
         route_reserve=np.array([1.,1.,0.])*self.progress_reserve_m_s/self.context['routeParameters'][5]
         route_screens=[('westerly',west)]+([('easterly',route)] if self.require_east else [])
-        ineq=np.r_[ineq,(np.array([[r[n] for n in names[47:]] for r in rows])-np.array(k.operating_contract['resistanceDomainReserve'])).ravel(),list(margins.values()),np.concatenate([r[:3]-route_reserve for _,r in route_screens]),righting]
+        ineq=np.r_[ineq,(np.array([[r[n] for n in self.context['resistanceMarginOutputs']] for r in rows])-np.array(k.operating_contract['resistanceDomainReserve'])).ravel(),list(margins.values()),np.concatenate([r[:3]-route_reserve for _,r in route_screens]),righting]
         self.constraint_names=([f'case {i}: {n}' for i in range(8) for n in static_names]
-            +[f'case {i}: {n} (search reserve)' for i in range(8) for n in names[47:]]
+            +[f'case {i}: {n} (search reserve)' for i in range(8) for n in self.context['resistanceMarginOutputs']]
             +list(margins)+[f'{direction} {n}' for direction,_ in route_screens for n in ['downstream progress','upstream progress','duration']]
             +[f'righting trim {trim:g}, heel {heel:g}' for trim in self.context['coarseTrims'] for heel in self.context['coarseHeels']])
         result={'eq':eq,'ineq':ineq,'design':x,'states':states,'rows':rows,'structure':margins,'route':route,'westerlyRoute':west,'righting':righting,'mass':reference_mass,'concept':concept,'envelope':envelope}

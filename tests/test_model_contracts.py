@@ -46,12 +46,11 @@ def mass_case():
 
 
 def test_mass_scalar_batch_defaults_and_typed_records(mass_case):
-    from tools.boat_analysis.model.design_boundary import unpack
     from tools.boat_analysis.generated import Design, Parameters
     k,d,g,p=mass_case
     from dataclasses import fields
-    typed_d=unpack(Design,d,[f.name for f in fields(Design)])
-    typed_p=unpack(Parameters,p,[f.name for f in fields(Parameters)])
+    typed_d=Design.from_array(d)
+    typed_p=Parameters.from_array(p)
     expected=k(design=typed_d,geometry=g,parameters=typed_p)
     assert k(design=d,geometry=g)==expected
     batch=k.batch(shared={'design':typed_d,'parameters':typed_p},cases={'geometry':np.stack([g,g])})

@@ -3,7 +3,6 @@ from dataclasses import replace
 import sys
 import numpy as np
 import pytest
-from tools.boat_analysis.model.design_boundary import pack, unpack
 from tools.boat_analysis.generated import (
     Design, Parameters, OperatingState, AeroCoefficients, HydroState, MassProperties)
 
@@ -22,7 +21,7 @@ def case():
     import json
     from tools.boat_analysis.model.runtime import ROOT
     context=json.loads((ROOT/'.tools/coupled-operation-contract.json').read_text())
-    typed={n:unpack(t,raw[n],context[t.sysml_id+'Fields']) for n,t in types.items()}
+    typed={n:t.from_array(raw[n]) for n,t in types.items()}
     return kernel,raw,typed,context
 
 
@@ -62,9 +61,9 @@ def test_record_orders_match_physics_contract(case):
     kernel,raw,typed,context=case
     from tools.boat_analysis.generated import MassResult
     from dataclasses import fields
-    assert context['MarineDesign::MassPropertiesFields']==[f.name for f in fields(MassResult)]
+    assert [f.name for f in fields(MassProperties)]==[f.name for f in fields(MassResult)]
     for name,record in typed.items():
-        np.testing.assert_array_equal(pack(record,context[record.sysml_id+'Fields']),raw[name])
+        np.testing.assert_array_equal(record.as_array(),raw[name])
     assert typed['state'].windSpeed_m_s==raw['state'][0]
     assert typed['hydro'].waterplaneArea_m2==raw['hydro'][7]
 
@@ -82,7 +81,7 @@ def test_coupled_state_and_mass_record_api(case):
     _,_,typed,_=case
     design=model.design_record(model.c['referenceDesign'])
     state=replace(typed['state'],windSpeed_m_s=8.,windFrom_deg=50.,incidence_deg=4.)
-    vector=pack(state,model.operating_contract[state.sysml_id+'Fields'])
+    vector=state.as_array()
     assert model.at_state(design,state,pitch_equilibrium=False)==model.at_state(design,vector,pitch_equilibrium=False)
     _,mass,geometry,_=model.configuration(design,0.)
     assert model.mass(design=design,geometry=geometry[:51]).to_mapping()==mass
