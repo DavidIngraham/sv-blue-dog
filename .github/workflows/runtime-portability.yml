@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff
         with:
-          version: '0.9.5'
+          version: '0.12.10'
       - name: Install MinGW GCC
         id: mingw
         if: runner.os == 'Windows' && matrix.compiler == 'gcc'
@@ -88,5 +88,6 @@ jobs:
         run: >-
           ${{ matrix.python }} -c "import os, subprocess, sys;
           from tools.boat_analysis.model.install import binary_path;
+          subprocess.run(['uv', 'pip', 'install', str(binary_path().parent / 'source/client/python')], check=True);
           env = dict(os.environ, OPENSYSML_BINARY=str(binary_path()));
           subprocess.run([sys.executable, '-m', 'pytest', 'packages/sysml-python/tests/test_project.py', '-q'], env=env, check=True)"
