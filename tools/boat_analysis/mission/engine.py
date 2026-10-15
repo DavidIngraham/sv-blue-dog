@@ -44,6 +44,7 @@ class Result:
     outside_performance_coverage_seconds: float = 0.
     surface_summary: dict = field(default_factory=dict)
     recovery_summary: dict = field(default_factory=dict)
+    logic_trace: list = field(default_factory=list)
     model_scope: str = 'Conceptual polar and point-mass guidance; wave dynamics and full navigation-rule compliance not verified'
 
 
@@ -68,6 +69,8 @@ def direction(route, distance):
 @execution_session()
 def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), seed=0,
              stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None):
+    from .logic import MissionLogic
+    logic = MissionLogic()
     dt, hours, forecast, lookahead, maneuver_time, _ = inputs['time']
     control_period = inputs['controlPeriodSeconds']
     if not 0 <= maneuver_time <= control_period or control_period <= 0:
@@ -123,6 +126,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     crossing_log, history, event_log = [], [], []
     recovery_summary = {'outcome':'not_exercised', 'modelAvailable':recovery_planner is not None}
     safety_abort = False
+    conflict = False
     reserve_protected = True
     traffic_seen = set()
     event_list = sorted(events, key=lambda e:e.seconds)
@@ -143,6 +147,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             history.append(terminal)
         observed=Result(verdict,cause,seconds,crossing_log,history,event_log,minimum,distance)
         observed.recovery_summary = recovery_summary
+        observed.logic_trace = list(logic.trace)
         observed.outside_performance_coverage_seconds=outside_coverage
         if performance:observed.model_scope=inputs['performance']['scope']
         if wave_effects is not None:
@@ -156,9 +161,12 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     def abort(cause, capsized=False, recover=True):
         nonlocal safety_abort, recovery_summary, seconds, stored, position, minimum, distance
         from .recovery import execute_recovery
-        safety_abort = True
+        decision = logic.cycle(seconds, abort_requested=True,
+                               communications_available=seconds >= comms_until)
+        safety_abort = decision['abortLatchedNext']
         event_log.append({'seconds':seconds, 'kind':'safety_abort', 'cause':cause})
-        event_log.append({'seconds':seconds, 'kind':'abort_alert_attempt' if seconds >= comms_until else 'abort_alert_queued'})
+        if decision['alert'] != 'none':
+            event_log.append({'seconds':seconds, 'kind':'abort_alert_attempt' if decision['alert'] == 'attempt' else 'abort_alert_queued'})
         if not recover:
             recovery_summary = {'outcome':'awaiting_operator_retrieval_or_relocation'}
             return result('disqualified', cause)
@@ -186,24 +194,21 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         while event_index < len(event_list) and event_list[event_index].seconds <= seconds:
             event = event_list[event_index]; event_index += 1
             event_log.append({'seconds':seconds,'kind':event.kind})
-            if event.kind in ('operator_intervention','manual_weather_update','motor_use'):
+            decision = logic.event(event.kind, seconds)
+            directive = decision['directive']
+            if directive == 'disqualify':
                 return result('disqualified',event.kind)
-            if event.kind == 'communications_loss':
+            if directive == 'communications_outage':
                 comms_until = max(comms_until, seconds+event.duration)
-            elif event.kind == 'weather_service_loss':
-                # Loss of access alone does not invalidate the held forecast.
-                # Applicability is a separate scenario/provider decision below.
+            elif directive == 'retain_forecast':
                 pass
-            elif event.kind == 'forecast_invalidated':
-                return abort('forecast_no_longer_applicable')
-            elif event.kind == 'wind_sensor_loss':
+            elif directive == 'wind_outage':
                 sensor_until = max(sensor_until, seconds+event.duration)
-            elif event.kind in ('safety_capability_loss', 'capsize', 'refuge_entry', 'grounding', 'anchoring', 'shore_attachment'):
-                return abort(event.kind, capsized=event.kind == 'capsize', recover=event.kind in ('safety_capability_loss', 'capsize'))
-            elif event.kind == 'terminal_failure':
+            elif directive == 'abort':
+                cause = 'forecast_no_longer_applicable' if event.kind == 'forecast_invalidated' else event.kind
+                return abort(cause, capsized=decision['capsized'], recover=decision['recoveryPermitted'])
+            elif directive == 'stop':
                 return result('incomplete','terminal_failure')
-            elif event.kind != 'communications_loss':
-                raise ValueError('Unknown mission event: '+event.kind)
         state = weather.at(seconds)
         nearest = route.project(Point(position))
         current = direction(route, nearest)*state.current_mps
@@ -249,7 +254,10 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             wind_angle = 90-state.wind_from_deg
             relative = (headings-wind_angle+180)%360-180
             speeds = sailing_speeds(state.wind_mps,relative)
-            if seconds < sensor_until:
+            supervisor = logic.cycle(seconds, wind_valid=seconds >= sensor_until,
+                                     traffic_conflict=conflict,
+                                     communications_available=seconds >= comms_until)
+            if not supervisor['sailingPermitted']:
                 speeds[:] = 0
             velocities = np.column_stack((np.cos(radians),np.sin(radians)))*speeds[:,None]+current
             # Explicit depowered choice still drifts with current.
@@ -270,13 +278,17 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             projected = position+velocities*forecast
             preview = contains_xy(water,projected[:,0],projected[:,1])
             cost = np.linalg.norm(endpoints-target,axis=1)+turn*10+(~preview)*lookahead
-            mode = 'sailing' if seconds >= sensor_until else 'degraded_drift'
+            conflict = False
             for actor_index,actor in enumerate(traffic):
                 safe, penalty = actor.assess(position,endpoints,seconds,control_period,forecast,inputs['dimensions'])
+                conflict |= bool(not safe.all() or np.any(penalty))
                 if actor_index not in traffic_seen and (not safe.all() or np.any(penalty)):
                     traffic_seen.add(actor_index)
                     event_log.append({'seconds':seconds,'kind':'traffic_conflict_predicted','actor':actor.name,'actor_index':actor_index})
                 permitted &= safe;cost += penalty
+            supervisor = logic.cycle(seconds, wind_valid=seconds >= sensor_until,
+                                     traffic_conflict=conflict,
+                                     communications_available=seconds >= comms_until)
             cost[~permitted] = math.inf
             choice = int(np.argmin(cost))
             if not math.isfinite(cost[choice]):
@@ -307,7 +319,9 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         velocity = current.copy()
         if turn_remaining > 0:
             mode = 'maneuvering_drift'
-        elif seconds < sensor_until:
+        elif not logic.cycle(seconds, wind_valid=seconds >= sensor_until,
+                             traffic_conflict=conflict,
+                             communications_available=seconds >= comms_until)['sailingPermitted']:
             mode = 'degraded_drift'
         elif heading is None:
             mode = 'depowered_drift'
