@@ -63,8 +63,8 @@ Feasibility restoration precedes the local size search. Derivatives respect inte
 Use the package-free uv environment from the repository root. Native compiled execution uses Linux/GCC, including WSL. Keep Windows and Linux virtual environments separate.
 
 ```sh
+python tools/boat_analysis/model/install.py
 uv sync --locked
-uv run python -m tools.boat_analysis.cli install
 uv run python -m tools.boat_analysis.cli validate
 uv run python -m tools.boat_analysis.cli prepare
 uv run python -m tools.boat_analysis.cli continue-sizing --target 1.2

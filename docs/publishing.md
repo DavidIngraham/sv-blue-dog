@@ -42,8 +42,8 @@ Use an empty `sysml-report Package::Document` fence to include a native document
 From the repository root:
 
 ```sh
+python tools/boat_analysis/model/install.py
 uv sync --locked
-uv run python -m tools.boat_analysis.cli install
 uv run python -m tools.publishing.build
 ```
 
@@ -71,17 +71,25 @@ The introduction embeds a `design-explorer` fence. During the normal site build,
 
 `MarineDesign` definitions generate frozen records in the ignored
 `tools/boat_analysis/generated` package, alongside the callable calculation APIs.
-The export declarations in `pyproject.toml` select the model definitions; the same
-pinned compiler supplies type facts and executable calculations. Preparation and
-pytest run in the publishing workflow. There is no separate record-generator
-checkout or committed copy of the types.
+The export declarations in `pyproject.toml` select the model definitions.
+OpenSysML's standalone dataclass generator supplies the input records; the
+matching compiler supplies executable calculations. The installer obtains both
+from the [pinned candidate in our fork](https://github.com/DavidIngraham/OpenSysML/tree/e002f1668834f9409ee62200c8b89c0f5bf5e309).
+This feature is being tested on Blue Dog's working upstream base and is not yet
+an upstream release. Preparation and pytest run in the publishing workflow;
+generated types are rebuildable artifacts.
 
 ```sh
 uv run python -m tools.boat_analysis.cli prepare
 ```
 
-Generated records provide `as_array()` and `from_array()` at numerical boundaries;
-vessel and wind calculations use named fields. The generated execution boundary
+Input records expose named fields and `to_mapping()`. The helpers
+`as_array(record)` and `from_array(RecordType, values)` from
+`sysml_python.records` convert at NumPy boundaries; vessel and wind calculations
+use named fields. Snapshot constructors require explicit values. Model-declared
+literal defaults still apply to mapping inputs at the calculation boundary.
+Calculation-result wrappers retain their mapping and array methods.
+The generated execution boundary
 performs named packing, shape validation and model-declared physical checks.
 The sizing model declares equilibrium and constraint output groups explicitly,
 so solver roles do not depend on positions in the calculation's output vector.
@@ -90,5 +98,12 @@ These snapshots cover design variables, physical assumptions, operating state,
 aerodynamic coefficients, hydrostatic inputs, appendage loads, mass properties
 and passage conditions. Geometry arrays and route-case matrices remain numerical
 interfaces. Scalar and batch callers can supply named records; packing follows
-the model declaration order, independently of Python dictionary or dataclass order. Physical constraints remain native calculations; dataclass construction
+the model declaration order, which the upstream generator now preserves in its
+dataclass fields. Mapping inputs are packed by model field name rather than
+dictionary insertion order. Physical constraints remain native calculations; dataclass construction
 checks data representation, not vessel feasibility.
+
+The migration passed 426 Blue Dog tests and nine before/after coupled-solver
+comparisons within `1e-12`, covering uniform and sheared wind, heel and reversed
+flow. These are software-regression checks, not new vessel qualification evidence.
+The compiled batch executor remains in place for repeated optimization calls.

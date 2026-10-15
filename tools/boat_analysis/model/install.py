@@ -34,7 +34,7 @@ def main(source_checkout=None):
                         "--format=zip", f"--prefix=OpenSysML-{REVISION}/",
                         "--output", str(archive_path), REVISION], check=True)
     if not archive_path.exists():
-        with urllib.request.urlopen(f"https://codeload.github.com/Open-MBEE/OpenSysML/zip/{REVISION}", timeout=120) as response:
+        with urllib.request.urlopen(f"https://codeload.github.com/DavidIngraham/OpenSysML/zip/{REVISION}", timeout=120) as response:
             archive_path.write_bytes(response.read())
     if hashlib.sha256(archive_path.read_bytes()).hexdigest() != SOURCE_SHA256:
         raise SystemExit("OpenSysML source archive checksum mismatch")
