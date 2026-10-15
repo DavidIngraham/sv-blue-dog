@@ -83,7 +83,7 @@ The decision is which combination provides timely observations within the boat's
 3. Replace perfect traffic observations in the mission experiment with measured or explicitly hypothetical detection, error, delay and dropout models. Keep ground truth separate for collision/consequence scoring. Run paired scenarios and include degraded sensing and recovery behavior.
 4. Reconcile the equipment rollup with sizing, reoptimize credible alternatives and replay their chronological energy and encounters. Select only after both coverage and energy evidence support the declared operating scope; restrict that scope or abort when observations are inadequate.
 
-The [mission simulator](mission-simulation.md) currently receives perfectly observed scripted traffic. It exercises avoidance decisions but cannot establish sensor detection performance. This trade is **open**; the power sensitivity above does not execute or close the sensor-selection experiment. It directly addresses traffic risk R-001 and energy risk R-005 in the [maturity assessment](development-plan.md).
+The [encounter-feasibility study](encounter-feasibility.md) executes a paired comparison with imperfect tracks and four hypothetical sensing/power envelopes. Its fixed-candidate energy screen rejects all four added-load hypotheses. The mission simulator retains an explicit perfect-truth baseline, while this study uses range, misses, latency, error and dropout behavior. This trade remains **open**: synthetic envelopes and conceptual maneuvering do not establish installed sensor performance or select equipment. It directly addresses traffic risk R-001 and energy risk R-005 in the [maturity assessment](development-plan.md).
 
 ## Illustrative load-accounting example
 

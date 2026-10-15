@@ -13,7 +13,7 @@ The [introductory story](restarting-sv-blue-dog.md) begins with sailing, desktop
 | System requirements and scenarios | [Requirements](requirements.md), [mission simulation](mission-simulation.md) | What behavior counts as success, and what could we have missed? |
 | Logical architecture | [Use cases and allocated behavior](architecture.md#from-use-cases-to-allocated-behavior) | What responsibilities, information and fault responses make that behavior possible? |
 | Candidate physical architectures | [Structure and recovery](structures-and-recovery.md), [sail concepts](sail-trade.md), [recovery propulsion](recovery-propulsion.md) | How could those responsibilities be realized in a buildable boat? |
-| Trades, optimization and analysis | [Sizing results](results.md), [sizing method](sizing.md), [energy](energy.md), [reliability](reliability.md) | Which choices work under the stated assumptions, and which assumptions dominate? |
+| Trades, optimization and analysis | [Sizing results](results.md), [sizing method](sizing.md), [encounter feasibility](encounter-feasibility.md), [energy](energy.md), [reliability](reliability.md) | Which choices work under the stated assumptions, and which assumptions dominate? |
 | Verification, validation and learning | [From virtual evidence to water trials](validation-plan.md) | What evidence supports each claim, and what measurement should come next? |
 | Methods and evidence | [Modeling](methods/modeling.md), [publishing](publishing.md), [mission and design assessment](srr-review.md), [its appendix](srr-appendix.md) | How is the engineering record maintained, and what supports the current design? |
 

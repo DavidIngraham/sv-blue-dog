@@ -64,11 +64,17 @@ The logical scenarios connect normal sailing, traffic encounters and abort/recov
 
 The value is that I can follow a decision as well as a trajectory. The mission records the facts presented to the supervisor and the resulting decisions. Losing access to a weather service, for example, is different from deciding that the held forecast is no longer applicable. One preserves the attempt; the other initiates abort and recovery. That distinction can be exercised and inspected. [Forecast scenarios](https://github.com/DavidIngraham/sv-blue-dog/commit/7530eca).
 
-The supervisor covers mission policy. The simulation still supplies conceptual heading search, traffic geometry and vessel dynamics, and its scripted traffic is perfectly observed. The next behavioral questions concern uncertain observations, delayed decisions and maneuvers that the actual boat can execute. The [current logical execution](mission-simulation.md#executable-supervisory-logic) describes that boundary.
+The supervisor covers mission policy. The simulation still supplies conceptual heading search, traffic geometry and vessel dynamics, with perfect-truth and imperfect-observation modes explicitly distinguished. The behavioral questions concern measured observation errors, delayed decisions and maneuvers that the actual boat can execute. The [current logical execution](mission-simulation.md#executable-supervisory-logic) describes that boundary.
 
 ## Couple perception fidelity to energy
 
-The next [sensing-and-compute trade](energy.md#execute-a-sensing-and-compute-trade) joins two working assumptions: perfectly observed traffic and an allocated electronics load. First establish target-specific detection range, errors, latency and dropouts for candidate sensing combinations; then make those observations drive avoidance while independent ground truth scores consequences. Pair each combination with its installed power, mass and thermal behavior, rerun sizing, and sail the same declared scenarios. The current low electronics allowance does not establish vision feasibility. This spiral remains open until encounter and energy measurements support a choice.
+The [sensing-and-compute trade](energy.md#execute-a-sensing-and-compute-trade) connects observation performance to the allocated electronics load. Its hypothesis experiment supplies target-specific range, errors, latency and dropouts, makes those observations drive avoidance and uses independent ground truth to score consequences. Measured sensing envelopes must replace those hypotheses. Pair each combination with its installed power, mass and thermal behavior, rerun sizing, and sail the same declared scenarios. The current low electronics allowance does not establish vision feasibility. The executable hypothesis study below supplies a virtual comparison; this spiral remains open until encounter and energy measurements support a choice.
+
+## Perception, avoidance and recovery in one experiment
+
+The [encounter-feasibility study](encounter-feasibility.md) connects the detection-distance allocation to delayed and uncertain tracks, hypothetical sensor power, avoidance decisions and casualty consequences. The controller receives observations; separate truth scores executed collision and clearance. Weed patches provide an explicit target for the forward-sonar hypothesis. A perfect-truth baseline makes the observation assumptions visible in the comparison.
+
+This spiral tests 54 distance cases, 80 paired encounter runs and six casualty cases. It uses a synthetic local corridor, a conceptual polar, allocated maneuver timing and candidate energy accounting. Sensor envelopes and power increments are declared hypotheses, not selected devices. The investigation can reject a drop-in energy allocation and reveal unsupported failure cases; it cannot establish measured detection, full-course recovery coverage or a qualified architecture.
 
 ## Make the working assumptions visible
 

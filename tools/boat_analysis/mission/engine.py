@@ -45,6 +45,7 @@ class Result:
     surface_summary: dict = field(default_factory=dict)
     recovery_summary: dict = field(default_factory=dict)
     logic_trace: list = field(default_factory=list)
+    observation_summary: dict = field(default_factory=dict)
     model_scope: str = 'Conceptual polar and point-mass guidance; wave dynamics and full navigation-rule compliance not verified'
 
 
@@ -68,7 +69,7 @@ def direction(route, distance):
 
 @execution_session()
 def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), seed=0,
-             stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None):
+             stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None, observations=None):
     from .logic import MissionLogic
     logic = MissionLogic()
     dt, hours, forecast, lookahead, maneuver_time, _ = inputs['time']
@@ -148,6 +149,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         observed=Result(verdict,cause,seconds,crossing_log,history,event_log,minimum,distance)
         observed.recovery_summary = recovery_summary
         observed.logic_trace = list(logic.trace)
+        observed.observation_summary = observations.summary() if observations is not None else {"mode":"perfect_truth_baseline"}
         observed.outside_performance_coverage_seconds=outside_coverage
         if performance:observed.model_scope=inputs['performance']['scope']
         if wave_effects is not None:
@@ -168,7 +170,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         if decision['alert'] != 'none':
             event_log.append({'seconds':seconds, 'kind':'abort_alert_attempt' if decision['alert'] == 'attempt' else 'abort_alert_queued'})
         if not recover:
-            recovery_summary = {'outcome':'awaiting_operator_retrieval_or_relocation'}
+            recovery_summary = {'outcome': 'recovery_unavailable_common_cause' if cause in {'steering_loss','power_loss'} else 'awaiting_operator_retrieval_or_relocation'}
             return result('disqualified', cause)
         if recovery_planner is None:
             recovery_summary = {'outcome':'recovery_model_unavailable'}
@@ -209,6 +211,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 return abort(cause, capsized=decision['capsized'], recover=decision['recoveryPermitted'])
             elif directive == 'stop':
                 return result('incomplete','terminal_failure')
+        contacts = observations.observe(traffic, position, seconds) if observations is not None else traffic
         state = weather.at(seconds)
         nearest = route.project(Point(position))
         current = direction(route, nearest)*state.current_mps
@@ -279,7 +282,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             preview = contains_xy(water,projected[:,0],projected[:,1])
             cost = np.linalg.norm(endpoints-target,axis=1)+turn*10+(~preview)*lookahead
             conflict = False
-            for actor_index,actor in enumerate(traffic):
+            for actor_index,actor in enumerate(contacts):
+                actor_index = actor.source_id if actor.source_id is not None else actor_index
                 safe, penalty = actor.assess(position,endpoints,seconds,control_period,forecast,inputs['dimensions'])
                 conflict |= bool(not safe.all() or np.any(penalty))
                 if actor_index not in traffic_seen and (not safe.all() or np.any(penalty)):
@@ -306,6 +310,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             return abort('course_recovery_reserve_trigger') if recovery_planner is not None else result('incomplete','recovery_reserve_reached')
         boundaries = [dt, hours*3600-seconds, next_control-seconds,
                       (math.floor(seconds/3600)+1)*3600-seconds]
+        if observations is not None:
+            boundaries.append(observations.next_boundary(seconds)-seconds)
         if event_index < len(event_list):
             boundaries.append(event_list[event_index].seconds-seconds)
         if turn_remaining > 0:
@@ -350,7 +356,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         previous = position.copy(); endpoint = position+velocity*interval
         if not water.covers(LineString([previous,endpoint])):
             return abort('held_command_leaves_chart_domain') if recovery_planner is not None else result('incomplete','held_command_leaves_chart_domain')
-        for actor in traffic:
+        for actor in contacts:
             safe,_ = actor.assess(previous,np.array([endpoint]),seconds,interval,interval,inputs['dimensions'])
             if not safe[0]:
                 return abort('held_command_exhausts_traffic_margin') if recovery_planner is not None else result('incomplete','held_command_exhausts_traffic_margin')
@@ -366,7 +372,12 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         turn_remaining=max(0.,turn_remaining-interval)
         for actor in traffic:
             if actor.collides(previous,position,seconds-interval,interval,inputs['dimensions']):
-                return result('safety_violation','traffic_collision')
+                return result('safety_violation','weed_contact' if actor.target_kind == 'weed' else 'traffic_collision')
+        if observations is not None:
+            for actor in traffic:
+                safe, _ = actor.assess(previous,np.array([position]),seconds-interval,interval,interval,inputs['dimensions'])
+                if not safe[0]:
+                    return result('safety_violation','traffic_clearance_violation')
         if stored < reserve:
             reserve_protected = False
             return abort('course_recovery_reserve_trigger') if recovery_planner is not None else result('incomplete','recovery_reserve_reached')

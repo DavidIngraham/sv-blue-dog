@@ -35,8 +35,8 @@ package BlueDogRisks {
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
             confidence = "Low";
-            assessmentBasis = "The allocated encounter budget requires 724 m and adopts 750 m acquisition, including low-profile targets and darkness. Perfect traffic truth and the coarse mission controller do not demonstrate that installed sensing and timing are feasible. Equipment or exposure changes are likely; a missed encounter can compromise other river users.";
-            evidenceReference = "models/analyses/encounter-review.sysml; models/vehicle/requirements.sysml";
+            assessmentBasis = "The allocated encounter budget requires 724 m and adopts 750 m acquisition, including low-profile targets and darkness. The imperfect-observation hypothesis study and coarse 30-second mission controller do not demonstrate that installed sensing and allocated one-second/two-second timing are feasible. Equipment or exposure changes are likely; a missed encounter can compromise other river users.";
+            evidenceReference = "models/analyses/encounter-review.sysml; models/analyses/encounter-feasibility.sysml; tools/boat_analysis/mission/encounter_study.py; models/vehicle/requirements.sysml";
             residualDisposition = "Open; Mitigate; require sensing and maneuver evidence before admitting the affected operating envelope. No residual-risk acceptance recorded.";
             statement = "If installed sensing cannot acquire and track relevant traffic early enough, the vessel cannot safely execute the allocated avoidance maneuver.";
             consequence = "Collision or impediment of other river users, especially in darkness or spray.";

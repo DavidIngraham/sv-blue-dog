@@ -23,7 +23,7 @@ The [simulation development spirals](simulation-spirals.md) show how added capab
 
 The [candidate budget](energy.md#current-candidate-budget) reconciles the retained replay to its source inputs, including actuation, losses and recovery reserve. The electronics allocation remains lumped and installed measurements remain absent; this accounting check does not reduce R-005.
 
-The [energy rollup and avoidance trade](energy.md#perception-computing-and-the-avoidance-trade) expose a coupled gap across physical architecture, analysis and validation: no selected perception stack has a measured installed power or latency budget, and traffic observations in simulation are perfect. R-001 and R-005 remain open. Compare complementary sensing with measured compute demand, then propagate observation uncertainty and energy through paired mission scenarios before selecting hardware.
+The [energy rollup and avoidance trade](energy.md#perception-computing-and-the-avoidance-trade) expose a coupled gap across physical architecture, analysis and validation: no selected perception stack has a measured installed power or latency budget, and the imperfect-observation study uses unmeasured sensing envelopes. R-001 and R-005 remain open. The [encounter study](encounter-feasibility.md) exercises distance sensitivity, imperfect tracks, four sensing/energy hypotheses and casualty cases. The 30-second conceptual controller does not establish the allocated one-second assessment and two-second command response. Measure sensing, maneuvering, installed power and independent recovery capability before selecting hardware.
 
 ## How the assessment stays current
 

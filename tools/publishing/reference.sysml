@@ -660,3 +660,23 @@ package BlueDogCandidateEnergyDocuments {
         part gaps : Table { calc rows : Gaps; }
     }
 }
+
+package BlueDogEncounterStudyDocuments {
+    private import DocumentQueries::*;
+    calc def Ranges :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogEncounterFeasibility::target1", "BlueDogEncounterFeasibility::target2", "BlueDogEncounterFeasibility::target3", "BlueDogEncounterFeasibility::target4", "BlueDogEncounterFeasibility::target5", "BlueDogEncounterFeasibility::target6")), columns = (
+            Column(name = "Target", path = "target"), Column(name = "15 s maneuver: required m", path = "baselineM"), Column(name = "30 s maneuver: required m", path = "slowerM")))
+    }
+    calc def Stacks :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogEncounterFeasibility::stack1", "BlueDogEncounterFeasibility::stack2", "BlueDogEncounterFeasibility::stack3", "BlueDogEncounterFeasibility::stack4")), columns = (
+            Column(name = "Hypothesis", path = "label"), Column(name = "Craft m", path = "craftM"), Column(name = "Low target m", path = "lowM"), Column(name = "Weeds m", path = "weedM"), Column(name = "Extra bus W", path = "additionalW"), Column(name = "Remaining Wh", path = "headroomWh")))
+    }
+    part def Detection :> Document {
+        attribute redefines title = "Closing distance and maneuver allowance";
+        part ranges : Table { calc rows : Ranges; }
+    }
+    part def Energy :> Document {
+        attribute redefines title = "Hypothetical sensing envelopes and fixed-candidate energy screen";
+        part stacks : Table { calc rows : Stacks; }
+    }
+}

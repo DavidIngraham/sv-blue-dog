@@ -20,7 +20,7 @@ package BlueDogEncounterReview {
     analysis Acquisition {
         out attribute requiredRangesM : Real [6] ordered nonunique = (1..6)->ControlFunctions::collect {
             in i : Integer;
-            (criteria.targetSpeedMps#(i)+criteria.vesselSpeedMps)*(criteria.acquisitionSeconds+criteria.assessmentSeconds+criteria.commandSeconds+criteria.maneuverSeconds+criteria.reserveSeconds)+criteria.hullSeparationM#(i)+criteria.relativePositionAllowanceM };
+            BlueDogEncounterFeasibility::RequiredRange(criteria.targetSpeedMps#(i)+criteria.vesselSpeedMps,criteria.acquisitionSeconds,criteria.assessmentSeconds,criteria.commandSeconds,criteria.maneuverSeconds,criteria.reserveSeconds,criteria.hullSeparationM#(i),criteria.relativePositionAllowanceM) };
     }
     part acceptance {
         attribute scenarios : String = "Both tacks; head-on, crossing each side, overtaking each side, anchored/drifting fishing, reversing ski boat, obscured emergence, dense traffic, bridge approach and casualty recovery; repeat by target class in day/night and wave/glare extremes.";

@@ -10,7 +10,7 @@ The simulator supports both the original conceptual configuration and a named si
 
 The [development spirals](simulation-spirals.md) explain how these capabilities grow together and how each experiment guides the next addition to fidelity.
 
-The [sensing-and-compute trade](energy.md#execute-a-sensing-and-compute-trade) must replace perfect traffic observations with explicit detection, latency, error and dropout behavior, coupled to installed energy demand. Current avoidance results do not qualify a camera, AIS, acoustic or radar implementation.
+The [encounter-feasibility study](encounter-feasibility.md) supplies explicit detection range, misses, latency, position error, track expiry and dropout behavior to guidance, while independent truth scores collisions and clearance. It compares sensing hypotheses with energy and casualty outcomes. Perfect observations remain an explicit baseline for older campaigns. These virtual results do not qualify a camera, AIS, acoustic or radar implementation.
 
 ## Executable supervisory logic
 
@@ -102,7 +102,7 @@ Each realization has reproducible weather and traffic random streams. Weather re
 
 Commercial scenarios use charted recommended-track fragments and represent the complete tow footprint. Small-craft scenarios include local crossings and reversing tracks for fishing and powered recreation, alongside sailing traffic. Passenger vessels are included because the regional AIS-derived port record shows that traffic class too. The model owns the rates, dimensions, speeds and separation allocations.
 
-VesselFinder's accessible record does not provide a complete traffic census or an accepted arrival-rate estimate. Small craft may not transmit AIS, and a tug position does not describe the entire tow. The simulator initially has perfect knowledge of scripted traffic; sensor range, occlusion, latency and uncertain intentions need additional cases before these results can support traffic-system acceptance. Geometric separation checks do not establish full Navigation Rules compliance.
+VesselFinder's accessible record does not provide a complete traffic census or an accepted arrival-rate estimate. Small craft may not transmit AIS, and a tug position does not describe the entire tow. The perfect-truth baseline knows the scripted traffic; the encounter study supplies range-limited, delayed and uncertain observations instead. Occlusion, uncertain intent and measured detection performance still need additional cases before these results can support traffic-system acceptance. Geometric separation checks do not establish full Navigation Rules compliance.
 
 The useful early outputs are failure mechanisms and sensitivity to assumptions. The fraction of synthetic scenarios completed must not be presented as the probability that the real boat will complete the Gorge challenge.
 
@@ -198,7 +198,7 @@ The next useful step is to improve local tack planning around the rounding mark 
 | Candidate averaged-tack envelope (or original conceptual polar) | Full candidate polars, explicit tack excursions and measured maneuver performance |
 | Point-mass guidance | Control-software replay and maneuver dynamics |
 | Synthetic weather regimes | Forecast-conditioned, correlated along-route weather/current histories |
-| Scripted traffic with perfect visibility | Time-stamped observations and sensing/intent uncertainty |
+| Scripted truth and hypothetical observation errors | Time-stamped sensor replay, calibrated detection and intent uncertainty |
 | Allocated electrical budget | Measured installed loads and battery behavior |
 | Chart planning clearances | Configuration-specific maneuver, draft, pool-stage and notice review |
 

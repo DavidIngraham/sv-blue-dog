@@ -17,11 +17,11 @@ package BlueDogMissionLogic {
                 else if eventKind == "communications_loss" ? "communications_outage"
                 else if eventKind == "weather_service_loss" ? "retain_forecast"
                 else if eventKind == "wind_sensor_loss" ? "wind_outage"
-                else if eventKind == "forecast_invalidated" or eventKind == "safety_capability_loss" or eventKind == "capsize" or eventKind == "refuge_entry" or eventKind == "grounding" or eventKind == "anchoring" or eventKind == "shore_attachment" ? "abort"
+                else if eventKind == "forecast_invalidated" or eventKind == "sensing_loss" or eventKind == "steering_loss" or eventKind == "power_loss" or eventKind == "safety_capability_loss" or eventKind == "capsize" or eventKind == "refuge_entry" or eventKind == "grounding" or eventKind == "anchoring" or eventKind == "shore_attachment" ? "abort"
                 else if eventKind == "terminal_failure" ? "stop"
                 else "unsupported";
             assign capsized := eventKind == "capsize";
-            assign recoveryPermitted := eventKind == "forecast_invalidated" or eventKind == "safety_capability_loss" or eventKind == "capsize";
+            assign recoveryPermitted := eventKind == "sensing_loss" or eventKind == "forecast_invalidated" or eventKind == "safety_capability_loss" or eventKind == "capsize";
         }
         then done;
     }

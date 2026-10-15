@@ -21,6 +21,9 @@ class Traffic:
     beam_m: float
     clearance_m: float
     stationary_seconds: float = 0.
+    target_kind: str = "craft"
+    ais_equipped: bool = False
+    source_id: int | None = None
 
     def __post_init__(self):
         if min(self.length_m,self.beam_m,self.track.length) <= 0 or self.clearance_m < 0 or self.speed_mps < 0 or (self.speed_mps == 0 and self.stationary_seconds <= 0):
