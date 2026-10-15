@@ -1,18 +1,19 @@
-"""Render standard technical-risk metadata without assigning missing assessments."""
-from fractions import Fraction
-from math import ceil, isfinite
+"""Render ordinal development judgments separately from quantitative risk fields."""
 from collections import defaultdict
 import json
 from tools.boat_analysis.model.runtime import ROOT, native, model_files
 
+LIKELIHOOD = ('Remote', 'Unlikely', 'Possible', 'Likely', 'Demonstrated')
+CONSEQUENCE = ('Negligible', 'Minor', 'Moderate', 'Major', 'Critical')
 
-def coordinate(value):
-    if not value.strip():
+
+def coordinate(value, labels):
+    value = value.strip()
+    if not value:
         return None
-    number = float(Fraction(value))
-    if not isfinite(number) or not 0 <= number <= 1:
-        raise ValueError(f'Risk coordinate outside [0, 1]: {value}')
-    return number
+    if value not in labels:
+        raise ValueError(f'Unknown qualitative risk class: {value}')
+    return labels.index(value)
 
 
 def read_rows():
@@ -24,16 +25,14 @@ def read_rows():
             continue
         cells = [c.strip() for c in line.strip('|').split('|')]
         if len(cells) == 4 and cells[0].startswith('R-'):
-            identifier, area, probability, impact = cells
+            identifier, area, likelihood, consequence = cells
+            coordinate(likelihood, LIKELIHOOD)
+            coordinate(consequence, CONSEQUENCE)
             rows.append(dict(identifier=identifier, area=area,
-                             probability=coordinate(probability), impact=coordinate(impact)))
+                             likelihood=likelihood, consequence=consequence))
     if not rows or len({r['identifier'] for r in rows}) != len(rows):
         raise ValueError('Risk export must contain distinct identified risks')
     return rows
-
-
-def cell(value):
-    return max(0, ceil(value * 5) - 1)
 
 
 def render(directory, rows=None):
@@ -46,33 +45,34 @@ def render(directory, rows=None):
     directory.mkdir(parents=True, exist_ok=True)
     assessed, unassessed = defaultdict(list), []
     for row in rows:
-        p, i = row['probability'], row['impact']
-        if p is None or i is None:
+        likelihood = coordinate(row['likelihood'], LIKELIHOOD)
+        consequence = coordinate(row['consequence'], CONSEQUENCE)
+        if likelihood is None or consequence is None:
             unassessed.append(row)
         else:
-            coordinate(str(p)); coordinate(str(i))
-            assessed[cell(i), cell(p)].append(row['identifier'])
+            assessed[consequence, likelihood].append(row['identifier'])
     with plt.rc_context({'svg.fonttype': 'none', 'svg.hashsalt': 'blue-dog-risk-cube'}):
-        fig, (ax, side) = plt.subplots(1, 2, figsize=(11, 6), gridspec_kw={'width_ratios': [1.5, 1]}, layout='constrained')
+        fig, (ax, side) = plt.subplots(1, 2, figsize=(12, 6.5), gridspec_kw={'width_ratios': [1.6, 1]}, layout='constrained')
         fig.suptitle('Development risk assessment', fontsize=19, fontweight='bold')
         for x in range(5):
             for y in range(5):
-                ax.add_patch(Rectangle((x, y), 1, 1, facecolor='#edf2f7', edgecolor='white', linewidth=2))
-                if assessed[x, y]:
-                    ax.text(x+.5, y+.5, fill(', '.join(assessed[x, y]), 15), ha='center', va='center', fontsize=10, color='#133e64', fontweight='bold')
-        ax.set(xlim=(0,5), ylim=(0,5), aspect='equal', xlabel='Consequence / normalized impact →', ylabel='Likelihood / probability →')
-        labels=['0–.2','>.2–.4','>.4–.6','>.6–.8','>.8–1']
-        ax.set_xticks([.5,1.5,2.5,3.5,4.5], labels)
-        ax.set_yticks([.5,1.5,2.5,3.5,4.5], labels)
+                present = assessed[x, y]
+                ax.add_patch(Rectangle((x, y), 1, 1, facecolor='#d6e7f4' if present else '#edf2f7', edgecolor='white', linewidth=2))
+                if present:
+                    ax.text(x+.5, y+.5, fill(', '.join(present), 15), ha='center', va='center', fontsize=10, color='#133e64', fontweight='bold')
+        ax.set(xlim=(0,5), ylim=(0,5), aspect='equal', xlabel='Consequence if unresolved →', ylabel='Prospect of redesign or scope restriction →')
+        ax.set_xticks([.5,1.5,2.5,3.5,4.5], CONSEQUENCE)
+        ax.set_yticks([.5,1.5,2.5,3.5,4.5], LIKELIHOOD)
         ax.tick_params(length=0, labelsize=9)
         for spine in ax.spines.values(): spine.set_visible(False)
         side.axis('off')
-        side.text(0, .98, f'Unassessed · {len(unassessed)}', fontsize=16, fontweight='bold', va='top', color='#133e64')
-        items=[f"{r['identifier']}  {r['area'].capitalize()}" for r in unassessed]
-        side.text(0, .86, '\n\n'.join(items) if items else 'All risks have coordinates.', fontsize=12, va='top')
-        side.text(0, .20, 'Missing likelihood or consequence\nstays outside the cube.\nUnknown does not mean low risk.', fontsize=10, va='top', color='#44566a')
-        side.text(0, .06, f'{sum(len(v) for v in assessed.values())} assessed · {len(rows)} total\nNeutral cells: no acceptance policy assigned.', fontsize=10, va='top', color='#44566a')
-        fig.savefig(directory/'cube.svg', metadata={'Date':None, 'Description':'Technical risk likelihood and consequence from SysML. Unassessed risks are listed separately.'})
+        side.text(0, .98, 'Assessed development risks', fontsize=15, fontweight='bold', va='top', color='#133e64')
+        side.text(0, .88, '\n\n'.join(f"{r['identifier']}  {r['area'].capitalize()}" for r in rows), fontsize=12, va='top')
+        unknown = ', '.join(r['identifier'] for r in unassessed) or 'None'
+        side.text(0, .32, fill('Unassessed: '+unknown, 39), fontsize=10, va='top', color='#44566a')
+        side.text(0, .22, 'Qualitative engineering judgments.\nDemonstrated = a current limitation\nalready restricts the conclusion.\nNot probabilities of accidents.', fontsize=10, va='top', color='#44566a')
+        side.text(0, .07, f'{sum(len(v) for v in assessed.values())} assessed · {len(rows)} total\nNo residual-risk acceptance implied.', fontsize=10, va='top', color='#44566a')
+        fig.savefig(directory/'cube.svg', metadata={'Date':None, 'Description':'Ordinal development risk judgments from SysML; not measured incident probabilities. Unassessed entries remain outside the grid.'})
         fig.savefig(directory/'cube.png', dpi=140)
         plt.close(fig)
     (directory/'data.json').write_text(json.dumps(rows, indent=2)+'\n', encoding='utf-8')

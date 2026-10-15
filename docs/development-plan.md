@@ -62,9 +62,20 @@ The first selection is safety feasibility: traffic sensing and maneuvering, toge
 
 ### Risk cube
 
-![Technical risk cube: likelihood versus consequence, with risks lacking either assessment listed separately.](https://davidingraham.github.io/sv-blue-dog/assets/risk/cube.svg)
+![Qualitative development risk cube: prospect of redesign or operating restriction versus consequence if unresolved.](https://davidingraham.github.io/sv-blue-dog/assets/risk/cube.svg)
 
-The cube reads technical-risk probability and impact from the standard metadata. Its five bands divide the standard 0–1 scale evenly; these are display bins, not an approved risk-acceptance policy. Unassessed risks stay outside the grid. The action priorities below are separate judgments about what to investigate first.
+**Assessment: 15 October 2026.** The cube assesses the next concept-selection and integrated-test planning spiral. Its vertical axis expresses the prospect that an identified limitation forces redesign or a narrower operating envelope. Its horizontal axis expresses the credible consequence if the issue remains unresolved. These are qualitative engineering judgments, separate from measured probabilities of an accident during a voyage.
+
+Likelihood classes are **Remote** (strong evidence against a material change), **Unlikely** (supported margins with limited outstanding concerns), **Possible** (a plausible challenge with insufficient evidence either way), **Likely** (specific evidence points toward a material change or restriction), and **Demonstrated** (a current limitation already restricts the conclusion). Missing evidence alone does not automatically make a risk likely.
+
+Consequences are **Negligible** (no meaningful effect on the decision), **Minor** (local adjustment), **Moderate** (subsystem redesign or bounded loss of capability), **Major** (concept-level rework, mission noncompletion or an unsupported operating envelope), and **Critical** (credible loss of safety, flotation or recovery functions, including exposure of other river users). These classes have no numerical probability meaning and are not multiplied into a risk score.
+
+The judgments are recorded by the analysis agent with owner review pending. All six risks remain open. Confidence describes the support for the development judgment, not confidence that a physical failure will occur: low for largely unmeasured assumptions, medium for specific but indirect analytical evidence, and high where the limitation is directly demonstrated.
+
+```sysml-report BlueDogRiskDocuments::Assessments
+```
+
+Traffic sensing and casualty recovery lead the safety investigations. The small energy margin warrants early measured-load work alongside them. Structural and wing evidence constrain the design alternatives; scenario coverage constrains every mission conclusion. A populated cell records a judgment, not a completed mitigation.
 
 ```sysml-report BlueDogRiskDocuments::Priorities
 ```
@@ -74,7 +85,7 @@ The cube reads technical-risk probability and impact from the standard metadata.
 ```sysml-report BlueDogRiskDocuments::Actions
 ```
 
-Standard probability and impact fields remain unset until the assessed event, exposure and supporting evidence are defined. Unknown is not zero, and the standard low/medium/high probability values are not substitutes for measurements. We do not multiply ordinal scores into an apparent mission probability. The named owner coordinates the action; I review residual-risk dispositions. Planned tests and successful software checks alone do not reduce a physical risk rating.
+The standard quantitative probability and impact fields remain unset. The qualitative classes live in explicitly named extensions of the same risk metadata. Unknown remains separate from a low assessment, and numerical regression results alone do not justify reducing a rating. The named owner coordinates the action; I review residual-risk dispositions. Planned tests and successful software checks alone do not reduce a physical risk rating.
 
 For each investigation, record the configuration, predicted observable, uncertainty and decision it could change before running it. Link the resulting evidence back into the model, reassess the risk and select the next action. Close a risk only with supporting evidence and an explicit disposition; otherwise retain it, restrict the concept's scope, or change the architecture. The inventory starts with six risk areas and must grow when analysis or experiments reveal omissions. It does not supersede the DFMEA or authorize field trials.
 

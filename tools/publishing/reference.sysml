@@ -566,6 +566,19 @@ package BlueDogRiskDocuments {
         attribute redefines title = "Current investigation priorities";
         part rows : Table { calc values : PrioritiesRows; }
     }
+    calc def AssessmentRows :> Query {
+        Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
+            Column(name = "ID", path = "risk.identifier"),
+            Column(name = "Likelihood class", path = "risk.likelihoodClass"),
+            Column(name = "Consequence class", path = "risk.consequenceClass"),
+            Column(name = "Confidence", path = "risk.confidence"),
+            Column(name = "Assessment basis", path = "risk.assessmentBasis"),
+            Column(name = "Evidence references", path = "risk.evidenceReference")))
+    }
+    part def Assessments :> Document {
+        attribute redefines title = "Qualitative development risk assessments";
+        part rows : Table { calc values : AssessmentRows; }
+    }
     calc def ActionsRows :> Query {
         Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
             Column(name = "ID", path = "risk.identifier"),
@@ -587,11 +600,11 @@ package BlueDogRiskPlot {
         Project(source = WhereMetadata(source = Descendants(source = Named(qualifiedName = "BlueDogRisks")), 'metadata' = "RiskMetadata::Risk"), columns = (
             Column(name = "ID", path = "risk.identifier"),
             Column(name = "Area", path = "name"),
-            Column(name = "Probability", path = "risk.technicalRisk.probability"),
-            Column(name = "Impact", path = "risk.technicalRisk.impact")))
+            Column(name = "Likelihood class", path = "risk.likelihoodClass"),
+            Column(name = "Consequence class", path = "risk.consequenceClass")))
     }
     part def Data :> Document {
-        attribute redefines title = "Technical risk coordinates";
+        attribute redefines title = "Qualitative development risk coordinates";
         part data : Table { calc rows : Rows; }
     }
 }

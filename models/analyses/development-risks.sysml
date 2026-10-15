@@ -1,10 +1,11 @@
 package BlueDogRisks {
     private import ScalarValues::*;
-    doc /* Initial PDR risk inventory, not an exhaustive hazard analysis or an approved baseline.
-     * Tracking specializes the OMG RiskMetadata::Risk definition. Standard numerical
-     * assessments remain unset until their event, exposure and evidential basis are known.
-     * Do not interpret unset probability as zero or substitute ordinal scores for probability.
-     * Work priority is a review judgment, not calculated risk magnitude.
+    doc /* Development risk assessment for the next concept-selection and integrated-test
+     * planning spiral. Qualitative likelihood rates the prospect that an identified
+     * limitation forces redesign or operating-envelope restriction. Consequence rates
+     * the credible effect if it is not addressed. These are ordinal engineering
+     * judgments, not incident probabilities, expected losses or residual-risk acceptance.
+     * Standard technicalRisk probability and impact remain unset without quantitative evidence.
      */
     metadata def Tracking :> RiskMetadata::Risk {
         attribute identifier : String;
@@ -15,7 +16,13 @@ package BlueDogRisks {
         attribute priorityRationale : String;
         attribute reductionAction : String;
         attribute closureEvidence : String;
-        attribute assessmentBasis : String default "Likelihood and normalized impact unassessed; no accepted risk-reduction evidence.";
+        attribute likelihoodClass : String default "";
+        attribute consequenceClass : String default "";
+        attribute confidence : String default "Unassessed";
+        attribute assessedOn : String default "2026-10-15";
+        attribute assessor : String default "Analysis agent; owner review pending";
+        attribute assessmentScope : String default "Next concept-selection and integrated-test planning spiral; likelihood of redesign or operating-envelope restriction, not a probability of an accident on a voyage.";
+        attribute assessmentBasis : String default "Unassessed";
         attribute evidenceReference : String default "None accepted";
         attribute residualDisposition : String default "Open; no residual-risk acceptance recorded";
     }
@@ -23,6 +30,12 @@ package BlueDogRisks {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
             identifier = "R-001";
+            likelihoodClass = "Likely";
+            consequenceClass = "Critical";
+            confidence = "Low";
+            assessmentBasis = "The allocated encounter budget requires 724 m and adopts 750 m acquisition, including low-profile targets and darkness. Perfect traffic truth and the coarse mission controller do not demonstrate that installed sensing and timing are feasible. Equipment or exposure changes are likely; a missed encounter can compromise other river users.";
+            evidenceReference = "models/analyses/encounter-review.sysml; models/vehicle/requirements.sysml";
+            residualDisposition = "Open; Mitigate; require sensing and maneuver evidence before admitting the affected operating envelope. No residual-risk acceptance recorded.";
             statement = "If installed sensing cannot acquire and track relevant traffic early enough, the vessel cannot safely execute the allocated avoidance maneuver.";
             consequence = "Collision or impediment of other river users, especially in darkness or spray.";
             uncertainty = "No installed detection envelope or correlated maneuver response supports the 750 m allocation.";
@@ -39,6 +52,12 @@ package BlueDogRisks {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
             identifier = "R-002";
+            likelihoodClass = "Likely";
+            consequenceClass = "Critical";
+            confidence = "Medium";
+            assessmentBasis = "The site assessment rejects endpoint-only coverage and has no surveyed casualty approach coverage. Synthetic tests demonstrate current-authority limits and separate capsized capability, not real recovery. Site, propulsion or operating restrictions are likely; unresolved loss of recovery can expose other traffic.";
+            evidenceReference = "models/analyses/recovery-site-review.sysml; tests/test_course_recovery.py; models/analyses/recovery-risk.sysml";
+            residualDisposition = "Open; Mitigate; retain casualty restrictions until site coverage and installed recovery authority are demonstrated. No residual-risk acceptance recorded.";
             statement = "If a casualty removes sensing, steering or buoyancy, autonomous shore recovery may fail before another traffic encounter.";
             consequence = "Collision, stranded vessel or unrecovered debris.";
             uncertainty = "Reachability and common-cause exposure are unvalidated; low failure probability is not established.";
@@ -57,6 +76,12 @@ package BlueDogRisks {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
             identifier = "R-003";
+            likelihoodClass = "Possible";
+            consequenceClass = "Critical";
+            confidence = "Low";
+            assessmentBasis = "The structural basis explicitly marks 10 GPa and 50 MPa as unqualified and lacks joint/load correlation. There is insufficient evidence to call the candidate inadequate or robust, so redesign is possible rather than presumed likely. Loss of a keel or hull load path can defeat flotation and recovery.";
+            evidenceReference = "models/analyses/structural-basis.sysml; models/vehicle/verification.sysml";
+            residualDisposition = "Open; Mitigate; obtain production material and attachment evidence and rerun affected sizing before structural reliance. No residual-risk acceptance recorded.";
             statement = "If wet laminate, joint or load assumptions are optimistic, the proposed structure may be too heavy or may lose its load path in service.";
             consequence = "Structural failure, loss of recovery capability or invalid sizing frontier.";
             uncertainty = "10 GPa and 50 MPa are unqualified; joint, fatigue and functional deformation evidence is missing.";
@@ -76,6 +101,12 @@ package BlueDogRisks {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
             identifier = "R-004";
+            likelihoodClass = "Likely";
+            consequenceClass = "Critical";
+            confidence = "Medium";
+            assessmentBasis = "Recorded mesh and heel sensitivities motivate restricted incidence and conservative force/moment allowances. Both-tack and off-design measurements and loaded drive behavior remain absent. Rig or actuator changes are likely; an overloaded or jammed actuator can remove control authority, so the credible consequence is safety-critical even though a physical failure rate is unknown.";
+            evidenceReference = "models/analyses/aerodynamic-policy.sysml; docs/sail-trade.md; evidence/runs/2026-10-13-surface-environment/summary.json";
+            residualDisposition = "Open; Mitigate; keep rig selection open and bound forces, moments and drive demand with measurements. No residual-risk acceptance recorded.";
             statement = "If the wing force or trim-moment model is optimistic, the selected rig may lack progress or overload its actuator.";
             consequence = "Mission noncompletion, excess energy demand or loss of control.";
             uncertainty = "No measured both-tack polar; stall, broadside response and loaded gearbox behavior remain uncertain.";
@@ -93,6 +124,12 @@ package BlueDogRisks {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
             identifier = "R-005";
+            likelihoodClass = "Likely";
+            consequenceClass = "Critical";
+            confidence = "Medium";
+            assessmentBasis = "The retained candidate has only 3.974 Wh headroom against 312.826 Wh allocated demand. Installed loads, usable capacity and correlated duty cycles are unmeasured. Energy or operating allocations are likely to need adjustment; exhausted shared power can remove safety and recovery functions.";
+            evidenceReference = "models/evidence/srr-current.sysml; evidence/runs/2026-10-13-srr-readiness/srr-readiness.json";
+            residualDisposition = "Open; Mitigate; establish measured capacity/load bounds and protect independent recovery authority before relying on the margin. No residual-risk acceptance recorded.";
             statement = "If installed loads, battery capacity or correlated duty cycles exceed assumptions, the vessel may exhaust usable energy before passage or recovery completes.";
             consequence = "Abort or loss of safety and recovery functions.";
             uncertainty = "The 440 Wh candidate has little nominal headroom; installed consumption and usable capacity are unmeasured.";
@@ -110,6 +147,12 @@ package BlueDogRisks {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; owner = "Analysis agent; owner reviews disposition"; }
         metadata risk : Tracking {
             identifier = "R-006";
+            likelihoodClass = "Demonstrated";
+            consequenceClass = "Major";
+            confidence = "High";
+            assessmentBasis = "All four archived wave-performance mission replays stop outside coverage at departure despite 32 supported small-wave operating cases. Thus current evidence already restricts mission conclusions. Synthetic traffic and weather also limit transfer; greater sample count alone cannot establish the operating envelope.";
+            evidenceReference = "evidence/runs/2026-10-13-wave-performance/summary.json; docs/mission-simulation.md";
+            residualDisposition = "Open; Restrict claims to supported domains; expand and correlate decision-driving coverage before comparing mission success. No residual-risk acceptance recorded.";
             statement = "If weather, traffic or physics coverage is unrepresentative, the optimizer may select a boat whose apparent mission success does not transfer to the river.";
             consequence = "Wrong concept selection or unjustified operating envelope.";
             uncertainty = "Synthetic scenario fractions are not calibrated real-world mission probabilities.";

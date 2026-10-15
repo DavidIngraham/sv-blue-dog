@@ -6,7 +6,7 @@ def test_risk_actions_are_published_from_model():
     report = native('-render-document', 'BlueDogRiskDocuments::Actions')
     for number in range(1, 7):
         assert report.count(f'| R-{number:03d} |') == 1
-    assert report.count('Open; no residual-risk acceptance recorded') == 6
+    assert report.count('No residual-risk acceptance recorded.') == 6
     assert 'owner reviews disposition' in report
     assert 'coupled loss-of-sensing' in report
 
@@ -25,3 +25,13 @@ def test_standard_risk_metadata_and_unknown_probability(tmp_path):
     report = native('-render-document', 'RiskCheck::Report', models=(*MODELS, source))
     for number in range(1, 7):
         assert f'| R-{number:03d} |  |' in report
+
+
+def test_assessment_basis_and_evidence_are_published():
+    report = native('-render-document', 'BlueDogRiskDocuments::Assessments')
+    for number in range(1, 7):
+        assert report.count(f'| R-{number:03d} |') == 1
+    assert '3.974 Wh' in report
+    assert 'wave-performance/summary.json' in report
+    assert 'Possible' in report and 'Demonstrated' in report
+    assert 'Low' in report and 'High' in report
