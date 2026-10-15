@@ -2,6 +2,7 @@
 import hashlib
 import json
 import math
+import os
 import subprocess
 from pathlib import Path
 
@@ -24,6 +25,26 @@ class OpenSysML:
 
     def elements(self):
         return json.loads(self.run('-convert', 'api-json'))
+
+    def record_source(self, definitions):
+        """Generate standalone model records through the matching upstream service."""
+        from opensysml import Connection
+        from opensysml.generate import generate_source, require_type_facts
+        binary = self.executable.with_name('sysml-grpc' + self.executable.suffix)
+        previous = os.environ.get('OPENSYSML_BINARY')
+        os.environ['OPENSYSML_BINARY'] = str(binary)
+        try:
+            connection = Connection(require_capabilities=('parse_sources', 'type_facts'))
+        finally:
+            if previous is None:
+                os.environ.pop('OPENSYSML_BINARY', None)
+            else:
+                os.environ['OPENSYSML_BINARY'] = previous
+        with connection:
+            require_type_facts(connection)
+            model = connection.parse_sources(self.sources, strict=True)
+            return generate_source(model, json.dumps([p.read_text(encoding='utf-8') for p in self.sources]),
+                                   format='dataclass', selected=sorted(definitions))
 
     def index(self):
         # A preparation snapshot; create a new backend when sources change.

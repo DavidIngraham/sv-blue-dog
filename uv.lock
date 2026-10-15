@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.12, <3.14"
 
 [[package]]
@@ -526,14 +526,12 @@ wheels = [
 
 [[package]]
 name = "opensysml"
-version = "0.10.0"
-source = { url = "https://github.com/Open-MBEE/OpenSysML/archive/62b904178c1c8281439f6b0445c739547c89ae9a.zip", subdirectory = "client/python" }
+source = { directory = ".tools/develop-e002f1668/source/client/python" }
 dependencies = [
     { name = "grpcio" },
     { name = "protobuf" },
     { name = "sigstore" },
 ]
-sdist = { hash = "sha256:2d188a0c431fdaf5805b150071d9feaeb1430268605826f64aeef72596e2ebde" }
 
 [package.metadata]
 requires-dist = [
@@ -1030,7 +1028,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "opensysml", url = "https://github.com/Open-MBEE/OpenSysML/archive/62b904178c1c8281439f6b0445c739547c89ae9a.zip", subdirectory = "client/python" },
+    { name = "opensysml", directory = ".tools/develop-e002f1668/source/client/python" },
     { name = "sysml-python-runtime", editable = "packages/sysml-python" },
 ]
 

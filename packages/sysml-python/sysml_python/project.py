@@ -43,6 +43,9 @@ class Project:
         if generated_python.exists() and not generated_python.read_text(encoding='utf-8').startswith('# Generated from SysML. Do not edit.'):
             raise ValueError('Refusing to overwrite a non-generated Python package: '+str(directory))
         directory.mkdir(parents=True, exist_ok=True)
+        definitions = {definition for settings in self.config['exports'].values()
+                       for definition in settings.get('records', {}).values()}
+        snapshot_source = self.backend.record_source(definitions) if definitions else ''
         manifest = {'schemaVersion':2,
                     'projectRoot':Path(os.path.relpath(self.root, directory)).as_posix(),
                     'configuration':{'path':self.path.relative_to(self.root).as_posix(),'sha256':digest(self.path)},
@@ -50,12 +53,12 @@ class Project:
                     'runtime':{'sourceHashes':runtime_sources()},
                     'sourceHashes':{p.relative_to(self.root).as_posix():digest(p) for p in self.backend.sources},
                     'compiler':{'path':str(self.backend.executable),'sha256':digest(self.backend.executable)},'exports':{}}
-        code = ['# Generated from SysML. Do not edit.', 'from dataclasses import dataclass, field as _record_field',
+        code = ['# Generated from SysML. Do not edit.', snapshot_source, 'from dataclasses import dataclass',
                 'from pathlib import Path', 'from numpy.typing import ArrayLike, NDArray', 'import numpy as np', 'from typing import TypedDict, Literal, Sequence',
                 'from sysml_python.backends.native import BatchResult',
                 'from sysml_python.records import Record', 'from sysml_python.execution import Calculation', '']
         record_names, analyses = {}, {}
-        symbols = {'dataclass', '_record_field', 'Path', 'ArrayLike', 'TypedDict', 'Literal', 'Sequence',
+        symbols = {'dataclass', 'Path', 'ArrayLike', 'TypedDict', 'Literal', 'Sequence',
                    'BatchResult', 'Record', 'Calculation', 'NDArray', 'np'}
         def reserve(label):
             identifier(label)
@@ -64,7 +67,7 @@ class Project:
             symbols.add(label)
         for name in self.config['exports']:
             reserve(name)
-        def emit_record(label, record):
+        def emit_result(label, record):
             reserve(label)
             if len(set(record['fields'])) != len(record['fields']):
                 raise ValueError('Duplicate record fields')
@@ -73,8 +76,7 @@ class Project:
                     raise ValueError('Record field conflicts with runtime API: '+field)
             code.extend(['@dataclass(frozen=True)', f'class {label}(Record):', f"    sysml_id = {record['sysml_id']!r}"])
             for field in record['fields']:
-                default = f" = _record_field(default={record['defaults'][field]!r}, kw_only=True)" if field in record.get('defaults', {}) else ''
-                code.append(f'    {identifier(field)}: float'+default)
+                code.append(f'    {identifier(field)}: float')
             code.append('')
         for name, settings in self.config['exports'].items():
             identifier(name)
@@ -117,7 +119,7 @@ class Project:
                     if label in record_names.values():
                         raise ValueError('Record class name collision')
                     record_names[definition] = label
-                    emit_record(label,record)
+                    reserve(label)
             if 'output_record' in settings:
                 record = self.backend.record(settings['output_record'])
                 if record['fields'] != [f['name'] for f in schema['outputs']]:
@@ -139,7 +141,7 @@ class Project:
                 schema['checks'] = check
             manifest['exports'][name] = schema
             result = ''.join(p.capitalize() for p in name.split('_'))+'Result'
-            emit_record(result, {'sysml_id':settings.get('output_record',schema['definition']+'::result'),
+            emit_result(result, {'sysml_id':settings.get('output_record',schema['definition']+'::result'),
                                 'fields':[f['name'] for f in schema['outputs']]})
             arguments, types = [], {}
             for f in schema['inputs']:

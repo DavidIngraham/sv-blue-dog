@@ -1,4 +1,5 @@
 """Generated schemas and physical preconditions remain authoritative across APIs."""
+from sysml_python.records import from_array
 import copy
 import sys
 import numpy as np
@@ -49,8 +50,8 @@ def test_mass_scalar_batch_defaults_and_typed_records(mass_case):
     from tools.boat_analysis.generated import Design, Parameters
     k,d,g,p=mass_case
     from dataclasses import fields
-    typed_d=Design.from_array(d)
-    typed_p=Parameters.from_array(p)
+    typed_d=from_array(Design, d)
+    typed_p=from_array(Parameters, p)
     expected=k(design=typed_d,geometry=g,parameters=typed_p)
     assert k(design=d,geometry=g)==expected
     batch=k.batch(shared={'design':typed_d,'parameters':typed_p},cases={'geometry':np.stack([g,g])})

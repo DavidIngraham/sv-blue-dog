@@ -6,7 +6,9 @@ import importlib
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    for name in ("install", "validate", "prepare", "recovery", "pitch", "audit", "evidence-check"):
+    install_parser = commands.add_parser('install')
+    install_parser.add_argument('--source', help='Local OpenSysML Git checkout for an unpublished revision')
+    for name in ("validate", "prepare", "recovery", "pitch", "audit", "evidence-check"):
         commands.add_parser(name)
     record = commands.add_parser("record", help="Execute cases into native AnalysisRecords evidence")
     record.add_argument("--case", action="append", required=True, dest="cases")
@@ -32,7 +34,7 @@ def main():
     args = parser.parse_args()
     if args.command == "install":
         from .model.install import main as install
-        install()
+        install(args.source)
     elif args.command == "validate":
         from .model.runtime import validate
         validate()

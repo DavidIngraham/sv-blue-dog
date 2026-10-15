@@ -1,4 +1,5 @@
 """Coupled geometric pose, buoyancy and native operating equations."""
+from sysml_python.records import from_array
 from sysml_python import execution_session
 import json
 import numpy as np
@@ -45,16 +46,16 @@ class CoupledModel:
         validate(self.operating_contract['sourceHashes'])
         self.c=json.loads((ROOT/'.tools/coupled-contract.json').read_text());self.parameters=np.array(self.c['parameterValues'],dtype=float);self.last=None;self.hull_reference=None;self.section_cache=None
     def design_record(self, values: Design | ArrayLike) -> Design:
-        return values if isinstance(values,Design) else Design.from_array(values)
+        return values if isinstance(values,Design) else from_array(Design, values)
 
     @property
     def assumptions(self) -> Parameters:
-        return Parameters.from_array(self.parameters)
+        return from_array(Parameters, self.parameters)
 
     def candidate(self,x: Design | ArrayLike,resolution=4):
         d=self.design_record(x);density=self.assumptions.ballastDensity;key=(d,resolution,density)
         if self.last is not None and key==self.last[0]:return self.last[1]
-        g,v,outlines=build_geometry(d,resolution)
+        g,v,outlines=build_geometry(d.to_mapping(),resolution)
         bulb,center=ballast_geometry(d.ballast_kg/density,-d.bottom_depth_m-d.keel_span_m,resolution)
         g['ballast']=bulb
         result=(d,g,v,center,skin_triangles(g['hull']),outlines)
@@ -80,7 +81,7 @@ class CoupledModel:
         d,g,v,center,hull_skin,outlines=self.candidate(x,resolution)
         p=self.assumptions
         if not isinstance(state, OperatingState):
-            state=OperatingState.from_array(state)
+            state=from_array(OperatingState, state)
         wind,up,foul,speed,heading,alpha,beta,delta,heel=(
             state.windSpeed_m_s,state.windward,state.foulingMultiplier,state.speed_m_s,
             state.windFrom_deg,state.incidence_deg,state.leeway_deg,state.rudder_deg,state.heel_deg)
@@ -109,8 +110,8 @@ class CoupledModel:
             features=upright_hull_features(hull.tetrahedra,upright['waterline_m'])
             self.hull_reference=(key,features)
         features=self.hull_reference[1]
-        aero=AeroCoefficients.from_array(aero)
-        hydro=HydroState.from_array(np.r_[h['waterline_m'],h['righting_Nm'],wetted,features])
+        aero=from_array(AeroCoefficients, aero)
+        hydro=from_array(HydroState, np.r_[h['waterline_m'],h['righting_Nm'],wetted,features])
         result=dict(self.operation(design=d,parameters=p,state=state,aero=aero,mass=m,hydro=hydro))
         result.update({'pitch_deg':pitch,'waterline_m':h['waterline_m'],'wetted_m2':wetted,'mast_trim_deg':float(np.rad2deg(trim)),'mass_kg':mass,'mass_residual_kg':h['mass_residual_kg'],'pitch_residual_Nm':h['pitch_torque_Nm']})
         return result

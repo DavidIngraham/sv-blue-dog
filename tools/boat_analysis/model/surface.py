@@ -3,6 +3,7 @@
 Opt-in provider: historical uniform-flow replay remains reproducible. The local
 finite-wing coefficient approximation does not resolve spanwise circulation.
 """
+from sysml_python.records import from_array
 from sysml_python import execution_session
 
 import numpy as np
@@ -38,8 +39,8 @@ class SurfaceOperation:
     @execution_session()
     def evaluate(self,design,parameters,state,aero,mass,hydro,*,motion=None,motion_origin=(0,0,0)):
         design,parameters,state,aero,mass,hydro=self.pack(design,parameters,state,aero,mass,hydro)
-        d,p,s=Design.from_array(design),Parameters.from_array(parameters),OperatingState.from_array(state)
-        hydro=HydroState.from_array(hydro)
+        d,p,s=from_array(Design, design),from_array(Parameters, parameters),from_array(OperatingState, state)
+        hydro=from_array(HydroState, hydro)
         q=self.contract['environment'];height=np.sqrt(d.sail_m2*d.sail_AR);chord=d.sail_m2/height
         theta,beta,heel=np.deg2rad([s.windFrom_deg,s.leeway_deg,s.heel_deg])
         ax=s.windSpeed_m_s*np.cos(theta)+s.speed_m_s*np.cos(beta)

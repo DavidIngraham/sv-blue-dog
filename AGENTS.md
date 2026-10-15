@@ -7,8 +7,10 @@ Do not introduce a second SysML parser, relationship engine, or result ontology.
 
 The dependency revision is pinned in `pyproject.toml`, `uv.lock`, and
 `tools/boat_analysis/model/install.py`. Keep the CLI, Python service, MCP server
-and Python client aligned. Install with `uv run python -m tools.boat_analysis.cli
-install`; Go 1.25+ is required for the development source build.
+and Python client aligned. Bootstrap the unpublished candidate with
+`python tools/boat_analysis/model/install.py --source /path/to/OpenSysML`
+before `uv sync --locked`; Go 1.25+ is required for the development source build.
+The local checkout must contain the exact pinned commit. See README.md.
 
 Keep the existing Markdown authoring, scoped SysML view fences, article URLs,
 blog import, navigation, and interactive illustrations. Model facts belong in

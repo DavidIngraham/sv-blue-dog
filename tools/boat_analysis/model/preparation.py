@@ -1,4 +1,5 @@
 """Build model contracts and interpreter evidence, separate from runtime adapters."""
+from sysml_python.records import from_array
 import json
 import numpy as np
 from .runtime import ROOT, analysis_values, load_model, numerical_value
@@ -11,8 +12,8 @@ def prepare_mass():
     c['sourceHashes']=source_hashes([])
     (ROOT/'.tools/coupled-contract.json').write_text(json.dumps(c,indent=2)+'\n')
     from tools.boat_analysis.geometry.vessel import build_geometry,ballast_geometry
-    d=Design.from_array(c['referenceDesign']);p=Parameters.from_array(c['parameterValues'])
-    _,vectors,_=build_geometry(d)
+    d=from_array(Design, c['referenceDesign']);p=from_array(Parameters, c['parameterValues'])
+    _,vectors,_=build_geometry(d.to_mapping())
     bulb,center=ballast_geometry(d.ballast_kg/p.ballastDensity,-d.bottom_depth_m-d.keel_span_m)
     geometry=np.r_[np.concatenate(list(vectors.values())),center]
     values=numerical_value(load_model().calc('BlueDogCoupledSizing::MassProperties',

@@ -51,7 +51,7 @@ parameters = "BlueDogCoupledSizing::Inputs.parameterValues"
 materials = "BlueDogCoupledSizing::Inputs.materialValues"
 
 [tool.uv.sources]
-opensysml = { url = "https://github.com/Open-MBEE/OpenSysML/archive/62b904178c1c8281439f6b0445c739547c89ae9a.zip", subdirectory = "client/python" }
+opensysml = { path = ".tools/develop-e002f1668/source/client/python" }
 sysml-python-runtime = { path = "packages/sysml-python", editable = true }
 
 [tool.sysml_python.exports.structure]

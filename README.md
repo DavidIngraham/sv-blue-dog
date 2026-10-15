@@ -19,18 +19,18 @@ The [development plan](docs/development-plan.md) connects mission intent, simula
 ## Work locally
 
 ```sh
+python tools/boat_analysis/model/install.py --source /path/to/OpenSysML
 uv sync --locked
-uv run python -m tools.boat_analysis.cli install
 uv run python -m tools.boat_analysis.cli validate
 uv run python -m tools.boat_analysis.cli prepare
 uv run python -m tools.publishing.build
 uv run pytest -q
 ```
 
-Python uses the package-free uv project. The Python client, CLI, service and MCP server use upstream development revision `62b904178c1c8281439f6b0445c739547c89ae9a`. Install Go 1.25+ for the source installer and a GNU-compatible C compiler for numerical preparation. The installer verifies the upstream source archive before building the three native executables. See [modeling conventions](models/README.md), [publishing](docs/publishing.md), and [sizing methods](docs/sizing.md).
+Python uses the package-free uv project. The Python client, CLI, service and MCP server use local candidate revision `e002f1668834f9409ee62200c8b89c0f5bf5e309`, on `feat/python-dataclass-bluedog-pinned` in the OpenSysML checkout. This unpublished candidate adds standalone dataclasses to the known-working upstream revision `62b904178`; it must be installed from a local checkout containing that commit before `uv sync`. Install Go 1.25+ for the source installer and a GNU-compatible C compiler for numerical preparation. The installer verifies a pinned Git archive checksum, builds all three executables, and retains the matching Python source under `.tools` for uv. Uncommitted checkout edits are not included. This is a local testing pin: hosted CI cannot bootstrap it until the candidate is published and the archive URL/checksum are updated. See [modeling conventions](models/README.md), [publishing](docs/publishing.md), and [sizing methods](docs/sizing.md).
 
 This pin includes the native runtime MCP tools. The later upstream short-name-resolution merge `b8e897e0e` caused a severe validation slowdown on the complete Blue Dog model during migration. Update the pin only after checking full-model validation, numerical regressions and document rendering together; the Python client and native executables must use the same revision.
 
-For an agent host, register `.tools/develop-62b904178/sysml-mcp` (Windows: `sysml-mcp.exe`) with `-root` pointing to this repository's `models` directory. Prefer its native model queries, verification, execution and rendering tools. The blog retains its authored Markdown, scoped views and existing navigation; OpenSysML supplies model semantics and diagram/report rendering.
+For an agent host, register `.tools/develop-e002f1668/sysml-mcp` (Windows: `sysml-mcp.exe`) with `-root` pointing to this repository's `models` directory. Prefer its native model queries, verification, execution and rendering tools. The blog retains its authored Markdown, scoped views and existing navigation; OpenSysML supplies model semantics and diagram/report rendering.
 
 Generated pages belong in build artifacts. The model owns design facts; documentation explains how we reason about them. Current sizing uses explicit conservative aerodynamic assumptions and refined scenario replay; VSPAERO supplies exploratory finite-wing trends. Recorded outcomes are conditional evidence, not a qualified vessel design.

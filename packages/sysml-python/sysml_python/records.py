@@ -6,6 +6,20 @@ from numbers import Real
 from math import isfinite
 
 
+def from_array(cls, values):
+    """Decode a numerical vector in the generated record's declaration order."""
+    names = [f.metadata.get('sysml_name', f.name) for f in fields(cls)]
+    array = np.asarray(values)
+    if array.shape != (len(names),):
+        raise ValueError(f'{cls.__name__}: expected vector of length {len(names)}')
+    return cls.from_mapping(dict(zip(names, array, strict=True)))
+
+
+def as_array(record):
+    """Copy a model record's values at the NumPy boundary."""
+    return np.asarray(tuple(record.to_mapping().values()), dtype=float)
+
+
 class Record(Mapping):
     sysml_id: str
 
@@ -23,7 +37,7 @@ class Record(Mapping):
 
     def as_array(self):
         """Copy model-ordered values for a NumPy algorithm."""
-        return np.asarray(tuple(self.values()), dtype=float)
+        return as_array(self)
 
     @classmethod
     def from_mapping(cls, values):
@@ -32,11 +46,7 @@ class Record(Mapping):
     @classmethod
     def from_array(cls, values):
         """Decode a numerical vector in generated model field order."""
-        names = [f.name for f in fields(cls)]
-        array = np.asarray(values)
-        if array.shape != (len(names),):
-            raise ValueError(f'{cls.__name__}: expected vector of length {len(names)}')
-        return cls(**dict(zip(names, array, strict=True)))
+        return from_array(cls, values)
 
     def __getitem__(self, name):
         if name not in {f.name for f in fields(self)}:

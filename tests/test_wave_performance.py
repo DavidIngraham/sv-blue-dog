@@ -1,4 +1,5 @@
 """Independent limits for wave response, inertia, loads and mission caching."""
+from sysml_python.records import from_array
 import sys
 import numpy as np
 import pytest
@@ -121,7 +122,7 @@ def test_small_wave_limit_recovers_steady_balance_and_power(typed):
             for i in range(count):yield np.zeros(6),-2*np.pi*i/count,(2*np.pi/period)**2/9.80665,2*np.pi/period
     if typed:
         from tools.boat_analysis.generated import OperatingState,AeroCoefficients,MassProperties,HydroState
-        state,aero,mass,hydro=(t.from_array(v)
+        state,aero,mass,hydro=(from_array(t, v)
             for t,v in zip((OperatingState,AeroCoefficients,MassProperties,HydroState),(state,aero,mass,hydro),strict=True))
         design=model.design_record(design)
     steady=SurfaceOperation(model.operating_contract,model.polar,[10,.0002,.05,8]).evaluate(design,model.parameters,state,aero,mass,hydro)

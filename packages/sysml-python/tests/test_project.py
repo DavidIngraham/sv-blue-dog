@@ -1,4 +1,6 @@
 import importlib.util
+import sys
+from sysml_python.records import as_array
 import os
 from pathlib import Path
 
@@ -25,6 +27,7 @@ definition = "Example::Heat"
     package = project.prepare()
     spec = importlib.util.spec_from_file_location('generated_test', package/'__init__.py')
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return project, source, module
 
@@ -55,6 +58,7 @@ def test_model_default_is_bound_before_native_execution(prepared):
     package = project.prepare()
     spec = importlib.util.spec_from_file_location('default_test', package/'__init__.py')
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     assert module.heat(current=2).power == 40
     assert module.heat(current=2,resistance=5).power == 20
@@ -116,8 +120,14 @@ dimensions = "Plate::Dimensions"
     package = Project(config, executable=executable).prepare()
     spec = importlib.util.spec_from_file_location('plate_test', package/'__init__.py')
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     first = module.Dimensions(width=2, height=3)
+    from dataclasses import fields
+    from sysml_python.records import Record
+    assert not isinstance(first, Record)
+    assert [f.metadata['sysml_name'] for f in fields(first)] == ['width', 'height']
+    assert module.Dimensions(width=np.float32(2), height=np.int64(3)).to_mapping() == first.to_mapping()
     assert module.area(dimensions=first).area == 6
     assert module.area(dimensions={'height':3, 'width':2}).area == 6
     packed = module.area.prepare_inputs(dimensions=first)
@@ -138,6 +148,7 @@ def test_single_named_vector_return_and_array_copy(prepared):
     package = project.prepare()
     spec = importlib.util.spec_from_file_location('single_vector_test', package/'__init__.py')
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     result = module.heat(current=2,resistance=10)
     vector = result.as_array()
@@ -187,6 +198,7 @@ def test_prepared_project_is_relocatable(prepared):
     source.write_text('changed original location')
     spec = importlib.util.spec_from_file_location('moved_test', moved/'generated/__init__.py')
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     assert module.heat(current=2, resistance=10).power == 40
     assert set(module.heat.provenance()['sourceHashes']) == {'example.sysml'}
@@ -252,7 +264,6 @@ def test_generated_batch_signature_is_statically_named(prepared):
 
 
 @pytest.mark.parametrize('declaration,field,match', [
-    ('attribute def Dimensions { attribute values : Real; }','values','conflicts'),
     ('part def Nested {} part def Dimensions { attribute x : Real; part nested : Nested; }','x','nested'),
     ('attribute def Dimensions { attribute x : Real = 2; }','x','bound record'),
     ('attribute def Parent { attribute x : Real; } attribute def Dimensions :> Parent { attribute y : Real; }','y','inheritance'),
@@ -264,6 +275,23 @@ def test_unsupported_record_schemas_fail_explicitly(prepared, declaration, field
     project.path.write_text(project.path.read_text()+'\n[tool.sysml_python.exports.heat.records]\nsize = "Example::Dimensions"\n')
     with pytest.raises(ValueError, match=match):
         project.prepare()
+
+
+def test_snapshot_field_can_use_mapping_method_name(prepared):
+    project, source, _ = prepared
+    source.write_text('package Example { private import ScalarValues::*; '
+        'attribute def Dimensions { attribute values : Real; attribute scale : Real; } '
+        'calc def Heat { in size : Real [2] ordered nonunique; return area : Real = size#(1)*size#(2); } }')
+    project.path.write_text(project.path.read_text()+'\n[tool.sysml_python.exports.heat.records]\nsize = "Example::Dimensions"\n')
+    package = project.prepare()
+    spec = importlib.util.spec_from_file_location('mapping_name_test', package/'__init__.py')
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    record = module.Dimensions(values=3, scale=2)
+    assert record.values == 3
+    assert record.to_mapping() == {'values': 3, 'scale': 2}
+    assert module.heat(size=record).area == 6
 
 
 def test_source_aliases_preserve_resolved_discovery_semantics(prepared):
@@ -282,6 +310,7 @@ def test_real_scalar_with_compiler_numeric_union(prepared, expression, expected)
     package = project.prepare()
     spec = importlib.util.spec_from_file_location('numeric_union_test',package/'__init__.py')
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     assert module.heat(current=2,resistance=10).power == expected[1]
     result = module.heat.batch(shared={'resistance':10},cases={'current':[-1,2]})
@@ -303,6 +332,7 @@ def test_constant_calculation_without_inputs(prepared):
     package = project.prepare()
     spec = importlib.util.spec_from_file_location('constant_test',package/'__init__.py')
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     assert module.heat().power == 42
     with pytest.raises(ValueError, match='exactly once'):
@@ -316,9 +346,12 @@ def test_record_defaults_preserve_model_order_and_named_overrides(prepared):
     package = project.prepare()
     spec = importlib.util.spec_from_file_location('record_defaults_test',package/'__init__.py')
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
-    record = module.Dimensions(height=3)
-    np.testing.assert_array_equal(record.as_array(),[2,3])
+    record = module.Dimensions(height=3, width=2)
+    with pytest.raises(TypeError):
+        module.Dimensions(height=3)
+    np.testing.assert_array_equal(as_array(record),[2,3])
     assert module.heat(size=record).power == 6
     assert module.heat(size={'height':3}).power == 6
     assert module.heat(size=module.Dimensions(height=3,width=4)).power == 12

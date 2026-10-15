@@ -9,9 +9,9 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-REVISION = "62b904178c1c8281439f6b0445c739547c89ae9a"
+REVISION = "e002f1668834f9409ee62200c8b89c0f5bf5e309"
 RELEASE = "develop-" + REVISION[:9]
-SOURCE_SHA256 = "2d188a0c431fdaf5805b150071d9feaeb1430268605826f64aeef72596e2ebde"
+SOURCE_SHA256 = "cbedc8e4dcce444d11a11eb71e99b93236484f435fe36adaf8c392a143f637b9"
 ROOT = Path(__file__).resolve().parents[3]
 COMMANDS = ("sysml", "sysml-grpc", "sysml-mcp")
 
@@ -22,20 +22,27 @@ def binary_path(command="sysml"):
     return ROOT / ".tools" / RELEASE / (command + (".exe" if platform.system() == "Windows" else ""))
 
 
-def main():
+def main(source_checkout=None):
     go = shutil.which("go")
     if not go:
         raise SystemExit("Install Go 1.25 or later to build the pinned OpenSysML development revision.")
     destination = binary_path().parent
     destination.mkdir(parents=True, exist_ok=True)
     archive_path = destination / "source.zip"
+    if source_checkout is not None:
+        subprocess.run(["git", "-C", str(Path(source_checkout).resolve()), "archive",
+                        "--format=zip", f"--prefix=OpenSysML-{REVISION}/",
+                        "--output", str(archive_path), REVISION], check=True)
     if not archive_path.exists():
         with urllib.request.urlopen(f"https://codeload.github.com/Open-MBEE/OpenSysML/zip/{REVISION}", timeout=120) as response:
             archive_path.write_bytes(response.read())
     if hashlib.sha256(archive_path.read_bytes()).hexdigest() != SOURCE_SHA256:
         raise SystemExit("OpenSysML source archive checksum mismatch")
-    with tempfile.TemporaryDirectory(prefix="bluedog-opensysml-") as directory:
-        build(go, archive_path, Path(directory))
+    with tempfile.TemporaryDirectory(prefix='bluedog-opensysml-') as directory:
+        source = Path(directory)
+        build(go, archive_path, source)
+        shutil.copytree(source / 'client' / 'python', destination / 'source' / 'client' / 'python',
+                        dirs_exist_ok=True)
 
 
 def build(go, archive_path, source):
@@ -63,4 +70,7 @@ def build(go, archive_path, source):
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source', help='Local Git checkout containing the pinned revision')
+    main(parser.parse_args().source)

@@ -26,14 +26,16 @@ jobs:
           fetch-depth: 0
       - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
         with:
-          version: '0.9.5'
+          version: '0.12.10'
           enable-cache: true
-      - run: uv sync --locked
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
         with:
           go-version: '1.25.11'
           cache: false
-      - run: uv run python -m tools.boat_analysis.cli install
+      - run: python3 tools/boat_analysis/model/install.py
+      - run: uv sync --locked
+      - name: Select the pinned compiler
+        run: python3 -c 'from tools.boat_analysis.model.install import binary_path; print("OPENSYSML_BINARY=" + str(binary_path()))' >> "$GITHUB_ENV"
       - run: uv run python -m tools.boat_analysis.environment.climatology
       - run: uv run python -m tools.boat_analysis.environment.sensitivity
       - run: uv run python -m tools.publishing.passage_exposure
@@ -50,12 +52,8 @@ jobs:
       - run: uv run python -m tools.boat_analysis.cli prepare
       - run: uv run python -m tools.boat_analysis.cli evidence-check
       - name: Check reusable SysML Python interface
-        env:
-          OPENSYSML_BINARY: ${{ github.workspace }}/.tools/develop-62b904178/sysml
         run: uv run pytest packages/sysml-python/tests -q
       - name: Verify installed runtime with an independent project
-        env:
-          OPENSYSML_BINARY: ${{ github.workspace }}/.tools/develop-62b904178/sysml
         run: |
           uv build packages/sysml-python --wheel --out-dir .tools/runtime-dist
           template_dir=$(mktemp -d)

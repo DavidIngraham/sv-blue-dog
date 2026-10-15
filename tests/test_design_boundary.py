@@ -1,4 +1,5 @@
 """Typed inputs must preserve the native numerical ABI exactly."""
+from sysml_python.records import from_array, as_array
 import json
 from dataclasses import fields, replace
 import numpy as np
@@ -12,13 +13,13 @@ def test_records_preserve_model_vectors_and_reject_drift():
     c=json.loads((ROOT/'.tools/coupled-contract.json').read_text())
     for cls,names,values in [(Design,c['designNames'],c['referenceDesign']),
                              (Parameters,c['parameterNames'],c['parameterValues'])]:
-        record=cls.from_array(values)
-        np.testing.assert_array_equal(record.as_array(),values)
+        record=from_array(cls, values)
+        np.testing.assert_array_equal(as_array(record),values)
         assert [f.name for f in fields(record)]==names
-        with pytest.raises(ValueError):cls.from_array(values[:-1])
-        with pytest.raises(ValueError):cls.from_array([values])
-        with pytest.raises(ValueError,match='finite'):cls.from_array([float('nan'),*values[1:]])
-    design=Design.from_array(c['referenceDesign'])
+        with pytest.raises(ValueError):from_array(cls, values[:-1])
+        with pytest.raises(ValueError):from_array(cls, [values])
+        with pytest.raises(ValueError,match='finite'):from_array(cls, [float('nan'),*values[1:]])
+    design=from_array(Design, c['referenceDesign'])
     assert replace(design,length_m=1.2).length_m==1.2
     assert design.length_m!=1.2
 
@@ -31,7 +32,7 @@ def test_configuration_accepts_record_without_numerical_change():
     _,new_mass,new_geometry,_=model.configuration(record,0,resolution=4)
     assert new_mass==old_mass
     np.testing.assert_array_equal(new_geometry,old_geometry)
-    np.testing.assert_array_equal(model.assumptions.as_array(),model.parameters)
+    np.testing.assert_array_equal(as_array(model.assumptions),model.parameters)
 
 
 def test_mass_kernel_accepts_both_typed_inputs():
@@ -46,7 +47,7 @@ def test_ballast_density_invalidates_geometry_cache():
     state=[5,1,1,2,50,4,1,-2,0]
     model.at_state(design,state,pitch_equilibrium=False)
     original=model.candidate(design)
-    density_index=list(model.assumptions).index('ballastDensity')
+    density_index=list(model.assumptions.to_mapping()).index('ballastDensity')
     model.parameters[density_index]*=.8
     changed=model.candidate(design)
     assert changed is not original
