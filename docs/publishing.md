@@ -21,7 +21,7 @@ The arrows follow information from the model and analyses into the engineering r
 
 The seasonal weather views follow the same rule: NOAA observations are frozen with hashes, model policy defines the bins and profile scope, and native calculations supply the passage-probability sensitivity. CI regenerates these views and rejects drift from the committed projection and plots. The testbed illustration is exported from the actual read-only SolidWorks assembly with `tools/boat_analysis/cad/export_testbed.ps1`; it is separate from simulated candidate geometry.
 
-The current SRR candidate table is projected from its immutable replay with `python -m tools.publishing.srr --run 2026-10-13-srr-readiness`. CI regenerates the SysML evidence and rejects drift; the Markdown imports that model view.
+The current candidate table is projected from its immutable replay with `python -m tools.publishing.srr --run 2026-10-13-srr-readiness`. CI regenerates the SysML evidence and rejects drift; the Markdown imports that model view.
 
 Our Markdown describes methods and design reasoning. Engineering definitions, assumptions and rationale belong in `models/`. Each page imports those definitions into a small native view; the publisher resolves the view with OpenSysML and inserts its diagram and requirement statements.
 
@@ -49,13 +49,13 @@ uv run python -m tools.publishing.build
 
 The generated site is written to `build/site`; rendered Markdown for the blog is under `build/site/imports/docs`. Generated files are build artifacts. Author the source pages and models, then rebuild them together. Raw GitHub Markdown displays the view source; the published site displays the resolved diagrams.
 
-A documentation build never runs optimization or VSP. Recorded analysis evidence is retained with its original provenance, and current results must identify their inputs and source revision. The current conservative run and the earlier exploratory run use separate model packages, so updating a report never relabels historical evidence. See [the sizing method](sizing.md) and [recorded outcomes](results.md).
+A documentation build never runs optimization or VSP. Recorded analysis evidence is retained with its original provenance, and current results must identify their inputs and source revision. Each recorded analysis has a separate model package identifying its configuration and source evidence. See [the sizing method](sizing.md) and [recorded outcomes](results.md).
 
 ## GitHub Actions
 
 The model-and-documentation workflow validates and prepares native calculations, checks recorded provenance, runs pytest and builds the site. Pull requests produce a Pages artifact; a successful main-branch run deploys it. Action revisions, uv and the native tool are pinned. Full history is fetched because archived evidence is checked against its original source revision.
 
-The personal blog keeps its existing article identifiers and reads rendered Markdown from the project site's `imports/` directory. Authored pages stay in this repository. Legacy page paths redirect to current methods; superseded numerical studies remain available through Git history rather than masquerading as current results.
+The personal blog reads rendered Markdown from the project site's `imports/` directory. Authored pages stay in this repository, with stable article identifiers and links to configuration-specific evidence.
 
 Aerodynamic plots are regenerated from hash-checked archived JSON by `tools.boat_analysis.evidence.aerodynamics` and published under `assets/vsp`. Native geometry screenshots and the corresponding VSP model are retained as evidence. Mesh/wake comparisons and sizing outcomes are projected into SysML for native report queries. The plot build does not launch OpenVSP.
 
@@ -98,12 +98,12 @@ These snapshots cover design variables, physical assumptions, operating state,
 aerodynamic coefficients, hydrostatic inputs, appendage loads, mass properties
 and passage conditions. Geometry arrays and route-case matrices remain numerical
 interfaces. Scalar and batch callers can supply named records; packing follows
-the model declaration order, which the upstream generator now preserves in its
+the model declaration order, which the upstream generator preserves in its
 dataclass fields. Mapping inputs are packed by model field name rather than
 dictionary insertion order. Physical constraints remain native calculations; dataclass construction
 checks data representation, not vessel feasibility.
 
-The migration passed 426 Blue Dog tests and nine before/after coupled-solver
-comparisons within `1e-12`, covering uniform and sheared wind, heel and reversed
-flow. These are software-regression checks, not new vessel qualification evidence.
+Coupled-solver regression checks cover uniform and sheared wind, heel and reversed
+flow with comparisons within `1e-12`. These checks establish software consistency;
+physical qualification requires measured evidence.
 The compiled batch executor remains in place for repeated optimization calls.

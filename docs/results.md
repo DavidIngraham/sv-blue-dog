@@ -2,7 +2,7 @@
 
 **OOSEM:** Trades, optimization and analysis · [Maturity assessment](development-plan.md)
 
-The **1.2 m overall-length** candidate now passes the nominal refined Gorge static screens on the selected Hood River bridge route. A 440 Wh battery and 260 mm hull beam clear the previous energy and reserve-buoyancy shortfalls. The candidate weighs **10.313 kg**, predicts a **33.87-hour** conditional westerly passage, and retains **3.97 Wh** beyond the allocated voyage energy. It remains a preliminary design requiring sensitivity studies and physical evidence. Its structural margins use the provisional analysis basis; they do not qualify material properties, functional deformation limits or casualty flotation.
+The **1.2 m overall-length** candidate passes the nominal refined Gorge static screens on the selected Hood River bridge route. It has a 440 Wh battery and a 260 mm hull beam. The candidate weighs **10.313 kg**, predicts a **33.87-hour** conditional westerly passage, and retains **3.97 Wh** beyond the allocated voyage energy. It remains a preliminary design requiring sensitivity studies and physical evidence. Its structural margins use the provisional analysis basis; they do not qualify material properties, functional deformation limits or casualty flotation.
 
 ```sysml-report BlueDogSRRCurrentDocuments::Summary
 ```
@@ -19,10 +19,10 @@ The bounded local study examines 1.2, 1.0 and 0.8 m overall-length caps. It reta
 
 There is no minimum sailing-speed floor, 72-hour challenge deadline or daily energy-neutrality requirement. Stored energy is sized for a finite passage and protected recovery. The passage multiplier and delay allowance remain provisional design allocations in [the concept policy](../models/analyses/sizing/credibility.sysml).
 
-In the earlier route snapshot, both coarse-feasible outputs remained effectively the same 1.2 m seed: their masses differ by less than 0.1 g and their conditional passage times by about 2.4 minutes. This bounded run has not yet produced a useful spread of design choices. The 1.0 and 0.8 m searches remain unresolved; infeasible terminal points are listed for diagnosis, not offered as alternatives.
+In the archived search configuration, both coarse-feasible outputs remained effectively the same 1.2 m seed: their masses differ by less than 0.1 g and their conditional passage times by about 2.4 minutes. This bounded run has not yet produced a useful spread of design choices. The 1.0 and 0.8 m searches remain unresolved; infeasible terminal points are listed for diagnosis, not offered as alternatives.
 
 <details>
-<summary>Earlier search results before the SRR bridge-route correction</summary>
+<summary>Search evidence and configuration limits</summary>
 
 These figures describe their archived configuration. Their feasibility verdicts do not apply to the current course.
 
@@ -36,7 +36,7 @@ These figures describe their archived configuration. Their feasibility verdicts 
 ```sysml-report BlueDogSRRFrontierDocuments::SeedReplay
 ```
 
-In that earlier replay, the retained 1.2 m seed balanced its operating cases, but the voyage-energy margin fell to −0.00556 as conditional passage changed from 33.66 to 33.74 hours. The current battery-and-beam correction above supersedes that failed candidate.
+In the archived seed replay, the retained 1.2 m seed balanced its operating cases, but the voyage-energy margin fell to −0.00556 as conditional passage changed from 33.66 to 33.74 hours. That seed is distinct from the 440 Wh candidate assessed above.
 
 The sampled sealed-body recovery curves have pitch equilibria and positive restoring roll moments at all interior samples across four wing trims. That does not establish dynamic capsize recovery, pitch stability, structural integrity or recovery with damaged equipment. The challenge permits limp recovery to shore; self-righting remains one possible vehicle strategy.
 
@@ -50,7 +50,7 @@ The useful next work is to test sensitivity to construction and foil assumptions
 
 Cost and construction effort need a bill of materials and process estimates. Recovery needs assessed shore approaches and casualty capabilities. Until those inputs exist, a mass-versus-time plot represents only part of the design decision.
 
-The [SRR review](srr-review.md) separates the requirements baseline from these preliminary design findings. Neither a solver pass nor SRR approval qualifies a vessel for an unattended trial.
+The [mission and design assessment](srr-review.md) connects these findings to the requirements and remaining evidence. A solver pass does not qualify a vessel for an unattended trial.
 
 [Archived run and source provenance](../evidence/runs/2026-10-13-srr-frontier/manifest.json) · [Generated model evidence](../models/evidence/srr-frontier.sysml)
 

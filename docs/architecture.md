@@ -32,7 +32,7 @@ package Page_architecture_0 {
 
 I am using OpenSysML's OOSEM library to make the steps between mission intent and equipment explicit. The context identifies the boat, operator, shore support, environment and other vessels. Use cases act on that complete context. Logical scenarios then describe the responsibilities needed to carry out those use cases, before I settle the implementation.
 
-The model now refines three use cases with scenario threads. Their actions are allocated to the existing boat architecture; verification cases and the mission simulation are linked to those threads. These are logical sequences, not executable control software or evidence that the boat has passed a test.
+The model refines three use cases with scenario threads. Their actions are allocated to the existing boat architecture; verification cases and the mission simulation are linked to those threads. These are logical sequences, not executable control software or evidence that the boat has passed a test.
 
 ### Normal sailing
 

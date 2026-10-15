@@ -1,16 +1,14 @@
-# Blue Dog system requirements review
+# Blue Dog mission and design assessment
 
-**OOSEM:** Historical assessment · [Maturity assessment](development-plan.md)
+**OOSEM:** Mission, requirements and evidence · [Maturity assessment](development-plan.md)
 
-> Historical assessment: the review framing below is retained as context. Formal SRR approval is no longer a current project gate; see the [running OOSEM maturity assessment](development-plan.md). Numerical and physical evidence retain their original limitations.
-
-This review asks whether the mission and requirements are clear enough to develop the boat. The proposed baseline and supporting desktop assessments are prepared for review; **SRR approval is open**. The [technical appendix](srr-appendix.md) separates evidence, limitations and proposed actions. Your review determines the disposition.
+The Gorge mission gives Blue Dog a definite job. This assessment connects that intent to the requirements, candidate design and evidence still needed. The [technical appendix](srr-appendix.md) records the calculations and their limits.
 
 ## 1 · A small boat with a definite job
 
 Build an autonomous sailboat that completes the Gorge round trip and can recover to shore when continuing is unsafe. I want to learn digital engineering while building something I can transport, manufacture and test myself.
 
-Hawaii remains a future mission. This review concerns the finite Gorge challenge.
+Hawaii remains a future mission. The current design addresses the finite Gorge challenge.
 
 ![The existing manufacturing and wing testbed in SolidWorks.](figures/testbed-solidworks.png)
 
@@ -130,7 +128,7 @@ Autonomous weather polling is allowed; manual data pushes are not. Communication
 ```sysml-report BlueDogSRRDocuments::EnvironmentProposal
 ```
 
-These are **review proposals**, not measured extremes or accepted launch limits. The fetch sensitivity exposed a mismatch in the old wave allocation. The model now uses this same wave allocation, includes calm, and separates operational exposure from casualty recovery. The appendix specifies correlated cases, wake tests and the evidence needed before expanding the on-water envelope.
+These are engineering allocations, not measured extremes or qualified launch limits. The model includes calm conditions and distinguishes operational exposure from casualty recovery. The appendix specifies correlated cases, wake tests and the evidence needed to establish the on-water envelope.
 
 Darkness is included. Fog matters when it compromises a required safety capability. Calm is a possible waiting state, not an automatic mission failure.
 
@@ -156,7 +154,7 @@ Sweep overall-length caps while leaving hull length and the remaining parameters
 
 There is no handicap score and no fixed sailing-speed floor. The reliability target is provisional. The design team chooses the preferred balance and records its rationale.
 
-The 1.2 m concept, corrected to a 440 Wh battery and 260 mm hull beam, passes nominal refined Gorge static screens against the corrected course in the [current SRR evidence](srr-appendix.md#current-baseline-evidence). It is not an accepted vessel design. The earlier frontier is retained as historical exploration; current feasibility comes from the new replay. Local searches do not establish a minimum feasible size or a calibrated mission probability.
+The 1.2 m concept with a 440 Wh battery and 260 mm hull beam passes nominal refined Gorge static screens in the [candidate evidence](srr-appendix.md#current-baseline-evidence). It is a preliminary design. Local searches do not establish a minimum feasible size or a calibrated mission probability.
 
 [Alternatives, scope and unresolved searches](results.md)
 
@@ -201,29 +199,26 @@ The next experiments should inform structural mass, seams, wing behavior, actuat
 
 ## 13 · What is resolved, and what comes next
 
-The SRR preparation defines the course and bridge passage, recovery-site selection, environmental design basis, traffic-performance allocations and impaired-sensing risk method. The model, reference routing, verification plans and fresh evidence use the same proposed baseline. These are concrete proposals for your review, not analyses you need to perform.
+The model defines the course and bridge passage, recovery-site selection, environmental design basis, traffic-performance allocations and impaired-sensing risk method. Their physical feasibility remains the central question.
 
 ```sysml-report BlueDogSRRReadinessDocuments::Encounters
 ```
 
-PDR investigations are selected through the [model-linked risk inventory](development-plan.md#let-risk-select-the-next-investigation). Priorities remain provisional while SRR disposition is pending.
+The [model-linked risk inventory](development-plan.md#let-risk-select-the-next-investigation) guides the next investigations. Traffic sensing and casualty recovery have priority because they can determine the architecture and operating scope.
 
-The largest allocated closing-speed case needs 724 m of acquisition distance; the proposed design envelope rounds this to 750 m. This is an engineering allocation, not a navigation-rule stand-off. Demonstrating detection from a small, moving boat—especially in darkness—is a major PDR feasibility question.
+The largest allocated closing-speed case needs 724 m of acquisition distance; the design envelope rounds this to 750 m. This is an engineering allocation, not a navigation-rule stand-off. Demonstrating detection from a small, moving boat—especially in darkness—is a major feasibility question.
 
-| Next gate | Deliverable | Who does the work |
-| --- | --- | --- |
-| PDR | Demonstrate a credible sensing/maneuver architecture and route/casualty recovery coverage; select a feasible design from the frontier | Analysis agent, using owner-supplied field observations and priorities |
-| CDR | Correlate critical loads, construction, propulsion and capsize behavior; release a defined build | Analysis agent integrates experiments conducted with the owner |
-| Each TRR | Confirm actual sites, access, notices, stage, forecast and the tested configuration; accept the scoped residual risk | Agent prepares the evidence; owner reviews and authorizes the trial |
+| Investigation | Evidence needed |
+| --- | --- |
+| Sensing and maneuvering | Sensor replay and measured response against the target classes and timing allocations |
+| Casualty recovery | Surveyed approaches, route coverage, reserve, retention and one-person pickup |
+| Physical design | Correlated loads, construction, propulsion and capsize behavior for an identified configuration |
+| On-water experiments | Actual sites, access, notices, stage, forecast, retrieval arrangements and bounded operating conditions |
 
-[Completed desktop assessments and explicit gate criteria](srr-appendix.md#review-actions)
+[Evidence and next investigations](srr-appendix.md#review-actions)
 
-## 14 · Your SRR disposition
+## 14 · What I am ready to learn next
 
-The available decisions are **proceed**, **proceed with limitations**, or **iterate**. No decision is recorded yet.
+The available evidence supports concept development and supervised component experiments. I need measurements of sensing, maneuvering, construction and recovery to judge the boat's operating envelope. An unattended challenge attempt needs integrated evidence for its actual configuration and conditions.
 
-**Recommendation: proceed with limitations** to concept development and supervised component experiments. No unattended on-water operation is included. A limited release can authorize this work. It does not authorize an unattended challenge trial or certify the current numerical design.
-
-Review the baseline and proposed allocations, add actions, and identify the limits of any approval. I will implement the resulting actions and return the changed evidence for review.
-
-[Technical appendix](srr-appendix.md) · [Development plan](development-plan.md)
+[Technical appendix](srr-appendix.md) · [Maturity assessment](development-plan.md)

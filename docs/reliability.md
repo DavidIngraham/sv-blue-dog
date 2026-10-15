@@ -4,7 +4,7 @@
 
 A slower voyage demands more hours of successful unattended operation. I use passage estimates and the architecture to ask what can fail during that exposure, and how the boat should respond. This connects [preliminary design](development-plan.md#virtual-design) to the fault and endurance tests needed for [physical verification](development-plan.md#physical-validation).
 
-The finite Gorge round trip is the current design objective. I connect sailing progress, passage duration and reliability exposure to compare the chance of completing that mission. The sizing study now uses conservative aerodynamic assumptions for its primary case and re-solves controls under additional stresses. Passage times from those scenarios are conditional estimates, not measured endurance or demonstrated reliability; see the [current outcomes](results.md).
+The finite Gorge round trip is the current design objective. I connect sailing progress, passage duration and reliability exposure to compare the chance of completing that mission. The sizing study uses conservative aerodynamic assumptions for its primary case and re-solves controls under additional stresses. Passage times from those scenarios are conditional estimates, not measured endurance or demonstrated reliability; see the [current outcomes](results.md).
 
 ## Can a faster boat be more likely to finish?
 
@@ -32,7 +32,7 @@ Our native [passage-exposure analysis](../models/analyses/passage-exposure.sysml
 
 The current mission has no completion deadline and retains protected recovery reserve. Its battery may finish below its starting charge if reserve and peak-power requirements remain satisfied throughout the voyage. Repeating the same energy cycle indefinitely is a separate future objective.
 
-The chronological energy model now reports finite-campaign feasibility separately from repeatable-cycle feasibility. The current sizing search retains peak-power checks without imposing daily energy balance. To compare designs by mission success, I still need to connect each sizing candidate to finite mission energy histories and condition-dependent failure exposure. A minimum-length static result is not a mission-success optimum.
+The chronological energy model reports finite-campaign feasibility separately from repeatable-cycle feasibility. The current sizing search retains peak-power checks without imposing daily energy balance. To compare designs by mission success, I still need to connect each sizing candidate to finite mission energy histories and condition-dependent failure exposure. A minimum-length static result is not a mission-success optimum.
 
 Hawaii will require its own route, season, passage duration, communications, saltwater exposure and recovery allocations. The model keeps the candidate ocean requirements for that future work, without making them prerequisites for the Gorge boat.
 

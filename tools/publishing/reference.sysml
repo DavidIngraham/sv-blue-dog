@@ -445,7 +445,7 @@ package BlueDogSRRDocuments {
             Column(name = "Current sensitivity m/s", path = "currentSensitivityUpperMps")))
     }
     part def EnvironmentProposal :> Document {
-        attribute redefines title = "Environmental allocations proposed for review";
+        attribute redefines title = "Provisional environmental design allocations";
         part allocations : Table { calc rows : EnvironmentProposalRows; }
     }
 }
@@ -534,7 +534,7 @@ package BlueDogSRRCurrentDocuments {
             Column(name = "Physically qualified", path = "physicallyQualified")))
     }
     part def Summary :> Document {
-        attribute redefines title = "Current SRR sizing candidate";
+        attribute redefines title = "Gorge sizing candidate";
         part result : Table { calc rows : CandidateRows; }
     }
 }

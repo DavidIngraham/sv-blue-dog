@@ -22,9 +22,10 @@ Organize current development around OOSEM layers, not formal SETR approval gates
 When engineering changes affect coverage, traceability, evidence or applicability,
 update the dated assessment in `docs/development-plan.md` with supporting links,
 remaining gaps and the next useful investigation. Keep virtual, physical and
-model-validation evidence distinct. Preserve the introductory story and retain
-older review pages as historical assessments, without treating pending approvals
-as current work gates.
+model-validation evidence distinct. Preserve the introductory story and article URLs. Published prose describes the
+current project and author viewpoint, not editing history, migrations or previous
+blog structures. Preserve substantive technical provenance and configuration
+limits without narrating the reorganization.
 
 Python owns SciPy search, numerical quadrature, geometry, tool integration and
 pytest orchestration. The compiled batch adapter serves repeated numerical

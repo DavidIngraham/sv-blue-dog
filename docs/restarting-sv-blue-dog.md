@@ -36,7 +36,7 @@ I realized that open-source tools and SysML v2 could give the project some struc
 
 I am especially interested in how that model can structure an agent-driven development project. Agents can help explore alternatives and implement analyses quickly. I still need a shared description of what we are trying to achieve, why a choice was made and what would count as convincing evidence. Otherwise, producing more analysis can simply make the maze bigger.
 
-The [development plan](development-plan.md) gives the project a path from the challenge definition to a boat on the water. At each stage, it identifies the decisions to make, the analyses or tests needed to support them, and what needs to be resolved before moving on. I use that structure to guide both my own work and the tasks I give agents, revisiting earlier decisions as simulations and experiments reveal more about the design.
+The [maturity assessment](development-plan.md) connects the mission, requirements, architecture, analyses and experiments. I use it to understand what the evidence supports, where the gaps are and which question to tackle next. Those layers develop together as I learn more about the boat.
 
 ### Try the configuration decisions
 
@@ -50,7 +50,7 @@ The interesting part is what the sketch cannot tell me on its own. More wing are
 
 The optimizer starts from a candidate, builds its geometry, and uses native SysML calculations for mass, loads, power and requirement margins. SciPy adjusts the design and the sailing controls to balance surge, side force, yaw and roll across both tacks, upwind and downwind, at the study wind speeds. It checks structural, handling, recovery, course-progress and finite-passage energy constraints alongside that balance.
 
-The current search sweeps overall-length caps while keeping all 29 design variables and 48 operating-state values free. It optimizes mass and conditional passage time separately and retains feasible alternatives for a design decision. The first bounded run retains a 1.2 m candidate, but its refined replay still misses the energy allocation slightly; the smaller searches remain unresolved. Finer geometry, recovery assessment and mission simulation challenge every candidate. Failure to find a solution is a reason to investigate the constraints and search, not proof that no boat of that size can work. The [sizing method](sizing.md) and [current results](results.md) carry the details.
+The current search sweeps overall-length caps while keeping all 29 design variables and 48 operating-state values free. It optimizes mass and conditional passage time separately and retains feasible alternatives for a design decision. The assessed 1.2 m candidate has a 440 Wh battery and 260 mm hull beam and passes the nominal refined Gorge screens, with a small positive energy margin. Smaller searches remain unresolved. Finer geometry, recovery assessment and mission simulation challenge every candidate. Failure to find a solution is a reason to investigate the constraints and search, not proof that no boat of that size can work. The [sizing method](sizing.md) and [current results](results.md) carry the details.
 
 The applet lets you explore and save a proposed configuration. It does not run that coupled optimization in your browser, and a plausible-looking sketch is not a feasible design.
 

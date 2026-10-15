@@ -2,11 +2,9 @@
 
 **OOSEM:** All layers · [The introductory story](restarting-sv-blue-dog.md) · [Series guide](index.md)
 
-The story still starts with Ozzy, an autonomous sailboat, desktop manufacturing and the wish to learn by building a complete system. The [introduction](restarting-sv-blue-dog.md) preserves that journey. This page answers the practical question that follows: what do I understand well enough to use, and what should I learn next?
+Blue Dog brings together my interest in autonomous sailing, desktop manufacturing and learning by building a complete system. The [introduction](restarting-sv-blue-dog.md) tells that story. Here I assess what I understand well enough to use and what I should learn next.
 
-I now organize the work around OOSEM layers: mission and stakeholder needs, system requirements, logical architecture, candidate physical architectures, trades and analysis, and verification and validation. They develop together. A new experiment can change an assumption, an allocation or the mission scope; no layer has to wait for a formal review meeting to improve.
-
-The project no longer uses SRR, PDR, CDR or TRR as its organizing process. Earlier [SRR material](srr-review.md) and its [technical appendix](srr-appendix.md) remain historical assessments with their original evidence. Their pending review decisions are not a current work queue, and retiring the process does not turn an unverified claim into an accepted result.
+I organize the work around OOSEM layers: mission and stakeholder needs, system requirements, logical architecture, candidate physical architectures, trades and analysis, and verification and validation. They develop together. An experiment can change an assumption, an allocation or the mission scope.
 
 ## Current maturity by layer
 
@@ -25,18 +23,18 @@ The most developed numerical work does not determine the maturity of the whole b
 
 ## How the assessment stays current
 
-For each layer, keep four questions separate:
+I assess each layer through four questions:
 
 - **Coverage:** what behavior, interfaces and operating conditions are described, and what is missing?
 - **Traceability:** can I follow the intent through requirements, responsibilities, implementation choices and evidence?
 - **Virtual evidence:** what has been calculated or simulated, for which configuration and assumptions?
 - **Physical evidence:** what has actually been measured or demonstrated, and where is it applicable?
 
-Update the affected row when a model change, analysis, experiment or failed trial changes the answer. State the date, link the specific configuration and evidence, explain the remaining uncertainty, and name the next investigation that could change a decision. Retain the previous assessment in Git history and keep archived runs immutable. If new evidence invalidates an assumption, reduce the claimed maturity or narrow its scope; progress need not be monotonic.
+I reassess each layer as analysis, experiments and trials change the evidence. Each judgment identifies its configuration, remaining uncertainty and the next investigation that could change a decision. A failed trial can narrow the scope of a claim just as a successful experiment can strengthen it.
 
 There is no overall percentage or automatic promotion from “modeled” to “verified.” Missing evidence stays missing. Software tests establish implementation behavior; physical measurements establish claims about the actual system. A document count or a rendered diagram establishes neither.
 
-This page is the running assessment, updated with the engineering work. It is not currently a scheduled monitor or an automated model audit. The model remains authoritative for requirements and design facts; the prose summarizes their present support and limitations.
+The model defines requirements and design facts; this assessment connects them to their present support and limitations.
 
 ## OOSEM views: what is present and what is missing
 
@@ -47,7 +45,7 @@ Dedicated enterprise/stakeholder, measures, logical-architecture and physical-ar
 <a id="review-gates-scaled-to-one-project"></a>
 ## Choosing the next work
 
-Choose the unresolved question that could most change the design or its permitted operating scope. Record what result would change the choice before collecting evidence. Focus first on traffic behavior and casualty recovery, then the material/load, wing and installed-energy assumptions that dominate the candidate. Keep practical test conditions, retrieval arrangements and data capture explicit even though there is no formal review-gate process.
+Choose the unresolved question that could most change the design or its permitted operating scope. Record what result would change the choice before collecting evidence. Focus first on traffic behavior and casualty recovery, then the material/load, wing and installed-energy assumptions that dominate the candidate. Keep practical test conditions, retrieval arrangements and data capture explicit.
 
 1. Extend the scenario threads and define the testbed's learning objectives, including degraded operation and interface assumptions.
 2. Plan wing/actuator measurements, construction coupons and controlled flotation/recovery experiments with predicted observables and uncertainty.
