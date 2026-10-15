@@ -1,0 +1,10 @@
+{
+  "sourceRevision": "40829619e8453220a2eb69cb53047a9b31177f93",
+  "files": {
+    "encounter-feasibility.json": {
+      "sha256": "15175ff53af6fc1aca1fc257ad9d1ed74191d39b029db620d172fe52cd03e9bd"
+    }
+  },
+  "qualified": false,
+  "scope": "Virtual local encounter hypotheses and casualty cases; no hardware, navigation-rule or recovery-site qualification."
+}

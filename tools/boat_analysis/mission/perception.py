@@ -64,7 +64,8 @@ class Observations:
                 if actor.ais_equipped:
                     radius = max(radius,e.cooperative_range_m)
                 point = actor.position(seconds)
-                # Circumscribed target extent is a conservative detection proxy.
+                # Circumscribed extent can trigger earlier than a rectangular hull.
+                # This is an optimistic acquisition proxy, not qualified range.
                 distance = max(0.,np.linalg.norm(point-own_position)-math.hypot(actor.length_m,actor.beam_m)/2)
                 if outage or missed or radius <= 0 or distance > radius:
                     continue
