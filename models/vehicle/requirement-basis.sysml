@@ -48,7 +48,7 @@ package BlueDogRequirementBasis {
     }
     part retainedAllocations : BlueDogDesignDecisions::Decision {
         attribute :>> disposition = "Retain safety behavior, environmental qualification profiles, sensing/control timing and accuracy, handling targets and the provisional mission-reliability objective. These are performance allocations, not material or architecture mandates.";
-        attribute :>> evidenceNeeded = "SRR disposition and PDR validation of the allocated numbers against handling, control sensitivity and mission/encounter analysis; they are not uniquely derived by arithmetic from the challenge.";
+        attribute :>> evidenceNeeded = "Validation of the allocated numbers against handling, control sensitivity and mission/encounter analysis; they are not uniquely derived by arithmetic from the challenge.";
     }
     part recoveryStrategy : BlueDogDesignDecisions::Decision {
         attribute :>> disposition = "Treat passive self-righting as a selected vehicle strategy. The Gorge challenge also admits demonstrated autonomous limp recovery after abort.";
