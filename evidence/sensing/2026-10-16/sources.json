@@ -1,0 +1,67 @@
+{
+  "review_date": "2026-10-16",
+  "status": "supplier specifications and project installation hypotheses; no measured detection or installed consumption",
+  "sources": [
+    {
+      "id": "oak-wide",
+      "url": "https://docs.luxonis.com/hardware/products/OAK-1%20W.md",
+      "accessed": "2026-10-16",
+      "claim_scope": "Fixed IMX378:4056x3040,95x72deg; OV9782:1280x800,127x79.5deg. Streaming2.5-3W; AI up to1W; encoder up to0.5W. Workload-specific, not installed consumption.",
+      "retrieved_sha256": "de3ffd85eb4de67f82c35e69da1aa0bf10121af580c427395e6f9648f34fff7d",
+      "retrieved_bytes": 3988
+    },
+    {
+      "id": "oak-mass",
+      "url": "https://shop.luxonis.com/products/oak-1-w",
+      "accessed": "2026-10-16",
+      "claim_scope": "Camera53.1g,36x54.5x27.8mm; verify exact variant at procurement; exclude housing/cable.",
+      "retrieved_sha256": "66136627aaa8502df6fdf16a65b33f0241c017e16ea8303760ef24af523183c1",
+      "retrieved_bytes": 211231
+    },
+    {
+      "id": "pi-power",
+      "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html",
+      "accessed": "2026-10-16",
+      "claim_scope": "Pi4 USB peripheral limit1.2A total; externally powered hub needed for camera ring. Supply rating is not operating demand.",
+      "retrieval_note": "Official source reviewed through web search/open; direct snapshot unavailable: HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "ais",
+      "url": "https://quark-elec.com/doc/QK-A026_application_note.pdf",
+      "accessed": "2026-10-16",
+      "claim_scope": "QK-A026 supplier maximum120mA at5V =>0.6W; legacy2016 manual accessed today; verify delivered revision. Antennas/cabling and installed mass not closed.",
+      "retrieval_note": "Official source reviewed through web search/open; direct snapshot unavailable: HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "scanner-servo",
+      "url": "https://hitecrcd.com/hs-785hb-karbonite-3-5-turn-winch-servo/",
+      "accessed": "2026-10-16",
+      "claim_scope": "HS785HB:110g,4.8-6V,3.5turns,splash-proof;8mA idle,250mA no-load,1800mA stall;1.38s/60deg at6V.",
+      "retrieved_sha256": "a54e8bfc28488dbd0210fa9f89418c0f60face25b3f7c66a6510c47de1154d3a",
+      "retrieved_bytes": 245907
+    },
+    {
+      "id": "servo-controller",
+      "url": "https://www.pololu.com/product/1350/specs",
+      "accessed": "2026-10-16",
+      "claim_scope": "Micro Maestro6:4.8g;30mA noUSB LEDs on,about10mA more USB. Servo supply separate.",
+      "retrieved_sha256": "4a8dd2fdb51aec410865e6826466d35347483b28dfaaab26a34b17ec07d81907",
+      "retrieved_bytes": 62176
+    },
+    {
+      "id": "sonar",
+      "url": "https://bluerobotics.com/store/sonars/imaging-sonars/ping360-sonar-r1-rp/",
+      "accessed": "2026-10-16",
+      "claim_scope": "Ping360510g with cable,max5W,11-25V;50m catalog range is not vegetation detection;33s360scan at50m;0-30C;underwater only;out of stock when reviewed.",
+      "retrieval_note": "Official source reviewed through web search/open; direct snapshot unavailable: HTTP Error 403: Forbidden"
+    },
+    {
+      "id": "radar",
+      "url": "https://static.garmin.com/pumac/GMR_Fantom_Domes_18x_24x_Install_EN-US.pdf",
+      "accessed": "2026-10-16",
+      "claim_scope": "Fantom18x6.35kg;33W max normal transmit,24W max power-save,4W standby. 50W is RF output, not electrical consumption.",
+      "retrieved_sha256": "7c74052e7eeb8dd82778148bb48587a036614075b1bc7e780b617c2aac400369",
+      "retrieved_bytes": 915986
+    }
+  ]
+}

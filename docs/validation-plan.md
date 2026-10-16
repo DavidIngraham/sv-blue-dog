@@ -41,11 +41,26 @@ I will also replay recorded observations and injected faults through the mission
 
 ## Measure sensing and shared compute as an installation
 
-Measure the complete sensor and compute installation at the regulated bus, including acquisition, processing and thermal behavior. Record the hardware and software revision, instruments, clock basis and operating conditions so the electrical and observation results describe the same installation.
+The [physical shortlist](reference/sensing-configurations.md) supplies two fixed
+camera layouts and a scanning comparison. Start by checking whether each camera
+can support detection and metric range/motion estimation against independent
+target truth. Useful image resolution alone does not establish a usable track.
+Then measure the complete sensor and compute installation at the regulated bus,
+including acquisition, processing and thermal behavior. Record the hardware and
+software revision, instruments, clock basis and operating conditions so the
+electrical and observation results describe the same installation.
 
 Pair detections and misses with independently observed targets and synchronized power and command timestamps. Separate range, target class, lighting and obscuration: an average can hide the conditions that determine whether the boat can operate. Keep some encounters out of calibration so they can test the resulting model independently.
 
 Latency statistics cover delivered detections; missed targets must remain visible separately. An observed electrical peak is limited by instrument bandwidth and sampling. The [measurement reference](reference/sensing-measurements.md) defines the records and accounts for any base electronics load replaced by shared compute. No installed dataset has yet established these capabilities.
+
+The [response envelope](reference/encounter-envelope.md) identifies the clock
+boundaries to measure, including a target arriving during an occupied maneuver.
+The [maneuver study](reference/maneuver-dynamics.md) identifies heading, speed
+and swept path as separate observables. Repeat across tacks, gybes, low
+water-relative speeds and degraded steering; retain unfinished responses as
+failures to establish a bound. These measurements will replace the provisional
+coefficients before they support a physical operating envelope.
 
 ## Integrate in bounded steps
 

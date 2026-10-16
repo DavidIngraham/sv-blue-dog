@@ -17,15 +17,46 @@ The declared baseline uses 5 seconds for acquisition, 1 for processing, 2 for co
 
 The fast-powerboat case drives **724 m**, rounded to the current **750 m** acquisition allocation. Doubling its maneuver time to 30 seconds requires **994 m**. Keeping the 15-second maneuver but increasing processing to five seconds requires **796 m**. Neither variation fits 750 m. The study sweeps six target classes, three maneuver allowances and three processing delays: **54 cases**.
 
-Slower targets require less closing distance, but a person-sized target in darkness can still be the harder sensing problem. The table does not relax the existing all-target 750 m acceptance envelope. A future class-specific allocation needs measured detection and maneuver evidence, explicit operating conditions and an owner-reviewed requirement change.
+Slower targets require less closing distance, but a person-sized target in darkness can still be the harder sensing problem. The table does not relax the existing 750 m acceptance envelope for its six traffic classes. A future class-specific allocation needs measured detection and maneuver evidence, explicit operating conditions and an owner-reviewed requirement change. Weed-response calculations remain separate sensitivities; they do not assign that traffic requirement to vegetation.
 
 The executed timing comparison uses **30-second and one-second assessment schedules**, **two-second command delivery** and a persistent **15-second maneuver**. Pending commands hold the previous heading until delivery; frequent updates cannot restart or shorten a maneuver. The native timing criterion distinguishes the declared schedules, but a passing simulated schedule is not a measurement of installed response.
 
-The table's one-second processing allowance is an allocation. In the replay hypotheses, sensor delivery adds another one or two seconds before the next assessment opportunity. Including both gives **742 m** for the radar-assisted stack and **760 m** for the vision stack at one-second assessment. At 30-second assessment the same bounds are **1,264 m** and **1,282 m**. The vision hypothesis therefore exceeds 750 m even with the faster schedule. The radar-assisted daylight craft hypothesis only narrowly fits; its night and low-target hypotheses still do not. These timing sums are serial allowances for a fresh response opportunity, not measured latency distributions. A pending command or active maneuver blocks selection of another heading; one-second margin checks can request abort but cannot pre-empt that maneuver. Encounters beginning during that occupied interval require additional response-time analysis. Passing the declared schedule criterion does not verify the complete avoidance deadline.
+In the replay timing screen, the one-second allowance represents the wait to the next assessment; it is not also charged as another processing delay. Sensor delivery adds one or two seconds. Including both gives **742 m** for the radar-assisted hypothesis and **760 m** for the vision hypothesis at one-second assessment. At 30-second assessment the same bounds are **1,264 m** and **1,282 m**. The vision hypothesis therefore exceeds 750 m even with the faster schedule. The radar-assisted daylight craft hypothesis only narrowly fits; its night and low-target hypotheses still do not.
+
+These are serial allowances for a fresh response opportunity, not measured latency distributions. A pending command or active maneuver blocks selection of another heading; one-second margin checks can request abort but cannot pre-empt that maneuver. The occupied-response analysis below adds that wait. Passing the declared schedule criterion does not verify the complete avoidance deadline.
+
+### A hazard arriving during a turn
+
+The [class-specific encounter envelope](reference/encounter-envelope.md) separates
+the observation needed for a tow, fast craft, person, stationary obstacle and
+vegetation. It compares head-on, crossing and same-course closure and includes
+the time already committed to another command or maneuver. Acquisition may
+overlap that occupied interval; the model counts the overlap once.
+
+For the fast head-on case with one-second sensor delivery, the fresh-response
+bound is 742 m. If a 17-second
+command-and-maneuver interval begins as the target enters the acquisition
+envelope, the bound becomes 940 m. If 17 seconds remain when the usable track
+arrives, it becomes 1,048 m. Those are different timing conditions, not
+interchangeable margins. None reduces the current 750 m requirement, and none
+establishes that 750 m is sufficient for every encounter.
+
+The [finite-turn experiment](reference/maneuver-dynamics.md) also challenges the
+15-second maneuver assumption. Its uncalibrated turn, tack and gybe cases take
+different times; insufficient steering authority can leave a turn unfinished.
+Without a supported observation or maneuver bound, the envelope reports an
+unsupported case rather than a finite required range.
 
 ## Choosing an installed sensing stack
 
 I need a complete observation pipeline: acquisition, detection, tracking, range and motion estimation, fusion and timely delivery to guidance. IC-01 allocates 8 W of additional sensing and compute demand to make that choice concrete. Camera count, field of view and frame rate affect both observation coverage and power. Carrier electronics, storage, conversion, cooling and any lens cleaning or heating belong in the installation too. Measure useful observations and battery demand together under the intended workload and temperature.
+
+The [physical configuration comparison](reference/sensing-configurations.md)
+now identifies actual camera, compute and AIS components and distinguishes
+continuous coverage from a scanning installation. Their power, mounting and
+backup-sensing gaps feed the next boat-sizing decision. They have no credited
+detection range yet. The abstract range hypotheses below remain historical
+experiment inputs; they are not predictions for these components.
 
 ### Coverage requires complementary observations
 

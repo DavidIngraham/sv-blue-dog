@@ -59,7 +59,7 @@ The loop keeps the boat’s decisions and their consequences on the same timelin
 
 ### A maneuver has several clocks
 
-Consider a heading selected at time zero. With the allocated two-second command delay, the boat keeps its previous heading until second two. The 15-second maneuver then occupies the controller until second seventeen. A one-second assessment period supplies more frequent checks, but it does not shorten either delay.
+In the archived fixed-duration representation, consider a heading selected at time zero. With the allocated two-second command delay, the boat keeps its previous heading until second two. The 15-second maneuver then occupies the controller until second seventeen. That is an allocated release time, not a general prediction of when the boat achieves its heading. A one-second assessment period supplies more frequent checks, but it does not shorten either delay.
 
 | Clock | What it controls |
 | --- | --- |
@@ -89,6 +89,21 @@ The planner checks complete routes to candidate approaches against delivered obs
 If no supported route remains, propulsion stops and drift continues. Essential loads consume the remaining energy, but battery exhaustion does not stop physical motion. Independent truth scores collision and clearance; it cannot secretly prevent a command. A clearance violation remains recorded while the trajectory continues. Contact ends modeled motion, and shore contact is an adverse outcome. If the horizon arrives first, the consequence remains unresolved.
 
 The drift model includes current only, including when inverted. Windage and wave-driven drift remain missing. Reaching a synthetic water approach also does not establish capture, retention or retrieval at a real shore. The [integration evidence plan](validation-plan.md#exercise-decisions-before-physical-integration) identifies the site and casualty tests needed to extend those results.
+
+## Executing a finite turn
+
+An optional [maneuver model](reference/maneuver-dynamics.md) limits turn rate,
+acceleration and speed through a tack or gybe. Steering authority falls with
+water-relative speed. A command remains occupied until the allocated interval
+and the actual heading change have both finished; an unfinished turn cannot be
+replaced with an assumed completion time. This makes occupied-maneuver arrivals
+an explicit input to the [encounter timing analysis](reference/encounter-envelope.md).
+
+The coefficients are hypotheses, and the component study is separate from the
+archived IC-01 campaign. Guidance still forecasts kinematic motion and powered
+recovery still follows its earlier point-mass model. The new capability helps
+identify which maneuver measurements matter; it does not establish safe paths
+for an installed boat.
 
 ## Connecting a sizing candidate
 

@@ -8,6 +8,15 @@ The [integration candidate IC-01](../models/analyses/integrated-candidate.sysml)
 
 IC-01 is the working basis for my first build. I use the search to challenge that allocation and find useful alternatives, rather than treating the smallest numerical answer as a construction decision.
 
+The [physical sensing configurations](reference/sensing-configurations.md) now
+give that search concrete installation questions. Camera coverage, compute,
+protective windows and independent recovery observation must fit together.
+Primary camera-ring loads already challenge the 8 W increment; provisional
+mass subtotals leave unresolved recovery hardware within the shared 1.2 kg
+allowance. I will use reconciled installation budgets and mounting geometry in
+the next sizing comparison. Increasing hull detail before those quantities are
+bounded could refine a boat that cannot carry its required safety functions.
+
 ## What the calculation means
 
 A **sailing state** is one set of speed, heading, sail trim, leeway, rudder angle and heel for a specified wind and tack. The calculation seeks a state where drive balances resistance and the sideways forces and turning moments balance. A **screen** is a pass/fail check on that result: for example, whether it makes upstream progress, fits the available energy or keeps an assembly within its handling limit.

@@ -77,6 +77,15 @@ def direction(route, distance):
 @execution_session()
 def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), seed=0,
              stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None, observations=None, recovery_observations=None):
+    """Execute legacy kinematics unless inputs['maneuverDynamics'] is supplied.
+
+    The opt-in map requires initialHeadingDeg and optionally initialSpeedMps,
+    coefficients, and rudderFraction. Startup has no prior commanded motion, so
+    it coasts during initial command latency. Later pending commands retain the
+    previous target. Achieved headings query the same candidate/wave speed
+    provider as the controller; maneuver loss is applied to that speed demand.
+    Heading forecasts and powered recovery remain kinematic approximations.
+    """
     from .logic import MissionLogic
     logic = MissionLogic()
     dt, hours, forecast, lookahead, maneuver_time, _ = inputs['time']
@@ -84,7 +93,14 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     if not math.isfinite(control_period) or control_period <= 0:
         raise ValueError('Control period must be positive and finite')
     from .command import CommandClock
-    command_clock=CommandClock(inputs.get('commandLatencySeconds',0.),maneuver_time)
+    dynamics=None
+    if 'maneuverDynamics' in inputs:
+        from .maneuver import ManeuverDynamics
+        allocation=inputs['maneuverDynamics']
+        dynamics=ManeuverDynamics(allocation['initialHeadingDeg'],allocation.get('coefficients'),allocation.get('initialSpeedMps',0.))
+        rudder_fraction=allocation.get('rudderFraction',1.)
+        if not math.isfinite(rudder_fraction) or not 0<=rudder_fraction<=1:raise ValueError('Rudder fraction must lie between zero and one')
+    command_clock=CommandClock(inputs.get('commandLatencySeconds',0.),maneuver_time,dynamics=dynamics)
     continue_after_abort=inputs.get('continueAfterAbort',True)
     capacity, stored, reserve, load, maneuver_wh, solar, charging, discharge = inputs['energy']
     recovery_bank=inputs.get('recoveryBatteryWh')
@@ -169,6 +185,9 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         observed.consequence_summary = consequence_summary.copy()
         observed.consequence_summary['truthClearanceViolated'] = truth_clearance_violation
         observed.timing_trace = list(command_clock.trace)
+        if dynamics is not None:
+            observed.timing_trace.append(dict(maneuverModel='bounded-rate-hypothesis',coefficients=dynamics.coefficients,
+                                             physicalValidation=False,steps=dynamics.trace))
         observed.energy_summary=dict(mainStoredWh=stored,recoveryStoredWh=recovery_bank,recoveryInitialWh=inputs.get('recoveryBatteryWh'),recoveryStandbyW=bank_standby)
         if recovery_observations is not None:observed.recovery_summary['observations']=recovery_observations.summary()
         observed.observation_summary = observations.summary() if observations is not None else {"mode":"perfect_truth_baseline"}
@@ -178,6 +197,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             wave_summary['wakeEncounters']=len(wave_effects.seen)
             observed.surface_summary=wave_summary
             observed.model_scope += ('; cached cycle-averaged sailing balance with linear wave response' if wave_performance is not None else '; directional wave resistance sensitivity and geometric contact screens')
+        if dynamics is not None:observed.model_scope += '; unvalidated bounded-rate sailing maneuvers; kinematic heading forecast and point-mass recovery unchanged'
         return observed
     def current_at(point, time):
         return direction(route, route.project(Point(point)))*weather.at(time).current_mps
@@ -277,9 +297,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                     raise ValueError('Unassisted righting requires a preceding capsize')
                 awaiting_righting = disposition == 'await_righting'
                 # A pre-capsize command must not be applied after recovery.
-                command_clock.pending = None
-                command_clock.heading = None
-                command_clock.ends = seconds
+                command_clock.cancel(seconds,event.kind)
+                if dynamics is not None:dynamics.speed=0.
                 heading = None
                 next_control = seconds
                 last_off_line = [position.copy() for _ in range(len(inputs['gateNames']))]
@@ -402,7 +421,11 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                     return result('incomplete','performance_model_outside_coverage')
                 return abort('no_safe_control_in_controller_search') if recovery_planner is not None or continue_after_abort else result('incomplete','no_safe_control_in_controller_search')
             proposed=None if math.isnan(headings[choice]) else headings[choice]
-            command_clock.select(seconds,proposed,turn[choice])
+            kind='turn'
+            if dynamics is not None:
+                from .maneuver import maneuver_kind
+                kind=maneuver_kind(dynamics.heading,proposed,wind_angle)
+            command_clock.select(seconds,proposed,turn[choice],kind=kind)
             if command_clock.advance(seconds):
                 stored-=maneuver_wh;minimum=min(minimum,stored)
             heading=command_clock.heading
@@ -426,6 +449,17 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         velocity = current.copy()
         if awaiting_righting:
             mode = 'capsized_drift'
+        elif dynamics is not None:
+            permitted=logic.cycle(seconds,wind_valid=seconds>=sensor_until,traffic_conflict=conflict,
+                                  communications_available=seconds>=comms_until)['sailingPermitted']
+            target=command_clock.target_heading
+            relative=(dynamics.heading-(90-state.wind_from_deg)+180)%360-180
+            demand=float(sailing_speeds(state.wind_mps,relative)) if permitted and target is not None else 0.
+            maneuver=dynamics.step(target if permitted else None,demand,interval,command_clock.kind,rudder_fraction)
+            velocity+=np.asarray(maneuver['velocity'])
+            command_clock.heading=dynamics.heading
+            heading=dynamics.heading
+            mode='maneuvering_bounded' if maneuver['turning'] else ('sailing' if permitted and target is not None else 'coasting_drift')
         elif command_clock.drifting(seconds):
             mode = 'maneuvering_drift'
         elif not logic.cycle(seconds, wind_valid=seconds >= sensor_until,

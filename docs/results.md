@@ -18,7 +18,7 @@ The earlier 440 Wh reference could satisfy its nominal sailing screen, but left 
 | Main energy headroom after allocated reserve | 4 Wh | 102 Wh |
 | Role | Earlier nominal sizing reference | Integrated capability allocation for refinement |
 
-These are separate coupled configurations. The difference is not a measured hardware retrofit or a claim that battery size alone explains the change. IC-01 still needs an identified sensing stack, rig comparison, installation design and physical evidence.
+These are separate coupled configurations. The difference is not a measured hardware retrofit or a claim that battery size alone explains the change. IC-01 still needs a selected sensing installation, rig comparison, installation design and physical evidence. The [physical sensing shortlist](reference/sensing-configurations.md) now identifies three primary layouts to investigate, with power, ranging and independent-recovery gaps that may change the next sizing result.
 
 ## Integrated candidate sizing
 

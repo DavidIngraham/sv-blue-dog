@@ -144,6 +144,39 @@ selecting a rig.
 
 The 16 October traceability review found two future-mission dependencies still attached to the finite Gorge rig trade: ocean survival waves and repeating-operation energy feasibility. I removed those links from the current comparison while retaining the future requirements in their own scope. The native assessments still give all three rigs equal development status with incomplete evidence. This corrects the basis of the comparison; it supplies no new performance or physical qualification evidence. The next useful comparison remains common measurements of performance, trim energy and recovery under Gorge conditions.
 
+## Connect observation time, achieved turns and physical equipment
+
+The next 16 October investigation asks what sensing must deliver before I add
+detail to the hull-sizing study. The [encounter envelope](reference/encounter-envelope.md)
+separates target classes and encounter geometry, then accounts for a hazard
+arriving while another maneuver occupies the boat. Acquisition can overlap that
+maneuver. A fast head-on case requires 742 m for a fresh response, but 940 m
+when a 17-second occupied interval starts at acquisition-envelope entry. The
+750 m requirement remains unchanged; this calculation exposes a condition it
+does not justify.
+
+The optional [maneuver model](reference/maneuver-dynamics.md) replaces an
+instantaneous heading change with bounded turning, acceleration and
+speed-dependent rudder authority. Synthetic turn, tack and gybe cases finish at
+different times; low-speed and unavailable-rudder cases do not finish within
+their horizon. Finer integration gives similar component responses. The
+coefficients remain uncalibrated, guidance prediction remains kinematic and
+powered recovery keeps its earlier executor. The IC-01 archive retains its
+original fidelity.
+
+The [equipment comparison](reference/sensing-configurations.md) gives the next
+trade three concrete primary installations: two fixed camera rings and a
+scanning head, with named compute and AIS components. Continuous coverage
+challenges the added-power allowance; scanning introduces blind intervals.
+None yet provides independent upright and inverted recovery observation.
+Supplier specifications and project allowances are recorded separately.
+
+This narrows the next sizing inputs to installation loads, coverage geometry
+and backup packaging that can actually be tested. Configuration-specific sensing
+simulation is deferred to the next experiment. It will need the selected
+physical layouts, without treating catalogue resolution or range as achieved
+detection performance.
+
 ### Evidence through each iteration
 
 For me, fidelity means representing the effects that matter to a decision with enough accuracy. Traceability means being able to explain which mission obligation, design, assumptions and evidence produced the conclusion. A more detailed model can strengthen one part of that chain while exposing a weakness in another.

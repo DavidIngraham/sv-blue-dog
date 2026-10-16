@@ -32,6 +32,14 @@ Capacity, departure and remaining-energy rows are successive account states, not
 
 The 4.5 W base electronics allocation and additional 8 W sensing/compute target must become a measured installation budget. Acquisition, processing, communications, cooling and conversion all count. If a shared processor replaces an existing controller, I subtract the replaced load once before adding the complete new installation.
 
+The [physical sensing comparison](reference/sensing-configurations.md) now gives
+that reconciliation specific hardware. Four high-resolution cameras draw a
+quoted 10–12 W for streaming alone; three wider global-shutter cameras draw
+7.5–9 W. Host processing, AIS, conversion and protective installation remain
+additional. A scanning camera reduces the camera count but introduces blind
+intervals. None is a demonstrated fit to the present budget, and independent
+recovery observation still needs its own installation.
+
 The earlier 440 Wh reference shows why this matters: its nominal headroom is only **4 Wh**. Even a small continuous addition requires more storage. The resulting mass changes sailing performance and passage time, so I must resize the candidate rather than divide the extra energy by a battery’s specific energy and call the design finished. IC-01 is one coupled response to that problem.
 
 At IC-01’s 54.6-hour exposure, an extra watt drawn continuously from the battery costs about **54.6 Wh** before any change to passage time. Duty cycling saves energy only if the observation gaps still permit a timely response to traffic. The [sensing comparison](encounter-feasibility.md#choosing-an-installed-sensing-stack) sets out the performance evidence that must accompany a power measurement.

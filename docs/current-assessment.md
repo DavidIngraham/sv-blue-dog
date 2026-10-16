@@ -12,8 +12,8 @@ The rows follow the Object-Oriented Systems Engineering Method (OOSEM): mission,
 | --- | --- | --- |
 | Mission and operating context | An explicit Bingen–Stevenson round trip, independent control, traffic obligations and a distinction between qualification and recovery. | Survey the launch and recovery approaches; resolve actual access, bridge margins and operating boundaries. [Context](architecture.md), [site evidence](site-and-environment-evidence.md) |
 | Requirements and scenarios | Linked obligations, owner constraints, verification cases and scenarios for sailing, encounters and recovery. | Challenge them with adverse and held-out cases; give each important obligation an observable test. [Requirements](requirements.md) |
-| Logical architecture | Executable event handling, sailing permission, abort persistence and recovery-versus-drift decisions. | Resolve hazards arriving during an occupied maneuver, backup startup and obstructed recovery routes. [Mission execution](mission-simulation.md) |
-| Physical architecture | IC-01 allocates geometry, sensing demand, equipment mass and independently powered recovery together. | Select hardware and interfaces; measure installed mass, thermal behavior, electrical demand and fault isolation. [Candidate](results.md) |
+| Logical architecture | Executable event handling, sailing permission, abort persistence and recovery-versus-drift decisions; explicit occupied-response timing. | Exercise dynamically achieved turns with arriving hazards, backup startup and obstructed recovery routes. [Mission execution](mission-simulation.md) |
+| Physical architecture | IC-01 allocates geometry, sensing demand, equipment mass and independently powered recovery together; three primary sensing layouts identify specific components. | Resolve ranging and independent recovery observation; reconcile installed mass, thermal behavior, electrical demand and fault isolation. [Candidate](results.md), [sensing layouts](reference/sensing-configurations.md) |
 | Trades and analysis | Coupled sizing, three open rig concepts, energy accounting and bounded recovery/encounter studies. | Correlate aerodynamic, structural, maneuvering and recovery assumptions with measurements, then compare alternatives on the same cases. [Sizing](sizing.md), [rig trade](sail-trade.md) |
 | Physical verification and model validation | Planned cases identify the claims to test; software checks establish behavior in supplied cases. | Obtain component and integrated measurements for an identified configuration. No completed physical qualification is claimed. [Evidence plan](validation-plan.md) |
 
@@ -40,14 +40,16 @@ righting observations, without adding a dynamic righting model or changing the
 15 October archive. [Mission execution](mission-simulation.md#executable-supervisory-logic)
 describes what happens during inversion.
 
-The declared one-second assessment, two-second command delivery and persistent 15-second maneuver also leave a specific timing question: a passing timing screen does not establish the command deadline for a new hazard arriving during an occupied maneuver. Installed sensing range, latency and power remain allocations. [Encounter evidence](encounter-feasibility.md) and the [candidate energy budget](energy.md) carry those limits alongside their results.
+The [encounter envelope](reference/encounter-envelope.md) now distinguishes a fresh response from a hazard arriving during an occupied maneuver, allowing acquisition and the existing maneuver to overlap. The latter can exceed the 750 m allocation even with one-second assessments. An optional [maneuver model](reference/maneuver-dynamics.md) adds finite turning and speed-dependent steering authority; its synthetic cases show why a universal 15-second maneuver is not a justified bound. Its coefficients still need physical measurements, and the archived integration result retains its original motion model.
+
+The [physical sensing candidates](reference/sensing-configurations.md) identify components and installation gaps. Simultaneous camera coverage challenges the additional 8 W allocation, while independent upright and inverted observation remains unresolved. These findings constrain the next sizing study; none of the installations is selected or credited with meeting the detection requirement. Simulation of their particular coverage and failure behavior is the next separate experiment.
 
 <a id="review-gates-scaled-to-one-project"></a>
 ## Choosing the next work
 
 I prioritize evidence that could change the architecture or the conditions in which I can operate the boat.
 
-1. **Sensing and maneuvering:** measure an identifiable pipeline’s target detection, latency, mass, power and thermal behavior together. Exercise hazards during maneuvers and compare achieved motion with predictions.
+1. **Sensing and maneuvering:** use the physical candidate layouts to define the next sensing simulation, then measure target detection, latency, mass, power and thermal behavior together. Replace the provisional maneuver coefficients with achieved heading, speed and swept-path measurements.
 2. **Independent recovery:** test observation, control and power isolation; upright and inverted thrust; startup and usable capacity. Survey approaches and demonstrate shore retention and one-person pickup.
 3. **Rig and construction:** compare soft sail, tail-controlled wing and directly rotated wing on equal terms for the finite Gorge mission. The trade links use this mission’s criteria; future ocean-wave and repeating-endurance requirements are outside its scope. Measure loads, trim energy, material properties, joints and casualty behavior that could change the IC-01 design.
 4. **Integrated replay and trials:** replace provisional inputs with the measured envelopes, rerun the affected scenarios and expand physical trials within the demonstrated limits.
