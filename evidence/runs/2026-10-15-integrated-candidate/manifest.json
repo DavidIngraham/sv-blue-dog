@@ -1,0 +1,16 @@
+{
+  "sourceRevision": "86049ae5ee0429fd2c7b350228d3a544428a4aaf",
+  "files": {
+    "coupled-uncertainty-inputs.json": {
+      "sha256": "f28eff1423ed7875e0e19ef0678bcf087756b798593a8e25bb3fb0f7aff0132c"
+    },
+    "integrated-mission.json": {
+      "sha256": "29541c573df8ad7e2f33501bc15f9506576217e95d8e882f6042f3096643cd09"
+    },
+    "integrated-sizing.json": {
+      "sha256": "51ceda1f8dc9da70c6cba592351e735ac18b84be6af17ef58962bdbb20f57659"
+    }
+  },
+  "qualified": false,
+  "scope": "IC-01 allocated candidate: nominal coupled Gorge sizing, synthetic 600 m reach day/night encounters, independent recovery, end-exposure standby/reserve, refinement and negative controls. Native virtual closure passes within declared scope. No measured installation, physical qualification, full charted-course recovery coverage, finite-turn recovery dynamics or shore capture claim."
+}
