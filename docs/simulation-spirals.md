@@ -226,6 +226,12 @@ their original scope. The [current encounter explanation](encounter-feasibility.
 and [detailed allocation](reference/encounter-envelope.md) describe the criteria
 needed before sensor measurements can establish an admitted operating envelope.
 
+The allocation review also distinguishes a reviewed reliability criterion from
+evidence that meets it. Both observation and whole-response criteria must be
+reviewed before the model reports a reviewed design distance. Regression cases
+exercise missing and invalid criteria separately from inadequate response
+evidence; neither establishes physical performance.
+
 ### Evidence through each iteration
 
 For me, fidelity means representing the effects that matter to a decision with enough accuracy. Traceability means being able to explain which mission obligation, design, assumptions and evidence produced the conclusion. A more detailed model can strengthen one part of that chain while exposing a weakness in another.

@@ -58,7 +58,10 @@ retaining the other traffic classes. Illustrative distances are available;
 class-specific accepted margins, reliability/confidence criteria and supporting
 evidence remain unresolved. No low-consequence class exemption or numerical
 residual-risk threshold has been accepted. The earlier campaigns retain their
-original acquisition assumptions and do not verify the new allocation.
+original acquisition assumptions and do not verify the new allocation. A reviewed
+design distance requires reviewed observation and whole-response reliability
+criteria; accepting that distance also requires the corresponding evidence.
+The traffic risk traces to this current policy as well as its historical study.
 
 <a id="review-gates-scaled-to-one-project"></a>
 ## Choosing the next work

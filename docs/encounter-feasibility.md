@@ -6,7 +6,7 @@ Can Blue Dog detect a hazard early enough to avoid it? I first work backward fro
 
 ## Allocate distance and reliability separately
 
-I now allocate observation by target class, encounter geometry and operating condition. First I need enough distance to form a track and complete a feasible response. Reviewed consequence allowances can add clearance and distance margin. Separately, I need evidence that the installation supplies that observation reliably enough for the consequences of a miss. The class-specific method is current; accepted numerical class allocations remain unresolved. A lower consequence does not shorten the physical maneuver, and a longer nominal sensor range does not establish reliable detection.
+I now allocate observation by target class, encounter geometry and operating condition. First I need enough distance to form a track and complete a feasible response. Reviewed consequence allowances can add clearance and distance margin. Separately, I need evidence that both the observation pipeline and the complete detection-to-maneuver response meet their reviewed reliability criteria. The class-specific method is current; accepted numerical class allocations remain unresolved. A lower consequence does not shorten the physical maneuver, and a longer nominal sensor range does not establish reliable detection.
 
 The current allocation distinguishes occupied kayaks, occupied stand-up paddleboards, people in the water and unoccupied craft. A low-energy glancing contact with an intact hull might have limited consequences; that is a conditional hypothesis to investigate, not a harmless label for every encounter with that class. A person could fall, become trapped or be struck by an appendage. Contact angle, relative speed, occupancy and the complete boat geometry matter. No accepted numerical injury, severity or probability limit has been assigned.
 
@@ -18,6 +18,11 @@ distances do not imply matching consequences. No row is an accepted allocation.
 
 ```sysml-report BlueDogClassDetectionDocuments::Summary
 ```
+
+The 39 seconds includes one second for sensor delivery, in addition to the
+earlier 38-second budget. At the fast-craft closing speed of 18 m/s, that extra
+second adds 18 m: **742 m here versus 724 m in the historical table below**.
+This is a timing-assumption difference, not a change in the consequence allowance.
 
 ### What the earlier common-distance study showed
 

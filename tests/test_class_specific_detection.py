@@ -73,3 +73,24 @@ def test_sensor_timing_alone_cannot_establish_response_reliability(model):
     assert r['timingFeasible'] is True
     assert r['reliabilitySatisfied'] is True
     assert r['allocationAccepted'] is False
+
+
+@pytest.mark.parametrize('changes', [
+    {'requiredResponseProbability': 0},
+    {'requiredResponseProbability': 1.01},
+    {'responseReliabilityReviewRef': ''},
+])
+def test_unreviewed_response_criterion_cannot_publish_reviewed_distance(model, changes):
+    r = assess(model, **changes)
+    assert r['allocationReviewed'] is False
+    assert r['reviewedDesignDistanceM'] == -1
+    assert r['status'] == 'Unsupported: current class allocation not reviewed'
+    assert r['allocationAccepted'] is False
+
+
+def test_reviewed_criteria_can_precede_response_evidence(model):
+    r = assess(model, responseEvidenceRef='')
+    assert r['allocationReviewed'] is True
+    assert r['reviewedDesignDistanceM'] == 40
+    assert r['allocationAccepted'] is False
+    assert r['status'] == 'Reviewed design distance only; safety acceptance unsupported'

@@ -50,7 +50,7 @@ package BlueDogClassDetection {
      out attribute kinematicMinimumM : Real = if kinematicsSupported ? relativeSpeedBoundMps*responseBoundS+positionAllowanceM else -1;
      out attribute consequenceReviewed : Boolean = consequenceReviewRef != "" and consequenceClearanceM >= 0 and consequenceMarginM >= 0;
      out attribute reliabilityCriterionReviewed : Boolean = reliabilityReviewRef != "" and requiredTimelyTrackProbability > 0 and requiredTimelyTrackProbability <= 1 and requiredConfidenceLevel > 0 and requiredConfidenceLevel < 1;
-     out attribute allocationReviewed : Boolean = kinematicsSupported and consequenceReviewed and reliabilityCriterionReviewed and exposureReviewRef != "" and allocationReviewRef != "";
+     out attribute allocationReviewed : Boolean = kinematicsSupported and consequenceReviewed and reliabilityCriterionReviewed and responseCriterionReviewed and exposureReviewRef != "" and allocationReviewRef != "";
      out attribute reviewedDesignDistanceM : Real = if allocationReviewed ? kinematicMinimumM+consequenceClearanceM+consequenceMarginM else -1;
      out attribute evidenceApplicable : Boolean = observationEvidenceRef != "" and maneuverEvidenceRef != "" and consequenceEvidenceRef != "" and evidenceMethodReviewRef != "" and independentEncounterCount > 0 and timelyTrackProbabilityLowerBound >= 0 and timelyTrackProbabilityLowerBound <= 1 and evidenceConfidenceLevel > 0 and evidenceConfidenceLevel < 1;
      out attribute reliabilitySatisfied : Boolean = allocationReviewed and evidenceApplicable and timelyTrackProbabilityLowerBound >= requiredTimelyTrackProbability and evidenceConfidenceLevel >= requiredConfidenceLevel;
@@ -67,7 +67,8 @@ package BlueDogClassDetection {
      in attribute responseEvidenceRef : String;
      in attribute responseReliabilityReviewRef : String;
      in attribute evidenceMethodReviewRef : String;
-     out attribute responseReliabilitySatisfied : Boolean = allocationReviewed and responseReliabilityReviewRef != "" and responseEvidenceRef != "" and evidenceMethodReviewRef != "" and requiredResponseProbability > 0 and requiredResponseProbability <= 1 and responseProbabilityLowerBound >= requiredResponseProbability and responseProbabilityLowerBound <= 1 and responseEvidenceConfidenceLevel >= requiredConfidenceLevel and responseEvidenceConfidenceLevel < 1;
+     out attribute responseReliabilitySatisfied : Boolean = allocationReviewed and responseCriterionReviewed and responseEvidenceRef != "" and evidenceMethodReviewRef != "" and responseProbabilityLowerBound >= requiredResponseProbability and responseProbabilityLowerBound <= 1 and responseEvidenceConfidenceLevel >= requiredConfidenceLevel and responseEvidenceConfidenceLevel < 1;
+     out attribute responseCriterionReviewed : ScalarValues::Boolean = responseReliabilityReviewRef != "" and requiredResponseProbability > 0 and requiredResponseProbability <= 1 and requiredConfidenceLevel > 0 and requiredConfidenceLevel < 1;
  }
  analysis Summary {
      out attribute classIds : String [9] ordered = policy.classIds;
