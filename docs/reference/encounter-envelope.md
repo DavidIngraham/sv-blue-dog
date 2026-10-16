@@ -73,6 +73,11 @@ Reducing ownship speed lowers head-on closing speed, but does not necessarily so
 
 ## Reproduce and use the result
 
+The [16 October native summary](../../evidence/runs/2026-10-16-response-maneuvers/encounter-envelope.json)
+preserves the table and timing results with source hashes. Its
+[manifest](../../evidence/runs/2026-10-16-response-maneuvers/manifest.json)
+identifies the source revision shared with the component maneuver study.
+
 The stable native entry points are:
 
 - `BlueDogEncounterEnvelope::Summary`: the class, geometry, timing-epoch and own-speed sensitivities above.

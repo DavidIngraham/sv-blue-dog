@@ -1,0 +1,13 @@
+{
+  "sourceRevision": "a7ee6abb6abd6df28217e3505a721e12e7376f5f",
+  "files": {
+    "encounter-envelope.json": {
+      "sha256": "121fb46e28637fb15f08a93a170ece82333f6455e73b06fe2ab278ad00f849fc"
+    },
+    "maneuver-study.json": {
+      "sha256": "06978b27e52394180715e13ab5d597cda3bf478072f0ce9ee28664d81d4a636b"
+    }
+  },
+  "qualified": false,
+  "scope": "Synthetic component maneuvers and encounter response timing; uncalibrated coefficients, no physical qualification, no configuration-specific sensing simulation."
+}

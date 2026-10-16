@@ -155,6 +155,10 @@ when a 17-second occupied interval starts at acquisition-envelope entry. The
 750 m requirement remains unchanged; this calculation exposes a condition it
 does not justify.
 
+The [immutable study record](../evidence/runs/2026-10-16-response-maneuvers/manifest.json)
+preserves the native response summary and synthetic trajectories against their
+source revision.
+
 The optional [maneuver model](reference/maneuver-dynamics.md) replaces an
 instantaneous heading change with bounded turning, acceleration and
 speed-dependent rudder authority. Synthetic turn, tack and gybe cases finish at

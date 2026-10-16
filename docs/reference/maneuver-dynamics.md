@@ -59,6 +59,11 @@ for an identified hull, rig and actuator installation before assigning a
 credible bound. Cases with insufficient authority must lead to an explicit
 operating restriction or another safety response.
 
+The [16 October record](../../evidence/runs/2026-10-16-response-maneuvers/maneuver-study.json)
+preserves these inputs and trajectories; its
+[manifest](../../evidence/runs/2026-10-16-response-maneuvers/manifest.json)
+identifies the source revision and file hashes.
+
 Reproduce the component study with
 `uv run python -m tools.boat_analysis.mission.maneuver_study`. It writes
 `build/analysis/maneuver-study.json`, including model inputs, trajectories and
