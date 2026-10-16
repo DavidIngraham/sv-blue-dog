@@ -148,7 +148,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                  'motor_use' in kinds, outcome == 'safety_violation' or truth_clearance_violation,
                  outcome == 'incomplete', reserve_protected, outcome == 'censored')
         verdict = classify(*facts, True) if safety_abort else classify(*facts)
-        terminal = [seconds,*position,stored,cause,seconds>=comms_until]
+        terminal = [seconds,*position,stored,cause,bool(seconds>=comms_until)]
         if history and history[-1][0] == seconds:
             history[-1] = terminal
         else:
@@ -189,7 +189,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             old=position.copy()
             for row in drift.history:
                 distance+=float(np.linalg.norm(np.asarray(row[1:3])-old));old=np.asarray(row[1:3])
-                history.append([*row,row[0]>=comms_until])
+                history.append([*row,bool(row[0]>=comms_until)])
             seconds,stored,position=drift.seconds,drift.energy_wh,np.asarray(drift.position)
             minimum=min(minimum,stored)
             consequence_summary=asdict(drift)
@@ -218,7 +218,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         for row in recovery.history:
             distance += float(np.linalg.norm(np.asarray(row[1:3])-start_position))
             start_position = np.asarray(row[1:3])
-            history.append([*row, row[0]>=comms_until])
+            history.append([*row, bool(row[0]>=comms_until)])
         seconds, stored, position = recovery.seconds, recovery.energy_wh, np.asarray(recovery.position)
         minimum = min(minimum, stored)
         if continue_after_abort and not recovery.collision and recovery.outcome!='recovery_approach_reached':
@@ -394,7 +394,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             if not diagnostic['covered']:return result('incomplete','wave_model_outside_coverage')
         if previous_velocity is None or not np.allclose(velocity,previous_velocity,rtol=0,atol=1e-10):
             if not history or history[-1][0]!=seconds:
-                history.append([seconds,*position,stored,mode,seconds>=comms_until])
+                history.append([seconds,*position,stored,mode,bool(seconds>=comms_until)])
         previous_velocity=velocity.copy()
         previous = position.copy(); endpoint = position+velocity*interval
         if not water.covers(LineString([previous,endpoint])):
@@ -437,11 +437,11 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 elif legs is None and phase == 2:
                     leg = upstream
                 if phase == len(sequence):
-                    history.append([seconds,*position,stored,'finished',seconds>=comms_until])
+                    history.append([seconds,*position,stored,'finished',bool(seconds>=comms_until)])
                     return result('qualified_completion','ordered_gates_without_intervention')
             elif gates[name].distance(Point(position)) > 1e-6:
                 last_off_line[phase]=position.copy()
         if step % save_every == 0:
-            history.append([seconds,*position,stored,mode,seconds>=comms_until])
+            history.append([seconds,*position,stored,mode,bool(seconds>=comms_until)])
         step += 1
     return result('censored','computational_horizon')

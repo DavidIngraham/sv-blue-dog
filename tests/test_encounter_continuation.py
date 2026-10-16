@@ -74,3 +74,13 @@ def test_native_timing_requirement(period,expected):
     from tools.boat_analysis.model.runtime import load_model
     verdict=load_model().verify_requirement('BlueDogEncounterFeasibility::TimingCriterion',named_arguments={'assessmentPeriodS':period,'commandLatencyS':2})
     assert verdict.evaluated and verdict.holds is expected
+
+
+def test_completed_recovery_result_uses_standard_json():
+    from dataclasses import asdict
+    from tools.boat_analysis.mission.recovery import RecoveryPlanner,RecoverySite,RecoveryCapability
+    args=fixture();args[0]['continueAfterAbort']=True
+    planner=RecoveryPlanner(args[2],[RecoverySite('test',(80,30),'synthetic','synthetic')],RecoveryCapability(2,50,8,1.2,2))
+    result=simulate(*args,events=[Event(0,'sensing_loss')],recovery_planner=planner)
+    assert result.recovery_summary['outcome']=='recovery_approach_reached'
+    assert json.loads(json.dumps(asdict(result)))['consequence_summary']['termination']=='recovery_approach_reached'
