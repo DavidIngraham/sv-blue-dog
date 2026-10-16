@@ -147,9 +147,9 @@ package BlueDogRequirements {
 
     requirement def <'S-001'> TrafficSafety {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall assess and respond to collision risks within reviewed class-specific detection and response envelopes. Allocations shall include kinematic response distance, uncertainty, consequence-informed clearance and margins, and required timely observation and whole-response reliability with confidence criteria. Unreliably classified targets shall use a reviewed conservative envelope spanning plausible classes and occupant transitions. Collision avoidance and nonimpediment obligations remain unchanged.*/
-        comment conditions /* Use independently recorded head-on, crossing and overtaking AIS and non-AIS targets, day and night in the selected operational profile. */
+        doc /* The vessel shall assess and respond to collision risks within reviewed class-specific detection and response envelopes while meeting the collision avoidance and nonimpediment obligations.*/
         metadata issue : ModelingMetadata::Issue { text = "BlueDogClassDetection defines the current class-specific allocation method. Numerical consequence, exposure, reliability, confidence and risk acceptance inputs remain unreviewed; hardware sensing and maneuver evidence is absent. Historical six-class 750 m analyses do not define the current requirement."; }
+        comment conditions /* Use independently recorded head-on, crossing and overtaking AIS and non-AIS targets, day and night in the selected operational profile. Allocations shall include kinematic response distance, uncertainty, consequence-informed clearance and margins, and required timely observation and whole-response reliability with confidence criteria. Unreliably classified targets shall use a reviewed conservative envelope spanning plausible classes and occupant transitions. Collision avoidance and nonimpediment obligations remain unchanged.*/
     }
     requirement trafficSafety : TrafficSafety;
     #derivation connection challengeTrafficResponse {

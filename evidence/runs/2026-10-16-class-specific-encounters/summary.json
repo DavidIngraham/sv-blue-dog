@@ -1,0 +1,66 @@
+{
+  "scope": "Nine-class head-on response sensitivity using inherited illustrative motion and clearance inputs; not selected allocations or physical evidence. No configuration-specific sensing simulation.",
+  "qualified": false,
+  "analysis": "BlueDogClassDetection::Summary",
+  "outputs": {
+    "classIds": [
+      "commercialTow",
+      "fishingCraft",
+      "fastCraft",
+      "sailingCraft",
+      "passengerVessel",
+      "occupiedKayak",
+      "occupiedSUP",
+      "personInWater",
+      "unoccupiedDriftingCraft"
+    ],
+    "illustrativeTargetSpeedMps": [
+      3.5,
+      1.5,
+      15,
+      4,
+      4,
+      2,
+      2,
+      2,
+      2
+    ],
+    "illustrativeSeparationM": [
+      50,
+      20,
+      30,
+      20,
+      50,
+      20,
+      20,
+      20,
+      20
+    ],
+    "illustrativeResponseS": 39,
+    "illustrativeKinematicMinimumM": [
+      263.5,
+      185.5,
+      712,
+      283,
+      283,
+      205,
+      205,
+      205,
+      205
+    ],
+    "illustrativeResponseDistanceM": [
+      313.5,
+      205.5,
+      742,
+      303,
+      333,
+      225,
+      225,
+      225,
+      225
+    ],
+    "currentAllocationsAccepted": false,
+    "physicalQualification": false,
+    "status": "Open: class clearances, consequence margins, required reliability/confidence and risk dispositions await review and evidence."
+  }
+}
