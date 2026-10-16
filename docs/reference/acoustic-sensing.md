@@ -2,7 +2,7 @@
 
 **Supplier review: 16 October 2026.** I would investigate acoustics as a complement to the [optical installations](sensing-configurations.md). A passive array could cue attention toward a noisy vessel. Active forward-looking sonar could measure distance to an underwater reflector without needing that object to make noise. Neither is an installed avoidance system, and neither removes the need to observe small surface craft.
 
-The [source register](../../evidence/sensing/2026-10-16-acoustics/sources.json) distinguishes supplier evidence from installation assumptions. The [equipment model](../../models/configurations/acoustic-equipment.sysml) records those facts and calculates the provisional budgets. No sensing simulation or demonstrated detection distance has changed.
+The [native equipment record](../../models/configurations/acoustic-equipment.sysml) retains component specifications and unresolved performance gates. The [source register](../../evidence/sensing/2026-10-16-acoustics/sources.json) distinguishes supplier evidence from installation assumptions. The [equipment model](../../models/configurations/acoustic-equipment.sysml) records those facts and calculates the provisional budgets. No sensing simulation or demonstrated detection distance has changed.
 
 ## Three concrete alternatives
 

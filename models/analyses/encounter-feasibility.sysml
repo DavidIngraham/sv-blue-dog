@@ -1,8 +1,6 @@
 package BlueDogEncounterFeasibility {
     private import ScalarValues::*;
-    doc /* Hypothesis study, not sensor specifications or a changed acceptance envelope.
-     * Range is from nearest target extent. Time allowances add sequentially;
-     * maneuver authority and visibility still require independent evidence. */
+    doc /* Historical six-class acquisition comparison retained for archived evidence reproduction. The uniform 750 m allocation and broad low-target class are prior hypotheses, not current acceptance criteria. Current class-specific policy and open review/evidence gates are BlueDogClassDetection; these numerical APIs retain their historical meaning.*/
     calc def RequiredRange {
         in closingMps : Real;
         in acquisitionS : Real;

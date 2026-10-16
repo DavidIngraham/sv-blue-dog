@@ -507,7 +507,7 @@ package BlueDogSRRReadinessDocuments {
             Column(name = "Contingency s", path = "reserveSeconds")))
     }
     part def Encounters :> Document {
-        attribute redefines title = "Traffic performance design allocation";
+        attribute redefines title = "Historical six-class traffic allocation";
         part budget : Table { calc rows : EncounterRows; }
     }
     calc def SiteDecisionRows :> Query {
@@ -679,4 +679,11 @@ package BlueDogEncounterStudyDocuments {
         attribute redefines title = "Hypothetical sensing envelopes and fixed-candidate energy screen";
         part stacks : Table { calc rows : Stacks; }
     }
+}
+
+package BlueDogClassDetectionDocuments {
+ doc /* Nine current target classes; illustrated speeds and separations are inherited sensitivity inputs, not reviewed allocations.*/
+ private import DocumentQueries::*;
+ calc def Rows :> Query { Project(source=Named(qualifiedName=("BlueDogClassDetection::classRow1","BlueDogClassDetection::classRow2","BlueDogClassDetection::classRow3","BlueDogClassDetection::classRow4","BlueDogClassDetection::classRow5","BlueDogClassDetection::classRow6","BlueDogClassDetection::classRow7","BlueDogClassDetection::classRow8","BlueDogClassDetection::classRow9")),columns=(Column(name="Target",path="target"),Column(name="Illustrative target speed (m/s)",path="targetSpeedMps"),Column(name="Illustrative head-on distance (m)",path="illustrativeDistanceM"),Column(name="Allocation accepted",path="allocationAccepted"))) }
+ part def Summary :> Document { attribute redefines title="Class-specific response sensitivity: unaccepted illustrative inputs"; part cases : Table { calc rows : Rows; } }
 }

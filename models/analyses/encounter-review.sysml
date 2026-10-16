@@ -1,4 +1,5 @@
 package BlueDogEncounterReview {
+    doc /* Historical six-class acquisition comparison retained for archived evidence reproduction. The uniform 750 m allocation and broad low-target class are prior hypotheses, not current acceptance criteria. Current class-specific policy and open review/evidence gates are BlueDogClassDetection; these numerical APIs retain their historical meaning.*/
     private import ScalarValues::*;
     part criteria {
         attribute targets : String [6] ordered = ("tow including barges", "fishing or drifting craft", "ski/power boat including tow", "sailing craft", "passenger vessel", "person or low-profile paddle craft");
@@ -24,7 +25,7 @@ package BlueDogEncounterReview {
     }
     part acceptance {
         attribute scenarios : String = "Both tacks; head-on, crossing each side, overtaking each side, anchored/drifting fishing, reversing ski boat, obscured emergence, dense traffic, bridge approach and casualty recovery; repeat by target class in day/night and wave/glare extremes.";
-        attribute passCriterion : String = "Acquire within 5 s of the target entering the 750 m envelope; maintain the track; update risk each second and command within 2 s; demonstrate the allocated maneuver within 15 s or reject the scenario. Independently measured swept hulls shall not overlap, project separation shall be preserved, and a confined vessel shall not need to change speed/course because of Blue Dog. Apply navigation rules separately; passing distance alone is insufficient.";
+        attribute passCriterion : String = "Historical acceptance hypothesis, not current BlueDogClassDetection policy: Acquire within 5 s of the target entering the 750 m envelope; maintain the track; update risk each second and command within 2 s; demonstrate the allocated maneuver within 15 s or reject the scenario. Independently measured swept hulls shall not overlap, project separation shall be preserved, and a confined vessel shall not need to change speed/course because of Blue Dog. Apply navigation rules separately; passing distance alone is insufficient.";
         attribute simulationScope : String = "Mission traffic generator is coarse route exposure. Exact target truth is not sensor performance. Dedicated deterministic encounter fixtures and later hardware replay close the one-second/2-second requirements; a 30 s mission control period cannot claim them.";
     }
     dependency basis from criteria to BlueDogRequirements::trafficSafety;

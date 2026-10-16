@@ -1,12 +1,6 @@
 package BlueDogEncounterEnvelope {
     private import ScalarValues::*;
-    doc /* Bounded response-distance sensitivity, not sensor qualification or a
-     * change to the six-traffic-class 750 m acquisition requirement. Distances start at
-     * the nearest relevant physical extent, including the whole tow or swept
-     * underwater hazard. Velocities use one common ground-relative frame.
-     * The scalar relative-speed bound assumes constant/bounded relative motion
-     * throughout the response; turns or acceleration require a larger supported
-     * bound or trajectory assessment. No collision-free maneuver is proved here. */
+    doc /* Historical six-class 750 m response-distance comparison, not the current BlueDogClassDetection allocation or sensor qualification. Distances start at the nearest relevant physical extent, including the whole tow or swept underwater hazard. Velocities share a ground-relative frame. The scalar relative-speed bound must cover motion throughout response; turns or acceleration require a supported bound or trajectory assessment. No collision-free maneuver is proved.*/
 
     calc def RelativeSpeed {
         in ownEastMps : Real;
@@ -65,15 +59,7 @@ package BlueDogEncounterEnvelope {
 
     analysis def Envelope {
         subject encounter;
-        doc /* Caller supplies supported bounds, not a nominal turn time. Set
-         * motionBoundAvailable=false for stalled or unresolved maneuver authority;
-         * observationBoundAvailable=false for presence-only/unbounded tracks.
-         * Unsupported outputs use -1, never a zero-distance passing result.
-         * occupiedAtDelivery selects the epoch of occupiedS. A scalar bound
-         * remains a necessary timing screen, not proof of safe motion or rules
-         * compliance. appliesTrafficRequirement must explicitly identify whether
-         * the case belongs to the existing traffic acceptance scope; weeds do not.
-         * A smaller traffic-class result does not relax 750 m. */
+        doc /* Caller supplies supported bounds, not nominal turn time. Set motionBoundAvailable=false for stalled or unresolved maneuver authority and observationBoundAvailable=false for presence-only/unbounded tracks. Unsupported distances are -1. occupiedAtDelivery selects the epoch of occupiedS. This scalar necessary timing screen does not prove safe motion or rules compliance. appliesTrafficRequirement selects the historical six-class comparison scope, excluding weeds. Its retained 750 m floor is historical only; current BlueDogClassDetection policy has no such floor.*/
         in attribute ownEastMps : Real;
         in attribute ownNorthMps : Real;
         in attribute targetEastMps : Real;
@@ -104,10 +90,7 @@ package BlueDogEncounterEnvelope {
         out attribute trafficComparisonApplicable : Boolean = appliesTrafficRequirement;
         out attribute fitsRetainedDistance : Boolean = appliesTrafficRequirement and supported and requiredRangeM <= retainedRequirementM;
         out attribute combinedEnvelopeM : Real = if not supported ? -1 else if not appliesTrafficRequirement ? requiredRangeM else if requiredRangeM > retainedRequirementM ? requiredRangeM else retainedRequirementM;
-        out attribute status : String = if not supported ? "Unsupported: no finite response-distance claim"
-            else if not appliesTrafficRequirement ? "Scenario timing sensitivity only; 750 m traffic comparison not applicable"
-            else if fitsRetainedDistance ? "Within 750 m timing budget only; requirement and physical evidence remain"
-            else "Exceeds 750 m; resolve response, sensing or admitted conditions";
+        out attribute status : String = if not supported ? "Unsupported: no finite response-distance claim" else if not appliesTrafficRequirement ? "Scenario timing sensitivity only; historical 750 m traffic comparison not applicable" else if fitsRetainedDistance ? "Within historical 750 m timing budget only; no current acceptance" else "Exceeds historical 750 m comparison; current class allocation remains open";
         out attribute physicalQualification : Boolean = false;
     }
 
@@ -168,7 +151,7 @@ package BlueDogEncounterEnvelope {
         out attribute fastHeadOnByOwnSpeedM : Real [5] ordered nonunique = ownSpeedSweepMps->ControlFunctions::collect {
             in speed : Real; RangeForResponse(RelativeSpeed(speed,0,-study.targetSpeedMps#(3),0),freshSeconds,study.separationM#(3),study.positionAllowanceM) };
         out attribute qualificationClaim : Boolean = false;
-        out attribute scope : String = "Constant/bounded relative-velocity timing sensitivity; six-traffic-class 750 m retained, not extended to weeds. Own-speed sweep alone does not preserve maneuver authority. No finite-turn or sensor measurement is credited.";
+        out attribute scope : String = "Historical six-class 750 m comparison and constant/bounded relative-velocity sensitivity, not current BlueDogClassDetection acceptance. Own-speed sweep alone does not preserve maneuver authority. No sensor measurement is credited.";
     }
 
     part observationContract {

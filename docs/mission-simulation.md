@@ -152,4 +152,6 @@ The course and scenario contracts stay identifiable through these changes. Virtu
 
 Reproduction commands, source records and campaign settings are in the [runtime reference](reference/model-runtime.md#reproducing-mission-campaigns). I use the recorded failures and coverage gaps to decide which behavior needs better evidence next.
 
+The current [class-specific observation allocation](reference/encounter-envelope.md) separates response geometry from observation reliability and contact consequences. Archived mission campaigns keep their original target grouping and acquisition assumptions; they do not validate the new kayak, stand-up paddleboard, person-in-water and unoccupied-craft distinctions. Future scenarios must preserve those distinctions and uncertain occupancy when scoring misses and consequences.
+
 **Next:** [Passage time, reliability and failure analysis](reliability.md) · [Series guide](index.md)

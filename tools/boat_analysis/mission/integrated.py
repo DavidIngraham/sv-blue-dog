@@ -62,7 +62,7 @@ def scenarios(record):
                 recoveryCoverage=dict(exposureHours=exposure,remainingWh=bank,currentMps=[-.4,0],samples=coverage,passed=all(c['passCheck'] for c in coverage),scope='Sampled positions in the synthetic gate corridor; not continuous or Gorge coverage'),
                 physicalQualification=False,
                 assumptions=[
-                    'Allocated 750 m craft/low-target and 40 m weed acquisition by day/night, 1 s latency, 10 percent independent misses, 5 m position error and 8 W additional bus demand are simultaneous hypotheses, not measured equipment performance.',
+                    'Historical 15 October sensing hypothesis, not current class-specific acceptance: allocated 750 m craft/low-target and 40 m weed acquisition by day/night, 1 s latency, 10 percent independent misses, 5 m position error and 8 W additional bus demand are simultaneous hypotheses, not measured equipment performance.',
                     'Separate recovery power, thrust, control and observations survive the injected primary-path fault; common environmental damage remains unqualified.',
                     'Primary guidance adds the native 10 m relative-position allowance as a recovery-handoff buffer. Backup routes use delivered tracks and retain the current destination when its predicted route remains clear; otherwise they select an available alternative. Recovery uses point-mass current compensation, not measured finite-turn dynamics.',
                     'Recovery approaches, upright/inverted authority and retention are hypotheses; approach arrival is not physical capture. Primary sailing load shuts down on abort.',

@@ -4,7 +4,55 @@
 
 How far away must a hazard be when Blue Dog first has a chance to observe it? The answer depends on more than target speed. The observation has to become a usable track, reach guidance, wait for a decision opportunity and leave enough time for the boat to carry out the response. A maneuver already in progress can make that wait longer.
 
-The [native response-envelope analysis](../../models/analyses/encounter-envelope.sysml) separates those intervals and compares encounter geometries. It leaves the existing **750 m acquisition requirement for the six traffic classes** unchanged. A lower traffic-case distance is a sensitivity result, not permission to substitute a shorter-range sensor. A higher distance identifies a combination of response time and conditions that the existing allocation does not cover. Weed cases use the same response calculation without extending that traffic requirement to vegetation.
+The current [class-specific allocation](../../models/analyses/class-specific-detection.sysml)
+separates the distance needed to respond from the reliability needed to support
+the safety argument. No common 750 m floor remains in that current policy.
+The earlier [response-envelope analysis](../../models/analyses/encounter-envelope.sysml)
+and numerical table below preserve the old allocation for comparison; their
+750 m fields are historical, not current acceptance criteria.
+
+## The current allocation has three parts
+
+1. **Kinematics:** relative motion, acquisition and delivery, controller occupancy,
+   command delay, achieved maneuver and position uncertainty determine the
+   minimum response distance.
+2. **Consequence allowance:** a reviewed clearance and additional margin reflect
+   the target's occupied extent, contact modes and uncertainty. Those choices
+   can increase the required distance; they cannot erase the maneuver distance.
+3. **Reliability and evidence:** timely acquisition, usable tracks and the
+   complete avoidance response each need applicable evidence. Confidence,
+   exposure and an explicit review determine whether the installation is
+   supported for that class and condition.
+
+Reliability here means timely acquisition **and enough track continuity for the encounter**, not per-frame detector accuracy. The confidence bound must come from applicable independent evidence; a supplied success flag is insufficient.
+
+A numerical distance alone cannot satisfy all three. Current class-specific
+clearances, margins and reliability criteria still need evidence and review;
+unknown criteria remain unsupported rather than becoming zero or inheriting
+approval from the old 750 m number.
+
+| Current target class | Distinction the evidence must preserve |
+| --- | --- |
+| Commercial tow | Tug, barges and occupied water, including restrictions on its maneuvering |
+| Fishing craft | Variable motion, possible drifting and noncooperative observation |
+| Fast craft | High closure and any towed person or equipment |
+| Sailing craft | Quiet operation, heading changes and rig/occupied extent |
+| Passenger vessel | Occupied extent and consequences affecting multiple people |
+| Occupied kayak | Low profile; possible occupant injury, upset or entrapment |
+| Occupied stand-up paddleboard | Standing or fallen occupant; low board profile and loss of balance |
+| Person in the water | Direct human exposure, wave occlusion and no protective hull |
+| Unoccupied drifting craft | Occupancy must be established; drift, entanglement and secondary hazards remain |
+
+I would investigate a low-energy glancing contact with an intact hull as a
+potentially low-severity contact mode. That hypothesis does not apply to every
+kayak or paddleboard encounter, nor to direct contact with a person. Relative
+speed, angle, appendages, occupancy and possible secondary immersion matter.
+Ownship mass and speed also matter, but contact energy alone does not predict injury. An unidentified target or uncertain occupancy must not be assigned a presumed low-consequence class. Before reliable classification, I need a reviewed conservative envelope covering the plausible classes and changes in occupancy; an apparently empty craft may have a person beside it. Without that envelope, admission is unsupported. There is no accepted numerical severity or probability limit yet.
+
+The new illustrative class summary retains the older speeds and separations
+for comparability. In particular, all four split low-profile classes use the
+same inherited 2 m/s and 20 m separation in that sensitivity. Identical calculated
+distances therefore do not mean identical consequences or approved allocations.
 
 ## What the observation must establish
 
@@ -22,7 +70,7 @@ These are observation needs, not a claim that one sensor supplies them all. The 
 
 ## Count each interval once
 
-The illustrative case reuses the existing five-second acquisition allocation, one-second assessment allowance, two-second command delivery, 15-second maneuver and 15-second contingency. It adds IC-01's separate one-second observation-delivery hypothesis. The acquisition interval must include the work needed to form the declared observation; delivery describes only the subsequent interval before guidance can use it. A measured end-to-end delay that already includes acquisition must not be added to the five seconds again.
+The historical illustrative case reuses the five-second acquisition allocation, one-second assessment allowance, two-second command delivery, 15-second maneuver and 15-second contingency. It adds IC-01's separate one-second observation-delivery hypothesis. The acquisition interval must include the work needed to form the declared observation; delivery describes only the subsequent interval before guidance can use it. A measured end-to-end delay that already includes acquisition must not be added to the five seconds again.
 
 The one-second assessment allowance is used **once** as the worst phase wait to the next eligible assessment. It is not counted again as an extra processing delay. If a real implementation needs additional processing that is outside acquisition and delivery, that work needs a separate, measured allocation before using this budget.
 
@@ -59,13 +107,13 @@ With ownship at 3 m/s, the fresh 39-second budget gives the following illustrati
 | Stationary person or low-profile paddle craft | 0 | 147 m | 147 m | 147 m |
 | Stationary weed boundary | 0 | 127 m | 127 m | 127 m |
 
-The stationary person or paddle-craft row retains that traffic class's 20 m separation and 750 m acquisition requirement. The weed row assumes a no-contact boundary with zero additional stand-off plus the same 10 m position allowance; it is a sensitivity, not a selected weed-clearance criterion. Real underwater geometry and uncertainties must replace that assumption. The 20–40 m weed detection hypotheses used in earlier studies do not cover this 3 m/s, 39-second case; this does not assign vegetation a 750 m requirement.
+The combined stationary person/paddle-craft row retains the historical 20 m separation for that old class. It does not replace the four distinct current cases. The weed row assumes a no-contact boundary with zero additional stand-off plus the same 10 m position allowance; it is a sensitivity, not a selected weed-clearance criterion. Real underwater geometry and uncertainties must replace that assumption. The 20–40 m weed detection hypotheses used in earlier studies do not cover this 3 m/s, 39-second case; this does not assign vegetation a 750 m requirement.
 
 The head-on case adds speeds, crossing uses their vector difference, and overtaking uses their difference along the common course. These calculations assume the relative velocity stays constant or is bounded by the supplied magnitude throughout the response. A target turning or accelerating can invalidate the crossing/overtaking bound. If future headings are uncertain, the sum of supported speed bounds is the conservative orientation-independent alternative. A distance screen does not establish closest approach, a clear turn path or navigation-rule compliance.
 
 ## What an occupied or slower maneuver changes
 
-For the fast-craft head-on case, the 17-second entry case needs **940 m**; the full residual-at-delivery case needs **1,048 m**. Neither fits the retained 750 m distance. These examples illustrate the old two-second command plus 15-second hold. They do not bound the newer maneuver model: an achieved turn can take longer, and insufficient steering authority can leave it unresolved.
+For the fast-craft head-on case, the 17-second entry case needs **940 m**; the full residual-at-delivery case needs **1,048 m**. Neither fits the historical 750 m comparison distance. These examples illustrate the old two-second command plus 15-second hold. They do not bound the newer maneuver model: an achieved turn can take longer, and insufficient steering authority can leave it unresolved.
 
 The parameterized analysis therefore accepts separate achieved bounds for the remaining old maneuver and the new avoidance maneuver. When either motion authority or the observation bound is unavailable, it reports **unsupported**, with no finite-distance claim. The numerical `-1` fields in that result mean unavailable, not a negative or zero required range. More range cannot repair a response with no supported completion time.
 
@@ -73,29 +121,16 @@ Reducing ownship speed lowers head-on closing speed, but does not necessarily so
 
 ## Can I exclude a rare or difficult target class?
 
-The current requirements include sailing craft and people or low-profile paddle
-craft. The [challenge](../../models/missions/transgorge.sysml) requires compliance
-with applicable navigation rules (C-007), completion without collision with
-other users (C-009), and noninterference (C-011). The
-[vehicle requirements](../../models/vehicle/requirements.sysml) then require
-assessment and response within the deployment-specific traffic envelope (S-001)
-and tracking of every encounter target within that envelope (S-101).
+The current scope includes all nine classes above. The
+[challenge](../../models/missions/transgorge.sysml) retains collision avoidance,
+noninterference and applicable navigation obligations. Class-specific allocation
+changes how I substantiate the response, not which river users count.
 
-Those outcomes do not themselves prescribe 750 m. That uniform distance is the
-selected engineering allocation in the
-[six-class encounter review](../../models/analyses/encounter-review.sysml).
-Its rationale explicitly allows revisiting admissible speed and exposure or
-redesigning detection. The one-second assessment and two-second command
-requirements are also numerical allocation decisions; they need a response-time
-basis rather than being treated as inevitable consequences of collision avoidance.
-No target class or numerical requirement has been removed by this study.
-
-A class- and condition-specific observation envelope is therefore worth
-investigating. Slower closure can permit a shorter distance, provided acquisition,
-uncertainty, occupied time and achieved maneuver authority still fit. The small
-target must actually be observable at that distance. The 225 m person/paddle-craft
-and 303 m sailing-craft examples above are fresh-response sensitivities, not
-approved replacement requirements.
+The old six-class review's 750 m distance is now a historical comparison.
+Numerical assessment and command timing also need a response-time basis.
+Shorter distances are possible where supported motion, observation and reviewed
+clearance allow them; neither an attractive sensor specification nor a presumed
+minor contact completes that argument.
 
 ### Probability can inform a disposition
 
@@ -133,19 +168,29 @@ and cautions against assumptions based on scanty information. A project risk
 acceptance does not itself settle compliance with those obligations.
 [USCG navigation-rule guidance](https://navcen.uscg.gov/navigation-rules-faqs).
 
-The present decision is therefore open: investigate better class-specific
-allocations and exposure evidence, while retaining sailboats and paddlers in the
-current encounter scope. The [acoustic comparison](acoustic-sensing.md) evaluates
+The current decision is to use class-specific allocations and develop their
+missing criteria and evidence, while retaining all nine traffic classes. The [acoustic comparison](acoustic-sensing.md) evaluates
 what sound can contribute without treating acoustic quietness as absence.
 
 ## Reproduce and use the result
+
+The [class-specific summary](../../evidence/runs/2026-10-16-class-specific-encounters/summary.json)
+records the nine-class illustrative comparison. Its
+[manifest](../../evidence/runs/2026-10-16-class-specific-encounters/manifest.json)
+identifies the model revision and source hashes. No row supplies an accepted
+consequence or reliability allocation.
+
+`BlueDogClassDetection::Summary` reproduces that comparison.
+`BlueDogClassDetection::Assessment` checks supplied class-specific bounds and
+review declarations. It does not inspect the contents of the referenced records
+or establish physical qualification.
 
 The [16 October native summary](../../evidence/runs/2026-10-16-response-maneuvers/encounter-envelope.json)
 preserves the table and timing results with source hashes. Its
 [manifest](../../evidence/runs/2026-10-16-response-maneuvers/manifest.json)
 identifies the source revision shared with the component maneuver study.
 
-The stable native entry points are:
+The historical response-envelope entry points are:
 
 - `BlueDogEncounterEnvelope::Summary`: the class, geometry, timing-epoch and own-speed sensitivities above.
 - `BlueDogEncounterEnvelope::Envelope`: a parameterized case; use subject `BlueDogEncounterEnvelope::study` and explicitly supply observation and motion bounds and `appliesTrafficRequirement` (true for the existing traffic classes, false for the weed sensitivity).
@@ -156,6 +201,11 @@ The stable native entry points are:
 .tools/develop-e002f1668/sysml models -analysis BlueDogEncounterEnvelope::Summary -json
 ```
 
-The parameterized result distinguishes the scenario's `requiredRangeM` from the unchanged traffic allocation, `retainedRequirementM`. When `trafficComparisonApplicable` is true, `combinedEnvelopeM` is their maximum and `fitsRetainedDistance` reports the timing comparison. When it is false, `combinedEnvelopeM` is only the scenario distance; `fitsRetainedDistance` is false because the traffic comparison is inapplicable, and the status says so. This result establishes no new weed requirement. `physicalQualification` remains false in both cases. A smaller traffic-case budget cannot lower the existing traffic acquisition requirement.
+The older parameterized result retains `retainedRequirementM`,
+`combinedEnvelopeM` and `fitsRetainedDistance` to reproduce its original
+comparison. Those fields are not the current class-specific policy and must not
+be used to restore a hidden 750 m minimum. `physicalQualification` remains false.
+The new class allocation keeps acceptance and evidence readiness separate from
+the illustrative distance calculation.
 
 Next I need synchronized measurements of first detection, usable track delivery, decision opportunity, command delivery and achieved motion. Those records should identify the target extent, relative motion, control state and each clock's starting point. The existing archived criteria and results remain unchanged so that improvements in the response model are compared against an identifiable baseline.

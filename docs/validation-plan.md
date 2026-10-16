@@ -50,7 +50,9 @@ including acquisition, processing and thermal behavior. Record the hardware and
 software revision, instruments, clock basis and operating conditions so the
 electrical and observation results describe the same installation.
 
-Pair detections and misses with independently observed targets and synchronized power and command timestamps. Separate range, target class, lighting and obscuration: an average can hide the conditions that determine whether the boat can operate. Keep some encounters out of calibration so they can test the resulting model independently.
+Pair detections and misses with independently observed targets and synchronized power and command timestamps. Keep occupied kayaks, occupied stand-up paddleboards, people in the water and unoccupied craft separate, including uncertain occupancy. Separate range, target class, lighting and obscuration: an average can hide the conditions that determine whether the boat can operate. Keep some encounters out of calibration so they can test the resulting model independently.
+
+Measure whether a usable track arrives before the class-specific response distance is consumed, separately from how much maneuver distance is needed. Also measure the complete avoidance response: reliable detection cannot compensate for unreliable steering or an obstructed escape path. Consequence studies must identify ownship mass and speed, relative motion, contact geometry and exposed people. A computed contact energy is not an injury model; neither a glancing-contact hypothesis nor a successful avoidance trial supplies an accepted severity or probability threshold.
 
 Latency statistics cover delivered detections; missed targets must remain visible separately. An observed electrical peak is limited by instrument bandwidth and sampling. The [measurement reference](reference/sensing-measurements.md) defines the records and accounts for any base electronics load replaced by shared compute. No installed dataset has yet established these capabilities.
 

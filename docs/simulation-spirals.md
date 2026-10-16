@@ -152,8 +152,8 @@ separates target classes and encounter geometry, then accounts for a hazard
 arriving while another maneuver occupies the boat. Acquisition can overlap that
 maneuver. A fast head-on case requires 742 m for a fresh response, but 940 m
 when a 17-second occupied interval starts at acquisition-envelope entry. The
-750 m requirement remains unchanged; this calculation exposes a condition it
-does not justify.
+750 m requirement remained unchanged in that study; the calculation exposed a
+condition it did not justify.
 
 The [immutable study record](../evidence/runs/2026-10-16-response-maneuvers/manifest.json)
 preserves the native response summary and synthetic trajectories against their
@@ -200,7 +200,31 @@ residual risk, but the model has no accepted probability threshold or measured
 traffic evidence supporting omission of sailboats or paddlers. The next
 requirement investigation is class- and condition-specific response distance
 and exposure, with consequences and uncertainty assessed separately from
-mission success. Existing targets and acceptance values remain unchanged.
+mission success. At that stage, targets and acceptance values remained unchanged.
+
+## Class-specific observation and consequence — 16 October 2026
+
+The next decision replaces the common 750 m allocation with class- and
+condition-specific observation obligations. I separate the physical response
+distance from reviewed consequence clearance and the reliability of both
+timely observation and the complete avoidance response. Occupied kayaks, occupied stand-up paddleboards,
+people in the water and unoccupied drifting craft now have distinct cases.
+The other traffic classes remain; no class is excluded for being difficult to see.
+
+The native illustrative comparison keeps the older motion inputs for continuity.
+The four split low-profile cases consequently have identical illustrative
+distances, not identical consequence or reliability claims. The
+[native summary and source record](../evidence/runs/2026-10-16-class-specific-encounters/manifest.json)
+preserve that comparison. A low-severity
+glancing contact remains a conditional hypothesis requiring contact geometry
+and occupancy evidence. Unknown occupancy cannot receive that presumption.
+
+This adds the allocation structure, not accepted numerical severity or
+probability thresholds. Class-specific clearance, margin, reliability/confidence
+and evidence review remain open. Earlier 750 m studies and mission runs retain
+their original scope. The [current encounter explanation](encounter-feasibility.md)
+and [detailed allocation](reference/encounter-envelope.md) describe the criteria
+needed before sensor measurements can establish an admitted operating envelope.
 
 ### Evidence through each iteration
 

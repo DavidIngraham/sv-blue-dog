@@ -1,4 +1,7 @@
-"""Native response budgets must preserve timing epochs and unknown authority."""
+"""Historical response budgets preserve timing epochs and unknown authority.
+
+Current class-specific acceptance is tested in test_class_specific_detection.py.
+"""
 import json
 
 import pytest
@@ -74,7 +77,7 @@ def test_relative_motion_geometries_and_common_current(envelope_model):
     assert overtaking["relativeSpeedMps"] == reverse_overtake["relativeSpeedMps"] == 1
 
 
-def test_slow_or_stationary_target_does_not_relax_acquisition_requirement(envelope_model):
+def test_slow_or_stationary_target_preserves_historical_comparison(envelope_model):
     stationary = evaluate(envelope_model, targetEastMps=0, separationM=20)
     weed_boundary = evaluate(envelope_model, targetEastMps=0, separationM=0,
                              appliesTrafficRequirement=False)

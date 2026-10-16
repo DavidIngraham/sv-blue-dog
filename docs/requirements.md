@@ -13,20 +13,26 @@ Hawai‘i and sustained repeated operation are separate future missions. Their l
 
 ## Which requirements can the sensing study challenge?
 
-The mission outcomes and their numerical allocations are different decisions.
-Avoiding collisions and interference with other users is a challenge obligation;
-detecting every listed traffic class at 750 m is a selected engineering
-allocation. The current classes include sailboats and paddlers. Different
-class-specific distances may be justified by closure, observation quality and
-achieved maneuvering, but none has replaced the present allocation.
+Avoiding collision and interference remains the mission obligation. Observation
+distance is now allocated by target class, encounter geometry, uncertainty and
+achievable response, rather than a common 750 m for every target. The older
+750 m studies retain that assumption as historical evidence.
 
-The model also permits explicitly reviewed residual risk under L-104. It does
-not supply an accepted probability threshold for ignoring a traffic class, and
-the provisional mission-reliability objective is not a collision-risk budget.
-The [encounter reference](reference/encounter-envelope.md#can-i-exclude-a-rare-or-difficult-target-class)
-explains what evidence a narrower operating envelope or revised sensing
-requirement would need. Acoustic and optical architectures should be compared
-against that obligation, with their unsupported cases visible.
+I keep two questions separate: **how much distance does the response need**, and
+**how reliably must the installation provide a usable observation**? Consequences inform reviewed clearance and extra distance margins as well as
+observation reliability; exposure also informs reliability and admissible
+conditions. None can reduce the physical response time or maneuver distance.
+The method is adopted, but accepted numerical class allocations remain unresolved.
+Occupied kayaks, occupied stand-up paddleboards, people in the water and
+unoccupied craft are distinct cases. A potentially minor glancing contact is a
+specific hypothesis, not a zero-consequence classification.
+
+L-104 permits explicitly reviewed residual risk. No numerical severity or
+probability threshold has been accepted, and the provisional mission-reliability
+objective is not a collision-risk budget. The
+[encounter reference](reference/encounter-envelope.md#can-i-exclude-a-rare-or-difficult-target-class)
+explains the evidence needed to complete these allocations. All traffic classes
+remain in scope; acoustic and optical choices must expose their unsupported cases.
 
 ## Reference by engineering question
 

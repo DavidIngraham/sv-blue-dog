@@ -4,7 +4,22 @@
 
 Can Blue Dog detect a hazard early enough to avoid it? I first work backward from closing speed and maneuver time to the observation distance needed. Then I compare sensing approaches, their electrical cost and the behavior of IC-01 when those capabilities operate together.
 
-## Challenge the detection-distance allocation
+## Allocate distance and reliability separately
+
+I now allocate observation by target class, encounter geometry and operating condition. First I need enough distance to form a track and complete a feasible response. Reviewed consequence allowances can add clearance and distance margin. Separately, I need evidence that the installation supplies that observation reliably enough for the consequences of a miss. The class-specific method is current; accepted numerical class allocations remain unresolved. A lower consequence does not shorten the physical maneuver, and a longer nominal sensor range does not establish reliable detection.
+
+The current allocation distinguishes occupied kayaks, occupied stand-up paddleboards, people in the water and unoccupied craft. A low-energy glancing contact with an intact hull might have limited consequences; that is a conditional hypothesis to investigate, not a harmless label for every encounter with that class. A person could fall, become trapped or be struck by an appendage. Contact angle, relative speed, occupancy and the complete boat geometry matter. No accepted numerical injury, severity or probability limit has been assigned.
+
+The comparison below uses a 39-second response, 3 m/s ownship speed and the
+earlier separation assumptions. It shows the effect of target speed before
+class-specific consequence reviews select clearance, margin and reliability.
+The four small-target cases deliberately share provisional inputs; matching
+distances do not imply matching consequences. No row is an accepted allocation.
+
+```sysml-report BlueDogClassDetectionDocuments::Summary
+```
+
+### What the earlier common-distance study showed
 
 The [encounter allocation](../models/analyses/encounter-review.sysml) measures distance from the nearest physical extent of the target. A tow includes its barges; a reported antenna position is not its boundary. The native calculation is:
 
@@ -15,9 +30,9 @@ The declared baseline uses 5 seconds for acquisition, 1 for processing, 2 for co
 ```sysml-report BlueDogEncounterStudyDocuments::Detection
 ```
 
-The fast-powerboat case drives **724 m**, rounded to the current **750 m** acquisition allocation. Doubling its maneuver time to 30 seconds requires **994 m**. Keeping the 15-second maneuver but increasing processing to five seconds requires **796 m**. Neither variation fits 750 m. The study sweeps six target classes, three maneuver allowances and three processing delays: **54 cases**.
+The fast-powerboat case drives **724 m**, rounded to the earlier **750 m** common acquisition allocation. Doubling its maneuver time to 30 seconds requires **994 m**. Keeping the 15-second maneuver but increasing processing to five seconds requires **796 m**. Neither variation fits 750 m. The study sweeps six target classes, three maneuver allowances and three processing delays: **54 cases**.
 
-Slower targets require less closing distance, but a person-sized target in darkness can still be the harder sensing problem. The table does not relax the existing 750 m acceptance envelope for its six traffic classes. A future class-specific allocation needs measured detection and maneuver evidence, explicit operating conditions and an owner-reviewed requirement change. Weed-response calculations remain separate sensitivities; they do not assign that traffic requirement to vegetation.
+This six-class table is the historical allocation study, not the current acceptance rule. Its combined person/paddle-craft class must not conceal the distinct observation and consequence cases above. Slower closure may need less maneuver distance while a low target in darkness remains harder to detect. Current class-specific distances need supported timing, uncertainty and motion bounds; their reliability criteria need evidence and an explicit residual-risk disposition. Weed-response calculations remain separate sensitivities.
 
 The executed timing comparison uses **30-second and one-second assessment schedules**, **two-second command delivery** and a persistent **15-second maneuver**. Pending commands hold the previous heading until delivery; frequent updates cannot restart or shorten a maneuver. The native timing criterion distinguishes the declared schedules, but a passing simulated schedule is not a measurement of installed response.
 
@@ -38,8 +53,8 @@ bound is 742 m. If a 17-second
 command-and-maneuver interval begins as the target enters the acquisition
 envelope, the bound becomes 940 m. If 17 seconds remain when the usable track
 arrives, it becomes 1,048 m. Those are different timing conditions, not
-interchangeable margins. None reduces the current 750 m requirement, and none
-establishes that 750 m is sufficient for every encounter.
+interchangeable margins. These comparisons challenge the earlier 750 m common allocation; they do not
+establish a universal current distance.
 
 The [finite-turn experiment](reference/maneuver-dynamics.md) also challenges the
 15-second maneuver assumption. Its uncalibrated turn, tack and gybe cases take
@@ -96,16 +111,21 @@ Include dense rooted beds, sparse stems, floating mats and drifting strands as d
 
 Avoidance must keep the entire underwater swept volume clear with uncertainty allowance, while respecting current, available sailing directions and turning response. The mission experiment should include weed patches and drifting vegetation as independent ground truth, compare timely avoidance with late/missed observations, and assess loss of propulsion or steering if fouling occurs. Recovery routes must also remain usable. Measure sonar power and processing latency, and check that the transducer mount, cables and any guard do not create new snag points. This remains a testable candidate capability, not credited weed protection.
 
-### Can probability justify a smaller sensing obligation?
+### What probability and consequence can change
 
-The present traffic scope includes sailboats and paddlers. Its uniform 750 m
-allocation can be challenged using class-specific closing speed, uncertainty
-and achieved response; removing a target class is a different decision.
-L-104 allows explicitly reviewed residual risk, but no accepted probability
-threshold or measured class-specific exposure currently supports such an
-exclusion. The [requirement-scope review](reference/encounter-envelope.md#can-i-exclude-a-rare-or-difficult-target-class)
-separates that possibility from the provisional mission-reliability objective.
-Quiet targets remain test cases for the acoustic alternatives.
+The current traffic scope retains sailboats, kayaks, stand-up paddleboards,
+people in the water and unoccupied craft. I can change the observation allocation
+or restrict the operating envelope when a class-specific argument supports it;
+I cannot interpret an acoustically quiet target as absent.
+
+That argument separates exposure to an encounter, failure to obtain a usable
+observation, failure to avoid after observation, and the consequences of the
+resulting contact. These factors can be dependent: the same waves may hide a
+person and impair steering. L-104 permits reviewed residual risk, but no accepted
+numerical probability or severity limit is supplied by this decision. The
+provisional mission-reliability objective is not a collision-risk budget.
+The [encounter reference](reference/encounter-envelope.md#can-i-exclude-a-rare-or-difficult-target-class)
+sets out the class distinctions and the evidence needed.
 
 ## Compare sensing and energy together
 

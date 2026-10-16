@@ -152,7 +152,7 @@ package BlueDogRequirementVerification {
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
     verification def <'V-S-001'> TrafficSafetyVerification {
-        doc /* Apply the S-001 qualification conditions. Assess every applicable acceptance outcome separately: S-101, S-102, S-103, S-104. */
+        doc /* Verify S-001 and its decomposed timing and tracking requirements using reviewed class-specific and conservative unclassified envelopes from BlueDogClassDetection. Record class/condition-specific timely track and whole-response probability lower bounds, confidence, applicable method and consequence/exposure reviews, classification transitions, clearance and risk disposition. Independently observe collision and nonimpediment obligations; source-model gates and synthetic truth do not demonstrate physical compliance. Current allocations and installed evidence remain open.*/
         objective acceptance {
             verify BlueDogRequirements::trafficSafety;
             verify BlueDogRequirements::trafficTracking;

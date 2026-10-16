@@ -35,12 +35,12 @@ package BlueDogRisks {
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
             confidence = "Low";
-            assessmentBasis = "The acquisition allocation is 750 m, including low-profile targets and darkness. IC-01 closes its bounded synthetic case set using allocated sensing, explicit timing and a recovery-handoff allowance, but has no measured installation demonstrating range, latency and power together. Occupied-maneuver arrivals and broader encounters remain outside that closure claim. Equipment or exposure changes are likely; a missed encounter can compromise other river users.";
-            evidenceReference = "models/analyses/encounter-review.sysml; models/analyses/integrated-candidate.sysml; evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json; models/vehicle/requirements.sysml";
+            assessmentBasis = "Current class-specific detection allocations require reviewed kinematics, consequence-informed clearance, observation and whole-response reliability, confidence and risk disposition. Those inputs and installed evidence remain open. Historical IC-01 synthetic closure used a uniform 750 m sensing hypothesis; it does not establish the new class policy or measured installation. A missed encounter can compromise other river users.";
+            evidenceReference = "models/analyses/class-specific-detection.sysml; models/analyses/encounter-review.sysml (historical); models/analyses/integrated-candidate.sysml (historical sensing hypothesis); models/vehicle/requirements.sysml";
             residualDisposition = "Open; Mitigate; require sensing and maneuver evidence before admitting the affected operating envelope. No residual-risk acceptance recorded.";
             statement = "If installed sensing cannot acquire and track relevant traffic early enough, the vessel cannot safely execute the allocated avoidance maneuver.";
             consequence = "Collision or impediment of other river users, especially in darkness or spray.";
-            uncertainty = "No installed detection envelope or correlated maneuver response supports the 750 m allocation.";
+            uncertainty = "No installed class-specific detection envelope, consequence review or correlated maneuver-response evidence establishes an accepted current allocation.";
             priority = "Now: safety feasibility";
             priorityRationale = "Safety consequence and potential architecture blocker; a desktop envelope study can expose infeasibility before equipment selection.";
             reductionAction = "Analyze detection geometry, target visibility, latency and maneuver sensitivity together; define a shore-camera and controlled-target experiment before selecting equipment.";

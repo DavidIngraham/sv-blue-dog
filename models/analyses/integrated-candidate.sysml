@@ -21,7 +21,9 @@ package BlueDogIntegratedCandidate {
         attribute electronicsW : Real = BlueDogConfigurations::assumptions.electronicsW + additionalBusW;
         attribute fixedEquipmentKg : Real = BlueDogConfigurations::assumptions.fixedEquipmentKg + additionalEquipmentKg + recoveryBatteryWh/batteryWhKg;
         attribute recoveryDepartureWh : Real = recoveryBatteryWh*0.8*0.9;
-        attribute sensorRangeM : Real = BlueDogEncounterReview::criteria.rangeAllocationM;
+        attribute sensorRangeM : Real = BlueDogEncounterReview::criteria.rangeAllocationM {
+            doc /* Historical 15 October IC-01 sensing hypothesis retained for archived replay. The 750 m value is not a current class-specific allocation; BlueDogClassDetection allocations remain unaccepted.*/
+        }
         attribute weedRangeM : Real = 40;
         attribute sensorLatencyS : Real = 1;
         attribute assessmentS : Real = 1;

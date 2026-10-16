@@ -147,9 +147,9 @@ package BlueDogRequirements {
 
     requirement def <'S-001'> TrafficSafety {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall assess and respond to collision risks within the deployment-specific traffic envelope. */
+        doc /* The vessel shall assess and respond to collision risks within reviewed class-specific detection and response envelopes. Allocations shall include kinematic response distance, uncertainty, consequence-informed clearance and margins, and required timely observation and whole-response reliability with confidence criteria. Unreliably classified targets shall use a reviewed conservative envelope spanning plausible classes and occupant transitions. Collision avoidance and nonimpediment obligations remain unchanged.*/
         comment conditions /* Use independently recorded head-on, crossing and overtaking AIS and non-AIS targets, day and night in the selected operational profile. */
-        metadata issue : ModelingMetadata::Issue { text = "BlueDogEncounterReview allocates target classes, acquisition range, uncertainty and timing. Hardware sensing and maneuver evidence are PDR/CDR and test-readiness deliverables; the SRR definition is complete but satisfaction is not claimed."; }
+        metadata issue : ModelingMetadata::Issue { text = "BlueDogClassDetection defines the current class-specific allocation method. Numerical consequence, exposure, reliability, confidence and risk acceptance inputs remain unreviewed; hardware sensing and maneuver evidence is absent. Historical six-class 750 m analyses do not define the current requirement."; }
     }
     requirement trafficSafety : TrafficSafety;
     #derivation connection challengeTrafficResponse {
@@ -512,7 +512,7 @@ package BlueDogRequirements {
     requirement def <'N-033'> Visibility {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         doc /* The vessel shall provide mode-appropriate navigation and traffic response across the specified visibility conditions. */
-        comment conditions /* Exercise daylight and darkness at meteorological visibility of at least 1 km, and detected visibility below 1 km. Apply the BlueDogEncounterReview scenarios and acquisition envelope. */
+        comment conditions /* Exercise daylight and darkness at meteorological visibility of at least 1 km, and detected visibility below 1 km. Apply current BlueDogClassDetection class-specific or conservative plausible-class envelopes and the S-001 reviewed observation and response criteria.*/
     }
     requirement visibility : Visibility;
     #derivation connection deriveVisibility {
@@ -1492,7 +1492,7 @@ package BlueDogRequirements {
 
     requirement def <'S-101'> TrafficTracking {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall maintain a track for every encounter target within the frozen S-001 detection envelope. */
+        doc /* The vessel shall acquire and maintain encounter tracks with the reviewed class- and condition-specific timely acquisition and continuity performance required by S-001. All admitted target classes remain in scope; before reliable classification, the reviewed conservative plausible-class envelope applies.*/
     }
     requirement trafficTracking : TrafficTracking;
 
@@ -1947,7 +1947,7 @@ package BlueDogRequirements {
 
     requirement def <'N-102'> VisibilityTrafficCapability {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* Traffic assessment shall meet the frozen S-001 criteria at visibility of at least 1 km in daylight and darkness. */
+        doc /* Traffic assessment shall meet the reviewed class-specific S-001 criteria at visibility of at least 1 km in daylight and darkness.*/
     }
     requirement visibilityTrafficCapability : VisibilityTrafficCapability;
 

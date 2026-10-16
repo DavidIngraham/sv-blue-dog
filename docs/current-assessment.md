@@ -40,7 +40,7 @@ righting observations, without adding a dynamic righting model or changing the
 15 October archive. [Mission execution](mission-simulation.md#executable-supervisory-logic)
 describes what happens during inversion.
 
-The [encounter envelope](reference/encounter-envelope.md) now distinguishes a fresh response from a hazard arriving during an occupied maneuver, allowing acquisition and the existing maneuver to overlap. The latter can exceed the 750 m allocation even with one-second assessments. An optional [maneuver model](reference/maneuver-dynamics.md) adds finite turning and speed-dependent steering authority; its synthetic cases show why a universal 15-second maneuver is not a justified bound. Its coefficients still need physical measurements, and the archived integration result retains its original motion model.
+The [encounter envelope](reference/encounter-envelope.md) now distinguishes a fresh response from a hazard arriving during an occupied maneuver, allowing acquisition and the existing maneuver to overlap. The latter can exceed the historical 750 m allocation even with one-second assessments. An optional [maneuver model](reference/maneuver-dynamics.md) adds finite turning and speed-dependent steering authority; its synthetic cases show why a universal 15-second maneuver is not a justified bound. Its coefficients still need physical measurements, and the archived integration result retains its original motion model.
 
 The [physical sensing candidates](reference/sensing-configurations.md) identify components and installation gaps. Simultaneous camera coverage challenges the additional 8 W allocation, while independent upright and inverted observation remains unresolved. These findings constrain the next sizing study; none of the installations is selected or credited with meeting the detection requirement. Simulation of their particular coverage and failure behavior is the next separate experiment.
 
@@ -50,19 +50,22 @@ may cue powered traffic; active sonar can range a reflecting submerged target
 without relying on its emitted sound. Useful near-surface detection, installed
 average demand and independent inverted operation remain unmeasured.
 
-The [requirement-scope review](reference/encounter-envelope.md#can-i-exclude-a-rare-or-difficult-target-class)
-identifies a legitimate question about the uniform 750 m allocation. The model
-permits explicitly reviewed residual risk, but has neither an accepted
-target-class exclusion nor evidence that sailboats or paddlers can be ignored.
-Class-specific observation distances and enforceable exposure restrictions are
-investigations; the current traffic scope remains unchanged.
+The [class-specific allocation](reference/encounter-envelope.md) replaces the
+blanket 750 m policy with separate response-distance, consequence-clearance and
+observation and response reliability decisions. It distinguishes occupied kayaks, occupied
+stand-up paddleboards, people in the water and unoccupied drifting craft while
+retaining the other traffic classes. Illustrative distances are available;
+class-specific accepted margins, reliability/confidence criteria and supporting
+evidence remain unresolved. No low-consequence class exemption or numerical
+residual-risk threshold has been accepted. The earlier campaigns retain their
+original acquisition assumptions and do not verify the new allocation.
 
 <a id="review-gates-scaled-to-one-project"></a>
 ## Choosing the next work
 
 I prioritize evidence that could change the architecture or the conditions in which I can operate the boat.
 
-1. **Sensing and maneuvering:** use the physical candidate layouts to define the next sensing simulation, then measure target detection, latency, mass, power and thermal behavior together. Replace the provisional maneuver coefficients with achieved heading, speed and swept-path measurements.
+1. **Sensing and maneuvering:** complete the class-specific criteria and use the physical candidate layouts to define the next sensing simulation, then measure target detection, latency, mass, power and thermal behavior together. Replace the provisional maneuver coefficients with achieved heading, speed and swept-path measurements.
 2. **Independent recovery:** test observation, control and power isolation; upright and inverted thrust; startup and usable capacity. Survey approaches and demonstrate shore retention and one-person pickup.
 3. **Rig and construction:** compare soft sail, tail-controlled wing and directly rotated wing on equal terms for the finite Gorge mission. The trade links use this mission’s criteria; future ocean-wave and repeating-endurance requirements are outside its scope. Measure loads, trim energy, material properties, joints and casualty behavior that could change the IC-01 design.
 4. **Integrated replay and trials:** replace provisional inputs with the measured envelopes, rerun the affected scenarios and expand physical trials within the demonstrated limits.

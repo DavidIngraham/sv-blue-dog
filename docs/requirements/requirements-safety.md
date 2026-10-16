@@ -6,7 +6,7 @@ Finishing the course cannot take priority over other river users. The boat needs
 
 ## Traffic and operating boundary
 
-The boat must observe relevant traffic, assess conflicts and act within its timing and maneuvering capability. Range and timing allocations need integrated testing, including new hazards that appear during an occupied maneuver.
+The boat must observe relevant traffic, assess conflicts and act within its timing and maneuvering capability. Distance now depends on target class, relative motion, uncertainty, reviewed clearance and achieved response, including hazards arriving during an occupied maneuver. Timely acquisition and track reliability are separate evidence obligations. Occupied kayaks, stand-up paddleboards, people in the water and unoccupied craft remain distinct cases; uncertain occupancy must not receive a presumed low-consequence treatment. The [allocation reference](../reference/encounter-envelope.md) identifies the still-unresolved acceptance criteria.
 
 <details>
 <summary>Model relationships and authoritative requirement statements</summary>
