@@ -31,7 +31,11 @@ def test_assessment_basis_and_evidence_are_published():
     report = native('-render-document', 'BlueDogRiskDocuments::Assessments')
     for number in range(1, 7):
         assert report.count(f'| R-{number:03d} |') == 1
-    assert '3.974 Wh' in report
+    from tools.boat_analysis.evidence.records import ROOT,run_record
+    candidate=run_record(ROOT/'evidence/runs/2026-10-15-integrated-candidate','integrated-sizing.json')
+    headroom=100*candidate['replay']['concept']['voyageEnergyMargin']
+    assert f'{headroom:.3f} Wh' in report
+    assert 'integrated-candidate/integrated-mission.json' in report
     assert 'wave-performance/summary.json' in report
     assert 'Possible' in report and 'Demonstrated' in report
     assert 'Low' in report and 'High' in report
