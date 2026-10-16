@@ -14,7 +14,7 @@ The [encounter-feasibility study](encounter-feasibility.md) supplies explicit de
 
 ## Executable supervisory logic
 
-The [mission supervisor](../models/vehicle/mission-logic.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing permission, operating mode, abort latching and whether an abort alert is attempted or queued. Dependencies connect these actions to the normal-sailing, traffic-encounter and abort/recovery scenarios; the supervisor is allocated to the onboard mission manager.
+The [mission supervisor](../models/vehicle/mission-logic.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing permission, operating mode, abort latching and whether an abort alert is attempted or queued. `FallbackPolicy` decides whether the available, permitted recovery path can be attempted or the vessel must continue drifting. Dependencies connect these actions to the normal-sailing, traffic-encounter and abort/recovery scenarios; the supervisor is allocated to the onboard mission manager.
 
 A wind observation outage inhibits sailing while the vessel drifts with the current. Restoring the observation permits sailing again. Communications loss alone does not end the attempt. A safety abort latches: restoring inputs does not resume qualification. Alert delivery does not block autonomous recovery. A held forecast remains usable during a service outage; a declared invalid forecast triggers abort and recovery.
 
@@ -44,8 +44,10 @@ flowchart TD
     observations --> supervisor["Executable logical supervisor"]
     supervisor -->|sailing permission| guidance["Choose sailing heading or depower"]
     supervisor -->|latched abort| recovery["Plan and execute available recovery"]
+    recovery -->|unavailable or failed| drift["Continue current-driven drift and energy use"]
+    drift --> evidence
     recovery --> evidence
-    guidance -->|no safe control with recovery configured| supervisor
+    guidance -->|no safe control| supervisor
     guidance --> motion["Advance vessel with current and maneuver delay"]
     motion --> checks["Check chart domain, traffic and ordered gates"]
     motion --> energy["Integrate load, maneuver energy and solar collection"]
@@ -57,11 +59,13 @@ flowchart TD
 
 The model owns both the supervisory decisions during a voyage and the outcome criteria used to assess it. The simulator supplies observations to the supervisor and applies its decisions. Ordered crossings, intervention, collision, reserve and abort facts determine the final mission classification. A simulated completion remains separate from physical qualification or proof of full navigation-rule compliance.
 
-The controller evaluates sailing headings and a depowered option. Depowering still allows the boat to drift with the current; it does not create free station keeping. Maneuvers cost time and energy. The controller updates on its own clock; a smaller integration step does not increase its update rate or shorten a maneuver. Motion steps end at control updates, maneuver completion, weather changes and injected events. Both pieces of the drift-then-sail maneuver must remain in the chart domain. A communications outage does not stop autonomous execution. Operator intervention or motor use ends qualification for that attempt.
+The controller evaluates sailing headings and a depowered option. Depowering still allows the boat to drift with the current; it does not create free station keeping. Maneuvers cost time and energy. The controller updates on its own clock; a smaller integration step does not increase its update rate or shorten a maneuver. Command delivery and maneuver completion have separate clocks. A pending command holds the previous heading until delivery; an active maneuver cannot be restarted by a faster assessment update. Margin checks continue during that interval, but new heading selection waits for the in-flight command and maneuver to finish. This non-preemptive policy leaves an additional timing question for hazards first observed during an occupied interval. The timing trace records selection, application and maneuver completion. Motion steps end at control updates, command delivery, maneuver completion, weather changes and injected events. Saved tracks retain velocity-change points so rendering does not cut across a turn. Both pieces of the drift-then-sail maneuver must remain in the chart domain. A communications outage does not stop autonomous execution. Operator intervention or motor use ends qualification for that attempt.
 
 There is no 72-hour challenge deadline and no daily energy-balance requirement. A finite trip can finish with less stored energy than it started with. It must still protect the energy needed to reach a suitable shore retrieval location from its current position. The simulation horizon is a computational setting: reaching it produces a censored result, not a failed challenge deadline.
 
 Recovery has an explicit route-planning and execution interface. The [native recovery calculation](../models/libraries/marine/recovery.sysml) resolves along-track and cross-current effects on powered transit; the [Python planner](../tools/boat_analysis/mission/recovery.py) searches chart-clear approaches and accumulates energy with an explicit uncertainty allowance. Capsized performance must be supplied separately. The mission engine can trigger recovery before continued sailing would consume its reserve, terminate qualification, and record the powered transit independently of challenge completion.
+
+An unavailable or failed recovery continues as current-driven drift until physical contact or the declared horizon. Essential loads consume the remaining battery, and drift continues after exhaustion. Clearance violations remain latched in the result without feeding truth back to guidance or ending the trajectory. Actual collision ends the modeled motion; shore contact is an adverse terminal event, not successful retrieval. Horizon expiry leaves the consequence censored. Windage, wave-driven and capsized drift are not modeled, and reaching a recovery approach does not establish retention there. Legacy stopped-baseline runs explicitly disable continuation.
 
 The recovery regression scenarios use synthetic pickup locations and propulsion capabilities. They demonstrate the implementation, not suitable real-world refuges. The published historical campaigns have not yet been rerun with assessed shore locations. Reaching a modeled water approach also does not prove final grounding, shore access or vessel retention. Those need their own evidence. During recovery, traffic truth remains in the consequence calculation even when onboard traffic sensing is unavailable; we do not credit an independent backup detector that has not been designed.
 

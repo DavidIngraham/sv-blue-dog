@@ -35,8 +35,8 @@ package BlueDogRisks {
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
             confidence = "Low";
-            assessmentBasis = "The allocated encounter budget requires 724 m and adopts 750 m acquisition, including low-profile targets and darkness. The imperfect-observation hypothesis study and coarse 30-second mission controller do not demonstrate that installed sensing and allocated one-second/two-second timing are feasible. Equipment or exposure changes are likely; a missed encounter can compromise other river users.";
-            evidenceReference = "models/analyses/encounter-review.sysml; models/analyses/encounter-feasibility.sysml; tools/boat_analysis/mission/encounter_study.py; models/vehicle/requirements.sysml";
+            assessmentBasis = "The allocated encounter budget requires 724 m and adopts 750 m acquisition, including low-profile targets and darkness. Including hypothetical sensor delivery requires 742-760 m at one-second assessment and over 1260 m at 30-second assessment. All 20 one-second continuation cases remain censored; declared timing does not establish effective guidance or installed response. Equipment or exposure changes are likely; a missed encounter can compromise other river users.";
+            evidenceReference = "models/analyses/encounter-review.sysml; models/analyses/encounter-feasibility.sysml; evidence/runs/2026-10-15-encounter-continuation/encounter-continuation.json; models/vehicle/requirements.sysml";
             residualDisposition = "Open; Mitigate; require sensing and maneuver evidence before admitting the affected operating envelope. No residual-risk acceptance recorded.";
             statement = "If installed sensing cannot acquire and track relevant traffic early enough, the vessel cannot safely execute the allocated avoidance maneuver.";
             consequence = "Collision or impediment of other river users, especially in darkness or spray.";
@@ -58,8 +58,8 @@ package BlueDogRisks {
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
             confidence = "Medium";
-            assessmentBasis = "The site assessment rejects endpoint-only coverage and has no surveyed casualty approach coverage. Synthetic tests demonstrate current-authority limits and separate capsized capability, not real recovery. Site, propulsion or operating restrictions are likely; unresolved loss of recovery can expose other traffic.";
-            evidenceReference = "models/analyses/recovery-site-review.sysml; tests/test_course_recovery.py; models/analyses/recovery-risk.sysml";
+            assessmentBasis = "The site assessment rejects endpoint-only coverage and has no surveyed casualty approach coverage. Continued synthetic casualties expose censored common-cause drift and shore contact under adverse current. A clear-path approach is a virtual positive control, not surveyed recovery or shore retention. Site, propulsion or operating restrictions are likely; unresolved loss of recovery can expose other traffic.";
+            evidenceReference = "models/analyses/recovery-site-review.sysml; tests/test_course_recovery.py; evidence/runs/2026-10-15-encounter-continuation/encounter-continuation.json; models/analyses/recovery-risk.sysml";
             residualDisposition = "Open; Mitigate; retain casualty restrictions until site coverage and installed recovery authority are demonstrated. No residual-risk acceptance recorded.";
             statement = "If a casualty removes sensing, steering or buoyancy, autonomous shore recovery may fail before another traffic encounter.";
             consequence = "Collision, stranded vessel or unrecovered debris.";

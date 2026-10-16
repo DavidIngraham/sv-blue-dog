@@ -1,0 +1,10 @@
+{
+  "sourceRevision": "909ba579d83cc7a929f875b9c97585bc40f6b1e7",
+  "files": {
+    "encounter-continuation.json": {
+      "sha256": "edbfc802061656c4d18cc83a165c61bac2c2deae2994a50d61a3239eafdb97ae"
+    }
+  },
+  "qualified": false,
+  "scope": "Virtual command timing and bounded encounter/casualty continuations; no physical qualification or measured installation."
+}

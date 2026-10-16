@@ -87,6 +87,8 @@ package Page_architecture_recovery {
 
 The initial physical allocation puts autonomous estimation and decisions on an onboard platform. It leaves processor choice, software partitioning and redundancy open. Wind observation also has a concrete allocation to the challenge's wired sensor installation. Further physical-architecture work must develop these coarse allocations into compatible interfaces and implementations, supported by timing, power and failure evidence. The [method model](../models/vehicle/method.sysml) owns those links; the [development plan](development-plan.md) tracks the maturity and remaining evidence for each layer.
 
+The executable logical responsibilities include event handling, sailing permission, abort latching and the choice between an available recovery attempt and continued drift. Command delivery and maneuver completion are distinct timing events. The [mission simulator](mission-simulation.md#executable-supervisory-logic) records these decisions and their consequences; independent sensing and propulsion after a casualty remain unallocated physical capabilities, not implied backups.
+
 ## Sailing hardware
 
 Hull and rig provide the physical platform; actuation trims and steers it. The diagram names the responsibilities before I choose equipment.

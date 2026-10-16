@@ -53,7 +53,7 @@ The [analysis](../models/analyses/encounter-review.sysml) defines six target cla
 
 The range budget includes closing speed, acquisition, assessment, command, maneuver, contingency, relative-position uncertainty and separation measured from the target's physical extent. The worst allocated case needs 724 m; 750 m is the proposed common envelope. Qualification observes the actual target, track continuity, one-second assessment, two-second command and 15-second maneuver. It separately checks swept-hull collision, the class-specific project separation and whether Blue Dog impedes a confined vessel. Passing a distance screen alone does not establish navigation-rule compliance.
 
-The mission simulation's 30-second guidance loop and perfect target truth are suitable for coarse route-exposure studies. They **do not verify** these sensing and response requirements. Feasibility needs sensor replay and maneuver evidence before the allocation is considered feasible; a failed demonstration requires redesign or an explicitly changed operating envelope.
+The [encounter method](encounter-feasibility.md) exercises imperfect tracks, explicit command delay and 30-second/one-second schedules, alongside a perfect-truth baseline for coarse route-exposure studies. These conceptual simulations **do not verify** installed sensing or achieved maneuver response. Feasibility needs sensor replay and maneuver evidence before the allocation is considered feasible; a failed demonstration requires redesign or an explicitly changed operating envelope.
 
 ## Impaired-sensing recovery decision
 
