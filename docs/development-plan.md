@@ -90,7 +90,7 @@ Consequences are **Negligible** (no meaningful effect on the decision), **Minor*
 
 The judgments are recorded by the analysis agent with owner review pending. All six risks remain open. Confidence describes the support for the development judgment, not confidence that a physical failure will occur: low for largely unmeasured assumptions, medium for specific but indirect analytical evidence, and high where the limitation is directly demonstrated.
 
-Traffic sensing and casualty recovery lead the safety investigations. The small energy margin warrants early measured-load work alongside them. Structural and wing evidence constrain the design alternatives; scenario coverage constrains every mission conclusion. A populated cell records a judgment, not a completed mitigation.
+Traffic sensing and casualty recovery lead the safety investigations. IC-01 has nominal energy headroom, but simultaneous sensing performance, installed demand and power isolation still warrant early measured-load work. Structural and wing evidence constrain the design alternatives; scenario coverage constrains every mission conclusion. The cube's evidence descriptions include the bounded virtual closure; all six risks retain their open dispositions and existing ratings because the physical evidence gaps remain.
 
 ### Risk reduction and closure
 

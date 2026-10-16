@@ -35,8 +35,8 @@ package BlueDogRisks {
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
             confidence = "Low";
-            assessmentBasis = "The allocated encounter budget requires 724 m and adopts 750 m acquisition, including low-profile targets and darkness. Including hypothetical sensor delivery requires 742-760 m at one-second assessment and over 1260 m at 30-second assessment. All 20 one-second continuation cases remain censored; declared timing does not establish effective guidance or installed response. Equipment or exposure changes are likely; a missed encounter can compromise other river users.";
-            evidenceReference = "models/analyses/encounter-review.sysml; models/analyses/encounter-feasibility.sysml; evidence/runs/2026-10-15-encounter-continuation/encounter-continuation.json; models/vehicle/requirements.sysml";
+            assessmentBasis = "The acquisition allocation is 750 m, including low-profile targets and darkness. IC-01 closes its bounded synthetic case set using allocated sensing, explicit timing and a recovery-handoff allowance, but has no measured installation demonstrating range, latency and power together. Occupied-maneuver arrivals and broader encounters remain outside that closure claim. Equipment or exposure changes are likely; a missed encounter can compromise other river users.";
+            evidenceReference = "models/analyses/encounter-review.sysml; models/analyses/integrated-candidate.sysml; evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json; models/vehicle/requirements.sysml";
             residualDisposition = "Open; Mitigate; require sensing and maneuver evidence before admitting the affected operating envelope. No residual-risk acceptance recorded.";
             statement = "If installed sensing cannot acquire and track relevant traffic early enough, the vessel cannot safely execute the allocated avoidance maneuver.";
             consequence = "Collision or impediment of other river users, especially in darkness or spray.";
@@ -58,8 +58,8 @@ package BlueDogRisks {
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
             confidence = "Medium";
-            assessmentBasis = "The site assessment rejects endpoint-only coverage and has no surveyed casualty approach coverage. Continued synthetic casualties expose censored common-cause drift and shore contact under adverse current. A clear-path approach is a virtual positive control, not surveyed recovery or shore retention. Site, propulsion or operating restrictions are likely; unresolved loss of recovery can expose other traffic.";
-            evidenceReference = "models/analyses/recovery-site-review.sysml; tests/test_course_recovery.py; evidence/runs/2026-10-15-encounter-continuation/encounter-continuation.json; models/analyses/recovery-risk.sysml";
+            assessmentBasis = "IC-01 reaches synthetic approaches in six casualty/end-of-exposure cases using allocated independent power, control, observations and upright/inverted thrust. Shared-power and empty-bank controls still reach shore contact. No surveyed casualty coverage, measured fault isolation, finite-turn recovery dynamics or retention is established. Site, propulsion or operating restrictions remain likely; unresolved loss of recovery can expose other traffic.";
+            evidenceReference = "models/analyses/recovery-site-review.sysml; tests/test_course_recovery.py; evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json; models/analyses/recovery-risk.sysml";
             residualDisposition = "Open; Mitigate; retain casualty restrictions until site coverage and installed recovery authority are demonstrated. No residual-risk acceptance recorded.";
             statement = "If a casualty removes sensing, steering or buoyancy, autonomous shore recovery may fail before another traffic encounter.";
             consequence = "Collision, stranded vessel or unrecovered debris.";
@@ -133,14 +133,14 @@ package BlueDogRisks {
             likelihoodClass = "Likely";
             consequenceClass = "Critical";
             confidence = "Medium";
-            assessmentBasis = "The retained candidate has only 3.974 Wh headroom against 312.826 Wh allocated demand. Installed loads, usable capacity and correlated duty cycles are unmeasured. Energy or operating allocations are likely to need adjustment; exhausted shared power can remove safety and recovery functions.";
-            evidenceReference = "models/evidence/srr-current.sysml; evidence/runs/2026-10-13-srr-readiness/srr-readiness.json";
+            assessmentBasis = "IC-01 has 102.062 Wh main-pack headroom against 833.938 Wh nominal allocated demand and separately budgets recovery standby and propulsion. Its additional 8 W sensing demand, equipment mass, usable capacity, duty and isolation remain unmeasured. This is a conditional allocation, not installed energy evidence. Energy or operating allocations remain likely to need adjustment; exhausted or shared power can remove safety and recovery functions.";
+            evidenceReference = "models/analyses/integrated-candidate.sysml; evidence/runs/2026-10-15-integrated-candidate/integrated-sizing.json; evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json";
             residualDisposition = "Open; Mitigate; establish measured capacity/load bounds and protect independent recovery authority before relying on the margin. No residual-risk acceptance recorded.";
             statement = "If installed loads, battery capacity or correlated duty cycles exceed assumptions, the vessel may exhaust usable energy before passage or recovery completes.";
             consequence = "Abort or loss of safety and recovery functions.";
-            uncertainty = "The 440 Wh candidate has little nominal headroom; installed consumption and usable capacity are unmeasured.";
+            uncertainty = "IC-01 has nominal allocated margin; installed sensing demand, usable capacity, duty and independent recovery loads are unmeasured.";
             priority = "Next: integration credibility";
-            priorityRationale = "Small nominal margin and shared safety power make this a design risk despite a passing static screen.";
+            priorityRationale = "Simultaneous sensing performance, installed demand and power isolation can overturn the allocated concept despite virtual closure.";
             reductionAction = "Propagate correlated load and capacity uncertainty through chronological passage and abort cases; specify measured-load replay on the electrical bench.";
             closureEvidence = "Evidence-backed usable energy and load profiles support passage and recovery margins in the declared scenario set; protection and common-cause faults have explicit dispositions.";
         }
@@ -157,8 +157,8 @@ package BlueDogRisks {
             likelihoodClass = "Demonstrated";
             consequenceClass = "Major";
             confidence = "High";
-            assessmentBasis = "All four archived wave-performance mission replays stop outside coverage at departure despite 32 supported small-wave operating cases. Thus current evidence already restricts mission conclusions. Synthetic traffic and weather also limit transfer; greater sample count alone cannot establish the operating envelope.";
-            evidenceReference = "evidence/runs/2026-10-13-wave-performance/summary.json; docs/mission-simulation.md";
+            assessmentBasis = "IC-01 closes a bounded synthetic reach with averaged-tack sailing and point-mass recovery. It does not establish complete Gorge, wave or physical maneuver coverage. All four archived wave-performance mission replays stop outside their supported domain at departure despite 32 small-wave operating cases. Synthetic traffic and weather limit transfer; greater sample count alone cannot establish the operating envelope.";
+            evidenceReference = "evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json; evidence/runs/2026-10-13-wave-performance/summary.json; docs/mission-simulation.md";
             residualDisposition = "Open; Restrict claims to supported domains; expand and correlate decision-driving coverage before comparing mission success. No residual-risk acceptance recorded.";
             statement = "If weather, traffic or physics coverage is unrepresentative, the optimizer may select a boat whose apparent mission success does not transfer to the river.";
             consequence = "Wrong concept selection or unjustified operating envelope.";
