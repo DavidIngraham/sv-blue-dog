@@ -1,0 +1,80 @@
+{
+  "reviewed_on": "2026-10-16",
+  "scope": "Supplier research; no installed performance or sensing simulation evidence",
+  "project_assumptions": {
+    "passive_geometry_m": [
+      0.6,
+      0.3
+    ],
+    "immersion_depth": "unresolved",
+    "passive_support_mass_kg": 0.45,
+    "active_support_mass_kg": 0.3,
+    "recorder_with_heads_power_scenario_W": [
+      1.5,
+      3
+    ],
+    "pi_host_power_scenario_W": [
+      3,
+      6
+    ],
+    "conversion_efficiency_scenario": 0.9,
+    "independent_recovery": "unresolved; excluded from provisional primary subtotals",
+    "synchronization": "single multichannel recorder proposed; channel time/phase calibration and Pi live interface/latency unverified"
+  },
+  "sources": [
+    {
+      "id": "aquarian-h3dx",
+      "url": "https://www.aquarianaudio.com/AqAudDocs/H3dX_manual.pdf",
+      "accessed": "2026-10-16",
+      "claim_scope": "Current d-model head mass excludes cable/plug; typical phantom current; interface and care",
+      "review_method": "official source reviewed through web tool",
+      "retrieved_sha256": "43a78ff010a2f33e3d505aa86a018dde585f287ca3e6bb74518e2c7969514f9b",
+      "retrieved_bytes": 126261
+    },
+    {
+      "id": "zoom-f6-manual",
+      "url": "https://www.zoom.co.jp/sites/default/files/products/downloads/pdfs/E_F6.pdf",
+      "accessed": "2026-10-16",
+      "claim_scope": "Six-channel interface, phantom voltages,520g;1W main unit only,not installed array",
+      "review_method": "official source reviewed through web tool",
+      "retrieved_sha256": "0542ec901c6bdd93d6324349b97580468ad9faca22064b8f953c6d72a0f07a93",
+      "retrieved_bytes": 4547927
+    },
+    {
+      "id": "cerulean-fs-spec",
+      "url": "https://docs.ceruleansonar.com/c/omniscan-450/specifications",
+      "accessed": "2026-10-16",
+      "claim_scope": "FS100m depth version440g;10Wmaximum;beam and instrument range,not target detection",
+      "review_method": "official source reviewed through web tool",
+      "retrieved_sha256": "db3a35f2adce10ee0f66ebee5afa7d1dedd59d5e19b669f5640f4216ac86d373",
+      "retrieved_bytes": 467318
+    },
+    {
+      "id": "cerulean-mount",
+      "url": "https://docs.ceruleansonar.com/c/omniscan-450/mechanical-mounting",
+      "accessed": "2026-10-16",
+      "claim_scope": "Nominal downward mounting guidance",
+      "review_method": "official source reviewed through web tool",
+      "retrieved_sha256": "4e55ca59f287396d618f6dd3ab085f7df081cfa00f664e9e480adc0605ac8442",
+      "retrieved_bytes": 397628
+    },
+    {
+      "id": "sonoptix-echo",
+      "url": "https://bluerobotics.com/store/sonars/imaging-sonars/sonoptix-echo/",
+      "accessed": "2026-10-16",
+      "claim_scope": "Current technical table;750g;5-25W and mode examples;sector/vertical field;catalogue ranges,firmware conditions",
+      "review_method": "official source reviewed through web tool",
+      "retrieved_sha256": "cf5cf9572ebe20b2410c78cf23ed55a8d3a68afcda8f1a1fbcc6f3980cac30c2",
+      "retrieved_bytes": 311058
+    },
+    {
+      "id": "noaa-sonar",
+      "url": "https://oceanservice.noaa.gov/facts/sonar.html",
+      "accessed": "2026-10-16",
+      "claim_scope": "Active echo ranging versus passive listening principles",
+      "review_method": "official source reviewed through web tool",
+      "retrieved_sha256": "ee7e8b8c7e368d2b36fc70500e776fcb79b7628020fb393257941d4424040dc6",
+      "retrieved_bytes": 31844
+    }
+  ]
+}

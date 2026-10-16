@@ -181,6 +181,27 @@ simulation is deferred to the next experiment. It will need the selected
 physical layouts, without treating catalogue resolution or range as achieved
 detection performance.
 
+## Compare acoustic observations and challenge the allocation
+
+The acoustic follow-up asks whether the optical shortlist omitted useful ways
+to observe traffic and underwater hazards. The
+[comparison](reference/acoustic-sensing.md) identifies a synchronized hydrophone
+array, a narrow-beam forward sonar and a multibeam imaging sonar. It separates
+passive bearing cues from active range returns and records the physical
+interfaces, mass and electrical assumptions needed to test each. Quiet targets,
+surface reflections, flow noise and casualty orientation remain explicit gaps.
+No acoustic performance is inserted into the sensing simulation.
+
+The same investigation checks whether difficult targets can be excluded. The
+[requirements review](reference/encounter-envelope.md#can-i-exclude-a-rare-or-difficult-target-class)
+finds that the mission requires collision avoidance and noninterference, while
+the uniform 750 m distance is an engineering allocation. L-104 permits reviewed
+residual risk, but the model has no accepted probability threshold or measured
+traffic evidence supporting omission of sailboats or paddlers. The next
+requirement investigation is class- and condition-specific response distance
+and exposure, with consequences and uncertainty assessed separately from
+mission success. Existing targets and acceptance values remain unchanged.
+
 ### Evidence through each iteration
 
 For me, fidelity means representing the effects that matter to a decision with enough accuracy. Traceability means being able to explain which mission obligation, design, assumptions and evidence produced the conclusion. A more detailed model can strengthen one part of that chain while exposing a weakness in another.

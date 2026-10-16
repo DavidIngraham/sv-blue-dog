@@ -80,6 +80,14 @@ For Blue Dog, compare a hydrophone or compact array as a powered-traffic cue, an
 
 Budget receiver preamplifiers, digitizers, continuous processing and data recording for passive sensing; add transmitter peak demand, ping duty and echo processing for active sonar. Passive means no transmitted acoustic pulse, not zero electrical demand. Measure useful range/bearing and update latency alongside average and peak battery-bus demand. Acoustic cues may direct cameras or strengthen a fused track, but any power-saving schedule must preserve the required detection lead time.
 
+The [physical acoustic comparison](reference/acoustic-sensing.md) now identifies
+an Aquarian hydrophone array with synchronized acquisition, a Cerulean
+Omniscan 450 FS narrow-beam sonar and a Sonoptix ECHO multibeam sonar. Passive
+listening could cue a powered target; active sonar can range a return from a
+quiet submerged object. Neither observation establishes all-bearing surface
+traffic coverage. The comparison separates head specifications from complete
+installation demand, useful target evidence and independent recovery.
+
 ### Weed detection and avoidance
 
 Active sonar can detect submerged vegetation: [BioSonics' aquatic-habitat echo sounder](https://www.biosonicsinc.com/products/mx-aquatic-habitat-echosounder/) explicitly supports mapping submerged aquatic vegetation. This supports investigating the sensing principle; it does not establish real-time avoidance performance on Blue Dog. A downward survey image obtained after passing over vegetation is different from a timely forward obstacle observation.
@@ -87,6 +95,17 @@ Active sonar can detect submerged vegetation: [BioSonics' aquatic-habitat echo s
 Include dense rooted beds, sparse stems, floating mats and drifting strands as distinct cases. Measure detection distance, missed hazards, false alarms and estimated extent at the depths swept by the keel, rudder and recovery propulsor. Test bottom/surface clutter, turbid water, bubbles, boat motion and different approach angles. A reliable return from a dense bed cannot be generalized to every thin strand. Passive hydrophones do not provide a dependable warning for quiet vegetation; visible cameras may complement sonar for exposed mats.
 
 Avoidance must keep the entire underwater swept volume clear with uncertainty allowance, while respecting current, available sailing directions and turning response. The mission experiment should include weed patches and drifting vegetation as independent ground truth, compare timely avoidance with late/missed observations, and assess loss of propulsion or steering if fouling occurs. Recovery routes must also remain usable. Measure sonar power and processing latency, and check that the transducer mount, cables and any guard do not create new snag points. This remains a testable candidate capability, not credited weed protection.
+
+### Can probability justify a smaller sensing obligation?
+
+The present traffic scope includes sailboats and paddlers. Its uniform 750 m
+allocation can be challenged using class-specific closing speed, uncertainty
+and achieved response; removing a target class is a different decision.
+L-104 allows explicitly reviewed residual risk, but no accepted probability
+threshold or measured class-specific exposure currently supports such an
+exclusion. The [requirement-scope review](reference/encounter-envelope.md#can-i-exclude-a-rare-or-difficult-target-class)
+separates that possibility from the provisional mission-reliability objective.
+Quiet targets remain test cases for the acoustic alternatives.
 
 ## Compare sensing and energy together
 

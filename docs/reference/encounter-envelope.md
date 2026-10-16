@@ -71,6 +71,73 @@ The parameterized analysis therefore accepts separate achieved bounds for the re
 
 Reducing ownship speed lowers head-on closing speed, but does not necessarily solve the problem. For the same assumed 39-second response against the fast craft, own speeds of 0, 0.5, 1, 2 and 3 m/s give 625, 645, 664, 703 and 742 m. Those are timing sensitivities only: reduced speed can also reduce rudder authority and lengthen the maneuver. The response duration must be reevaluated with the speed change before admitting an operating condition.
 
+## Can I exclude a rare or difficult target class?
+
+The current requirements include sailing craft and people or low-profile paddle
+craft. The [challenge](../../models/missions/transgorge.sysml) requires compliance
+with applicable navigation rules (C-007), completion without collision with
+other users (C-009), and noninterference (C-011). The
+[vehicle requirements](../../models/vehicle/requirements.sysml) then require
+assessment and response within the deployment-specific traffic envelope (S-001)
+and tracking of every encounter target within that envelope (S-101).
+
+Those outcomes do not themselves prescribe 750 m. That uniform distance is the
+selected engineering allocation in the
+[six-class encounter review](../../models/analyses/encounter-review.sysml).
+Its rationale explicitly allows revisiting admissible speed and exposure or
+redesigning detection. The one-second assessment and two-second command
+requirements are also numerical allocation decisions; they need a response-time
+basis rather than being treated as inevitable consequences of collision avoidance.
+No target class or numerical requirement has been removed by this study.
+
+A class- and condition-specific observation envelope is therefore worth
+investigating. Slower closure can permit a shorter distance, provided acquisition,
+uncertainty, occupied time and achieved maneuver authority still fit. The small
+target must actually be observable at that distance. The 225 m person/paddle-craft
+and 303 m sailing-craft examples above are fresh-response sensitivities, not
+approved replacement requirements.
+
+### Probability can inform a disposition
+
+L-104 permits an explicitly reviewed residual risk for an identified
+safety-critical failure mode. This is not a demand to prove that every imaginable
+collision is impossible. It is also not permission to omit a class because the
+available sensor cannot see it. The requirement explicitly keeps harm to other
+users separate from an attractive aggregate reliability score. L-101's proposed
+90% mission-reliability objective is nonbinding and is not a collision-risk budget.
+
+A useful probabilistic argument would distinguish the chance of encountering
+the class over the admitted voyage from the chance of collision or other harm
+given that encounter and the installed response. It would also assess severity,
+uncertainty and shared causes such as glare or weather. The local exposure
+evidence must include non-AIS users, the return leg, waiting and recovery near
+shore. An AIS-only traffic count cannot establish that paddlers or unpowered
+sailboats are rare.
+
+The [existing recovery-risk sensitivity](../../models/analyses/recovery-risk.sysml)
+shows how exposure can be studied, but uses hypothetical rates and a conditional
+independence assumption for sensing-loss recovery. It establishes neither a
+target-class exclusion nor an accepted probability threshold. A simulated
+completion fraction or an absence of encounters in a short trial cannot fill
+that gap.
+
+Route, time and weather restrictions may reduce exposure if they can be
+established and enforced. They still need a disposition for unexpected users;
+the sensor's failure to report a quiet target cannot establish that the area is
+clear. Daylight-only development trials are possible, but changing the qualifying
+mission to daylight only would also revisit C-025, which currently requires night
+operation.
+
+USCG guidance treats lookout and collision appraisal as ongoing responsibilities
+and cautions against assumptions based on scanty information. A project risk
+acceptance does not itself settle compliance with those obligations.
+[USCG navigation-rule guidance](https://navcen.uscg.gov/navigation-rules-faqs).
+
+The present decision is therefore open: investigate better class-specific
+allocations and exposure evidence, while retaining sailboats and paddlers in the
+current encounter scope. The [acoustic comparison](acoustic-sensing.md) evaluates
+what sound can contribute without treating acoustic quietness as absence.
+
 ## Reproduce and use the result
 
 The [16 October native summary](../../evidence/runs/2026-10-16-response-maneuvers/encounter-envelope.json)

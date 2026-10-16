@@ -4,7 +4,12 @@
 
 The [model record](../../models/configurations/sensing-equipment.sysml) separates supplier specifications from project allowances and leaves installed-budget, detection, latency and independent-recovery acceptance false. The [source register](../../evidence/sensing/2026-10-16/sources.json) records URLs, retrieval date, source scope and available response hashes.
 
-## Three primary installations
+The [acoustic alternatives](acoustic-sensing.md) add a synchronized hydrophone
+array, a narrow-beam forward sonar and a multibeam imaging sonar to the trade.
+They address different observations and have their own installation limits;
+none is credited as a complete replacement for traffic awareness.
+
+## Three optical primary installations
 
 All three use on-camera RVC2 inference, a **Raspberry Pi 4 Model B** for track association, AIS fusion, logging and guidance messages, an externally powered USB 3 hub, and a **Quark QK-A026 AIS/GPS receiver** connected by USB. The cameras use their factory fixed-focus lenses. AIS supplies cooperative reports; it cannot cover non-transmitting craft or define a tow’s full boundary. VHF/GPS antennas, lengths of coax and the final powered-hub SKU remain procurement items within the support allowance.
 

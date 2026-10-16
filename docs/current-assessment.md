@@ -44,6 +44,19 @@ The [encounter envelope](reference/encounter-envelope.md) now distinguishes a fr
 
 The [physical sensing candidates](reference/sensing-configurations.md) identify components and installation gaps. Simultaneous camera coverage challenges the additional 8 W allocation, while independent upright and inverted observation remains unresolved. These findings constrain the next sizing study; none of the installations is selected or credited with meeting the detection requirement. Simulation of their particular coverage and failure behavior is the next separate experiment.
 
+The [acoustic comparison](reference/acoustic-sensing.md) adds a synchronized
+hydrophone array and two distinct forward-sonar installations. Passive sound
+may cue powered traffic; active sonar can range a reflecting submerged target
+without relying on its emitted sound. Useful near-surface detection, installed
+average demand and independent inverted operation remain unmeasured.
+
+The [requirement-scope review](reference/encounter-envelope.md#can-i-exclude-a-rare-or-difficult-target-class)
+identifies a legitimate question about the uniform 750 m allocation. The model
+permits explicitly reviewed residual risk, but has neither an accepted
+target-class exclusion nor evidence that sailboats or paddlers can be ignored.
+Class-specific observation distances and enforceable exposure restrictions are
+investigations; the current traffic scope remains unchanged.
+
 <a id="review-gates-scaled-to-one-project"></a>
 ## Choosing the next work
 

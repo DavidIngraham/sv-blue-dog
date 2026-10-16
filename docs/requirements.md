@@ -11,6 +11,23 @@ The requirements turn the Gorge challenge and my practical constraints into obse
 
 Hawai‘i and sustained repeated operation are separate future missions. Their labeled ocean and repeating-energy requirements remain in the reference model, but they do not set acceptance criteria for the first Gorge boat.
 
+## Which requirements can the sensing study challenge?
+
+The mission outcomes and their numerical allocations are different decisions.
+Avoiding collisions and interference with other users is a challenge obligation;
+detecting every listed traffic class at 750 m is a selected engineering
+allocation. The current classes include sailboats and paddlers. Different
+class-specific distances may be justified by closure, observation quality and
+achieved maneuvering, but none has replaced the present allocation.
+
+The model also permits explicitly reviewed residual risk under L-104. It does
+not supply an accepted probability threshold for ignoring a traffic class, and
+the provisional mission-reliability objective is not a collision-risk budget.
+The [encounter reference](reference/encounter-envelope.md#can-i-exclude-a-rare-or-difficult-target-class)
+explains what evidence a narrower operating envelope or revised sensing
+requirement would need. Acoustic and optical architectures should be compared
+against that obligation, with their unsupported cases visible.
+
 ## Reference by engineering question
 
 | Topic | What to look up |
