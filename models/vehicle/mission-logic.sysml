@@ -17,7 +17,8 @@ package BlueDogMissionLogic {
                 else if eventKind == "communications_loss" ? "communications_outage"
                 else if eventKind == "weather_service_loss" ? "retain_forecast"
                 else if eventKind == "wind_sensor_loss" ? "wind_outage"
-                else if eventKind == "forecast_invalidated" or eventKind == "sensing_loss" or eventKind == "steering_loss" or eventKind == "power_loss" or eventKind == "safety_capability_loss" or eventKind == "capsize" or eventKind == "refuge_entry" or eventKind == "grounding" or eventKind == "anchoring" or eventKind == "shore_attachment" ? "abort"
+                else if eventKind == "capsize" or eventKind == "unassisted_righting" ? "assess_capsize"
+                else if eventKind == "forecast_invalidated" or eventKind == "sensing_loss" or eventKind == "steering_loss" or eventKind == "power_loss" or eventKind == "safety_capability_loss" or eventKind == "refuge_entry" or eventKind == "grounding" or eventKind == "anchoring" or eventKind == "shore_attachment" ? "abort"
                 else if eventKind == "terminal_failure" ? "stop"
                 else "unsupported";
             assign capsized := eventKind == "capsize";
@@ -25,6 +26,27 @@ package BlueDogMissionLogic {
         }
         then done;
     }
+
+    action def CapsizeDisposition {
+        doc /* Explicit observation contract, not a righting dynamics prediction.
+         * Safety must remain available while inverted. Resumption additionally
+         * requires observed unassisted upright recovery and restored control.
+         * Missing safety evidence fails closed; a prior abort cannot be cleared. */
+        in currentlyCapsized : Boolean;
+        in uprightRecoveryObserved : Boolean;
+        in requiredSafetyConfirmed : Boolean;
+        in abortLatched : Boolean;
+        out directive : String;
+        first start;
+        then action assess {
+            assign directive := if abortLatched or not requiredSafetyConfirmed ? "abort"
+                else if uprightRecoveryObserved and not currentlyCapsized ? "invalid_observation"
+                else if uprightRecoveryObserved ? "resume"
+                else "await_righting";
+        }
+        then done;
+    }
+    dependency capsizeQualification from CapsizeDisposition to BlueDogRequirements::capsizeQualificationRetention;
 
     action def SupervisoryCycle {
         in windValid : Boolean;

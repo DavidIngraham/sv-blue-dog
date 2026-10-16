@@ -1,19 +1,15 @@
 # Traffic safety, communications and monitoring
 
-**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
+[Requirements overview](../requirements.md) · [Current assessment](../current-assessment.md)
 
-Other river users are part of the operating context. The vessel must remain observable, respect its operating boundary and distinguish monitoring from intervention that ends a qualifying attempt.
-
-[Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
-
-Arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision, and **dependency** records a design basis. Each view retains its upstream context; statements are rendered from the model.
-
-- [Traffic and operating boundary](#traffic-and-operating-boundary)
-- [Conspicuity, classification and recovery](#conspicuity-classification-and-recovery)
-- [Live monitoring and telemetry](#live-monitoring-and-telemetry)
-- [Command integrity](#command-integrity)
+Finishing the course cannot take priority over other river users. The boat needs onboard traffic assessment, conspicuous behavior and a recovery response when a required safety capability is lost. Shore telemetry lets me observe the attempt; intervention ends qualification.
 
 ## Traffic and operating boundary
+
+The boat must observe relevant traffic, assess conflicts and act within its timing and maneuvering capability. Range and timing allocations need integrated testing, including new hazards that appear during an occupied maneuver.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_safety_18::thread direction=BT statements=true
 package Page_safety_18 {
@@ -67,10 +63,17 @@ package Page_safety_18 {
 }
 ```
 
+</details>
+
 
 ## Conspicuity, classification and recovery
 
+Navigation signals and operating applicability depend on the actual vessel and mode. The model records obligations and release criteria; the site and installation evidence must support them.
+
 ### Deployment release and safe recovery
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_safety_19::thread direction=BT statements=true
 package Page_safety_19 {
@@ -152,7 +155,12 @@ package Page_safety_19 {
 }
 ```
 
+</details>
+
 ### Navigation signals and signaling faults
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_safety_20::thread direction=BT statements=true
 package Page_safety_20 {
@@ -196,8 +204,15 @@ package Page_safety_20 {
 }
 ```
 
+</details>
+
 
 ## Live monitoring and telemetry
+
+Telemetry supports observation without becoming a required control link. Lost communications must preserve autonomous decisions, and important events must remain available after reconnection.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_safety_21::thread direction=BT statements=true
 package Page_safety_21 {
@@ -259,8 +274,15 @@ package Page_safety_21 {
 }
 ```
 
+</details>
+
 
 ## Command integrity
+
+Commands need validity, freshness and preserved restrictions so stale messages or a restart cannot trigger an unsafe action or restore qualification.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_safety_22::thread direction=BT statements=true
 package Page_safety_22 {
@@ -328,7 +350,14 @@ package Page_safety_22 {
 }
 ```
 
+</details>
+
 ## Autonomous abort and shore recovery
+
+When continuing is unsafe, the boat must end qualification and act onboard. Alert delivery or operator acknowledgment cannot be a prerequisite for attempting recovery.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view SRR_Thread_safety::thread direction=BT statements=true
 package SRR_Thread_safety {
@@ -355,3 +384,7 @@ package SRR_Thread_safety {
     }
 }
 ```
+
+</details>
+
+**Continue:** [Candidate results](../results.md), or return to the [requirements overview](../requirements.md).

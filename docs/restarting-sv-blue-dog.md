@@ -1,10 +1,10 @@
 # SV Blue Dog: learning through an autonomous sailboat
 
-**Design phase:** Introduction · [Development plan](development-plan.md)
+**Introduction** · [Current assessment](current-assessment.md)
 
 SV Blue Dog is my personal project to design and build a small autonomous sailboat that can travel from Bingen to buoy 16 near Stevenson and back without intervention, while I monitor it from shore. Longer term, I’d love to develop something capable of reaching Hawai‘i, as a separate mission with its own constraints. It brings together things I want to learn—sailing, desktop manufacturing and digital engineering—with the fun of building a complete robot that can look after itself on the water. The name comes from my blue heeler, Ozzy: another small, independent creature with plenty of energy and ideas of his own.
 
-I started this project because I wanted to explore the limits of autonomous sailing and desktop manufacturing. I wanted to learn about sailing, build something cool, and develop a complete system. Microtransat—the challenge of sending an autonomous sailing boat across the Atlantic—gave me an idea for something closer to home: an even more micro “trans-gorge” boat.
+Microtransat—the challenge of sending an autonomous sailing boat across the Atlantic—gave me an idea for something closer to home: an even more micro “trans-gorge” boat.
 
 My initial inspiration was the Gorge Blowout course. Adding a return journey made it a much more demanding challenge: the boat would have to sail both ways and make progress against the river current. For the current design, that finite round trip is the goal. A faster boat might tolerate a higher hourly failure rate and still be more likely to finish because it spends less time exposed; that [speed–reliability trade](reliability.md#can-a-faster-boat-be-more-likely-to-finish) is part of what makes the challenge interesting.
 
@@ -18,9 +18,9 @@ The picture in my head is the classic westerly Gorge day. With wind from the wes
 
 *With a westerly, the outbound leg is windward with the current; the return is downwind against it.*
 
-## A testbed, then a maze of decisions
+## A maze of decisions
 
-I began sketching a testbed in SolidWorks to reduce risk around manufacturing techniques, wing-sail design and ArduSail control systems. The [existing CAD](../cad/) comes from that work. It was supposed to help me learn how to print and assemble the boat, explore the rig and get the control system working. It was never intended to be the final challenge vessel.
+I began sketching a testbed in SolidWorks to reduce risk around manufacturing techniques, wing-sail design and ArduSail control systems. The [existing CAD](../cad/) comes from that work. It was supposed to help me learn how to print and assemble the boat, explore the rig and get the control system working. That separate testbed is no longer my build plan. My intended first boat is a refined version of the IC-01 integration candidate described below; focused component experiments will support that build.
 
 ![SolidWorks rendering of the testbed: a translucent slender hull, tall crescent wing with internal ribs, mast drive, sensor mast, and deep keel with ballast bulb.](figures/testbed-solidworks.png)
 
@@ -32,15 +32,15 @@ This is a surprisingly complex, high-performance system for something I hope wil
 
 ## Using a model to get moving again
 
-I realized that open-source tools and SysML v2 could give the project some structure. That also made Blue Dog a good excuse to dive into digital engineering: could I connect the mission, requirements, architecture, analysis and eventual tests closely enough to make the next decision clearer?
+I realized that open-source tools and SysML v2 could give the project some structure. SysML is a systems modeling language: it lets me record requirements, component responsibilities, relationships and calculations in a connected model. That also made Blue Dog a good excuse to dive into digital engineering: could I connect the mission, requirements, architecture, analysis and eventual tests closely enough to make the next decision clearer?
 
-I am especially interested in how that model can structure an agent-driven development project. Agents can help explore alternatives and implement analyses quickly. I still need a shared description of what we are trying to achieve, why a choice was made and what would count as convincing evidence. Otherwise, producing more analysis can simply make the maze bigger.
+I am especially interested in how that model can structure an agent-driven development project. Agents can help explore alternatives and implement analyses quickly. I still need a shared description of what I am trying to achieve, why a choice was made and what would count as convincing evidence. Otherwise, producing more analysis can simply make the maze bigger.
 
-The [maturity assessment](development-plan.md) connects the mission, requirements, architecture, analyses and experiments. I use it to understand what the evidence supports, where the gaps are and which question to tackle next. Those layers develop together as I learn more about the boat.
+The [maturity assessment](current-assessment.md) connects the mission, requirements, architecture, analyses and experiments. I use it to understand what the evidence supports, where the gaps are and which question to tackle next. Those layers develop together as I learn more about the boat.
 
 ### Try the configuration decisions
 
-This is the web of choices I was trying to hold in my head. Start with the recorded 1.2 m sizing candidate and change its wing, hull or appendages. The sketch follows the geometry inputs; the other controls expose the construction and equipment assumptions that feed the full sizing analysis.
+This is the web of choices I was trying to hold in my head. Start with IC-01 and change its wing, hull or appendages. The sketch follows the geometry inputs; the other controls expose the construction and equipment assumptions that feed the full sizing analysis. Its rigid wing is the geometry used in this calculation, not a selected rig.
 
 ```design-explorer
 {"src":"https://davidingraham.github.io/sv-blue-dog/assets/design-explorer/design.json"}
@@ -48,18 +48,23 @@ This is the web of choices I was trying to hold in my head. Start with the recor
 
 The interesting part is what the sketch cannot tell me on its own. More wing area changes drive and overturning loads. More ballast changes recovery, displacement and drag. A bigger battery changes available energy and the weight the hull has to carry. Those consequences have to agree in the same candidate.
 
-The optimizer starts from a candidate, builds its geometry, and uses native SysML calculations for mass, loads, power and requirement margins. SciPy adjusts the design and the sailing controls to balance surge, side force, yaw and roll across both tacks, upwind and downwind, at the study wind speeds. It checks structural, handling, recovery, course-progress and finite-passage energy constraints alongside that balance.
-
-The current search sweeps overall-length caps while keeping all 29 design variables and 48 operating-state values free. It optimizes mass and conditional passage time separately and retains feasible alternatives for a design decision. The assessed 1.2 m candidate has a 440 Wh battery and 260 mm hull beam and passes the nominal refined Gorge screens, with a small positive energy margin. Smaller searches remain unresolved. Finer geometry, recovery assessment and mission simulation challenge every candidate. Failure to find a solution is a reason to investigate the constraints and search, not proof that no boat of that size can work. The [sizing method](sizing.md) and [current results](results.md) carry the details.
+The [sizing analysis](sizing.md) connects those choices: changing battery capacity changes mass, which changes the hull and sailing performance, which changes passage duration and energy demand. I use it to compare feasible configurations, then challenge them with [mission simulations](mission-simulation.md).
 
 The applet lets you explore and save a proposed configuration. It does not run that coupled optimization in your browser, and a plausible-looking sketch is not a feasible design.
 
-## Where the project stands
+## The boat I intend to build
 
-I now have a challenge definition, a connected requirements and architecture model, and a coupled sizing study. The current numerical trial can satisfy the primary modeled sailing and energy screens, but handling, adverse conditions and self-righting still need work. It has not established a minimum-size design. The [results article](results.md) explains those findings and what they suggest testing next.
+**IC-01 is my current working candidate.** I intend to refine a boat at this scale into the first physical build. It gives the whole system a concrete starting point while rig, sensors, processors and recovery hardware remain open choices.
 
-The mission simulation also lets me exercise part of the logical architecture. The model decides when sailing is permitted, how events affect the attempt and when recovery must begin. I can follow those decisions alongside the boat’s track and energy history. [Developing the simulation in spirals](simulation-spirals.md) explains how I use each added capability to expose the next question.
+| Configuration | Purpose | Dimensions and mass | Battery capacity |
+| --- | --- | --- | --- |
+| Earlier sizing reference | Explore nominal sailing and energy feasibility | 1.2 m overall length, 0.26 m beam, 10.313 kg | 440 Wh |
+| IC-01 | Bring sensing, sailing, energy and independent recovery into one candidate | 1.2 m overall length, 0.42 m beam, 20.061 kg | 1,300 Wh main + 60 Wh recovery |
 
-That feels like useful progress: I can see which assumptions are driving the design and which experiments could change the answer. The next step is to use the testbed and focused measurements to improve those assumptions, then revisit the sizing decisions with better evidence.
+That change in scale tells an important part of the story. The lighter reference has only about 4 Wh of calculated energy headroom. Credible sensing and a separately powered recovery system add electrical demand and equipment mass; supporting them changes the battery, hull and sailing solution together. IC-01 has about 102 Wh of main-pack headroom under its declared passage assumptions. The [candidate results](results.md) explain the calculation and the alternatives still worth investigating.
 
-**Next:** [The mission and the boat’s responsibilities](architecture.md), then [the development plan](development-plan.md). The [series guide](index.md) separates the main reading path from the technical reference pages.
+The same IC-01 allocation now supports a bounded set of local sailing, encounter and casualty simulations: ten completed courses, eight safe aborted encounter approaches and six casualty or end-of-exposure recovery approaches. Those runs show that the allocated capabilities can work together in the modeled cases. They do not yet establish full Gorge-course coverage, physical recovery or an installed sensor system.
+
+The next decisions depend on measurements: which rig works best across both tacks, what the sensing installation actually consumes, how the boat maneuvers, and whether its independent recovery path works after a casualty. I will use component experiments and progressively integrated trials to turn IC-01 into a buildable design. The [current assessment](current-assessment.md) identifies which evidence would change those decisions.
+
+**Next:** [Mission, context and architecture](architecture.md) · [Series guide](index.md)

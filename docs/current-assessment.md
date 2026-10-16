@@ -1,0 +1,133 @@
+# What the evidence supports, and what I need to learn next
+
+**Assessment: 16 October 2026** · [Candidate results](results.md) · [Development history](simulation-spirals.md)
+
+I intend to refine IC-01 into the first physical boat. The project has a connected mission model and a candidate that works across bounded simulations; the next step is to replace consequential assumptions with measurements and compatible hardware choices. The original CAD testbed is project history, not a separate planned build.
+
+## Current assessment
+
+The rows follow the Object-Oriented Systems Engineering Method (OOSEM): mission, requirements, responsibilities, physical choices, analysis and evidence. They develop together as experiments change what I know.
+
+| Area | What I can use now | Next evidence that could change a decision |
+| --- | --- | --- |
+| Mission and operating context | An explicit Bingen–Stevenson round trip, independent control, traffic obligations and a distinction between qualification and recovery. | Survey the launch and recovery approaches; resolve actual access, bridge margins and operating boundaries. [Context](architecture.md), [site evidence](site-and-environment-evidence.md) |
+| Requirements and scenarios | Linked obligations, owner constraints, verification cases and scenarios for sailing, encounters and recovery. | Challenge them with adverse and held-out cases; give each important obligation an observable test. [Requirements](requirements.md) |
+| Logical architecture | Executable event handling, sailing permission, abort persistence and recovery-versus-drift decisions. | Resolve hazards arriving during an occupied maneuver, backup startup and obstructed recovery routes. [Mission execution](mission-simulation.md) |
+| Physical architecture | IC-01 allocates geometry, sensing demand, equipment mass and independently powered recovery together. | Select hardware and interfaces; measure installed mass, thermal behavior, electrical demand and fault isolation. [Candidate](results.md) |
+| Trades and analysis | Coupled sizing, three open rig concepts, energy accounting and bounded recovery/encounter studies. | Correlate aerodynamic, structural, maneuvering and recovery assumptions with measurements, then compare alternatives on the same cases. [Sizing](sizing.md), [rig trade](sail-trade.md) |
+| Physical verification and model validation | Planned cases identify the claims to test; software checks establish behavior in supplied cases. | Obtain component and integrated measurements for an identified configuration. No completed physical qualification is claimed. [Evidence plan](validation-plan.md) |
+
+## Integration milestone
+
+The milestone is **one candidate whose sensing, guidance, energy and recovery capabilities work together in representative simulations**. Its geometry, equipment mass, electrical demand and sailing performance must remain consistent across the studies.
+
+IC-01 meets the seven conditions in the [native integration requirement](../models/analyses/integrated-candidate.sysml) for the [15 October local campaign](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json):
+
+- Ten courses complete.
+- Eight encounter attempts end qualification and reach recovery approaches without the scored collision or clearance violations.
+- Six casualty or end-of-exposure cases reach recovery approaches.
+- Two finer-step cases preserve their outcome classifications; shared-fault and empty-bank controls remain adverse.
+
+These cases support the allocated concept at their declared fidelity. They do not cover the full Gorge course or establish physical capture and retention at shore. A recovery approach reached is an intermediate outcome, not retrieval.
+
+The native integration check combines seven supplied findings. Its passing result
+checks that combination; the linked campaign records supply the underlying
+evidence and its limits.
+
+The 16 October supervisor checks also distinguish observed unassisted righting
+from a disqualifying casualty. They exercise the policy with supplied safety and
+righting observations, without adding a dynamic righting model or changing the
+15 October archive. [Mission execution](mission-simulation.md#executable-supervisory-logic)
+describes what happens during inversion.
+
+The declared one-second assessment, two-second command delivery and persistent 15-second maneuver also leave a specific timing question: a passing timing screen does not establish the command deadline for a new hazard arriving during an occupied maneuver. Installed sensing range, latency and power remain allocations. [Encounter evidence](encounter-feasibility.md) and the [candidate energy budget](energy.md) carry those limits alongside their results.
+
+<a id="review-gates-scaled-to-one-project"></a>
+## Choosing the next work
+
+I prioritize evidence that could change the architecture or the conditions in which I can operate the boat.
+
+1. **Sensing and maneuvering:** measure an identifiable pipeline’s target detection, latency, mass, power and thermal behavior together. Exercise hazards during maneuvers and compare achieved motion with predictions.
+2. **Independent recovery:** test observation, control and power isolation; upright and inverted thrust; startup and usable capacity. Survey approaches and demonstrate shore retention and one-person pickup.
+3. **Rig and construction:** compare soft sail, tail-controlled wing and directly rotated wing on equal terms for the finite Gorge mission. Measure loads, trim energy, material properties, joints and casualty behavior that could change the IC-01 design.
+4. **Integrated replay and trials:** replace provisional inputs with the measured envelopes, rerun the affected scenarios and expand physical trials within the demonstrated limits.
+
+## Let risk select the next investigation
+
+The [risk inventory](../models/analyses/development-risks.sysml) connects each concern to requirements, analyses and decisions. It complements the design failure modes and effects analysis (DFMEA), which examines how components and functions can fail. Traffic sensing and casualty recovery lead because they can determine the architecture; structural, wing, energy and model-coverage uncertainty also remain open.
+
+### Technical risk cube
+
+The explorer links each risk to its evidence and next investigation. The [native risk inventory](../models/analyses/development-risks.sysml) is also available as a reference.
+
+```risk-explorer
+{"src":"https://davidingraham.github.io/sv-blue-dog/assets/risk/risks.json"}
+```
+
+All six current entries are **technical risks**, including uncertainty in model credibility. Safety consequences inform their technical severity; they do not make these entries a separate operational-safety assessment. Cost, schedule and operational risks belong in separate inventories and cubes, with criteria appropriate to each kind. No assessments of those kinds are recorded yet.
+
+**Risk ratings: 15 October 2026.** The cube assesses the next concept-selection and integrated-test planning spiral. Its vertical axis expresses the prospect that an identified limitation forces redesign or a narrower operating envelope. Its horizontal axis expresses the credible consequence if the issue remains unresolved. These are qualitative engineering judgments, separate from measured probabilities of an accident during a voyage.
+
+<details>
+<summary>Rating definitions, ownership and closure criteria</summary>
+
+Likelihood classes are **Remote** (strong evidence against a material change), **Unlikely** (supported margins with limited outstanding concerns), **Possible** (a plausible challenge with insufficient evidence either way), **Likely** (specific evidence points toward a material change or restriction), and **Demonstrated** (a current limitation already restricts the conclusion). Missing evidence alone does not automatically make a risk likely.
+
+Consequences are **Negligible** (no meaningful effect on the decision), **Minor** (local adjustment), **Moderate** (subsystem redesign or bounded loss of capability), **Major** (concept-level rework, mission noncompletion or an unsupported operating envelope), and **Critical** (credible loss of safety, flotation or recovery functions, including exposure of other river users). These classes have no numerical probability meaning and are not multiplied into a risk score. Green, yellow and red cells show low, moderate and high qualitative risk bands, increasing toward the upper-right corner. The color is an assessment aid, not a residual-risk acceptance decision.
+
+The judgments are recorded by the analysis agent with owner review pending. All six risks remain open. Confidence describes the support for the development judgment, not confidence that a physical failure will occur: low for largely unmeasured assumptions, medium for specific but indirect analytical evidence, and high where the limitation is directly demonstrated.
+
+Traffic sensing and casualty recovery lead the safety investigations. IC-01 has nominal energy headroom, but simultaneous sensing performance, installed demand and power isolation still warrant early measured-load work. Structural and wing evidence constrain the design alternatives; scenario coverage constrains every mission conclusion. The cube's evidence descriptions include the bounded virtual closure; all six risks retain their open dispositions and existing ratings because the physical evidence gaps remain.
+
+### Risk reduction and closure
+
+The standard quantitative probability and impact fields remain unset. The qualitative classes live in explicitly named extensions of the same risk metadata. Unknown remains separate from a low assessment, and numerical regression results alone do not justify reducing a rating. The named owner coordinates the action; I review residual-risk dispositions. Planned tests and successful software checks alone do not reduce a physical risk rating.
+
+For each investigation, record the configuration, predicted observable, uncertainty and decision it could change before running it. Link the resulting evidence back into the model, reassess the risk and select the next action. Close a risk only with supporting evidence and an explicit disposition; otherwise retain it, restrict the concept's scope, or change the architecture. The inventory starts with six risk areas and must grow when analysis or experiments reveal omissions. It does not supersede the DFMEA or authorize field trials.
+
+
+</details>
+
+<a id="engineering-record"></a>
+## Reading the evidence
+
+For each result I need to know the question, configuration, conditions, predicted observable and decision it could change. The [development history](simulation-spirals.md) preserves earlier studies with their original boats and assumptions.
+
+| Evidence | What it establishes |
+| --- | --- |
+| Model and software checks | Consistency and implemented behavior for supplied inputs |
+| Sizing and mission simulations | Conditional predictions within the model’s supported domain |
+| Physical verification | Whether the tested installation meets a defined criterion |
+| Model validation | How predictions compare with independent measurements and where they are useful |
+
+A measured component result transfers to IC-01 only when its installation and conditions support that inference. I retain failures and inconclusive results because they can change the design just as much as a successful test.
+
+<details>
+<summary>Method references by engineering layer</summary>
+
+<a id="mission-definition"></a>
+### Mission and requirements
+
+[Story](restarting-sv-blue-dog.md), [operating conditions](operating-constraints.md), [architecture](architecture.md) and [requirements](requirements.md).
+
+<a id="virtual-design"></a>
+### Architectures and analysis
+
+[Candidate results](results.md), [sizing method](sizing.md), [rig comparison](sail-trade.md), [energy](energy.md), [recovery propulsion](recovery-propulsion.md) and [reliability](reliability.md).
+
+<a id="detailed-design"></a>
+### Physical realization
+
+[Structure and recovery](structures-and-recovery.md) connects the candidate to construction, interfaces and measurements needed for the first build.
+
+<a id="physical-validation"></a>
+### Verification and validation
+
+[The evidence plan](validation-plan.md) connects component and integrated experiments to their questions and operating conditions.
+
+<a id="model-credibility"></a>
+### Model credibility
+
+[Modeling methods](methods/modeling.md) explain how requirements, assumptions, calculations and evidence stay connected. Dedicated stakeholder and complete architecture views remain unfinished; drawing them does not substitute for the missing engineering evidence.
+
+</details>

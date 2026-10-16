@@ -11,7 +11,8 @@ def test_native_contract_export(tmp_path):
     mass=json.loads((ROOT/'.tools/coupled-contract.json').read_text())
     operation=json.loads((ROOT/'.tools/coupled-operation-contract.json').read_text())
     fields=data['fields']
-    assert '2026-10-13-srr-frontier' in data['baseline']
+    assert 'IC-01' in data['baseline']
+    candidate=json.loads((ROOT/'evidence/runs/2026-10-15-integrated-candidate/integrated-sizing.json').read_text())
     assert next(f['value'] for f in fields if f['name']=='length_m') <= 1.2
     assert data['solverInputs']['maximumOverallLengthM'] == 1.2
     assert len(fields)==80
@@ -19,7 +20,8 @@ def test_native_contract_export(tmp_path):
     assert [f['name'] for f in design]==mass['designNames']
     assert [f['minimum'] for f in design]==operation['designLower']
     assert [f['maximum'] for f in design]==operation['designUpper']
-    assert [f['value'] for f in fields if f['kind']=='parameters']==mass['parameterValues']
+    assert {f['name']:f['value'] for f in fields if f['kind']=='parameters'}==candidate['replay']['parameters']
+    assert {f['name']:f['value'] for f in fields if f['kind']=='design'}==candidate['design']
     assert [f['value'] for f in fields if f['kind']=='materials']==mass['materialValues']
     for camber, thickness in [(0.5,0.5),(1,1),(1.5,2)]:
         upper,lower=wing_section(camber,thickness)

@@ -272,7 +272,7 @@ package BlueDogEvidenceDocuments {
             Column(name = "Retained water (kg)", path = "retainedWaterKg")))
     }
     part def Recovery :> Document {
-        attribute redefines title = "Current static ingress sensitivity";
+        attribute redefines title = "Archived 2.009 m reference: static ingress sensitivity";
         part cases : Table { calc rows : Ingress; }
     }
     part def CandidateBrief :> Document {
@@ -301,7 +301,7 @@ package BlueDogSailTradeDocuments {
     calc def Traces :> Query { Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogSailTrade")), type = "Dependency"), columns = (Column(name = "Analysis element", cell = { in row : KerML::Root::Dependency; row.client }), Column(name = "Requirement / architecture", cell = { in row : KerML::Root::Dependency; row.supplier }))) }
     part def Report :> Document {
         attribute redefines title = "Sail architecture trade study";
-        part scope : Paragraph { attribute redefines text = "Preliminary qualitative development selection. All physical requirement gates remain unknown. No numeric reliability rates or arbitrary weighted scores are assigned. Neither rigid concept is mission-qualified; the soft sail is deprioritized, not proven noncompliant. Sources and decision rationale are linked in BlueDogSourceEvidence and BlueDogDesignDecisions."; }
+        part scope : Paragraph { attribute redefines text = "Equal comparison of three rig concepts for the finite Gorge mission. All physical requirement gates remain unknown. No numeric reliability rates or arbitrary weighted scores are assigned. No rig is selected or mission-qualified. Sources and decision rationale are linked in BlueDogSourceEvidence and BlueDogDesignDecisions."; }
         part decision : Section { attribute redefines title = "Native analysis conclusion"; part rows : Table { calc rows : Results; } }
         part concepts : Section { attribute redefines title = "Candidate definitions"; part rows : Table { calc rows : Concepts; } }
         part durability : Section { attribute redefines title = "Durability and energy"; part rows : Table { calc rows : Durability; } }

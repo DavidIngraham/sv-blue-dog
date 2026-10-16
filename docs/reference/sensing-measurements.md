@@ -1,0 +1,10 @@
+# Importing synchronized sensing and power measurements
+
+This procedure supports the [validation plan](../validation-plan.md#measure-sensing-and-shared-compute-as-an-installation). Retain raw records, identified hardware, independent target truth and instrument uncertainty.
+
+Use a power CSV with `seconds,voltage_v,current_a` and an observation CSV with `frame_seconds,decision_seconds,target_present,detected`. Each observation row represents an independently confirmed target-present trial; retain misses with `detected=0` and an empty decision time. Use separate cohorts for target class, range, bearing, lighting and obscuration, and retain independent truth alongside the cohort. These minimum files do not characterize false positives, localization error or an operating envelope by themselves.
+
+The metadata JSON requires `installationId`, `pipelineRevision`, `conditions`, `clockBasis`, `instrument`, `operator`, `measuredOn`, `measurementBoundary` (`regulated-bus`) and `evidenceType` (`measured` or `synthetic-test`). To remove a shared baseline load, specify `replacedBaseElectronicsW` and `replacementScope`, identifying exactly which functions the measured stack replaces. The deduction cannot exceed the existing base electronics allocation. Do not deduct a component merely because it uses the same processor.
+
+Run `python -m tools.boat_analysis.mission.measurements --power power.csv --observations observations.csv --metadata metadata.json --output installation.json`. The output records time-integrated mean load, observed peak, maximum sample gap, delivered-frame latency, miss fraction, source hashes and native energy screening. Missed frames remain in the denominator; latency statistics describe delivered detections only. Choose instrument sampling fast enough to characterize relevant transients; an observed peak is not a guaranteed maximum. The fixed-passage capacity lower bound omits feedback from added mass and passage time, so follow it with coupled sizing, packaging, thermal and peak-power checks and chronological replay.
+

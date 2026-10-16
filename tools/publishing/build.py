@@ -1,5 +1,6 @@
 """Build authored Markdown, native views and reports into Pages and blog imports."""
 import argparse
+from dataclasses import replace
 from html import escape
 import json
 import os
@@ -13,7 +14,7 @@ from urllib.parse import urlsplit, unquote
 
 from markdown_it import MarkdownIt
 from tools.boat_analysis.model.runtime import ROOT
-from .views import ViewBlock, render_blocks
+from .views import QUALIFIED, ViewBlock, render_blocks
 
 PARSER = MarkdownIt("commonmark", {"html": True}).enable("table")
 KINDS = {"sysml-view", "sysml-report"}
@@ -22,6 +23,20 @@ REPOSITORY = "https://github.com/DavidIngraham/sv-blue-dog"
 
 def blocks(source):
     return [t for t in PARSER.parse(source) if t.type == "fence" and t.info.split()[:1] and t.info.split()[0] in KINDS]
+
+
+def scoped_blocks(source):
+    """Keep diagram context, but print each exposed requirement once per page."""
+    seen = set()
+    result = []
+    for token in blocks(source):
+        block = ViewBlock.parse(token.info, token.content)
+        if block.statements:
+            names = re.findall(r'\bexpose\s+(' + QUALIFIED + r')\s*;', block.source)
+            block = replace(block, statement_names=tuple(n for n in names if n not in seen))
+            seen.update(names)
+        result.append(block)
+    return result
 
 
 def materialize(source, outputs):
@@ -54,12 +69,15 @@ def readable_report(output):
     """Format native Markdown tables for readers without changing model/evidence data."""
     def cell(value):
         clean = value.strip()
+        labels = {'massKg': 'Mass (kg)', 'conditionalPassageHours': 'Conditional passage (h)'}
+        if clean in labels:
+            return ' ' + labels[clean] + ' '
         if clean in {"true", "false"}:
             return " " + {"true": "Yes", "false": "No"}[clean] + " "
         number = re.fullmatch(r"(-?\d+\.\d{5,}(?:[eE][+-]?\d+)?)(.*)", clean)
         if number and (not number[2] or number[2].startswith(" \\[")):
             return f" {float(number[1]):.4g}{number[2]} "
-        return re.sub(r"([a-z])([A-Z])", r"\1 \2", value)
+        return re.sub(r"([a-z])([A-Z])", r"\1 \2", value).replace('k Pa', 'kPa')
     return "\n".join("|".join(cell(c) for c in line.split("|")) if line.startswith("|") else line
                      for line in output.splitlines())
 
@@ -90,7 +108,7 @@ def body_html(markdown, link=None):
 
 
 def render_page(source, directory):
-    selected = [ViewBlock.parse(t.info, t.content) for t in blocks(source)]
+    selected = scoped_blocks(source)
     return body_html(materialize(source, render_blocks(selected, directory)))
 
 
@@ -126,7 +144,8 @@ def document(title, body, home, source):
 <title>{escape(title)} · SV Blue Dog</title>
 <style>body{{font:17px/1.65 system-ui;max-width:1120px;margin:2rem auto;padding:0 1.2rem;color:#183047}}nav,footer{{font-size:.9rem;padding:1rem 0;border-bottom:1px solid #ccd}}footer{{border-top:1px solid #ccd;border-bottom:0;margin-top:3rem}}h1,h2,h3{{line-height:1.25}}pre{{overflow:auto;background:#f4f7fa;padding:1rem}}table{{border-collapse:collapse;display:block;overflow:auto}}td,th{{border:1px solid #bbc;padding:.45rem;text-align:left}}img{{max-width:100%;height:auto}}a{{color:#145b90}}.mermaid{{background:white;text-align:center}}.mermaid svg{{max-width:none;height:auto}}.diagram-viewport{{overflow:auto;border:1px solid #dde;max-height:85vh}}.diagram-controls{{display:flex;gap:.5rem;margin:.4rem 0}}button{{font:inherit;padding:.2rem .7rem}}dt{{font-weight:600}}dd{{margin-bottom:1rem}}.diagram-error{{color:#8b2315}}</style></head>
 <body><nav><a href="{escape(home)}">SV Blue Dog</a> · <a href="{escape(source)}">Edit this page</a></nav><main>{body}</main>
-<footer>Views and statements are generated from SysML. Numerical evidence is conditional; design allocations are not verification verdicts.</footer>
+<footer><a href="{escape(home)}">Series guide</a> · SV Blue Dog</footer>
+<script type="module" src="{escape(posixpath.join(posixpath.dirname(home), 'assets/explorers.js'))}"></script>
 <script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.esm.min.mjs';
 mermaid.initialize({{startOnLoad:false,securityLevel:'strict'}});
@@ -147,11 +166,11 @@ try {{
     if (!drawing.querySelector('title')) {{
       const title = document.createElementNS('http://www.w3.org/2000/svg','title');
       title.id = `diagram-title-${{[...document.querySelectorAll('.mermaid svg')].indexOf(drawing)}}`;
-      title.textContent = 'Development plan: design, simulation and physical evidence';
+      title.textContent = 'Model relationships';
       drawing.prepend(title); drawing.setAttribute('aria-labelledby',title.id);
       const desc = document.createElementNS('http://www.w3.org/2000/svg','desc');
       desc.id = title.id + '-description';
-      desc.textContent = 'Read down the left from mission through criteria, subsystems and detail to build, then up the right through component and subsystem tests to vessel and mission validation. The virtual vessel checks requirements early and supplies physical test scenarios. Cross-V links pair intent with evidence.';
+      desc.textContent = 'Follow the named elements and labeled relationships. The surrounding text explains the engineering question.';
       drawing.prepend(desc); drawing.setAttribute('aria-describedby',desc.id);
     }}
     drawing.setAttribute('role','img');
@@ -181,11 +200,12 @@ def _build(source_dir, output_dir):
         raise ValueError("Build output must be outside authored documentation")
     pages = sorted(source_dir.rglob("*.md"))
     sources = [p.read_text(encoding="utf-8") for p in pages]
-    selected = [ViewBlock.parse(t.info, t.content) for s in sources for t in blocks(s)]
+    selected = [block for s in sources for block in scoped_blocks(s)]
     (ROOT / ".tools").mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="site-", dir=ROOT / ".tools") as scratch:
         outputs = iter(render_blocks(selected, Path(scratch)))
     output_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(ROOT / 'tools/publishing/assets', output_dir / 'assets', dirs_exist_ok=True)
     redirects = json.loads((ROOT / "tools/publishing/redirects.json").read_text(encoding="utf-8")) if source_dir == (ROOT / "docs").resolve() else {}
     if source_dir == (ROOT / "docs").resolve():
         from tools.boat_analysis.evidence.aerodynamics import render

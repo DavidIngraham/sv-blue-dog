@@ -7,6 +7,18 @@ import pytest
 from tests.native_cases import native
 
 
+def test_mixed_compact_and_native_diagram_identities():
+    from tools.publishing.relationships import diagram_nodes
+    diagram = '''n0("`*«requirement»*\n**C-000 Challenge**`")
+n1("`*«requirement»*\n**BlueDogRequirements::roundTrip : RoundTrip**`")
+%% source-node n0 GorgeChallenge::transGorgeChallenge
+'''
+    assert diagram_nodes(diagram) == {
+        'n0': 'GorgeChallenge::transGorgeChallenge',
+        'n1': 'BlueDogRequirements::roundTrip',
+    }
+
+
 @pytest.fixture(scope='module')
 def relationship_report():
     return native('-render-document', 'BlueDogDocuments::RelationshipRegister')
@@ -96,17 +108,13 @@ def test_authored_pages_contain_views_not_copied_diagrams(rendered_site):
             assert f'%% {block.info.split()[1]} ' in rendered
 
 
-def test_srr_views_stay_scoped_to_review_topics(rendered_site):
-    text = (rendered_site / 'imports/docs/srr-review.md').read_text(encoding='utf-8')
-    assert len(re.findall(r'^## \d+ · ', text, re.M)) == 14
-    diagrams = re.findall(r'```mermaid\n(.*?)```', text, re.S)
-    for target, count in [('SRR_Qualification::scope', 6), ('SRR_Safety::scope', 6), ('SRR_Recovery::scope', 5)]:
-        diagram = next(d for d in diagrams if f'%% {target} ' in d)
-        assert len(re.findall(r'^  n\d+[(\[]', diagram, re.M)) == count
-        assert 'flowchart BT' in diagram
-    assert 'C-018 CapsizeRecovery' in text
-    assert '1.2 m' in text
-    assert '250 × 250 × 250 mm' in text
+def test_requirement_context_does_not_repeat_authoritative_statements(rendered_site):
+    text = (rendered_site / 'imports/docs/requirements/requirements-mission.md').read_text(encoding='utf-8')
+    # The challenge remains visible in several diagrams but its full definition
+    # is rendered only once, through a native query with a page-scoped name set.
+    statement = '**M-001 RoundTrip** — The vessel shall cross the configured Bingen departure'
+    assert text.count(statement) == 1
+    assert text.count('```mermaid') == 4
 
 
 def test_construction_views_show_model_basis_and_qualification(rendered_site):

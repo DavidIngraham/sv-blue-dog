@@ -1,8 +1,8 @@
 # Mission, context and architecture
 
-**OOSEM:** Mission and context · Logical architecture · [Maturity assessment](development-plan.md)
+**OOSEM:** Mission and context · Logical architecture · [Maturity assessment](current-assessment.md)
 
-What does this little boat actually have to do? I start with one finite, independent Gorge challenge, then work through the people, environment and equipment it will interact with. This is [mission definition](development-plan.md#mission-definition): it sets up the responsibilities and scenarios I will use to compare designs.
+What does this little boat actually have to do? I start with one finite, independent Gorge challenge, then work through the people, environment and equipment it will interact with. Those responsibilities give me a basis for comparing designs before selecting equipment.
 
 ![Map of the Gorge challenge corridor along the Columbia River, from Bingen to buoy 16 near Stevenson and back.](figures/gorge-course-map.svg)
 
@@ -30,9 +30,15 @@ The integration candidate, [IC-01](../models/analyses/integrated-candidate.sysml
 
 The [virtual integration milestone](validation-plan.md#exercise-decisions-before-physical-integration) requires the same candidate to support sizing, sensing, maneuver timing, chronological energy and recovery. Hardware interfaces, waterproofing, installed mass distribution, thermal behavior and physical shore retention remain design and evidence work. The retained 440 Wh nominal sizing result is a separate reference configuration; its budget must not be combined with IC-01's capability allocations.
 
-The challenge remains independent of the vehicle so a convenient hardware choice cannot redefine success. Hawaii remains a separate future mission with its own constraints; it does not set acceptance criteria for the Gorge vessel. Traffic, shore support and live monitoring belong in the system context; the vessel must make its own decisions during a qualifying attempt.
+## What counts as an attempt
 
-We decompose responsibilities before choosing hardware. A satisfy link identifies intended responsibility, while a verification case identifies how that allocation will be tested. Neither means the vessel has passed a physical test.
+The boat must complete the scored circuit under sail, unattached and without outside assistance. Safe waiting is allowed. Refuge, grounding, anchoring, intervention or recovery propulsion ends qualification; a later attempt starts again at the departure gate. A component failure does not by itself end the attempt if a demonstrated backup preserves the required function.
+
+I monitor position, mode and health from shore. The boat makes its own navigation and weather decisions. It may poll weather services autonomously; manual data pushes are intervention. Communications loss alone does not end a safe attempt, and critical alerts can wait in a queue while autonomous decisions continue.
+
+I also want to build and handle the boat myself. Printed parts must fit a 250 × 250 × 250 mm build volume, while joined assemblies can be larger. Removable components and simple handling aids must make transport, launch and retrieval practical for one person. These owner constraints sit alongside the mission obligations in the [requirements](requirements.md).
+
+I decompose responsibilities before choosing hardware. A satisfy link identifies intended responsibility, while a verification case identifies how that allocation will be tested. Neither means the vessel has passed a physical test.
 
 ```sysml-view Page_architecture_0::context direction=TB
 package Page_architecture_0 {
@@ -46,7 +52,7 @@ package Page_architecture_0 {
 
 ## From use cases to allocated behavior
 
-I am using OpenSysML's OOSEM library to make the steps between mission intent and equipment explicit. The context identifies the boat, operator, shore support, environment and other vessels. Use cases act on that complete context. Logical scenarios then describe the responsibilities needed to carry out those use cases, before I settle the implementation.
+I use the Object-Oriented Systems Engineering Method (OOSEM) to connect mission intent to equipment through requirements and allocated responsibilities. OpenSysML supplies the modeling tools; the diagrams below are views of that shared model. The context identifies the boat, operator, shore support, environment and other vessels. Use cases act on that complete context. Logical scenarios then describe the responsibilities needed to carry out those use cases, before I settle the implementation.
 
 The model refines three use cases with scenario threads. Their actions are allocated to the existing boat architecture; verification cases and the mission simulation are linked to those threads. The [executable mission supervisor](mission-simulation.md#executable-supervisory-logic) implements event responses, sailing permission and abort latching in the conceptual simulator. The scenario sequences describe broader responsibilities: sensing, heading search and physical actuation still need their own implementations and evidence.
 
@@ -78,6 +84,8 @@ package Page_architecture_traffic {
 
 ### Abort and recover
 
+Capsize alone need not end qualification: the boat may recover unassisted and continue if it retains the required safety capabilities and uses no recovery motor. Motor use, outside intervention or loss of a required safety capability ends qualification. IC-01’s inverted powered-recovery hypothesis is therefore an abort path.
+
 An abort ends the attempt. The boat records and signals the event, selects a reachable shore destination and attempts recovery without waiting for an operator or communications acknowledgment. The recovery leg may use the motor.
 
 ```sysml-view Page_architecture_recovery::scenario direction=LR
@@ -89,9 +97,12 @@ package Page_architecture_recovery {
 }
 ```
 
-The initial physical allocation puts autonomous estimation and decisions on an onboard platform. It leaves processor choice, software partitioning and redundancy open. Wind observation also has a concrete allocation to the challenge's wired sensor installation. Further physical-architecture work must develop these coarse allocations into compatible interfaces and implementations, supported by timing, power and failure evidence. The [method model](../models/vehicle/method.sysml) owns those links; the [development plan](development-plan.md) tracks the maturity and remaining evidence for each layer.
+The initial physical allocation puts autonomous estimation and decisions on an onboard platform. It leaves processor choice, software partitioning and redundancy open. Wind observation also has a concrete allocation to the challenge's wired sensor installation. Further physical-architecture work must develop these coarse allocations into compatible interfaces and implementations, supported by timing, power and failure evidence. The [method model](../models/vehicle/method.sysml) owns those links; the [development plan](current-assessment.md) tracks the maturity and remaining evidence for each layer.
 
-The executable logical responsibilities include event handling, sailing permission, abort latching and the choice between an available recovery attempt and continued drift. Command delivery and maneuver completion are distinct timing events. The [mission simulator](mission-simulation.md#executable-supervisory-logic) records these decisions and their consequences; independent sensing and propulsion after a casualty remain unallocated physical capabilities, not implied backups.
+The executable logical responsibilities include event handling, sailing permission, abort latching and the choice between an available recovery attempt and continued drift. Command delivery and maneuver completion are distinct timing events. The [mission simulator](mission-simulation.md#executable-supervisory-logic) records these decisions and their consequences; IC-01 explicitly allocates independent sensing, control, propulsion and power after a casualty. These capabilities remain unselected and physically unverified. Older conceptual configurations without those allocations cannot claim the same fallback.
+
+<details>
+<summary>Subsystem responsibilities and supporting use cases</summary>
 
 ## Sailing hardware
 
@@ -175,6 +186,8 @@ package Page_architecture_7 {
 
 Launch, service, ocean sailing and navigation signaling remain in the [complete use-case model](../models/vehicle/use-cases.sysml).
 
+</details>
+
 ## From mission to verification
 
 Read this view from the challenge obligation to its vehicle refinement and planned verification. A satisfy link allocates responsibility; it does not assert a passed test.
@@ -199,7 +212,7 @@ package Page_architecture_3 {
 }
 ```
 
-[Focused requirements](requirements.md) keep each derivation small enough to read. We distinguish mission obligations from independent owner constraints such as transport and manufacture.
+[Focused requirements](requirements.md) keep each derivation small enough to read. I distinguish mission obligations from independent owner constraints such as transport and manufacture.
 
 ```sysml-view Page_architecture_4::ManufacturingSemantics direction=BT
 package Page_architecture_4 {
@@ -217,5 +230,4 @@ package Page_architecture_4 {
 }
 ```
 
-
-**Next:** [The development plan](development-plan.md).
+**Next:** [Establishing operating constraints](operating-constraints.md) · [Series guide](index.md)

@@ -54,3 +54,63 @@ def test_model_policy_change_changes_simulator_behavior(tmp_path, monkeypatch):
     assert result.cause == 'weather_service_loss'
     assert result.logic_trace[0]['outputs']['directive'] == 'abort'
     assert any(row['outputs'].get('abortLatchedNext') for row in result.logic_trace)
+
+
+@pytest.mark.parametrize('capsized,upright,safe,expected', [
+    (False, False, True, 'await_righting'),
+    (True, True, True, 'resume'),
+    (True, True, False, 'abort'),
+    (False, False, False, 'abort'),
+    (False, True, True, 'invalid_observation'),
+])
+def test_native_capsize_observation_policy(capsized, upright, safe, expected):
+    logic = MissionLogic()
+    assert logic.event('capsize', 0)['directive'] == 'assess_capsize'
+    assert logic.capsize(0, capsized, upright, safe) == expected
+    logic.cycle(1, abort_requested=True)
+    assert logic.capsize(2, True, True, True) == 'abort'
+
+
+def test_unassisted_righting_preserves_attempt_but_never_sails_inverted():
+    result = simulate(*fixture(), events=[
+        Event(0, 'capsize', required_safety_confirmed=True),
+        Event(25, 'unassisted_righting', required_safety_confirmed=True)], save_every=1)
+    assert result.outcome == 'qualified_completion'
+    inverted = [row for row in result.history if row[0] < 25]
+    assert inverted and all(row[4] == 'capsized_drift' for row in inverted)
+    # Fixture current is 0.4 m/s westward; sailing velocity is absent.
+    assert next(row for row in result.history if row[0] == 25)[1] == pytest.approx(70.)
+    assert all(crossing['seconds'] > 25 for crossing in result.crossings)
+    assert not any(event['kind'] in {'motor_use', 'safety_abort'} for event in result.events)
+    assert result.recovery_summary['outcome'] == 'unassisted_righting_observed'
+    assert result.physically_validated is False
+
+
+@pytest.mark.parametrize('kind', ['motor_use', 'operator_intervention', 'safety_capability_loss', 'power_loss'])
+def test_righting_cannot_erase_disqualifying_event(kind):
+    result = simulate(*fixture(), events=[
+        Event(0, 'capsize', required_safety_confirmed=True), Event(10, kind),
+        Event(25, 'unassisted_righting', required_safety_confirmed=True)])
+    assert result.outcome == 'disqualified'
+
+
+def test_unobserved_righting_never_resumes_or_counts_drift_gate_crossings():
+    inputs, route, water, gates = fixture()
+    inputs['time'][1] = .1
+    result = simulate(inputs, route, water, gates,
+        events=[Event(0, 'capsize', required_safety_confirmed=True)], save_every=1)
+    assert result.outcome == 'censored'
+    assert not result.crossings
+    assert result.recovery_summary['outcome'] == 'awaiting_unassisted_righting'
+    assert all(row[4] == 'capsized_drift' for row in result.history[:-1])
+
+
+def test_righting_without_safety_confirmation_aborts():
+    result = simulate(*fixture(), events=[
+        Event(0, 'capsize', required_safety_confirmed=True), Event(25, 'unassisted_righting')])
+    assert result.outcome == 'disqualified'
+
+
+def test_righting_without_capsize_is_invalid():
+    with pytest.raises(ValueError, match='preceding capsize'):
+        simulate(*fixture(), events=[Event(0, 'unassisted_righting', required_safety_confirmed=True)])

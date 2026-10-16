@@ -1,12 +1,12 @@
 # Coupled sizing method
 
-**OOSEM:** Trades, optimization and analysis · [Maturity assessment](development-plan.md)
+**OOSEM:** Trades, optimization and analysis · [Maturity assessment](current-assessment.md)
 
-The design mission is the finite Gorge round trip. The static search enforces peak-power capability and a finite-passage battery allowance; daily energy balance and a completion deadline are not acceptance criteria. Each candidate can then drive the chronological mission simulation. The optimizer uses the passage screen, not a calibrated mission-success probability or an embedded Monte Carlo solve. Dynamic planing and speed-dependent failure exposure also need validated models; current results do not select between planing and displacement hulls.
+How much boat is needed to carry the equipment and finish the Gorge round trip? Hull, rig, ballast and battery cannot be sized independently: extra battery increases displacement, which changes speed and therefore the energy needed to finish. I solve those couplings before comparing candidate mass and passage time. The static calculation supplies a candidate to the chronological mission simulation; it does not estimate a probability of success.
 
-The [integration candidate IC-01](../models/analyses/integrated-candidate.sysml) applies the same method to an explicit sensing and independent-recovery allocation. Added equipment demand and mass enter the coupled solve before the mission receives its performance envelope and energy accounts. A hull outside the resistance model's geometry domain cannot provide accepted sailing performance. Static feasibility, supported sailing states and successful mission/recovery cases must hold together for the [integration milestone](development-plan.md#integration-milestone). The retained 440 Wh result remains a separately identified sizing reference.
+The [integration candidate IC-01](../models/analyses/integrated-candidate.sysml) applies the same method to an explicit sensing and independent-recovery allocation. Added equipment demand and mass enter the coupled solve before the mission receives its performance envelope and energy accounts. A hull outside the resistance model's geometry domain cannot provide accepted sailing performance. Static feasibility, supported sailing states and successful mission/recovery cases must hold together for the [integration milestone](current-assessment.md#integration-milestone). The retained 440 Wh result remains a separately identified sizing reference.
 
-How small can Blue Dog be and still make headway upriver? For [preliminary design](development-plan.md#virtual-design), I start with the route, wind and current assumptions, then vary the hull, wing, ballast and energy system together. I want to find which designs are worth developing and which assumptions I most need to test.
+IC-01 is the working basis for my first build. I use the search to challenge that allocation and find useful alternatives, rather than treating the smallest numerical answer as a construction decision.
 
 ![Sailing force balance: wing drive must overcome hull drag, while the keel resists side force and ballast supplies a restoring moment. Ground progress also includes current.](figures/sailing-forces.svg)
 
@@ -15,9 +15,9 @@ How small can Blue Dog be and still make headway upriver? For [preliminary desig
 ```mermaid
 flowchart TB
     accTitle: How the sizing study makes a candidate
-    accDescr: The outer search changes the design. For each design, geometry and mass feed an inner operating solve. Constraint failures send the outer search back to a revised design. Independent replay and recovery challenge the selected trial.
-    design["Outer search: hull, rig, ballast, structure, energy"] --> physics["Geometry and mass + aerodynamic / water-force models"]
-    physics --> operating["Inner solve: trim and sailing equilibrium in each scenario"]
+    accDescr: The search changes design and operating variables together. Geometry, mass and forces determine equilibrium and constraint margins. Independent finer replay holds geometry fixed and challenges the retained candidate.
+    design["Search: 29 design + 48 operating variables"] --> physics["Geometry and mass + aerodynamic / water-force models"]
+    physics --> operating["Evaluate sailing balance in each operating case"]
     operating --> screens["Progress, loads, energy, handling and recovery screens"]
     screens -->|revise design| design
     screens -->|feasible alternative| trial["Candidate frontier"]
@@ -27,9 +27,11 @@ flowchart TB
     replay --> experiment["Identify the next measurement or design change"]
 ```
 
-The sizing search treats 1.2 m overall length as a challenge limit, including the modeled wing and rudder sweeps. At each selected overall-length cap, hull length and the other 28 design variables remain free alongside 48 operating-state variables. Separate mass and conditional passage-time objectives retain alternatives for the design team; they do not combine preferences into a handicap score. Fixed-hull-length continuation is available for numerical diagnosis. Numerical brackets describe model coverage and search limits. A bound hit requires investigation before claiming a minimum size.
+## Search objectives and geometry limits
 
-Run the provisional search with `python -m tools.boat_analysis.optimization.frontier --caps 0.8 1.0 1.2`. Its local monohull, quasi-steady results require finer replay and paired chronological mission scenarios. They do not yet supply a calibrated completion probability, bill of materials or construction-effort estimate.
+The sizing search treats 1.2 m overall length as a challenge limit, including the modeled wing and rudder sweeps. At each selected overall-length cap, hull length and the other 28 design variables remain free alongside 48 operating-state variables. Separate mass and conditional passage-time objectives retain alternatives for comparison; they do not combine preferences into a handicap score. Fixed-hull-length continuation is available for numerical diagnosis. Numerical brackets describe model coverage and search limits. A bound hit requires investigation before claiming a minimum size.
+
+The search compares local monohull alternatives at 0.8, 1.0 and 1.2 m overall-length caps. Each promising result needs a finer replay at fixed geometry and the same chronological mission scenarios before it can inform selection. Cost and construction effort need separate estimates.
 
 The [concept credibility policy](../models/analyses/sizing/credibility.sysml) screens underwater foil proportions and attachment geometry in both search and refined replay. Keel and rudder aspect ratios must be at least 2; this is a provisional screening allocation, not a validated accuracy boundary. The keel chord must fit beneath the hull, the rudder stock must stay at or forward of the transom (no unmodeled outrigger), and the keel and rudder's full steering disk must have at least 20 mm planform separation. The clearance remains provisional pending deflection and installation analysis. A different architecture can change these allocations with supporting geometry, mass and loads.
 
@@ -37,81 +39,34 @@ The rudder drive uses the torque arm implied by the mid-chord stock and provisio
 
 Foil-model fidelity, chronological endurance evidence, detailed equipment fit, joints and bearings, fatigue/slamming and dynamic recovery remain open work. The overall-length constraint includes the hull and swept appendages. The current candidate and its evidence are described in the [results](results.md); a minimum credible size has not been demonstrated.
 
+## Couple storage, mass and passage time
+
 The native [concept calculation](../models/libraries/marine/concept.sysml) couples storage to passage duration and candidate electrical demand. The nominal screening scenario credits no harvesting and uses 1.25 times the conditional westerly trip duration plus six hours of delay, at the largest operating bus load, with conversion losses and the modeled recovery reserve. The multiplier and delay are explicit engineering allowances, not weather statistics or a completion deadline. Solar collection is assessed separately on the chronological timeline. Changing battery capacity feeds back into mass, displacement, force balance and passage time.
 
 Installed-volume screening subtracts hull material volume, then credits half the remaining void. Battery enclosure volume uses a provisional 200 Wh/litre and other equipment/actuator installation space uses 0.5 kg/litre. These allocations are sensitivity inputs, not selected hardware specifications. They prevent volume-free equipment but do not prove local fit, cable routing, access or watertight assembly. The geometry report separately records hull length, full wing/rudder swept extent and individual module dimensions; module bounds are not a verified packed transport arrangement or a print segmentation plan.
 
-SysML owns the physical equations, named configurations, bounds, assumptions and acceptance criteria. Python evaluates geometric intersections and section properties, interpolates saved aerodynamic evidence and drives SciPy. Compiled array interfaces are confined to the runtime boundary. Reusable libraries have no dependency on Blue Dog requirements; application analyses connect them to the mission.
+The [modeling reference](methods/modeling.md) explains how the equations, assumptions and acceptance criteria remain connected to each result. Numerical search and geometric calculations use those same declared inputs.
+
+## Sailing and environmental assumptions
 
 The model combines provisional attached-flow wing forces and moments, underwater appendage forces, hull resistance, static buoyancy, material accounting, laminate screens and actuator energy. Both tacks contribute to progress with weights that cancel crosswind drift. In the representative westerly challenge case, the downstream leg is windward and the upstream return is leeward; an easterly reverses them. River current helps the outbound leg and opposes the return in either case.
 
-The [weather policy](../models/analyses/weather.sysml) separates a selected-weather-window challenge from eventual all-season capability. The default search requires the westerly route to pass; `--route-profile all-season` also requires easterly progress. Both profiles retain the operating, passage-energy, packaging, handling, structure and recovery screens, and both report easterly performance. This is a conditional design screen, not proof that a selected window will stay westerly.
+The [weather policy](../models/analyses/weather.sysml) separates a selected-weather-window challenge from eventual all-season capability. The current frontier search requires the westerly route to pass and also reports easterly performance. The all-season profile available in the diagnostic sizing tools additionally requires easterly progress. Both profiles retain the operating, passage-energy, packaging, handling, structure and recovery screens. This is a conditional design screen, not proof that a selected window will stay westerly.
 
-The [seasonal observations and probability method](operating-constraints.md#gorge-weather-and-launch-windows) distinguish hourly wind frequency from whole-passage weather probability. We sweep the latter through the native model, reporting route-screen coverage separately from passage time conditional on passing. Failed or energy-unconstrained cases cannot disappear into an average. Until route and forecast evidence supports a distribution, the optimizer still minimizes length subject to its declared profile; no invented east-wind weight is hidden in its cost function.
+The [seasonal observations and probability method](operating-constraints.md#gorge-weather-and-launch-windows) distinguish hourly wind frequency from whole-passage weather probability. The study sweeps the latter through the native model, reporting route-screen coverage separately from passage time conditional on passing. Failed or energy-unconstrained cases cannot disappear into an average. The current frontier search minimizes mass and conditional passage time in separate runs at each overall-length cap. Weather probabilities are not hidden weights in either objective.
 
-The [aerodynamic policy](../models/analyses/aerodynamic-policy.sysml) makes the former adverse aerodynamic assumptions the primary sizing case. It limits nominal incidence and heel, reduces lift credit, increases drag, and assigns an independent pitching-moment allowance. These are engineering assumptions, not measured uncertainty bounds. All represented geometry, structure and energy variables remain adjustable, with length fixed only within each continuation stage; the restricted controls prevent the search from relying as heavily on high incidence and large heel.
+The [aerodynamic policy](../models/analyses/aerodynamic-policy.sysml) applies conservative assumptions to the primary sizing case. It limits nominal incidence and heel, reduces lift credit, increases drag, and assigns an independent pitching-moment allowance. These are engineering assumptions, not measured uncertainty bounds. All represented geometry, structure and energy variables remain adjustable within the overall-length cap. The restricted controls prevent the search from relying as heavily on high incidence and large heel.
 
-VSPAERO supplies finite-wing trends within the archived grid. We retain the provisional upright-polar cosine projection in the force balance; the separate heel study demonstrates why this is a limitation. Published crescent-wing results do not match this CAD section closely enough to supply measured coefficients. Representative mesh/wake checks assess numerical sensitivity, while physical section polars, stall and moment measurements remain open evidence needs.
+VSPAERO supplies finite-wing trends within the archived grid. The calculation retains the provisional upright-polar cosine projection in the force balance; the separate heel study demonstrates why this is a limitation. Published crescent-wing results do not match this CAD section closely enough to supply measured coefficients. Representative mesh/wake checks assess numerical sensitivity, while physical section polars, stall and moment measurements remain open evidence needs.
 
 The [surface-environment replay](mission-simulation.md#wind-at-wing-height-and-waves-along-the-route) checks fixed candidates with height-resolved wind loads and directional wave sensitivities before another size reduction. The archived sizing pass remains a uniform-flow, calm-water result. The [wave-averaged operating solver](mission-simulation.md#wave-averaged-sailing-performance) closes mean sailing balance at fixed geometry using calculated heave, roll and pitch response. A new size optimum should wait for review of response coverage, damping and wave-force assumptions.
 
-Feasibility restoration precedes the local size search. Derivatives respect interpolation-grid breakpoints. Small mesh reserves protect against numerical drift; they are separate from physical uncertainty. Continuation starts from the named appendage-screened archive and restores it against the current constraints before reducing length, targets 0.2 m length reductions, and halves unsuccessful steps down to 0.025 m. Each stage first seeks the closest feasible design with constrained SLSQP, then uses least-squares restoration if needed. Each method receives a budget of 60 iterations or residual evaluations respectively, with up to two extensions when violation norm improves by at least 5 percent. A failed stage also tries a wider-hull, reduced-wing/ballast starting guess; those changes are not constraints. A stage stops once an accepted iterate passes the unchanged feasibility tolerance; it does not continue polishing proximity to the seed. Separate records retain the smallest feasible design and best infeasible attempt, and restoration uses the best intermediate constrained correction rather than discarding it for a worse final iterate. No stage relaxes physical acceptance criteria. This is local feasibility tracing, not a proof that a failed length cannot work. Refined replay re-solves operating states with peak-power constraints, then identifies any diagnostic solve that removes that check. The finite energy and volume screens also run in refined replay; chronological mission evaluation remains necessary for actual weather and traffic histories. A failed local solve is not proof of physical impossibility.
+## Check a result before accepting it
 
-<details>
-<summary>Reproduce the search and refresh aerodynamic evidence</summary>
+A numerical search first seeks a feasible design, then improves its declared objective. A finer replay holds geometry fixed and re-solves operating states, including peak power, finite energy and installed volume. Small numerical reserves protect against mesh drift; they are distinct from physical uncertainty. Failed solves retain diagnostic trials because they can reveal a binding constraint or a poor initial guess. They do not prove that a smaller boat is physically impossible.
 
-## Run the workflow
+The older length-minimization search and fixed-hull-length continuation remain diagnostic tools. Their stage sizes, restoration methods and iteration budgets are described in the [workflow reference](reference/sizing-workflow.md#diagnostic-continuation); they are not the objectives of the current frontier comparison.
 
-Use the package-free uv environment from the repository root. Native compiled execution uses Linux/GCC, including WSL. Keep Windows and Linux virtual environments separate.
+[Search commands, diagnostic continuation and geometry exports](reference/sizing-workflow.md) document the executable workflow.
 
-```sh
-python tools/boat_analysis/model/install.py
-uv sync --locked
-uv run python -m tools.boat_analysis.cli validate
-uv run python -m tools.boat_analysis.cli prepare
-uv run python -m tools.boat_analysis.cli continue-sizing --target 1.2
-uv run python -m tools.boat_analysis.mission.campaign --count 32 --candidate build/analysis/sizing-continuation.json
-uv run python -m tools.boat_analysis.optimization.credibility build/analysis/sizing-continuation.json
-# The original unconstrained-length search remains available:
-uv run python -m tools.boat_analysis.cli solve
-uv run python -m tools.boat_analysis.cli replay
-uv run python -m tools.boat_analysis.cli recovery
-uv run python -m tools.boat_analysis.cli pitch
-uv run python -m tools.boat_analysis.cli audit
-```
-
-Continuation writes `build/analysis/sizing-continuation.json` and leaves the replay candidate untouched; a continuation result must be selected explicitly before refined replay. Preparation exports model inputs and compiles native calculations. Solving writes a candidate; replay and recovery are separate assessments. Outputs go to ignored `build/analysis`, not to authored documentation. Accepted records are archived without overwriting earlier runs and projected into named model instances for publication. The current run is identified on the [results page](results.md).
-
-Replay holds the selected geometry fixed and re-solves controls for six hypotheses: the conservative primary case (stored as `nominal`), construction, additional aerodynamic degradation, hydrodynamic degradation, energy degradation, and their combination. These scenarios test sensitivity; they are neither probabilities nor demonstrated worst cases. An operating failure or pitch-unstable recovery sample remains visible even if the coarse sizing screen passed.
-
-OpenVSP uses the separate package-free environment under `tools/boat_analysis/aerodynamics/vsp` because the pinned binary has its own Python ABI. Run its modules from the repository root with that uv project. The saved grid permits routine analysis without rerunning VSPAERO. Mesh convergence and a direct candidate comparison test numerical consistency; viscous drag, stall, broadside flow, thickness effects and dynamic sailing still need evidence.
-
-The [results page](results.md) reports whether the current search reached feasibility and whether length minimization completed. A diagnostic trial remains useful for replay when a search stops before feasibility. The reusable geometry checks include analytic section properties, displaced-volume oracles, mass moments, force and torque invariance, and native/interpreted parity. Qualification remains broader than those software checks.
-
-[Recorded outcomes](results.md) · [Sail concepts](sail-trade.md) · [Structures and recovery](structures-and-recovery.md)
-
-## Refresh external wing evidence
-
-The supported VSP installation is Windows with Python 3.13. From the repository root, use the separate locked environment:
-
-```powershell
-uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.install_vsp
-uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.extract_sections
-uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.reference_vsp --mesh 32
-uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.polar_grid
-uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.convergence
-uv run --project tools/boat_analysis/aerodynamics/vsp python -m tools.boat_analysis.aerodynamics.vsp.check_candidate
-```
-
-Run the grid only when its CAD, coverage or solver settings change; it is substantially more expensive than document publication. New evidence is written under `build/analysis`. Regenerate native inputs after changing geometry evidence. Review results and provenance before archiving a new run and projecting it into the model; never overwrite an archived run in place.
-
-
-</details>
-
-**Next:** [Compare the sail concepts](sail-trade.md).
-
-## Generating the concept geometry
-
-The geometry exporter extracts oriented exterior surfaces from the same tetrahedra used for buoyancy and geometric metrics. Named hull, wing, keel, rudder and ballast components are exported in metres as GLB. A neutral-pose calculation supplies mass, center of gravity and the fixed-pitch upright waterline. Exported volume and bounds must agree with the analysis geometry; the mesh carries no invented internal equipment or manufacturing detail.
-
-`uv run python -m tools.publishing.concepts --figures docs/figures` regenerates the archived starting and smallest accepted concepts, metadata and equal-scale fixed views. The model publishing workflow supplies the mesh assets; the existing blog renders the interactive comparison inside the sizing article. Each accepted continuation stage exports its own mesh and metadata outside the optimizer's evaluation loop. Source hashes identify the candidate and exporter; changing the geometry basis requires a new analysis record.
+**Next:** [Comparing sail architectures](sail-trade.md) · [Series guide](index.md)

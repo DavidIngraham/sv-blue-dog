@@ -1,8 +1,24 @@
 # Sizing Blue Dog for the Gorge
 
-**OOSEM:** Trades, optimization and analysis · [Maturity assessment](development-plan.md)
+**OOSEM:** Trades, optimization and analysis · [Maturity assessment](current-assessment.md)
 
-The current integration question is whether **IC-01** supports sensing, guidance, sailing energy and independent recovery as one coherent candidate. Its [allocation](../models/analyses/integrated-candidate.sysml) includes sensing/compute demand and recovery equipment in a fresh coupled evaluation. The [virtual acceptance requirement](development-plan.md#integration-milestone) combines those sizing results with representative mission and casualty simulations. It does not select catalog hardware or establish physical qualification.
+**IC-01 is the working basis for my first physical boat.** I expect to refine it before construction. Its purpose is to carry sensing, guidance, sailing energy and independent recovery together, rather than size a sailing hull first and add those functions later. Its [allocation](../models/analyses/integrated-candidate.sysml) includes sensing/compute demand and recovery equipment in a fresh coupled evaluation. The [virtual acceptance requirement](current-assessment.md#integration-milestone) combines those sizing results with representative mission and casualty simulations. It does not select catalog hardware or establish physical qualification.
+
+## Why the boat grew
+
+The earlier 440 Wh reference could satisfy its nominal sailing screen, but left only about 4 Wh beyond the allocated voyage energy. It could not absorb the additional sensing loads I was investigating. IC-01 makes those functions explicit and carries an independent recovery system. Their mass and demand feed back into hull sizing and passage time.
+
+| Quantity | Earlier sizing reference | IC-01 working candidate |
+| --- | --- | --- |
+| Overall swept length | 1.2 m | 1.2 m |
+| Hull beam | 0.26 m | 0.42 m |
+| Modeled mass | 10.313 kg | 20.061 kg |
+| Main / separate recovery storage | 440 Wh / none | 1,300 Wh / 60 Wh |
+| Conditional westerly passage | 33.869 h | 38.884 h |
+| Main energy headroom after allocated reserve | 3.974 Wh | 102.062 Wh |
+| Role | Earlier nominal sizing reference | Integrated capability allocation for refinement |
+
+These are separate coupled configurations. The difference is not a measured hardware retrofit or a claim that battery size alone explains the change. IC-01 still needs an identified sensing stack, rig comparison, installation design and physical evidence.
 
 ## Integrated candidate sizing
 
@@ -30,7 +46,7 @@ The [power and energy budgets](energy.md#current-candidate-budget) distinguish t
 ```sysml-report BlueDogSRRCurrentDocuments::Summary
 ```
 
-[Current replay, mission outcomes and limitations](srr-appendix.md#current-baseline-evidence)
+[Earlier reference replay, mission outcomes and limitations](site-and-environment-evidence.md#configuration-specific-desktop-records)
 
 This study takes the finite Bingen–Stevenson challenge, manufacturing assumptions and provisional physics as inputs. It informs concept selection and the measurements needed before detailed design. The [sizing method](sizing.md) explains the calculations; the [mission simulation](mission-simulation.md) adds changing weather, traffic and recovery decisions.
 
@@ -38,7 +54,7 @@ The [development spirals](simulation-spirals.md#develop-the-trades-alongside-the
 
 ## Search for alternatives, then choose a design
 
-Overall length is a constraint on the full operating envelope, including appendage sweeps. Hull length and the other 28 design variables remain free, together with 48 operating-state variables. Separate mass and conditional-passage objectives expose competing choices instead of hiding them in a weighted score. The design team will choose a balance after comparing the candidates.
+Overall length is a constraint on the full operating envelope, including appendage sweeps. Hull length and the other 28 design variables remain free, together with 48 operating-state variables. Separate mass and conditional-passage objectives expose competing choices instead of hiding them in a weighted score. I will choose a balance after comparing performance, recovery, construction and cost.
 
 The bounded local study examines 1.2, 1.0 and 0.8 m overall-length caps. It retains feasible accepted iterates even if a later solver step fails. An unresolved search is not proof that a smaller boat is impossible. These are local monohull alternatives; they do not establish a global optimum or compare every hull architecture.
 
@@ -56,27 +72,27 @@ These figures describe their archived configuration. Their feasibility verdicts 
 ```sysml-report BlueDogSRRFrontierDocuments::Summary
 ```
 
-## What the finer replay tells us
+## What the finer replay establishes
 
 ```sysml-report BlueDogSRRFrontierDocuments::SeedReplay
 ```
 
 In the archived seed replay, the retained 1.2 m seed balanced its operating cases, but the voyage-energy margin fell to −0.00556 as conditional passage changed from 33.66 to 33.74 hours. That seed is distinct from the 440 Wh candidate assessed above.
 
-The sampled sealed-body recovery curves have pitch equilibria and positive restoring roll moments at all interior samples across four wing trims. That does not establish dynamic capsize recovery, pitch stability, structural integrity or recovery with damaged equipment. The challenge permits limp recovery to shore; self-righting remains one possible vehicle strategy.
+The sampled sealed-body recovery curves have pitch equilibria and positive restoring roll moments at all interior samples across four wing trims. That does not establish dynamic capsize recovery, pitch stability, structural integrity or recovery with damaged equipment. Unassisted self-righting can preserve qualification when required safety capabilities return. Powered recovery to shore is a separate, disqualified outcome.
 
-This replay applies to the retained seed, not automatically to every frontier alternative. It also does not include a calibrated weather-window completion probability. The environmental and traffic campaign must assess each selected candidate with the same scenario realizations before we compare mission outcomes.
+This replay applies to the retained seed, not automatically to every frontier alternative. It also does not include a calibrated weather-window completion probability. The environmental and traffic campaign must assess each selected candidate with the same scenario realizations before I compare mission outcomes.
 
 </details>
 
 ## What needs to improve before selecting a boat
 
-The useful next work is to test sensitivity to construction and foil assumptions, and connect eligible alternatives to chronological mission and recovery scenarios. Physical measurements of laminate stiffness, joints, actuator loads and wing behavior are still needed to establish model credibility.
+The useful next work is to replace IC-01's sensing and recovery allocations with credible installed equipment, test sensitivity to construction and foil assumptions, and compare eligible alternatives on the same chronological mission scenarios. Physical measurements of laminate stiffness, joints, actuator loads and wing behavior are still needed to establish model credibility.
 
 Cost and construction effort need a bill of materials and process estimates. Recovery needs assessed shore approaches and casualty capabilities. Until those inputs exist, a mass-versus-time plot represents only part of the design decision.
 
-The [mission and design assessment](srr-review.md) connects these findings to the requirements and remaining evidence. A solver pass does not qualify a vessel for an unattended trial.
+The [maturity assessment](current-assessment.md) connects these findings to the requirements and remaining evidence. A solver pass does not qualify a vessel for an unattended trial.
 
 [Archived run and source provenance](../evidence/runs/2026-10-13-srr-frontier/manifest.json) · [Generated model evidence](../models/evidence/srr-frontier.sysml)
 
-**Next:** [How the sizing search works](sizing.md).
+**Next:** [Coupled sizing method](sizing.md) · [Series guide](index.md)

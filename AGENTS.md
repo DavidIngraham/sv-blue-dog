@@ -13,21 +13,37 @@ before `uv sync --locked`; Go 1.25+ is required for the development source build
 An optional `--source /path/to/OpenSysML` uses a local checkout containing the
 exact pinned commit. See README.md.
 
-Keep the existing Markdown authoring, scoped SysML view fences, article URLs,
-blog import, navigation, and interactive illustrations. Model facts belong in
+Keep Markdown authoring, scoped SysML view fences, the blog import and useful
+interactive illustrations. Article boundaries, URLs and navigation may change
+to improve the reading journey; do not preserve obsolete links at its expense. Model facts belong in
 SysML; prose explains the engineering method. Do not create a separate public
 website or framework repository as part of routine Blue Dog work.
 
 Organize current development around OOSEM layers, not formal SETR approval gates.
 When engineering changes affect coverage, traceability, evidence or applicability,
-update the dated assessment in `docs/development-plan.md` with supporting links,
+update the dated assessment in `docs/current-assessment.md` with supporting links,
 remaining gaps and the next useful investigation. Keep virtual, physical and
-model-validation evidence distinct. Preserve the introductory story and article URLs. Published prose describes the
+model-validation evidence distinct. Preserve the introductory personal story. Published prose describes the
 current project and author viewpoint, not editing history, migrations or previous
 blog structures. Preserve substantive technical provenance and configuration
 limits without narrating the reorganization.
 
 ## Blog organization and editorial maintenance
+
+Write for a technically minded reader who is new to Blue Dog and understands
+basic systems engineering, but may not know SysML. Use first-person singular for
+owner judgments, plain language and concrete engineering consequences. Explain
+the question, alternatives, evidence and decision. Define specialist terms on
+first use. Avoid unexplained "we" or "design team", bureaucratic narration,
+repeated generic caveats and software implementation detail in the main story.
+
+IC-01 is the current working candidate. A refined IC-01-scale vessel is the first
+intended physical build; the original CAD testbed is historical. Compare soft
+sail, tail-controlled rigid wing and directly rotated fixed-camber wing equally
+for the finite Gorge mission. Unassisted capsize recovery that restores required
+safety capability need not end qualification; motor use, external intervention
+or loss of required safety capability does. Preserve historical evidence with
+its original configuration and policy rather than rewriting archived results.
 
 Organize the main articles by OOSEM methods and their engineering questions:
 mission and stakeholder needs, system requirements and scenarios, logical

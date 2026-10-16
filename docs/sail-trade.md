@@ -1,18 +1,26 @@
 # Comparing sail architectures
 
-**OOSEM:** Candidate physical architectures · [Maturity assessment](development-plan.md)
+**OOSEM:** Candidate physical architectures · [Maturity assessment](current-assessment.md)
 
-Which rig gives this boat a useful combination of drive, low trim power and recoverability? I am comparing three concepts during [preliminary design](development-plan.md#virtual-design), using the mission requirements, prior art and exploratory aerodynamic runs. The decision is still open: the fixed-camber wing gives me a concrete sizing experiment, while measurements must establish whether it deserves to become the selected rig.
+Which rig gives this boat a useful combination of drive, low trim power and recoverability? I am comparing three concepts during [preliminary design](current-assessment.md#virtual-design), using the mission requirements, prior art and exploratory aerodynamic runs. The decision is still open: the fixed-camber wing gives me a concrete sizing experiment, while measurements must establish whether it deserves to become the selected rig.
 
 ![Three conceptual rigs: a wing trimmed by a tail and elevator, a fixed-camber wing rotated at its mast, and a triangular soft sail controlled by a sheet.](figures/rig-concepts.svg)
 
 *Three ways to trim a sail: elevator control, mast rotation and sheet tension.*
 
-We compare control architecture separately from section camber. A tail-controlled wing and a directly rotated fixed-camber wing solve trim differently; either needs measured aerodynamic moments, actuator losses, structural loads and failure-state behavior. A soft sail remains a useful comparator rather than an assumed failure. The fixed-camber CAD wing is our sizing experiment, not a resolved winner of the trade.
+I compare control architecture separately from section camber. A tail-controlled wing and a directly rotated fixed-camber wing solve trim differently; either needs measured aerodynamic moments, actuator losses, structural loads and failure-state behavior. The soft sail is an equal contender for the finite Gorge mission. The fixed-camber CAD wing supplies the current sizing experiment; having more calculations for it does not give it a preference in selection.
 
 I want to compare the rigs on the same terms. A promising lift curve is only part of the answer: the sail also has to survive unattended operation, use manageable trim power and let the boat recover from a capsize. A durability concern is worth investigating, but it is not a measured failure rate. I keep that distinction visible in the trade rather than hiding unknowns inside a weighted score.
 
-The representative west-wind challenge puts the upstream return on a leeward course. That makes broad-reach/downwind performance important alongside windward efficiency. The [seasonal probability study](operating-constraints.md#gorge-weather-and-launch-windows) keeps easterly upriver performance as a separate sensitivity, especially for winter tests. It does not let us score any rig as a winner from the attached-flow VSPAERO grid: broadside flow and separated downwind operation still need evidence. Durability, controllability and recovery remain acceptance gates, not benefits traded away by a low weather frequency.
+The representative west-wind challenge puts the upstream return on a leeward course. That makes broad-reach/downwind performance important alongside windward efficiency. The [seasonal probability study](operating-constraints.md#gorge-weather-and-launch-windows) keeps easterly upriver performance as a separate sensitivity, especially for winter tests. It does not identify a winning rig from the attached-flow VSPAERO grid: broadside flow and separated downwind operation still need evidence. Durability, controllability and recovery remain acceptance gates, not benefits traded away by a low weather frequency.
+
+| Concept | Main opportunity | Evidence most likely to decide it |
+| --- | --- | --- |
+| Tail-controlled rigid wing | Aerodynamic trim authority with a small control surface | Both-tack control moments, tail authority, installed energy and failure-state behavior |
+| Directly rotated fixed-camber wing | A direct mechanical relationship between commanded and held trim | Mast torque, move/hold energy, separated-flow performance and locked-angle recovery |
+| Soft sail | A lightweight rig with familiar sheet control and options for reducing sail | Unattended sheet handling, both-tack performance, wet durability and recovery after immersion |
+
+I will compare each at the same mission duration and conditions. Long ocean endurance is not a reason to downgrade cloth for this finite mission. Material durability, tangling and handling are questions to test for each proposed installation.
 
 ```sysml-report BlueDogSailTradeDocuments::Conclusion
 ```
@@ -39,14 +47,14 @@ I need comparable measurements of both-tack lift, drag and pitching moment over 
 
 For recovery, I will represent each body with its actual mass, center of gravity, geometry and flooding state. Free and locked rig angles, on both sides of a full roll, expose different failure cases. Pitch stability and dynamic release behavior need their own checks alongside sampled static righting moments. The [structures and recovery method](structures-and-recovery.md) describes that distinction.
 
-This is where prototypes can resolve the uncertainties before I commit to geometry. Published [crescent-wing research](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) includes wind-tunnel comparisons, but its section geometry and test conditions differ from ours. It supports investigating the concept; it does not supply validated coefficients for our CAD. The [sizing workflow](sizing.md) therefore uses explicit conservative assumptions while other concepts remain open. Its numerical results do not complete the trade.
+This is where prototypes can resolve the uncertainties before I commit to geometry. Published [crescent-wing research](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) includes wind-tunnel comparisons, but its section geometry and test conditions differ from ours. It supports investigating the concept; it does not supply validated coefficients for this CAD. The [sizing workflow](sizing.md) therefore uses explicit conservative assumptions while other concepts remain open. Its numerical results do not complete the trade.
 
 <details>
 <summary>Full experiment gallery: geometry, sweeps, convergence, heel and reproduction</summary>
 
-## What we have actually run in OpenVSP
+## What the OpenVSP studies cover in OpenVSP
 
-The recorded work uses OpenVSP 3.54.0. We use a reference-wing study and a 200-point aspect-ratio/camber grid for finite-wing trends, a separate heel/incidence study to expose the limits of the boat model's projection, and representative mesh/wake checks within the restricted sizing domain. Figures are regenerated from immutable run records during each site build. Publishing them does not rerun the aerodynamic solver.
+The recorded work uses OpenVSP 3.54.0. The study uses a reference-wing study and a 200-point aspect-ratio/camber grid for finite-wing trends, a separate heel/incidence study to expose the limits of the boat model's projection, and representative mesh/wake checks within the restricted sizing domain. Figures are regenerated from immutable run records during each site build. Publishing them does not rerun the aerodynamic solver.
 
 ### Tested geometry
 
@@ -72,7 +80,7 @@ The original reference and response-grid sweeps use 5 m/s, air density 1.225 kg/
 
 
 
-Lift and pitching moment change with mesh refinement, so these curves should not be called mesh-independent. We check that sensitivity explicitly with mesh settings 24, 48 and 72 and wake counts 5, 15 and 30 at incidences −4°, 0°, 4° and 8°. The representative cases cover forward and reversed chord at zero spanwise inflow and forward chord at 20° spanwise inflow. This is 60 additional operating points, not a convergence certificate for every geometry in the response grid.
+Lift and pitching moment change with mesh refinement, so these curves should not be called mesh-independent. I check that sensitivity explicitly with mesh settings 24, 48 and 72 and wake counts 5, 15 and 30 at incidences −4°, 0°, 4° and 8°. The representative cases cover forward and reversed chord at zero spanwise inflow and forward chord at 20° spanwise inflow. This is 60 additional operating points, not a convergence certificate for every geometry in the response grid.
 
 ![Representative mesh and wake convergence checks](https://davidingraham.github.io/sv-blue-dog/assets/vsp/convergence.svg)
 
@@ -97,7 +105,7 @@ All six final-increment checks pass the model's absolute coefficient-change scre
 
 *Induced drag plotted against lift for each aspect ratio.*
 
-The drag plots show **induced drag only**, not total sail drag or boat performance. The reference output also contains a profile-drag estimate, but we have not validated it for this section and Reynolds-number range. It is deliberately excluded from these comparisons.
+The drag plots show **induced drag only**, not total sail drag or boat performance. The reference output also contains a profile-drag estimate, but I have not validated it for this section and Reynolds-number range. It is deliberately excluded from these comparisons.
 
 ![Forward and reversed-chord alpha sweeps](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reverse-sweeps.svg)
 
@@ -117,7 +125,7 @@ These runs support exploratory interpolation and sensitivity studies inside the 
 
 Primary sizing uses the [conservative aerodynamic policy](../models/analyses/aerodynamic-policy.sysml): reduced lift credit, increased drag, an independent pitching-moment allowance, nominal incidence limited to −4° through 8°, and sailing heel limited to ±20°. The geometry variables remain free. The [sizing results](results.md) report the current candidate and convergence outcome. Additional adverse aerodynamic assumptions are applied in replay. These factors are provisional engineering judgments, not measured confidence intervals or a demonstrated stall boundary; the [current results](results.md) must be read with that qualification.
 
-VLM assumes attached, inviscid flow and a prescribed shedding edge. This CAD section has a rounded edge, making that shedding assumption particularly important. Increasing lift at the high-alpha endpoints does not demonstrate absence of stall. Broadside sailing, separation, real low-Re drag, both-tack transitions, gust response, mast interference and tail/elevator control are not validated here. No tail-controlled wing or soft-sail simulation is included in this dataset. The authoritative [aerodynamic decision and evidence gaps](../models/vehicle/decisions.sysml) retain those limits.
+The vortex lattice method (VLM) assumes attached, inviscid flow and a prescribed shedding edge. This CAD section has a rounded edge, making that shedding assumption particularly important. Increasing lift at the high-alpha endpoints does not demonstrate absence of stall. Broadside sailing, separation, real low-Re drag, both-tack transitions, gust response, mast interference and tail/elevator control are not validated here. No tail-controlled wing or soft-sail simulation is included in this dataset. The authoritative [aerodynamic decision and evidence gaps](../models/vehicle/decisions.sysml) retain those limits.
 
 ### Reproduce the figures
 
@@ -135,7 +143,7 @@ For each nominal incidence, mast trim is fixed relative to the boat while heel c
 
 ### Frames and loads
 
-The right-handed world frame is **X aft, Y starboard, Z up**. Positive heel rotates about the aft axis and tilts the mast toward port. The wind velocity is horizontal, with direction `(cos(AWA), −sin(AWA), 0)`. Wing axes are chord X, span Y and section-normal Z. We transform wind into those axes using `R = Rx(heel) Rz(nominal incidence − AWA) Rx(90°)` and recover the solver angles from the transformed vector. At beam wind, the solver's spanwise angle is the negative of heel; at zero heel, every case recovers the original incidence and zero spanwise flow.
+The right-handed world frame is **X aft, Y starboard, Z up**. Positive heel rotates about the aft axis and tilts the mast toward port. The wind velocity is horizontal, with direction `(cos(AWA), −sin(AWA), 0)`. Wing axes are chord X, span Y and section-normal Z. The calculation transforms wind into those axes using `R = Rx(heel) Rz(nominal incidence − AWA) Rx(90°)` and recover the solver angles from the transformed vector. At beam wind, the solver's spanwise angle is the negative of heel; at zero heel, every case recovers the original incidence and zero spanwise flow.
 
 The direction and moment normalization follow the [VSPAERO solver conventions](https://github.com/OpenVSP/OpenVSP/blob/master/src/vsp_aero/Solver/VSP_Solver.C). Forces and moments are transformed back into world axes after solving. Forward force is `−Fx`; starboard and upward loads retain their signs. All plotted loads use **inviscid surface-integration results**, excluding the unvalidated profile-drag estimate. Moments are dimensionalized before rotation: roll/yaw coefficients use reference span, pitch uses reference chord.
 
@@ -166,4 +174,4 @@ The [archived heel results](../evidence/runs/2026-10-11-heel/wing-heel-sweep.jso
 
 </details>
 
-**Next:** [Follow the energy through the mission](energy.md).
+**Next:** [Manufacturing, structure and recovery](structures-and-recovery.md) · [Series guide](index.md)

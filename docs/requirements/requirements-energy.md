@@ -1,20 +1,17 @@
 # Energy and recovery propulsion
 
-**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
+[Requirements overview](../requirements.md) · [Current assessment](../current-assessment.md)
 
-The energy budget must support sailing continuously and retain a deliberate recovery capability. These threads separate energy awareness, sustained balance and the motor rules for a qualifying attempt.
-
-[Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
-
-Arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision, and **dependency** records a design basis. Each view retains its upstream context; statements are rendered from the model.
-
-- [Energy awareness and low-energy response](#energy-awareness-and-low-energy-response)
-- [Sustained energy feasibility](#sustained-energy-feasibility)
-- [Recovery propulsion and reserves](#recovery-propulsion-and-reserves)
+Energy is a mission capability: the boat needs enough usable storage and power delivery for the planned passage, while preserving a reachable recovery option. Low-energy behavior must protect navigation and collision avoidance before optional loads. IC-01 allocates a separate recovery battery; the [energy analysis](../energy.md) evaluates that design choice against these obligations.
 
 ## Energy awareness and low-energy response
 
+Available energy and route-dependent reserve must be estimated often enough to act before the boat loses its recovery option. Optional payloads yield to essential functions.
+
 ### Preserving essential functions at low energy
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_energy_8::thread direction=BT statements=true
 package Page_energy_8 {
@@ -96,7 +93,12 @@ package Page_energy_8 {
 }
 ```
 
+</details>
+
 ### Estimating available energy and reserve
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_energy_9::thread direction=BT statements=true
 package Page_energy_9 {
@@ -130,10 +132,15 @@ package Page_energy_9 {
 }
 ```
 
+</details>
+
 
 ## Sustained energy feasibility
 
 This repeating-energy objective belongs to future sustained operation. The current Gorge mission requires adequate energy and protected reserve throughout its finite campaign.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_energy_10::thread direction=BT statements=true
 package Page_energy_10 {
@@ -179,8 +186,15 @@ package Page_energy_10 {
 }
 ```
 
+</details>
+
 
 ## Recovery propulsion and reserves
+
+The motor is inhibited during qualification. Recovery requires explicit authority, a fresh valid command and sufficient reserve; stopping the motor or restarting the controller does not restore the attempt.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_energy_11::thread direction=BT statements=true
 package Page_energy_11 {
@@ -255,3 +269,7 @@ package Page_energy_11 {
     }
 }
 ```
+
+</details>
+
+**Continue:** [Candidate results](../results.md), or return to the [requirements overview](../requirements.md).

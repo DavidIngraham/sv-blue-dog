@@ -8,13 +8,13 @@ package BlueDogDesignDecisions {
         attribute :>> disposition = "Use the fixed-camber rotating-mast wing as the first numerical sizing baseline; no final sail downselect.";
         attribute :>> evidenceNeeded = "Comparable both-tack polars, wet-cycle durability, actuator energy, mass/CG and dynamic recovery evidence for the alternatives.";
         metadata rationale : ModelingMetadata::Rationale {
-            text = "The existing manufacturing CAD supplies a measured section and a practical starting geometry. This enables coupled sizing while preserving the tail-controlled and soft-sail candidates as unqualified alternatives. Availability of CAD is not proof of superior sailing performance.";
+            text = "The existing manufacturing CAD supplies a measured section and a practical starting geometry. This enables coupled sizing while preserving the tail-controlled wing and soft sail as equal development contenders for the finite Gorge mission. Availability of CAD is not proof of superior sailing performance.";
         }
         metadata issue : ModelingMetadata::Issue { text = "The source CAD is a manufacturing prototype, not the challenge vessel; the rectangular VSP wing uses its complete midspan section rather than reproducing its swept planform."; }
     }
     dependency baselineCandidate from sizingBaseline to BlueDogSailTrade::camberedWing;
     dependency retainedAlternative from sizingBaseline to BlueDogSailTrade::tailWing;
-    dependency benchmarkAlternative from sizingBaseline to BlueDogSailTrade::softSail;
+    dependency softSailAlternative from sizingBaseline to BlueDogSailTrade::softSail;
     dependency baselinePurpose from sizingBaseline to BlueDogRequirements::cruiseEvidence;
 
     part holdingDrive : Decision {

@@ -117,7 +117,7 @@ package BlueDogRisks {
             uncertainty = "No measured both-tack polar; stall, broadside response and loaded gearbox behavior remain uncertain.";
             priority = "Next: sizing credibility";
             priorityRationale = "High leverage on rig selection, energy and vessel size; avoid refining geometry inside an unsupported aerodynamic assumption.";
-            reductionAction = "Rank force and moment sensitivity at mission-critical conditions; define force/moment and drive-energy tests for the existing wing testbed.";
+            reductionAction = "Rank force and moment sensitivity at mission-critical conditions; define force/moment and drive-energy component tests supporting the first IC-01-scale build.";
             closureEvidence = "Independent measurements bound the model at conditions used for concept selection; force, trim and failure behavior support the chosen rig or trigger a new trade.";
         }
     }

@@ -21,7 +21,7 @@ Use `verify` for verification cases and `satisfy` for intended design allocation
 
 Reusable library interfaces expose named design properties. Numerical adapters currently use documented SI scalar conventions and vector conversion calculations; this is not full dimensional type checking.
 
-View definitions belong in the [authored Markdown](../docs/publishing.md). Native document queries supporting publication live under `tools/publishing/`. Generated diagrams and pages are build outputs, not hand-maintained copies of the model.
+View definitions belong in the [authored Markdown](../docs/reference/authoring.md). Native document queries supporting publication live under `tools/publishing/`. Generated diagrams and pages are build outputs, not hand-maintained copies of the model.
 
 ### OOSEM
 

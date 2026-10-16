@@ -1,8 +1,8 @@
 # Seeing hazards early enough to act
 
-**OOSEM:** System requirements, logical behavior, trades and virtual evidence · [Maturity assessment](development-plan.md)
+**OOSEM:** System requirements, logical behavior, trades and virtual evidence · [Maturity assessment](current-assessment.md)
 
-The immediate architecture question is whether Blue Dog can observe a hazard early enough to maneuver, while retaining enough energy and recovery capability. I connect detection distance, uncertain observations, sensing demand and casualty recovery in the [integrated candidate study](../tools/boat_analysis/mission/integrated.py). Its sailing performance and energy come from the same coupled candidate. Sensing ranges and recovery authority remain explicit allocations, not vendor specifications or a selected installation. The [paired sensing comparison](../tools/boat_analysis/mission/continuation_study.py) remains the evidence for comparing four earlier sensing hypotheses on its declared conceptual vessel.
+Can Blue Dog see a hazard early enough to act, and carry the equipment needed to do so? I connect detection distance, uncertain observations, sensing demand and casualty recovery in the [integrated candidate study](../tools/boat_analysis/mission/integrated.py). Its sailing performance and energy come from the same coupled candidate. Sensing ranges and recovery authority remain explicit allocations, not vendor specifications or a selected installation. The [paired sensing comparison](../tools/boat_analysis/mission/continuation_study.py) remains the evidence for comparing four earlier sensing hypotheses on its declared conceptual vessel.
 
 ## Close the candidate loop
 
@@ -12,7 +12,7 @@ Normal sailing must complete; an encounter may complete or deliberately abort an
 
 The allocated day/night range is deliberately a capability target. It does not identify hardware able to deliver that range within the power and mass budget. This local case set also does not cover every high-speed encounter, occupied-maneuver arrival, false positive, correlated obscuration or recovery-route blockage. Broader admission and held-out cases remain necessary before extending a conditional result to the challenge.
 
-The [executed IC-01 record](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json) passes the seven native closure conditions. Of 18 nominal/encounter runs, **10 complete** and **eight safely abort to recovery approaches**. All six casualty/end-of-exposure runs reach an approach; these remain disqualified challenge attempts. The clear-water and weed cases preserve their classifications at half-second integration. Eighteen upright/inverted reserve samples fit the independent bank after full energy-exposure standby. Shared primary/recovery power failure and an empty recovery bank produce shore contact, while the short-range weed sensitivity safely aborts. That one short-range result does not establish a reduced sensing requirement. No successful admitted case records collision, clearance violation or unsupported sailing performance.
+The archived 15 October 2026 [IC-01 record](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json) passes the seven native closure conditions. Of 18 nominal/encounter runs, **10 complete** and **eight safely abort to recovery approaches**. All six casualty/end-of-exposure runs reach an approach; these use powered recovery and remain disqualified challenge attempts. The archived capsize case tests inverted powered recovery. It does not test unassisted self-righting: a capsize that restores the required safety capabilities without motor use or outside intervention need not end qualification. The clear-water and weed cases preserve their classifications at half-second integration. Eighteen upright/inverted reserve samples fit the independent bank after full energy-exposure standby. Shared primary/recovery power failure and an empty recovery bank produce shore contact, while the short-range weed sensitivity safely aborts. That one short-range result does not establish a reduced sensing requirement. No successful admitted case records collision, clearance violation or unsupported sailing performance.
 
 ## Challenge the detection-distance allocation
 
@@ -43,6 +43,42 @@ Independent truth checks executed motion continuously for collision and required
 
 An explicit perfect-truth baseline remains available for comparison and for reproducing older experiments. Each result identifies which observation mode it used. The paired study uses the imperfect provider for every sensing hypothesis and retains observations, supervisory decisions, movement history and stopping causes.
 
+## Choosing an installed sensing stack
+
+IC-01 allocates 8 W of additional sensing and compute demand. That number is a design target for the complete pipeline: acquisition, detection, tracking, range and motion estimation, fusion and decision latency. Camera count, field of view and frame rate affect both observation coverage and power. Carrier electronics, storage, conversion, cooling and any lens cleaning or heating belong in the installation too. Measure useful observations and battery demand together under the intended workload and temperature.
+
+The [energy budget](energy.md) shows why this matters: the earlier 440 Wh reference has only about 4 Wh of headroom. Adding a sensor can require a larger battery and hull, with a different passage time. IC-01 evaluates one such coupled allocation; it does not identify equipment that meets it.
+
+### Coverage requires complementary observations
+
+AIS reports cooperating transmitters. It includes some recreational vessels carrying Class B equipment as well as mandated commercial traffic, but absence of an AIS report does not establish clear water. [USCG carriage requirements](https://www.navcen.uscg.gov/ais-requirements) and [IMO AIS operating guidance](https://www.navcen.uscg.gov/sites/default/files/pdf/ais/references/IMO_A1106_29_Revised_guidelines.pdf) describe that boundary.
+
+| Candidate sensing layer | Useful evidence | What the trade must challenge |
+| --- | --- | --- |
+| AIS | Reported identity, position and motion of equipped traffic | Non-transmitters, stale or incorrect reports, and the full extent of a tug and tow |
+| Visible cameras, with thermal as a separate option | Non-cooperative craft, people, buoys and visible debris | Glare, darkness, fog, spray, fouled lenses, wave occlusion, range ambiguity and low targets from a small boat |
+| Passive acoustics: microphones or hydrophones | Audible signals or machinery/propeller sounds that may cue another sensor | Quiet sailboats, paddlers and debris; wind, flow and own-boat noise; localization and ambiguous sources |
+| Active acoustic ranging/sonar | Returns from targets within the chosen sensor's beam and propagation domain | Above-water versus submerged coverage, near-surface clutter, range, update rate and installation constraints |
+| Radar | Independent ranging and tracking candidate for non-cooperative traffic | Small-target returns, sea clutter, near-field coverage, mounting, mass and power |
+
+Vision and acoustic sensing therefore cannot be credited with capturing everything. [River-watercraft vision experiments](https://publications.ri.cmu.edu/storage/publications/pub_files/2013/5/ARMS2013_VOO.pdf) illustrate both capability and the challenge of water reflections. [NOAA's acoustic work](https://www.fisheries.noaa.gov/new-england-mid-atlantic/science-data/marine-mammal-acoustics) explains how noise masks passive observations; applying passive sensing to Blue Dog would require vessel-specific evidence. Quiet hazards are a reason to investigate complementary sensing, not to assume acoustic detection.
+
+### Hydrophones and forward-looking sonar
+
+A hydrophone is an underwater receiver; a passive sonar system adds acquisition and processing, and potentially an array for bearing estimation. A single receiver detecting a sound does not by itself establish target range or a collision track. Active sonar transmits a pulse and measures returning echoes. [NOAA explains the active/passive distinction](https://oceanservice.noaa.gov/facts/sonar.html). For collision avoidance, evaluate a forward-looking geometry rather than assuming a downward-looking depth sounder observes the path ahead.
+
+For Blue Dog, compare a hydrophone or compact array as a powered-traffic cue, and forward-looking sonar as a candidate for submerged or partly submerged hazards. Neither has selected hardware or a credited detection range. Test quiet targets as well as powered craft, surface/bottom reflections, bubbles and wakes, and masking from water flow, actuators and recovery propulsion. Mounting depth, array aperture, wet connectors, drag and fouling belong in the installation trade. Underwater coverage does not establish coverage of obstacles entirely above water.
+
+Budget receiver preamplifiers, digitizers, continuous processing and data recording for passive sensing; add transmitter peak demand, ping duty and echo processing for active sonar. Passive means no transmitted acoustic pulse, not zero electrical demand. Measure useful range/bearing and update latency alongside average and peak battery-bus demand. Acoustic cues may direct cameras or strengthen a fused track, but any power-saving schedule must preserve the required detection lead time.
+
+### Weed detection and avoidance
+
+Active sonar can detect submerged vegetation: [BioSonics' aquatic-habitat echo sounder](https://www.biosonicsinc.com/products/mx-aquatic-habitat-echosounder/) explicitly supports mapping submerged aquatic vegetation. This supports investigating the sensing principle; it does not establish real-time avoidance performance on Blue Dog. A downward survey image obtained after passing over vegetation is different from a timely forward obstacle observation.
+
+Include dense rooted beds, sparse stems, floating mats and drifting strands as distinct cases. Measure detection distance, missed hazards, false alarms and estimated extent at the depths swept by the keel, rudder and recovery propulsor. Test bottom/surface clutter, turbid water, bubbles, boat motion and different approach angles. A reliable return from a dense bed cannot be generalized to every thin strand. Passive hydrophones do not provide a dependable warning for quiet vegetation; visible cameras may complement sonar for exposed mats.
+
+Avoidance must keep the entire underwater swept volume clear with uncertainty allowance, while respecting current, available sailing directions and turning response. The mission experiment should include weed patches and drifting vegetation as independent ground truth, compare timely avoidance with late/missed observations, and assess loss of propulsion or steering if fouling occurs. Recovery routes must also remain usable. Measure sonar power and processing latency, and check that the transducer mount, cables and any guard do not create new snag points. This remains a testable candidate capability, not credited weed protection.
+
 ## Compare sensing and energy together
 
 ```sysml-report BlueDogEncounterStudyDocuments::Energy
@@ -54,21 +90,11 @@ The power entries are hypothetical **additional bus loads**, including the propo
 
 The four-stack screening trials use the reference candidate's stored energy and baseline demand with the conceptual mission polar, not a correlated candidate maneuver model. Short-run remaining charge is not voyage feasibility. IC-01 has its own coupled resizing and local chronological replay; its static full-passage energy screen remains separate from complete charted-course execution.
 
-## Continue encounters and casualties to their consequences
+## Follow an unsuccessful attempt to its consequence
 
-The [paired continuation experiment](../evidence/runs/2026-10-15-encounter-continuation/encounter-continuation.json) compares five local encounters: equipped oncoming tow, fast non-AIS crossing craft, low-profile drifting target, weed patch and reversing craft. Two hypothetical stacks, day/night conditions and 30/1-second assessment schedules give **40 runs**, using seed 17 and a 40–60 second observation outage. The synthetic corridor, conceptual polar and candidate energy are a controlled fixture, not the charted Gorge or a correlated candidate maneuver model. The declared one-hour horizon remains a computational bound.
+An abort must lead somewhere. The simulator continues powered recovery or current-driven drift until an approach, physical contact or the declared horizon. Energy exhaustion does not stop the boat moving. Shore contact is an adverse event; reaching a water approach does not establish capture, retention or access for retrieval. Those distinctions make recovery limitations visible rather than counting a stopped simulation as a safe outcome.
 
-The 40 archived runs produce **10 complete courses, four physical terminal events and 26 unresolved horizons**. Ten attempts trigger a traffic-margin abort; continuation exposes four contacts and leaves six drifting at the horizon. Twenty other attempts remain sailing at the computational limit. A completed course is separate from its safety classification: retained clearance violations still determine the verdict. All 20 one-second cases in that configuration remain censored; the ten completions occur in the 30-second group. Its assessment period also changes the heading-search horizon, and its traces include zero-speed sailing headings, so it does not isolate update frequency. IC-01's fixed prediction horizon and explicit gate-capture policy have their own acceptance cases. Non-preemptive maneuver response remains a timing limit. These selected synthetic cases do not rank real sensors or estimate accident probability.
-
-When no safe command remains, the native supervisor latches abort and chooses available recovery or continued drift. A failed powered attempt also continues into drift. Energy can reach zero without stopping the moving vessel. Independent truth retains clearance violations and scores physical collision; it does not feed an unseen obstacle to guidance. Shore contact is an adverse terminal event, not demonstrated capture. Current-only drift omits windage, wave forcing and capsize dynamics. The point-mass maneuver and heading-search forecast still need correlation against achieved swept motion.
-
-Casualty cases include sensing loss, common-cause steering and power loss, capsize, inadequate recovery energy and adverse current. A synthetic clear-path sensing-loss case exercises reaching the water approach as a positive control. It does not establish an independent backup detector; the preceding [spiral record](simulation-spirals.md#perception-avoidance-and-recovery-in-one-experiment) retains the obstructed recovery case and its collision. The refinement pair repeats a steering-loss continuation at one- and half-second integration steps; it checks numerical consistency for that trajectory, not all encounter geometries.
-
-The four added-load hypotheses retain their **−157.15, −425.68, −264.56 and −533.09 Wh** voyage headrooms. No installed measurements have replaced them. The [measurement procedure](validation-plan.md#measure-sensing-and-shared-compute-as-an-installation) records synchronized load and latency, reconciles shared compute and screens a fixed-passage capacity lower bound. Coupled resizing remains dependent on an identified measured installation.
-
-The archive retains source hashes, assumptions, observation and command traces, complete saved trajectories, casualty outcomes and numerical refinement. `python -m tools.boat_analysis.mission.continuation_study` runs the paired comparison; `python -m tools.boat_analysis.mission.integrated --phase all` runs candidate integration. Historical configurations and their original conclusions remain in the [spiral log](simulation-spirals.md).
-
-The [real recovery-site assessment](srr-appendix.md#course-and-recovery-decision) remains unresolved. The lateral approach is explicitly synthetic; it does not approve a refuge, beaching point, public access or casualty route. R-001, R-002 and R-005 remain open.
+The [earlier paired continuation study](reference/encounter-continuation.md) exposed contacts and unresolved drift in a conceptual-vessel comparison. Its 40 runs and four added-load hypotheses belong to that configuration, not IC-01. The [development history](simulation-spirals.md) explains the changes those failures motivated. Current-only drift and point-mass recovery still need measured maneuver, windage and wave behavior before they can support a real recovery decision.
 
 ## Measurements that could change the choice
 
@@ -78,4 +104,4 @@ Measure the boat's achieved swept maneuver and time under both tacks, low wind a
 
 For recovery, establish surveyed water approaches and shore access, installed upright and inverted thrust/power, current authority, retention and retrieval arrangements. Inject loss of sensing, steering and power to establish which recovery functions remain independent. Until those measurements exist, the useful outcome is an explicit architecture gap and a testable experiment, not risk closure.
 
-**Continue:** [Power budget and sensing trade](energy.md) · [Mission simulator](mission-simulation.md) · [Validation plan](validation-plan.md)
+**Next:** [Power and energy budget for the Gorge candidate](energy.md) · [Series guide](index.md)

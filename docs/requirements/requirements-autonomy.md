@@ -1,18 +1,15 @@
 # Autonomous sailing, navigation and wind sensing
 
-**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
+[Requirements overview](../requirements.md) · [Current assessment](../current-assessment.md)
 
-Autonomy turns the mission into onboard decisions. Navigation and wind observations supply the controller; recovery behavior keeps faults from silently becoming mission failures. The [executable supervisor](../mission-simulation.md#executable-supervisory-logic) exercises part of this behavior in the mission simulation: sailing permission, event responses and latched abort/recovery. Its decision trace provides virtual evidence to inspect alongside these obligations; sensing and physical control require their own evidence.
-
-[Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
-
-Arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision, and **dependency** records a design basis. Each view retains its upstream context; statements are rendered from the model.
-
-- [Navigation and control](#navigation-and-control)
-- [Wind observation](#wind-observation)
-- [Fault recovery and mission evidence](#fault-recovery-and-mission-evidence)
+The boat must make navigation and safety decisions onboard, using observations that are timely and valid. A restart must preserve qualification status and restrictions; losing shore communications must not remove its ability to act. The [mission supervisor](../mission-simulation.md#executable-supervisory-logic) exercises these decisions in simulation. Sensor quality and achieved control response need separate evidence.
 
 ## Navigation and control
+
+Navigation estimates, guidance decisions and commands must remain coherent over time. The obligations below specify availability, cadence and command behavior so later tests can check more than whether the boat followed a plausible track.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_autonomy_3::thread direction=BT statements=true
 package Page_autonomy_3 {
@@ -84,8 +81,15 @@ package Page_autonomy_3 {
 }
 ```
 
+</details>
+
 
 ## Wind observation
+
+Wind estimates need accuracy, update cadence and a clear response to stale or missing samples. A numerically valid sensor value is not enough if its timestamp makes it unusable for control.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_autonomy_4::thread direction=BT statements=true
 package Page_autonomy_4 {
@@ -127,11 +131,18 @@ package Page_autonomy_4 {
 }
 ```
 
-[Sensor configurations and budgets](../energy.md#wind-sensing-configurations) distinguish the Bluetooth testbed sensor from the wired challenge installation.
+</details>
+
+The [sensor budget](../energy.md#wind-sensing-configurations) identifies the wired mission installation. The earlier Bluetooth testbed configuration is historical.
 
 ## Fault recovery and mission evidence
 
+Ingress, resets and interrupted logging must not silently restore permission to sail or erase the event that ended qualification. Records must preserve enough timing and state to reconstruct the attempt.
+
 ### Ingress protection and restart response
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_autonomy_5::thread direction=BT statements=true
 package Page_autonomy_5 {
@@ -215,7 +226,12 @@ package Page_autonomy_5 {
 }
 ```
 
+</details>
+
 ### Restoring mission state after reset
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_autonomy_6::thread direction=BT statements=true
 package Page_autonomy_6 {
@@ -289,7 +305,12 @@ package Page_autonomy_6 {
 }
 ```
 
+</details>
+
 ### Recording trustworthy mission evidence
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_autonomy_7::thread direction=BT statements=true
 package Page_autonomy_7 {
@@ -359,7 +380,14 @@ package Page_autonomy_7 {
 }
 ```
 
+</details>
+
 ## Onboard decisions during service outages
+
+A weather-service outage differs from an invalid forecast. The boat may continue using an applicable held forecast; it must respond when that basis no longer supports continued operation.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view SRR_Thread_autonomy::thread direction=BT statements=true
 package SRR_Thread_autonomy {
@@ -382,3 +410,7 @@ package SRR_Thread_autonomy {
     }
 }
 ```
+
+</details>
+
+**Continue:** [Candidate results](../results.md), or return to the [requirements overview](../requirements.md).

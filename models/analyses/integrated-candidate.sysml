@@ -1,6 +1,7 @@
 package BlueDogIntegratedCandidate {
     private import ScalarValues::*;
-    doc /* An allocated virtual candidate, not selected catalog equipment or measured performance.
+    doc /* Current working integration candidate. A refined IC-01-scale vessel is the intended first physical build.
+     * Allocations are not selected catalog equipment or measured performance.
      * Independent recovery includes separate power, thrust, navigation and observation paths.
      * Every capability and independence claim requires configuration-specific physical evidence. */
     part hypothesis {

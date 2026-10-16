@@ -19,9 +19,9 @@ def render(output):
     mass = json.loads((ROOT/'.tools/coupled-contract.json').read_text())
     operation = json.loads((ROOT/'.tools/coupled-operation-contract.json').read_text())
     validate(mass['sourceHashes']); validate(operation['sourceHashes'])
-    candidate = run_record(ROOT/'evidence/runs/2026-10-13-srr-frontier', 'srr-candidate-replay.json')
+    candidate = run_record(ROOT/'evidence/runs/2026-10-15-integrated-candidate', 'integrated-sizing.json')
     design = Design.from_mapping(candidate['design']).to_mapping()
-    assumptions = Parameters.from_mapping(dict(zip(mass['parameterNames'], mass['parameterValues'], strict=True)))
+    assumptions = Parameters.from_mapping(candidate['replay']['parameters'])
     text = (ROOT/'models/analyses/sizing/inputs.sysml').read_text()
     materials = re.search(r'out attribute materialValues.*?= \((.*?)\);', text, re.S)[1]
     material_names = re.findall(r'material\.(\w+)', materials)
@@ -39,7 +39,7 @@ def render(output):
                                 ('materials', material_names, mass['materialValues'])]:
         fields.extend(dict(name=n, kind=kind, value=v) for n,v in zip(names, values, strict=True))
     record = dict(version=1, revision=subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip(),
-                  baseline='2026-10-13-srr-frontier / retained 1.2 m seed; refined energy shortfall unresolved',
+                  baseline='2026-10-15-integrated-candidate / IC-01; illustrative wing geometry, rig selection open',
                   fields=fields, wingSection=dict(u=u.tolist(), mean=mean.tolist(), half=half.tolist()),
                   solverInputs={k:v for k,v in operation.items() if not k.endswith('Hash') and k!='sourceHashes'},
                   sourceHashes={**mass['sourceHashes'], **operation['sourceHashes']})

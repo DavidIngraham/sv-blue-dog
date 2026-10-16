@@ -1,8 +1,8 @@
-# Design evidence and open questions
+# Course, recovery sites and environmental evidence
 
-**OOSEM:** Requirements, analysis and evidence · [Maturity assessment](development-plan.md)
+**OOSEM:** Requirements, analysis and evidence · [Maturity assessment](current-assessment.md)
 
-This appendix connects the desktop assessments to the candidate design and the evidence still needed. Requirement statements remain in the model and its generated views.
+This reference records where the boat would sail and recover, the environmental allocations used in design, and the evidence still needed at actual sites. Candidate performance is summarized in the [results](results.md); these site and exposure assumptions must be checked for the built configuration.
 
 ## Model and implementation sources
 
@@ -18,13 +18,13 @@ This appendix connects the desktop assessments to the candidate design and the e
 
 The [NOAA-hosted gap-flow study](https://repository.library.noaa.gov/view/noaa/28157/noaa_28157_DS1.pdf) supports persistent, spatially varying winter easterlies. Its profiler jet observations must not be substituted for a 10 m surface limit on this course. The archived airport observations likewise need exposure and height interpretation.
 
-The native fetch sensitivity evaluates coupled wind and effective-fetch hypotheses. It does not measure directional fetch, shallow-water transformation, current gradients or traffic wakes. The proposed wave margin is an provisional engineering allocation. A single numerical envelope cannot replace forecast-conditioned trajectory assessment.
+The native fetch sensitivity evaluates coupled wind and effective-fetch hypotheses. It does not measure directional fetch, shallow-water transformation, current gradients or traffic wakes. The proposed wave margin is a provisional engineering allocation. A single numerical envelope cannot replace forecast-conditioned trajectory assessment.
 
 ## Course and recovery decision
 
-Both legs cross the **closed Hood River lift span**, ENC feature `0226241BDFAB1596`. The chart gives 20.4 m vertical and 74.9 m horizontal clearance. The [Port's published clearance](https://www.portofhoodriver.com/bridge-lift-request) independently identifies this span and notes that clearance changes with pool level. We do not apply its clearance to adjacent spans. The reference route excludes unassessed bridge footprints and applies a 10 m pier allowance. Bridge of the Gods is west of the buoy-16 turnaround and is not a required transit.
+Both legs cross the **closed Hood River lift span**, ENC feature `0226241BDFAB1596`. The chart gives 20.4 m vertical and 74.9 m horizontal clearance. The [Port's published clearance](https://www.portofhoodriver.com/bridge-lift-request) independently identifies this span and notes that clearance changes with pool level. I do not apply its clearance to adjacent spans. The reference route excludes unassessed bridge footprints and applies a 10 m pier allowance. Bridge of the Gods is west of the buoy-16 turnaround and is not a required transit.
 
-Before a water trial, the measured maximum air draft plus wave motion, pool rise relative to the clearance datum and the model's 2 m vertical uncertainty allowance must remain below the available clearance. No bridge opening is assumed. A commercial vessel's constrained passage has priority in our planning: wait outside its conflict region or abort rather than forcing an encounter in the span.
+Before a water trial, the measured maximum air draft plus wave motion, pool rise relative to the clearance datum and the model's 2 m vertical uncertainty allowance must remain below the available clearance. No bridge opening is assumed. A commercial vessel's constrained passage has priority in my planning: wait outside its conflict region or abort rather than forcing an encounter in the span.
 
 ```sysml-report BlueDogSRRReadinessDocuments::SiteDecision
 ```
@@ -51,36 +51,25 @@ Recovery stress cases use 25 m/s mean wind, 35 m/s gusts, Hs 2 m, periods 1.5–
 
 The [analysis](../models/analyses/encounter-review.sysml) defines six target classes: full commercial tow, fishing/drifting craft, ski/powerboat including a towed person, sailing craft, passenger vessel, and a person or low-profile paddle craft. Exercise head-on, crossing, overtaking, anchored/drifting, changing-course, occluded emergence, bridge and casualty cases in both daylight and darkness. AIS is supplementary; it cannot substitute for the non-AIS cases.
 
-The range budget includes closing speed, acquisition, assessment, command, maneuver, contingency, relative-position uncertainty and separation measured from the target's physical extent. The worst allocated case needs 724 m; 750 m is the proposed common envelope. Qualification observes the actual target, track continuity, one-second assessment, two-second command and 15-second maneuver. It separately checks swept-hull collision, the class-specific project separation and whether Blue Dog impedes a confined vessel. Passing a distance screen alone does not establish navigation-rule compliance.
+The baseline range budget includes closing speed, acquisition, assessment, command, maneuver, contingency, relative-position uncertainty and separation measured from the target's physical extent. Its worst allocated case needs 724 m; 750 m is the proposed common envelope before additional observation-delivery delays. The [encounter study](encounter-feasibility.md) shows how delayed observations change that distance and distinguishes the later IC-01 allocation. The verification plan calls for observing the actual target, track continuity, one-second assessment, two-second command and 15-second maneuver. New hazards during occupied maneuvers need a separate deadline check; the static timing screen does not establish that behavior. It separately checks swept-hull collision, the class-specific project separation and whether Blue Dog impedes a confined vessel. Passing a distance screen alone does not establish navigation-rule compliance.
 
-The [encounter method](encounter-feasibility.md) exercises imperfect tracks, explicit command delay and 30-second/one-second schedules, alongside a perfect-truth baseline for coarse route-exposure studies. These conceptual simulations **do not verify** installed sensing or achieved maneuver response. Feasibility needs sensor replay and maneuver evidence before the allocation is considered feasible; a failed demonstration requires redesign or an explicitly changed operating envelope.
+Earlier experiments in the [encounter method](encounter-feasibility.md) exercise imperfect tracks, explicit command delay and 30-second/one-second schedules, alongside a perfect-truth baseline for coarse route-exposure studies. The later IC-01 campaign uses its own candidate performance and fixed guidance horizon. These conceptual simulations **do not verify** installed sensing or achieved maneuver response. Feasibility needs sensor replay and maneuver evidence before the allocation is considered feasible; a failed demonstration requires redesign or an explicitly changed operating envelope.
 
 ## Impaired-sensing recovery decision
 
-Retain the agreed architecture: terminate qualification, alert when possible and begin conspicuous autonomous shore recovery without waiting for the operator. Do not assume an independent backup detector exists.
+Loss of the required primary safety capability terminates qualification. The boat alerts when possible and attempts conspicuous autonomous shore recovery without waiting for the operator. IC-01 allocates an independently powered observation and control path for that recovery, but its installed performance and independence remain to be demonstrated. Older impaired-sensing studies without that allocation cannot borrow it. If the recovery path is unavailable, the simulation continues the drift and scores its consequences.
 
 The [native sensitivity analysis](../models/analyses/recovery-risk.sysml) evaluates loss-of-sensing exposure over passage duration and conflicting-traffic exposure during recovery. A deliberately pessimistic screen treats every conflicting encounter as contact. The assumed rates are varied rather than presented as measured reliability. Shortening recovery reduces exposure, but the calculation does not justify calling the risk negligible.
 
 Fog, waves, power faults and common-cause loss of navigation can correlate failures with traffic exposure or defeat recovery entirely. Assess these as explicit cases, not independent probability multipliers. Injury, entanglement and commercial-vessel impediment matter alongside contact probability. The resulting decision is **proceed with analysis and supervised experiments; no unattended release on this risk argument**. Unattended operation requires measured failure/traffic inputs and casualty demonstrations, with owner acceptance of the residual risk. Failure to support acceptance requires exposure restrictions or additional independent protection.
 
-## Current baseline evidence
+## Configuration-specific desktop records
 
-[Candidate desktop assessment and refined replay](../evidence/runs/2026-10-13-srr-readiness/srr-readiness.json) · [Fixed-seed mission campaign](../evidence/runs/2026-10-13-srr-readiness/srr-mission-campaign.json)
+The [13 October desktop assessment](../evidence/runs/2026-10-13-srr-readiness/srr-readiness.json) records a 65.989 km reference circuit, chart-clear gates and both legs through the selected bridge span. Its boat is the earlier 1.2 m, 260 mm beam, 10.313 kg sizing reference with a 440 Wh battery. Its 3.974 Wh nominal energy headroom and failed all-season easterly-progress screen belong to that configuration.
 
-The route audit finds a 65.989 km reference circuit, chart-clear gates and both legs through the selected bridge span.
+The associated [32-run conceptual mission campaign](../evidence/runs/2026-10-13-srr-readiness/srr-mission-campaign.json) records 18 completions, 13 incomplete runs and one computational-horizon stop. It uses a separately identified conceptual vessel, not a performance replay of the 440 Wh sizing reference. Those counts differ from earlier campaigns because the course and scenario records differ; they are not estimates of measured completion probability.
 
-```sysml-report BlueDogSRRCurrentDocuments::Summary
-```
-
-The candidate has a 440 Wh battery, a 260 mm hull beam and a 1.2 m overall length. Total mass is 10.313 kg. Battery capacity and hull geometry are coupled through mass, reserve buoyancy and installation space.
-
-The refined operating states balance and predict a 33.869 h conditional westerly passage. The existing 25% passage allowance plus six hours gives a 48.336 h energy basis. Available departure energy is 316.800 Wh against 312.826 Wh required, leaving **3.974 Wh positive headroom**. The nominal Gorge structural, packaging, operating and sampled static recovery screens pass at the existing numerical tolerance. These calculations do not qualify hardware or demonstrate adverse-weather robustness. The all-season easterly-progress screen still fails and remains outside the selected-window Gorge profile.
-
-The impaired-sensing sensitivity spans approximately 0.012% to 12.6% under its explicitly assumed loss rates and recovery durations. This wide range supports collecting rate/exposure evidence; it does not support a claim that the residual risk is negligible.
-
-The 32 fixed-seed conceptual mission scenarios produce 18 simulated completions, 13 incomplete runs and 1 censored run. Incomplete cases stop when the coarse controller finds no safe action; the censored case reaches the computational horizon. These are conditional scenario counts, not a measured completion probability.
-
-The candidate evidence is a local refined replay, not a frontier search. Acceptance uses balanced operating cases; the coarse operating-state seed is diagnostic. Battery capacity and beam remain free in subsequent optimization. Mission logic uses a separately identified conceptual vessel and cannot qualify the optimized design.
+The [15 October IC-01 integration record](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json) instead uses candidate-specific performance, energy and independent recovery allocations in bounded local cases. It records ten completed courses, eight safe aborted encounter approaches and six casualty/end-of-exposure recovery approaches. These synthetic approaches do not qualify the real sites listed above. The [current assessment](current-assessment.md#integration-milestone) explains the resulting integration claim.
 
 <a id="review-actions"></a>
 ## Evidence and next investigations
@@ -96,19 +85,18 @@ The candidate evidence is a local refined replay, not a frontier search. Accepta
 | Design alternatives | Bounded search and candidate replay | Feasible alternatives with comparable mission evidence |
 | Critical physics | Wing, structure, actuation and casualty models | Physical correlation and established applicability |
 
-I use these gaps to choose experiments and refine the architecture. The [maturity assessment](development-plan.md) places their evidence in the context of the whole project.
+I use these gaps to choose experiments and refine the architecture. The [maturity assessment](current-assessment.md) places their evidence in the context of the whole project.
 
-## Reproducing checks
+<details>
+<summary>Reproducing the archived desktop and conceptual campaign checks</summary>
 
-Use the repository's uv-managed environment and pinned native SysML tool. The model validation, pytest suite and publishing workflow are described in [publishing](publishing.md). Native numerical adapters run in the Linux solver environment with GCC.
-
-Regression checks cover implementation consistency. The candidate acceptance check separately verifies positive energy, balanced operating cases, passing refined Gorge screens and unchanged qualification status.
-
-The recovery fixtures deliberately use synthetic locations and loads. They check current compensation, increasing reserve with exposure, unavailable recovery authority, explicit capsized performance, autonomous recovery without communications, persistent disqualification and independently observed collision consequences. They do not qualify a real shore location.
-
-The [fixed-seed mission campaign](../evidence/runs/2026-10-13-srr-readiness/manifest.json) exercises the current course, mission policy and seeded weather/traffic workflow using the conceptual vessel. It is not a mission-performance replay of the optimized 1.2 m candidate. The independently tested casualty routes remain synthetic pending real recovery-site assessment.
+The [publishing and validation instructions](reference/authoring.md) describe the pinned native SysML environment. The commands below reproduce the earlier 440 Wh assessment and conceptual campaign; they do not execute IC-01’s integration campaign.
 
 ```sh
 uv run python -m tools.boat_analysis.evidence.srr --budget 10 --battery-wh 440 --beam-m 0.26
 uv run python -m tools.boat_analysis.mission.campaign --count 32 --output build/analysis/srr-mission-campaign.json
 ```
+
+Recovery fixtures use synthetic sites and loads to check current compensation, exposure-dependent reserve, unavailable authority, capsized performance and continuing consequences. Field surveys and casualty demonstrations must establish transfer to actual shore approaches.
+
+</details>

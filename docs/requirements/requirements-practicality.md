@@ -1,21 +1,15 @@
 # Manufacturing, handling and serviceability
 
-**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
+[Requirements overview](../requirements.md) · [Current assessment](../current-assessment.md)
 
-One-person handling and a 250 mm cubic printer are owner-imposed project constraints. They shape the build and maintenance approach alongside the mission goals.
-
-[Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
-
-Arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision, and **dependency** records a design basis. Each view retains its upstream context; statements are rendered from the model.
-
-- [Construction](#construction)
-- [Construction qualification](#construction-qualification)
-- [Transport and handling](#transport-and-handling)
-- [Serviceability](#serviceability)
+I want to manufacture, transport, assemble, launch and retrieve the boat myself. Printed parts must fit my 250 × 250 × 250 mm printer; assembled structures may be larger. Those owner constraints shape the construction and handling of the intended IC-01-scale first build.
 
 ## Construction
 
 The owner-selected printer envelope and construction process are design constraints. The sizing study assumes 230 mm tiles for seams and mass. Actual tiles may be larger when their complete print job, including supports and clearance, fits the owner-selected 250 mm cube.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_practicality_construction::thread direction=BT statements=true
 package Page_practicality_construction {
@@ -34,9 +28,14 @@ package Page_practicality_construction {
 }
 ```
 
+</details>
+
 ## Construction qualification
 
 Load, deflection, wet laminate coupon and glass-to-print bond criteria establish whether the chosen process can carry the modeled loads. These requirements derive from structural integrity; selecting the construction process does not demonstrate compliance. Material strength and stiffness are qualified inputs, not fixed minimum targets. Functional deformation limits require evidence; the preliminary sizing percentages do not close these requirements. See [requirements versus design assumptions](../methods/modeling.md#requirements-versus-design-assumptions).
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_practicality_materials::thread direction=BT statements=true
 package Page_practicality_materials {
@@ -82,11 +81,18 @@ package Page_practicality_materials {
 }
 ```
 
+</details>
+
 [Structural load and deflection requirements](../structures-and-recovery.md)
 
 <a id="transport-and-manufacture"></a>
 
 ## Transport and handling
+
+Assess the assembled mass, component breakdown and handling aids together. One-person operation must work at the actual launch and retrieval sites, not only in the workshop.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_practicality_23::thread direction=BT statements=true
 package Page_practicality_23 {
@@ -112,8 +118,15 @@ package Page_practicality_23 {
 }
 ```
 
+</details>
+
 
 ## Serviceability
+
+Inspection, repair and replacement need accessible interfaces. Those practical tasks belong in the design before the sealed installation is built.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_practicality_24::thread direction=BT statements=true
 package Page_practicality_24 {
@@ -134,3 +147,7 @@ package Page_practicality_24 {
     }
 }
 ```
+
+</details>
+
+**Continue:** [Candidate results](../results.md), or return to the [requirements overview](../requirements.md).

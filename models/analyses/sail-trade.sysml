@@ -32,7 +32,7 @@ package BlueDogSailTrade {
         attribute :>> recovery = "Include main wing, tail, boom, tab, actuator and any counterweight as separate mass/volume bodies. Check free, jammed and failed trim states plus sealed, flooded and draining states.";
         attribute :>> manufacturing = "Compatible in principle with printed ribs and glass skins; extra bearings, waterproof actuation, alignment and tail clearance need design.";
         attribute :>> nextEvidence = "Low-speed trim bench; unpowered and jammed-tab gust tests; wet-cycle endurance; actual rig mass/CG and compartment geometry.";
-        metadata rationale : ModelingMetadata::Rationale { text = "Co-leading development choice based on passive trim and removing cloth/line wear mechanisms, not demonstrated Blue Dog reliability. Primary-source notes and limitations are linked through BlueDogSourceEvidence."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Equal development contender for the finite Gorge mission; passive trim and cloth/line wear are trade criteria, not demonstrated reliability advantages. Primary-source notes and limitations are linked through BlueDogSourceEvidence."; }
     }
     part camberedWing : Candidate {
         attribute :>> label = "Fixed-camber rotating-mast wing";
@@ -54,11 +54,11 @@ package BlueDogSailTrade {
         attribute :>> concept = "Triangular woven-polyester sail on mast and boom with sheet control. Reefing/furling is a design option requiring explicit mechanism, mass and fault analysis; battens and reinforcement are not excluded.";
         attribute :>> durability = "Flogging, flutter, chafe, UV/stitching degradation and sheet wear create unattended-maintenance concerns. Durable cloth, battens and anti-chafe design can mitigate them; no lifetime failure is established.";
         attribute :>> energy = "Sheet/winch energy and holding strategy must be measured; self-locking or balanced arrangements may have low static draw. Do not assume a continuously powered servo.";
-        attribute :>> sailing = "Both-tack sailing is conventional in principle; actual reefed and unreefed low-Re polars are needed. Useful benchmark for mass and performance.";
+        attribute :>> sailing = "Both-tack sailing is conventional in principle; actual reefed and unreefed low-Re polars are needed. Compare mass and performance on the same finite-mission basis as both rigid wings.";
         attribute :>> recovery = "Lower membrane mass and negligible sealed cloth volume can help, but model mast/boom buoyancy, immersion drag, trapped water and sheet snagging separately.";
         attribute :>> manufacturing = "Simple sailmaking and repair, low rig-mass potential; requires sailcloth and rigging rather than printing every component. Hull FDM/glass requirement does not prohibit a soft sail.";
         attribute :>> nextEvidence = "Unattended flogging/chafe/UV exposure and sheet fault tests over declared mission hours; autonomous depower and recovery demonstration.";
-        metadata rationale : ModelingMetadata::Rationale { text = "Deprioritized for the long unattended objective by engineering judgment, not rejected against a measured requirement. Still credible for a shorter Gorge test or performance benchmark."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Equal development contender for the finite Gorge mission. Compare measured wear, handling, energy, mass and recovery against both rigid wings over the declared exposure; future ocean endurance does not select this rig."; }
     }
     analysis def TradeAssessment {
         subject candidate : Candidate;
@@ -71,8 +71,7 @@ package BlueDogSailTrade {
         // Explicit development policy, not an inferred failure probability or weighted score.
         return developmentDecision : String = if knownFailure ? "Resolve verified failure before selection" else
             if qualified ? "Eligible for selection; compare validated margins" else
-            if not candidate.membraneSail ? "Co-leading development candidate" else
-            "Deprioritize for long unattended service; retain prototype benchmark";
+            "Equal development contender for the finite Gorge mission";
         objective assess { require constraint { gateCount == 7 } }
     }
     analysis tailAssessment : TradeAssessment { subject :>> candidate = tailWing; }

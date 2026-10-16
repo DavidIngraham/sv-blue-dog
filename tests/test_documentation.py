@@ -31,15 +31,30 @@ def test_generated_index_links_every_focused_requirement_page():
     assert len(pages) == 6
 
 
-def test_legacy_requirement_links_reach_topic_sections(rendered_site):
-    import json
-    redirects = json.loads((ROOT / 'tools/publishing/redirects.json').read_text())
-    legacy = {old: new for old, new in redirects.items() if old.startswith('requirements/')}
-    assert len(legacy) == 50
-    for old, new in legacy.items():
-        destination = urlsplit(new)
-        assert destination.fragment
-        html = (rendered_site / Path(destination.path).with_suffix('.html')).read_text()
-        assert f'id="{destination.fragment}"' in html
-        redirect = (rendered_site / Path(old).with_suffix('.html')).read_text()
-        assert '#' + destination.fragment in redirect
+def test_rendered_internal_links_and_fragments_resolve(rendered_site):
+    from html.parser import HTMLParser
+
+    class Links(HTMLParser):
+        def __init__(self, text):
+            super().__init__()
+            self.links, self.ids = [], set()
+            self.feed(text)
+
+        def handle_starttag(self, tag, attrs):
+            attrs = dict(attrs)
+            if 'id' in attrs:
+                self.ids.add(attrs['id'])
+            if tag == 'a' and 'href' in attrs:
+                self.links.append(attrs['href'])
+
+    pages = {p.resolve(): Links(p.read_text()) for p in rendered_site.rglob('*.html')}
+    missing = []
+    for page, parsed in pages.items():
+        for link in parsed.links:
+            url = urlsplit(link)
+            if url.scheme or url.netloc:
+                continue
+            target = (page.parent / unquote(url.path)).resolve() if url.path else page
+            if target not in pages or (url.fragment and unquote(url.fragment) not in pages[target].ids):
+                missing.append(f'{page.relative_to(rendered_site)} -> {link}')
+    assert not missing, '\n'.join(missing)

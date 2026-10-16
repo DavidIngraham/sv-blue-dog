@@ -10,7 +10,8 @@ def diagram_nodes(body):
     """Map native node IDs to model identities, including compact-label exports."""
     saved = dict(re.findall(r'^%% source-node (n\d+) ([\w:]+)$', body, re.M))
     packages = dict(re.findall(r'(n\d+)\["`\*«package»\*\s*\*\*([\w:]+)\*\*`"\]', body))
-    return packages | (saved or dict(re.findall(r'(n\d+)\("`.*?\*\*([\w:]+) :', body, re.S)))
+    native = dict(re.findall(r'(n\d+)\("`[^`]*?\*\*([\w:]+) :', body, re.S))
+    return packages | native | saved
 
 
 def basis_links(report):
@@ -19,8 +20,8 @@ def basis_links(report):
             re.findall(r'^\| ([\w:]+) \| ([\w:]+) \|', section, re.M)]
 
 
-def include_basis(diagram, links):
-    labels = dict((name, rid) for rid, name in
+def include_basis(diagram, links, labels=None):
+    labels = (labels or {}) | dict((name, rid) for rid, name in
                   re.findall(r'^\*\*([A-Z]-\d+) (\w+)\*\*', diagram, re.M))
     def update(match):
         body = match[1]

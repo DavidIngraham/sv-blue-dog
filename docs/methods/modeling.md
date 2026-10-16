@@ -1,10 +1,10 @@
 # Reading the design through the model
 
-**OOSEM:** Methods · [Maturity assessment](../development-plan.md)
+**OOSEM:** Methods · [Maturity assessment](../current-assessment.md)
 
-I want to be able to follow a design decision back to the mission that caused it. This is how I use SysML to keep requirements, rationale, architecture and verification connected in the [engineering record](../development-plan.md#engineering-record). It starts with mission intent and ends with links that make later design decisions and test results easier to interpret.
+I want to be able to follow a design decision back to the mission that caused it. This is how I use SysML to keep requirements, rationale, architecture and verification connected in the [current assessment](../current-assessment.md). It starts with mission intent and ends with links that make later design decisions and test results easier to interpret.
 
-We begin with the challenge and the eventual ocean mission, then make the vehicle's obligations precise enough to evaluate. A requirement statement states the obligation; its conditions identify the qualification context. Rationale explains why an obligation or design choice exists without becoming another acceptance criterion.
+I begin with the finite Gorge challenge, then make the vehicle’s obligations precise enough to evaluate. The eventual ocean mission has separate applicability. A requirement statement states the obligation; its conditions identify the qualification context. Rationale explains why an obligation or design choice exists without becoming another acceptance criterion.
 
 For example, the vehicle's ordered gate crossings refine the challenge's course-completion obligation. The statement and relationship below are read from the model at publication time.
 
@@ -35,12 +35,12 @@ Read the normative conditions and supporting metadata in the [vehicle requiremen
 
 A challenge obligation motivates a function; it does not uniquely determine a material modulus, laminate thickness or sensor accuracy. I keep explicit owner constraints, functional acceptance, provisional performance allocations and selected strategies distinct with [requirement-basis metadata](../../models/vehicle/requirement-basis.sysml). A dependency records a selected design basis; a derivation identifies an obligation needed to meet its parent.
 
-The material and geometric constants used in preliminary sizing live in the [structural analysis basis](../../models/analyses/structural-basis.sysml). They let us explore a candidate before measurements exist. Qualification instead checks supported material bounds and applicable load, functional and site limits. Missing evidence cannot produce a passing executable requirement. Lower measured stiffness or strength means revisiting the geometry or reinforcement, not rejecting a material for missing an assumed property.
+The material and geometric constants used in preliminary sizing live in the [structural analysis basis](../../models/analyses/structural-basis.sysml). They let me explore a candidate before measurements exist. Qualification instead checks supported material bounds and applicable load, functional and site limits. Missing evidence cannot produce a passing executable requirement. Lower measured stiffness or strength means revisiting the geometry or reinforcement, not rejecting a material for missing an assumed property.
 
 ```sysml-report BlueDogRequirementBasisDocuments::Summary
 ```
 
-The numerical screening inputs have not changed in this clarification. Archived runs retain their original revision and claims; their passing screens are not converted into evidence that the current acceptance requirements have been verified. The next sizing refinement should vary the provisional inputs and replace them with evidence-backed values.
+Archived runs retain their original inputs and claims. A passing numerical screen supports a candidate under those assumptions; measured stiffness, strength and operating loads are needed to establish physical compliance.
 
 ## Following executable decisions
 
@@ -50,50 +50,21 @@ For example, a loss of communications can coexist with continued autonomous sail
 
 The [development spirals](../simulation-spirals.md) place this behavior alongside the growth in vessel and environmental fidelity.
 
-## Running the calculations
+## Running and reading the model
 
-I use a pinned development revision of OpenSysML for the model engine, Python client and agent MCP server. Native analysis calls return typed values. The simulator executes the model's supervisory actions during the voyage and its outcome calculation when classifying the result. The numerical optimizer remains in SciPy, while the equations and acceptance criteria stay in SysML.
+OpenSysML parses and executes the model, supplies document queries and renders
+the diagrams in these articles. Python coordinates geometry, external evidence
+and the numerical search. The equations and acceptance criteria stay in SysML.
 
-The same native engine supplies document queries and renders the scoped views in these articles. The publishing code handles narrative pages, navigation, interactive plots and the existing blog import. The numerical batch adapter remains useful for repeated compiled evaluations; it is a specialized bridge, rather than a second modeling framework.
+That separation lets me ask the same engineering question from a script, a
+modeling tool or an agent. The result still depends on the declared inputs and
+on whether the model represents the behavior that matters. A successful software
+check establishes implementation consistency; physical evidence establishes
+whether the boat behaves as predicted.
 
-For repeatable model analyses, I can save a standalone model snapshot with OpenSysML's native `AnalysisRecords`. Each record identifies its case, execution time, tool and outputs. The source models remain unchanged. For example:
-
-```sh
-uv run python -m tools.boat_analysis.cli record \
-  --case BlueDogEnvironmentReview::FetchSensitivity \
-  --case BlueDogEncounterReview::Acquisition \
-  --output build/analysis/review.sysml
-```
-
-The saved model can be reopened with the same engine and queried through its Python client or MCP server. These records supplement the immutable archives for external simulations and optimizer campaigns; a recorded execution does not imply that a vessel requirement has been physically verified.
-
-SysML owns the equations. Python assembles geometry, chooses operating cases and coordinates the optimizer. All native calculations use the reusable library’s [execution backend](../../packages/sysml-python/sysml_python/backends/native.py). Mass, operating performance, structural margins, passage feasibility, route screening, surface/wave helpers, recovery segments, hull resistance and hydrostatics have declarative exports. Preparation reads argument order, Real types, dimensions and named output tuples from OpenSysML's API element export. Application wiring supplies friendly argument aliases and selects model-exported defaults; the generated interface supplies vector widths and output labels.
-
-Mass, operating performance, structural margins, passage feasibility and route screening use declarative exports in [pyproject.toml](../../pyproject.toml). The [reusable SysML/Python library](../../packages/sysml-python/README.md) discovers their vector dimensions, delegates input-record generation to OpenSysML, evaluates model-owned defaults and compiles declared input checks. It still generates calculation-result wrappers for named return tuples. Surface and wave providers assemble external geometry and quadrature around generated calculations; the shared backend compiles those calculations. Named model results can be copied to arrays for NumPy operations. Geometry and interpreter reference experiments remain project-owned in the [reference preparation](../../tools/boat_analysis/model/preparation.py). Hydrostatic meshes use the same explicit batch API; the project sums the returned tetrahedron moments. Generated code and manifests remain build artifacts; fingerprints cover model and runtime sources.
-
-OpenSysML generates frozen, slotted dataclass snapshots from `MarineDesign` for operating state, aerodynamic coefficients, hydrostatic inputs, appendage loads, mass properties and passage conditions, alongside `Design` and `Parameters`. These input records expose named fields and `to_mapping()`; NumPy conversion uses `as_array(record)` and `from_array(RecordType, values)` from `sysml_python.records`. The model declares the numerical field order; the boundary packs by field name, including for batches. Mass dictionaries are also packed by name, so insertion order cannot alter the physics. The surface-wind provider uses the same packing contract. Optimizer coordinates, mesh geometry and low-level numerical arrays remain arrays; these records describe quantities exchanged between domain calculations.
-
-Scalar and batch calls share shape, finite-value, default and typed-record handling. Physical mass and operating preconditions are explicit SysML `InputChecks` calculations; the boundary executes them before evaluating the requested calculation. The pinned C generator omits assertions inside calculations, so these checks are compiled and called explicitly. A failed input group produces its model-defined name and, for per-case inputs, its batch index. These numerical preconditions are separate from vessel qualification requirements.
-
-Meson builds all exported calculations and input checks together as separate shared libraries, selecting the host compiler, linker and library filenames. The runtime caches immutable build snapshots using the generated sources, wrappers, Meson recipe, compiler identity and flags. Calls sharing a loaded library use the same lock because OpenSysML's generated evaluator owns mutable execution state. Results are copied before that state can be reused. Hydrostatics uses the generated batch calculations with project-owned mesh reduction.
-
-Independent cases can run in a native batch. Shared inputs and per-case inputs are explicit; there is no implicit broadcasting:
-
-```python
-result = operation.batch(
-    shared={"design": design, "parameters": parameters,
-            "aero": aero, "mass": mass, "hydro": hydro},
-    cases={"state": states},  # (number of cases, 9)
-    chunk_size=256,
-)
-# result.values columns follow the fields of generated OperationResult.
-```
-
-The C wrapper calls the same generated calculation for each row and copies its output immediately. It processes bounded chunks, preserves case order and reports the original case index on failure. With `errors="collect"`, native failures produce an error message and a NaN row; those rows must never count as feasible results. Malformed inputs and adapter precondition failures reject the batch before execution. A shared vector has shape `(width,)`; a per-case vector has shape `(cases, width)`. Scalar inputs use a scalar or a `(cases,)` array respectively.
-
-Wing-strip load integration uses this path. Independent operating-condition sweeps can use it too. A nonlinear solver's next trial still depends on the previous result, and a mission trajectory still advances chronologically; batching does not remove those dependencies. Parallel studies can use separate worker processes, each with its own native state. The runtime itself does not create workers. Solves and mission operations use an execution session: model and generated-source fingerprints are checked before the first calculation and before the operation returns. Nested calculations share the snapshot, while numerical input checks still run on each call. Source edits invalidate the operation at exit. This avoids checking every source file for every wind strip or recovery segment.
-
-Adding a supported calculation to the declarative library requires its SysML definition and an export declaration. It does not require a handwritten adapter or preparation function. The contract reader supports Real scalars, fixed vectors, and unbounded vectors whose size comes from a model-exported default. Unsupported schemas fail preparation. Physical preconditions are explicitly connected to their calculation; the generator does not infer engineering meaning. Hydrostatics uses the shared native batch loop, with mesh assembly and reduction in project geometry code. Resistance-domain screening is a project-owned policy over generated, named model results; it contains no compiler or ABI setup.
+The [contributor guide](../reference/authoring.md) explains how to reproduce the
+site. The [runtime reference](../reference/model-runtime.md) covers calculation
+records, generated interfaces and numerical execution.
 
 ## Native OOSEM roles
 
@@ -101,4 +72,4 @@ The architecture uses the pinned [OpenSysML OOSEM library](https://github.com/Da
 
 When developing a function, connect its use case to a logical scenario, allocate its actions to responsibilities, then refine the physical realization and its verification evidence. Typed items describe information crossing action boundaries. Model links identify intended scope; they do not claim that a simulation already implements every linked behavior.
 
-Requirements packages carry OOSEM roles. Individual requirements retain their existing derivation, refinement and owner-constraint semantics. We do not apply a blanket requirement-level classification: the pinned library's direct parent-level derivation checks do not express every same-level decomposition or independent owner constraint in this project. Adding an artificial derivation to silence a method warning would weaken traceability.
+Requirements packages carry OOSEM roles. Individual requirements retain their existing derivation, refinement and owner-constraint semantics. I do not apply a blanket requirement-level classification: the pinned library's direct parent-level derivation checks do not express every same-level decomposition or independent owner constraint in this project. Adding an artificial derivation to silence a method warning would weaken traceability.

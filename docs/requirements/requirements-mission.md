@@ -1,20 +1,15 @@
 # Mission, course completion and endurance
 
-**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
+[Requirements overview](../requirements.md) · [Current assessment](../current-assessment.md)
 
-One Gorge round trip is the current design mission. These threads connect that finite challenge to course performance and reliability. Hawaii and repeated operation have separate future constraints.
-
-The [ocean envelope](requirements-environment.md#future-hawaii-mission-ocean-conditions) and [repeating-energy objective](requirements-energy.md#sustained-energy-feasibility) are retained as future work. They do not set acceptance criteria for the current Gorge vessel.
-
-[Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
-
-Arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision, and **dependency** records a design basis. Each view retains its upstream context; statements are rendered from the model.
-
-- [Mission and challenge rules](#mission-and-challenge-rules)
-- [Endurance and cruise performance](#endurance-and-cruise-performance)
-- [Mission reliability](#mission-reliability)
+The job is a finite, unassisted round trip from Bingen around Buoy 16 near Stevenson and back under sail. Course completion depends on progress over the ground, allowed launch conditions and preserved qualification throughout the attempt. These requirements define success before I choose a hull, rig or battery.
 
 ## Mission and challenge rules
+
+The course, length limit, propulsion and independence rules define the attempt. A convenient implementation cannot redefine those conditions.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_mission_0::thread direction=BT statements=true
 package Page_mission_0 {
@@ -76,8 +71,15 @@ package Page_mission_0 {
 }
 ```
 
+</details>
+
 
 ## Endurance and cruise performance
+
+The finite passage needs enough energy for its duration and delays, with protected recovery reserve. There is no fixed 72-hour deadline, daily energy-neutrality requirement or sailing-speed floor for this mission.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_mission_1::thread direction=BT statements=true
 package Page_mission_1 {
@@ -133,8 +135,15 @@ package Page_mission_1 {
 }
 ```
 
+</details>
+
 
 ## Mission reliability
+
+The reliability target is a design objective to investigate through exposure and failure mechanisms. Synthetic completion fractions do not establish its real-world value.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_mission_2::thread direction=BT statements=true
 package Page_mission_2 {
@@ -164,7 +173,14 @@ package Page_mission_2 {
 }
 ```
 
+</details>
+
 ## Qualification and launch admission
+
+Launch admission must consider the forecast and the boat’s supported capability. Safe waiting can preserve qualification; refuge, grounding, anchoring, intervention or recovery propulsion ends it.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view SRR_Thread_mission::thread direction=BT statements=true
 package SRR_Thread_mission {
@@ -187,3 +203,7 @@ package SRR_Thread_mission {
     }
 }
 ```
+
+</details>
+
+**Continue:** [Candidate results](../results.md), or return to the [requirements overview](../requirements.md).

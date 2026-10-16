@@ -14,6 +14,7 @@ class ViewBlock:
     direction: str = "BT"
     report: bool = False
     statements: bool = False
+    statement_names: tuple[str, ...] | None = None
 
     @classmethod
     def parse(cls, info, source):
@@ -38,7 +39,7 @@ class ViewBlock:
 
     def document(self, index):
         """Wrap native views in a native document for layout and statement queries."""
-        names = re.findall(r'\bexpose\s+(' + QUALIFIED + r')\s*;', self.source)
+        names = self.statement_names if self.statement_names is not None else re.findall(r'\bexpose\s+(' + QUALIFIED + r')\s*;', self.source)
         statements = ""
         if names and self.statements:
             quoted = ', '.join('"' + name + '"' for name in names)
@@ -89,5 +90,10 @@ def render_blocks(blocks, directory):
            "-render-show", "qualifiers,typings", models=models)
     from .relationships import basis_links, include_basis
     basis = basis_links((output / 'BlueDogDocuments-RelationshipRegister.md').read_text(encoding='utf-8'))
-    return [include_basis((output / ((block.target.replace('::', '-') if block.report else f"PageBuild{i}-Content") + ".md")).read_text(encoding="utf-8"), basis)
-            for i, block in enumerate(blocks)]
+    documents = [(output / ((block.target.replace('::', '-') if block.report else f"PageBuild{i}-Content") + ".md")).read_text(encoding="utf-8")
+                 for i, block in enumerate(blocks)]
+    # Labels still come from native requirement definitions even when a page
+    # has already printed an ancestor's statement in an earlier section.
+    labels = {name: rid for text in documents for rid, name in
+              re.findall(r'^\*\*([A-Z]-\d+) (\w+)\*\*', text, re.M)}
+    return [include_basis(text, basis, labels) for text in documents]

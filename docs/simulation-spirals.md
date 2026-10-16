@@ -1,6 +1,6 @@
 # Developing the mission simulation in spirals
 
-**OOSEM:** Mission, architecture, analysis and evidence · [Current maturity](development-plan.md) · [Simulation methods](mission-simulation.md)
+**OOSEM:** Mission, architecture, analysis and evidence · [Current maturity](current-assessment.md) · [Simulation methods](mission-simulation.md)
 
 I want to understand how a small autonomous sailboat can complete the Gorge round trip, and what would stop it. Answering that takes more than a detailed model of any one component. The boat has to make progress, avoid traffic, manage its energy and retain a way to recover, all in the same voyage.
 
@@ -36,9 +36,9 @@ The [sail architecture trade](sail-trade.md) compares a tail-controlled wing, a 
 
 Aerodynamic experiments made progress by changing what performance I was willing to credit. Mesh and heel studies exposed sensitivity in the force predictions, leading to a restricted operating domain and explicit conservative aerodynamic assumptions in sizing. This improved the basis for comparing designs without demonstrating a winning rig. A successful attached-flow case cannot settle broadside sailing, stalled flow or installed trim losses. [Conservative sizing basis](https://github.com/DavidIngraham/sv-blue-dog/commit/3eb61d8), [aerodynamic evidence](sail-trade.md#what-changed-my-sizing-assumptions).
 
-The sizing trade also develops from searching for a small feasible boat toward retaining alternatives at overall-length caps, with mass and conditional passage time considered separately. In the bounded archived study, the two coarse-feasible outputs were effectively the same 1.2 m seed; the 1.0 and 0.8 m searches were unresolved. The study provides a method for comparing alternatives, but has not yet produced a useful spread of choices. The current 440 Wh, 260 mm beam candidate is a local refined replay with positive nominal energy headroom, not a globally preferred architecture. [Retaining feasible alternatives](https://github.com/DavidIngraham/sv-blue-dog/commit/e97f309), [current sizing findings](results.md).
+The sizing trade also develops from searching for a small feasible boat toward retaining alternatives at overall-length caps, with mass and conditional passage time considered separately. In the bounded archived study, the two coarse-feasible outputs were effectively the same 1.2 m seed; the 1.0 and 0.8 m searches were unresolved. The study provides a method for comparing alternatives, but has not yet produced a useful spread of choices. The earlier 440 Wh, 260 mm beam reference is a local refined replay with positive nominal energy headroom, not a globally preferred architecture. [Retaining feasible alternatives](https://github.com/DavidIngraham/sv-blue-dog/commit/e97f309), [current sizing findings](results.md).
 
-The [recovery propulsion trade](recovery-propulsion.md) remains open between water and air propulsion. Illustrative resistance, efficiency and propulsion capability let us estimate reserve and exercise casualty routes before selecting hardware. The mission then asks what a component calculation cannot: can that capability reach a usable shore approach from this position, against this current, with the remaining energy? Installed thrust, electrical demand, weeds, guarding and capsized behavior must inform the comparison. [Initial recovery analysis](https://github.com/DavidIngraham/sv-blue-dog/commit/48ff36e).
+The [recovery propulsion trade](recovery-propulsion.md) remains open between water and air propulsion. Illustrative resistance, efficiency and propulsion capability let me estimate reserve and exercise casualty routes before selecting hardware. The mission then asks what a component calculation cannot: can that capability reach a usable shore approach from this position, against this current, with the remaining energy? Installed thrust, electrical demand, weeds, guarding and capsized behavior must inform the comparison. [Initial recovery analysis](https://github.com/DavidIngraham/sv-blue-dog/commit/48ff36e).
 
 For the next comparison, I want feasible alternatives to sail the same declared scenarios with their own mass, performance, energy and recovery characteristics. Cost and construction effort also need explicit estimates. The mission should reveal the consequences of a choice; a favorable result for one provisional configuration should not silently close the alternatives.
 
@@ -46,7 +46,7 @@ For the next comparison, I want feasible alternatives to sail the same declared 
 
 Uniform wind and calm water leave out important effects for a small vessel. The environmental studies introduce wind varying with height, directional waves, current interaction and wakes. Wave-motion studies then ask how the moving wing sees the wind and how the hull and appendages move relative to the water. Those questions connect the operating environment to forces, clearance and control demands. [Wind and wave sensitivity](https://github.com/DavidIngraham/sv-blue-dog/commit/a342847), [motion and wing loads](https://github.com/DavidIngraham/sv-blue-dog/commit/86b51c0).
 
-Paired scenarios help isolate an assumption. The archived environmental replay holds the candidate geometry fixed and uses the same weather and traffic seeds across different environmental representations. At 5 m/s reference wind, the 1.4 m candidate's modeled downwind velocity made good through the water falls from about 1.19 m/s in uniform wind to 0.66 m/s with the height-dependent profile. That identifies a consequential aerodynamic assumption. Voyage duration is less straightforward: changed motion changes when the boat encounters later weather and the rounding mark. Identical random inputs do not imply identical experiences along two different trajectories. [Environmental replay and comparison](mission-simulation.md#current-sizing-candidate-replay).
+Paired scenarios help isolate an assumption. The archived environmental replay holds the candidate geometry fixed and uses the same weather and traffic seeds across different environmental representations. At 5 m/s reference wind, the 1.4 m candidate's modeled downwind velocity made good through the water falls from about 1.19 m/s in uniform wind to 0.66 m/s with the height-dependent profile. That identifies a consequential aerodynamic assumption. Voyage duration is less straightforward: changed motion changes when the boat encounters later weather and the rounding mark. Identical random inputs do not imply identical experiences along two different trajectories. [Environmental replay and comparison](reference/environmental-replays.md).
 
 Calculated wave response adds another level. Heave, roll and pitch affect apparent wind, underwater inflow, loads and power; the sailing calculation seeks a balance over the wave cycle. The archived study accepted 32 operating cases for regular waves 0.04 m high with a 3 s period. Its four Gorge replays stopped at departure because their requested conditions lay outside that small-wave performance coverage. [Calculated wave response](https://github.com/DavidIngraham/sv-blue-dog/commit/8f6f098), [operating and mission evidence](../evidence/runs/2026-10-13-wave-performance/summary.json).
 
@@ -56,7 +56,7 @@ That is useful progress even though it does not produce a passage time. The mode
 
 Recovery changes the meaning of available energy. A fixed battery reserve cannot describe every position, current or casualty. The recovery model evaluates a route to a shore approach, the propulsion authority against the current, the transit energy and a declared allowance. Capsized capability is a separate input. The mission can terminate sailing before continuing would consume the recovery margin. [Recovery behavior and tests](https://github.com/DavidIngraham/sv-blue-dog/blob/9df1808/tests/test_course_recovery.py).
 
-This makes the safety obligation observable in a scenario: where was the boat, what recovery remained reachable, why did it abort, and what happened during the transit? Tests exercise recovery without communications and retain traffic in the consequence calculation even when onboard sensing is unavailable. The present recovery fixtures use synthetic sites and capabilities. Surveyed approaches, measured propulsion and actual pickup conditions are the evidence needed to carry those conclusions into a real voyage. [Recovery assessment](srr-appendix.md#course-and-recovery-decision).
+This makes the safety obligation observable in a scenario: where was the boat, what recovery remained reachable, why did it abort, and what happened during the transit? Tests exercise recovery without communications and retain traffic in the consequence calculation even when onboard sensing is unavailable. The present recovery fixtures use synthetic sites and capabilities. Surveyed approaches, measured propulsion and actual pickup conditions are the evidence needed to carry those conclusions into a real voyage. [Recovery assessment](site-and-environment-evidence.md#course-and-recovery-decision).
 
 ## Give decisions an executable meaning
 
@@ -68,7 +68,7 @@ The supervisor covers mission policy. The simulation still supplies conceptual h
 
 ## Couple perception fidelity to energy
 
-The [sensing-and-compute trade](energy.md#execute-a-sensing-and-compute-trade) connects observation performance to the allocated electronics load. Its hypothesis experiment supplies target-specific range, errors, latency and dropouts, makes those observations drive avoidance and uses independent ground truth to score consequences. Measured sensing envelopes must replace those hypotheses. Pair each combination with its installed power, mass and thermal behavior, rerun sizing, and sail the same declared scenarios. The current low electronics allowance does not establish vision feasibility. The executable hypothesis study below supplies a virtual comparison; this spiral remains open until encounter and energy measurements support a choice.
+The [sensing-and-compute trade](encounter-feasibility.md#compare-sensing-and-energy-together) connects observation performance to the allocated electronics load. Its hypothesis experiment supplies target-specific range, errors, latency and dropouts, makes those observations drive avoidance and uses independent ground truth to score consequences. Measured sensing envelopes must replace those hypotheses. Pair each combination with its installed power, mass and thermal behavior, rerun sizing, and sail the same declared scenarios. The earlier sizing reference’s low electronics allowance does not establish vision feasibility. The executable hypothesis study below supplies a virtual comparison; this spiral remains open until encounter and energy measurements support a choice.
 
 ## Perception, avoidance and recovery in one experiment
 
@@ -98,7 +98,7 @@ The simulation adds a fixed guidance prediction horizon, forward-progress scorin
 
 The evidence combines nominal and uncertain-observation runs, casualty cases, end-of-exposure recovery, sampled reserve coverage, refinement and degraded controls. The [current encounter method](encounter-feasibility.md#close-the-candidate-loop) defines their scope, and the [acceptance requirement](../models/analyses/integrated-candidate.sysml) requires the loop's conditions together. Day/night ranges, 8 W incremental sensing demand, equipment mass, maneuver time and fault independence remain allocations. Actual sensor/processor selection, correlated sailing dynamics, surveyed approaches and retention remain open trades and physical evidence needs.
 
-The [immutable sizing record](../evidence/runs/2026-10-15-integrated-candidate/integrated-sizing.json) passes the nominal static screens with a 20.061 kg candidate, 38.884-hour conditional passage and 102.062 Wh main-pack headroom. The [mission record](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json) passes all seven virtual closure conditions: ten completed courses, eight safe encounter recoveries and six casualty/end-of-exposure recoveries, with two consistent refinement cases. The two independence/energy negative controls still reach the shore boundary. The result advances the allocated integration concept, while explicitly leaving physical qualification and full Gorge recovery coverage open.
+The [immutable sizing record](../evidence/runs/2026-10-15-integrated-candidate/integrated-sizing.json) passes the nominal static screens with a 20.061 kg candidate, 38.884-hour conditional passage and 102.062 Wh main-pack headroom. The [mission record](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json) passes all seven virtual closure conditions: ten completed courses, eight safe aborted encounter approaches and six casualty/end-of-exposure recovery approaches, with two consistent refinement cases. The two independence/energy negative controls still reach the shore boundary. The result advances the allocated integration concept, while explicitly leaving physical qualification and full Gorge recovery coverage open.
 
 ## Make the working assumptions visible
 
@@ -107,7 +107,7 @@ Each spiral needs enough definition to run an experiment. These assumptions desc
 | Spiral | Working assumptions that enable progress | What they leave open |
 | --- | --- | --- |
 | Mission and coupled sizing | A parameterized monohull, a fixed-camber wing for the sizing experiment, provisional construction properties and representative operating conditions make geometry, forces, mass and power calculable together. | Rig and hull alternatives, measured material properties, detailed construction and the final equipment installation. A feasible candidate does not select the architecture. |
-| Course and chronological voyage | A conceptual polar and load budget, point-mass motion, allocated maneuver timing, synthetic weather and perfectly observed scripted traffic let us exercise navigation and energy over time. | The actual controller, sensing uncertainty, local weather statistics and measured maneuver capability. Completion counts characterize those scenarios. |
+| Course and chronological voyage | A conceptual polar and load budget, point-mass motion, allocated maneuver timing, synthetic weather and perfectly observed scripted traffic let me exercise navigation and energy over time. | The actual controller, sensing uncertainty, local weather statistics and measured maneuver capability. Completion counts characterize those scenarios. |
 | Candidate mission replay | A small set of solved sailing states supplies an averaged-tack envelope. Allocated electrical loads, storage characteristics and packaging assumptions give the candidate a voyage budget. | Full polars, explicit tack paths, installed loads and detailed fit. The 25% passage-time allowance and six-hour delay used in current sizing are provisional allowances, not measured weather statistics. |
 | Environmental response | Fixed candidate geometry isolates the environmental effect. A neutral wind-height profile, effective-fetch hypotheses and prescribed motion support sensitivity studies; calculated linear wave response and declared damping support the bounded small-wave study. | Observed wind and seas, calibrated wave resistance, nonlinear motion and dynamic recovery. These studies do not reoptimize or select the whole boat. |
 | Casualty recovery | Synthetic shore approaches, declared upright and capsized propulsion capability, and energy allowances make recovery reachability and reserve decisions testable. | Real site suitability, installed drive selection, pickup delay, shore retention and measured casualty capability. |
@@ -118,6 +118,29 @@ The assumptions have different purposes. A chosen wing makes one design experime
 I can therefore continue developing the mission with an unresolved architecture, provided I retain the configuration and limit each conclusion to what it exercised. When evidence challenges an assumption, the next spiral can change the parameter, compare another concept or narrow the claim. The trade remains open until the evidence supports the choice I actually need to make.
 
 ## Keep the evidence connected through every spiral
+
+### 16 October: distinguish an upset from an ended attempt
+
+Capsize does not necessarily require outside help. I want the qualification
+policy to permit continued sailing after unassisted recovery, provided the boat
+retains its required safety functions. The supervisor now assesses those facts
+explicitly. During inversion the simulation permits current-driven drift but no
+sailing or gate progress; a separate confirmed righting observation permits
+resumption. Missing safety evidence, motor use, intervention or an already
+latched abort still end qualification.
+
+Native and simulator regression cases exercise those distinctions, including
+hazards and energy use during inversion. The observations are supplied scenario
+facts, not calculated righting physics. Earlier casualty records retain their
+original inputs and outcomes. Physical recovery remains an experiment to design
+and demonstrate.
+
+This spiral also puts all three rig concepts on equal footing for the finite
+Gorge comparison. The current wing-based sizing calculation remains one
+candidate realization; it does not supply comparable physical evidence for
+selecting a rig.
+
+### Evidence through each iteration
 
 For me, fidelity means representing the effects that matter to a decision with enough accuracy. Traceability means being able to explain which mission obligation, design, assumptions and evidence produced the conclusion. A more detailed model can strengthen one part of that chain while exposing a weakness in another.
 
@@ -131,7 +154,7 @@ For me, fidelity means representing the effects that matter to a decision with e
 
 The [archived-run provenance](https://github.com/DavidIngraham/sv-blue-dog/commit/e80e46d) preserves the identity of each experiment. Comparing spirals means comparing identifiable configurations and assumptions. A new course, different candidate or changed sea model needs an explicit comparison before a difference in outcomes can be attributed to one improvement.
 
-The next spirals should connect measurements to the mission: wing and actuator tests to sailing and maneuver predictions; installed loads and battery tests to endurance; sensor replay and site surveys to traffic decisions and recovery. Each experiment should have a predicted observable and a decision it could change. I then replay the affected missions and update the [maturity assessment](development-plan.md) according to the evidence, including results that narrow the boat's usable envelope.
+The next spirals should connect measurements to the mission: wing and actuator tests to sailing and maneuver predictions; installed loads and battery tests to endurance; sensor replay and site surveys to traffic decisions and recovery. Each experiment should have a predicted observable and a decision it could change. I then replay the affected missions and update the [maturity assessment](current-assessment.md) according to the evidence, including results that narrow the boat's usable envelope.
 
 The aim is a progressively better explanation of what Blue Dog can do, under which conditions, and why I believe it.
 

@@ -1,21 +1,17 @@
-# Environment, durability and self-righting
+# Environment, durability and casualty recovery
 
-**OOSEM:** System requirements and scenarios · [Maturity assessment](../development-plan.md)
+[Requirements overview](../requirements.md) · [Current assessment](../current-assessment.md)
 
-The Gorge environment sets the current loads and exposure conditions. A separately labeled ocean profile is retained for future Hawaii work. The breakdown connects those environments to measurable limits, capsize recovery and weed tolerance.
-
-[Requirements overview](../requirements.md) · [Modeling method](../methods/modeling.md)
-
-Arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision, and **dependency** records a design basis. Each view retains its upstream context; statements are rendered from the model.
-
-- [Operating environments](#operating-environments)
-- [Marine exposure and integrity](#marine-exposure-and-integrity)
-- [Stability and capsize recovery](#stability-and-capsize-recovery)
-- [Weed tolerance](#weed-tolerance)
+The boat must keep its essential functions within a declared operating envelope and recover when it cannot continue safely. That includes wet structures and electronics, weeds, capsize and retention of damaged components. Self-righting is one recovery solution; powered inverted recovery is another, but motor use ends qualification.
 
 ## Operating environments
 
+Operational and casualty exposures serve different decisions. Wind, current, waves, temperature and visibility must be assessed in relevant combinations rather than treated as unrelated worst-case numbers.
+
 ### Gorge conditions and survival transitions
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_environment_12::thread direction=BT statements=true
 package Page_environment_12 {
@@ -101,7 +97,12 @@ package Page_environment_12 {
 }
 ```
 
+</details>
+
 ### Temperature, humidity and visibility
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_environment_13::thread direction=BT statements=true
 package Page_environment_13 {
@@ -149,9 +150,14 @@ package Page_environment_13 {
 }
 ```
 
+</details>
+
 ### Future Hawaii mission: ocean conditions
 
 These candidate ocean limits are deferred to a separate Hawaii mission; they do not constrain Gorge acceptance.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_environment_14::thread direction=BT statements=true
 package Page_environment_14 {
@@ -179,8 +185,15 @@ package Page_environment_14 {
 }
 ```
 
+</details>
+
 
 ## Marine exposure and integrity
+
+Wet material behavior, sealing and ingress response connect the environmental envelope to flotation, structure and essential electronics.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_environment_15::thread direction=BT statements=true
 package Page_environment_15 {
@@ -232,8 +245,15 @@ package Page_environment_15 {
 }
 ```
 
+</details>
+
 
 ## Stability and capsize recovery
+
+Capsize alone need not end the attempt. Unassisted recovery may preserve qualification if no motor or outside intervention is used and the required safety capabilities remain available. The physical test must establish the actual recovery behavior.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_environment_16::thread direction=BT statements=true
 package Page_environment_16 {
@@ -293,8 +313,15 @@ package Page_environment_16 {
 }
 ```
 
+</details>
+
 
 ## Weed tolerance
+
+Fouling can reduce steering and recovery authority before it stops the boat completely. Detection and response therefore belong alongside the appendage and propulsor design.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view Page_environment_17::thread direction=BT statements=true
 package Page_environment_17 {
@@ -374,7 +401,14 @@ package Page_environment_17 {
 }
 ```
 
+</details>
+
 ## No littering and casualty recovery
+
+The casualty case includes flotation, retained major components and a recoverable boat. Reaching a modeled shore approach does not establish capture, retention or retrieval.
+
+<details>
+<summary>Model relationships and authoritative requirement statements</summary>
 
 ```sysml-view SRR_Thread_environment::thread direction=BT statements=true
 package SRR_Thread_environment {
@@ -395,3 +429,7 @@ package SRR_Thread_environment {
     }
 }
 ```
+
+</details>
+
+**Continue:** [Candidate results](../results.md), or return to the [requirements overview](../requirements.md).

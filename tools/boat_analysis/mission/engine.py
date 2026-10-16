@@ -27,6 +27,10 @@ class Event:
     seconds: float
     kind: str
     duration: float = 0.
+    # Explicit scenario observation; never inferred from static righting moment.
+    # At capsize: safety retained while inverted. At righting: upright and
+    # required control/safety restored without propulsion or outside assistance.
+    required_safety_confirmed: bool = False
 
 
 @dataclass
@@ -139,6 +143,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     consequence_summary = {}
     truth_clearance_violation = False
     safety_abort = False
+    awaiting_righting = False
     conflict = False
     reserve_protected = True
     traffic_seen = set()
@@ -177,8 +182,10 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     def current_at(point, time):
         return direction(route, route.project(Point(point)))*weather.at(time).current_mps
 
-    def abort(cause, capsized=False, recover=True):
+    def abort(cause, capsized=None, recover=True):
         nonlocal safety_abort, recovery_summary, consequence_summary, seconds, stored, position, minimum, distance, recovery_bank
+        if capsized is None:
+            capsized = awaiting_righting
         from .recovery import execute_recovery
         decision = logic.cycle(seconds, abort_requested=True,
                                communications_available=seconds >= comms_until)
@@ -247,6 +254,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         while event_index < len(event_list) and event_list[event_index].seconds <= seconds:
             event = event_list[event_index]; event_index += 1
             event_log.append({'seconds':seconds,'kind':event.kind})
+            if event.kind in {'capsize', 'unassisted_righting'}:
+                event_log[-1]['requiredSafetyConfirmed'] = event.required_safety_confirmed
             decision = logic.event(event.kind, seconds)
             directive = decision['directive']
             if directive == 'disqualify':
@@ -257,10 +266,29 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 pass
             elif directive == 'wind_outage':
                 sensor_until = max(sensor_until, seconds+event.duration)
+            elif directive == 'assess_capsize':
+                if type(event.required_safety_confirmed) is not bool:
+                    raise TypeError('Capsize safety observation must be Boolean')
+                disposition = logic.capsize(seconds, awaiting_righting,
+                    event.kind == 'unassisted_righting', event.required_safety_confirmed)
+                if disposition == 'abort':
+                    return abort(event.kind, capsized=event.kind == 'capsize' or awaiting_righting)
+                if disposition == 'invalid_observation':
+                    raise ValueError('Unassisted righting requires a preceding capsize')
+                awaiting_righting = disposition == 'await_righting'
+                # A pre-capsize command must not be applied after recovery.
+                command_clock.pending = None
+                command_clock.heading = None
+                command_clock.ends = seconds
+                heading = None
+                next_control = seconds
+                last_off_line = [position.copy() for _ in range(len(inputs['gateNames']))]
+                recovery_summary = dict(outcome='awaiting_unassisted_righting' if awaiting_righting else 'unassisted_righting_observed',
+                    modelAvailable=False, scope='Explicit scenario observation; current-only drift, no righting dynamics')
             elif directive == 'abort':
                 cause = 'forecast_no_longer_applicable' if event.kind == 'forecast_invalidated' else event.kind
                 permission=logic.recovery_authority(seconds,event.kind,decision['recoveryPermitted'],inputs.get('independentRecovery',False) and recovery_bank is not None and recovery_bank>0)
-                return abort(cause, capsized=decision['capsized'], recover=permission)
+                return abort(cause, capsized=decision['capsized'] or awaiting_righting, recover=permission)
             elif directive == 'stop':
                 return result('incomplete','terminal_failure')
         if command_clock.advance(seconds):
@@ -304,7 +332,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             load=wave_performance.power
         # The sampled controller has a fixed update period independent of the
         # integration step. Commands and maneuver delay persist between updates.
-        if seconds >= next_control and not command_clock.busy(seconds):
+        if not awaiting_righting and seconds >= next_control and not command_clock.busy(seconds):
             progress = leg.project(Point(position))
             target = np.array(leg.interpolate(min(leg.length,progress+lookahead)).coords[0])
             desired = math.degrees(math.atan2(*(target-position)[::-1]))
@@ -396,7 +424,9 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             raise ValueError('Non-progressing mission clock')
         mode = 'sailing'
         velocity = current.copy()
-        if command_clock.drifting(seconds):
+        if awaiting_righting:
+            mode = 'capsized_drift'
+        elif command_clock.drifting(seconds):
             mode = 'maneuvering_drift'
         elif not logic.cycle(seconds, wind_valid=seconds >= sensor_until,
                              traffic_conflict=conflict,
@@ -440,10 +470,10 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         position = endpoint
         if performance and not performance.covered(state.wind_mps):outside_coverage += interval
         if 'storage' in inputs:
-            bus=solar*state.solar_fraction-load
+            bus=(0. if awaiting_righting else solar*state.solar_fraction)-load
             net=(min(bus*charging,inputs['storage']['maxChargeW']) if bus>=0 else bus/discharge)-inputs['storage']['selfDischargeW']
         else:
-            net = solar*state.solar_fraction*charging-load/discharge
+            net = (0. if awaiting_righting else solar*state.solar_fraction*charging)-load/discharge
         stored = min(capacity,stored+net*interval/3600)
         if recovery_bank is not None:recovery_bank=max(0.,recovery_bank-bank_standby*interval/3600)
         minimum=min(minimum,stored);seconds+=interval;distance+=float(np.linalg.norm(position-previous))
@@ -460,7 +490,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         if stored < reserve:
             reserve_protected = False
             return abort('course_recovery_reserve_trigger') if recovery_planner is not None or continue_after_abort else result('incomplete','recovery_reserve_reached')
-        if phase < len(sequence):
+        if not awaiting_righting and phase < len(sequence):
             name, expected = sequence[phase]
             actual = crossing_direction(gates[name],last_off_line[phase],position)
             if actual == expected:

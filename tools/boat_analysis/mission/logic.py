@@ -43,11 +43,20 @@ class MissionLogic:
         if directive == 'unsupported':
             raise ValueError('Unknown mission event: ' + kind)
         if directive not in {'disqualify', 'communications_outage', 'retain_forecast',
-                             'wind_outage', 'abort', 'stop'}:
+                             'wind_outage', 'abort', 'stop', 'assess_capsize'}:
             raise ValueError('Unsupported model event directive: ' + str(directive))
         self.trace.append(dict(seconds=seconds, action=action, inputs={'eventKind': kind},
                                outputs=result.copy()))
         return result
+
+    def capsize(self, seconds, currently_capsized, upright_observed, safety_confirmed):
+        action = 'BlueDogMissionLogic::CapsizeDisposition'
+        inputs = dict(currentlyCapsized=bool(currently_capsized),
+                      uprightRecoveryObserved=bool(upright_observed),
+                      requiredSafetyConfirmed=bool(safety_confirmed), abortLatched=self.abort_latched)
+        result = self._execute(action, inputs)
+        self.trace.append(dict(seconds=seconds, action=action, inputs=inputs, outputs=result.copy()))
+        return result['directive']
 
     def cycle(self, seconds, *, wind_valid=True, traffic_conflict=False,
               abort_requested=False, communications_available=True):

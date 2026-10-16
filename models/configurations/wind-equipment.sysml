@@ -18,6 +18,9 @@ package BlueDogWindEquipment {
         attribute evidenceAccepted : Boolean = false;
     }
     part testbed : Installation {
+        doc /* Historical installation allowance for the retired separate testbed concept.
+         * The owned sensor remains available for component experiments; this is
+         * not a planned first boat or a selected IC-01 installation. */
         attribute :>> product = "Calypso Ultrasonic Portable Mini";
         attribute :>> dataInterface = "Bluetooth; internal battery; shore Qi charging";
         attribute :>> sensorMassKg = 0.078;
@@ -29,7 +32,7 @@ package BlueDogWindEquipment {
         attribute :>> internalBatteryRuntimeHours = 150;
         attribute :>> xFraction = 0;
         attribute :>> aboveDeckM = 0.3;
-        metadata rationale : ModelingMetadata::Rationale { text = "Owner already has the battery/Bluetooth sensor for the manufacturing and controls testbed. Manufacturer lists 78 g including internal battery, 43 mm diameter, 47 mm height, 1 Hz, Bluetooth 5.1, Qi charging and 150 hours active use: https://www.calypsoinstruments.com/shop/ultrasonic-portable-mini-wind-meter-221 . The 50 g mount and 50 mW receiver are project allowances, not product specifications. Sensor energy comes from its own battery; zero vessel-bus sensor power does not mean zero sensor consumption."; }
+        metadata rationale : ModelingMetadata::Rationale { text = "Owner has the battery/Bluetooth sensor originally considered for the retired testbed concept and available for component experiments. Manufacturer lists 78 g including internal battery, 43 mm diameter, 47 mm height, 1 Hz, Bluetooth 5.1, Qi charging and 150 hours active use: https://www.calypsoinstruments.com/shop/ultrasonic-portable-mini-wind-meter-221 . The 50 g mount and 50 mW receiver are project allowances, not product specifications. Sensor energy comes from its own battery; zero vessel-bus sensor power does not mean zero sensor consumption."; }
         metadata issue : ModelingMetadata::Issue { text = "Confirm owned 25 or 45 m/s variant and firmware. Measure runtime, receiver power, disconnection behavior and charging between tests. Internal battery capacity and energy use are not published here; 150 hours is a supplier runtime claim, not an endurance verification."; }
     }
     part challenge : Installation {

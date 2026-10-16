@@ -4,7 +4,7 @@ Named after my blue heeler, Ozzy, Blue Dog is an autonomous sailboat project exp
 
 Start with the [project journey](docs/restarting-sv-blue-dog.md), [development series](docs/index.md), and [focused requirements](docs/requirements.md).
 
-The [running OOSEM maturity assessment](docs/development-plan.md) connects each engineering layer to its current evidence, unresolved questions and next useful investigation.
+The [running OOSEM maturity assessment](docs/current-assessment.md) connects each engineering layer to its current evidence, unresolved questions and next useful investigation.
 
 ## Repository
 
@@ -27,7 +27,7 @@ uv run python -m tools.publishing.build
 uv run pytest -q
 ```
 
-Python uses the package-free uv project. The Python client, CLI, service and MCP server use candidate revision `e002f1668834f9409ee62200c8b89c0f5bf5e309` from [our OpenSysML fork](https://github.com/DavidIngraham/OpenSysML/tree/feat/python-dataclass-bluedog-pinned). This candidate adds standalone dataclasses to the known-working upstream revision `62b904178`; it is not an upstream release. Run the installer before `uv sync`. Install Go 1.25+ for the source installer and a GNU-compatible C compiler for numerical preparation. The installer downloads the exact commit from the fork, verifies the archive checksum, builds all three executables, and retains the matching Python source under `.tools` for uv. An optional `--source /path/to/OpenSysML` archives the same pinned commit from a local checkout; uncommitted edits are not included. See [modeling conventions](models/README.md), [publishing](docs/publishing.md), and [sizing methods](docs/sizing.md).
+Python uses the package-free uv project. The Python client, CLI, service and MCP server use candidate revision `e002f1668834f9409ee62200c8b89c0f5bf5e309` from [our OpenSysML fork](https://github.com/DavidIngraham/OpenSysML/tree/feat/python-dataclass-bluedog-pinned). This candidate adds standalone dataclasses to the known-working upstream revision `62b904178`; it is not an upstream release. Run the installer before `uv sync`. Install Go 1.25+ for the source installer and a GNU-compatible C compiler for numerical preparation. The installer downloads the exact commit from the fork, verifies the archive checksum, builds all three executables, and retains the matching Python source under `.tools` for uv. An optional `--source /path/to/OpenSysML` archives the same pinned commit from a local checkout; uncommitted edits are not included. See [modeling conventions](models/README.md), [publishing](docs/reference/authoring.md), and [sizing methods](docs/sizing.md).
 
 This pin includes the native runtime MCP tools. The later upstream short-name-resolution merge `b8e897e0e` caused a severe validation slowdown on the complete Blue Dog model during migration. Update the pin only after checking full-model validation, numerical regressions and document rendering together; the Python client and native executables must use the same revision.
 
