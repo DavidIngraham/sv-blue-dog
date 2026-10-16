@@ -53,4 +53,4 @@ def test_model_policy_change_changes_simulator_behavior(tmp_path, monkeypatch):
     assert result.outcome == 'disqualified'
     assert result.cause == 'weather_service_loss'
     assert result.logic_trace[0]['outputs']['directive'] == 'abort'
-    assert result.logic_trace[-1]['outputs']['abortLatchedNext']
+    assert any(row['outputs'].get('abortLatchedNext') for row in result.logic_trace)

@@ -12,7 +12,7 @@ def fixture():
     water=box(-1500,-500,500,500)
     gates={'eastGate':LineString([(0,100),(0,-100)]),
            'westGate':LineString([(-1000,100),(-1000,-100)])}
-    inputs={'controlPeriodSeconds':10, 'gateNames':['eastGate','westGate','westGate','eastGate'], 'gateDirections':[-1,-1,1,1], 'gateApproachM':80, 'time':[10,4,30,80,2,1], 'energy':[500,500,60,5,.01,40,.85,.9],
+    inputs={'continueAfterAbort':False, 'controlPeriodSeconds':10, 'gateNames':['eastGate','westGate','westGate','eastGate'], 'gateDirections':[-1,-1,1,1], 'gateApproachM':80, 'time':[10,4,30,80,2,1], 'energy':[500,500,60,5,.01,40,.85,.9],
             'dimensions':[2,.8,3], 'angles':[0,35,45,60,90,135,180],
             'speedRatios':[0,0,.28,.36,.45,.38,.3], 'weather':[270,7,.4,36,.2,.85,.8,.15,.8,.08,.03,6,18,8]}
     return inputs,route,water,gates

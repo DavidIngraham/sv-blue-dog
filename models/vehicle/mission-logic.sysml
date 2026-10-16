@@ -50,6 +50,20 @@ package BlueDogMissionLogic {
         then done;
     }
 
+    action def FallbackPolicy {
+        in recoveryAvailable : Boolean;
+        in recoveryPermitted : Boolean;
+        out attemptRecovery : Boolean;
+        out continueDrift : Boolean;
+        first start;
+        then action chooseFallback {
+            assign attemptRecovery := recoveryAvailable and recoveryPermitted;
+            assign continueDrift := not (recoveryAvailable and recoveryPermitted);
+        }
+        then done;
+    }
+    dependency fallbackBasis from FallbackPolicy to GorgeChallenge::autonomousShoreRecovery;
+
     dependency unassisted from HandleEvent to GorgeChallenge::unassistedAttempt;
     dependency propulsion from HandleEvent to GorgeChallenge::sailingPropulsion;
     dependency safeRecovery from SupervisoryCycle to GorgeChallenge::autonomousShoreRecovery;

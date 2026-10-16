@@ -61,6 +61,8 @@ package BlueDogMissionSimulation {
         out attribute gateNames : String [5] ordered nonunique = TransGorgeCourse::policy.gateNames;
         out attribute gateDirections : Integer [5] ordered nonunique = TransGorgeCourse::policy.gateDirections;
         out attribute controlPeriodSeconds : Real = scenarioPolicy.controlPeriodSeconds;
+        out attribute commandLatencySeconds : Real = BlueDogEncounterReview::criteria.commandSeconds;
+        out attribute continueAfterAbort : Boolean = true;
         out attribute gateApproachM : Real = scenarioPolicy.gateApproachM;
         out attribute time : Real [6] ordered nonunique = (scenarioPolicy.stepSeconds,scenarioPolicy.horizonHours,scenarioPolicy.forecastSeconds,scenarioPolicy.routeLookaheadM,scenarioPolicy.maneuverSeconds,scenarioPolicy.seed);
         out attribute energy : Real [8] ordered nonunique = (conceptualVessel.batteryWh,conceptualVessel.initialEnergyWh,conceptualVessel.protectedReserveWh,conceptualVessel.baseLoadW,conceptualVessel.maneuverEnergyWh,conceptualVessel.solarPeakW,conceptualVessel.solarEfficiency,conceptualVessel.dischargeEfficiency);

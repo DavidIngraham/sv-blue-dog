@@ -119,6 +119,7 @@ class RecoveryResult:
     position: list[float]
     history: list
     collision: bool = False
+    clearance_violated: bool = False
 
 
 def execute_recovery(planner, position, seconds, energy_wh, current_at, *,
@@ -137,27 +138,85 @@ def execute_recovery(planner, position, seconds, energy_wh, current_at, *,
     if plan is None:
         return RecoveryResult('no_modeled_recovery_route', None, seconds, energy_wh, point.tolist(), [])
     history = []; deadline = seconds+horizon_seconds
+    clearance = False
     c = planner.capability
     power = (c.capsized_motor_w if capsized else c.motor_w)+c.essential_w
     for target in list(plan.route.coords)[1:]:
         target = np.asarray(target)
         while np.linalg.norm(target-point) > 1e-7:
             if seconds >= deadline:
-                return RecoveryResult('recovery_censored', plan.site.name, seconds, energy_wh, point.tolist(), history)
+                return RecoveryResult('recovery_censored', plan.site.name, seconds, energy_wh, point.tolist(), history, clearance_violated=clearance)
             delta = target-point; length = float(np.linalg.norm(delta)); unit = delta/length
             segment = planner.segment(length, unit, current_at(point, seconds), capsized)
             if segment is None:
-                return RecoveryResult('recovery_current_exceeds_authority', plan.site.name, seconds, energy_wh, point.tolist(), history)
+                return RecoveryResult('recovery_current_exceeds_authority', plan.site.name, seconds, energy_wh, point.tolist(), history, clearance_violated=clearance)
             interval = min(dt, segment[2], deadline-seconds)
             available = max(0., energy_wh-c.arrival_allowance_wh)
             if power*interval/3600 > available:
-                return RecoveryResult('recovery_energy_insufficient', plan.site.name, seconds, energy_wh, point.tolist(), history)
+                return RecoveryResult('recovery_energy_insufficient', plan.site.name, seconds, energy_wh, point.tolist(), history, clearance_violated=clearance)
             previous = point.copy(); point = point+unit*segment[1]*interval
             if not planner.water.covers(LineString([previous, point])):
-                return RecoveryResult('recovery_outside_chart', plan.site.name, seconds, energy_wh, previous.tolist(), history)
+                return RecoveryResult('recovery_outside_chart', plan.site.name, seconds, energy_wh, previous.tolist(), history, clearance_violated=clearance)
             collision = any(actor.collides(previous, point, seconds, interval, dimensions) for actor in traffic)
+            for actor in traffic:
+                safe,_=actor.assess(previous,np.array([point]),seconds,interval,interval,dimensions)
+                clearance |= not bool(safe[0])
             seconds += interval; energy_wh -= power*interval/3600
             history.append([seconds, *point, energy_wh, 'powered_recovery'])
             if collision:
-                return RecoveryResult('recovery_collision', plan.site.name, seconds, energy_wh, point.tolist(), history, True)
-    return RecoveryResult('recovery_approach_reached', plan.site.name, seconds, energy_wh, point.tolist(), history)
+                return RecoveryResult('recovery_collision', plan.site.name, seconds, energy_wh, point.tolist(), history, True, clearance)
+    return RecoveryResult('recovery_approach_reached', plan.site.name, seconds, energy_wh, point.tolist(), history, clearance_violated=clearance)
+
+
+@dataclass
+class DriftResult:
+    termination: str
+    seconds: float
+    energy_wh: float
+    position: list
+    history: list
+    collision: bool = False
+    clearance_violated: bool = False
+    energy_exhausted: bool = False
+
+
+def execute_drift(water, position, seconds, energy_wh, current_at, *, dt, horizon_seconds,
+                  essential_w, traffic=(), dimensions=(1.2,.5,1.)):
+    """Post-abort consequence integration, with no station keeping or rescue credit.
+
+    Water-current advection only; windage, capsize drift and shore impact physics
+    are uncorrelated. Horizon expiry remains a censored consequence.
+    """
+    from shapely import get_coordinates
+    if not all(math.isfinite(v) for v in (seconds,energy_wh,dt,horizon_seconds,essential_w)) or dt<=0 or min(energy_wh,horizon_seconds,essential_w)<0:
+        raise ValueError('Invalid drift inputs')
+    point=np.asarray(position,dtype=float)
+    if point.shape!=(2,) or not np.isfinite(point).all():raise ValueError('Invalid drift position')
+    history=[];deadline=seconds+horizon_seconds;clearance=False;exhausted=energy_wh<=0
+    def result(termination,collision=False):
+        return DriftResult(termination,seconds,energy_wh,point.tolist(),history,collision,clearance,exhausted)
+    if not water.covers(Point(point)):return result('shore_contact')
+    while seconds<deadline-1e-9:
+        velocity=np.asarray(current_at(point,seconds),dtype=float)
+        if velocity.shape!=(2,) or not np.isfinite(velocity).all():raise ValueError('Invalid current')
+        interval=min(dt,deadline-seconds)
+        if essential_w>0 and energy_wh>0:interval=min(interval,energy_wh*3600/essential_w)
+        previous=point.copy();endpoint=point+velocity*interval
+        segment=LineString([previous,endpoint]);grounded=not water.covers(segment)
+        if grounded and segment.length>0:
+            crossings=get_coordinates(segment.intersection(water.boundary))
+            distances=[segment.project(Point(p)) for p in crossings]
+            fraction=min(distances)/segment.length if distances else 0.
+            interval*=fraction;endpoint=previous+velocity*interval
+        collision=False
+        if interval>0:
+            for actor in traffic:
+                collision |= actor.collides(previous,endpoint,seconds,interval,dimensions)
+                safe,_=actor.assess(previous,np.array([endpoint]),seconds,interval,interval,dimensions)
+                clearance |= not bool(safe[0])
+        point=endpoint;seconds+=interval;energy_wh=max(0.,energy_wh-essential_w*interval/3600)
+        if energy_wh<1e-10:energy_wh=0.;exhausted=True
+        history.append([seconds,*point,energy_wh,'unpowered_drift'])
+        if collision:return result('drift_collision',True)
+        if grounded:return result('shore_contact')
+    return result('drift_censored')

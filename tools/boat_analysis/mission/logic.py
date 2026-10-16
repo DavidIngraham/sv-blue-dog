@@ -22,6 +22,13 @@ class MissionLogic:
             self._cache[key] = dict(self.model.execute_action(action, inputs=inputs))
         return self._cache[key].copy()
 
+    def fallback(self, seconds, available, permitted):
+        action='BlueDogMissionLogic::FallbackPolicy'
+        inputs=dict(recoveryAvailable=bool(available),recoveryPermitted=bool(permitted))
+        result=self._execute(action,inputs)
+        self.trace.append(dict(seconds=seconds,action=action,inputs=inputs,outputs=result.copy()))
+        return result
+
     def event(self, kind, seconds):
         action = 'BlueDogMissionLogic::HandleEvent'
         result = self._execute(action, {'eventKind': kind})

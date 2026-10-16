@@ -18,6 +18,21 @@ package BlueDogEncounterFeasibility {
         in additionalBusW : Real;
         return headroomWh : Real = BlueDogCandidateEnergy::headroom.energyWh-additionalBusW*BlueDogCandidateEnergy::exposureHours/BlueDogSRRCurrent::energyInputs.dischargeEfficiency;
     }
+    calc def InstalledIncrement {
+        in measuredBusW : Real;
+        in replacedBaseW : Real;
+        return incrementW : Real = measuredBusW-replacedBaseW;
+    }
+    calc def CapacityLowerBound {
+        in incrementW : Real;
+        return nameplateWh : Real = (BlueDogCandidateEnergy::required.energyWh+incrementW*BlueDogCandidateEnergy::exposureHours/BlueDogSRRCurrent::energyInputs.dischargeEfficiency)/(BlueDogSRRCurrent::energyInputs.usableFraction*BlueDogSRRCurrent::energyInputs.initialFraction);
+    }
+    requirement def TimingCriterion {
+        subject target;
+        in attribute assessmentPeriodS : Real;
+        in attribute commandLatencyS : Real;
+        require constraint { assessmentPeriodS > 0 and assessmentPeriodS <= BlueDogEncounterReview::criteria.assessmentSeconds and commandLatencyS >= 0 and commandLatencyS <= BlueDogEncounterReview::criteria.commandSeconds }
+    }
     analysis Inputs {
         out attribute targets : String [6] ordered = BlueDogEncounterReview::criteria.targets;
         out attribute speeds : Real [6] ordered nonunique = BlueDogEncounterReview::criteria.targetSpeedMps;
@@ -42,6 +57,12 @@ package BlueDogEncounterFeasibility {
         out attribute additionalBusW : Real [4] ordered nonunique = (3,8,5,10);
         out attribute usableBatteryWh : Real = BlueDogCandidateEnergy::usable.energyWh;
         out attribute trialHorizonS : Real = 120;
+        out attribute continuationHorizonS : Real = 3600;
+        out attribute controllerSweepS : Real [2] ordered = (30,1);
+        out attribute commandLatencyS : Real = BlueDogEncounterReview::criteria.commandSeconds;
+        out attribute refinementStepS : Real [2] ordered = (1,0.5);
+        out attribute clearanceTailS : Real = 60;
+        out attribute baselineElectronicsW : Real = BlueDogCandidateEnergy::electronics.averageBusW;
         out attribute trialSeeds : Integer [2] ordered = (17,29);
         out attribute recoveryCapability : Real [5] ordered nonunique = (2,50,8,1.2,2);
         out attribute samplePeriodS : Real = 1;
@@ -74,6 +95,8 @@ package BlueDogEncounterFeasibility {
     part stack2 : StackRow { attribute :>> stackIndex = 2; }
     part stack3 : StackRow { attribute :>> stackIndex = 3; }
     part stack4 : StackRow { attribute :>> stackIndex = 4; }
+    dependency timingBasis from TimingCriterion to BlueDogRequirements::avoidanceCommandDeadline;
+    dependency loadBasis from InstalledIncrement to BlueDogCandidateEnergy::electronics;
     dependency rangeBasis from RequiredRange to BlueDogEncounterReview::criteria;
     dependency energyBasis from EnergyScreen to BlueDogCandidateEnergy::Reconciliation;
     dependency riskBasis from Inputs to BlueDogRisks::traffic;
