@@ -1,6 +1,6 @@
 # Course, recovery sites and environmental evidence
 
-**OOSEM:** Requirements, analysis and evidence · [Maturity assessment](current-assessment.md)
+**OOSEM:** Requirements, analysis and evidence · [Current assessment](current-assessment.md)
 
 This reference records where the boat would sail and recover, the environmental allocations used in design, and the evidence still needed at actual sites. Candidate performance is summarized in the [results](results.md); these site and exposure assumptions must be checked for the built configuration.
 
@@ -85,7 +85,7 @@ The [15 October IC-01 integration record](../evidence/runs/2026-10-15-integrated
 | Design alternatives | Bounded search and candidate replay | Feasible alternatives with comparable mission evidence |
 | Critical physics | Wing, structure, actuation and casualty models | Physical correlation and established applicability |
 
-I use these gaps to choose experiments and refine the architecture. The [maturity assessment](current-assessment.md) places their evidence in the context of the whole project.
+I use these gaps to choose experiments and refine the architecture. The [current assessment](current-assessment.md) places their evidence in the context of the whole project.
 
 <details>
 <summary>Reproducing the archived desktop and conceptual campaign checks</summary>

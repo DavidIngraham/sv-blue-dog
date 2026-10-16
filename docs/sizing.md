@@ -1,12 +1,18 @@
 # Coupled sizing method
 
-**OOSEM:** Trades, optimization and analysis · [Maturity assessment](current-assessment.md)
+**OOSEM:** Trades, optimization and analysis · [Current assessment](current-assessment.md)
 
 How much boat is needed to carry the equipment and finish the Gorge round trip? Hull, rig, ballast and battery cannot be sized independently: extra battery increases displacement, which changes speed and therefore the energy needed to finish. I solve those couplings before comparing candidate mass and passage time. The static calculation supplies a candidate to the chronological mission simulation; it does not estimate a probability of success.
 
-The [integration candidate IC-01](../models/analyses/integrated-candidate.sysml) applies the same method to an explicit sensing and independent-recovery allocation. Added equipment demand and mass enter the coupled solve before the mission receives its performance envelope and energy accounts. A hull outside the resistance model's geometry domain cannot provide accepted sailing performance. Static feasibility, supported sailing states and successful mission/recovery cases must hold together for the [integration milestone](current-assessment.md#integration-milestone). The retained 440 Wh result remains a separately identified sizing reference.
+The [integration candidate IC-01](../models/analyses/integrated-candidate.sysml) applies the same method to an explicit sensing and independent-recovery allocation. Added equipment demand and mass enter the coupled solve before the mission receives its performance envelope and energy accounts. A hull outside the resistance model's geometry domain cannot provide accepted sailing performance. The sizing checks and subsequent sailing and recovery scenarios must agree for the [integration milestone](current-assessment.md#integration-milestone). The retained 440 Wh result remains a separately identified sizing reference.
 
 IC-01 is the working basis for my first build. I use the search to challenge that allocation and find useful alternatives, rather than treating the smallest numerical answer as a construction decision.
+
+## What the calculation means
+
+A **sailing state** is one set of speed, heading, sail trim, leeway, rudder angle and heel for a specified wind and tack. The calculation seeks a state where drive balances resistance and the sideways forces and turning moments balance. A **screen** is a pass/fail check on that result: for example, whether it makes upstream progress, fits the available energy or keeps an assembly within its handling limit.
+
+A **refined replay** holds the candidate's dimensions and equipment fixed, then recalculates its sailing states with finer numerical treatment and checks the limits again. For example, if the replay predicts a slower upstream return, the longer passage consumes more energy. A design that passed the first energy screen can then fail without any change to its battery. That is why I retain the replay result separately from the search result.
 
 ![Sailing force balance: wing drive must overcome hull drag, while the keel resists side force and ballast supplies a restoring moment. Ground progress also includes current.](figures/sailing-forces.svg)
 
@@ -29,7 +35,7 @@ flowchart TB
 
 ## Search objectives and geometry limits
 
-The sizing search treats 1.2 m overall length as a challenge limit, including the modeled wing and rudder sweeps. At each selected overall-length cap, hull length and the other 28 design variables remain free alongside 48 operating-state variables. Separate mass and conditional passage-time objectives retain alternatives for comparison; they do not combine preferences into a handicap score. Fixed-hull-length continuation is available for numerical diagnosis. Numerical brackets describe model coverage and search limits. A bound hit requires investigation before claiming a minimum size.
+The sizing search treats 1.2 m overall length as a challenge limit, including the modeled wing and rudder sweeps. At each selected overall-length cap, hull length and the other 28 design variables remain free alongside 48 operating-state variables. Separate mass and conditional passage-time objectives retain alternatives for comparison; they do not combine preferences into a handicap score. If the best result lies at a numerical search bound, I need to investigate that bound before drawing a physical design conclusion.
 
 The search compares local monohull alternatives at 0.8, 1.0 and 1.2 m overall-length caps. Each promising result needs a finer replay at fixed geometry and the same chronological mission scenarios before it can inform selection. Cost and construction effort need separate estimates.
 

@@ -1,16 +1,14 @@
 # Comparing sail architectures
 
-**OOSEM:** Candidate physical architectures · [Maturity assessment](current-assessment.md)
+**OOSEM:** Candidate physical architectures · [Current assessment](current-assessment.md)
 
-Which rig gives this boat a useful combination of drive, low trim power and recoverability? I am comparing three concepts during [preliminary design](current-assessment.md#virtual-design), using the mission requirements, prior art and exploratory aerodynamic runs. The decision is still open: the fixed-camber wing gives me a concrete sizing experiment, while measurements must establish whether it deserves to become the selected rig.
+Which rig provides enough drive, manageable trim power and a workable recovery path? I am comparing a soft sail, a tail-controlled rigid wing and a directly rotated fixed-camber wing on equal terms for the finite Gorge mission. The comparison must include the complete installation: sail, controls, structure, electrical demand and behavior after a fault.
 
 ![Three conceptual rigs: a wing trimmed by a tail and elevator, a fixed-camber wing rotated at its mast, and a triangular soft sail controlled by a sheet.](figures/rig-concepts.svg)
 
 *Three ways to trim a sail: elevator control, mast rotation and sheet tension.*
 
 I compare control architecture separately from section camber. A tail-controlled wing and a directly rotated fixed-camber wing solve trim differently; either needs measured aerodynamic moments, actuator losses, structural loads and failure-state behavior. The soft sail is an equal contender for the finite Gorge mission. The fixed-camber CAD wing supplies the current sizing experiment; having more calculations for it does not give it a preference in selection.
-
-I want to compare the rigs on the same terms. A promising lift curve is only part of the answer: the sail also has to survive unattended operation, use manageable trim power and let the boat recover from a capsize. A durability concern is worth investigating, but it is not a measured failure rate. I keep that distinction visible in the trade rather than hiding unknowns inside a weighted score.
 
 The representative west-wind challenge puts the upstream return on a leeward course. That makes broad-reach/downwind performance important alongside windward efficiency. The [seasonal probability study](operating-constraints.md#gorge-weather-and-launch-windows) keeps easterly upriver performance as a separate sensitivity, especially for winter tests. It does not identify a winning rig from the attached-flow VSPAERO grid: broadside flow and separated downwind operation still need evidence. Durability, controllability and recovery remain acceptance gates, not benefits traded away by a low weather frequency.
 
@@ -22,6 +20,12 @@ The representative west-wind challenge puts the upstream return on a leeward cou
 
 I will compare each at the same mission duration and conditions. Long ocean endurance is not a reason to downgrade cloth for this finite mission. Material durability, tangling and handling are questions to test for each proposed installation.
 
+## One experiment for all three rigs
+
+I will use the same wind speeds, intended trim range and mission duty cycle for each concept. Each rig needs evidence from both tacks—wind arriving from either side—as well as broadside sailing, stall and transitions. I will measure lift, drag and the turning moment the controls must resist, then measure electrical energy through the same moving, holding and idle sequence. A gearbox that holds without motor current still has controller demand and movement losses.
+
+The recovery comparison must use each rig's actual mass, center of gravity and flooding behavior. Free and locked trim positions can give different righting behavior, so both belong in static checks and dynamic release tests. Wet durability and unattended handling also need the same finite-mission exposure. Those measurements can change which rig I choose; a promising aerodynamic curve alone cannot.
+
 ```sysml-report BlueDogSailTradeDocuments::Conclusion
 ```
 
@@ -31,7 +35,9 @@ The [mission development spirals](simulation-spirals.md#develop-the-trades-along
 
 ## What changed my sizing assumptions
 
-The useful result from VSP so far is a warning about the model, not a winning rig. Mesh choice affects the reference response, and heel changes the local flow in ways a single cosine factor misses. I therefore tightened operating angles and reduced the performance credited in primary sizing. Measurements are still needed to replace those judgments.
+The existing numerical evidence covers only the fixed-camber wing. OpenVSP provides the geometry and its VSPAERO solver estimates aerodynamic loads. No equivalent tail-controlled-wing or soft-sail dataset is included, so these runs support that one sizing hypothesis rather than rank the three rigs.
+
+Two findings changed the sizing assumptions: the numerical mesh affects the predicted loads, and heel changes local airflow in ways a single cosine correction misses. I therefore tightened operating angles and reduced the performance credited in primary sizing. Physical measurements are needed to replace those judgments. Published [crescent-wing research](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) includes wind-tunnel comparisons, but uses different section geometry and test conditions; it cannot supply validated coefficients for this CAD.
 
 ![Reference alpha sweeps showing lift and pitching moment at three mesh settings.](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reference-sweeps.svg)
 
@@ -41,20 +47,12 @@ The useful result from VSP so far is a warning about the model, not a winning ri
 
 *The projection error changes with wind direction: it overpredicts forward force at 45° and 90° and underpredicts it at 135° at substantial heel.*
 
-## Obtain comparable evidence
-
-I need comparable measurements of both-tack lift, drag and pitching moment over the intended trim range, including stall, broadside sailing and transitions. I also need electrical energy measured over the same move/hold/idle duty cycle. A gearbox that holds without motor current still has movement losses, controller demand and a retained-angle failure state.
-
-For recovery, I will represent each body with its actual mass, center of gravity, geometry and flooding state. Free and locked rig angles, on both sides of a full roll, expose different failure cases. Pitch stability and dynamic release behavior need their own checks alongside sampled static righting moments. The [structures and recovery method](structures-and-recovery.md) describes that distinction.
-
-This is where prototypes can resolve the uncertainties before I commit to geometry. Published [crescent-wing research](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) includes wind-tunnel comparisons, but its section geometry and test conditions differ from ours. It supports investigating the concept; it does not supply validated coefficients for this CAD. The [sizing workflow](sizing.md) therefore uses explicit conservative assumptions while other concepts remain open. Its numerical results do not complete the trade.
-
 <details>
 <summary>Full experiment gallery: geometry, sweeps, convergence, heel and reproduction</summary>
 
-## What the OpenVSP studies cover in OpenVSP
+## Geometry and numerical coverage
 
-The recorded work uses OpenVSP 3.54.0. The study uses a reference-wing study and a 200-point aspect-ratio/camber grid for finite-wing trends, a separate heel/incidence study to expose the limits of the boat model's projection, and representative mesh/wake checks within the restricted sizing domain. Figures are regenerated from immutable run records during each site build. Publishing them does not rerun the aerodynamic solver.
+The recorded work uses OpenVSP 3.54.0, with a reference wing and a 200-point aspect-ratio/camber grid for finite-wing trends, a separate heel/incidence study to expose the limits of the boat model's projection, and representative mesh/wake checks within the restricted sizing domain. Figures are regenerated from immutable run records during each site build. Publishing them does not rerun the aerodynamic solver.
 
 ### Tested geometry
 

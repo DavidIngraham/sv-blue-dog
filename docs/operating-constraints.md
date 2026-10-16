@@ -1,10 +1,25 @@
 # Establishing operating constraints
 
-**OOSEM:** Mission and stakeholder needs · [Maturity assessment](current-assessment.md)
+**OOSEM:** Mission and stakeholder needs · [Current assessment](current-assessment.md)
 
-Before I size the boat around a convenient rule of thumb, I need to understand where and how it will operate. At [mission definition](current-assessment.md#mission-definition), I bring together the intended waters, traffic, operating modes and source research. The result should tell me which obligations affect the design and which questions must be resolved before a [water trial](current-assessment.md#physical-validation).
+The boat must make progress against river current, avoid traffic and remain recoverable when sailing stops. I use two environmental cases: ordinary operation during a selected weather window, and a more severe casualty exposure while the boat reaches shore and waits for pickup. These cases shape the hull, rig, sensing and recovery system before I choose hardware.
 
-I distinguish rules of a voluntary challenge, jurisdiction-specific operating obligations and my engineering allocations. A size threshold quoted in a race discussion does not by itself establish vessel classification or permission to operate.
+## Conditions the design must address
+
+| Condition | Operational design basis | Casualty recovery design basis |
+| --- | --- | --- |
+| Mean wind / gust | 0–15 m/s / 20 m/s | Up to 25 m/s / 35 m/s |
+| Significant wave height | 1.5 m | 2 m |
+| Peak wave period | 1.5–5 s | 1.5–7 s |
+| Separate individual-wave case | 3 m | 4 m |
+| River current | Evaluate 0–1.5 m/s and local direction | Use the route's current field; reject a route if recovery cannot overcome it |
+| Exposure | The actual passage, including holds and delays | The longest applicable recovery transit plus the arranged pickup delay; the study allows two hours |
+
+Significant wave height describes the larger waves in a sea state, approximately the average height of the highest third; it is not the largest individual wave. The separate individual-wave cases therefore matter for clearance, flooding and structural loads. Wave period matters too: waves of the same height can produce very different boat motions.
+
+These are provisional engineering allocations in the [native environmental analysis](../models/analyses/environment-review.sysml), not measured extremes or a promise that IC-01 can sail in every combination. I must test coupled wind, current and waves, including reversals and boat wakes. Calm waiting is allowed, but the boat must retain its safety and recovery functions. Ice, dam transit and surf-zone launch remain outside this scope. The [site and environmental evidence](site-and-environment-evidence.md#environmental-decision) records the basis and remaining measurements.
+
+The practical consequence is that a favorable launch forecast does not remove the recovery problem. A boat that cannot keep sailing still needs enough flotation, observation, control and energy to reach a usable approach and remain there until pickup.
 
 ## Gorge weather and launch windows
 
@@ -16,6 +31,11 @@ The seasonal distinction has a physical basis: coastal and inland pressure diffe
 
 The reproducible study uses **2015–2024 NOAA ISD-Lite hourly observations** from airport station KDLS and Troutdale (KTTD). At KDLS, east winds account for about **10% of east/west hours in May–September**, rising to **48% in November–March**. Troutdale gives roughly **31% and 86%**. These are station proxies, not a route-wide average: KDLS is upstream and Troutdale is downstream of the challenge reach, and airport exposure is different from a small wing over the water. The discrepancy is a reason to add observations along the route, not to average the stations together.
 
+The next useful step is to evaluate complete, forecast-conditioned weather histories along the route, preserving wind persistence and its relationship to current, waves and daylight. Passage progress, holds and battery reserve must use the same history. Station wind frequencies alone cannot determine a launch decision or a probability of completing the mission.
+
+<details>
+<summary>How the weather statistics were calculated, and what they can support</summary>
+
 Those percentages exclude a substantial fraction of the record. The analysis preserves light winds below 2 m/s, other directions, and unknown or absent observations. Directions are meteorological “from,” with east 45–135° and west 225–315°. The thresholds are descriptive bins, not acceptance criteria. Seasons use UTC months. The [model](../models/analyses/weather.sysml) owns these choices and the [frozen archive](../evidence/weather/2015-2024/manifest.json) records source URLs and hashes; NOAA documents the [data format](https://www.ncei.noaa.gov/pub/data/noaa/isd-lite/isd-lite-format.pdf).
 
 ### From wind frequencies to a performance weighting
@@ -26,10 +46,9 @@ For passage-level decisions, the useful quantity is the probability of each comp
 
 Persistence matters. A hindcast probe selects hours preceded by six consecutive westerly hours and looks forward 72 hours without selecting on future direction. At KDLS, about 43% of the **complete warm-season windows** encounter at least one easterly hour. That is not a failure probability, and missing observations exclude many windows. The native report below exposes complete and incomplete counts and conservative missing-data bounds. Windows overlap, so their count is not an independent sample size. Troutdale has no complete warm-season windows under this strict rule; it cannot support that estimate.
 
-The next fidelity step is to sample contiguous, forecast-conditioned trajectories along the route, preserving wind persistence and joint current, wave and solar conditions. Route progress and chronological battery reserve must be evaluated on the same trajectory, including holds, reversals, aborts and recovery. Winter trials need their own exposure profile. Only then can I choose a defensible weather-success allocation alongside the existing reliability target. Reducing the weight of easterly performance never reduces the required survival or traffic-safety capability.
+A later probability model needs complete trajectories and a defined launch rule. Reducing the weight of easterly performance never reduces the required survival or traffic-safety capability.
 
-<details>
-<summary>Native observation counts, missing-data bounds and reproduction</summary>
+
 
 ```sysml-report BlueDogWeatherDocuments::Observations
 ```

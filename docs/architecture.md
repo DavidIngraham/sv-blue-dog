@@ -1,6 +1,6 @@
 # Mission, context and architecture
 
-**OOSEM:** Mission and context · Logical architecture · [Maturity assessment](current-assessment.md)
+**Object-Oriented Systems Engineering Method (OOSEM):** Mission and context · Logical architecture · [Current assessment](current-assessment.md)
 
 What does this little boat actually have to do? I start with one finite, independent Gorge challenge, then work through the people, environment and equipment it will interact with. Those responsibilities give me a basis for comparing designs before selecting equipment.
 
@@ -24,11 +24,11 @@ The return leg has to make progress over the ground, not just through the water.
 
 ![Vessel concept with wing, hull, rudder, keel, ballast, solar collection and electronics.](figures/boat-concept.svg)
 
-The main systems bring together propulsion, steering, power and recovery. The model views below allocate their responsibilities.
+The hull and rig turn wind into motion; the rudder steers; onboard sensing and control choose where to go. Batteries supply those functions and a separate recovery system. I use the model to assign each responsibility before selecting hardware.
 
-The integration candidate, [IC-01](../models/analyses/integrated-candidate.sysml), binds these responsibilities to one provisional mass, energy and performance configuration. Its primary sensing and guidance path sails the mission. A separately powered recovery path has its own observation, navigation, control and thrust allocations, including an inverted operating hypothesis. Primary steering or power loss can therefore permit modeled recovery only when the independent path is explicitly present and powered. This is a fault-isolation assumption to test, not evidence that shared environmental damage cannot defeat both paths.
+In [IC-01](../models/analyses/integrated-candidate.sysml), the main sensing and control system sails the mission. A separately powered recovery system must observe hazards, navigate and propel the boat after a primary failure, including while inverted. The practical question is whether those backup functions can survive the fault that disabled sailing. Shared water damage could still defeat both systems; isolation needs testing.
 
-The [virtual integration milestone](validation-plan.md#exercise-decisions-before-physical-integration) requires the same candidate to support sizing, sensing, maneuver timing, chronological energy and recovery. Hardware interfaces, waterproofing, installed mass distribution, thermal behavior and physical shore retention remain design and evidence work. The retained 440 Wh nominal sizing result is a separate reference configuration; its budget must not be combined with IC-01's capability allocations.
+The [integration study](validation-plan.md#exercise-decisions-before-physical-integration) checks those responsibilities together using one boat's mass, sailing performance and energy budget. The next step is to turn the allocated capabilities into compatible hardware and test their interfaces.
 
 ## What counts as an attempt
 
@@ -38,7 +38,7 @@ I monitor position, mode and health from shore. The boat makes its own navigatio
 
 I also want to build and handle the boat myself. Printed parts must fit a 250 × 250 × 250 mm build volume, while joined assemblies can be larger. Removable components and simple handling aids must make transport, launch and retrieval practical for one person. These owner constraints sit alongside the mission obligations in the [requirements](requirements.md).
 
-I decompose responsibilities before choosing hardware. A satisfy link identifies intended responsibility, while a verification case identifies how that allocation will be tested. Neither means the vessel has passed a physical test.
+The context view places the boat among the people and conditions it must respond to.
 
 ```sysml-view Page_architecture_0::context direction=TB
 package Page_architecture_0 {
@@ -52,13 +52,13 @@ package Page_architecture_0 {
 
 ## From use cases to allocated behavior
 
-I use the Object-Oriented Systems Engineering Method (OOSEM) to connect mission intent to equipment through requirements and allocated responsibilities. OpenSysML supplies the modeling tools; the diagrams below are views of that shared model. The context identifies the boat, operator, shore support, environment and other vessels. Use cases act on that complete context. Logical scenarios then describe the responsibilities needed to carry out those use cases, before I settle the implementation.
+I use OOSEM to work from what the mission needs to what each part of the boat must do. The three scenarios below describe normal sailing, avoiding traffic and recovering after an abort. OpenSysML renders these views from the shared model.
 
-The model refines three use cases with scenario threads. Their actions are allocated to the existing boat architecture; verification cases and the mission simulation are linked to those threads. The [executable mission supervisor](mission-simulation.md#executable-supervisory-logic) implements event responses, sailing permission and abort latching in the conceptual simulator. The scenario sequences describe broader responsibilities: sensing, heading search and physical actuation still need their own implementations and evidence.
+The [mission supervisor](mission-simulation.md#executable-supervisory-logic) implements part of these scenarios: it responds to events, permits or inhibits sailing, and remembers an abort so that sailing cannot silently resume. Sensor processing, steering decisions and physical actuation still need their own implementations and tests.
 
 ### Normal sailing
 
-A sailing cycle carries a typed wind estimate into command selection and a typed command into actuation. The estimate includes its timestamp and validity. The executable supervisor inhibits sailing while wind observations are unavailable and permits it when they return. A safety abort follows a separate, latched recovery path. The scenario describes the full observation-to-actuation responsibility; the simulator exercises the supervisory part alongside conceptual guidance.
+Each sailing cycle starts with a wind estimate carrying its value, timestamp and validity. Guidance chooses a command and the actuators carry it out. If wind observations disappear, the supervisor inhibits sailing; when they return, sailing can resume unless the attempt has already been aborted.
 
 ```sysml-view Page_architecture_normal::scenario direction=LR
 package Page_architecture_normal {
@@ -71,7 +71,7 @@ package Page_architecture_normal {
 
 ### Traffic encounter
 
-Observe, assess, maneuver and reassess. Both AIS and non-AIS vessels matter. The simulator supplies a predicted-conflict observation, and the supervisor identifies traffic-avoidance mode. Geometric maneuver assessment and heading selection remain in the conceptual guidance model. This thread gives the simulation and later sensor testing a common behavioral reference.
+Observe, assess, maneuver and reassess. The Automatic Identification System (AIS) broadcasts information from equipped vessels, but Blue Dog must also detect traffic that does not transmit. In the simulator, a predicted conflict triggers traffic-avoidance mode; the guidance calculation then chooses a maneuver. The [encounter study](encounter-feasibility.md) asks how early an observation must arrive for that response to work.
 
 ```sysml-view Page_architecture_traffic::scenario direction=LR
 package Page_architecture_traffic {
@@ -97,9 +97,9 @@ package Page_architecture_recovery {
 }
 ```
 
-The initial physical allocation puts autonomous estimation and decisions on an onboard platform. It leaves processor choice, software partitioning and redundancy open. Wind observation also has a concrete allocation to the challenge's wired sensor installation. Further physical-architecture work must develop these coarse allocations into compatible interfaces and implementations, supported by timing, power and failure evidence. The [method model](../models/vehicle/method.sysml) owns those links; the [development plan](current-assessment.md) tracks the maturity and remaining evidence for each layer.
+These responsibilities put estimation and decisions onboard. The wired wind sensor is a concrete starting point, while processor choice, software boundaries and backup equipment remain open. I need timing, power and fault tests to select compatible implementations. The [method model](../models/vehicle/method.sysml) records the assignments; the [current assessment](current-assessment.md) identifies the next investigations.
 
-The executable logical responsibilities include event handling, sailing permission, abort latching and the choice between an available recovery attempt and continued drift. Command delivery and maneuver completion are distinct timing events. The [mission simulator](mission-simulation.md#executable-supervisory-logic) records these decisions and their consequences; IC-01 explicitly allocates independent sensing, control, propulsion and power after a casualty. These capabilities remain unselected and physically unverified. Older conceptual configurations without those allocations cannot claim the same fallback.
+The [mission simulator](mission-simulation.md#executable-supervisory-logic) records the resulting decisions and motion, including the time between sending a command and completing a maneuver. That connection lets a scenario expose a missing capability rather than merely describe an intended sequence.
 
 <details>
 <summary>Subsystem responsibilities and supporting use cases</summary>

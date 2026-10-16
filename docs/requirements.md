@@ -24,4 +24,6 @@ Hawai‘i and sustained repeated operation are separate future missions. Their l
 
 Each reference starts with the design consequence, then offers expandable model views and authoritative statements. Repeated upstream requirements remain visible in the diagrams; their statements appear only at their first occurrence on each page. In a view, arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision and **dependency** records a design basis. These relationships explain why a requirement exists; evidence must separately establish whether a configuration meets it. The [modeling reference](methods/modeling.md) explains the notation and the distinction between requirements and provisional design assumptions.
 
-**Next:** [Sizing Blue Dog for the Gorge](results.md) · [Series guide](index.md)
+These obligations now have to fit in one boat. The next article shows why carrying sensing and independent recovery changed the candidate's mass and battery budget.
+
+**Next:** [IC-01 candidate results](results.md) · [Series guide](index.md)

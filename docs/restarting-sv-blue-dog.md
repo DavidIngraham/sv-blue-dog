@@ -36,7 +36,7 @@ I realized that open-source tools and SysML v2 could give the project some struc
 
 I am especially interested in how that model can structure an agent-driven development project. Agents can help explore alternatives and implement analyses quickly. I still need a shared description of what I am trying to achieve, why a choice was made and what would count as convincing evidence. Otherwise, producing more analysis can simply make the maze bigger.
 
-The [maturity assessment](current-assessment.md) connects the mission, requirements, architecture, analyses and experiments. I use it to understand what the evidence supports, where the gaps are and which question to tackle next. Those layers develop together as I learn more about the boat.
+The [current assessment](current-assessment.md) connects the mission, requirements, architecture, analyses and experiments. I use it to understand what the evidence supports, where the gaps are and which question to tackle next. Those layers develop together as I learn more about the boat.
 
 ### Try the configuration decisions
 
@@ -58,12 +58,12 @@ The applet lets you explore and save a proposed configuration. It does not run t
 
 | Configuration | Purpose | Dimensions and mass | Battery capacity |
 | --- | --- | --- | --- |
-| Earlier sizing reference | Explore nominal sailing and energy feasibility | 1.2 m overall length, 0.26 m beam, 10.313 kg | 440 Wh |
-| IC-01 | Bring sensing, sailing, energy and independent recovery into one candidate | 1.2 m overall length, 0.42 m beam, 20.061 kg | 1,300 Wh main + 60 Wh recovery |
+| Earlier sizing reference | Explore nominal sailing and energy feasibility | 1.2 m overall length, 0.26 m beam, 10.3 kg | 440 Wh |
+| IC-01 | Bring sensing, sailing, energy and independent recovery into one candidate | 1.2 m overall length, 0.42 m beam, 20.1 kg | 1,300 Wh main + 60 Wh recovery |
 
 That change in scale tells an important part of the story. The lighter reference has only about 4 Wh of calculated energy headroom. Credible sensing and a separately powered recovery system add electrical demand and equipment mass; supporting them changes the battery, hull and sailing solution together. IC-01 has about 102 Wh of main-pack headroom under its declared passage assumptions. The [candidate results](results.md) explain the calculation and the alternatives still worth investigating.
 
-The same IC-01 allocation now supports a bounded set of local sailing, encounter and casualty simulations: ten completed courses, eight safe aborted encounter approaches and six casualty or end-of-exposure recovery approaches. Those runs show that the allocated capabilities can work together in the modeled cases. They do not yet establish full Gorge-course coverage, physical recovery or an installed sensor system.
+Local simulations now exercise IC-01 sailing, avoiding encounters and recovering after failures. They give me a candidate to investigate, with the full Gorge voyage and physical boat still ahead. The [current assessment](current-assessment.md#integration-milestone) records the outcomes and their limits.
 
 The next decisions depend on measurements: which rig works best across both tacks, what the sensing installation actually consumes, how the boat maneuvers, and whether its independent recovery path works after a casualty. I will use component experiments and progressively integrated trials to turn IC-01 into a buildable design. The [current assessment](current-assessment.md) identifies which evidence would change those decisions.
 

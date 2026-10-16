@@ -79,8 +79,6 @@ package BlueDogSailTrade {
     analysis softAssessment : TradeAssessment { subject :>> candidate = softSail; }
     dependency durabilityCriterion from TradeAssessment to BlueDogRequirements::wetMechanicalIntegrity;
     dependency stormWindCriterion from TradeAssessment to BlueDogRequirements::gorgeSurvivalWind;
-    dependency stormWaveCriterion from TradeAssessment to BlueDogRequirements::oceanSurvivalWaves;
-    dependency energyCriterion from TradeAssessment to BlueDogRequirements::sustainedEnergyFeasibility;
     dependency progressCriterion from TradeAssessment to BlueDogRequirements::legProgress;
     dependency capsizeCriterion from TradeAssessment to BlueDogRequirements::selfRighting;
     dependency controlCriterion from TradeAssessment to BlueDogRequirements::capsizeControlRecovery;

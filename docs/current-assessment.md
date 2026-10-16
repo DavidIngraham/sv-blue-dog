@@ -2,7 +2,7 @@
 
 **Assessment: 16 October 2026** · [Candidate results](results.md) · [Development history](simulation-spirals.md)
 
-I intend to refine IC-01 into the first physical boat. The project has a connected mission model and a candidate that works across bounded simulations; the next step is to replace consequential assumptions with measurements and compatible hardware choices. The original CAD testbed is project history, not a separate planned build.
+I intend to refine IC-01 into the first physical boat. The project has a connected mission model and a candidate that works across bounded simulations; the next step is to replace consequential assumptions with measurements and compatible hardware choices.
 
 ## Current assessment
 
@@ -49,7 +49,7 @@ I prioritize evidence that could change the architecture or the conditions in wh
 
 1. **Sensing and maneuvering:** measure an identifiable pipeline’s target detection, latency, mass, power and thermal behavior together. Exercise hazards during maneuvers and compare achieved motion with predictions.
 2. **Independent recovery:** test observation, control and power isolation; upright and inverted thrust; startup and usable capacity. Survey approaches and demonstrate shore retention and one-person pickup.
-3. **Rig and construction:** compare soft sail, tail-controlled wing and directly rotated wing on equal terms for the finite Gorge mission. Measure loads, trim energy, material properties, joints and casualty behavior that could change the IC-01 design.
+3. **Rig and construction:** compare soft sail, tail-controlled wing and directly rotated wing on equal terms for the finite Gorge mission. The trade links use this mission’s criteria; future ocean-wave and repeating-endurance requirements are outside its scope. Measure loads, trim energy, material properties, joints and casualty behavior that could change the IC-01 design.
 4. **Integrated replay and trials:** replace provisional inputs with the measured envelopes, rerun the affected scenarios and expand physical trials within the demonstrated limits.
 
 ## Let risk select the next investigation
@@ -81,7 +81,7 @@ Traffic sensing and casualty recovery lead the safety investigations. IC-01 has 
 
 ### Risk reduction and closure
 
-The standard quantitative probability and impact fields remain unset. The qualitative classes live in explicitly named extensions of the same risk metadata. Unknown remains separate from a low assessment, and numerical regression results alone do not justify reducing a rating. The named owner coordinates the action; I review residual-risk dispositions. Planned tests and successful software checks alone do not reduce a physical risk rating.
+The standard quantitative probability and impact fields remain unset. The qualitative classes live in explicitly named extensions of the same risk metadata. Unknown remains separate from a low assessment, and numerical regression results alone do not justify reducing a rating. I coordinate the investigations and decide whether the remaining risk is acceptable. Planned tests and successful software checks alone do not reduce a physical risk rating.
 
 For each investigation, record the configuration, predicted observable, uncertainty and decision it could change before running it. Link the resulting evidence back into the model, reassess the risk and select the next action. Close a risk only with supporting evidence and an explicit disposition; otherwise retain it, restrict the concept's scope, or change the architecture. The inventory starts with six risk areas and must grow when analysis or experiments reveal omissions. It does not supersede the DFMEA or authorize field trials.
 

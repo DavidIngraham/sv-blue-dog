@@ -1,14 +1,16 @@
 # Manufacturing, structure and recovery
 
-**OOSEM:** Candidate physical architectures · [Maturity assessment](current-assessment.md)
+**OOSEM:** Candidate physical architectures · [Current assessment](current-assessment.md)
 
-Can I manufacture this boat within its mass budget, and recover safely after an upset? I use the candidate geometry, printed construction, glass laminate and flooding assumptions to connect [sizing](current-assessment.md#virtual-design) with [detailed design](current-assessment.md#detailed-design). Coupon and recovery experiments will decide how much confidence those calculations deserve.
+Can I build a sufficiently stiff boat without making it too heavy, and will its shape and sealed volumes help it recover after an upset? These are coupled questions. More laminate adds stiffness and mass; where that mass sits changes stability. A sealed wing adds buoyancy when immersed, while a leaking wing may lose that buoyancy or carry trapped water. I need to evaluate the construction and recovery behavior together.
 
 The original CAD work made construction part of the sizing problem. Printed walls and ribs, wet glass/epoxy, seams and finish contribute to mass. That design is historical; my first complete build will be a refined IC-01-scale boat. Component fixtures and coupons can answer construction questions before I commit to its geometry.
 
 ![SolidWorks rendering of the original testbed, showing the wing's internal structure and the hull, drive, keel and ballast arrangement.](figures/testbed-solidworks.png)
 
-The [weather-window mission](operating-constraints.md#gorge-weather-and-launch-windows) changes which sailing performance I emphasize, not the need to withstand loads or recover from a capsize. I keep those screens as hard constraints. Winter trials also need material, sealing and recovery evidence applicable to their temperature and weather conditions.
+## Account for the whole structure
+
+I count printed walls, ribs, laminate, joints and finish in the mass budget. I credit bending stiffness only where the structural model and material evidence support it. Coupon tests must establish properties under the intended wet and temperature conditions; assembly tests must then establish whether joints and attachments preserve the predicted load path.
 
 ![Construction section: a glass and epoxy skin surrounds the printed support and hollow interior.](figures/laminate-section.svg)
 
@@ -17,6 +19,9 @@ The [weather-window mission](operating-constraints.md#gorge-weather-and-launch-w
 I initially used 10 GPa stiffness and 50 MPa strength to explore the laminate sizing. Those remain unverified study inputs, not material acceptance floors. Coupon evidence establishes the properties I can credit; geometry and reinforcement must then satisfy the applicable loads and validated functional deformation limits. The [design-basis record](methods/modeling.md#requirements-versus-design-assumptions) separates these inputs from requirements, including the preliminary pressure, freeboard, reserve-buoyancy and launch screens.
 
 The current stiffness calculation uses finite laminate sections from inward offsets of the actual geometry. The calculation credits the glass laminate for bending while treating printed support, joints and attachments as separate evidence obligations.
+
+<details>
+<summary>Model links for strength, stiffness and proof-load checks</summary>
 
 ```sysml-view Page_structures_and_recovery_0::StrengthRelationships direction=BT
 package Page_structures_and_recovery_0 {
@@ -54,29 +59,35 @@ package Page_structures_and_recovery_1 {
 }
 ```
 
+</details>
+
+## Follow buoyancy and mass through a capsize
+
 ![Recovery concepts: a sealed wing retains air volume, a freely flooded wing exchanges water, and a water-retaining wing carries trapped water.](figures/recovery-states.svg)
 
 *Water ingress changes the wing’s buoyancy and carried mass. Recovery depends on both roll restoration and pitch stability.*
 
-The sizing search uses a coarse fixed-pitch recovery screen alongside sailing, structure and energy constraints. I then solve displaced volume and its centroid at a specified attitude, balance heave and pitch, and inspect full-roll restoring curves for several mast positions at the selected geometry. Positive roll moments do not establish a dynamic recovery path, particularly on a pitch-unstable branch. Sealed, freely flooded and retained-water cases answer different questions and remain separate. Restricting sailing heel in the aerodynamic policy does not restrict the full-roll recovery assessment or relax its requirements.
+The first sizing check asks whether buoyancy and gravity produce a moment toward upright at sampled roll angles. A fuller calculation also allows the hull to move vertically and pitch until displaced water balances its weight and fore-aft moment. I inspect the resulting righting curves at several rig positions.
 
-The smaller finite-passage candidates are checked separately from the older full-curve study. Their current sealed-wing probe samples six roll angles at four locked mast positions and records pitch stability as well as restoring direction. The [current sizing results](results.md) distinguish IC-01 from the earlier reference. Material stiffness remains an unmeasured input; the published static passes do not replace coupon and assembly tests. Positive roll restoration alone has not established self-righting.
+A moment toward upright is necessary evidence, but it does not establish that the boat will complete the motion. It could instead pitch into an unstable attitude, admit water or encounter a different balance as the rig moves. Sealed, freely flooded and trapped-water cases therefore remain separate. The full capsize assessment also extends well beyond the modest heel angles allowed in the sailing calculation.
+
+The smaller finite-passage candidates are checked separately from the older full-curve study. Their current sealed-wing probe samples six roll angles at four locked mast positions and records pitch stability as well as restoring direction. The [current sizing results](results.md) distinguish IC-01 from the earlier reference. These are static samples; dynamic releases must establish whether the boat preserves its safety functions while inverted and regains upright control.
 
 ## Archived 2.009 m ingress study
 
 The following archived 2.009 m reference study covers sealed, freely flooded and retained-water states in fresh and salt water. It contains pitch-unstable equilibria and adverse flooded-wing restoring samples. These are historical sensitivity results, not a replay of the smaller candidate; sealed-wing results cannot establish ingress tolerance.
 
+<details>
+<summary>Archived ingress results and full recovery curves for the 2.009 m reference</summary>
+
 ```sysml-report BlueDogEvidenceDocuments::Recovery
 ```
-
-<details>
-<summary>Archived full recovery curves for the 2.009 m reference</summary>
 
 ![Restoring moment versus heel for the archived 2.009 m reference, comparing sealed, freely flooded and water-retaining wing states. Crosses mark pitch-unstable equilibria.](figures/coupled-recovery.svg)
 
 </details>
 
-Unassisted self-righting and powered recovery answer different needs. A boat that rights itself and restores the required safety capabilities without intervention may continue qualifying. IC-01 also allocates inverted powered recovery for a casualty that cannot do so; using that path ends qualification. Neither sampled static righting moments nor a simulated shore approach demonstrates either physical capability.
+Unassisted self-righting and powered recovery answer different needs. A boat that preserves the required safety capabilities while inverted and regains upright control without motor use or intervention may continue qualifying. IC-01 also allocates inverted powered recovery for a casualty that cannot do so; using that path ends qualification. Neither sampled static righting moments nor a simulated shore approach demonstrates either physical capability.
 
 The model owns material assumptions, numerical allocations, practical handling constraints and their rationale. Wet coupons, assembly proof tests, ingress/drainage and dynamic releases must replace those assumptions with evidence before qualification.
 

@@ -1,14 +1,12 @@
 # Passage time, reliability and failure analysis
 
-**OOSEM:** Trades, optimization and analysis · [Maturity assessment](current-assessment.md)
+**OOSEM:** Trades, optimization and analysis · [Current assessment](current-assessment.md)
 
 A slower voyage demands more hours of successful unattended operation. I use passage estimates and the architecture to ask what can fail during that exposure, and how the boat should respond. This connects [preliminary design](current-assessment.md#virtual-design) to the fault and endurance tests needed for [physical verification](current-assessment.md#physical-validation).
 
-The finite Gorge round trip is the current design objective. I connect sailing progress, passage duration and reliability exposure to compare the chance of completing that mission. The sizing study uses conservative aerodynamic assumptions for its primary case. Its passage times are conditional estimates, not measured endurance or demonstrated reliability; the [candidate results](results.md) identify the configurations behind them.
+The [candidate passage estimates](results.md) give me exposure times to investigate. I still need evidence about the failures that can occur during those hours.
 
 ## Can a faster boat be more likely to finish?
-
-Could a faster boat be more likely to finish, even if it is more failure-prone per hour?
 
 A slow boat has to keep everything working for longer. Under a constant critical-failure rate, survival is `exp(−failure rate × exposure time)`. Halving the passage time permits twice the hourly rate at the same survival probability. The [NIST exponential reliability model](https://itl.nist.gov/div898/handbook/apr/section1/apr161.htm) gives a simple starting point for that trade.
 
@@ -32,9 +30,9 @@ The native [passage-exposure analysis](../models/analyses/passage-exposure.sysml
 
 The current mission has no completion deadline and retains protected recovery reserve. Its battery may finish below its starting charge if reserve and peak-power requirements remain satisfied throughout the voyage. Repeating the same energy cycle indefinitely is a separate future objective.
 
-The chronological energy model reports finite-campaign feasibility separately from repeatable-cycle feasibility. The current sizing search retains peak-power checks without imposing daily energy balance. IC-01 already supplies candidate-specific performance and electrical loads to local chronological encounters and recovery cases. Extending that evidence to complete charted-course histories and condition-dependent failure exposure remains necessary before comparing mission-success probability. A static mass or passage-time optimum does not answer that question.
+IC-01 has been exercised in local encounter and recovery simulations. Comparing its chance of completing the mission requires full-course histories with failures tied to the conditions, loads and operating time along each route.
 
-Hawaii will require its own route, season, passage duration, communications, saltwater exposure and recovery allocations. The model keeps the candidate ocean requirements for that future work, without making them prerequisites for the Gorge boat.
+Hawai‘i and repeated operation need separate endurance studies; the present comparison concerns one Gorge round trip.
 
 ```sysml-view Page_reliability_0::CruiseSemantics direction=BT
 package Page_reliability_0 {
@@ -72,7 +70,9 @@ package Page_reliability_1 {
 }
 ```
 
-The native weather analysis named `primary` refers to the archived 2.009 m boat. Its current evaluation passes the westerly route screen and fails the easterly screen. It must not be read as a current IC-01 result. IC-01's nominal westerly pass likewise does not establish all-season easterly capability. The [weather-window study](operating-constraints.md#gorge-weather-and-launch-windows) separates selected westerly conditions from easterly exposure.
+## Combine weather and failure exposure
+
+The [weather-window study](operating-constraints.md#gorge-weather-and-launch-windows) explains how a favorable launch window can change during the passage. IC-01's nominal westerly result does not establish all-season capability.
 
 Weather-route success and hardware survival are different quantities. A useful comparison must combine them over complete trajectories, including failed routes and holds. Applying a hazard rate only to the average successful passage would omit important risk. No weather probability has been accepted as an allocation of the mission reliability target.
 
@@ -100,6 +100,6 @@ package Page_reliability_2 {
 }
 ```
 
-The [DFMEA model](../models/analyses/dfmea.sysml) owns the failure hypotheses, effects, proposed actions and architecture/requirement dependencies. The [reliability analysis](../models/analyses/reliability.sysml) owns the exposure calculation and evidence gates. Neither an open DFMEA action nor a synthetic rate estimate establishes achieved reliability.
+My next comparison needs measured sailing and maneuvering performance, followed by failure evidence appropriate to each mechanism. The [DFMEA](../models/analyses/dfmea.sysml) helps choose those tests; the [reliability analysis](../models/analyses/reliability.sysml) connects their results to passage exposure.
 
 **Next:** [From virtual evidence to water trials](validation-plan.md) · [Series guide](index.md)

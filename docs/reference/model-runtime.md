@@ -45,3 +45,40 @@ Adding a supported calculation to the declarative library requires its SysML def
 
 
 [Modeling method](../methods/modeling.md) · [Contributor guide](authoring.md)
+
+## Mission actions and records
+
+The [mission supervisor](../../models/vehicle/mission-logic.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing permission, operating mode, abort latching and whether an abort alert is attempted or queued. `RecoveryAuthority` permits recovery after primary steering or power loss only when an explicitly independent, powered path is supplied. `FallbackPolicy` decides whether the available, permitted recovery path can be attempted or the vessel must continue drifting. Dependencies connect these actions to the normal-sailing, traffic-encounter and abort/recovery scenarios; the supervisor is allocated to the onboard mission manager.
+
+Python supplies observations, computes chart and traffic geometry, ranks feasible headings and integrates motion and energy. It dispatches the action outputs to those mechanisms. The supervisor's traffic mode identifies a predicted encounter; avoidance geometry and maneuver selection remain conceptual Python calculations. This is a partial executable logical architecture, not a complete autopilot or a verified sensing system.
+
+The capsize path requires explicit observations: safety functions remain available
+while inverted, then unassisted righting restores upright operation. Between
+those observations the simulated boat drifts with the current, consumes energy
+and remains exposed to chart and traffic hazards. It cannot sail, score gate
+crossings or collect solar energy. Missing safety evidence triggers abort. This
+tests the qualification policy; it does not predict righting dynamics or supply
+evidence that the physical boat can recover.
+
+Each result includes `logic_trace`, with the action name, simulation time, input facts and output decisions for events and changed supervisory decisions. The abort latch and memoized pure action results are scoped to one simulation. Execution sessions check model provenance, and campaign records include the source hashes. These records support explaining a simulated decision; they do not establish physical capability.
+
+
+## Reproducing mission campaigns
+
+Run the original conceptual campaign with `uv run python -m tools.boat_analysis.mission.campaign --count 32`, or add `--candidate build/analysis/sizing-continuation.json` for a freshly checked sizing result. It records the model inputs, source hashes, seeds, generated traffic counts, gate events and chronological histories. The numerical horizon can be extended without turning incomplete observations into failures.
+
+Forecast-service loss and forecast invalidity are separate scenario events. A service outage alone preserves the qualifying attempt; a forecast declared no longer applicable triggers autonomous recovery. A manually supplied weather update disqualifies the attempt. These cases exercise mission policy; they do not yet validate a forecast-applicability estimator or an operational weather-service integration.
+
+
+## Reproducing the IC-01 integration
+
+Prepare the pinned model/runtime inputs, then run the allocated sizing and mission phases:
+
+```sh
+uv run python -m tools.boat_analysis.cli prepare
+uv run python -m tools.boat_analysis.mission.integrated --phase all
+```
+
+The sizing phase supplies a freshly evaluated candidate to the mission phase. Records retain model and driver hashes, trajectories, both energy accounts and acceptance facts. An explicitly supplied warm start can accelerate the solve; it is reevaluated before becoming acceptance evidence.
+
+For installed sensing inputs, the [measurement format and importer](sensing-measurements.md) records the pipeline identity, synchronized observations and power, source hashes and any base electronics load replaced by shared compute. Synthetic regression fixtures remain labeled `synthetic-test`; they do not qualify hardware.

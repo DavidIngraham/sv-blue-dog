@@ -5,7 +5,7 @@
 - Audience: technically minded, new to this project, familiar with basic systems engineering but not necessarily SysML.
 - Voice: personal first-person singular for owner decisions; plain, precise prose. Explain the engineering question, choices, evidence and consequence. Define specialist terms on first use. Avoid bureaucratic process narration, excessive disclaimers and unexplained "we" or "design team".
 - IC-01 is the current working integration candidate. A refined IC-01-scale vessel is the intended FIRST physical build. The original CAD testbed is historical only, not a planned separate build. Component experiments still support the first build.
-- Capsize alone must not end qualification when unassisted recovery restores required safety capabilities. Motor use, external intervention, or loss of required safety capability still end qualification. Inverted powered recovery is a disqualified recovery path.
+- Capsize alone must not end qualification when required safety capabilities remain available while inverted and unassisted righting restores upright control. Motor use, external intervention, or loss of required safety capability still end qualification. Inverted powered recovery is a disqualified recovery path.
 - Compare soft sail, tail-controlled rigid wing and directly rotated fixed-camber wing equally for the finite Gorge mission. No selected rig or installed sensing stack is implied.
 - Restructure freely: URLs, historical navigation and article boundaries are not constraints. Consolidate repeated material; retain useful evidence and provenance, not redundant public pages.
 - Publish after checks. User expressly authorized publication. Do not ask again.
@@ -35,3 +35,11 @@ The 14-article reading path is in `docs/index.md`. The current assessment and si
 The native supervisor distinguishes a safe, explicitly observed unassisted righting from a disqualifying casualty. The simulator suspends sailing and gate scoring while inverted; no righting dynamics or physical capability is inferred. Three rig concepts receive equal development consideration. Historical experiment bytes and source provenance remain unchanged.
 
 Validation: 75 model documents parsed with no MCP diagnostics; 50 focused model/behavior checks passed. The full 496-test run passed 494 checks and identified two publishing identity failures caused by deduplicated statements. After fixing mixed native/compact diagram identity handling, all 41 affected documentation, model-view and traceability checks passed, including a new mixed-label regression. The 32-page publishing build and rendered-browser checks passed; geometry/reset, risk filters/details and expanded native diagrams were exercised. The JavaScript geometry and risk contracts passed for both site implementations.
+
+## Readability follow-up
+
+The independent review was read against published revision `78129ee`. Its follow-up centers the main articles on engineering questions and decisions, moves statistical/history/runtime detail into disclosures or references, puts IC-01 first in the energy account, and explains maneuver clocks with an example. Prose columns are bounded at 74ch while figures and tables remain wider. Assessment labels and the candidate-results title are consistent across both sites.
+
+Removed only the rig trade’s stale dependencies on future ocean-wave survival and repeating-endurance requirements. Future requirement definitions and immutable evidence remain intact. The pinned native assessments still report all three rigs as equal development contenders with incomplete evidence.
+
+Follow-up validation: model preparation passed. The full suite passed 496 of 497 checks; the sole failure required accessibility metadata on the new energy illustration. After adding its title and description, all 17 affected documentation, relationship and budget checks passed. The 32-page publishing build succeeded. Browser inspection confirmed readable prose widths, working disclosures, the revised energy diagram and mission headings, and the operating-envelope lead; no console errors were observed on those pages.

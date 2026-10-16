@@ -1,6 +1,6 @@
 # Developing the mission simulation in spirals
 
-**OOSEM:** Mission, architecture, analysis and evidence · [Current maturity](current-assessment.md) · [Simulation methods](mission-simulation.md)
+**OOSEM:** Mission, architecture, analysis and evidence · [Current assessment](current-assessment.md) · [Simulation methods](mission-simulation.md)
 
 I want to understand how a small autonomous sailboat can complete the Gorge round trip, and what would stop it. Answering that takes more than a detailed model of any one component. The boat has to make progress, avoid traffic, manage its energy and retain a way to recover, all in the same voyage.
 
@@ -140,6 +140,10 @@ Gorge comparison. The current wing-based sizing calculation remains one
 candidate realization; it does not supply comparable physical evidence for
 selecting a rig.
 
+## Keep rig criteria within the mission being compared
+
+The 16 October traceability review found two future-mission dependencies still attached to the finite Gorge rig trade: ocean survival waves and repeating-operation energy feasibility. I removed those links from the current comparison while retaining the future requirements in their own scope. The native assessments still give all three rigs equal development status with incomplete evidence. This corrects the basis of the comparison; it supplies no new performance or physical qualification evidence. The next useful comparison remains common measurements of performance, trim energy and recovery under Gorge conditions.
+
 ### Evidence through each iteration
 
 For me, fidelity means representing the effects that matter to a decision with enough accuracy. Traceability means being able to explain which mission obligation, design, assumptions and evidence produced the conclusion. A more detailed model can strengthen one part of that chain while exposing a weakness in another.
@@ -154,7 +158,7 @@ For me, fidelity means representing the effects that matter to a decision with e
 
 The [archived-run provenance](https://github.com/DavidIngraham/sv-blue-dog/commit/e80e46d) preserves the identity of each experiment. Comparing spirals means comparing identifiable configurations and assumptions. A new course, different candidate or changed sea model needs an explicit comparison before a difference in outcomes can be attributed to one improvement.
 
-The next spirals should connect measurements to the mission: wing and actuator tests to sailing and maneuver predictions; installed loads and battery tests to endurance; sensor replay and site surveys to traffic decisions and recovery. Each experiment should have a predicted observable and a decision it could change. I then replay the affected missions and update the [maturity assessment](current-assessment.md) according to the evidence, including results that narrow the boat's usable envelope.
+The next spirals should connect measurements to the mission: wing and actuator tests to sailing and maneuver predictions; installed loads and battery tests to endurance; sensor replay and site surveys to traffic decisions and recovery. Each experiment should have a predicted observable and a decision it could change. I then replay the affected missions and update the [current assessment](current-assessment.md) according to the evidence, including results that narrow the boat's usable envelope.
 
 The aim is a progressively better explanation of what Blue Dog can do, under which conditions, and why I believe it.
 

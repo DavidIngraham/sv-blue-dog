@@ -1,32 +1,43 @@
 # Power and energy budget for the Gorge candidate
 
-**OOSEM:** Trades, optimization and analysis · [Maturity assessment](current-assessment.md)
+**OOSEM:** Trades, optimization and analysis · [Current assessment](current-assessment.md)
 
-The budget distinguishes **IC-01, the integration candidate**, from the retained **440 Wh sizing reference**. Each has its own geometry, equipment demand, performance and energy evidence. Equipment allocations remain provisional; neither budget is measured installed consumption or a completed hardware selection.
+Can IC-01 power its sensors and controls for the passage and still recover after a fault? I budget the main and recovery batteries separately, using the sailing performance of the same candidate. The answer currently depends on allocated equipment loads; measuring the installation is the next test of that budget.
 
 <a id="installed-load-rollup-and-its-limits"></a>
 ## Current candidate budget
 
-IC-01 allocates a **1,300 Wh main pack** and a **60 Wh independent recovery pack**. Its electronics include the existing 4.5 W base allocation and 0.07049 W wind installation plus **8 W additional sensing/compute demand**. Actuation comes from its own solved operating states. The model includes **1.2 kg additional equipment**, with recovery-battery mass separately derived from the existing specific-energy assumption. These are simultaneous capability and load targets; no selected installation has demonstrated them.
+IC-01 allocates a **1,300 Wh main pack** and a **60 Wh independent recovery pack**. Its electronics include the existing 4.5 W base allocation and about 0.07 W wind installation plus **8 W additional sensing/compute demand**. Actuation comes from its own solved operating states. The model includes **1.2 kg additional equipment**, with recovery-battery mass separately derived from the existing specific-energy assumption. These are simultaneous capability and load targets; no selected installation has demonstrated them.
 
 The independent pack begins with **43.2 Wh**, after the allocated 80% usable and 90% departure fractions. It draws **0.05 W standby** during sailing. Active recovery uses battery-side allocations of **50 W propulsion + 8 W essentials upright**, or **40 W + 8 W inverted**, with a 1.2 route-energy factor and 2 Wh arrival allowance. Allocated water-relative speeds are 1.5 m/s upright and 0.5 m/s inverted. The [native candidate](../models/analyses/integrated-candidate.sysml) and [recovery route model](../models/libraries/marine/recovery.sysml) own those assumptions. The main-pack screen retains its existing protected reserve as additional conservatism; no transfer between packs is credited.
 
 The [integration study](encounter-feasibility.md#close-the-candidate-loop) checks local chronological energy, the main pack's nominal full-passage screen, standby exposure and sampled recovery reachability together. These are distinct scopes: initializing a recovery bank after passage standby does not create a full-course voyage trajectory. Solar harvest is disabled. Primary sailing load shuts down on abort in the allocated architecture, and recovery draws from its independent account. Hardware peaks, conversion, thermal behavior and fault isolation still need installed measurements.
 
-The [IC-01 replay](../evidence/runs/2026-10-15-integrated-candidate/integrated-sizing.json) gives the following budget for that configuration:
+The [IC-01 calculation](../evidence/runs/2026-10-15-integrated-candidate/integrated-sizing.json) gives the following budget. Values are rounded here; the linked record retains the numerical precision:
 
 | Account | Value | Basis |
 | --- | --- | --- |
-| Maximum sampled average sailing load | 12.916 W | Electronics, wind installation and candidate actuation at the bus |
-| Maximum sampled peak sailing load | 15.633 W | Operating samples; not a measured surge envelope |
-| Main usable capacity / departure energy | 1,040.000 / 936.000 Wh | 80% usable capacity, then 90% departure fraction |
-| Energy exposure | 54.605 h | 38.884 h nominal passage × 1.25, plus 6 h |
-| Required main-pack energy | 833.938 Wh | Sailing withdrawal, discharge losses, self-discharge and 49.2 Wh reserve |
-| Remaining main-pack headroom | 102.062 Wh | Departure minus required energy |
-| Independent recovery departure | 43.200 Wh | Separate account, unavailable to ordinary sailing |
-| Independent recovery after exposure standby | 40.470 Wh | 0.05 W standby over the same 54.605 h |
+| Maximum sampled average sailing load | 12.9 W | Electronics, wind installation and candidate actuation at the bus |
+| Maximum sampled peak sailing load | 15.6 W | Operating samples; not a measured surge envelope |
+| Main usable capacity / departure energy | 1,040 / 936 Wh | 80% usable capacity, then 90% departure fraction |
+| Energy exposure | 54.6 h | 38.9 h nominal passage × 1.25, plus 6 h |
+| Required main-pack energy | 834 Wh | Sailing withdrawal, discharge losses, self-discharge and 49.2 Wh reserve |
+| Remaining main-pack headroom | 102 Wh | Departure minus required energy |
+| Independent recovery departure | 43.2 Wh | Separate account, unavailable to ordinary sailing |
+| Independent recovery after exposure standby | 40.5 Wh | 0.05 W standby over the same 54.6 h |
 
 Capacity, departure and remaining-energy rows are successive account states, not additive loads. Recovery route demand is evaluated against the independent account. The additional 8 W remains a target requiring simultaneous sensing-performance evidence; the nominal margin does not authorize arbitrary extra equipment.
+
+## What could change this budget?
+
+The 4.5 W base electronics allocation and additional 8 W sensing/compute target must become a measured installation budget. Acquisition, processing, communications, cooling and conversion all count. If a shared processor replaces an existing controller, I subtract the replaced load once before adding the complete new installation.
+
+The earlier 440 Wh reference shows why this matters: its nominal headroom is only **4 Wh**. Even a small continuous addition requires more storage. The resulting mass changes sailing performance and passage time, so I must resize the candidate rather than divide the extra energy by a battery’s specific energy and call the design finished. IC-01 is one coupled response to that problem.
+
+At IC-01’s 54.6-hour exposure, an extra watt drawn continuously from the battery costs about **54.6 Wh** before any change to passage time. Duty cycling saves energy only if the observation gaps still permit a timely response to traffic. The [sensing comparison](encounter-feasibility.md#choosing-an-installed-sensing-stack) sets out the performance evidence that must accompany a power measurement.
+
+<details>
+<summary>Earlier 440 Wh reference: detailed ledger and fixed-passage sensitivity</summary>
 
 ## Retained 440 Wh reference budget
 
@@ -43,14 +54,16 @@ This finite-passage screen credits **no solar harvest**. The [chronological simu
 
 The [native budget](../models/analyses/candidate-energy.sysml) reconstructs the [retained replay](../evidence/runs/2026-10-13-srr-readiness/srr-readiness.json). Its [generated inputs](../models/evidence/srr-current.sysml) retain the archived parameters, governing cases and source revision. Native assertions reconcile average power, peak power, departure energy and required energy with that replay. Updating hardware assumptions requires a new replay; editing this report cannot silently make an archived candidate feasible.
 
-## Equipment still needing an allocation
+<a id="equipment-still-needing-an-allocation"></a>
+### Unresolved loads in the earlier reference
 
 ```sysml-report BlueDogCandidateEnergyDocuments::MissingAllocations
 ```
 
 The reference's **4.5 W electronics line is one unresolved allowance**, not a sum of established component budgets. Its function list describes intended coverage, not proof those functions fit. IC-01 adds an explicit 8 W capability target, but camera/sonar acquisition and avoidance inference still have no measured component allocation. Unknown demand is not zero, and none of the proposed sensing capabilities is credited as installed. A selected stack must replace the lump with measured component/mode loads, accounting once for any shared processor, then pass sizing and chronological passage/recovery replay.
 
-## What an additional watt costs
+<a id="what-an-additional-watt-costs"></a>
+### What an additional watt costs in the reference
 
 For a transparent first sensitivity, hold the published 33.87-hour passage fixed and apply the existing 1.25 duration multiplier plus six hours: **48.34 hours** of exposure. The following are hypothetical *additional battery-withdrawal powers*, not sensor specifications or a resized vessel. Their energy is power times exposure; loads specified at a regulated bus would also need battery discharge losses.
 
@@ -64,6 +77,8 @@ For a transparent first sensitivity, hold the published 33.87-hour passage fixed
 This arithmetic identifies sensitivity, not a feasible battery choice. Resizing changes mass, sailing performance, passage time, packaging and recovery energy. IC-01 evaluates those couplings for one allocated hypothesis; measured or alternative pipelines require their own replay. If new compute replaces the existing controller, account for the replacement once rather than adding the full old and new loads. Duty cycling is admissible only when the resulting observation gaps still meet encounter timing needs.
 
 The [sensing and encounter comparison](encounter-feasibility.md#choosing-an-installed-sensing-stack) examines the complementary observations and measured performance needed to justify those loads.
+
+</details>
 
 ## Illustrative load-accounting example
 
@@ -81,8 +96,12 @@ This [example configuration](../models/configurations/energy.sysml) demonstrates
 
 The [wind-observation thread](requirements/requirements-autonomy.md#wind-observation) connects autonomous sailing to the observations needed for trim. The vessel-powered ULP Wired Mini is the current sizing allocation. My battery-powered Bluetooth Portable Mini remains available for component experiments; it does not define a separate planned testbed build.
 
-```sysml-report BlueDogWindDocuments::WindEquipment
-```
+| Installation | Role | Energy accounting |
+| --- | --- | --- |
+| ULP Wired Mini | Current candidate allocation | Continuous vessel power, including interface and conversion allowances |
+| Bluetooth Portable Mini | Component experiments | Its own battery, charged ashore |
+
+The [native equipment record](../models/configurations/wind-equipment.sysml) retains supplier specifications and installation allowances.
 
 The portable sensor carries its own battery and is charged ashore. Its supplier runtime is a planning input for individual tests. The sizing allocation budgets the wired sensor continuously, including conversion losses and an interface allowance. Installed mass includes the mount and cabling; the sizing model accounts for the installation's elevated center of gravity. These allowances and their sources live in the [equipment model](../models/configurations/wind-equipment.sysml), separately from the manufacturer's specifications.
 
@@ -92,21 +111,26 @@ The wired component allocation feeds the current energy and mass calculations, i
 
 ```mermaid
 flowchart TB
-    accTitle: Energy through the mission
-    accDescr: Solar collection charges usable storage through conversion losses. Storage supplies standby and active loads. The chronological calculation checks the lowest reserve, while a separate check assesses peak demand.
-    sun["Solar collection and conversion losses"] --> battery["Usable stored energy over time"]
-    battery --> loads["Standby + sensing + communications + actuator duty"]
-    battery --> reserve["Lowest reserve: include darkness and outages"]
-    loads --> peak["Separate peak-current check"]
+    accTitle: IC-01 main and independent recovery energy accounts
+    accDescr: The main battery supplies sailing functions. The independent recovery battery supplies standby during sailing and propulsion plus essential functions after abort. Remaining energy and peak supply are checked separately.
+    main["Main battery"] --> sailing["Sensing, control, communications and actuation"]
+    recovery["Independent recovery battery"] --> standby["Standby during sailing"]
+    recovery --> active["Recovery propulsion and essential functions after abort"]
+    sailing --> check["Check remaining energy and peak supply separately"]
+    standby --> check
+    active --> check
 ```
 
-This diagram describes the general energy framework; IC-01 takes no solar credit. It separates energy over time from instantaneous power. A positive daily balance can still hide an overnight reserve shortfall or a peak the supply cannot deliver.
+IC-01 credits no solar harvest in either its static passage screen or its local integration record. The static screen carries the maximum sampled average load through a conservative passage allowance. The [chronological simulation](mission-simulation.md#two-batteries-through-the-voyage) follows the actual sequence of sailing, standby, abort and recovery. Their totals answer different questions and must not be added together.
 
-The reusable energy framework adds the installed loads once, including standby demand and conversion losses, then propagates stored energy through a chronological mission profile. An explicit timeline prevents declaration order from becoming an accidental mission schedule. Peak supply demand is checked separately from average energy balance.
+Peak supply capability is a separate question from stored energy. Moving a wing, holding it still and powering its controller create different loads. A non-backdrivable drive may reduce holding current while introducing a locked failure state. The sampled peak is therefore a design input to test against measured start, stall and simultaneous-load behavior.
 
-The framework accounts for usable storage, charge/discharge limits and efficiencies, self-discharge, intermittent harvesting and the recovery reserve. The calculation splits intervals where an outage, duty change or burst can change the minimum stored energy; averages alone cannot establish transient capability. The active coupled sizing screen checks instantaneous peak demand and a finite no-harvest passage allowance: the predicted westerly trip, an explicit duration multiplier and delay, and recovery reserve. Daily balance and a fixed overnight duration are not challenge criteria. The [mission simulation](mission-simulation.md) follows weather, solar collection, sailing maneuvers and load through the actual voyage. The simulator can load candidate-specific storage, solved demand and panel area; a hypothetical configuration is also available for controlled comparisons. Candidate load and battery assumptions still need hardware measurements. Archived sizing results retain their original constraints.
+The reusable framework can model harvest, charge limits, losses, outages and duty changes. For a future solar-assisted scenario, I would use the same weather trajectory for sailing progress, daylight, cloud and energy. An average daily surplus cannot excuse an empty battery during a particular night or recovery.
 
-The [seasonal weather policy](operating-constraints.md#gorge-weather-and-launch-windows) separates the westerly weather-window challenge from winter testing and later year-round operation. A winter trial cannot inherit a warm-season harvest assumption. The mission trajectory couples wind direction and duration to daylight, cloud, maneuver demand and drift; probability-weighted daily surplus cannot excuse an empty battery on a particular trip. The archived energy stress cases retain their failed status regardless of how often easterlies occur.
+<details>
+<summary>Future sustained operation: repeating-energy requirements</summary>
+
+These requirements address sustained repeated operation, beyond the finite Gorge mission. They are retained here as a reference for the reusable energy framework.
 
 ```sysml-view Page_energy_0::EnergySemantics direction=BT
 package Page_energy_0 {
@@ -128,17 +152,12 @@ package Page_energy_0 {
 }
 ```
 
-Moving a wing and holding it still are different electrical loads. A non-backdrivable drive may reduce motor holding current but still consumes controller power and incurs moving losses. Its locked failure state also affects recovery. The sizing calculation treats direct aerodynamic moment uncertainty independently of credited lift: lowering the assumed propulsion benefit does not automatically lower the direct pitching-moment load. Both quantities still need measurements.
-
-The current finite-passage search sizes battery capacity with geometry and mass. Solar collection can be credited in a separately declared chronological scenario; neither IC-01's static screen nor its local integration record credits it. The [results](results.md) distinguish static sizing allowances, actual simulated durations and performance-model coverage gaps. This is a virtual design study; the energy-evidence decision still requires measurements of the installed configuration before physical acceptance.
-
-[Sizing](sizing.md) couples these loads to geometry and motion using conservative aerodynamic assumptions. The selected installation will also need replay under adverse energy and combined loading assumptions. [Reliability](reliability.md) considers how passage time increases unattended exposure.
-
+</details>
 
 ## Reconcile measured installation loads
 
 A shared-compute installation replaces a declared part of the base electronics load and adds its measured complete stack load. The [native calculation](../models/analyses/encounter-feasibility.sysml) uses **increment = measured bus load − explicitly replaced base load**; the [measurement procedure](validation-plan.md#measure-sensing-and-shared-compute-as-an-installation) retains power, latency, misses and configuration together. This keeps acquisition and processing from being counted twice.
 
-No measured installation has been supplied. The four earlier sensing stacks remain hypotheses; IC-01 is a resized working candidate with an allocated capability target, rather than a selected hardware stack. The importer supplies a fixed-passage nameplate-capacity lower bound using the retained candidate's demand, usable fraction and departure charge. Added battery mass, propulsion demand, packaging and passage time require a coupled solve before that number can become a candidate budget. Compare measured pipelines on the same held-out encounters, then replay the feasible resized candidates chronologically.
+No measured installation has been supplied. The four earlier sensing stacks remain hypotheses; IC-01 is a resized working candidate with an allocated capability target, rather than a selected hardware stack. The [measurement workflow](reference/sensing-measurements.md) also provides a fixed-passage capacity bound using the earlier reference’s demand, usable fraction and departure charge. Added battery mass, propulsion demand, packaging and passage time require a coupled solve before that number can become a candidate budget. Compare measured pipelines on the same held-out encounters, then replay the feasible resized candidates chronologically.
 
 **Next:** [Sailing the challenge before building the boat](mission-simulation.md) · [Series guide](index.md)
