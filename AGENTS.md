@@ -27,6 +27,38 @@ current project and author viewpoint, not editing history, migrations or previou
 blog structures. Preserve substantive technical provenance and configuration
 limits without narrating the reorganization.
 
+## Blog organization and editorial maintenance
+
+Organize the main articles by OOSEM methods and their engineering questions:
+mission and stakeholder needs, system requirements and scenarios, logical
+architecture, candidate physical architectures, trades and analysis, and
+verification and validation. Present a consistent snapshot of the current
+project across those articles. An article may connect several methods, but its
+purpose and navigation should follow the engineering method, not a development
+iteration, commit, experiment date or implementation milestone.
+
+Update the established method articles in place when the model, simulator,
+architecture, assumptions or evidence change. Reconcile affected explanations,
+figures, tables, navigation and the current maturity assessment together. Do not
+create a new main article for each completed iteration or append a running change
+log to an existing article. Create a new article only for a distinct, durable
+method or engineering subject that does not fit the existing coverage.
+
+Use `docs/simulation-spirals.md` as the canonical running development history.
+For each substantive spiral, record the question, enabling assumptions, capability
+and fidelity added, trade progress, evidence, findings and remaining gaps; link
+to the current method articles and immutable experiment records. Keep earlier
+spiral conclusions scoped to their original configuration rather than rewriting
+them as current evidence. The dated maturity assessment describes current
+coverage and next investigations; it is not a chronological diary.
+
+Preserve the introductory personal story. Main articles may cite dated experiments
+and historical sources when needed for technical provenance, but should explain
+current methods, decisions and limits without narrating edits, migrations or how
+the blog used to be organized. Before publishing, check related articles for stale
+or contradictory claims and update the spiral log when substantive engineering
+work has been completed.
+
 Python owns SciPy search, numerical quadrature, geometry, tool integration and
 pytest orchestration. The compiled batch adapter serves repeated numerical
 evaluations; prefer native OpenSysML APIs for ordinary model operations.
