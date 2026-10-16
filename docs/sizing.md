@@ -4,6 +4,8 @@
 
 The design mission is the finite Gorge round trip. The static search enforces peak-power capability and a finite-passage battery allowance; daily energy balance and a completion deadline are not acceptance criteria. Each candidate can then drive the chronological mission simulation. The optimizer uses the passage screen, not a calibrated mission-success probability or an embedded Monte Carlo solve. Dynamic planing and speed-dependent failure exposure also need validated models; current results do not select between planing and displacement hulls.
 
+The [integration candidate IC-01](../models/analyses/integrated-candidate.sysml) applies the same method to an explicit sensing and independent-recovery allocation. Added equipment demand and mass enter the coupled solve before the mission receives its performance envelope and energy accounts. A hull outside the resistance model's geometry domain cannot provide accepted sailing performance. Static feasibility, supported sailing states and successful mission/recovery cases must hold together for the [integration milestone](development-plan.md#integration-milestone). The retained 440 Wh result remains a separately identified sizing reference.
+
 How small can Blue Dog be and still make headway upriver? For [preliminary design](development-plan.md#virtual-design), I start with the route, wind and current assumptions, then vary the hull, wing, ballast and energy system together. I want to find which designs are worth developing and which assumptions I most need to test.
 
 ![Sailing force balance: wing drive must overcome hull drag, while the keel resists side force and ballast supplies a restoring moment. Ground progress also includes current.](figures/sailing-forces.svg)

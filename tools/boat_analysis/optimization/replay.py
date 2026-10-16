@@ -27,13 +27,27 @@ def operating_case(model,design,wind,up,tack,state,budget):
     return diagnostic
 
 
-def verify(name,design,initial,scenarios,budget=35,route_profile='challenge'):
+def _operating_worker(arguments):
+    parameters,design,wind,up,tack,state,budget=arguments
+    model=CoupledModel();model.parameters=np.asarray(parameters)
+    return operating_case(model,design,wind,up,tack,state,budget)
+
+
+def verify(name,design,initial,scenarios,budget=35,route_profile='challenge',workers=1):
     if route_profile not in ('challenge','all-season'):raise ValueError('Unknown route profile')
     model=CoupledModel();model.parameters=np.array(scenarios['values'][name])
     x=np.array([design[n] for n in model.c['designNames']]);rows=[]
     env=[(w,u,t) for w in model.operating_contract['windSpeeds'] for u in [True,False] for t in [1,-1]]
-    for state,(wind,up,tack) in zip(initial,env):
-        rows.append(operating_case(model,x,wind,up,tack,state,budget))
+    if workers<1:raise ValueError('Positive operating worker count required')
+    if len(initial)!=len(env):raise ValueError('One initial state per operating case required')
+    if workers==1:
+        for state,(wind,up,tack) in zip(initial,env):
+            rows.append(operating_case(model,x,wind,up,tack,state,budget))
+    else:
+        from multiprocessing import get_context
+        jobs=[(model.parameters,x,wind,up,tack,state,budget) for state,(wind,up,tack) in zip(initial,env)]
+        with ProcessPoolExecutor(max_workers=min(workers,len(jobs)),mp_context=get_context('spawn')) as pool:
+            rows=list(pool.map(_operating_worker,jobs))
     bodies,m,g,_=model.configuration(x,0,resolution=16)
     cg=[m['cgX'],m['cgY'],m['cgZ']]
     upright=free_pitch_equilibrium(model.hydro,bodies,cg,m['totalMass'],0,density=model.parameters[31])

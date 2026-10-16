@@ -2,9 +2,30 @@
 
 **OOSEM:** Trades, optimization and analysis · [Maturity assessment](development-plan.md)
 
-The **1.2 m overall-length** candidate passes the nominal refined Gorge static screens on the selected Hood River bridge route. It has a 440 Wh battery and a 260 mm hull beam. The candidate weighs **10.313 kg**, predicts a **33.87-hour** conditional westerly passage, and retains **3.97 Wh** beyond the allocated voyage energy. It remains a preliminary design requiring sensitivity studies and physical evidence. Its structural margins use the provisional analysis basis; they do not qualify material properties, functional deformation limits or casualty flotation.
+The current integration question is whether **IC-01** supports sensing, guidance, sailing energy and independent recovery as one coherent candidate. Its [allocation](../models/analyses/integrated-candidate.sysml) includes sensing/compute demand and recovery equipment in a fresh coupled evaluation. The [virtual acceptance requirement](development-plan.md#integration-milestone) combines those sizing results with representative mission and casualty simulations. It does not select catalog hardware or establish physical qualification.
 
-The [candidate power and energy budget](energy.md#current-candidate-budget) breaks the allocated demand into electronics, wind sensing, actuation, discharge losses, self-discharge and protected recovery reserve. It also identifies the unallocated perception hardware.
+## Integrated candidate sizing
+
+The [IC-01 coupled replay](../evidence/runs/2026-10-15-integrated-candidate/integrated-sizing.json) passes the nominal Gorge static screens with all eight operating states balanced and screen-feasible at 5 and 8 m/s wind. Accepted states can come from the feasible solve phase even when the subsequent speed-maximization phase stops at its iteration limit; these results establish a feasible allocated candidate, not an optimum.
+
+| Quantity | IC-01 nominal result |
+| --- | --- |
+| Overall swept length / hull beam | 1.200 m / 0.420 m |
+| Total modeled mass | 20.061 kg |
+| Wing area | 0.400 m² |
+| Main / independent recovery battery | 1,300 Wh / 60 Wh nameplate |
+| Maximum sampled average / peak sailing bus load | 12.916 W / 15.633 W |
+| Conditional westerly passage / energy exposure allowance | 38.884 h / 54.605 h |
+| Main-pack departure / required energy | 936.000 Wh / 833.938 Wh |
+| Main-pack headroom after allocated reserve | 102.062 Wh |
+
+The energy allowance includes the existing 25% passage multiplier and six-hour delay, with no harvest credit. The 15 kg handling limit applies to individual modeled assemblies, not total vessel mass; those assembly screens pass. Structural, installation-volume and sampled static righting screens also pass under their provisional material and geometry assumptions. Resistance-domain checks are necessary bounds, not experimental validation of every hull within them. Neither these screens nor the larger energy margin establish real sensing, dynamic capsize recovery or full-course safety.
+
+## Retained nominal sizing reference
+
+The **1.2 m overall-length, 440 Wh reference** passes the nominal refined Gorge static screens on the selected Hood River bridge route. It has a 260 mm hull beam, weighs **10.313 kg**, predicts a **33.87-hour** conditional westerly passage, and retains **3.97 Wh** beyond the allocated voyage energy. This is a separate configuration from IC-01. It remains a preliminary design requiring sensitivity studies and physical evidence. Its structural margins use the provisional analysis basis; they do not qualify material properties, functional deformation limits or casualty flotation.
+
+The [power and energy budgets](energy.md#current-candidate-budget) distinguish the two configurations and break the retained reference's demand into electronics, wind sensing, actuation, discharge losses, self-discharge and protected recovery reserve. Both identify the remaining installation evidence needs.
 
 ```sysml-report BlueDogSRRCurrentDocuments::Summary
 ```

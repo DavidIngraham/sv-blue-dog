@@ -22,6 +22,13 @@ class MissionLogic:
             self._cache[key] = dict(self.model.execute_action(action, inputs=inputs))
         return self._cache[key].copy()
 
+    def recovery_authority(self, seconds, event_kind, ordinary, independent):
+        action='BlueDogMissionLogic::RecoveryAuthority'
+        inputs=dict(eventKind=event_kind,ordinaryPermission=bool(ordinary),independentPath=bool(independent))
+        result=self._execute(action,inputs)
+        self.trace.append(dict(seconds=seconds,action=action,inputs=inputs,outputs=result.copy()))
+        return result['permitted']
+
     def fallback(self, seconds, available, permitted):
         action='BlueDogMissionLogic::FallbackPolicy'
         inputs=dict(recoveryAvailable=bool(available),recoveryPermitted=bool(permitted))

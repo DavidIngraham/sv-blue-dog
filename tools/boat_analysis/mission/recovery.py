@@ -80,7 +80,7 @@ class RecoveryPlanner:
         return values if values[0] == 1 else None
 
     @execution_session()
-    def plan(self, position, current, capsized=False):
+    def plan(self, position, current, capsized=False, *, contacts=(), start_seconds=0., dimensions=(1.2,.5,1.), preferred_site=None):
         """Least reserve among chart-clear routes, under the supplied current field.
 
         current may be a vector or a spatial callable. None means no modeled
@@ -104,10 +104,12 @@ class RecoveryPlanner:
                 value = self.segment(distance, delta/distance, flow, capsized)
                 if value is None:
                     break
+                if any(not actor.assess(np.asarray(a),np.asarray([b]),start_seconds+seconds,value[2],value[2],dimensions)[0][0] for actor in contacts):
+                    break
                 seconds += value[2]; energy += value[3]
             else:
                 candidates.append(RecoveryPlan(site, route, seconds, energy, capsized))
-        return min(candidates, key=lambda p: (p.reserve_wh, p.seconds, p.site.name), default=None)
+        return min(candidates, key=lambda p: (p.site.name!=preferred_site,p.reserve_wh,p.seconds,p.site.name), default=None)
 
 
 @dataclass
@@ -123,7 +125,7 @@ class RecoveryResult:
 
 
 def execute_recovery(planner, position, seconds, energy_wh, current_at, *,
-                     capsized=False, dt=10., horizon_seconds=86400., traffic=(), dimensions=(1.2, .5, 1.)):
+                     capsized=False, dt=10., horizon_seconds=86400., traffic=(), dimensions=(1.2, .5, 1.), observations=None):
     """Execute a recovery route with time-varying current and no solar credit.
 
     Traffic here is truth for consequence assessment, not an assumed backup
@@ -137,20 +139,36 @@ def execute_recovery(planner, position, seconds, energy_wh, current_at, *,
     plan = planner.plan(point, lambda p: current_at(p, seconds), capsized)
     if plan is None:
         return RecoveryResult('no_modeled_recovery_route', None, seconds, energy_wh, point.tolist(), [])
+    if observations is not None and observations.last_time<0:observations.activate(seconds)
     history = []; deadline = seconds+horizon_seconds
     clearance = False
     c = planner.capability
     power = (c.capsized_motor_w if capsized else c.motor_w)+c.essential_w
-    for target in list(plan.route.coords)[1:]:
-        target = np.asarray(target)
+    targets=list(plan.route.coords)[1:]
+    while targets:
+        target = np.asarray(targets[0])
         while np.linalg.norm(target-point) > 1e-7:
             if seconds >= deadline:
                 return RecoveryResult('recovery_censored', plan.site.name, seconds, energy_wh, point.tolist(), history, clearance_violated=clearance)
+            contacts=[]
+            if observations is not None:
+                contacts=observations.observe(traffic,point,seconds)
+                alternative=planner.plan(point,lambda p:current_at(p,seconds),capsized,contacts=contacts,start_seconds=seconds,dimensions=dimensions,preferred_site=plan.site.name)
+                if alternative is None:
+                    return RecoveryResult('recovery_observed_obstruction',plan.site.name,seconds,energy_wh,point.tolist(),history,clearance_violated=clearance)
+                if alternative.reserve_wh>energy_wh:
+                    return RecoveryResult('recovery_energy_insufficient',alternative.site.name,seconds,energy_wh,point.tolist(),history,clearance_violated=clearance)
+                plan=alternative;targets=list(plan.route.coords)[1:];target=np.asarray(targets[0])
             delta = target-point; length = float(np.linalg.norm(delta)); unit = delta/length
             segment = planner.segment(length, unit, current_at(point, seconds), capsized)
             if segment is None:
                 return RecoveryResult('recovery_current_exceeds_authority', plan.site.name, seconds, energy_wh, point.tolist(), history, clearance_violated=clearance)
             interval = min(dt, segment[2], deadline-seconds)
+            if observations is not None:
+                interval=min(interval,observations.next_boundary(seconds)-seconds)
+                proposed=point+unit*segment[1]*interval
+                if any(not actor.assess(point,np.array([proposed]),seconds,interval,interval,dimensions)[0][0] for actor in contacts):
+                    return RecoveryResult('recovery_observed_obstruction',plan.site.name,seconds,energy_wh,point.tolist(),history,clearance_violated=clearance)
             available = max(0., energy_wh-c.arrival_allowance_wh)
             if power*interval/3600 > available:
                 return RecoveryResult('recovery_energy_insufficient', plan.site.name, seconds, energy_wh, point.tolist(), history, clearance_violated=clearance)
@@ -165,6 +183,8 @@ def execute_recovery(planner, position, seconds, energy_wh, current_at, *,
             history.append([seconds, *point, energy_wh, 'powered_recovery'])
             if collision:
                 return RecoveryResult('recovery_collision', plan.site.name, seconds, energy_wh, point.tolist(), history, True, clearance)
+        else:
+            targets.pop(0)
     return RecoveryResult('recovery_approach_reached', plan.site.name, seconds, energy_wh, point.tolist(), history, clearance_violated=clearance)
 
 

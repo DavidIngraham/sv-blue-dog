@@ -2,10 +2,33 @@
 
 **OOSEM:** Trades, optimization and analysis · [Maturity assessment](development-plan.md)
 
-This is the accounting budget for the retained **440 Wh, 1.2 m candidate**. It reconciles the nominal sizing replay's power, passage energy and reserve. Equipment allocations remain provisional: the table is a model budget, not measured installed consumption or a completed hardware selection.
+The budget distinguishes **IC-01, the integration candidate**, from the retained **440 Wh sizing reference**. Each has its own geometry, equipment demand, performance and energy evidence. Equipment allocations remain provisional; neither budget is measured installed consumption or a completed hardware selection.
 
 <a id="installed-load-rollup-and-its-limits"></a>
 ## Current candidate budget
+
+IC-01 allocates a **1,300 Wh main pack** and a **60 Wh independent recovery pack**. Its electronics include the existing 4.5 W base allocation and 0.07049 W wind installation plus **8 W additional sensing/compute demand**. Actuation comes from its own solved operating states. The model includes **1.2 kg additional equipment**, with recovery-battery mass separately derived from the existing specific-energy assumption. These are simultaneous capability and load targets; no selected installation has demonstrated them.
+
+The independent pack begins with **43.2 Wh**, after the allocated 80% usable and 90% departure fractions. It draws **0.05 W standby** during sailing. Active recovery uses battery-side allocations of **50 W propulsion + 8 W essentials upright**, or **40 W + 8 W inverted**, with a 1.2 route-energy factor and 2 Wh arrival allowance. Allocated water-relative speeds are 1.5 m/s upright and 0.5 m/s inverted. The [native candidate](../models/analyses/integrated-candidate.sysml) and [recovery route model](../models/libraries/marine/recovery.sysml) own those assumptions. The main-pack screen retains its existing protected reserve as additional conservatism; no transfer between packs is credited.
+
+The [integration study](encounter-feasibility.md#close-the-candidate-loop) checks local chronological energy, the main pack's nominal full-passage screen, standby exposure and sampled recovery reachability together. These are distinct scopes: initializing a recovery bank after passage standby does not create a full-course voyage trajectory. Solar harvest is disabled. Primary sailing load shuts down on abort in the allocated architecture, and recovery draws from its independent account. Hardware peaks, conversion, thermal behavior and fault isolation still need installed measurements.
+
+The [IC-01 replay](../evidence/runs/2026-10-15-integrated-candidate/integrated-sizing.json) gives the following budget for that configuration:
+
+| Account | Value | Basis |
+| --- | --- | --- |
+| Maximum sampled average sailing load | 12.916 W | Electronics, wind installation and candidate actuation at the bus |
+| Maximum sampled peak sailing load | 15.633 W | Operating samples; not a measured surge envelope |
+| Main usable capacity / departure energy | 1,040.000 / 936.000 Wh | 80% usable capacity, then 90% departure fraction |
+| Energy exposure | 54.605 h | 38.884 h nominal passage × 1.25, plus 6 h |
+| Required main-pack energy | 833.938 Wh | Sailing withdrawal, discharge losses, self-discharge and 49.2 Wh reserve |
+| Remaining main-pack headroom | 102.062 Wh | Departure minus required energy |
+| Independent recovery departure | 43.200 Wh | Separate account, unavailable to ordinary sailing |
+| Independent recovery after exposure standby | 40.470 Wh | 0.05 W standby over the same 54.605 h |
+
+Capacity, departure and remaining-energy rows are successive account states, not additive loads. Recovery route demand is evaluated against the independent account. The additional 8 W remains a target requiring simultaneous sensing-performance evidence; the nominal margin does not authorize arbitrary extra equipment.
+
+## Retained 440 Wh reference budget
 
 ```sysml-report BlueDogCandidateEnergyDocuments::Budget
 ```
@@ -25,13 +48,13 @@ The [native budget](../models/analyses/candidate-energy.sysml) reconstructs the 
 ```sysml-report BlueDogCandidateEnergyDocuments::MissingAllocations
 ```
 
-The **4.5 W electronics line is one unresolved allowance**, not a sum of established component budgets. Its function list describes intended coverage, not proof those functions fit. In particular, camera/sonar acquisition and avoidance inference have no separately established load. Unknown demand is not zero, and none of the proposed sensing capabilities is credited as installed. A selected stack must replace the lump with measured component/mode loads, accounting once for any shared processor, then pass sizing and chronological passage/recovery replay.
+The reference's **4.5 W electronics line is one unresolved allowance**, not a sum of established component budgets. Its function list describes intended coverage, not proof those functions fit. IC-01 adds an explicit 8 W capability target, but camera/sonar acquisition and avoidance inference still have no measured component allocation. Unknown demand is not zero, and none of the proposed sensing capabilities is credited as installed. A selected stack must replace the lump with measured component/mode loads, accounting once for any shared processor, then pass sizing and chronological passage/recovery replay.
 
 ## Perception, computing and the avoidance trade
 
 **The present budget does not establish adequate power or computing capacity for vision-based avoidance.** A processor allowance must cover the whole pipeline: camera acquisition, detection, tracking, range/motion estimation, sensor fusion and decision latency, alongside navigation and logging. Camera count, field of view, resolution and frame rate affect both coverage and compute. Include carrier electronics, storage, conversion, thermal management and any lens heating or cleaning hardware in the installation. Measure sustained and burst demand at the battery bus under the intended workload and enclosure temperature; advertised inference throughput is not a detection guarantee.
 
-The scale matters. NVIDIA lists [7–25 W power options for Jetson Orin Nano modules](https://developer.nvidia.com/embedded/jetson-modules/). That is an example of a processor class, not a hardware selection or a complete installed demand. Lower-power accelerators and simpler vision pipelines remain alternatives. The [current candidate](results.md) has only 3.97 Wh beyond its allocated voyage demand, so an unaccounted continuous load can overturn its static feasibility.
+The scale matters. NVIDIA lists [7–25 W power options for Jetson Orin Nano modules](https://developer.nvidia.com/embedded/jetson-modules/). That is an example of a processor class, not a hardware selection or a complete installed demand. Lower-power accelerators and simpler vision pipelines remain alternatives. The [retained 440 Wh reference](results.md) has only 3.97 Wh beyond its allocated voyage demand, so an unaccounted continuous load can overturn its static feasibility.
 
 For a transparent first sensitivity, hold the published 33.87-hour passage fixed and apply the existing 1.25 duration multiplier plus six hours: **48.34 hours** of exposure. The following are hypothetical *additional battery-withdrawal powers*, not sensor specifications or a resized vessel. Their energy is power times exposure; loads specified at a regulated bus would also need battery discharge losses.
 
@@ -42,7 +65,7 @@ For a transparent first sensitivity, hold the published 33.87-hour passage fixed
 | 10 W | 483.4 Wh |
 | 20 W | 966.8 Wh |
 
-This arithmetic identifies sensitivity, not a feasible battery choice. Resizing changes mass, sailing performance, passage time, packaging and recovery energy. The next comparison must rerun those couplings and the chronological mission. If new compute replaces the existing controller, account for the replacement once rather than adding the full old and new loads. Duty cycling is admissible only when the resulting observation gaps still meet encounter timing needs.
+This arithmetic identifies sensitivity, not a feasible battery choice. Resizing changes mass, sailing performance, passage time, packaging and recovery energy. IC-01 evaluates those couplings for one allocated hypothesis; measured or alternative pipelines require their own replay. If new compute replaces the existing controller, account for the replacement once rather than adding the full old and new loads. Duty cycling is admissible only when the resulting observation gaps still meet encounter timing needs.
 
 ### Coverage requires complementary observations
 

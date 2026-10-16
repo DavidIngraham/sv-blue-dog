@@ -50,6 +50,17 @@ package BlueDogMissionLogic {
         then done;
     }
 
+    action def RecoveryAuthority {
+        in eventKind : String;
+        in ordinaryPermission : Boolean;
+        in independentPath : Boolean;
+        out permitted : Boolean;
+        first start;
+        then action chooseAuthority {
+            assign permitted := ordinaryPermission or (independentPath and (eventKind == "steering_loss" or eventKind == "power_loss"));
+        }
+        then done;
+    }
     action def FallbackPolicy {
         in recoveryAvailable : Boolean;
         in recoveryPermitted : Boolean;

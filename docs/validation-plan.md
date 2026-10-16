@@ -12,6 +12,23 @@ Each experiment needs a declared configuration, predicted result, measurement un
 
 ## Exercise decisions before physical integration
 
+Virtual integration requires **one coherent candidate closing the sensing–guidance–energy–recovery loop in representative simulations**. Its [native acceptance requirement](../models/analyses/integrated-candidate.sysml) requires compatible sizing, normal completion, safe encounter outcomes, casualty recovery, energy sufficiency, executable timing and recorded assumptions together. A safe abort counts as recovery evidence, never as challenge completion. A collision, unresolved horizon, unsupported sailing state or exhausted recovery bank prevents closure of the applicable case. IC-01 passes the declared [bounded case set](encounter-feasibility.md#close-the-candidate-loop); the following physical evidence remains necessary.
+
+The candidate's equipment mass and bus load enter the coupled sizing calculation. Its solved sailing states, swept dimensions and electrical demand then enter the mission simulation. A separate recovery bank and explicitly independent observation, control and thrust path must survive the injected primary fault. Recovery evidence ends at a modeled water approach; it does not establish physical capture or retention. Synthetic local reaches exercise the loop; they cannot establish coverage of every location on the charted Gorge course.
+
+| Critical assumption | Physical evidence needed | Decision affected |
+| --- | --- | --- |
+| Detection range, misses, latency and night performance are available simultaneously within the allocated power and mass | Synchronized target truth, detections, power, temperature and installation mass for an identified pipeline; held-out adverse conditions | Sensing architecture and admissible operating conditions |
+| Solved sailing performance and allocated maneuver time represent the boat | Measured polars, current, heading and swept tracks, including tacks and command-to-motion delay | Course feasibility, separation and detection lead time |
+| The independent recovery path survives primary sensing, steering or power loss | Fault-injection tests of isolation, startup, navigation and backup observations under load | Whether recovery can be credited after each casualty |
+| Upright and inverted recovery authority fits the protected energy | Thrust/speed/power tests in representative current, with usable battery capacity and load transients | Recovery battery, propulsion and refuge spacing |
+| A water approach is a usable retrieval destination | Surveyed access, approach hazards, landing/capture and retention trials | Permitted course and launch conditions |
+| Static mass, structure and flotation predictions transfer to the build | Weighed assemblies, material/joint coupons, watertightness and flotation/righting measurements | Geometry, handling and casualty survivability |
+
+These are evidence needs, not measurements already obtained. Passing the virtual milestone permits a more focused physical experiment; it does not qualify the challenge vessel or close its technical risks.
+
+Reproduce the candidate with `python -m tools.boat_analysis.cli prepare`, then `python -m tools.boat_analysis.mission.integrated --phase all`. The sizing phase solves the allocated geometry and loads before supplying performance to the mission phase. The resulting JSON records retain their model and driver hashes, trajectories, energy accounts and acceptance facts. An explicitly supplied warm start may accelerate a fresh sizing solve; it is never reused as acceptance evidence without reevaluation.
+
 The [executable mission logic](mission-simulation.md#executable-supervisory-logic) is exercised with observation outages, interventions and casualty events. The regression cases check sailing inhibition and restoration, a persistent abort latch, and alert queuing without a monitoring link. An isolated change to the modeled event policy changes the simulated response, checking that the logical model actually governs the behavior.
 
 The next evidence is timed sensor and controller replay: feed recorded observations and faults into the decision loop, compare the resulting commands with the modeled intent, then measure the boat’s response. Preserve observation uncertainty and actuator delay when carrying those results into the [mission development spirals](simulation-spirals.md). Passing a supervisory test does not demonstrate detection range, maneuver authority or physical recovery.

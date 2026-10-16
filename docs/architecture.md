@@ -26,6 +26,10 @@ The return leg has to make progress over the ground, not just through the water.
 
 The main systems bring together propulsion, steering, power and recovery. The model views below allocate their responsibilities.
 
+The integration candidate, [IC-01](../models/analyses/integrated-candidate.sysml), binds these responsibilities to one provisional mass, energy and performance configuration. Its primary sensing and guidance path sails the mission. A separately powered recovery path has its own observation, navigation, control and thrust allocations, including an inverted operating hypothesis. Primary steering or power loss can therefore permit modeled recovery only when the independent path is explicitly present and powered. This is a fault-isolation assumption to test, not evidence that shared environmental damage cannot defeat both paths.
+
+The [virtual integration milestone](validation-plan.md#exercise-decisions-before-physical-integration) requires the same candidate to support sizing, sensing, maneuver timing, chronological energy and recovery. Hardware interfaces, waterproofing, installed mass distribution, thermal behavior and physical shore retention remain design and evidence work. The retained 440 Wh nominal sizing result is a separate reference configuration; its budget must not be combined with IC-01's capability allocations.
+
 The challenge remains independent of the vehicle so a convenient hardware choice cannot redefine success. Hawaii remains a separate future mission with its own constraints; it does not set acceptance criteria for the Gorge vessel. Traffic, shore support and live monitoring belong in the system context; the vessel must make its own decisions during a qualifying attempt.
 
 We decompose responsibilities before choosing hardware. A satisfy link identifies intended responsibility, while a verification case identifies how that allocation will be tested. Neither means the vessel has passed a physical test.

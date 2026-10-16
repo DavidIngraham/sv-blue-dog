@@ -48,6 +48,7 @@ class Result:
     observation_summary: dict = field(default_factory=dict)
     consequence_summary: dict = field(default_factory=dict)
     timing_trace: list = field(default_factory=list)
+    energy_summary: dict = field(default_factory=dict)
     model_scope: str = 'Conceptual polar and point-mass guidance; wave dynamics and full navigation-rule compliance not verified'
 
 
@@ -71,7 +72,7 @@ def direction(route, distance):
 
 @execution_session()
 def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), seed=0,
-             stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None, observations=None):
+             stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None, observations=None, recovery_observations=None):
     from .logic import MissionLogic
     logic = MissionLogic()
     dt, hours, forecast, lookahead, maneuver_time, _ = inputs['time']
@@ -82,6 +83,10 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     command_clock=CommandClock(inputs.get('commandLatencySeconds',0.),maneuver_time)
     continue_after_abort=inputs.get('continueAfterAbort',True)
     capacity, stored, reserve, load, maneuver_wh, solar, charging, discharge = inputs['energy']
+    recovery_bank=inputs.get('recoveryBatteryWh')
+    bank_standby=inputs.get('recoveryStandbyW',0.)
+    if recovery_bank is not None and (not math.isfinite(recovery_bank) or recovery_bank<0 or not math.isfinite(bank_standby) or bank_standby<0):
+        raise ValueError('Invalid independent recovery energy allocation')
     from .candidate import Performance
     performance = Performance(inputs['performance']) if 'performance' in inputs else None
     wave_performance=None
@@ -159,6 +164,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         observed.consequence_summary = consequence_summary.copy()
         observed.consequence_summary['truthClearanceViolated'] = truth_clearance_violation
         observed.timing_trace = list(command_clock.trace)
+        observed.energy_summary=dict(mainStoredWh=stored,recoveryStoredWh=recovery_bank,recoveryInitialWh=inputs.get('recoveryBatteryWh'),recoveryStandbyW=bank_standby)
+        if recovery_observations is not None:observed.recovery_summary['observations']=recovery_observations.summary()
         observed.observation_summary = observations.summary() if observations is not None else {"mode":"perfect_truth_baseline"}
         observed.outside_performance_coverage_seconds=outside_coverage
         if performance:observed.model_scope=inputs['performance']['scope']
@@ -171,7 +178,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         return direction(route, route.project(Point(point)))*weather.at(time).current_mps
 
     def abort(cause, capsized=False, recover=True):
-        nonlocal safety_abort, recovery_summary, consequence_summary, seconds, stored, position, minimum, distance
+        nonlocal safety_abort, recovery_summary, consequence_summary, seconds, stored, position, minimum, distance, recovery_bank
         from .recovery import execute_recovery
         decision = logic.cycle(seconds, abort_requested=True,
                                communications_available=seconds >= comms_until)
@@ -180,11 +187,13 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         if decision['alert'] != 'none':
             event_log.append({'seconds':seconds, 'kind':'abort_alert_attempt' if decision['alert'] == 'attempt' else 'abort_alert_queued'})
         def drift_after_failure(prior_clearance=False):
-            nonlocal consequence_summary,seconds,stored,position,minimum,distance
+            nonlocal consequence_summary,seconds,stored,position,minimum,distance,recovery_bank
             from .recovery import execute_drift
-            essential=0. if cause=='power_loss' else (recovery_planner.capability.essential_w if recovery_planner else load/discharge)
+            independent_active=recovery_bank is not None and inputs.get('independentRecovery',False)
+            essential=0. if cause=='power_loss' and not independent_active else (recovery_planner.capability.essential_w if recovery_planner else load/discharge)
+            drift_started=seconds
             drift=execute_drift(water,position,seconds,stored,current_at,dt=dt,
-                horizon_seconds=max(0.,hours*3600-seconds),essential_w=essential,
+                horizon_seconds=max(0.,hours*3600-seconds),essential_w=essential if recovery_bank is None else 0.,
                 traffic=traffic,dimensions=inputs['dimensions'])
             old=position.copy()
             for row in drift.history:
@@ -192,7 +201,10 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 history.append([*row,bool(row[0]>=comms_until)])
             seconds,stored,position=drift.seconds,drift.energy_wh,np.asarray(drift.position)
             minimum=min(minimum,stored)
+            if recovery_bank is not None:recovery_bank=max(0.,recovery_bank-(seconds-drift_started)*essential/3600)
             consequence_summary=asdict(drift)
+            if recovery_bank is not None:
+                consequence_summary['recoveryEnergyExhausted']=recovery_bank<=0
             consequence_summary['clearance_violated'] |= prior_clearance
             violation=drift.collision or drift.termination=='shore_contact' or consequence_summary['clearance_violated']
             return result('safety_violation' if violation else 'disqualified',cause)
@@ -208,18 +220,21 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             recovery_summary = {'outcome':'recovery_model_unavailable'}
             return drift_after_failure() if continue_after_abort and fallback['continueDrift'] else result('disqualified', cause)
         start_position = position.copy()
-        recovery = execute_recovery(recovery_planner, position, seconds, stored, current_at,
+        recovery = execute_recovery(recovery_planner, position, seconds, stored if recovery_bank is None else recovery_bank, current_at,
                                     capsized=capsized, dt=dt,
                                     horizon_seconds=max(dt, hours*3600-seconds),
-                                    traffic=traffic, dimensions=inputs['dimensions'])
+                                    traffic=traffic, dimensions=inputs['dimensions'],observations=recovery_observations)
         recovery_summary = asdict(recovery)
+        recovery_summary['energySource']='main' if recovery_bank is None else 'independent_recovery_bank'
         if recovery.history:
             event_log.append({'seconds':seconds, 'kind':'motor_use'})
         for row in recovery.history:
             distance += float(np.linalg.norm(np.asarray(row[1:3])-start_position))
             start_position = np.asarray(row[1:3])
-            history.append([*row, bool(row[0]>=comms_until)])
-        seconds, stored, position = recovery.seconds, recovery.energy_wh, np.asarray(recovery.position)
+            history.append([*row[:3],row[3] if recovery_bank is None else stored,*row[4:],bool(row[0]>=comms_until)])
+        seconds,position=recovery.seconds,np.asarray(recovery.position)
+        if recovery_bank is None:stored=recovery.energy_wh
+        else:recovery_bank=recovery.energy_wh
         minimum = min(minimum, stored)
         if continue_after_abort and not recovery.collision and recovery.outcome!='recovery_approach_reached':
             return drift_after_failure(recovery.clearance_violated)
@@ -244,7 +259,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 sensor_until = max(sensor_until, seconds+event.duration)
             elif directive == 'abort':
                 cause = 'forecast_no_longer_applicable' if event.kind == 'forecast_invalidated' else event.kind
-                return abort(cause, capsized=decision['capsized'], recover=decision['recoveryPermitted'])
+                permission=logic.recovery_authority(seconds,event.kind,decision['recoveryPermitted'],inputs.get('independentRecovery',False) and recovery_bank is not None and recovery_bank>0)
+                return abort(cause, capsized=decision['capsized'], recover=permission)
             elif directive == 'stop':
                 return result('incomplete','terminal_failure')
         if command_clock.advance(seconds):
@@ -258,7 +274,9 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             plan = recovery_planner.plan(position, lambda p: current_at(p, seconds))
             if plan is None:
                 return abort('no_modeled_recovery_route')
-            reserve = plan.reserve_wh
+            if recovery_bank is None:reserve = plan.reserve_wh
+            elif recovery_bank <= plan.reserve_wh+bank_standby*control_period/3600:
+                return abort('independent_recovery_reserve_trigger')
             decision_allowance = (load/discharge)*control_period/3600 + maneuver_wh
             if stored <= reserve+decision_allowance:
                 reserve_protected = stored >= reserve
@@ -290,6 +308,11 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             progress = leg.project(Point(position))
             target = np.array(leg.interpolate(min(leg.length,progress+lookahead)).coords[0])
             desired = math.degrees(math.atan2(*(target-position)[::-1]))
+            if inputs.get('captureGateCenters',False) and phase<len(sequence):
+                gate=gates[sequence[phase][0]]
+                if gate.distance(Point(position))<lookahead:
+                    target=np.asarray(gate.interpolate(.5,normalized=True).coords[0])
+                    desired=math.degrees(math.atan2(*(target-position)[::-1]))
             # Cartesian heading east=0; meteorological wind-from north=0.
             headings = np.unique(np.r_[np.arange(0,360,10), desired % 360])
             radians = np.deg2rad(headings)
@@ -305,7 +328,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             # Explicit depowered choice still drifts with current.
             velocities = np.vstack((velocities,current));headings=np.r_[headings,np.nan]
             turn = np.zeros(len(headings),dtype=bool) if heading is None else np.abs((headings-heading+180)%360-180)>30
-            planning_interval=max(control_period,command_clock.latency+maneuver_time+control_period)
+            planning_interval=max(inputs.get('planningHorizonSeconds',0.),control_period,command_clock.latency+maneuver_time+control_period)
             held_velocity=current.copy()
             if heading is not None and supervisor['sailingPermitted']:
                 held_relative=(heading-wind_angle+180)%360-180
@@ -321,6 +344,14 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             projected = position+velocities*forecast
             preview = contains_xy(water,projected[:,0],projected[:,1])
             cost = np.linalg.norm(endpoints-target,axis=1)+turn*10+(~preview)*lookahead
+            if inputs.get('progressGuidance',False):
+                desired_vector=target-position
+                norm=float(np.linalg.norm(desired_vector))
+                unit=desired_vector/norm if norm>1e-8 else direction(leg,progress)
+                delta=endpoints-position;forward=delta@unit
+                cross=np.linalg.norm(delta-forward[:,None]*unit,axis=1)
+                cost=inputs['crossTrackWeight']*cross-forward+turn*inputs['maneuverPenaltyM']+(~preview)*lookahead
+
             conflict = False
             for actor_index,actor in enumerate(contacts):
                 actor_index = actor.source_id if actor.source_id is not None else actor_index
@@ -333,6 +364,9 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             supervisor = logic.cycle(seconds, wind_valid=seconds >= sensor_until,
                                      traffic_conflict=conflict,
                                      communications_available=seconds >= comms_until)
+            if 'minimumSailingSpeedMps' in inputs:
+                permitted[:-1] &= speeds>=inputs['minimumSailingSpeedMps']
+                cost[-1] += inputs.get('depowerPenaltyM',0.)
             cost[~permitted] = math.inf
             choice = int(np.argmin(cost))
             if not math.isfinite(cost[choice]):
@@ -411,6 +445,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         else:
             net = solar*state.solar_fraction*charging-load/discharge
         stored = min(capacity,stored+net*interval/3600)
+        if recovery_bank is not None:recovery_bank=max(0.,recovery_bank-bank_standby*interval/3600)
         minimum=min(minimum,stored);seconds+=interval;distance+=float(np.linalg.norm(position-previous))
         for actor in traffic:
             if actor.collides(previous,position,seconds-interval,interval,inputs['dimensions']):

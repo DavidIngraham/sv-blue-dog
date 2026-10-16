@@ -28,15 +28,24 @@ class SensorEnvelope:
 
 
 class Observations:
-    def __init__(self, envelope, seed=0, *, night=False, dropouts=()):
+    def __init__(self, envelope, seed=0, *, night=False, dropouts=(), clearance_allowance_m=0.):
         self.envelope, self.seed, self.night = envelope, seed, night
         self.dropouts = tuple(dropouts)
+        if not math.isfinite(clearance_allowance_m) or clearance_allowance_m<0:
+            raise ValueError('Nonnegative observation clearance allowance required')
+        self.clearance_allowance_m=clearance_allowance_m
         if any(not (math.isfinite(a) and math.isfinite(b) and 0 <= a < b) for a,b in self.dropouts):
             raise ValueError('Invalid dropout interval')
+        self.start_time = 0.
         self.next_sample = 0.
         self.sample = 0
         self.pending, self.tracks, self.trace = [], {}, []
         self.last_time = -1.
+
+    def activate(self, seconds):
+        if self.last_time>=0 or self.sample or not math.isfinite(seconds) or seconds<0:
+            raise ValueError('Only an unused observation provider can be activated')
+        self.start_time=self.next_sample=float(seconds)
 
     def next_boundary(self, seconds):
         times = [self.next_sample, *[p[0] for p in self.pending],
@@ -79,7 +88,7 @@ class Observations:
                 self.pending.append((seconds+e.latency_s,contact))
                 self.trace.append(dict(sampleSeconds=seconds,deliverySeconds=seconds+e.latency_s,actor=actor.name,distanceM=float(distance)))
             self.sample += 1
-            self.next_sample = self.sample*e.period_s
+            self.next_sample = self.start_time+self.sample*e.period_s
         for due,contact in self.pending:
             if due <= seconds+1e-9:
                 i,sampled,point,velocity,actor = contact
@@ -92,11 +101,12 @@ class Observations:
             speed = float(np.linalg.norm(velocity))
             endpoint = position+velocity*3600 if speed else position+np.array([1.,0.])
             contacts.append(Traffic(actor.name,LineString([position,endpoint]),seconds,speed,
-                actor.length_m+2*e.error_m,actor.beam_m+2*e.error_m,actor.clearance_m,
+                actor.length_m+2*e.error_m,actor.beam_m+2*e.error_m,actor.clearance_m+self.clearance_allowance_m,
                 stationary_seconds=3600.,target_kind=actor.target_kind,ais_equipped=actor.ais_equipped,source_id=i))
         return contacts
 
     def summary(self):
         return dict(mode='sampled_hypothesis',samples=self.sample,deliveredOrPendingDetections=len(self.trace),
+                    clearanceAllowanceM=self.clearance_allowance_m,
                     trace=self.trace,physicalValidation=False,
                     scope='Range, Bernoulli misses, latency, bounded position error, expiry and scheduled outages; exact instantaneous velocity/extent; no false positives or measured sensor physics')
