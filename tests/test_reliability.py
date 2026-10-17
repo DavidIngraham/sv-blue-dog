@@ -1,5 +1,4 @@
 """Exercise native cruise/reliability calculations and DFMEA traceability."""
-import json
 import pytest
 from tests.native_cases import native
 
@@ -99,14 +98,13 @@ def test_accepted_synthetic_fixture_exercises_pass_path(cruise):
 
 
 def test_dfmea_starter_stays_open_and_has_real_links():
-    report = json.loads(native('-instantiate', 'BlueDogDFMEA::starter', '-analysis',
-                              'BlueDogDFMEA::DesignFailureReview BlueDogDFMEA::starter', '-json'))
-    assert not report['diagnostics']
-    v = {v['name']: v['value'] for v in report['checks'][0]['values']}
-    assert v['modeCount'] == '12'
-    assert v['unresolvedCriticalCount'] == '10'
-    assert v['openActionCount'] == '12'
-    assert v['reviewReady'] == 'false'
+    from tools.boat_analysis.model.runtime import load_model
+    result = load_model().run_analysis('BlueDogDFMEA::DesignFailureReview',
+                                      subject='BlueDogDFMEA::starter')
+    assert result.outputs['modeCount'] == 12
+    assert result.outputs['unresolvedCriticalCount'] == 10
+    assert result.outputs['openActionCount'] == 12
+    assert result.outputs['reviewReady'] is False
     table = native('-render-document', 'BlueDogReliabilityDocuments::DFMEA')
     for trace in ['| steeringJam | actuation |', '| steeringJam | weedSnagSteeringRecovery |',
                   '| powerCommonCause | powerManagement |', '| powerCommonCause | failureRateBudget |',

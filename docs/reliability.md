@@ -100,6 +100,99 @@ package Page_reliability_2 {
 }
 ```
 
+## How avoidance can fail
+
+I review avoidance at three levels: the harmful encounter, the failed function,
+and the physical concept that could cause that failure. The shared functional
+review follows observation, classification, prediction, navigation duties,
+command selection, achieved motion and recovery. The concept review then asks
+what changes with fixed cameras, a scanning camera, acoustic sensing and each rig.
+A scanner jam and a fixed-camera blind sector can both lead to missed detection,
+but they need different diagnostics and design actions.
+
+The model contains 17 functional avoidance rows and 15 concept rows, alongside
+the 12 whole-boat starter rows. These are linked reviews, not 44 independent risks.
+All actions remain open and none of the three reviews is ready for acceptance.
+The concept rows identify candidate configurations, including alternatives; they
+do not imply that all equipment is installed together.
+
+### A fault tree for loss of safe separation capability
+
+Read the following diagram upward. **OR** means any listed input is enough to
+establish that branch's failure proposition. **AND** means every input must hold
+within the same encounter response interval. These are qualitative Boolean gates,
+not probability calculations or a model of event timing.
+
+The top event is an encounter for which neither the primary response nor the
+fallback provides a supported, timely safe response. It is **loss of capability,
+not a prediction that collision occurs**. A fallback counts as available only if
+its observation, decisions, transition and achieved maneuver are adequate for
+that encounter. An operating motor alone does not establish this.
+
+```sysml-report BlueDogFailureViews::SystemTree
+```
+
+The shared power and compute failures each appear once and feed both response
+branches. Multiple sensors on the same host or supply therefore do not establish
+independent protection. The recovery branch also includes an unsafe transition,
+inadequate recovery observation, no safe route and a response that arrives too
+late. Those branches are listed in the functional review below. Another river
+user avoiding Blue Dog is not credited as a safeguard.
+
+### What sits inside the primary response
+
+```sysml-report BlueDogFailureViews::PrimaryTree
+```
+
+The observation branch includes missing, late and false or swapped tracks.
+Assessment includes wrong target status, predicted motion or navigation duty.
+Command selection includes no feasible response and an unsafe courtesy change.
+Execution includes steering or sail-control loss and a failure to notice that
+actual motion differs from the plan. Shared power and compute causes are shown
+in the preceding tree rather than repeated here.
+
+<details>
+<summary>Functional avoidance DFMEA: causes and actions still needed</summary>
+
+```sysml-report BlueDogAvoidanceDocuments::functional
+```
+
+</details>
+
+### What changes with the physical concept
+
+For SC-03, one scanning camera, the observation branch has the following causes.
+Each input means the fault or condition has already defeated the required
+observation within the response interval; a harmless splash or brief delay does
+not automatically assert a failure.
+
+```sysml-report BlueDogFailureViews::ScannerTree
+```
+
+A fixed camera ring removes scanning motion but retains wet optics, shared-host
+failures and coverage gaps caused by the rig and heel. Passive acoustics adds
+quiet-target and ambiguous-bearing limitations; active sonar adds clutter,
+shadowing and incomplete coverage of above-water riders, rigs and lines. Capsize
+can disable an otherwise working installation by immersing an optical aperture
+or lifting an acoustic head out of the water. Rig-specific jams affect the
+maneuver available after a target is detected.
+
+<details>
+<summary>Concept-specific DFMEA: alternatives and proposed tests</summary>
+
+```sysml-report BlueDogAvoidanceDocuments::concepts
+```
+
+</details>
+
+The diagrams and tables use the same model events. Standard SysML cause-and-effect
+connections carry the causal relationships; small project extensions supply the
+Boolean gates and review/action records. Gate calculations are executable and
+checked with synthetic cases. The physical causal claims, diagnostic coverage,
+common-cause boundaries and completeness remain unverified. No failure rates or
+independence assumptions are assigned, and these trees do not yet inject faults
+into the mission simulator.
+
 My next comparison needs measured sailing and maneuvering performance, followed by failure evidence appropriate to each mechanism. The [DFMEA](../models/analyses/dfmea.sysml) helps choose those tests; the [reliability analysis](../models/analyses/reliability.sysml) connects their results to passage exposure.
 
 **Next:** [From virtual evidence to water trials](validation-plan.md) · [Series guide](index.md)

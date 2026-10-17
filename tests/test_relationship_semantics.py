@@ -103,7 +103,17 @@ def test_authored_pages_contain_views_not_copied_diagrams(rendered_site):
         assert '```sysml-view' not in rendered
         views = [block for block in blocks(source) if block.info.startswith('sysml-view ')]
         assert '```sysml-report' not in rendered
-        assert rendered.count('```mermaid') == len(views) + len(sketches)
+        report_views = {
+            'BlueDogFailureViews::SystemTree': 'BlueDogFailureViews::SystemTreeView',
+            'BlueDogFailureViews::PrimaryTree': 'BlueDogFailureViews::PrimaryTreeView',
+            'BlueDogFailureViews::ScannerTree': 'BlueDogFailureViews::ScannerTreeView',
+        }
+        diagrams_from_reports = [report_views[block.info.split()[1]] for block in blocks(source)
+                                 if block.info.startswith('sysml-report ')
+                                 and block.info.split()[1] in report_views]
+        assert rendered.count('```mermaid') == len(views) + len(sketches) + len(diagrams_from_reports)
+        for view in diagrams_from_reports:
+            assert f'%% {view} ' in rendered
         for block in views:
             assert f'%% {block.info.split()[1]} ' in rendered
 

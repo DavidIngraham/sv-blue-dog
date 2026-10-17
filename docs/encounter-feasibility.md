@@ -183,6 +183,8 @@ Independent truth checks executed motion continuously for collision and required
 
 An explicit perfect-truth baseline remains available for comparison and for reproducing older experiments. Each result identifies which observation mode it used. The paired study uses the imperfect provider for every sensing hypothesis and retains observations, supervisory decisions, movement history and stopping causes.
 
+The [avoidance failure analysis](reliability.md#how-avoidance-can-fail) connects these scenarios to failed functions and concept-specific causes. Its qualitative fault trees distinguish primary response loss, unavailable recovery and shared causes; their safeguards remain unverified.
+
 ## Leave room for crewed boats
 
 I want Blue Dog to stay out of crewed boats' way before an encounter develops,

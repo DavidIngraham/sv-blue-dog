@@ -353,3 +353,26 @@ explicit assumptions. No planner objective, sensing fidelity, numerical result o
 hardware allocation changed in this step; archived campaigns retain their original
 scope. The [encounter article](encounter-feasibility.md#leave-room-for-crewed-boats)
 explains the current policy and its untested status.
+
+
+## Connect avoidance DFMEA and qualitative fault trees
+
+On 17 October 2026, I replaced the whole-boat DFMEA's text-only cause/effect fields
+with references to occurrences connected through the standard SysML Cause and
+Effect library. The review rows retain actions, owners and evidence disposition;
+derived text fields let the native document queries render the linked events.
+
+The [avoidance analysis](reliability.md#how-avoidance-can-fail) adds 17 functional
+and 15 concept-specific rows. Separate camera and acoustic alternatives feed
+shared functional failures without pretending every concept is installed.
+Qualitative AND/OR gates cover encounter demand, primary response failure,
+unavailable timely fallback and shared power/compute causes. The top event is
+unsupported safe separation capability, not collision probability. Three native
+blog diagrams show the system tree, primary branches and scanning-camera branch.
+
+Synthetic native checks exercise gate truth, common causes, missing evidence and
+rendered relationships. They do not close physical actions. All 44 review actions
+remain open, including the 12 whole-boat rows; scope completeness is unaccepted.
+No failure rates, independent-backup credit, new mission outcomes or sizing changes
+are claimed. Next, review the causal scope against installed concepts and use the
+open actions to define observation, maneuver and recovery fault-injection trials.

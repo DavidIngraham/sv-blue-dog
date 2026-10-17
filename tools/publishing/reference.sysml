@@ -35,24 +35,24 @@ package BlueDogDocuments {
     calc def Derivations :> Query {
         Project(source = WhereType(source = ModelElements(), type = "ConnectionUsage"),
             columns = (
-                Column(name = "Original", cell = { in row : KerML::Kernel::Connector;
-                    WhereMetadata(source = row.connectorEnd, 'metadata' = "RequirementDerivation::OriginalRequirementMetadata")->ControlFunctions::collect { in e : KerML::Core::Feature; e.ownedReferenceSubsetting.referencedFeature } }),
-                Column(name = "Derived", cell = { in row : KerML::Kernel::Connector;
-                    WhereMetadata(source = row.connectorEnd, 'metadata' = "RequirementDerivation::DerivedRequirementMetadata")->ControlFunctions::collect { in e : KerML::Core::Feature; e.ownedReferenceSubsetting.referencedFeature } }),
-                Column(name = "Status", path = "workStatus.status"), Column(name = "Rationale", path = "rationale.text")))
+            Column(name = "Original", cell = { in row : KerML::Kernel::Connector;
+            WhereMetadata(source = row.connectorEnd, 'metadata' = "RequirementDerivation::OriginalRequirementMetadata")->ControlFunctions::collect { in e : KerML::Core::Feature; e.ownedReferenceSubsetting.referencedFeature } }),
+            Column(name = "Derived", cell = { in row : KerML::Kernel::Connector;
+            WhereMetadata(source = row.connectorEnd, 'metadata' = "RequirementDerivation::DerivedRequirementMetadata")->ControlFunctions::collect { in e : KerML::Core::Feature; e.ownedReferenceSubsetting.referencedFeature } }),
+            Column(name = "Status", path = "workStatus.status"), Column(name = "Rationale", path = "rationale.text")))
     }
     calc def UseCaseLinks :> Query {
         Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogUseCases")), type = "UseCaseUsage"),
             properties = ("name", "documentation"),
             columns = (Column(name = "Requirement", cell = { in row : SysML::UseCaseUsage;
-                row.objectiveRequirement.ownedSubsetting.subsettedFeature })))
+            row.objectiveRequirement.ownedSubsetting.subsettedFeature })))
     }
 
     calc def SatisfactionLinks :> Query {
         Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirements")), type = "RequirementUsage"),
             properties = ("name"),
             columns = (Column(name = "Design element", cell = { in row : SysML::RequirementUsage;
-                RelatedElements(source = row, relationshipKind = "satisfaction", direction = "incoming", maxDepth = 1) })))
+            RelatedElements(source = row, relationshipKind = "satisfaction", direction = "incoming", maxDepth = 1) })))
     }
     part def Traceability :> Document {
         attribute redefines title = "Use-case and architecture traceability";
@@ -87,10 +87,10 @@ package BlueDogDocuments {
     calc def EnergyLoads :> Query {
         Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogEnergyExamples::sailing"), maxDepth = 1), type = "PartUsage"),
             columns = (Column(name = "Load", path = "label"),
-                Column(name = "Active power", path = "activePower"), Column(name = "Idle power", path = "idlePower"),
-                Column(name = "Active fraction", path = "activeFraction"), Column(name = "Conversion efficiency", path = "conversionEfficiency"),
-                Column(name = "Uncertainty factor", path = "uncertaintyFactor"),
-                Column(name = "Average bus power", path = "averagePower"), Column(name = "Peak bus power", path = "peakPower")))
+            Column(name = "Active power", path = "activePower"), Column(name = "Idle power", path = "idlePower"),
+            Column(name = "Active fraction", path = "activeFraction"), Column(name = "Conversion efficiency", path = "conversionEfficiency"),
+            Column(name = "Uncertainty factor", path = "uncertaintyFactor"),
+            Column(name = "Average bus power", path = "averagePower"), Column(name = "Peak bus power", path = "peakPower")))
     }
     calc def EnergyTotals :> Query {
         Project(source = Named(qualifiedName = "BlueDogEnergyExamples::sailing"),
@@ -111,15 +111,15 @@ package BlueDogDocuments {
     calc def Conditions :> Query {
         WhereText(source = Project(source = RequirementDefinitions(),
             columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"),
-                Column(name = "Text", cell = { in row : KerML::Root::Element;
-                    row.ownedElement->ControlFunctions::select { in e : KerML::Root::Element; e.declaredName == "conditions" }->ControlFunctions::collect { in c : KerML::Root::Comment; c.body } }))),
+            Column(name = "Text", cell = { in row : KerML::Root::Element;
+            row.ownedElement->ControlFunctions::select { in e : KerML::Root::Element; e.declaredName == "conditions" }->ControlFunctions::collect { in c : KerML::Root::Comment; c.body } }))),
             columns = ("Text"), operator = "!=", value = "")
     }
     calc def Notes :> Query {
         WhereText(source = Project(source = RequirementDefinitions(),
             columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"),
-                Column(name = "Text", cell = { in row : KerML::Root::Element;
-                    row.ownedElement->ControlFunctions::select { in e : KerML::Root::Element; e.declaredName == "notes" }->ControlFunctions::collect { in c : KerML::Root::Comment; c.body } }))),
+            Column(name = "Text", cell = { in row : KerML::Root::Element;
+            row.ownedElement->ControlFunctions::select { in e : KerML::Root::Element; e.declaredName == "notes" }->ControlFunctions::collect { in c : KerML::Root::Comment; c.body } }))),
             columns = ("Text"), operator = "!=", value = "")
     }
     calc def RationaleRows :> Query {
@@ -134,7 +134,7 @@ package BlueDogDocuments {
         Project(source = WhereType(source = Descendants(source = Named(qualifiedName = ("BlueDogRequirementVerification", "BlueDogReliability"))), type = "VerificationCaseDefinition"),
             properties = ("shortName", "name", "documentation"),
             columns = (Column(name = "Verifies", cell = { in row : SysML::VerificationCaseDefinition;
-                RelatedElements(source = row, relationshipKind = "verification", direction = "outgoing", maxDepth = 1) })))
+            RelatedElements(source = row, relationshipKind = "verification", direction = "outgoing", maxDepth = 1) })))
     }
     part def RequirementContext :> Document {
         attribute redefines title = "Requirement context and verification specifications";
@@ -172,7 +172,6 @@ package BlueDogDocuments {
         part derivation : Paragraph { part link : Link { attribute redefines text = "Challenge derivations"; attribute redefines target = "requirements/requirements-c-000.md"; } }
         part process : Paragraph { part link : Link { attribute redefines text = "Design process and model sources"; attribute redefines target = "index.md"; } }
     }
-
 
     calc def RefinementDependencies :> Query {
         WhereMetadata(source = WhereType(source = ModelElements(), type = "Dependency"), 'metadata' = "ModelingMetadata::Refinement")
@@ -322,11 +321,11 @@ package BlueDogReliabilityDocuments {
     }
     calc def Functions :> Query {
         Project(source = Modes(), columns = (Column(name = "ID", path = "identifier"),
-            Column(name = "Model element", path = "name"), Column(name = "Function", path = "intendedFunction"), Column(name = "Failure mode", path = "failureMode")))
+            Column(name = "Model element", path = "name"), Column(name = "Function", path = "intendedFunction"), Column(name = "Failure mode", path = "failureModeText")))
     }
     calc def Effects :> Query {
         Project(source = Modes(), columns = (Column(name = "ID", path = "identifier"),
-            Column(name = "Cause", path = "cause"), Column(name = "Local effect", path = "localEffect"), Column(name = "Mission effect", path = "missionEffect")))
+            Column(name = "Cause", path = "causeText"), Column(name = "Local effect", path = "localEffectText"), Column(name = "Mission effect", path = "missionEffectText")))
     }
     calc def Actions :> Query {
         Project(source = Modes(), columns = (Column(name = "ID", path = "identifier"),
@@ -340,7 +339,7 @@ package BlueDogReliabilityDocuments {
     calc def Traces :> Query {
         Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogDFMEA")), type = "Dependency"),
             columns = (Column(name = "From", cell = { in row : KerML::Root::Dependency; row.client }),
-                       Column(name = "To", cell = { in row : KerML::Root::Dependency; row.supplier })))
+            Column(name = "To", cell = { in row : KerML::Root::Dependency; row.supplier })))
     }
     part def DFMEA :> Document {
         attribute redefines title = "Initial architecture DFMEA";
@@ -682,16 +681,68 @@ package BlueDogEncounterStudyDocuments {
 }
 
 package BlueDogClassDetectionDocuments {
- doc /* Historical nine-row sensitivity; current policy also includes three wind-sport classes without inherited numerical allocations.*/
- private import DocumentQueries::*;
- calc def Rows :> Query { Project(source=Named(qualifiedName=("BlueDogClassDetection::classRow1","BlueDogClassDetection::classRow2","BlueDogClassDetection::classRow3","BlueDogClassDetection::classRow4","BlueDogClassDetection::classRow5","BlueDogClassDetection::classRow6","BlueDogClassDetection::classRow7","BlueDogClassDetection::classRow8","BlueDogClassDetection::classRow9")),columns=(Column(name="Target",path="target"),Column(name="Illustrative target speed (m/s)",path="targetSpeedMps"),Column(name="Illustrative head-on distance (m)",path="illustrativeDistanceM"),Column(name="Allocation accepted",path="allocationAccepted"))) }
- part def Summary :> Document { attribute redefines title="Class-specific response sensitivity: unaccepted illustrative inputs"; part cases : Table { calc rows : Rows; } }
+    doc /* Historical nine-row sensitivity; current policy also includes three wind-sport classes without inherited numerical allocations.*/
+    private import DocumentQueries::*;
+    calc def Rows :> Query { Project(source=Named(qualifiedName=("BlueDogClassDetection::classRow1","BlueDogClassDetection::classRow2","BlueDogClassDetection::classRow3","BlueDogClassDetection::classRow4","BlueDogClassDetection::classRow5","BlueDogClassDetection::classRow6","BlueDogClassDetection::classRow7","BlueDogClassDetection::classRow8","BlueDogClassDetection::classRow9")),columns=(Column(name="Target",path="target"),Column(name="Illustrative target speed (m/s)",path="targetSpeedMps"),Column(name="Illustrative head-on distance (m)",path="illustrativeDistanceM"),Column(name="Allocation accepted",path="allocationAccepted"))) }
+    part def Summary :> Document { attribute redefines title="Class-specific response sensitivity: unaccepted illustrative inputs"; part cases : Table { calc rows : Rows; } }
 }
 
 package BlueDogLocationTrafficDocuments {
- private import DocumentQueries::*;
- calc def Sectors :> Query { Project(source=Named(qualifiedName=("BlueDogLocationTraffic::bingen","BlueDogLocationTraffic::bridge","BlueDogLocationTraffic::hoodRiver","BlueDogLocationTraffic::hatchery","BlueDogLocationTraffic::viento","BlueDogLocationTraffic::homeValley","BlueDogLocationTraffic::stevenson","BlueDogLocationTraffic::connecting")),columns=(Column(name="Location",path="location"),Column(name="Conflict to assess",path="hazards"),Column(name="Next investigation",path="nextInvestigation"))) }
- part def Locations :> Document { attribute redefines title="Traffic assessment sectors: survey priorities, not accepted windows"; part sectors : Table { calc rows : Sectors; } }
- calc def Hazards :> Query { Project(source=Named(qualifiedName=("BlueDogLocationTraffic::windsurfCrossing","BlueDogLocationTraffic::wingfoilTurn","BlueDogLocationTraffic::kiteSweep","BlueDogLocationTraffic::fallenRider","BlueDogLocationTraffic::groupEncounter","BlueDogLocationTraffic::windowOverrun")),columns=(Column(name="Case",path="scenario"),Column(name="Occupied extent",path="extent"),Column(name="Required challenge",path="criterion"))) }
- part def Cases :> Document { attribute redefines title="Wind-sport and traffic-window hazard cases"; part hazards : Table { calc rows : Hazards; } }
+    private import DocumentQueries::*;
+    calc def Sectors :> Query { Project(source=Named(qualifiedName=("BlueDogLocationTraffic::bingen","BlueDogLocationTraffic::bridge","BlueDogLocationTraffic::hoodRiver","BlueDogLocationTraffic::hatchery","BlueDogLocationTraffic::viento","BlueDogLocationTraffic::homeValley","BlueDogLocationTraffic::stevenson","BlueDogLocationTraffic::connecting")),columns=(Column(name="Location",path="location"),Column(name="Conflict to assess",path="hazards"),Column(name="Next investigation",path="nextInvestigation"))) }
+    part def Locations :> Document { attribute redefines title="Traffic assessment sectors: survey priorities, not accepted windows"; part sectors : Table { calc rows : Sectors; } }
+    calc def Hazards :> Query { Project(source=Named(qualifiedName=("BlueDogLocationTraffic::windsurfCrossing","BlueDogLocationTraffic::wingfoilTurn","BlueDogLocationTraffic::kiteSweep","BlueDogLocationTraffic::fallenRider","BlueDogLocationTraffic::groupEncounter","BlueDogLocationTraffic::windowOverrun")),columns=(Column(name="Case",path="scenario"),Column(name="Occupied extent",path="extent"),Column(name="Required challenge",path="criterion"))) }
+    part def Cases :> Document { attribute redefines title="Wind-sport and traffic-window hazard cases"; part hazards : Table { calc rows : Hazards; } }
+}
+
+package BlueDogAvoidanceDocuments { private import DocumentQueries::*;
+    calc def functionalRows :> Query { Project(source = Named(qualifiedName = ("BlueDogAvoidanceFailures::functional::missedDetection", "BlueDogAvoidanceFailures::functional::lateObservation", "BlueDogAvoidanceFailures::functional::falseOrSwappedTrack", "BlueDogAvoidanceFailures::functional::wrongClassification", "BlueDogAvoidanceFailures::functional::wrongMotionPrediction", "BlueDogAvoidanceFailures::functional::wrongRuleAssessment", "BlueDogAvoidanceFailures::functional::noFeasibleCommand", "BlueDogAvoidanceFailures::functional::unsafeCourtesyChange", "BlueDogAvoidanceFailures::functional::steeringUnavailable", "BlueDogAvoidanceFailures::functional::sailControlUnavailable", "BlueDogAvoidanceFailures::functional::unobservedExecutionError", "BlueDogAvoidanceFailures::functional::unsafeAbortTransition", "BlueDogAvoidanceFailures::functional::inadequateRecoveryObservation", "BlueDogAvoidanceFailures::functional::noSafeRecoveryRoute", "BlueDogAvoidanceFailures::functional::recoveryTooLate", "BlueDogAvoidanceFailures::functional::sharedPowerLoss", "BlueDogAvoidanceFailures::functional::sharedComputeLoss")), columns = (Column(name = "ID", path = "identifier"), Column(name = "Function / scope", path = "intendedFunction"), Column(name = "Cause", path = "causeText"), Column(name = "Failure", path = "failureModeText"), Column(name = "Action needed", path = "recommendedAction"))) }
+    part def functional :> Document { attribute redefines title = ""; part rows : Table { calc rows : functionalRows; } }
+    calc def conceptsRows :> Query { Project(source = Named(qualifiedName = ("BlueDogAvoidanceFailures::concepts::fixedAngularGap", "BlueDogAvoidanceFailures::concepts::fixedStaleFrames", "BlueDogAvoidanceFailures::concepts::wetOptics", "BlueDogAvoidanceFailures::concepts::sharedHub", "BlueDogAvoidanceFailures::concepts::scannerJam", "BlueDogAvoidanceFailures::concepts::scannerRevisit", "BlueDogAvoidanceFailures::concepts::scannerCable", "BlueDogAvoidanceFailures::concepts::passiveQuiet", "BlueDogAvoidanceFailures::concepts::passiveAmbiguous", "BlueDogAvoidanceFailures::concepts::activeClutter", "BlueDogAvoidanceFailures::concepts::narrowBeamRevisit", "BlueDogAvoidanceFailures::concepts::multibeamExtent", "BlueDogAvoidanceFailures::concepts::invertedMount", "BlueDogAvoidanceFailures::concepts::wingDriveJam", "BlueDogAvoidanceFailures::concepts::softSailSheetJam")), columns = (Column(name = "ID", path = "identifier"), Column(name = "Function / scope", path = "intendedFunction"), Column(name = "Cause", path = "causeText"), Column(name = "Failure", path = "failureModeText"), Column(name = "Action needed", path = "recommendedAction"))) }
+    part def concepts :> Document { attribute redefines title = ""; part rows : Table { calc rows : conceptsRows; } }
+}
+
+package BlueDogFailureViews { private import StandardViewDefinitions::*; private import DocumentQueries::*;
+    view SystemTreeView : InterconnectionView {
+        expose BlueDogAvoidanceFailures::Exposure::encounterDemand;
+        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable;
+        expose BlueDogAvoidanceFailures::Exposure::OR_recoveryUnavailable;
+        expose BlueDogAvoidanceFailures::Exposure::AND_safeSeparationUnsupported;
+        expose BlueDogAvoidanceFailures::Exposure::sharedPowerLoss;
+        expose BlueDogAvoidanceFailures::Exposure::sharedComputeLoss;
+        expose BlueDogAvoidanceFailures::Exposure::AND_safeSeparationUnsupported_0;
+        expose BlueDogAvoidanceFailures::Exposure::AND_safeSeparationUnsupported_1;
+        expose BlueDogAvoidanceFailures::Exposure::AND_safeSeparationUnsupported_2;
+        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_4;
+        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_5;
+        expose BlueDogAvoidanceFailures::Exposure::OR_recoveryUnavailable_4;
+        expose BlueDogAvoidanceFailures::Exposure::OR_recoveryUnavailable_5;
+    }
+    part def SystemTree :> Document { attribute redefines title = ""; part diagram : Diagram { attribute redefines direction = "BT"; attribute redefines show = "keywords"; ref redefines source = SystemTreeView; } }
+    view PrimaryTreeView : InterconnectionView {
+        expose BlueDogAvoidanceFailures::Exposure::OR_observationUnavailable;
+        expose BlueDogAvoidanceFailures::Exposure::OR_assessmentWrong;
+        expose BlueDogAvoidanceFailures::Exposure::OR_commandUnsafe;
+        expose BlueDogAvoidanceFailures::Exposure::OR_maneuverUnavailable;
+        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable;
+        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_0;
+        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_1;
+        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_2;
+        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_3;
+    }
+    part def PrimaryTree :> Document { attribute redefines title = ""; part diagram : Diagram { attribute redefines direction = "BT"; attribute redefines show = "keywords"; ref redefines source = PrimaryTreeView; } }
+    view ScannerTreeView : InterconnectionView {
+        expose BlueDogAvoidanceFailures::scannerJam;
+        expose BlueDogAvoidanceFailures::scannerRevisit;
+        expose BlueDogAvoidanceFailures::scannerCable;
+        expose BlueDogAvoidanceFailures::wetOptics;
+        expose BlueDogAvoidanceFailures::sharedHub;
+        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable;
+        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_0;
+        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_1;
+        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_2;
+        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_3;
+        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_4;
+    }
+    part def ScannerTree :> Document { attribute redefines title = ""; part diagram : Diagram { attribute redefines direction = "BT"; attribute redefines show = "keywords"; ref redefines source = ScannerTreeView; } }
 }

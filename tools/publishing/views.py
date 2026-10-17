@@ -88,7 +88,7 @@ def render_blocks(blocks, directory):
     # Keep identities for compact requirement labels and queried dependency links.
     native("-render-documents", output, "-diagram-form", "mermaid",
            "-render-show", "qualifiers,typings", models=models)
-    from .relationships import basis_links, include_basis
+    from .relationships import basis_links, include_basis, compact_failure_diagram
     basis = basis_links((output / 'BlueDogDocuments-RelationshipRegister.md').read_text(encoding='utf-8'))
     documents = [(output / ((block.target.replace('::', '-') if block.report else f"PageBuild{i}-Content") + ".md")).read_text(encoding="utf-8")
                  for i, block in enumerate(blocks)]
@@ -96,4 +96,4 @@ def render_blocks(blocks, directory):
     # has already printed an ancestor's statement in an earlier section.
     labels = {name: rid for text in documents for rid, name in
               re.findall(r'^\*\*([A-Z]-\d+) (\w+)\*\*', text, re.M)}
-    return [include_basis(text, basis, labels) for text in documents]
+    return [compact_failure_diagram(include_basis(text, basis, labels)) for text in documents]
