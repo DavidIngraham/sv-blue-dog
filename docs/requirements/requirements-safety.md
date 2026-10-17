@@ -366,7 +366,7 @@ package SRR_Thread_safety {
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
         expose GorgeChallenge::transGorgeChallenge;
-        expose GorgeChallenge::trafficNonInterference;
+        expose GorgeChallenge::navigationRules;
         expose GorgeChallenge::safetyCapabilityAbort;
         expose GorgeChallenge::autonomousShoreRecovery;
         expose GorgeChallenge::abortAlert;
@@ -374,7 +374,7 @@ package SRR_Thread_safety {
         expose GorgeChallenge::reserveAbort;
         expose GorgeChallenge::recoveryConspicuity;
         metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
-        metadata Layout about GorgeChallenge::trafficNonInterference { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::navigationRules { x = 320; y = 0; }
         metadata Layout about GorgeChallenge::safetyCapabilityAbort { x = 640; y = 0; }
         metadata Layout about GorgeChallenge::autonomousShoreRecovery { x = 0; y = 400; }
         metadata Layout about GorgeChallenge::abortAlert { x = 320; y = 400; }

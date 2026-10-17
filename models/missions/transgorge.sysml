@@ -14,7 +14,7 @@ package GorgeChallenge {
     attribute maximumOverallLength : LengthValue = 1.2 [m];
     requirement def <'C-000'> TransGorgeChallenge {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall complete the Trans-Gorge challenge under C-001 and C-003 through C-027. */
+        doc /* The vessel shall complete the Trans-Gorge challenge under C-001, C-003 through C-010 and C-012 through C-027.*/
         metadata rationale : ModelingMetadata::Rationale { text = "One Bingen–Stevenson–Bingen circuit defines the finite challenge. Repeated circuits are a separate future endurance objective."; }
     }
     requirement transGorgeChallenge : TransGorgeChallenge;
@@ -147,18 +147,6 @@ package GorgeChallenge {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
         end #original source ::> transGorgeChallenge;
         end #derive target ::> overallLength;
-    }
-    requirement def <'C-011'> TrafficNonInterference {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        doc /* The vessel shall avoid impeding other waterway users. */
-        comment conditions /* Safety takes precedence over course progress and qualification. Encounter criteria must account for commercial traffic, non-AIS craft and people in the water. */
-        metadata rationale : ModelingMetadata::Rationale { text = "Safe coexistence is a challenge obligation, not an optional vehicle trade."; }
-    }
-    requirement trafficNonInterference : TrafficNonInterference;
-    #derivation connection deriveTrafficNonInterference {
-        metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
-        end #original source ::> transGorgeChallenge;
-        end #derive target ::> trafficNonInterference;
     }
     requirement def <'C-012'> SafetyCapabilityAbort {
         metadata workStatus : ModelingMetadata::StatusInfo { status = ModelingMetadata::StatusKind::open; }
@@ -352,4 +340,5 @@ package GorgeChallenge {
         end #original source ::> transGorgeChallenge;
         end #derive target ::> recoveryConspicuity;
     }
+    comment trafficCourtesyGuidance /* Entrants are encouraged to choose routes and operating windows that reduce encounters with other waterway users. This is nonbinding guidance, not an entry or adjudication criterion. Another vessel changing course or speed is not by itself a breach. Navigation-rule compliance, applicable nonimpediment duties and collision avoidance remain governed by C-007 and C-009.*/
 }

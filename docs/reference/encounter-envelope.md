@@ -130,7 +130,7 @@ Reducing ownship speed lowers head-on closing speed, but does not necessarily so
 
 The current scope includes all twelve classes above. The
 [challenge](../../models/missions/transgorge.sysml) retains collision avoidance,
-noninterference and applicable navigation obligations. Class-specific allocation
+applicable nonimpediment duties and other navigation obligations. Class-specific allocation
 changes how I substantiate the response, not which river users count.
 
 The old six-class review's 750 m distance is now a historical comparison.

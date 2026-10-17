@@ -4,16 +4,18 @@ The requirements turn the Gorge challenge and my practical constraints into obse
 
 - **Complete one independent, sail-only round trip.** Start at the Bingen gate, round Buoy 16 near Stevenson and return. Safe waiting is allowed; motor use, intervention, anchoring, grounding or refuge ends qualification.
 - **Make decisions onboard.** Shore communications support observation. Their loss must not remove navigation or safety capability.
-- **Preserve safety and recoverability.** The boat must avoid interfering with other river users and act autonomously when a required capability is lost. Capsize alone need not end qualification if unassisted recovery preserves the required safety functions without motor use.
+- **Preserve safety and recoverability.** The boat must avoid collisions, meet applicable navigation duties and act autonomously when a required capability is lost. Capsize alone need not end qualification if unassisted recovery preserves the required safety functions without motor use.
 - **Carry enough usable energy.** Support the finite passage and its delays while preserving recovery reserve. This mission imposes neither a fixed 72-hour deadline nor daily energy neutrality.
 - **Survive the declared conditions.** Environmental, structural and casualty tests must identify their configuration and exposure. A calculated margin is evidence for a prediction, not a physical demonstration.
 - **Remain practical for me to build and handle.** Printed jobs must fit a 250 × 250 × 250 mm envelope; assembled structures can be larger. One person must be able to transport, launch and retrieve the boat with appropriate aids.
 
 Hawai‘i and sustained repeated operation are separate future missions. Their labeled ocean and repeating-energy requirements remain in the reference model, but they do not set acceptance criteria for the first Gorge boat.
 
+The challenge also encourages routes and operating windows that reduce traffic encounters. That is guidance, not a pass/fail test of whether another skipper changes course. My stronger [courtesy preference for Blue Dog](encounter-feasibility.md#leave-room-for-crewed-boats) accepts delay to reduce the need for crewed boats to maneuver, while preserving safe, rule-consistent behavior.
+
 ## Which requirements can the sensing study challenge?
 
-Avoiding collision and interference remains the mission obligation. Observation
+Avoiding collision and meeting applicable navigation duties remain mission obligations. Observation
 distance is now allocated by target class, encounter geometry, uncertainty and
 achievable response, rather than a common 750 m for every target. The older
 750 m studies retain that assumption as historical evidence.

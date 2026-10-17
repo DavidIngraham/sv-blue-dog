@@ -68,4 +68,10 @@ package BlueDogDesignDecisions {
     }
     dependency uncertaintyCases from uncertaintyPolicy to BlueDogCoupledUncertainty::Inputs;
     dependency missionEvidence from uncertaintyPolicy to BlueDogRequirements::missionEvidence;
+    part trafficCourtesy : Decision {
+        attribute disposition :>> disposition = "Prefer safe, rule-consistent routes, operating windows and trajectories that reduce the likelihood of crewed vessels needing to maneuver. Accept delay or reduced mission progress to avoid developing encounters. Once encounter duties apply, preserve required predictable behavior and act when permitted or necessary; this is not an always-yield policy.";
+        attribute evidenceNeeded :>> evidenceNeeded = "Compare alternatives against the same traffic scenarios using close-encounter exposure, predicted need for other-vessel action and mission delay, with explicit behavior and sensing assumptions. These are comparative design measures, not evidence of why another skipper acted or challenge pass/fail criteria. The preference is not yet implemented as a planner objective or validated by the existing replay.";
+    }
+    dependency courtesyWithinNavigationDuties from trafficCourtesy to GorgeChallenge::navigationRules;
+    dependency courtesyCollisionSafety from trafficCourtesy to GorgeChallenge::trafficCoexistence;
 }

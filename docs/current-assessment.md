@@ -35,6 +35,8 @@ steering selection changes. This does not establish successful rule-directed
 avoidance or support resizing IC-01. The static sizing result remains scoped to
 its existing configuration and assumptions.
 
+Blue Dog also has a [traffic courtesy preference](encounter-feasibility.md#leave-room-for-crewed-boats): avoid developing encounters that require crewed vessels to react, subject to safe navigation duties. The challenge encourages this as nonbinding guidance. It is not a qualification criterion or an implemented planner objective; comparative route studies remain to be done.
+
 ## Integration milestone
 
 The milestone is **one candidate whose sensing, guidance, energy and recovery capabilities work together in representative simulations**. Its geometry, equipment mass, electrical demand and sailing performance must remain consistent across the studies.

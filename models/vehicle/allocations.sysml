@@ -203,7 +203,6 @@ package BlueDogSatisfaction {
     // Logical responsibility allocations for the SRR challenge baseline.
     // These assert intended design responsibility, not demonstrated compliance.
     satisfy GorgeChallenge::overallLength by missionContext.boat;
-    satisfy GorgeChallenge::trafficNonInterference by missionContext.boat.control.collisionAvoidance;
     satisfy GorgeChallenge::safetyCapabilityAbort by missionContext.boat.recovery.recoveryController;
     satisfy GorgeChallenge::autonomousShoreRecovery by missionContext.boat.recovery.recoveryController;
     satisfy GorgeChallenge::abortAlert by missionContext.boat.communications;

@@ -5,11 +5,6 @@ package GorgeChallengeVerification {
         objective acceptance { verify GorgeChallenge::overallLength; }
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
-    verification def TrafficNonInterferenceVerification {
-        doc /* Review applicable navigation obligations, then exercise AIS and non-AIS crossing, overtaking, head-on and constrained-water encounters. Use BlueDogClassDetection reviewed class-specific or conservative plausible-class envelopes, target extents, observation and response timing, clearance, consequence and reliability/confidence criteria. Independently observe closest hull approach and other-vessel impediment. No current class allocation is accepted. Coarse mission truth tracks do not verify sensing or waive collision/nonimpediment obligations.*/
-        objective acceptance { verify GorgeChallenge::trafficNonInterference; }
-        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
-    }
     verification def SafetyCapabilityAbortVerification {
         doc /* Inject loss of required safety functions, including visibility-driven loss and common-cause faults. Confirm qualification terminates when the function is unavailable; demonstrate continued qualification only when an accepted backup maintains that function. */
         objective acceptance { verify GorgeChallenge::safetyCapabilityAbort; }
@@ -93,7 +88,6 @@ package GorgeChallengeVerification {
     verification def WindSportEncounterVerification {
         doc /* Exercise BlueDogLocationTraffic windsurfCrossing, wingfoilTurn, kiteSweep, fallenRider and groupEncounter across both tacks, overtaking, unknown tack, glare, waves and darkness. Independently record rider/equipment extent, timing, swept-volume clearance and navigation obligations. Include timely, delayed and absent rider avoidance, falls, track swaps and no feasible sailing response. Scripted planar targets or cooperative passes cannot close these cases.*/
         objective acceptance {
-            verify GorgeChallenge::trafficNonInterference;
             verify GorgeChallenge::trafficCoexistence;
             verify GorgeChallenge::navigationRules;
         }

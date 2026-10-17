@@ -332,3 +332,24 @@ The next spirals should connect measurements to the mission: wing and actuator t
 The aim is a progressively better explanation of what Blue Dog can do, under which conditions, and why I believe it.
 
 **Continue:** [Mission simulation methods](mission-simulation.md) · [Evidence and physical experiments](validation-plan.md)
+
+
+## Separate traffic courtesy from challenge acceptance
+
+On 17 October 2026, I separated the desire to leave crewed boats undisturbed from
+what Gorge judges can fairly verify. C-011's blanket noninterference requirement
+was retired. Nonbinding challenge guidance encourages routes and operating windows
+that reduce encounters; C-007 retains applicable navigation and nonimpediment duties,
+and C-009 retains collision avoidance. The redundant standalone verification and
+component-satisfaction claim were removed, while wind-sport encounter verification
+retains its collision and navigation objectives.
+
+The [Blue Dog design decision](../models/vehicle/decisions.sysml) prefers safe,
+rule-consistent trajectories that reduce the likelihood of crewed vessels needing
+to maneuver, accepting delay or reduced progress. It does not override stand-on
+duties. Future comparisons should use the same traffic scenarios and report
+close-encounter exposure, predicted other-vessel action and mission delay with
+explicit assumptions. No planner objective, sensing fidelity, numerical result or
+hardware allocation changed in this step; archived campaigns retain their original
+scope. The [encounter article](encounter-feasibility.md#leave-room-for-crewed-boats)
+explains the current policy and its untested status.

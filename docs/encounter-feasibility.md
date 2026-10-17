@@ -183,6 +183,27 @@ Independent truth checks executed motion continuously for collision and required
 
 An explicit perfect-truth baseline remains available for comparison and for reproducing older experiments. Each result identifies which observation mode it used. The paired study uses the imperfect provider for every sensing hypothesis and retains observations, supervisory decisions, movement history and stopping causes.
 
+## Leave room for crewed boats
+
+I want Blue Dog to stay out of crewed boats' way before an encounter develops,
+even if that costs time or course progress. This is a [design preference](../models/vehicle/decisions.sysml),
+subject to safe, rule-consistent behavior. Once encounter duties apply, an
+unexpected courtesy turn can defeat another skipper's avoidance maneuver.
+Holding course, permission to act and mandatory action therefore remain distinct.
+
+The Gorge challenge encourages routes and operating windows that reduce traffic
+encounters. That guidance is nonbinding: another vessel changing course or speed
+is not by itself a failure. Judges assess the navigation obligations under C-007
+and collision avoidance under C-009, rather than trying to infer another skipper's
+motives or whether a different route would have inconvenienced fewer people.
+
+For Blue Dog, I can compare route choices against the same traffic scenarios using
+close-encounter exposure, predicted need for another vessel's action and mission
+delay. Those measures depend on explicit sensing and traffic-behavior assumptions;
+they are design comparisons, not challenge acceptance thresholds. This preference
+has not yet been implemented as a planner objective, and the existing replay does
+not demonstrate it.
+
 ## Check navigation duties as well as clearance
 
 A collision-free path can still violate a navigation duty. I use an

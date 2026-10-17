@@ -31,5 +31,5 @@ package BlueDogEncounterReview {
     dependency basis from criteria to BlueDogRequirements::trafficSafety;
     dependency tracking from criteria to BlueDogRequirements::trafficTracking;
     dependency timing from criteria to BlueDogRequirements::avoidanceCommandDeadline;
-    dependency nonInterference from acceptance to GorgeChallenge::trafficNonInterference;
+    dependency applicableNavigationDuties from acceptance to GorgeChallenge::navigationRules;
 }
