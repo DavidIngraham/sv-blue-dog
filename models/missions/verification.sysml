@@ -106,4 +106,46 @@ package GorgeChallengeVerification {
         }
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
+    verification def NavigationRulesEntryAndAdjudicationVerification {
+        doc /* Planned case; no completed compliance evidence. Review entry applicability, current rule/notice baseline, installed observation and maneuver evidence, controlled demonstrations and simulation limitations against predeclared criteria. Reject unsupported admitted conditions. Replay compliant autonomous avoidance, no-contact rule breach, collision, operator intervention, motor-assisted safety action and insufficient evidence; confirm their distinct qualification outcomes. Record configuration, conditions, reviewer, evidence and rationale. Do not stage hazardous encounters with uninvolved users.*/
+        objective acceptance {
+            verify GorgeChallenge::navigationRules;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def InlandApplicabilityVerification {
+        doc /* Planned case; no completed compliance evidence. Sources: Rules 1-3, https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-A . Review jurisdiction, vessel classification, sailing/powered/casualty modes, responsibility, local provisions and authority for exceptions. Record applicability dispositions; no blanket small-vessel or autonomous exemption.*/
+        objective acceptance {
+            verify GorgeChallenge::navigationRules;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def InlandLookoutAndAvoidanceVerification {
+        doc /* Planned case; no completed compliance evidence. Sources: Rules 5-8, https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-B . Demonstrate installed lookout, safe speed, risk appraisal and effective avoidance under admitted conditions, including uncertain and missed tracks. Independently observe early/substantial action and effectiveness. No-contact outcome alone is insufficient.*/
+        objective acceptance {
+            verify GorgeChallenge::navigationRules;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def InlandEncounterConductVerification {
+        doc /* Planned case; no completed compliance evidence. Sources: Rules 11-18, https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-B . Review applicability and demonstrate sailing, overtaking, crossing/head-on where relevant, give-way and stand-on escalation, unknown tack and exceptional status. Retain overtaking duty until past and clear. Distinguish permission from mandatory action; a subset does not verify omitted rules.*/
+        objective acceptance {
+            verify GorgeChallenge::navigationRules;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def InlandChannelAndVisibilityVerification {
+        doc /* Planned case; no completed compliance evidence. Sources: Rules 9, 10 and 19, https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-B . Review channel confinement, nonimpediment, crossings, applicable traffic separation and restricted visibility. Exercise simultaneous pairwise/channel duties. Record applicability or justified exclusions, operating limits and response to deteriorating visibility. In-sight logic does not verify nonvisual encounters.*/
+        objective acceptance {
+            verify GorgeChallenge::navigationRules;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def InlandSignalsVerification {
+        doc /* Planned case; no completed compliance evidence. Sources: Rules 20-37 and applicable annexes, https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E . Review lights, shapes and sound signals for sailing, powered recovery and casualty modes. Demonstrate required equipment performance and signal behavior under admitted conditions. Record authority for alternatives; review distress signaling and applicable exemptions separately.*/
+        objective acceptance {
+            verify GorgeChallenge::navigationRules;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
 }

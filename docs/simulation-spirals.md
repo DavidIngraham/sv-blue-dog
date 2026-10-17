@@ -254,6 +254,12 @@ complete mission exposure review are still needed before selecting a window.
 The [current location assessment](site-and-environment-evidence.md#traffic-risk-by-location-and-arrival-window)
 sets out the next observations and how they would change launch admission.
 
+## Clarify navigation-rule entry evidence and adjudication
+
+The 16 October challenge review distinguishes avoiding contact from complying with navigation obligations. C-007 now identifies the U.S. Inland Rules and local provisions, organizer-reviewed entry evidence and explicit qualification outcomes. Six source-linked verification cases cover applicability, lookout/avoidance, encounter conduct, channels/visibility, signals and adjudication. They remain inconclusive: this adds review structure, not measured capability or completed compliance evidence.
+
+The [verification plan](validation-plan.md#navigation-rule-entry-review-and-adjudication) identifies the required evidence. Configuration-specific applicability, accepted demonstration criteria and physical results remain open. The standalone executable rule experiment remains outside production model loading and is not credited as challenge compliance.
+
 ### Evidence through each iteration
 
 For me, fidelity means representing the effects that matter to a decision with enough accuracy. Traceability means being able to explain which mission obligation, design, assumptions and evidence produced the conclusion. A more detailed model can strengthen one part of that chain while exposing a weakness in another.

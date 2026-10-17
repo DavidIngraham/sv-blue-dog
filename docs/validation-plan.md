@@ -4,6 +4,25 @@
 
 Which measurements could change the boat I build? IC-01 gives me a specific geometry, load budget and recovery architecture to challenge. I will start with experiments that could force a different sensor, propulsion system, rig or structure, then integrate the supported choices into the first boat.
 
+## Navigation-rule entry review and adjudication
+
+The challenge's C-007 requires the [U.S. Inland Navigation Rules](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E) and applicable local provisions. Before entry approval, the organizer reviews the identified boat, course, propulsion modes, operating conditions and current rule/notice baseline. The entrant supplies applicability decisions, justified exclusions, observation and maneuver limits, predeclared acceptance criteria and supporting demonstrations. Unsupported conditions cannot enter the admitted operating envelope.
+
+The [model verification cases](../models/missions/verification.sysml) each verify `GorgeChallenge::navigationRules` and link to their legal sources:
+
+| Model case | Source and review scope |
+| --- | --- |
+| `InlandApplicabilityVerification` | [Rules 1–3](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-A): jurisdiction, definitions, responsibility and exceptions |
+| `InlandLookoutAndAvoidanceVerification` | [Rules 5–8](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-B): lookout, safe speed, risk and avoidance |
+| `InlandEncounterConductVerification` | [Rules 11–18](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-B): sailing, overtaking, other relevant encounters and give-way/stand-on duties |
+| `InlandChannelAndVisibilityVerification` | [Rules 9, 10 and 19](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-B): channels, applicable traffic separation and restricted visibility |
+| `InlandSignalsVerification` | [Rules 20–37 and applicable annexes](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E): lights, shapes and sound signals across operating modes |
+| `NavigationRulesEntryAndAdjudicationVerification` | C-007: entry evidence and consistent qualification decisions |
+
+All six cases remain **inconclusive**. They provide a structure for assessing compliance, not a finding that Blue Dog complies. The applicability review must account for provisions beyond these grouped cases where relevant. Physical demonstrations, simulation evidence and unresolved gaps remain distinct; passing a limited software rule subset cannot close C-007.
+
+After an attempt, the organizer reviews retained observations, commands, motion history and independent evidence where available. A collision, established rule breach or unsafe conduct requiring intervention disqualifies the attempt. Operator intervention or motor use ends qualification even when it prevents a breach; compliant autonomous avoidance does not by itself do so. Insufficient evidence leaves qualification unconfirmed. Record the reason for each decision. Demonstrations must use controlled conditions without staging hazardous encounters with uninvolved users.
+
 ## Start with measurements that change a decision
 
 | First experiment | What I would measure | What could change |

@@ -8,6 +8,11 @@ The job is a finite, unassisted round trip from Bingen around Buoy 16 near Steve
 
 The course, length limit, propulsion and independence rules define the attempt. A convenient implementation cannot redefine those conditions.
 
+C-007 explicitly requires the U.S. Inland Navigation Rules and applicable local navigation provisions for the approved course. The organizer reviews the governing rule and notice baseline, each entrant's applicability assessment and evidence for the admitted conditions. Entrants justify their own sensing distances, margins and maneuver capability.
+
+A collision, established rule breach or unsafe conduct requiring safety intervention disqualifies the attempt. Operator intervention or motor propulsion also ends qualification when used for safety. Compliant autonomous avoidance can preserve qualification; missing evidence leaves the outcome unconfirmed. Safety action must never wait to protect a score. The [navigation compliance assessment](../validation-plan.md#navigation-rule-entry-review-and-adjudication) connects the legal sources to planned model verification cases.
+
+
 <details>
 <summary>Model relationships and authoritative requirement statements</summary>
 

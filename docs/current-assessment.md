@@ -17,6 +17,8 @@ The rows follow the Object-Oriented Systems Engineering Method (OOSEM): mission,
 | Trades and analysis | Coupled sizing, three open rig concepts, energy accounting and bounded recovery/encounter studies. | Correlate aerodynamic, structural, maneuvering and recovery assumptions with measurements, then compare alternatives on the same cases. [Sizing](sizing.md), [rig trade](sail-trade.md) |
 | Physical verification and model validation | Planned cases identify the claims to test; software checks establish behavior in supplied cases. | Obtain component and integrated measurements for an identified configuration. No completed physical qualification is claimed. [Evidence plan](validation-plan.md) |
 
+The challenge explicitly identifies the U.S. Inland Navigation Rules, entry evidence and adjudication under C-007. Six [source-linked navigation review cases](validation-plan.md#navigation-rule-entry-review-and-adjudication) organize applicability, encounter conduct and equipment evidence. All remain inconclusive; accepted navigation compliance and physical entry qualification are still open. The next review must establish the configuration-specific applicability matrix and demonstration criteria.
+
 ## Integration milestone
 
 The milestone is **one candidate whose sensing, guidance, energy and recovery capabilities work together in representative simulations**. Its geometry, equipment mass, electrical demand and sailing performance must remain consistent across the studies.
