@@ -4,6 +4,12 @@
 
 **IC-01 is the working basis for my first physical boat.** I expect to refine it before construction. Its purpose is to carry sensing, guidance, sailing energy and independent recovery together, rather than size a sailing hull first and add those functions later. Its [allocation](../models/analyses/integrated-candidate.sysml) includes sensing/compute demand and recovery equipment in a fresh coupled evaluation. The [virtual acceptance requirement](current-assessment.md#integration-milestone) combines those sizing results with representative mission and casualty simulations. It does not select catalog hardware or establish physical qualification.
 
+The [navigation-rule replay](encounter-feasibility.md#what-changed-in-the-ic-01-replay)
+uses this configuration unchanged. It produces earlier aborts when encounter
+assessments are missing, with no improvement in completion or accepted steering
+choices. Its small energy reductions come from abandoned attempts, not greater
+endurance. No new hardware load or sizing optimum is inferred from that study.
+
 ## Why the boat grew
 
 The earlier 440 Wh reference could satisfy its nominal sailing screen, but left only about 4 Wh beyond the allocated voyage energy. It could not absorb the additional sensing loads I was investigating. IC-01 makes those functions explicit and carries an independent recovery system. Their mass and demand feed back into hull sizing and passage time.

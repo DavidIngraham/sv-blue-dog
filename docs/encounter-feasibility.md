@@ -185,8 +185,8 @@ An explicit perfect-truth baseline remains available for comparison and for repr
 
 ## Check navigation duties as well as clearance
 
-A collision-free path can still violate a navigation duty. I use a separate
-[executable Inland Rules experiment](../experiments/inland-navigation/README.md)
+A collision-free path can still violate a navigation duty. I use an
+[executable Inland Rules model](../experiments/inland-navigation/README.md)
 to ask which duties apply and whether a proposed action and equipment evidence
 support them. It covers sailing and powered encounters, overtaking, special
 vessel status, channels, restricted visibility, signals and equipment checks.
@@ -198,13 +198,66 @@ separate obligation even when the pairwise encounter gives Blue Dog a stand-on
 role. The combined assessment also rejects inconsistent vessel, visibility,
 risk and passage-agreement facts across those checks.
 
-This experiment does not yet drive the traffic controller. Its cases supply
-assessed facts; they do not establish that a camera can identify a vessel's
-status or that Blue Dog can execute a safe turn. The [coverage register](../experiments/inland-navigation/COVERAGE.md)
-separates executable conditions from remaining interpretations and evidence.
-The next useful test is to connect observed tracks and feasible candidate
-maneuvers to these duties, then check the resulting motion against independent
-traffic truth.
+The pair assessment now filters the mission simulator's sailing candidates using
+delivered tracks. An unresolved applicable duty can end the attempt and trigger
+recovery. Holding course and speed, acting permissively and acting mandatorily
+remain distinct responses. Established overtaking duties survive track loss.
+The forecast checks command latency, maneuver drift and subsequent sailing as
+separate timed segments, including hazards observed during an occupied maneuver.
+
+This integration accepts an explicitly assessed clear-visibility, non-channel
+context. It rejects unsupported contexts rather than applying visual encounter
+roles to them. It does not yet implement navigation-rule control during powered
+recovery or connect the equipment checks to installed hardware. The [coverage
+register](../experiments/inland-navigation/COVERAGE.md) distinguishes the broader
+rule library from the subset used by this controller.
+
+Identification and response assessments are still inputs to test, not capabilities
+credited to a camera. The comparison therefore separates missing assessments from
+explicit hypotheses about visual identification, vessel status and whether the
+other vessel is responding. A geometric track alone supplies none of those facts.
+
+
+### What changed in the IC-01 replay
+
+The [17 October paired record](../evidence/runs/2026-10-17-navigation-integration/navigation-integration.json)
+keeps the boat, energy allocation, weather, traffic and observation hypotheses
+from the 29-case IC-01 campaign. Each case runs with geometry-only guidance,
+with missing navigation assessments, and with explicit hypothetical craft
+identification and response assessments. All three use the same heading choices
+and segment-by-segment maneuver forecast. The record separately identifies changes
+from the older geometric controller, so those are not attributed to the rules.
+
+| Result in the 18 nominal cases | Geometry-only control | Missing assessments | Hypothetical craft assessments |
+| --- | --- | --- | --- |
+| Completed attempts | 10 | 10 | 10 |
+| Aborted attempts reaching recovery approaches | 8 | 8 | 8 |
+| Low-target abort time from departure | 180 s | 160–162 s | 160–162 s |
+| Changed accepted steering selections relative to control | — | 0 | 0 |
+
+The low target remains unidentified in both rule-enabled modes. The controller
+refuses an unsupported encounter 18–20 seconds earlier, reaching the recovery
+approach about 23–25 seconds earlier. Main and recovery energy together fall by
+about 0.17–0.19 Wh because the attempt ends sooner. This is not an endurance gain.
+
+The original crossing does not exercise a rule-constrained maneuver. A separate
+four-case probe shifts its arrival time to create a closer encounter. All modes
+abort safely. Missing assessments trigger abort 1–3 seconds earlier; supplied
+hypothetical assessments produce a stand-on role with permission to act, but the
+same steering and eventual geometric abort as the control. This demonstrates
+rule-driven refusal under uncertainty, not successful rule-directed avoidance.
+
+Across all 99 runs there are no recorded traffic collisions or traffic-clearance
+violations. The two adverse power/recovery controls in each mode still end in
+shore contact. The six casualty cases and the finer-step checks retain their
+outcome classifications. Recovery navigation compliance is not assessed.
+
+I would not resize IC-01 from this result. Its physical configuration and static
+energy feasibility were held fixed, and the replay supplies no new equipment
+load. The next useful cases must require a different supported maneuver: resolved
+sailing tack, overtaking with track loss, a responding versus nonresponding target,
+and late arrival during a turn. Those should use measured or explicitly bounded
+identification and maneuver behavior before informing a hardware trade.
 
 ## Close the candidate loop
 

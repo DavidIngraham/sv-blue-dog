@@ -1,0 +1,10 @@
+{
+  "sourceRevision": "467f64501f1b9c2db6514c9caca5814676b0cd7c",
+  "files": {
+    "navigation-integration.json": {
+      "sha256": "ecb16182edc3c6cef062d3356a1d8ab65ec8ed20cada1cdfcb3e07f8bdc777ce"
+    }
+  },
+  "qualified": false,
+  "scope": "Frozen IC-01: 29 archived cases plus four timed-crossing probes, each in geometric, unassessed-rule and assumed-assessment modes. 99 synthetic replays; no resizing or physical/navigation compliance qualification."
+}

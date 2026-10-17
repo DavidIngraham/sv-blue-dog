@@ -1,6 +1,6 @@
 # What the evidence supports, and what I need to learn next
 
-**Assessment: 16 October 2026** · [Candidate results](results.md) · [Development history](simulation-spirals.md)
+**Assessment: 17 October 2026** · [Candidate results](results.md) · [Development history](simulation-spirals.md)
 
 I intend to refine IC-01 into the first physical boat. The project has a connected mission model and a candidate that works across bounded simulations; the next step is to replace consequential assumptions with measurements and compatible hardware choices.
 
@@ -19,14 +19,21 @@ The rows follow the Object-Oriented Systems Engineering Method (OOSEM): mission,
 
 The challenge explicitly identifies the U.S. Inland Navigation Rules, entry evidence and adjudication under C-007. Six [source-linked navigation review cases](validation-plan.md#navigation-rule-entry-review-and-adjudication) organize applicability, encounter conduct and equipment evidence. All remain inconclusive; accepted navigation compliance and physical entry qualification are still open. The next review must establish the configuration-specific applicability matrix and demonstration criteria.
 
-The [standalone Inland Rules experiment](../experiments/inland-navigation/README.md)
-now evaluates a broader set of encounter, signal and equipment obligations in
-native SysML. Synthetic cases exercise rule boundaries and inconsistent inputs.
-It remains separate from the traffic controller and does not change the six
-inconclusive navigation review cases. The [rule-by-rule inventory](../experiments/inland-navigation/COVERAGE.md)
-identifies remaining clause detail, interpretation and physical evidence. Next,
-bind a consistent observed encounter and a physically feasible candidate maneuver
-to the assessment, then replay the resulting decisions in the mission simulator.
+The [Inland Rules model](../experiments/inland-navigation/README.md) now filters
+primary sailing commands in an opt-in mission replay. It retains overtaking duties
+across track loss and rejects unsupported encounter assessments. The integration
+is limited to an assessed clear-visibility, non-channel context; equipment,
+restricted-visibility control, multi-vessel negotiation and powered recovery remain
+open. The six navigation review cases remain inconclusive. The next evidence must
+connect identification and response judgments to observations, and maneuver
+predictions to achieved motion, before changing hardware allocations.
+
+The [paired navigation replay](encounter-feasibility.md#what-changed-in-the-ic-01-replay)
+retains ten completions and eight safe aborts in the 18 nominal cases across all
+three modes. Unresolved identification triggers earlier refusal, but no accepted
+steering selection changes. This does not establish successful rule-directed
+avoidance or support resizing IC-01. The static sizing result remains scoped to
+its existing configuration and assumptions.
 
 ## Integration milestone
 

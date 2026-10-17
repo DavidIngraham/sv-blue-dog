@@ -258,7 +258,7 @@ sets out the next observations and how they would change launch admission.
 
 The 16 October challenge review distinguishes avoiding contact from complying with navigation obligations. C-007 now identifies the U.S. Inland Rules and local provisions, organizer-reviewed entry evidence and explicit qualification outcomes. Six source-linked verification cases cover applicability, lookout/avoidance, encounter conduct, channels/visibility, signals and adjudication. They remain inconclusive: this adds review structure, not measured capability or completed compliance evidence.
 
-The [verification plan](validation-plan.md#navigation-rule-entry-review-and-adjudication) identifies the required evidence. Configuration-specific applicability, accepted demonstration criteria and physical results remain open. The standalone executable rule experiment remains outside production model loading and is not credited as challenge compliance.
+The [verification plan](validation-plan.md#navigation-rule-entry-review-and-adjudication) identifies the required evidence. Configuration-specific applicability, accepted demonstration criteria and physical results remain open. At this stage, the executable rule experiment remained outside production model loading and was not credited as challenge compliance.
 
 ## Expand the executable navigation assessment
 
@@ -281,7 +281,37 @@ not select a sensor installation or establish physical compliance. The
 implemented conditions from remaining interpretation, clause detail and physical
 evidence. The [encounter method](encounter-feasibility.md#check-navigation-duties-as-well-as-clearance)
 describes the next integration: consistent observations and feasible maneuvers,
-followed by end-to-end mission replay. Production traffic guidance is unchanged.
+followed by end-to-end mission replay. Production traffic guidance was unchanged in that experiment.
+
+## Connect navigation duties to the frozen IC-01 replay
+
+The 17 October integration asks whether the rule assessment changes mission
+behavior before changing the boat. The [archived comparison](../evidence/runs/2026-10-17-navigation-integration/manifest.json)
+contains 99 runs: all 29 prior local scenarios and four separately identified
+timed-crossing probes, each under geometric guidance, missing assessments and
+hypothetical craft assessments. Geometry, storage, performance and observation
+allocations stay fixed. All modes share the retained-heading candidate and
+piecewise latency/drift forecast; differences from the older geometric controller
+are recorded separately.
+
+The native pair model now filters sailing candidates and retains overtaking memory.
+Observation metadata has explicit latency and expiry. Independent review exposed
+false depower-as-turn credit, skipped channel/context checks, stale continuation
+approval and incomplete maneuver-segment checking. Regression cases cover those
+boundaries, unseen traffic, track loss and identical no-contact comparisons.
+
+All modes retain ten completions and eight safe aborts in the 18 nominal cases.
+The low target triggers rule-based abort 18–20 seconds earlier. A closer crossing
+probe also refuses missing assessments earlier, while hypothetical assessments
+retain the geometric result. No accepted steering selection changes. Energy
+reductions reflect earlier abandonment and recovery, not improved mission
+performance. The adverse power/recovery controls still reach shore contact.
+
+This adds executable refusal under unresolved duties, not demonstrated successful
+rule-directed avoidance. The [encounter method](encounter-feasibility.md#what-changed-in-the-ic-01-replay)
+sets out the next cases and interpretation. Resolved rig/tack, observed response,
+measured maneuver bounds, channel/restricted-visibility control and recovery
+navigation remain open. No sizing change or physical qualification is claimed.
 
 ### Evidence through each iteration
 

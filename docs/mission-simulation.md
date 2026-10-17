@@ -111,6 +111,23 @@ The candidate provider forms an averaged-tack velocity envelope from the four so
 
 The electrical configuration uses candidate storage, usable fraction, departure charge, panel area and maximum solved operating bus load. It integrates net bus power with charge/discharge efficiency, charge-rate limitation and self-discharge. Maneuver energy remains an explicit additional scenario allowance. The no-harvest passage screen and a chronological replay answer different questions. Solar collection is configuration-specific; IC-01's integration record disables it.
 
+## Navigation duties in the local replay
+
+An opt-in rule assessment now filters primary sailing candidates using delivered
+observations. It retains overtaking duties when a track disappears and distinguishes
+holding course, optional action and mandatory action. Missing applicable assessments
+can request abort. The paired replay gives every mode the same heading choices and
+checks command latency, drifting turns and sailing segments at their actual times.
+It also checks the remaining trajectory while a maneuver occupies the controller.
+
+This integration uses the archived kinematic maneuver representation. It cannot
+yet be combined with the bounded maneuver model above. Its accepted context is
+clear visibility outside an applicable narrow channel; other contexts fail an
+explicit scope gate. Equipment, signal exchange and powered-recovery rule control
+remain separate. The [paired IC-01 results](encounter-feasibility.md#what-changed-in-the-ic-01-replay)
+show earlier refusal under missing assessments, without a demonstrated change to
+accepted steering choices or sizing.
+
 ## Weather and traffic ensembles
 
 Each realization has reproducible weather and traffic random streams. Weather retains persistent regimes and correlated perturbations rather than drawing an independent wind at every step. Solar input follows a day/night cycle with a cloud factor. These are initial sensitivity hypotheses, not a forecast model or calibrated local probability distribution.
