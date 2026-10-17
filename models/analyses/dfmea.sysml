@@ -4,56 +4,21 @@ package BlueDogDFMEA {
      * hazard coverage or measured rates. No ordinal score is converted to probability.
      * Scope includes sailing, holds, recovery, and common-cause failures.
      */
-    part def ReviewRow {
-        doc /* Review/action record referencing causal occurrences; the row is not itself a failure occurrence.*/
-        attribute identifier : String;
-        ref part affected : Parts::Part;
-        attribute intendedFunction : String;
-        ref occurrence failureMode : BlueDogFailureModeling::Event;
-        ref occurrence cause : BlueDogFailureModeling::Event;
-        ref occurrence localEffect : BlueDogFailureModeling::Event;
-        ref occurrence missionEffect : BlueDogFailureModeling::Event;
-        attribute failureModeText : String = failureMode.description;
-        attribute causeText : String = cause.description;
-        attribute localEffectText : String = localEffect.description;
-        attribute missionEffectText : String = missionEffect.description;
-        attribute proposedDetection : String;
-        attribute recommendedAction : String;
-        attribute ownerRole : String;
-        attribute safetyCritical : Boolean;
-        attribute dispositionAccepted : Boolean default false;
-        attribute actionEvidenceAccepted : Boolean default false;
-        attribute evidenceReference : String default "Not yet available";
-    }
-    part def Review {
-        ref part vessel : BlueDog::Architecture::Boat;
-        part modes : ReviewRow [1..*];
-        attribute scopeReviewed : Boolean;
-    }
-    analysis def DesignFailureReview {
-        subject review : Review;
-        out attribute modeCount : Integer = SequenceFunctions::size(review.modes);
-        out attribute safetyCriticalCount : Integer = SequenceFunctions::size(review.modes->ControlFunctions::select { in mode : ReviewRow; mode.safetyCritical });
-        out attribute unresolvedCriticalCount : Integer = SequenceFunctions::size(review.modes->ControlFunctions::select {
-            in mode : ReviewRow; mode.safetyCritical and not (mode.dispositionAccepted and mode.actionEvidenceAccepted and mode.evidenceReference != "Not yet available") });
-        out attribute openActionCount : Integer = SequenceFunctions::size(review.modes->ControlFunctions::select { in mode : ReviewRow; not mode.actionEvidenceAccepted });
-        return reviewReady : Boolean = modeCount > 0 and review.scopeReviewed and unresolvedCriticalCount == 0;
-        objective inventory { require constraint { modeCount > 0 } }
-    }
+    private import FailureAnalysis::*;
     part starter : Review {
-        ref part :>> vessel = BlueDog::Architecture::missionContext.boat;
+        ref part :>> system = BlueDog::Architecture::missionContext.boat;
         attribute :>> scopeReviewed default = false;
         part hullLeak : ReviewRow subsets modes {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.hullAndRig.printedHull;
             attribute :>> identifier = "FM-001";
             attribute :>> intendedFunction = "Retain buoyancy";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Printed seam leaks"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Printed seam leaks"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Cyclic wave load or print defect"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Cyclic wave load or print defect"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Water enters hull"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Water enters hull"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Buoyancy or electrical function lost"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Buoyancy or electrical function lost"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Ingress sensing; acceptance unproven";
             attribute :>> recommendedAction = "Coupon fatigue, seam pressure test and flooded-compartment trial";
@@ -66,13 +31,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.hullAndRig.keelAndBallast;
             attribute :>> identifier = "FM-002";
             attribute :>> intendedFunction = "Maintain righting moment";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Keel attachment fractures"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Keel attachment fractures"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Fatigue or impact"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Fatigue or impact"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Ballast detached"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Ballast detached"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Persistent inversion or vessel loss"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Persistent inversion or vessel loss"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Attitude sensor; attachment inspection";
             attribute :>> recommendedAction = "Proof load and fatigue qualification of joint";
@@ -85,13 +50,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.actuation;
             attribute :>> identifier = "FM-003";
             attribute :>> intendedFunction = "Control heading";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Rudder or linkage jams"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Rudder or linkage jams"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Milfoil wrap, debris or actuator fault"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Milfoil wrap, debris or actuator fault"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Commanded rudder motion unavailable"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Commanded rudder motion unavailable"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Reduced VMG; boundary excursion or collision"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Reduced VMG; boundary excursion or collision"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Position/current disagreement detection to be designed";
             attribute :>> recommendedAction = "Weed-jam injection and autonomous clearing trial";
@@ -104,13 +69,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.actuation;
             attribute :>> identifier = "FM-004";
             attribute :>> intendedFunction = "Control sail force";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Wing trim jams"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Wing trim jams"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Bearing wear, salt or drive failure"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Bearing wear, salt or drive failure"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Trim fixed in unsafe position"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Trim fixed in unsafe position"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "VMG loss or overpower/capsize"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "VMG loss or overpower/capsize"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Command/response monitoring to be designed";
             attribute :>> recommendedAction = "Jam test at adverse trim; passive load limiting trade";
@@ -123,13 +88,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.energy.storage;
             attribute :>> identifier = "FM-005";
             attribute :>> intendedFunction = "Supply essential power";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Battery disconnects or faults"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Battery disconnects or faults"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Cell degradation, BMS trip or short"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Cell degradation, BMS trip or short"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Bus power lost or overheating"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Bus power lost or overheating"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Mission loss; possible thermal damage"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Mission loss; possible thermal damage"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Voltage/temperature/current sensing to be verified";
             attribute :>> recommendedAction = "Cold/aged-cell loading and BMS fault injection";
@@ -142,13 +107,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.energy.harvesting;
             attribute :>> identifier = "FM-006";
             attribute :>> intendedFunction = "Replenish stored energy";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Harvesting stops"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Harvesting stops"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Connector corrosion or panel damage"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Connector corrosion or panel damage"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Persistent energy deficit"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Persistent energy deficit"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Long-hold exposure exhausts reserve"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Long-hold exposure exhausts reserve"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Harvest-current residual monitoring to be designed";
             attribute :>> recommendedAction = "No-harvest fault campaign and reserve policy validation";
@@ -161,13 +126,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.energy.powerManagement;
             attribute :>> identifier = "FM-007";
             attribute :>> intendedFunction = "Keep essential services powered";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Shared bus fault disables multiple functions"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Shared bus fault disables multiple functions"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Regulator short or common water ingress"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Regulator short or common water ingress"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Navigation, actuation and telemetry lost together"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Navigation, actuation and telemetry lost together"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Mission and observation lost"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Mission and observation lost"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Independent health path not yet designed";
             attribute :>> recommendedAction = "Assess isolation and independence; common-cause fault injection";
@@ -180,13 +145,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.navigation.positionAndAttitude;
             attribute :>> identifier = "FM-008";
             attribute :>> intendedFunction = "Estimate position and heading";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Plausible wrong navigation solution"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Plausible wrong navigation solution"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Bias, stale data or corrupted input"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Bias, stale data or corrupted input"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Guidance uses wrong state"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Guidance uses wrong state"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Boundary/traffic hazard and route failure"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Boundary/traffic hazard and route failure"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Plausibility checks; independent reference unresolved";
             attribute :>> recommendedAction = "Biased/stale-sensor injection across speed/current profiles";
@@ -199,13 +164,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.control.missionManager;
             attribute :>> identifier = "FM-009";
             attribute :>> intendedFunction = "Execute autonomous mission";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Controller hangs or repeats invalid command"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Controller hangs or repeats invalid command"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Systematic software fault or reset corruption"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Systematic software fault or reset corruption"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Mission logic stops or is unsafe"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Mission logic stops or is unsafe"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "No progress or unsafe actuation"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "No progress or unsafe actuation"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Watchdog and restoration requirements; unverified";
             attribute :>> recommendedAction = "Fault injection and persisted-state consistency testing";
@@ -218,13 +183,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.control.collisionAvoidance;
             attribute :>> identifier = "FM-010";
             attribute :>> intendedFunction = "Avoid other vessels";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Traffic conflict missed"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Traffic conflict missed"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Sensor blind spot or prediction error"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Sensor blind spot or prediction error"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "The required encounter response is unavailable or too late"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "The required encounter response is unavailable or too late"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Collision risk"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Collision risk"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Independent lookout unavailable onboard";
             attribute :>> recommendedAction = "Non-AIS traffic scenarios and safe boundary strategies";
@@ -237,13 +202,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.communications.telemetryRadio;
             attribute :>> identifier = "FM-011";
             attribute :>> intendedFunction = "Provide live observation";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Radio link unavailable"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Radio link unavailable"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Antenna wetting, shadowing or radio fault"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Antenna wetting, shadowing or radio fault"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Live data cannot reach shore"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Live data cannot reach shore"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Observation outage; autonomy must continue"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Observation outage; autonomy must continue"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Contact-age monitoring and retained logs";
             attribute :>> recommendedAction = "Wet/inverted antenna trials and 24-hour outage/reconnect test";
@@ -256,13 +221,13 @@ package BlueDogDFMEA {
             ref part :>> affected = BlueDog::Architecture::missionContext.boat.recovery.motorSystem;
             attribute :>> identifier = "FM-012";
             attribute :>> intendedFunction = "Provide controlled recovery thrust";
-            occurrence failureModeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Motor energizes during qualifying sailing"; }
+            occurrence failureModeEvent : FailureAnalysis::Event { attribute :>> description = "Motor energizes during qualifying sailing"; }
             ref occurrence :>> failureMode = failureModeEvent;
-            occurrence causeEvent : BlueDogFailureModeling::Event { attribute :>> description = "Driver short or command gating fault"; }
+            occurrence causeEvent : FailureAnalysis::Event { attribute :>> description = "Driver short or command gating fault"; }
             ref occurrence :>> cause = causeEvent;
-            occurrence localEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Unintended powered propulsion"; }
+            occurrence localEffectEvent : FailureAnalysis::Event { attribute :>> description = "Unintended powered propulsion"; }
             ref occurrence :>> localEffect = localEffectEvent;
-            occurrence missionEffectEvent : BlueDogFailureModeling::Event { attribute :>> description = "Challenge disqualification or contact hazard"; }
+            occurrence missionEffectEvent : FailureAnalysis::Event { attribute :>> description = "Challenge disqualification or contact hazard"; }
             ref occurrence :>> missionEffect = missionEffectEvent;
             attribute :>> proposedDetection = "Isolation and qualification latch; unverified";
             attribute :>> recommendedAction = "Stuck-driver test and independent propulsion isolation";

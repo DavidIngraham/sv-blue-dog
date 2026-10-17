@@ -9,9 +9,9 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-REVISION = "e002f1668834f9409ee62200c8b89c0f5bf5e309"
+REVISION = "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2"
 RELEASE = "develop-" + REVISION[:9]
-SOURCE_SHA256 = "cbedc8e4dcce444d11a11eb71e99b93236484f435fe36adaf8c392a143f637b9"
+SOURCE_SHA256 = "9a3bcf85cf42597063682edc497daa43e2b674577981e0c62216bc1a06e08e62"
 ROOT = Path(__file__).resolve().parents[3]
 COMMANDS = ("sysml", "sysml-grpc", "sysml-mcp")
 

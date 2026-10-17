@@ -99,7 +99,7 @@ def test_accepted_synthetic_fixture_exercises_pass_path(cruise):
 
 def test_dfmea_starter_stays_open_and_has_real_links():
     from tools.boat_analysis.model.runtime import load_model
-    result = load_model().run_analysis('BlueDogDFMEA::DesignFailureReview',
+    result = load_model().run_analysis('FailureAnalysis::DesignFailureReview',
                                       subject='BlueDogDFMEA::starter')
     assert result.outputs['modeCount'] == 12
     assert result.outputs['unresolvedCriticalCount'] == 10

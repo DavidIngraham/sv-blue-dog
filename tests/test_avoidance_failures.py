@@ -2,7 +2,6 @@
 import re
 import pytest
 from tools.boat_analysis.model.runtime import connection, load_model, model_files, ROOT, native
-from tools.publishing.relationships import compact_failure_diagram
 
 LEAVES = ('encounterDemand missedDetection lateObservation falseOrSwappedTrack '
           'wrongClassification wrongMotionPrediction wrongRuleAssessment noFeasibleCommand '
@@ -50,7 +49,7 @@ def test_encounter_demand_and_complete_response_paths(cases, case, primary, fall
     ('BlueDogAvoidanceFailures::concepts', 15, 15),
 ])
 def test_open_actions_cannot_be_mistaken_for_accepted_safeguards(review, count, critical):
-    result = load_model().run_analysis('BlueDogDFMEA::DesignFailureReview', subject=review)
+    result = load_model().run_analysis('FailureAnalysis::DesignFailureReview', subject=review)
     assert result.outputs == dict(modeCount=count, safetyCriticalCount=critical,
                                   unresolvedCriticalCount=critical, openActionCount=count,
                                   reviewReady=False)
@@ -78,12 +77,13 @@ def test_native_tables_resolve_event_references_and_diagrams_preserve_connectors
     for name, count in [('SystemTree', 7), ('PrimaryTree', 4), ('ScannerTree', 5)]:
         raw = native('-render-document', 'BlueDogFailureViews::'+name,
                      '-diagram-form', 'mermaid', models=paths)
-        compact = compact_failure_diagram(raw)
-        old = re.findall(r'(n\d+)_anchor === (n\d+)_anchor', raw)
-        new = re.findall(r'(n\d+) === (n\d+)', compact)
-        assert old == new and len(new) == count
-        assert 'subgraph' not in compact and '_anchor' not in compact
-        assert 'description' not in compact and 'inputs' not in compact
+        edges = re.findall(r'(n\d+) --> (n\d+)(?:_gate)?', raw)
+        assert len(edges) == count
+        assert 'subgraph' not in raw and '_anchor' not in raw
+        assert not re.search(r'n\d+\[.*(?:description|inputs)', raw)
+        assert 'data:image/svg+xml;base64,' in raw
+        assert ('[partial view]' in raw) == (name != 'ScannerTree')
+
 
 
 def test_unassessed_exposure_does_not_default_to_safe():

@@ -121,7 +121,9 @@ do not imply that all equipment is installed together.
 Read the following diagram upward. **OR** means any listed input is enough to
 establish that branch's failure proposition. **AND** means every input must hold
 within the same encounter response interval. These are qualitative Boolean gates,
-not probability calculations or a model of event timing.
+not probability calculations or a model of event timing. A box marked **partial
+view** has additional inputs or connections outside that diagram. Its gate
+still uses the complete input list in the model.
 
 The top event is an encounter for which neither the primary response nor the
 fallback provides a supported, timely safe response. It is **loss of capability,
@@ -186,8 +188,12 @@ maneuver available after a target is detected.
 </details>
 
 The diagrams and tables use the same model events. Standard SysML cause-and-effect
-connections carry the causal relationships; small project extensions supply the
-Boolean gates and review/action records. Gate calculations are executable and
+connections carry the causal relationships. A reusable failure-analysis library
+supplies the Boolean gates and review records, following the relevant concepts in
+[OMG RAAML](https://www.omg.org/spec/RAAML/1.1), a standard for model-based risk
+analysis. This is a qualitative SysML v2 subset, not the complete RAAML profile.
+Gate symbols come from the modeled types, and each table selects the rows in its
+review. Adding another review uses the same definitions and views. Gate calculations are executable and
 checked with synthetic cases. The physical causal claims, diagnostic coverage,
 common-cause boundaries and completeness remain unverified. No failure rates or
 independence assumptions are assigned, and these trees do not yet inject faults

@@ -50,34 +50,3 @@ def include_basis(diagram, links, labels=None):
         body += '\n' + '\n'.join(identities)
         return '```mermaid\n' + body.rstrip() + '\n' + '\n'.join(edges) + '\n```'
     return re.sub(r'```mermaid\n(.*?)```', update, diagram, flags=re.S)
-
-
-def compact_failure_diagram(document):
-    """Flatten native occurrence compartments for the bounded fault-tree views.
-
-    Only presentation changes: native node IDs and every connector are retained.
-    No model parsing, causal discovery or gate evaluation occurs here.
-    """
-    if 'BlueDogFailureViews::' not in document:
-        return document
-
-    def diagram(match):
-        body = match[1]
-        def box(cluster):
-            node, label = cluster[1], cluster[2]
-            name = label.split(' : ', 1)[0]
-            gate, separator, rest = name.partition('_')
-            if separator and gate in ('AND', 'OR'):
-                title = gate + '<br/>' + re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', rest)
-            else:
-                title = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', name)
-            return f'  {node}["{title}"]'
-        body, count = re.subn(
-            r'  subgraph (n\d+) \["`\*«occurrence»\* \*\*([^\n]+?)\*\*`"\]\n.*?^  end',
-            box, body, flags=re.M | re.S)
-        if not count:
-            raise ValueError('Expected native occurrence compartments in fault-tree diagram')
-        body = re.sub(r'(n\d+)_anchor', r'\1', body)
-        body = re.sub(r'^  classDef anchor.*\n|^  class .* anchor\n', '', body, flags=re.M)
-        return '```mermaid\n' + body.rstrip() + '\n```'
-    return re.sub(r'```mermaid\n(.*?)```', diagram, document, flags=re.S)

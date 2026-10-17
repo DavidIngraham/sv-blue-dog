@@ -526,7 +526,7 @@ wheels = [
 
 [[package]]
 name = "opensysml"
-source = { directory = ".tools/develop-e002f1668/source/client/python" }
+source = { directory = ".tools/develop-23ca2e2f0/source/client/python" }
 dependencies = [
     { name = "grpcio" },
     { name = "protobuf" },
@@ -1028,7 +1028,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "opensysml", directory = ".tools/develop-e002f1668/source/client/python" },
+    { name = "opensysml", directory = ".tools/develop-23ca2e2f0/source/client/python" },
     { name = "sysml-python-runtime", editable = "packages/sysml-python" },
 ]
 

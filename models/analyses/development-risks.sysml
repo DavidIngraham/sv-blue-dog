@@ -175,5 +175,5 @@ package BlueDogRisks {
     }
     dependency missionTrace0 from mission to BlueDogDesignDecisions::uncertaintyPolicy;
     dependency missionTrace1 from mission to BlueDogRequirements::missionReliability;
-    dependency missionTrace2 from mission to BlueDogDFMEA::DesignFailureReview;
+    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;
 }

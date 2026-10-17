@@ -68,8 +68,25 @@ records, generated interfaces and numerical execution.
 
 ## Native OOSEM roles
 
-The architecture uses the pinned [OpenSysML OOSEM library](https://github.com/DavidIngraham/OpenSysML/blob/e002f1668834f9409ee62200c8b89c0f5bf5e309/docs/project/oosem-library.md) for system context, actors, logical responsibilities, hardware, nodes and logical scenarios. This is an OpenSysML method library expressed in SysML, not a separate Blue Dog workflow engine. The [method model](../../models/vehicle/method.sysml) holds package classifications, scenario refinements and allocations; diagrams import that model through native `LogicalScenarioView` definitions.
+The architecture uses the pinned [OpenSysML OOSEM library](https://github.com/DavidIngraham/OpenSysML/blob/23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2/docs/project/oosem-library.md) for system context, actors, logical responsibilities, hardware, nodes and logical scenarios. This is an OpenSysML method library expressed in SysML, not a separate Blue Dog workflow engine. The [method model](../../models/vehicle/method.sysml) holds package classifications, scenario refinements and allocations; diagrams import that model through native `LogicalScenarioView` definitions.
 
 When developing a function, connect its use case to a logical scenario, allocate its actions to responsibilities, then refine the physical realization and its verification evidence. Typed items describe information crossing action boundaries. Model links identify intended scope; they do not claim that a simulation already implements every linked behavior.
 
 Requirements packages carry OOSEM roles. Individual requirements retain their existing derivation, refinement and owner-constraint semantics. I do not apply a blanket requirement-level classification: the pinned library's direct parent-level derivation checks do not express every same-level decomposition or independent owner constraint in this project. Adding an artificial derivation to silence a method warning would weaken traceability.
+
+
+## Reusing failure-analysis views
+
+The [reliability analysis](../reliability.md#how-avoidance-can-fail) uses library
+event and gate types, standard causal connections and review records. A new
+failure tree declares its inputs and connections, then exposes the relevant
+events in a `FaultTreeView`. A new DFMEA review owns its rows; the reusable
+`ReviewRows` query selects those rows by type. Neither needs project-specific
+Python diagram or table code.
+
+The [redundant-power example](https://github.com/DavidIngraham/OpenSysML/blob/23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2/examples/fault-tree.sysml)
+shows the same definitions applied outside Blue Dog. The
+[library guide](https://github.com/DavidIngraham/OpenSysML/blob/23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2/docs/guide/failure-analysis.md)
+describes the supported qualitative subset and rendering limits. The reusable
+view controls presentation; it does not establish that the causal argument is
+complete or that its safeguards work on the boat.

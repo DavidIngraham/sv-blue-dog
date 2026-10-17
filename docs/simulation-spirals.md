@@ -376,3 +376,25 @@ remain open, including the 12 whole-boat rows; scope completeness is unaccepted.
 No failure rates, independent-backup credit, new mission outcomes or sizing changes
 are claimed. Next, review the causal scope against installed concepts and use the
 open actions to define observation, maneuver and recovery fault-injection trials.
+
+## Make failure-analysis views reusable
+
+On 17 October 2026, I tested whether another design could use the same failure
+vocabulary and views without Blue Dog-specific rendering code. The model uses a
+qualitative SysML v2 subset aligned with RAAML's event and AND/OR gate concepts,
+plus standard cause-and-effect connections. This does not import the UML profile
+or claim full RAAML conformance.
+
+OpenSysML now renders gate symbols from semantic types, keeps a shared cause as
+one event and checks that drawn causal inputs agree with executable gate inputs.
+Scoped diagrams label omitted inputs as partial views. A type-based document
+query finds DFMEA rows and their referenced event descriptions. A separate
+redundant-power example exercises the same library, including a shared cause,
+both gate types and a review table; the blog needs no fault-tree text rewrite.
+
+This improves reviewability and reuse, without adding physical evidence. All 44
+Blue Dog actions remain open. The [avoidance trees](reliability.md#how-avoidance-can-fail)
+remain conditional capability arguments. Inherited runtime-instance expansion,
+computed gate input lists, quantitative probabilities and temporal gates are
+outside the supported rendering subset. Next, define fault injections from the
+open actions for the physical sensing and maneuvering configurations.

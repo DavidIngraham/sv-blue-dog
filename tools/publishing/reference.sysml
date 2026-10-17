@@ -317,7 +317,8 @@ package BlueDogSailTradeDocuments {
 package BlueDogReliabilityDocuments {
     private import DocumentQueries::*;
     calc def Modes :> Query {
-        Named(qualifiedName = ("BlueDogDFMEA::starter::hullLeak", "BlueDogDFMEA::starter::keelLoss", "BlueDogDFMEA::starter::steeringJam", "BlueDogDFMEA::starter::sailJam", "BlueDogDFMEA::starter::batteryFault", "BlueDogDFMEA::starter::harvestLoss", "BlueDogDFMEA::starter::powerCommonCause", "BlueDogDFMEA::starter::navigationFault", "BlueDogDFMEA::starter::controlLockup", "BlueDogDFMEA::starter::trafficMiss", "BlueDogDFMEA::starter::radioLoss", "BlueDogDFMEA::starter::motorUncommanded"))
+        WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogDFMEA::starter")),
+            type = "FailureAnalysis::ReviewRow")
     }
     calc def Functions :> Query {
         Project(source = Modes(), columns = (Column(name = "ID", path = "identifier"),
@@ -696,14 +697,18 @@ package BlueDogLocationTrafficDocuments {
 }
 
 package BlueDogAvoidanceDocuments { private import DocumentQueries::*;
-    calc def functionalRows :> Query { Project(source = Named(qualifiedName = ("BlueDogAvoidanceFailures::functional::missedDetection", "BlueDogAvoidanceFailures::functional::lateObservation", "BlueDogAvoidanceFailures::functional::falseOrSwappedTrack", "BlueDogAvoidanceFailures::functional::wrongClassification", "BlueDogAvoidanceFailures::functional::wrongMotionPrediction", "BlueDogAvoidanceFailures::functional::wrongRuleAssessment", "BlueDogAvoidanceFailures::functional::noFeasibleCommand", "BlueDogAvoidanceFailures::functional::unsafeCourtesyChange", "BlueDogAvoidanceFailures::functional::steeringUnavailable", "BlueDogAvoidanceFailures::functional::sailControlUnavailable", "BlueDogAvoidanceFailures::functional::unobservedExecutionError", "BlueDogAvoidanceFailures::functional::unsafeAbortTransition", "BlueDogAvoidanceFailures::functional::inadequateRecoveryObservation", "BlueDogAvoidanceFailures::functional::noSafeRecoveryRoute", "BlueDogAvoidanceFailures::functional::recoveryTooLate", "BlueDogAvoidanceFailures::functional::sharedPowerLoss", "BlueDogAvoidanceFailures::functional::sharedComputeLoss")), columns = (Column(name = "ID", path = "identifier"), Column(name = "Function / scope", path = "intendedFunction"), Column(name = "Cause", path = "causeText"), Column(name = "Failure", path = "failureModeText"), Column(name = "Action needed", path = "recommendedAction"))) }
+    calc def functionalRows :> FailureAnalysisViews::ReviewRows {
+        in :>> reviewName = "BlueDogAvoidanceFailures::functional";
+    }
     part def functional :> Document { attribute redefines title = ""; part rows : Table { calc rows : functionalRows; } }
-    calc def conceptsRows :> Query { Project(source = Named(qualifiedName = ("BlueDogAvoidanceFailures::concepts::fixedAngularGap", "BlueDogAvoidanceFailures::concepts::fixedStaleFrames", "BlueDogAvoidanceFailures::concepts::wetOptics", "BlueDogAvoidanceFailures::concepts::sharedHub", "BlueDogAvoidanceFailures::concepts::scannerJam", "BlueDogAvoidanceFailures::concepts::scannerRevisit", "BlueDogAvoidanceFailures::concepts::scannerCable", "BlueDogAvoidanceFailures::concepts::passiveQuiet", "BlueDogAvoidanceFailures::concepts::passiveAmbiguous", "BlueDogAvoidanceFailures::concepts::activeClutter", "BlueDogAvoidanceFailures::concepts::narrowBeamRevisit", "BlueDogAvoidanceFailures::concepts::multibeamExtent", "BlueDogAvoidanceFailures::concepts::invertedMount", "BlueDogAvoidanceFailures::concepts::wingDriveJam", "BlueDogAvoidanceFailures::concepts::softSailSheetJam")), columns = (Column(name = "ID", path = "identifier"), Column(name = "Function / scope", path = "intendedFunction"), Column(name = "Cause", path = "causeText"), Column(name = "Failure", path = "failureModeText"), Column(name = "Action needed", path = "recommendedAction"))) }
+    calc def conceptsRows :> FailureAnalysisViews::ReviewRows {
+        in :>> reviewName = "BlueDogAvoidanceFailures::concepts";
+    }
     part def concepts :> Document { attribute redefines title = ""; part rows : Table { calc rows : conceptsRows; } }
 }
 
-package BlueDogFailureViews { private import StandardViewDefinitions::*; private import DocumentQueries::*;
-    view SystemTreeView : InterconnectionView {
+package BlueDogFailureViews { private import FailureAnalysisViews::*; private import DocumentQueries::*;
+    view SystemTreeView : FaultTreeView {
         expose BlueDogAvoidanceFailures::Exposure::encounterDemand;
         expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable;
         expose BlueDogAvoidanceFailures::Exposure::OR_recoveryUnavailable;
@@ -719,7 +724,7 @@ package BlueDogFailureViews { private import StandardViewDefinitions::*; private
         expose BlueDogAvoidanceFailures::Exposure::OR_recoveryUnavailable_5;
     }
     part def SystemTree :> Document { attribute redefines title = ""; part diagram : Diagram { attribute redefines direction = "BT"; attribute redefines show = "keywords"; ref redefines source = SystemTreeView; } }
-    view PrimaryTreeView : InterconnectionView {
+    view PrimaryTreeView : FaultTreeView {
         expose BlueDogAvoidanceFailures::Exposure::OR_observationUnavailable;
         expose BlueDogAvoidanceFailures::Exposure::OR_assessmentWrong;
         expose BlueDogAvoidanceFailures::Exposure::OR_commandUnsafe;
@@ -731,7 +736,7 @@ package BlueDogFailureViews { private import StandardViewDefinitions::*; private
         expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_3;
     }
     part def PrimaryTree :> Document { attribute redefines title = ""; part diagram : Diagram { attribute redefines direction = "BT"; attribute redefines show = "keywords"; ref redefines source = PrimaryTreeView; } }
-    view ScannerTreeView : InterconnectionView {
+    view ScannerTreeView : FaultTreeView {
         expose BlueDogAvoidanceFailures::scannerJam;
         expose BlueDogAvoidanceFailures::scannerRevisit;
         expose BlueDogAvoidanceFailures::scannerCable;

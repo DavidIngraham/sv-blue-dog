@@ -37,7 +37,7 @@ its existing configuration and assumptions.
 
 Blue Dog also has a [traffic courtesy preference](encounter-feasibility.md#leave-room-for-crewed-boats): avoid developing encounters that require crewed vessels to react, subject to safe navigation duties. The challenge encourages this as nonbinding guidance. It is not a qualification criterion or an implemented planner objective; comparative route studies remain to be done.
 
-The [avoidance DFMEA and fault trees](reliability.md#how-avoidance-can-fail) now link 17 functional and 15 concept-specific rows to causal occurrences, alongside the 12 whole-boat starter rows. All 44 actions remain open; the reviews are not accepted. Native Boolean checks establish gate behavior only. Installed diagnostic coverage, complete timely fallback, common-cause isolation and review completeness still need evidence.
+The [avoidance DFMEA and fault trees](reliability.md#how-avoidance-can-fail) now link 17 functional and 15 concept-specific rows to causal occurrences, alongside the 12 whole-boat starter rows. All 44 actions remain open; the reviews are not accepted. The reviews use a reusable qualitative failure-analysis library; native views preserve shared causes and mark omitted gate inputs. Native Boolean checks establish gate behavior only. Installed diagnostic coverage, complete timely fallback, common-cause isolation and review completeness still need evidence.
 
 ## Integration milestone
 
