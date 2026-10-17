@@ -1,0 +1,73 @@
+{
+  "reviewDate": "2026-10-16",
+  "kind": "Desktop source register, not field traffic evidence",
+  "stravaSampled": false,
+  "acceptedTrafficRate": false,
+  "acceptedDepartureWindow": false,
+  "sources": [
+    {
+      "id": "Bingen port",
+      "url": "https://www.portofklickitat.com/boat-launch-parks",
+      "scope": "Launch/retrieval context; retained recovery-site source, not a traffic count."
+    },
+    {
+      "id": "Hood River waterfront",
+      "url": "https://portofhoodriver.specialdistrict.org/waterfront",
+      "scope": "Mixed waterfront use and windsurf/kite access; no quantitative traffic rate."
+    },
+    {
+      "id": "Hood River events",
+      "url": "https://www.portofhoodriver.com/events-on-port-property",
+      "scope": "Event planning source to check for each proposed mission date; no event date selected."
+    },
+    {
+      "id": "Spring Creek park",
+      "url": "https://parks.wa.gov/find-parks/state-parks/spring-creek-hatchery-state-park",
+      "scope": "Documents windsurfing and kiteboarding; waves and day-use access. Park hours do not prove water empty outside them."
+    },
+    {
+      "id": "CGW2 Swell City",
+      "url": "https://cgw2.org/wp-content/uploads/2026/02/01-Friendly-Reminders-About-Swell-City-2026.pdf",
+      "scope": "Operator identifies windsurfer and winger access. Not an offshore occupancy boundary."
+    },
+    {
+      "id": "Viento park",
+      "url": "https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=123",
+      "scope": "River access and windsurfing documented; downwind route extent remains unmeasured."
+    },
+    {
+      "id": "Bob's Beach",
+      "url": "https://www.portofskamania.org/bob-s-beach",
+      "scope": "Windsurfing site with kiteboarding launch prohibition and reference to East Point; do not infer absence offshore."
+    },
+    {
+      "id": "East Point",
+      "url": "https://portofskamania.specialdistrict.org/east-point",
+      "scope": "Port site identity; kite use supported by Bob's Beach referral."
+    },
+    {
+      "id": "Strava guide",
+      "url": "https://support.strava.com/en-us/articles/16046277-a-guide-to-strava-heatmaps",
+      "scope": "Global annual, Weekly seven-day and Night aggregates; custom date range personal only. No heatmap sampled or rate extracted."
+    },
+    {
+      "id": "Oregon wind sports",
+      "url": "https://www.oregon.gov/osmb/boater-info/Pages/Wind-Sports.aspx",
+      "scope": "Sailboard and kiteboard definitions include wing/foil variants; equipment/entanglement context."
+    },
+    {
+      "id": "USCG navigation rules",
+      "url": "https://www.navcen.uscg.gov/navigation-rules-amalgamated",
+      "scope": "Rules 3, 5, 7, 8, 9, 12, 13 and 17 are review basis; no legal exemption from size/autonomy/agility inferred."
+    }
+  ],
+  "modelSources": [
+    "models/missions/course.sysml",
+    "models/analyses/recovery-site-review.sysml"
+  ],
+  "limitations": [
+    "Named sectors are survey scopes, not geofenced hazard polygons.",
+    "No measured class speeds, turn rates, rider cooperation probabilities or traffic counts.",
+    "Local notices, site rules and event schedules must be reviewed for the proposed date."
+  ]
+}

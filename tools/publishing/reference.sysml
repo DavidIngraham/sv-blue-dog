@@ -682,8 +682,16 @@ package BlueDogEncounterStudyDocuments {
 }
 
 package BlueDogClassDetectionDocuments {
- doc /* Nine current target classes; illustrated speeds and separations are inherited sensitivity inputs, not reviewed allocations.*/
+ doc /* Historical nine-row sensitivity; current policy also includes three wind-sport classes without inherited numerical allocations.*/
  private import DocumentQueries::*;
  calc def Rows :> Query { Project(source=Named(qualifiedName=("BlueDogClassDetection::classRow1","BlueDogClassDetection::classRow2","BlueDogClassDetection::classRow3","BlueDogClassDetection::classRow4","BlueDogClassDetection::classRow5","BlueDogClassDetection::classRow6","BlueDogClassDetection::classRow7","BlueDogClassDetection::classRow8","BlueDogClassDetection::classRow9")),columns=(Column(name="Target",path="target"),Column(name="Illustrative target speed (m/s)",path="targetSpeedMps"),Column(name="Illustrative head-on distance (m)",path="illustrativeDistanceM"),Column(name="Allocation accepted",path="allocationAccepted"))) }
  part def Summary :> Document { attribute redefines title="Class-specific response sensitivity: unaccepted illustrative inputs"; part cases : Table { calc rows : Rows; } }
+}
+
+package BlueDogLocationTrafficDocuments {
+ private import DocumentQueries::*;
+ calc def Sectors :> Query { Project(source=Named(qualifiedName=("BlueDogLocationTraffic::bingen","BlueDogLocationTraffic::bridge","BlueDogLocationTraffic::hoodRiver","BlueDogLocationTraffic::hatchery","BlueDogLocationTraffic::viento","BlueDogLocationTraffic::homeValley","BlueDogLocationTraffic::stevenson","BlueDogLocationTraffic::connecting")),columns=(Column(name="Location",path="location"),Column(name="Conflict to assess",path="hazards"),Column(name="Next investigation",path="nextInvestigation"))) }
+ part def Locations :> Document { attribute redefines title="Traffic assessment sectors: survey priorities, not accepted windows"; part sectors : Table { calc rows : Sectors; } }
+ calc def Hazards :> Query { Project(source=Named(qualifiedName=("BlueDogLocationTraffic::windsurfCrossing","BlueDogLocationTraffic::wingfoilTurn","BlueDogLocationTraffic::kiteSweep","BlueDogLocationTraffic::fallenRider","BlueDogLocationTraffic::groupEncounter","BlueDogLocationTraffic::windowOverrun")),columns=(Column(name="Case",path="scenario"),Column(name="Occupied extent",path="extent"),Column(name="Required challenge",path="criterion"))) }
+ part def Cases :> Document { attribute redefines title="Wind-sport and traffic-window hazard cases"; part hazards : Table { calc rows : Hazards; } }
 }

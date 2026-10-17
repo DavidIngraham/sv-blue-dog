@@ -37,6 +37,9 @@ approval from the old 750 m number.
 | Fishing craft | Variable motion, possible drifting and noncooperative observation |
 | Fast craft | High closure and any towed person or equipment |
 | Sailing craft | Quiet operation, heading changes and rig/occupied extent |
+| Windsurfer | High closure and turning; rider, mast and sail, including falls |
+| Wingfoiler | Rider, wing, leash and submerged foil; fall and separation transitions |
+| Kiter | Rider, board/foil, kite and line sweep through jumps, crashes and relaunch |
 | Passenger vessel | Occupied extent and consequences affecting multiple people |
 | Occupied kayak | Low profile; possible occupant injury, upset or entrapment |
 | Occupied stand-up paddleboard | Standing or fallen occupant; low board profile and loss of balance |
@@ -49,10 +52,14 @@ kayak or paddleboard encounter, nor to direct contact with a person. Relative
 speed, angle, appendages, occupancy and possible secondary immersion matter.
 Ownship mass and speed also matter, but contact energy alone does not predict injury. An unidentified target or uncertain occupancy must not be assigned a presumed low-consequence class. Before reliable classification, I need a reviewed conservative envelope covering the plausible classes and changes in occupancy; an apparently empty craft may have a person beside it. Without that envelope, admission is unsupported. There is no accepted numerical severity or probability limit yet.
 
-The new illustrative class summary retains the older speeds and separations
+The historical nine-row illustrative class summary retains the older speeds and separations
 for comparability. In particular, all four split low-profile classes use the
 same inherited 2 m/s and 20 m separation in that sensitivity. Identical calculated
 distances therefore do not mean identical consequences or approved allocations.
+
+Wind-sport speed and consequence allocations remain open. The
+[location and window assessment](../site-and-environment-evidence.md#traffic-risk-by-location-and-arrival-window)
+connects their hazard cases to passage and recovery exposure.
 
 ## What the observation must establish
 
@@ -121,7 +128,7 @@ Reducing ownship speed lowers head-on closing speed, but does not necessarily so
 
 ## Can I exclude a rare or difficult target class?
 
-The current scope includes all nine classes above. The
+The current scope includes all twelve classes above. The
 [challenge](../../models/missions/transgorge.sysml) retains collision avoidance,
 noninterference and applicable navigation obligations. Class-specific allocation
 changes how I substantiate the response, not which river users count.
@@ -169,7 +176,7 @@ acceptance does not itself settle compliance with those obligations.
 [USCG navigation-rule guidance](https://navcen.uscg.gov/navigation-rules-faqs).
 
 The current decision is to use class-specific allocations and develop their
-missing criteria and evidence, while retaining all nine traffic classes. The [acoustic comparison](acoustic-sensing.md) evaluates
+missing criteria and evidence, while retaining all current traffic classes. The [acoustic comparison](acoustic-sensing.md) evaluates
 what sound can contribute without treating acoustic quietness as absence.
 
 ## Reproduce and use the result

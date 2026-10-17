@@ -94,3 +94,10 @@ def test_reviewed_criteria_can_precede_response_evidence(model):
     assert r['reviewedDesignDistanceM'] == 40
     assert r['allocationAccepted'] is False
     assert r['status'] == 'Reviewed design distance only; safety acceptance unsupported'
+
+
+@pytest.mark.parametrize('kind',['windsurfer','wingfoiler','kiter'])
+def test_wind_sports_require_the_same_supported_allocation_inputs(model,kind):
+    assert assess(model,classId=kind)['allocationAccepted'] is True
+    assert assess(model,classId=kind,classificationReliable=False)['allocationAccepted'] is False
+    assert assess(model,classId=kind,responseProbabilityLowerBound=0)['allocationAccepted'] is False

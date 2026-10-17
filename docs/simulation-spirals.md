@@ -232,6 +232,28 @@ reviewed before the model reports a reviewed design distance. Regression cases
 exercise missing and invalid criteria separately from inadequate response
 evidence; neither establishes physical performance.
 
+## Connect wind-sport hazards to place and time
+
+The 16 October location review asks whether a different departure window or
+route can reduce encounters that challenge Blue Dog's sensing and maneuvering.
+The class policy now distinguishes windsurfers, wingfoilers and kiters. Planned
+cases include falls, separated equipment, kite lines, foils, group encounters
+and delayed passage beyond a reviewed window; no assumed rider avoidance is
+credited. The historical nine-row distance comparison remains unchanged.
+
+The [desktop source register](../evidence/traffic/2026-10-16-location-review/sources.json)
+supports eight survey sectors and identifies evidence gaps. A native per-visit
+assessment relates reviewed rate bounds to exposure time and rejects incomplete
+window coverage or unsupported capability. Its synthetic regression cases test
+timing and evidence boundaries, not real encounter probability. Strava is a
+possible survey aid; no heatmap-derived traffic estimate has been accepted.
+
+This adds an exposure assessment and verification cases, not a reactive rider
+simulator. Measured traffic, surveyed polygons, class speed/turn bounds and a
+complete mission exposure review are still needed before selecting a window.
+The [current location assessment](site-and-environment-evidence.md#traffic-risk-by-location-and-arrival-window)
+sets out the next observations and how they would change launch admission.
+
 ### Evidence through each iteration
 
 For me, fidelity means representing the effects that matter to a decision with enough accuracy. Traceability means being able to explain which mission obligation, design, assumptions and evidence produced the conclusion. A more detailed model can strengthen one part of that chain while exposing a weakness in another.

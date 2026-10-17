@@ -90,4 +90,20 @@ package GorgeChallengeVerification {
         objective acceptance { verify GorgeChallenge::recoveryConspicuity; }
         return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
     }
+    verification def WindSportEncounterVerification {
+        doc /* Exercise BlueDogLocationTraffic windsurfCrossing, wingfoilTurn, kiteSweep, fallenRider and groupEncounter across both tacks, overtaking, unknown tack, glare, waves and darkness. Independently record rider/equipment extent, timing, swept-volume clearance and navigation obligations. Include timely, delayed and absent rider avoidance, falls, track swaps and no feasible sailing response. Scripted planar targets or cooperative passes cannot close these cases.*/
+        objective acceptance {
+            verify GorgeChallenge::trafficNonInterference;
+            verify GorgeChallenge::trafficCoexistence;
+            verify GorgeChallenge::navigationRules;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
+    verification def LocationTrafficAdmissionVerification {
+        doc /* Exercise BlueDogLocationTraffic windowOverrun and WindowAssessment for surveyed sectors and background reaches on both legs, waiting and recovery. Reject missing traffic evidence, unsupported wind/daylight conditions, incomplete coverage and intervals outside reviewed windows. Compare cumulative exposure, energy, sensing and recovery before departure. Sparse heatmaps and zero observed users cannot establish absence. Reassess delays and unexpected traffic; no accepted window yet.*/
+        objective acceptance {
+            verify GorgeChallenge::forecastAdmission;
+        }
+        return verdict : VerificationCases::VerdictKind = VerificationCases::VerdictKind::inconclusive;
+    }
 }

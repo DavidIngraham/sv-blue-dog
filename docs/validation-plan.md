@@ -79,3 +79,18 @@ Afterward, compare measurements with predictions, retain failures and censored o
 See the [current assessment](current-assessment.md#reading-the-evidence) for the update method and the [modeling method](methods/modeling.md) for the evidence links.
 
 **Next:** [Current assessment and next investigations](current-assessment.md) · [Series guide](index.md)
+
+## Wind-sport encounters and passage windows
+
+The challenge's `WindSportEncounterVerification` exercises the
+[wind-sport hazard cases](encounter-feasibility.md#wind-sports-change-both-motion-and-occupied-space),
+including falls, separated equipment, kite lines, foils and absent rider response.
+Independent observations must establish clearance and response; cooperative
+passes alone cannot demonstrate the admitted capability.
+
+`LocationTrafficAdmissionVerification` checks the
+[sector and arrival-window assessment](site-and-environment-evidence.md#traffic-risk-by-location-and-arrival-window)
+on both legs and recovery routes. Include a quiet departure with a busy delayed
+return, missing background coverage, wind/visibility changes and a recovery
+approach that becomes occupied. Both cases remain inconclusive. Software tests
+of the exposure arithmetic do not verify observed traffic or authorize launch.

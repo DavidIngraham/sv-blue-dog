@@ -55,6 +55,86 @@ The baseline range budget includes closing speed, acquisition, assessment, comma
 
 Earlier experiments in the [encounter method](encounter-feasibility.md) exercise imperfect tracks, explicit command delay and 30-second/one-second schedules, alongside a perfect-truth baseline for coarse route-exposure studies. The later IC-01 campaign uses its own candidate performance and fixed guidance horizon. These conceptual simulations **do not verify** installed sensing or achieved maneuver response. Feasibility needs sensor replay and maneuver evidence before the allocation is considered feasible; a failed demonstration requires redesign or an explicitly changed operating envelope.
 
+## Traffic risk by location and arrival window
+
+I need to know where an encounter is likely to occur and whether Blue Dog can
+respond there. A busy riding area with room to maneuver poses a different
+problem from one rider appearing beside the bridge approach. I therefore assess
+the course in named sectors, including the water between recreation sites.
+These are survey scopes, not measured traffic boundaries or approved routes.
+
+```sysml-report BlueDogLocationTrafficDocuments::Locations
+```
+
+The first wind-sport surveys should cover Hood River waterfront, Hatchery/Swell
+City and Stevenson because the site operators document those activities.
+[Viento](https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=123) adds
+another documented windsurfing access point. These priorities reflect the
+combination of known use and a plausible conflict with passage or recovery;
+I have not assigned numerical likelihood or severity scores.
+
+The [Hood River waterfront](https://portofhoodriver.specialdistrict.org/waterfront)
+brings several activities together. [Spring Creek](https://parks.wa.gov/find-parks/state-parks/spring-creek-hatchery-state-park)
+and [Swell City](https://cgw2.org/wp-content/uploads/2026/02/01-Friendly-Reminders-About-Swell-City-2026.pdf)
+identify wind-sport access. At Stevenson, [Bob's Beach](https://www.portofskamania.org/bob-s-beach)
+prohibits kiteboarding from that site and directs kiters to East Point. That is
+a launch rule, not evidence that kiters cannot cross nearby water. Likewise,
+park opening hours do not establish an empty river after closing.
+The [source register](../evidence/traffic/2026-10-16-location-review/sources.json)
+records what each source supports. Current works, event schedules and local
+restrictions still need review for the proposed mission date.
+
+### Choose a window for the whole passage
+
+For each sector, I need the earliest arrival and latest departure on both legs,
+including uncertain sailing progress, waiting and casualty recovery. A quiet
+outbound crossing is insufficient if the return falls in an unsupported period.
+The boat must also have enough energy, useful wind, observation capability and
+a feasible recovery path throughout that interval. Night or calm conditions
+may reduce recreation while making sensing or progress worse.
+
+The [native window assessment](../models/analyses/location-traffic-risk.sysml)
+checks one sector, target class, operating condition and visit at a time. A
+reviewed upper encounter-rate bound multiplied by exposure time gives an upper
+estimate of expected encounters. It is **not collision probability**. A purely
+synthetic comparison illustrates the arithmetic: half an hour at two encounters
+per hour gives one expected encounter; at ten per hour it gives five. Neither
+rate is a Gorge observation, and no exposure limit has been selected.
+
+The rate must describe entries into the defined encounter envelope and cover
+the whole visit's time and conditions. If those change, split the assessment
+into separate intervals. Unknown rates remain unknown; they do not become zero.
+Even a low estimate cannot pass without an accepted class response allocation,
+navigation-rule assessment and supported recovery. I do not credit a rider
+with seeing and avoiding Blue Dog.
+
+Before selecting a departure, review every sector and plausible target class,
+including connecting reaches, on outbound, return, waiting and recovery paths.
+Review cumulative exposure without counting the same encounter twice. Passing
+one interval does not admit the mission. No complete mission aggregation or
+accepted departure window exists yet. Delay beyond a reviewed interval or
+unexpected traffic requires reassessment and a supported waiting, rerouting or
+recovery response; moving aside must not create a commercial-channel conflict.
+
+### Use heatmaps to plan observations
+
+[Strava's heatmaps](https://support.strava.com/en-us/articles/16046277-a-guide-to-strava-heatmaps)
+can suggest corridors worth observing. Global aggregates the preceding year;
+Weekly shows seven days; Night separates sunset-to-sunrise activity. Custom
+date filtering applies to personal heatmaps. I have not sampled these maps for
+this assessment. Their intensity cannot supply hourly traffic rates or prove
+that an apparently quiet area is empty.
+
+At each site, collect time-stamped counts and tracks across wind direction and
+strength, daylight, season, weekdays and event days. Record the observation
+area, duration, obscuration and missed coverage, including sessions with no
+sightings. Use local time with its UTC offset and retain UTC timestamps for
+comparison with the passage. Consenting riders' tracks can supplement shore
+observations, but repeated runs and uneven recorder participation need to be
+accounted for. Estimate speed, turning, falls and equipment extent separately
+from how often users appear. Review confidence and sampling bias before using
+an upper rate bound; zero sightings alone do not justify a zero rate.
+
 ## Impaired-sensing recovery decision
 
 Loss of the required primary safety capability terminates qualification. The boat alerts when possible and attempts conspicuous autonomous shore recovery without waiting for the operator. IC-01 allocates an independently powered observation and control path for that recovery, but its installed performance and independence remain to be demonstrated. Older impaired-sensing studies without that allocation cannot borrow it. If the recovery path is unavailable, the simulation continues the drift and scores its consequences.

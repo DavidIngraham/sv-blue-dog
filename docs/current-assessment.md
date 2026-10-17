@@ -63,6 +63,14 @@ design distance requires reviewed observation and whole-response reliability
 criteria; accepting that distance also requires the corresponding evidence.
 The traffic risk traces to this current policy as well as its historical study.
 
+The [location-specific traffic assessment](site-and-environment-evidence.md#traffic-risk-by-location-and-arrival-window)
+adds windsurfer, wingfoiler and kiter cases, including falls, separated equipment,
+line/foil hazards and absent rider response. Eight survey sectors cover the
+named access areas, constrained passage and connecting reaches. The native
+visit assessment rejects unsupported timing or traffic evidence; no field
+counts, traffic polygons or departure window are accepted. Reactive wind-sport
+simulation and complete mission exposure aggregation remain future work.
+
 <a id="review-gates-scaled-to-one-project"></a>
 ## Choosing the next work
 

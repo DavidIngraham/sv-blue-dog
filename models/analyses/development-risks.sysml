@@ -51,6 +51,7 @@ package BlueDogRisks {
         doc /* Historical six-class allocation study; current allocation is traced separately. */
     }
     dependency trafficCurrentPolicy from traffic to BlueDogClassDetection::policy;
+    dependency trafficLocationReview from traffic to BlueDogLocationTraffic::policy;
     dependency trafficTrace1 from traffic to BlueDogDFMEA::starter::trafficMiss;
     dependency trafficTrace2 from traffic to BlueDogRequirements::trafficSafety;
     part recovery {

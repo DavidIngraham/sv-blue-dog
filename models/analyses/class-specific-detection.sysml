@@ -3,7 +3,7 @@ package BlueDogClassDetection {
  private import ScalarValues::*;
  part policy {
      doc /* Detection distance must cover relative motion during observation/decision/maneuver delay, position uncertainty and reviewed clearance/margin. Consequences and exposure separately inform clearance and required reliability; do not multiply kinematic distance by severity or call a whole class harmless. Collision and nonimpediment obligations remain. No current class allocation is accepted without applicable review and evidence.*/
-     attribute classIds : String [9] ordered = ("commercialTow","fishingCraft","fastCraft","sailingCraft","passengerVessel","occupiedKayak","occupiedSUP","personInWater","unoccupiedDriftingCraft");
+     attribute classIds : String [12] ordered = ("commercialTow","fishingCraft","fastCraft","sailingCraft","passengerVessel","occupiedKayak","occupiedSUP","personInWater","unoccupiedDriftingCraft","windsurfer","wingfoiler","kiter");
      attribute consequenceReview : String = "Review actual vessel mass and relative contact speed, contact geometry, rigid appendages, entanglement, capsize/immersion, occupant vulnerability and secondary collision/impediment. A low-speed glancing hull contact may have low direct damage under supported conditions; that is not a whole-class near-zero consequence allocation.";
      attribute classificationRule : String = "Before reliable classification, use a reviewed conservative envelope spanning plausible classes and occupant transitions. An apparently empty craft may have a person beside it; unknown is not unoccupied. Classification range must support the transition to a narrower envelope. With no reviewed conservative envelope, admission remains unsupported.";
      attribute reliabilityMeaning : String = "Required probability concerns timely acquisition AND sufficient track continuity for the admitted encounter class/conditions, not per-frame detector accuracy. Review exposure, false negatives, false positives and confidence basis. A lower confidence bound must come from applicable independent evidence; supplied booleans alone cannot establish acceptance.";
@@ -44,7 +44,7 @@ package BlueDogClassDetection {
      in attribute consequenceEvidenceRef : String;
      in attribute riskAcceptanceRef : String;
      in attribute collisionAndNonImpedimentSupported : Boolean;
-     out attribute knownClass : Boolean = classId == "commercialTow" or classId == "fishingCraft" or classId == "fastCraft" or classId == "sailingCraft" or classId == "passengerVessel" or classId == "occupiedKayak" or classId == "occupiedSUP" or classId == "personInWater" or classId == "unoccupiedDriftingCraft";
+     out attribute knownClass : Boolean = classId == "commercialTow" or classId == "fishingCraft" or classId == "fastCraft" or classId == "sailingCraft" or classId == "passengerVessel" or classId == "occupiedKayak" or classId == "occupiedSUP" or classId == "personInWater" or classId == "unoccupiedDriftingCraft" or classId == "windsurfer" or classId == "wingfoiler" or classId == "kiter";
      out attribute classScopeSupported : Boolean = classificationReviewRef != "" and ((knownClass and classificationReliable) or (classId == "unclassified" and conservativeEnvelopeReviewed));
      out attribute kinematicsSupported : Boolean = classScopeSupported and motionBoundAvailable and observationBoundAvailable and relativeSpeedBoundMps >= 0 and responseBoundS >= 0 and positionAllowanceM >= 0;
      out attribute kinematicMinimumM : Real = if kinematicsSupported ? relativeSpeedBoundMps*responseBoundS+positionAllowanceM else -1;
@@ -71,7 +71,8 @@ package BlueDogClassDetection {
      out attribute responseCriterionReviewed : ScalarValues::Boolean = responseReliabilityReviewRef != "" and requiredResponseProbability > 0 and requiredResponseProbability <= 1 and requiredConfidenceLevel > 0 and requiredConfidenceLevel < 1;
  }
  analysis Summary {
-     out attribute classIds : String [9] ordered = policy.classIds;
+     doc /* Historical nine-row sensitivity comparison; current policy additionally includes windsurfer, wingfoiler and kiter with no inherited speed or distance allocation.*/
+     out attribute classIds : String [9] ordered = ("commercialTow","fishingCraft","fastCraft","sailingCraft","passengerVessel","occupiedKayak","occupiedSUP","personInWater","unoccupiedDriftingCraft");
      out attribute illustrativeTargetSpeedMps : Real [9] ordered nonunique = illustrative.targetSpeedMps;
      out attribute illustrativeSeparationM : Real [9] ordered nonunique = illustrative.historicalSeparationM;
      out attribute illustrativeResponseS : Real = illustrative.responseS;

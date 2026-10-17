@@ -10,11 +10,12 @@ I now allocate observation by target class, encounter geometry and operating con
 
 The current allocation distinguishes occupied kayaks, occupied stand-up paddleboards, people in the water and unoccupied craft. A low-energy glancing contact with an intact hull might have limited consequences; that is a conditional hypothesis to investigate, not a harmless label for every encounter with that class. A person could fall, become trapped or be struck by an appendage. Contact angle, relative speed, occupancy and the complete boat geometry matter. No accepted numerical injury, severity or probability limit has been assigned.
 
-The comparison below uses a 39-second response, 3 m/s ownship speed and the
+The nine-row historical sensitivity comparison below uses a 39-second response, 3 m/s ownship speed and the
 earlier separation assumptions. It shows the effect of target speed before
 class-specific consequence reviews select clearance, margin and reliability.
 The four small-target cases deliberately share provisional inputs; matching
-distances do not imply matching consequences. No row is an accepted allocation.
+distances do not imply matching consequences. No row is an accepted allocation. The three wind-sport classes are not assigned
+these inherited inputs; their numerical bounds remain open.
 
 ```sysml-report BlueDogClassDetectionDocuments::Summary
 ```
@@ -66,6 +67,35 @@ The [finite-turn experiment](reference/maneuver-dynamics.md) also challenges the
 different times; insufficient steering authority can leave a turn unfinished.
 Without a supported observation or maneuver bound, the envelope reports an
 unsupported case rather than a finite required range.
+
+## Wind sports change both motion and occupied space
+
+Windsurfers, wingfoilers and kiters now have separate target classes. I cannot
+assign them the generic sailing-craft illustration's 4 m/s or a paddleboard's
+low-speed assumption. Their speed, turning and visibility need their own
+bounds. A rider who falls becomes a person-in-water case while the board, rig,
+wing or kite remains a separate hazard.
+
+```sysml-report BlueDogLocationTrafficDocuments::Cases
+```
+
+These are planned verification cases. The current simulator follows scripted
+traffic footprints; it does not model a rider choosing to avoid Blue Dog, a kite
+and its lines in three dimensions, or a foil striking underwater. Those gaps
+must remain visible when interpreting a successful simulated pass.
+
+I will test timely, delayed and absent rider response. Agility may help in a
+particular encounter, but it cannot substitute for Blue Dog's supported
+response. The navigation assessment must distinguish overtaking, opposite
+tacks, windward/leeward roles and uncertain classification. Standing on calls
+for predictable motion and continued collision assessment, not an assumption
+that the other user will act. Small size and autonomy confer no special
+maneuverability status under the [Inland Rules](https://www.navcen.uscg.gov/navigation-rules-amalgamated).
+
+The [location assessment](site-and-environment-evidence.md#traffic-risk-by-location-and-arrival-window)
+connects these cases to riding areas, constrained passages and recovery
+approaches. Choosing a quieter passage window can reduce exposure; it does not
+remove the need to handle an unexpected rider.
 
 ## Choosing an installed sensing stack
 
