@@ -78,5 +78,6 @@
     }
   ],
   "legalReviewComplete": false,
-  "productionIntegration": false
+  "productionIntegration": true,
+  "integrationScope": "Opt-in primary-sailing pair assessment; broader obligations remain separate. See README and COVERAGE."
 }

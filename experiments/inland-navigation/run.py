@@ -14,13 +14,15 @@ from tools.boat_analysis.model.runtime import connection
 from tools.boat_analysis.model.install import RELEASE
 
 HERE = Path(__file__).resolve().parent
+RULES = ROOT/'models/libraries/navigation'
+SOURCES = [RULES/'inland-pair.sysml', RULES/'inland-obligations.sysml']
 @lru_cache(maxsize=16)
 def input_types(model, analysis="InlandNavigationExperiment::Assess"):
     return {s.name: s.type_facts for s in model.find(analysis).children()
             if s.metadata.get('direction') == 'in'}
 
 def load():
-    return connection().parse_sources(tuple((str(HERE/n), (HERE/n).read_text()) for n in ['navigation.sysml', 'extended.sysml']), strict=True)
+    return connection().parse_sources(tuple((str(p), p.read_text()) for p in SOURCES), strict=True)
 
 def decode(value):
     if isinstance(value, EnumLiteral):
@@ -135,10 +137,10 @@ def main():
     extended = json.loads((HERE / 'extended-cases.json').read_text())
     for suite in extended['suites']:
         cases.extend(execute_case(model, suite, c) for c in suite['cases'])
-    files = ['navigation.sysml', 'extended.sysml', 'cases.json', 'extended-cases.json', 'run.py']
+    files = [*SOURCES, *[HERE/n for n in ['cases.json', 'extended-cases.json', 'run.py']]]
     record = dict(kind='Synthetic rule-interpretation regression; not navigation qualification',
-        toolchain=RELEASE, modelScope='Only experiments/inland-navigation/*.sysml',
-        sourceSha256={n: hashlib.sha256((HERE/n).read_bytes()).hexdigest() for n in files},
+        toolchain=RELEASE, modelScope='Reusable Inland rules; synthetic interpretation regressions',
+        sourceSha256={p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in files},
         scenarioCount=len(cases), evaluationCount=sum(len(c['steps']) for c in cases), cases=cases)
     (HERE / 'results.json').write_text(json.dumps(record, indent=2) + '\n')
     print(f"{record['scenarioCount']} scenarios, {record['evaluationCount']} native evaluations passed")

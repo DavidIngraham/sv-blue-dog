@@ -1,13 +1,13 @@
 {
   "kind": "Synthetic rule-interpretation regression; not navigation qualification",
   "toolchain": "develop-e002f1668",
-  "modelScope": "Only experiments/inland-navigation/*.sysml",
+  "modelScope": "Reusable Inland rules; synthetic interpretation regressions",
   "sourceSha256": {
-    "navigation.sysml": "43b8c04cbdaa687ecebc81633c28c557988fe5c3483b423d254b342b7ade4b0b",
-    "extended.sysml": "197a3953e0b7da1e8dcf46b379ab4d1a1ba4f5ffde8d9fd08082537cff841e82",
-    "cases.json": "b8191d89effdab7f383a10fb567f6af4beb7c4ac7e25ace12f7d37d3bb69526d",
-    "extended-cases.json": "8f5e36092620825ee69c86440cbaf25f27187d7e7fca8a98afcb19b077325fae",
-    "run.py": "46e936282b206951cec6b5e6374ded098c9a11ffcab7511f1087e48568ef021e"
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "experiments/inland-navigation/cases.json": "b8191d89effdab7f383a10fb567f6af4beb7c4ac7e25ace12f7d37d3bb69526d",
+    "experiments/inland-navigation/extended-cases.json": "8f5e36092620825ee69c86440cbaf25f27187d7e7fca8a98afcb19b077325fae",
+    "experiments/inland-navigation/run.py": "7940449f85392ffc68b69395248da71ac8c115cd264012b21ea9abcb10e7aa15"
   },
   "scenarioCount": 248,
   "evaluationCount": 255,

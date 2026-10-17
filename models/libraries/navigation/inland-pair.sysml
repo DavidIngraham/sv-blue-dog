@@ -1,5 +1,5 @@
 package InlandNavigationExperiment {
- doc /* Standalone executable interpretation experiment. U.S. Inland Rules subset, reviewed 2026-10-16. No Blue Dog imports, requirements, traces or runtime integration. Inputs are assessed facts, not sensor detections. Not a navigation controller or a full legal-compliance checker. README records every operational interpretation and omission.*/
+ doc /* Reusable U.S. Inland Rules interpretation. Supplied facts and candidate checks are conditional assessments, not established legal compliance. The mission navigation adapter consumes the pair assessment; equipment and other obligations remain separately assessed.*/
  private import ScalarValues::*;
  enum def Truth { yes; no; unknown; }
  enum def VesselKind { sailing; power; unclassified;

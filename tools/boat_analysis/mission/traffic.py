@@ -4,7 +4,7 @@ Tracks are scenario inputs. An AIS tug position must represent its whole tow;
 small craft need independent non-AIS scenarios. These checks are geometric,
 not a complete implementation or certification of the Navigation Rules.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import math
 
 import numpy as np
@@ -24,6 +24,7 @@ class Traffic:
     target_kind: str = "craft"
     ais_equipped: bool = False
     source_id: int | None = None
+    navigation_facts: dict = field(default_factory=dict)
 
     def __post_init__(self):
         if min(self.length_m,self.beam_m,self.track.length) <= 0 or self.clearance_m < 0 or self.speed_mps < 0 or (self.speed_mps == 0 and self.stationary_seconds <= 0):

@@ -28,8 +28,9 @@ class SensorEnvelope:
 
 
 class Observations:
-    def __init__(self, envelope, seed=0, *, night=False, dropouts=(), clearance_allowance_m=0.):
+    def __init__(self, envelope, seed=0, *, night=False, dropouts=(), clearance_allowance_m=0., observe_navigation_facts=False):
         self.envelope, self.seed, self.night = envelope, seed, night
+        self.observe_navigation_facts=observe_navigation_facts
         self.dropouts = tuple(dropouts)
         if not math.isfinite(clearance_allowance_m) or clearance_allowance_m<0:
             raise ValueError('Nonnegative observation clearance allowance required')
@@ -102,11 +103,13 @@ class Observations:
             endpoint = position+velocity*3600 if speed else position+np.array([1.,0.])
             contacts.append(Traffic(actor.name,LineString([position,endpoint]),seconds,speed,
                 actor.length_m+2*e.error_m,actor.beam_m+2*e.error_m,actor.clearance_m+self.clearance_allowance_m,
-                stationary_seconds=3600.,target_kind=actor.target_kind,ais_equipped=actor.ais_equipped,source_id=i))
+                stationary_seconds=3600.,target_kind=actor.target_kind,ais_equipped=actor.ais_equipped,source_id=i,
+                navigation_facts=dict(actor.navigation_facts) if self.observe_navigation_facts else {}))
         return contacts
 
     def summary(self):
         return dict(mode='sampled_hypothesis',samples=self.sample,deliveredOrPendingDetections=len(self.trace),
                     clearanceAllowanceM=self.clearance_allowance_m,
+                    navigationFactsObserved=self.observe_navigation_facts,
                     trace=self.trace,physicalValidation=False,
                     scope='Range, Bernoulli misses, latency, bounded position error, expiry and scheduled outages; exact instantaneous velocity/extent; no false positives or measured sensor physics')

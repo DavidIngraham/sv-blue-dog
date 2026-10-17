@@ -21,10 +21,10 @@ def test_missing_input_is_not_defaulted(model):
 def test_native_interface_matches_transport_schema(model):
     assert set(experiment.input_types(model)) == set(FIXTURE['base'])
 
-def test_experiment_is_outside_production_model_load():
+def test_reusable_rule_sources_are_loaded_once():
     from tools.boat_analysis.model.runtime import model_files
-    assert experiment.HERE/'navigation.sysml' not in model_files()
-    assert 'BlueDog' not in (experiment.HERE/'navigation.sysml').read_text().replace('No Blue Dog','No project')
+    assert set(experiment.SOURCES) <= set(model_files())
+    assert not (experiment.HERE/'navigation.sysml').exists()
 
 
 EXTENDED = json.loads((experiment.HERE/'extended-cases.json').read_text())['suites']

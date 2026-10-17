@@ -1,9 +1,10 @@
-# Executable Inland Rules experiment
+# Executable Inland Rules and mission integration
 
-This standalone SysML v2 experiment evaluates navigation duties, candidate-action
-restrictions, signal obligations and selected equipment checks. It uses the
-pinned native OpenSysML engine. It is outside the production model loader and
-**does not yet drive Blue Dog's traffic controller**.
+The reusable SysML v2 model evaluates navigation duties, candidate-action
+restrictions, signal obligations and selected equipment checks using the pinned
+native OpenSysML engine. An opt-in mission adapter now uses the pairwise
+assessment to filter primary sailing commands. The wider equipment and combined
+compliance assessments remain separate from that controller.
 
 The expanded model represents every numbered Inland Rule through executable
 logic, definitions/applicability, or an explicit assessment boundary. That is
@@ -16,11 +17,12 @@ geometry or a substitute for the review.
 
 ```sh
 .tools/uv run python experiments/inland-navigation/run.py
-.tools/uv run pytest -q experiments/inland-navigation/test_navigation.py
+.tools/uv run pytest -q experiments/inland-navigation/test_navigation.py tests/test_navigation_integration.py
+.tools/uv run python -m tools.boat_analysis.mission.navigation_study
 ```
 
-`navigation.sysml` owns pairwise roles, precedence, overtaking memory and
-response escalation. `extended.sysml` owns general-duty checks, channels and
+[`inland-pair.sysml`](../../models/libraries/navigation/inland-pair.sysml) owns pairwise roles, precedence, overtaking memory and
+response escalation. [`inland-obligations.sysml`](../../models/libraries/navigation/inland-obligations.sysml) owns general-duty checks, channels and
 traffic separation, restricted visibility, lights/shapes, signals, selected
 annex calculations, special display alternatives, bounded passage agreement,
 distress-signal families, exemption eligibility and combined candidate assessment.
@@ -124,6 +126,41 @@ does not supply sensor truth, hydrodynamics or physical evidence. Those are
 separate engineering tasks. Code generation, embedded performance, cross-tool
 portability and formal proof have not been established.
 
-The next integration step is to bind this assessment to consistent traffic
-observations and candidate maneuvers from the production simulator, then replay
-end-to-end scenarios. That integration has not happened in this experiment.
+## Mission replay boundary
+
+The adapter receives only delivered observations. Navigation metadata is absent
+unless the observation scenario explicitly supplies it; it shares observation
+latency and expiry. Roles and overtaking-memory transitions execute in the native
+pair model. Native candidate constraints implement hold/may-act/shall-act and
+keep-clear responses. A lost track cannot clear an established overtaking duty.
+An unresolved applicable duty or absence of a supported candidate causes abort.
+
+The current integration accepts an assessed clear-visibility, non-channel context.
+Other contexts fail an explicit scope gate even with no contacts. The full rule
+library is broader than this first controller integration. Equipment, signals,
+Rule 19 maneuver control, multi-vessel negotiation and powered recovery navigation
+are not established by a primary-sailing result. Bounded maneuver dynamics cannot
+yet be combined with this adapter; the replay retains the archived kinematic model.
+
+Both the geometric control and rule-enabled comparison use the same candidate
+headings and piecewise command-latency, drifting-turn and sailing forecasts.
+The remaining committed trajectory is checked at each control tick. Continuation
+approval belongs only to pairs assessed for the current command and cannot bypass
+changed duties, inadequate facts or a newly conflicting segment. Independent
+traffic truth still scores actual contact and clearance; it cannot supply unseen
+observations or veto a command secretly.
+
+The [controller policy](../../models/analyses/navigation-controller.sysml) declares
+2-degree/0.05 m/s hold tolerances, a 15-degree substantial-turn hypothesis,
+10-degree bearing uncertainty and a twice-protected-envelope clearance-release
+hypothesis. These are not statutory thresholds or accepted physical criteria.
+Averaged sailing course is a bow-heading proxy; unconventional-rig tack and actual
+maneuver achievement still require evidence. Depowering is not credited as a
+substantial heading change.
+
+The paired study freezes IC-01 sizing and all 29 archived local scenarios. It
+compares geometry-only control, missing navigation assessments, and explicitly
+hypothetical identification/response assessments. A separate four-case timed
+crossing probe changes arrival time to exercise a closer encounter. It adds no
+hardware mass or power credit. Earlier aborts can save energy while failing the
+mission; they must not be called efficiency improvements.

@@ -3,6 +3,11 @@
 Source profile: [U.S. Inland Navigation Rules, 33 CFR 83–90](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E), reviewed 16 October 2026.
 This is an implementation inventory, not a legal opinion or completed verification.
 
+The opt-in mission controller consumes pair roles, overtaking memory and candidate
+restrictions in an assessed clear-visibility, non-channel context. It does not
+execute every assessment below. Other contexts are rejected by the controller
+scope gate, and equipment and powered-recovery compliance remain unassessed.
+
 | Rule | Executable representation | Still external or incomplete |
 | --- | --- | --- |
 | 1 | `General`: jurisdiction/local-provision gates; certificate checks in `ExemptionsAndSpecialCases` | Legal/geographic applicability, complete local-rule inventory, copy-of-rules carriage |

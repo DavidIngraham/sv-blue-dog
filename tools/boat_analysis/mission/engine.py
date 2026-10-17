@@ -53,6 +53,7 @@ class Result:
     consequence_summary: dict = field(default_factory=dict)
     timing_trace: list = field(default_factory=list)
     energy_summary: dict = field(default_factory=dict)
+    navigation_summary: dict = field(default_factory=dict)
     model_scope: str = 'Conceptual polar and point-mass guidance; wave dynamics and full navigation-rule compliance not verified'
 
 
@@ -76,7 +77,7 @@ def direction(route, distance):
 
 @execution_session()
 def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), seed=0,
-             stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None, observations=None, recovery_observations=None):
+             stochastic=False, save_every=10, classify=evaluate_outcome, recovery_planner=None, observations=None, recovery_observations=None, navigation=None):
     """Execute legacy kinematics unless inputs['maneuverDynamics'] is supplied.
 
     The opt-in map requires initialHeadingDeg and optionally initialSpeedMps,
@@ -86,6 +87,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     provider as the controller; maneuver loss is applied to that speed demand.
     Heading forecasts and powered recovery remain kinematic approximations.
     """
+    if navigation is not None and observations is None:
+        raise ValueError("Navigation integration requires delivered observations, not truth tracks")
     from .logic import MissionLogic
     logic = MissionLogic()
     dt, hours, forecast, lookahead, maneuver_time, _ = inputs['time']
@@ -94,6 +97,8 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         raise ValueError('Control period must be positive and finite')
     from .command import CommandClock
     dynamics=None
+    if 'maneuverDynamics' in inputs and (navigation is not None or inputs.get('piecewiseTrafficForecast',False)):
+        raise ValueError('Navigation integration currently requires the declared kinematic maneuver model')
     if 'maneuverDynamics' in inputs:
         from .maneuver import ManeuverDynamics
         allocation=inputs['maneuverDynamics']
@@ -188,6 +193,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         if dynamics is not None:
             observed.timing_trace.append(dict(maneuverModel='bounded-rate-hypothesis',coefficients=dynamics.coefficients,
                                              physicalValidation=False,steps=dynamics.trace))
+        if navigation is not None:observed.navigation_summary=navigation.summary()
         observed.energy_summary=dict(mainStoredWh=stored,recoveryStoredWh=recovery_bank,recoveryInitialWh=inputs.get('recoveryBatteryWh'),recoveryStandbyW=bank_standby)
         if recovery_observations is not None:observed.recovery_summary['observations']=recovery_observations.summary()
         observed.observation_summary = observations.summary() if observations is not None else {"mode":"perfect_truth_baseline"}
@@ -361,7 +367,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                     target=np.asarray(gate.interpolate(.5,normalized=True).coords[0])
                     desired=math.degrees(math.atan2(*(target-position)[::-1]))
             # Cartesian heading east=0; meteorological wind-from north=0.
-            headings = np.unique(np.r_[np.arange(0,360,10), desired % 360])
+            headings = np.unique(np.r_[np.arange(0,360,10), desired % 360, *([] if not inputs.get("retainCurrentHeadingCandidate",False) or heading is None else [heading])])
             radians = np.deg2rad(headings)
             wind_angle = 90-state.wind_from_deg
             relative = (headings-wind_angle+180)%360-180
@@ -403,6 +409,12 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             for actor_index,actor in enumerate(contacts):
                 actor_index = actor.source_id if actor.source_id is not None else actor_index
                 safe, penalty = actor.assess(position,endpoints,seconds,planning_interval,forecast,inputs['dimensions'])
+                if inputs.get('piecewiseTrafficForecast',False):
+                    from .navigation import trajectory_clear
+                    for j in np.flatnonzero(safe):
+                        safe[j] &= trajectory_clear(actor,position,seconds,
+                            [(command_clock.latency,held_velocity),(maneuver_time if turn[j] else 0.,current),
+                             (max(forecast,planning_interval)-command_clock.latency-(maneuver_time if turn[j] else 0.),velocities[j])],inputs['dimensions'])
                 conflict |= bool(not safe.all() or np.any(penalty))
                 if actor_index not in traffic_seen and (not safe.all() or np.any(penalty)):
                     traffic_seen.add(actor_index)
@@ -414,12 +426,24 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             if 'minimumSailingSpeedMps' in inputs:
                 permitted[:-1] &= speeds>=inputs['minimumSailingSpeedMps']
                 cost[-1] += inputs.get('depowerPenaltyM',0.)
+            baseline_cost=cost.copy();baseline_cost[~permitted]=math.inf
+            original_choice=int(np.argmin(baseline_cost))
+            if navigation is not None:
+                permitted=navigation.assess(position=position,contacts=contacts,seconds=seconds,
+                    interval=planning_interval,forecast=forecast,dimensions=inputs['dimensions'],
+                    headings=headings,endpoints=endpoints,velocities=velocities,
+                    held_velocity=held_velocity,heading=heading,permitted=permitted,
+                    trajectories=[[(command_clock.latency,held_velocity),(maneuver_time if turning else 0.,current),
+                        (max(forecast,planning_interval)-command_clock.latency-(maneuver_time if turning else 0.),v)]
+                        for turning,v in zip(turn,velocities)])
             cost[~permitted] = math.inf
             choice = int(np.argmin(cost))
+            if navigation is not None:navigation.selected(original_choice,choice)
             if not math.isfinite(cost[choice]):
                 if performance and not performance.covered(state.wind_mps):
                     return result('incomplete','performance_model_outside_coverage')
-                return abort('no_safe_control_in_controller_search') if recovery_planner is not None or continue_after_abort else result('incomplete','no_safe_control_in_controller_search')
+                cause='navigation_obligation_unresolved_or_no_supported_candidate' if navigation is not None and math.isfinite(baseline_cost[original_choice]) else 'no_safe_control_in_controller_search'
+                return abort(cause) if recovery_planner is not None or continue_after_abort else result('incomplete',cause)
             proposed=None if math.isnan(headings[choice]) else headings[choice]
             kind='turn'
             if dynamics is not None:
@@ -429,6 +453,42 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             if command_clock.advance(seconds):
                 stored-=maneuver_wh;minimum=min(minimum,stored)
             heading=command_clock.heading
+        elif (navigation is not None or inputs.get('piecewiseTrafficForecast',False)) and not awaiting_righting and seconds >= next_control:
+            # Reassess the remaining committed trajectory, not a new turn from
+            # the temporarily depowered state. New/changed duties still fail.
+            pending=command_clock.pending
+            target_heading=pending['heading'] if pending is not None else command_clock.target_heading
+            remaining_latency=max(0.,pending['appliedSeconds']-seconds) if pending is not None else 0.
+            remaining_drift=(maneuver_time if pending is not None and pending['turn'] else max(0.,command_clock.ends-seconds))
+            target_velocity=current.copy()
+            if target_heading is not None:
+                relative=(target_heading-(90-state.wind_from_deg)+180)%360-180
+                speed=float(sailing_speeds(state.wind_mps,relative))
+                target_velocity+=speed*np.array([math.cos(math.radians(target_heading)),math.sin(math.radians(target_heading))])
+            horizon=max(forecast,remaining_latency+remaining_drift+control_period)
+            prior_velocity=current.copy()
+            if heading is not None and remaining_latency>0:
+                relative=(heading-(90-state.wind_from_deg)+180)%360-180
+                prior_velocity+=float(sailing_speeds(state.wind_mps,relative))*np.array([math.cos(math.radians(heading)),math.sin(math.radians(heading))])
+            endpoint=position+prior_velocity*remaining_latency+current*remaining_drift+target_velocity*(horizon-remaining_latency-remaining_drift)
+            from .navigation import trajectory_clear
+            committed_segments=[(remaining_latency,prior_velocity),(remaining_drift,current),
+                                (horizon-remaining_latency-remaining_drift,target_velocity)]
+            if inputs.get('piecewiseTrafficForecast',False) and any(not trajectory_clear(actor,position,seconds,committed_segments,inputs['dimensions']) for actor in contacts):
+                return abort('committed_maneuver_forecast_conflict')
+            permitted=np.array([True]) if navigation is None else navigation.assess(position=position,contacts=contacts,seconds=seconds,
+                interval=horizon,forecast=horizon,dimensions=inputs['dimensions'],
+                headings=np.array([np.nan if target_heading is None else target_heading]),
+                endpoints=np.array([endpoint]),velocities=np.array([target_velocity]),
+                held_velocity=target_velocity,heading=target_heading,permitted=np.array([True]),committed=True,
+                trajectories=[[(remaining_latency,prior_velocity),(remaining_drift,current),
+                    (horizon-remaining_latency-remaining_drift,target_velocity)]],
+                reference_trajectory=[(remaining_latency,prior_velocity),(remaining_drift,current),
+                    (horizon-remaining_latency-remaining_drift,target_velocity)],
+                motion_velocity=prior_velocity if remaining_latency>0 else current if remaining_drift>0 else target_velocity,
+                assessment_heading=heading if remaining_latency>0 else target_heading)
+            if not permitted[0]:
+                return abort('navigation_obligation_during_occupied_maneuver')
         if seconds>=next_control:next_control=seconds+control_period
         if stored < reserve:
             reserve_protected = False

@@ -1,4 +1,5 @@
 package InlandExtended {
+ doc /* Reusable U.S. Inland Rules interpretation. Supplied facts and candidate checks are conditional assessments, not established legal compliance. The mission navigation adapter consumes the pair assessment; equipment and other obligations remain separately assessed.*/
  private import ScalarValues::*;
  enum def Truth { yes; no; unknown; }
  enum def Mode { sail; power; rowing; towingAstern; pushing; towed; pushed; trawling; fishing; nuc; ram; dredging; diving; mineClearance; pilot; seaplane; wig; airCushion; mooredBarge; }
