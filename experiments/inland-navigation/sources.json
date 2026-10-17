@@ -1,0 +1,82 @@
+{
+  "reviewDate": "2026-10-16",
+  "jurisdiction": "U.S. Inland Navigation Rules; no automatic International substitution",
+  "sources": [
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-B",
+      "sections": [
+        "83.04",
+        "83.05",
+        "83.06",
+        "83.07",
+        "83.08",
+        "83.09",
+        "83.10",
+        "83.11",
+        "83.12",
+        "83.13",
+        "83.14",
+        "83.15",
+        "83.16",
+        "83.17",
+        "83.18",
+        "83.19"
+      ],
+      "scope": "Steering and sailing rules; executable conditions and remaining boundaries documented in COVERAGE.md."
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-A/section-83.03",
+      "scope": "Definitions, visual observability, exceptional vessel status and jurisdiction terms."
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-A/section-83.02",
+      "scope": "Responsibility and special circumstances; no automatic departure algorithm encoded."
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-84",
+      "scope": "Expanded executable assessment and explicit remaining boundaries in COVERAGE.md"
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-86",
+      "scope": "Expanded executable assessment and explicit remaining boundaries in COVERAGE.md"
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-87",
+      "scope": "Expanded executable assessment and explicit remaining boundaries in COVERAGE.md"
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-88",
+      "scope": "Expanded executable assessment and explicit remaining boundaries in COVERAGE.md"
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-89",
+      "scope": "Expanded executable assessment and explicit remaining boundaries in COVERAGE.md"
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-90",
+      "scope": "Expanded executable assessment and explicit remaining boundaries in COVERAGE.md"
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-C",
+      "scope": "Lights and shapes."
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-D",
+      "scope": "Sound and light signals."
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-E",
+      "scope": "Historical exemptions."
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-A/section-83.01",
+      "scope": "Jurisdiction, special provisions, alternative compliance and rule-copy carriage applicability."
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E",
+      "scope": "Rule and annex inventory, including reserved Part 85."
+    }
+  ],
+  "legalReviewComplete": false,
+  "productionIntegration": false
+}

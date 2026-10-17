@@ -1,0 +1,2172 @@
+{
+  "kind": "Fully specified synthetic assessed facts; no operational defaults",
+  "suites": [
+    {
+      "analysis": "InlandExtended::General",
+      "base": {
+        "factsKnown": true,
+        "inlandWaters": true,
+        "jurisdictionReviewed": true,
+        "localProvisionsSatisfied": true,
+        "visualLookout": true,
+        "hearingLookout": true,
+        "appropriateMeansUsed": true,
+        "radarOperational": false,
+        "radarLongRangeUsed": false,
+        "radarPlottingUsed": false,
+        "visibilityReviewed": true,
+        "trafficDensityReviewed": true,
+        "maneuverabilityReviewed": true,
+        "backgroundLightsReviewed": true,
+        "weatherCurrentReviewed": true,
+        "draftDepthReviewed": true,
+        "radarLimitsReviewed": false,
+        "positiveAction": true,
+        "earlyAction": true,
+        "substantialAction": true,
+        "noNewCloseQuarters": true,
+        "safePassingDistance": true,
+        "effectivenessMonitored": true,
+        "finallyClear": false,
+        "speedReductionNecessary": false,
+        "speedReduced": false,
+        "immediateDanger": false,
+        "departureNecessary": false,
+        "departureLimitedToNecessity": false,
+        "specialCircumstancesReviewed": false,
+        "riskAssessment": "no",
+        "approaching": false,
+        "bearingSteady": false,
+        "largeTowOrCloseRange": false,
+        "otherRiskEvidence": false
+      },
+      "cases": [
+        {
+          "name": "General: supported candidate",
+          "inputs": {},
+          "expect": {
+            "assessmentSupported": true,
+            "rule7RiskPresent": false
+          }
+        },
+        {
+          "name": "General: reject visualLookout",
+          "inputs": {
+            "visualLookout": false
+          },
+          "expect": {
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "General: reject hearingLookout",
+          "inputs": {
+            "hearingLookout": false
+          },
+          "expect": {
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "General: reject trafficDensityReviewed",
+          "inputs": {
+            "trafficDensityReviewed": false
+          },
+          "expect": {
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "General: reject maneuverabilityReviewed",
+          "inputs": {
+            "maneuverabilityReviewed": false
+          },
+          "expect": {
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "General: reject substantialAction",
+          "inputs": {
+            "substantialAction": false
+          },
+          "expect": {
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "General: reject noNewCloseQuarters",
+          "inputs": {
+            "noNewCloseQuarters": false
+          },
+          "expect": {
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "General: reject effectivenessMonitored",
+          "inputs": {
+            "effectivenessMonitored": false
+          },
+          "expect": {
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "General: reject factsKnown",
+          "inputs": {
+            "factsKnown": false
+          },
+          "expect": {
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "General: doubt means risk",
+          "inputs": {
+            "riskAssessment": "unknown"
+          },
+          "expect": {
+            "rule7RiskPresent": true
+          }
+        },
+        {
+          "name": "General: steady bearing overrides no-risk",
+          "inputs": {
+            "approaching": true,
+            "bearingSteady": true
+          },
+          "expect": {
+            "rule7RiskPresent": true
+          }
+        },
+        {
+          "name": "General: tow bearing needs appraisal",
+          "inputs": {
+            "approaching": true,
+            "largeTowOrCloseRange": true
+          },
+          "expect": {
+            "rule7FurtherAppraisalRequired": true
+          }
+        },
+        {
+          "name": "General: radar not systematically used",
+          "inputs": {
+            "radarOperational": true
+          },
+          "expect": {
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "General: danger alone grants no departure",
+          "inputs": {
+            "immediateDanger": true
+          },
+          "expect": {
+            "rule2DepartureAssessmentSupported": false
+          }
+        },
+        {
+          "name": "General: necessary departure assessed",
+          "inputs": {
+            "immediateDanger": true,
+            "departureNecessary": true,
+            "departureLimitedToNecessity": true,
+            "specialCircumstancesReviewed": true
+          },
+          "expect": {
+            "rule2DepartureAssessmentSupported": true
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::ChannelsAndTSS",
+      "base": {
+        "factsKnown": true,
+        "channel": false,
+        "ownSailing": true,
+        "ownFishing": false,
+        "otherConfined": false,
+        "otherNavigatingChannel": false,
+        "crossingChannel": false,
+        "crossingImpede": false,
+        "followingChannel": false,
+        "safePracticableStarboardEdge": false,
+        "nearObscuredBend": false,
+        "caution": false,
+        "bendSignal": false,
+        "anchors": false,
+        "avoidAnchoringPracticable": false,
+        "tss": false,
+        "usesLane": false,
+        "followsFlow": false,
+        "clearSeparation": false,
+        "joinsLeaves": false,
+        "atTermination": false,
+        "smallJoinAngle": false,
+        "crossesLane": false,
+        "crossingAvoidable": false,
+        "rightAngleHeading": false,
+        "usesInshore": false,
+        "canUseLane": false,
+        "destinationException": false,
+        "immediateDanger": false,
+        "entersSeparationZone": false,
+        "fishingInZone": false,
+        "necessaryMaintenanceExemption": false,
+        "necessaryCableExemption": false,
+        "nearTermination": false,
+        "terminationCaution": false,
+        "wideAvoidanceMargin": false,
+        "otherFollowingLane": false,
+        "otherPower": false,
+        "earlySeaRoom": false,
+        "providedNonImpediment": false,
+        "lengthM": 1.2
+      },
+      "cases": [
+        {
+          "name": "ChannelsAndTSS: outside channel and TSS",
+          "inputs": {},
+          "expect": {
+            "channelSupported": true,
+            "tssSupported": true
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: stand-on still owes nonimpediment",
+          "inputs": {
+            "channel": true,
+            "otherConfined": true
+          },
+          "expect": {
+            "channelNonImpediment": true,
+            "channelSupported": false
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: fishing cannot impede channel user",
+          "inputs": {
+            "channel": true,
+            "ownSailing": false,
+            "ownFishing": true,
+            "lengthM": 30,
+            "otherNavigatingChannel": true
+          },
+          "expect": {
+            "channelNonImpediment": true
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: crossing impediment",
+          "inputs": {
+            "channel": true,
+            "crossingChannel": true,
+            "otherConfined": true,
+            "crossingImpede": true
+          },
+          "expect": {
+            "channelCrossingProhibited": true
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: bend requires signal and caution",
+          "inputs": {
+            "channel": true,
+            "nearObscuredBend": true
+          },
+          "expect": {
+            "channelBendSignalRequired": true,
+            "channelSupported": false
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: practicable anchor avoidance",
+          "inputs": {
+            "channel": true,
+            "anchors": true,
+            "avoidAnchoringPracticable": true
+          },
+          "expect": {
+            "channelAvoidAnchor": true,
+            "channelSupported": false
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: wrong lane direction",
+          "inputs": {
+            "tss": true,
+            "usesLane": true,
+            "clearSeparation": true
+          },
+          "expect": {
+            "tssSupported": false
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: correct lane",
+          "inputs": {
+            "tss": true,
+            "usesLane": true,
+            "followsFlow": true,
+            "clearSeparation": true
+          },
+          "expect": {
+            "tssSupported": true
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: crossing must be justified and right angle",
+          "inputs": {
+            "tss": true,
+            "crossesLane": true,
+            "wideAvoidanceMargin": true
+          },
+          "expect": {
+            "tssSupported": false
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: small vessel lane nonimpediment",
+          "inputs": {
+            "tss": true,
+            "otherFollowingLane": true,
+            "otherPower": true
+          },
+          "expect": {
+            "tssNonImpediment": true
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: inshore size boundary",
+          "inputs": {
+            "lengthM": 20,
+            "ownSailing": false,
+            "canUseLane": true
+          },
+          "expect": {
+            "inshorePermitted": false
+          }
+        },
+        {
+          "name": "ChannelsAndTSS: emergency separation entry",
+          "inputs": {
+            "immediateDanger": true
+          },
+          "expect": {
+            "separationEntryPermitted": true
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::RestrictedVisibility",
+      "base": {
+        "factsKnown": true,
+        "inSight": false,
+        "inOrNearRestricted": true,
+        "radarOnly": false,
+        "forwardOfBeam": false,
+        "abeamOrAbaft": false,
+        "ownOvertaking": false,
+        "portTurn": false,
+        "towardTargetTurn": false,
+        "courseAlteration": false,
+        "closeQuarters": false,
+        "fogSignalForward": false,
+        "cannotAvoidForwardClose": false,
+        "minimumSteerageSpeed": false,
+        "allWayOffNecessary": false,
+        "allWayOff": false,
+        "extremeCaution": false,
+        "enginePowered": false,
+        "enginesReady": false,
+        "earlyAvoidance": true,
+        "safeSpeedAdapted": true,
+        "risk": "yes"
+      },
+      "cases": [
+        {
+          "name": "RestrictedVisibility: radar forward port turn rejected",
+          "inputs": {
+            "radarOnly": true,
+            "forwardOfBeam": true,
+            "courseAlteration": true,
+            "portTurn": true
+          },
+          "expect": {
+            "avoidPortTurn": true,
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "RestrictedVisibility: overtaking exception",
+          "inputs": {
+            "radarOnly": true,
+            "forwardOfBeam": true,
+            "courseAlteration": true,
+            "portTurn": true,
+            "ownOvertaking": true
+          },
+          "expect": {
+            "avoidPortTurn": false,
+            "candidateSupported": true
+          }
+        },
+        {
+          "name": "RestrictedVisibility: abeam turn toward rejected",
+          "inputs": {
+            "radarOnly": true,
+            "abeamOrAbaft": true,
+            "courseAlteration": true,
+            "towardTargetTurn": true
+          },
+          "expect": {
+            "avoidTowardTarget": true,
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "RestrictedVisibility: fog signal forward requires minimum speed",
+          "inputs": {
+            "fogSignalForward": true
+          },
+          "expect": {
+            "minimumSpeedRequired": true,
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "RestrictedVisibility: minimum speed and caution",
+          "inputs": {
+            "fogSignalForward": true,
+            "minimumSteerageSpeed": true,
+            "extremeCaution": true
+          },
+          "expect": {
+            "candidateSupported": true
+          }
+        },
+        {
+          "name": "RestrictedVisibility: engine readiness",
+          "inputs": {
+            "enginePowered": true
+          },
+          "expect": {
+            "engineReadinessRequired": true,
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "RestrictedVisibility: visual encounter excluded from19",
+          "inputs": {
+            "inSight": true
+          },
+          "expect": {
+            "applicable": false,
+            "avoidanceRequired": false
+          }
+        },
+        {
+          "name": "RestrictedVisibility: unknown risk conservative",
+          "inputs": {
+            "risk": "unknown",
+            "fogSignalForward": true
+          },
+          "expect": {
+            "minimumSpeedRequired": true
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::LightsAndShapes",
+      "base": {
+        "factsKnown": true,
+        "night": false,
+        "restrictedVisibility": false,
+        "lightsCarried": false,
+        "lightsDeemedNecessary": false,
+        "makingWay": false,
+        "underway": true,
+        "anchored": false,
+        "aground": false,
+        "specialAnchorage": false,
+        "awayFromNavigation": false,
+        "sailAlsoPowered": false,
+        "normalSailLightsPracticable": true,
+        "chooseSmallSailAlternative": false,
+        "chooseSmallPowerAlternative": false,
+        "chooseSmallStatusExemption": false,
+        "compositeUnit": false,
+        "gearBeyond150m": false,
+        "divingSmallDisplay": false,
+        "obstruction": false,
+        "gearRestrictedTowing": false,
+        "partiallySubmerged": false,
+        "towLightingImpracticable": false,
+        "assistanceTow": false,
+        "airActivity": false,
+        "nonDisplacement": false,
+        "mooredProjectsIntoChannel": false,
+        "mooredWidthBelow80": false,
+        "groupMoreThanTwoWide": false,
+        "groupWidthOver25": false,
+        "mooredParallel": false,
+        "shelteredBargeExemption": false,
+        "geographicBargeExemption": false,
+        "allRequiredDisplaysPresent": true,
+        "annexInstallationAccepted": true,
+        "otherLightsNonConfusing": true,
+        "mode": "sail",
+        "lengthM": 1.2,
+        "towLengthM": 0,
+        "towBreadthM": 0,
+        "objectLengthM": 0
+      },
+      "cases": [
+        {
+          "name": "LightsAndShapes: day shapes",
+          "inputs": {},
+          "expect": {
+            "displayLights": false,
+            "displayShapes": true,
+            "displayEvidenceSupported": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: night lights",
+          "inputs": {
+            "night": true
+          },
+          "expect": {
+            "displayLights": true,
+            "displayShapes": false
+          }
+        },
+        {
+          "name": "LightsAndShapes: fog lights if carried",
+          "inputs": {
+            "restrictedVisibility": true,
+            "lightsCarried": true
+          },
+          "expect": {
+            "displayLights": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: small sail fallback only impracticable",
+          "inputs": {
+            "chooseSmallSailAlternative": true
+          },
+          "expect": {
+            "smallSailAlternative": false
+          }
+        },
+        {
+          "name": "LightsAndShapes: small sail fallback",
+          "inputs": {
+            "chooseSmallSailAlternative": true,
+            "normalSailLightsPracticable": false
+          },
+          "expect": {
+            "smallSailAlternative": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: 7m cannot use fallback",
+          "inputs": {
+            "lengthM": 7,
+            "chooseSmallSailAlternative": true,
+            "normalSailLightsPracticable": false
+          },
+          "expect": {
+            "smallSailAlternative": false
+          }
+        },
+        {
+          "name": "LightsAndShapes: power12 boundary",
+          "inputs": {
+            "mode": "power",
+            "lengthM": 12,
+            "chooseSmallPowerAlternative": true
+          },
+          "expect": {
+            "smallPowerAlternative": false
+          }
+        },
+        {
+          "name": "LightsAndShapes: powered sail cone12",
+          "inputs": {
+            "lengthM": 12,
+            "sailAlsoPowered": true
+          },
+          "expect": {
+            "sailMotorConeRequired": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: no newbuild Rule28",
+          "inputs": {},
+          "expect": {
+            "rule28Reserved": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: small NUC optional exemption",
+          "inputs": {
+            "mode": "nuc",
+            "chooseSmallStatusExemption": true
+          },
+          "expect": {
+            "smallStatusExemption": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: diver cannot use small exemption",
+          "inputs": {
+            "mode": "diving",
+            "chooseSmallStatusExemption": true
+          },
+          "expect": {
+            "smallStatusExemption": false
+          }
+        },
+        {
+          "name": "LightsAndShapes: tow200 boundary",
+          "inputs": {
+            "mode": "towingAstern",
+            "towLengthM": 200
+          },
+          "expect": {
+            "mastheadTowStackCount": 2,
+            "longTowDiamondRequired": false
+          }
+        },
+        {
+          "name": "LightsAndShapes: tow exceeds200",
+          "inputs": {
+            "mode": "towingAstern",
+            "towLengthM": 200.1
+          },
+          "expect": {
+            "mastheadTowStackCount": 3,
+            "longTowDiamondRequired": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: composite unit uses power",
+          "inputs": {
+            "mode": "pushing",
+            "compositeUnit": true
+          },
+          "expect": {
+            "mastheadTowStackCount": 0,
+            "towPattern": "Rule 23 power-driven composite unit"
+          }
+        },
+        {
+          "name": "LightsAndShapes: partial tow wide boundary",
+          "inputs": {
+            "mode": "towed",
+            "partiallySubmerged": true,
+            "towBreadthM": 25,
+            "objectLengthM": 101
+          },
+          "expect": {
+            "partialTowOutlineLightMinimum": 4,
+            "partialTowIntermediateLightsRequired": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: anchor small away exemption",
+          "inputs": {
+            "anchored": true,
+            "underway": false,
+            "awayFromNavigation": true
+          },
+          "expect": {
+            "anchorExemption": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: anchor near navigation no exemption",
+          "inputs": {
+            "anchored": true,
+            "underway": false
+          },
+          "expect": {
+            "anchorExemption": false
+          }
+        },
+        {
+          "name": "LightsAndShapes: aground small exemption not blanket anchor",
+          "inputs": {
+            "aground": true,
+            "underway": false
+          },
+          "expect": {
+            "groundingExtraRequired": false,
+            "anchorExemption": false
+          }
+        },
+        {
+          "name": "LightsAndShapes: ground12 extra",
+          "inputs": {
+            "aground": true,
+            "lengthM": 12,
+            "underway": false
+          },
+          "expect": {
+            "groundingExtraRequired": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: fishing gear",
+          "inputs": {
+            "mode": "fishing",
+            "gearBeyond150m": true
+          },
+          "expect": {
+            "outlyingGearDisplayRequired": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: dredging obstruction",
+          "inputs": {
+            "mode": "dredging",
+            "obstruction": true,
+            "lengthM": 20
+          },
+          "expect": {
+            "obstructionDisplayRequired": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: moored barge projects",
+          "inputs": {
+            "mode": "mooredBarge",
+            "mooredParallel": true,
+            "mooredProjectsIntoChannel": true
+          },
+          "expect": {
+            "bargeLightsRequired": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: sheltered barge",
+          "inputs": {
+            "mode": "mooredBarge",
+            "shelteredBargeExemption": true
+          },
+          "expect": {
+            "bargeLightsRequired": false
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified trawling",
+          "inputs": {
+            "mode": "trawling"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified fishing",
+          "inputs": {
+            "mode": "fishing"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified nuc",
+          "inputs": {
+            "mode": "nuc"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified ram",
+          "inputs": {
+            "mode": "ram"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified diving",
+          "inputs": {
+            "mode": "diving"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified mineClearance",
+          "inputs": {
+            "mode": "mineClearance"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified pilot",
+          "inputs": {
+            "mode": "pilot"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified seaplane",
+          "inputs": {
+            "mode": "seaplane"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified wig",
+          "inputs": {
+            "mode": "wig"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified airCushion",
+          "inputs": {
+            "mode": "airCushion"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified rowing",
+          "inputs": {
+            "mode": "rowing"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "LightsAndShapes: classified pushed",
+          "inputs": {
+            "mode": "pushed"
+          },
+          "expect": {
+            "valid": true
+          }
+        },
+        {
+          "name": "Motor sailing selects powered lights",
+          "inputs": {
+            "sailAlsoPowered": true,
+            "chooseSmallSailAlternative": true,
+            "normalSailLightsPracticable": false
+          },
+          "expect": {
+            "smallSailAlternative": false,
+            "ordinaryUnderwayPattern": "Forward masthead, sidelights and sternlight"
+          }
+        },
+        {
+          "name": "Restricted tow requires RAM supplement",
+          "inputs": {
+            "mode": "towingAstern",
+            "gearRestrictedTowing": true
+          },
+          "expect": {
+            "restrictedTowRamDisplayRequired": true
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::Signals",
+      "base": {
+        "factsKnown": true,
+        "inSight": false,
+        "approaching": false,
+        "powerPair": false,
+        "underway": true,
+        "meetingCrossing": false,
+        "withinHalfMile": false,
+        "overtaking": false,
+        "intendLeaveOnPort": false,
+        "intendOvertakeStarboard": false,
+        "asternPropulsion": false,
+        "passingAgreementReached": false,
+        "otherProposalHeard": false,
+        "proposalAccepted": false,
+        "doubt": false,
+        "bendOrObstruction": false,
+        "heardBendSignal": false,
+        "leavingBerth": false,
+        "restrictedVisibility": false,
+        "makingWay": false,
+        "anchored": false,
+        "aground": false,
+        "mannedLastTow": false,
+        "compositeUnit": false,
+        "chooseSmallEfficientAlternative": false,
+        "efficientSoundAvailable": true,
+        "specialAnchorage": false,
+        "pilotDuty": false,
+        "distress": false,
+        "assistanceRequired": false,
+        "distressSignalChosen": false,
+        "attentionNeeded": false,
+        "attentionSignalNonConfusing": false,
+        "attentionDoesNotDazzle": false,
+        "signalEquipmentAccepted": true,
+        "mode": "sail",
+        "lengthM": 1.2,
+        "elapsedFogSignalS": 0,
+        "shortBlastS": 1,
+        "shortToleranceS": 0.1,
+        "prolongedBlastS": 4
+      },
+      "cases": [
+        {
+          "name": "Signals: small sound required",
+          "inputs": {},
+          "expect": {
+            "efficientSoundRequired": true,
+            "whistleRequired": false,
+            "candidateSupported": true
+          }
+        },
+        {
+          "name": "Signals: equipment boundary 12",
+          "inputs": {
+            "lengthM": 12
+          },
+          "expect": {
+            "whistleRequired": true,
+            "bellRequired": false,
+            "gongRequired": false
+          }
+        },
+        {
+          "name": "Signals: equipment boundary 20",
+          "inputs": {
+            "lengthM": 20
+          },
+          "expect": {
+            "whistleRequired": true,
+            "bellRequired": true,
+            "gongRequired": false
+          }
+        },
+        {
+          "name": "Signals: equipment boundary 100",
+          "inputs": {
+            "lengthM": 100
+          },
+          "expect": {
+            "whistleRequired": true,
+            "bellRequired": true,
+            "gongRequired": true
+          }
+        },
+        {
+          "name": "Signals: sailing fog pattern",
+          "inputs": {
+            "restrictedVisibility": true
+          },
+          "expect": {
+            "fogPattern": "One prolonged then two short",
+            "fogSignalIntervalMaxS": 120
+          }
+        },
+        {
+          "name": "Signals: small fog alternative",
+          "inputs": {
+            "restrictedVisibility": true,
+            "chooseSmallEfficientAlternative": true
+          },
+          "expect": {
+            "fogPattern": "Other efficient sound"
+          }
+        },
+        {
+          "name": "Signals: power stopped fog",
+          "inputs": {
+            "mode": "power",
+            "restrictedVisibility": true,
+            "lengthM": 20
+          },
+          "expect": {
+            "fogPattern": "Two prolonged separated by about 2 s"
+          }
+        },
+        {
+          "name": "Signals: anchor bell",
+          "inputs": {
+            "anchored": true,
+            "underway": false,
+            "restrictedVisibility": true,
+            "lengthM": 20
+          },
+          "expect": {
+            "fogSignalIntervalMaxS": 60
+          }
+        },
+        {
+          "name": "Signals: fog timer due exactly120",
+          "inputs": {
+            "restrictedVisibility": true,
+            "elapsedFogSignalS": 120
+          },
+          "expect": {
+            "fogSignalDue": true
+          }
+        },
+        {
+          "name": "Signals: danger not waived by radio",
+          "inputs": {
+            "inSight": true,
+            "approaching": true,
+            "doubt": true,
+            "passingAgreementReached": true
+          },
+          "expect": {
+            "dangerMinimumShortBlasts": 5
+          }
+        },
+        {
+          "name": "Signals: inland port-to-port one blast",
+          "inputs": {
+            "mode": "power",
+            "inSight": true,
+            "powerPair": true,
+            "meetingCrossing": true,
+            "withinHalfMile": true,
+            "intendLeaveOnPort": true
+          },
+          "expect": {
+            "maneuverShortBlasts": 1
+          }
+        },
+        {
+          "name": "Signals: overtake starboard one blast",
+          "inputs": {
+            "mode": "power",
+            "inSight": true,
+            "powerPair": true,
+            "overtaking": true,
+            "intendOvertakeStarboard": true
+          },
+          "expect": {
+            "maneuverShortBlasts": 1
+          }
+        },
+        {
+          "name": "Signals: astern three blasts",
+          "inputs": {
+            "mode": "power",
+            "inSight": true,
+            "powerPair": true,
+            "meetingCrossing": true,
+            "withinHalfMile": true,
+            "asternPropulsion": true
+          },
+          "expect": {
+            "maneuverShortBlasts": 3
+          }
+        },
+        {
+          "name": "Signals: radio passage agreement",
+          "inputs": {
+            "inSight": true,
+            "powerPair": true,
+            "meetingCrossing": true,
+            "withinHalfMile": true,
+            "passingAgreementReached": true
+          },
+          "expect": {
+            "maneuverSignalRequired": false
+          }
+        },
+        {
+          "name": "Signals: bend long signal",
+          "inputs": {
+            "bendOrObstruction": true
+          },
+          "expect": {
+            "prolongedBendSignalRequired": true
+          }
+        },
+        {
+          "name": "Signals: false distress rejected",
+          "inputs": {
+            "distressSignalChosen": true
+          },
+          "expect": {
+            "distressSignalMisuse": true,
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Signals: distress requires signal",
+          "inputs": {
+            "distress": true,
+            "assistanceRequired": true
+          },
+          "expect": {
+            "distressSignalRequired": true,
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Signals: long blast under4 rejected",
+          "inputs": {
+            "prolongedBlastS": 3.99
+          },
+          "expect": {
+            "blastDurationsSupported": false
+          }
+        },
+        {
+          "name": "Anchored dredger RAM fog pattern",
+          "inputs": {
+            "mode": "dredging",
+            "anchored": true,
+            "underway": false,
+            "restrictedVisibility": true,
+            "lengthM": 20
+          },
+          "expect": {
+            "fogPattern": "One prolonged then two short",
+            "fogSignalIntervalMaxS": 120
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::LightFixture",
+      "base": {
+        "kind": "masthead",
+        "lengthM": 1.2,
+        "nominalArcDeg": 225,
+        "measuredRangeNm": 2,
+        "minimumMeasuredIntensityCd": 5,
+        "colorX": 0.4,
+        "colorY": 0.4,
+        "flashesPerMinute": 0,
+        "factsKnown": true,
+        "submergedTow": false,
+        "unmannedBarge": false,
+        "sailingUnderway": false,
+        "horizontalSectorEvidenceAccepted": true,
+        "verticalSectorEvidenceAccepted": true,
+        "installationPositionEvidenceAccepted": true,
+        "screensEvidenceAccepted": true,
+        "chromaticityEvidenceAccepted": true
+      },
+      "cases": [
+        {
+          "name": "LightFixture: small masthead",
+          "inputs": {},
+          "expect": {
+            "requiredRangeNm": 2,
+            "fixtureSupported": true
+          }
+        },
+        {
+          "name": "LightFixture: range boundary12",
+          "inputs": {
+            "lengthM": 12
+          },
+          "expect": {
+            "requiredRangeNm": 3,
+            "fixtureSupported": false
+          }
+        },
+        {
+          "name": "LightFixture: range boundary20",
+          "inputs": {
+            "lengthM": 20
+          },
+          "expect": {
+            "requiredRangeNm": 5,
+            "fixtureSupported": false
+          }
+        },
+        {
+          "name": "LightFixture: range boundary50",
+          "inputs": {
+            "lengthM": 50
+          },
+          "expect": {
+            "requiredRangeNm": 6,
+            "fixtureSupported": false
+          }
+        },
+        {
+          "name": "LightFixture: port red range1",
+          "inputs": {
+            "kind": "portSide",
+            "nominalArcDeg": 112.5,
+            "colorX": 0.699,
+            "colorY": 0.291
+          },
+          "expect": {
+            "requiredColor": "red",
+            "requiredRangeNm": 1,
+            "fixtureSupported": true
+          }
+        },
+        {
+          "name": "LightFixture: starboard green",
+          "inputs": {
+            "kind": "starboardSide",
+            "nominalArcDeg": 112.5,
+            "colorX": 0.15,
+            "colorY": 0.5
+          },
+          "expect": {
+            "requiredColor": "green",
+            "fixtureSupported": true
+          }
+        },
+        {
+          "name": "LightFixture: wrong chromaticity",
+          "inputs": {
+            "kind": "portSide",
+            "nominalArcDeg": 112.5
+          },
+          "expect": {
+            "chromaticitySupported": false,
+            "fixtureSupported": false
+          }
+        },
+        {
+          "name": "LightFixture: yellow special flashing",
+          "inputs": {
+            "kind": "specialFlashing",
+            "nominalArcDeg": 200,
+            "colorX": 0.59,
+            "colorY": 0.4,
+            "flashesPerMinute": 50
+          },
+          "expect": {
+            "requiredColor": "yellow",
+            "flashSupported": true,
+            "fixtureSupported": true
+          }
+        },
+        {
+          "name": "LightFixture: special flashing exceeds70",
+          "inputs": {
+            "kind": "specialFlashing",
+            "flashesPerMinute": 71
+          },
+          "expect": {
+            "flashSupported": false
+          }
+        },
+        {
+          "name": "LightFixture: sailing heel sector",
+          "inputs": {
+            "sailingUnderway": true
+          },
+          "expect": {
+            "requiredVerticalOuterDeg": 25,
+            "requiredOuterIntensityFraction": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::Installation",
+      "base": {
+        "lengthM": 1.2,
+        "breadthM": 0.42,
+        "mastheadHeightM": 1,
+        "mastheadAboveSidelightsM": 1,
+        "aftAboveForwardM": 2,
+        "verticalStackSpacingM": 1,
+        "lowestStackHeightM": 2,
+        "shapeDiameterM": 0.6,
+        "shapeHeightM": 0.6,
+        "shapeSpacingM": 1.5,
+        "forwardSectorCutoffDeg": 2,
+        "aftSectorCutoffDeg": 5,
+        "allRoundObscuredDeg": 0,
+        "factsKnown": true,
+        "powered": false,
+        "hasTwoMastheads": false,
+        "hasVerticalStack": false,
+        "towingStack": false,
+        "threeLightsEquallySpaced": true,
+        "smallShapeReductionAccepted": false,
+        "shapeBlack": true,
+        "coneOrDiamond": false,
+        "anchorLight": false,
+        "highSpeedAlternativeClaimed": false,
+        "highSpeedAlternativeEvidenceAccepted": false,
+        "horizontalPlacementAccepted": true,
+        "trimVisibilityAccepted": true
+      },
+      "cases": [
+        {
+          "name": "Installation: standard measured layout",
+          "inputs": {},
+          "expect": {
+            "installationSupported": true
+          }
+        },
+        {
+          "name": "Installation: power lower light separation",
+          "inputs": {
+            "powered": true,
+            "mastheadAboveSidelightsM": 0.99
+          },
+          "expect": {
+            "installationSupported": false
+          }
+        },
+        {
+          "name": "Installation: 12m masthead boundary",
+          "inputs": {
+            "powered": true,
+            "lengthM": 12
+          },
+          "expect": {
+            "mastheadMinimumHeightM": 2.5,
+            "installationSupported": false
+          }
+        },
+        {
+          "name": "Installation: 20m broad vessel",
+          "inputs": {
+            "powered": true,
+            "lengthM": 20,
+            "breadthM": 9
+          },
+          "expect": {
+            "mastheadMinimumHeightM": 8
+          }
+        },
+        {
+          "name": "Installation: small reduced shape reviewed",
+          "inputs": {
+            "shapeDiameterM": 0.1,
+            "shapeHeightM": 0.1,
+            "shapeSpacingM": 0.2,
+            "smallShapeReductionAccepted": true
+          },
+          "expect": {
+            "shapeSupported": true
+          }
+        },
+        {
+          "name": "Installation: no automatic small shape scale",
+          "inputs": {
+            "shapeDiameterM": 0.1
+          },
+          "expect": {
+            "shapeSupported": false
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::SoundAppliance",
+      "base": {
+        "lengthM": 1.2,
+        "fundamentalHz": 500,
+        "bandHz": 500,
+        "measuredBandDb": 115,
+        "forward45Db": 111,
+        "otherDirectionsDb": 105,
+        "listeningPostDb": 100,
+        "bellDb": 110,
+        "bellDiameterMm": 300,
+        "strikerMassFraction": 0.03,
+        "whistleSpacingM": 0,
+        "minimumFrequencyDifferenceHz": 10,
+        "conformingWhistleFraction": 1,
+        "factsKnown": true,
+        "directional": false,
+        "forwardAligned": true,
+        "positioningReviewed": true,
+        "combined": false,
+        "twoWhistles": false,
+        "higherFrequencyConforms": false,
+        "simultaneous": false,
+        "manualBell": true,
+        "corrosionResistant": true,
+        "clearTone": true,
+        "bellFitted": false,
+        "gongFitted": false,
+        "gongDistinct": false
+      },
+      "cases": [
+        {
+          "name": "SoundAppliance: small fitted whistle",
+          "inputs": {},
+          "expect": {
+            "minimumBandDb": 115,
+            "whistleSupported": true
+          }
+        },
+        {
+          "name": "SoundAppliance: listener too loud",
+          "inputs": {
+            "listeningPostDb": 111
+          },
+          "expect": {
+            "whistleSupported": false
+          }
+        },
+        {
+          "name": "SoundAppliance: 20m stronger whistle needed",
+          "inputs": {
+            "lengthM": 20
+          },
+          "expect": {
+            "minimumBandDb": 130,
+            "whistleSupported": false,
+            "equipmentSupported": false
+          }
+        },
+        {
+          "name": "SoundAppliance: 200m frequency range",
+          "inputs": {
+            "lengthM": 200
+          },
+          "expect": {
+            "minimumFundamentalHz": 70,
+            "maximumFundamentalHz": 200
+          }
+        },
+        {
+          "name": "SoundAppliance: spaced whistles simultaneous prohibited",
+          "inputs": {
+            "whistleSpacingM": 101,
+            "simultaneous": true
+          },
+          "expect": {
+            "combinedSupported": false
+          }
+        },
+        {
+          "name": "SoundAppliance: weak bell rejected",
+          "inputs": {
+            "bellFitted": true,
+            "bellDb": 109
+          },
+          "expect": {
+            "bellSupported": false
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::ExemptionsAndSpecialCases",
+      "base": {
+        "factsKnown": true,
+        "constructedBefore19801224": false,
+        "legacyRulesSatisfied": false,
+        "metricRepositionOnly": false,
+        "certificateClaimed": false,
+        "certificateIssued": false,
+        "certificateStillApplicable": false,
+        "certificateOnboard": false,
+        "lawEnforcement": false,
+        "publicSafetyAuthorized": false,
+        "blueLightChosen": false,
+        "redYellowChosen": false,
+        "supplementalNonInterfering": true,
+        "actualMechanicalRigidConnection": false,
+        "movesAsOneVessel": false,
+        "mooringBuoyFast": false,
+        "specialRiverGeographyReviewed": false,
+        "greatLakes": false,
+        "westernRivers": false,
+        "listed8925Water": false,
+        "seaplaneOnWater": false,
+        "wigFlight": false,
+        "wigOnWater": false,
+        "collisionRisk": false,
+        "distress": false,
+        "assistanceRequired": false,
+        "authorizedAnnexIVSignal": false,
+        "lengthM": 1.2
+      },
+      "cases": [
+        {
+          "name": "ExemptionsAndSpecialCases: new small vessel no grandfathering",
+          "inputs": {},
+          "expect": {
+            "rule38Eligible": false,
+            "rule38RangeColorExemption": false
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: qualifying old small vessel",
+          "inputs": {
+            "constructedBefore19801224": true,
+            "legacyRulesSatisfied": true
+          },
+          "expect": {
+            "rule38RangeColorExemption": true
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: old keel alone insufficient",
+          "inputs": {
+            "constructedBefore19801224": true
+          },
+          "expect": {
+            "rule38Eligible": false
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: self claimed certificate rejected",
+          "inputs": {
+            "certificateClaimed": true
+          },
+          "expect": {
+            "alternativeCertificateSupported": false,
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: valid certificate must be aboard",
+          "inputs": {
+            "certificateClaimed": true,
+            "certificateIssued": true,
+            "certificateStillApplicable": true
+          },
+          "expect": {
+            "alternativeCertificateSupported": false
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: blue light not for ordinary boat",
+          "inputs": {
+            "blueLightChosen": true
+          },
+          "expect": {
+            "blueLightPermitted": false,
+            "assessmentSupported": false
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: public safety no priority",
+          "inputs": {
+            "publicSafetyAuthorized": true,
+            "redYellowChosen": true
+          },
+          "expect": {
+            "redYellowPermitted": true,
+            "supplementalPriorityGranted": false
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: rope coupling not composite",
+          "inputs": {
+            "movesAsOneVessel": true
+          },
+          "expect": {
+            "compositeUnit": false
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: mechanical composite",
+          "inputs": {
+            "movesAsOneVessel": true,
+            "actualMechanicalRigidConnection": true
+          },
+          "expect": {
+            "compositeUnit": true
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: Columbia not automatically western river",
+          "inputs": {
+            "specialRiverGeographyReviewed": true
+          },
+          "expect": {
+            "specialRiverRulesApply": false
+          }
+        },
+        {
+          "name": "ExemptionsAndSpecialCases: WIG surface power duties",
+          "inputs": {
+            "wigOnWater": true
+          },
+          "expect": {
+            "wigSurfacePowerRules": true
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::CandidateAssessment",
+      "base": {
+        "factsConsistent": true,
+        "inSight": true,
+        "generalSupported": true,
+        "pairwiseSupported": true,
+        "restrictedVisibilitySupported": true,
+        "channelSupported": true,
+        "tssSupported": true,
+        "signalsSupported": true,
+        "displaySupported": true,
+        "fixturesSupported": true,
+        "installationSupported": true,
+        "soundSupported": true,
+        "specialCasesSupported": true,
+        "additionalApplicableClausesReviewed": true,
+        "inOrNearRestricted": false,
+        "specialDisplaysSupported": true,
+        "passageProtocolSupported": true,
+        "distressCatalogSupported": true
+      },
+      "cases": [
+        {
+          "name": "Combined consistent assessment",
+          "inputs": {},
+          "expect": {
+            "candidateSupported": true
+          }
+        },
+        {
+          "name": "Combined rejects factsConsistent",
+          "inputs": {
+            "factsConsistent": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects generalSupported",
+          "inputs": {
+            "generalSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects pairwiseSupported",
+          "inputs": {
+            "pairwiseSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects restrictedVisibilitySupported",
+          "inputs": {
+            "restrictedVisibilitySupported": false,
+            "inSight": false,
+            "inOrNearRestricted": true
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects channelSupported",
+          "inputs": {
+            "channelSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects tssSupported",
+          "inputs": {
+            "tssSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects signalsSupported",
+          "inputs": {
+            "signalsSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects displaySupported",
+          "inputs": {
+            "displaySupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects fixturesSupported",
+          "inputs": {
+            "fixturesSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects installationSupported",
+          "inputs": {
+            "installationSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects soundSupported",
+          "inputs": {
+            "soundSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects specialCasesSupported",
+          "inputs": {
+            "specialCasesSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects additionalApplicableClausesReviewed",
+          "inputs": {
+            "additionalApplicableClausesReviewed": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Nonvisual restricted uses19 instead of pair role",
+          "inputs": {
+            "inSight": false,
+            "inOrNearRestricted": true,
+            "pairwiseSupported": false
+          },
+          "expect": {
+            "candidateSupported": true
+          }
+        },
+        {
+          "name": "Nonvisual clear-weather unsupported",
+          "inputs": {
+            "inSight": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects specialDisplaysSupported",
+          "inputs": {
+            "specialDisplaysSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects passageProtocolSupported",
+          "inputs": {
+            "passageProtocolSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        },
+        {
+          "name": "Combined rejects distressCatalogSupported",
+          "inputs": {
+            "distressCatalogSupported": false
+          },
+          "expect": {
+            "candidateSupported": false
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::SpecialDisplays",
+      "base": {
+        "factsKnown": true,
+        "greatLakes": false,
+        "useGreatLakesPowerAlternative": false,
+        "regionalPushAlternativeApplicable": false,
+        "chooseRegionalPushAlternative": false,
+        "combinedSailingLantern": false,
+        "optionalRedOverGreen": false,
+        "fishingCloseProximity": false,
+        "shootingNets": false,
+        "haulingNets": false,
+        "netFast": false,
+        "pairTrawling": false,
+        "purseSeine": false,
+        "hamperedByGear": false,
+        "pushedAhead": false,
+        "towedAlongside": false,
+        "alongsideBothSides": false,
+        "groupTow": false,
+        "towImpracticable": false,
+        "assistanceTow": false,
+        "unableToTowDisplay": false,
+        "allPossibleTowIndication": false,
+        "bridgePassageLoweringNecessary": false,
+        "anchorCornerAlternative": false,
+        "mooredBothSides": false,
+        "projectingBarge": false,
+        "specialBargeExemptionReviewed": false,
+        "specialBargeExemption": false,
+        "seaplaneFullDisplayImpossible": false,
+        "closestPossibleArrangementReviewed": false,
+        "optionalFishingSpacingAccepted": false,
+        "mode": "sail",
+        "lengthM": 1.2
+      },
+      "cases": [
+        {
+          "name": "Special display baseline",
+          "inputs": {},
+          "expect": {
+            "displayAlternativeSupported": true
+          }
+        },
+        {
+          "name": "Red-over-green conflicts with combined sailing lantern",
+          "inputs": {
+            "optionalRedOverGreen": true,
+            "combinedSailingLantern": true
+          },
+          "expect": {
+            "displayAlternativeSupported": false
+          }
+        },
+        {
+          "name": "Great Lakes alternative requires location",
+          "inputs": {
+            "mode": "power",
+            "useGreatLakesPowerAlternative": true
+          },
+          "expect": {
+            "displayAlternativeSupported": false
+          }
+        },
+        {
+          "name": "Great Lakes alternate approved context",
+          "inputs": {
+            "mode": "power",
+            "useGreatLakesPowerAlternative": true,
+            "greatLakes": true
+          },
+          "expect": {
+            "displayAlternativeSupported": true
+          }
+        },
+        {
+          "name": "Trawler shooting nets",
+          "inputs": {
+            "mode": "trawling",
+            "fishingCloseProximity": true,
+            "shootingNets": true
+          },
+          "expect": {
+            "fishingOptionalPattern": "Two white all-round lights vertically"
+          }
+        },
+        {
+          "name": "Purse seine optional signal restricted",
+          "inputs": {
+            "mode": "fishing",
+            "fishingCloseProximity": true,
+            "purseSeine": true
+          },
+          "expect": {
+            "fishingOptionalPattern": "None"
+          }
+        },
+        {
+          "name": "Purse seine hampered signal",
+          "inputs": {
+            "mode": "fishing",
+            "fishingCloseProximity": true,
+            "purseSeine": true,
+            "hamperedByGear": true
+          },
+          "expect": {
+            "fishingOptionalPattern": "Two yellow lights alternate each second, equal light/dark duration"
+          }
+        },
+        {
+          "name": "Tow impossible still needs indication",
+          "inputs": {
+            "towImpracticable": true
+          },
+          "expect": {
+            "displayAlternativeSupported": false
+          }
+        },
+        {
+          "name": "Bridge lowering only necessary",
+          "inputs": {},
+          "expect": {
+            "bridgeLoweringPermitted": false
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::PassageProtocol",
+      "base": {
+        "factsKnown": true,
+        "requiredExchange": false,
+        "proposalSent": false,
+        "proposalReceived": false,
+        "ownAgreement": false,
+        "otherAgreement": false,
+        "doubt": false,
+        "maneuverStarted": false,
+        "radioAgreement": false,
+        "lawfulAlternative": false,
+        "riskResolved": false,
+        "downboundWithCurrent": false,
+        "specialRiverPriority": false,
+        "upboundOpposite": false,
+        "holdingForPassage": false,
+        "mannerAndPlaceProposed": false,
+        "signalInitiated": false,
+        "bridgePassageComplete": false,
+        "loweredLightsRestored": false,
+        "priorAgreement": "no"
+      },
+      "cases": [
+        {
+          "name": "Unagreed passage needs precaution",
+          "inputs": {
+            "requiredExchange": true
+          },
+          "expect": {
+            "precautionRequired": true
+          }
+        },
+        {
+          "name": "Cannot start unagreed passage",
+          "inputs": {
+            "requiredExchange": true,
+            "maneuverStarted": true
+          },
+          "expect": {
+            "protocolSupported": false
+          }
+        },
+        {
+          "name": "Radio agreement retained",
+          "inputs": {
+            "radioAgreement": true
+          },
+          "expect": {
+            "currentAgreement": true,
+            "agreementRetained": true
+          }
+        },
+        {
+          "name": "Doubt overrides old agreement",
+          "inputs": {
+            "priorAgreement": "yes",
+            "doubt": true
+          },
+          "expect": {
+            "currentAgreement": false,
+            "dangerSignalRequired": true
+          }
+        },
+        {
+          "name": "Downbound must propose and signal",
+          "inputs": {
+            "specialRiverPriority": true,
+            "downboundWithCurrent": true
+          },
+          "expect": {
+            "proposalRequired": true,
+            "protocolSupported": false
+          }
+        },
+        {
+          "name": "Upbound must hold",
+          "inputs": {
+            "specialRiverPriority": true,
+            "upboundOpposite": true
+          },
+          "expect": {
+            "holdRequired": true,
+            "protocolSupported": false
+          }
+        },
+        {
+          "name": "Resolved encounter releases agreement",
+          "inputs": {
+            "priorAgreement": "yes",
+            "riskResolved": true
+          },
+          "expect": {
+            "agreementRetained": false
+          }
+        },
+        {
+          "name": "Restore lowered lights after bridge",
+          "inputs": {
+            "bridgePassageComplete": true
+          },
+          "expect": {
+            "protocolSupported": false
+          }
+        },
+        {
+          "name": "Agreement needs transmitted and received evidence",
+          "inputs": {
+            "ownAgreement": true,
+            "otherAgreement": true
+          },
+          "expect": {
+            "currentAgreement": false
+          }
+        },
+        {
+          "name": "Exchanged agreement accepted",
+          "inputs": {
+            "ownAgreement": true,
+            "otherAgreement": true,
+            "proposalSent": true,
+            "proposalReceived": true
+          },
+          "expect": {
+            "currentAgreement": true
+          }
+        }
+      ]
+    },
+    {
+      "analysis": "InlandExtended::DistressCatalog",
+      "base": {
+        "signalName": "SOS",
+        "factsKnown": true,
+        "distress": false,
+        "assistanceRequired": false,
+        "chosen": false,
+        "authorizedRadioEquipment": false,
+        "supplementalOnly": false,
+        "whiteFlashesPerMinute": 60
+      },
+      "cases": [
+        {
+          "name": "SOS recognized",
+          "inputs": {},
+          "expect": {
+            "listedAnnexIVSignal": true,
+            "useSupported": true
+          }
+        },
+        {
+          "name": "SOS not recreational signal",
+          "inputs": {
+            "chosen": true
+          },
+          "expect": {
+            "useSupported": false
+          }
+        },
+        {
+          "name": "SOS for distress",
+          "inputs": {
+            "chosen": true,
+            "distress": true,
+            "assistanceRequired": true
+          },
+          "expect": {
+            "useSupported": true
+          }
+        },
+        {
+          "name": "Unknown signal rejected",
+          "inputs": {
+            "signalName": "ordinaryTelemetry",
+            "chosen": true,
+            "distress": true,
+            "assistanceRequired": true
+          },
+          "expect": {
+            "listedAnnexIVSignal": false,
+            "useSupported": false
+          }
+        },
+        {
+          "name": "white distress frequency ceiling",
+          "inputs": {
+            "signalName": "highIntensityWhite",
+            "whiteFlashesPerMinute": 71
+          },
+          "expect": {
+            "listedAnnexIVSignal": false
+          }
+        },
+        {
+          "name": "radio equipment required",
+          "inputs": {
+            "signalName": "DSC",
+            "chosen": true,
+            "distress": true,
+            "assistanceRequired": true
+          },
+          "expect": {
+            "useSupported": false
+          }
+        },
+        {
+          "name": "canvas supplemental only",
+          "inputs": {
+            "signalName": "orangeCanvas",
+            "chosen": true,
+            "distress": true,
+            "assistanceRequired": true
+          },
+          "expect": {
+            "useSupported": false
+          }
+        }
+      ]
+    }
+  ]
+}

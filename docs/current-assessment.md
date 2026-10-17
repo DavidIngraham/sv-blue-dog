@@ -19,6 +19,15 @@ The rows follow the Object-Oriented Systems Engineering Method (OOSEM): mission,
 
 The challenge explicitly identifies the U.S. Inland Navigation Rules, entry evidence and adjudication under C-007. Six [source-linked navigation review cases](validation-plan.md#navigation-rule-entry-review-and-adjudication) organize applicability, encounter conduct and equipment evidence. All remain inconclusive; accepted navigation compliance and physical entry qualification are still open. The next review must establish the configuration-specific applicability matrix and demonstration criteria.
 
+The [standalone Inland Rules experiment](../experiments/inland-navigation/README.md)
+now evaluates a broader set of encounter, signal and equipment obligations in
+native SysML. Synthetic cases exercise rule boundaries and inconsistent inputs.
+It remains separate from the traffic controller and does not change the six
+inconclusive navigation review cases. The [rule-by-rule inventory](../experiments/inland-navigation/COVERAGE.md)
+identifies remaining clause detail, interpretation and physical evidence. Next,
+bind a consistent observed encounter and a physically feasible candidate maneuver
+to the assessment, then replay the resulting decisions in the mission simulator.
+
 ## Integration milestone
 
 The milestone is **one candidate whose sensing, guidance, energy and recovery capabilities work together in representative simulations**. Its geometry, equipment mass, electrical demand and sailing performance must remain consistent across the studies.

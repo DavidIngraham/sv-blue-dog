@@ -23,7 +23,7 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "experiments/inland-navigation/test_navigation.py"]
 pythonpath = ["."]
 addopts = "--strict-config --strict-markers"
 

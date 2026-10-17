@@ -1,0 +1,1063 @@
+{
+  "kind": "Synthetic fully specified observations, not measured traffic",
+  "base": {
+    "inlandProfile": "yes",
+    "inSight": "yes",
+    "restrictedVisibility": "no",
+    "riskOfCollision": "yes",
+    "ownKind": "sailing",
+    "otherKind": "sailing",
+    "ownExceptionalStatus": "no",
+    "otherExceptionalStatus": "no",
+    "unmodeledSpecialCircumstances": "no",
+    "observationsAdequate": "yes",
+    "lookoutAdequate": "yes",
+    "safeSpeedSupported": "yes",
+    "ownTack": "portTack",
+    "otherTack": "starboardTack",
+    "windward": "unresolved",
+    "ownComingUp": "no",
+    "otherComingUp": "no",
+    "ownBearingLowDeg": 0,
+    "ownBearingHighDeg": 0,
+    "otherBearingLowDeg": 0,
+    "otherBearingHighDeg": 0,
+    "declaredOwnOvertakingDoubt": "no",
+    "previousMemory": "clear",
+    "pastAndClear": "no",
+    "otherActionAppropriate": "yes",
+    "giveWayAloneSufficient": "yes",
+    "ownAvoidanceFeasible": "yes",
+    "immediateDanger": "no",
+    "channelContext": "no",
+    "otherConfinedToChannel": "no",
+    "ownLengthM": 1.2,
+    "crossingChannel": "no",
+    "crossingWouldImpede": "no",
+    "proceedingAlongChannel": "no",
+    "channelPlanSupported": "unknown",
+    "clearanceEvidenceAdequate": "yes",
+    "powerEncounter": "none",
+    "targetSide": "unresolved",
+    "headOnDoubt": "no",
+    "passageAgreement": "none",
+    "specialRiverRulesApply": "no",
+    "ownRiverMotion": "other",
+    "otherRiverMotion": "other",
+    "downboundFollowingCurrent": "no",
+    "ownUnderway": "yes",
+    "otherUnderway": "yes",
+    "portTurnProposed": "no",
+    "crossAheadProposed": "no",
+    "circumstancesAdmit": "yes",
+    "otherNavigatingChannel": "no",
+    "starboardTurnProposed": "yes"
+  },
+  "cases": [
+    {
+      "name": "Port gives way to starboard",
+      "inputs": {},
+      "expect": {
+        "role": "giveWay",
+        "response": "keepClear",
+        "selectionSupported": true
+      }
+    },
+    {
+      "name": "Starboard stands on",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack"
+      },
+      "expect": {
+        "role": "standOn",
+        "response": "holdCourseSpeed",
+        "selectionSupported": true
+      }
+    },
+    {
+      "name": "Same tack own windward",
+      "inputs": {
+        "otherTack": "portTack",
+        "windward": "ownWindward"
+      },
+      "expect": {
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Same tack own leeward",
+      "inputs": {
+        "otherTack": "portTack",
+        "windward": "otherWindward"
+      },
+      "expect": {
+        "role": "standOn"
+      }
+    },
+    {
+      "name": "Port with unknown tack to windward",
+      "inputs": {
+        "otherTack": "unresolved",
+        "windward": "otherWindward"
+      },
+      "expect": {
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Starboard with unknown other tack is not automatically stand-on",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "unresolved",
+        "windward": "otherWindward"
+      },
+      "expect": {
+        "role": "unsupported",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Own tack unresolved",
+      "inputs": {
+        "ownTack": "unresolved"
+      },
+      "expect": {
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Same tack windward relation unresolved",
+      "inputs": {
+        "otherTack": "portTack"
+      },
+      "expect": {
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Unknown risk is treated as present",
+      "inputs": {
+        "riskOfCollision": "unknown"
+      },
+      "expect": {
+        "riskDeemedPresent": true,
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Reported no collision risk without overtaking",
+      "inputs": {
+        "riskOfCollision": "no"
+      },
+      "expect": {
+        "role": "noPairRole",
+        "response": "monitor"
+      }
+    },
+    {
+      "name": "Own overtaking overrides starboard tack",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "ownComingUp": "yes",
+        "ownBearingLowDeg": 150,
+        "ownBearingHighDeg": 160
+      },
+      "expect": {
+        "role": "giveWay",
+        "nextMemory": "ownDuty"
+      }
+    },
+    {
+      "name": "Other overtaking overrides own port tack",
+      "inputs": {
+        "otherComingUp": "yes",
+        "otherBearingLowDeg": 150,
+        "otherBearingHighDeg": 160
+      },
+      "expect": {
+        "role": "standOn",
+        "nextMemory": "otherDuty"
+      }
+    },
+    {
+      "name": "Exact 112.5-degree boundary is not more than abaft beam",
+      "inputs": {
+        "ownComingUp": "yes",
+        "ownBearingLowDeg": 112.5,
+        "ownBearingHighDeg": 112.5,
+        "riskOfCollision": "no"
+      },
+      "expect": {
+        "ownOvertakingConfirmed": false,
+        "ownOvertakingPresumed": false,
+        "nextMemory": "clear"
+      }
+    },
+    {
+      "name": "Just aft of boundary",
+      "inputs": {
+        "ownComingUp": "yes",
+        "ownBearingLowDeg": 112.5001,
+        "ownBearingHighDeg": 112.5001
+      },
+      "expect": {
+        "ownOvertakingConfirmed": true,
+        "nextMemory": "ownDuty"
+      }
+    },
+    {
+      "name": "Bearing interval straddles boundary",
+      "inputs": {
+        "ownComingUp": "yes",
+        "ownBearingLowDeg": 112,
+        "ownBearingHighDeg": 113
+      },
+      "expect": {
+        "ownOvertakingPresumed": true,
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Uncertain coming-up movement from astern",
+      "inputs": {
+        "ownComingUp": "unknown",
+        "ownBearingLowDeg": 150,
+        "ownBearingHighDeg": 160
+      },
+      "expect": {
+        "ownOvertakingPresumed": true,
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Explicit own overtaking doubt",
+      "inputs": {
+        "declaredOwnOvertakingDoubt": "yes"
+      },
+      "expect": {
+        "ownOvertakingPresumed": true,
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Unresolved declared doubt uses conservative own duty",
+      "inputs": {
+        "declaredOwnOvertakingDoubt": "unknown"
+      },
+      "expect": {
+        "ownOvertakingPresumed": true,
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Other overtaking uncertainty gives no stand-on credit",
+      "inputs": {
+        "otherComingUp": "unknown",
+        "otherBearingLowDeg": 150,
+        "otherBearingHighDeg": 160
+      },
+      "expect": {
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Contradictory overtakers",
+      "inputs": {
+        "ownComingUp": "yes",
+        "ownBearingLowDeg": 150,
+        "ownBearingHighDeg": 160,
+        "otherComingUp": "yes",
+        "otherBearingLowDeg": 150,
+        "otherBearingHighDeg": 160
+      },
+      "expect": {
+        "nextMemory": "conflicting",
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Active overtaking duty survives low risk",
+      "inputs": {
+        "previousMemory": "ownDuty",
+        "riskOfCollision": "no"
+      },
+      "expect": {
+        "role": "giveWay",
+        "nextMemory": "ownDuty"
+      }
+    },
+    {
+      "name": "Clearance conflicts with risk",
+      "inputs": {
+        "previousMemory": "ownDuty",
+        "pastAndClear": "yes"
+      },
+      "expect": {
+        "clearanceConflict": true,
+        "role": "unsupported",
+        "nextMemory": "ownDuty"
+      }
+    },
+    {
+      "name": "Unknown risk cannot confirm release",
+      "inputs": {
+        "previousMemory": "ownDuty",
+        "pastAndClear": "yes",
+        "riskOfCollision": "unknown"
+      },
+      "expect": {
+        "clearanceConflict": true,
+        "nextMemory": "ownDuty"
+      }
+    },
+    {
+      "name": "Stand-on may act",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "otherActionAppropriate": "no"
+      },
+      "expect": {
+        "response": "mayAct",
+        "selectionSupported": true
+      }
+    },
+    {
+      "name": "Stand-on shall act even if other action looks appropriate",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "giveWayAloneSufficient": "no"
+      },
+      "expect": {
+        "response": "shallAct",
+        "selectionSupported": true
+      }
+    },
+    {
+      "name": "Stand-on unknown appropriateness",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "otherActionAppropriate": "unknown"
+      },
+      "expect": {
+        "response": "unresolved",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Stand-on unknown mandatory-action threshold",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "giveWayAloneSufficient": "unknown"
+      },
+      "expect": {
+        "response": "unresolved",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Known permission with unknown mandatory-action threshold",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "otherActionAppropriate": "no",
+        "giveWayAloneSufficient": "unknown"
+      },
+      "expect": {
+        "response": "mayAct",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Mandatory duty persists without feasible own maneuver",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "giveWayAloneSufficient": "no",
+        "ownAvoidanceFeasible": "no"
+      },
+      "expect": {
+        "response": "shallAct",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Emergency review coexists with mandatory action",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "giveWayAloneSufficient": "no",
+        "immediateDanger": "yes"
+      },
+      "expect": {
+        "response": "shallAct",
+        "emergencyReviewRequired": true,
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Lost visual contact excludes sailing role",
+      "inputs": {
+        "inSight": "no"
+      },
+      "expect": {
+        "role": "unsupported",
+        "rule19AssessmentNeeded": false
+      }
+    },
+    {
+      "name": "Restricted visibility without visual contact",
+      "inputs": {
+        "inSight": "no",
+        "restrictedVisibility": "yes"
+      },
+      "expect": {
+        "role": "unsupported",
+        "rule19AssessmentNeeded": true
+      }
+    },
+    {
+      "name": "Visual contact within restricted visibility retains in-sight branch",
+      "inputs": {
+        "restrictedVisibility": "yes"
+      },
+      "expect": {
+        "role": "giveWay",
+        "rule19AssessmentNeeded": false
+      }
+    },
+    {
+      "name": "Unknown visibility context",
+      "inputs": {
+        "inSight": "unknown",
+        "restrictedVisibility": "unknown"
+      },
+      "expect": {
+        "role": "unsupported",
+        "rule19AssessmentNeeded": true
+      }
+    },
+    {
+      "name": "Sail-power crossing now supported by Rule18",
+      "inputs": {
+        "otherKind": "power"
+      },
+      "expect": {
+        "role": "standOn",
+        "response": "holdCourseSpeed",
+        "selectionSupported": true
+      }
+    },
+    {
+      "name": "Power pair overtaking is covered",
+      "inputs": {
+        "ownComingUp": "yes",
+        "ownBearingLowDeg": 150,
+        "ownBearingHighDeg": 160,
+        "ownKind": "power",
+        "otherKind": "power"
+      },
+      "expect": {
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Unknown vessel status is not ordinary status",
+      "inputs": {
+        "otherExceptionalStatus": "unknown"
+      },
+      "expect": {
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Exceptional vessel status outside scope",
+      "inputs": {
+        "otherExceptionalStatus": "yes"
+      },
+      "expect": {
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Special river or other unmodeled rule blocks pair advice",
+      "inputs": {
+        "unmodeledSpecialCircumstances": "yes"
+      },
+      "expect": {
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Unknown jurisdiction",
+      "inputs": {
+        "inlandProfile": "unknown"
+      },
+      "expect": {
+        "role": "unsupported",
+        "nonImpedimentDuty": "unknown"
+      }
+    },
+    {
+      "name": "Missing observations cannot start overtaking memory",
+      "inputs": {
+        "ownComingUp": "yes",
+        "ownBearingLowDeg": 150,
+        "ownBearingHighDeg": 160,
+        "observationsAdequate": "unknown"
+      },
+      "expect": {
+        "role": "unsupported",
+        "nextMemory": "clear"
+      }
+    },
+    {
+      "name": "Inadequate lookout does not erase known duty",
+      "inputs": {
+        "lookoutAdequate": "no"
+      },
+      "expect": {
+        "role": "giveWay",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Unreviewed safe speed blocks support",
+      "inputs": {
+        "safeSpeedSupported": "unknown"
+      },
+      "expect": {
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Channel duty coexists with stand-on",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes"
+      },
+      "expect": {
+        "role": "standOn",
+        "nonImpedimentDuty": "yes",
+        "selectionSupported": true
+      }
+    },
+    {
+      "name": "Channel duty remains without sight",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes",
+        "inSight": "no"
+      },
+      "expect": {
+        "role": "unsupported",
+        "nonImpedimentDuty": "yes"
+      }
+    },
+    {
+      "name": "Impeding crossing is prohibited even when stand-on",
+      "inputs": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack",
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes",
+        "crossingChannel": "yes",
+        "crossingWouldImpede": "yes"
+      },
+      "expect": {
+        "role": "standOn",
+        "crossingProhibited": "yes",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Unknown crossing effect is not crossing permission",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes",
+        "crossingChannel": "yes",
+        "crossingWouldImpede": "unknown"
+      },
+      "expect": {
+        "crossingProhibited": "unknown",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Channel-confined target not inferred from size",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "unknown",
+        "channelPlanSupported": "yes"
+      },
+      "expect": {
+        "nonImpedimentDuty": "unknown",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Channel plan not reviewed",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "unknown"
+      },
+      "expect": {
+        "nonImpedimentDuty": "yes",
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Proceed along starboard edge subject to safe and practicable review",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes",
+        "proceedingAlongChannel": "yes"
+      },
+      "expect": {
+        "starboardEdgeDuty": "yes"
+      }
+    },
+    {
+      "name": "Power vessel exactly 20m without crossing",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes",
+        "ownKind": "power",
+        "ownLengthM": 20
+      },
+      "expect": {
+        "nonImpedimentDuty": "no"
+      }
+    },
+    {
+      "name": "Power vessel below 20m",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes",
+        "ownKind": "power",
+        "ownLengthM": 19.999
+      },
+      "expect": {
+        "nonImpedimentDuty": "yes"
+      }
+    },
+    {
+      "name": "Sailing vessel above 20m",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes",
+        "ownLengthM": 30
+      },
+      "expect": {
+        "nonImpedimentDuty": "yes"
+      }
+    },
+    {
+      "name": "Large power vessel crossing confined passage",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes",
+        "ownKind": "power",
+        "ownLengthM": 30,
+        "crossingChannel": "yes",
+        "crossingWouldImpede": "yes"
+      },
+      "expect": {
+        "nonImpedimentDuty": "yes",
+        "crossingProhibited": "yes"
+      }
+    },
+    {
+      "name": "Unknown type still has under-20m channel duty",
+      "inputs": {
+        "channelContext": "yes",
+        "otherConfinedToChannel": "yes",
+        "channelPlanSupported": "yes",
+        "ownKind": "unclassified"
+      },
+      "expect": {
+        "role": "unsupported",
+        "nonImpedimentDuty": "yes"
+      }
+    },
+    {
+      "name": "Invalid bearing range preserves existing duty",
+      "inputs": {
+        "previousMemory": "ownDuty",
+        "ownBearingLowDeg": 170,
+        "ownBearingHighDeg": 160
+      },
+      "expect": {
+        "inputBoundsValid": false,
+        "role": "unsupported",
+        "nextMemory": "ownDuty"
+      }
+    },
+    {
+      "name": "Out of range degrees",
+      "inputs": {
+        "ownBearingHighDeg": 181
+      },
+      "expect": {
+        "inputBoundsValid": false,
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Invalid length",
+      "inputs": {
+        "ownLengthM": 0
+      },
+      "expect": {
+        "inputBoundsValid": false,
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Overtaking history through turn, lost sight and clearance",
+      "steps": [
+        {
+          "inputs": {
+            "ownComingUp": "yes",
+            "ownBearingLowDeg": 150,
+            "ownBearingHighDeg": 160
+          },
+          "expect": {
+            "nextMemory": "ownDuty",
+            "role": "giveWay"
+          }
+        },
+        {
+          "inputs": {
+            "ownTack": "starboardTack",
+            "otherTack": "portTack",
+            "riskOfCollision": "no"
+          },
+          "expect": {
+            "nextMemory": "ownDuty",
+            "role": "giveWay"
+          }
+        },
+        {
+          "inputs": {
+            "inSight": "no"
+          },
+          "expect": {
+            "nextMemory": "ownDuty",
+            "role": "unsupported"
+          }
+        },
+        {
+          "inputs": {
+            "pastAndClear": "unknown"
+          },
+          "expect": {
+            "nextMemory": "ownDuty",
+            "role": "giveWay"
+          }
+        },
+        {
+          "inputs": {
+            "pastAndClear": "yes",
+            "riskOfCollision": "no"
+          },
+          "expect": {
+            "nextMemory": "clear",
+            "role": "noPairRole"
+          }
+        },
+        {
+          "inputs": {
+            "ownTack": "starboardTack",
+            "otherTack": "portTack"
+          },
+          "expect": {
+            "nextMemory": "clear",
+            "role": "standOn"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stand-on escalation through nonresponse",
+      "shared": {
+        "ownTack": "starboardTack",
+        "otherTack": "portTack"
+      },
+      "steps": [
+        {
+          "inputs": {},
+          "expect": {
+            "response": "holdCourseSpeed"
+          }
+        },
+        {
+          "inputs": {
+            "otherActionAppropriate": "no"
+          },
+          "expect": {
+            "response": "mayAct"
+          }
+        },
+        {
+          "inputs": {
+            "otherActionAppropriate": "no",
+            "giveWayAloneSufficient": "no"
+          },
+          "expect": {
+            "response": "shallAct"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unreliable clearance cannot erase overtaking duty",
+      "inputs": {
+        "previousMemory": "ownDuty",
+        "pastAndClear": "yes",
+        "riskOfCollision": "no",
+        "observationsAdequate": "no",
+        "clearanceEvidenceAdequate": "unknown"
+      },
+      "expect": {
+        "nextMemory": "ownDuty",
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Independently supported clearance may release duty without sight",
+      "inputs": {
+        "previousMemory": "ownDuty",
+        "pastAndClear": "yes",
+        "riskOfCollision": "no",
+        "inSight": "no",
+        "observationsAdequate": "no",
+        "clearanceEvidenceAdequate": "yes"
+      },
+      "expect": {
+        "nextMemory": "clear",
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Excluded fishing status cannot claim no channel duty",
+      "inputs": {
+        "ownKind": "power",
+        "ownLengthM": 30,
+        "ownExceptionalStatus": "yes",
+        "channelContext": "yes",
+        "otherConfinedToChannel": "no"
+      },
+      "expect": {
+        "nonImpedimentDuty": "unknown",
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Special inland priority prevents an unconditional starboard-edge output",
+      "inputs": {
+        "unmodeledSpecialCircumstances": "yes",
+        "channelContext": "yes",
+        "proceedingAlongChannel": "yes"
+      },
+      "expect": {
+        "starboardEdgeDuty": "unknown",
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Sail gives way to fishing",
+      "inputs": {
+        "otherKind": "fishing"
+      },
+      "expect": {
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Power gives way to sail",
+      "inputs": {
+        "ownKind": "power"
+      },
+      "expect": {
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Sail gives way to NUC",
+      "inputs": {
+        "otherKind": "notUnderCommand"
+      },
+      "expect": {
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Fishing gives way to RAM",
+      "inputs": {
+        "ownKind": "fishing",
+        "otherKind": "restrictedManeuverability"
+      },
+      "expect": {
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "NUC versus RAM has no invented ranking",
+      "inputs": {
+        "ownKind": "notUnderCommand",
+        "otherKind": "restrictedManeuverability"
+      },
+      "expect": {
+        "role": "unsupported"
+      }
+    },
+    {
+      "name": "Powered head-on",
+      "inputs": {
+        "ownKind": "power",
+        "otherKind": "power",
+        "powerEncounter": "headOn"
+      },
+      "expect": {
+        "role": "mutualAvoidance"
+      }
+    },
+    {
+      "name": "Head-on doubt presumed",
+      "inputs": {
+        "ownKind": "power",
+        "otherKind": "power",
+        "headOnDoubt": "yes"
+      },
+      "expect": {
+        "role": "mutualAvoidance"
+      }
+    },
+    {
+      "name": "Power crossing starboard target",
+      "inputs": {
+        "ownKind": "power",
+        "otherKind": "power",
+        "powerEncounter": "crossing",
+        "targetSide": "starboardSide"
+      },
+      "expect": {
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Power crossing port target",
+      "inputs": {
+        "ownKind": "power",
+        "otherKind": "power",
+        "powerEncounter": "crossing",
+        "targetSide": "portSide"
+      },
+      "expect": {
+        "role": "standOn"
+      }
+    },
+    {
+      "name": "River crossing yields to along-river",
+      "inputs": {
+        "ownKind": "power",
+        "otherKind": "power",
+        "specialRiverRulesApply": "yes",
+        "ownRiverMotion": "crossing",
+        "otherRiverMotion": "upbound"
+      },
+      "expect": {
+        "role": "giveWay"
+      }
+    },
+    {
+      "name": "Rule17 optional port turn rejected",
+      "inputs": {
+        "ownKind": "power",
+        "otherKind": "power",
+        "powerEncounter": "crossing",
+        "targetSide": "portSide",
+        "otherActionAppropriate": "no",
+        "portTurnProposed": "yes"
+      },
+      "expect": {
+        "rule17PortTurnRestricted": true,
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Crossing ahead rejected",
+      "inputs": {
+        "ownKind": "power",
+        "otherKind": "power",
+        "powerEncounter": "crossing",
+        "targetSide": "starboardSide",
+        "crossAheadProposed": "yes"
+      },
+      "expect": {
+        "crossAheadRestricted": true,
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Port-to-port agreement cannot allow port alteration",
+      "inputs": {
+        "ownKind": "power",
+        "otherKind": "power",
+        "powerEncounter": "headOn",
+        "passageAgreement": "portToPort",
+        "portTurnProposed": "yes"
+      },
+      "expect": {
+        "headOnStarboardRequired": true,
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Head-on requires starboard alteration",
+      "inputs": {
+        "ownKind": "power",
+        "otherKind": "power",
+        "powerEncounter": "headOn",
+        "starboardTurnProposed": "no"
+      },
+      "expect": {
+        "selectionSupported": false
+      }
+    },
+    {
+      "name": "Fishing channel duty survives Rule18 stand-on",
+      "inputs": {
+        "ownKind": "fishing",
+        "otherKind": "power",
+        "ownLengthM": 30,
+        "channelContext": "yes",
+        "otherNavigatingChannel": "yes",
+        "otherConfinedToChannel": "no"
+      },
+      "expect": {
+        "role": "standOn",
+        "nonImpedimentDuty": "yes",
+        "selectionSupported": false
+      }
+    }
+  ]
+}

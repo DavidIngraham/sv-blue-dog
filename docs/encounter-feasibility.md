@@ -183,6 +183,29 @@ Independent truth checks executed motion continuously for collision and required
 
 An explicit perfect-truth baseline remains available for comparison and for reproducing older experiments. Each result identifies which observation mode it used. The paired study uses the imperfect provider for every sensing hypothesis and retains observations, supervisory decisions, movement history and stopping causes.
 
+## Check navigation duties as well as clearance
+
+A collision-free path can still violate a navigation duty. I use a separate
+[executable Inland Rules experiment](../experiments/inland-navigation/README.md)
+to ask which duties apply and whether a proposed action and equipment evidence
+support them. It covers sailing and powered encounters, overtaking, special
+vessel status, channels, restricted visibility, signals and equipment checks.
+
+The useful output is a set of conditional obligations: keep clear, maintain
+course and speed, act when the other vessel is not responding, use a specified
+signal, or reject an unsupported candidate. Channel nonimpediment remains a
+separate obligation even when the pairwise encounter gives Blue Dog a stand-on
+role. The combined assessment also rejects inconsistent vessel, visibility,
+risk and passage-agreement facts across those checks.
+
+This experiment does not yet drive the traffic controller. Its cases supply
+assessed facts; they do not establish that a camera can identify a vessel's
+status or that Blue Dog can execute a safe turn. The [coverage register](../experiments/inland-navigation/COVERAGE.md)
+separates executable conditions from remaining interpretations and evidence.
+The next useful test is to connect observed tracks and feasible candidate
+maneuvers to these duties, then check the resulting motion against independent
+traffic truth.
+
 ## Close the candidate loop
 
 IC-01 links an allocated sensing envelope to one-second guidance assessments, explicit command and maneuver clocks, candidate-specific sailing performance and separately accounted recovery energy. Day/night runs pair clear water, a non-AIS crossing, a stationary low target and a weed patch across fixed seeds. Additional cases exercise the solved wind endpoints, primary sensing/steering/power loss, capsize, recovery after passage standby, finer integration and degraded capabilities. The synthetic reach is 600 m between gates in a 700 m wide water domain, with two hypothetical shore approaches. It is a representative integration exercise, not the complete charted Gorge mission.

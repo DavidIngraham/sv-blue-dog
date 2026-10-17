@@ -260,6 +260,29 @@ The 16 October challenge review distinguishes avoiding contact from complying wi
 
 The [verification plan](validation-plan.md#navigation-rule-entry-review-and-adjudication) identifies the required evidence. Configuration-specific applicability, accepted demonstration criteria and physical results remain open. The standalone executable rule experiment remains outside production model loading and is not credited as challenge compliance.
 
+## Expand the executable navigation assessment
+
+The 16 October rule experiment asks whether SysML can represent the wider Inland
+Rules without hiding qualitative judgments inside numerical defaults. It adds
+powered encounters, vessel-status relationships, channels and traffic separation,
+restricted visibility, signal patterns, equipment constraints, special cases and
+a combined candidate assessment. The native engine executes the rule expressions;
+the harness transports supplied facts and records outputs.
+
+The [standalone record](../experiments/inland-navigation/results.json) retains
+source hashes, synthetic inputs, expected outcomes and native outputs. Independent
+review exposed interactions between channel duties, light and fog-signal modes,
+and passage agreement. Regression cases now reject those contradictions and
+prevent external review assertions from overriding failed native checks.
+
+This supports using SysML for conditional duties and equipment checks. It does
+not select a sensor installation or establish physical compliance. The
+[coverage register](../experiments/inland-navigation/COVERAGE.md) distinguishes
+implemented conditions from remaining interpretation, clause detail and physical
+evidence. The [encounter method](encounter-feasibility.md#check-navigation-duties-as-well-as-clearance)
+describes the next integration: consistent observations and feasible maneuvers,
+followed by end-to-end mission replay. Production traffic guidance is unchanged.
+
 ### Evidence through each iteration
 
 For me, fidelity means representing the effects that matter to a decision with enough accuracy. Traceability means being able to explain which mission obligation, design, assumptions and evidence produced the conclusion. A more detailed model can strengthen one part of that chain while exposing a weakness in another.
