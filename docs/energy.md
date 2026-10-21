@@ -32,7 +32,7 @@ Capacity, departure and remaining-energy rows are successive account states, not
 
 The 4.5 W base electronics allocation and additional 8 W sensing/compute target must become a measured installation budget. Acquisition, processing, communications, cooling and conversion all count. If a shared processor replaces an existing controller, I subtract the replaced load once before adding the complete new installation.
 
-The [physical sensing comparison](reference/sensing-configurations.md) now gives
+The [physical sensing comparison](reference/sensing-configurations.md) gives
 that reconciliation specific hardware. Four high-resolution cameras draw a
 quoted 10–12 W for streaming alone; three wider global-shutter cameras draw
 7.5–9 W. Host processing, AIS, conversion and protective installation remain

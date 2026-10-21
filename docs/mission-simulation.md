@@ -6,7 +6,7 @@ What happens when the boat meets changing wind, traffic or a fault? The simulati
 
 The simulator supports conceptual configurations and named sizing candidates. The integration candidate IC-01 supplies its own solved sailing states, electrical demand, battery capacity and swept dimensions. Its sensing load and recovery equipment mass enter that same sizing calculation. Keeping the course and scenario logic separate lets me increase vessel fidelity while rerunning the same seeds.
 
-The [development spirals](simulation-spirals.md) explain how these capabilities grow together and how each experiment guides the next addition to fidelity.
+The [simulation studies and their limits](simulation-studies.md) identify the configuration, assumptions and engineering questions covered by each study.
 
 The [encounter-feasibility study](encounter-feasibility.md) supplies explicit detection range, misses, latency, position error, track expiry and dropout behavior to guidance, while independent truth scores collisions and clearance. It compares sensing hypotheses with energy and casualty outcomes. Perfect observations remain an explicit baseline for older campaigns. These virtual results do not qualify a camera, AIS, acoustic or radar implementation.
 
@@ -20,7 +20,7 @@ The capsize case has two distinct observations: safety functions remain availabl
 
 A decision trace records the facts presented to the supervisor and what it decided. The [runtime reference](reference/model-runtime.md#mission-actions-and-records) explains how those records are generated.
 
-The native policy owns sailing, gate-scoring and harvest permissions as well as persistent qualification loss. A navigation outage inhibits sailing; continuing to retain qualification requires an explicit confirmation that the required safety functions remain available. Each supplied safety-loss observation is latched before a later observation can restore availability, including when events share a timestamp. Communications loss alone leaves safe autonomous operation available. Reaching the protected reserve threshold requests a safety abort in every simulation mode; choosing whether to continue the trajectory afterward changes the simulated exposure, not the qualification decision.
+The native policy owns sailing, gate-scoring and harvest permissions as well as persistent qualification loss. A navigation outage inhibits sailing; retaining qualification requires explicit confirmation that the required safety functions remain available. A reported loss of a required safety capability ends qualification for the attempt, even if another observation at the same time reports restored availability. Communications loss alone leaves safe autonomous operation available. Reaching the protected reserve threshold requests a safety abort in every simulation mode; choosing whether to continue the trajectory afterward changes the simulated exposure, not the qualification decision.
 
 The [named IC-01 demonstration](reference/model-runtime.md#run-the-named-integration-candidate) exercises these combinations and passes native recovery-energy results into the recovery policy. The three illustrative routes distinguish enough reserve, a feasible route with insufficient inverted reserve, and current that removes upstream recovery authority. Their supplied observations and simplified propulsion assumptions are explicit; none establishes a measured recovery envelope.
 
@@ -104,8 +104,8 @@ replaced with an assumed completion time. This makes occupied-maneuver arrivals
 an explicit input to the [encounter timing analysis](reference/encounter-envelope.md).
 
 The coefficients are hypotheses, and the component study is separate from the
-archived IC-01 campaign. Guidance still forecasts kinematic motion and powered
-recovery still follows its earlier point-mass model. The new capability helps
+archived IC-01 campaign. Guidance forecasts kinematic motion and powered
+recovery uses a point-mass model. The bounded maneuver calculation helps
 identify which maneuver measurements matter; it does not establish safe paths
 for an installed boat.
 
@@ -117,7 +117,7 @@ The electrical configuration uses candidate storage, usable fraction, departure 
 
 ## Navigation duties in the local replay
 
-An opt-in rule assessment now filters primary sailing candidates using delivered
+An opt-in rule assessment filters primary sailing candidates using delivered
 observations. It retains overtaking duties when a track disappears and distinguishes
 holding course, optional action and mandatory action. Missing applicable assessments
 can request abort. The paired replay gives every mode the same heading choices and
@@ -128,7 +128,7 @@ This integration uses the archived kinematic maneuver representation. It cannot
 yet be combined with the bounded maneuver model above. Its accepted context is
 clear visibility outside an applicable narrow channel; other contexts fail an
 explicit scope gate. Equipment, signal exchange and powered-recovery rule control
-remain separate. The [paired IC-01 results](encounter-feasibility.md#what-changed-in-the-ic-01-replay)
+remain separate. The [paired IC-01 results](encounter-feasibility.md#navigation-assessments-in-the-ic-01-replay)
 show earlier refusal under missing assessments, without a demonstrated change to
 accepted steering choices or sizing.
 
@@ -154,9 +154,9 @@ The wave solver calculates heave, roll and pitch response, then averages sailing
 
 The archived 1.4 m study accepted 32 operating cases in 0.04 m, 3 s regular waves. Its four voyage replays requested much larger waves and stopped at departure outside the saved coverage. No passage time was obtained for those cases. The [wave study and records](reference/environmental-replays.md#wave-averaged-sailing-performance) retain the solver assumptions, numerical checks and evidence needed to extend that calculation responsibly.
 
-## What the earlier voyages established
+## Configuration-specific voyage results
 
-The original 32-run conceptual-vessel campaign completed 28 courses, with three numerical-horizon stops and one unresolved maneuver. It exposed a local rounding limitation, but its load and sailing assumptions did not represent IC-01. The [original campaign record](reference/original-mission-campaign.md) preserves those counts and its 65.786 km course revision. The [development history](simulation-spirals.md) connects it to later experiments; counts from different vessels and course revisions are separate evidence.
+The 32-run conceptual-vessel campaign completed 28 courses, with three numerical-horizon stops and one unresolved maneuver. Its load and sailing assumptions apply to that conceptual vessel. The [campaign record](reference/original-mission-campaign.md) preserves those counts and its 65.786 km course revision. The [simulation study guide](simulation-studies.md) identifies the scope of this and the IC-01 studies. Counts from different vessels and course revisions are separate evidence.
 
 ## Increasing fidelity without changing the question
 
@@ -173,6 +173,6 @@ The course and scenario contracts stay identifiable through these changes. Virtu
 
 Reproduction commands, source records and campaign settings are in the [runtime reference](reference/model-runtime.md#reproducing-mission-campaigns). I use the recorded failures and coverage gaps to decide which behavior needs better evidence next.
 
-The current [class-specific observation allocation](reference/encounter-envelope.md) separates response geometry from observation reliability and contact consequences. Archived mission campaigns keep their original target grouping and acquisition assumptions; they do not validate the new kayak, stand-up paddleboard, person-in-water and unoccupied-craft distinctions. Future scenarios must preserve those distinctions and uncertain occupancy when scoring misses and consequences.
+The [class-specific observation allocation](reference/encounter-envelope.md) separates response geometry from observation reliability and contact consequences. Archived mission campaigns use their recorded target grouping and acquisition assumptions; they do not validate the kayak, stand-up paddleboard, person-in-water and unoccupied-craft distinctions. Scenarios assessing those targets need to preserve their distinctions and uncertain occupancy when scoring misses and consequences.
 
 **Next:** [Passage time, reliability and failure analysis](reliability.md) · [Series guide](index.md)

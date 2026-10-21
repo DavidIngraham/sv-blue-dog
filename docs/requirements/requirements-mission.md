@@ -145,7 +145,7 @@ package Page_mission_1 {
 
 ## Mission reliability
 
-The reliability target is a design objective to investigate through exposure and failure mechanisms. Synthetic completion fractions do not establish its real-world value.
+I use L-101 and L-102 as provisional study objectives for mission success probability and combined failure rate. They do not set launch or mission-acceptance thresholds. L-103 requires evidence for the reliability estimate, and L-104 requires a disposition for critical failures and residual risk. Synthetic completion fractions do not establish real-world reliability.
 
 <details>
 <summary>Model relationships and authoritative requirement statements</summary>

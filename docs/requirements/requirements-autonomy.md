@@ -133,7 +133,7 @@ package Page_autonomy_4 {
 
 </details>
 
-The [sensor budget](../energy.md#wind-sensing-configurations) identifies the wired mission installation. The earlier Bluetooth testbed configuration is historical.
+The [sensor budget](../energy.md#wind-sensing-configurations) identifies the wired mission installation and its electrical demand.
 
 ## Fault recovery and mission evidence
 

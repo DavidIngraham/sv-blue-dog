@@ -2,15 +2,15 @@
 
 **OOSEM:** Trades, optimization and analysis · [Current assessment](current-assessment.md)
 
-**IC-01 is the working basis for my first physical boat.** I expect to refine it before construction. Its purpose is to carry sensing, guidance, sailing energy and independent recovery together, rather than size a sailing hull first and add those functions later. Its [allocation](../models/analyses/integrated-candidate.sysml) includes sensing/compute demand and recovery equipment in a fresh coupled evaluation. The [virtual acceptance requirement](current-assessment.md#integration-milestone) combines those sizing results with representative mission and casualty simulations. It does not select catalog hardware or establish physical qualification.
+**IC-01 is the working basis for my first physical boat.** I expect to refine it before construction. Its purpose is to carry sensing, guidance, sailing energy and independent recovery together, rather than size a sailing hull first and add those functions later. Its [allocation](../models/analyses/integrated-candidate.sysml) includes sensing/compute demand and recovery equipment in a fresh coupled evaluation. The [virtual acceptance requirement](current-assessment.md#integrated-simulation-evidence) combines those sizing results with representative mission and casualty simulations. It does not select catalog hardware or establish physical qualification.
 
-The [navigation-rule replay](encounter-feasibility.md#what-changed-in-the-ic-01-replay)
+The [navigation-rule replay](encounter-feasibility.md#navigation-assessments-in-the-ic-01-replay)
 uses this configuration unchanged. It produces earlier aborts when encounter
 assessments are missing, with no improvement in completion or accepted steering
 choices. Its small energy reductions come from abandoned attempts, not greater
 endurance. No new hardware load or sizing optimum is inferred from that study.
 
-## Why the boat grew
+## Carry sensing and recovery in the same boat
 
 The earlier 440 Wh reference could satisfy its nominal sailing screen, but left only about 4 Wh beyond the allocated voyage energy. It could not absorb the additional sensing loads I was investigating. IC-01 makes those functions explicit and carries an independent recovery system. Their mass and demand feed back into hull sizing and passage time.
 
@@ -24,7 +24,7 @@ The earlier 440 Wh reference could satisfy its nominal sailing screen, but left 
 | Main energy headroom after allocated reserve | 4 Wh | 102 Wh |
 | Role | Earlier nominal sizing reference | Integrated capability allocation for refinement |
 
-These are separate coupled configurations. The difference is not a measured hardware retrofit or a claim that battery size alone explains the change. IC-01 still needs a selected sensing installation, rig comparison, installation design and physical evidence. The [physical sensing shortlist](reference/sensing-configurations.md) now identifies three primary layouts to investigate, with power, ranging and independent-recovery gaps that may change the next sizing result.
+These are separate coupled configurations. The comparison shows how the allocated functions affect mass, energy and passage time; it does not isolate battery size as the cause or represent a measured hardware retrofit. IC-01 still needs a selected sensing installation, rig comparison, installation design and physical evidence. The [physical sensing shortlist](reference/sensing-configurations.md) identifies three primary layouts to investigate, with power, ranging and independent-recovery gaps that may change the next sizing result.
 
 ## Integrated candidate sizing
 

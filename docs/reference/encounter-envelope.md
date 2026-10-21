@@ -4,12 +4,12 @@
 
 How far away must a hazard be when Blue Dog first has a chance to observe it? The answer depends on more than target speed. The observation has to become a usable track, reach guidance, wait for a decision opportunity and leave enough time for the boat to carry out the response. A maneuver already in progress can make that wait longer.
 
-The current [class-specific allocation](../../models/analyses/class-specific-detection.sysml)
+The [class-specific allocation](../../models/analyses/class-specific-detection.sysml)
 separates the distance needed to respond from the reliability needed to support
-the safety argument. No common 750 m floor remains in that current policy.
-The earlier [response-envelope analysis](../../models/analyses/encounter-envelope.sysml)
-and numerical table below preserve the old allocation for comparison; their
-750 m fields are historical, not current acceptance criteria.
+the safety argument. Each class needs its own supported bounds.
+The [response-envelope experiment](../../models/analyses/encounter-envelope.sysml)
+and numerical table below use 750 m as a comparison threshold; that experiment
+assumption is not a current acceptance criterion.
 
 ## The current allocation has three parts
 
@@ -133,7 +133,7 @@ The current scope includes all twelve classes above. The
 applicable nonimpediment duties and other navigation obligations. Class-specific allocation
 changes how I substantiate the response, not which river users count.
 
-The old six-class review's 750 m distance is now a historical comparison.
+The six-class experiment uses 750 m as its comparison distance, not a current acceptance criterion.
 Numerical assessment and command timing also need a response-time basis.
 Shorter distances are possible where supported motion, observation and reviewed
 clearance allow them; neither an attractive sensor specification nor a presumed
@@ -208,11 +208,10 @@ The historical response-envelope entry points are:
 .tools/develop-23ca2e2f0/sysml models -analysis BlueDogEncounterEnvelope::Summary -json
 ```
 
-The older parameterized result retains `retainedRequirementM`,
-`combinedEnvelopeM` and `fitsRetainedDistance` to reproduce its original
-comparison. Those fields are not the current class-specific policy and must not
-be used to restore a hidden 750 m minimum. `physicalQualification` remains false.
-The new class allocation keeps acceptance and evidence readiness separate from
-the illustrative distance calculation.
+The experiment's parameterized result uses `retainedRequirementM`,
+`combinedEnvelopeM` and `fitsRetainedDistance` for its 750 m comparison.
+Current acceptance uses the class-specific criteria and applicable evidence;
+`physicalQualification` remains false. The class allocation keeps acceptance
+and evidence readiness separate from the illustrative distance calculation.
 
 Next I need synchronized measurements of first detection, usable track delivery, decision opportunity, command delivery and achieved motion. Those records should identify the target extent, relative motion, control state and each clock's starting point. The existing archived criteria and results remain unchanged so that improvements in the response model are compared against an identifiable baseline.

@@ -26,6 +26,6 @@ Finally I will include the installation's sailing drag or windage, rig clearance
 
 Actual propeller data and installed measurements will decide the selection. The [source notes](../models/vehicle/source-evidence.sysml) retain the prior research and comparison rationale; [energy accounting](energy.md) and [recovery analysis](structures-and-recovery.md) explain how that choice affects the rest of the boat.
 
-The [mission development spirals](simulation-spirals.md#carry-recovery-through-the-voyage) connect this component trade to position-dependent recovery authority and energy reserve.
+The [simulation studies](simulation-studies.md#carry-recovery-through-the-voyage) connect this component trade to position-dependent recovery authority and energy reserve.
 
 **Next:** [Seeing hazards early enough to act](encounter-feasibility.md) · [Series guide](index.md)

@@ -1,6 +1,6 @@
-# Earlier sensing and casualty comparison
+# Conceptual sensing and casualty comparison
 
-This reference preserves the conceptual-vessel experiment separately from IC-01. The [development history](../simulation-spirals.md) places it in the sequence of design decisions.
+This experiment uses a conceptual vessel to compare sensing schedules and casualty consequences. The [study guide](../simulation-studies.md) distinguishes its assumptions from IC-01's candidate-specific integration.
 
 ## Continue encounters and casualties to their consequences
 
@@ -10,11 +10,11 @@ The 40 archived runs produce **10 complete courses, four physical terminal event
 
 When no safe command remains, the native supervisor latches abort and chooses available recovery or continued drift. A failed powered attempt also continues into drift. Energy can reach zero without stopping the moving vessel. Independent truth retains clearance violations and scores physical collision; it does not feed an unseen obstacle to guidance. Shore contact is an adverse terminal event, not demonstrated capture. Current-only drift omits windage, wave forcing and capsize dynamics. The point-mass maneuver and heading-search forecast still need correlation against achieved swept motion.
 
-Casualty cases include sensing loss, common-cause steering and power loss, capsize, inadequate recovery energy and adverse current. A synthetic clear-path sensing-loss case exercises reaching the water approach as a positive control. It does not establish an independent backup detector; the preceding [spiral record](../simulation-spirals.md#perception-avoidance-and-recovery-in-one-experiment) retains the obstructed recovery case and its collision. The refinement pair repeats a steering-loss continuation at one- and half-second integration steps; it checks numerical consistency for that trajectory, not all encounter geometries.
+Casualty cases include sensing loss, common-cause steering and power loss, capsize, inadequate recovery energy and adverse current. A synthetic clear-path sensing-loss case exercises reaching the water approach as a positive control. It does not establish an independent backup detector; the [perception study](../../evidence/runs/2026-10-15-encounter-feasibility/manifest.json) includes an obstructed recovery case and its collision. The refinement pair repeats a steering-loss continuation at one- and half-second integration steps; it checks numerical consistency for that trajectory, not all encounter geometries.
 
 The four added-load hypotheses retain their **−157.15, −425.68, −264.56 and −533.09 Wh** voyage headrooms. No installed measurements have replaced them. The [measurement procedure](../validation-plan.md#measure-sensing-and-shared-compute-as-an-installation) records synchronized load and latency, reconciles shared compute and screens a fixed-passage capacity lower bound. Coupled resizing remains dependent on an identified measured installation.
 
-The archive retains source hashes, assumptions, observation and command traces, complete saved trajectories, casualty outcomes and numerical refinement. `python -m tools.boat_analysis.mission.continuation_study` runs the paired comparison; `python -m tools.boat_analysis.mission.integrated --phase all` runs candidate integration. Historical configurations and their original conclusions remain in the [spiral log](../simulation-spirals.md).
+The archive retains source hashes, assumptions, observation and command traces, complete saved trajectories, casualty outcomes and numerical refinement. `python -m tools.boat_analysis.mission.continuation_study` runs the paired comparison; `python -m tools.boat_analysis.mission.integrated --phase all` runs candidate integration.
 
 The [real recovery-site assessment](../site-and-environment-evidence.md#course-and-recovery-decision) remains unresolved. The lateral approach is explicitly synthetic; it does not approve a refuge, beaching point, public access or casualty route. R-001, R-002 and R-005 remain open.
 

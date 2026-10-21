@@ -34,7 +34,7 @@ The [integration study](validation-plan.md#exercise-decisions-before-physical-in
 
 Navigation estimates position and attitude; wind estimation supplies the sailing condition; traffic observation and collision assessment identify conflicts. Guidance chooses a sailing command. Mission supervision decides whether that command may be used, whether a gate crossing can count, and whether an abort has ended the attempt. Energy management supplies the reserve assessment, while recovery management decides how to act after an abort. Recording and communications preserve and expose those decisions.
 
-These are responsibilities, independent of processor or software boundaries. The [logical architecture](../models/vehicle/architecture.sysml) connects them with typed observations, permissions, commands and records. A navigation estimate includes validity and time; a safety observation states what has been confirmed. A missing confirmation cannot become evidence simply because a message arrived.
+These are responsibilities, independent of processor or software boundaries. The [logical architecture](../models/vehicle/architecture.sysml) connects them with typed observations, permissions, commands and records. A navigation estimate includes validity and time; a safety observation explicitly confirms which required capabilities remain available.
 
 ```sysml-view Page_architecture_logical::responsibilities direction=TB
 package Page_architecture_logical {
@@ -45,7 +45,7 @@ package Page_architecture_logical {
 }
 ```
 
-The candidate physical assembly allocates those responsibilities to a primary sailing path and a recovery path with its own battery, navigation, observation, controller and propulsor. It retains the wired wind-sensing installation as a provisional equipment choice. The assembly identifies power and data interfaces without pretending that connectors, bus timing, equipment ratings or common-cause isolation have been resolved. Recording and telemetry power assignment still needs to be reconciled with both energy budgets.
+The candidate physical assembly allocates those responsibilities to a primary sailing path and a recovery path with its own battery, navigation, observation, controller and propulsor. Wired wind sensing is a provisional equipment choice. The assembly identifies power and data interfaces; connectors, bus timing, equipment ratings and common-cause isolation remain open engineering questions. Recording and telemetry power assignment needs to be reconciled with both energy budgets.
 
 ```sysml-view Page_architecture_physical::candidate direction=TB
 package Page_architecture_physical {
@@ -82,7 +82,7 @@ package Page_architecture_0 {
 
 I use OOSEM to work from what the mission needs to what each part of the boat must do. The scenarios below describe interactions that the boat must support. OpenSysML renders these views from the shared model.
 
-The [mission supervisor](mission-simulation.md#executable-supervisory-logic) implements part of these scenarios: it responds to events, permits or inhibits sailing, and remembers an abort so that sailing cannot silently resume. Sensor processing, steering decisions and physical actuation still need their own implementations and tests.
+The [mission supervisor](mission-simulation.md#executable-supervisory-logic) implements part of these scenarios: it responds to events, permits or inhibits sailing, and keeps an abort in effect for the rest of the attempt. Sensor processing, steering decisions and physical actuation need their own implementations and tests.
 
 ### Normal sailing
 
@@ -144,7 +144,7 @@ These responsibilities put estimation and decisions onboard. The wired wind sens
 
 ### Navigation, outages, reserve, launch and maintenance
 
-The same model connects the less visible interactions that make a mission possible. Navigation passes a time-stamped estimate through validity assessment before guidance can use it. A communications outage preserves records onboard and queues alerts for later delivery; losing the shore link does not itself remove autonomous control. Energy management assesses the protected recovery reserve and can request an abort before it is exhausted.
+Navigation passes a time-stamped estimate through validity assessment before guidance can use it. A communications outage preserves records onboard and queues alerts for later delivery; losing the shore link does not itself remove autonomous control. Energy management assesses the protected recovery reserve and can request an abort before it is exhausted.
 
 Before launch, the scenario combines an identified configuration, evidence readiness and the admitted operating conditions into a release decision. Maintenance records the configuration and work performed before a new release. These [typed scenarios](../models/vehicle/method.sysml) describe the necessary exchanges and responsible functions. Their presence does not implement a launcher, maintenance system, sensor estimator or communications protocol. The supervisor and numerical demonstrations execute the bounded decisions identified in the [runtime reference](reference/model-runtime.md#run-the-named-integration-candidate).
 

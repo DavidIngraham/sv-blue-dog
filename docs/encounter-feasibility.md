@@ -6,7 +6,7 @@ Can Blue Dog detect a hazard early enough to avoid it? I first work backward fro
 
 ## Allocate distance and reliability separately
 
-I now allocate observation by target class, encounter geometry and operating condition. First I need enough distance to form a track and complete a feasible response. Reviewed consequence allowances can add clearance and distance margin. Separately, I need evidence that both the observation pipeline and the complete detection-to-maneuver response meet their reviewed reliability criteria. The class-specific method is current; accepted numerical class allocations remain unresolved. A lower consequence does not shorten the physical maneuver, and a longer nominal sensor range does not establish reliable detection.
+I allocate observation by target class, encounter geometry and operating condition. First I need enough distance to form a track and complete a feasible response. Reviewed consequence allowances can add clearance and distance margin. Separately, I need evidence that both the observation pipeline and the complete detection-to-maneuver response meet their reviewed reliability criteria. Accepted numerical class allocations remain unresolved. A lower consequence does not shorten the physical maneuver, and a longer nominal sensor range does not establish reliable detection.
 
 The current allocation distinguishes occupied kayaks, occupied stand-up paddleboards, people in the water and unoccupied craft. A low-energy glancing contact with an intact hull might have limited consequences; that is a conditional hypothesis to investigate, not a harmless label for every encounter with that class. A person could fall, become trapped or be struck by an appendage. Contact angle, relative speed, occupancy and the complete boat geometry matter. No accepted numerical injury, severity or probability limit has been assigned.
 
@@ -70,7 +70,7 @@ unsupported case rather than a finite required range.
 
 ## Wind sports change both motion and occupied space
 
-Windsurfers, wingfoilers and kiters now have separate target classes. I cannot
+Windsurfers, wingfoilers and kiters have separate target classes. I cannot
 assign them the generic sailing-craft illustration's 4 m/s or a paddleboard's
 low-speed assumption. Their speed, turning and visibility need their own
 bounds. A rider who falls becomes a person-in-water case while the board, rig,
@@ -102,7 +102,7 @@ remove the need to handle an unexpected rider.
 I need a complete observation pipeline: acquisition, detection, tracking, range and motion estimation, fusion and timely delivery to guidance. IC-01 allocates 8 W of additional sensing and compute demand to make that choice concrete. Camera count, field of view and frame rate affect both observation coverage and power. Carrier electronics, storage, conversion, cooling and any lens cleaning or heating belong in the installation too. Measure useful observations and battery demand together under the intended workload and temperature.
 
 The [physical configuration comparison](reference/sensing-configurations.md)
-now identifies actual camera, compute and AIS components and distinguishes
+identifies actual camera, compute and AIS components and distinguishes
 continuous coverage from a scanning installation. Their power, mounting and
 backup-sensing gaps feed the next boat-sizing decision. They have no credited
 detection range yet. The abstract range hypotheses below remain historical
@@ -130,7 +130,7 @@ For Blue Dog, compare a hydrophone or compact array as a powered-traffic cue, an
 
 Budget receiver preamplifiers, digitizers, continuous processing and data recording for passive sensing; add transmitter peak demand, ping duty and echo processing for active sonar. Passive means no transmitted acoustic pulse, not zero electrical demand. Measure useful range/bearing and update latency alongside average and peak battery-bus demand. Acoustic cues may direct cameras or strengthen a fused track, but any power-saving schedule must preserve the required detection lead time.
 
-The [physical acoustic comparison](reference/acoustic-sensing.md) now identifies
+The [physical acoustic comparison](reference/acoustic-sensing.md) identifies
 an Aquarian hydrophone array with synchronized acquisition, a Cerulean
 Omniscan 450 FS narrow-beam sonar and a Sonoptix ECHO multibeam sonar. Passive
 listening could cue a powered target; active sonar can range a return from a
@@ -221,7 +221,7 @@ separate obligation even when the pairwise encounter gives Blue Dog a stand-on
 role. The combined assessment also rejects inconsistent vessel, visibility,
 risk and passage-agreement facts across those checks.
 
-The pair assessment now filters the mission simulator's sailing candidates using
+The pair assessment filters the mission simulator's sailing candidates using
 delivered tracks. An unresolved applicable duty can end the attempt and trigger
 recovery. Holding course and speed, acting permissively and acting mandatorily
 remain distinct responses. Established overtaking duties survive track loss.
@@ -241,15 +241,15 @@ explicit hypotheses about visual identification, vessel status and whether the
 other vessel is responding. A geometric track alone supplies none of those facts.
 
 
-### What changed in the IC-01 replay
+### Navigation assessments in the IC-01 replay
 
 The [17 October paired record](../evidence/runs/2026-10-17-navigation-integration/navigation-integration.json)
 keeps the boat, energy allocation, weather, traffic and observation hypotheses
 from the 29-case IC-01 campaign. Each case runs with geometry-only guidance,
 with missing navigation assessments, and with explicit hypothetical craft
 identification and response assessments. All three use the same heading choices
-and segment-by-segment maneuver forecast. The record separately identifies changes
-from the older geometric controller, so those are not attributed to the rules.
+and segment-by-segment maneuver forecast, isolating the effect of the supplied
+navigation assessments within this comparison.
 
 | Result in the 18 nominal cases | Geometry-only control | Missing assessments | Hypothetical craft assessments |
 | --- | --- | --- | --- |
@@ -296,7 +296,7 @@ The archived 15 October 2026 [IC-01 record](../evidence/runs/2026-10-15-integrat
 
 An abort must lead somewhere. The simulator continues powered recovery or current-driven drift until an approach, physical contact or the declared horizon. Energy exhaustion does not stop the boat moving. Shore contact is an adverse event; reaching a water approach does not establish capture, retention or access for retrieval. Those distinctions make recovery limitations visible rather than counting a stopped simulation as a safe outcome.
 
-The [earlier paired continuation study](reference/encounter-continuation.md) exposed contacts and unresolved drift in a conceptual-vessel comparison. Its 40 runs and four added-load hypotheses belong to that configuration, not IC-01. The [development history](simulation-spirals.md) explains the changes those failures motivated. Current-only drift and point-mass recovery still need measured maneuver, windage and wave behavior before they can support a real recovery decision.
+The [paired continuation study](reference/encounter-continuation.md) records contacts and unresolved drift in a conceptual-vessel comparison. Its 40 runs and four added-load hypotheses belong to that configuration, not IC-01. The [study guide](simulation-studies.md) identifies the configurations and limits behind these results. Current-only drift and point-mass recovery still need measured maneuver, windage and wave behavior before they can support a real recovery decision.
 
 ## Measurements that could change the choice
 

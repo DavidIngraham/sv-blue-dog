@@ -31,13 +31,13 @@ The recovery comparison must use each rig's actual mass, center of gravity and f
 
 The candidate definitions and gate logic live in the [trade model](../models/analyses/sail-trade.sysml). The [design decisions](../models/vehicle/decisions.sysml) explain the baseline used for sizing. [Source evidence](../models/vehicle/source-evidence.sysml) preserves the prior-art findings and their limits, including the square-sail precedent, Oshen PC13, tail control and non-backdrivable gearing.
 
-The [mission development spirals](simulation-spirals.md#develop-the-trades-alongside-the-voyage) show how this open rig comparison supplies working candidates and how voyage-level consequences guide the next experiments.
+The [simulation studies](simulation-studies.md#compare-the-open-trades-on-common-terms) connect each working rig candidate to its voyage-level consequences and the evidence needed for comparison.
 
-## What changed my sizing assumptions
+## Aerodynamic evidence and sizing assumptions
 
 The existing numerical evidence covers only the fixed-camber wing. OpenVSP provides the geometry and its VSPAERO solver estimates aerodynamic loads. No equivalent tail-controlled-wing or soft-sail dataset is included, so these runs support that one sizing hypothesis rather than rank the three rigs.
 
-Two findings changed the sizing assumptions: the numerical mesh affects the predicted loads, and heel changes local airflow in ways a single cosine correction misses. I therefore tightened operating angles and reduced the performance credited in primary sizing. Physical measurements are needed to replace those judgments. Published [crescent-wing research](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) includes wind-tunnel comparisons, but uses different section geometry and test conditions; it cannot supply validated coefficients for this CAD.
+The numerical mesh affects predicted loads, and heel changes the local airflow across the wing. Primary sizing therefore uses bounded operating angles and conservative aerodynamic coefficients. Physical measurements are needed to establish those bounds. Published [crescent-wing research](https://research.chalmers.se/publication/543872/file/543872_Fulltext.pdf) includes wind-tunnel comparisons, but uses different section geometry and test conditions; it cannot supply validated coefficients for this CAD.
 
 ![Reference alpha sweeps showing lift and pitching moment at three mesh settings.](https://davidingraham.github.io/sv-blue-dog/assets/vsp/reference-sweeps.svg)
 

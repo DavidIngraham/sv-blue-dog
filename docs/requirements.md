@@ -16,15 +16,14 @@ The challenge also encourages routes and operating windows that reduce traffic e
 ## Which requirements can the sensing study challenge?
 
 Avoiding collision and meeting applicable navigation duties remain mission obligations. Observation
-distance is now allocated by target class, encounter geometry, uncertainty and
-achievable response, rather than a common 750 m for every target. The older
-750 m studies retain that assumption as historical evidence.
+distance depends on target class, encounter geometry, uncertainty and
+achievable response.
 
 I keep two questions separate: **how much distance does the response need**, and
 **how reliably must the installation provide a usable observation**? Consequences inform reviewed clearance and extra distance margins as well as
 observation reliability; exposure also informs reliability and admissible
 conditions. None can reduce the physical response time or maneuver distance.
-The method is adopted, but accepted numerical class allocations remain unresolved.
+Accepted numerical class allocations remain unresolved.
 Occupied kayaks, occupied stand-up paddleboards, people in the water and
 unoccupied craft are distinct cases. A potentially minor glancing contact is a
 specific hypothesis, not a zero-consequence classification.
@@ -49,6 +48,6 @@ remain in scope; acoustic and optical choices must expose their unsupported case
 
 Each reference starts with the design consequence, then offers expandable model views and authoritative statements. Repeated upstream requirements remain visible in the diagrams; their statements appear only at their first occurrence on each page. In a view, arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision and **dependency** records a design basis. These relationships explain why a requirement exists; evidence must separately establish whether a configuration meets it. The [modeling reference](methods/modeling.md) explains the notation and the distinction between requirements and provisional design assumptions.
 
-These obligations now have to fit in one boat. The next article shows why carrying sensing and independent recovery changed the candidate's mass and battery budget.
+These obligations have to fit in one boat. The next article examines the mass and energy needed for sensing, sailing and independent recovery in IC-01.
 
 **Next:** [IC-01 candidate results](results.md) · [Series guide](index.md)

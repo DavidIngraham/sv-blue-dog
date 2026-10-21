@@ -4,11 +4,11 @@
 
 Which measurements could change the boat I build? IC-01 gives me a specific geometry, load budget and recovery architecture to challenge. I will start with experiments that could force a different sensor, propulsion system, rig or structure, then integrate the supported choices into the first boat.
 
-## What coverage means
+## What I need to establish
 
-The [requirements audit](reference/oosem-requirements-audit.md) accounts for all 251 governing statements: 237 current requirements, two provisional reliability study objectives and 12 future statements. Every current statement has a direct verification objective, including grouped plans for overall mission acceptance, environmental survival and hybrid construction. Seven future statements still lack objectives and remain outside current Gorge acceptance.
+I organize verification around the [current Gorge obligations](requirements.md): mission qualification, safe autonomous operation, usable energy and recovery reserve, environmental survival, construction and handling. The model identifies 237 current requirements and two provisional reliability study objectives, each with a verification objective. The 12 future statements concern separate missions and do not set acceptance criteria for the Gorge boat. Their procedures depend on the conditions and configurations selected for those missions.
 
-A defined objective says what must be assessed. A procedure says how to collect the evidence. An executable predicate evaluates supplied inputs; an analysis or simulation supplies evidence within its validity domain. Physical testing establishes what an identified installation actually does. Acceptance needs the applicable evidence and a review of its adequacy; counting links cannot provide it. The [native audit command](reference/model-runtime.md#run-the-named-integration-candidate) reports coverage without assigning accepted verdicts, while the existing executable plans return inconclusive when required evidence is absent.
+A defined objective says what must be assessed. A procedure says how to collect the evidence. An executable predicate evaluates supplied inputs; an analysis or simulation supplies evidence within its validity domain. Physical testing establishes what an identified installation actually does. I can accept a claim only when the evidence addresses its criterion and conditions. The planned cases remain inconclusive when that evidence is absent; a simulation pass does not establish physical qualification.
 
 ## Navigation-rule entry review and adjudication
 
@@ -44,7 +44,7 @@ Before each experiment I will record the configuration, predicted result, uncert
 
 ## Exercise decisions before physical integration
 
-IC-01 already passes a [bounded set of local integration cases](encounter-feasibility.md#close-the-candidate-loop), using its own mass, sailing performance, electrical demand and independent recovery allocation. The [acceptance requirement](../models/analyses/integrated-candidate.sysml) requires those capabilities to work together. Safe abort remains distinct from course completion, and a modeled recovery approach remains distinct from physical shore retention.
+IC-01 passes a [bounded set of local integration cases](encounter-feasibility.md#close-the-candidate-loop), using its own mass, sailing performance, electrical demand and independent recovery allocation. The [acceptance requirement](../models/analyses/integrated-candidate.sysml) requires those capabilities to work together. Safe abort remains distinct from course completion, and a modeled recovery approach remains distinct from physical shore retention.
 
 <details>
 <summary>Which integration assumptions each physical test must establish</summary>
@@ -67,39 +67,39 @@ I will also replay recorded observations and injected faults through the mission
 ## Measure sensing and shared compute as an installation
 
 The [physical shortlist](reference/sensing-configurations.md) supplies two fixed
-camera layouts and a scanning comparison. Start by checking whether each camera
+camera layouts and a scanning comparison. I will first check whether each camera
 can support detection and metric range/motion estimation against independent
 target truth. Useful image resolution alone does not establish a usable track.
-Then measure the complete sensor and compute installation at the regulated bus,
-including acquisition, processing and thermal behavior. Record the hardware and
+I will then measure the complete sensor and compute installation at the regulated bus,
+including acquisition, processing and thermal behavior. I will record the hardware and
 software revision, instruments, clock basis and operating conditions so the
 electrical and observation results describe the same installation.
 
-Pair detections and misses with independently observed targets and synchronized power and command timestamps. Keep occupied kayaks, occupied stand-up paddleboards, people in the water and unoccupied craft separate, including uncertain occupancy. Separate range, target class, lighting and obscuration: an average can hide the conditions that determine whether the boat can operate. Keep some encounters out of calibration so they can test the resulting model independently.
+I will pair detections and misses with independently observed targets and synchronized power and command timestamps. I will keep occupied kayaks, occupied stand-up paddleboards, people in the water and unoccupied craft separate, including uncertain occupancy. Results must distinguish range, target class, lighting and obscuration: an average can hide the conditions that determine whether the boat can operate. Held-out encounters will test the calibrated model independently.
 
-Measure whether a usable track arrives before the class-specific response distance is consumed, separately from how much maneuver distance is needed. Also measure the complete avoidance response: reliable detection cannot compensate for unreliable steering or an obstructed escape path. Consequence studies must identify ownship mass and speed, relative motion, contact geometry and exposed people. A computed contact energy is not an injury model; neither a glancing-contact hypothesis nor a successful avoidance trial supplies an accepted severity or probability threshold.
+I will measure whether a usable track arrives before the class-specific response distance is consumed, separately from how much maneuver distance is needed. I also need the complete avoidance response: reliable detection cannot compensate for unreliable steering or an obstructed escape path. Consequence studies must identify ownship mass and speed, relative motion, contact geometry and exposed people. A computed contact energy is not an injury model; neither a glancing-contact hypothesis nor a successful avoidance trial supplies an accepted severity or probability threshold.
 
 Latency statistics cover delivered detections; missed targets must remain visible separately. An observed electrical peak is limited by instrument bandwidth and sampling. The [measurement reference](reference/sensing-measurements.md) defines the records and accounts for any base electronics load replaced by shared compute. No installed dataset has yet established these capabilities.
 
 The [response envelope](reference/encounter-envelope.md) identifies the clock
 boundaries to measure, including a target arriving during an occupied maneuver.
 The [maneuver study](reference/maneuver-dynamics.md) identifies heading, speed
-and swept path as separate observables. Repeat across tacks, gybes, low
-water-relative speeds and degraded steering; retain unfinished responses as
-failures to establish a bound. These measurements will replace the provisional
+and swept path as separate observables. I will repeat the measurements across
+tacks, gybes, low water-relative speeds and degraded steering, retaining
+unfinished responses as failures to establish a bound. These measurements will replace the provisional
 coefficients before they support a physical operating envelope.
 
 ## Integrate in bounded steps
 
-First establish individual sensors, actuators and electrical behavior on the bench. Then exercise integrated state transitions and faults, including unavailable communications, loss of safety capability and the transition from a qualifying attempt to recovery. Follow with controlled flotation and recovery trials, then short local-water missions before extending the operating envelope.
+I will establish individual sensors, actuators and electrical behavior on the bench, then exercise integrated state transitions and faults. Those cases include unavailable communications, loss of safety capability and the transition from a qualifying attempt to recovery. Controlled flotation and recovery trials will precede short local-water missions; I will extend the operating envelope only with supporting evidence.
 
 Evidence transferred from a fixture must identify which geometry, hardware and conditions still apply to the assembled boat. Controlled capsize trials must measure both recovery and the safety functions needed during it.
 
-## Update maturity from each experiment
+## Compare predictions with measurements
 
-Before each water trial, connect the objective to its verification case, identify the actual test article and instrumentation, and check conditions, boundaries, shore retrieval and emergency response. Choose a bounded scope that can answer the question with the available equipment and recovery arrangements.
+Before each water trial, I will identify the verification objective, test article and instrumentation, and check conditions, boundaries, shore retrieval and emergency response. The trial must answer a bounded question with the available equipment and recovery arrangements.
 
-Afterward, compare measurements with predictions, retain failures and censored observations, and update the model's validity limits. Use the result to choose repetition, redesign or a wider trial, and update the affected requirements, design assumptions and evidence assessment.
+I will compare measurements with predictions and retain failures and incomplete observations. The differences will define where the model is useful and whether I need another experiment, a different design or a wider trial.
 
 See the [current assessment](current-assessment.md#reading-the-evidence) for the update method and the [modeling method](methods/modeling.md) for the evidence links.
 
@@ -115,9 +115,9 @@ passes alone cannot demonstrate the admitted capability.
 
 `LocationTrafficAdmissionVerification` checks the
 [sector and arrival-window assessment](site-and-environment-evidence.md#traffic-risk-by-location-and-arrival-window)
-on both legs and recovery routes. Include a quiet departure with a busy delayed
-return, missing background coverage, wind/visibility changes and a recovery
-approach that becomes occupied. Both cases remain inconclusive. Software tests
+on both legs and recovery routes. I will test a quiet departure with a busy
+delayed return, missing background coverage, wind/visibility changes and a
+recovery approach that becomes occupied. Both cases remain inconclusive. Software tests
 of the exposure arithmetic do not verify observed traffic or authorize launch.
 
 **Next:** [Current assessment and next investigations](current-assessment.md) · [Series guide](index.md)

@@ -48,7 +48,7 @@ The [mission supervisor](../mission-simulation.md#executable-supervisory-logic) 
 
 For example, a loss of communications can coexist with continued autonomous sailing, while a safety abort queues its alert and proceeds toward recovery. Regression scenarios check these distinctions, including the persistence of an abort after observations recover. A separate model calculation classifies the observed mission outcome. Behavioral execution and outcome assessment answer different questions, and neither supplies the physical evidence for an installed controller.
 
-The [development spirals](../simulation-spirals.md) place this behavior alongside the growth in vessel and environmental fidelity.
+The [simulation studies and their limits](../simulation-studies.md) describe the vessel, environment and behavior assumptions used in each assessment.
 
 ## Running and reading the model
 
@@ -70,9 +70,9 @@ records, generated interfaces and numerical execution.
 
 The architecture uses the pinned [OpenSysML OOSEM library](https://github.com/DavidIngraham/OpenSysML/blob/23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2/docs/project/oosem-library.md) for system context, actors, logical responsibilities, hardware, nodes and logical scenarios. This is an OpenSysML method library expressed in SysML, not a separate Blue Dog workflow engine. The [method model](../../models/vehicle/method.sysml) holds package classifications, scenario refinements and allocations; diagrams import that model through native `LogicalScenarioView` definitions.
 
-When developing a function, connect its use case to a logical scenario, allocate its actions to responsibilities, then refine the physical realization and its verification evidence. Typed items describe information crossing action boundaries. Model links identify intended scope; they do not claim that a simulation already implements every linked behavior.
+I connect each function's use case to a logical scenario, allocate its actions to responsibilities, then describe the candidate physical realization and its verification evidence. Typed items describe information crossing action boundaries. Model links identify intended scope; the executable subset is described separately from behavior awaiting implementation.
 
-Requirements packages carry OOSEM roles. Individual requirements retain their existing derivation, refinement and owner-constraint semantics. I do not apply a blanket requirement-level classification: the pinned library's direct parent-level derivation checks do not express every same-level decomposition or independent owner constraint in this project. Adding an artificial derivation to silence a method warning would weaken traceability.
+Requirements packages carry OOSEM roles. Individual requirements express derivation, refinement and independent owner constraints through their relationships. I classify requirements at package level because the pinned library's direct parent-level derivation checks do not cover every same-level decomposition or independent owner constraint used here.
 
 
 ## Reusing failure-analysis views

@@ -149,7 +149,7 @@ The [13 October desktop assessment](../evidence/runs/2026-10-13-srr-readiness/sr
 
 The associated [32-run conceptual mission campaign](../evidence/runs/2026-10-13-srr-readiness/srr-mission-campaign.json) records 18 completions, 13 incomplete runs and one computational-horizon stop. It uses a separately identified conceptual vessel, not a performance replay of the 440 Wh sizing reference. Those counts differ from earlier campaigns because the course and scenario records differ; they are not estimates of measured completion probability.
 
-The [15 October IC-01 integration record](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json) instead uses candidate-specific performance, energy and independent recovery allocations in bounded local cases. It records ten completed courses, eight safe aborted encounter approaches and six casualty/end-of-exposure recovery approaches. These synthetic approaches do not qualify the real sites listed above. The [current assessment](current-assessment.md#integration-milestone) explains the resulting integration claim.
+The [15 October IC-01 integration record](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json) instead uses candidate-specific performance, energy and independent recovery allocations in bounded local cases. It records ten completed courses, eight safe aborted encounter approaches and six casualty/end-of-exposure recovery approaches. These synthetic approaches do not qualify the real sites listed above. The [current assessment](current-assessment.md#integrated-simulation-evidence) explains the resulting integration claim.
 
 <a id="review-actions"></a>
 ## Evidence and next investigations

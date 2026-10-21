@@ -12,7 +12,7 @@ Blue Dog is my attempt to build a small boat that can sail a Columbia River Gorg
 | 2 | [Mission and architecture](architecture.md) | What must the boat do, and which functions make it possible? |
 | 3 | [Operating conditions](operating-constraints.md) | What does the Gorge demand of it? |
 | 4 | [Requirements](requirements.md) | Which obligations govern the design and a qualifying attempt? |
-| 5 | [Candidate results](results.md) | Why is IC-01 heavier than the earlier sizing reference? |
+| 5 | [Candidate results](results.md) | How do sensing, sailing and recovery fit in IC-01? |
 | 6 | [Sizing method](sizing.md) | How do geometry, performance and energy constrain each other? |
 | 7 | [Rig comparison](sail-trade.md) | How should I compare soft sail and rigid-wing alternatives? |
 | 8 | [Construction and recovery](structures-and-recovery.md) | Can I build it and retain its safety functions after an upset? |
@@ -26,7 +26,7 @@ Blue Dog is my attempt to build a small boat that can sail a Columbia River Gorg
 ## Follow the evidence
 
 - [Current assessment](current-assessment.md): evidence, open risks and next investigations.
-- [Development history](simulation-spirals.md): how the analyses developed, with each result tied to its original configuration.
+- [Simulation studies](simulation-studies.md): the questions, configurations, assumptions and limits behind the results.
 - [Site and environment evidence](site-and-environment-evidence.md): course, bridge, recovery approaches and environmental assumptions.
 - [Reading the model](methods/modeling.md): how requirements, assumptions, decisions and evidence connect.
 - [Contributor guide](reference/authoring.md): build the articles and reproduce their model views.
