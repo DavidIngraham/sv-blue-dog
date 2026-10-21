@@ -1,6 +1,6 @@
 # What the evidence supports, and what I need to learn next
 
-**Assessment: 17 October 2026** · [Candidate results](results.md) · [Development history](simulation-spirals.md)
+**Assessment: 20 October 2026** · [Candidate results](results.md) · [Development history](simulation-spirals.md)
 
 I intend to refine IC-01 into the first physical boat. The project has a connected mission model and a candidate that works across bounded simulations; the next step is to replace consequential assumptions with measurements and compatible hardware choices.
 
@@ -11,9 +11,9 @@ The rows follow the Object-Oriented Systems Engineering Method (OOSEM): mission,
 | Area | What I can use now | Next evidence that could change a decision |
 | --- | --- | --- |
 | Mission and operating context | An explicit Bingen–Stevenson round trip, independent control, traffic obligations and a distinction between qualification and recovery. | Survey the launch and recovery approaches; resolve actual access, bridge margins and operating boundaries. [Context](architecture.md), [site evidence](site-and-environment-evidence.md) |
-| Requirements and scenarios | Linked obligations, owner constraints, verification cases and scenarios for sailing, encounters and recovery. | Challenge them with adverse and held-out cases; give each important obligation an observable test. [Requirements](requirements.md) |
-| Logical architecture | Executable event handling, sailing permission, abort persistence and recovery-versus-drift decisions; explicit occupied-response timing. | Exercise dynamically achieved turns with arriving hazards, backup startup and obstructed recovery routes. [Mission execution](mission-simulation.md) |
-| Physical architecture | IC-01 allocates geometry, sensing demand, equipment mass and independently powered recovery together; three primary sensing layouts identify specific components. | Resolve ranging and independent recovery observation; reconcile installed mass, thermal behavior, electrical demand and fault isolation. [Candidate](results.md), [sensing layouts](reference/sensing-configurations.md) |
+| Requirements and scenarios | All 237 current requirements and two provisional study objectives have defined verification objectives; 12 future statements have separate applicability. Typed scenarios cover sailing, navigation, encounters, outages, reserve protection, capsize, recovery, launch and maintenance. | Supply the procedures, measurements and acceptance judgments behind those plans; resolve seven future verification omissions when their mission scope is developed. [Requirements audit](reference/oosem-requirements-audit.md) |
+| Logical architecture | Implementation-independent functions exchange typed observations, permissions, commands and records. Native supervision retains qualification loss across righting, restored navigation and communications recovery. | Exercise dynamically achieved turns with arriving hazards, backup startup and obstructed recovery routes; implement the descriptive scenario steps. [Architecture](architecture.md), [mission execution](mission-simulation.md) |
+| Physical architecture | A provisional IC-01 assembly allocates the functions to separate main and recovery paths with explicit data and power interfaces. Its named model configuration owns the complete 29-property sizing design. | Resolve ranging and independent recovery observation; reconcile recording/telemetry supply, installed mass, thermal behavior, electrical demand and fault isolation. [Candidate](results.md), [sensing layouts](reference/sensing-configurations.md) |
 | Trades and analysis | Coupled sizing, three open rig concepts, energy accounting and bounded recovery/encounter studies. | Correlate aerodynamic, structural, maneuvering and recovery assumptions with measurements, then compare alternatives on the same cases. [Sizing](sizing.md), [rig trade](sail-trade.md) |
 | Physical verification and model validation | Planned cases identify the claims to test; software checks establish behavior in supplied cases. | Obtain component and integrated measurements for an identified configuration. No completed physical qualification is claimed. [Evidence plan](validation-plan.md) |
 
@@ -179,6 +179,6 @@ A measured component result transfers to IC-01 only when its installation and co
 <a id="model-credibility"></a>
 ### Model credibility
 
-[Modeling methods](methods/modeling.md) explain how requirements, assumptions, calculations and evidence stay connected. Dedicated stakeholder and complete architecture views remain unfinished; drawing them does not substitute for the missing engineering evidence.
+[Modeling methods](methods/modeling.md) explain how requirements, assumptions, calculations and evidence stay connected. Dedicated stakeholder views and detailed physical interface definitions remain unfinished; drawing them does not substitute for the missing engineering evidence.
 
 </details>

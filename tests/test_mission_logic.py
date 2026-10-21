@@ -114,3 +114,103 @@ def test_righting_without_safety_confirmation_aborts():
 def test_righting_without_capsize_is_invalid():
     with pytest.raises(ValueError, match='preceding capsize'):
         simulate(*fixture(), events=[Event(0, 'unassisted_righting', required_safety_confirmed=True)])
+
+
+def test_inverted_permissions_are_native_and_fail_closed():
+    safe = MissionLogic().cycle(0, capsized=True, safety_confirmed=True)
+    assert safe['mode'] == 'capsized_drift'
+    assert not safe['sailingPermitted']
+    assert not safe['gateScoringPermitted']
+    assert not safe['harvestPermitted']
+    assert not safe['qualificationLostNext']
+    missing = MissionLogic().cycle(0, capsized=True)
+    assert missing['abortLatchedNext'] and missing['qualificationLostNext']
+
+
+def test_navigation_degradation_requires_confirmed_backup_safety():
+    logic = MissionLogic()
+    degraded = logic.cycle(0, navigation_valid=False, safety_confirmed=True)
+    assert degraded['mode'] == 'navigation_degraded'
+    assert not degraded['sailingPermitted'] and not degraded['gateScoringPermitted']
+    assert not degraded['qualificationLostNext']
+    assert logic.cycle(1)['sailingPermitted']
+    missing = MissionLogic().cycle(0, navigation_valid=False)
+    assert missing['abortLatchedNext'] and missing['qualificationLostNext']
+
+
+@pytest.mark.parametrize('kind', ['motor_use', 'operator_intervention', 'safety_capability_loss'])
+def test_event_qualification_persists_in_native_adapter_outside_engine(kind):
+    logic = MissionLogic()
+    logic.event(kind, 0)
+    assert logic.qualification_lost
+    assert logic.capsize(1, True, True, True) == 'abort'
+    assert not logic.cycle(2)['sailingPermitted']
+    assert not logic.cycle(3)['gateScoringPermitted']
+    assert not MissionLogic().qualification_lost
+
+
+def test_low_reserve_capsize_and_communications_outage_latch_once():
+    logic = MissionLogic()
+    result = logic.cycle(0, capsized=True, safety_confirmed=True,
+                         reserve_threatened=True, communications_available=False)
+    assert result['mode'] == 'abort_recovery'
+    assert result['alert'] == 'queue'
+    assert result['qualificationLostNext'] and not result['sailingPermitted']
+    assert logic.capsize(1, True, True, True) == 'abort'
+    restored = logic.cycle(2)
+    assert restored['abortLatchedNext'] and restored['alert'] == 'none'
+
+
+def test_safe_capsize_and_navigation_outage_resume_without_hidden_sailing():
+    result = simulate(*fixture(), events=[
+        Event(0, 'communications_loss', 40),
+        Event(0, 'capsize', required_safety_confirmed=True),
+        Event(5, 'navigation_loss', 30, required_safety_confirmed=True),
+        Event(25, 'unassisted_righting', required_safety_confirmed=True)], save_every=1)
+    assert result.outcome == 'qualified_completion'
+    cycles = [row for row in result.logic_trace if row['action'].endswith('SupervisoryCycle')]
+    inverted = [row for row in cycles if row['inputs']['capsized']]
+    assert inverted and all(not row['outputs']['sailingPermitted'] for row in inverted)
+    assert all(not row['outputs']['gateScoringPermitted'] for row in inverted)
+    assert any(row['outputs']['mode'] == 'navigation_degraded' for row in cycles)
+    assert not any(row['outputs']['qualificationLostNext'] for row in cycles)
+    assert all(row['seconds'] >= 35 for row in result.crossings)
+
+
+def test_navigation_loss_without_backup_confirmation_aborts_during_capsize():
+    result = simulate(*fixture(), events=[
+        Event(0, 'communications_loss', 60),
+        Event(0, 'capsize', required_safety_confirmed=True),
+        Event(5, 'navigation_loss', 30)], save_every=1)
+    assert result.outcome == 'disqualified'
+    assert result.cause == 'required_safety_unconfirmed'
+    assert any(event['kind'] == 'abort_alert_queued' for event in result.events)
+    assert not result.crossings
+
+
+@pytest.mark.parametrize('continue_after_abort', [False, True])
+def test_reserve_exhaustion_during_safe_inversion_ends_attempt_with_queued_alert(continue_after_abort):
+    inputs, route, water, gates = fixture()
+    inputs['continueAfterAbort'] = continue_after_abort
+    inputs['time'][1] = .01
+    inputs['energy'][1] = 60.01
+    inputs['energy'][5] = 0
+    result = simulate(inputs, route, water, gates, events=[
+        Event(0, 'communications_loss', 60),
+        Event(0, 'capsize', required_safety_confirmed=True)], save_every=1)
+    assert result.outcome == 'disqualified'
+    assert result.cause == 'course_recovery_reserve_trigger'
+    assert any(event['kind'] == 'abort_alert_queued' for event in result.events)
+    assert not result.crossings
+    assert any(row['inputs'].get('reserveThreatened') for row in result.logic_trace)
+
+
+@pytest.mark.parametrize('unsafe_first', [False, True])
+def test_simultaneous_navigation_observations_cannot_erase_safety_loss(unsafe_first):
+    unsafe = Event(0, 'navigation_loss', 30)
+    safe = Event(0, 'navigation_loss', 5, required_safety_confirmed=True)
+    events = [unsafe, safe] if unsafe_first else [safe, unsafe]
+    result = simulate(*fixture(), events=events)
+    assert result.outcome == 'disqualified'
+    assert result.cause == 'required_safety_unconfirmed'
+    assert any(row['outputs'].get('abortLatchedNext') for row in result.logic_trace)

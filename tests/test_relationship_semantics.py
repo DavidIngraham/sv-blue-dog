@@ -50,7 +50,7 @@ def test_formal_refinements_are_distinct_from_design_dependencies(relationship_r
     ('mission-semantics', {'derive', 'refine', 'satisfy', 'verify'}),
     ('energy-semantics', {'derive', 'refine', 'satisfy', 'verify'}),
     ('cruise-semantics', {'derive', 'satisfy', 'verify'}),
-    ('reliability-semantics', {'derive', 'satisfy', 'verify'}),
+    ('reliability-semantics', {'dependency', 'satisfy', 'verify'}),
     ('manufacturing-semantics', {'satisfy', 'verify'}),
     ('weed-semantics', {'derive', 'satisfy', 'verify'}),
 ])
@@ -133,7 +133,10 @@ def test_construction_views_show_model_basis_and_qualification(rendered_site):
     construction=next(d for d in diagrams if '%% Page_practicality_construction::thread ' in d)
     materials=next(d for d in diagrams if '%% Page_practicality_materials::thread ' in d)
     assert len(re.findall(r'^  n\d+[(\[]',construction,re.M))==4
-    assert construction.count('|"dependency"|')==3
+    assert construction.count('|"dependency"|')==2
+    envelope=next(d for d in diagrams if '%% Page_practicality_printEnvelope::thread ' in d)
+    assert len(re.findall(r'^  n\d+[(\[]',envelope,re.M))==2
+    assert envelope.count('|"refine"|')==1
     assert len(re.findall(r'^  n\d+[(\[]',materials,re.M))==17
     assert materials.count('|"derive"|')>=9
     assert materials.count('|"dependency"|')>=3

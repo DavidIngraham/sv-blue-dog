@@ -30,6 +30,8 @@ class Event:
     # Explicit scenario observation; never inferred from static righting moment.
     # At capsize: safety retained while inverted. At righting: upright and
     # required control/safety restored without propulsion or outside assistance.
+    # At navigation loss: a separately observed backup retains required safety.
+    # A positive duration bounds that outage; zero denotes persistent loss.
     required_safety_confirmed: bool = False
 
 
@@ -165,11 +167,14 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     truth_clearance_violation = False
     safety_abort = False
     awaiting_righting = False
+    capsize_safety_confirmed = False
+    navigation_safety_confirmed = False
     conflict = False
     reserve_protected = True
     traffic_seen = set()
     event_list = sorted(events, key=lambda e:e.seconds)
     event_index, comms_until, sensor_until = 0, -1., -1.
+    navigation_until = -1.
     last_off_line = [position.copy() for _ in range(len(inputs['gateNames']))]
     sequence = list(zip(inputs['gateNames'],inputs['gateDirections']))
     prepare(water)
@@ -208,13 +213,24 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
     def current_at(point, time):
         return direction(route, route.project(Point(point)))*weather.at(time).current_mps
 
-    def abort(cause, capsized=None, recover=True):
+    def supervise(**overrides):
+        observations = dict(wind_valid=seconds >= sensor_until,
+                            navigation_valid=seconds >= navigation_until,
+                            capsized=awaiting_righting, traffic_conflict=conflict,
+                            communications_available=seconds >= comms_until,
+                            safety_confirmed=(not awaiting_righting or capsize_safety_confirmed)
+                            and (seconds >= navigation_until or navigation_safety_confirmed))
+        observations.update(overrides)
+        return logic.cycle(seconds, **observations)
+
+    def abort(cause, capsized=None, recover=True, decision=None, reserve_threatened=False):
         nonlocal safety_abort, recovery_summary, consequence_summary, seconds, stored, position, minimum, distance, recovery_bank
         if capsized is None:
             capsized = awaiting_righting
         from .recovery import execute_recovery
-        decision = logic.cycle(seconds, abort_requested=True,
-                               communications_available=seconds >= comms_until)
+        if decision is None:
+            decision = supervise(abort_requested=not reserve_threatened,
+                                 reserve_threatened=reserve_threatened)
         safety_abort = decision['abortLatchedNext']
         event_log.append({'seconds':seconds, 'kind':'safety_abort', 'cause':cause})
         if decision['alert'] != 'none':
@@ -280,7 +296,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         while event_index < len(event_list) and event_list[event_index].seconds <= seconds:
             event = event_list[event_index]; event_index += 1
             event_log.append({'seconds':seconds,'kind':event.kind})
-            if event.kind in {'capsize', 'unassisted_righting'}:
+            if event.kind in {'capsize', 'unassisted_righting', 'navigation_loss'}:
                 event_log[-1]['requiredSafetyConfirmed'] = event.required_safety_confirmed
             decision = logic.event(event.kind, seconds)
             directive = decision['directive']
@@ -292,6 +308,19 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 pass
             elif directive == 'wind_outage':
                 sensor_until = max(sensor_until, seconds+event.duration)
+            elif directive == 'navigation_outage':
+                if type(event.required_safety_confirmed) is not bool:
+                    raise TypeError('Backup navigation safety observation must be Boolean')
+                navigation_until = max(navigation_until, seconds+event.duration if event.duration > 0 else math.inf)
+                navigation_safety_confirmed = event.required_safety_confirmed
+                command_clock.cancel(seconds,event.kind)
+                heading = None
+                next_control = seconds
+                # Process each observation before another simultaneous event can
+                # replace it. Restored backup status cannot erase observed loss.
+                observation_decision = supervise()
+                if observation_decision['abortLatchedNext']:
+                    return abort('required_safety_unconfirmed', decision=observation_decision)
             elif directive == 'assess_capsize':
                 if type(event.required_safety_confirmed) is not bool:
                     raise TypeError('Capsize safety observation must be Boolean')
@@ -302,6 +331,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 if disposition == 'invalid_observation':
                     raise ValueError('Unassisted righting requires a preceding capsize')
                 awaiting_righting = disposition == 'await_righting'
+                capsize_safety_confirmed = event.required_safety_confirmed
                 # A pre-capsize command must not be applied after recovery.
                 command_clock.cancel(seconds,event.kind)
                 if dynamics is not None:dynamics.speed=0.
@@ -316,6 +346,9 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 return abort(cause, capsized=decision['capsized'] or awaiting_righting, recover=permission)
             elif directive == 'stop':
                 return result('incomplete','terminal_failure')
+        supervisor = supervise()
+        if supervisor['abortLatchedNext']:
+            return abort('required_safety_unconfirmed', decision=supervisor)
         if command_clock.advance(seconds):
             stored-=maneuver_wh;minimum=min(minimum,stored)
         heading=command_clock.heading
@@ -329,11 +362,11 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                 return abort('no_modeled_recovery_route')
             if recovery_bank is None:reserve = plan.reserve_wh
             elif recovery_bank <= plan.reserve_wh+bank_standby*control_period/3600:
-                return abort('independent_recovery_reserve_trigger')
+                return abort('independent_recovery_reserve_trigger', reserve_threatened=True)
             decision_allowance = (load/discharge)*control_period/3600 + maneuver_wh
             if stored <= reserve+decision_allowance:
                 reserve_protected = stored >= reserve
-                return abort('course_recovery_reserve_trigger')
+                return abort('course_recovery_reserve_trigger', reserve_threatened=True)
         if wave_effects is not None:wave_effects.update(seconds,position,current)
         if wave_performance is not None:
             trains=wave_effects.components if wave_effects is not None else []
@@ -357,7 +390,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             load=wave_performance.power
         # The sampled controller has a fixed update period independent of the
         # integration step. Commands and maneuver delay persist between updates.
-        if not awaiting_righting and seconds >= next_control and not command_clock.busy(seconds):
+        if supervisor['mode'] not in {'capsized_drift', 'navigation_degraded'} and seconds >= next_control and not command_clock.busy(seconds):
             progress = leg.project(Point(position))
             target = np.array(leg.interpolate(min(leg.length,progress+lookahead)).coords[0])
             desired = math.degrees(math.atan2(*(target-position)[::-1]))
@@ -372,9 +405,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             wind_angle = 90-state.wind_from_deg
             relative = (headings-wind_angle+180)%360-180
             speeds = sailing_speeds(state.wind_mps,relative)
-            supervisor = logic.cycle(seconds, wind_valid=seconds >= sensor_until,
-                                     traffic_conflict=conflict,
-                                     communications_available=seconds >= comms_until)
+            supervisor = supervise()
             if not supervisor['sailingPermitted']:
                 speeds[:] = 0
             velocities = np.column_stack((np.cos(radians),np.sin(radians)))*speeds[:,None]+current
@@ -420,9 +451,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                     traffic_seen.add(actor_index)
                     event_log.append({'seconds':seconds,'kind':'traffic_conflict_predicted','actor':actor.name,'actor_index':actor_index})
                 permitted &= safe;cost += penalty
-            supervisor = logic.cycle(seconds, wind_valid=seconds >= sensor_until,
-                                     traffic_conflict=conflict,
-                                     communications_available=seconds >= comms_until)
+            supervisor = supervise()
             if 'minimumSailingSpeedMps' in inputs:
                 permitted[:-1] &= speeds>=inputs['minimumSailingSpeedMps']
                 cost[-1] += inputs.get('depowerPenaltyM',0.)
@@ -453,7 +482,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             if command_clock.advance(seconds):
                 stored-=maneuver_wh;minimum=min(minimum,stored)
             heading=command_clock.heading
-        elif (navigation is not None or inputs.get('piecewiseTrafficForecast',False)) and not awaiting_righting and seconds >= next_control:
+        elif (navigation is not None or inputs.get('piecewiseTrafficForecast',False)) and supervisor['mode'] not in {'capsized_drift', 'navigation_degraded'} and seconds >= next_control:
             # Reassess the remaining committed trajectory, not a new turn from
             # the temporarily depowered state. New/changed duties still fail.
             pending=command_clock.pending
@@ -492,7 +521,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         if seconds>=next_control:next_control=seconds+control_period
         if stored < reserve:
             reserve_protected = False
-            return abort('course_recovery_reserve_trigger') if recovery_planner is not None or continue_after_abort else result('incomplete','recovery_reserve_reached')
+            return abort('course_recovery_reserve_trigger', reserve_threatened=True)
         boundaries = [dt, hours*3600-seconds, next_control-seconds,
                       (math.floor(seconds/3600)+1)*3600-seconds]
         if observations is not None:
@@ -500,18 +529,17 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         if event_index < len(event_list):
             boundaries.append(event_list[event_index].seconds-seconds)
         boundaries.append(command_clock.next_boundary(seconds)-seconds)
-        for expiry in (comms_until,sensor_until):
+        for expiry in (comms_until,sensor_until,navigation_until):
             if expiry > seconds:boundaries.append(expiry-seconds)
         interval = min(boundaries)
         if interval <= 0:
             raise ValueError('Non-progressing mission clock')
         mode = 'sailing'
         velocity = current.copy()
-        if awaiting_righting:
-            mode = 'capsized_drift'
+        if supervisor['mode'] in {'capsized_drift', 'navigation_degraded'}:
+            mode = supervisor['mode']
         elif dynamics is not None:
-            permitted=logic.cycle(seconds,wind_valid=seconds>=sensor_until,traffic_conflict=conflict,
-                                  communications_available=seconds>=comms_until)['sailingPermitted']
+            permitted=supervisor['sailingPermitted']
             target=command_clock.target_heading
             relative=(dynamics.heading-(90-state.wind_from_deg)+180)%360-180
             demand=float(sailing_speeds(state.wind_mps,relative)) if permitted and target is not None else 0.
@@ -522,9 +550,7 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
             mode='maneuvering_bounded' if maneuver['turning'] else ('sailing' if permitted and target is not None else 'coasting_drift')
         elif command_clock.drifting(seconds):
             mode = 'maneuvering_drift'
-        elif not logic.cycle(seconds, wind_valid=seconds >= sensor_until,
-                             traffic_conflict=conflict,
-                             communications_available=seconds >= comms_until)['sailingPermitted']:
+        elif not supervisor['sailingPermitted']:
             mode = 'degraded_drift'
         elif heading is None:
             mode = 'depowered_drift'
@@ -564,10 +590,10 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
         position = endpoint
         if performance and not performance.covered(state.wind_mps):outside_coverage += interval
         if 'storage' in inputs:
-            bus=(0. if awaiting_righting else solar*state.solar_fraction)-load
+            bus=(solar*state.solar_fraction if supervisor['harvestPermitted'] else 0.)-load
             net=(min(bus*charging,inputs['storage']['maxChargeW']) if bus>=0 else bus/discharge)-inputs['storage']['selfDischargeW']
         else:
-            net = (0. if awaiting_righting else solar*state.solar_fraction*charging)-load/discharge
+            net = (solar*state.solar_fraction*charging if supervisor['harvestPermitted'] else 0.)-load/discharge
         stored = min(capacity,stored+net*interval/3600)
         if recovery_bank is not None:recovery_bank=max(0.,recovery_bank-bank_standby*interval/3600)
         minimum=min(minimum,stored);seconds+=interval;distance+=float(np.linalg.norm(position-previous))
@@ -583,8 +609,10 @@ def simulate(inputs, route, water, gates, weather=None, events=(), traffic=(), s
                         return result('safety_violation','traffic_clearance_violation')
         if stored < reserve:
             reserve_protected = False
-            return abort('course_recovery_reserve_trigger') if recovery_planner is not None or continue_after_abort else result('incomplete','recovery_reserve_reached')
-        if not awaiting_righting and phase < len(sequence):
+            return abort('course_recovery_reserve_trigger', reserve_threatened=True)
+        if not supervisor['gateScoringPermitted']:
+            last_off_line = [position.copy() for _ in range(len(inputs['gateNames']))]
+        if supervisor['gateScoringPermitted'] and phase < len(sequence):
             name, expected = sequence[phase]
             actual = crossing_direction(gates[name],last_off_line[phase],position)
             if actual == expected:

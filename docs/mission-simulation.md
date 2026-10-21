@@ -20,6 +20,10 @@ The capsize case has two distinct observations: safety functions remain availabl
 
 A decision trace records the facts presented to the supervisor and what it decided. The [runtime reference](reference/model-runtime.md#mission-actions-and-records) explains how those records are generated.
 
+The native policy owns sailing, gate-scoring and harvest permissions as well as persistent qualification loss. A navigation outage inhibits sailing; continuing to retain qualification requires an explicit confirmation that the required safety functions remain available. Each supplied safety-loss observation is latched before a later observation can restore availability, including when events share a timestamp. Communications loss alone leaves safe autonomous operation available. Reaching the protected reserve threshold requests a safety abort in every simulation mode; choosing whether to continue the trajectory afterward changes the simulated exposure, not the qualification decision.
+
+The [named IC-01 demonstration](reference/model-runtime.md#run-the-named-integration-candidate) exercises these combinations and passes native recovery-energy results into the recovery policy. The three illustrative routes distinguish enough reserve, a feasible route with insufficient inverted reserve, and current that removes upstream recovery authority. Their supplied observations and simplified propulsion assumptions are explicit; none establishes a measured recovery envelope.
+
 ## A course tied to charted markers
 
 The challenge stays in Bonneville Pool. Launch and retrieval use Bingen Point boat ramp outside the scored course. The start/finish gate references green Lighted Buoy 39. At Stevenson, the vessel rounds red Lighted Buoy 16 to port through north, west and south checkpoints in order, maintaining an 80 m nominal marker exclusion. Gate segments extend 80–220 m from each reference. The model owns the geometry and order; current notices and actual buoy positions must be checked before launch.

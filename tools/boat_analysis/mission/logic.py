@@ -12,6 +12,7 @@ class MissionLogic:
     def __init__(self):
         self.model = load_model()
         self.abort_latched = False
+        self.qualification_lost = False
         self.trace = []
         self._cache = {}
         self._last_cycle = None
@@ -38,14 +39,16 @@ class MissionLogic:
 
     def event(self, kind, seconds):
         action = 'BlueDogMissionLogic::HandleEvent'
-        result = self._execute(action, {'eventKind': kind})
+        inputs = {'eventKind': kind, 'qualificationLost': self.qualification_lost}
+        result = self._execute(action, inputs)
         directive = result['directive']
         if directive == 'unsupported':
             raise ValueError('Unknown mission event: ' + kind)
         if directive not in {'disqualify', 'communications_outage', 'retain_forecast',
-                             'wind_outage', 'abort', 'stop', 'assess_capsize'}:
+                             'wind_outage', 'navigation_outage', 'abort', 'stop', 'assess_capsize'}:
             raise ValueError('Unsupported model event directive: ' + str(directive))
-        self.trace.append(dict(seconds=seconds, action=action, inputs={'eventKind': kind},
+        self.qualification_lost = result['qualificationLostNext']
+        self.trace.append(dict(seconds=seconds, action=action, inputs=inputs,
                                outputs=result.copy()))
         return result
 
@@ -53,26 +56,43 @@ class MissionLogic:
         action = 'BlueDogMissionLogic::CapsizeDisposition'
         inputs = dict(currentlyCapsized=bool(currently_capsized),
                       uprightRecoveryObserved=bool(upright_observed),
-                      requiredSafetyConfirmed=bool(safety_confirmed), abortLatched=self.abort_latched)
+                      requiredSafetyConfirmed=bool(safety_confirmed), abortLatched=self.abort_latched,
+                      qualificationLost=self.qualification_lost)
         result = self._execute(action, inputs)
+        self.qualification_lost = result['qualificationLostNext']
         self.trace.append(dict(seconds=seconds, action=action, inputs=inputs, outputs=result.copy()))
         return result['directive']
 
     def cycle(self, seconds, *, wind_valid=True, traffic_conflict=False,
-              abort_requested=False, communications_available=True):
+              abort_requested=False, communications_available=True, capsized=False,
+              navigation_valid=True, reserve_threatened=False, safety_confirmed=None):
+        # Nominal simulations assume their declared upright observation baseline.
+        # Inverted/backup safety must be supplied explicitly; no dynamics or sensor
+        # capability is inferred from a primary observation loss.
+        if safety_confirmed is None:
+            safety_confirmed = not capsized and navigation_valid
+        if type(safety_confirmed) is not bool:
+            raise TypeError('Required safety confirmation must be Boolean')
         action = 'BlueDogMissionLogic::SupervisoryCycle'
         inputs = dict(windValid=bool(wind_valid), trafficConflict=bool(traffic_conflict),
                       abortRequested=bool(abort_requested), abortLatched=self.abort_latched,
+                      qualificationLost=self.qualification_lost, capsized=bool(capsized),
+                      navigationValid=bool(navigation_valid),
+                      reserveThreatened=bool(reserve_threatened),
+                      requiredSafetyConfirmed=bool(safety_confirmed),
                       communicationsAvailable=bool(communications_available))
         result = self._execute(action, inputs)
-        for name in ('abortLatchedNext', 'sailingPermitted'):
+        for name in ('abortLatchedNext', 'qualificationLostNext', 'sailingPermitted',
+                     'gateScoringPermitted', 'harvestPermitted'):
             if type(result[name]) is not bool:
                 raise TypeError('Model supervisor output must be Boolean: ' + name)
-        if result['mode'] not in {'sailing', 'degraded_drift', 'traffic_avoidance', 'abort_recovery'}:
+        if result['mode'] not in {'sailing', 'degraded_drift', 'traffic_avoidance', 'abort_recovery',
+                                 'capsized_drift', 'navigation_degraded', 'disqualified'}:
             raise ValueError('Unsupported supervisor mode: ' + str(result['mode']))
         if result['alert'] not in {'none', 'attempt', 'queue'}:
             raise ValueError('Unsupported supervisor alert: ' + str(result['alert']))
         self.abort_latched = result['abortLatchedNext']
+        self.qualification_lost = result['qualificationLostNext']
         signature = (tuple(inputs.items()), tuple(result.items()))
         if signature != self._last_cycle:
             self.trace.append(dict(seconds=seconds, action=action, inputs=inputs, outputs=result.copy()))

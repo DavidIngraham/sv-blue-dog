@@ -4,6 +4,12 @@
 
 Which measurements could change the boat I build? IC-01 gives me a specific geometry, load budget and recovery architecture to challenge. I will start with experiments that could force a different sensor, propulsion system, rig or structure, then integrate the supported choices into the first boat.
 
+## What coverage means
+
+The [requirements audit](reference/oosem-requirements-audit.md) accounts for all 251 governing statements: 237 current requirements, two provisional reliability study objectives and 12 future statements. Every current statement has a direct verification objective, including grouped plans for overall mission acceptance, environmental survival and hybrid construction. Seven future statements still lack objectives and remain outside current Gorge acceptance.
+
+A defined objective says what must be assessed. A procedure says how to collect the evidence. An executable predicate evaluates supplied inputs; an analysis or simulation supplies evidence within its validity domain. Physical testing establishes what an identified installation actually does. Acceptance needs the applicable evidence and a review of its adequacy; counting links cannot provide it. The [native audit command](reference/model-runtime.md#run-the-named-integration-candidate) reports coverage without assigning accepted verdicts, while the existing executable plans return inconclusive when required evidence is absent.
+
 ## Navigation-rule entry review and adjudication
 
 The challenge's C-007 requires the [U.S. Inland Navigation Rules](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E) and applicable local provisions. Before entry approval, the organizer reviews the identified boat, course, propulsion modes, operating conditions and current rule/notice baseline. The entrant supplies applicability decisions, justified exclusions, observation and maneuver limits, predeclared acceptance criteria and supporting demonstrations. Unsupported conditions cannot enter the admitted operating envelope.
@@ -97,7 +103,7 @@ Afterward, compare measurements with predictions, retain failures and censored o
 
 See the [current assessment](current-assessment.md#reading-the-evidence) for the update method and the [modeling method](methods/modeling.md) for the evidence links.
 
-**Next:** [Current assessment and next investigations](current-assessment.md) · [Series guide](index.md)
+
 
 ## Wind-sport encounters and passage windows
 
@@ -113,3 +119,5 @@ on both legs and recovery routes. Include a quiet departure with a busy delayed
 return, missing background coverage, wind/visibility changes and a recovery
 approach that becomes occupied. Both cases remain inconclusive. Software tests
 of the exposure arithmetic do not verify observed traffic or authorize launch.
+
+**Next:** [Current assessment and next investigations](current-assessment.md) · [Series guide](index.md)

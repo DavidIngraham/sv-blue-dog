@@ -70,3 +70,34 @@ def test_missing_record_does_not_replace_existing_evidence(tmp_path):
     with pytest.raises(RuntimeError, match='did not record'):
         record_analyses(['Sample::missing'], output, (source,))
     assert output.read_text() == 'previous evidence'
+
+
+def test_native_records_distinguish_runs_from_nested_verdicts_and_unrelated_parts(tmp_path):
+    source = tmp_path/'subject.sysml'
+    source.write_text('''package SubjectCases {
+        part vessel { attribute capacity : ScalarValues::Real = 42; }
+        analysis passing {
+            subject candidate = vessel;
+            out result : ScalarValues::Real = candidate.capacity;
+            assert constraint positive { result > 0 }
+        }
+        analysis failing {
+            subject candidate = vessel;
+            out result : ScalarValues::Real = candidate.capacity;
+            assert constraint insufficient { result < 0 }
+        }
+    }
+    package BlueDogRecordedEvidence {
+        part unrelated { attribute caseName : ScalarValues::String = "NotAnAnalysis::case"; }
+    }''')
+    output = record_analyses(['SubjectCases::passing', 'SubjectCases::failing'],
+                            tmp_path/'evidence.sysml', (source,))
+    model = load_model((output,))
+    passing = model.instantiate('BlueDogRecordedEvidence::passing_run1')
+    failing = model.instantiate('BlueDogRecordedEvidence::failing_run1')
+    assert passing.caseName == 'SubjectCases::passing'
+    assert failing.caseName == 'SubjectCases::failing'
+    assert passing.subjectName == failing.subjectName == 'SubjectCases::vessel'
+    assert model.instantiate('BlueDogRecordedEvidence::passing_run1::verdict1').status == 'satisfied'
+    assert model.instantiate('BlueDogRecordedEvidence::failing_run1::verdict1').status == 'not satisfied'
+    assert model.instantiate('BlueDogRecordedEvidence::unrelated').caseName == 'NotAnAnalysis::case'

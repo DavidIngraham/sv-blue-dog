@@ -28,7 +28,35 @@ The hull and rig turn wind into motion; the rudder steers; onboard sensing and c
 
 In [IC-01](../models/analyses/integrated-candidate.sysml), the main sensing and control system sails the mission. A separately powered recovery system must observe hazards, navigate and propel the boat after a primary failure, including while inverted. The practical question is whether those backup functions can survive the fault that disabled sailing. Shared water damage could still defeat both systems; isolation needs testing.
 
-The [integration study](validation-plan.md#exercise-decisions-before-physical-integration) checks those responsibilities together using one boat's mass, sailing performance and energy budget. The next step is to turn the allocated capabilities into compatible hardware and test their interfaces.
+The [integration study](validation-plan.md#exercise-decisions-before-physical-integration) checks those responsibilities together using one boat's mass, sailing performance and energy budget. The [named IC-01 configuration](../models/configurations/ic01.sysml) owns its complete design and integration assumptions. The next step is to turn the allocated capabilities into compatible hardware and test their interfaces.
+
+## Logical responsibilities and the candidate boat
+
+Navigation estimates position and attitude; wind estimation supplies the sailing condition; traffic observation and collision assessment identify conflicts. Guidance chooses a sailing command. Mission supervision decides whether that command may be used, whether a gate crossing can count, and whether an abort has ended the attempt. Energy management supplies the reserve assessment, while recovery management decides how to act after an abort. Recording and communications preserve and expose those decisions.
+
+These are responsibilities, independent of processor or software boundaries. The [logical architecture](../models/vehicle/architecture.sysml) connects them with typed observations, permissions, commands and records. A navigation estimate includes validity and time; a safety observation states what has been confirmed. A missing confirmation cannot become evidence simply because a message arrived.
+
+```sysml-view Page_architecture_logical::responsibilities direction=TB
+package Page_architecture_logical {
+    private import StandardViewDefinitions::*;
+    view responsibilities : InterconnectionView {
+        expose BlueDogLogicalArchitecture::LogicalVessel;
+    }
+}
+```
+
+The candidate physical assembly allocates those responsibilities to a primary sailing path and a recovery path with its own battery, navigation, observation, controller and propulsor. It retains the wired wind-sensing installation as a provisional equipment choice. The assembly identifies power and data interfaces without pretending that connectors, bus timing, equipment ratings or common-cause isolation have been resolved. Recording and telemetry power assignment still needs to be reconciled with both energy budgets.
+
+```sysml-view Page_architecture_physical::candidate direction=TB
+package Page_architecture_physical {
+    private import StandardViewDefinitions::*;
+    view candidate : InterconnectionView {
+        expose BlueDogPhysicalArchitecture::IC01Candidate;
+    }
+}
+```
+
+IC-01 is a working integration candidate, not a qualified assembly or a universally selected design. Its wing geometry supports the current sizing calculations; soft sail, tail-controlled rigid wing and directly rotated fixed-camber wing retain equal development standing. Owner decisions such as the finite mission, one-person handling and print volume govern the concept. Proposed equipment and interface assignments remain choices to test.
 
 ## What counts as an attempt
 
@@ -52,7 +80,7 @@ package Page_architecture_0 {
 
 ## From use cases to allocated behavior
 
-I use OOSEM to work from what the mission needs to what each part of the boat must do. The three scenarios below describe normal sailing, avoiding traffic and recovering after an abort. OpenSysML renders these views from the shared model.
+I use OOSEM to work from what the mission needs to what each part of the boat must do. The scenarios below describe interactions that the boat must support. OpenSysML renders these views from the shared model.
 
 The [mission supervisor](mission-simulation.md#executable-supervisory-logic) implements part of these scenarios: it responds to events, permits or inhibits sailing, and remembers an abort so that sailing cannot silently resume. Sensor processing, steering decisions and physical actuation still need their own implementations and tests.
 
@@ -97,7 +125,28 @@ package Page_architecture_recovery {
 }
 ```
 
+### Capsize, safety and unassisted righting
+
+An inversion suspends sailing and gate scoring. The supervisor needs explicit confirmation that required safety capability remains available while the boat is inverted. It can then wait for an observed unassisted return to upright control. A later upright observation cannot clear an earlier safety abort, motor use or intervention.
+
+```sysml-view Page_architecture_capsize::scenario direction=LR
+package Page_architecture_capsize {
+    private import OOSEM::*;
+    view scenario : LogicalScenarioView {
+        expose BlueDogMethod::Scenarios::CapsizeAndResume;
+    }
+}
+```
+
+The scenario carries a safety observation into a permission decision, applies that permission and retains its record. The native supervisor executes this decision policy in the simulator; it does not predict whether the hull will right itself. Low reserve or lost safety capability can interrupt the wait for righting, including during a communications outage. Physical inverted sensing, righting, restored control and recovery thrust remain tests to perform on an identified boat.
+
 These responsibilities put estimation and decisions onboard. The wired wind sensor is a concrete starting point, while processor choice, software boundaries and backup equipment remain open. I need timing, power and fault tests to select compatible implementations. The [method model](../models/vehicle/method.sysml) records the assignments; the [current assessment](current-assessment.md) identifies the next investigations.
+
+### Navigation, outages, reserve, launch and maintenance
+
+The same model connects the less visible interactions that make a mission possible. Navigation passes a time-stamped estimate through validity assessment before guidance can use it. A communications outage preserves records onboard and queues alerts for later delivery; losing the shore link does not itself remove autonomous control. Energy management assesses the protected recovery reserve and can request an abort before it is exhausted.
+
+Before launch, the scenario combines an identified configuration, evidence readiness and the admitted operating conditions into a release decision. Maintenance records the configuration and work performed before a new release. These [typed scenarios](../models/vehicle/method.sysml) describe the necessary exchanges and responsible functions. Their presence does not implement a launcher, maintenance system, sensor estimator or communications protocol. The supervisor and numerical demonstrations execute the bounded decisions identified in the [runtime reference](reference/model-runtime.md#run-the-named-integration-candidate).
 
 The [mission simulator](mission-simulation.md#executable-supervisory-logic) records the resulting decisions and motion, including the time between sending a command and completing a maneuver. That connection lets a scenario expose a missing capability rather than merely describe an intended sequence.
 
@@ -190,7 +239,7 @@ Launch, service, ocean sailing and navigation signaling remain in the [complete 
 
 ## From mission to verification
 
-Read this view from the challenge obligation to its vehicle refinement and planned verification. A satisfy link allocates responsibility; it does not assert a passed test.
+Read this view from the challenge obligation to its vehicle refinement and planned verification. A satisfy link states the design's intended satisfaction claim; that claim still needs evidence. Allocation separately maps logical responsibilities to physical elements.
 
 ```sysml-view Page_architecture_3::MissionSemantics direction=BT
 package Page_architecture_3 {

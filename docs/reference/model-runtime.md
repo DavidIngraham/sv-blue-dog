@@ -15,6 +15,24 @@ uv run python -m tools.boat_analysis.cli record \
 
 The saved model can be reopened with the same engine and queried through its Python client or MCP server. These records supplement the immutable archives for external simulations and optimizer campaigns; a recorded execution does not imply that a vessel requirement has been physically verified.
 
+## Run the named integration candidate
+
+[IC-01](../../models/configurations/ic01.sysml) owns the complete sizing design and its provisional integration assumptions, with design provenance in the immutable 15 October integration archive. The sizing adapter reads the model configuration and defaults to initial operating guesses from the 13 October SRR-readiness archive's `refinedReplay`; an explicitly supplied warm-start file can replace those guesses. This keeps a new configuration edit from being silently overwritten by an old result.
+
+```sh
+uv run python -m tools.boat_analysis.mission.demonstration \
+  --output build/analysis/ic01-demonstration.json \
+  --records build/analysis/ic01-demonstration.sysml
+uv run python -m tools.boat_analysis.model.audit \
+  --output build/oosem-audit.json --archives
+```
+
+The demonstration executes native recovery analyses and feeds their feasibility outputs into the native recovery-versus-drift policy. It also records safe unassisted righting, capsize with low reserve and communications loss, and navigation degradation followed by safety loss. The JSON contains the configuration inputs, model and source hashes, revision, runtime revision, native analysis reports and timestamped behavior traces. The optional SysML snapshot contains official native analysis records. These are supplied-observation examples, not a full voyage or an installed autopilot.
+
+The audit uses native queries for every governing requirement, derivation, dependency and impact path. Its JSON and Markdown distinguish current requirements, provisional study objectives, future applicability and defined verification objectives. Neither a link nor the audit itself executes a physical procedure or accepts evidence. Native verification verdicts remain pass, fail, inconclusive or error; not-applicable is recorded through mission applicability rather than invented as a fifth runtime verdict. Archive checks reject altered registered records and unregistered run JSON in the supported manifest schema.
+
+Use the locked environment and the pinned engine identified in [model conventions](../../models/README.md). An already synchronized environment can run the same commands with `.venv/bin/python` in place of `uv run python`. Check an attached MCP server's revision and workspace before relying on it; a server connected to another checkout cannot validate this one.
+
 SysML owns the equations. Python assembles geometry, chooses operating cases and coordinates the optimizer. All native calculations use the reusable library’s [execution backend](../../packages/sysml-python/sysml_python/backends/native.py). Mass, operating performance, structural margins, passage feasibility, route screening, surface/wave helpers, recovery segments, hull resistance and hydrostatics have declarative exports. Preparation reads argument order, Real types, dimensions and named output tuples from OpenSysML's API element export. Application wiring supplies friendly argument aliases and selects model-exported defaults; the generated interface supplies vector widths and output labels.
 
 Mass, operating performance, structural margins, passage feasibility and route screening use declarative exports in [pyproject.toml](../../pyproject.toml). The [reusable SysML/Python library](../../packages/sysml-python/README.md) discovers their vector dimensions, delegates input-record generation to OpenSysML, evaluates model-owned defaults and compiles declared input checks. It still generates calculation-result wrappers for named return tuples. Surface and wave providers assemble external geometry and quadrature around generated calculations; the shared backend compiles those calculations. Named model results can be copied to arrays for NumPy operations. Geometry and interpreter reference experiments remain project-owned in the [reference preparation](../../tools/boat_analysis/model/preparation.py). Hydrostatic meshes use the same explicit batch API; the project sums the returned tetrahedron moments. Generated code and manifests remain build artifacts; fingerprints cover model and runtime sources.
@@ -48,7 +66,7 @@ Adding a supported calculation to the declarative library requires its SysML def
 
 ## Mission actions and records
 
-The [mission supervisor](../../models/vehicle/mission-logic.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing permission, operating mode, abort latching and whether an abort alert is attempted or queued. `RecoveryAuthority` permits recovery after primary steering or power loss only when an explicitly independent, powered path is supplied. `FallbackPolicy` decides whether the available, permitted recovery path can be attempted or the vessel must continue drifting. Dependencies connect these actions to the normal-sailing, traffic-encounter and abort/recovery scenarios; the supervisor is allocated to the onboard mission manager.
+The [mission supervisor](../../models/vehicle/mission-logic.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing permission, operating mode, abort latching and whether an abort alert is attempted or queued. `RecoveryAuthority` permits recovery after primary steering or power loss only when an explicitly independent, powered path is supplied. `FallbackPolicy` decides whether the available, permitted recovery path can be attempted or the vessel must continue drifting. Dependencies connect these actions to the normal-sailing, traffic-encounter and abort/recovery scenarios; the supervisor is allocated to logical mission supervision, which is mapped to the provisional IC-01 primary controller.
 
 Python supplies observations, computes chart and traffic geometry, ranks feasible headings and integrates motion and energy. It dispatches the action outputs to those mechanisms. The supervisor's traffic mode identifies a predicted encounter; avoidance geometry and maneuver selection remain conceptual Python calculations. This is a partial executable logical architecture, not a complete autopilot or a verified sensing system.
 

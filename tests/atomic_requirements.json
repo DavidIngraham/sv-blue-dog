@@ -622,7 +622,8 @@
       "id": "N-117",
       "name": "BatteryChargeTemperatureInhibition",
       "parent": "solarHeating",
-      "usage": "batteryChargeTemperatureInhibition"
+      "usage": "batteryChargeTemperatureInhibition",
+      "relationship": "dependency"
     },
     {
       "id": "N-118",

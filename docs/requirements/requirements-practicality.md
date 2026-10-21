@@ -28,6 +28,21 @@ package Page_practicality_construction {
 }
 ```
 
+The structural tile envelope refines the same owner printer limit; its verification also requires an accepted build configuration.
+
+```sysml-view Page_practicality_printEnvelope::thread direction=BT statements=true
+package Page_practicality_printEnvelope {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view thread : GeneralView {
+        filter @SysML::RequirementUsage;
+        expose BlueDogRequirements::desktopManufacture;
+        expose BlueDogStructure::printTileEnvelope;
+        metadata Layout about BlueDogRequirements::desktopManufacture { x = 0; y = 0; }
+        metadata Layout about BlueDogStructure::printTileEnvelope { x = 0; y = 300; }
+    }
+}
+```
 </details>
 
 ## Construction qualification

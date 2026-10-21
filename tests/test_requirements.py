@@ -62,8 +62,6 @@ def test_diagram_preserves_expected_derivations(published_model):
         ('marineDurability', 'wetElectricalIntegrity'),
         ('marineDurability', 'wetMechanicalIntegrity'),
         ('missionReliability', 'criticalFailureDisposition'),
-        ('missionReliability', 'failureRateBudget'),
-        ('missionReliability', 'missionSuccessProbability'),
         ('missionReliability', 'reliabilityEvidence'),
         ('multiDayEndurance', 'energyEvidenceReadiness'),
         ('sustainedEnergyFeasibility', 'harvestCampaignCoverage'),
@@ -76,7 +74,6 @@ def test_diagram_preserves_expected_derivations(published_model):
         ('oceanEnvironment', 'oceanWaves'),
         ('oceanEnvironment', 'oceanWind'),
         ('oceanEnvironment', 'saltwaterExposure'),
-        ('stabilityAndFouling', 'capsizeControlRecovery'),
         ('stabilityAndFouling', 'recoveryPropulsorWeeds'),
         ('stabilityAndFouling', 'submergedWeedPassage'),
         ('stabilityAndFouling', 'weedBlockageResponse'),
@@ -93,7 +90,7 @@ def test_diagram_preserves_expected_derivations(published_model):
     }
     expected.update(('transGorgeChallenge', name) for name in ['overallLength', 'safetyCapabilityAbort', 'autonomousShoreRecovery', 'abortAlert', 'noLittering', 'unattachedPassage', 'communicationOutageAutonomy', 'forecastAdmission', 'weatherOutageContinuation', 'courseRecoveryReserve', 'reserveAbort', 'nightOperation', 'abortPersistence', 'recoveryConspicuity'])
     expected.update(('noLittering', name) for name in ['casualtyFlotation', 'majorComponentRetention', 'capsizeRecovery'])
-    expected.update((r['parent'], r['usage']) for r in ATOMIC['leaves'])
+    expected.update((r['parent'], r['usage']) for r in ATOMIC['leaves'] if r.get('relationship', 'derivation') == 'derivation')
     expected.update(tuple(edge) for edge in ATOMIC['shared_links'])
     expected.update(('structuralIntegrity', name) for name in STRUCTURE_LEAVES)
     assert set(published_model.edges) == expected
@@ -185,7 +182,7 @@ def test_focused_views_cover_all_derivations(published_model, rendered_site):
             for detail, abstract in re.findall(r'(n[0-9]+) -\.->\|"refine"\| (n[0-9]+)', diagram):
                 refinements.add((nodes[detail], nodes[abstract]))
     assert edges == set(published_model.edges)
-    assert refinements == {('roundTrip', 'courseCompletion'), ('communications', 'liveObservation'), ('operatingBoundary', 'restrictedWaters')}
+    assert refinements == {('roundTrip', 'courseCompletion'), ('communications', 'liveObservation'), ('operatingBoundary', 'restrictedWaters'), ('printTileEnvelope', 'desktopManufacture')}
 
 
 def test_statements_exclude_supporting_material(published_model):
@@ -202,9 +199,16 @@ def test_statements_exclude_supporting_material(published_model):
         assert text in context
 
 
-def test_planned_verification_cannot_report_a_pass(run_model):
+@pytest.mark.parametrize('case', [
+    'BlueDogRequirementVerification::EnergyAwarenessVerification',
+    'GorgeChallengeVerification::PassageQualificationVerification',
+    'BlueDogRequirementVerification::StabilityAndFoulingVerification',
+    'BlueDogRequirementVerification::PeakSupplyCapabilityVerification',
+    'BlueDogRequirementVerification::ConstructionArchitectureVerification',
+])
+def test_planned_verification_cannot_report_a_pass(run_model, case):
     code, report = run_model('package VerificationProbe {}', '-analysis',
-                            'BlueDogRequirementVerification::EnergyAwarenessVerification')
+                            case)
     assert code != 0
     assert not [d for d in report['diagnostics'] or [] if d['pass'] != 'runtime']
     values = {v['name']: v['value'] for v in report['checks'][0]['values']}
@@ -213,7 +217,7 @@ def test_planned_verification_cannot_report_a_pass(run_model):
 
 @pytest.mark.parametrize("view,actions", [
     ("normal", ("ObserveWind", "SelectSailingCommand", "ApplySailingCommand")),
-    ("traffic", ("ObserveTraffic", "AssessEncounter", "SelectAvoidanceManeuver", "ExecuteAndReassess")),
+    ("traffic", ("ObserveTraffic", "ObserveNavigation", "AssessEncounter", "SelectAvoidanceManeuver", "ExecuteAndReassess")),
     ("recovery", ("LatchAbort", "RecordAndSignalAbort", "SelectReachableShore", "RecoverAndReassess")),
 ])
 def test_oosem_scenarios_render_declared_behavior(view, actions):

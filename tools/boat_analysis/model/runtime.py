@@ -119,10 +119,20 @@ def record_analyses(names, output, models=None):
         if not staged.is_file():
             raise RuntimeError("Native session did not save its analysis evidence")
         model = load_model((staged,))
-        records = model.query(where={"@type": "PrimitiveConstraint", "operator": "=",
-                                     "property": "@type", "value": ["PartUsage"]})
-        recorded = Counter(model.instantiate(record.id).caseName for record in records
-                           if record.id.startswith("BlueDogRecordedEvidence::"))
+        # Native %record emits a direct AnalysisRun specialization for each case.
+        # Its nested VerdictRecord parts are evidence, but are not analysis runs.
+        # Use resolved native type facts; a caseName-looking attribute is not a type.
+        def equals(property_name, values):
+            return {"@type": "PrimitiveConstraint", "operator": "=",
+                    "property": property_name, "value": values}
+        run_types = model.query(where={"@type": "CompositeConstraint", "operator": "and",
+            "constraint": [equals("@type", ["PartDefinition"]),
+                           equals("general", ["AnalysisRecords::AnalysisRun"])]})
+        records = model.query(where={"@type": "CompositeConstraint", "operator": "and",
+            "constraint": [equals("@type", ["PartUsage"]),
+                           equals("owner", ["BlueDogRecordedEvidence"]),
+                           equals("type", ["AnalysisRecords::AnalysisRun", *(row.id for row in run_types)])]})
+        recorded = Counter(model.instantiate(record.id).caseName for record in records)
         if recorded != Counter(names):
             raise RuntimeError(f"Native session did not record the requested cases: {dict(recorded)}")
         staged.replace(output)

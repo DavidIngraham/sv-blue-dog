@@ -22,9 +22,9 @@ package Page_methods_modeling_0 {
 }
 ```
 
-Derivation, refinement and design motivation answer different questions. A derivation identifies an acceptance outcome under its parent's conditions. A refinement makes a referenced obligation more precise. A dependency with rationale records a design motivation without claiming that satisfying it proves the originating requirement.
+Derivation, refinement and design motivation answer different questions. A requirement derivation asserts that satisfaction of the original requirement implies satisfaction of its derived requirements under the stated conditions; passing the children alone does not prove the parent. A refinement makes a referenced obligation more precise. A dependency with rationale records a design motivation without claiming that satisfying it proves the originating requirement.
 
-Architecture satisfaction links express intended allocations. Verification cases identify the evidence needed to establish compliance. An optimizer's converged candidate is analysis evidence under its assumptions; it is not a completed physical verification.
+Architecture satisfaction links assert that their subject satisfies the referenced requirement. At this stage they record an intended design claim that still needs evidence. Allocations separately map logical responsibilities to candidate equipment. Verification cases identify the evidence needed to establish compliance. An optimizer's converged candidate is analysis evidence under its assumptions; it is not a completed physical verification.
 
 The Markdown source owns this explanation and the scope of each view. The imported SysML owns the requirements, relationships and rationale. The publisher validates temporary view definitions and generates the completed page without editing this source.
 
@@ -33,7 +33,7 @@ Read the normative conditions and supporting metadata in the [vehicle requiremen
 
 ## Requirements versus design assumptions
 
-A challenge obligation motivates a function; it does not uniquely determine a material modulus, laminate thickness or sensor accuracy. I keep explicit owner constraints, functional acceptance, provisional performance allocations and selected strategies distinct with [requirement-basis metadata](../../models/vehicle/requirement-basis.sysml). A dependency records a selected design basis; a derivation identifies an obligation needed to meet its parent.
+A challenge obligation motivates a function; it does not uniquely determine a material modulus, laminate thickness or sensor accuracy. I keep explicit owner constraints, functional acceptance, provisional performance allocations and selected strategies distinct with [requirement-basis metadata](../../models/vehicle/requirement-basis.sysml). The two provisional reliability objectives are explicitly marked as studies, so their numerical comparisons cannot silently become binding mission obligations. A dependency records a selected design basis; a derivation records an implied obligation under explicit conditions.
 
 The material and geometric constants used in preliminary sizing live in the [structural analysis basis](../../models/analyses/structural-basis.sysml). They let me explore a candidate before measurements exist. Qualification instead checks supported material bounds and applicable load, functional and site limits. Missing evidence cannot produce a passing executable requirement. Lower measured stiffness or strength means revisiting the geometry or reinforcement, not rejecting a material for missing an assumed property.
 
@@ -44,7 +44,7 @@ Archived runs retain their original inputs and claims. A passing numerical scree
 
 ## Following executable decisions
 
-The [mission supervisor](../mission-simulation.md#executable-supervisory-logic) connects logical scenarios to decisions during a simulated voyage. Its actions govern event responses, sailing permission and abort latching. The resulting trace records the input facts and decisions, so a trajectory can be read alongside the behavior that produced it. Scenario dependencies and the mission-manager allocation identify the architectural responsibility being exercised.
+The [mission supervisor](../mission-simulation.md#executable-supervisory-logic) connects logical scenarios to decisions during a simulated voyage. Its actions govern event responses, sailing permission and abort latching. The resulting trace records the input facts and decisions, so a trajectory can be read alongside the behavior that produced it. Scenario dependencies and the logical-supervision allocation identify the architectural responsibility being exercised.
 
 For example, a loss of communications can coexist with continued autonomous sailing, while a safety abort queues its alert and proceeds toward recovery. Regression scenarios check these distinctions, including the persistence of an abort after observations recover. A separate model calculation classifies the observed mission outcome. Behavioral execution and outcome assessment answer different questions, and neither supplies the physical evidence for an installed controller.
 
