@@ -2,6 +2,8 @@
 
 Assessment: 20 October 2026. Baseline: `b12b079`; work branch: `refactor/oosem-system-model`. The [system concept](../architecture.md), [current assessment](../current-assessment.md) and [model conventions](../../models/README.md) describe the resulting engineering model. This record accounts for the refactor, its evidence and its limits. It is not a vessel qualification record.
 
+The [saved run manifest](../../evidence/runs/2026-10-20-oosem-refactor/manifest.json) identifies source commit `9ab77ad` and protects the [coverage, relationship and impact register](../../evidence/runs/2026-10-20-oosem-refactor/oosem-audit.json), [IC-01 execution](../../evidence/runs/2026-10-20-oosem-refactor/ic01-demonstration.json), [exact numerical comparison](../../evidence/runs/2026-10-20-oosem-refactor/oosem-numerical-comparison.json), baseline values and [validation record with test logs](../../evidence/runs/2026-10-20-oosem-refactor/validation-summary.json). The audit ran before the source commit and retains its honest modified-tree execution identity; the manifest verifies its actual source fingerprints against the committed refactor. The demonstration and numerical comparison were repeated after that commit.
+
 ## Engineering result
 
 The model connects the finite Gorge mission to typed operational scenarios, implementation-independent responsibilities, a provisional physical assembly, native supervisory decisions, a complete named candidate and verification objectives. The original subsystem/context tree remains useful and retains its identity. Separate logical and physical packages now express the distinctions that the mixed tree could not carry by itself.
@@ -85,6 +87,7 @@ The prescribed commands were run in the existing locked Linux environment using 
 | Numerical preservation | Exact equality for all 29 IC-01 properties, original integration inputs, retained-candidate energy reconciliation, weather outputs and recovery bank at the recorded exposure. The design interface expands from nine overrides to 29 complete properties. |
 | Historical run integrity | Final audit passed for all 22 supported run manifests: 96 records, 2,066 record-level source fingerprints, 80 additional manifest model-source fingerprints and 16 cross-run input artifacts. |
 | Publishing | Baseline: 36 pages. Integrated build: 38 pages, including the two review reports. Local browser inspection confirmed native diagrams, working zoom controls and no architecture-page rendering errors. |
+| Editorial follow-up | The corrected reading sequence rebuilt successfully; all three documentation checks passed in 36.27 seconds. |
 
 The numerical comparison is `build/analysis/oosem-numerical-comparison.json`. It retains before/after outputs and source fingerprints. The earlier 440 Wh candidate still has 3.9736604490556715 Wh nominal headroom at 48.33604399677567 hours; this is a separate historical configuration, not IC-01's battery. IC-01's recovery bank remains 40.46977165885351 Wh after 54.604566822929904 hours under the original standby assumption. No archived evidence file was rewritten.
 

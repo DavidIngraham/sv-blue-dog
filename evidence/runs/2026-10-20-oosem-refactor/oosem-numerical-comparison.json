@@ -1,0 +1,449 @@
+{
+  "baselineFile": "baseline-numerics.json",
+  "baselineSha256": "8c6e852b88ac859b11066d9b8673a7da552f8634a0b399c965e8a08559ac0600",
+  "baselineSourceRevision": "b12b079855002466a8a95b54a5dba88e8ffc0611",
+  "sourceRevision": "9ab77ad9307d9d5e8495f49f2b817db484dcc3c9",
+  "modelHash": "b7e4c82227d6dfe3f843b081e36d535aeb0c387ec162d0725720cc0a2e23f435",
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/avoidance-failures.sysml": "e696a0d798ca05bbcf3ef05a90c0c2b67bf3268f62238dacd691d553cb46d1f4",
+    "models/analyses/candidate-energy.sysml": "f05a4a2187aabd316ac06e1968fd8e9fae00ab3ca5980d9a216ce2a5146c4241",
+    "models/analyses/class-specific-detection.sysml": "9e585fb65056849ffe3827d6b489912bf6e26e4ae6d20bde7a9b005a3836a8b3",
+    "models/analyses/development-risks.sysml": "02215b2776e5c643d044ce4b8a47c51e8e5796e1ba5a9e451714cbe781ec2a40",
+    "models/analyses/dfmea.sysml": "8c98402beff7af56f9203d0ada24547b4d692de64fb0d9f804ae1a8b632193a6",
+    "models/analyses/encounter-envelope.sysml": "61654e8fe683aa4932f6c409f8fe954ebd6f3fb5c1295805ecced68b15071db5",
+    "models/analyses/encounter-feasibility.sysml": "4067475ad5174a54f22fc72baad6d8ee3cc502cbc3bc6dbfd528db49277500cb",
+    "models/analyses/encounter-review.sysml": "7efaf1b169a56ae75c6465fe130bb6a0c3fca2b94faa1f3584cea43a666f1bbb",
+    "models/analyses/energy.sysml": "0a1fc9435697450907604405c21e87882add03071f1024f73bf26ab2c845bc36",
+    "models/analyses/environment-review.sysml": "5d74730715837b2cfb7596af73d481c5545308ec03cd9b73c6dcb807d7efa243",
+    "models/analyses/integrated-candidate.sysml": "9eab58e1ce9d4d79d57b6fe7c0740fda867ac4286c687f1786673a620c5f0c7b",
+    "models/analyses/location-traffic-risk.sysml": "21fcbaa999f92f7bd1b305708fea4dccd8b0bc5688b0f8d1a749e218b41483ba",
+    "models/analyses/maneuver-dynamics.sysml": "065494ce5c9ff1fa96e761181c3ff40651f0858085c88894f39f50852018c750",
+    "models/analyses/mission.sysml": "5d10d5dcb127b499437a7e915e0c92ad98104477762a0a3d119efc052e6a3cd6",
+    "models/analyses/navigation-controller.sysml": "32d2edfcb696147b7fad2daeb682c0d2bc09a28af0e758b78904cdfde0d77b30",
+    "models/analyses/passage-exposure.sysml": "72f055615ffabba4ec9377d00d2f76ade31ee68091f012b60ed56d5bb1a64f73",
+    "models/analyses/polar-demand.sysml": "2ae69be8debe151f0c081cc37da56074c878a77ff50a647ab5e4364a9a866905",
+    "models/analyses/recovery-propulsion.sysml": "bb79e2d030eda65bf8c2d243d62d9e51a02a9b114f7fb5659fece646a8ab6829",
+    "models/analyses/recovery-risk.sysml": "91d821d597600176304c6d2dede380f409aacee8eae2769ce5b033e9eb7309f5",
+    "models/analyses/recovery-site-review.sysml": "f0e8915d23aea03f4b8af834960fa8dfc4fd075ae0512188ecb97c6f4a3f051d",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "d82e06121ab8bb8a472e4a1c83b2e2f96faf517f9f3e65390a9d1c64d0e6a4a3",
+    "models/analyses/sail-trade.sysml": "c5cd6ec64a05c65e1eece7c21b47ca97747ad0a848000071b2baa6c9390f22eb",
+    "models/analyses/sizing/credibility.sysml": "42eca821d95eca13772ef1326b6a27b625e1f6ec0e890d2a2ad94f717455728c",
+    "models/analyses/sizing/evidence.sysml": "f0d2a6d886c71d4b7adc632271ff122f7bc57b1a6302db84bf844d74f20fe801",
+    "models/analyses/sizing/inputs.sysml": "934dde8fa12d41656d776b954c7a695f7979e003e629d2677ea4de51b1615925",
+    "models/analyses/sizing/operating.sysml": "04e6733d21d749c8a06e141ad67b7807cb349b6b03612a0c3d2a315ee4c92ce7",
+    "models/analyses/sizing/uncertainty.sysml": "78d71e2767b681561768d486ca6d6a9d4e16332fd576fe9cfe1a8e01d3dfcf3b",
+    "models/analyses/structural-basis.sysml": "c85be7e177715c5586e13508ecb973ac9d9355cac58fac684c683c0da3fc6ed6",
+    "models/analyses/surface-environment.sysml": "5778f163047634797e8ef65a8783a5e783676df530bc0caa0247a679c00222ea",
+    "models/analyses/wave-performance.sysml": "383e94db89dfe142db9e46398de22a707c543f754d3f778aa600a695689d6b3d",
+    "models/analyses/weather.sysml": "44ecf6b6d1e331fa5185398873d42e553128533c925d292dfc4287851ff1ee4c",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/acoustic-equipment.sysml": "cf00a437976ecfd928740adf21a711da19184bd87347e1c8e6ce8126ee6b419e",
+    "models/configurations/energy.sysml": "9a67f9f74fa51fb67f2749cf3b4e12615014f383b365a48043f3461999d6c7b8",
+    "models/configurations/ic01.sysml": "0b953814697ff78defa9931de9c23813a23ca90eb1a2cd7121f4d755064a221f",
+    "models/configurations/operating.sysml": "2f3019e2b9c4a9985d7a5eabfbd39dde694903dc378d8381c1b550f3c48c59d0",
+    "models/configurations/polar-demand.sysml": "776327bf7cefc8edc26f29000d21261cc3f2d2da9da8dcd8a6e30ffa5ced121e",
+    "models/configurations/reference.sysml": "409baa5254262a527b27af7fce00ffb3da35f249fe54e51f3cf024bdf86671be",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/sensing-equipment.sysml": "67f7f5e14071cc49cad4dc86c35477caeae217c06ecb88a30b6b7f97023f3845",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/configurations/wind-equipment.sysml": "ebb44c8c073855c60e4fbe6a6d1d3ee0b9e8dac26284f0451d89bdde67e6ff8c",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/evidence/current-sizing.sysml": "b6176f48be47dde61bd41ea892fec6c68258b72afdf2265ffb1bba5fb642b991",
+    "models/evidence/finite-passage-sizing.sysml": "7c0cac2c4733ba43b652edc7bc547265087434656a11694670ff5347c2028f56",
+    "models/evidence/gorge-wind.sysml": "2eee7571fc7ac02bcd054b0c226b5edb54ff931a31d74c508331ff1bf20ef466",
+    "models/evidence/sizing-continuation.sysml": "b8825d29058049ef75538b8b40b0dceb5bbdcb9aac806457856b9b2a9ccfee2e",
+    "models/evidence/srr-current.sysml": "c429f99895f703e8189f10383374e02865c78a7d5bc623478affdda1600daa33",
+    "models/evidence/srr-frontier.sysml": "c153ab46f07b4fffe4e4d946bd42a81b43f5fb6f6d5f0d95ee52097d8a7333db",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/appendages.sysml": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+    "models/libraries/marine/concept.sysml": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+    "models/libraries/marine/course.sysml": "3f58d6c0dc668858aa0b6bdad232c26b0ac75952ad67d0f06e73f4fbd464c85c",
+    "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "models/libraries/marine/hull-resistance.sysml": "967550313effe20092525e10c1695771b8354c66478203f449ac902d8af1a5f1",
+    "models/libraries/marine/hydrostatics.sysml": "b6791576a108dee393063a15a1a359113a8c24aba793105fa7d60fa193e9d858",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/recovery.sysml": "00c8c1fcfda115116fc66bf1db5a67334e04ea893182a454a796ada62eeeaab4",
+    "models/libraries/marine/reliability.sysml": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+    "models/libraries/marine/sailing.sysml": "8281caf912a840d83d5a6d1c39fe0422419ce7fb9ccaae3d9044b0c5df33446f",
+    "models/libraries/marine/surface.sysml": "781d337d8553160eb8d3c0724ae2aef4463d51ae6bc05ef475d32884645213c8",
+    "models/libraries/marine/wave-performance.sysml": "ee1d491adb19773eb151588a5f8ccb52c8ee4364150c5783637c58ada8a07ba9",
+    "models/libraries/marine/weather.sysml": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326",
+    "models/libraries/structures/mass-properties.sysml": "ced6365432541c9c9ada7b683564efde12f597d46e96144fd70221f767ef5dde",
+    "models/libraries/structures/scantlings.sysml": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+    "models/missions/course.sysml": "58bff9885a96ec73bcd4f0b405f9bef2f5b520bb605c0f1d8eb6ed630ed4d714",
+    "models/missions/scope.sysml": "3f4058d5a9fc653f77764849708b3729f286fc52e692ec418ea5fd47aad92854",
+    "models/missions/transgorge.sysml": "57ca69fabdcf360c123713094876f7fe11789e9461986f02c6b74339b2f87143",
+    "models/missions/verification.sysml": "569f3a2725e31135054dd8f937da1beb9ed047a748456db9d69587ffc47e49f0",
+    "models/vehicle/allocations.sysml": "f779f459f6e2e15fd786c42aa061e35b28fc76d0e82ab6fb70abe8b3c775a4a9",
+    "models/vehicle/architecture.sysml": "1a60afdd4ad1f8e76d83e0a179b36d9f277d4af2f29e682dd2dd9a161f8c0349",
+    "models/vehicle/decisions.sysml": "34d3a1300b2285eebf39236d2c6b929fd6599d8f428d3ab32e9a29da431e1076",
+    "models/vehicle/method.sysml": "9e825a3d7b867406d246d7adbce4e41be60ae3f26ef2950aeea1a7963fd4a934",
+    "models/vehicle/mission-logic.sysml": "58dff51cedf09ac7cea8d4b2b03032b3b60052833ede7f9e8ce567ce6865da23",
+    "models/vehicle/requirement-basis.sysml": "ebc7926d8b2ea96f4a76da88210270987a2576215beb7d1c4daa7386342be0a9",
+    "models/vehicle/requirements.sysml": "53ccdd473d66090777742923d721a52351deaee799b08a49e05619bb94412503",
+    "models/vehicle/source-evidence.sysml": "028ba4009dc681ed1cc3205d6f6385dba8062931303645fb1347030f6b84c8f6",
+    "models/vehicle/structure.sysml": "9256a63e0971f1ccd9173766c4e49bdc0f29f22b649c1043bb1831fdfe9a8a6d",
+    "models/vehicle/use-cases.sysml": "a309fd7bb4c876ea09f62538ccef30849218eba87a8c282d30fb35057fb1902c",
+    "models/vehicle/verification.sysml": "b66bdf139f5fafcf9161701287da082f5c192e5fe326e1aba93ff295982277e9",
+    "packages/sysml-python/sysml_python/__init__.py": "64d808e0eb882a80f2ae567cb4d4659e10e9ffd89e6a564fa004028fc9f8fe64",
+    "packages/sysml-python/sysml_python/records.py": "a0f0455b185595cacffe8a5db5ad0a0a902e631e4a99364d88a09a0387e9871d",
+    "packages/sysml-python/sysml_python/provenance.py": "4e8de83f06d76bc170e6d5f77f42fcfd06ebeede0bef76702656e8cb3d05ac38",
+    "packages/sysml-python/sysml_python/project.py": "e218e7a95594b0b116377af8951eb5300b1deec4ade3f282454c055a9c16f812",
+    "packages/sysml-python/sysml_python/execution.py": "7ec0dabcb3f0d49ac5f5f04781f2fb9a3476c32bdde294f179a5ed96a04ca84f",
+    "packages/sysml-python/sysml_python/backends/abi.py": "e0b7b2c4cf5d5787c0ec9465cd6206a1596b6505e0c17d02e9ebdd936f556601",
+    "packages/sysml-python/sysml_python/backends/__init__.py": "bb2a07f663b348e070089471b3e8e94b065feff3fd97ded31930753edd2abaab",
+    "packages/sysml-python/sysml_python/backends/build.py": "88a692b23caa29bce31e7519db1c1e64f40a26d144e71c501ba26fc86d706676",
+    "packages/sysml-python/sysml_python/backends/opensysml.py": "aa4add40b71861f2d709692987ce089846ac04fe1ed6e02afb5f61e3245a247c",
+    "packages/sysml-python/sysml_python/backends/native.py": "d7a667fd7342d91aa75bf62e66a873687c59c51800163eda559edf058cc1d28d",
+    "pyproject.toml": "4b0d1450123297a9901c7271ba56bedf9797e6ea6cfd7d62d9ad8611cd334bd1",
+    "tools/boat_analysis/model/preparation.py": "8a8f94ee78a347bb6e86ab52f3ad6f1e7cbb8937f336180a1abcce7fe8260384",
+    "tools/boat_analysis/model/hydrostatic_mesh.py": "b446c81528381babbdf50475283d17966b9601bf6042cf46512de7253799b820"
+  },
+  "namedDesign": {
+    "before": {
+      "length_m": 1.1999999999991275,
+      "beam_m": 0.42,
+      "bottom_depth_m": 0.1,
+      "deck_height_m": 0.07,
+      "sail_m2": 0.4,
+      "sail_AR": 2.341980758978876,
+      "camber_scale": 1.5,
+      "wing_thickness_scale": 2.0,
+      "mast_fraction": 0.5238422485213118,
+      "mast_x_fraction": -0.1481170636448525,
+      "keel_m2": 0.02,
+      "keel_span_m": 0.19999999999977908,
+      "rudder_m2": 0.017679746777796716,
+      "rudder_span_m": 0.188041210379152,
+      "rudder_arm_fraction": 0.420003780182039,
+      "ballast_kg": 0.5,
+      "battery_Wh": 1300,
+      "panel_m2": 0.05,
+      "wing_torque_Nm": 1.5,
+      "rudder_torque_Nm": 0.34378095116731916,
+      "hull_glass_kg_m2": 0.452496128293465,
+      "wing_glass_kg_m2": 0.4,
+      "keel_glass_kg_m2": 2.5,
+      "rudder_glass_kg_m2": 3,
+      "hull_rib_pitch_m": 0.022436816975681086,
+      "foil_rib_pitch_m": 0.2299999999996331,
+      "battery_x_fraction": -2.528793840994581e-11,
+      "battery_z_fraction": 0.05,
+      "hull_fullness_exponent": 2.0
+    },
+    "after": {
+      "length_m": 1.1999999999991275,
+      "beam_m": 0.42,
+      "bottom_depth_m": 0.1,
+      "deck_height_m": 0.07,
+      "sail_m2": 0.4,
+      "sail_AR": 2.341980758978876,
+      "camber_scale": 1.5,
+      "wing_thickness_scale": 2.0,
+      "mast_fraction": 0.5238422485213118,
+      "mast_x_fraction": -0.1481170636448525,
+      "keel_m2": 0.02,
+      "keel_span_m": 0.19999999999977908,
+      "rudder_m2": 0.017679746777796716,
+      "rudder_span_m": 0.188041210379152,
+      "rudder_arm_fraction": 0.420003780182039,
+      "ballast_kg": 0.5,
+      "battery_Wh": 1300,
+      "panel_m2": 0.05,
+      "wing_torque_Nm": 1.5,
+      "rudder_torque_Nm": 0.34378095116731916,
+      "hull_glass_kg_m2": 0.452496128293465,
+      "wing_glass_kg_m2": 0.4,
+      "keel_glass_kg_m2": 2.5,
+      "rudder_glass_kg_m2": 3,
+      "hull_rib_pitch_m": 0.022436816975681086,
+      "foil_rib_pitch_m": 0.2299999999996331,
+      "battery_x_fraction": -2.528793840994581e-11,
+      "battery_z_fraction": 0.05,
+      "hull_fullness_exponent": 2.0
+    },
+    "exactlyEqual": true
+  },
+  "unchangedIntegrationInputs": {
+    "identifier": {
+      "before": "IC-01",
+      "after": "IC-01",
+      "exactlyEqual": true
+    },
+    "parameterNames": {
+      "before": [
+        "electronicsW",
+        "fixedEquipmentKg"
+      ],
+      "after": [
+        "electronicsW",
+        "fixedEquipmentKg"
+      ],
+      "exactlyEqual": true
+    },
+    "parameterValues": {
+      "before": [
+        12.570486111111112,
+        4.128571428571429
+      ],
+      "after": [
+        12.570486111111112,
+        4.128571428571429
+      ],
+      "exactlyEqual": true
+    },
+    "recoveryCapability": {
+      "before": [
+        1.5,
+        50,
+        8,
+        1.2,
+        2,
+        0.5,
+        40
+      ],
+      "after": [
+        1.5,
+        50,
+        8,
+        1.2,
+        2,
+        0.5,
+        40
+      ],
+      "exactlyEqual": true
+    },
+    "recoveryDepartureWh": {
+      "before": 43.2,
+      "after": 43.2,
+      "exactlyEqual": true
+    },
+    "recoveryNameplateWh": {
+      "before": 60,
+      "after": 60,
+      "exactlyEqual": true
+    },
+    "recoveryStandbyW": {
+      "before": 0.05,
+      "after": 0.05,
+      "exactlyEqual": true
+    },
+    "planningHorizonSeconds": {
+      "before": 180,
+      "after": 180,
+      "exactlyEqual": true
+    },
+    "controlPeriodSeconds": {
+      "before": 1,
+      "after": 1,
+      "exactlyEqual": true
+    },
+    "commandLatencySeconds": {
+      "before": 2,
+      "after": 2,
+      "exactlyEqual": true
+    },
+    "maneuverSeconds": {
+      "before": 15,
+      "after": 15,
+      "exactlyEqual": true
+    },
+    "minimumSailingSpeedMps": {
+      "before": 0.05,
+      "after": 0.05,
+      "exactlyEqual": true
+    },
+    "depowerPenaltyM": {
+      "before": 180,
+      "after": 180,
+      "exactlyEqual": true
+    },
+    "crossTrackWeight": {
+      "before": 0.5,
+      "after": 0.5,
+      "exactlyEqual": true
+    },
+    "maneuverPenaltyM": {
+      "before": 10,
+      "after": 10,
+      "exactlyEqual": true
+    },
+    "sensorRangeM": {
+      "before": 750,
+      "after": 750,
+      "exactlyEqual": true
+    },
+    "weedRangeM": {
+      "before": 40,
+      "after": 40,
+      "exactlyEqual": true
+    },
+    "sensorLatencyS": {
+      "before": 1,
+      "after": 1,
+      "exactlyEqual": true
+    },
+    "horizonS": {
+      "before": 14400,
+      "after": 14400,
+      "exactlyEqual": true
+    },
+    "seeds": {
+      "before": [
+        17,
+        29
+      ],
+      "after": [
+        17,
+        29
+      ],
+      "exactlyEqual": true
+    }
+  },
+  "unchangedAnalyses": {
+    "BlueDogCandidateEnergy::Reconciliation": {
+      "before": {
+        "averageBusW": 4.890628964581317,
+        "peakBusW": 7.262321698296685,
+        "exposureHours": 48.33604399677567,
+        "requiredWh": 312.82633955094434,
+        "departureWh": 316.8,
+        "headroomWh": 3.9736604490556715,
+        "reserveWh": 49.2,
+        "busWh": 236.39365680390796,
+        "dischargeLossWh": 26.265961867100884,
+        "selfDischargeWh": 0.9667208799355135,
+        "hardwareBudgetComplete": false
+      },
+      "after": {
+        "averageBusW": 4.890628964581317,
+        "peakBusW": 7.262321698296685,
+        "exposureHours": 48.33604399677567,
+        "requiredWh": 312.82633955094434,
+        "departureWh": 316.8,
+        "headroomWh": 3.9736604490556715,
+        "reserveWh": 49.2,
+        "busWh": 236.39365680390796,
+        "dischargeLossWh": 26.265961867100884,
+        "selfDischargeWh": 0.9667208799355135,
+        "hardwareBudgetComplete": false
+      },
+      "exactlyEqual": true
+    },
+    "BlueDogWeather::primary": {
+      "before": {
+        "probabilities": [
+          0,
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9,
+          1
+        ],
+        "eligible": true,
+        "westPass": true,
+        "eastPass": false,
+        "coverage": [
+          1,
+          0.9,
+          0.8,
+          0.7,
+          0.6,
+          0.5,
+          0.4,
+          0.30000000000000004,
+          0.19999999999999996,
+          0.09999999999999998,
+          0
+        ],
+        "conditionalHours": [
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          0
+        ]
+      },
+      "after": {
+        "probabilities": [
+          0,
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8,
+          0.9,
+          1
+        ],
+        "eligible": true,
+        "westPass": true,
+        "eastPass": false,
+        "coverage": [
+          1,
+          0.9,
+          0.8,
+          0.7,
+          0.6,
+          0.5,
+          0.4,
+          0.30000000000000004,
+          0.19999999999999996,
+          0.09999999999999998,
+          0
+        ],
+        "conditionalHours": [
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          21.399871474949084,
+          0
+        ]
+      },
+      "exactlyEqual": true
+    }
+  },
+  "recoveryBank": {
+    "exposureHours": 54.604566822929904,
+    "beforeWh": 40.46977165885351,
+    "afterWh": 40.46977165885351,
+    "exactlyEqual": true
+  },
+  "changedInterfaces": {
+    "designBinding": "Complete29-property named configuration replaces9 archive overlays",
+    "oldDesignProperties": 9,
+    "newDesignProperties": 29,
+    "addedOutputs": {
+      "independentRecoveryAssumed": true
+    },
+    "recoveryAnalysis": "New IC01-only native arithmetic includes explicit configuration applicability; no archived result replaced"
+  },
+  "interpretation": "Exact numerical software regression comparison; no full optimizer rerun or new physical qualification evidence.",
+  "physicalQualification": false,
+  "preserved": true
+}

@@ -1,0 +1,193 @@
+{
+  "analyses": {
+    "BlueDogIntegratedCandidate::Inputs": {
+      "identifier": "IC-01",
+      "parameterNames": [
+        "electronicsW",
+        "fixedEquipmentKg"
+      ],
+      "parameterValues": [
+        12.570486111111112,
+        4.128571428571429
+      ],
+      "designNames": [
+        "battery_Wh",
+        "beam_m",
+        "bottom_depth_m",
+        "deck_height_m",
+        "sail_m2",
+        "wing_glass_kg_m2",
+        "wing_torque_Nm",
+        "keel_glass_kg_m2",
+        "rudder_glass_kg_m2"
+      ],
+      "designValues": [
+        1300,
+        0.42,
+        0.1,
+        0.07,
+        0.4,
+        0.4,
+        1.5,
+        2.5,
+        3
+      ],
+      "recoveryCapability": [
+        1.5,
+        50,
+        8,
+        1.2,
+        2,
+        0.5,
+        40
+      ],
+      "recoveryDepartureWh": 43.2,
+      "recoveryNameplateWh": 60,
+      "recoveryStandbyW": 0.05,
+      "planningHorizonSeconds": 180,
+      "controlPeriodSeconds": 1,
+      "commandLatencySeconds": 2,
+      "maneuverSeconds": 15,
+      "minimumSailingSpeedMps": 0.05,
+      "depowerPenaltyM": 180,
+      "crossTrackWeight": 0.5,
+      "maneuverPenaltyM": 10,
+      "sensorRangeM": 750,
+      "weedRangeM": 40,
+      "sensorLatencyS": 1,
+      "horizonS": 14400,
+      "seeds": [
+        17,
+        29
+      ]
+    },
+    "BlueDogCandidateEnergy::Reconciliation": {
+      "averageBusW": 4.890628964581317,
+      "peakBusW": 7.262321698296685,
+      "exposureHours": 48.33604399677567,
+      "requiredWh": 312.82633955094434,
+      "departureWh": 316.8,
+      "headroomWh": 3.9736604490556715,
+      "reserveWh": 49.2,
+      "busWh": 236.39365680390796,
+      "dischargeLossWh": 26.265961867100884,
+      "selfDischargeWh": 0.9667208799355135,
+      "hardwareBudgetComplete": false
+    },
+    "BlueDogWeather::primary": {
+      "probabilities": [
+        0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1
+      ],
+      "eligible": true,
+      "westPass": true,
+      "eastPass": false,
+      "coverage": [
+        1,
+        0.9,
+        0.8,
+        0.7,
+        0.6,
+        0.5,
+        0.4,
+        0.30000000000000004,
+        0.19999999999999996,
+        0.09999999999999998,
+        0
+      ],
+      "conditionalHours": [
+        21.399871474949084,
+        21.399871474949084,
+        21.399871474949084,
+        21.399871474949084,
+        21.399871474949084,
+        21.399871474949084,
+        21.399871474949084,
+        21.399871474949084,
+        21.399871474949084,
+        21.399871474949084,
+        0
+      ]
+    }
+  },
+  "composedDesign": {
+    "length_m": 1.1999999999991275,
+    "beam_m": 0.42,
+    "bottom_depth_m": 0.1,
+    "deck_height_m": 0.07,
+    "sail_m2": 0.4,
+    "sail_AR": 2.341980758978876,
+    "camber_scale": 1.5,
+    "wing_thickness_scale": 2.0,
+    "mast_fraction": 0.5238422485213118,
+    "mast_x_fraction": -0.1481170636448525,
+    "keel_m2": 0.02,
+    "keel_span_m": 0.19999999999977908,
+    "rudder_m2": 0.017679746777796716,
+    "rudder_span_m": 0.188041210379152,
+    "rudder_arm_fraction": 0.420003780182039,
+    "ballast_kg": 0.5,
+    "battery_Wh": 1300,
+    "panel_m2": 0.05,
+    "wing_torque_Nm": 1.5,
+    "rudder_torque_Nm": 0.34378095116731916,
+    "hull_glass_kg_m2": 0.452496128293465,
+    "wing_glass_kg_m2": 0.4,
+    "keel_glass_kg_m2": 2.5,
+    "rudder_glass_kg_m2": 3,
+    "hull_rib_pitch_m": 0.022436816975681086,
+    "foil_rib_pitch_m": 0.2299999999996331,
+    "battery_x_fraction": -2.528793840994581e-11,
+    "battery_z_fraction": 0.05,
+    "hull_fullness_exponent": 2.0
+  },
+  "archiveDesignExactlyEqual": true,
+  "archiveManifestSha256": "569b2c7aa317ab7a92622ca3c453482e6372aa499e3ca25d1e0f28be6e49ce59",
+  "exposureHours": 54.604566822929904,
+  "recoveryBankAfterExposureWh": 40.46977165885351,
+  "archivedNumericalOutputs": {
+    "mass": {
+      "totalMass": 20.06076931271301,
+      "hullMass": 2.8031414937734525,
+      "wingMass": 1.438837526178471,
+      "keelMass": 0.24432255513680257,
+      "rudderMass": 0.25361488066346866,
+      "batteryMass": 9.285714285714286,
+      "panelMass": 0.1,
+      "wingDriveMass": 0.425,
+      "rudderDriveMass": 0.13156714267509786,
+      "equipmentMass": 4.878571428571429,
+      "cgX": -0.02689814108069589,
+      "cgY": -0.0028089272737017094,
+      "cgZ": -0.024429493763977957,
+      "hullMaterialVolume": 0.001918120292224565,
+      "wingMaterialVolume": 0.0008682247630236642,
+      "keelMaterialVolume": 0.00014980210304710648,
+      "rudderMaterialVolume": 0.00015574340030966957,
+      "hullLaminateThickness": 0.0005609207572398221,
+      "wingLaminateThickness": 0.0004958457959454969,
+      "keelLaminateThickness": 0.0030990362246593552,
+      "rudderLaminateThickness": 0.003718843469591226
+    },
+    "concept": {
+      "voyageEnergyMargin": 1.0206240612644115,
+      "installationVolumeMargin": 0.3866223459924881,
+      "passageHours": 54.604566822929904,
+      "departureWh": 936.0,
+      "requiredWh": 833.9375938735589,
+      "batteryVolumeM3": 0.0065,
+      "equipmentVolumeM3": 0.010870277142493053,
+      "availableVolumeM3": 0.021236500602417933
+    }
+  },
+  "scope": "Read-only baseline native calculations and immutable archived outputs; no new sizing or physical test."
+}

@@ -1,0 +1,22 @@
+{
+  "sourceRevision": "9ab77ad9307d9d5e8495f49f2b817db484dcc3c9",
+  "files": {
+    "baseline-numerics.json": {
+      "sha256": "8c6e852b88ac859b11066d9b8673a7da552f8634a0b399c965e8a08559ac0600"
+    },
+    "ic01-demonstration.json": {
+      "sha256": "00b2aa1da61794bcebaf823ea394b686d968c378a4d7389c232c8c1b2377d6ad"
+    },
+    "oosem-audit.json": {
+      "sha256": "fec6655bcb91b666a61ff695f70aa065d528a2092c4a5bee35bd57ae302922f0"
+    },
+    "oosem-numerical-comparison.json": {
+      "sha256": "520cee2877d5c4cb79f7f0c20f8e4022012b9e669236f18b32bd970d0340805b"
+    },
+    "validation-summary.json": {
+      "sha256": "456b05c7b10017327eb1309617a6c7e5ab98f364277d90b0d27cc91ce8183b62"
+    }
+  },
+  "qualified": false,
+  "scope": "OOSEM model, native policy and numerical software regression only. The audit retains its precommit execution identity; all source hashes resolve to this manifest revision. No physical qualification or accepted vessel verification."
+}

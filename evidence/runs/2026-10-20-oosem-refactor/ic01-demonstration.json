@@ -1,0 +1,1583 @@
+{
+  "configuration": "BlueDogIC01::design",
+  "configurationId": "IC-01",
+  "configurationInputs": {
+    "identifier": "IC-01",
+    "independentRecoveryAssumed": true,
+    "parameterNames": [
+      "electronicsW",
+      "fixedEquipmentKg"
+    ],
+    "parameterValues": [
+      12.570486111111112,
+      4.128571428571429
+    ],
+    "designNames": [
+      "length_m",
+      "beam_m",
+      "bottom_depth_m",
+      "deck_height_m",
+      "sail_m2",
+      "sail_AR",
+      "camber_scale",
+      "wing_thickness_scale",
+      "mast_fraction",
+      "mast_x_fraction",
+      "keel_m2",
+      "keel_span_m",
+      "rudder_m2",
+      "rudder_span_m",
+      "rudder_arm_fraction",
+      "ballast_kg",
+      "battery_Wh",
+      "panel_m2",
+      "wing_torque_Nm",
+      "rudder_torque_Nm",
+      "hull_glass_kg_m2",
+      "wing_glass_kg_m2",
+      "keel_glass_kg_m2",
+      "rudder_glass_kg_m2",
+      "hull_rib_pitch_m",
+      "foil_rib_pitch_m",
+      "battery_x_fraction",
+      "battery_z_fraction",
+      "hull_fullness_exponent"
+    ],
+    "designValues": [
+      1.1999999999991275,
+      0.42,
+      0.1,
+      0.07,
+      0.4,
+      2.341980758978876,
+      1.5,
+      2.0,
+      0.5238422485213118,
+      -0.1481170636448525,
+      0.02,
+      0.19999999999977908,
+      0.017679746777796716,
+      0.188041210379152,
+      0.420003780182039,
+      0.5,
+      1300,
+      0.05,
+      1.5,
+      0.34378095116731916,
+      0.452496128293465,
+      0.4,
+      2.5,
+      3,
+      0.022436816975681086,
+      0.2299999999996331,
+      -2.528793840994581e-11,
+      0.05,
+      2.0
+    ],
+    "recoveryCapability": [
+      1.5,
+      50,
+      8,
+      1.2,
+      2,
+      0.5,
+      40
+    ],
+    "recoveryDepartureWh": 43.2,
+    "recoveryNameplateWh": 60,
+    "recoveryStandbyW": 0.05,
+    "planningHorizonSeconds": 180,
+    "controlPeriodSeconds": 1,
+    "commandLatencySeconds": 2,
+    "maneuverSeconds": 15,
+    "minimumSailingSpeedMps": 0.05,
+    "depowerPenaltyM": 180,
+    "crossTrackWeight": 0.5,
+    "maneuverPenaltyM": 10,
+    "sensorRangeM": 750,
+    "weedRangeM": 40,
+    "sensorLatencyS": 1,
+    "horizonS": 14400,
+    "seeds": [
+      17,
+      29
+    ]
+  },
+  "modelHash": "b7e4c82227d6dfe3f843b081e36d535aeb0c387ec162d0725720cc0a2e23f435",
+  "sourceRevision": "9ab77ad9307d9d5e8495f49f2b817db484dcc3c9",
+  "sourceTreeModified": true,
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/avoidance-failures.sysml": "e696a0d798ca05bbcf3ef05a90c0c2b67bf3268f62238dacd691d553cb46d1f4",
+    "models/analyses/candidate-energy.sysml": "f05a4a2187aabd316ac06e1968fd8e9fae00ab3ca5980d9a216ce2a5146c4241",
+    "models/analyses/class-specific-detection.sysml": "9e585fb65056849ffe3827d6b489912bf6e26e4ae6d20bde7a9b005a3836a8b3",
+    "models/analyses/development-risks.sysml": "02215b2776e5c643d044ce4b8a47c51e8e5796e1ba5a9e451714cbe781ec2a40",
+    "models/analyses/dfmea.sysml": "8c98402beff7af56f9203d0ada24547b4d692de64fb0d9f804ae1a8b632193a6",
+    "models/analyses/encounter-envelope.sysml": "61654e8fe683aa4932f6c409f8fe954ebd6f3fb5c1295805ecced68b15071db5",
+    "models/analyses/encounter-feasibility.sysml": "4067475ad5174a54f22fc72baad6d8ee3cc502cbc3bc6dbfd528db49277500cb",
+    "models/analyses/encounter-review.sysml": "7efaf1b169a56ae75c6465fe130bb6a0c3fca2b94faa1f3584cea43a666f1bbb",
+    "models/analyses/energy.sysml": "0a1fc9435697450907604405c21e87882add03071f1024f73bf26ab2c845bc36",
+    "models/analyses/environment-review.sysml": "5d74730715837b2cfb7596af73d481c5545308ec03cd9b73c6dcb807d7efa243",
+    "models/analyses/integrated-candidate.sysml": "9eab58e1ce9d4d79d57b6fe7c0740fda867ac4286c687f1786673a620c5f0c7b",
+    "models/analyses/location-traffic-risk.sysml": "21fcbaa999f92f7bd1b305708fea4dccd8b0bc5688b0f8d1a749e218b41483ba",
+    "models/analyses/maneuver-dynamics.sysml": "065494ce5c9ff1fa96e761181c3ff40651f0858085c88894f39f50852018c750",
+    "models/analyses/mission.sysml": "5d10d5dcb127b499437a7e915e0c92ad98104477762a0a3d119efc052e6a3cd6",
+    "models/analyses/navigation-controller.sysml": "32d2edfcb696147b7fad2daeb682c0d2bc09a28af0e758b78904cdfde0d77b30",
+    "models/analyses/passage-exposure.sysml": "72f055615ffabba4ec9377d00d2f76ade31ee68091f012b60ed56d5bb1a64f73",
+    "models/analyses/polar-demand.sysml": "2ae69be8debe151f0c081cc37da56074c878a77ff50a647ab5e4364a9a866905",
+    "models/analyses/recovery-propulsion.sysml": "bb79e2d030eda65bf8c2d243d62d9e51a02a9b114f7fb5659fece646a8ab6829",
+    "models/analyses/recovery-risk.sysml": "91d821d597600176304c6d2dede380f409aacee8eae2769ce5b033e9eb7309f5",
+    "models/analyses/recovery-site-review.sysml": "f0e8915d23aea03f4b8af834960fa8dfc4fd075ae0512188ecb97c6f4a3f051d",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "d82e06121ab8bb8a472e4a1c83b2e2f96faf517f9f3e65390a9d1c64d0e6a4a3",
+    "models/analyses/sail-trade.sysml": "c5cd6ec64a05c65e1eece7c21b47ca97747ad0a848000071b2baa6c9390f22eb",
+    "models/analyses/sizing/credibility.sysml": "42eca821d95eca13772ef1326b6a27b625e1f6ec0e890d2a2ad94f717455728c",
+    "models/analyses/sizing/evidence.sysml": "f0d2a6d886c71d4b7adc632271ff122f7bc57b1a6302db84bf844d74f20fe801",
+    "models/analyses/sizing/inputs.sysml": "934dde8fa12d41656d776b954c7a695f7979e003e629d2677ea4de51b1615925",
+    "models/analyses/sizing/operating.sysml": "04e6733d21d749c8a06e141ad67b7807cb349b6b03612a0c3d2a315ee4c92ce7",
+    "models/analyses/sizing/uncertainty.sysml": "78d71e2767b681561768d486ca6d6a9d4e16332fd576fe9cfe1a8e01d3dfcf3b",
+    "models/analyses/structural-basis.sysml": "c85be7e177715c5586e13508ecb973ac9d9355cac58fac684c683c0da3fc6ed6",
+    "models/analyses/surface-environment.sysml": "5778f163047634797e8ef65a8783a5e783676df530bc0caa0247a679c00222ea",
+    "models/analyses/wave-performance.sysml": "383e94db89dfe142db9e46398de22a707c543f754d3f778aa600a695689d6b3d",
+    "models/analyses/weather.sysml": "44ecf6b6d1e331fa5185398873d42e553128533c925d292dfc4287851ff1ee4c",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/acoustic-equipment.sysml": "cf00a437976ecfd928740adf21a711da19184bd87347e1c8e6ce8126ee6b419e",
+    "models/configurations/energy.sysml": "9a67f9f74fa51fb67f2749cf3b4e12615014f383b365a48043f3461999d6c7b8",
+    "models/configurations/ic01.sysml": "0b953814697ff78defa9931de9c23813a23ca90eb1a2cd7121f4d755064a221f",
+    "models/configurations/operating.sysml": "2f3019e2b9c4a9985d7a5eabfbd39dde694903dc378d8381c1b550f3c48c59d0",
+    "models/configurations/polar-demand.sysml": "776327bf7cefc8edc26f29000d21261cc3f2d2da9da8dcd8a6e30ffa5ced121e",
+    "models/configurations/reference.sysml": "409baa5254262a527b27af7fce00ffb3da35f249fe54e51f3cf024bdf86671be",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/sensing-equipment.sysml": "67f7f5e14071cc49cad4dc86c35477caeae217c06ecb88a30b6b7f97023f3845",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/configurations/wind-equipment.sysml": "ebb44c8c073855c60e4fbe6a6d1d3ee0b9e8dac26284f0451d89bdde67e6ff8c",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/evidence/current-sizing.sysml": "b6176f48be47dde61bd41ea892fec6c68258b72afdf2265ffb1bba5fb642b991",
+    "models/evidence/finite-passage-sizing.sysml": "7c0cac2c4733ba43b652edc7bc547265087434656a11694670ff5347c2028f56",
+    "models/evidence/gorge-wind.sysml": "2eee7571fc7ac02bcd054b0c226b5edb54ff931a31d74c508331ff1bf20ef466",
+    "models/evidence/sizing-continuation.sysml": "b8825d29058049ef75538b8b40b0dceb5bbdcb9aac806457856b9b2a9ccfee2e",
+    "models/evidence/srr-current.sysml": "c429f99895f703e8189f10383374e02865c78a7d5bc623478affdda1600daa33",
+    "models/evidence/srr-frontier.sysml": "c153ab46f07b4fffe4e4d946bd42a81b43f5fb6f6d5f0d95ee52097d8a7333db",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/appendages.sysml": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+    "models/libraries/marine/concept.sysml": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+    "models/libraries/marine/course.sysml": "3f58d6c0dc668858aa0b6bdad232c26b0ac75952ad67d0f06e73f4fbd464c85c",
+    "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "models/libraries/marine/hull-resistance.sysml": "967550313effe20092525e10c1695771b8354c66478203f449ac902d8af1a5f1",
+    "models/libraries/marine/hydrostatics.sysml": "b6791576a108dee393063a15a1a359113a8c24aba793105fa7d60fa193e9d858",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/recovery.sysml": "00c8c1fcfda115116fc66bf1db5a67334e04ea893182a454a796ada62eeeaab4",
+    "models/libraries/marine/reliability.sysml": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+    "models/libraries/marine/sailing.sysml": "8281caf912a840d83d5a6d1c39fe0422419ce7fb9ccaae3d9044b0c5df33446f",
+    "models/libraries/marine/surface.sysml": "781d337d8553160eb8d3c0724ae2aef4463d51ae6bc05ef475d32884645213c8",
+    "models/libraries/marine/wave-performance.sysml": "ee1d491adb19773eb151588a5f8ccb52c8ee4364150c5783637c58ada8a07ba9",
+    "models/libraries/marine/weather.sysml": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326",
+    "models/libraries/structures/mass-properties.sysml": "ced6365432541c9c9ada7b683564efde12f597d46e96144fd70221f767ef5dde",
+    "models/libraries/structures/scantlings.sysml": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+    "models/missions/course.sysml": "58bff9885a96ec73bcd4f0b405f9bef2f5b520bb605c0f1d8eb6ed630ed4d714",
+    "models/missions/scope.sysml": "3f4058d5a9fc653f77764849708b3729f286fc52e692ec418ea5fd47aad92854",
+    "models/missions/transgorge.sysml": "57ca69fabdcf360c123713094876f7fe11789e9461986f02c6b74339b2f87143",
+    "models/missions/verification.sysml": "569f3a2725e31135054dd8f937da1beb9ed047a748456db9d69587ffc47e49f0",
+    "models/vehicle/allocations.sysml": "f779f459f6e2e15fd786c42aa061e35b28fc76d0e82ab6fb70abe8b3c775a4a9",
+    "models/vehicle/architecture.sysml": "1a60afdd4ad1f8e76d83e0a179b36d9f277d4af2f29e682dd2dd9a161f8c0349",
+    "models/vehicle/decisions.sysml": "34d3a1300b2285eebf39236d2c6b929fd6599d8f428d3ab32e9a29da431e1076",
+    "models/vehicle/method.sysml": "9e825a3d7b867406d246d7adbce4e41be60ae3f26ef2950aeea1a7963fd4a934",
+    "models/vehicle/mission-logic.sysml": "58dff51cedf09ac7cea8d4b2b03032b3b60052833ede7f9e8ce567ce6865da23",
+    "models/vehicle/requirement-basis.sysml": "ebc7926d8b2ea96f4a76da88210270987a2576215beb7d1c4daa7386342be0a9",
+    "models/vehicle/requirements.sysml": "53ccdd473d66090777742923d721a52351deaee799b08a49e05619bb94412503",
+    "models/vehicle/source-evidence.sysml": "028ba4009dc681ed1cc3205d6f6385dba8062931303645fb1347030f6b84c8f6",
+    "models/vehicle/structure.sysml": "9256a63e0971f1ccd9173766c4e49bdc0f29f22b649c1043bb1831fdfe9a8a6d",
+    "models/vehicle/use-cases.sysml": "a309fd7bb4c876ea09f62538ccef30849218eba87a8c282d30fb35057fb1902c",
+    "models/vehicle/verification.sysml": "b66bdf139f5fafcf9161701287da082f5c192e5fe326e1aba93ff295982277e9",
+    "packages/sysml-python/sysml_python/__init__.py": "64d808e0eb882a80f2ae567cb4d4659e10e9ffd89e6a564fa004028fc9f8fe64",
+    "packages/sysml-python/sysml_python/records.py": "a0f0455b185595cacffe8a5db5ad0a0a902e631e4a99364d88a09a0387e9871d",
+    "packages/sysml-python/sysml_python/provenance.py": "4e8de83f06d76bc170e6d5f77f42fcfd06ebeede0bef76702656e8cb3d05ac38",
+    "packages/sysml-python/sysml_python/project.py": "e218e7a95594b0b116377af8951eb5300b1deec4ade3f282454c055a9c16f812",
+    "packages/sysml-python/sysml_python/execution.py": "7ec0dabcb3f0d49ac5f5f04781f2fb9a3476c32bdde294f179a5ed96a04ca84f",
+    "packages/sysml-python/sysml_python/backends/abi.py": "e0b7b2c4cf5d5787c0ec9465cd6206a1596b6505e0c17d02e9ebdd936f556601",
+    "packages/sysml-python/sysml_python/backends/__init__.py": "bb2a07f663b348e070089471b3e8e94b065feff3fd97ded31930753edd2abaab",
+    "packages/sysml-python/sysml_python/backends/build.py": "88a692b23caa29bce31e7519db1c1e64f40a26d144e71c501ba26fc86d706676",
+    "packages/sysml-python/sysml_python/backends/opensysml.py": "aa4add40b71861f2d709692987ce089846ac04fe1ed6e02afb5f61e3245a247c",
+    "packages/sysml-python/sysml_python/backends/native.py": "d7a667fd7342d91aa75bf62e66a873687c59c51800163eda559edf058cc1d28d",
+    "pyproject.toml": "4b0d1450123297a9901c7271ba56bedf9797e6ea6cfd7d62d9ad8611cd334bd1",
+    "tools/boat_analysis/model/preparation.py": "8a8f94ee78a347bb6e86ab52f3ad6f1e7cbb8937f336180a1abcce7fe8260384",
+    "tools/boat_analysis/model/hydrostatic_mesh.py": "b446c81528381babbdf50475283d17966b9601bf6042cf46512de7253799b820",
+    "tools/boat_analysis/mission/demonstration.py": "35298620a74a613b3cd79ee56720baecfeb677f5170b9cf3a3ee724de68bf94a",
+    "tools/boat_analysis/mission/logic.py": "fbf1b323a2ade72386f60b4f185b585b0059786c17287e26ba9f823fa94b14b9",
+    "tools/boat_analysis/model/runtime.py": "3cfbd45a15ce6c3a0dade3a49aea78a6ada1f135e98c3150deeb54e8a57b1226",
+    "tools/boat_analysis/model/install.py": "3853c64a76703de30cee1fbce9b823d85dfa7b5cc5057dc170a91d2b610139ee",
+    "tools/boat_analysis/evidence/records.py": "7b4776265f6d5930aad474143f9d9ff4f204872ebd609666f8b3a585cc080cb6",
+    "uv.lock": "7ba39412e14decf22cb3df7a06371f9d97f66ef6eb0309abd13af5c333e10603"
+  },
+  "nativeAnalyses": {
+    "BlueDogIntegratedCandidate::IC01RecoveryIllustration": {
+      "status": "holds",
+      "exit": 0,
+      "checks": [
+        {
+          "subject": "BlueDogIntegratedCandidate::IC01RecoveryIllustration",
+          "status": "holds",
+          "values": [
+            {
+              "name": "configurationApplicable",
+              "value": "true"
+            },
+            {
+              "name": "configurationId",
+              "value": "\"IC-01\""
+            },
+            {
+              "name": "mainNameplateWh",
+              "value": "1300"
+            },
+            {
+              "name": "independentNameplateWh",
+              "value": "60"
+            },
+            {
+              "name": "remainingWh",
+              "value": "43.0"
+            },
+            {
+              "name": "groundSpeedMps",
+              "value": "1.1"
+            },
+            {
+              "name": "transitSeconds",
+              "value": "545.4545454545454"
+            },
+            {
+              "name": "requiredWh",
+              "value": "12.545454545454543"
+            },
+            {
+              "name": "routeFeasible",
+              "value": "true"
+            },
+            {
+              "name": "reserveFits",
+              "value": "true"
+            },
+            {
+              "name": "physicalQualification",
+              "value": "false"
+            },
+            {
+              "name": "assertion configurationApplicability",
+              "value": "satisfied"
+            },
+            {
+              "name": "assertion inputDomain",
+              "value": "satisfied"
+            }
+          ],
+          "lines": [
+            "\u2713 BlueDogIntegratedCandidate::IC01RecoveryIllustration",
+            "  configurationApplicable = true",
+            "  configurationId = \"IC-01\"",
+            "  mainNameplateWh = 1300",
+            "  independentNameplateWh = 60",
+            "  remainingWh = 43.0",
+            "  groundSpeedMps = 1.1",
+            "  transitSeconds = 545.4545454545454",
+            "  requiredWh = 12.545454545454543",
+            "  routeFeasible = true",
+            "  reserveFits = true",
+            "  physicalQualification = false",
+            "  assertion configurationApplicability: satisfied",
+            "  assertion inputDomain: satisfied",
+            "  standing: value (observed: 1 run under reverse)"
+          ],
+          "rows": null,
+          "plan": {
+            "engine": "auto",
+            "standing": "value (observed: 1 run under reverse)",
+            "steps": [
+              {
+                "engine": "run",
+                "status": "answered"
+              }
+            ],
+            "workers": 0,
+            "warming": 0
+          },
+          "results": [
+            {
+              "engine": "run",
+              "claim": "value",
+              "strength": "observed",
+              "bounds": [
+                {
+                  "name": "steps",
+                  "limit": 10000000,
+                  "reached": false
+                },
+                {
+                  "name": "elements",
+                  "limit": 1000000,
+                  "reached": false
+                }
+              ],
+              "witness": null,
+              "standing": "value (observed: 1 run under reverse)"
+            }
+          ]
+        }
+      ],
+      "diagnostics": null,
+      "output": [
+        "\u2713 package BlueDogWingActuator",
+        "\u2713 package BlueDogAerodynamicPolicy",
+        "\u2713 package BlueDogAvoidanceFailures",
+        "\u2713 package BlueDogCandidateEnergy",
+        "\u2713 package BlueDogClassDetection",
+        "\u2713 package BlueDogRisks",
+        "\u2713 package BlueDogDFMEA",
+        "\u2713 package BlueDogEncounterEnvelope",
+        "\u2713 package BlueDogEncounterFeasibility",
+        "\u2713 package BlueDogEncounterReview",
+        "\u2713 package BlueDogEnergy",
+        "\u2713 package BlueDogEnvironmentReview",
+        "\u2713 package BlueDogIntegratedCandidate",
+        "\u2713 package BlueDogLocationTraffic",
+        "\u2713 package BlueDogManeuverDynamics",
+        "\u2713 package BlueDogMissionSimulation",
+        "\u2713 package BlueDogNavigationController",
+        "\u2713 package BlueDogPassageExposure",
+        "\u2713 package BlueDogSailing",
+        "\u2713 package RecoveryPropulsionTrade",
+        "\u2713 package BlueDogRecoveryRisk",
+        "\u2713 package BlueDogRecoverySiteReview",
+        "\u2713 package BlueDogHydrostatics",
+        "\u2713 package BlueDogReliability",
+        "\u2713 package BlueDogSailTrade",
+        "\u2713 package BlueDogConceptCredibility",
+        "\u2713 package BlueDogSizingEvidence",
+        "\u2713 package BlueDogCoupledSizing",
+        "\u2713 package BlueDogCoupledOperation",
+        "\u2713 package BlueDogCoupledUncertainty",
+        "\u2713 package BlueDogStructuralBasis",
+        "\u2713 package BlueDogSurfaceEnvironment",
+        "\u2713 package BlueDogWavePerformance",
+        "\u2713 package BlueDogWeather",
+        "\u2713 package BlueDogWingHeel",
+        "\u2713 package BlueDogAcousticEquipment",
+        "\u2713 package BlueDogEnergyExamples",
+        "\u2713 package BlueDogIC01",
+        "\u2713 package BlueDogOperatingEnvironment",
+        "\u2713 package BlueDogSailingExamples",
+        "\u2713 package BlueDogConfigurations",
+        "\u2713 package BlueDogReliabilityExamples",
+        "\u2713 package BlueDogSensingEquipment",
+        "\u2713 package BlueDogStudyPlan",
+        "\u2713 package BlueDogWindEquipment",
+        "\u2713 package BlueDogRecordedSizing",
+        "\u2713 package BlueDogCurrentSizing",
+        "\u2713 package BlueDogFinitePassageSizing",
+        "\u2713 package BlueDogWindObservations",
+        "\u2713 package BlueDogSizingContinuation",
+        "\u2713 package BlueDogSRRCurrent",
+        "\u2713 package BlueDogSRRFrontier",
+        "\u2713 package MarineActuation",
+        "\u2713 package MarineEnergy",
+        "\u2713 package MarineAppendages",
+        "\u2713 package MarineConcept",
+        "\u2713 package MarineCourse",
+        "\u2713 package MarineDesign",
+        "\u2713 package MarineResistance",
+        "\u2713 package MarineHydrostatics",
+        "\u2713 package MarinePropulsion",
+        "\u2713 package MarineRecovery",
+        "\u2713 package MarineReliability",
+        "\u2713 package MarineSailing",
+        "\u2713 package MarineSurface",
+        "\u2713 package MarineWavePerformance",
+        "\u2713 package MarineWeather",
+        "\u2713 package InlandExtended",
+        "\u2713 package InlandNavigationExperiment",
+        "\u2713 package MarineMass",
+        "\u2713 package MarineStructures",
+        "\u2713 package TransGorgeCourse",
+        "\u2713 package BlueDogMissionScope",
+        "\u2713 package GorgeChallenge",
+        "\u2713 package GorgeChallengeVerification",
+        "\u2713 package BlueDogSatisfaction",
+        "\u2713 package BlueDog",
+        "\u2713 package BlueDogLogicalArchitecture",
+        "\u2713 package BlueDogPhysicalArchitecture",
+        "\u2713 package BlueDogDesignDecisions",
+        "\u2713 package BlueDogMethod",
+        "\u2713 package BlueDogMissionLogic",
+        "\u2713 package BlueDogRequirementBasis",
+        "\u2713 package BlueDogRequirements",
+        "\u2713 package BlueDogSourceEvidence",
+        "\u2713 package BlueDogStructure",
+        "\u2713 package BlueDogUseCases",
+        "\u2713 package BlueDogRequirementVerification"
+      ],
+      "errors": null
+    },
+    "BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration": {
+      "status": "holds",
+      "exit": 0,
+      "checks": [
+        {
+          "subject": "BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration",
+          "status": "holds",
+          "values": [
+            {
+              "name": "configurationApplicable",
+              "value": "true"
+            },
+            {
+              "name": "configurationId",
+              "value": "\"IC-01\""
+            },
+            {
+              "name": "mainNameplateWh",
+              "value": "1300"
+            },
+            {
+              "name": "independentNameplateWh",
+              "value": "60"
+            },
+            {
+              "name": "remainingWh",
+              "value": "43.0"
+            },
+            {
+              "name": "groundSpeedMps",
+              "value": "0.09999999999999998"
+            },
+            {
+              "name": "transitSeconds",
+              "value": "6000.000000000001"
+            },
+            {
+              "name": "requiredWh",
+              "value": "98.0"
+            },
+            {
+              "name": "routeFeasible",
+              "value": "true"
+            },
+            {
+              "name": "reserveFits",
+              "value": "false"
+            },
+            {
+              "name": "physicalQualification",
+              "value": "false"
+            },
+            {
+              "name": "assertion configurationApplicability",
+              "value": "satisfied"
+            },
+            {
+              "name": "assertion inputDomain",
+              "value": "satisfied"
+            }
+          ],
+          "lines": [
+            "\u2713 BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration",
+            "  configurationApplicable = true",
+            "  configurationId = \"IC-01\"",
+            "  mainNameplateWh = 1300",
+            "  independentNameplateWh = 60",
+            "  remainingWh = 43.0",
+            "  groundSpeedMps = 0.09999999999999998",
+            "  transitSeconds = 6000.000000000001",
+            "  requiredWh = 98.0",
+            "  routeFeasible = true",
+            "  reserveFits = false",
+            "  physicalQualification = false",
+            "  assertion configurationApplicability: satisfied",
+            "  assertion inputDomain: satisfied",
+            "  standing: value (observed: 1 run under reverse)"
+          ],
+          "rows": null,
+          "plan": {
+            "engine": "auto",
+            "standing": "value (observed: 1 run under reverse)",
+            "steps": [
+              {
+                "engine": "run",
+                "status": "answered"
+              }
+            ],
+            "workers": 0,
+            "warming": 0
+          },
+          "results": [
+            {
+              "engine": "run",
+              "claim": "value",
+              "strength": "observed",
+              "bounds": [
+                {
+                  "name": "steps",
+                  "limit": 10000000,
+                  "reached": false
+                },
+                {
+                  "name": "elements",
+                  "limit": 1000000,
+                  "reached": false
+                }
+              ],
+              "witness": null,
+              "standing": "value (observed: 1 run under reverse)"
+            }
+          ]
+        }
+      ],
+      "diagnostics": null,
+      "output": [
+        "\u2713 package BlueDogWingActuator",
+        "\u2713 package BlueDogAerodynamicPolicy",
+        "\u2713 package BlueDogAvoidanceFailures",
+        "\u2713 package BlueDogCandidateEnergy",
+        "\u2713 package BlueDogClassDetection",
+        "\u2713 package BlueDogRisks",
+        "\u2713 package BlueDogDFMEA",
+        "\u2713 package BlueDogEncounterEnvelope",
+        "\u2713 package BlueDogEncounterFeasibility",
+        "\u2713 package BlueDogEncounterReview",
+        "\u2713 package BlueDogEnergy",
+        "\u2713 package BlueDogEnvironmentReview",
+        "\u2713 package BlueDogIntegratedCandidate",
+        "\u2713 package BlueDogLocationTraffic",
+        "\u2713 package BlueDogManeuverDynamics",
+        "\u2713 package BlueDogMissionSimulation",
+        "\u2713 package BlueDogNavigationController",
+        "\u2713 package BlueDogPassageExposure",
+        "\u2713 package BlueDogSailing",
+        "\u2713 package RecoveryPropulsionTrade",
+        "\u2713 package BlueDogRecoveryRisk",
+        "\u2713 package BlueDogRecoverySiteReview",
+        "\u2713 package BlueDogHydrostatics",
+        "\u2713 package BlueDogReliability",
+        "\u2713 package BlueDogSailTrade",
+        "\u2713 package BlueDogConceptCredibility",
+        "\u2713 package BlueDogSizingEvidence",
+        "\u2713 package BlueDogCoupledSizing",
+        "\u2713 package BlueDogCoupledOperation",
+        "\u2713 package BlueDogCoupledUncertainty",
+        "\u2713 package BlueDogStructuralBasis",
+        "\u2713 package BlueDogSurfaceEnvironment",
+        "\u2713 package BlueDogWavePerformance",
+        "\u2713 package BlueDogWeather",
+        "\u2713 package BlueDogWingHeel",
+        "\u2713 package BlueDogAcousticEquipment",
+        "\u2713 package BlueDogEnergyExamples",
+        "\u2713 package BlueDogIC01",
+        "\u2713 package BlueDogOperatingEnvironment",
+        "\u2713 package BlueDogSailingExamples",
+        "\u2713 package BlueDogConfigurations",
+        "\u2713 package BlueDogReliabilityExamples",
+        "\u2713 package BlueDogSensingEquipment",
+        "\u2713 package BlueDogStudyPlan",
+        "\u2713 package BlueDogWindEquipment",
+        "\u2713 package BlueDogRecordedSizing",
+        "\u2713 package BlueDogCurrentSizing",
+        "\u2713 package BlueDogFinitePassageSizing",
+        "\u2713 package BlueDogWindObservations",
+        "\u2713 package BlueDogSizingContinuation",
+        "\u2713 package BlueDogSRRCurrent",
+        "\u2713 package BlueDogSRRFrontier",
+        "\u2713 package MarineActuation",
+        "\u2713 package MarineEnergy",
+        "\u2713 package MarineAppendages",
+        "\u2713 package MarineConcept",
+        "\u2713 package MarineCourse",
+        "\u2713 package MarineDesign",
+        "\u2713 package MarineResistance",
+        "\u2713 package MarineHydrostatics",
+        "\u2713 package MarinePropulsion",
+        "\u2713 package MarineRecovery",
+        "\u2713 package MarineReliability",
+        "\u2713 package MarineSailing",
+        "\u2713 package MarineSurface",
+        "\u2713 package MarineWavePerformance",
+        "\u2713 package MarineWeather",
+        "\u2713 package InlandExtended",
+        "\u2713 package InlandNavigationExperiment",
+        "\u2713 package MarineMass",
+        "\u2713 package MarineStructures",
+        "\u2713 package TransGorgeCourse",
+        "\u2713 package BlueDogMissionScope",
+        "\u2713 package GorgeChallenge",
+        "\u2713 package GorgeChallengeVerification",
+        "\u2713 package BlueDogSatisfaction",
+        "\u2713 package BlueDog",
+        "\u2713 package BlueDogLogicalArchitecture",
+        "\u2713 package BlueDogPhysicalArchitecture",
+        "\u2713 package BlueDogDesignDecisions",
+        "\u2713 package BlueDogMethod",
+        "\u2713 package BlueDogMissionLogic",
+        "\u2713 package BlueDogRequirementBasis",
+        "\u2713 package BlueDogRequirements",
+        "\u2713 package BlueDogSourceEvidence",
+        "\u2713 package BlueDogStructure",
+        "\u2713 package BlueDogUseCases",
+        "\u2713 package BlueDogRequirementVerification"
+      ],
+      "errors": null
+    },
+    "BlueDogIntegratedCandidate::IC01NoRecoveryAuthority": {
+      "status": "holds",
+      "exit": 0,
+      "checks": [
+        {
+          "subject": "BlueDogIntegratedCandidate::IC01NoRecoveryAuthority",
+          "status": "holds",
+          "values": [
+            {
+              "name": "configurationApplicable",
+              "value": "true"
+            },
+            {
+              "name": "configurationId",
+              "value": "\"IC-01\""
+            },
+            {
+              "name": "mainNameplateWh",
+              "value": "1300"
+            },
+            {
+              "name": "independentNameplateWh",
+              "value": "60"
+            },
+            {
+              "name": "remainingWh",
+              "value": "43.0"
+            },
+            {
+              "name": "groundSpeedMps",
+              "value": "0.0"
+            },
+            {
+              "name": "transitSeconds",
+              "value": "0"
+            },
+            {
+              "name": "requiredWh",
+              "value": "2.0"
+            },
+            {
+              "name": "routeFeasible",
+              "value": "false"
+            },
+            {
+              "name": "reserveFits",
+              "value": "false"
+            },
+            {
+              "name": "physicalQualification",
+              "value": "false"
+            },
+            {
+              "name": "assertion configurationApplicability",
+              "value": "satisfied"
+            },
+            {
+              "name": "assertion inputDomain",
+              "value": "satisfied"
+            }
+          ],
+          "lines": [
+            "\u2713 BlueDogIntegratedCandidate::IC01NoRecoveryAuthority",
+            "  configurationApplicable = true",
+            "  configurationId = \"IC-01\"",
+            "  mainNameplateWh = 1300",
+            "  independentNameplateWh = 60",
+            "  remainingWh = 43.0",
+            "  groundSpeedMps = 0.0",
+            "  transitSeconds = 0",
+            "  requiredWh = 2.0",
+            "  routeFeasible = false",
+            "  reserveFits = false",
+            "  physicalQualification = false",
+            "  assertion configurationApplicability: satisfied",
+            "  assertion inputDomain: satisfied",
+            "  standing: value (observed: 1 run under reverse)"
+          ],
+          "rows": null,
+          "plan": {
+            "engine": "auto",
+            "standing": "value (observed: 1 run under reverse)",
+            "steps": [
+              {
+                "engine": "run",
+                "status": "answered"
+              }
+            ],
+            "workers": 0,
+            "warming": 0
+          },
+          "results": [
+            {
+              "engine": "run",
+              "claim": "value",
+              "strength": "observed",
+              "bounds": [
+                {
+                  "name": "steps",
+                  "limit": 10000000,
+                  "reached": false
+                },
+                {
+                  "name": "elements",
+                  "limit": 1000000,
+                  "reached": false
+                }
+              ],
+              "witness": null,
+              "standing": "value (observed: 1 run under reverse)"
+            }
+          ]
+        }
+      ],
+      "diagnostics": null,
+      "output": [
+        "\u2713 package BlueDogWingActuator",
+        "\u2713 package BlueDogAerodynamicPolicy",
+        "\u2713 package BlueDogAvoidanceFailures",
+        "\u2713 package BlueDogCandidateEnergy",
+        "\u2713 package BlueDogClassDetection",
+        "\u2713 package BlueDogRisks",
+        "\u2713 package BlueDogDFMEA",
+        "\u2713 package BlueDogEncounterEnvelope",
+        "\u2713 package BlueDogEncounterFeasibility",
+        "\u2713 package BlueDogEncounterReview",
+        "\u2713 package BlueDogEnergy",
+        "\u2713 package BlueDogEnvironmentReview",
+        "\u2713 package BlueDogIntegratedCandidate",
+        "\u2713 package BlueDogLocationTraffic",
+        "\u2713 package BlueDogManeuverDynamics",
+        "\u2713 package BlueDogMissionSimulation",
+        "\u2713 package BlueDogNavigationController",
+        "\u2713 package BlueDogPassageExposure",
+        "\u2713 package BlueDogSailing",
+        "\u2713 package RecoveryPropulsionTrade",
+        "\u2713 package BlueDogRecoveryRisk",
+        "\u2713 package BlueDogRecoverySiteReview",
+        "\u2713 package BlueDogHydrostatics",
+        "\u2713 package BlueDogReliability",
+        "\u2713 package BlueDogSailTrade",
+        "\u2713 package BlueDogConceptCredibility",
+        "\u2713 package BlueDogSizingEvidence",
+        "\u2713 package BlueDogCoupledSizing",
+        "\u2713 package BlueDogCoupledOperation",
+        "\u2713 package BlueDogCoupledUncertainty",
+        "\u2713 package BlueDogStructuralBasis",
+        "\u2713 package BlueDogSurfaceEnvironment",
+        "\u2713 package BlueDogWavePerformance",
+        "\u2713 package BlueDogWeather",
+        "\u2713 package BlueDogWingHeel",
+        "\u2713 package BlueDogAcousticEquipment",
+        "\u2713 package BlueDogEnergyExamples",
+        "\u2713 package BlueDogIC01",
+        "\u2713 package BlueDogOperatingEnvironment",
+        "\u2713 package BlueDogSailingExamples",
+        "\u2713 package BlueDogConfigurations",
+        "\u2713 package BlueDogReliabilityExamples",
+        "\u2713 package BlueDogSensingEquipment",
+        "\u2713 package BlueDogStudyPlan",
+        "\u2713 package BlueDogWindEquipment",
+        "\u2713 package BlueDogRecordedSizing",
+        "\u2713 package BlueDogCurrentSizing",
+        "\u2713 package BlueDogFinitePassageSizing",
+        "\u2713 package BlueDogWindObservations",
+        "\u2713 package BlueDogSizingContinuation",
+        "\u2713 package BlueDogSRRCurrent",
+        "\u2713 package BlueDogSRRFrontier",
+        "\u2713 package MarineActuation",
+        "\u2713 package MarineEnergy",
+        "\u2713 package MarineAppendages",
+        "\u2713 package MarineConcept",
+        "\u2713 package MarineCourse",
+        "\u2713 package MarineDesign",
+        "\u2713 package MarineResistance",
+        "\u2713 package MarineHydrostatics",
+        "\u2713 package MarinePropulsion",
+        "\u2713 package MarineRecovery",
+        "\u2713 package MarineReliability",
+        "\u2713 package MarineSailing",
+        "\u2713 package MarineSurface",
+        "\u2713 package MarineWavePerformance",
+        "\u2713 package MarineWeather",
+        "\u2713 package InlandExtended",
+        "\u2713 package InlandNavigationExperiment",
+        "\u2713 package MarineMass",
+        "\u2713 package MarineStructures",
+        "\u2713 package TransGorgeCourse",
+        "\u2713 package BlueDogMissionScope",
+        "\u2713 package GorgeChallenge",
+        "\u2713 package GorgeChallengeVerification",
+        "\u2713 package BlueDogSatisfaction",
+        "\u2713 package BlueDog",
+        "\u2713 package BlueDogLogicalArchitecture",
+        "\u2713 package BlueDogPhysicalArchitecture",
+        "\u2713 package BlueDogDesignDecisions",
+        "\u2713 package BlueDogMethod",
+        "\u2713 package BlueDogMissionLogic",
+        "\u2713 package BlueDogRequirementBasis",
+        "\u2713 package BlueDogRequirements",
+        "\u2713 package BlueDogSourceEvidence",
+        "\u2713 package BlueDogStructure",
+        "\u2713 package BlueDogUseCases",
+        "\u2713 package BlueDogRequirementVerification"
+      ],
+      "errors": null
+    }
+  },
+  "nativeOutputs": {
+    "BlueDogIntegratedCandidate::IC01RecoveryIllustration": {
+      "configurationApplicable": true,
+      "configurationId": "IC-01",
+      "mainNameplateWh": 1300,
+      "independentNameplateWh": 60,
+      "remainingWh": 43.0,
+      "groundSpeedMps": 1.1,
+      "transitSeconds": 545.4545454545454,
+      "requiredWh": 12.545454545454543,
+      "routeFeasible": true,
+      "reserveFits": true,
+      "physicalQualification": false
+    },
+    "BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration": {
+      "configurationApplicable": true,
+      "configurationId": "IC-01",
+      "mainNameplateWh": 1300,
+      "independentNameplateWh": 60,
+      "remainingWh": 43.0,
+      "groundSpeedMps": 0.09999999999999998,
+      "transitSeconds": 6000.000000000001,
+      "requiredWh": 98.0,
+      "routeFeasible": true,
+      "reserveFits": false,
+      "physicalQualification": false
+    },
+    "BlueDogIntegratedCandidate::IC01NoRecoveryAuthority": {
+      "configurationApplicable": true,
+      "configurationId": "IC-01",
+      "mainNameplateWh": 1300,
+      "independentNameplateWh": 60,
+      "remainingWh": 43.0,
+      "groundSpeedMps": 0.0,
+      "transitSeconds": 0,
+      "requiredWh": 2.0,
+      "routeFeasible": false,
+      "reserveFits": false,
+      "physicalQualification": false
+    }
+  },
+  "behaviorTraces": {
+    "safeUnassistedRighting": [
+      {
+        "seconds": 0,
+        "action": "BlueDogMissionLogic::SupervisoryCycle",
+        "inputs": {
+          "windValid": true,
+          "trafficConflict": false,
+          "abortRequested": false,
+          "abortLatched": false,
+          "qualificationLost": false,
+          "capsized": false,
+          "navigationValid": true,
+          "reserveThreatened": false,
+          "requiredSafetyConfirmed": true,
+          "communicationsAvailable": true
+        },
+        "outputs": {
+          "capsized": false,
+          "windValid": true,
+          "communicationsAvailable": true,
+          "trafficConflict": false,
+          "abortLatched": false,
+          "requiredSafetyConfirmed": true,
+          "alert": "none",
+          "navigationValid": true,
+          "harvestPermitted": true,
+          "gateScoringPermitted": true,
+          "mode": "sailing",
+          "reserveThreatened": false,
+          "abortRequested": false,
+          "qualificationLostNext": false,
+          "qualificationLost": false,
+          "abortLatchedNext": false,
+          "sailingPermitted": true
+        }
+      },
+      {
+        "seconds": 1,
+        "action": "BlueDogMissionLogic::HandleEvent",
+        "inputs": {
+          "eventKind": "capsize",
+          "qualificationLost": false
+        },
+        "outputs": {
+          "qualificationLost": false,
+          "directive": "assess_capsize",
+          "recoveryPermitted": true,
+          "capsized": true,
+          "eventKind": "capsize",
+          "qualificationLostNext": false
+        }
+      },
+      {
+        "seconds": 1,
+        "action": "BlueDogMissionLogic::CapsizeDisposition",
+        "inputs": {
+          "currentlyCapsized": true,
+          "uprightRecoveryObserved": false,
+          "requiredSafetyConfirmed": true,
+          "abortLatched": false,
+          "qualificationLost": false
+        },
+        "outputs": {
+          "directive": "await_righting",
+          "requiredSafetyConfirmed": true,
+          "qualificationLost": false,
+          "abortLatched": false,
+          "uprightRecoveryObserved": false,
+          "currentlyCapsized": true,
+          "qualificationLostNext": false
+        }
+      },
+      {
+        "seconds": 1,
+        "action": "BlueDogMissionLogic::SupervisoryCycle",
+        "inputs": {
+          "windValid": true,
+          "trafficConflict": false,
+          "abortRequested": false,
+          "abortLatched": false,
+          "qualificationLost": false,
+          "capsized": true,
+          "navigationValid": true,
+          "reserveThreatened": false,
+          "requiredSafetyConfirmed": true,
+          "communicationsAvailable": false
+        },
+        "outputs": {
+          "capsized": true,
+          "windValid": true,
+          "communicationsAvailable": false,
+          "trafficConflict": false,
+          "abortLatched": false,
+          "requiredSafetyConfirmed": true,
+          "alert": "none",
+          "navigationValid": true,
+          "reserveThreatened": false,
+          "gateScoringPermitted": false,
+          "harvestPermitted": false,
+          "mode": "capsized_drift",
+          "abortRequested": false,
+          "qualificationLostNext": false,
+          "qualificationLost": false,
+          "abortLatchedNext": false,
+          "sailingPermitted": false
+        }
+      },
+      {
+        "seconds": 2,
+        "action": "BlueDogMissionLogic::HandleEvent",
+        "inputs": {
+          "eventKind": "unassisted_righting",
+          "qualificationLost": false
+        },
+        "outputs": {
+          "directive": "assess_capsize",
+          "recoveryPermitted": false,
+          "eventKind": "unassisted_righting",
+          "capsized": false,
+          "qualificationLost": false,
+          "qualificationLostNext": false
+        }
+      },
+      {
+        "seconds": 2,
+        "action": "BlueDogMissionLogic::CapsizeDisposition",
+        "inputs": {
+          "currentlyCapsized": true,
+          "uprightRecoveryObserved": true,
+          "requiredSafetyConfirmed": true,
+          "abortLatched": false,
+          "qualificationLost": false
+        },
+        "outputs": {
+          "uprightRecoveryObserved": true,
+          "requiredSafetyConfirmed": true,
+          "directive": "resume",
+          "abortLatched": false,
+          "qualificationLost": false,
+          "currentlyCapsized": true,
+          "qualificationLostNext": false
+        }
+      },
+      {
+        "seconds": 2,
+        "action": "BlueDogMissionLogic::SupervisoryCycle",
+        "inputs": {
+          "windValid": true,
+          "trafficConflict": false,
+          "abortRequested": false,
+          "abortLatched": false,
+          "qualificationLost": false,
+          "capsized": false,
+          "navigationValid": true,
+          "reserveThreatened": false,
+          "requiredSafetyConfirmed": true,
+          "communicationsAvailable": true
+        },
+        "outputs": {
+          "capsized": false,
+          "windValid": true,
+          "communicationsAvailable": true,
+          "trafficConflict": false,
+          "abortLatched": false,
+          "requiredSafetyConfirmed": true,
+          "alert": "none",
+          "navigationValid": true,
+          "harvestPermitted": true,
+          "gateScoringPermitted": true,
+          "mode": "sailing",
+          "reserveThreatened": false,
+          "abortRequested": false,
+          "qualificationLostNext": false,
+          "qualificationLost": false,
+          "abortLatchedNext": false,
+          "sailingPermitted": true
+        }
+      }
+    ],
+    "capsizeReserveThreatAndCommunicationLoss": [
+      {
+        "seconds": 0,
+        "action": "BlueDogMissionLogic::SupervisoryCycle",
+        "inputs": {
+          "windValid": true,
+          "trafficConflict": false,
+          "abortRequested": false,
+          "abortLatched": false,
+          "qualificationLost": false,
+          "capsized": false,
+          "navigationValid": true,
+          "reserveThreatened": false,
+          "requiredSafetyConfirmed": true,
+          "communicationsAvailable": true
+        },
+        "outputs": {
+          "windValid": true,
+          "capsized": false,
+          "communicationsAvailable": true,
+          "trafficConflict": false,
+          "abortLatched": false,
+          "requiredSafetyConfirmed": true,
+          "alert": "none",
+          "navigationValid": true,
+          "mode": "sailing",
+          "gateScoringPermitted": true,
+          "harvestPermitted": true,
+          "reserveThreatened": false,
+          "abortRequested": false,
+          "qualificationLostNext": false,
+          "qualificationLost": false,
+          "abortLatchedNext": false,
+          "sailingPermitted": true
+        }
+      },
+      {
+        "seconds": 1,
+        "action": "BlueDogMissionLogic::HandleEvent",
+        "inputs": {
+          "eventKind": "capsize",
+          "qualificationLost": false
+        },
+        "outputs": {
+          "directive": "assess_capsize",
+          "recoveryPermitted": true,
+          "eventKind": "capsize",
+          "capsized": true,
+          "qualificationLost": false,
+          "qualificationLostNext": false
+        }
+      },
+      {
+        "seconds": 1,
+        "action": "BlueDogMissionLogic::CapsizeDisposition",
+        "inputs": {
+          "currentlyCapsized": true,
+          "uprightRecoveryObserved": false,
+          "requiredSafetyConfirmed": true,
+          "abortLatched": false,
+          "qualificationLost": false
+        },
+        "outputs": {
+          "abortLatched": false,
+          "requiredSafetyConfirmed": true,
+          "qualificationLost": false,
+          "uprightRecoveryObserved": false,
+          "directive": "await_righting",
+          "currentlyCapsized": true,
+          "qualificationLostNext": false
+        }
+      },
+      {
+        "seconds": 1,
+        "action": "BlueDogMissionLogic::SupervisoryCycle",
+        "inputs": {
+          "windValid": true,
+          "trafficConflict": false,
+          "abortRequested": false,
+          "abortLatched": false,
+          "qualificationLost": false,
+          "capsized": true,
+          "navigationValid": true,
+          "reserveThreatened": true,
+          "requiredSafetyConfirmed": true,
+          "communicationsAvailable": false
+        },
+        "outputs": {
+          "capsized": true,
+          "windValid": true,
+          "communicationsAvailable": false,
+          "trafficConflict": false,
+          "abortLatched": false,
+          "requiredSafetyConfirmed": true,
+          "alert": "queue",
+          "navigationValid": true,
+          "harvestPermitted": false,
+          "gateScoringPermitted": false,
+          "mode": "abort_recovery",
+          "reserveThreatened": true,
+          "abortRequested": false,
+          "qualificationLostNext": true,
+          "qualificationLost": false,
+          "abortLatchedNext": true,
+          "sailingPermitted": false
+        }
+      },
+      {
+        "seconds": 2,
+        "action": "BlueDogMissionLogic::CapsizeDisposition",
+        "inputs": {
+          "currentlyCapsized": true,
+          "uprightRecoveryObserved": true,
+          "requiredSafetyConfirmed": true,
+          "abortLatched": true,
+          "qualificationLost": true
+        },
+        "outputs": {
+          "abortLatched": true,
+          "requiredSafetyConfirmed": true,
+          "qualificationLost": true,
+          "uprightRecoveryObserved": true,
+          "directive": "abort",
+          "currentlyCapsized": true,
+          "qualificationLostNext": true
+        }
+      },
+      {
+        "seconds": 2,
+        "action": "BlueDogMissionLogic::SupervisoryCycle",
+        "inputs": {
+          "windValid": true,
+          "trafficConflict": false,
+          "abortRequested": false,
+          "abortLatched": true,
+          "qualificationLost": true,
+          "capsized": false,
+          "navigationValid": true,
+          "reserveThreatened": false,
+          "requiredSafetyConfirmed": true,
+          "communicationsAvailable": true
+        },
+        "outputs": {
+          "windValid": true,
+          "capsized": false,
+          "communicationsAvailable": true,
+          "trafficConflict": false,
+          "abortLatched": true,
+          "requiredSafetyConfirmed": true,
+          "alert": "none",
+          "navigationValid": true,
+          "reserveThreatened": false,
+          "gateScoringPermitted": false,
+          "harvestPermitted": true,
+          "mode": "abort_recovery",
+          "abortRequested": false,
+          "qualificationLostNext": true,
+          "qualificationLost": true,
+          "abortLatchedNext": true,
+          "sailingPermitted": false
+        }
+      }
+    ],
+    "navigationDegradationThenSafetyLoss": [
+      {
+        "seconds": 0,
+        "action": "BlueDogMissionLogic::SupervisoryCycle",
+        "inputs": {
+          "windValid": true,
+          "trafficConflict": false,
+          "abortRequested": false,
+          "abortLatched": false,
+          "qualificationLost": false,
+          "capsized": false,
+          "navigationValid": true,
+          "reserveThreatened": false,
+          "requiredSafetyConfirmed": true,
+          "communicationsAvailable": true
+        },
+        "outputs": {
+          "capsized": false,
+          "windValid": true,
+          "communicationsAvailable": true,
+          "trafficConflict": false,
+          "abortLatched": false,
+          "requiredSafetyConfirmed": true,
+          "alert": "none",
+          "navigationValid": true,
+          "reserveThreatened": false,
+          "gateScoringPermitted": true,
+          "mode": "sailing",
+          "harvestPermitted": true,
+          "abortRequested": false,
+          "qualificationLostNext": false,
+          "qualificationLost": false,
+          "abortLatchedNext": false,
+          "sailingPermitted": true
+        }
+      },
+      {
+        "seconds": 1,
+        "action": "BlueDogMissionLogic::SupervisoryCycle",
+        "inputs": {
+          "windValid": true,
+          "trafficConflict": false,
+          "abortRequested": false,
+          "abortLatched": false,
+          "qualificationLost": false,
+          "capsized": false,
+          "navigationValid": false,
+          "reserveThreatened": false,
+          "requiredSafetyConfirmed": true,
+          "communicationsAvailable": true
+        },
+        "outputs": {
+          "capsized": false,
+          "windValid": true,
+          "communicationsAvailable": true,
+          "trafficConflict": false,
+          "abortLatched": false,
+          "requiredSafetyConfirmed": true,
+          "alert": "none",
+          "navigationValid": false,
+          "reserveThreatened": false,
+          "gateScoringPermitted": false,
+          "mode": "navigation_degraded",
+          "harvestPermitted": true,
+          "abortRequested": false,
+          "qualificationLostNext": false,
+          "qualificationLost": false,
+          "abortLatchedNext": false,
+          "sailingPermitted": false
+        }
+      },
+      {
+        "seconds": 2,
+        "action": "BlueDogMissionLogic::SupervisoryCycle",
+        "inputs": {
+          "windValid": true,
+          "trafficConflict": false,
+          "abortRequested": false,
+          "abortLatched": false,
+          "qualificationLost": false,
+          "capsized": false,
+          "navigationValid": false,
+          "reserveThreatened": false,
+          "requiredSafetyConfirmed": false,
+          "communicationsAvailable": false
+        },
+        "outputs": {
+          "capsized": false,
+          "windValid": true,
+          "communicationsAvailable": false,
+          "trafficConflict": false,
+          "abortLatched": false,
+          "requiredSafetyConfirmed": false,
+          "alert": "queue",
+          "navigationValid": false,
+          "reserveThreatened": false,
+          "gateScoringPermitted": false,
+          "mode": "abort_recovery",
+          "harvestPermitted": true,
+          "abortRequested": false,
+          "qualificationLostNext": true,
+          "qualificationLost": false,
+          "abortLatchedNext": true,
+          "sailingPermitted": false
+        }
+      }
+    ],
+    "recoveryFromNativeReserveScreens": {
+      "BlueDogIntegratedCandidate::IC01RecoveryIllustration": [
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::HandleEvent",
+          "inputs": {
+            "eventKind": "power_loss",
+            "qualificationLost": false
+          },
+          "outputs": {
+            "directive": "abort",
+            "recoveryPermitted": false,
+            "eventKind": "power_loss",
+            "capsized": false,
+            "qualificationLost": false,
+            "qualificationLostNext": true
+          }
+        },
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::SupervisoryCycle",
+          "inputs": {
+            "windValid": true,
+            "trafficConflict": false,
+            "abortRequested": true,
+            "abortLatched": false,
+            "qualificationLost": true,
+            "capsized": false,
+            "navigationValid": true,
+            "reserveThreatened": false,
+            "requiredSafetyConfirmed": true,
+            "communicationsAvailable": false
+          },
+          "outputs": {
+            "capsized": false,
+            "windValid": true,
+            "communicationsAvailable": false,
+            "trafficConflict": false,
+            "abortLatched": false,
+            "requiredSafetyConfirmed": true,
+            "alert": "queue",
+            "navigationValid": true,
+            "mode": "abort_recovery",
+            "gateScoringPermitted": false,
+            "reserveThreatened": false,
+            "harvestPermitted": true,
+            "abortRequested": true,
+            "qualificationLostNext": true,
+            "qualificationLost": true,
+            "abortLatchedNext": true,
+            "sailingPermitted": false
+          }
+        },
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::RecoveryAuthority",
+          "inputs": {
+            "eventKind": "power_loss",
+            "ordinaryPermission": false,
+            "independentPath": true
+          },
+          "outputs": {
+            "eventKind": "power_loss",
+            "ordinaryPermission": false,
+            "independentPath": true,
+            "permitted": true
+          }
+        },
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::FallbackPolicy",
+          "inputs": {
+            "recoveryAvailable": true,
+            "recoveryPermitted": true
+          },
+          "outputs": {
+            "recoveryPermitted": true,
+            "continueDrift": false,
+            "attemptRecovery": true,
+            "recoveryAvailable": true
+          }
+        }
+      ],
+      "BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration": [
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::HandleEvent",
+          "inputs": {
+            "eventKind": "power_loss",
+            "qualificationLost": false
+          },
+          "outputs": {
+            "recoveryPermitted": false,
+            "eventKind": "power_loss",
+            "qualificationLost": false,
+            "capsized": false,
+            "directive": "abort",
+            "qualificationLostNext": true
+          }
+        },
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::SupervisoryCycle",
+          "inputs": {
+            "windValid": true,
+            "trafficConflict": false,
+            "abortRequested": true,
+            "abortLatched": false,
+            "qualificationLost": true,
+            "capsized": false,
+            "navigationValid": true,
+            "reserveThreatened": false,
+            "requiredSafetyConfirmed": true,
+            "communicationsAvailable": false
+          },
+          "outputs": {
+            "windValid": true,
+            "capsized": false,
+            "communicationsAvailable": false,
+            "trafficConflict": false,
+            "abortLatched": false,
+            "requiredSafetyConfirmed": true,
+            "alert": "queue",
+            "navigationValid": true,
+            "reserveThreatened": false,
+            "gateScoringPermitted": false,
+            "harvestPermitted": true,
+            "mode": "abort_recovery",
+            "abortRequested": true,
+            "qualificationLostNext": true,
+            "qualificationLost": true,
+            "abortLatchedNext": true,
+            "sailingPermitted": false
+          }
+        },
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::RecoveryAuthority",
+          "inputs": {
+            "eventKind": "power_loss",
+            "ordinaryPermission": false,
+            "independentPath": true
+          },
+          "outputs": {
+            "eventKind": "power_loss",
+            "ordinaryPermission": false,
+            "independentPath": true,
+            "permitted": true
+          }
+        },
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::FallbackPolicy",
+          "inputs": {
+            "recoveryAvailable": false,
+            "recoveryPermitted": true
+          },
+          "outputs": {
+            "recoveryPermitted": true,
+            "continueDrift": true,
+            "attemptRecovery": false,
+            "recoveryAvailable": false
+          }
+        }
+      ],
+      "BlueDogIntegratedCandidate::IC01NoRecoveryAuthority": [
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::HandleEvent",
+          "inputs": {
+            "eventKind": "power_loss",
+            "qualificationLost": false
+          },
+          "outputs": {
+            "eventKind": "power_loss",
+            "qualificationLost": false,
+            "directive": "abort",
+            "capsized": false,
+            "recoveryPermitted": false,
+            "qualificationLostNext": true
+          }
+        },
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::SupervisoryCycle",
+          "inputs": {
+            "windValid": true,
+            "trafficConflict": false,
+            "abortRequested": true,
+            "abortLatched": false,
+            "qualificationLost": true,
+            "capsized": false,
+            "navigationValid": true,
+            "reserveThreatened": false,
+            "requiredSafetyConfirmed": true,
+            "communicationsAvailable": false
+          },
+          "outputs": {
+            "windValid": true,
+            "capsized": false,
+            "communicationsAvailable": false,
+            "trafficConflict": false,
+            "abortLatched": false,
+            "requiredSafetyConfirmed": true,
+            "alert": "queue",
+            "navigationValid": true,
+            "reserveThreatened": false,
+            "gateScoringPermitted": false,
+            "mode": "abort_recovery",
+            "harvestPermitted": true,
+            "abortRequested": true,
+            "qualificationLostNext": true,
+            "qualificationLost": true,
+            "abortLatchedNext": true,
+            "sailingPermitted": false
+          }
+        },
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::RecoveryAuthority",
+          "inputs": {
+            "eventKind": "power_loss",
+            "ordinaryPermission": false,
+            "independentPath": true
+          },
+          "outputs": {
+            "ordinaryPermission": false,
+            "eventKind": "power_loss",
+            "independentPath": true,
+            "permitted": true
+          }
+        },
+        {
+          "seconds": 0,
+          "action": "BlueDogMissionLogic::FallbackPolicy",
+          "inputs": {
+            "recoveryAvailable": false,
+            "recoveryPermitted": true
+          },
+          "outputs": {
+            "recoveryPermitted": true,
+            "continueDrift": true,
+            "attemptRecovery": false,
+            "recoveryAvailable": false
+          }
+        }
+      ]
+    }
+  },
+  "physicalQualification": false,
+  "scope": "Native conditional recovery arithmetic and supervisor policy with explicitly supplied hypothetical observations; no whole-course, installed hardware, righting dynamics or physical qualification claim.",
+  "nativeAnalysisRecords": "build/analysis/ic01-demonstration.sysml"
+}
