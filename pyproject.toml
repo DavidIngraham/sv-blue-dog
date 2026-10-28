@@ -49,8 +49,8 @@ design = "MarineDesign::Design"
 parameters = "MarineDesign::Parameters"
 
 [tool.sysml_python.exports.mass.defaults]
-parameters = "BlueDogCoupledSizing::Inputs.parameterValues"
-materials = "BlueDogCoupledSizing::Inputs.materialValues"
+parameters = "BlueDog::Analyses::Sizing::Inputs.parameterValues"
+materials = "BlueDog::Analyses::Sizing::Inputs.materialValues"
 
 [tool.uv.sources]
 opensysml = { path = ".tools/develop-23ca2e2f0/source/client/python" }
@@ -70,7 +70,7 @@ parameters = "MarineDesign::Parameters"
 mass = "MarineDesign::MassProperties"
 loads = "MarineDesign::AppendageLoads"
 [tool.sysml_python.exports.structure.defaults]
-structure = "BlueDogCoupledOperation::Inputs.structureValues"
+structure = "BlueDog::Analyses::Operating::Inputs.structureValues"
 
 [tool.sysml_python.exports.concept]
 definition = "MarineConcept::Evaluate"
@@ -85,8 +85,8 @@ design = "MarineDesign::Design"
 mass = "MarineDesign::MassProperties"
 passage = "MarineDesign::Passage"
 [tool.sysml_python.exports.concept.defaults]
-environment = "BlueDogOperatingEnvironment::Inputs.parameterValues"
-policy = "BlueDogConceptCredibility::Inputs.values"
+environment = "BlueDog::Configurations::OperatingEnvironment::Inputs.parameterValues"
+policy = "BlueDog::Analyses::Sizing::Credibility::Inputs.values"
 
 [tool.sysml_python.exports.operation]
 definition = "MarineSailing::Evaluate"
@@ -106,12 +106,12 @@ aero = "MarineDesign::AeroCoefficients"
 mass = "MarineDesign::MassProperties"
 hydro = "MarineDesign::HydroState"
 [tool.sysml_python.exports.operation.defaults]
-environment = "BlueDogOperatingEnvironment::Inputs.parameterValues"
+environment = "BlueDog::Configurations::OperatingEnvironment::Inputs.parameterValues"
 
 [tool.sysml_python.exports.route]
 definition = "MarineCourse::Route"
 [tool.sysml_python.exports.route.defaults]
-policy = "BlueDogCoupledOperation::Inputs.routeParameters"
+policy = "BlueDog::Analyses::Operating::Inputs.routeParameters"
 
 [tool.sysml_python.exports.wind_sample]
 definition = "MarineSurface::WindSample"
@@ -149,13 +149,13 @@ definition = "MarineWavePerformance::Actuation"
 [tool.sysml_python.exports.recovery_segment]
 definition = "MarineRecovery::Segment"
 [tool.sysml_python.exports.wave_actuation.defaults]
-q = "BlueDogOperatingEnvironment::Inputs.parameterValues"
+q = "BlueDog::Configurations::OperatingEnvironment::Inputs.parameterValues"
 
 [tool.sysml_python.exports.sailing_core]
 definition = "MarineSailing::Core"
 checks = "MarineSailing::InputChecks"
 [tool.sysml_python.exports.sailing_core.defaults]
-q = "BlueDogOperatingEnvironment::Inputs.parameterValues"
+q = "BlueDog::Configurations::OperatingEnvironment::Inputs.parameterValues"
 [tool.sysml_python.exports.sailing_core.records]
 d = "MarineDesign::Design"
 p = "MarineDesign::Parameters"

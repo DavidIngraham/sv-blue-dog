@@ -22,56 +22,56 @@ package Page_mission_0 {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::challengeMotorInhibition;
-        expose BlueDogRequirements::commandIntegrity;
-        expose BlueDogRequirements::communications;
-        expose BlueDogRequirements::cruisePerformance;
-        expose BlueDogRequirements::environmentalEnvelope;
-        expose BlueDogRequirements::gorgeEnvironment;
-        expose BlueDogRequirements::ingressResponse;
-        expose BlueDogRequirements::missionEvidence;
-        expose BlueDogRequirements::missionReliability;
-        expose BlueDogRequirements::multiDayEndurance;
-        expose BlueDogRequirements::navigationAndControl;
-        expose BlueDogRequirements::operatingBoundary;
-        expose GorgeChallenge::restrictedWaters;
-        expose BlueDogRequirements::regulatoryClassification;
-        expose BlueDogRequirements::resetRecovery;
-        expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::emergencyControl;
-        expose BlueDogRequirements::serviceability;
-        expose BlueDogRequirements::windObservation;
-        expose GorgeChallenge::courseCompletion;
-        expose GorgeChallenge::emergencyIntervention;
-        expose GorgeChallenge::liveObservation;
-        expose GorgeChallenge::sailingPropulsion;
-        expose GorgeChallenge::transGorgeChallenge;
-        expose GorgeChallenge::unassistedAttempt;
-        metadata Layout about BlueDogRequirements::challengeMotorInhibition { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::commandIntegrity { x = 320; y = 0; }
-        metadata Layout about BlueDogRequirements::communications { x = 640; y = 0; }
-        metadata Layout about BlueDogRequirements::cruisePerformance { x = 960; y = 0; }
-        metadata Layout about BlueDogRequirements::environmentalEnvelope { x = 0; y = 400; }
-        metadata Layout about BlueDogRequirements::gorgeEnvironment { x = 320; y = 400; }
-        metadata Layout about BlueDogRequirements::ingressResponse { x = 640; y = 400; }
-        metadata Layout about BlueDogRequirements::missionEvidence { x = 960; y = 400; }
-        metadata Layout about BlueDogRequirements::missionReliability { x = 0; y = 800; }
-        metadata Layout about BlueDogRequirements::multiDayEndurance { x = 320; y = 800; }
-        metadata Layout about BlueDogRequirements::navigationAndControl { x = 640; y = 800; }
-        metadata Layout about BlueDogRequirements::operatingBoundary { x = 960; y = 800; }
-        metadata Layout about BlueDogRequirements::regulatoryClassification { x = 0; y = 1200; }
-        metadata Layout about BlueDogRequirements::resetRecovery { x = 320; y = 1200; }
-        metadata Layout about BlueDogRequirements::roundTrip { x = 640; y = 1200; }
-        metadata Layout about BlueDogRequirements::emergencyControl { x = 960; y = 1200; }
-        metadata Layout about BlueDogRequirements::serviceability { x = 0; y = 1600; }
-        metadata Layout about BlueDogRequirements::windObservation { x = 320; y = 1600; }
-        metadata Layout about GorgeChallenge::courseCompletion { x = 640; y = 1600; }
-        metadata Layout about GorgeChallenge::emergencyIntervention { x = 960; y = 1600; }
-        metadata Layout about GorgeChallenge::liveObservation { x = 0; y = 2000; }
-        metadata Layout about GorgeChallenge::sailingPropulsion { x = 320; y = 2000; }
-        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 640; y = 2000; }
-        metadata Layout about GorgeChallenge::unassistedAttempt { x = 960; y = 2000; }
-        metadata Layout about GorgeChallenge::restrictedWaters { x = 0; y = 2400; }
+        expose BlueDog::Requirements::challengeMotorInhibition;
+        expose BlueDog::Requirements::commandIntegrity;
+        expose BlueDog::Requirements::communications;
+        expose BlueDog::Requirements::cruisePerformance;
+        expose BlueDog::Requirements::environmentalEnvelope;
+        expose BlueDog::Requirements::gorgeEnvironment;
+        expose BlueDog::Requirements::ingressResponse;
+        expose BlueDog::Requirements::missionEvidence;
+        expose BlueDog::Requirements::missionReliability;
+        expose BlueDog::Requirements::multiDayEndurance;
+        expose BlueDog::Requirements::navigationAndControl;
+        expose BlueDog::Requirements::operatingBoundary;
+        expose BlueDog::Mission::Challenge::restrictedWaters;
+        expose BlueDog::Requirements::regulatoryClassification;
+        expose BlueDog::Requirements::resetRecovery;
+        expose BlueDog::Requirements::roundTrip;
+        expose BlueDog::Requirements::emergencyControl;
+        expose BlueDog::Requirements::serviceability;
+        expose BlueDog::Requirements::windObservation;
+        expose BlueDog::Mission::Challenge::courseCompletion;
+        expose BlueDog::Mission::Challenge::emergencyIntervention;
+        expose BlueDog::Mission::Challenge::liveObservation;
+        expose BlueDog::Mission::Challenge::sailingPropulsion;
+        expose BlueDog::Mission::Challenge::transGorgeChallenge;
+        expose BlueDog::Mission::Challenge::unassistedAttempt;
+        metadata Layout about BlueDog::Requirements::challengeMotorInhibition { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::commandIntegrity { x = 320; y = 0; }
+        metadata Layout about BlueDog::Requirements::communications { x = 640; y = 0; }
+        metadata Layout about BlueDog::Requirements::cruisePerformance { x = 960; y = 0; }
+        metadata Layout about BlueDog::Requirements::environmentalEnvelope { x = 0; y = 400; }
+        metadata Layout about BlueDog::Requirements::gorgeEnvironment { x = 320; y = 400; }
+        metadata Layout about BlueDog::Requirements::ingressResponse { x = 640; y = 400; }
+        metadata Layout about BlueDog::Requirements::missionEvidence { x = 960; y = 400; }
+        metadata Layout about BlueDog::Requirements::missionReliability { x = 0; y = 800; }
+        metadata Layout about BlueDog::Requirements::multiDayEndurance { x = 320; y = 800; }
+        metadata Layout about BlueDog::Requirements::navigationAndControl { x = 640; y = 800; }
+        metadata Layout about BlueDog::Requirements::operatingBoundary { x = 960; y = 800; }
+        metadata Layout about BlueDog::Requirements::regulatoryClassification { x = 0; y = 1200; }
+        metadata Layout about BlueDog::Requirements::resetRecovery { x = 320; y = 1200; }
+        metadata Layout about BlueDog::Requirements::roundTrip { x = 640; y = 1200; }
+        metadata Layout about BlueDog::Requirements::emergencyControl { x = 960; y = 1200; }
+        metadata Layout about BlueDog::Requirements::serviceability { x = 0; y = 1600; }
+        metadata Layout about BlueDog::Requirements::windObservation { x = 320; y = 1600; }
+        metadata Layout about BlueDog::Mission::Challenge::courseCompletion { x = 640; y = 1600; }
+        metadata Layout about BlueDog::Mission::Challenge::emergencyIntervention { x = 960; y = 1600; }
+        metadata Layout about BlueDog::Mission::Challenge::liveObservation { x = 0; y = 2000; }
+        metadata Layout about BlueDog::Mission::Challenge::sailingPropulsion { x = 320; y = 2000; }
+        metadata Layout about BlueDog::Mission::Challenge::transGorgeChallenge { x = 640; y = 2000; }
+        metadata Layout about BlueDog::Mission::Challenge::unassistedAttempt { x = 960; y = 2000; }
+        metadata Layout about BlueDog::Mission::Challenge::restrictedWaters { x = 0; y = 2400; }
     }
 }
 ```
@@ -92,50 +92,50 @@ package Page_mission_1 {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::cruiseEvidence;
-        expose BlueDogRequirements::cruisePerformance;
-        expose BlueDogRequirements::energyAwareness;
-        expose BlueDogRequirements::energyEvidenceReadiness;
-        expose BlueDogRequirements::legProgress;
-        expose BlueDogRequirements::lowEnergyRecovery;
-        expose BlueDogRequirements::multiDayEndurance;
-        expose BlueDogRequirements::navigationAndControl;
-        expose BlueDogRequirements::passageDuration;
-        expose BlueDogRequirements::peakSupplyCapability;
-        expose BlueDogRequirements::recoveryEnergy;
-        expose BlueDogRequirements::recoveryPropulsion;
-        expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::emergencyControl;
-        expose BlueDogRequirements::sustainedReserveProtection;
-        expose BlueDogRequirements::windObservation;
-        expose BlueDogRequirements::windSensingEndurance;
-        expose GorgeChallenge::courseCompletion;
-        expose GorgeChallenge::emergencyIntervention;
-        expose GorgeChallenge::sailingPropulsion;
-        expose GorgeChallenge::transGorgeChallenge;
-        expose GorgeChallenge::unassistedAttempt;
-        metadata Layout about BlueDogRequirements::cruiseEvidence { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::cruisePerformance { x = 320; y = 0; }
-        metadata Layout about BlueDogRequirements::energyAwareness { x = 640; y = 0; }
-        metadata Layout about BlueDogRequirements::energyEvidenceReadiness { x = 960; y = 0; }
-        metadata Layout about BlueDogRequirements::legProgress { x = 320; y = 400; }
-        metadata Layout about BlueDogRequirements::lowEnergyRecovery { x = 640; y = 400; }
-        metadata Layout about BlueDogRequirements::multiDayEndurance { x = 960; y = 400; }
-        metadata Layout about BlueDogRequirements::navigationAndControl { x = 0; y = 800; }
-        metadata Layout about BlueDogRequirements::passageDuration { x = 320; y = 800; }
-        metadata Layout about BlueDogRequirements::peakSupplyCapability { x = 640; y = 800; }
-        metadata Layout about BlueDogRequirements::recoveryEnergy { x = 960; y = 800; }
-        metadata Layout about BlueDogRequirements::recoveryPropulsion { x = 0; y = 1200; }
-        metadata Layout about BlueDogRequirements::roundTrip { x = 320; y = 1200; }
-        metadata Layout about BlueDogRequirements::emergencyControl { x = 640; y = 1200; }
-        metadata Layout about BlueDogRequirements::sustainedReserveProtection { x = 960; y = 1200; }
-        metadata Layout about BlueDogRequirements::windObservation { x = 0; y = 1600; }
-        metadata Layout about BlueDogRequirements::windSensingEndurance { x = 320; y = 1600; }
-        metadata Layout about GorgeChallenge::courseCompletion { x = 640; y = 1600; }
-        metadata Layout about GorgeChallenge::emergencyIntervention { x = 960; y = 1600; }
-        metadata Layout about GorgeChallenge::sailingPropulsion { x = 0; y = 2000; }
-        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 320; y = 2000; }
-        metadata Layout about GorgeChallenge::unassistedAttempt { x = 640; y = 2000; }
+        expose BlueDog::Requirements::cruiseEvidence;
+        expose BlueDog::Requirements::cruisePerformance;
+        expose BlueDog::Requirements::energyAwareness;
+        expose BlueDog::Requirements::energyEvidenceReadiness;
+        expose BlueDog::Requirements::legProgress;
+        expose BlueDog::Requirements::lowEnergyRecovery;
+        expose BlueDog::Requirements::multiDayEndurance;
+        expose BlueDog::Requirements::navigationAndControl;
+        expose BlueDog::Requirements::passageDuration;
+        expose BlueDog::Requirements::peakSupplyCapability;
+        expose BlueDog::Requirements::recoveryEnergy;
+        expose BlueDog::Requirements::recoveryPropulsion;
+        expose BlueDog::Requirements::roundTrip;
+        expose BlueDog::Requirements::emergencyControl;
+        expose BlueDog::Requirements::sustainedReserveProtection;
+        expose BlueDog::Requirements::windObservation;
+        expose BlueDog::Requirements::windSensingEndurance;
+        expose BlueDog::Mission::Challenge::courseCompletion;
+        expose BlueDog::Mission::Challenge::emergencyIntervention;
+        expose BlueDog::Mission::Challenge::sailingPropulsion;
+        expose BlueDog::Mission::Challenge::transGorgeChallenge;
+        expose BlueDog::Mission::Challenge::unassistedAttempt;
+        metadata Layout about BlueDog::Requirements::cruiseEvidence { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::cruisePerformance { x = 320; y = 0; }
+        metadata Layout about BlueDog::Requirements::energyAwareness { x = 640; y = 0; }
+        metadata Layout about BlueDog::Requirements::energyEvidenceReadiness { x = 960; y = 0; }
+        metadata Layout about BlueDog::Requirements::legProgress { x = 320; y = 400; }
+        metadata Layout about BlueDog::Requirements::lowEnergyRecovery { x = 640; y = 400; }
+        metadata Layout about BlueDog::Requirements::multiDayEndurance { x = 960; y = 400; }
+        metadata Layout about BlueDog::Requirements::navigationAndControl { x = 0; y = 800; }
+        metadata Layout about BlueDog::Requirements::passageDuration { x = 320; y = 800; }
+        metadata Layout about BlueDog::Requirements::peakSupplyCapability { x = 640; y = 800; }
+        metadata Layout about BlueDog::Requirements::recoveryEnergy { x = 960; y = 800; }
+        metadata Layout about BlueDog::Requirements::recoveryPropulsion { x = 0; y = 1200; }
+        metadata Layout about BlueDog::Requirements::roundTrip { x = 320; y = 1200; }
+        metadata Layout about BlueDog::Requirements::emergencyControl { x = 640; y = 1200; }
+        metadata Layout about BlueDog::Requirements::sustainedReserveProtection { x = 960; y = 1200; }
+        metadata Layout about BlueDog::Requirements::windObservation { x = 0; y = 1600; }
+        metadata Layout about BlueDog::Requirements::windSensingEndurance { x = 320; y = 1600; }
+        metadata Layout about BlueDog::Mission::Challenge::courseCompletion { x = 640; y = 1600; }
+        metadata Layout about BlueDog::Mission::Challenge::emergencyIntervention { x = 960; y = 1600; }
+        metadata Layout about BlueDog::Mission::Challenge::sailingPropulsion { x = 0; y = 2000; }
+        metadata Layout about BlueDog::Mission::Challenge::transGorgeChallenge { x = 320; y = 2000; }
+        metadata Layout about BlueDog::Mission::Challenge::unassistedAttempt { x = 640; y = 2000; }
     }
 }
 ```
@@ -156,24 +156,24 @@ package Page_mission_2 {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::criticalFailureDisposition;
-        expose BlueDogRequirements::failureRateBudget;
-        expose BlueDogRequirements::missionReliability;
-        expose BlueDogRequirements::missionSuccessProbability;
-        expose BlueDogRequirements::reliabilityEvidence;
-        expose BlueDogRequirements::roundTrip;
-        expose GorgeChallenge::courseCompletion;
-        expose GorgeChallenge::sailingPropulsion;
-        expose GorgeChallenge::transGorgeChallenge;
-        metadata Layout about BlueDogRequirements::criticalFailureDisposition { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::failureRateBudget { x = 320; y = 0; }
-        metadata Layout about BlueDogRequirements::missionReliability { x = 640; y = 0; }
-        metadata Layout about BlueDogRequirements::missionSuccessProbability { x = 960; y = 0; }
-        metadata Layout about BlueDogRequirements::reliabilityEvidence { x = 0; y = 400; }
-        metadata Layout about BlueDogRequirements::roundTrip { x = 320; y = 400; }
-        metadata Layout about GorgeChallenge::courseCompletion { x = 640; y = 400; }
-        metadata Layout about GorgeChallenge::sailingPropulsion { x = 960; y = 400; }
-        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 800; }
+        expose BlueDog::Requirements::criticalFailureDisposition;
+        expose BlueDog::Requirements::failureRateBudget;
+        expose BlueDog::Requirements::missionReliability;
+        expose BlueDog::Requirements::missionSuccessProbability;
+        expose BlueDog::Requirements::reliabilityEvidence;
+        expose BlueDog::Requirements::roundTrip;
+        expose BlueDog::Mission::Challenge::courseCompletion;
+        expose BlueDog::Mission::Challenge::sailingPropulsion;
+        expose BlueDog::Mission::Challenge::transGorgeChallenge;
+        metadata Layout about BlueDog::Requirements::criticalFailureDisposition { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::failureRateBudget { x = 320; y = 0; }
+        metadata Layout about BlueDog::Requirements::missionReliability { x = 640; y = 0; }
+        metadata Layout about BlueDog::Requirements::missionSuccessProbability { x = 960; y = 0; }
+        metadata Layout about BlueDog::Requirements::reliabilityEvidence { x = 0; y = 400; }
+        metadata Layout about BlueDog::Requirements::roundTrip { x = 320; y = 400; }
+        metadata Layout about BlueDog::Mission::Challenge::courseCompletion { x = 640; y = 400; }
+        metadata Layout about BlueDog::Mission::Challenge::sailingPropulsion { x = 960; y = 400; }
+        metadata Layout about BlueDog::Mission::Challenge::transGorgeChallenge { x = 0; y = 800; }
     }
 }
 ```
@@ -193,18 +193,18 @@ package SRR_Thread_mission {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose GorgeChallenge::transGorgeChallenge;
-        expose GorgeChallenge::overallLength;
-        expose GorgeChallenge::unattachedPassage;
-        expose GorgeChallenge::abortPersistence;
-        expose GorgeChallenge::nightOperation;
-        expose GorgeChallenge::forecastAdmission;
-        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
-        metadata Layout about GorgeChallenge::overallLength { x = 320; y = 0; }
-        metadata Layout about GorgeChallenge::unattachedPassage { x = 640; y = 0; }
-        metadata Layout about GorgeChallenge::abortPersistence { x = 0; y = 400; }
-        metadata Layout about GorgeChallenge::nightOperation { x = 320; y = 400; }
-        metadata Layout about GorgeChallenge::forecastAdmission { x = 640; y = 400; }
+        expose BlueDog::Mission::Challenge::transGorgeChallenge;
+        expose BlueDog::Mission::Challenge::overallLength;
+        expose BlueDog::Mission::Challenge::unattachedPassage;
+        expose BlueDog::Mission::Challenge::abortPersistence;
+        expose BlueDog::Mission::Challenge::nightOperation;
+        expose BlueDog::Mission::Challenge::forecastAdmission;
+        metadata Layout about BlueDog::Mission::Challenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about BlueDog::Mission::Challenge::overallLength { x = 320; y = 0; }
+        metadata Layout about BlueDog::Mission::Challenge::unattachedPassage { x = 640; y = 0; }
+        metadata Layout about BlueDog::Mission::Challenge::abortPersistence { x = 0; y = 400; }
+        metadata Layout about BlueDog::Mission::Challenge::nightOperation { x = 320; y = 400; }
+        metadata Layout about BlueDog::Mission::Challenge::forecastAdmission { x = 640; y = 400; }
     }
 }
 ```

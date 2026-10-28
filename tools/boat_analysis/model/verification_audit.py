@@ -32,9 +32,9 @@ def native_verification_audit(sources=None):
         if not row.cells[2]:errors.append('V01 Missing verification objective: '+row.element.id)
     open_evidence=[]
     for row in tables['IntegrationConfigurations']:
-        if [r.id for r in row.cells[1]]!=['BlueDogIC01::design']:
+        if [r.id for r in row.cells[1]]!=['BlueDog::Configurations::IC01::design']:
             errors.append('V02 Wrong planned design: '+row.element.id)
-        if [r.id for r in row.cells[2]]!=['BlueDogPhysicalArchitecture::ic01']:
+        if [r.id for r in row.cells[2]]!=['BlueDog::Architecture::Physical::ic01']:
             errors.append('V02 Wrong planned assembly: '+row.element.id)
         open_evidence.append(dict(plan=row.element.id,missing=[name for name,cell in
             zip(tables['IntegrationConfigurations'].columns[4:],row.cells[4:]) if not cell]))

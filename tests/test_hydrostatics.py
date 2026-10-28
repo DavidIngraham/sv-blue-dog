@@ -90,7 +90,7 @@ def test_geometry_changes_with_wing_camber_and_trim_without_changing_volume(kern
 def test_native_actuator_accounting_keeps_idle_and_movement_losses():
     import json
     from tests.native_cases import native,MODELS,ROOT
-    result=json.loads(native('-analysis','BlueDogWingActuator::accountingExample','-json',models=MODELS+(ROOT/'models/vehicle/structure.sysml',ROOT/'models/analyses/actuation.sysml')))
+    result=json.loads(native('-analysis','BlueDog::Analyses::WingActuator::accountingExample','-json',models=MODELS+(ROOT/'models/blue-dog.sysml',ROOT/'models/blue-dog.sysml')))
     assert result['status']=='holds' and not result.get('diagnostics')
     values={v['name']:json.loads(v['value']) for v in result['checks'][0]['values']}
     assert values['lockedWhPerDay']==pytest.approx(24*(.1+.02*(1+1*.2/(.8*.4))))

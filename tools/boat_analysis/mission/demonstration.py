@@ -21,7 +21,7 @@ STUDY = ROOT / 'examples/studies/recovery.yaml'
 
 # Legacy import compatibility only. Execution discovers every configured
 # RecoveryScreen usage through the study; this tuple does not select runs.
-CASES = tuple('BlueDogIntegratedCandidate::'+name for name in (
+CASES = tuple('BlueDog::Analyses::IntegratedCandidate::'+name for name in (
     'IC01RecoveryIllustration', 'IC01InvertedRecoveryIllustration',
     'IC01NoRecoveryAuthority'))
 

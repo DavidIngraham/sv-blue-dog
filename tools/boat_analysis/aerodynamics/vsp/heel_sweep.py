@@ -31,12 +31,12 @@ def inflow(heel, awa, nominal_alpha):
 
 
 def settings():
-    return analysis_values('BlueDogWingHeel::sweepInputs')
+    return analysis_values('BlueDog::Analyses::WingHeel::sweepInputs')
 
 
 def run():
     config=settings()
-    source_paths=[Path(__file__).relative_to(ROOT).as_posix(),'tools/boat_analysis/aerodynamics/vsp/reference_vsp.py','tools/boat_analysis/aerodynamics/vsp/vsp_runtime.py','models/analyses/wing-heel.sysml']
+    source_paths=[Path(__file__).relative_to(ROOT).as_posix(),'tools/boat_analysis/aerodynamics/vsp/reference_vsp.py','tools/boat_analysis/aerodynamics/vsp/vsp_runtime.py','models/blue-dog.sysml']
     hashes={name:digest(ROOT/name) for name in source_paths}
     work=ROOT/'.tools/wing-heel';work.mkdir(exist_ok=True)
     checkpoint=work/'checkpoint.json'

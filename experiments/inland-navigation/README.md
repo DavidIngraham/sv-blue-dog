@@ -150,7 +150,7 @@ changed duties, inadequate facts or a newly conflicting segment. Independent
 traffic truth still scores actual contact and clearance; it cannot supply unseen
 observations or veto a command secretly.
 
-The [controller policy](../../models/analyses/navigation-controller.sysml) declares
+The [controller policy](../../models/blue-dog.sysml) declares
 2-degree/0.05 m/s hold tolerances, a 15-degree substantial-turn hypothesis,
 10-degree bearing uncertainty and a twice-protected-envelope clearance-release
 hypothesis. These are not statutory thresholds or accepted physical criteria.

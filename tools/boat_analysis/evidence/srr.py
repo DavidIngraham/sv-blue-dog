@@ -17,7 +17,7 @@ def run(budget=10, battery_wh=None, beam_m=None):
     hashes=source_hashes(paths)
     report={'sourceHashes':hashes,'sourceRevision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
             'physicalQualification':False,'srrApproved':False,'analyses':{}}
-    for name in ('BlueDogEnvironmentReview::FetchSensitivity','BlueDogEncounterReview::Acquisition','BlueDogRecoveryRisk::Sensitivity'):
+    for name in ('BlueDog::Analyses::EnvironmentReview::FetchSensitivity','BlueDog::Analyses::EncounterReview::Acquisition','BlueDog::Analyses::RecoveryRisk::Sensitivity'):
         report['analyses'][name]=analysis_values(name)
     course,water,groups,gates,route=build()
     paths=rounding_paths(water,gates,route,course['routing'][4])

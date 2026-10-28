@@ -62,8 +62,8 @@
     }
   ],
   "modelSources": [
-    "models/missions/course.sysml",
-    "models/analyses/recovery-site-review.sysml"
+    "models/blue-dog.sysml",
+    "models/blue-dog.sysml"
   ],
   "limitations": [
     "Named sectors are survey scopes, not geofenced hazard polygons.",

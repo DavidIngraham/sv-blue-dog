@@ -2,11 +2,11 @@ package RequirementQualityTests {
     private import DocumentQueries::*;
     calc def Trace :> Query {
         Project(source = Named(qualifiedName = (
-            "GorgeChallenge::navigationRuleApplicability", "GorgeChallenge::navigationRuleBaseline",
-            "GorgeChallenge::navigationEntryEvidence", "GorgeChallenge::operatorSafetyIntervention",
-            "GorgeChallenge::navigationAdjudication", "BlueDogRequirements::capsizeResilience",
-            "BlueDogRequirements::vegetationResilience", "BlueDogRequirements::serviceability",
-            "BlueDogRequirements::wetElectricalIntegrity")), columns = (
+            "BlueDog::Mission::Challenge::navigationRuleApplicability", "BlueDog::Mission::Challenge::navigationRuleBaseline",
+            "BlueDog::Mission::Challenge::navigationEntryEvidence", "BlueDog::Mission::Challenge::operatorSafetyIntervention",
+            "BlueDog::Mission::Challenge::navigationAdjudication", "BlueDog::Requirements::capsizeResilience",
+            "BlueDog::Requirements::vegetationResilience", "BlueDog::Requirements::serviceability",
+            "BlueDog::Requirements::wetElectricalIntegrity")), columns = (
             Column(name = "Verifiers", cell = { in row : SysML::RequirementUsage;
                 RelatedElements(source = row, relationshipKind = "verification", direction = "incoming", maxDepth = 1) }),
             Column(name = "Satisfiers", cell = { in row : SysML::RequirementUsage;

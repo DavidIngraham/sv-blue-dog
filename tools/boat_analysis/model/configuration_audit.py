@@ -12,8 +12,8 @@ def native_configuration_audit(sources=None):
     m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
     tables={n:m.run_document_query('BlueDogConfigurationDocuments::'+n) for n in ('Contexts','Installation','Scopes','Allocations')}
     errors=[]
-    expected={'currentCandidate':'BlueDogIC01::design','retainedSizing':'BlueDogSRRCurrent::candidate',
-        'illustrativeLoads':'BlueDogEnergyExamples::sailing'}
+    expected={'currentCandidate':'BlueDog::Configurations::IC01::design','retainedSizing':'BlueDog::Evidence::SRRCurrent::candidate',
+        'illustrativeLoads':'BlueDog::Configurations::Examples::Energy::sailing'}
     contexts={r.element.id.rsplit('::',1)[-1]:r for r in tables['Contexts']}
     for name,subject in expected.items():
         row=contexts.get(name)
@@ -28,36 +28,40 @@ def native_configuration_audit(sources=None):
     def eq(key,values):return {'@type':'PrimitiveConstraint','property':key,'operator':'=','value':values}
     occurrences=m.query(scope=roots,select=['owner','type'],where={'@type':'CompositeConstraint',
         'operator':'and','constraint':[eq('@type',['PartUsage']),eq('type',['MarineDesign::Design','MarineDesign::Parameters'])]})
-    top_design_parts=[r for r in occurrences if r.get('owner') in roots]
+    # Namespace depth is organizational. Independent design/parameter usages
+    # are owned by native packages, including deeply nested project namespaces;
+    # usages inside parts/definitions remain contextual references.
+    package_ids={row.id for row in m.query(scope=roots,select=[],where=eq('@type',['Package']))}
+    top_design_parts=[r for r in occurrences if r.get('owner') in package_ids]
     represented={x.id for row in contexts.values() for x in row.cells[2]}
     for row in top_design_parts:
         if row.id not in represented:errors.append('C02 Unclassified top-level design/parameter part: '+row.id)
     for row in tables['Installation']:
-        for i,expected_id in enumerate(('BlueDogIC01::design','BlueDogPhysicalArchitecture::ic01')):
+        for i,expected_id in enumerate(('BlueDog::Configurations::IC01::design','BlueDog::Architecture::Physical::ic01')):
             if [x.id for x in row.cells[i]]!=[expected_id]:errors.append('C04 Wrong planned installation reference: '+row.element.id)
     for row in tables['Scopes']:
-        if [x.id for x in row.cells[2]]!=['BlueDogIC01::design']:errors.append('C07 Wrong accounting configuration: '+row.element.id)
+        if [x.id for x in row.cells[2]]!=['BlueDog::Configurations::IC01::design']:errors.append('C07 Wrong accounting configuration: '+row.element.id)
         if any(not c or c==('',) for i,c in enumerate(row.cells[:-1]) if i!=2):
             errors.append('C07 Incomplete accounting context: '+row.element.id)
         if m.eval(row.element.id+'.quantitiesValid') is not True:
             errors.append('C07 Invalid allocated quantity: '+row.element.id)
     # Native equality checks the documented owner relationship, without reimplementing rollup equations.
     owner_bindings={
-        'ic01.mainStorage.nameplateEnergy':'BlueDogIC01::design.battery_Wh * 3600 [J]',
-        'ic01.mainStorage.departureEnergy':'BlueDogConfigurationManagement::ic01.mainStorage.nameplateEnergy * BlueDogOperatingEnvironment::Inputs.usable_fraction * BlueDogOperatingEnvironment::Inputs.initial_fraction',
-        'ic01.fixedEquipment.massAllocation':'BlueDogIC01::integration.fixedEquipmentKg * 1 [kg]',
-        'ic01.sailingElectronics.averagePowerAllocation':'BlueDogIC01::integration.electronicsW * 1 [W]',
-        'ic01.recoveryEssentials.averagePowerAllocation':'BlueDogIC01::integration.recoveryEssentialW * 1 [W]',
-        'ic01.recoveryStorage.nameplateEnergy':'BlueDogIC01::integration.recoveryBatteryWh * 3600 [J]',
-        'ic01.recoveryStorage.departureEnergy':'BlueDogIC01::integration.recoveryDepartureWh * 3600 [J]',
-        'ic01.responseTiming.acquisitionLatency':'BlueDogIC01::integration.sensorLatencyS * 1 [s]',
-        'ic01.responseTiming.assessmentLatency':'BlueDogIC01::integration.assessmentS * 1 [s]',
-        'ic01.responseTiming.commandLatency':'BlueDogIC01::integration.commandS * 1 [s]',
-        'ic01.responseTiming.maneuverDuration':'BlueDogIC01::integration.maneuverS * 1 [s]'}
+        'ic01.mainStorage.nameplateEnergy':'BlueDog::Configurations::IC01::design.battery_Wh * 3600 [J]',
+        'ic01.mainStorage.departureEnergy':'BlueDog::Configurations::Management::ic01.mainStorage.nameplateEnergy * BlueDog::Configurations::OperatingEnvironment::Inputs.usable_fraction * BlueDog::Configurations::OperatingEnvironment::Inputs.initial_fraction',
+        'ic01.fixedEquipment.massAllocation':'BlueDog::Configurations::IC01::integration.fixedEquipmentKg * 1 [kg]',
+        'ic01.sailingElectronics.averagePowerAllocation':'BlueDog::Configurations::IC01::integration.electronicsW * 1 [W]',
+        'ic01.recoveryEssentials.averagePowerAllocation':'BlueDog::Configurations::IC01::integration.recoveryEssentialW * 1 [W]',
+        'ic01.recoveryStorage.nameplateEnergy':'BlueDog::Configurations::IC01::integration.recoveryBatteryWh * 3600 [J]',
+        'ic01.recoveryStorage.departureEnergy':'BlueDog::Configurations::IC01::integration.recoveryDepartureWh * 3600 [J]',
+        'ic01.responseTiming.acquisitionLatency':'BlueDog::Configurations::IC01::integration.sensorLatencyS * 1 [s]',
+        'ic01.responseTiming.assessmentLatency':'BlueDog::Configurations::IC01::integration.assessmentS * 1 [s]',
+        'ic01.responseTiming.commandLatency':'BlueDog::Configurations::IC01::integration.commandS * 1 [s]',
+        'ic01.responseTiming.maneuverDuration':'BlueDog::Configurations::IC01::integration.maneuverS * 1 [s]'}
     for feature,owner in owner_bindings.items():
-        if m.eval('BlueDogConfigurationManagement::'+feature+' == '+owner,context_symbol_id='BlueDogConfigurationManagement') is not True:
+        if m.eval('BlueDog::Configurations::Management::'+feature+' == '+owner,context_symbol_id='BlueDog::Configurations::Management') is not True:
             errors.append('C10 Accounting binding differs from its declared owner: '+feature)
-    review=m.run_analysis('BlueDogConfigurationManagement::AccountingReview',subject='BlueDogConfigurationManagement::ic01').outputs
+    review=m.run_analysis('BlueDog::Configurations::Management::AccountingReview',subject='BlueDog::Configurations::Management::ic01').outputs
     open_installation=[name for name,cell in zip(tables['Installation'].columns[2:7],tables['Installation'].rows[0].cells[2:7]) if not cell]
     open_quantities=[dict(scope=r.element.id,missingPeak=not bool(r.cells[3])) for r in tables['Allocations'] if r.cells[2]]
     return dict(runtimeRevision=REVISION,modelHash=m.hash,

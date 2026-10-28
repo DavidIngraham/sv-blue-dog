@@ -26,35 +26,35 @@ The return leg has to make progress over the ground, not just through the water.
 
 The hull and rig turn wind into motion; the rudder steers; onboard sensing and control choose where to go. Batteries supply those functions and a separate recovery system. I use the model to assign each responsibility before selecting hardware.
 
-In [IC-01](../models/analyses/integrated-candidate.sysml), the main sensing and control system sails the mission. A separately powered recovery system must observe hazards, navigate and propel the boat after a primary failure, including while inverted. The practical question is whether those backup functions can survive the fault that disabled sailing. Shared water damage could still defeat both systems; isolation needs testing.
+In [IC-01](../models/blue-dog.sysml), the main sensing and control system sails the mission. A separately powered recovery system must observe hazards, navigate and propel the boat after a primary failure, including while inverted. The practical question is whether those backup functions can survive the fault that disabled sailing. Shared water damage could still defeat both systems; isolation needs testing.
 
-The [integration study](validation-plan.md#exercise-decisions-before-physical-integration) checks those responsibilities together using one boat's mass, sailing performance and energy budget. The [named IC-01 configuration](../models/configurations/ic01.sysml) owns its complete design and integration assumptions. The next step is to turn the allocated capabilities into compatible hardware and test their interfaces.
+The [integration study](validation-plan.md#exercise-decisions-before-physical-integration) checks those responsibilities together using one boat's mass, sailing performance and energy budget. The [named IC-01 configuration](../models/blue-dog.sysml) owns its complete design and integration assumptions. The next step is to turn the allocated capabilities into compatible hardware and test their interfaces.
 
 ## Logical responsibilities and the candidate boat
 
 Navigation estimates position and attitude; wind estimation supplies the sailing condition; traffic observation and collision assessment identify conflicts. Guidance chooses a sailing command. Mission supervision decides whether that command may be used, whether a gate crossing can count, and whether an abort has ended the attempt. Energy management supplies the reserve assessment. Recovery management plans and commands shore recovery; recovery actuation executes permitted propulsion commands. Recording and communications preserve and expose those decisions.
 
-These are responsibilities, independent of processor or software boundaries. The [logical architecture](../models/vehicle/architecture.sysml) connects them with typed observations, permissions, commands and records. A navigation estimate includes validity and time; a safety observation explicitly confirms which required capabilities remain available.
+These are responsibilities, independent of processor or software boundaries. The [logical architecture](../models/blue-dog.sysml) connects them with typed observations, permissions, commands and records. A navigation estimate includes validity and time; a safety observation explicitly confirms which required capabilities remain available.
 
 ```sysml-view Page_architecture_logical::responsibilities direction=TB
 package Page_architecture_logical {
     private import StandardViewDefinitions::*;
     view responsibilities : InterconnectionView {
-        expose BlueDogLogicalArchitecture::LogicalVessel;
+        expose BlueDog::Architecture::Logical::LogicalVessel;
     }
 }
 ```
 
 The candidate physical assembly allocates those responsibilities to a primary sailing path and a recovery path with its own battery, navigation, observation, controller and propulsor. Wired wind sensing is a provisional equipment choice. The assembly identifies power and data interfaces; connectors, bus timing, equipment ratings and common-cause isolation remain open engineering questions. Recording and telemetry power assignment needs to be reconciled with both energy budgets.
 
-The context description, logical responsibilities and candidate assembly answer different questions. The context's `Boat` groups responsibilities and places the vessel among external actors. The logical model defines their exchanges. IC-01 proposes equipment to implement them. [Named correspondences](../models/vehicle/architecture-contracts.sysml) explain how these descriptions connect, including the portion assigned to each element and the candidate configuration it concerns.
+The context description, logical responsibilities and candidate assembly answer different questions. The context's `Boat` groups responsibilities and places the vessel among external actors. The logical model defines their exchanges. IC-01 proposes equipment to implement them. [Named correspondences](../models/blue-dog.sysml) explain how these descriptions connect, including the portion assigned to each element and the candidate configuration it concerns.
 
 A responsibility can need several implementation contributions. Navigation needs an estimate source and controller-side validation. Recording needs storage and controller-side scheduling. Recovery needs route assessment, commands and a propulsor, supported by its power and sensing interfaces. Assigning several responsibilities to one controller also creates internal interactions whose software timing and fault behavior I still need to establish.
 
 <details>
 <summary>Logical responsibilities and their IC-01 contributions</summary>
 
-The table follows the model's allocation links. Each named allocation records its scope in the [correspondence model](../models/vehicle/architecture-contracts.sysml). Primary and recovery identify implementation paths; shared equipment still needs a supply and fault-survival decision. These links describe the candidate, not accepted equipment or a demonstrated software deployment.
+The table follows the model's allocation links. Each named allocation records its scope in the [correspondence model](../models/blue-dog.sysml). Primary and recovery identify implementation paths; shared equipment still needs a supply and fault-survival decision. These links describe the candidate, not accepted equipment or a demonstrated software deployment.
 
 ```sysml-report BlueDogArchitectureDocuments::ResponsibilityRegister
 ```
@@ -77,7 +77,7 @@ The payload definitions preserve quantities, observation timestamps and validity
 package Page_architecture_physical {
     private import StandardViewDefinitions::*;
     view candidate : InterconnectionView {
-        expose BlueDogPhysicalArchitecture::IC01Candidate;
+        expose BlueDog::Architecture::Physical::IC01Candidate;
     }
 }
 ```
@@ -118,7 +118,7 @@ Each sailing cycle starts with a wind estimate carrying its value, timestamp and
 package Page_architecture_normal {
     private import OOSEM::*;
     view scenario : LogicalScenarioView {
-        expose BlueDogMethod::Scenarios::NormalSailing;
+        expose BlueDog::Method::Scenarios::NormalSailing;
     }
 }
 ```
@@ -131,7 +131,7 @@ Observe, assess, maneuver and reassess. The Automatic Identification System (AIS
 package Page_architecture_traffic {
     private import OOSEM::*;
     view scenario : LogicalScenarioView {
-        expose BlueDogMethod::Scenarios::TrafficEncounter;
+        expose BlueDog::Method::Scenarios::TrafficEncounter;
     }
 }
 ```
@@ -148,7 +148,7 @@ The recovery cycle explicitly supplies navigation, traffic, boundary and reserve
 package Page_architecture_recovery {
     private import OOSEM::*;
     view scenario : LogicalScenarioView {
-        expose BlueDogMethod::Scenarios::AbortAndRecover;
+        expose BlueDog::Method::Scenarios::AbortAndRecover;
     }
 }
 ```
@@ -161,20 +161,20 @@ An inversion suspends sailing and gate scoring. The supervisor needs explicit co
 package Page_architecture_capsize {
     private import OOSEM::*;
     view scenario : LogicalScenarioView {
-        expose BlueDogMethod::Scenarios::CapsizeAndResume;
+        expose BlueDog::Method::Scenarios::CapsizeAndResume;
     }
 }
 ```
 
 The scenario carries a safety observation into a permission decision, applies that permission and retains its record. The native supervisor executes this decision policy in the simulator; it does not predict whether the hull will right itself. Low reserve or lost safety capability can interrupt the wait for righting, including during a communications outage. Physical inverted sensing, righting, restored control and recovery thrust remain tests to perform on an identified boat.
 
-These responsibilities put estimation and decisions onboard. The wired wind sensor is a concrete starting point, while processor choice, software boundaries and backup equipment remain open. I need timing, power and fault tests to select compatible implementations. The [method model](../models/vehicle/method.sysml) records the assignments; the [current assessment](current-assessment.md) identifies the next investigations.
+These responsibilities put estimation and decisions onboard. The wired wind sensor is a concrete starting point, while processor choice, software boundaries and backup equipment remain open. I need timing, power and fault tests to select compatible implementations. The [method model](../models/blue-dog.sysml) records the assignments; the [current assessment](current-assessment.md) identifies the next investigations.
 
 ### Navigation, outages, reserve, launch and maintenance
 
 Navigation passes a time-stamped estimate through validity assessment before guidance can use it. A communications outage preserves records onboard and queues alerts for later delivery; losing the shore link does not itself remove autonomous control. Energy management assesses the protected recovery reserve and can request an abort before it is exhausted.
 
-Before launch, the scenario combines an identified configuration, evidence readiness and the admitted operating conditions into a release decision. Maintenance records the configuration and work performed before a new release. These [typed scenarios](../models/vehicle/method.sysml) describe the necessary exchanges and responsible functions. Their presence does not implement a launcher, maintenance system, sensor estimator or communications protocol. The supervisor and numerical demonstrations execute the bounded decisions identified in the [runtime reference](reference/model-runtime.md#run-the-named-integration-candidate).
+Before launch, the scenario combines an identified configuration, evidence readiness and the admitted operating conditions into a release decision. Maintenance records the configuration and work performed before a new release. These [typed scenarios](../models/blue-dog.sysml) describe the necessary exchanges and responsible functions. Their presence does not implement a launcher, maintenance system, sensor estimator or communications protocol. The supervisor and numerical demonstrations execute the bounded decisions identified in the [runtime reference](reference/model-runtime.md#run-the-named-integration-candidate).
 
 The [mission simulator](mission-simulation.md#executable-supervisory-logic) records the resulting decisions and motion, including the time between sending a command and completing a maneuver. That connection lets a scenario expose a missing capability rather than merely describe an intended sequence.
 
@@ -239,8 +239,8 @@ Traffic is an actor in the operating context, not just an environmental number. 
 package Page_architecture_2 {
     private import StandardViewDefinitions::*;
     view operations : GeneralView {
-        expose BlueDogUseCases::sailGorge;
-        expose BlueDogUseCases::avoidTraffic;
+        expose BlueDog::Mission::UseCases::sailGorge;
+        expose BlueDog::Mission::UseCases::avoidTraffic;
         filter @SysML::UseCaseUsage;
     }
 }
@@ -254,14 +254,14 @@ Monitoring supports live observation; recovery is a separate operation that can 
 package Page_architecture_7 {
     private import StandardViewDefinitions::*;
     view supportOperations : GeneralView {
-        expose BlueDogUseCases::monitor;
-        expose BlueDogUseCases::recover;
+        expose BlueDog::Mission::UseCases::monitor;
+        expose BlueDog::Mission::UseCases::recover;
         filter @SysML::UseCaseUsage;
     }
 }
 ```
 
-Launch, service, ocean sailing and navigation signaling remain in the [complete use-case model](../models/vehicle/use-cases.sysml).
+Launch, service, ocean sailing and navigation signaling remain in the [complete use-case model](../models/blue-dog.sysml).
 
 </details>
 
@@ -269,9 +269,9 @@ Launch, service, ocean sailing and navigation signaling remain in the [complete 
 
 A connected port needs a shared interpretation of its payload. Observations identify their source, configuration, clock and producer restart epoch; navigation and traffic values also identify their coordinate or angular references. Commands carry authority, configuration, issuance and expiry context. These are candidate interface definitions; transport encoding and installed equipment support remain open.
 
-The [interface contract model](../models/vehicle/interface-contracts.sysml) separates producer validity from consumer usability. Its native predicates check a supplied age bound, an established time basis and applicable context. Command applicability also requires accepted authority and ordering. A valid link-down observation differs from missing link data; an empty traffic list does not establish detection coverage. Numerical refresh cadence does not establish a safe freshness limit.
+The [interface contract model](../models/blue-dog.sysml) separates producer validity from consumer usability. Its native predicates check a supplied age bound, an established time basis and applicable context. Command applicability also requires accepted authority and ordering. A valid link-down observation differs from missing link data; an empty traffic list does not establish detection coverage. Numerical refresh cadence does not establish a safe freshness limit.
 
-The [executable consumer contracts](../models/vehicle/behavior-contracts.sysml) reuse those predicates and separate sailing permission from recovery enable. Sailing checks current command and permission applicability, navigation, wind, safety and persistent restrictions. Motor enable requires known nonqualifying state, durable disqualification, established recovery authorization, an available path and no active inhibit. These partial logical actions are tested through native execution; the scalar mission simulator does not yet implement the message/storage protocol or hardware interlocks.
+The [executable consumer contracts](../models/blue-dog.sysml) reuse those predicates and separate sailing permission from recovery enable. Sailing checks current command and permission applicability, navigation, wind, safety and persistent restrictions. Motor enable requires known nonqualifying state, durable disqualification, established recovery authorization, an available path and no active inhibit. These partial logical actions are tested through native execution; the scalar mission simulator does not yet implement the message/storage protocol or hardware interlocks.
 
 I use [NASA interface management guidance](https://www.nasa.gov/reference/6-3-interface-management/) to connect these definitions to integration checks and change control. The [historical NASA interface design guidance](https://swehb.nasa.gov/spaces/7150/pages/16450621/SWE-112%2B-%2BInterface%2BDesign%2BDescription) supplies the detailed review topics. Freshness allocations, clock uncertainty, reference transformations, controller arbitration and physical compatibility need engineering decisions and evidence before these contracts can support deployment. The conceptual simulator does not yet consume these message envelopes.
 
@@ -285,15 +285,15 @@ package Page_architecture_3 {
     private import DiagramLayout::*;
     view MissionSemantics : GeneralView {
         filter @SysML::RequirementUsage;
-        expose GorgeChallenge::transGorgeChallenge;
-        expose GorgeChallenge::courseCompletion;
-        expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirementVerification::RoundTripVerification;
+        expose BlueDog::Mission::Challenge::transGorgeChallenge;
+        expose BlueDog::Mission::Challenge::courseCompletion;
+        expose BlueDog::Requirements::roundTrip;
+        expose BlueDog::Verification::Requirements::RoundTripVerification;
         expose BlueDog::Architecture::missionContext::boat;
-        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
-        metadata Layout about GorgeChallenge::courseCompletion { x = 360; y = 0; }
-        metadata Layout about BlueDogRequirements::roundTrip { x = 0; y = 200; }
-        metadata Layout about BlueDogRequirementVerification::RoundTripVerification { x = 360; y = 200; }
+        metadata Layout about BlueDog::Mission::Challenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about BlueDog::Mission::Challenge::courseCompletion { x = 360; y = 0; }
+        metadata Layout about BlueDog::Requirements::roundTrip { x = 0; y = 200; }
+        metadata Layout about BlueDog::Verification::Requirements::RoundTripVerification { x = 360; y = 200; }
         metadata Layout about BlueDog::Architecture::missionContext::boat { x = 0; y = 400; }
     }
 }
@@ -307,12 +307,12 @@ package Page_architecture_4 {
     private import DiagramLayout::*;
     view ManufacturingSemantics : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::desktopManufacture;
+        expose BlueDog::Requirements::desktopManufacture;
         expose BlueDog::Architecture::missionContext::boat::hullAndRig::printedHull;
-        expose BlueDogRequirementVerification::DesktopManufactureVerification;
-        metadata Layout about BlueDogRequirements::desktopManufacture { x = 0; y = 0; }
+        expose BlueDog::Verification::Requirements::DesktopManufactureVerification;
+        metadata Layout about BlueDog::Requirements::desktopManufacture { x = 0; y = 0; }
         metadata Layout about BlueDog::Architecture::missionContext::boat::hullAndRig::printedHull { x = 360; y = 0; }
-        metadata Layout about BlueDogRequirementVerification::DesktopManufactureVerification { x = 0; y = 200; }
+        metadata Layout about BlueDog::Verification::Requirements::DesktopManufactureVerification { x = 0; y = 200; }
     }
 }
 ```

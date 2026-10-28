@@ -15,7 +15,7 @@ from tools.boat_analysis.model.runtime import ROOT, analysis_values
 
 
 def course_inputs():
-    return analysis_values('TransGorgeCourse::GateGeometry')
+    return analysis_values('BlueDog::Mission::Course::GateGeometry')
 
 
 def chart_domains(features, settings, frame=LocalFrame()):

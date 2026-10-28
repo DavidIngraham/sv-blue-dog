@@ -6,6 +6,7 @@ import pytest
 
 from tools.boat_analysis.model import audit
 from tools.boat_analysis.model.runtime import model_files
+from tests.native_edits import replace_unique, set_values
 
 
 @pytest.fixture(scope='module')
@@ -29,11 +30,11 @@ def test_current_coverage_distinguishes_plans_studies_and_future_scope(report):
 
 def test_removing_a_current_verification_objective_is_detected():
     sources = [(str(p), p.read_text()) for p in model_files()]
-    needle = 'verify BlueDogRequirements::roundTrip;'
+    needle = 'verify BlueDog::Requirements::roundTrip;'
     assert sum(text.count(needle) for _, text in sources) == 1
-    altered = [(path, text.replace(needle, '')) for path, text in sources]
+    altered = replace_unique(sources,needle,'')
     result = audit.native_audit(altered)
-    assert 'Missing current verification objective: BlueDogRequirements::roundTrip' in result['errors']
+    assert 'Missing current verification objective: BlueDog::Requirements::roundTrip' in result['errors']
 
 
 def test_unregistered_evidence_is_rejected(tmp_path, monkeypatch):
@@ -48,12 +49,11 @@ def test_unregistered_evidence_is_rejected(tmp_path, monkeypatch):
 
 def test_explicit_current_mission_annotation_does_not_hide_missing_verification():
     sources = [(str(p), p.read_text()) for p in model_files()]
-    altered = [(path, text.replace('mission = MissionKind::futureEndurance;',
-                                  'mission = MissionKind::gorge;') if path.endswith('/missions/scope.sysml') else text)
-               for path, text in sources]
+    altered = set_values(sources, {'BlueDog::Mission::Scope::applicability::mission':
+                                   'BlueDog::Mission::Scope::MissionKind::gorge'})
     result = audit.native_audit(altered)
     assert result['summary']['future'] == 11
-    assert 'Missing current verification objective: GorgeChallenge::repeatedOperation' in result['errors']
+    assert 'Missing current verification objective: BlueDog::Mission::Challenge::repeatedOperation' in result['errors']
 
 
 def test_manifest_input_artifact_change_is_rejected(tmp_path, monkeypatch):

@@ -2,7 +2,7 @@
 
 **Supplier review: 16 October 2026.** I need a physical installation to test against IC-01’s sensing assumptions. These three configurations name cameras, processing, interfaces and mounting concepts. They are bench candidates, not selected equipment or evidence that the boat meets the class-specific observation allocations. No sensing simulation has been changed for this comparison.
 
-The [model record](../../models/configurations/sensing-equipment.sysml) separates supplier specifications from project allowances and leaves installed-budget, detection, latency and independent-recovery acceptance false. The [source register](../../evidence/sensing/2026-10-16/sources.json) records URLs, retrieval date, source scope and available response hashes.
+The [model record](../../models/blue-dog.sysml) separates supplier specifications from project allowances and leaves installed-budget, detection, latency and independent-recovery acceptance false. The [source register](../../evidence/sensing/2026-10-16/sources.json) records URLs, retrieval date, source scope and available response hashes.
 
 The [acoustic alternatives](acoustic-sensing.md) add a synchronized hydrophone
 array, a narrow-beam forward sonar and a multibeam imaging sonar to the trade.

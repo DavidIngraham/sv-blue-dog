@@ -55,7 +55,8 @@ def test_archived_campaign_and_model_projection_agree():
     assert record['targetReached'] and record['completed'] and not record['qualified']
     assert [a['lengthM'] for a in record['attempts']]==[2.,1.8,1.6,1.4,1.2]
     assert all(a['feasible'] and a['maxEquilibriumResidual']<1e-4 and a['minimumMargin']>-1e-4 for a in record['attempts'])
-    assert (ROOT/'models/evidence/sizing-continuation.sysml').read_text()==model_source(directory)
+    from tools.boat_analysis.evidence.projection import read_projection
+    assert read_projection('sizing-continuation') == model_source(directory)
 
 
 def test_retained_target_is_rejected_by_current_geometry_policy():
@@ -101,7 +102,8 @@ def test_finite_passage_projection_preserves_interrupted_status_and_lineage():
     stages=compatible_stages(directory)
     assert [s['lengthM'] for s in stages]==pytest.approx([2.,1.8,1.6,1.4])
     assert all(s['feasible'] for s in stages)
-    assert (ROOT/'models/evidence/finite-passage-sizing.sysml').read_text()==model_source(directory,'BlueDogFinitePassageSizing')
+    from tools.boat_analysis.evidence.projection import read_projection
+    assert read_projection('finite-passage-sizing') == model_source(directory,'BlueDog::Evidence::FinitePassageSizing')
 
 
 def test_larger_archived_baseline_is_ineligible_under_current_challenge():

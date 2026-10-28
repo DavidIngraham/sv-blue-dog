@@ -2,7 +2,7 @@
 
 **OOSEM:** Trades, optimization and analysis · [Current assessment](current-assessment.md)
 
-**IC-01 is the working basis for my first physical boat.** I expect to refine it before construction. Its purpose is to carry sensing, guidance, sailing energy and independent recovery together, rather than size a sailing hull first and add those functions later. Its [allocation](../models/analyses/integrated-candidate.sysml) includes sensing/compute demand and recovery equipment in a fresh coupled evaluation. The [virtual acceptance requirement](current-assessment.md#integrated-simulation-evidence) combines those sizing results with representative mission and casualty simulations. It does not select catalog hardware or establish physical qualification.
+**IC-01 is the working basis for my first physical boat.** I expect to refine it before construction. Its purpose is to carry sensing, guidance, sailing energy and independent recovery together, rather than size a sailing hull first and add those functions later. Its [allocation](../models/blue-dog.sysml) includes sensing/compute demand and recovery equipment in a fresh coupled evaluation. The [virtual acceptance requirement](current-assessment.md#integrated-simulation-evidence) combines those sizing results with representative mission and casualty simulations. It does not select catalog hardware or establish physical qualification.
 
 The [navigation-rule replay](encounter-feasibility.md#navigation-assessments-in-the-ic-01-replay)
 uses this configuration unchanged. It produces earlier aborts when encounter
@@ -72,7 +72,7 @@ The archived search has not yet produced a useful spread of feasible alternative
 
 The bounded local study examines 1.2, 1.0 and 0.8 m overall-length caps. It retains feasible accepted iterates even if a later solver step fails. An unresolved search is not proof that a smaller boat is impossible. These are local monohull alternatives; they do not establish a global optimum or compare every hull architecture.
 
-There is no minimum sailing-speed floor, 72-hour challenge deadline or daily energy-neutrality requirement. Stored energy is sized for a finite passage and protected recovery. The passage multiplier and delay allowance remain provisional design allocations in [the concept policy](../models/analyses/sizing/credibility.sysml).
+There is no minimum sailing-speed floor, 72-hour challenge deadline or daily energy-neutrality requirement. Stored energy is sized for a finite passage and protected recovery. The passage multiplier and delay allowance remain provisional design allocations in [the concept policy](../models/blue-dog.sysml).
 
 In the archived search configuration, both coarse-feasible outputs remained effectively the same 1.2 m seed: their masses differ by less than 0.1 g and their conditional passage times by about 2.4 minutes. This bounded run has not yet produced a useful spread of design choices. The 1.0 and 0.8 m searches remain unresolved; infeasible terminal points are listed for diagnosis, not offered as alternatives.
 
@@ -106,6 +106,6 @@ Cost and construction effort need a bill of materials and process estimates. Rec
 
 The [current assessment](current-assessment.md) connects these findings to the requirements and remaining evidence. A solver pass does not qualify a vessel for an unattended trial.
 
-[Archived run and source provenance](../evidence/runs/2026-10-13-srr-frontier/manifest.json) · [Generated model evidence](../models/evidence/srr-frontier.sysml)
+[Archived run and source provenance](../evidence/runs/2026-10-13-srr-frontier/manifest.json) · [Generated model evidence](../models/blue-dog.sysml)
 
 **Next:** [Coupled sizing method](sizing.md) · [Series guide](index.md)

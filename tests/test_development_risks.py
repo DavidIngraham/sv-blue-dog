@@ -16,7 +16,7 @@ def test_standard_risk_metadata_and_unknown_probability(tmp_path):
     source.write_text('''package RiskCheck {
         private import DocumentQueries::*;
         calc def Rows :> Query {
-            Project(source = WhereMetadata(source = Descendants(source = Named(qualifiedName = "BlueDogRisks")), 'metadata' = "RiskMetadata::Risk"), columns = (
+            Project(source = WhereMetadata(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::DevelopmentRisks")), 'metadata' = "RiskMetadata::Risk"), columns = (
                 Column(name = "Risk", path = "risk.identifier"),
                 Column(name = "Likelihood", path = "risk.technicalRisk.probability")))
         }

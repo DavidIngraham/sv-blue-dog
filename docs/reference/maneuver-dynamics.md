@@ -6,7 +6,7 @@ turn rate and acceleration, reduces speed during a turn, tack or gybe, and makes
 rudder authority depend on speed through the water. Current moves the boat but
 does not supply that steering authority.
 
-The [native model](../../models/analyses/maneuver-dynamics.sysml) owns the
+The [native model](../../models/blue-dog.sysml) owns the
 equations, coefficients and study cases. Its coefficients are unmeasured
 hypotheses. The Python adapter integrates heading and position. It does not
 resolve yaw inertia, roll, wave excitation or sail handling.

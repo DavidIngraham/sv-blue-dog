@@ -20,27 +20,26 @@ def basis_links(report):
             re.findall(r'^\| ([\w:]+) \| ([\w:]+) \|', section, re.M)]
 
 
-def include_basis(diagram, links, labels=None):
+def include_basis(diagram, links, labels=None, identities=()):
     labels = (labels or {}) | dict((name, rid) for rid, name in
                   re.findall(r'^\*\*([A-Z]-\d+) (\w+)\*\*', diagram, re.M))
-    # Native renderers may omit a common namespace. Restore a short usage
-    # identity only when the native label query provides one unique match.
-    by_short_name = {}
-    for identity in labels:
-        if '::' not in identity:
-            continue
-        short_name = identity.rsplit('::', 1)[-1]
-        by_short_name.setdefault(short_name, []).append(identity)
+    # Native diagrams omit common namespaces. Resolve their displayed suffixes
+    # only against authoritative native identities, including package nodes.
+    known=set(identities) | {name for name in labels if '::' in name}
     def canonical(identity):
-        matches = by_short_name.get(identity, [])
-        return matches[0] if len(matches) == 1 else identity
+        if identity in known:
+            return identity
+        matches=[name for name in known if name.endswith('::'+identity)]
+        if len(matches)>1:
+            raise ValueError('Ambiguous native diagram identity: '+identity)
+        return matches[0] if matches else identity
     def update(match):
         body = match[1]
         found = diagram_nodes(body).items()
         names = {}
         for node, qualified in found:
             qualified = canonical(qualified)
-            if not qualified.startswith(('BlueDogRequirements::', 'BlueDog::Goals::', 'GorgeChallenge::', 'BlueDogStructure::', 'BlueDog::DesignIntent')):
+            if not qualified.startswith(('BlueDog::Requirements::', 'BlueDog::Goals::', 'BlueDog::Mission::Challenge::', 'BlueDog::Requirements::Structure::', 'BlueDog::DesignIntent')):
                 continue
             name = qualified.rsplit('::', 1)[-1]
             if name in names:

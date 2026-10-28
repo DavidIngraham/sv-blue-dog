@@ -46,7 +46,8 @@ def test_frozen_archive_matches_native_projection(weather_policy):
     assert len(manifest['sources']) == 20
     for item in manifest['sources']:
         assert hashlib.sha256((DIRECTORY/item['file']).read_bytes()).hexdigest() == item['sha256']
-    projection = (ROOT/'models/evidence/gorge-wind.sysml').read_text()
+    from tools.boat_analysis.evidence.projection import read_projection
+    projection = read_projection('gorge-wind')
     for name, station in STATIONS.items():
         records = {}
         for year in range(weather_policy['firstYear'], weather_policy['lastYear']+1):

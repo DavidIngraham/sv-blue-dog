@@ -50,7 +50,7 @@ def native_decision_audit(sources=None):
             errors.append('D18 Record lacks question/disposition or evidence needs: '+row.element.id)
     review_types=m.query(where={'@type':'PrimitiveConstraint','property':'general','operator':'=',
         'value':['EngineeringDecisions::AllocationReview']})
-    if not any(r.id=='BlueDogRequirementBasis::AllocationDecision' for r in review_types):
+    if not any(r.id=='BlueDog::Requirements::Basis::AllocationDecision' for r in review_types):
         errors.append('D01 Allocation metadata lacks the shared review schema')
     annotations=m.query(where={'@type':'PrimitiveConstraint','property':'type','operator':'=',
         'value':['EngineeringDecisions::AllocationReview',*(r.id for r in review_types)]})
@@ -66,17 +66,17 @@ def native_decision_audit(sources=None):
         if any(not c for c in row.cells):errors.append('D07 Incomplete criterion: '+row.element.id);continue
         position=row.cells[0][0];kind=row.cells[2][0].id
         expected='comparativeStudy' if position==7 else 'mandatory'
-        if kind!='BlueDogTradeCriteria::Kind::'+expected:errors.append('D08 Wrong mandatory/study classification: '+row.element.id)
+        if kind!='BlueDog::Decisions::TradeCriteria::Kind::'+expected:errors.append('D08 Wrong mandatory/study classification: '+row.element.id)
         if not basis.get(row.element.id):errors.append('D07 Criterion lacks native requirement basis: '+row.element.id)
-    expected_basis={'BlueDogTradeCriteria::progress':{'BlueDogRequirements::passageDuration','BlueDogRequirements::cruiseEvidence'},
-        'BlueDogTradeCriteria::reliabilityStudy':{'BlueDogRequirements::missionSuccessProbability','BlueDogRequirements::reliabilityEvidence','BlueDogRequirements::missionReliability'}}
+    expected_basis={'BlueDog::Decisions::TradeCriteria::progress':{'BlueDog::Requirements::passageDuration','BlueDog::Requirements::cruiseEvidence'},
+        'BlueDog::Decisions::TradeCriteria::reliabilityStudy':{'BlueDog::Requirements::missionSuccessProbability','BlueDog::Requirements::reliabilityEvidence','BlueDog::Requirements::missionReliability'}}
     for criterion,required_basis in expected_basis.items():
         if not required_basis<=basis.get(criterion,set()):errors.append('D07 Missing current criterion basis: '+criterion)
     design_basis={(a.id,b.id) for row in tables['DesignBasis'] for a in row.cells[0] for b in row.cells[1]}
     for req in ('launchEnergyAdmission','recoveryEnergy'):
-        if ('BlueDogDesignDecisions::holdingDrive','BlueDogRequirements::'+req) not in design_basis:
+        if ('BlueDog::Decisions::Design::holdingDrive','BlueDog::Requirements::'+req) not in design_basis:
             errors.append('D02 Holding-drive finite mission basis missing: '+req)
-    assessments={name:m.run_analysis('BlueDogSailTrade::'+name).outputs for name in ('tailAssessment','camberAssessment','softAssessment')}
+    assessments={name:m.run_analysis('BlueDog::Analyses::SailTrade::'+name).outputs for name in ('tailAssessment','camberAssessment','softAssessment')}
     return dict(runtimeRevision=REVISION,modelHash=m.hash,
         sourceHashes={str(Path(p).relative_to(ROOT)):hashlib.sha256(t.encode()).hexdigest() for p,t in sources},
         auditSources={str(p.relative_to(ROOT)):hashlib.sha256(p.read_text().encode()).hexdigest() for p in (q,Path(__file__))},

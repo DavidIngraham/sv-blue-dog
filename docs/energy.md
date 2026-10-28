@@ -9,7 +9,7 @@ Can IC-01 power its sensors and controls for the passage and still recover after
 
 IC-01 allocates a **1,300 Wh main pack** and a **60 Wh independent recovery pack**. Its electronics include the existing 4.5 W base allocation and about 0.07 W wind installation plus **8 W additional sensing/compute demand**. Actuation comes from its own solved operating states. The model includes **1.2 kg additional equipment**, with recovery-battery mass separately derived from the existing specific-energy assumption. These are simultaneous capability and load targets; no selected installation has demonstrated them.
 
-The independent pack begins with **43.2 Wh**, after the allocated 80% usable and 90% departure fractions. It draws **0.05 W standby** during sailing. Active recovery uses battery-side allocations of **50 W propulsion + 8 W essentials upright**, or **40 W + 8 W inverted**, with a 1.2 route-energy factor and 2 Wh arrival allowance. Allocated water-relative speeds are 1.5 m/s upright and 0.5 m/s inverted. The [native candidate](../models/analyses/integrated-candidate.sysml) and [recovery route model](../models/libraries/marine/recovery.sysml) own those assumptions. The main-pack screen retains its existing protected reserve as additional conservatism; no transfer between packs is credited.
+The independent pack begins with **43.2 Wh**, after the allocated 80% usable and 90% departure fractions. It draws **0.05 W standby** during sailing. Active recovery uses battery-side allocations of **50 W propulsion + 8 W essentials upright**, or **40 W + 8 W inverted**, with a 1.2 route-energy factor and 2 Wh arrival allowance. Allocated water-relative speeds are 1.5 m/s upright and 0.5 m/s inverted. The [native candidate](../models/blue-dog.sysml) and [recovery route model](../models/libraries/marine/recovery.sysml) own those assumptions. The main-pack screen retains its existing protected reserve as additional conservatism; no transfer between packs is credited.
 
 The [integration study](encounter-feasibility.md#close-the-candidate-loop) checks local chronological energy, the main pack's nominal full-passage screen, standby exposure and sampled recovery reachability together. These are distinct scopes: initializing a recovery bank after passage standby does not create a full-course voyage trajectory. Solar harvest is disabled. Primary sailing load shuts down on abort in the allocated architecture, and recovery draws from its independent account. Hardware peaks, conversion, thermal behavior and fault isolation still need installed measurements.
 
@@ -60,7 +60,7 @@ The energy ledger adds **236.39 Wh delivered to loads**, **26.27 Wh discharge lo
 
 This finite-passage screen credits **no solar harvest**. The [chronological simulator](mission-simulation.md) separately follows harvest and battery state, and can add explicit maneuver-energy allowances. Its candidate adapter uses maximum sampled average load as well. A simulation trajectory and this conservative static exposure are different assessments; their energy totals must not be combined.
 
-The [native budget](../models/analyses/candidate-energy.sysml) reconstructs the [retained replay](../evidence/runs/2026-10-13-srr-readiness/srr-readiness.json). Its [generated inputs](../models/evidence/srr-current.sysml) retain the archived parameters, governing cases and source revision. Native assertions reconcile average power, peak power, departure energy and required energy with that replay. Updating hardware assumptions requires a new replay; editing this report cannot silently make an archived candidate feasible.
+The [native budget](../models/blue-dog.sysml) reconstructs the [retained replay](../evidence/runs/2026-10-13-srr-readiness/srr-readiness.json). Its [generated inputs](../models/blue-dog.sysml) retain the archived parameters, governing cases and source revision. Native assertions reconcile average power, peak power, departure energy and required energy with that replay. Updating hardware assumptions requires a new replay; editing this report cannot silently make an archived candidate feasible.
 
 <a id="equipment-still-needing-an-allocation"></a>
 ### Unresolved loads in the earlier reference
@@ -96,7 +96,7 @@ The [sensing and encounter comparison](encounter-feasibility.md#choosing-an-inst
 ```sysml-report BlueDogDocuments::EnergyBudget
 ```
 
-This [example configuration](../models/configurations/energy.sysml) demonstrates component accounting. It is **not the retained candidate**: its 2 W computer, 1 W traffic sensor and actuator allocations do not feed the candidate's 4.5 W electronics allowance or torque-based actuation calculations. Its totals must not be substituted for, or added to, the candidate budget above.
+This [example configuration](../models/blue-dog.sysml) demonstrates component accounting. It is **not the retained candidate**: its 2 W computer, 1 W traffic sensor and actuator allocations do not feed the candidate's 4.5 W electronics allowance or torque-based actuation calculations. Its totals must not be substituted for, or added to, the candidate budget above.
 
 </details>
 
@@ -109,9 +109,9 @@ The [wind-observation thread](requirements/requirements-autonomy.md#wind-observa
 | ULP Wired Mini | Current candidate allocation | Continuous vessel power, including interface and conversion allowances |
 | Bluetooth Portable Mini | Component experiments | Its own battery, charged ashore |
 
-The [native equipment record](../models/configurations/wind-equipment.sysml) retains supplier specifications and installation allowances.
+The [native equipment record](../models/blue-dog.sysml) retains supplier specifications and installation allowances.
 
-The portable sensor carries its own battery and is charged ashore. Its supplier runtime is a planning input for individual tests. The sizing allocation budgets the wired sensor continuously, including conversion losses and an interface allowance. Installed mass includes the mount and cabling; the sizing model accounts for the installation's elevated center of gravity. These allowances and their sources live in the [equipment model](../models/configurations/wind-equipment.sysml), separately from the manufacturer's specifications.
+The portable sensor carries its own battery and is charged ashore. Its supplier runtime is a planning input for individual tests. The sizing allocation budgets the wired sensor continuously, including conversion losses and an interface allowance. Installed mass includes the mount and cabling; the sizing model accounts for the installation's elevated center of gravity. These allowances and their sources live in the [equipment model](../models/blue-dog.sysml), separately from the manufacturer's specifications.
 
 The wired component allocation feeds the current energy and mass calculations, including the finite-passage size study. Each archive retains its own inputs. Bench measurements will replace the interface, mounting and power allowances before hardware qualification.
 
@@ -146,15 +146,15 @@ package Page_energy_0 {
     private import DiagramLayout::*;
     view EnergySemantics : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::sustainedEnergyFeasibility;
-        expose BlueDogRequirements::sustainedReserveProtection;
-        expose BlueDogRequirements::SustainedReserveProtectionCriterion;
-        expose BlueDogEnergy::SustainedEnergyVerification;
+        expose BlueDog::Requirements::sustainedEnergyFeasibility;
+        expose BlueDog::Requirements::sustainedReserveProtection;
+        expose BlueDog::Requirements::SustainedReserveProtectionCriterion;
+        expose BlueDog::Analyses::Energy::SustainedEnergyVerification;
         expose BlueDog::Architecture::missionContext::boat::energy;
-        metadata Layout about BlueDogRequirements::sustainedEnergyFeasibility { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::sustainedReserveProtection { x = 360; y = 0; }
-        metadata Layout about BlueDogRequirements::SustainedReserveProtectionCriterion { x = 0; y = 200; }
-        metadata Layout about BlueDogEnergy::SustainedEnergyVerification { x = 360; y = 200; }
+        metadata Layout about BlueDog::Requirements::sustainedEnergyFeasibility { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::sustainedReserveProtection { x = 360; y = 0; }
+        metadata Layout about BlueDog::Requirements::SustainedReserveProtectionCriterion { x = 0; y = 200; }
+        metadata Layout about BlueDog::Analyses::Energy::SustainedEnergyVerification { x = 360; y = 200; }
         metadata Layout about BlueDog::Architecture::missionContext::boat::energy { x = 0; y = 400; }
     }
 }
@@ -164,7 +164,7 @@ package Page_energy_0 {
 
 ## Reconcile measured installation loads
 
-A shared-compute installation replaces a declared part of the base electronics load and adds its measured complete stack load. The [native calculation](../models/analyses/encounter-feasibility.sysml) uses **increment = measured bus load − explicitly replaced base load**; the [measurement procedure](validation-plan.md#measure-sensing-and-shared-compute-as-an-installation) retains power, latency, misses and configuration together. This keeps acquisition and processing from being counted twice.
+A shared-compute installation replaces a declared part of the base electronics load and adds its measured complete stack load. The [native calculation](../models/blue-dog.sysml) uses **increment = measured bus load − explicitly replaced base load**; the [measurement procedure](validation-plan.md#measure-sensing-and-shared-compute-as-an-installation) retains power, latency, misses and configuration together. This keeps acquisition and processing from being counted twice.
 
 No measured installation has been supplied. The four earlier sensing stacks remain hypotheses; IC-01 is a resized working candidate with an allocated capability target, rather than a selected hardware stack. The [measurement workflow](reference/sensing-measurements.md) also provides a fixed-passage capacity bound using the earlier reference’s demand, usable fraction and departure charge. Added battery mass, propulsion demand, packaging and passage time require a coupled solve before that number can become a candidate budget. Compare measured pipelines on the same held-out encounters, then replay the feasible resized candidates chronologically.
 

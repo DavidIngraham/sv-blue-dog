@@ -29,7 +29,7 @@ class ManeuverDynamics:
         if not all(math.isfinite(v) for v in (initial_heading,initial_speed)) or initial_speed<0:
             raise ValueError('Finite heading and nonnegative initial speed required')
         self.model=load_model()
-        self.coefficients=numerical_value(self.model.run_analysis('BlueDogManeuverDynamics::Defaults').outputs)
+        self.coefficients=numerical_value(self.model.run_analysis('BlueDog::Analyses::ManeuverDynamics::Defaults').outputs)
         if coefficients:
             if set(coefficients)-set(self.coefficients):raise ValueError('Unknown maneuver coefficient')
             self.coefficients.update(coefficients)
@@ -58,7 +58,7 @@ class ManeuverDynamics:
         args.update(headingErrorDeg=angle_error(target_heading,self.heading) if turning else 0.,
                     speedMps=self.speed,targetSpeedMps=target_speed_mps,intervalS=dt_seconds,
                     rudderFraction=rudder_fraction,speedRetention=c[kind+'SpeedRetention'] if turning else 1.)
-        result=numerical_value(dict(self.model.execute_action('BlueDogManeuverDynamics::Advance',inputs=args)))
+        result=numerical_value(dict(self.model.execute_action('BlueDog::Analyses::ManeuverDynamics::Advance',inputs=args)))
         midpoint=math.radians(self.heading+result['deltaHeadingDeg']/2)
         self.heading=(self.heading+result['deltaHeadingDeg'])%360.;self.speed=result['speedNextMps']
         result.update(headingDeg=self.heading,speedMps=self.speed,meanSpeedMps=result['speedMeanMps'],

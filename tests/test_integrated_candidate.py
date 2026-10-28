@@ -94,9 +94,9 @@ def test_backup_observations_select_an_unobstructed_alternative_approach():
 def test_native_closure_rejects_each_unclosed_loop():
     keys=['sizingPass','nominalPass','encountersPass','recoveryPass','energyPass','timingPass','assumptionsRecorded']
     m=load_model();facts=dict.fromkeys(keys,True)
-    assert m.verify_requirement('BlueDogIntegratedCandidate::VirtualClosure',named_arguments=facts).holds
+    assert m.verify_requirement('BlueDog::Analyses::IntegratedCandidate::VirtualClosure',named_arguments=facts).holds
     for key in keys:
-        assert not m.verify_requirement('BlueDogIntegratedCandidate::VirtualClosure',named_arguments={**facts,key:False}).holds
+        assert not m.verify_requirement('BlueDog::Analyses::IntegratedCandidate::VirtualClosure',named_arguments={**facts,key:False}).holds
 
 
 def test_prediction_horizon_and_gate_capture_at_fast_update():

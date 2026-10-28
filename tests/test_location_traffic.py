@@ -16,8 +16,8 @@ def window(model, **changes):
         responseWithoutRiderCooperationSupported=True,navigationObligationsSupported=True,
         recoverySupported=True)
     args.update(changes)
-    result=model.run_analysis('BlueDogLocationTraffic::WindowAssessment',
-        subject='BlueDogLocationTraffic::policy',named_arguments=args)
+    result=model.run_analysis('BlueDog::Analyses::LocationTraffic::WindowAssessment',
+        subject='BlueDog::Analyses::LocationTraffic::policy',named_arguments=args)
     assert result
     return numerical_value(result.outputs)
 
@@ -59,6 +59,6 @@ def test_delay_can_invalidate_previously_supported_window(model):
 
 def test_hazard_and_verification_cases_remain_explicit(model):
     for name in ['windsurfCrossing','wingfoilTurn','kiteSweep','fallenRider','groupEncounter','windowOverrun']:
-        assert model.find('BlueDogLocationTraffic::'+name)
+        assert model.find('BlueDog::Analyses::LocationTraffic::'+name)
     for name in ['WindSportEncounterVerification','LocationTrafficAdmissionVerification']:
-        assert model.find('GorgeChallengeVerification::'+name)
+        assert model.find('BlueDog::Verification::Challenge::'+name)

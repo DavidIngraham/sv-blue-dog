@@ -8,8 +8,8 @@ For repeatable model analyses, I can save a standalone model snapshot with OpenS
 
 ```sh
 uv run python -m tools.boat_analysis.cli record \
-  --case BlueDogEnvironmentReview::FetchSensitivity \
-  --case BlueDogEncounterReview::Acquisition \
+  --case BlueDog::Analyses::EnvironmentReview::FetchSensitivity \
+  --case BlueDog::Analyses::EncounterReview::Acquisition \
   --output build/analysis/review.sysml
 ```
 
@@ -34,7 +34,7 @@ uv run python -m tools.boat_analysis.cli study examples/studies/sail-trade.yaml 
 
 ## Run the named integration candidate
 
-[IC-01](../../models/configurations/ic01.sysml) owns the complete sizing design and its provisional integration assumptions, with design provenance in the immutable 15 October integration archive. The sizing adapter reads the model configuration and defaults to initial operating guesses from the 13 October SRR-readiness archive's `refinedReplay`; an explicitly supplied warm-start file can replace those guesses. Design values come from the named configuration, while warm starts supply numerical initial guesses.
+[IC-01](../../models/blue-dog.sysml) owns the complete sizing design and its provisional integration assumptions, with design provenance in the immutable 15 October integration archive. The sizing adapter reads the model configuration and defaults to initial operating guesses from the 13 October SRR-readiness archive's `refinedReplay`; an explicitly supplied warm-start file can replace those guesses. Design values come from the named configuration, while warm starts supply numerical initial guesses.
 
 ```sh
 uv run python -m tools.boat_analysis.mission.demonstration \
@@ -91,7 +91,7 @@ uv run python -m tools.boat_analysis.model.architecture_audit --output build/arc
 
 The [architecture article](../architecture.md#logical-responsibilities-and-the-candidate-boat) renders the same native queries as tables. Coverage includes all current scenario steps and logical exchanges; it does not establish correct controller scheduling, installed transport, authority arbitration or physical independence. Unresolved interfaces remain in the correspondence model. The audit does not reclassify historical analyses as IC-01 studies.
 
-The [mission supervisor](../../models/vehicle/mission-logic.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing, gate-scoring and harvest permissions, operating mode, persistent abort and qualification state, and whether an abort alert is attempted or queued. `RecoveryAuthority` permits recovery after primary steering or power loss only when an explicitly independent, powered path is supplied. `FallbackPolicy` decides whether the available, permitted recovery path can be attempted or the vessel must continue drifting. Dependencies connect these actions to the logical scenarios. Supervisor and capsize decisions are allocated to logical supervision; recovery authority and fallback decisions are allocated to logical recovery management. Named candidate mappings distinguish the primary supervisor's sailing permissions from the recovery controller's qualification restrictions and fallback authority. Primary-loss startup, peer timeout and authority arbitration still need implementation and evidence.
+The [mission supervisor](../../models/blue-dog.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing, gate-scoring and harvest permissions, operating mode, persistent abort and qualification state, and whether an abort alert is attempted or queued. `RecoveryAuthority` permits recovery after primary steering or power loss only when an explicitly independent, powered path is supplied. `FallbackPolicy` decides whether the available, permitted recovery path can be attempted or the vessel must continue drifting. Dependencies connect these actions to the logical scenarios. Supervisor and capsize decisions are allocated to logical supervision; recovery authority and fallback decisions are allocated to logical recovery management. Named candidate mappings distinguish the primary supervisor's sailing permissions from the recovery controller's qualification restrictions and fallback authority. Primary-loss startup, peer timeout and authority arbitration still need implementation and evidence.
 
 Python supplies observations, computes chart and traffic geometry, ranks feasible headings and integrates motion and energy. It dispatches the action outputs to those mechanisms. The supervisor's traffic mode identifies a predicted encounter; avoidance geometry and maneuver selection remain conceptual Python calculations. This is a partial executable logical architecture, not a complete autopilot or a verified sensing system.
 
@@ -128,7 +128,7 @@ For installed sensing inputs, the [measurement format and importer](sensing-meas
 
 ## Consumer gates and qualification restoration
 
-`BlueDogBehaviorContracts` supplies partial native action contracts for observation usability, sailing actuation, recovery motor enable and qualification restoration. Observation assessment reuses the typed interface predicate. Applicability, authority, physical availability and durable-record inputs require established evidence; the actions do not infer them from connectivity. `MissionLogic.restore_qualification` executes the native restoration policy and records its inputs and result. It preserves a live disqualification and applies the nonqualifying fallback to an invalid record. This API restores qualification only, without claiming a complete watchdog/storage implementation or deadline verification.
+`BlueDog::Behavior::Contracts` supplies partial native action contracts for observation usability, sailing actuation, recovery motor enable and qualification restoration. Observation assessment reuses the typed interface predicate. Applicability, authority, physical availability and durable-record inputs require established evidence; the actions do not infer them from connectivity. `MissionLogic.restore_qualification` executes the native restoration policy and records its inputs and result. It preserves a live disqualification and applies the nonqualifying fallback to an invalid record. This API restores qualification only, without claiming a complete watchdog/storage implementation or deadline verification.
 
 The recovery scenario explicitly orders durable disqualification acknowledgment before actuation. The post-actuation record describes observed execution disposition, not a predicted shore arrival. Native regressions test each motor barrier, unknown state, missing acknowledgment, expired command/permission and fault restoration. The conceptual simulator still supplies scalar observations and does not implement the candidate message serialization, storage protocol or hardware interlocks.
 

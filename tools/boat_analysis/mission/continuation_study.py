@@ -18,8 +18,8 @@ def expanded(result):
 
 
 def run():
-    p=analysis_values('BlueDogEncounterFeasibility::Inputs');m=load_model()
-    budget=analysis_values('BlueDogCandidateEnergy::Reconciliation');base=mission_inputs()
+    p=analysis_values('BlueDog::Analyses::EncounterFeasibility::Inputs');m=load_model()
+    budget=analysis_values('BlueDog::Analyses::CandidateEnergy::Reconciliation');base=mission_inputs()
     base['energy'][:4]=[p['usableBatteryWh'],budget['departureWh'],budget['reserveWh'],budget['averageBusW']]
     base['continueAfterAbort']=True;base['commandLatencySeconds']=p['commandLatencyS']
     missions=[]
@@ -49,8 +49,8 @@ def run():
     timing=[]
     for control in p['controllerSweepS']:
         for latency in p['latency'][:2]:
-            distance=m.calc('BlueDogEncounterFeasibility::RequiredRange',arguments=[18,p['acquisition'],control+latency,p['commandLatencyS'],15,p['contingency'],30,p['error']]).value
-            verdict=m.verify_requirement('BlueDogEncounterFeasibility::TimingCriterion',named_arguments={'assessmentPeriodS':control,'commandLatencyS':p['commandLatencyS']})
+            distance=m.calc('BlueDog::Analyses::EncounterFeasibility::RequiredRange',arguments=[18,p['acquisition'],control+latency,p['commandLatencyS'],15,p['contingency'],30,p['error']]).value
+            verdict=m.verify_requirement('BlueDog::Analyses::EncounterFeasibility::TimingCriterion',named_arguments={'assessmentPeriodS':control,'commandLatencyS':p['commandLatencyS']})
             timing.append(dict(assessmentPeriodS=control,sensorLatencyS=latency,requiredFastCraftM=float(distance),declaredScheduleCriterionHolds=verdict.holds))
     paths=[x.relative_to(ROOT).as_posix() for folder in ['tools/boat_analysis/mission','tools/boat_analysis/environment'] for x in (ROOT/folder).glob('*.py')]
     paths+=['tools/boat_analysis/model/runtime.py','tools/boat_analysis/evidence/records.py','uv.lock']

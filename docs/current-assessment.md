@@ -49,11 +49,19 @@ limits. These capabilities improve repeatability; they add no physical
 qualification evidence. The next analysis-interface work is to expose semantic
 route/state contracts before generalizing the remaining campaign orchestration.
 
+The [model's namespaces](reference/namespace-structure.md) place mission,
+requirements, architecture, behavior, analyses, configurations, decisions,
+verification and evidence under one `BlueDog` project root. Reusable calculation
+libraries remain independent. This ownership structure supports scoped native
+discovery and makes the links between engineering areas easier to inspect;
+component composition and allocations still define how the candidate works.
+It adds no measurement or physical verification evidence.
+
 ## Integrated simulation evidence
 
 I need **one candidate whose sensing, guidance, energy and recovery capabilities work together**. Its geometry, equipment mass, electrical demand and sailing performance must remain consistent across the studies.
 
-IC-01 meets the seven conditions in the [native integration requirement](../models/analyses/integrated-candidate.sysml) for the [15 October local campaign](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json):
+IC-01 meets the seven conditions in the [native integration requirement](../models/blue-dog.sysml) for the [15 October local campaign](../evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json):
 
 - Ten courses complete.
 - Eight encounter attempts end qualification and reach recovery approaches without the scored collision or clearance violations.
@@ -114,11 +122,11 @@ I prioritize evidence that could change the architecture or the conditions in wh
 
 ## Let risk select the next investigation
 
-The [risk inventory](../models/analyses/development-risks.sysml) connects each concern to requirements, analyses and decisions. It complements the design failure modes and effects analysis (DFMEA), which examines how components and functions can fail. Traffic sensing and casualty recovery lead because they can determine the architecture; structural, wing, energy and model-coverage uncertainty also remain open.
+The [risk inventory](../models/blue-dog.sysml) connects each concern to requirements, analyses and decisions. It complements the design failure modes and effects analysis (DFMEA), which examines how components and functions can fail. Traffic sensing and casualty recovery lead because they can determine the architecture; structural, wing, energy and model-coverage uncertainty also remain open.
 
 ### Technical risk cube
 
-The explorer links each risk to its evidence and next investigation. The [native risk inventory](../models/analyses/development-risks.sysml) is also available as a reference.
+The explorer links each risk to its evidence and next investigation. The [native risk inventory](../models/blue-dog.sysml) is also available as a reference.
 
 ```risk-explorer
 {"src":"https://davidingraham.github.io/sv-blue-dog/assets/risk/risks.json"}
@@ -194,10 +202,10 @@ A measured component result transfers to IC-01 only when its installation and co
 
 ### Interface and behavior assessment, 2026-10-23
 
-The candidate [interface definitions](../models/vehicle/interface-contracts.sysml) now distinguish observation provenance from producer validity and command authority/time context. Typed native applicability calculations support synthetic boundary checks; their existence is not controller integration or physical evidence. Fourteen existing payload definitions retain their original fields and add context. Missing reserve, boundary and traffic-list timestamps are explicit; link-down, invalid and absent observations remain different conditions.
+The candidate [interface definitions](../models/blue-dog.sysml) now distinguish observation provenance from producer validity and command authority/time context. Typed native applicability calculations support synthetic boundary checks; their existence is not controller integration or physical evidence. Fourteen existing payload definitions retain their original fields and add context. Missing reserve, boundary and traffic-list timestamps are explicit; link-down, invalid and absent observations remain different conditions.
 
 Open IF-01 through IF-05 cover justified consumer freshness/latency limits; clock uncertainty and restart/replay rules; spatial/angular references; primary/recovery command arbitration and inhibits; electrical, connector, sealing, storage/telemetry supply and transport contracts. These issues remain deployment gaps. Scenario and implementation mappings still need to preserve this meaning. The conceptual simulator currently exchanges scalar observations, not these candidate serialized messages.
-The [behavior contracts](../models/vehicle/behavior-contracts.sysml) expose current consumer gates and a qualification-restoration action. Sailing scenarios pass supervisor permission explicitly. Recovery includes a durable disqualification acknowledgment before actuation and a separate observed execution record afterward. Native tests exercise denied permissions, expired context, missing durability, unknown qualification and restoration after faults. A qualification-only restoration API preserves the nonqualifying fallback; it does not implement the watchdog, other restriction restoration or the 30-second deadline.
+The [behavior contracts](../models/blue-dog.sysml) expose current consumer gates and a qualification-restoration action. Sailing scenarios pass supervisor permission explicitly. Recovery includes a durable disqualification acknowledgment before actuation and a separate observed execution record afterward. Native tests exercise denied permissions, expired context, missing durability, unknown qualification and restoration after faults. A qualification-only restoration API preserves the nonqualifying fallback; it does not implement the watchdog, other restriction restoration or the 30-second deadline.
 
 B-01 through B-04 keep message/storage integration, atomic durable state, controller scheduling/arbitration and achieved physical response open. The descriptive scenarios now expose these obligations but do not execute the estimators or storage hardware. Existing mission, capsize, abort and independent-recovery policy remain authoritative.
 

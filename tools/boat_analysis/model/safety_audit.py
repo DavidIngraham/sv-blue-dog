@@ -18,7 +18,7 @@ def native_safety_audit(sources=None):
     for row in hazards.values():
         if any(not c or c==('',) for c in (*row.cells[:5],row.cells[6])):
             errors.append('S01 Incomplete hazard context: '+row.element.id)
-        if [x.id for x in row.cells[5]]!=['BlueDogIC01::design']:
+        if [x.id for x in row.cells[5]]!=['BlueDog::Configurations::IC01::design']:
             errors.append('S01 Wrong hazard configuration: '+row.element.id)
     for row in tables['Basis']:
         for client in row.cells[1]:
@@ -35,8 +35,8 @@ def native_safety_audit(sources=None):
         if row.cells[1]==(True,) and name not in mapped:errors.append('S02 Unmapped critical failure: '+name)
     open_records=[dict(hazard=r.element.id,missing=[name for name,cell in zip(tables['Dispositions'].columns[5:8],r.cells[5:8]) if not cell],
         closed=r.cells[8][0]) for r in tables['Dispositions']]
-    safety=m.run_analysis('BlueDogSafety::SafetyReview',subject='BlueDogSafety::gorge').outputs
-    fmea=m.run_analysis('FailureAnalysis::DesignFailureReview',subject='BlueDogDFMEA::starter').outputs
+    safety=m.run_analysis('BlueDog::Analyses::Safety::SafetyReview',subject='BlueDog::Analyses::Safety::gorge').outputs
+    fmea=m.run_analysis('FailureAnalysis::DesignFailureReview',subject='BlueDog::Analyses::Safety::DFMEA::starter').outputs
     return dict(runtimeRevision=REVISION,modelHash=m.hash,
         sourceHashes={str(Path(p).relative_to(ROOT)):hashlib.sha256(t.encode()).hexdigest() for p,t in sources},
         auditSources={str(p.relative_to(ROOT)):hashlib.sha256(p.read_text().encode()).hexdigest() for p in (q,Path(__file__))},

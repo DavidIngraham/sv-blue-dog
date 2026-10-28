@@ -8,7 +8,7 @@ import subprocess
 from tools.boat_analysis.model.install import REVISION
 from tools.boat_analysis.model.runtime import ROOT, connection, model_files
 
-GOVERNING = ('GorgeChallenge', 'BlueDog::Goals', 'BlueDogRequirements', 'BlueDogStructure')
+GOVERNING = ('BlueDog::Mission::Challenge', 'BlueDog::Goals', 'BlueDog::Requirements', 'BlueDog::Requirements::Structure')
 
 
 def native_audit(sources=None):
@@ -54,12 +54,12 @@ def native_audit(sources=None):
             errors.append('Self-derivation: ' + row['element']['id'])
     impacts = []
     for element, relationship, direction in (
-        ('GorgeChallenge::capsizeRecovery', 'derivation', 'incoming'),
-        ('BlueDogRequirements::recoveryEnergy', 'verification', 'incoming'),
-        ('BlueDogRequirements::capsizeQualificationRetention', 'verification', 'incoming'),
-        ('BlueDogRequirements::capsizeQualificationRetention', 'satisfaction', 'incoming'),
-        ('BlueDogRequirements::emergencyControl', 'satisfaction', 'incoming'),
-        ('BlueDogLogicalArchitecture::LogicalVessel::supervision', 'allocation', 'outgoing'),
+        ('BlueDog::Mission::Challenge::capsizeRecovery', 'derivation', 'incoming'),
+        ('BlueDog::Requirements::recoveryEnergy', 'verification', 'incoming'),
+        ('BlueDog::Requirements::capsizeQualificationRetention', 'verification', 'incoming'),
+        ('BlueDog::Requirements::capsizeQualificationRetention', 'satisfaction', 'incoming'),
+        ('BlueDog::Requirements::emergencyControl', 'satisfaction', 'incoming'),
+        ('BlueDog::Architecture::Logical::LogicalVessel::supervision', 'allocation', 'outgoing'),
     ):
         rows = audit.run_document_query('BlueDogAudit::Impact', dict(element=element, relationship=relationship, direction=direction, depth=2))
         impacts.append(dict(element=element, relationship=relationship, direction=direction, depth=2, results=[row.element.id for row in rows]))

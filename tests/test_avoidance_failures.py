@@ -25,7 +25,7 @@ def cases():
     for name, active in settings.items():
         fields = ''.join('occurrence :>> ' + leaf + ' { attribute :>> present = '
                          + str(leaf in active).lower() + '; }' for leaf in LEAVES)
-        parts.append('occurrence ' + name + ' : BlueDogAvoidanceFailures::Exposure {' + fields + '}')
+        parts.append('occurrence ' + name + ' : BlueDog::Analyses::Safety::AvoidanceFailures::Exposure {' + fields + '}')
     source = 'package FailureProbe {' + ''.join(parts) + '}'
     return connection().parse_sources((*[(str(p), p.read_text()) for p in model_files()],
                                       ('failure-probe.sysml', source)), strict=True)
@@ -37,16 +37,16 @@ def cases():
     ('commonCompute', True, True, True), ('noDemand', True, True, False),
 ])
 def test_encounter_demand_and_complete_response_paths(cases, case, primary, fallback, top):
-    result = cases.run_analysis('BlueDogAvoidanceFailures::EvaluateExposure',
+    result = cases.run_analysis('BlueDog::Analyses::Safety::AvoidanceFailures::EvaluateExposure',
                                subject='FailureProbe::' + case)
     assert result.outputs == dict(primaryUnavailable=primary,
                                   recoveryUnavailable=fallback,
                                   safeSeparationUnsupported=top)
 
 @pytest.mark.parametrize('review,count,critical', [
-    ('BlueDogDFMEA::starter', 15, 13),
-    ('BlueDogAvoidanceFailures::functional', 17, 17),
-    ('BlueDogAvoidanceFailures::concepts', 15, 15),
+    ('BlueDog::Analyses::Safety::DFMEA::starter', 15, 13),
+    ('BlueDog::Analyses::Safety::AvoidanceFailures::functional', 17, 17),
+    ('BlueDog::Analyses::Safety::AvoidanceFailures::concepts', 15, 15),
 ])
 def test_open_actions_cannot_be_mistaken_for_accepted_safeguards(review, count, critical):
     result = load_model().run_analysis('FailureAnalysis::DesignFailureReview', subject=review)
@@ -89,5 +89,5 @@ def test_native_tables_resolve_event_references_and_diagrams_preserve_connectors
 def test_unassessed_exposure_does_not_default_to_safe():
     from opensysml.errors import AnalysisRunError
     with pytest.raises(AnalysisRunError):
-        load_model().run_analysis('BlueDogAvoidanceFailures::EvaluateExposure',
-                                  subject='BlueDogAvoidanceFailures::exposure')
+        load_model().run_analysis('BlueDog::Analyses::Safety::AvoidanceFailures::EvaluateExposure',
+                                  subject='BlueDog::Analyses::Safety::AvoidanceFailures::exposure')

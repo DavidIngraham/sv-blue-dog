@@ -8,14 +8,12 @@ from functools import lru_cache
 import math
 import numpy as np
 from opensysml import EnumLiteral
-from ..model.runtime import ROOT, load_model
-
-SOURCES = (ROOT/'models/libraries/navigation/inland-pair.sysml',
-           ROOT/'models/analyses/navigation-controller.sysml')
+from ..model.runtime import load_model
 
 @lru_cache(maxsize=1)
 def rule_model():
-    return load_model(SOURCES)
+    # The canonical project namespace depends on the complete native library closure.
+    return load_model()
 
 @lru_cache(maxsize=8)
 def interface(name):
@@ -63,7 +61,7 @@ class NavigationAssessment:
     def __init__(self, *, assessed_context=None, label='unassessed'):
         self.context=dict(assessed_context or {})
         self.label=label
-        self.policy=evaluate('BlueDogNavigationController::Policy')
+        self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
         self.memory={}
         self.approved={}
         self.latest={}
@@ -89,7 +87,7 @@ class NavigationAssessment:
         motion_velocity=held_velocity if motion_velocity is None else motion_velocity
         assessed_heading=heading if assessment_heading is _UNSET else assessment_heading
         self.latest={}
-        context=evaluate('BlueDogNavigationController::Context',inlandProfile=self.context.get('inlandProfile','unknown'),
+        context=evaluate('BlueDog::Behavior::Navigation::Context',inlandProfile=self.context.get('inlandProfile','unknown'),
             channelContext=self.context.get('channelContext','unknown'),restrictedVisibility=self.context.get('restrictedVisibility','unknown'),
             specialCircumstances=self.context.get('unmodeledSpecialCircumstances','unknown'))
         if not context['supported']:
@@ -137,7 +135,7 @@ class NavigationAssessment:
                 headingKnown=heading is not None,trackAdequate=facts.get('observationsAdequate','unknown')=='yes',
                 headingToleranceDeg=float(self.policy['headingToleranceDeg']),speedToleranceMps=float(self.policy['speedToleranceMps']),
                 substantialTurnDeg=float(self.policy['substantialTurnDeg']))
-            release=evaluate('BlueDogNavigationController::Geometry',**geometry,headingChangeDeg=0.,speedChangeMps=0.)
+            release=evaluate('BlueDog::Behavior::Navigation::Geometry',**geometry,headingChangeDeg=0.,speedChangeMps=0.)
             side='unresolved' if heading is None else ('starboardSide' if (math.degrees(math.atan2(relative[1],relative[0]))-heading+180)%360-180<0 else 'portSide')
             data=dict(inlandProfile=self.context.get('inlandProfile','unknown'),inSight=facts.get('inSight','unknown'),
                 restrictedVisibility=self.context.get('restrictedVisibility','unknown'),riskOfCollision=truth(not held_clear),
@@ -184,13 +182,13 @@ class NavigationAssessment:
                     candidate_clear=candidate_clear and trajectory_clear(actor,position,seconds,trajectories[j],dimensions)
                 proposed=None if math.isnan(headings[j]) else float(headings[j])
                 delta=0. if heading is None or proposed is None else (proposed-heading+180)%360-180
-                g=evaluate('BlueDogNavigationController::Geometry',**dict(geometry,headingKnown=heading is not None and proposed is not None),
+                g=evaluate('BlueDog::Behavior::Navigation::Geometry',**dict(geometry,headingKnown=heading is not None and proposed is not None),
                     headingChangeDeg=abs(delta),
                     speedChangeMps=abs(float(np.linalg.norm(velocities[j]))-own_speed))
                 candidate=dict(data,ownAvoidanceFeasible=truth(candidate_clear),portTurnProposed=truth(delta>0),
                                starboardTurnProposed=truth(delta<0))
                 result=evaluate('InlandNavigationExperiment::Assess',**candidate)
-                decision=evaluate('BlueDogNavigationController::Candidate',relevant=relevant,
+                decision=evaluate('BlueDog::Behavior::Navigation::Candidate',relevant=relevant,
                     supported=result['selectionSupported'],candidateClear=candidate_clear,heldClear=held_clear,
                     holdsCourseSpeed=g['holdsCourseSpeed'],substantialChange=g['substantialChange'],
                     missingTrackedDuty=missing,response=result['response'],

@@ -31,13 +31,13 @@ def ingest(power_path, observation_path, metadata_path):
         latency.append(decision-frame)
     if len(set(frames))!=len(frames) or any(b<=a for a,b in zip(frames,frames[1:])):raise ValueError('Ordered distinct frame times required')
     replaced=float(metadata.get('replacedBaseElectronicsW',0))
-    base=analysis_values('BlueDogEncounterFeasibility::Inputs')['baselineElectronicsW']
+    base=analysis_values('BlueDog::Analyses::EncounterFeasibility::Inputs')['baselineElectronicsW']
     if not math.isfinite(replaced) or not 0<=replaced<=base:raise ValueError('Replacement exceeds the existing base electronics allocation')
     if replaced and not metadata.get('replacementScope'):raise ValueError('Identify exactly which base functions the measured stack replaces')
     m=load_model()
-    increment=float(m.calc('BlueDogEncounterFeasibility::InstalledIncrement',arguments=[average,replaced]).value)
-    headroom=float(m.calc('BlueDogEncounterFeasibility::EnergyScreen',arguments=[increment]).value)
-    capacity=float(m.calc('BlueDogEncounterFeasibility::CapacityLowerBound',arguments=[increment]).value)
+    increment=float(m.calc('BlueDog::Analyses::EncounterFeasibility::InstalledIncrement',arguments=[average,replaced]).value)
+    headroom=float(m.calc('BlueDog::Analyses::EncounterFeasibility::EnergyScreen',arguments=[increment]).value)
+    capacity=float(m.calc('BlueDog::Analyses::EncounterFeasibility::CapacityLowerBound',arguments=[increment]).value)
     return dict(metadata=metadata,sourceFiles={str(p.resolve()):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},
         averageBusW=average,observedPeakBusW=float(max(watts)),maximumPowerSampleGapS=float(max(np.diff(times))),
         maximumObservedLatencyS=max(latency) if latency else None,latencyP95S=float(np.quantile(latency,.95)) if latency else None,

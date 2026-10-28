@@ -24,7 +24,7 @@ The failure mechanisms matter. Electronics faults may accumulate with running ti
 
 The design comparison I want is therefore **probability of completing the round trip**, evaluated jointly over weather, current, holds, energy use and failures. Each candidate should have an operating policy: sail faster when conditions permit, reduce speed or hold when the accumulated risk would otherwise rise. Unsuccessful routes must remain in that comparison. Traffic safety and accepted critical-failure dispositions remain launch gates.
 
-The native [passage-exposure analysis](../models/analyses/passage-exposure.sysml) generates the curves and example points. It shares its constant-hazard calculation with the cruise reliability model. The current force-balance solver does not model dynamic planing or speed-dependent failure rates; the contour is a sensitivity study, not a planing-boat selection. A hull comparison with actual performance and loading evidence will deserve its own story.
+The native [passage-exposure analysis](../models/blue-dog.sysml) generates the curves and example points. It shares its constant-hazard calculation with the cruise reliability model. The current force-balance solver does not model dynamic planing or speed-dependent failure rates; the contour is a sensitivity study, not a planing-boat selection. A hull comparison with actual performance and loading evidence will deserve its own story.
 
 ## Finite endurance and future missions
 
@@ -40,13 +40,13 @@ package Page_reliability_0 {
     private import DiagramLayout::*;
     view CruiseSemantics : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::cruisePerformance;
-        expose BlueDogRequirements::legProgress;
-        expose BlueDogRequirementVerification::MissionPerformanceAssessmentVerification;
+        expose BlueDog::Requirements::cruisePerformance;
+        expose BlueDog::Requirements::legProgress;
+        expose BlueDog::Verification::Requirements::MissionPerformanceAssessmentVerification;
         expose BlueDog::Architecture::missionContext::boat;
-        metadata Layout about BlueDogRequirements::cruisePerformance { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::legProgress { x = 360; y = 0; }
-        metadata Layout about BlueDogRequirementVerification::MissionPerformanceAssessmentVerification { x = 360; y = 200; }
+        metadata Layout about BlueDog::Requirements::cruisePerformance { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::legProgress { x = 360; y = 0; }
+        metadata Layout about BlueDog::Verification::Requirements::MissionPerformanceAssessmentVerification { x = 360; y = 200; }
         metadata Layout about BlueDog::Architecture::missionContext::boat { x = 0; y = 400; }
     }
 }
@@ -58,13 +58,13 @@ package Page_reliability_1 {
     private import DiagramLayout::*;
     view ReliabilitySemantics : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::missionReliability;
-        expose BlueDogRequirements::missionSuccessProbability;
-        expose BlueDogReliability::VoyageReliabilityVerification;
+        expose BlueDog::Requirements::missionReliability;
+        expose BlueDog::Requirements::missionSuccessProbability;
+        expose BlueDog::Analyses::Reliability::VoyageReliabilityVerification;
         expose BlueDog::Architecture::missionContext::boat;
-        metadata Layout about BlueDogRequirements::missionReliability { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::missionSuccessProbability { x = 360; y = 0; }
-        metadata Layout about BlueDogReliability::VoyageReliabilityVerification { x = 360; y = 200; }
+        metadata Layout about BlueDog::Requirements::missionReliability { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::missionSuccessProbability { x = 360; y = 0; }
+        metadata Layout about BlueDog::Analyses::Reliability::VoyageReliabilityVerification { x = 360; y = 200; }
         metadata Layout about BlueDog::Architecture::missionContext::boat { x = 0; y = 400; }
     }
 }
@@ -88,16 +88,16 @@ package Page_reliability_2 {
     private import DiagramLayout::*;
     view WeedSemantics : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::submergedWeedPassage;
-        expose BlueDogRequirements::weedPassageSpeed;
-        expose BlueDogRequirements::weedPassageSteering;
+        expose BlueDog::Requirements::submergedWeedPassage;
+        expose BlueDog::Requirements::weedPassageSpeed;
+        expose BlueDog::Requirements::weedPassageSteering;
         expose BlueDog::Architecture::missionContext::boat;
-        expose BlueDogRequirementVerification::SubmergedWeedPassageVerification;
-        metadata Layout about BlueDogRequirements::submergedWeedPassage { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::weedPassageSpeed { x = 360; y = 0; }
-        metadata Layout about BlueDogRequirements::weedPassageSteering { x = 0; y = 200; }
+        expose BlueDog::Verification::Requirements::SubmergedWeedPassageVerification;
+        metadata Layout about BlueDog::Requirements::submergedWeedPassage { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::weedPassageSpeed { x = 360; y = 0; }
+        metadata Layout about BlueDog::Requirements::weedPassageSteering { x = 0; y = 200; }
         metadata Layout about BlueDog::Architecture::missionContext::boat { x = 360; y = 200; }
-        metadata Layout about BlueDogRequirementVerification::SubmergedWeedPassageVerification { x = 0; y = 400; }
+        metadata Layout about BlueDog::Verification::Requirements::SubmergedWeedPassageVerification { x = 0; y = 400; }
     }
 }
 ```
@@ -201,7 +201,7 @@ common-cause boundaries and completeness remain unverified. No failure rates or
 independence assumptions are assigned, and these trees do not yet inject faults
 into the mission simulator.
 
-My next comparison needs measured sailing and maneuvering performance, followed by failure evidence appropriate to each mechanism. The [DFMEA](../models/analyses/dfmea.sysml) helps choose those tests; the [reliability analysis](../models/analyses/reliability.sysml) connects their results to passage exposure.
+My next comparison needs measured sailing and maneuvering performance, followed by failure evidence appropriate to each mechanism. The [DFMEA](../models/blue-dog.sysml) helps choose those tests; the [reliability analysis](../models/blue-dog.sysml) connects their results to passage exposure.
 
 
 ### Hazard controls and actual disposition

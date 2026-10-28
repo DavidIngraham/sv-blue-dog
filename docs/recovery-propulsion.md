@@ -18,13 +18,13 @@ IC-01 allocates recovery power, observations, control and thrust independently o
 
 ## Measure the complete installation
 
-I will start by towing the hull to measure the force needed at the recovery speeds. Each complete guarded drive then needs thrust, electrical power and temperature measurements, followed by maneuvering tests upright and inverted. The [native analysis](../models/analyses/recovery-propulsion.sysml) estimates reserve demand from illustrative inputs to help plan those tests.
+I will start by towing the hull to measure the force needed at the recovery speeds. Each complete guarded drive then needs thrust, electrical power and temperature measurements, followed by maneuvering tests upright and inverted. The [native analysis](../models/blue-dog.sysml) estimates reserve demand from illustrative inputs to help plan those tests.
 
 The same weed trials must include contact, shutdown, clearing and restart. An air rotor may avoid submerged vegetation while upright, but it does not protect the hull, keel or rudder from fouling. Fault tests must also establish that recovery still starts, observes and steers after the primary path loses power or control.
 
 Finally I will include the installation's sailing drag or windage, rig clearance, mass, guarding, corrosion, servicing and handling. Those results connect the [recovery and reserve requirements](requirements/requirements-energy.md#recovery-propulsion-and-reserves) and [weed requirement](requirements/requirements-environment.md#weed-tolerance) to an actual equipment choice.
 
-Actual propeller data and installed measurements will decide the selection. The [source notes](../models/vehicle/source-evidence.sysml) retain the prior research and comparison rationale; [energy accounting](energy.md) and [recovery analysis](structures-and-recovery.md) explain how that choice affects the rest of the boat.
+Actual propeller data and installed measurements will decide the selection. The [source notes](../models/blue-dog.sysml) retain the prior research and comparison rationale; [energy accounting](energy.md) and [recovery analysis](structures-and-recovery.md) explain how that choice affects the rest of the boat.
 
 The [simulation studies](simulation-studies.md#carry-recovery-through-the-voyage) connect this component trade to position-dependent recovery authority and energy reserve.
 

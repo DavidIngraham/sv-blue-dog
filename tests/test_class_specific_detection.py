@@ -21,17 +21,17 @@ def assess(model, **changes):
         responseEvidenceRef='synthetic whole response evidence',responseReliabilityReviewRef='synthetic response review',
         evidenceMethodReviewRef='synthetic method applicability review')
     inputs.update(changes)
-    r=model.run_analysis('BlueDogClassDetection::Assessment',subject='BlueDogClassDetection::policy',named_arguments=inputs)
+    r=model.run_analysis('BlueDog::Analyses::ClassDetection::Assessment',subject='BlueDog::Analyses::ClassDetection::policy',named_arguments=inputs)
     assert r
     return numerical_value(r.outputs)
 
 def test_current_class_summary_keeps_historical_numbers_separate(model):
-    r=numerical_value(model.run_analysis('BlueDogClassDetection::Summary').outputs)
+    r=numerical_value(model.run_analysis('BlueDog::Analyses::ClassDetection::Summary').outputs)
     assert r['classIds'][-4:]==['occupiedKayak','occupiedSUP','personInWater','unoccupiedDriftingCraft']
     assert r['illustrativeResponseDistanceM']==pytest.approx([313.5,205.5,742,303,333,225,225,225,225])
     assert r['currentAllocationsAccepted'] is False
     assert r['physicalQualification'] is False
-    old=numerical_value(model.run_analysis('BlueDogEncounterReview::Acquisition').outputs)
+    old=numerical_value(model.run_analysis('BlueDog::Analyses::EncounterReview::Acquisition').outputs)
     assert old['requiredRangesM']==pytest.approx([307,201,724,296,326,220])
 
 def test_supplied_consistent_reviews_have_no_hidden_750_floor(model):

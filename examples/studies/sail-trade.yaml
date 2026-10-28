@@ -4,9 +4,9 @@ groups:
   - name: candidates
     select:
       kind: AnalysisCaseUsage
-      owner: BlueDogSailTrade
-      type: BlueDogSailTrade::TradeAssessment
+      owner: BlueDog::Analyses::SailTrade
+      type: BlueDog::Analyses::SailTrade::TradeAssessment
       cardinality: many
   - name: buoyancy
     select:
-      id: BlueDogSailTrade::buoyancyIllustration
+      id: BlueDog::Analyses::SailTrade::buoyancyIllustration

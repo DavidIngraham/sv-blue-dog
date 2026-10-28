@@ -1,8 +1,9 @@
 """Native V&V planning, evidence applicability and meaningful negative controls."""
 import pytest
 from opensysml.errors import ExecutionError
-from tools.boat_analysis.model.runtime import load_model,model_files,connection
+from tools.boat_analysis.model.runtime import ROOT,load_model,model_files,connection
 from tools.boat_analysis.model.verification_audit import native_verification_audit
+from tests.native_edits import set_values, delete_symbols, replace_unique
 
 
 @pytest.fixture(scope='module')
@@ -22,21 +23,30 @@ def test_all_project_definitions_have_methods_and_objectives_without_execution(r
         for row in report['openEvidence'])
 
 
+
+def test_nested_unplanned_verification_is_not_lost_beneath_namespace_containers(sources):
+    extra='package AdditionalVerification { package Nested { verification def Unplanned { subject target; } } }'
+    report=native_verification_audit((*sources,(str(ROOT/'reviews/nested-verification.sysml'),extra)))
+    identity='AdditionalVerification::Nested::Unplanned'
+    assert 'V04 Missing planned method: '+identity in report['errors']
+    assert report['summary']['verificationDefinitions']==101
+
+
 def test_method_choices_distinguish_inspection_analysis_and_user_demonstration(report):
     rows={r['element']['id']:r['cells'] for r in report['tables']['Plans']['rows']}
     methods=lambda name:{x['id'].rsplit('::',1)[-1] for x in rows[name][1]}
-    assert methods('BlueDogRequirementVerification::ConstructionArchitectureVerification')=={'inspect'}
-    assert methods('BlueDogRequirementVerification::SustainedReserveProtectionVerification')=={'analyze'}
-    assert methods('BlueDogVerificationPlanning::HumanRecoveryUseValidation')=={'test','demo'}
-    assert methods('BlueDogEnergy::SustainedEnergyVerification')=={'analyze'}
+    assert methods('BlueDog::Verification::Requirements::ConstructionArchitectureVerification')=={'inspect'}
+    assert methods('BlueDog::Verification::Requirements::SustainedReserveProtectionVerification')=={'analyze'}
+    assert methods('BlueDog::Verification::Planning::HumanRecoveryUseValidation')=={'test','demo'}
+    assert methods('BlueDog::Analyses::Energy::SustainedEnergyVerification')=={'analyze'}
 
 
 def test_numerical_eligibility_never_changes_planned_verdicts(report):
     m=load_model()
-    assert m.calc('BlueDogVerificationPlanning::EvidenceEligibleForAcceptance',[True]*11).value is True
+    assert m.calc('BlueDog::Verification::Planning::EvidenceEligibleForAcceptance',[True]*11).value is True
     for row in report['tables']['PlannedVerdicts']['rows']:
         assert [r['id'] for r in row['cells'][1]]==['VerificationCases::VerdictKind::inconclusive']
-    assert m.eval('BlueDogCurrentSizing::nominal.evidenceAccepted') is False
+    assert m.eval('BlueDog::Evidence::CurrentSizing::nominal.evidenceAccepted') is False
 
 
 FIELDS=('executed','subjectIdentified','configurationApplicable','conditionsApplicable','procedureControlled',
@@ -59,38 +69,33 @@ FIELDS=('executed','subjectIdentified','configurationApplicable','conditionsAppl
 def test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance(case,changes):
     # Synthetic review assertions; this does not manufacture an actual evidence assessment.
     inputs={name:True for name in FIELDS}|changes
-    assert load_model().calc('BlueDogVerificationPlanning::EvidenceEligibleForAcceptance',
+    assert load_model().calc('BlueDog::Verification::Planning::EvidenceEligibleForAcceptance',
         [inputs[name] for name in FIELDS]).value is False
 
 
 def test_missing_evidence_review_input_is_not_success():
     with pytest.raises(ExecutionError):
-        load_model().calc('BlueDogVerificationPlanning::EvidenceEligibleForAcceptance',[True]*10)
+        load_model().calc('BlueDog::Verification::Planning::EvidenceEligibleForAcceptance',[True]*10)
 
 
 def test_missing_method_annotation_is_detected(sources):
-    old='''    verification def <'V-E-003'> ResetRecoveryVerification {
-        metadata plannedTest : VerificationCases::VerificationMethod { kind = VerificationCases::VerificationMethodKind::test; }'''
-    assert sum(t.count(old) for _,t in sources)==1
-    mutant=tuple((p,t.replace(old,"    verification def <'V-E-003'> ResetRecoveryVerification {")) for p,t in sources)
-    assert 'V04 Missing planned method: BlueDogRequirementVerification::ResetRecoveryVerification' in native_verification_audit(mutant)['errors']
+    mutant=delete_symbols(sources,'BlueDog::Verification::Requirements::ResetRecoveryVerification::plannedTest')
+    assert 'V04 Missing planned method: BlueDog::Verification::Requirements::ResetRecoveryVerification' in native_verification_audit(mutant)['errors']
 
 
 def test_archived_design_cannot_substitute_for_planned_ic01_test_article(sources):
-    old='''    part interfaceBench : PlannedTestConfiguration {
-        ref part :>> plannedDesign = BlueDogIC01::design;'''
-    assert sum(t.count(old) for _,t in sources)==1
-    mutant=tuple((p,t.replace(old,old.replace('BlueDogIC01::design','BlueDogCurrentSizing::candidate'))) for p,t in sources)
-    assert 'V02 Wrong planned design: BlueDogVerificationPlanning::interfaceBench' in native_verification_audit(mutant)['errors']
+    mutant=set_values(sources,{'BlueDog::Verification::Planning::interfaceBench::plannedDesign':
+                               'BlueDog::Evidence::CurrentSizing::candidate'})
+    assert 'V02 Wrong planned design: BlueDog::Verification::Planning::interfaceBench' in native_verification_audit(mutant)['errors']
 
 
 def test_removing_uncertainty_precondition_changes_native_eligibility(sources):
     old='and measurementBasisAdequate and uncertaintyAdequate and criterionEvaluated'
     assert sum(t.count(old) for _,t in sources)==1
-    m=connection().parse_sources(tuple((p,t.replace(old,
-        'and measurementBasisAdequate and criterionEvaluated')) for p,t in sources),strict=True)
+    m=connection().parse_sources(replace_unique(sources,old,
+        'and measurementBasisAdequate and criterionEvaluated'),strict=True)
     inputs={name:True for name in FIELDS}|dict(uncertaintyAdequate=False)
-    assert m.calc('BlueDogVerificationPlanning::EvidenceEligibleForAcceptance',
+    assert m.calc('BlueDog::Verification::Planning::EvidenceEligibleForAcceptance',
         [inputs[name] for name in FIELDS]).value is True
 
 

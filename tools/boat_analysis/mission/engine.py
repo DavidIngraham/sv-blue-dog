@@ -19,7 +19,7 @@ from tools.boat_analysis.model.runtime import analysis_values, load_model
 
 
 def mission_inputs():
-    return analysis_values('BlueDogMissionSimulation::Inputs')
+    return analysis_values('BlueDog::Analyses::MissionSimulation::Inputs')
 
 
 @dataclass(frozen=True)
@@ -67,7 +67,7 @@ def evaluate_outcome(*facts):
         raise ValueError('MissionOutcome requires eight Boolean facts (legacy calls imply no safety abort)')
     if any(not isinstance(fact, (bool, np.bool_)) for fact in facts):
         raise TypeError('MissionOutcome facts must be Boolean')
-    return load_model().calc('BlueDogMissionSimulation::MissionOutcome', arguments=[bool(fact) for fact in facts]).value
+    return load_model().calc('BlueDog::Analyses::MissionSimulation::MissionOutcome', arguments=[bool(fact) for fact in facts]).value
 
 
 def direction(route, distance):

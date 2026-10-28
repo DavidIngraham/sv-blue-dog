@@ -18,7 +18,7 @@ def save(name,record):
 
 def named_configuration():
     """The complete design is a native named configuration, never archive overlays."""
-    values=analysis_values('BlueDogIntegratedCandidate::Inputs')
+    values=analysis_values('BlueDog::Analyses::IntegratedCandidate::Inputs')
     design=dict(zip(values['designNames'],values['designValues'],strict=True))
     if len(design)!=len(values['designNames']):
         raise ValueError('Named configuration has duplicate design properties')
@@ -33,7 +33,7 @@ def sizing(budget=35,warm_start=None):
     for name,value in zip(p['parameterNames'],p['parameterValues']):
         scenarios['values']['nominal'][model.c['parameterNames'].index(name)]=value
     initial=[case['state'][3:] for case in prior['refinedReplay']['cases']]
-    seed_source=dict(path=source.relative_to(ROOT).as_posix(),sha256=digest(source),scope='Initial operating guesses only; complete design comes from BlueDogIC01::design')
+    seed_source=dict(path=source.relative_to(ROOT).as_posix(),sha256=digest(source),scope='Initial operating guesses only; complete design comes from BlueDog::Configurations::IC01::design')
     if warm_start:
         seed_path=Path(warm_start);seed=json.loads(seed_path.read_text())
         initial=[c['state'][3:] for c in seed['replay']['cases']]
@@ -54,7 +54,7 @@ def sizing(budget=35,warm_start=None):
         inputs[key]=p[key]
     inputs.update(captureGateCenters=True,progressGuidance=True,independentRecovery=p['independentRecoveryAssumed'],recoveryBatteryWh=p['recoveryDepartureWh'])
     inputs['time'][4]=p['maneuverSeconds'];inputs['energy'][5]=0.
-    record=dict(identifier=p['identifier'],configuration='BlueDogIC01::design',inputs=inputs,allocation=p,design=design,mass=mass,replay=replay,physicalQualification=False,
+    record=dict(identifier=p['identifier'],configuration='BlueDog::Configurations::IC01::design',inputs=inputs,allocation=p,design=design,mass=mass,replay=replay,physicalQualification=False,
                 initialStates=initial,initialStateSource=seed_source,operatingSolveBudgetPerPhase=budget,sourceHashes=hashes)
     validate(hashes);save('integrated-sizing.json',record)
     print(json.dumps(dict(massKg=mass['totalMass'],staticPass=replay['profileSampledStaticScreensPass'],structure=replay['structure'],hours=replay['westerlyRoute'][5]),indent=2),flush=True)

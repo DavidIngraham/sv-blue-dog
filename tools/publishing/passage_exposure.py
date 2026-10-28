@@ -6,7 +6,7 @@ from tools.boat_analysis.model.runtime import ROOT, analysis_values
 
 
 def render():
-    values = analysis_values('BlueDogPassageExposure::Contours')
+    values = analysis_values('BlueDog::Analyses::PassageExposure::Contours')
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt

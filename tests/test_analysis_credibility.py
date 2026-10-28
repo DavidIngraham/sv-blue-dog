@@ -5,6 +5,7 @@ import pytest
 from tools.boat_analysis.evidence import records
 from tools.boat_analysis.model.runtime import ROOT,connection,model_files,load_model
 from tools.boat_analysis.model.credibility_audit import native_credibility_audit
+from tests.native_edits import delete_symbols, set_values, edit_sources
 
 
 @pytest.fixture
@@ -64,16 +65,40 @@ def test_native_use_inventory_covers_definitions_and_configured_usages():
     assert r['summary']['useCategories']['HistoricalReview']==13
 
 
-@pytest.mark.parametrize('mutation',('new_case','missing_annotation','missing_domain'))
+@pytest.mark.parametrize('mutation',('new_case','nested_case','missing_annotation','missing_domain'))
 def test_native_inventory_detects_missing_scope_or_use(mutation):
     sources=[(str(p),p.read_text()) for p in model_files()]
     if mutation=='new_case':sources.append((str(ROOT/'reviews/untagged.sysml'),'package Untagged { analysis sample { out value : ScalarValues::Real = 1; } }'))
+    elif mutation=='nested_case':
+        sources.append((str(ROOT/'reviews/nested-untagged.sysml'),'package Untagged { package Nested { analysis sample { out value : ScalarValues::Real = 1; } } }'))
+    elif mutation=='missing_annotation':
+        sources=delete_symbols(sources,'BlueDog::Analyses::AnalysisCredibility::use001')
     else:
-        p=str(ROOT/'models/analyses/credibility.sysml')
-        replacement=('metadata use001 : Equipment about BlueDogAcousticEquipment::Budget;', '') if mutation=='missing_annotation' else (
-            'attribute :>> domain = "Declared included/excluded components, duty assumptions, modes and accounting boundary.";', 'attribute :>> domain = "";')
-        sources=[(name,text.replace(*replacement) if name==p else text) for name,text in sources]
+        sources=set_values(sources,{'BlueDog::Analyses::AnalysisCredibility::Equipment::domain':'""'})
     assert native_credibility_audit(sources)['errors']
+
+
+def test_new_nested_typed_analysis_is_registered_without_a_package_list_edit():
+    sources=[(str(p),p.read_text()) for p in model_files()]
+    owner='BlueDog::Analyses::SyntheticExtension::Nested'
+    def extend(editor):
+        editor.add_member('BlueDog::Analyses','package','SyntheticExtension')
+        editor.add_member('BlueDog::Analyses::SyntheticExtension','package','Nested')
+        editor.add_member(owner,'analysis','sample')
+        editor.add_member(owner+'::sample','attribute','value',
+                          type='ScalarValues::Real',direction='out',value='1')
+        editor.add_metadata(owner,'BlueDog::Analyses::AnalysisCredibility::UseIntent',
+            name='purpose',about=[owner+'::sample'],values={
+                'category':'"Synthetic"',
+                'intendedUse':'"Exercise typed inventory discovery."',
+                'domain':'"A constant scalar test case."',
+                'excludedUses':'"No engineering capability evidence."',
+                'evidenceNeeded':'"Software regression only."'})
+    result=native_credibility_audit(edit_sources(sources,extend))
+    assert not result['errors'] and not result['diagnostics']
+    assert result['summary']['analysisCases']==result['summary']['registeredCases']==111
+    assert result['summary']['useCategories']['Synthetic']==1
+    assert any(row['element']['id']==owner+'::sample' for row in result['table']['rows'])
 
 
 FLAGS=('intendedUseReviewed','configurationApplicable','domainApplicable','inputPedigreeReviewed','implementationVerified',
@@ -83,12 +108,12 @@ FLAGS=('intendedUseReviewed','configurationApplicable','domainApplicable','input
 @pytest.mark.parametrize('missing',FLAGS)
 def test_each_proposed_use_precondition_is_required(missing):
     arguments=[name!=missing for name in FLAGS]
-    assert load_model().calc('BlueDogAnalysisCredibility::UsePreconditions',arguments=arguments).value is False
+    assert load_model().calc('BlueDog::Analyses::AnalysisCredibility::UsePreconditions',arguments=arguments).value is False
 
 
 def test_review_preconditions_dont_require_a_passing_design_result():
-    assert load_model().calc('BlueDogAnalysisCredibility::UsePreconditions',arguments=[True]*len(FLAGS)).value is True
-    with pytest.raises(Exception):load_model().calc('BlueDogAnalysisCredibility::UsePreconditions',arguments=[True]*9)
+    assert load_model().calc('BlueDog::Analyses::AnalysisCredibility::UsePreconditions',arguments=[True]*len(FLAGS)).value is True
+    with pytest.raises(Exception):load_model().calc('BlueDog::Analyses::AnalysisCredibility::UsePreconditions',arguments=[True]*9)
 
 
 def test_registered_reference_role_preserves_unchanged_geometry_consumers(inputs,monkeypatch):

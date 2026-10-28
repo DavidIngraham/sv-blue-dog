@@ -11,10 +11,10 @@ def check_values(check):
 def variant(run_model):
     def variant(base, bindings):
         source = ('package TradeTest { private import SI::*; '
-                  f'part candidate :> RecoveryPropulsionTrade::{base} {{ ' +
+                  f'part candidate :> BlueDog::Analyses::RecoveryPropulsionTrade::{base} {{ ' +
                   ' '.join(f'attribute :>> {key} = {value};' for key, value in bindings.items()) + ' } }')
         return run_model(source, '-instantiate', 'TradeTest::candidate', '-analysis',
-                         'RecoveryPropulsionTrade::RecoverySizing TradeTest::candidate')
+                         'BlueDog::Analyses::RecoveryPropulsionTrade::RecoverySizing TradeTest::candidate')
 
     return variant
 

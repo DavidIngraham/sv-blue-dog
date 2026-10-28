@@ -9,6 +9,7 @@ def test_navigation_replay_retains_native_provenance_and_frozen_scope():
     record=run_record(ARCHIVE,'navigation-integration.json')
     assert not record['resized'] and not record['completeComplianceEstablished']
     assert 'models/libraries/navigation/inland-pair.sysml' in record['sourceHashes']
+    # Archived source fingerprints retain their original namespace/source layout.
     assert 'models/analyses/navigation-controller.sysml' in record['sourceHashes']
     assert len(record['runs'])==99
     assert all(row['sameOutcome'] for row in record['baselineArchiveChecks'])

@@ -22,7 +22,7 @@ The native method register distinguishes inspection, analysis, demonstration and
 
 </details>
 
-The [integration and recovery-use plans](../models/vehicle/verification-planning.sysml) identify the intended IC-01 design and assembly. Actual article, released procedure and instrument identities remain unset. The interface bench plan checks command/permission applicability, durable disqualification, restart and physical motor-enable timing. The recovery-use plan combines product criteria with the operator's complete approach, capture, retention and one-person pickup task.
+The [integration and recovery-use plans](../models/blue-dog.sysml) identify the intended IC-01 design and assembly. Actual article, released procedure and instrument identities remain unset. The interface bench plan checks command/permission applicability, durable disqualification, restart and physical motor-enable timing. The recovery-use plan combines product criteria with the operator's complete approach, capture, retention and one-person pickup task.
 
 <details>
 <summary>Candidate configurations and missing execution details</summary>
@@ -40,7 +40,7 @@ This follows [NASA verification](https://www.nasa.gov/reference/5-3-product-veri
 
 The challenge's C-007 requires the [U.S. Inland Navigation Rules](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E) and applicable local provisions. Before entry approval, the organizer reviews the identified boat, course, propulsion modes, operating conditions and current rule/notice baseline. The entrant supplies applicability decisions, justified exclusions, observation and maneuver limits, predeclared acceptance criteria and supporting demonstrations. Unsupported conditions cannot enter the admitted operating envelope.
 
-The [model verification cases](../models/missions/verification.sysml) each verify `GorgeChallenge::navigationRules` and link to their legal sources:
+The [model verification cases](../models/blue-dog.sysml) each verify `BlueDog::Mission::Challenge::navigationRules` and link to their legal sources:
 
 | Model case | Source and review scope |
 | --- | --- |
@@ -70,7 +70,7 @@ Before each experiment I will record the configuration, predicted result, uncert
 
 ## Exercise decisions before physical integration
 
-IC-01 passes a [bounded set of local integration cases](encounter-feasibility.md#close-the-candidate-loop), using its own mass, sailing performance, electrical demand and independent recovery allocation. The [acceptance requirement](../models/analyses/integrated-candidate.sysml) requires those capabilities to work together. Safe abort remains distinct from course completion, and a modeled recovery approach remains distinct from physical shore retention.
+IC-01 passes a [bounded set of local integration cases](encounter-feasibility.md#close-the-candidate-loop), using its own mass, sailing performance, electrical demand and independent recovery allocation. The [acceptance requirement](../models/blue-dog.sysml) requires those capabilities to work together. Safe abort remains distinct from course completion, and a modeled recovery approach remains distinct from physical shore retention.
 
 <details>
 <summary>Which integration assumptions each physical test must establish</summary>

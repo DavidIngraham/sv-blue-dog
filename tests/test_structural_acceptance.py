@@ -56,7 +56,7 @@ def test_shared_inputs_do_not_leak(acceptance):
 def test_shared_evaluation_matches_cli(acceptance, run_model, accepted, expected):
     inputs = dict(creditedAllowablePa=20e6, qualifiedAllowablePa=25e6, evidenceAccepted=accepted)
     bindings = ' '.join(f'attribute :>> {key} = {str(value).lower()};' for key,value in inputs.items())
-    code, report = run_model('package Parity { requirement sample : BlueDogStructure::WetCouponStrength { '
+    code, report = run_model('package Parity { requirement sample : BlueDog::Requirements::Structure::WetCouponStrength { '
                              + bindings + ' } }', '-requirement', 'Parity::sample')
     assert report['status'] == expected
     assert acceptance('WetCouponStrength', **inputs) == (code, report['status'])

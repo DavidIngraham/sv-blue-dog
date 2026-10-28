@@ -1,7 +1,7 @@
 package BlueDogAudit {
     private import DocumentQueries::*;
     calc def GoverningElements :> Query {
-        Descendants(source = Named(qualifiedName = ("GorgeChallenge", "BlueDog::Goals", "BlueDogRequirements", "BlueDogStructure")))
+        Descendants(source = Named(qualifiedName = ("BlueDog::Mission::Challenge", "BlueDog::Goals", "BlueDog::Requirements", "BlueDog::Requirements::Structure")))
     }
     calc def Coverage :> Query {
         Project(source = WhereType(source = GoverningElements(), type = "RequirementUsage"), columns = (
@@ -11,11 +11,11 @@ package BlueDogAudit {
             Column(name = "Satisfaction", cell = { in row : SysML::RequirementUsage; RelatedElements(source = row, relationshipKind = "satisfaction", direction = "incoming", maxDepth = 1) })))
     }
     calc def Deferred :> Query {
-        WhereFeature(source = Project(source = WhereMetadata(source = WhereType(source = GoverningElements(), type = "RequirementDefinition"), 'metadata' = "BlueDogMissionScope::Applicability"), columns = (
-            Column(name = "Mission", path = "BlueDogMissionScope::Applicability::mission"))), 'feature' = "Mission", operator = "matches", value = "future(Ocean|Endurance)$")
+        WhereFeature(source = Project(source = WhereMetadata(source = WhereType(source = GoverningElements(), type = "RequirementDefinition"), 'metadata' = "BlueDog::Mission::Scope::Applicability"), columns = (
+            Column(name = "Mission", path = "BlueDog::Mission::Scope::Applicability::mission"))), 'feature' = "Mission", operator = "matches", value = "future(Ocean|Endurance)$")
     }
     calc def StudyObjectives :> Query {
-        WhereMetadata(source = WhereType(source = GoverningElements(), type = "RequirementDefinition"), 'metadata' = "BlueDogRequirementBasis::StudyObjective")
+        WhereMetadata(source = WhereType(source = GoverningElements(), type = "RequirementDefinition"), 'metadata' = "BlueDog::Requirements::Basis::StudyObjective")
     }
     calc def Derivations :> Query {
         Project(source = WhereMetadata(source = GoverningElements(), 'metadata' = "RequirementDerivation::DerivationMetadata"), columns = (

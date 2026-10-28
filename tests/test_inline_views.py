@@ -43,7 +43,7 @@ def test_inline_view_resolves_actual_refinement_and_statements(tmp_path):
     assert 'refine' in result
     assert 'The vessel shall cross the configured Bingen departure' in result
     assert 'flowchart BT' in result
-    assert 'BlueDogRequirements::communications' not in result
+    assert 'BlueDog::Requirements::communications' not in result
     assert 'sysml-view' not in result
 
 

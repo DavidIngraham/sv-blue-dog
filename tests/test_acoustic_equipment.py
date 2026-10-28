@@ -4,7 +4,7 @@ from tools.boat_analysis.model.runtime import load_model, numerical_value
 
 
 def test_recorder_allowance_includes_nominal_phantom_supply_once_and_keeps_partial_budget():
-    result=numerical_value(load_model().run_analysis('BlueDogAcousticEquipment::Budget').outputs)
+    result=numerical_value(load_model().run_analysis('BlueDog::Configurations::AcousticEquipment::Budget').outputs)
     assert result['passiveNominalPhantomSupplyW']==pytest.approx(.2304)
     assert result['passivePlanningRailLowW']==pytest.approx(4.5)
     assert result['passivePlanningBatteryLowW']==pytest.approx(5)
@@ -18,7 +18,7 @@ def test_recorder_allowance_includes_nominal_phantom_supply_once_and_keeps_parti
 
 @pytest.mark.parametrize('candidate',['passiveArray','narrowBeamForward','multibeamForward'])
 def test_catalogue_specs_never_supply_observation_or_recovery_acceptance(candidate):
-    instance=load_model().instantiate('BlueDogAcousticEquipment::'+candidate)
+    instance=load_model().instantiate('BlueDog::Configurations::AcousticEquipment::'+candidate)
     for gate in ('detectionRangeDemonstrated','bearingAccuracyDemonstrated','metricRangeDemonstrated',
                  'relativeMotionDemonstrated','latencyDemonstrated','dayNightCoverageDemonstrated',
                  'invertedObservationDemonstrated','independentRecoveryComplete',

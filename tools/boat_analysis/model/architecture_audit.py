@@ -25,8 +25,8 @@ def native_architecture_audit(sources=None):
         return model.query(scope=[scope], select=['owner'], where={
             '@type': 'PrimitiveConstraint', 'operator': '=', 'property': '@type', 'value': [kind]})
 
-    logical_owner = 'BlueDogLogicalArchitecture::LogicalVessel'
-    implementation_owner = 'BlueDogPhysicalArchitecture::IC01Candidate'
+    logical_owner = 'BlueDog::Architecture::Logical::LogicalVessel'
+    implementation_owner = 'BlueDog::Architecture::Physical::IC01Candidate'
     logical_parts = {r.id for r in elements(logical_owner, 'PartUsage') if r.get('owner') == logical_owner}
     candidate_parts = {r.id for r in elements(implementation_owner, 'PartUsage') if r.get('owner') == implementation_owner}
     candidate_flows = {r.id for r in elements(implementation_owner, 'FlowUsage') if r.get('owner') == implementation_owner}
@@ -50,7 +50,7 @@ def native_architecture_audit(sources=None):
 
     # Native owner and typing facts select steps within the scenario definitions
     # used by the package's scenario usages, rather than guessing from names.
-    scenario_package = 'BlueDogMethod::Scenarios'
+    scenario_package = 'BlueDog::Method::Scenarios'
     action_owners = {r.id: r.get('owner') for r in elements(scenario_package, 'ActionUsage')}
     definitions = {t.id for row in tables['ScenarioActions']
                    if action_owners.get(row.element.id) == scenario_package for t in row.cells[1]}
@@ -67,7 +67,7 @@ def native_architecture_audit(sources=None):
     mapping_counts = {}
     for row in tables['Mappings']:
         scope, configurations, paths, types = row.cells
-        kinds = [t.id for t in types if t.id.startswith('BlueDogArchitectureContracts::')]
+        kinds = [t.id for t in types if t.id.startswith('BlueDog::Architecture::Contracts::')]
         if len(kinds) != 1:
             errors.append('L03 Missing or ambiguous mapping convention: '+row.element.id)
             continue
@@ -76,16 +76,16 @@ def native_architecture_audit(sources=None):
         if not scope or not any(str(v).strip() for v in scope):
             errors.append('L02 Unscoped allocation: '+row.element.id)
         if kind != 'ContextMapping':
-            if [r.id for r in configurations] != ['BlueDogIC01::design']:
+            if [r.id for r in configurations] != ['BlueDog::Configurations::IC01::design']:
                 errors.append('C01 Wrong or missing candidate configuration: '+row.element.id)
             if len(paths) != 1 or paths[0].id not in {
-                'BlueDogArchitectureContracts::ImplementationPath::'+p for p in ('primary', 'recovery', 'shared')}:
+                'BlueDog::Architecture::Contracts::ImplementationPath::'+p for p in ('primary', 'recovery', 'shared')}:
                 errors.append('L05 Missing implementation path: '+row.element.id)
 
     candidate = list(tables['Candidate'])
-    if len(candidate) != 1 or [r.id for r in candidate[0].cells[0]] != ['BlueDogIC01::design']:
+    if len(candidate) != 1 or [r.id for r in candidate[0].cells[0]] != ['BlueDog::Configurations::IC01::design']:
         errors.append('C01 Candidate assembly is not bound to IC-01 design')
-    if len(candidate) != 1 or [r.id for r in candidate[0].cells[1]] != ['BlueDogIC01::integration']:
+    if len(candidate) != 1 or [r.id for r in candidate[0].cells[1]] != ['BlueDog::Configurations::IC01::integration']:
         errors.append('C01 Candidate assembly is not bound to IC-01 integration assumptions')
 
     return dict(modelHash=model.hash, runtimeRevision=REVISION,

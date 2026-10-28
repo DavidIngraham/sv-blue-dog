@@ -6,11 +6,11 @@ import pytest
 
 @pytest.fixture
 def sailing(run_model):
-    def run(body='', base='BlueDogSailingExamples::UpstreamHeadwind', analysis='PolarDemandAndHullScreen'):
+    def run(body='', base='BlueDog::Configurations::Examples::Sailing::UpstreamHeadwind', analysis='PolarDemandAndHullScreen'):
         source = ('package SailingTest { private import SI::*; '
                   f'part candidate : {base} {{ {body} }} }}')
         code, report = run_model(source, '-instantiate', 'SailingTest::candidate',
-                                 '-analysis', f'BlueDogSailing::{analysis} SailingTest::candidate')
+                                 '-analysis', f'BlueDog::Analyses::Sailing::{analysis} SailingTest::candidate')
         assert not [d for d in report['diagnostics'] or [] if d['pass'] != 'runtime']
         values = {v['name']: v['value'] for c in report['checks'] or [] for v in c['values']}
         return code, values
@@ -49,8 +49,8 @@ def test_speed_either_side_of_the_inverse_boundary(sailing, speed, code):
 
 def test_tacking_gybing_and_current_are_not_conflated(sailing):
     _, beat = sailing()
-    _, run = sailing(base='BlueDogSailingExamples::UpstreamTailwind')
-    _, downstream = sailing(base='BlueDogSailingExamples::DownstreamHeadwind')
+    _, run = sailing(base='BlueDog::Configurations::Examples::Sailing::UpstreamTailwind')
+    _, downstream = sailing(base='BlueDog::Configurations::Examples::Sailing::DownstreamHeadwind')
     assert number(run, 'requiredCleanPolarSpeed') == pytest.approx(3.4352823403481025)
     assert number(downstream, 'requiredGroundVMG') == pytest.approx(100000 / 36000)
     assert number(downstream, 'requiredCleanPolarSpeed') == pytest.approx(2.3776982408319576)
@@ -122,8 +122,8 @@ def test_one_evidence_flag_does_not_support_the_claim(sailing, field):
 def test_coupled_polar_legs_change_cruise_exposure(run_model):
     results = []
     for scenario, expected in [('gorgeWesterly', 61.54045659717509), ('gorgeEasterly', 57.31706223726946)]:
-        code, report = run_model('package SailingTest {}', '-instantiate', f'BlueDogSailingExamples::{scenario}',
-                                '-analysis', f'BlueDogSailing::PolarVoyageAssessment BlueDogSailingExamples::{scenario}')
+        code, report = run_model('package SailingTest {}', '-instantiate', f'BlueDog::Configurations::Examples::Sailing::{scenario}',
+                                '-analysis', f'BlueDog::Analyses::Sailing::PolarVoyageAssessment BlueDog::Configurations::Examples::Sailing::{scenario}')
         assert code == 0
         v = {x['name']: x['value'] for x in report['checks'][0]['values']}
         assert number(v, 'voyageHours') == pytest.approx(expected)
@@ -135,12 +135,12 @@ def test_coupled_polar_legs_change_cruise_exposure(run_model):
 
 def test_time_allocations_cannot_overbook_the_mission(run_model):
     source = '''package SailingTest { private import SI::*;
-        part candidate :> BlueDogSailingExamples::gorgeWesterly {
+        part candidate :> BlueDog::Configurations::Examples::Sailing::gorgeWesterly {
             attribute :>> holdTime = 25200 [s];
         }
     }'''
     code, report = run_model(source, '-instantiate', 'SailingTest::candidate',
-                             '-analysis', 'BlueDogSailing::PolarVoyageAssessment SailingTest::candidate')
+                             '-analysis', 'BlueDog::Analyses::Sailing::PolarVoyageAssessment SailingTest::candidate')
     assert code != 0
     v = {x['name']: x['value'] for x in report['checks'][0]['values']}
     assert v['allocationValid'] == 'false'
@@ -148,8 +148,8 @@ def test_time_allocations_cannot_overbook_the_mission(run_model):
 
 
 def test_offshore_probe_is_duration_driven_and_unaccepted(run_model):
-    code, report = run_model('package SailingTest {}', '-instantiate', 'BlueDogSailingExamples::oceanIllustration',
-                             '-analysis', 'BlueDogSailing::PolarDemandAndHullScreen BlueDogSailingExamples::oceanIllustration')
+    code, report = run_model('package SailingTest {}', '-instantiate', 'BlueDog::Configurations::Examples::Sailing::oceanIllustration',
+                             '-analysis', 'BlueDog::Analyses::Sailing::PolarDemandAndHullScreen BlueDog::Configurations::Examples::Sailing::oceanIllustration')
     assert code == 0
     v = {x['name']: x['value'] for x in report['checks'][0]['values']}
     assert number(v, 'requiredGroundVMG') == pytest.approx(4000000 / 2419200)

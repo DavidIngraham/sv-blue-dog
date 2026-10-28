@@ -1,10 +1,10 @@
 package BlueDogViews {
     private import StandardViewDefinitions::*;
     view requirements : GeneralView {
-        expose GorgeChallenge::*;
+        expose BlueDog::Mission::Challenge::*;
         expose BlueDog::Goals::*;
-        expose BlueDogRequirements::*;
-        expose BlueDogStructure::*;
+        expose BlueDog::Requirements::*;
+        expose BlueDog::Requirements::Structure::*;
         filter @SysML::RequirementUsage;
     }
 }

@@ -32,7 +32,17 @@ def test_native_validation():
     assert not json.loads(native("-validate", "-json"))["diagnostics"]
 
 def test_challenge_is_standalone():
-    __import__("tools.boat_analysis.model.runtime", fromlist=["native"]).native("-validate", models=(Path("models/missions/transgorge.sysml").resolve(),))
+    from tools.boat_analysis.model.runtime import connection, load_model
+    # Native edit ranges provide the actual declaration. Validate it under its
+    # canonical owners without the vehicle or any project/library declarations.
+    identity='BlueDog::Mission::Challenge'
+    result=load_model().edit().move(identity,'BlueDog::Mission').apply()
+    declarations=[edit.old_text for edit in result.applied
+                  if edit.length and edit.target==identity and 'package Challenge {' in edit.old_text]
+    assert len(declarations)==1
+    isolated='package BlueDog { package Mission {\n'+declarations[0]+'\n} }'
+    challenge=connection().parse_sources((('challenge-only.sysml',isolated),),strict=True)
+    assert challenge.get(identity+'::transGorgeChallenge') is not None
 
 def test_diagram_preserves_expected_derivations(published_model):
     # Deliberate aggregate implications remain; chosen allocations do not.
@@ -154,14 +164,14 @@ def test_statements_exclude_supporting_material(published_model):
 
 
 @pytest.mark.parametrize('case', [
-    'BlueDogRequirementVerification::EnergyAwarenessVerification',
-    'GorgeChallengeVerification::PassageQualificationVerification',
-    'BlueDogRequirementVerification::CapsizeResilienceVerification',
-    'BlueDogRequirementVerification::VegetationResilienceVerification',
-    'BlueDogRequirementVerification::MissionPerformanceAssessmentVerification',
-    'BlueDogRequirementVerification::ReliabilityEvidenceVerification',
-    'BlueDogRequirementVerification::PeakSupplyCapabilityVerification',
-    'BlueDogRequirementVerification::ConstructionArchitectureVerification',
+    'BlueDog::Verification::Requirements::EnergyAwarenessVerification',
+    'BlueDog::Verification::Challenge::PassageQualificationVerification',
+    'BlueDog::Verification::Requirements::CapsizeResilienceVerification',
+    'BlueDog::Verification::Requirements::VegetationResilienceVerification',
+    'BlueDog::Verification::Requirements::MissionPerformanceAssessmentVerification',
+    'BlueDog::Verification::Requirements::ReliabilityEvidenceVerification',
+    'BlueDog::Verification::Requirements::PeakSupplyCapabilityVerification',
+    'BlueDog::Verification::Requirements::ConstructionArchitectureVerification',
 ])
 def test_planned_verification_cannot_report_a_pass(run_model, case):
     code, report = run_model('package VerificationProbe {}', '-analysis',

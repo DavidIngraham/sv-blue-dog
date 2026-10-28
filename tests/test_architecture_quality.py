@@ -3,6 +3,7 @@ import pytest
 
 from tools.boat_analysis.model.architecture_audit import native_architecture_audit
 from tools.boat_analysis.model.runtime import model_files
+from tests.native_edits import replace_unique, set_values, delete_symbols
 
 
 @pytest.fixture(scope='module')
@@ -10,9 +11,9 @@ def sources():
     return tuple((str(p), p.read_text()) for p in model_files())
 
 
-def altered(sources, old, new, file):
-    assert sum(text.count(old) for path,text in sources if path.endswith(file)) == 1
-    return tuple((path,text.replace(old,new) if path.endswith(file) else text) for path,text in sources)
+def altered(sources, old, new):
+    # A former source file now shares the canonical project document.
+    return replace_unique(sources, old, new)
 
 
 def test_scenarios_responsibilities_and_exchanges_have_native_correspondences(sources):
@@ -28,56 +29,44 @@ def test_scenarios_responsibilities_and_exchanges_have_native_correspondences(so
 
 def test_missing_recovery_scenario_owner_is_detected(sources):
     src = altered(sources,
-        'allocate abortAndRecover.actuate to BlueDogLogicalArchitecture::vessel.recoveryActuation;',
-        '', '/vehicle/method.sysml')
-    assert 'L01 Unowned scenario action: BlueDogMethod::Scenarios::AbortAndRecover::actuate' in native_architecture_audit(src)['errors']
+        'allocate abortAndRecover.actuate to BlueDog::Architecture::Logical::vessel.recoveryActuation;',
+        '')
+    assert 'L01 Unowned scenario action: BlueDog::Method::Scenarios::AbortAndRecover::actuate' in native_architecture_audit(src)['errors']
 
 
 def test_missing_propulsion_responsibility_allocation_is_detected(sources):
-    block = '''    allocation recoveryActuation : IC01Responsibility allocate vessel.recoveryActuation to ic01.recoveryPropulsor {
-        attribute :>> path = ImplementationPath::recovery;
-        attribute :>> scope = "Execute permitted recovery commands; achieved upright/inverted thrust remains unverified";
-    }
-'''
-    src = altered(sources, block, '', '/vehicle/architecture-contracts.sysml')
-    assert 'L02 Missing candidate allocation: BlueDogLogicalArchitecture::LogicalVessel::recoveryActuation' in native_architecture_audit(src)['errors']
+    src = delete_symbols(sources, 'BlueDog::Architecture::Correspondence::recoveryActuation')
+    assert 'L02 Missing candidate allocation: BlueDog::Architecture::Logical::LogicalVessel::recoveryActuation' in native_architecture_audit(src)['errors']
 
 
 def test_missing_recovery_command_mapping_is_detected(sources):
-    block = '''    allocation recoveryCommandsRecoveryCommandData : IC01Exchange allocate vessel.recoveryCommands to ic01.recoveryCommandData {
-        attribute :>> path = ImplementationPath::recovery;
-        attribute :>> scope = "Candidate payload transfer; installed timing, transport and fault handling remain to be specified";
-    }
-'''
-    src = altered(sources, block, '', '/vehicle/architecture-contracts.sysml')
-    assert 'I01 Unmapped logical exchange: BlueDogLogicalArchitecture::LogicalVessel::recoveryCommands' in native_architecture_audit(src)['errors']
+    src = delete_symbols(sources, 'BlueDog::Architecture::Correspondence::recoveryCommandsRecoveryCommandData')
+    assert 'I01 Unmapped logical exchange: BlueDog::Architecture::Logical::LogicalVessel::recoveryCommands' in native_architecture_audit(src)['errors']
 
 
 def test_archived_design_cannot_become_the_candidate_mapping_subject(sources):
-    old = 'ref part configuration : MarineDesign::Design = BlueDogIC01::design;'
-    # Override one allocation convention, not the archived study or its values.
-    block = '''    allocation def IC01Responsibility {
-        end part logical;
-        end part implementation;
-        '''+old
-    src = altered(sources, block, block.replace('BlueDogIC01::design','BlueDogSRRCurrent::candidate'), '/vehicle/architecture-contracts.sysml')
+    # Change the allocation convention, not any archived configuration values.
+    src = set_values(sources, {
+        'BlueDog::Architecture::Contracts::IC01Responsibility::configuration':
+        'BlueDog::Evidence::SRRCurrent::candidate',
+    })
     errors = native_architecture_audit(src)['errors']
-    assert 'C01 Wrong or missing candidate configuration: BlueDogArchitectureCorrespondence::recoveryManagement' in errors
+    assert 'C01 Wrong or missing candidate configuration: BlueDog::Architecture::Correspondence::recoveryManagement' in errors
 
 
 def test_operator_cannot_replace_candidate_propulsion_allocation(sources):
     src = altered(sources,
         'allocate vessel.recoveryActuation to ic01.recoveryPropulsor',
-        'allocate vessel.recoveryActuation to missionContext.operator', '/vehicle/architecture-contracts.sysml')
-    assert any(e.startswith('L03 Invalid candidate responsibility target: BlueDogLogicalArchitecture::LogicalVessel::recoveryActuation')
+        'allocate vessel.recoveryActuation to missionContext.operator')
+    assert any(e.startswith('L03 Invalid candidate responsibility target: BlueDog::Architecture::Logical::LogicalVessel::recoveryActuation')
                for e in native_architecture_audit(src)['errors'])
 
 
 def test_scope_is_required_for_shared_implementation_claims(sources):
-    src = altered(sources,
-        'attribute :>> scope = "Recovery-side qualification restrictions and fallback authority; primary-loss arbitration remains open";',
-        'attribute :>> scope = "";', '/vehicle/architecture-contracts.sysml')
-    assert 'L02 Unscoped allocation: BlueDogArchitectureCorrespondence::recoverySupervision' in native_architecture_audit(src)['errors']
+    src = set_values(sources, {
+        'BlueDog::Architecture::Correspondence::recoverySupervision::scope': '""',
+    })
+    assert 'L02 Unscoped allocation: BlueDog::Architecture::Correspondence::recoverySupervision' in native_architecture_audit(src)['errors']
 
 
 def test_rendered_architecture_tables_identify_both_sides(rendered_site):

@@ -1,6 +1,6 @@
 {
   "retrieved": "2026-10-11",
-  "purpose": "Course and traffic scenario evidence; gate decisions live in models/missions/course.sysml",
+  "purpose": "Course and traffic scenario evidence; gate decisions live in models/blue-dog.sysml",
   "sources": [
     {
       "url": "https://www.charts.noaa.gov/MCD/Dole.shtml",

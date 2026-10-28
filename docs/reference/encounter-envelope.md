@@ -4,10 +4,10 @@
 
 How far away must a hazard be when Blue Dog first has a chance to observe it? The answer depends on more than target speed. The observation has to become a usable track, reach guidance, wait for a decision opportunity and leave enough time for the boat to carry out the response. A maneuver already in progress can make that wait longer.
 
-The [class-specific allocation](../../models/analyses/class-specific-detection.sysml)
+The [class-specific allocation](../../models/blue-dog.sysml)
 separates the distance needed to respond from the reliability needed to support
 the safety argument. Each class needs its own supported bounds.
-The [response-envelope experiment](../../models/analyses/encounter-envelope.sysml)
+The [response-envelope experiment](../../models/blue-dog.sysml)
 and numerical table below use 750 m as a comparison threshold; that experiment
 assumption is not a current acceptance criterion.
 
@@ -73,7 +73,7 @@ connects their hazard cases to passage and recovery exposure.
 
 Commercial tows, fast craft and towed people need their whole occupied envelope represented. Paddlers, people and low stationary objects need separate detection evidence in waves, glare and darkness. Weed sensing must resolve the region swept by the keel, rudder and recovery propulsor, including thin strands and drifting mats. A downward-looking survey return after the boat has passed is not an early forward warning.
 
-These are observation needs, not a claim that one sensor supplies them all. The model records them in `BlueDogEncounterEnvelope::observationContract`; the [equipment comparison](sensing-configurations.md) considers possible sources of those observations.
+These are observation needs, not a claim that one sensor supplies them all. The model records them in `BlueDog::Analyses::EncounterEnvelope::observationContract`; the [equipment comparison](sensing-configurations.md) considers possible sources of those observations.
 
 ## Count each interval once
 
@@ -129,7 +129,7 @@ Reducing ownship speed lowers head-on closing speed, but does not necessarily so
 ## Can I exclude a rare or difficult target class?
 
 The current scope includes all twelve classes above. The
-[challenge](../../models/missions/transgorge.sysml) retains collision avoidance,
+[challenge](../../models/blue-dog.sysml) retains collision avoidance,
 applicable nonimpediment duties and other navigation obligations. Class-specific allocation
 changes how I substantiate the response, not which river users count.
 
@@ -156,7 +156,7 @@ evidence must include non-AIS users, the return leg, waiting and recovery near
 shore. An AIS-only traffic count cannot establish that paddlers or unpowered
 sailboats are rare.
 
-The [existing recovery-risk sensitivity](../../models/analyses/recovery-risk.sysml)
+The [existing recovery-risk sensitivity](../../models/blue-dog.sysml)
 shows how exposure can be studied, but uses hypothetical rates and a conditional
 independence assumption for sensing-loss recovery. It establishes neither a
 target-class exclusion nor an accepted probability threshold. A simulated
@@ -187,8 +187,8 @@ records the nine-class illustrative comparison. Its
 identifies the model revision and source hashes. No row supplies an accepted
 consequence or reliability allocation.
 
-`BlueDogClassDetection::Summary` reproduces that comparison.
-`BlueDogClassDetection::Assessment` checks supplied class-specific bounds and
+`BlueDog::Analyses::ClassDetection::Summary` reproduces that comparison.
+`BlueDog::Analyses::ClassDetection::Assessment` checks supplied class-specific bounds and
 review declarations. It does not inspect the contents of the referenced records
 or establish physical qualification.
 
@@ -199,13 +199,13 @@ identifies the source revision shared with the component maneuver study.
 
 The historical response-envelope entry points are:
 
-- `BlueDogEncounterEnvelope::Summary`: the class, geometry, timing-epoch and own-speed sensitivities above.
-- `BlueDogEncounterEnvelope::Envelope`: a parameterized case; use subject `BlueDogEncounterEnvelope::study` and explicitly supply observation and motion bounds and `appliesTrafficRequirement` (true for the existing traffic classes, false for the weed sensitivity).
+- `BlueDog::Analyses::EncounterEnvelope::Summary`: the class, geometry, timing-epoch and own-speed sensitivities above.
+- `BlueDog::Analyses::EncounterEnvelope::Envelope`: a parameterized case; use subject `BlueDog::Analyses::EncounterEnvelope::study` and explicitly supply observation and motion bounds and `appliesTrafficRequirement` (true for the existing traffic classes, false for the weed sensitivity).
 - `ResponseAfterDelivery` and `ResponseFromEntry`: the two timing contracts.
 - `RelativeSpeed` and `RangeForResponse`: velocity and distance calculations.
 
 ```sh
-.tools/develop-23ca2e2f0/sysml models -analysis BlueDogEncounterEnvelope::Summary -json
+.tools/develop-23ca2e2f0/sysml models -analysis BlueDog::Analyses::EncounterEnvelope::Summary -json
 ```
 
 The experiment's parameterized result uses `retainedRequirementM`,

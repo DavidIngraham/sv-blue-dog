@@ -49,19 +49,19 @@ def run():
     paths=[p.relative_to(ROOT).as_posix() for folder in ['tools/boat_analysis/mission','tools/boat_analysis/environment'] for p in (ROOT/folder).glob('*.py')]
     paths += ['tools/boat_analysis/model/runtime.py','tools/boat_analysis/model/install.py','tools/boat_analysis/evidence/records.py','uv.lock']
     hashes=source_hashes(paths)
-    model=load_model(); p=analysis_values('BlueDogEncounterFeasibility::Inputs')
-    base=mission_inputs(); budget=analysis_values('BlueDogCandidateEnergy::Reconciliation')
+    model=load_model(); p=analysis_values('BlueDog::Analyses::EncounterFeasibility::Inputs')
+    base=mission_inputs(); budget=analysis_values('BlueDog::Analyses::CandidateEnergy::Reconciliation')
     base['energy'][:4]=[p['usableBatteryWh'],budget['departureWh'],budget['reserveWh'],budget['averageBusW']]
     ranges=[]
     for target,speed,separation in zip(p['targets'],p['speeds'],p['separations']):
         for maneuver in p['maneuverSweep']:
             for processing in p['processingSweep']:
-                value=model.calc('BlueDogEncounterFeasibility::RequiredRange',arguments=[speed+p['ownSpeed'],p['acquisition'],processing,p['command'],maneuver,p['contingency'],separation,p['error']]).value
+                value=model.calc('BlueDog::Analyses::EncounterFeasibility::RequiredRange',arguments=[speed+p['ownSpeed'],p['acquisition'],processing,p['command'],maneuver,p['contingency'],separation,p['error']]).value
                 ranges.append(dict(target=target,maneuverS=maneuver,processingS=processing,requiredM=float(value),withinAllocation=float(value)<=p['rangeAllocation']))
     stacks=[]; records=[]
     for i,name in enumerate(p['stacks']):
         extra=p['additionalBusW'][i]
-        remaining=float(model.calc('BlueDogEncounterFeasibility::EnergyScreen',arguments=[extra]).value)
+        remaining=float(model.calc('BlueDog::Analyses::EncounterFeasibility::EnergyScreen',arguments=[extra]).value)
         envelope=SensorEnvelope(p['craftRange'][i],p['lowRange'][i],p['weedRange'][i],p['cooperativeRange'],p['samplePeriodS'],p['latency'][i],p['missProbability'],p['positionErrorM'],p['trackExpiryS'],p['nightFactor'][i])
         stacks.append(dict(name=name,envelope=asdict(envelope),additionalBusW=extra,remainingHeadroomWh=remaining,energyScreenPass=remaining>=0,hardwareSelected=False))
         for night in (False,True):

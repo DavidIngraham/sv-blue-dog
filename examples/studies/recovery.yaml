@@ -3,12 +3,12 @@ name: IC-01 conditional recovery demonstration
 groups:
   - name: configuration_inputs
     select:
-      id: BlueDogIntegratedCandidate::Inputs
+      id: BlueDog::Analyses::IntegratedCandidate::Inputs
   - name: recovery
     select:
       kind: AnalysisCaseUsage
-      owner: BlueDogIntegratedCandidate
-      type: BlueDogIntegratedCandidate::RecoveryScreen
+      owner: BlueDog::Analyses::IntegratedCandidate
+      type: BlueDog::Analyses::IntegratedCandidate::RecoveryScreen
       cardinality: many
     subject:
-      id: BlueDogIC01::design
+      id: BlueDog::Configurations::IC01::design

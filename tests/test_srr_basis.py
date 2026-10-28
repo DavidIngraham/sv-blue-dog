@@ -12,13 +12,13 @@ def values(name):
 
 
 def test_encounter_ranges_cover_latency_and_closure():
-    result=values('BlueDogEncounterReview::Acquisition')['requiredRangesM']
+    result=values('BlueDog::Analyses::EncounterReview::Acquisition')['requiredRangesM']
     assert result==pytest.approx([(v+3)*38+d+10 for v,d in zip([3.5,1.5,15,4,4,2],[50,20,30,20,50,20])])
     assert max(result)==724 and max(result)<750
 
 
 def test_recovery_risk_sensitivity_is_not_a_measured_probability():
-    result=values('BlueDogRecoveryRisk::Sensitivity')
+    result=values('BlueDog::Analyses::RecoveryRisk::Sensitivity')
     expected=[(1-math.exp(-rate*48))*(1-math.exp(-.1*hours)) for rate,hours in zip(result['lossRatesPerHour'],result['recoveryHours'])]
     assert result['bounds']==pytest.approx(expected)
     assert result['bounds'][0]<result['bounds'][-1]

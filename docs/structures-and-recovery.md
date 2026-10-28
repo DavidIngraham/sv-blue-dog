@@ -29,14 +29,14 @@ package Page_structures_and_recovery_0 {
     private import DiagramLayout::*;
     view StrengthRelationships : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogStructure::structuralIntegrity;
-        expose BlueDogStructure::bendingStrength;
-        expose BlueDogStructure::panelStrength;
-        expose BlueDogStructure::rootProofLoad;
-        metadata Layout about BlueDogStructure::structuralIntegrity { x = 400; y = 0; }
-        metadata Layout about BlueDogStructure::bendingStrength { x = 0; y = 240; }
-        metadata Layout about BlueDogStructure::panelStrength { x = 400; y = 240; }
-        metadata Layout about BlueDogStructure::rootProofLoad { x = 800; y = 240; }
+        expose BlueDog::Requirements::Structure::structuralIntegrity;
+        expose BlueDog::Requirements::Structure::bendingStrength;
+        expose BlueDog::Requirements::Structure::panelStrength;
+        expose BlueDog::Requirements::Structure::rootProofLoad;
+        metadata Layout about BlueDog::Requirements::Structure::structuralIntegrity { x = 400; y = 0; }
+        metadata Layout about BlueDog::Requirements::Structure::bendingStrength { x = 0; y = 240; }
+        metadata Layout about BlueDog::Requirements::Structure::panelStrength { x = 400; y = 240; }
+        metadata Layout about BlueDog::Requirements::Structure::rootProofLoad { x = 800; y = 240; }
     }
 }
 ```
@@ -47,14 +47,14 @@ package Page_structures_and_recovery_1 {
     private import DiagramLayout::*;
     view StiffnessRelationships : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogStructure::structuralIntegrity;
-        expose BlueDogStructure::appendageDeflection;
-        expose BlueDogStructure::hullDeflection;
-        expose BlueDogStructure::panelDeflection;
-        metadata Layout about BlueDogStructure::structuralIntegrity { x = 400; y = 0; }
-        metadata Layout about BlueDogStructure::appendageDeflection { x = 0; y = 240; }
-        metadata Layout about BlueDogStructure::hullDeflection { x = 400; y = 240; }
-        metadata Layout about BlueDogStructure::panelDeflection { x = 800; y = 240; }
+        expose BlueDog::Requirements::Structure::structuralIntegrity;
+        expose BlueDog::Requirements::Structure::appendageDeflection;
+        expose BlueDog::Requirements::Structure::hullDeflection;
+        expose BlueDog::Requirements::Structure::panelDeflection;
+        metadata Layout about BlueDog::Requirements::Structure::structuralIntegrity { x = 400; y = 0; }
+        metadata Layout about BlueDog::Requirements::Structure::appendageDeflection { x = 0; y = 240; }
+        metadata Layout about BlueDog::Requirements::Structure::hullDeflection { x = 400; y = 240; }
+        metadata Layout about BlueDog::Requirements::Structure::panelDeflection { x = 800; y = 240; }
     }
 }
 ```

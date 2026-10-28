@@ -7,9 +7,9 @@ from tests.native_cases import native
 def cruise(run_model):
     def run(body='', analysis='CruiseReliability'):
         source = ('package ReliabilityTest { private import SI::*; '
-                  'part candidate :> BlueDogReliabilityExamples::gorgeIllustration {' + body + '} }')
+                  'part candidate :> BlueDog::Configurations::Examples::Reliability::gorgeIllustration {' + body + '} }')
         code, report = run_model(source, '-instantiate', 'ReliabilityTest::candidate', '-analysis',
-                                 f'BlueDogReliability::{analysis} ReliabilityTest::candidate')
+                                 f'BlueDog::Analyses::Reliability::{analysis} ReliabilityTest::candidate')
         assert not [d for d in report['diagnostics'] or [] if d['pass'] != 'runtime']
         values = {v['name']: v['value'] for v in report['checks'][0]['values']} if report['checks'] else {}
         return code, values
@@ -106,7 +106,7 @@ def test_accepted_synthetic_fixture_exercises_pass_path(cruise):
 def test_dfmea_starter_stays_open_and_has_real_links():
     from tools.boat_analysis.model.runtime import load_model
     result = load_model().run_analysis('FailureAnalysis::DesignFailureReview',
-                                      subject='BlueDogDFMEA::starter')
+                                      subject='BlueDog::Analyses::Safety::DFMEA::starter')
     assert result.outputs['modeCount'] == 15
     assert result.outputs['unresolvedCriticalCount'] == 13
     assert result.outputs['openActionCount'] == 15

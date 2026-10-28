@@ -186,7 +186,7 @@ def run(budget,resume=False,resolution=12,route_profile='challenge'):
         physical[p.length_index]=min(p.hi[p.length_index],physical[p.length_index]*needed*1.02)
         initial=(physical-p.lo)/p.span
     sources=['tools/boat_analysis/geometry/laminate.py','uv.lock','tools/boat_analysis/optimization/search.py','tools/boat_analysis/optimization/operating.py','tools/boat_analysis/model/vessel.py','packages/sysml-python/sysml_python/execution.py','tools/boat_analysis/model/hydrostatics.py','tools/boat_analysis/geometry/hydro.py','tools/boat_analysis/geometry/vessel.py','tools/boat_analysis/geometry/hull.py','tools/boat_analysis/aerodynamics/polar.py','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json']
-    hashes={**p.model.c['sourceHashes'],**p.model.operating_contract['sourceHashes'],**source_hashes(sources),'models/analyses/recovery.sysml':digest(ROOT/'models/analyses/recovery.sysml')}
+    hashes={**p.model.c['sourceHashes'],**p.model.operating_contract['sourceHashes'],**source_hashes(sources),'models/blue-dog.sysml':digest(ROOT/'models/blue-dog.sysml')}
 
     if np.abs(p.evaluate(initial)['eq']).max()>1e-4:
         from tools.boat_analysis.optimization.operating import solve_state

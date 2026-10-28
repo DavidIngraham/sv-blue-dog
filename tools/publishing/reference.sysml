@@ -1,7 +1,7 @@
 package BlueDogWindDocuments {
     private import DocumentQueries::*;
     calc def Configurations :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogWindEquipment::testbed", "BlueDogWindEquipment::challenge")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Configurations::WindEquipment::testbed", "BlueDog::Configurations::WindEquipment::challenge")), columns = (
             Column(name = "Configuration", path = "name"),
             Column(name = "Sensor", path = "product"),
             Column(name = "Interface", path = "dataInterface"),
@@ -18,14 +18,14 @@ package BlueDogWindDocuments {
 package BlueDogDocuments {
     private import DocumentQueries::*;
     calc def ModelElements :> Query {
-        Descendants(source = Named(qualifiedName = ("GorgeChallenge", "BlueDog::Goals", "BlueDogRequirements", "BlueDogStructure")))
+        Descendants(source = Named(qualifiedName = ("BlueDog::Mission::Challenge", "BlueDog::Goals", "BlueDog::Requirements", "BlueDog::Requirements::Structure")))
     }
     calc def Requirements :> Query {
         Project(source = WhereType(source = ModelElements(), type = "RequirementDefinition"),
             columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"), Column(name = "Status", path = "workStatus.status"), Column(name = "Statement", path = "documentation")))
     }
     calc def DeferredRequirements :> Query {
-        Project(source = WhereMetadata(source = WhereType(source = ModelElements(), type = "RequirementDefinition"), 'metadata' = "BlueDogMissionScope::Applicability"),
+        Project(source = WhereMetadata(source = WhereType(source = ModelElements(), type = "RequirementDefinition"), 'metadata' = "BlueDog::Mission::Scope::Applicability"),
             columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name")))
     }
     part def FutureMissionRequirements :> Document {
@@ -42,14 +42,14 @@ package BlueDogDocuments {
             Column(name = "Status", path = "workStatus.status"), Column(name = "Rationale", path = "rationale.text")))
     }
     calc def UseCaseLinks :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogUseCases")), type = "UseCaseUsage"),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Mission::UseCases")), type = "UseCaseUsage"),
             properties = ("name", "documentation"),
             columns = (Column(name = "Requirement", cell = { in row : SysML::UseCaseUsage;
             row.objectiveRequirement.ownedSubsetting.subsettedFeature })))
     }
 
     calc def SatisfactionLinks :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirements")), type = "RequirementUsage"),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Requirements")), type = "RequirementUsage"),
             properties = ("name"),
             columns = (Column(name = "Design element", cell = { in row : SysML::RequirementUsage;
             RelatedElements(source = row, relationshipKind = "satisfaction", direction = "incoming", maxDepth = 1) })))
@@ -85,7 +85,7 @@ package BlueDogDocuments {
     }
 
     calc def EnergyLoads :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogEnergyExamples::sailing"), maxDepth = 1), type = "PartUsage"),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Configurations::Examples::Energy::sailing"), maxDepth = 1), type = "PartUsage"),
             columns = (Column(name = "Load", path = "label"),
             Column(name = "Active power", path = "activePower"), Column(name = "Idle power", path = "idlePower"),
             Column(name = "Active fraction", path = "activeFraction"), Column(name = "Conversion efficiency", path = "conversionEfficiency"),
@@ -93,7 +93,7 @@ package BlueDogDocuments {
             Column(name = "Average bus power", path = "averagePower"), Column(name = "Peak bus power", path = "peakPower")))
     }
     calc def EnergyTotals :> Query {
-        Project(source = Named(qualifiedName = "BlueDogEnergyExamples::sailing"),
+        Project(source = Named(qualifiedName = "BlueDog::Configurations::Examples::Energy::sailing"),
             columns = (Column(name = "Budget", path = "name"), Column(name = "Average demand", path = "averagePower"), Column(name = "Coincident peak", path = "peakPower")))
     }
     part def EnergyBudget :> Document {
@@ -131,7 +131,7 @@ package BlueDogDocuments {
             columns = (Column(name = "ID", path = "shortName"), Column(name = "Requirement", path = "name"), Column(name = "Text", path = "issue.text")))
     }
     calc def VerificationSpecifications :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = ("BlueDogRequirementVerification", "BlueDogReliability", "GorgeChallengeVerification"))), type = "VerificationCaseDefinition"),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = ("BlueDog::Verification::Requirements", "BlueDog::Analyses::Reliability", "BlueDog::Verification::Challenge"))), type = "VerificationCaseDefinition"),
             properties = ("shortName", "name", "documentation"),
             columns = (Column(name = "Verifies", cell = { in row : SysML::VerificationCaseDefinition;
             RelatedElements(source = row, relationshipKind = "verification", direction = "outgoing", maxDepth = 1) })))
@@ -161,12 +161,12 @@ package BlueDogDocuments {
         }
     }
     calc def ChallengeStatements :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "GorgeChallenge")), type = "RequirementDefinition"),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Mission::Challenge")), type = "RequirementDefinition"),
             columns = (Column(name = "ID", path = "shortName"), Column(name = "Rule", path = "name"), Column(name = "Statement", path = "documentation")))
     }
     part def ChallengeBrief :> Document {
         attribute redefines title = "Trans-Gorge challenge";
-        part intro : Paragraph { attribute redefines text = "The challenge is defined independently of the vehicle in missions/transgorge.sysml. The statements below are generated from that model. Read the linked qualification conditions and open issues with these rules; a statement or model check is not proof of completion."; }
+        part intro : Paragraph { attribute redefines text = "The challenge is defined independently of the vehicle in blue-dog.sysml. The statements below are generated from that model. Read the linked qualification conditions and open issues with these rules; a statement or model check is not proof of completion."; }
         part rules : Table { calc rows : ChallengeStatements; }
         part context : Paragraph { part link : Link { attribute redefines text = "Qualification conditions and open issues"; attribute redefines target = "methods/modeling.md"; } }
         part derivation : Paragraph { part link : Link { attribute redefines text = "Challenge derivations"; attribute redefines target = "requirements/requirements-c-000.md"; } }
@@ -205,7 +205,7 @@ package BlueDogDocuments {
 package BlueDogEvidenceDocuments {
     private import DocumentQueries::*;
     calc def Cases :> Query {
-        Named(qualifiedName = ("BlueDogCurrentSizing::nominal", "BlueDogCurrentSizing::construction", "BlueDogCurrentSizing::aerodynamic", "BlueDogCurrentSizing::hydrodynamic", "BlueDogCurrentSizing::energy", "BlueDogCurrentSizing::combined"))
+        Named(qualifiedName = ("BlueDog::Evidence::CurrentSizing::nominal", "BlueDog::Evidence::CurrentSizing::construction", "BlueDog::Evidence::CurrentSizing::aerodynamic", "BlueDog::Evidence::CurrentSizing::hydrodynamic", "BlueDog::Evidence::CurrentSizing::energy", "BlueDog::Evidence::CurrentSizing::combined"))
     }
     calc def Outcomes :> Query {
         Project(source = Cases(), columns = (
@@ -218,7 +218,7 @@ package BlueDogEvidenceDocuments {
             Column(name = "Evidence accepted", path = "evidenceAccepted")))
     }
     calc def Dimensions :> Query {
-        Project(source = Named(qualifiedName = "BlueDogCurrentSizing::candidate"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Evidence::CurrentSizing::candidate"), columns = (
             Column(name = "Length (m)", path = "length_m"),
             Column(name = "Beam (m)", path = "beam_m"),
             Column(name = "Wing area (m2)", path = "sail_m2"),
@@ -226,7 +226,7 @@ package BlueDogEvidenceDocuments {
             Column(name = "Battery (Wh)", path = "battery_Wh")))
     }
     calc def Search :> Query {
-        Project(source = Named(qualifiedName = "BlueDogCurrentSizing::searchAssessment"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Evidence::CurrentSizing::searchAssessment"), columns = (
             Column(name = "Search status", path = "solverStatus"),
             Column(name = "Coarse feasible", path = "coarseFeasible"),
             Column(name = "Mass (kg)", path = "massKg"),
@@ -241,15 +241,15 @@ package BlueDogEvidenceDocuments {
             Column(name = "Mass (kg)", path = "massKg")))
     }
     calc def LimitingScreens :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogCurrentSizing::searchConstraint0", "BlueDogCurrentSizing::searchConstraint1", "BlueDogCurrentSizing::searchConstraint2", "BlueDogCurrentSizing::searchConstraint3", "BlueDogCurrentSizing::searchConstraint4", "BlueDogCurrentSizing::searchConstraint5")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Evidence::CurrentSizing::searchConstraint0", "BlueDog::Evidence::CurrentSizing::searchConstraint1", "BlueDog::Evidence::CurrentSizing::searchConstraint2", "BlueDog::Evidence::CurrentSizing::searchConstraint3", "BlueDog::Evidence::CurrentSizing::searchConstraint4", "BlueDog::Evidence::CurrentSizing::searchConstraint5")), columns = (
             Column(name = "Lowest search screens", path = "label"), Column(name = "Normalized margin", path = "margin")))
     }
     calc def ActiveBounds :> Query {
-        Project(source = Named(qualifiedName = "BlueDogCurrentSizing::searchAssessment"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Evidence::CurrentSizing::searchAssessment"), columns = (
             Column(name = "Active design brackets (not frozen variables)", path = "activeBounds")))
     }
     calc def Convergence :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogCurrentSizing::convergence0", "BlueDogCurrentSizing::convergence1", "BlueDogCurrentSizing::convergence2", "BlueDogCurrentSizing::convergence3", "BlueDogCurrentSizing::convergence4", "BlueDogCurrentSizing::convergence5")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Evidence::CurrentSizing::convergence0", "BlueDog::Evidence::CurrentSizing::convergence1", "BlueDog::Evidence::CurrentSizing::convergence2", "BlueDog::Evidence::CurrentSizing::convergence3", "BlueDog::Evidence::CurrentSizing::convergence4", "BlueDog::Evidence::CurrentSizing::convergence5")), columns = (
             Column(name = "Numerical increment", path = "label"),
             Column(name = "Max change CL", path = "CLtot"),
             Column(name = "Max change CDi", path = "CDi"),
@@ -262,14 +262,14 @@ package BlueDogEvidenceDocuments {
         part coarse : Table { calc rows : CoarseGrid; }
     }
     calc def CoarseGrid :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogCurrentSizing::coarseGrid0", "BlueDogCurrentSizing::coarseGrid1", "BlueDogCurrentSizing::coarseGrid2")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Evidence::CurrentSizing::coarseGrid0", "BlueDog::Evidence::CurrentSizing::coarseGrid1", "BlueDog::Evidence::CurrentSizing::coarseGrid2")), columns = (
             Column(name = "Coarse grid versus finest case", path = "label"),
             Column(name = "Max change CL", path = "CLtot"),
             Column(name = "Max change CDi", path = "CDi"),
             Column(name = "Max change CMy", path = "CMytot")))
     }
     calc def Ingress :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogCurrentSizing::ingress0", "BlueDogCurrentSizing::ingress1", "BlueDogCurrentSizing::ingress2", "BlueDogCurrentSizing::ingress3", "BlueDogCurrentSizing::ingress4", "BlueDogCurrentSizing::ingress5")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Evidence::CurrentSizing::ingress0", "BlueDog::Evidence::CurrentSizing::ingress1", "BlueDog::Evidence::CurrentSizing::ingress2", "BlueDog::Evidence::CurrentSizing::ingress3", "BlueDog::Evidence::CurrentSizing::ingress4", "BlueDog::Evidence::CurrentSizing::ingress5")), columns = (
             Column(name = "Wing state and water density", path = "label"),
             Column(name = "Min sampled restoring (Nm)", path = "minimumRestoringNm"),
             Column(name = "Missing pitch roots", path = "missingPitchRoots"),
@@ -297,16 +297,16 @@ package BlueDogEvidenceDocuments {
 
 package BlueDogSailTradeDocuments {
     private import DocumentQueries::*;
-    calc def Candidates :> Query { Named(qualifiedName = ("BlueDogSailTrade::tailWing", "BlueDogSailTrade::camberedWing", "BlueDogSailTrade::softSail")) }
+    calc def Candidates :> Query { Named(qualifiedName = ("BlueDog::Analyses::SailTrade::tailWing", "BlueDog::Analyses::SailTrade::camberedWing", "BlueDog::Analyses::SailTrade::softSail")) }
     calc def Concepts :> Query { Project(source = Candidates(), columns = (Column(name = "Candidate", path = "label"), Column(name = "Definition", path = "concept"))) }
     calc def Durability :> Query { Project(source = Candidates(), columns = (Column(name = "Candidate", path = "label"), Column(name = "Durability and reliability", path = "durability"), Column(name = "Energy", path = "energy"))) }
     calc def Recovery :> Query { Project(source = Candidates(), columns = (Column(name = "Candidate", path = "label"), Column(name = "Sailing performance", path = "sailing"), Column(name = "Recovery geometry", path = "recovery"))) }
     calc def Manufacturing :> Query { Project(source = Candidates(), columns = (Column(name = "Candidate", path = "label"), Column(name = "Construction", path = "manufacturing"), Column(name = "Next evidence", path = "nextEvidence"))) }
-    calc def Results :> Query { Project(source = Named(qualifiedName = ("BlueDogSailTrade::tailAssessment", "BlueDogSailTrade::camberAssessment", "BlueDogSailTrade::softAssessment")), columns = (Column(name = "Candidate", path = "candidateName"), Column(name = "Development decision", path = "developmentDecision"), Column(name = "Declared mandatory evidence", path = "requirementVerdict"), Column(name = "Provisional reliability study", path = "reliabilityStudyDisposition"))) }
-    calc def Traces :> Query { Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogSailTrade")), type = "Dependency"), columns = (Column(name = "Analysis element", cell = { in row : KerML::Root::Dependency; row.client }), Column(name = "Requirement / architecture", cell = { in row : KerML::Root::Dependency; row.supplier }))) }
+    calc def Results :> Query { Project(source = Named(qualifiedName = ("BlueDog::Analyses::SailTrade::tailAssessment", "BlueDog::Analyses::SailTrade::camberAssessment", "BlueDog::Analyses::SailTrade::softAssessment")), columns = (Column(name = "Candidate", path = "candidateName"), Column(name = "Development decision", path = "developmentDecision"), Column(name = "Declared mandatory evidence", path = "requirementVerdict"), Column(name = "Provisional reliability study", path = "reliabilityStudyDisposition"))) }
+    calc def Traces :> Query { Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::SailTrade")), type = "Dependency"), columns = (Column(name = "Analysis element", cell = { in row : KerML::Root::Dependency; row.client }), Column(name = "Requirement / architecture", cell = { in row : KerML::Root::Dependency; row.supplier }))) }
     part def Report :> Document {
         attribute redefines title = "Sail architecture trade study";
-        part scope : Paragraph { attribute redefines text = "Equal comparison of three rig concepts for the finite Gorge mission. All candidate evidence remains unknown. Six declared mandatory groups and a separate provisional reliability study organize this comparison; they are not a complete system acceptance argument. No numeric reliability rates or arbitrary weighted scores are assigned. No rig is selected or mission-qualified. Sources and decision rationale are linked in BlueDogSourceEvidence and BlueDogDesignDecisions."; }
+        part scope : Paragraph { attribute redefines text = "Equal comparison of three rig concepts for the finite Gorge mission. All candidate evidence remains unknown. Six declared mandatory groups and a separate provisional reliability study organize this comparison; they are not a complete system acceptance argument. No numeric reliability rates or arbitrary weighted scores are assigned. No rig is selected or mission-qualified. Sources and decision rationale are linked in BlueDog::Evidence::Sources and BlueDog::Decisions::Design."; }
         part decision : Section { attribute redefines title = "Native analysis conclusion"; part rows : Table { calc rows : Results; } }
         part concepts : Section { attribute redefines title = "Candidate definitions"; part rows : Table { calc rows : Concepts; } }
         part durability : Section { attribute redefines title = "Durability and energy"; part rows : Table { calc rows : Durability; } }
@@ -323,7 +323,7 @@ package BlueDogSailTradeDocuments {
 package BlueDogReliabilityDocuments {
     private import DocumentQueries::*;
     calc def Modes :> Query {
-        WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogDFMEA::starter")),
+        WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::Safety::DFMEA::starter")),
             type = "FailureAnalysis::ReviewRow")
     }
     calc def Functions :> Query {
@@ -344,7 +344,7 @@ package BlueDogReliabilityDocuments {
             Column(name = "Action evidence accepted", path = "actionEvidenceAccepted"), Column(name = "Evidence", path = "evidenceReference")))
     }
     calc def Traces :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogDFMEA")), type = "Dependency"),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::Safety::DFMEA")), type = "Dependency"),
             columns = (Column(name = "From", cell = { in row : KerML::Root::Dependency; row.client }),
             Column(name = "To", cell = { in row : KerML::Root::Dependency; row.supplier })))
     }
@@ -363,7 +363,7 @@ package BlueDogReliabilityDocuments {
 package BlueDogWeatherDocuments {
     private import DocumentQueries::*;
     calc def Cases :> Query {
-        Named(qualifiedName = ("BlueDogWindObservations::KDLS_warm", "BlueDogWindObservations::KDLS_winter", "BlueDogWindObservations::KTTD_warm", "BlueDogWindObservations::KTTD_winter"))
+        Named(qualifiedName = ("BlueDog::Evidence::WindObservations::KDLS_warm", "BlueDog::Evidence::WindObservations::KDLS_winter", "BlueDog::Evidence::WindObservations::KTTD_warm", "BlueDog::Evidence::WindObservations::KTTD_winter"))
     }
     calc def Counts :> Query {
         Project(source = Cases(), columns = (
@@ -393,14 +393,14 @@ package BlueDogWeatherDocuments {
 package BlueDogContinuationDocuments {
     private import DocumentQueries::*;
     calc def Stages :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogSizingContinuation::stage0", "BlueDogSizingContinuation::stage1", "BlueDogSizingContinuation::stage2", "BlueDogSizingContinuation::stage3", "BlueDogSizingContinuation::stage4")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Evidence::SizingContinuation::stage0", "BlueDog::Evidence::SizingContinuation::stage1", "BlueDog::Evidence::SizingContinuation::stage2", "BlueDog::Evidence::SizingContinuation::stage3", "BlueDog::Evidence::SizingContinuation::stage4")), columns = (
             Column(name = "Hull length (m)", path = "lengthM"),
             Column(name = "Coarse feasible", path = "feasible"),
             Column(name = "Max equilibrium residual", path = "maximumResidual"),
             Column(name = "Lowest margin", path = "minimumMargin")))
     }
     calc def Dimensions :> Query {
-        Project(source = Named(qualifiedName = "BlueDogSizingContinuation::candidate"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Evidence::SizingContinuation::candidate"), columns = (
             Column(name = "Length (m)", path = "length_m"),
             Column(name = "Beam (m)", path = "beam_m"),
             Column(name = "Wing area (m2)", path = "sail_m2"),
@@ -408,7 +408,7 @@ package BlueDogContinuationDocuments {
             Column(name = "Battery (Wh)", path = "battery_Wh")))
     }
     calc def Assessment :> Query {
-        Project(source = Named(qualifiedName = "BlueDogSizingContinuation::assessment"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Evidence::SizingContinuation::assessment"), columns = (
             Column(name = "Mass (kg)", path = "massKg"),
             Column(name = "Coarse westerly time (h)", path = "westerlyHours"),
             Column(name = "Rudder chord (m)", path = "rudderChordM"),
@@ -427,7 +427,7 @@ package BlueDogContinuationDocuments {
 package BlueDogFinitePassageDocuments {
     private import DocumentQueries::*;
     calc def Stages :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogFinitePassageSizing::stage0", "BlueDogFinitePassageSizing::stage1", "BlueDogFinitePassageSizing::stage2", "BlueDogFinitePassageSizing::stage3")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Evidence::FinitePassageSizing::stage0", "BlueDog::Evidence::FinitePassageSizing::stage1", "BlueDog::Evidence::FinitePassageSizing::stage2", "BlueDog::Evidence::FinitePassageSizing::stage3")), columns = (
             Column(name = "Hull length (m)", path = "lengthM"),
             Column(name = "Mass (kg)", path = "massKg"),
             Column(name = "Battery (Wh)", path = "batteryWh"),
@@ -443,7 +443,7 @@ package BlueDogFinitePassageDocuments {
 package BlueDogSRRDocuments {
     private import DocumentQueries::*;
     calc def EnvironmentProposalRows :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogEnvironmentReview::proposed")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::EnvironmentReview::proposed")), columns = (
             Column(name = "Wind upper m/s", path = "operationalWindUpperMps"),
             Column(name = "Gust upper m/s", path = "operationalGustUpperMps"),
             Column(name = "Significant wave height m", path = "operationalWaveHeightM"),
@@ -459,7 +459,7 @@ package BlueDogSRRDocuments {
 package BlueDogRecoverySiteDocuments {
     private import DocumentQueries::*;
     calc def Candidates :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogRecoverySiteReview::bingen", "BlueDogRecoverySiteReview::stevenson", "BlueDogRecoverySiteReview::springCreek", "BlueDogRecoverySiteReview::viento", "BlueDogRecoverySiteReview::homeValley", "BlueDogRecoverySiteReview::drano")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::RecoverySiteReview::bingen", "BlueDog::Analyses::RecoverySiteReview::stevenson", "BlueDog::Analyses::RecoverySiteReview::springCreek", "BlueDog::Analyses::RecoverySiteReview::viento", "BlueDog::Analyses::RecoverySiteReview::homeValley", "BlueDog::Analyses::RecoverySiteReview::drano")), columns = (
             Column(name = "Candidate", path = "site"),
             Column(name = "Access evidence", path = "evidence"),
             Column(name = "Before routing", path = "outstanding"),
@@ -475,7 +475,7 @@ package BlueDogRecoverySiteDocuments {
 package BlueDogSRRFrontierDocuments {
     private import DocumentQueries::*;
     calc def Alternatives :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogSRRFrontier::point0", "BlueDogSRRFrontier::point1", "BlueDogSRRFrontier::point2", "BlueDogSRRFrontier::point3", "BlueDogSRRFrontier::point4", "BlueDogSRRFrontier::point5")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Evidence::SRRFrontier::point0", "BlueDog::Evidence::SRRFrontier::point1", "BlueDog::Evidence::SRRFrontier::point2", "BlueDog::Evidence::SRRFrontier::point3", "BlueDog::Evidence::SRRFrontier::point4", "BlueDog::Evidence::SRRFrontier::point5")), columns = (
             Column(name = "Length cap (m)", path = "capM"),
             Column(name = "Objective", path = "optimizationObjective"),
             Column(name = "Coarse feasible", path = "feasible"),
@@ -488,7 +488,7 @@ package BlueDogSRRFrontierDocuments {
         part alternatives : Table { calc rows : Alternatives; }
     }
     calc def Replay :> Query {
-        Project(source = Named(qualifiedName = "BlueDogSRRFrontier::retainedSeedReplay"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Evidence::SRRFrontier::retainedSeedReplay"), columns = (
             Column(name = "Mass (kg)", path = "massKg"),
             Column(name = "Westerly passage (h)", path = "westerlyHours"),
             Column(name = "Voyage energy margin", path = "voyageEnergyMargin"),
@@ -504,7 +504,7 @@ package BlueDogSRRFrontierDocuments {
 package BlueDogSRRReadinessDocuments {
     private import DocumentQueries::*;
     calc def EncounterRows :> Query {
-        Project(source = Named(qualifiedName = "BlueDogEncounterReview::criteria"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Analyses::EncounterReview::criteria"), columns = (
             Column(name = "Acquisition range m", path = "rangeAllocationM"),
             Column(name = "Acquisition s", path = "acquisitionSeconds"),
             Column(name = "Assessment s", path = "assessmentSeconds"),
@@ -517,7 +517,7 @@ package BlueDogSRRReadinessDocuments {
         part budget : Table { calc rows : EncounterRows; }
     }
     calc def SiteDecisionRows :> Query {
-        Project(source = Named(qualifiedName = "BlueDogRecoverySiteReview::selection"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Analyses::RecoverySiteReview::selection"), columns = (
             Column(name = "Endpoints", path = "primarySites"),
             Column(name = "Intermediate coverage", path = "intermediateSites"),
             Column(name = "Coverage acceptance", path = "coverageDecision")))
@@ -531,7 +531,7 @@ package BlueDogSRRReadinessDocuments {
 package BlueDogSRRCurrentDocuments {
     private import DocumentQueries::*;
     calc def CandidateRows :> Query {
-        Project(source = Named(qualifiedName = "BlueDogSRRCurrent::candidate"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Evidence::SRRCurrent::candidate"), columns = (
             Column(name = "Battery Wh", path = "batteryWh"),
             Column(name = "Mass kg", path = "massKg"),
             Column(name = "Passage h", path = "westerlyPassageHours"),
@@ -548,7 +548,7 @@ package BlueDogSRRCurrentDocuments {
 package BlueDogRequirementBasisDocuments {
     private import DocumentQueries::*;
     calc def Decisions :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogRequirementBasis::materials", "BlueDogRequirementBasis::structuralScreens", "BlueDogRequirementBasis::manufactureAndSites", "BlueDogRequirementBasis::aging", "BlueDogRequirementBasis::retainedAllocations", "BlueDogRequirementBasis::recoveryStrategy")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Requirements::Basis::materials", "BlueDog::Requirements::Basis::structuralScreens", "BlueDog::Requirements::Basis::manufactureAndSites", "BlueDog::Requirements::Basis::aging", "BlueDog::Requirements::Basis::retainedAllocations", "BlueDog::Requirements::Basis::recoveryStrategy")), columns = (
             Column(name = "Current design basis", path = "disposition"),
             Column(name = "Evidence needed", path = "evidenceNeeded")))
     }
@@ -557,19 +557,19 @@ package BlueDogRequirementBasisDocuments {
         part decisions : Table { calc rows : Decisions; }
     }
     calc def AllocationClosureRows :> Query {
-        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirementBasis")), type = "MetadataUsage"), type = "BlueDogRequirementBasis::AllocationDecision"), columns = (
+        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Requirements::Basis")), type = "MetadataUsage"), type = "BlueDog::Requirements::Basis::AllocationDecision"), columns = (
             Column(name = "Record", path = "name"), Column(name = "Source", path = "source"),
             Column(name = "Applicability", path = "applicability"), Column(name = "Value justification", path = "valueJustification"),
             Column(name = "Margin basis", path = "marginBasis"), Column(name = "Evidence needed", path = "evidenceNeeded"),
             Column(name = "Owner", path = "owner"), Column(name = "Closure action", path = "closureAction"), Column(name = "Accepted", path = "accepted")))
     }
     calc def ProcessRows :> Query {
-        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirementBasis")), type = "MetadataUsage"), type = "BlueDogRequirementBasis::ProcessObligation"), columns = (
+        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Requirements::Basis")), type = "MetadataUsage"), type = "BlueDog::Requirements::Basis::ProcessObligation"), columns = (
             Column(name = "Record", path = "name"), Column(name = "Responsible role", path = "responsibleRole"),
             Column(name = "Output", path = "output"), Column(name = "Acceptance", path = "acceptance")))
     }
     calc def EngineeringDecisionRows :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirementDecisions")), type = "EngineeringDecisions::DecisionRecord"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Decisions::OpenQuestions")), type = "EngineeringDecisions::DecisionRecord"), columns = (
             Column(name = "ID", path = "shortName"), Column(name = "Question", path = "question"),
             Column(name = "Evidence needed", path = "evidenceNeeded"), Column(name = "Owner", path = "owner"), Column(name = "Accepted", path = "accepted")))
     }
@@ -594,7 +594,7 @@ package BlueDogRequirementBasisDocuments {
 package BlueDogRiskDocuments {
     private import DocumentQueries::*;
     calc def PrioritiesRows :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::DevelopmentRisks::traffic", "BlueDog::Analyses::DevelopmentRisks::recovery", "BlueDog::Analyses::DevelopmentRisks::structure", "BlueDog::Analyses::DevelopmentRisks::wing", "BlueDog::Analyses::DevelopmentRisks::energy", "BlueDog::Analyses::DevelopmentRisks::mission")), columns = (
             Column(name = "ID", path = "risk.identifier"),
             Column(name = "Risk kind", path = "risk.riskKind"),
             Column(name = "Work priority", path = "risk.priority"),
@@ -607,7 +607,7 @@ package BlueDogRiskDocuments {
         part rows : Table { calc values : PrioritiesRows; }
     }
     calc def AssessmentRows :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::DevelopmentRisks::traffic", "BlueDog::Analyses::DevelopmentRisks::recovery", "BlueDog::Analyses::DevelopmentRisks::structure", "BlueDog::Analyses::DevelopmentRisks::wing", "BlueDog::Analyses::DevelopmentRisks::energy", "BlueDog::Analyses::DevelopmentRisks::mission")), columns = (
             Column(name = "ID", path = "risk.identifier"),
             Column(name = "Risk kind", path = "risk.riskKind"),
             Column(name = "Likelihood class", path = "risk.likelihoodClass"),
@@ -621,7 +621,7 @@ package BlueDogRiskDocuments {
         part rows : Table { calc values : AssessmentRows; }
     }
     calc def ActionsRows :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogRisks::traffic", "BlueDogRisks::recovery", "BlueDogRisks::structure", "BlueDogRisks::wing", "BlueDogRisks::energy", "BlueDogRisks::mission")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::DevelopmentRisks::traffic", "BlueDog::Analyses::DevelopmentRisks::recovery", "BlueDog::Analyses::DevelopmentRisks::structure", "BlueDog::Analyses::DevelopmentRisks::wing", "BlueDog::Analyses::DevelopmentRisks::energy", "BlueDog::Analyses::DevelopmentRisks::mission")), columns = (
             Column(name = "ID", path = "risk.identifier"),
             Column(name = "Risk kind", path = "risk.riskKind"),
             Column(name = "Evidence gap", path = "risk.uncertainty"),
@@ -639,7 +639,7 @@ package BlueDogRiskDocuments {
 package BlueDogRiskPlot {
     private import DocumentQueries::*;
     calc def Rows :> Query {
-        Project(source = WhereMetadata(source = Descendants(source = Named(qualifiedName = "BlueDogRisks")), 'metadata' = "RiskMetadata::Risk"), columns = (
+        Project(source = WhereMetadata(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::DevelopmentRisks")), 'metadata' = "RiskMetadata::Risk"), columns = (
             Column(name = "ID", path = "risk.identifier"),
             Column(name = "Risk kind", path = "risk.riskKind"),
             Column(name = "Area", path = "name"),
@@ -671,21 +671,21 @@ package BlueDogRiskPlot {
 package BlueDogCandidateEnergyDocuments {
     private import DocumentQueries::*;
     calc def Loads :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogCandidateEnergy::electronics", "BlueDogCandidateEnergy::wind", "BlueDogCandidateEnergy::wing", "BlueDogCandidateEnergy::rudder", "BlueDogCandidateEnergy::totals")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::CandidateEnergy::electronics", "BlueDog::Analyses::CandidateEnergy::wind", "BlueDog::Analyses::CandidateEnergy::wing", "BlueDog::Analyses::CandidateEnergy::rudder", "BlueDog::Analyses::CandidateEnergy::totals")), columns = (
             Column(name = "Load", path = "label"), Column(name = "Average bus W", path = "averageBusW"),
             Column(name = "Peak bus W", path = "peakBusW"), Column(name = "Bus Wh", path = "busWh"),
             Column(name = "Battery Wh", path = "batteryWh")))
     }
     calc def Storage :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogCandidateEnergy::nominal", "BlueDogCandidateEnergy::usable", "BlueDogCandidateEnergy::departure")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::CandidateEnergy::nominal", "BlueDog::Analyses::CandidateEnergy::usable", "BlueDog::Analyses::CandidateEnergy::departure")), columns = (
             Column(name = "Storage", path = "label"), Column(name = "Wh", path = "energyWh"), Column(name = "Basis", path = "basis")))
     }
     calc def Ledger :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogCandidateEnergy::sailing", "BlueDogCandidateEnergy::losses", "BlueDogCandidateEnergy::selfDischarge", "BlueDogCandidateEnergy::reserve", "BlueDogCandidateEnergy::required", "BlueDogCandidateEnergy::headroom")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::CandidateEnergy::sailing", "BlueDog::Analyses::CandidateEnergy::losses", "BlueDog::Analyses::CandidateEnergy::selfDischarge", "BlueDog::Analyses::CandidateEnergy::reserve", "BlueDog::Analyses::CandidateEnergy::required", "BlueDog::Analyses::CandidateEnergy::headroom")), columns = (
             Column(name = "Energy account", path = "label"), Column(name = "Wh", path = "energyWh"), Column(name = "Basis", path = "basis")))
     }
     calc def Gaps :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogCandidateEnergy::compute", "BlueDogCandidateEnergy::navigation", "BlueDogCandidateEnergy::traffic", "BlueDogCandidateEnergy::communications", "BlueDogCandidateEnergy::housekeeping", "BlueDogCandidateEnergy::recoveryHardware")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::CandidateEnergy::compute", "BlueDog::Analyses::CandidateEnergy::navigation", "BlueDog::Analyses::CandidateEnergy::traffic", "BlueDog::Analyses::CandidateEnergy::communications", "BlueDog::Analyses::CandidateEnergy::housekeeping", "BlueDog::Analyses::CandidateEnergy::recoveryHardware")), columns = (
             Column(name = "Function", path = "function"), Column(name = "Current accounting", path = "allowance"), Column(name = "Needed to establish installed budget", path = "evidenceNeeded")))
     }
     part def Budget :> Document {
@@ -703,11 +703,11 @@ package BlueDogCandidateEnergyDocuments {
 package BlueDogEncounterStudyDocuments {
     private import DocumentQueries::*;
     calc def Ranges :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogEncounterFeasibility::target1", "BlueDogEncounterFeasibility::target2", "BlueDogEncounterFeasibility::target3", "BlueDogEncounterFeasibility::target4", "BlueDogEncounterFeasibility::target5", "BlueDogEncounterFeasibility::target6")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::EncounterFeasibility::target1", "BlueDog::Analyses::EncounterFeasibility::target2", "BlueDog::Analyses::EncounterFeasibility::target3", "BlueDog::Analyses::EncounterFeasibility::target4", "BlueDog::Analyses::EncounterFeasibility::target5", "BlueDog::Analyses::EncounterFeasibility::target6")), columns = (
             Column(name = "Target", path = "target"), Column(name = "15 s maneuver: required m", path = "baselineM"), Column(name = "30 s maneuver: required m", path = "slowerM")))
     }
     calc def Stacks :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogEncounterFeasibility::stack1", "BlueDogEncounterFeasibility::stack2", "BlueDogEncounterFeasibility::stack3", "BlueDogEncounterFeasibility::stack4")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Analyses::EncounterFeasibility::stack1", "BlueDog::Analyses::EncounterFeasibility::stack2", "BlueDog::Analyses::EncounterFeasibility::stack3", "BlueDog::Analyses::EncounterFeasibility::stack4")), columns = (
             Column(name = "Hypothesis", path = "label"), Column(name = "Craft m", path = "craftM"), Column(name = "Low target m", path = "lowM"), Column(name = "Weeds m", path = "weedM"), Column(name = "Extra bus W", path = "additionalW"), Column(name = "Remaining Wh", path = "headroomWh")))
     }
     part def Detection :> Document {
@@ -723,70 +723,70 @@ package BlueDogEncounterStudyDocuments {
 package BlueDogClassDetectionDocuments {
     doc /* Historical nine-row sensitivity; current policy also includes three wind-sport classes without inherited numerical allocations.*/
     private import DocumentQueries::*;
-    calc def Rows :> Query { Project(source=Named(qualifiedName=("BlueDogClassDetection::classRow1","BlueDogClassDetection::classRow2","BlueDogClassDetection::classRow3","BlueDogClassDetection::classRow4","BlueDogClassDetection::classRow5","BlueDogClassDetection::classRow6","BlueDogClassDetection::classRow7","BlueDogClassDetection::classRow8","BlueDogClassDetection::classRow9")),columns=(Column(name="Target",path="target"),Column(name="Illustrative target speed (m/s)",path="targetSpeedMps"),Column(name="Illustrative head-on distance (m)",path="illustrativeDistanceM"),Column(name="Allocation accepted",path="allocationAccepted"))) }
+    calc def Rows :> Query { Project(source=Named(qualifiedName=("BlueDog::Analyses::ClassDetection::classRow1","BlueDog::Analyses::ClassDetection::classRow2","BlueDog::Analyses::ClassDetection::classRow3","BlueDog::Analyses::ClassDetection::classRow4","BlueDog::Analyses::ClassDetection::classRow5","BlueDog::Analyses::ClassDetection::classRow6","BlueDog::Analyses::ClassDetection::classRow7","BlueDog::Analyses::ClassDetection::classRow8","BlueDog::Analyses::ClassDetection::classRow9")),columns=(Column(name="Target",path="target"),Column(name="Illustrative target speed (m/s)",path="targetSpeedMps"),Column(name="Illustrative head-on distance (m)",path="illustrativeDistanceM"),Column(name="Allocation accepted",path="allocationAccepted"))) }
     part def Summary :> Document { attribute redefines title="Class-specific response sensitivity: unaccepted illustrative inputs"; part cases : Table { calc rows : Rows; } }
 }
 
 package BlueDogLocationTrafficDocuments {
     private import DocumentQueries::*;
-    calc def Sectors :> Query { Project(source=Named(qualifiedName=("BlueDogLocationTraffic::bingen","BlueDogLocationTraffic::bridge","BlueDogLocationTraffic::hoodRiver","BlueDogLocationTraffic::hatchery","BlueDogLocationTraffic::viento","BlueDogLocationTraffic::homeValley","BlueDogLocationTraffic::stevenson","BlueDogLocationTraffic::connecting")),columns=(Column(name="Location",path="location"),Column(name="Conflict to assess",path="hazards"),Column(name="Next investigation",path="nextInvestigation"))) }
+    calc def Sectors :> Query { Project(source=Named(qualifiedName=("BlueDog::Analyses::LocationTraffic::bingen","BlueDog::Analyses::LocationTraffic::bridge","BlueDog::Analyses::LocationTraffic::hoodRiver","BlueDog::Analyses::LocationTraffic::hatchery","BlueDog::Analyses::LocationTraffic::viento","BlueDog::Analyses::LocationTraffic::homeValley","BlueDog::Analyses::LocationTraffic::stevenson","BlueDog::Analyses::LocationTraffic::connecting")),columns=(Column(name="Location",path="location"),Column(name="Conflict to assess",path="hazards"),Column(name="Next investigation",path="nextInvestigation"))) }
     part def Locations :> Document { attribute redefines title="Traffic assessment sectors: survey priorities, not accepted windows"; part sectors : Table { calc rows : Sectors; } }
-    calc def Hazards :> Query { Project(source=Named(qualifiedName=("BlueDogLocationTraffic::windsurfCrossing","BlueDogLocationTraffic::wingfoilTurn","BlueDogLocationTraffic::kiteSweep","BlueDogLocationTraffic::fallenRider","BlueDogLocationTraffic::groupEncounter","BlueDogLocationTraffic::windowOverrun")),columns=(Column(name="Case",path="scenario"),Column(name="Occupied extent",path="extent"),Column(name="Required challenge",path="criterion"))) }
+    calc def Hazards :> Query { Project(source=Named(qualifiedName=("BlueDog::Analyses::LocationTraffic::windsurfCrossing","BlueDog::Analyses::LocationTraffic::wingfoilTurn","BlueDog::Analyses::LocationTraffic::kiteSweep","BlueDog::Analyses::LocationTraffic::fallenRider","BlueDog::Analyses::LocationTraffic::groupEncounter","BlueDog::Analyses::LocationTraffic::windowOverrun")),columns=(Column(name="Case",path="scenario"),Column(name="Occupied extent",path="extent"),Column(name="Required challenge",path="criterion"))) }
     part def Cases :> Document { attribute redefines title="Wind-sport and traffic-window hazard cases"; part hazards : Table { calc rows : Hazards; } }
 }
 
 package BlueDogAvoidanceDocuments { private import DocumentQueries::*;
     calc def functionalRows :> FailureAnalysisViews::ReviewRows {
-        in :>> reviewName = "BlueDogAvoidanceFailures::functional";
+        in :>> reviewName = "BlueDog::Analyses::Safety::AvoidanceFailures::functional";
     }
     part def functional :> Document { attribute redefines title = ""; part rows : Table { calc rows : functionalRows; } }
     calc def conceptsRows :> FailureAnalysisViews::ReviewRows {
-        in :>> reviewName = "BlueDogAvoidanceFailures::concepts";
+        in :>> reviewName = "BlueDog::Analyses::Safety::AvoidanceFailures::concepts";
     }
     part def concepts :> Document { attribute redefines title = ""; part rows : Table { calc rows : conceptsRows; } }
 }
 
 package BlueDogFailureViews { private import FailureAnalysisViews::*; private import DocumentQueries::*;
     view SystemTreeView : FaultTreeView {
-        expose BlueDogAvoidanceFailures::Exposure::encounterDemand;
-        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable;
-        expose BlueDogAvoidanceFailures::Exposure::OR_recoveryUnavailable;
-        expose BlueDogAvoidanceFailures::Exposure::AND_safeSeparationUnsupported;
-        expose BlueDogAvoidanceFailures::Exposure::sharedPowerLoss;
-        expose BlueDogAvoidanceFailures::Exposure::sharedComputeLoss;
-        expose BlueDogAvoidanceFailures::Exposure::AND_safeSeparationUnsupported_0;
-        expose BlueDogAvoidanceFailures::Exposure::AND_safeSeparationUnsupported_1;
-        expose BlueDogAvoidanceFailures::Exposure::AND_safeSeparationUnsupported_2;
-        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_4;
-        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_5;
-        expose BlueDogAvoidanceFailures::Exposure::OR_recoveryUnavailable_4;
-        expose BlueDogAvoidanceFailures::Exposure::OR_recoveryUnavailable_5;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::encounterDemand;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_primaryUnavailable;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_recoveryUnavailable;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::AND_safeSeparationUnsupported;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::sharedPowerLoss;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::sharedComputeLoss;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::AND_safeSeparationUnsupported_0;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::AND_safeSeparationUnsupported_1;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::AND_safeSeparationUnsupported_2;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_primaryUnavailable_4;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_primaryUnavailable_5;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_recoveryUnavailable_4;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_recoveryUnavailable_5;
     }
     part def SystemTree :> Document { attribute redefines title = ""; part diagram : Diagram { attribute redefines direction = "BT"; attribute redefines show = "keywords"; ref redefines source = SystemTreeView; } }
     view PrimaryTreeView : FaultTreeView {
-        expose BlueDogAvoidanceFailures::Exposure::OR_observationUnavailable;
-        expose BlueDogAvoidanceFailures::Exposure::OR_assessmentWrong;
-        expose BlueDogAvoidanceFailures::Exposure::OR_commandUnsafe;
-        expose BlueDogAvoidanceFailures::Exposure::OR_maneuverUnavailable;
-        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable;
-        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_0;
-        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_1;
-        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_2;
-        expose BlueDogAvoidanceFailures::Exposure::OR_primaryUnavailable_3;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_observationUnavailable;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_assessmentWrong;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_commandUnsafe;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_maneuverUnavailable;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_primaryUnavailable;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_primaryUnavailable_0;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_primaryUnavailable_1;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_primaryUnavailable_2;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::Exposure::OR_primaryUnavailable_3;
     }
     part def PrimaryTree :> Document { attribute redefines title = ""; part diagram : Diagram { attribute redefines direction = "BT"; attribute redefines show = "keywords"; ref redefines source = PrimaryTreeView; } }
     view ScannerTreeView : FaultTreeView {
-        expose BlueDogAvoidanceFailures::scannerJam;
-        expose BlueDogAvoidanceFailures::scannerRevisit;
-        expose BlueDogAvoidanceFailures::scannerCable;
-        expose BlueDogAvoidanceFailures::wetOptics;
-        expose BlueDogAvoidanceFailures::sharedHub;
-        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable;
-        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_0;
-        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_1;
-        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_2;
-        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_3;
-        expose BlueDogAvoidanceFailures::OR_scannerObservationUnavailable_4;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::scannerJam;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::scannerRevisit;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::scannerCable;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::wetOptics;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::sharedHub;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::OR_scannerObservationUnavailable;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::OR_scannerObservationUnavailable_0;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::OR_scannerObservationUnavailable_1;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::OR_scannerObservationUnavailable_2;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::OR_scannerObservationUnavailable_3;
+        expose BlueDog::Analyses::Safety::AvoidanceFailures::OR_scannerObservationUnavailable_4;
     }
     part def ScannerTree :> Document { attribute redefines title = ""; part diagram : Diagram { attribute redefines direction = "BT"; attribute redefines show = "keywords"; ref redefines source = ScannerTreeView; } }
 }
@@ -794,26 +794,26 @@ package BlueDogFailureViews { private import FailureAnalysisViews::*; private im
 package BlueDogArchitectureAudit {
     private import DocumentQueries::*;
     calc def Responsibilities :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogLogicalArchitecture::LogicalVessel")), type = "PartUsage"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Architecture::Logical::LogicalVessel")), type = "PartUsage"), columns = (
             Column(name = "Logical responsibility", path = "name"),
             Column(name = "Implementation", cell = { in row : KerML::Root::Element;
                 RelatedElements(source = row, relationshipKind = "allocation", direction = "outgoing", maxDepth = 1) })))
     }
     calc def LogicalExchanges :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogLogicalArchitecture::LogicalVessel")), type = "FlowUsage"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Architecture::Logical::LogicalVessel")), type = "FlowUsage"), columns = (
             Column(name = "Logical exchange", path = "name"),
             Column(name = "Implementation", cell = { in row : KerML::Root::Element;
                 RelatedElements(source = row, relationshipKind = "allocation", direction = "outgoing", maxDepth = 1) })))
     }
     calc def ScenarioActions :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogMethod::Scenarios")), type = "ActionUsage"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Method::Scenarios")), type = "ActionUsage"), columns = (
             Column(name = "Responsible element", cell = { in row : KerML::Root::Element;
                 RelatedElements(source = row, relationshipKind = "allocation", direction = "outgoing", maxDepth = 1) }),
             Column(name = "Definition", cell = { in row : KerML::Root::Element;
                 RelatedElements(source = row, relationshipKind = "typing", direction = "outgoing", maxDepth = 1) })))
     }
     calc def Mappings :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogArchitectureCorrespondence")), type = "AllocationUsage"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Architecture::Correspondence")), type = "AllocationUsage"), columns = (
             Column(name = "Scope", path = "scope"),
             Column(name = "Configuration", path = "configuration"),
             Column(name = "Path", path = "path"),
@@ -821,12 +821,12 @@ package BlueDogArchitectureAudit {
                 RelatedElements(source = row, relationshipKind = "typing", direction = "outgoing", maxDepth = 1) })))
     }
     calc def Candidate :> Query {
-        Project(source = Named(qualifiedName = "BlueDogPhysicalArchitecture::ic01"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Architecture::Physical::ic01"), columns = (
             Column(name = "Configuration", path = "configuration"),
             Column(name = "Integration assumptions", path = "integration")))
     }
     calc def OpenDecisions :> Query {
-        Project(source = Named(qualifiedName = "BlueDogArchitectureCorrespondence"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Architecture::Correspondence"), columns = (
             Column(name = "Interface decisions", path = "interfaceDecisions.text"),
             Column(name = "Context limits", path = "contextLimits.text")))
     }
@@ -848,7 +848,7 @@ package BlueDogVerificationDocuments {
     private import DocumentQueries::*;
     calc def Plans :> Query {
         in roots : ScalarValues::String [1..*] ordered default = (
-            "BlueDogRequirementVerification", "GorgeChallengeVerification", "BlueDogVerificationPlanning", "BlueDogEnergy", "BlueDogReliability");
+            "BlueDog::Verification::Requirements", "BlueDog::Verification::Challenge", "BlueDog::Verification::Planning", "BlueDog::Analyses::Energy", "BlueDog::Analyses::Reliability");
         Project(source = WhereType(source = Descendants(source = Named(qualifiedName = roots)),
             type = "VerificationCaseDefinition"), columns = (
             Column(name = "Case", path = "name"),
@@ -858,13 +858,13 @@ package BlueDogVerificationDocuments {
     }
     calc def PlannedVerdicts :> Query {
         Project(source = WhereType(source = Descendants(source = Named(qualifiedName = (
-            "BlueDogRequirementVerification", "GorgeChallengeVerification", "BlueDogVerificationPlanning"))),
+            "BlueDog::Verification::Requirements", "BlueDog::Verification::Challenge", "BlueDog::Verification::Planning"))),
             type = "VerificationCaseDefinition"), columns = (
             Column(name = "Case", path = "name"), Column(name = "Declared plan result", path = "verdict")))
     }
     calc def IntegrationConfigurations :> Query {
-        Project(source = Named(qualifiedName = ("BlueDogVerificationPlanning::interfaceBench",
-            "BlueDogVerificationPlanning::recoveryUseTrial")), columns = (
+        Project(source = Named(qualifiedName = ("BlueDog::Verification::Planning::interfaceBench",
+            "BlueDog::Verification::Planning::recoveryUseTrial")), columns = (
             Column(name = "Plan", path = "name"), Column(name = "Planned design", path = "plannedDesign"),
             Column(name = "Planned assembly", path = "plannedAssembly"), Column(name = "Purpose", path = "purpose"),
             Column(name = "Actual article", path = "articleIdentity"), Column(name = "Released procedure", path = "procedureIdentity"),
@@ -884,15 +884,15 @@ package BlueDogVerificationDocuments {
 package BlueDogSafetyDocuments {
     private import DocumentQueries::*;
     calc def Hazards :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogSafety::gorge")),
-            type = "BlueDogSafety::HazardRecord"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::Safety::gorge")),
+            type = "BlueDog::Analyses::Safety::HazardRecord"), columns = (
             Column(name = "ID", path = "identifier"), Column(name = "Condition", path = "condition"),
             Column(name = "Potential mishap", path = "potentialMishap"), Column(name = "Modes", path = "modes"),
             Column(name = "Owner role", path = "ownerRole"), Column(name = "Configuration", path = "configuration"),
             Column(name = "Control intent", path = "controlIntent")))
     }
     calc def Basis :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogSafety")),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::Safety"), maxDepth = 1),
             type = "Dependency"), columns = (
             Column(name = "Link", path = "name"),
             Column(name = "Client", cell = { in row : KerML::Root::Dependency; row.client }),
@@ -900,8 +900,8 @@ package BlueDogSafetyDocuments {
             Column(name = "Rationale", path = "rationale.text")))
     }
     calc def Dispositions :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogSafety::gorge")),
-            type = "BlueDogSafety::HazardRecord"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::Safety::gorge")),
+            type = "BlueDog::Analyses::Safety::HazardRecord"), columns = (
             Column(name = "ID", path = "identifier"),
             Column(name = "Implementation evidence", path = "implementationEvidenceAccepted"),
             Column(name = "Effectiveness evidence", path = "effectivenessEvidenceAccepted"),
@@ -913,7 +913,7 @@ package BlueDogSafetyDocuments {
             Column(name = "Closed preconditions", path = "closed")))
     }
     calc def FailureModes :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogDFMEA::starter")),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::Safety::DFMEA::starter")),
             type = "FailureAnalysis::ReviewRow"), columns = (
             Column(name = "ID", path = "identifier"), Column(name = "Safety critical", path = "safetyCritical"),
             Column(name = "Owner role", path = "ownerRole"), Column(name = "Disposition accepted", path = "dispositionAccepted"),
@@ -933,14 +933,14 @@ package BlueDogSafetyDocuments {
 package BlueDogConfigurationDocuments {
     private import DocumentQueries::*;
     calc def Contexts :> Query {
-        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogConfigurationManagement")),
-            type = "PartUsage"), type = "BlueDogConfigurationManagement::ContextRecord"), columns = (
+        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Configurations::Management")),
+            type = "PartUsage"), type = "BlueDog::Configurations::Management::ContextRecord"), columns = (
             Column(name = "ID", path = "identifier"), Column(name = "Role", path = "role"),
             Column(name = "Represented subject", path = "representedSubject"),
             Column(name = "Intended use", path = "intendedUse"), Column(name = "Revision basis", path = "revisionBasis")))
     }
     calc def Installation :> Query {
-        Project(source = Named(qualifiedName = "BlueDogConfigurationManagement::ic01Installation"), columns = (
+        Project(source = Named(qualifiedName = "BlueDog::Configurations::Management::ic01Installation"), columns = (
             Column(name = "Planned design", path = "design"), Column(name = "Planned assembly", path = "assembly"),
             Column(name = "Actual article", path = "articleId"), Column(name = "Hardware revision", path = "hardwareRevision"),
             Column(name = "Software/data revision", path = "softwareDataRevision"), Column(name = "Procedure revision", path = "procedureRevision"),
@@ -948,8 +948,8 @@ package BlueDogConfigurationDocuments {
             Column(name = "Reconciled", path = "configurationReconciled")))
     }
     calc def Scopes :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogConfigurationManagement::ic01")),
-            type = "BlueDogConfigurationManagement::ResourceScope"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Configurations::Management::ic01")),
+            type = "BlueDog::Configurations::Management::ResourceScope"), columns = (
             Column(name = "Scope", path = "label"), Column(name = "Quantity kind", path = "quantityKind"),
             Column(name = "Configuration", path = "configuration"), Column(name = "Boundary", path = "boundary"),
             Column(name = "Mode", path = "mode"), Column(name = "Owner role", path = "ownerRole"),
@@ -957,8 +957,8 @@ package BlueDogConfigurationDocuments {
             Column(name = "Ready preconditions", path = "ready")))
     }
     calc def Allocations :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogConfigurationManagement::ic01")),
-            type = "BlueDogConfigurationManagement::ResourceScope"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Configurations::Management::ic01")),
+            type = "BlueDog::Configurations::Management::ResourceScope"), columns = (
             Column(name = "Scope", path = "label"), Column(name = "Mass allowance", path = "massAllocation"),
             Column(name = "Average/active power allowance", path = "averagePowerAllocation"), Column(name = "Peak bound", path = "peakPowerBound"),
             Column(name = "Nameplate energy", path = "nameplateEnergy"), Column(name = "Departure energy", path = "departureEnergy"),
@@ -981,14 +981,15 @@ package BlueDogConfigurationDocuments {
 package BlueDogAnalysisDocuments {
     private import DocumentQueries::*;
     calc def Uses :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = ("BlueDogAcousticEquipment", "BlueDogAerodynamicPolicy", "BlueDogAvoidanceFailures", "BlueDogCandidateEnergy", "BlueDogClassDetection", "BlueDogConceptCredibility", "BlueDogConfigurationManagement", "BlueDogCoupledOperation", "BlueDogCoupledSizing", "BlueDogCoupledUncertainty", "BlueDogCurrentSizing", "BlueDogEncounterEnvelope", "BlueDogEncounterFeasibility", "BlueDogEncounterReview", "BlueDogEnergy", "BlueDogEnvironmentReview", "BlueDogHydrostatics", "BlueDogIntegratedCandidate", "BlueDogLocationTraffic", "BlueDogManeuverDynamics", "BlueDogMissionSimulation", "BlueDogNavigationController", "BlueDogOperatingEnvironment", "BlueDogPassageExposure", "BlueDogRecordedSizing", "BlueDogRecoveryRisk", "BlueDogReliability", "BlueDogReliabilityExamples", "BlueDogSafety", "BlueDogSailing", "BlueDogSailingExamples", "BlueDogSailTrade", "BlueDogSizingEvidence", "BlueDogStructuralBasis", "BlueDogStructure", "BlueDogSurfaceEnvironment", "BlueDogWavePerformance", "BlueDogWeather", "BlueDogWindEquipment", "BlueDogWingActuator", "BlueDogWingHeel", "InlandExtended", "InlandNavigationExperiment", "MarineEnergy", "RecoveryPropulsionTrade", "TransGorgeCourse"))),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName =
+            ("BlueDog", "MarineEnergy", "InlandExtended", "InlandNavigationExperiment"))),
             type = ("AnalysisCaseDefinition", "AnalysisCaseUsage")), columns = (
             Column(name = "Analysis", path = "qualifiedName"),
-            Column(name = "Category", path = "BlueDogAnalysisCredibility::UseIntent::category"),
-            Column(name = "Intended use", path = "BlueDogAnalysisCredibility::UseIntent::intendedUse"),
-            Column(name = "Domain", path = "BlueDogAnalysisCredibility::UseIntent::domain"),
-            Column(name = "Excluded interpretations", path = "BlueDogAnalysisCredibility::UseIntent::excludedUses"),
-            Column(name = "Needed evidence", path = "BlueDogAnalysisCredibility::UseIntent::evidenceNeeded")))
+            Column(name = "Category", path = "BlueDog::Analyses::AnalysisCredibility::UseIntent::category"),
+            Column(name = "Intended use", path = "BlueDog::Analyses::AnalysisCredibility::UseIntent::intendedUse"),
+            Column(name = "Domain", path = "BlueDog::Analyses::AnalysisCredibility::UseIntent::domain"),
+            Column(name = "Excluded interpretations", path = "BlueDog::Analyses::AnalysisCredibility::UseIntent::excludedUses"),
+            Column(name = "Needed evidence", path = "BlueDog::Analyses::AnalysisCredibility::UseIntent::evidenceNeeded")))
     }
     part def UseRegister :> Document {
         attribute redefines title = "Analysis purposes, domains and limitations";
@@ -999,7 +1000,7 @@ package BlueDogAnalysisDocuments {
 package BlueDogDecisionDocuments {
     private import DocumentQueries::*;
     calc def BasisRecords :> Query {
-        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirementBasis")),
+        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Requirements::Basis")),
             type = "ItemUsage"), type = "EngineeringDecisions::DecisionRecord"), columns = (
             Column(name = "Record", path = "qualifiedName"),
             Column(name = "Recorded disposition", path = "disposition"),
@@ -1007,62 +1008,62 @@ package BlueDogDecisionDocuments {
     }
     calc def RecordStates :> Query {
         Project(source = WhereType(source = Descendants(source = Named(qualifiedName =
-            ("BlueDogDesignDecisions", "BlueDogRequirementDecisions", "BlueDogRequirementBasis"))),
+            ("BlueDog::Decisions::Design", "BlueDog::Decisions::OpenQuestions", "BlueDog::Requirements::Basis"))),
             type = "EngineeringDecisions::DecisionRecord"), columns = (
             Column(name = "Record", path = "qualifiedName"), Column(name = "Record state", path = "recordState"),
             Column(name = "Recorded disposition", path = "disposition"), Column(name = "Question", path = "question"),
             Column(name = "Needed evidence", path = "evidenceNeeded")))
     }
     calc def WorkingRecords :> Query {
-        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogDesignDecisions")), type = "ItemUsage"), type = "EngineeringDecisions::DecisionRecord"), columns = (
+        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Decisions::Design")), type = "ItemUsage"), type = "EngineeringDecisions::DecisionRecord"), columns = (
             Column(name = "Record", path = "qualifiedName"),
-            Column(name = "Kind", path = "BlueDogDecisionContext::Context::kind"),
-            Column(name = "Question", path = "BlueDogDecisionContext::Context::decisionQuestion"),
-            Column(name = "Scope", path = "BlueDogDecisionContext::Context::scope"),
-            Column(name = "Responsible role", path = "BlueDogDecisionContext::Context::ownerRole"),
-            Column(name = "Mandatory basis", path = "BlueDogDecisionContext::Context::criteriaBasis"),
-            Column(name = "Comparison basis", path = "BlueDogDecisionContext::Context::comparisonBasis"),
-            Column(name = "Reopening trigger", path = "BlueDogDecisionContext::Context::reopenTrigger"),
+            Column(name = "Kind", path = "BlueDog::Decisions::Context::Context::kind"),
+            Column(name = "Question", path = "BlueDog::Decisions::Context::Context::decisionQuestion"),
+            Column(name = "Scope", path = "BlueDog::Decisions::Context::Context::scope"),
+            Column(name = "Responsible role", path = "BlueDog::Decisions::Context::Context::ownerRole"),
+            Column(name = "Mandatory basis", path = "BlueDog::Decisions::Context::Context::criteriaBasis"),
+            Column(name = "Comparison basis", path = "BlueDog::Decisions::Context::Context::comparisonBasis"),
+            Column(name = "Reopening trigger", path = "BlueDog::Decisions::Context::Context::reopenTrigger"),
             Column(name = "Recorded disposition", path = "disposition"),
             Column(name = "Needed evidence", path = "evidenceNeeded"),
-            Column(name = "Actual disposition record", path = "BlueDogDecisionContext::Context::dispositionRecord"),
-            Column(name = "Actual authority", path = "BlueDogDecisionContext::Context::authorityIdentity"),
-            Column(name = "Actual decision date", path = "BlueDogDecisionContext::Context::decisionDate"),
-            Column(name = "Implementation evidence", path = "BlueDogDecisionContext::Context::implementationEvidence")))
+            Column(name = "Actual disposition record", path = "BlueDog::Decisions::Context::Context::dispositionRecord"),
+            Column(name = "Actual authority", path = "BlueDog::Decisions::Context::Context::authorityIdentity"),
+            Column(name = "Actual decision date", path = "BlueDog::Decisions::Context::Context::decisionDate"),
+            Column(name = "Implementation evidence", path = "BlueDog::Decisions::Context::Context::implementationEvidence")))
     }
     calc def OpenRecords :> Query {
-        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogRequirementDecisions")), type = "ItemUsage"), type = "EngineeringDecisions::DecisionRecord"), columns = (
+        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Decisions::OpenQuestions")), type = "ItemUsage"), type = "EngineeringDecisions::DecisionRecord"), columns = (
             Column(name = "Record", path = "qualifiedName"),
-            Column(name = "Kind", path = "BlueDogDecisionContext::Context::kind"),
+            Column(name = "Kind", path = "BlueDog::Decisions::Context::Context::kind"),
             Column(name = "Question", path = "question"),
-            Column(name = "Scope", path = "BlueDogDecisionContext::Context::scope"),
+            Column(name = "Scope", path = "BlueDog::Decisions::Context::Context::scope"),
             Column(name = "Responsible role", path = "owner"),
-            Column(name = "Mandatory basis", path = "BlueDogDecisionContext::Context::criteriaBasis"),
-            Column(name = "Comparison basis", path = "BlueDogDecisionContext::Context::comparisonBasis"),
-            Column(name = "Reopening trigger", path = "BlueDogDecisionContext::Context::reopenTrigger"),
+            Column(name = "Mandatory basis", path = "BlueDog::Decisions::Context::Context::criteriaBasis"),
+            Column(name = "Comparison basis", path = "BlueDog::Decisions::Context::Context::comparisonBasis"),
+            Column(name = "Reopening trigger", path = "BlueDog::Decisions::Context::Context::reopenTrigger"),
             Column(name = "Needed evidence", path = "evidenceNeeded"),
-            Column(name = "Actual disposition record", path = "BlueDogDecisionContext::Context::dispositionRecord"),
-            Column(name = "Actual authority", path = "BlueDogDecisionContext::Context::authorityIdentity"),
-            Column(name = "Actual decision date", path = "BlueDogDecisionContext::Context::decisionDate"),
-            Column(name = "Implementation evidence", path = "BlueDogDecisionContext::Context::implementationEvidence"),
+            Column(name = "Actual disposition record", path = "BlueDog::Decisions::Context::Context::dispositionRecord"),
+            Column(name = "Actual authority", path = "BlueDog::Decisions::Context::Context::authorityIdentity"),
+            Column(name = "Actual decision date", path = "BlueDog::Decisions::Context::Context::decisionDate"),
+            Column(name = "Implementation evidence", path = "BlueDog::Decisions::Context::Context::implementationEvidence"),
             Column(name = "Open-question acceptance", path = "accepted")))
     }
     calc def Criteria :> Query {
-        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogTradeCriteria")),
-            type = "PartUsage"), type = "BlueDogTradeCriteria::Criterion"), columns = (
+        Project(source = WhereType(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Decisions::TradeCriteria")),
+            type = "PartUsage"), type = "BlueDog::Decisions::TradeCriteria::Criterion"), columns = (
             Column(name = "Evidence-vector position", path = "position"), Column(name = "Criterion", path = "label"),
             Column(name = "Class", path = "kind"), Column(name = "Applicability", path = "scope"),
             Column(name = "Evidence needed", path = "evidenceNeeded")))
     }
     calc def Basis :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogTradeCriteria")), type = "Dependency"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Decisions::TradeCriteria")), type = "Dependency"), columns = (
             Column(name = "Criterion", cell = { in row : KerML::Root::Dependency; row.client }),
             Column(name = "Supporting requirement", cell = { in row : KerML::Root::Dependency; row.supplier })))
     }
 
 
     calc def DesignBasis :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDogDesignDecisions")), type = "Dependency"), columns = (
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Decisions::Design")), type = "Dependency"), columns = (
             Column(name = "Decision", cell = { in row : KerML::Root::Dependency; row.client }),
             Column(name = "Supporting element", cell = { in row : KerML::Root::Dependency; row.supplier })))
     }

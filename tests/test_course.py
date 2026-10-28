@@ -29,7 +29,7 @@ def test_frame_round_trip_and_offset():
 
 
 def test_model_gate_segments_clear_charted_land_and_restrictions(run_model):
-    code, report = run_model('package GateProbe {}', '-analysis', 'TransGorgeCourse::GateGeometry')
+    code, report = run_model('package GateProbe {}', '-analysis', 'BlueDog::Mission::Course::GateGeometry')
     assert code == 0
     values = {r['name']: native_value(r['value']) for r in report['checks'][0]['values']}
     root = Path(__file__).resolve().parents[1]
@@ -54,7 +54,7 @@ def test_long_passage_has_no_gorge_deadline(run_model):
                 (2,2,2,2,2,2,2,2), ({states}), (1,0.2,0.3,1000000,0,0.5,0));
             out attribute legacyDeadline : Real [6] ordered nonunique = MarineCourse::Route(
                 (2,2,2,2,2,2,2,2), ({states}), (1,0.2,0.3,1000000,72,0.5,0));
-            out attribute activeDeadline : Real = BlueDogCoupledOperation::Inputs.routeParameters#(5);
+            out attribute activeDeadline : Real = BlueDog::Analyses::Operating::Inputs.routeParameters#(5);
         }}
     }}'''
     code, report = run_model(source, '-analysis', 'DurationProbe::Probe')
@@ -68,10 +68,10 @@ def test_long_passage_has_no_gorge_deadline(run_model):
 
 def test_sizing_and_replay_share_chart_reference_distance(run_model):
     source = """package SizingCourseProbe { analysis Inputs {
-        out attribute sizing : ScalarValues::Real = BlueDogCoupledOperation::Inputs.routeParameters#(4);
-        out attribute primary : ScalarValues::Real = BlueDogCoupledUncertainty::Inputs.nominalRoute#(4);
-        out attribute adverse : ScalarValues::Real = BlueDogCoupledUncertainty::Inputs.adverseRoute#(4);
-        out attribute chart : ScalarValues::Real = TransGorgeCourse::policy.referenceLegLengthM;
+        out attribute sizing : ScalarValues::Real = BlueDog::Analyses::Operating::Inputs.routeParameters#(4);
+        out attribute primary : ScalarValues::Real = BlueDog::Analyses::Sizing::Uncertainty::Inputs.nominalRoute#(4);
+        out attribute adverse : ScalarValues::Real = BlueDog::Analyses::Sizing::Uncertainty::Inputs.adverseRoute#(4);
+        out attribute chart : ScalarValues::Real = BlueDog::Mission::Course::policy.referenceLegLengthM;
     } }"""
     code, report = run_model(source, '-analysis', 'SizingCourseProbe::Inputs')
     assert code == 0

@@ -7,7 +7,7 @@ from tools.boat_analysis.mission.maneuver import ManeuverDynamics
 
 
 def run():
-    inputs = analysis_values('BlueDogManeuverDynamics::StudyInputs')
+    inputs = analysis_values('BlueDog::Analyses::ManeuverDynamics::StudyInputs')
     runs = []
     for interval in inputs['intervalsS']:
         for index, name in enumerate(inputs['names']):
@@ -43,7 +43,7 @@ def run():
     envelope = dict(scope='Native encounter timing sensitivities; original traffic '
                           'requirement unchanged; weed cases are separate sensitivities.',
                     qualified=False,
-                    outputs=analysis_values('BlueDogEncounterEnvelope::Summary'),
+                    outputs=analysis_values('BlueDog::Analyses::EncounterEnvelope::Summary'),
                     sourceHashes=record['sourceHashes'])
     output_path('encounter-envelope.json').write_text(json.dumps(envelope, indent=2)+'\n')
     return record

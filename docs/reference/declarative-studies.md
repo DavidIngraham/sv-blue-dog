@@ -33,8 +33,8 @@ groups:
   - name: contenders
     select:
       kind: AnalysisCaseUsage
-      owner: BlueDogSailTrade
-      type: BlueDogSailTrade::TradeAssessment
+      owner: BlueDog::Analyses::SailTrade
+      type: BlueDog::Analyses::SailTrade::TradeAssessment
       cardinality: many
 ```
 

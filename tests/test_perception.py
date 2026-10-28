@@ -66,12 +66,12 @@ def test_seeded_observations_are_repeatable():
 def test_native_distance_and_energy_sensitivities():
     m=load_model()
     def distance(maneuver,processing=1):
-        return float(m.calc('BlueDogEncounterFeasibility::RequiredRange',arguments=[18,5,processing,2,maneuver,15,30,10]).value)
+        return float(m.calc('BlueDog::Analyses::EncounterFeasibility::RequiredRange',arguments=[18,5,processing,2,maneuver,15,30,10]).value)
     assert distance(15)==pytest.approx(724)
     assert distance(30)==pytest.approx(994)
     assert distance(15,5)==pytest.approx(796)
-    assert float(m.calc('BlueDogEncounterFeasibility::EnergyScreen',arguments=[0]).value)==pytest.approx(analysis_values('BlueDogCandidateEnergy::Reconciliation')['headroomWh'])
-    assert float(m.calc('BlueDogEncounterFeasibility::EnergyScreen',arguments=[1]).value)<0
+    assert float(m.calc('BlueDog::Analyses::EncounterFeasibility::EnergyScreen',arguments=[0]).value)==pytest.approx(analysis_values('BlueDog::Analyses::CandidateEnergy::Reconciliation')['headroomWh'])
+    assert float(m.calc('BlueDog::Analyses::EncounterFeasibility::EnergyScreen',arguments=[1]).value)<0
 
 
 @pytest.mark.parametrize('kind',['steering_loss','power_loss'])

@@ -13,7 +13,7 @@ from tools.boat_analysis.evidence.records import digest,validate
 def run():
     saved=input_record('coupled-sizing-search.json')
     model=CoupledModel();x=[saved['design'][n] for n in model.c['designNames']];cases=[]
-    sources=['build/analysis/coupled-sizing-search.json','tools/boat_analysis/optimization/recovery.py','tools/boat_analysis/model/vessel.py','tools/boat_analysis/geometry/vessel.py','models/analyses/sizing/inputs.sysml','models/analyses/recovery.sysml']
+    sources=['build/analysis/coupled-sizing-search.json','tools/boat_analysis/optimization/recovery.py','tools/boat_analysis/model/vessel.py','tools/boat_analysis/geometry/vessel.py','models/blue-dog.sysml','models/blue-dog.sysml']
     hashes=source_hashes(sources)
     for density in model.operating_contract['recoveryDensities']:
         for trim in model.operating_contract['recoveryTrims']:

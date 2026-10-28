@@ -10,13 +10,29 @@ from tests.native_cases import native
 def test_mixed_compact_and_native_diagram_identities():
     from tools.publishing.relationships import diagram_nodes
     diagram = '''n0("`*«requirement»*\n**C-000 Challenge**`")
-n1("`*«requirement»*\n**BlueDogRequirements::roundTrip : RoundTrip**`")
-%% source-node n0 GorgeChallenge::transGorgeChallenge
+n1("`*«requirement»*\n**BlueDog::Requirements::roundTrip : RoundTrip**`")
+%% source-node n0 BlueDog::Mission::Challenge::transGorgeChallenge
 '''
     assert diagram_nodes(diagram) == {
-        'n0': 'GorgeChallenge::transGorgeChallenge',
-        'n1': 'BlueDogRequirements::roundTrip',
+        'n0': 'BlueDog::Mission::Challenge::transGorgeChallenge',
+        'n1': 'BlueDog::Requirements::roundTrip',
     }
+
+
+def test_common_namespace_labels_resolve_through_unique_native_identities():
+    from tools.publishing.relationships import include_basis
+    diagram='''```mermaid
+flowchart BT
+  n0["`*«package»*\n**DesignIntent**`"]
+  n1("`*«requirement»*\n**Requirements::desktopManufacture : DesktopManufacture**`")
+```'''
+    labels={'BlueDog::Requirements::desktopManufacture':'P-002'}
+    output=include_basis(diagram,[('desktopManufacture','DesignIntent')],labels,
+                         {'BlueDog::DesignIntent',*labels})
+    assert 'n1 -.->|"dependency"| n0' in output
+    assert '%% source-node n1 BlueDog::Requirements::desktopManufacture' in output
+    with pytest.raises(ValueError,match='Ambiguous native diagram identity'):
+        include_basis(diagram,[],labels,{'BlueDog::DesignIntent','Other::DesignIntent'})
 
 
 @pytest.fixture(scope='module')
@@ -97,7 +113,7 @@ def test_authored_pages_contain_views_not_copied_diagrams(rendered_site):
             # Method illustrations may coexist with native semantics, but must
             # not copy the generated model's identities or requirement edges.
             assert 'accTitle:' in sketch and 'accDescr:' in sketch
-            assert not re.search(r'BlueDog\w*::|GorgeChallenge::|[CHEMPNSRQL]-\d{3}|"(?:derive|refine|satisfy|verify)"', sketch)
+            assert not re.search(r'BlueDog\w*::|BlueDog::Mission::Challenge::|[CHEMPNSRQL]-\d{3}|"(?:derive|refine|satisfy|verify)"', sketch)
         assert blocks(source)
         rendered = (rendered_site / f'imports/docs/{name}.md').read_text(encoding='utf-8')
         assert '```sysml-view' not in rendered

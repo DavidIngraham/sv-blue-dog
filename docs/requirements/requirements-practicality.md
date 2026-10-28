@@ -17,13 +17,13 @@ package Page_practicality_construction {
     private import DiagramLayout::*;
     view thread : GeneralView {
         expose BlueDog::DesignIntent;
-        expose BlueDogRequirements::desktopManufacture;
-        expose BlueDogStructure::hybridConstruction;
-        expose BlueDogStructure::printTileEnvelope;
+        expose BlueDog::Requirements::desktopManufacture;
+        expose BlueDog::Requirements::Structure::hybridConstruction;
+        expose BlueDog::Requirements::Structure::printTileEnvelope;
         metadata Layout about BlueDog::DesignIntent { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::desktopManufacture { x = 400; y = 0; }
-        metadata Layout about BlueDogStructure::hybridConstruction { x = 800; y = 0; }
-        metadata Layout about BlueDogStructure::printTileEnvelope { x = 0; y = 400; }
+        metadata Layout about BlueDog::Requirements::desktopManufacture { x = 400; y = 0; }
+        metadata Layout about BlueDog::Requirements::Structure::hybridConstruction { x = 800; y = 0; }
+        metadata Layout about BlueDog::Requirements::Structure::printTileEnvelope { x = 0; y = 400; }
     }
 }
 ```
@@ -36,10 +36,10 @@ package Page_practicality_printEnvelope {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::desktopManufacture;
-        expose BlueDogStructure::printTileEnvelope;
-        metadata Layout about BlueDogRequirements::desktopManufacture { x = 0; y = 0; }
-        metadata Layout about BlueDogStructure::printTileEnvelope { x = 0; y = 300; }
+        expose BlueDog::Requirements::desktopManufacture;
+        expose BlueDog::Requirements::Structure::printTileEnvelope;
+        metadata Layout about BlueDog::Requirements::desktopManufacture { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::Structure::printTileEnvelope { x = 0; y = 300; }
     }
 }
 ```
@@ -58,40 +58,40 @@ package Page_practicality_materials {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose GorgeChallenge::transGorgeChallenge;
-        expose GorgeChallenge::courseCompletion;
-        expose GorgeChallenge::sailingPropulsion;
-        expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::environmentalEnvelope;
-        expose BlueDogRequirements::marineDurability;
-        expose BlueDogRequirements::wetMechanicalIntegrity;
-        expose BlueDogStructure::structuralIntegrity;
-        expose BlueDogStructure::wetCouponStrength;
-        expose BlueDogStructure::wetCouponStiffness;
-        expose BlueDogStructure::bondProof;
-        expose BlueDogStructure::bendingStrength;
-        expose BlueDogStructure::appendageDeflection;
-        expose BlueDogStructure::hullDeflection;
-        expose BlueDogStructure::panelStrength;
-        expose BlueDogStructure::panelDeflection;
-        expose BlueDogStructure::rootProofLoad;
-        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
-        metadata Layout about GorgeChallenge::courseCompletion { x = 320; y = 0; }
-        metadata Layout about GorgeChallenge::sailingPropulsion { x = 640; y = 0; }
-        metadata Layout about BlueDogRequirements::roundTrip { x = 960; y = 0; }
-        metadata Layout about BlueDogRequirements::environmentalEnvelope { x = 0; y = 400; }
-        metadata Layout about BlueDogRequirements::marineDurability { x = 320; y = 400; }
-        metadata Layout about BlueDogRequirements::wetMechanicalIntegrity { x = 640; y = 400; }
-        metadata Layout about BlueDogStructure::structuralIntegrity { x = 960; y = 400; }
-        metadata Layout about BlueDogStructure::wetCouponStrength { x = 0; y = 800; }
-        metadata Layout about BlueDogStructure::wetCouponStiffness { x = 320; y = 800; }
-        metadata Layout about BlueDogStructure::bondProof { x = 640; y = 800; }
-        metadata Layout about BlueDogStructure::bendingStrength { x = 960; y = 800; }
-        metadata Layout about BlueDogStructure::appendageDeflection { x = 0; y = 1200; }
-        metadata Layout about BlueDogStructure::hullDeflection { x = 320; y = 1200; }
-        metadata Layout about BlueDogStructure::panelStrength { x = 640; y = 1200; }
-        metadata Layout about BlueDogStructure::panelDeflection { x = 960; y = 1200; }
-        metadata Layout about BlueDogStructure::rootProofLoad { x = 0; y = 1600; }
+        expose BlueDog::Mission::Challenge::transGorgeChallenge;
+        expose BlueDog::Mission::Challenge::courseCompletion;
+        expose BlueDog::Mission::Challenge::sailingPropulsion;
+        expose BlueDog::Requirements::roundTrip;
+        expose BlueDog::Requirements::environmentalEnvelope;
+        expose BlueDog::Requirements::marineDurability;
+        expose BlueDog::Requirements::wetMechanicalIntegrity;
+        expose BlueDog::Requirements::Structure::structuralIntegrity;
+        expose BlueDog::Requirements::Structure::wetCouponStrength;
+        expose BlueDog::Requirements::Structure::wetCouponStiffness;
+        expose BlueDog::Requirements::Structure::bondProof;
+        expose BlueDog::Requirements::Structure::bendingStrength;
+        expose BlueDog::Requirements::Structure::appendageDeflection;
+        expose BlueDog::Requirements::Structure::hullDeflection;
+        expose BlueDog::Requirements::Structure::panelStrength;
+        expose BlueDog::Requirements::Structure::panelDeflection;
+        expose BlueDog::Requirements::Structure::rootProofLoad;
+        metadata Layout about BlueDog::Mission::Challenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about BlueDog::Mission::Challenge::courseCompletion { x = 320; y = 0; }
+        metadata Layout about BlueDog::Mission::Challenge::sailingPropulsion { x = 640; y = 0; }
+        metadata Layout about BlueDog::Requirements::roundTrip { x = 960; y = 0; }
+        metadata Layout about BlueDog::Requirements::environmentalEnvelope { x = 0; y = 400; }
+        metadata Layout about BlueDog::Requirements::marineDurability { x = 320; y = 400; }
+        metadata Layout about BlueDog::Requirements::wetMechanicalIntegrity { x = 640; y = 400; }
+        metadata Layout about BlueDog::Requirements::Structure::structuralIntegrity { x = 960; y = 400; }
+        metadata Layout about BlueDog::Requirements::Structure::wetCouponStrength { x = 0; y = 800; }
+        metadata Layout about BlueDog::Requirements::Structure::wetCouponStiffness { x = 320; y = 800; }
+        metadata Layout about BlueDog::Requirements::Structure::bondProof { x = 640; y = 800; }
+        metadata Layout about BlueDog::Requirements::Structure::bendingStrength { x = 960; y = 800; }
+        metadata Layout about BlueDog::Requirements::Structure::appendageDeflection { x = 0; y = 1200; }
+        metadata Layout about BlueDog::Requirements::Structure::hullDeflection { x = 320; y = 1200; }
+        metadata Layout about BlueDog::Requirements::Structure::panelStrength { x = 640; y = 1200; }
+        metadata Layout about BlueDog::Requirements::Structure::panelDeflection { x = 960; y = 1200; }
+        metadata Layout about BlueDog::Requirements::Structure::rootProofLoad { x = 0; y = 1600; }
     }
 }
 ```
@@ -115,20 +115,20 @@ package Page_practicality_23 {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::liftMass;
-        expose BlueDogRequirements::packDuration;
-        expose BlueDogRequirements::setupDuration;
-        expose BlueDogRequirements::soloLaunch;
-        expose BlueDogRequirements::soloRetrieval;
-        expose BlueDogRequirements::soloTransport;
-        expose BlueDogRequirements::transportability;
-        metadata Layout about BlueDogRequirements::liftMass { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::packDuration { x = 320; y = 0; }
-        metadata Layout about BlueDogRequirements::setupDuration { x = 640; y = 0; }
-        metadata Layout about BlueDogRequirements::soloLaunch { x = 960; y = 0; }
-        metadata Layout about BlueDogRequirements::soloRetrieval { x = 0; y = 400; }
-        metadata Layout about BlueDogRequirements::soloTransport { x = 320; y = 400; }
-        metadata Layout about BlueDogRequirements::transportability { x = 640; y = 400; }
+        expose BlueDog::Requirements::liftMass;
+        expose BlueDog::Requirements::packDuration;
+        expose BlueDog::Requirements::setupDuration;
+        expose BlueDog::Requirements::soloLaunch;
+        expose BlueDog::Requirements::soloRetrieval;
+        expose BlueDog::Requirements::soloTransport;
+        expose BlueDog::Requirements::transportability;
+        metadata Layout about BlueDog::Requirements::liftMass { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::packDuration { x = 320; y = 0; }
+        metadata Layout about BlueDog::Requirements::setupDuration { x = 640; y = 0; }
+        metadata Layout about BlueDog::Requirements::soloLaunch { x = 960; y = 0; }
+        metadata Layout about BlueDog::Requirements::soloRetrieval { x = 0; y = 400; }
+        metadata Layout about BlueDog::Requirements::soloTransport { x = 320; y = 400; }
+        metadata Layout about BlueDog::Requirements::transportability { x = 640; y = 400; }
     }
 }
 ```
@@ -149,16 +149,16 @@ package Page_practicality_24 {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDogRequirements::nondestructiveService;
-        expose BlueDogRequirements::postServiceActuation;
-        expose BlueDogRequirements::postServiceSealing;
-        expose BlueDogRequirements::replacementDuration;
-        expose BlueDogRequirements::serviceability;
-        metadata Layout about BlueDogRequirements::nondestructiveService { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::postServiceActuation { x = 320; y = 0; }
-        metadata Layout about BlueDogRequirements::postServiceSealing { x = 640; y = 0; }
-        metadata Layout about BlueDogRequirements::replacementDuration { x = 960; y = 0; }
-        metadata Layout about BlueDogRequirements::serviceability { x = 0; y = 400; }
+        expose BlueDog::Requirements::nondestructiveService;
+        expose BlueDog::Requirements::postServiceActuation;
+        expose BlueDog::Requirements::postServiceSealing;
+        expose BlueDog::Requirements::replacementDuration;
+        expose BlueDog::Requirements::serviceability;
+        metadata Layout about BlueDog::Requirements::nondestructiveService { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::postServiceActuation { x = 320; y = 0; }
+        metadata Layout about BlueDog::Requirements::postServiceSealing { x = 640; y = 0; }
+        metadata Layout about BlueDog::Requirements::replacementDuration { x = 960; y = 0; }
+        metadata Layout about BlueDog::Requirements::serviceability { x = 0; y = 400; }
     }
 }
 ```

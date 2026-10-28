@@ -7,7 +7,7 @@ from tools.boat_analysis.evidence.records import source_hashes,output_path
 
 
 def run():
-    c=analysis_values('BlueDogAerodynamicPolicy::convergenceInputs')
+    c=analysis_values('BlueDog::Analyses::AerodynamicPolicy::convergenceInputs')
     hashes=source_hashes(['tools/boat_analysis/aerodynamics/vsp/convergence.py','tools/boat_analysis/aerodynamics/vsp/polar_grid.py','tools/boat_analysis/aerodynamics/vsp/reference_vsp.py','tools/boat_analysis/aerodynamics/vsp/vsp_runtime.py','build/analysis/wing-geometry.json'])
     rows=[]
     for reverse,beta in [(False,0),(True,0),(False,20)]:

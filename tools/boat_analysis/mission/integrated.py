@@ -27,7 +27,7 @@ def envelope(p,range_factor=1):
 def scenarios(record):
     validate(record['sourceHashes'])
     hashes=source_hashes(['build/analysis/integrated-sizing.json',*[x.relative_to(ROOT).as_posix() for x in (ROOT/'tools/boat_analysis/mission').glob('*.py')]])
-    p={**analysis_values('BlueDogEncounterFeasibility::Inputs'),**record['allocation']};inputs=record['inputs'];args=local_case(inputs,p['horizonS'])
+    p={**analysis_values('BlueDog::Analyses::EncounterFeasibility::Inputs'),**record['allocation']};inputs=record['inputs'];args=local_case(inputs,p['horizonS'])
     planner=RecoveryPlanner(args[2],[RecoverySite('east recovery approach',(100,280),'hypothetical access; survey required','synthetic corridor'),RecoverySite('west recovery approach',(-700,280),'hypothetical access; survey required','synthetic corridor')],RecoveryCapability(*p['recoveryCapability']))
     actors=[None,Traffic('non-AIS crossing',LineString([(-200,-300),(-200,300)]),150,5,6,2,20),Traffic('low target',LineString([(-240,0),(-239,0)]),0,0,2,1,20,stationary_seconds=p['horizonS'],target_kind='low'),Traffic('weed patch',LineString([(-240,0),(-239,0)]),0,0,12,25,0,stationary_seconds=p['horizonS'],target_kind='weed')]
     def run(case,*,seed=17,night=False,actor=None,events=(),overrides=None,step=1,range_factor=1,weather=None):
@@ -46,7 +46,7 @@ def scenarios(record):
         rows.append(run('clear',weather=[270,wind,.4]));rows[-1]['windMps']=wind
     casualties=[run(kind,events=[Event(30,kind)]) for kind in ('sensing_loss','steering_loss','power_loss','capsize')]
     exposure=record['replay']['concept']['passageHours']
-    bank=load_model().calc('BlueDogIntegratedCandidate::RecoveryBankAfterExposure',arguments=[exposure]).value
+    bank=load_model().calc('BlueDog::Analyses::IntegratedCandidate::RecoveryBankAfterExposure',arguments=[exposure]).value
     coverage=[]
     for inverted in (False,True):
         for x in (40,-300,-640):

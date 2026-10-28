@@ -32,7 +32,7 @@ class MissionLogic:
         """
         if type(record_valid) is not bool or type(persisted_qualification_lost) is not bool:
             raise TypeError('Qualification restoration inputs must be Boolean')
-        action = 'BlueDogBehaviorContracts::RestoreQualification'
+        action = 'BlueDog::Behavior::Contracts::RestoreQualification'
         inputs = dict(recordValid=record_valid,
                       persistedQualificationLost=persisted_qualification_lost,
                       currentQualificationLost=self.qualification_lost)
@@ -42,21 +42,21 @@ class MissionLogic:
         return self.qualification_lost
 
     def recovery_authority(self, seconds, event_kind, ordinary, independent):
-        action='BlueDogMissionLogic::RecoveryAuthority'
+        action='BlueDog::Behavior::MissionLogic::RecoveryAuthority'
         inputs=dict(eventKind=event_kind,ordinaryPermission=bool(ordinary),independentPath=bool(independent))
         result=self._execute(action,inputs)
         self.trace.append(dict(seconds=seconds,action=action,inputs=inputs,outputs=result.copy()))
         return result['permitted']
 
     def fallback(self, seconds, available, permitted):
-        action='BlueDogMissionLogic::FallbackPolicy'
+        action='BlueDog::Behavior::MissionLogic::FallbackPolicy'
         inputs=dict(recoveryAvailable=bool(available),recoveryPermitted=bool(permitted))
         result=self._execute(action,inputs)
         self.trace.append(dict(seconds=seconds,action=action,inputs=inputs,outputs=result.copy()))
         return result
 
     def event(self, kind, seconds):
-        action = 'BlueDogMissionLogic::HandleEvent'
+        action = 'BlueDog::Behavior::MissionLogic::HandleEvent'
         inputs = {'eventKind': kind, 'qualificationLost': self.qualification_lost}
         result = self._execute(action, inputs)
         directive = result['directive']
@@ -71,7 +71,7 @@ class MissionLogic:
         return result
 
     def capsize(self, seconds, currently_capsized, upright_observed, safety_confirmed):
-        action = 'BlueDogMissionLogic::CapsizeDisposition'
+        action = 'BlueDog::Behavior::MissionLogic::CapsizeDisposition'
         inputs = dict(currentlyCapsized=bool(currently_capsized),
                       uprightRecoveryObserved=bool(upright_observed),
                       requiredSafetyConfirmed=bool(safety_confirmed), abortLatched=self.abort_latched,
@@ -91,7 +91,7 @@ class MissionLogic:
             safety_confirmed = not capsized and navigation_valid
         if type(safety_confirmed) is not bool:
             raise TypeError('Required safety confirmation must be Boolean')
-        action = 'BlueDogMissionLogic::SupervisoryCycle'
+        action = 'BlueDog::Behavior::MissionLogic::SupervisoryCycle'
         inputs = dict(windValid=bool(wind_valid), trafficConflict=bool(traffic_conflict),
                       abortRequested=bool(abort_requested), abortLatched=self.abort_latched,
                       qualificationLost=self.qualification_lost, capsized=bool(capsized),

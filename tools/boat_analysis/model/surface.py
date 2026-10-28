@@ -13,7 +13,7 @@ from .runtime import analysis_values
 
 
 def policy_inputs():
-    return analysis_values('BlueDogSurfaceEnvironment::Inputs')
+    return analysis_values('BlueDog::Analyses::SurfaceEnvironment::Inputs')
 
 
 class SurfaceOperation:

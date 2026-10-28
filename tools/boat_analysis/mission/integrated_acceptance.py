@@ -37,6 +37,6 @@ def assess(report):
         energyPass=bool(report['recoveryCoverage']['passed']) and all(r['minimum_energy_wh']>0 and r['energy_summary']['recoveryStoredWh']>0 for r in rows),
         timingPass=refined and bool(timing) and all(math.isclose(t['appliedSeconds']-t['selectedSeconds'],p['commandLatencySeconds'],abs_tol=1e-7) and math.isclose(t['maneuverCompleteSeconds']-t['appliedSeconds'],p['maneuverSeconds'] if t['turn'] else 0.,abs_tol=1e-7) for t in timing),
         assumptionsRecorded=bool(report['assumptions'] and report['physicalEvidenceNeeds']))
-    verdict=load_model().verify_requirement('BlueDogIntegratedCandidate::VirtualClosure',named_arguments=facts)
+    verdict=load_model().verify_requirement('BlueDog::Analyses::IntegratedCandidate::VirtualClosure',named_arguments=facts)
     return dict(facts=facts,virtualClosure=bool(verdict.holds),physicalQualification=False,
                 scope='Allocated candidate in the declared synthetic reach and static nominal Gorge passage screen; no field qualification or complete charted-course recovery coverage.')

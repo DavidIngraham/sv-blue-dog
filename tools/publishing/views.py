@@ -98,7 +98,11 @@ def render_blocks(blocks, directory):
               re.findall(r'^\*\*([A-Z]-\d+) (\w+)\*\*', text, re.M)}
     # Native usage identities disambiguate equally named definitions in
     # different packages (for example the two OutageAutonomy requirements).
-    label_rows = load_model(models).run_document_query('BlueDogDocuments::RequirementLabels')
+    native_model = load_model(models)
+    label_rows = native_model.run_document_query('BlueDogDocuments::RequirementLabels')
     labels.update({row.element.id: row.cells[0][0] for row in label_rows
                    if len(row.cells[0]) == 1 and isinstance(row.cells[0][0], str)})
-    return [include_basis(text, basis, labels) for text in documents]
+    identities = {row.id for row in native_model.query(select=[], where={
+        '@type':'PrimitiveConstraint', 'operator':'=', 'property':'@type',
+        'value':['Package','RequirementDefinition','RequirementUsage']})}
+    return [include_basis(text, basis, labels, identities) for text in documents]

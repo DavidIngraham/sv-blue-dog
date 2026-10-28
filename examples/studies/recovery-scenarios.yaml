@@ -3,9 +3,9 @@ name: Explicit hypothetical recovery exposures
 groups:
   - name: recovery
     select:
-      id: BlueDogIntegratedCandidate::RecoveryScreen
+      id: BlueDog::Analyses::IntegratedCandidate::RecoveryScreen
     subject:
-      id: BlueDogIC01::design
+      id: BlueDog::Configurations::IC01::design
     scenarios:
       - name: bounded_reach
         arguments:

@@ -28,6 +28,6 @@ def test_native_geometry_boundaries_and_independent_oracle(tmp_path):
 
 
 def test_rudder_torque_arm_matches_modeled_stock():
-    report=json.loads(native('-analysis','BlueDogOperatingEnvironment::Inputs','-json'))
+    report=json.loads(native('-analysis','BlueDog::Configurations::OperatingEnvironment::Inputs','-json'))
     values={v['name']:native_value(v['value']) for v in report['checks'][0]['values']}
     assert values['hinge_fraction']==pytest.approx(.25)

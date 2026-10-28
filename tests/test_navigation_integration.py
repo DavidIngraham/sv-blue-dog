@@ -14,7 +14,7 @@ def candidate(response, **changes):
     inputs=dict(relevant=True,supported=True,candidateClear=True,heldClear=True,
         holdsCourseSpeed=True,substantialChange=False,missingTrackedDuty=False,response=response,continuationSupported=False)
     inputs.update(changes)
-    return evaluate('BlueDogNavigationController::Candidate',**inputs)['allowed']
+    return evaluate('BlueDog::Behavior::Navigation::Candidate',**inputs)['allowed']
 
 
 def test_stand_on_holds_until_assessed_escalation():
@@ -110,11 +110,11 @@ def test_replay_hashes_include_native_decisions():
     from tools.boat_analysis.evidence.records import source_hashes
     hashes=source_hashes([])
     assert 'models/libraries/navigation/inland-pair.sysml' in hashes
-    assert 'models/analyses/navigation-controller.sysml' in hashes
+    assert 'models/blue-dog.sysml' in hashes
 
 
 def test_depower_is_not_a_substantial_heading_change():
-    result=evaluate('BlueDogNavigationController::Geometry',rangeM=100.,closingMps=1.,protectedRadiusM=20.,
+    result=evaluate('BlueDog::Behavior::Navigation::Geometry',rangeM=100.,closingMps=1.,protectedRadiusM=20.,
         releaseMultiplier=2.,heldConflict=True,headingKnown=False,trackAdequate=True,
         headingToleranceDeg=2.,speedToleranceMps=.05,substantialTurnDeg=15.,headingChangeDeg=0.,speedChangeMps=2.)
     assert not result['substantialChange']

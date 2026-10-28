@@ -14,10 +14,10 @@ package Page_methods_modeling_0 {
     private import DiagramLayout::*;
     view course : GeneralView {
         filter @SysML::RequirementUsage;
-        expose GorgeChallenge::courseCompletion;
-        expose BlueDogRequirements::roundTrip;
-        metadata Layout about GorgeChallenge::courseCompletion { x = 0; y = 0; }
-        metadata Layout about BlueDogRequirements::roundTrip { x = 0; y = 200; }
+        expose BlueDog::Mission::Challenge::courseCompletion;
+        expose BlueDog::Requirements::roundTrip;
+        metadata Layout about BlueDog::Mission::Challenge::courseCompletion { x = 0; y = 0; }
+        metadata Layout about BlueDog::Requirements::roundTrip { x = 0; y = 200; }
     }
 }
 ```
@@ -28,16 +28,16 @@ Architecture satisfaction links assert that their subject satisfies the referenc
 
 The Markdown source owns this explanation and the scope of each view. The imported SysML owns the requirements, relationships and rationale. The publisher validates temporary view definitions and generates the completed page without editing this source.
 
-Read the normative conditions and supporting metadata in the [vehicle requirements](../../models/vehicle/requirements.sysml), [independent challenge](../../models/missions/transgorge.sysml), and [verification plans](../../models/vehicle/verification.sysml). The [design decisions](../../models/vehicle/decisions.sysml) and [source evidence](../../models/vehicle/source-evidence.sysml) preserve the rationale behind the analysis choices.
+Read the normative conditions and supporting metadata in the [vehicle requirements](../../models/blue-dog.sysml), [independent challenge](../../models/blue-dog.sysml), and [verification plans](../../models/blue-dog.sysml). The [design decisions](../../models/blue-dog.sysml) and [source evidence](../../models/blue-dog.sysml) preserve the rationale behind the analysis choices.
 
 
 ## Requirements versus design assumptions
 
-A challenge obligation motivates a function; it does not uniquely determine a material modulus, laminate thickness or sensor accuracy. I keep explicit owner constraints, functional acceptance, provisional performance allocations and selected strategies distinct with [requirement-basis metadata](../../models/vehicle/requirement-basis.sysml). Each numerical allocation has an attached review annotation identifying its source, applicability, owner, needed measurements, margin basis and closure action. An unrecorded value-selection justification remains open; retaining a limit does not accept it. Assessment and release obligations identify the responsible role and work product. The two provisional reliability objectives are explicitly marked as studies, so their numerical comparisons cannot silently become binding mission obligations. A dependency records a selected design basis; a derivation records an implied obligation under explicit conditions.
+A challenge obligation motivates a function; it does not uniquely determine a material modulus, laminate thickness or sensor accuracy. I keep explicit owner constraints, functional acceptance, provisional performance allocations and selected strategies distinct with [requirement-basis metadata](../../models/blue-dog.sysml). Each numerical allocation has an attached review annotation identifying its source, applicability, owner, needed measurements, margin basis and closure action. An unrecorded value-selection justification remains open; retaining a limit does not accept it. Assessment and release obligations identify the responsible role and work product. The two provisional reliability objectives are explicitly marked as studies, so their numerical comparisons cannot silently become binding mission obligations. A dependency records a selected design basis; a derivation records an implied obligation under explicit conditions.
 
 Engineering decision records use a shared [item definition](../../models/libraries/decision-records.sysml). SysML items can represent identifiable information acted on over time; parts represent systems or components that can perform actions. The decision register includes working policies, baselines, preferences, mixed design-basis statements and unresolved questions. Its record states describe existing content without claiming approval or implementation. Value-allocation and procedure-choice reviews remain metadata on the requirements and procedures they concern. The element choice follows [SysML 2.0 Part 1, §7.10](https://www.omg.org/spec/SysML/2.0/Language/PDF); the record content is project tailoring.
 
-The material and geometric constants used in preliminary sizing live in the [structural analysis basis](../../models/analyses/structural-basis.sysml). They let me explore a candidate before measurements exist. Qualification instead checks supported material bounds and applicable load, functional and site limits. Missing evidence cannot produce a passing executable requirement. Lower measured stiffness or strength means revisiting the geometry or reinforcement, not rejecting a material for missing an assumed property.
+The material and geometric constants used in preliminary sizing live in the [structural analysis basis](../../models/blue-dog.sysml). They let me explore a candidate before measurements exist. Qualification instead checks supported material bounds and applicable load, functional and site limits. Missing evidence cannot produce a passing executable requirement. Lower measured stiffness or strength means revisiting the geometry or reinforcement, not rejecting a material for missing an assumed property.
 
 ```sysml-report BlueDogRequirementBasisDocuments::Summary
 ```
@@ -78,7 +78,7 @@ records, generated interfaces and numerical execution.
 
 ## Native OOSEM roles
 
-The architecture uses the pinned [OpenSysML OOSEM library](https://github.com/DavidIngraham/OpenSysML/blob/23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2/docs/project/oosem-library.md) for system context, actors, logical responsibilities, hardware, nodes and logical scenarios. This is an OpenSysML method library expressed in SysML, not a separate Blue Dog workflow engine. The [method model](../../models/vehicle/method.sysml) holds package classifications, scenario refinements and allocations; diagrams import that model through native `LogicalScenarioView` definitions.
+The architecture uses the pinned [OpenSysML OOSEM library](https://github.com/DavidIngraham/OpenSysML/blob/23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2/docs/project/oosem-library.md) for system context, actors, logical responsibilities, hardware, nodes and logical scenarios. This is an OpenSysML method library expressed in SysML, not a separate Blue Dog workflow engine. The [method model](../../models/blue-dog.sysml) holds package classifications, scenario refinements and allocations; diagrams import that model through native `LogicalScenarioView` definitions.
 
 I connect each function's use case to a logical scenario, allocate its actions to responsibilities, then describe the candidate physical realization and its verification evidence. Typed items describe information crossing action boundaries. Model links identify intended scope; the executable subset is described separately from behavior awaiting implementation.
 

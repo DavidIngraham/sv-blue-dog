@@ -18,7 +18,7 @@ DOFS=('Heave','Roll','Pitch')
 
 
 def policy_inputs():
-    return analysis_values('BlueDogWavePerformance::Inputs')
+    return analysis_values('BlueDog::Analyses::WavePerformance::Inputs')
 
 
 def mesh_part(tetrahedra,name,resolution):

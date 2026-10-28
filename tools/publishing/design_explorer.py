@@ -22,7 +22,7 @@ def render(output):
     candidate = run_record(ROOT/'evidence/runs/2026-10-15-integrated-candidate', 'integrated-sizing.json')
     design = Design.from_mapping(candidate['design']).to_mapping()
     assumptions = Parameters.from_mapping(candidate['replay']['parameters'])
-    text = (ROOT/'models/analyses/sizing/inputs.sysml').read_text()
+    text = (ROOT/'models/blue-dog.sysml').read_text()
     materials = re.search(r'out attribute materialValues.*?= \((.*?)\);', text, re.S)[1]
     material_names = re.findall(r'material\.(\w+)', materials)
     if len(material_names) != len(mass['materialValues']):

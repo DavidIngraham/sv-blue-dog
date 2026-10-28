@@ -8,10 +8,10 @@ This reference records where the boat would sail and recover, the environmental 
 
 | Subject | Authoritative source | Assessment focus |
 | --- | --- | --- |
-| Challenge | [Challenge model](../models/missions/transgorge.sysml) | Course, size, autonomy, traffic and recovery obligations |
-| Verification | [Challenge cases](../models/missions/verification.sysml), [vehicle cases](../models/vehicle/verification.sysml) | Methods and missing allocations, not completed verdicts |
+| Challenge | [Challenge model](../models/blue-dog.sysml) | Course, size, autonomy, traffic and recovery obligations |
+| Verification | [Challenge cases](../models/blue-dog.sysml), [vehicle cases](../models/blue-dog.sysml) | Methods and missing allocations, not completed verdicts |
 | Recovery | [Native physics](../models/libraries/marine/recovery.sysml), [planner](../tools/boat_analysis/mission/recovery.py), [mission engine](../tools/boat_analysis/mission/engine.py) | Current authority, route feasibility, reserve and casualty capability |
-| Environmental basis | [Environmental analysis](../models/analyses/environment-review.sysml) | Evidence applicability, coupled exposure and unaccepted margins |
+| Environmental basis | [Environmental analysis](../models/blue-dog.sysml) | Evidence applicability, coupled exposure and unaccepted margins |
 | Design | [Sizing method](sizing.md), [results](results.md) | Eligible local alternatives, refined replay and remaining evidence gaps |
 
 ## Environmental interpretation
@@ -34,7 +34,7 @@ Before a water trial, the measured maximum air draft plus wave motion, pool rise
 
 This completes the **desktop selection**, not physical site qualification. Bingen and Stevenson are endpoint choices; Home Valley is the priority intermediate survey sector. Spring Creek and Viento are alternatives, not assumed sheltered harbors. Drano is excluded from the initial autonomous set because its entrance and fishing concentration add casualty-route hazards. No unvisited shoreline point is silently entered as an approved recovery destination.
 
-The [site model](../models/analyses/recovery-site-review.sysml) specifies the survey record and coverage acceptance. Recovery coverage must assess both legs and each casualty state with spatial current, blocked approaches and loss of the nearest site. Every admitted mission trajectory needs reachable recovery before reserve exhaustion. Unknown authority fails that check. Field evidence must verify actual capture, retention and one-person pickup, including access hours. [Bingen prohibits overnight parking](https://www.portofklickitat.com/boat-launch-parks); the [Stevenson launch](https://portofskamania.specialdistrict.org/boat-launch-and-docks) has seasonal docks, so winter retrieval cannot depend on them. [Viento's official access description](https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=123) establishes river access, not an autonomous landing approval.
+The [site model](../models/blue-dog.sysml) specifies the survey record and coverage acceptance. Recovery coverage must assess both legs and each casualty state with spatial current, blocked approaches and loss of the nearest site. Every admitted mission trajectory needs reachable recovery before reserve exhaustion. Unknown authority fails that check. Field evidence must verify actual capture, retention and one-person pickup, including access hours. [Bingen prohibits overnight parking](https://www.portofklickitat.com/boat-launch-parks); the [Stevenson launch](https://portofskamania.specialdistrict.org/boat-launch-and-docks) has seasonal docks, so winter retrieval cannot depend on them. [Viento's official access description](https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=123) establishes river access, not an autonomous landing approval.
 
 ## Environmental decision
 
@@ -49,7 +49,7 @@ Recovery stress cases use 25 m/s mean wind, 35 m/s gusts, Hs 2 m, periods 1.5–
 ```sysml-report BlueDogSRRReadinessDocuments::Encounters
 ```
 
-The historical [analysis](../models/analyses/encounter-review.sysml) used six target classes: full commercial tow, fishing/drifting craft, ski/powerboat including a towed person, sailing craft, passenger vessel, and a person or low-profile paddle craft. Exercise head-on, crossing, overtaking, anchored/drifting, changing-course, occluded emergence, bridge and casualty cases in both daylight and darkness. AIS is supplementary; it cannot substitute for the non-AIS cases.
+The historical [analysis](../models/blue-dog.sysml) used six target classes: full commercial tow, fishing/drifting craft, ski/powerboat including a towed person, sailing craft, passenger vessel, and a person or low-profile paddle craft. Exercise head-on, crossing, overtaking, anchored/drifting, changing-course, occluded emergence, bridge and casualty cases in both daylight and darkness. AIS is supplementary; it cannot substitute for the non-AIS cases.
 
 The baseline range budget includes closing speed, acquisition, assessment, command, maneuver, contingency, relative-position uncertainty and separation measured from the target's physical extent. Its historical worst allocated case needs 724 m; that study proposed a common 750 m envelope before additional observation-delivery delays. Current allocation is class- and condition-specific, separating response distance, consequence allowance, observation reliability and whole-response reliability. The historical table is not its acceptance rule. The [encounter study](encounter-feasibility.md) shows how delayed observations change that distance and distinguishes the later IC-01 allocation. The verification plan calls for observing the actual target, track continuity, one-second assessment, two-second command, and achieved maneuver duration and swept path under the admitted conditions. The historical 15-second maneuver allowance is not a verified bound. New hazards during occupied maneuvers need a separate deadline check; the static timing screen does not establish that behavior. It separately checks swept-hull collision, the class-specific project separation and whether Blue Dog impedes a confined vessel. Passing a distance screen alone does not establish navigation-rule compliance.
 
@@ -93,7 +93,7 @@ The boat must also have enough energy, useful wind, observation capability and
 a feasible recovery path throughout that interval. Night or calm conditions
 may reduce recreation while making sensing or progress worse.
 
-The [native window assessment](../models/analyses/location-traffic-risk.sysml)
+The [native window assessment](../models/blue-dog.sysml)
 checks one sector, target class, operating condition and visit at a time. A
 reviewed upper encounter-rate bound multiplied by exposure time gives an upper
 estimate of expected encounters. It is **not collision probability**. A purely
@@ -139,7 +139,7 @@ an upper rate bound; zero sightings alone do not justify a zero rate.
 
 Loss of the required primary safety capability terminates qualification. The boat alerts when possible and attempts conspicuous autonomous shore recovery without waiting for the operator. IC-01 allocates an independently powered observation and control path for that recovery, but its installed performance and independence remain to be demonstrated. Older impaired-sensing studies without that allocation cannot borrow it. If the recovery path is unavailable, the simulation continues the drift and scores its consequences.
 
-The [native sensitivity analysis](../models/analyses/recovery-risk.sysml) evaluates loss-of-sensing exposure over passage duration and conflicting-traffic exposure during recovery. A deliberately pessimistic screen treats every conflicting encounter as contact. The assumed rates are varied rather than presented as measured reliability. Shortening recovery reduces exposure, but the calculation does not justify calling the risk negligible.
+The [native sensitivity analysis](../models/blue-dog.sysml) evaluates loss-of-sensing exposure over passage duration and conflicting-traffic exposure during recovery. A deliberately pessimistic screen treats every conflicting encounter as contact. The assumed rates are varied rather than presented as measured reliability. Shortening recovery reduces exposure, but the calculation does not justify calling the risk negligible.
 
 Fog, waves, power faults and common-cause loss of navigation can correlate failures with traffic exposure or defeat recovery entirely. Assess these as explicit cases, not independent probability multipliers. Injury, entanglement and commercial-vessel impediment matter alongside contact probability. The resulting decision is **proceed with analysis and supervised experiments; no unattended release on this risk argument**. Unattended operation requires measured failure/traffic inputs and casualty demonstrations, with owner acceptance of the residual risk. Failure to support acceptance requires exposure restrictions or additional independent protection.
 

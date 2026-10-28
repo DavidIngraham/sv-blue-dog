@@ -44,7 +44,7 @@ def test_wind_loss_and_expiry_drive_executed_motion():
 def test_model_policy_change_changes_simulator_behavior(tmp_path, monkeypatch):
     # Change only native policy, not Python dispatch or a mocked action result.
     from tools.boat_analysis.mission import logic
-    path = ROOT/'models/vehicle/mission-logic.sysml'
+    path = ROOT/'models/blue-dog.sysml'
     altered = tmp_path/'mission-logic.sysml'
     altered.write_text(path.read_text().replace('? "retain_forecast"', '? "abort"'))
     model = load_model(tuple(p for p in model_files() if p != path)+(altered,))

@@ -10,11 +10,11 @@ def check_values(check):
 
 @pytest.fixture
 def run_case(run_model):
-    def run_case(body='', base='BlueDogEnergyExamples::campaign', extra='', analysis='SustainedOperation'):
+    def run_case(body='', base='BlueDog::Configurations::Examples::Energy::campaign', extra='', analysis='SustainedOperation'):
         source = ('package EnergyTest { private import SI::*; ' + extra +
                   f'part candidate :> {base} {{ {body} }} }}')
         code, report = run_model(source, '-instantiate', 'EnergyTest::candidate', '-analysis',
-                                 f'BlueDogEnergy::{analysis} EnergyTest::candidate')
+                                 f'BlueDog::Analyses::Energy::{analysis} EnergyTest::candidate')
         assert not [d for d in report['diagnostics'] or [] if d['pass'] != 'runtime'], 'Test must reach execution, not fail parsing or resolution'
         return code, report, check_values(report['checks'][0]) if report['checks'] else {}
 
@@ -97,13 +97,13 @@ def test_invalid_input_does_not_pass(run_case, body):
 
 
 def test_missing_input_does_not_pass(run_case):
-    code, report, _ = run_case(base='BlueDogEnergy::Scenario')
+    code, report, _ = run_case(base='BlueDog::Analyses::Energy::Scenario')
     assert code == 2
     assert report['status'] != 'holds'
 
 
 def test_mode_change_and_component_growth_are_rolled_up(run_case):
-    extra = '''part heavy :> BlueDogEnergyExamples::sailing {
+    extra = '''part heavy :> BlueDog::Configurations::Examples::Energy::sailing {
         part additionalLoad :> loads {
             attribute :>> label = "Extra load";
             attribute :>> activePower = 100 [W];

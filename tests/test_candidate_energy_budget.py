@@ -7,7 +7,7 @@ from tools.boat_analysis.model.runtime import ROOT, analysis_values
 def test_candidate_budget_reconciles_with_archived_replay():
     record = run_record(ROOT / 'evidence/runs/2026-10-13-srr-readiness', 'srr-readiness.json')
     replay = record['refinedReplay']
-    result = analysis_values('BlueDogCandidateEnergy::Reconciliation')
+    result = analysis_values('BlueDog::Analyses::CandidateEnergy::Reconciliation')
     assert result['averageBusW'] == pytest.approx(max(c['outputs']['averagePower'] for c in replay['cases']))
     assert result['peakBusW'] == pytest.approx(max(c['outputs']['peakPower'] for c in replay['cases']))
     for key in ['requiredWh', 'departureWh']:
@@ -19,10 +19,11 @@ def test_candidate_budget_reconciles_with_archived_replay():
 
 def test_candidate_budget_projection_is_reproducible():
     from tools.publishing.srr import render
-    path = ROOT / 'models/evidence/srr-current.sysml'
-    before = path.read_bytes()
+    from tools.boat_analysis.evidence.projection import projection_path, read_projection
+    before = projection_path().read_bytes()
     render('2026-10-13-srr-readiness')
-    assert path.read_bytes() == before
+    assert projection_path().read_bytes() == before
+    assert 'package SRRCurrent {' in read_projection('srr-current')
 
 
 def test_candidate_budget_is_the_primary_published_budget(rendered_site):

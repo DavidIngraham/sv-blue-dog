@@ -72,7 +72,7 @@ def test_measurement_rejects_excess_replacement(tmp_path):
 @pytest.mark.parametrize('period,expected',[(1,True),(30,False)])
 def test_native_timing_requirement(period,expected):
     from tools.boat_analysis.model.runtime import load_model
-    verdict=load_model().verify_requirement('BlueDogEncounterFeasibility::TimingCriterion',named_arguments={'assessmentPeriodS':period,'commandLatencyS':2})
+    verdict=load_model().verify_requirement('BlueDog::Analyses::EncounterFeasibility::TimingCriterion',named_arguments={'assessmentPeriodS':period,'commandLatencyS':2})
     assert verdict.evaluated and verdict.holds is expected
 
 

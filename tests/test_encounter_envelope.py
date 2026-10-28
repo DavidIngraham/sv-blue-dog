@@ -24,16 +24,16 @@ def evaluate(model, **changes):
         appliesTrafficRequirement=True,
     )
     inputs.update(changes)
-    result = model.run_analysis("BlueDogEncounterEnvelope::Envelope",
-                                subject="BlueDogEncounterEnvelope::study", named_arguments=inputs)
+    result = model.run_analysis("BlueDog::Analyses::EncounterEnvelope::Envelope",
+                                subject="BlueDog::Analyses::EncounterEnvelope::study", named_arguments=inputs)
     assert result, result
     return numerical_value(result.outputs)
 
 
 def test_original_criteria_and_archived_budget_are_unchanged(envelope_model):
-    old = numerical_value(envelope_model.run_analysis("BlueDogEncounterReview::Acquisition").outputs)
+    old = numerical_value(envelope_model.run_analysis("BlueDog::Analyses::EncounterReview::Acquisition").outputs)
     assert old["requiredRangesM"] == pytest.approx([307, 201, 724, 296, 326, 220])
-    summary = numerical_value(envelope_model.run_analysis("BlueDogEncounterEnvelope::Summary").outputs)
+    summary = numerical_value(envelope_model.run_analysis("BlueDog::Analyses::EncounterEnvelope::Summary").outputs)
     assert summary["targetSpeedMps"] == [3.5, 1.5, 15, 4, 4, 2, 0, 0]
     assert summary["retainedRequirementM"] == 750
     assert summary["qualificationClaim"] is False
@@ -127,12 +127,12 @@ def test_missing_inputs_cannot_reuse_previous_response_bound(envelope_model):
     from opensysml.errors import ExecutionError
     evaluate(envelope_model)
     with pytest.raises(ExecutionError, match="unbound parameter"):
-        envelope_model.run_analysis("BlueDogEncounterEnvelope::Envelope",
-                                    subject="BlueDogEncounterEnvelope::study", named_arguments={})
+        envelope_model.run_analysis("BlueDog::Analyses::EncounterEnvelope::Envelope",
+                                    subject="BlueDog::Analyses::EncounterEnvelope::study", named_arguments={})
 
 
 def test_summary_native_cli_client_parity(envelope_model):
-    client = numerical_value(envelope_model.run_analysis("BlueDogEncounterEnvelope::Summary").outputs)
-    report = json.loads(native("-analysis", "BlueDogEncounterEnvelope::Summary", "-json"))
+    client = numerical_value(envelope_model.run_analysis("BlueDog::Analyses::EncounterEnvelope::Summary").outputs)
+    report = json.loads(native("-analysis", "BlueDog::Analyses::EncounterEnvelope::Summary", "-json"))
     cli = {row["name"]: native_value(row["value"]) for row in report["checks"][0]["values"]}
     assert cli == client

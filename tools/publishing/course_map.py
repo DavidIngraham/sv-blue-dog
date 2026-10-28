@@ -102,7 +102,7 @@ def render():
     text(397, 442, '1  Downstream to Stevenson', 18)
     path([(320, 474), (380, 474)], '#176a65', 3, 'stroke-dasharray="7 6" marker-end="url(#back)"')
     text(397, 481, '2  Upstream to Bingen (dashed)', 18)
-    text(32, 518, 'Gate references and route: NOAA ENC · Gate offsets: TransGorgeCourse model', 14)
+    text(32, 518, 'Gate references and route: NOAA ENC · Gate offsets: BlueDog::Mission::Course model', 14)
     text(32, 545, 'Water extent: NOAA ENC depth-area polygons · Reference paths, not simulated sailing tracks', 14)
     parts += ['</g><defs><clipPath id="mapclip"><rect x="25" y="90" width="1090" '
               'height="315"/></clipPath></defs></svg>']

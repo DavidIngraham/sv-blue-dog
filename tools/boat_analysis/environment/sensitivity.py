@@ -10,7 +10,7 @@ from tools.boat_analysis.evidence.records import source_hashes
 
 def run():
     names = ['primary', 'construction', 'aerodynamic', 'hydrodynamic', 'energy', 'combined']
-    rows = [analysis_values('BlueDogWeather::'+name) for name in names]
+    rows = [analysis_values('BlueDog::Analyses::Weather::'+name) for name in names]
     if len(rows) != len(names):
         raise ValueError('Incomplete native weather assessment')
     record = dict(zip(names, rows))

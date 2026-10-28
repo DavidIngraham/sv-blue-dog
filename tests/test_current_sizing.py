@@ -10,7 +10,8 @@ from tools.boat_analysis.model.runtime import ROOT, native, native_value
 def test_current_sources_and_projection_are_reproducible():
     from tools.boat_analysis.evidence.model import model_source
     assert verify_run_sources(CURRENT) > 10
-    assert (ROOT / 'models/evidence/current-sizing.sysml').read_text(encoding='utf-8') == model_source(CURRENT, 'BlueDogCurrentSizing')
+    from tools.boat_analysis.evidence.projection import read_projection
+    assert read_projection('current-sizing') == model_source(CURRENT, 'BlueDog::Evidence::CurrentSizing')
 
 
 def test_full_search_keeps_design_free_and_controls_in_declared_domain():
@@ -47,7 +48,7 @@ def test_current_replay_has_all_scenarios_and_native_reviews_match_evidence():
         expected = (case['numericallyBalanced'] and case['minimumOperatingMargin'] >= -1e-4
                     and min(case['structure'].values()) >= -1e-4
                     and min(case['westerlyRoute'][:3]) >= -1e-4)
-        report = json.loads(native('-analysis', f"BlueDogCurrentSizing::{case['scenario']}Review", '-json'))
+        report = json.loads(native('-analysis', f"BlueDog::Evidence::CurrentSizing::{case['scenario']}Review", '-json'))
         values = {v['name']: native_value(v['value']) for v in report['checks'][0]['values']}
         assert values['operatingScreensPass'] == expected
         assert values['evidenceAccepted'] is False

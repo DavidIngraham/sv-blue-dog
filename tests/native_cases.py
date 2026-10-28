@@ -24,16 +24,16 @@ def native_register():
 def native_recovery_trade():
     arguments = []
     for candidate in ("waterExample", "airExample"):
-        name = f"RecoveryPropulsionTrade::{candidate}"
+        name = f"BlueDog::Analyses::RecoveryPropulsionTrade::{candidate}"
         arguments.extend(("-instantiate", name, "-analysis",
-                          f"RecoveryPropulsionTrade::RecoverySizing {name}"))
+                          f"BlueDog::Analyses::RecoveryPropulsionTrade::RecoverySizing {name}"))
     return native(*arguments, "-json")
 
 def native_energy_case():
-    return native("-instantiate", "BlueDogEnergyExamples::sailing", "-analysis",
-                  "BlueDogEnergy::BudgetRollup BlueDogEnergyExamples::sailing",
-                  "-instantiate", "BlueDogEnergyExamples::campaign", "-analysis",
-                  "BlueDogEnergy::SustainedOperation BlueDogEnergyExamples::campaign", "-json")
+    return native("-instantiate", "BlueDog::Configurations::Examples::Energy::sailing", "-analysis",
+                  "BlueDog::Analyses::Energy::BudgetRollup BlueDog::Configurations::Examples::Energy::sailing",
+                  "-instantiate", "BlueDog::Configurations::Examples::Energy::campaign", "-analysis",
+                  "BlueDog::Analyses::Energy::SustainedOperation BlueDog::Configurations::Examples::Energy::campaign", "-json")
 
 def native_sailing_case():
     arguments = []
@@ -47,6 +47,6 @@ def native_sailing_case():
         ("gorgeEasterly", "PolarVoyageAssessment"),
         ("upstreamHeadwind", "SailingSensitivity"),
     ):
-        subject = f"BlueDogSailingExamples::{example}"
-        arguments.extend(("-instantiate", subject, "-analysis", f"BlueDogSailing::{analysis} {subject}"))
+        subject = f"BlueDog::Configurations::Examples::Sailing::{example}"
+        arguments.extend(("-instantiate", subject, "-analysis", f"BlueDog::Analyses::Sailing::{analysis} {subject}"))
     return native(*arguments, "-json")

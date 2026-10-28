@@ -27,7 +27,7 @@ This is a timing-assumption difference, not a change in the consequence allowanc
 
 ### What the earlier common-distance study showed
 
-The [encounter allocation](../models/analyses/encounter-review.sysml) measures distance from the nearest physical extent of the target. A tow includes its barges; a reported antenna position is not its boundary. The native calculation is:
+The [encounter allocation](../models/blue-dog.sysml) measures distance from the nearest physical extent of the target. A tow includes its barges; a reported antenna position is not its boundary. The native calculation is:
 
 **required distance = closing speed × (acquisition + processing + command + maneuver + contingency time) + separation + relative-position allowance.**
 
@@ -188,7 +188,7 @@ The [avoidance failure analysis](reliability.md#how-avoidance-can-fail) connects
 ## Leave room for crewed boats
 
 I want Blue Dog to stay out of crewed boats' way before an encounter develops,
-even if that costs time or course progress. This is a [design preference](../models/vehicle/decisions.sysml),
+even if that costs time or course progress. This is a [design preference](../models/blue-dog.sysml),
 subject to safe, rule-consistent behavior. Once encounter duties apply, an
 unexpected courtesy turn can defeat another skipper's avoidance maneuver.
 Holding course, permission to act and mandatory action therefore remain distinct.
@@ -286,7 +286,7 @@ identification and maneuver behavior before informing a hardware trade.
 
 IC-01 links an allocated sensing envelope to one-second guidance assessments, explicit command and maneuver clocks, candidate-specific sailing performance and separately accounted recovery energy. Day/night runs pair clear water, a non-AIS crossing, a stationary low target and a weed patch across fixed seeds. Additional cases exercise the solved wind endpoints, primary sensing/steering/power loss, capsize, recovery after passage standby, finer integration and degraded capabilities. The synthetic reach is 600 m between gates in a 700 m wide water domain, with two hypothetical shore approaches. It is a representative integration exercise, not the complete charted Gorge mission.
 
-Normal sailing must complete; an encounter may complete or deliberately abort and reach a recovery approach safely. These outcomes remain separate. A collision, clearance violation, unsupported sailing state, exhausted recovery bank or censored trajectory prevents the applicable acceptance condition from passing. The [native closure requirement](../models/analyses/integrated-candidate.sysml) also requires compatible sizing and explicit assumptions. The [physical evidence plan](validation-plan.md#exercise-decisions-before-physical-integration) identifies what must replace those assumptions.
+Normal sailing must complete; an encounter may complete or deliberately abort and reach a recovery approach safely. These outcomes remain separate. A collision, clearance violation, unsupported sailing state, exhausted recovery bank or censored trajectory prevents the applicable acceptance condition from passing. The [native closure requirement](../models/blue-dog.sysml) also requires compatible sizing and explicit assumptions. The [physical evidence plan](validation-plan.md#exercise-decisions-before-physical-integration) identifies what must replace those assumptions.
 
 This case set does not cover every high-speed encounter, occupied-maneuver arrival, false positive, correlated obscuration or recovery-route blockage. Those are specific additions needed before extending the result to the full course.
 

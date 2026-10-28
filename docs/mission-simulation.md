@@ -12,7 +12,7 @@ The [encounter-feasibility study](encounter-feasibility.md) supplies explicit de
 
 ## Executable supervisory logic
 
-The [mission supervisor](../models/vehicle/mission-logic.sysml) decides whether sailing is permitted, how events change the attempt, and whether an available recovery path can be used. I keep those decisions in the model so I can trace a simulated action back to the mission policy. Heading selection and motion remain simplified guidance calculations, rather than a complete autopilot.
+The [mission supervisor](../models/blue-dog.sysml) decides whether sailing is permitted, how events change the attempt, and whether an available recovery path can be used. I keep those decisions in the model so I can trace a simulated action back to the mission policy. Heading selection and motion remain simplified guidance calculations, rather than a complete autopilot.
 
 A wind observation outage inhibits sailing while the vessel drifts with the current. Restoring the observation permits sailing again. Communications loss alone does not end the attempt. A safety abort latches: restoring inputs does not resume qualification. Capsize itself is not a disqualifying event. Unassisted righting may preserve the attempt if safety capabilities remain available while inverted and upright control returns; motor use, outside intervention or loss of those safety capabilities ends qualification. The archived IC-01 casualty case exercises inverted powered recovery, not an unassisted self-righting demonstration. Alert delivery does not block autonomous recovery. A held forecast remains usable during a service outage; a declared invalid forecast triggers abort and recovery.
 

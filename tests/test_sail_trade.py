@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 import pytest
 from tools.boat_analysis.model.runtime import ROOT, model_files, native
-MODEL = ROOT / "models/analyses/sail-trade.sysml"
+MODEL = ROOT / "models/blue-dog.sysml"
 MODELS_TRADE = tuple(p for p in model_files() if p != MODEL) + (MODEL,)
 
 
@@ -12,7 +12,7 @@ def values(check):return {v['name']:v['value'] for v in check['values']}
 
 
 def test_published_assessments_do_not_reject_unknown_candidates():
-    args = [arg for case in ('tailAssessment','camberAssessment','softAssessment','buoyancyIllustration') for arg in ('-analysis', 'BlueDogSailTrade::'+case)]
+    args = [arg for case in ('tailAssessment','camberAssessment','softAssessment','buoyancyIllustration') for arg in ('-analysis', 'BlueDog::Analyses::SailTrade::'+case)]
     r=json.loads(native(*args, '-json'))
     assert r['status'] == 'holds'
     for case in r['checks'][:3]:
@@ -40,7 +40,7 @@ def test_soft_sail_can_qualify_or_fail_from_actual_gates(tmp_path,gates,qualifie
     source,n=re.subn(r'attribute gates : Evidence \[7\] ordered nonunique default =.*?;',replacement,source,count=1,flags=re.S)
     assert n==1
     fixture=tmp_path/'sail-trade.sysml';fixture.write_text(source,encoding='utf-8')
-    result=json.loads(native('-analysis','BlueDogSailTrade::softAssessment','-json',models=MODELS_TRADE[:-1]+(fixture,)))
+    result=json.loads(native('-analysis','BlueDog::Analyses::SailTrade::softAssessment','-json',models=MODELS_TRADE[:-1]+(fixture,)))
     assert result['status']=='holds' and not result.get('diagnostics')
     v=values(result['checks'][0]);assert v['qualified']==qualified;assert v['knownFailure']==failed
     assert decision in v['developmentDecision']
