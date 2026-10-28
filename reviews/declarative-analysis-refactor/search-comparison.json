@@ -1,0 +1,2415 @@
+{
+  "baseline": "9c8878f",
+  "rtol": 1e-13,
+  "atol": 1e-12,
+  "comparisons": {
+    "lo": {
+      "shape": [
+        77
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "hi": {
+      "shape": [
+        77
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "span": {
+      "shape": [
+        77
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "initial": {
+      "shape": [
+        77
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "eq": {
+      "shape": [
+        32
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "ineq": {
+      "shape": [
+        297
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "design": {
+      "shape": [
+        29
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "states": {
+      "shape": [
+        8,
+        6
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "route": {
+      "shape": [
+        6
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "westerlyRoute": {
+      "shape": [
+        6
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "righting": {
+      "shape": [
+        16
+      ],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.surgeResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.swayResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.yawResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.rollResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.wingLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.keelLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.rudderLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.keelAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.rudderAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.wingDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.rudderDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.froudeMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.wingReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.keelReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.rudderReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.cycleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.reserveMarginScaled": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.peakMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.waterVMG": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.v": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.cl": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.cd": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.clk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.clr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.drive": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.resistance": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.heeling": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.righting": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.wingTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.rudderTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.averagePower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.peakPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.harvestPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.cycleEnergy": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.reserveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.wingRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.keelRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.rudderRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.ys": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.lk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.lr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.hullDrag": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.dk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.dr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.wingResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.keelResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.rudderResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftResistanceMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain4": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain5": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain6": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain7": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain8": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain9": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain10": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain11": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain12": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain13": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain14": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain15": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain16": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain17": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain18": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain19": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain20": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.delftDomain21": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.pitch_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.waterline_m": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.wetted_m2": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.mast_trim_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.mass_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.mass_residual_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.0.pitch_residual_Nm": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.surgeResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.swayResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.yawResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.rollResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.wingLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.keelLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.rudderLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.keelAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.rudderAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.wingDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.rudderDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.froudeMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.wingReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.keelReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.rudderReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.cycleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.reserveMarginScaled": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.peakMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.waterVMG": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.v": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.cl": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.cd": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.clk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.clr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.drive": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.resistance": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.heeling": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.righting": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.wingTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.rudderTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.averagePower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.peakPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.harvestPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.cycleEnergy": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.reserveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.wingRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.keelRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.rudderRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.ys": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.lk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.lr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.hullDrag": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.dk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.dr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.wingResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.keelResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.rudderResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftResistanceMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain4": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain5": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain6": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain7": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain8": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain9": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain10": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain11": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain12": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain13": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain14": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain15": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain16": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain17": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain18": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain19": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain20": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.delftDomain21": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.pitch_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.waterline_m": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.wetted_m2": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.mast_trim_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.mass_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.mass_residual_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.1.pitch_residual_Nm": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.surgeResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.swayResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.yawResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.rollResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.wingLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.keelLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.rudderLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.keelAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.rudderAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.wingDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.rudderDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.froudeMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.wingReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.keelReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.rudderReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.cycleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.reserveMarginScaled": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.peakMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.waterVMG": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.v": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.cl": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.cd": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.clk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.clr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.drive": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.resistance": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.heeling": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.righting": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.wingTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.rudderTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.averagePower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.peakPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.harvestPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.cycleEnergy": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.reserveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.wingRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.keelRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.rudderRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.ys": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.lk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.lr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.hullDrag": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.dk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.dr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.wingResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.keelResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.rudderResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftResistanceMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain4": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain5": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain6": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain7": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain8": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain9": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain10": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain11": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain12": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain13": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain14": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain15": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain16": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain17": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain18": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain19": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain20": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.delftDomain21": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.pitch_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.waterline_m": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.wetted_m2": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.mast_trim_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.mass_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.mass_residual_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.2.pitch_residual_Nm": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.surgeResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.swayResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.yawResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.rollResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.wingLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.keelLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.rudderLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.keelAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.rudderAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.wingDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.rudderDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.froudeMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.wingReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.keelReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.rudderReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.cycleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.reserveMarginScaled": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.peakMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.waterVMG": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.v": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.cl": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.cd": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.clk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.clr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.drive": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.resistance": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.heeling": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.righting": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.wingTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.rudderTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.averagePower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.peakPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.harvestPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.cycleEnergy": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.reserveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.wingRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.keelRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.rudderRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.ys": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.lk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.lr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.hullDrag": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.dk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.dr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.wingResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.keelResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.rudderResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftResistanceMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain4": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain5": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain6": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain7": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain8": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain9": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain10": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain11": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain12": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain13": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain14": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain15": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain16": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain17": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain18": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain19": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain20": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.delftDomain21": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.pitch_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.waterline_m": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.wetted_m2": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.mast_trim_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.mass_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.mass_residual_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.3.pitch_residual_Nm": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.surgeResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.swayResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.yawResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.rollResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.wingLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.keelLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.rudderLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.keelAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.rudderAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.wingDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.rudderDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.froudeMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.wingReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.keelReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.rudderReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.cycleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.reserveMarginScaled": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.peakMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.waterVMG": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.v": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.cl": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.cd": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.clk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.clr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.drive": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.resistance": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.heeling": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.righting": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.wingTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.rudderTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.averagePower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.peakPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.harvestPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.cycleEnergy": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.reserveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.wingRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.keelRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.rudderRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.ys": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.lk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.lr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.hullDrag": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.dk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.dr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.wingResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.keelResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.rudderResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftResistanceMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain4": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain5": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain6": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain7": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain8": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain9": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain10": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain11": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain12": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain13": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain14": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain15": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain16": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain17": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain18": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain19": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain20": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.delftDomain21": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.pitch_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.waterline_m": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.wetted_m2": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.mast_trim_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.mass_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.mass_residual_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.4.pitch_residual_Nm": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.surgeResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.swayResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.yawResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.rollResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.wingLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.keelLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.rudderLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.keelAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.rudderAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.wingDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.rudderDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.froudeMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.wingReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.keelReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.rudderReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.cycleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.reserveMarginScaled": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.peakMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.waterVMG": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.v": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.cl": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.cd": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.clk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.clr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.drive": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.resistance": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.heeling": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.righting": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.wingTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.rudderTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.averagePower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.peakPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.harvestPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.cycleEnergy": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.reserveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.wingRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.keelRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.rudderRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.ys": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.lk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.lr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.hullDrag": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.dk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.dr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.wingResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.keelResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.rudderResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftResistanceMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain4": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain5": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain6": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain7": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain8": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain9": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain10": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain11": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain12": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain13": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain14": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain15": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain16": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain17": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain18": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain19": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain20": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.delftDomain21": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.pitch_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.waterline_m": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.wetted_m2": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.mast_trim_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.mass_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.mass_residual_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.5.pitch_residual_Nm": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.surgeResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.swayResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.yawResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.rollResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.wingLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.keelLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.rudderLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.keelAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.rudderAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.wingDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.rudderDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.froudeMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.wingReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.keelReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.rudderReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.cycleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.reserveMarginScaled": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.peakMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.waterVMG": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.v": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.cl": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.cd": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.clk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.clr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.drive": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.resistance": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.heeling": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.righting": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.wingTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.rudderTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.averagePower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.peakPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.harvestPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.cycleEnergy": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.reserveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.wingRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.keelRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.rudderRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.ys": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.lk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.lr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.hullDrag": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.dk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.dr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.wingResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.keelResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.rudderResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftResistanceMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain4": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain5": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain6": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain7": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain8": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain9": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain10": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain11": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain12": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain13": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain14": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain15": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain16": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain17": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain18": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain19": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain20": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.delftDomain21": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.pitch_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.waterline_m": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.wetted_m2": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.mast_trim_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.mass_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.mass_residual_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.6.pitch_residual_Nm": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.surgeResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.swayResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.yawResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.rollResidual": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.wingLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.keelLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.rudderLiftMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.keelAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.rudderAngleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.wingDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.rudderDriveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.froudeMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.wingReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.keelReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.rudderReMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.cycleMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.reserveMarginScaled": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.peakMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.waterVMG": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.v": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.cl": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.cd": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.clk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.clr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.drive": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.resistance": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.heeling": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.righting": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.wingTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.rudderTorque": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.averagePower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.peakPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.harvestPower": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.cycleEnergy": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.reserveMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.wingRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.keelRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.rudderRe": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.ys": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.lk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.lr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.hullDrag": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.dk": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.dr": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.wingResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.keelResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.rudderResultant": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftResistanceMargin": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain4": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain5": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain6": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain7": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain8": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain9": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain10": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain11": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain12": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain13": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain14": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain15": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain16": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain17": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain18": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain19": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain20": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.delftDomain21": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.pitch_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.waterline_m": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.wetted_m2": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.mast_trim_deg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.mass_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.mass_residual_kg": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    },
+    "operating.7.pitch_residual_Nm": {
+      "shape": [],
+      "maximumAbsoluteDifference": 0.0
+    }
+  },
+  "constraints": 297,
+  "designFields": 29,
+  "freeStateFields": 6,
+  "operatingCases": 8,
+  "interpretation": "Single real shared-design evaluation and initialization; not optimizer convergence or physical validation."
+}

@@ -1,0 +1,86 @@
+{
+  "method": "Fresh serial pytest process per affected module",
+  "environment": {
+    "GOMEMLIMIT": "3GiB",
+    "GOGC": "50"
+  },
+  "files": [
+    {
+      "file": "experiments/inland-navigation/test_navigation.py",
+      "exitCode": 0,
+      "junit": ".tools/affected-00-test_navigation.xml",
+      "log": ".tools/affected-00-test_navigation.log",
+      "tests": "272",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.759"
+    },
+    {
+      "file": "tests/test_structural_acceptance.py",
+      "exitCode": 0,
+      "junit": ".tools/affected-01-test_structural_acceptance.xml",
+      "log": ".tools/affected-01-test_structural_acceptance.log",
+      "tests": "16",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "12.220"
+    },
+    {
+      "file": "tests/test_surface_environment.py",
+      "exitCode": 0,
+      "junit": ".tools/affected-02-test_surface_environment.xml",
+      "log": ".tools/affected-02-test_surface_environment.log",
+      "tests": "13",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "17.515"
+    },
+    {
+      "file": "tests/test_upstream_client.py",
+      "exitCode": 0,
+      "junit": ".tools/affected-03-test_upstream_client.xml",
+      "log": ".tools/affected-03-test_upstream_client.log",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "4.015"
+    },
+    {
+      "file": "tests/test_verification_evidence.py",
+      "exitCode": 0,
+      "junit": ".tools/affected-04-test_verification_evidence.xml",
+      "log": ".tools/affected-04-test_verification_evidence.log",
+      "tests": "19",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "70.919"
+    },
+    {
+      "file": "tests/test_wave_performance.py",
+      "exitCode": 0,
+      "junit": ".tools/affected-05-test_wave_performance.xml",
+      "log": ".tools/affected-05-test_wave_performance.log",
+      "tests": "10",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "18.386"
+    },
+    {
+      "file": "tests/test_weather.py",
+      "exitCode": 0,
+      "junit": ".tools/affected-06-test_weather.xml",
+      "log": ".tools/affected-06-test_weather.log",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "22.419"
+    }
+  ]
+}

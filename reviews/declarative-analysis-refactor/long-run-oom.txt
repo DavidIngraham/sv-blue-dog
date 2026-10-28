@@ -1,0 +1,2 @@
+[Tue Oct 27 20:54:20 2026] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/init.scope,task=sysml-grpc,pid=1361986,uid=1001
+[Tue Oct 27 20:54:20 2026] Out of memory: Killed process 1361986 (sysml-grpc) total-vm:9985488kB, anon-rss:8664340kB, file-rss:0kB, shmem-rss:0kB, UID:1001 pgtables:17316kB oom_score_adj:0

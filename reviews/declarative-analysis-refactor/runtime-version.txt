@@ -1,0 +1,4 @@
+sysml develop-23ca2e2f0
+  Commit:     23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2
+  Build time: unknown
+  Go version: go1.25.11

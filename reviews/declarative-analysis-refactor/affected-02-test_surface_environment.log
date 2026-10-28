@@ -1,0 +1,22 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/david/repos/sv-blue-dog-declarative
+configfile: pyproject.toml
+plugins: platformdirs-4.12.4
+collected 13 items
+
+tests/test_surface_environment.py .............                          [100%]
+
+- generated xml file: /home/david/repos/sv-blue-dog-declarative/.tools/affected-02-test_surface_environment.xml -
+============================= slowest 10 durations =============================
+12.63s call     tests/test_surface_environment.py::test_log_profile_reference_height_and_near_surface
+3.49s call     tests/test_surface_environment.py::test_mission_executes_scalar_wave_adjusted_speed
+0.56s call     tests/test_surface_environment.py::test_uniform_strip_provider_matches_legacy_upright_loads
+0.26s call     tests/test_surface_environment.py::test_wave_following_cancels_center_clearance_but_not_wind_height
+0.17s setup    tests/test_surface_environment.py::test_log_profile_reference_height_and_near_surface
+0.05s call     tests/test_surface_environment.py::test_zero_motion_preserves_strip_solution
+0.05s call     tests/test_surface_environment.py::test_quadrature_refinement_and_shear_reduce_drive
+0.04s call     tests/test_surface_environment.py::test_wake_is_triggered_once_and_expires
+0.03s call     tests/test_surface_environment.py::test_calm_and_opposing_current_wave_limits
+0.03s call     tests/test_surface_environment.py::test_strip_force_direction_and_moment
+============================= 13 passed in 17.52s ==============================

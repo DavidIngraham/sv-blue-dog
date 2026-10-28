@@ -1,0 +1,22 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/david/repos/sv-blue-dog-declarative
+configfile: pyproject.toml
+plugins: platformdirs-4.12.4
+collected 16 items
+
+tests/test_structural_acceptance.py ................                     [100%]
+
+- generated xml file: /home/david/repos/sv-blue-dog-declarative/.tools/affected-01-test_structural_acceptance.xml -
+============================= slowest 10 durations =============================
+4.95s call     tests/test_structural_acceptance.py::test_shared_evaluation_matches_cli[False-fails]
+3.75s call     tests/test_structural_acceptance.py::test_shared_evaluation_matches_cli[True-holds]
+3.33s setup    tests/test_structural_acceptance.py::test_lower_material_properties_are_allowed_but_overcredit_is_not[WetCouponStiffness-creditedModulusPa-qualifiedModulusPa-5000000000.0]
+0.02s call     tests/test_structural_acceptance.py::test_lower_material_properties_are_allowed_but_overcredit_is_not[WetCouponStiffness-creditedModulusPa-qualifiedModulusPa-5000000000.0]
+0.02s call     tests/test_structural_acceptance.py::test_design_specific_acceptance[PrintTileEnvelope-inputs0-change0]
+0.01s call     tests/test_structural_acceptance.py::test_shared_inputs_do_not_leak
+0.01s call     tests/test_structural_acceptance.py::test_lower_material_properties_are_allowed_but_overcredit_is_not[WetCouponStrength-creditedAllowablePa-qualifiedAllowablePa-25000000.0]
+0.01s call     tests/test_structural_acceptance.py::test_design_specific_acceptance[LaunchClearance-inputs2-change2]
+0.01s call     tests/test_structural_acceptance.py::test_functional_limit_replaces_assumed_screen[HullDeflection]
+0.01s call     tests/test_structural_acceptance.py::test_aged_capacity_is_compared_with_design_credit
+============================= 16 passed in 12.24s ==============================

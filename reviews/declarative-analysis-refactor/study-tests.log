@@ -1,0 +1,32 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/david/repos/sv-blue-dog-declarative
+configfile: pyproject.toml
+plugins: platformdirs-4.12.4
+collected 49 items
+
+tests/test_declarative_studies.py ...................................... [ 77%]
+                                                                         [ 77%]
+tests/test_study_cli.py ....                                             [ 85%]
+tests/test_search_discovery.py .......                                   [100%]
+
+- generated xml file: /home/david/repos/sv-blue-dog-declarative/.tools/study-tests.xml -
+============================= slowest 20 durations =============================
+1.20s call     tests/test_declarative_studies.py::test_new_model_case_is_discovered_without_a_python_registry_edit
+1.08s call     tests/test_declarative_studies.py::test_discovered_cases_are_ordered_by_native_id_and_repeated_runs_are_stable
+0.93s call     tests/test_declarative_studies.py::test_failed_native_objectives_are_retained_distinctly_from_execution_errors
+0.58s call     tests/test_declarative_studies.py::test_nested_unrepresentable_output_is_execution_error_with_retained_native_report
+0.56s call     tests/test_declarative_studies.py::test_defaults_are_explicit_and_native_values_preserve_their_types
+0.56s call     tests/test_declarative_studies.py::test_missing_unknown_or_wrongly_typed_inputs_cannot_pass[arguments2]
+0.52s call     tests/test_declarative_studies.py::test_scalar_bindings_cannot_masquerade_as_native_dimensional_values
+0.52s call     tests/test_declarative_studies.py::test_missing_unknown_or_wrongly_typed_inputs_cannot_pass[arguments3]
+0.51s call     tests/test_declarative_studies.py::test_missing_unknown_or_wrongly_typed_inputs_cannot_pass[arguments1]
+0.48s call     tests/test_declarative_studies.py::test_missing_unknown_or_wrongly_typed_inputs_cannot_pass[arguments0]
+0.44s call     tests/test_declarative_studies.py::test_subject_binding_uses_an_identified_model_configuration_and_records_assumptions
+0.17s setup    tests/test_declarative_studies.py::test_defaults_are_explicit_and_native_values_preserve_their_types
+0.01s call     tests/test_study_cli.py::test_schema_command_uses_the_pydantic_schema_without_native_execution
+0.01s call     tests/test_study_cli.py::test_cli_does_not_overwrite_the_study_file
+0.01s call     tests/test_study_cli.py::test_cli_writes_retained_report_and_exits_nonzero_for_failed_objectives
+
+(5 durations < 0.005s hidden.  Use -vv to show these durations.)
+============================== 49 passed in 8.32s ==============================

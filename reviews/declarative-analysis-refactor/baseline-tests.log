@@ -1,0 +1,49 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/david/repos/sv-blue-dog-declarative
+configfile: pyproject.toml
+plugins: platformdirs-4.12.4
+collected 94 items
+
+tests/test_native_kernel.py .....                                        [  5%]
+tests/test_energy.py ................                                    [ 22%]
+tests/test_sailing_performance.py ............................           [ 52%]
+tests/test_reliability.py ....................                           [ 73%]
+tests/test_named_configuration.py .......                                [ 80%]
+tests/test_upstream_client.py .......                                    [ 88%]
+tests/test_recorded_evidence.py .....                                    [ 93%]
+tests/test_sail_trade.py ......                                          [100%]
+
+- generated xml file: /home/david/repos/sv-blue-dog-declarative/.tools/baseline-tests.xml -
+============================= slowest 30 durations =============================
+27.93s call     tests/test_native_kernel.py::test_real_operation_batch_matches_scalar
+20.43s call     tests/test_named_configuration.py::test_named_demonstration_links_native_arithmetic_to_recovery_policy
+19.89s call     tests/test_recorded_evidence.py::test_recorded_sources_match_original_revision
+16.19s call     tests/test_energy.py::test_verification_requires_evidence_and_numerical_success
+15.72s call     tests/test_sailing_performance.py::test_tacking_gybing_and_current_are_not_conflated
+14.37s call     tests/test_sailing_performance.py::test_shorter_time_budget_and_leeway_raise_upwind_demand
+13.91s call     tests/test_recorded_evidence.py::test_native_record_review_distinguishes_nominal_and_adverse_cases
+12.10s call     tests/test_reliability.py::test_dfmea_starter_stays_open_and_has_real_links
+11.73s call     tests/test_sailing_performance.py::test_wind_strength_changes_required_ratio_not_a_predicted_polar
+9.95s call     tests/test_reliability.py::test_holds_increase_exposure_and_tighten_budget
+9.82s call     tests/test_sailing_performance.py::test_current_reduces_or_increases_demand_without_being_derated
+9.49s call     tests/test_sailing_performance.py::test_hull_length_changes_reference_not_predicted_speed
+9.44s call     tests/test_reliability.py::test_binding_duration_is_independent_of_provisional_reliability[True-100-pass]
+8.12s call     tests/test_reliability.py::test_synthetic_exposure_and_evidence_gate
+7.06s call     tests/test_sailing_performance.py::test_coupled_polar_legs_change_cruise_exposure
+6.48s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> trueWindAngle = TrigFunctions::rad(181) * (1 [rad]);]
+6.46s call     tests/test_sail_trade.py::test_soft_sail_can_qualify_or_fail_from_actual_gates[gates4-false-false-Equal development contender]
+6.33s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[attribute :>> zeroFailureTestHours = 0;]
+6.07s call     tests/test_reliability.py::test_positive_but_inadequate_progress_fails
+5.97s call     tests/test_reliability.py::test_duration_cannot_pass_an_accepted_profile_beyond_qualified_exposure
+5.92s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> waterlineLength = 0 [m];]
+5.78s call     tests/test_energy.py::test_rollup_and_synthetic_campaign
+5.74s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> distance = -1 [m];]
+5.65s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> retainedPerformance = 0;]
+5.54s call     tests/test_sail_trade.py::test_soft_sail_can_qualify_or_fail_from_actual_gates[gates0-true-false-Eligible for selection]
+5.47s call     tests/test_sail_trade.py::test_soft_sail_can_qualify_or_fail_from_actual_gates[gates3-true-false-Eligible for selection]
+5.33s call     tests/test_reliability.py::test_binding_duration_is_independent_of_provisional_reliability[False-100-inconclusive]
+5.31s call     tests/test_reliability.py::test_accepted_synthetic_fixture_exercises_pass_path
+5.29s call     tests/test_sail_trade.py::test_soft_sail_can_qualify_or_fail_from_actual_gates[gates1-false-true-Resolve verified failure]
+5.24s call     tests/test_sail_trade.py::test_soft_sail_can_qualify_or_fail_from_actual_gates[gates2-true-false-Eligible for selection]
+======================== 94 passed in 509.90s (0:08:29) ========================

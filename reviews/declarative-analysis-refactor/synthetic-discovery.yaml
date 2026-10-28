@@ -1,0 +1,8 @@
+schema_version: 1
+name: Synthetic configuration and analysis extension
+groups:
+  - name: discovered
+    select:
+      kind: AnalysisCaseUsage
+      type: DeclarativeStudyFixtures::Scale
+      cardinality: many

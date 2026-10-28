@@ -1,0 +1,38 @@
+{
+  "baselineCases": [
+    "discovered/default/DeclarativeStudyFixtures::Cases::alpha",
+    "discovered/default/DeclarativeStudyFixtures::Cases::zeta"
+  ],
+  "extendedCases": [
+    "discovered/default/AdditionalStudy::configured",
+    "discovered/default/DeclarativeStudyFixtures::Cases::alpha",
+    "discovered/default/DeclarativeStudyFixtures::Cases::zeta"
+  ],
+  "newConfiguration": "AdditionalStudy::candidate",
+  "addedCase": "AdditionalStudy::configured",
+  "outputs": {
+    "product": 105,
+    "label": "Added synthetic configuration"
+  },
+  "sameConfigSha256": true,
+  "configuration": {
+    "path": "/home/david/repos/sv-blue-dog-declarative/reviews/declarative-analysis-refactor/synthetic-discovery.yaml",
+    "sha256": "46e745a427de020292a68d50b09cc620db3ee0f0f148cdd98f70a7bd62e0eaf7",
+    "validatedSha256": "8dff0de137ebb2462af718d843b84437033b21088e06c677179d0d1d937a3f98"
+  },
+  "sourceHashes": {
+    "tests/fixtures/declarative-studies.sysml": "5f389a5a9acdd8b90a4834bf0d6c1c1bd3901f165b492b59334129ea6f5a606f",
+    "reviews/declarative-analysis-refactor/synthetic-addition.sysml": "9eb4c4378e2b3724b2f97ff59b5e99fcdcde750a912d62ddbdf5e1b3fd997206"
+  },
+  "driverHashes": {
+    "tools/boat_analysis/studies/runner.py": "fbb12a2321c784737958c31e1560298f39f6900941072201d695054e4050ac5b",
+    "tools/boat_analysis/studies/config.py": "c700604d0ba41cd117e9b93bb31837a3bf04f641e23bea435eb06ac8a5419bc9",
+    "tools/boat_analysis/studies/__init__.py": "3ab0a8e81dd1166a055d19561af1726543fd805d2e9dfbabff71dbc9d456c203",
+    "tools/boat_analysis/model/runtime.py": "fa157878fe115a75e6c31e9ced9b96a1c12566b2de45e0c8919fb17ae4004bc7",
+    "tools/boat_analysis/model/install.py": "3853c64a76703de30cee1fbce9b823d85dfa7b5cc5057dc170a91d2b610139ee",
+    "pyproject.toml": "c227beb83e9970d0887fabf936f6c079520aa9c0cc77bfb684ed9e234b8fd9e0",
+    "uv.lock": "b2907814fa1956f7894d7e7b7e5a97de37c7256714c559b1b50345f2643418b2"
+  },
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "interpretation": "Synthetic interface reuse and discovery regression; no physical evidence."
+}

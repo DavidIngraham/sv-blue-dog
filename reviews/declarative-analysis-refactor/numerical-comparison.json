@@ -1,0 +1,75 @@
+{
+  "baseline": "9c8878f",
+  "cases": [
+    {
+      "study": "recovery.yaml",
+      "case": "BlueDogIntegratedCandidate::Inputs",
+      "run": "configuration_inputs/default/BlueDogIntegratedCandidate::Inputs",
+      "identical": true,
+      "outputs": 23
+    },
+    {
+      "study": "recovery.yaml",
+      "case": "BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration",
+      "run": "recovery/default/BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration",
+      "identical": true,
+      "outputs": 11
+    },
+    {
+      "study": "recovery.yaml",
+      "case": "BlueDogIntegratedCandidate::IC01NoRecoveryAuthority",
+      "run": "recovery/default/BlueDogIntegratedCandidate::IC01NoRecoveryAuthority",
+      "identical": true,
+      "outputs": 11
+    },
+    {
+      "study": "recovery.yaml",
+      "case": "BlueDogIntegratedCandidate::IC01RecoveryIllustration",
+      "run": "recovery/default/BlueDogIntegratedCandidate::IC01RecoveryIllustration",
+      "identical": true,
+      "outputs": 11
+    },
+    {
+      "study": "sail-trade.yaml",
+      "case": "BlueDogSailTrade::camberAssessment",
+      "run": "candidates/default/BlueDogSailTrade::camberAssessment",
+      "identical": true,
+      "outputs": 10
+    },
+    {
+      "study": "sail-trade.yaml",
+      "case": "BlueDogSailTrade::softAssessment",
+      "run": "candidates/default/BlueDogSailTrade::softAssessment",
+      "identical": true,
+      "outputs": 10
+    },
+    {
+      "study": "sail-trade.yaml",
+      "case": "BlueDogSailTrade::tailAssessment",
+      "run": "candidates/default/BlueDogSailTrade::tailAssessment",
+      "identical": true,
+      "outputs": 10
+    },
+    {
+      "study": "sail-trade.yaml",
+      "case": "BlueDogSailTrade::buoyancyIllustration",
+      "run": "buoyancy/default/BlueDogSailTrade::buoyancyIllustration",
+      "identical": true,
+      "outputs": 2
+    },
+    {
+      "study": "recovery-scenarios.yaml",
+      "case": "BlueDogIntegratedCandidate::RecoveryScreen",
+      "run": "recovery/bounded_reach/BlueDogIntegratedCandidate::RecoveryScreen",
+      "identical": true,
+      "outputs": 11
+    }
+  ],
+  "recoveryNominalWh": 12.545454545454543,
+  "recoveryInvertedWh": 98.0,
+  "buoyancyPositiveNm": 98.0665,
+  "buoyancyNegativeNm": -98.0665,
+  "demonstrationOutputsAndBehaviorIdentical": true,
+  "nativeRecords": "/home/david/repos/sv-blue-dog-declarative/.tools/demonstration-refactor.sysml",
+  "interpretation": "Exact software/model numerical regression; no physical validation or qualification."
+}

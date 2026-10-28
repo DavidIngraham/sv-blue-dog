@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/david/repos/sv-blue-dog-declarative
+configfile: pyproject.toml
+plugins: platformdirs-4.12.4
+collected 5 items
+
+tests/test_weather.py .....                                              [100%]
+
+- generated xml file: /home/david/repos/sv-blue-dog-declarative/.tools/affected-06-test_weather.xml -
+============================= slowest 10 durations =============================
+13.25s call     tests/test_weather.py::test_profiles_keep_safety_constraints_and_report_east
+4.82s call     tests/test_weather.py::test_native_probability_does_not_average_failed_duration
+3.62s setup    tests/test_weather.py::test_from_direction_and_missing_wind
+0.64s call     tests/test_weather.py::test_frozen_archive_matches_native_projection
+0.01s call     tests/test_weather.py::test_window_selection_does_not_peek_and_gaps_are_not_success
+
+(5 durations < 0.005s hidden.  Use -vv to show these durations.)
+============================== 5 passed in 22.42s ==============================
