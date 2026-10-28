@@ -16,10 +16,12 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 90
     env:
       OPENBLAS_NUM_THREADS: "1"
       OMP_NUM_THREADS: "1"
+      GOMEMLIMIT: "3GiB"
+      GOGC: "50"
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -71,13 +73,14 @@ jobs:
           uv pip install --python "$template_dir/.venv/bin/python" .tools/runtime-dist/*.whl 'pytest>=9,<10'
           cd "$template_dir"
           .venv/bin/python -m pytest -q
-      - run: uv run pytest -q --durations=30 --junitxml=build/test-results.xml
+      - name: Run regression modules with isolated native services
+        run: uv run python -m tools.testing
       - name: Upload test timings
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: regression-timings
-          path: build/test-results.xml
+          path: build/test-results/
           if-no-files-found: ignore
       - name: Exercise the seeded mission campaign
         run: uv run python -m tools.boat_analysis.mission.campaign --count 4
