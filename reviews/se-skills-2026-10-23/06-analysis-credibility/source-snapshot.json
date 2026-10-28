@@ -1,0 +1,8 @@
+{
+  "archive": "source-snapshot.zip",
+  "sha256": "ce8e510a772c1d72fb942ee4aca30d996361215c47de7c4176c24950777103dc",
+  "modelSources": 94,
+  "totalSources": 119,
+  "reconstructedFromVerifiedEdits": false,
+  "scope": "Exact model/audit/skill sources; not a complete execution environment or physical evidence bundle."
+}

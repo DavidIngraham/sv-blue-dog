@@ -11,7 +11,7 @@ from tools.boat_analysis.aerodynamics.vsp.vsp_runtime import ROOT
 def run_case(aspect,camber,mesh=24,reverse=False,*,wake_iterations=5,alpha_start=-12,alpha_end=16,alpha_count=8,beta=0):
     v,wing,_,span,chord,cad_hash=build(1.,aspect,mesh)
     work=ROOT/'.tools/wing-grid'/f'ar{aspect:g}-camber{camber:g}-reverse{int(reverse)}-m{mesh}-w{wake_iterations}-b{beta:g}';work.mkdir(parents=True,exist_ok=True)
-    p=next(p for p in input_record('wing-geometry.json')['profiles'] if p['span_station_mm']==150)
+    p=next(p for p in input_record('wing-geometry.json', purpose='reference')['profiles'] if p['span_station_mm']==150)
     x=np.array(p['x_mm']);u=(x-x[0])/(x[-1]-x[0]);top=-np.array(p['lower_mm']);bottom=-np.array(p['upper_mm'])
     mean=(top+bottom)/2;half=(top-bottom)/2
     mean=(mean-np.linspace(mean[0],mean[-1],len(mean)))*camber

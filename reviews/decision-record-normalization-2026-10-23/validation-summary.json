@@ -1,0 +1,34 @@
+{
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "modelHash": "2db64b0fc2097a37aa7a251e11ba513ef6b4c4efe36d2ffcc6e47b5cee9749ef",
+  "auditedSourceContentUnchanged": true,
+  "rigAssessmentsUnchanged": true,
+  "tests": {
+    "tests": 1097,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "testSeconds": 1227.278,
+  "publicationPages": 36,
+  "decisionInventory": {
+    "workingDecisions": 8,
+    "openQuestions": 6,
+    "designBasisRecords": 6,
+    "totalDecisionRecords": 20,
+    "allocationReviews": 80,
+    "declaredCriteria": 7,
+    "criterionClasses": {
+      "mandatory": 6,
+      "comparativeStudy": 1
+    }
+  },
+  "preserved": {
+    "informationRecords": 20,
+    "contextAnnotations": 14,
+    "allocationProcedureReviews": 80,
+    "supportingDependencies": 43,
+    "openQuestionShortIDs": 6
+  },
+  "interpretation": "Structural normalization only; no new engineering selection, evidence acceptance or approval."
+}

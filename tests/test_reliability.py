@@ -81,6 +81,9 @@ def test_accepted_but_short_test_is_a_verification_failure(cruise):
     body = '''attribute :>> profileEvidenceAccepted = true;
               attribute :>> rateEvidenceAccepted = true;
               attribute :>> constantHazardAccepted = true;
+              attribute :>> criticalFunctionPartitionAccepted = true;
+              attribute :>> dependenceTreatmentAccepted = true;
+              attribute :>> commonCauseCoverageAccepted = true;
               attribute :>> zeroFailureTestHours = 100;'''
     code, v = cruise(body, 'VoyageReliabilityVerification')
     assert code != 0
@@ -91,7 +94,10 @@ def test_accepted_synthetic_fixture_exercises_pass_path(cruise):
     # This tests verdict logic, not acceptance of the real project's synthetic evidence.
     body = '''attribute :>> profileEvidenceAccepted = true;
               attribute :>> rateEvidenceAccepted = true;
-              attribute :>> constantHazardAccepted = true;'''
+              attribute :>> constantHazardAccepted = true;
+              attribute :>> criticalFunctionPartitionAccepted = true;
+              attribute :>> dependenceTreatmentAccepted = true;
+              attribute :>> commonCauseCoverageAccepted = true;'''
     code, v = cruise(body, 'VoyageReliabilityVerification')
     assert code == 0
     assert v['verdict'] == 'VerdictKind::pass'
@@ -101,9 +107,9 @@ def test_dfmea_starter_stays_open_and_has_real_links():
     from tools.boat_analysis.model.runtime import load_model
     result = load_model().run_analysis('FailureAnalysis::DesignFailureReview',
                                       subject='BlueDogDFMEA::starter')
-    assert result.outputs['modeCount'] == 12
-    assert result.outputs['unresolvedCriticalCount'] == 10
-    assert result.outputs['openActionCount'] == 12
+    assert result.outputs['modeCount'] == 15
+    assert result.outputs['unresolvedCriticalCount'] == 13
+    assert result.outputs['openActionCount'] == 15
     assert result.outputs['reviewReady'] is False
     table = native('-render-document', 'BlueDogReliabilityDocuments::DFMEA')
     for trace in ['| steeringJam | actuation |', '| steeringJam | weedSnagSteeringRecovery |',
@@ -118,3 +124,29 @@ def test_slow_progress_is_allowed_with_sufficient_qualified_exposure(cruise):
     assert v['minimumProgressMet'] == 'false'  # Historical comparison only.
     assert v['durationMet'] == 'true'
     assert v['modeledFeasible'] == 'true'
+
+
+@pytest.mark.parametrize('accepted, hours, expected', [
+    (False, 100, 'inconclusive'),
+    (True, 100, 'pass'),
+    (True, 10000, 'pass'),
+])
+def test_binding_duration_is_independent_of_provisional_reliability(cruise, accepted, hours, expected):
+    body = f"""attribute :>> profileEvidenceAccepted = {str(accepted).lower()};
+               attribute :>> rateEvidenceAccepted = true;
+               attribute :>> constantHazardAccepted = true;
+               attribute :>> criticalFunctionPartitionAccepted = true;
+               attribute :>> dependenceTreatmentAccepted = true;
+               attribute :>> commonCauseCoverageAccepted = true;
+               attribute :>> zeroFailureTestHours = {hours};"""
+    _, values = cruise(body, 'PassageDurationVerification')
+    assert values['verdict'] == f'VerdictKind::{expected}'
+    if accepted and hours == 100:
+        _, study = cruise(body, 'VoyageReliabilityVerification')
+        assert study['verdict'] == 'VerdictKind::fail'
+
+
+def test_duration_cannot_pass_an_accepted_profile_beyond_qualified_exposure(cruise):
+    _, values = cruise('attribute :>> profileEvidenceAccepted = true; attribute :>> holdTime = 43200 [s];',
+                       'PassageDurationVerification')
+    assert values['verdict'] == 'VerdictKind::fail'

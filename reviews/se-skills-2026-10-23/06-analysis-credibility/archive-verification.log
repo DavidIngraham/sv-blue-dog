@@ -1,0 +1,4 @@
+python -m tools.boat_analysis.cli evidence-check
+Verified 2262 archived source hashes.
+23 original-revision archives; 101 manifest-registered files.
+Exit code: 0

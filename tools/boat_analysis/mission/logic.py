@@ -23,6 +23,24 @@ class MissionLogic:
             self._cache[key] = dict(self.model.execute_action(action, inputs=inputs))
         return self._cache[key].copy()
 
+    def restore_qualification(self, seconds, *, record_valid, persisted_qualification_lost):
+        """Restore qualification only; this does not implement a hardware watchdog.
+
+        An invalid/missing durable record follows the model's nonqualifying
+        fallback. Restoring an older record cannot erase a live disqualification.
+        Abort and other hardware restrictions need their own persisted state.
+        """
+        if type(record_valid) is not bool or type(persisted_qualification_lost) is not bool:
+            raise TypeError('Qualification restoration inputs must be Boolean')
+        action = 'BlueDogBehaviorContracts::RestoreQualification'
+        inputs = dict(recordValid=record_valid,
+                      persistedQualificationLost=persisted_qualification_lost,
+                      currentQualificationLost=self.qualification_lost)
+        result = self._execute(action, inputs)
+        self.qualification_lost = result['qualificationLostNext']
+        self.trace.append(dict(seconds=seconds, action=action, inputs=inputs, outputs=result.copy()))
+        return self.qualification_lost
+
     def recovery_authority(self, seconds, event_kind, ordinary, independent):
         action='BlueDogMissionLogic::RecoveryAuthority'
         inputs=dict(eventKind=event_kind,ordinaryPermission=bool(ordinary),independentPath=bool(independent))

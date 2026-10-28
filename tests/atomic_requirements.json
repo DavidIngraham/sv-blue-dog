@@ -4,619 +4,722 @@
       "id": "E-101",
       "name": "EnergyEstimateCadence",
       "parent": "energyAwareness",
-      "usage": "energyEstimateCadence"
+      "usage": "energyEstimateCadence",
+      "relationship": "refinement"
     },
     {
       "id": "E-102",
       "name": "ReserveEstimateCadence",
       "parent": "energyAwareness",
-      "usage": "reserveEstimateCadence"
+      "usage": "reserveEstimateCadence",
+      "relationship": "refinement"
     },
     {
       "id": "E-103",
       "name": "EnergyEstimateAccuracy",
       "parent": "energyAwareness",
-      "usage": "energyEstimateAccuracy"
+      "usage": "energyEstimateAccuracy",
+      "relationship": "refinement"
     },
     {
       "id": "E-104",
       "name": "ConservativeEnergyEstimate",
       "parent": "energyAwareness",
-      "usage": "conservativeEnergyEstimate"
+      "usage": "conservativeEnergyEstimate",
+      "relationship": "refinement"
     },
     {
       "id": "E-105",
       "name": "GuidanceUpdateCadence",
       "parent": "navigationAndControl",
-      "usage": "guidanceUpdateCadence"
+      "usage": "guidanceUpdateCadence",
+      "relationship": "refinement"
     },
     {
       "id": "E-106",
       "name": "SailCommandCadence",
       "parent": "navigationAndControl",
-      "usage": "sailCommandCadence"
+      "usage": "sailCommandCadence",
+      "relationship": "refinement"
     },
     {
       "id": "E-107",
       "name": "SteeringCommandCadence",
       "parent": "navigationAndControl",
-      "usage": "steeringCommandCadence"
+      "usage": "steeringCommandCadence",
+      "relationship": "refinement"
     },
     {
       "id": "E-108",
       "name": "PositionAccuracy",
       "parent": "navigationAndControl",
-      "usage": "positionAccuracy"
+      "usage": "positionAccuracy",
+      "relationship": "refinement"
     },
     {
       "id": "E-109",
       "name": "HeadingAccuracy",
       "parent": "navigationAndControl",
-      "usage": "headingAccuracy"
+      "usage": "headingAccuracy",
+      "relationship": "refinement"
     },
     {
       "id": "E-110",
       "name": "RestartDeadline",
       "parent": "resetRecovery",
-      "usage": "restartDeadline"
+      "usage": "restartDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "E-111",
       "name": "MissionStateRestoration",
       "parent": "resetRecovery",
-      "usage": "missionStateRestoration"
+      "usage": "missionStateRestoration",
+      "relationship": "refinement"
     },
     {
       "id": "E-112",
       "name": "GateProgressRestoration",
       "parent": "resetRecovery",
-      "usage": "gateProgressRestoration"
+      "usage": "gateProgressRestoration",
+      "relationship": "refinement"
     },
     {
       "id": "E-113",
       "name": "ResetRestrictionPreservation",
       "parent": "resetRecovery",
-      "usage": "resetRestrictionPreservation"
+      "usage": "resetRestrictionPreservation",
+      "relationship": "derivation"
     },
     {
       "id": "E-114",
       "name": "LowEnergyEntry",
       "parent": "lowEnergyRecovery",
-      "usage": "lowEnergyEntry"
+      "usage": "lowEnergyEntry",
+      "relationship": "refinement"
     },
     {
       "id": "E-115",
       "name": "LowEnergyPayloadInhibition",
       "parent": "lowEnergyRecovery",
-      "usage": "lowEnergyPayloadInhibition"
+      "usage": "lowEnergyPayloadInhibition",
+      "relationship": "refinement"
     },
     {
       "id": "E-116",
       "name": "LowEnergyNavigationContinuity",
       "parent": "lowEnergyRecovery",
-      "usage": "lowEnergyNavigationContinuity"
+      "usage": "lowEnergyNavigationContinuity",
+      "relationship": "refinement"
     },
     {
       "id": "E-117",
       "name": "LowEnergyCollisionContinuity",
       "parent": "lowEnergyRecovery",
-      "usage": "lowEnergyCollisionContinuity"
+      "usage": "lowEnergyCollisionContinuity",
+      "relationship": "refinement"
     },
     {
       "id": "E-118",
       "name": "LowEnergyExit",
       "parent": "lowEnergyRecovery",
-      "usage": "lowEnergyExit"
+      "usage": "lowEnergyExit",
+      "relationship": "refinement"
     },
     {
       "id": "E-119",
       "name": "PayloadRestartPermission",
       "parent": "lowEnergyRecovery",
-      "usage": "payloadRestartPermission"
+      "usage": "payloadRestartPermission",
+      "relationship": "refinement"
     },
     {
       "id": "E-120",
       "name": "TelemetryDeliveryCadence",
       "parent": "communications",
-      "usage": "telemetryDeliveryCadence"
+      "usage": "telemetryDeliveryCadence",
+      "relationship": "derivation"
     },
     {
       "id": "E-121",
       "name": "OutageAutonomy",
       "parent": "communications",
-      "usage": "outageAutonomy"
+      "usage": "outageAutonomy",
+      "relationship": "refinement"
     },
     {
       "id": "E-122",
       "name": "ReconnectCurrentRecord",
       "parent": "communications",
-      "usage": "reconnectCurrentRecord"
+      "usage": "reconnectCurrentRecord",
+      "relationship": "refinement"
     },
     {
       "id": "E-123",
       "name": "BacklogOrdering",
       "parent": "communications",
-      "usage": "backlogOrdering"
+      "usage": "backlogOrdering",
+      "relationship": "refinement"
     },
     {
       "id": "E-124",
       "name": "BacklogCurrentPriority",
       "parent": "communications",
-      "usage": "backlogCurrentPriority"
+      "usage": "backlogCurrentPriority",
+      "relationship": "derivation"
     },
     {
       "id": "E-125",
       "name": "IngressDetection",
       "parent": "ingressResponse",
-      "usage": "ingressDetection"
+      "usage": "ingressDetection",
+      "relationship": "refinement"
     },
     {
       "id": "E-126",
       "name": "IngressRecoveryRequest",
       "parent": "ingressResponse",
-      "usage": "ingressRecoveryRequest"
+      "usage": "ingressRecoveryRequest",
+      "relationship": "refinement"
     },
     {
       "id": "E-127",
       "name": "IngressFlotation",
       "parent": "ingressResponse",
-      "usage": "ingressFlotation"
+      "usage": "ingressFlotation",
+      "relationship": "refinement"
     },
     {
       "id": "E-128",
       "name": "IngressElectronicsProtection",
       "parent": "ingressResponse",
-      "usage": "ingressElectronicsProtection"
+      "usage": "ingressElectronicsProtection",
+      "relationship": "refinement"
     },
     {
       "id": "E-129",
       "name": "IngressPositionContinuity",
       "parent": "ingressResponse",
-      "usage": "ingressPositionContinuity"
+      "usage": "ingressPositionContinuity",
+      "relationship": "refinement"
     },
     {
       "id": "E-130",
       "name": "PeriodicLogCadence",
       "parent": "missionEvidence",
-      "usage": "periodicLogCadence"
+      "usage": "periodicLogCadence",
+      "relationship": "refinement"
     },
     {
       "id": "E-131",
       "name": "LogRetention",
       "parent": "missionEvidence",
-      "usage": "logRetention"
+      "usage": "logRetention",
+      "relationship": "refinement"
     },
     {
       "id": "E-132",
       "name": "CriticalEventRecording",
       "parent": "missionEvidence",
-      "usage": "criticalEventRecording"
+      "usage": "criticalEventRecording",
+      "relationship": "refinement"
     },
     {
       "id": "E-133",
       "name": "LogTimestampAccuracy",
       "parent": "missionEvidence",
-      "usage": "logTimestampAccuracy"
+      "usage": "logTimestampAccuracy",
+      "relationship": "refinement"
     },
     {
       "id": "E-134",
       "name": "InvalidTimestampMarking",
       "parent": "missionEvidence",
-      "usage": "invalidTimestampMarking"
+      "usage": "invalidTimestampMarking",
+      "relationship": "refinement"
     },
     {
       "id": "E-135",
       "name": "LogGapIndication",
       "parent": "missionEvidence",
-      "usage": "logGapIndication"
+      "usage": "logGapIndication",
+      "relationship": "refinement"
     },
     {
       "id": "E-136",
       "name": "LogInterruptionDurability",
       "parent": "missionEvidence",
-      "usage": "logInterruptionDurability"
+      "usage": "logInterruptionDurability",
+      "relationship": "refinement"
     },
     {
       "id": "E-137",
       "name": "ReconnectLogPreservation",
       "parent": "missionEvidence",
-      "usage": "reconnectLogPreservation"
+      "usage": "reconnectLogPreservation",
+      "relationship": "refinement"
     },
     {
       "id": "E-138",
       "name": "QualificationPersistence",
       "parent": "missionEvidence",
-      "usage": "qualificationPersistence"
+      "usage": "qualificationPersistence",
+      "relationship": "refinement"
     },
     {
       "id": "E-139",
       "name": "UnknownQualificationFallback",
       "parent": "missionEvidence",
-      "usage": "unknownQualificationFallback"
+      "usage": "unknownQualificationFallback",
+      "relationship": "refinement"
     },
     {
       "id": "E-140",
       "name": "NavigationValidEpochs",
       "parent": "navigationAvailability",
-      "usage": "navigationValidEpochs"
+      "usage": "navigationValidEpochs",
+      "relationship": "refinement"
     },
     {
       "id": "E-141",
       "name": "StaleNavigationInvalidation",
       "parent": "navigationAvailability",
-      "usage": "staleNavigationInvalidation"
+      "usage": "staleNavigationInvalidation",
+      "relationship": "refinement"
     },
     {
       "id": "E-142",
       "name": "NavigationDegradedTransition",
       "parent": "navigationAvailability",
-      "usage": "navigationDegradedTransition"
+      "usage": "navigationDegradedTransition",
+      "relationship": "refinement"
     },
     {
       "id": "E-143",
       "name": "StaleNavigationUseInhibition",
       "parent": "navigationAvailability",
-      "usage": "staleNavigationUseInhibition"
+      "usage": "staleNavigationUseInhibition",
+      "relationship": "refinement"
     },
     {
       "id": "P-101",
       "name": "SoloTransport",
       "parent": "transportability",
-      "usage": "soloTransport"
+      "usage": "soloTransport",
+      "relationship": "refinement"
     },
     {
       "id": "P-102",
       "name": "LiftMass",
       "parent": "transportability",
-      "usage": "liftMass"
+      "usage": "liftMass",
+      "relationship": "refinement"
     },
     {
       "id": "P-103",
       "name": "SetupDuration",
       "parent": "transportability",
-      "usage": "setupDuration"
+      "usage": "setupDuration",
+      "relationship": "refinement"
     },
     {
       "id": "P-104",
       "name": "PackDuration",
       "parent": "transportability",
-      "usage": "packDuration"
+      "usage": "packDuration",
+      "relationship": "refinement"
     },
     {
       "id": "P-105",
       "name": "SoloLaunch",
       "parent": "transportability",
-      "usage": "soloLaunch"
+      "usage": "soloLaunch",
+      "relationship": "derivation"
     },
     {
       "id": "P-106",
       "name": "SoloRetrieval",
       "parent": "transportability",
-      "usage": "soloRetrieval"
+      "usage": "soloRetrieval",
+      "relationship": "derivation"
     },
     {
       "id": "P-107",
       "name": "ReplacementDuration",
       "parent": "serviceability",
-      "usage": "replacementDuration"
+      "usage": "replacementDuration",
+      "relationship": "refinement"
     },
     {
       "id": "P-108",
       "name": "NondestructiveService",
       "parent": "serviceability",
-      "usage": "nondestructiveService"
+      "usage": "nondestructiveService",
+      "relationship": "derivation"
     },
     {
       "id": "P-109",
       "name": "PostServiceSealing",
       "parent": "serviceability",
-      "usage": "postServiceSealing"
+      "usage": "postServiceSealing",
+      "relationship": "refinement"
     },
     {
       "id": "P-110",
       "name": "PostServiceActuation",
       "parent": "serviceability",
-      "usage": "postServiceActuation"
+      "usage": "postServiceActuation",
+      "relationship": "refinement"
     },
     {
       "id": "S-101",
       "name": "TrafficTracking",
       "parent": "trafficSafety",
-      "usage": "trafficTracking"
+      "usage": "trafficTracking",
+      "relationship": "refinement"
     },
     {
       "id": "S-102",
       "name": "CollisionAssessmentCadence",
       "parent": "trafficSafety",
-      "usage": "collisionAssessmentCadence"
+      "usage": "collisionAssessmentCadence",
+      "relationship": "refinement"
     },
     {
       "id": "S-103",
       "name": "AvoidanceCommandDeadline",
       "parent": "trafficSafety",
-      "usage": "avoidanceCommandDeadline"
+      "usage": "avoidanceCommandDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "S-104",
       "name": "TrafficAwarenessFault",
       "parent": "trafficSafety",
-      "usage": "trafficAwarenessFault"
+      "usage": "trafficAwarenessFault",
+      "relationship": "refinement"
     },
     {
       "id": "S-105",
       "name": "BoundaryEvaluationCadence",
       "parent": "operatingBoundary",
-      "usage": "boundaryEvaluationCadence"
+      "usage": "boundaryEvaluationCadence",
+      "relationship": "refinement"
     },
     {
       "id": "S-106",
       "name": "BoundaryAvoidanceDeadline",
       "parent": "operatingBoundary",
-      "usage": "boundaryAvoidanceDeadline"
+      "usage": "boundaryAvoidanceDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "S-107",
       "name": "BoundaryAvoidanceRecording",
       "parent": "operatingBoundary",
-      "usage": "boundaryAvoidanceRecording"
+      "usage": "boundaryAvoidanceRecording",
+      "relationship": "refinement"
     },
     {
       "id": "S-108",
       "name": "BoundaryStartInhibition",
       "parent": "operatingBoundary",
-      "usage": "boundaryStartInhibition"
+      "usage": "boundaryStartInhibition",
+      "relationship": "refinement"
     },
     {
       "id": "S-109",
       "name": "BoundaryDegradedEvidence",
       "parent": "operatingBoundary",
-      "usage": "boundaryDegradedEvidence"
+      "usage": "boundaryDegradedEvidence",
+      "relationship": "refinement"
     },
     {
       "id": "S-110",
       "name": "AbortLatchDeadline",
-      "parent": "safeRecovery",
-      "usage": "abortLatchDeadline"
+      "parent": "emergencyControl",
+      "usage": "abortLatchDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "S-111",
       "name": "RecoveryTelemetryCadence",
-      "parent": "safeRecovery",
-      "usage": "recoveryTelemetryCadence"
+      "parent": "emergencyControl",
+      "usage": "recoveryTelemetryCadence",
+      "relationship": "refinement"
     },
     {
       "id": "S-112",
       "name": "MotorIsolationDeadline",
-      "parent": "safeRecovery",
-      "usage": "motorIsolationDeadline"
+      "parent": "emergencyControl",
+      "usage": "motorIsolationDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "S-113",
       "name": "IsolationRestartInhibition",
-      "parent": "safeRecovery",
-      "usage": "isolationRestartInhibition"
+      "parent": "emergencyControl",
+      "usage": "isolationRestartInhibition",
+      "relationship": "refinement"
     },
     {
       "id": "S-114",
       "name": "ManualControlLossShutdown",
-      "parent": "safeRecovery",
-      "usage": "manualControlLossShutdown"
+      "parent": "emergencyControl",
+      "usage": "manualControlLossShutdown",
+      "relationship": "refinement"
     },
     {
       "id": "S-115",
       "name": "ControlLossLocationContinuity",
-      "parent": "safeRecovery",
-      "usage": "controlLossLocationContinuity"
+      "parent": "emergencyControl",
+      "usage": "controlLossLocationContinuity",
+      "relationship": "refinement"
     },
     {
       "id": "S-116",
       "name": "NavigationLightPresentation",
       "parent": "navigationConspicuity",
-      "usage": "navigationLightPresentation"
+      "usage": "navigationLightPresentation",
+      "relationship": "derivation"
     },
     {
       "id": "S-117",
       "name": "NavigationShapePresentation",
       "parent": "navigationConspicuity",
-      "usage": "navigationShapePresentation"
+      "usage": "navigationShapePresentation",
+      "relationship": "derivation"
     },
     {
       "id": "S-118",
       "name": "NavigationSoundPresentation",
       "parent": "navigationConspicuity",
-      "usage": "navigationSoundPresentation"
+      "usage": "navigationSoundPresentation",
+      "relationship": "derivation"
     },
     {
       "id": "S-119",
       "name": "SignalingModeDeadline",
       "parent": "navigationConspicuity",
-      "usage": "signalingModeDeadline"
+      "usage": "signalingModeDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "S-120",
       "name": "SignalingFaultRecording",
       "parent": "navigationConspicuity",
-      "usage": "signalingFaultRecording"
+      "usage": "signalingFaultRecording",
+      "relationship": "refinement"
     },
     {
       "id": "S-121",
       "name": "SignalingFaultReporting",
       "parent": "navigationConspicuity",
-      "usage": "signalingFaultReporting"
+      "usage": "signalingFaultReporting",
+      "relationship": "refinement"
     },
     {
       "id": "S-122",
       "name": "DeploymentComplianceRecord",
       "parent": "regulatoryClassification",
-      "usage": "deploymentComplianceRecord"
+      "usage": "deploymentComplianceRecord",
+      "relationship": "refinement"
     },
     {
       "id": "S-123",
       "name": "DeploymentReleaseGate",
       "parent": "regulatoryClassification",
-      "usage": "deploymentReleaseGate"
+      "usage": "deploymentReleaseGate",
+      "relationship": "derivation"
     },
     {
       "id": "C-201",
       "name": "TelemetryDisplayContent",
       "parent": "telemetryEquipment",
-      "usage": "telemetryDisplayContent"
+      "usage": "telemetryDisplayContent",
+      "relationship": "refinement"
     },
     {
       "id": "C-202",
       "name": "TelemetryStaleIndication",
       "parent": "telemetryEquipment",
-      "usage": "telemetryStaleIndication"
+      "usage": "telemetryStaleIndication",
+      "relationship": "refinement"
     },
     {
       "id": "C-203",
       "name": "TelemetryIdentityPreservation",
       "parent": "telemetryEquipment",
-      "usage": "telemetryIdentityPreservation"
+      "usage": "telemetryIdentityPreservation",
+      "relationship": "refinement"
     },
     {
       "id": "C-204",
       "name": "TelemetryDuplicateSuppression",
       "parent": "telemetryEquipment",
-      "usage": "telemetryDuplicateSuppression"
+      "usage": "telemetryDuplicateSuppression",
+      "relationship": "refinement"
     },
     {
       "id": "C-205",
       "name": "UnauthenticatedCommandRejection",
       "parent": "commandIntegrity",
-      "usage": "unauthenticatedCommandRejection"
+      "usage": "unauthenticatedCommandRejection",
+      "relationship": "refinement"
     },
     {
       "id": "C-206",
       "name": "ReplayCommandRejection",
       "parent": "commandIntegrity",
-      "usage": "replayCommandRejection"
+      "usage": "replayCommandRejection",
+      "relationship": "refinement"
     },
     {
       "id": "C-207",
       "name": "ExpiredCommandRejection",
       "parent": "commandIntegrity",
-      "usage": "expiredCommandRejection"
+      "usage": "expiredCommandRejection",
+      "relationship": "refinement"
     },
     {
       "id": "C-208",
       "name": "AcceptedCommandDeadline",
       "parent": "commandIntegrity",
-      "usage": "acceptedCommandDeadline"
+      "usage": "acceptedCommandDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "C-209",
       "name": "OnboardAcknowledgmentDeadline",
       "parent": "commandIntegrity",
-      "usage": "onboardAcknowledgmentDeadline"
+      "usage": "onboardAcknowledgmentDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "C-210",
       "name": "AcknowledgmentQueueing",
       "parent": "commandIntegrity",
-      "usage": "acknowledgmentQueueing"
+      "usage": "acknowledgmentQueueing",
+      "relationship": "refinement"
     },
     {
       "id": "C-211",
       "name": "ExternalControlDisqualification",
       "parent": "commandIntegrity",
-      "usage": "externalControlDisqualification"
+      "usage": "externalControlDisqualification",
+      "relationship": "refinement"
     },
     {
       "id": "N-101",
       "name": "VisibilityNavigationCapability",
       "parent": "visibility",
-      "usage": "visibilityNavigationCapability"
+      "usage": "visibilityNavigationCapability",
+      "relationship": "derivation"
     },
     {
       "id": "N-102",
       "name": "VisibilityTrafficCapability",
       "parent": "visibility",
-      "usage": "visibilityTrafficCapability"
+      "usage": "visibilityTrafficCapability",
+      "relationship": "derivation"
     },
     {
       "id": "N-103",
       "name": "RestrictedVisibilityEntry",
       "parent": "visibility",
-      "usage": "restrictedVisibilityEntry"
+      "usage": "restrictedVisibilityEntry",
+      "relationship": "refinement"
     },
     {
       "id": "N-104",
       "name": "RestrictedVisibilityEvidence",
       "parent": "visibility",
-      "usage": "restrictedVisibilityEvidence"
+      "usage": "restrictedVisibilityEvidence",
+      "relationship": "refinement"
     },
     {
       "id": "N-105",
       "name": "RestrictedVisibilityCollisionAssessment",
       "parent": "visibility",
-      "usage": "restrictedVisibilityCollisionAssessment"
+      "usage": "restrictedVisibilityCollisionAssessment",
+      "relationship": "derivation"
     },
     {
       "id": "N-106",
       "name": "SurvivalEntryDeadline",
       "parent": "envelopeTransition",
-      "usage": "survivalEntryDeadline"
+      "usage": "survivalEntryDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "N-107",
       "name": "SurvivalTransitionRecording",
       "parent": "envelopeTransition",
-      "usage": "survivalTransitionRecording"
+      "usage": "survivalTransitionRecording",
+      "relationship": "refinement"
     },
     {
       "id": "N-108",
       "name": "SailingResumptionDeadline",
       "parent": "envelopeTransition",
-      "usage": "sailingResumptionDeadline"
+      "usage": "sailingResumptionDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "N-109",
       "name": "SailingResumptionInhibition",
       "parent": "envelopeTransition",
-      "usage": "sailingResumptionInhibition"
+      "usage": "sailingResumptionInhibition",
+      "relationship": "derivation"
     },
     {
       "id": "N-110",
       "name": "ResumptionBlockEvidence",
       "parent": "envelopeTransition",
-      "usage": "resumptionBlockEvidence"
+      "usage": "resumptionBlockEvidence",
+      "relationship": "refinement"
     },
     {
       "id": "N-111",
       "name": "WetMechanismTravel",
       "parent": "wetMechanicalIntegrity",
-      "usage": "wetMechanismTravel"
+      "usage": "wetMechanismTravel",
+      "relationship": "refinement"
     },
     {
       "id": "N-112",
       "name": "WetJointIntegrity",
       "parent": "wetMechanicalIntegrity",
-      "usage": "wetJointIntegrity"
+      "usage": "wetJointIntegrity",
+      "relationship": "refinement"
     },
     {
       "id": "N-113",
       "name": "WetConductorResistance",
       "parent": "wetElectricalIntegrity",
-      "usage": "wetConductorResistance"
+      "usage": "wetConductorResistance",
+      "relationship": "refinement"
     },
     {
       "id": "N-114",
       "name": "WetInsulationResistance",
       "parent": "wetElectricalIntegrity",
-      "usage": "wetInsulationResistance"
+      "usage": "wetInsulationResistance",
+      "relationship": "refinement"
     },
     {
       "id": "N-115",
       "name": "HotSunElectronicsOperation",
       "parent": "solarHeating",
-      "usage": "hotSunElectronicsOperation"
+      "usage": "hotSunElectronicsOperation",
+      "relationship": "derivation"
     },
     {
       "id": "N-116",
       "name": "HotSunBatteryTemperature",
       "parent": "solarHeating",
-      "usage": "hotSunBatteryTemperature"
+      "usage": "hotSunBatteryTemperature",
+      "relationship": "derivation"
     },
     {
       "id": "N-117",
@@ -629,184 +732,491 @@
       "id": "N-118",
       "name": "RightingDeadline",
       "parent": "selfRighting",
-      "usage": "rightingDeadline"
+      "usage": "rightingDeadline",
+      "relationship": "derivation"
     },
     {
       "id": "N-119",
       "name": "CapsizeRigRetention",
       "parent": "selfRighting",
-      "usage": "capsizeRigRetention"
+      "usage": "capsizeRigRetention",
+      "relationship": "derivation"
     },
     {
       "id": "N-120",
       "name": "CapsizeBallastRetention",
       "parent": "selfRighting",
-      "usage": "capsizeBallastRetention"
+      "usage": "capsizeBallastRetention",
+      "relationship": "derivation"
     },
     {
       "id": "N-121",
       "name": "CapsizeElectronicsSealing",
       "parent": "selfRighting",
-      "usage": "capsizeElectronicsSealing"
+      "usage": "capsizeElectronicsSealing",
+      "relationship": "derivation"
     },
     {
       "id": "N-122",
       "name": "ControlRecoveryDeadline",
       "parent": "capsizeControlRecovery",
-      "usage": "controlRecoveryDeadline"
+      "usage": "controlRecoveryDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "N-123",
       "name": "CapsizeGateProgressRetention",
       "parent": "capsizeControlRecovery",
-      "usage": "capsizeGateProgressRetention"
+      "usage": "capsizeGateProgressRetention",
+      "relationship": "refinement"
     },
     {
       "id": "N-124",
       "name": "CapsizeQualificationRetention",
       "parent": "capsizeControlRecovery",
-      "usage": "capsizeQualificationRetention"
+      "usage": "capsizeQualificationRetention",
+      "relationship": "refinement"
     },
     {
       "id": "N-125",
       "name": "CapsizeRestrictionRetention",
       "parent": "capsizeControlRecovery",
-      "usage": "capsizeRestrictionRetention"
+      "usage": "capsizeRestrictionRetention",
+      "relationship": "refinement"
     },
     {
       "id": "N-126",
       "name": "WeedPassageSpeed",
       "parent": "submergedWeedPassage",
-      "usage": "weedPassageSpeed"
+      "usage": "weedPassageSpeed",
+      "relationship": "refinement"
     },
     {
       "id": "N-127",
       "name": "WeedPassageSteering",
       "parent": "submergedWeedPassage",
-      "usage": "weedPassageSteering"
+      "usage": "weedPassageSteering",
+      "relationship": "refinement"
     },
     {
       "id": "N-128",
       "name": "WeedSnagSpeedRecovery",
       "parent": "weedSnagShedding",
-      "usage": "weedSnagSpeedRecovery"
+      "usage": "weedSnagSpeedRecovery",
+      "relationship": "derivation"
     },
     {
       "id": "N-129",
       "name": "WeedSnagSteeringRecovery",
       "parent": "weedSnagShedding",
-      "usage": "weedSnagSteeringRecovery"
+      "usage": "weedSnagSteeringRecovery",
+      "relationship": "derivation"
     },
     {
       "id": "N-130",
       "name": "WeedBlockageFault",
       "parent": "weedBlockageResponse",
-      "usage": "weedBlockageFault"
+      "usage": "weedBlockageFault",
+      "relationship": "refinement"
     },
     {
       "id": "N-131",
       "name": "WeedBlockageContingency",
       "parent": "weedBlockageResponse",
-      "usage": "weedBlockageContingency"
+      "usage": "weedBlockageContingency",
+      "relationship": "refinement"
     },
     {
       "id": "N-132",
       "name": "WeedBlockageLocation",
       "parent": "weedBlockageResponse",
-      "usage": "weedBlockageLocation"
+      "usage": "weedBlockageLocation",
+      "relationship": "refinement"
     },
     {
       "id": "N-133",
       "name": "PoweredWeedSpeed",
       "parent": "recoveryPropulsorWeeds",
-      "usage": "poweredWeedSpeed"
+      "usage": "poweredWeedSpeed",
+      "relationship": "refinement"
     },
     {
       "id": "N-134",
       "name": "PoweredWeedCurrent",
       "parent": "recoveryPropulsorWeeds",
-      "usage": "poweredWeedCurrent"
+      "usage": "poweredWeedCurrent",
+      "relationship": "derivation"
     },
     {
       "id": "N-135",
       "name": "PoweredWeedTemperature",
       "parent": "recoveryPropulsorWeeds",
-      "usage": "poweredWeedTemperature"
+      "usage": "poweredWeedTemperature",
+      "relationship": "derivation"
     },
     {
       "id": "N-136",
       "name": "LockedPropulsorShutdown",
       "parent": "recoveryPropulsorWeeds",
-      "usage": "lockedPropulsorShutdown"
+      "usage": "lockedPropulsorShutdown",
+      "relationship": "refinement"
     },
     {
       "id": "R-101",
       "name": "MotorQualificationInvariant",
       "parent": "challengeMotorInhibition",
-      "usage": "motorQualificationInvariant"
+      "usage": "motorQualificationInvariant",
+      "relationship": "refinement"
     },
     {
       "id": "R-102",
       "name": "FreshRecoveryCommand",
       "parent": "challengeMotorInhibition",
-      "usage": "freshRecoveryCommand"
+      "usage": "freshRecoveryCommand",
+      "relationship": "refinement"
     },
     {
       "id": "E-144",
       "name": "IngressEventDeadline",
       "parent": "ingressResponse",
-      "usage": "ingressEventDeadline"
+      "usage": "ingressEventDeadline",
+      "relationship": "refinement"
     },
     {
       "id": "E-145",
       "name": "QualificationRestoration",
       "parent": "resetRecovery",
-      "usage": "qualificationRestoration"
+      "usage": "qualificationRestoration",
+      "relationship": "refinement"
     },
     {
       "id": "E-146",
       "name": "WindSampleCadence",
       "usage": "windSampleCadence",
-      "parent": "windObservation"
+      "parent": "windObservation",
+      "relationship": "refinement"
     },
     {
       "id": "E-147",
       "name": "WindSpeedAccuracy",
       "usage": "windSpeedAccuracy",
-      "parent": "windObservation"
+      "parent": "windObservation",
+      "relationship": "refinement"
     },
     {
       "id": "E-148",
       "name": "WindDirectionAccuracy",
       "usage": "windDirectionAccuracy",
-      "parent": "windObservation"
+      "parent": "windObservation",
+      "relationship": "refinement"
     },
     {
       "id": "E-149",
       "name": "WindStaleInvalidation",
       "usage": "windStaleInvalidation",
-      "parent": "windObservation"
+      "parent": "windObservation",
+      "relationship": "refinement"
     },
     {
       "id": "E-150",
       "name": "InvalidWindUseInhibition",
       "usage": "invalidWindUseInhibition",
-      "parent": "windObservation"
+      "parent": "windObservation",
+      "relationship": "refinement"
     },
     {
       "id": "E-151",
       "name": "WindLossResponse",
       "usage": "windLossResponse",
-      "parent": "windObservation"
+      "parent": "windObservation",
+      "relationship": "refinement"
     },
     {
       "id": "E-152",
       "name": "WindSensingEndurance",
       "usage": "windSensingEndurance",
-      "parent": "windObservation"
+      "parent": "windObservation",
+      "relationship": "refinement"
     }
   ],
-  "shared_links": [
+  "predicate_moves": {
+    "ResetRecovery": "RestartDeadline",
+    "NavigationAvailability": "NavigationValidEpochs",
+    "SelfRighting": "RightingDeadline",
+    "CapsizeControlRecovery": "ControlRecoveryDeadline",
+    "ChallengeMotorInhibition": "MotorQualificationInvariant"
+  },
+  "aggregate_derivations": [
+    [
+      "transGorgeChallenge",
+      "navigationRules"
+    ],
+    [
+      "transGorgeChallenge",
+      "restrictedWaters"
+    ],
+    [
+      "transGorgeChallenge",
+      "trafficCoexistence"
+    ],
+    [
+      "transGorgeChallenge",
+      "courseCompletion"
+    ],
+    [
+      "transGorgeChallenge",
+      "unassistedAttempt"
+    ],
+    [
+      "transGorgeChallenge",
+      "sailingPropulsion"
+    ],
+    [
+      "transGorgeChallenge",
+      "liveObservation"
+    ],
+    [
+      "transGorgeChallenge",
+      "emergencyIntervention"
+    ],
+    [
+      "transGorgeChallenge",
+      "overallLength"
+    ],
+    [
+      "transGorgeChallenge",
+      "safetyCapabilityAbort"
+    ],
+    [
+      "transGorgeChallenge",
+      "autonomousShoreRecovery"
+    ],
+    [
+      "transGorgeChallenge",
+      "abortAlert"
+    ],
+    [
+      "transGorgeChallenge",
+      "noLittering"
+    ],
+    [
+      "noLittering",
+      "casualtyFlotation"
+    ],
+    [
+      "noLittering",
+      "majorComponentRetention"
+    ],
+    [
+      "noLittering",
+      "capsizeRecovery"
+    ],
+    [
+      "transGorgeChallenge",
+      "unattachedPassage"
+    ],
+    [
+      "transGorgeChallenge",
+      "communicationOutageAutonomy"
+    ],
+    [
+      "transGorgeChallenge",
+      "forecastAdmission"
+    ],
+    [
+      "transGorgeChallenge",
+      "weatherOutageContinuation"
+    ],
+    [
+      "transGorgeChallenge",
+      "courseRecoveryReserve"
+    ],
+    [
+      "transGorgeChallenge",
+      "reserveAbort"
+    ],
+    [
+      "transGorgeChallenge",
+      "nightOperation"
+    ],
+    [
+      "transGorgeChallenge",
+      "abortPersistence"
+    ],
+    [
+      "transGorgeChallenge",
+      "recoveryConspicuity"
+    ],
+    [
+      "resetRecovery",
+      "resetRestrictionPreservation"
+    ],
+    [
+      "communications",
+      "telemetryDeliveryCadence"
+    ],
+    [
+      "communications",
+      "backlogCurrentPriority"
+    ],
+    [
+      "transportability",
+      "soloLaunch"
+    ],
+    [
+      "transportability",
+      "soloRetrieval"
+    ],
+    [
+      "serviceability",
+      "nondestructiveService"
+    ],
+    [
+      "navigationConspicuity",
+      "navigationLightPresentation"
+    ],
+    [
+      "navigationConspicuity",
+      "navigationShapePresentation"
+    ],
+    [
+      "navigationConspicuity",
+      "navigationSoundPresentation"
+    ],
+    [
+      "regulatoryClassification",
+      "deploymentReleaseGate"
+    ],
+    [
+      "visibility",
+      "visibilityNavigationCapability"
+    ],
+    [
+      "visibility",
+      "visibilityTrafficCapability"
+    ],
+    [
+      "visibility",
+      "restrictedVisibilityCollisionAssessment"
+    ],
+    [
+      "envelopeTransition",
+      "sailingResumptionInhibition"
+    ],
+    [
+      "solarHeating",
+      "hotSunElectronicsOperation"
+    ],
+    [
+      "solarHeating",
+      "hotSunBatteryTemperature"
+    ],
+    [
+      "selfRighting",
+      "rightingDeadline"
+    ],
+    [
+      "selfRighting",
+      "capsizeRigRetention"
+    ],
+    [
+      "selfRighting",
+      "capsizeBallastRetention"
+    ],
+    [
+      "selfRighting",
+      "capsizeElectronicsSealing"
+    ],
+    [
+      "weedSnagShedding",
+      "weedSnagSpeedRecovery"
+    ],
+    [
+      "weedSnagShedding",
+      "weedSnagSteeringRecovery"
+    ],
+    [
+      "recoveryPropulsorWeeds",
+      "poweredWeedCurrent"
+    ],
+    [
+      "recoveryPropulsorWeeds",
+      "poweredWeedTemperature"
+    ],
+    [
+      "sustainedEnergyFeasibility",
+      "sustainedReserveProtection"
+    ],
+    [
+      "sustainedEnergyFeasibility",
+      "repeatableCycleBalance"
+    ],
+    [
+      "sustainedEnergyFeasibility",
+      "peakSupplyCapability"
+    ],
+    [
+      "multiDayEndurance",
+      "sustainedReserveProtection"
+    ],
+    [
+      "cruisePerformance",
+      "legProgress"
+    ],
+    [
+      "cruisePerformance",
+      "passageDuration"
+    ],
+    [
+      "cruisePerformance",
+      "cruiseEvidence"
+    ],
+    [
+      "missionReliability",
+      "reliabilityEvidence"
+    ],
+    [
+      "missionReliability",
+      "criticalFailureDisposition"
+    ],
+    [
+      "structuralIntegrity",
+      "bendingStrength"
+    ],
+    [
+      "structuralIntegrity",
+      "appendageDeflection"
+    ],
+    [
+      "structuralIntegrity",
+      "hullDeflection"
+    ],
+    [
+      "structuralIntegrity",
+      "panelStrength"
+    ],
+    [
+      "structuralIntegrity",
+      "panelDeflection"
+    ],
+    [
+      "structuralIntegrity",
+      "rootProofLoad"
+    ],
+    [
+      "structuralIntegrity",
+      "wetCouponStrength"
+    ],
+    [
+      "structuralIntegrity",
+      "wetCouponStiffness"
+    ],
+    [
+      "structuralIntegrity",
+      "bondProof"
+    ]
+  ],
+  "shared_contexts": [
     [
       "resetRecovery",
       "logInterruptionDurability"
@@ -836,15 +1246,15 @@
       "qualificationPersistence"
     ],
     [
-      "safeRecovery",
+      "emergencyControl",
       "qualificationPersistence"
     ],
     [
-      "safeRecovery",
+      "emergencyControl",
       "motorQualificationInvariant"
     ],
     [
-      "safeRecovery",
+      "emergencyControl",
       "periodicLogCadence"
     ],
     [
@@ -907,12 +1317,5 @@
       "recoveryPropulsorWeeds",
       "motorQualificationInvariant"
     ]
-  ],
-  "predicate_moves": {
-    "ResetRecovery": "RestartDeadline",
-    "NavigationAvailability": "NavigationValidEpochs",
-    "SelfRighting": "RightingDeadline",
-    "CapsizeControlRecovery": "ControlRecoveryDeadline",
-    "ChallengeMotorInhibition": "MotorQualificationInvariant"
-  }
+  ]
 }

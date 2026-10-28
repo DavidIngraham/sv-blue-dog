@@ -14,10 +14,10 @@ from tools.boat_analysis.evidence.records import validate
 
 class WingPolar:
     def __init__(self):
-        self.path=input_path('wing-polar-grid.json')
-        data=input_record('wing-polar-grid.json')
+        self.path=input_path('wing-polar-grid.json', purpose='reference')
+        data=input_record('wing-polar-grid.json', purpose='reference')
         all_rows=[r for r in data['cases'] if r['camberScale']>0]
-        if {r['cadSha256'] for r in all_rows}!={input_record('wing-geometry.json')['sha256']}:
+        if {r['cadSha256'] for r in all_rows}!={input_record('wing-geometry.json', purpose='reference')['sha256']}:
             raise ValueError('Polar CAD provenance mismatch')
         self.interpolators={}
         for reverse in [False,True]:

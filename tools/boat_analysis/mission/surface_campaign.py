@@ -75,7 +75,7 @@ def run(count=4,budget=25,resolution=12,destination=None,reuse=False):
     policy=policy_inputs()
     paths=[p for p in (ROOT/'tools/boat_analysis').rglob('*.py') if '.venv' not in p.parts]
     paths += [ROOT/'uv.lock',ROOT/'evidence/course/2026-10-11/chart-features.geojson',ROOT/'evidence/course/2026-10-11/chart-extraction.json']
-    paths += [source_run/'mission-candidate.json',input_path('wing-polar-grid.json'),input_path('wing-geometry.json')]
+    paths += [source_run/'mission-candidate.json',input_path('wing-polar-grid.json', purpose='reference'),input_path('wing-geometry.json', purpose='reference')]
     ancestor=source_run;seen=set()
     while ancestor not in seen and (ancestor/'sizing-continuation.json').exists():
         seen.add(ancestor)

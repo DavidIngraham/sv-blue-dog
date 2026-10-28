@@ -42,7 +42,7 @@ def test_formal_refinements_are_distinct_from_design_dependencies(relationship_r
     # Binding numerical criteria refine; provisional study comparisons do not.
     assert 'CruiseReliability |' not in refinements
     assert 'EnergyEvidenceReadinessCriterion |' not in refinements
-    assert '| recoveryPropulsion | safeRecovery |' in dependencies
+    assert '| recoveryPropulsion | autonomousShoreRecovery |' in dependencies
     assert '| desktopManufacture | DesignIntent |' in dependencies
 
 
@@ -52,7 +52,7 @@ def test_formal_refinements_are_distinct_from_design_dependencies(relationship_r
     ('cruise-semantics', {'derive', 'satisfy', 'verify'}),
     ('reliability-semantics', {'dependency', 'satisfy', 'verify'}),
     ('manufacturing-semantics', {'satisfy', 'verify'}),
-    ('weed-semantics', {'derive', 'satisfy', 'verify'}),
+    ('weed-semantics', {'refine', 'satisfy', 'verify'}),
 ])
 def test_semantic_diagrams_are_small_connected_native_views(slug, kinds, rendered_site):
     locations = {
@@ -122,7 +122,7 @@ def test_requirement_context_does_not_repeat_authoritative_statements(rendered_s
     text = (rendered_site / 'imports/docs/requirements/requirements-mission.md').read_text(encoding='utf-8')
     # The challenge remains visible in several diagrams but its full definition
     # is rendered only once, through a native query with a page-scoped name set.
-    statement = '**M-001 RoundTrip** — The vessel shall cross the configured Bingen departure'
+    statement = '**M-001 RoundTrip** — The vessel shall sail from the Bingen departure gate'
     assert text.count(statement) == 1
     assert text.count('```mermaid') == 4
 
@@ -140,6 +140,6 @@ def test_construction_views_show_model_basis_and_qualification(rendered_site):
     assert len(re.findall(r'^  n\d+[(\[]',materials,re.M))==17
     assert materials.count('|"derive"|')>=9
     assert materials.count('|"dependency"|')>=3
-    assert 'Every print job shall fit' in text
+    assert 'Each print job shall fit within a 250 mm by 250 mm by 250 mm build volume.' in text
     assert 'wet-layup glass/epoxy reinforcement' in text
     assert 'Stiffness credited in structural qualification' in text

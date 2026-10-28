@@ -1,8 +1,8 @@
 # What the evidence supports, and what I need to learn next
 
-**Assessment: 20 October 2026** · [Candidate results](results.md) · [Simulation studies](simulation-studies.md)
+**Assessment: 25 October 2026** · [Candidate results](results.md) · [Simulation studies](simulation-studies.md)
 
-I intend to refine IC-01 into the first physical boat. The project has a connected mission model and a candidate that works across bounded simulations; the next step is to replace consequential assumptions with measurements and compatible hardware choices.
+I intend to refine IC-01 into the first physical boat. I have defined the river mission, the boat's required functions and an IC-01 design for the simulations. The next step is to choose compatible equipment and measure the properties that matter most to sailing and recovery.
 
 ## Current assessment
 
@@ -11,13 +11,13 @@ The rows follow the Object-Oriented Systems Engineering Method (OOSEM): mission,
 | Area | Available basis | Next evidence that could change a decision |
 | --- | --- | --- |
 | Mission and operating context | An explicit Bingen–Stevenson round trip, independent control, traffic obligations and a distinction between qualification and recovery. | Survey the launch and recovery approaches; resolve actual access, bridge margins and operating boundaries. [Context](architecture.md), [site evidence](site-and-environment-evidence.md) |
-| Requirements and scenarios | The current Gorge requirements have defined verification objectives. Scenarios cover sailing, navigation, encounters, outages, reserve protection, capsize, recovery, launch and maintenance. Reliability study objectives and future missions have separate applicability. | Develop test procedures and obtain measurements for the admitted conditions. Future ocean and sustained-operation objectives need their own mission scope and evidence. [Requirements](requirements.md), [evidence plan](validation-plan.md) |
-| Logical architecture | Implementation-independent functions exchange typed observations, permissions, commands and records. The mission supervisor retains qualification loss across righting, restored navigation and communications recovery. | Exercise dynamically achieved turns with arriving hazards, backup startup and obstructed recovery routes; implement the descriptive scenario steps. [Architecture](architecture.md), [mission execution](mission-simulation.md) |
-| Physical architecture | A provisional IC-01 assembly allocates the functions to separate main and recovery paths with explicit data and power interfaces. The sizing studies use its declared geometry and load assumptions. | Resolve ranging and independent recovery observation; reconcile recording/telemetry supply, installed mass, thermal behavior, electrical demand and fault isolation. [Candidate](results.md), [sensing layouts](reference/sensing-configurations.md) |
+| Requirements and scenarios | The requirements describe the course, autonomous sailing, safety, energy, recovery and owner constraints. Each current Gorge requirement has a planned check; physical results remain open. Capsize and vegetation recovery have separate outcomes, as do emergency control and powered shore recovery. Scenarios cover sailing, navigation, encounters, outages, reserve protection, capsize, recovery, launch and maintenance. Reliability study objectives and future missions have separate applicability. | Justify the retained numerical allocations against their named measurement and margin closure plans, then obtain evidence for admitted conditions. Future ocean and sustained-operation objectives need their own mission scope and evidence. [Requirements](requirements.md), [evidence plan](validation-plan.md) |
+| Logical architecture | Fourteen implementation-independent responsibilities exchange observations, permissions, commands and records. Recovery planning explicitly consumes navigation, traffic, boundary and reserve assessments; recovery actuation has its own command interface. All nine scenario descriptions have assigned step owners. The mission supervisor retains qualification loss across righting, restored navigation and communications recovery. | Exercise dynamically achieved turns with arriving hazards, backup startup and obstructed recovery routes; implement the descriptive scenario steps and establish their timing and validity contracts. [Architecture](architecture.md), [mission execution](mission-simulation.md) |
+| Physical architecture | Named allocations explain each IC-01 implementation contribution and bind it to the candidate configuration. Logical exchanges map to candidate transfers or explicitly identified controller-internal interactions. The sizing studies use the candidate's declared geometry and load assumptions. | Resolve peer authority, startup after primary loss, ranging and independent recovery observation; reconcile recording/telemetry supply, installed mass, thermal behavior, electrical demand and fault isolation. Navigation signaling still needs detailed interfaces and equipment allocation. [Architecture](architecture.md), [candidate](results.md), [sensing layouts](reference/sensing-configurations.md) |
 | Trades and analysis | Coupled sizing, three open rig concepts, energy accounting and bounded recovery/encounter studies. | Correlate aerodynamic, structural, maneuvering and recovery assumptions with measurements, then compare alternatives on the same cases. [Sizing](sizing.md), [rig trade](sail-trade.md) |
-| Physical verification and model validation | Planned cases identify the claims to test; software checks establish behavior in supplied cases. | Obtain component and integrated measurements for an identified configuration. No completed physical qualification is claimed. [Evidence plan](validation-plan.md) |
+| Physical verification and model validation | Native method annotations cover all 100 verification definitions, including three numerical definitions. Two IC-01 integration/use plans distinguish the intended candidate from the actual test article, procedure and instruments still needed. Planned physical cases remain inconclusive; eligibility checks do not accept evidence. | Obtain component and integrated measurements for an identified configuration. No completed physical qualification is claimed. [Evidence plan](validation-plan.md) |
 
-The challenge explicitly identifies the U.S. Inland Navigation Rules, entry evidence and adjudication under C-007. Six [source-linked navigation review cases](validation-plan.md#navigation-rule-entry-review-and-adjudication) organize applicability, encounter conduct and equipment evidence. All remain inconclusive; accepted navigation compliance and physical entry qualification are still open. The next review must establish the configuration-specific applicability matrix and demonstration criteria.
+The challenge identifies vessel compliance under C-007 and assigns entry applicability, baseline control, evidence acceptance, operator intervention and adjudication to C-028 through C-032. Six [source-linked navigation review cases](validation-plan.md#navigation-rule-entry-review-and-adjudication) organize applicability, encounter conduct and equipment evidence. All remain inconclusive; accepted navigation compliance and physical entry qualification are still open. The next review must establish the configuration-specific applicability matrix and demonstration criteria.
 
 The [Inland Rules model](../experiments/inland-navigation/README.md) filters
 primary sailing commands in an opt-in mission replay. It retains overtaking duties
@@ -181,3 +181,59 @@ A measured component result transfers to IC-01 only when its installation and co
 [Modeling methods](methods/modeling.md) explain how requirements, assumptions, calculations and evidence stay connected. Dedicated stakeholder views and detailed physical interface definitions remain unfinished; drawing them does not substitute for the missing engineering evidence.
 
 </details>
+
+### Interface and behavior assessment, 2026-10-23
+
+The candidate [interface definitions](../models/vehicle/interface-contracts.sysml) now distinguish observation provenance from producer validity and command authority/time context. Typed native applicability calculations support synthetic boundary checks; their existence is not controller integration or physical evidence. Fourteen existing payload definitions retain their original fields and add context. Missing reserve, boundary and traffic-list timestamps are explicit; link-down, invalid and absent observations remain different conditions.
+
+Open IF-01 through IF-05 cover justified consumer freshness/latency limits; clock uncertainty and restart/replay rules; spatial/angular references; primary/recovery command arbitration and inhibits; electrical, connector, sealing, storage/telemetry supply and transport contracts. These issues remain deployment gaps. Scenario and implementation mappings still need to preserve this meaning. The conceptual simulator currently exchanges scalar observations, not these candidate serialized messages.
+The [behavior contracts](../models/vehicle/behavior-contracts.sysml) expose current consumer gates and a qualification-restoration action. Sailing scenarios pass supervisor permission explicitly. Recovery includes a durable disqualification acknowledgment before actuation and a separate observed execution record afterward. Native tests exercise denied permissions, expired context, missing durability, unknown qualification and restoration after faults. A qualification-only restoration API preserves the nonqualifying fallback; it does not implement the watchdog, other restriction restoration or the 30-second deadline.
+
+B-01 through B-04 keep message/storage integration, atomic durable state, controller scheduling/arbitration and achieved physical response open. The descriptive scenarios now expose these obligations but do not execute the estimators or storage hardware. Existing mission, capsize, abort and independent-recovery policy remain authoritative.
+
+The [verification planning register](validation-plan.md#methods-configurations-and-acceptance) preserves all existing objectives and makes method choices visible. V-01 through V-04 keep released procedures, identified articles/instruments, evidence-transfer applicability and independent acceptance open. Recovery validation includes the human pickup task as well as autonomous approach. The three numerical verification definitions retain their input-dependent verdict logic; the audit does not execute them without subjects.
+
+The initial [hazard/control argument](reliability.md#hazard-controls-and-actual-disposition)
+now covers six current-Gorge scenarios and all thirteen critical whole-boat FMEA
+rows. All six hazard dispositions and fifteen FMEA actions remain open. Control
+effectiveness, common-cause treatment, risk criteria and actual acceptance records
+are still needed; trace coverage is not a safety acceptance decision. The
+reliability illustration also requires explicit review of its function partition,
+dependence and common-cause coverage before evidence can support its claim.
+
+### Configuration and accounting assessment,2026-10-23
+
+The [configuration register](architecture.md#identify-the-study-and-the-installation)
+distinguishes twelve study/input contexts, including every top-level native design
+and parameter part. It preserves historical projections and identifies IC-01's
+planned design/assembly without inventing actual installation records. The
+[accounting scopes](energy.md#scope-the-current-accounting-before-adding-loads)
+keep seven current-candidate boundaries explicit. All remain unaccepted, with two
+power-peak bounds and five installation/reconciliation identities missing. The
+whole-vessel mass-estimate field remains unset pending a new identified coupled
+result; fixed-equipment allowance and historical totals do not substitute for it.
+C-01 through C-04 cover installed identity, functional/component coverage, coupled
+budget reconciliation and evidence-backed uncertainty/change/retest decisions.
+
+Analysis-use coverage now distinguishes all110 native definitions/usages by intended
+use, domain, excluded interpretations and next evidence. This is a scope inventory,
+not110 physically validated analyses. Current result readers check both source and
+driver provenance and reject missing current outputs; archived CAD references and
+numerical seeds have explicit roles. Native recorded analyses retain execution
+semantics and actual-source/runtime companions. The open work is configuration-
+specific validation, uncertainty/dependence evidence and measured operating envelopes.
+
+Decision records use a shared [SysML item definition](../models/libraries/decision-records.sysml):
+eight design dispositions, six retained requirement-basis statements and six open
+acceptance questions. The six mixed basis statements remain intact pending content
+review; normalizing their structure does not resolve their assumptions or choose new
+policies. Eight dispositions and six questions have additional scope, responsibility,
+evidence basis and reopening context. The 80 allocation/procedure reviews remain
+subject-attached metadata under a shared review schema. Native before/after queries
+preserved record content, U-identifiers, context and 43 supporting links. Their
+actual authority/date/disposition/implementation identities remain unset where no
+supporting record is identified; all six acceptance flags stay false. The rig
+comparison separates six declared mandatory groups from the provisional L-101
+reliability study and uses current passage duration/evidence for performance.
+Unknown data does not reject a contender, and a missed provisional target does not
+create a new mandatory veto. No rig, gearbox, weights or hardware approval is selected.

@@ -107,8 +107,9 @@ package Page_safety_19 {
         expose BlueDogRequirements::regulatoryClassification;
         expose BlueDogRequirements::resetRecovery;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
-        expose BlueDogRequirements::stabilityAndFouling;
+        expose BlueDogRequirements::emergencyControl;
+        expose BlueDogRequirements::capsizeResilience;
+        expose BlueDogRequirements::vegetationResilience;
         expose BlueDogRequirements::weedBlockageResponse;
         expose GorgeChallenge::courseCompletion;
         expose GorgeChallenge::emergencyIntervention;
@@ -142,8 +143,9 @@ package Page_safety_19 {
         metadata Layout about BlueDogRequirements::regulatoryClassification { x = 960; y = 2000; }
         metadata Layout about BlueDogRequirements::resetRecovery { x = 0; y = 2400; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 320; y = 2400; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 640; y = 2400; }
-        metadata Layout about BlueDogRequirements::stabilityAndFouling { x = 960; y = 2400; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 640; y = 2400; }
+        metadata Layout about BlueDogRequirements::capsizeResilience { x = 960; y = 2400; }
+        metadata Layout about BlueDogRequirements::vegetationResilience { x = 1120; y = 2580; }
         metadata Layout about BlueDogRequirements::weedBlockageResponse { x = 0; y = 2800; }
         metadata Layout about GorgeChallenge::courseCompletion { x = 320; y = 2800; }
         metadata Layout about GorgeChallenge::emergencyIntervention { x = 640; y = 2800; }
@@ -310,7 +312,7 @@ package Page_safety_22 {
         expose BlueDogRequirements::replayCommandRejection;
         expose BlueDogRequirements::resetRecovery;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
+        expose BlueDogRequirements::emergencyControl;
         expose BlueDogRequirements::unauthenticatedCommandRejection;
         expose GorgeChallenge::courseCompletion;
         expose GorgeChallenge::emergencyIntervention;
@@ -338,7 +340,7 @@ package Page_safety_22 {
         metadata Layout about BlueDogRequirements::replayCommandRejection { x = 320; y = 1600; }
         metadata Layout about BlueDogRequirements::resetRecovery { x = 640; y = 1600; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 960; y = 1600; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 0; y = 2000; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 0; y = 2000; }
         metadata Layout about BlueDogRequirements::unauthenticatedCommandRejection { x = 320; y = 2000; }
         metadata Layout about GorgeChallenge::courseCompletion { x = 640; y = 2000; }
         metadata Layout about GorgeChallenge::emergencyIntervention { x = 960; y = 2000; }
@@ -388,3 +390,36 @@ package SRR_Thread_safety {
 </details>
 
 **Continue:** [Candidate results](../results.md), or return to the [requirements overview](../requirements.md).
+
+## Entry review and qualification decisions
+
+C-007 governs vessel navigation compliance. C-028 through C-032 identify the entrant, organizer and operator duties needed to review entry and adjudicate an attempt. Their process records remain subject to the planned review; traceability does not establish compliance.
+
+<details>
+<summary>Model process obligations and their source</summary>
+
+```sysml-view Page_safety_process::thread direction=BT statements=true
+package Page_safety_process {
+    private import StandardViewDefinitions::*;
+    private import DiagramLayout::*;
+    view thread : GeneralView {
+        filter @SysML::RequirementUsage;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::navigationRules;
+        expose GorgeChallenge::navigationRuleApplicability;
+        expose GorgeChallenge::navigationRuleBaseline;
+        expose GorgeChallenge::navigationEntryEvidence;
+        expose GorgeChallenge::operatorSafetyIntervention;
+        expose GorgeChallenge::navigationAdjudication;
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::navigationRules { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::navigationRuleApplicability { x = 0; y = 400; }
+        metadata Layout about GorgeChallenge::navigationRuleBaseline { x = 320; y = 400; }
+        metadata Layout about GorgeChallenge::navigationEntryEvidence { x = 640; y = 400; }
+        metadata Layout about GorgeChallenge::operatorSafetyIntervention { x = 0; y = 800; }
+        metadata Layout about GorgeChallenge::navigationAdjudication { x = 320; y = 800; }
+    }
+}
+```
+
+</details>

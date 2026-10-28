@@ -1,0 +1,37 @@
+{
+  "governingRequirements": 257,
+  "retainedIDs": 251,
+  "addedIDs": [
+    "C-028",
+    "C-029",
+    "C-030",
+    "C-031",
+    "C-032",
+    "N-004"
+  ],
+  "rewordedIDs": [
+    "E-001",
+    "E-103",
+    "E-105",
+    "E-106",
+    "E-107",
+    "E-205",
+    "N-003",
+    "P-101",
+    "P-103",
+    "P-104",
+    "P-105",
+    "P-106",
+    "Q-101",
+    "R-003",
+    "R-004",
+    "S-003"
+  ],
+  "unchangedStatements": 235,
+  "retainedDerivations": 67,
+  "convertedRefinements": 144,
+  "convertedDependencies": 27,
+  "logicalPhysicalAllocationPairs": 55,
+  "diagnostics": [],
+  "historicalAuditPreserved": true
+}

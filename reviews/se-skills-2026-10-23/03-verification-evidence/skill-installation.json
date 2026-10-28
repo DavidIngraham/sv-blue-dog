@@ -1,0 +1,22 @@
+[
+  {
+    "file": "SKILL.md",
+    "sha256": "E57378FC5F5DC877FF12C872C1D1A8790270732DE6DA0E3DB4C6243FC0CE8980",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\verification-validation-evidence\\SKILL.md"
+  },
+  {
+    "file": "agents\\openai.yaml",
+    "sha256": "71312EEB8EF067CD8EF283BA2CB3789EB4BA2981C912ED99AD41A65978915AA6",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\verification-validation-evidence\\agents\\openai.yaml"
+  },
+  {
+    "file": "references\\checklist.md",
+    "sha256": "1B03F083481C1F053ED8D6ACA605E5F49A7BD6B368B4437698D1F7021CA9841F",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\verification-validation-evidence\\references\\checklist.md"
+  },
+  {
+    "file": "references\\sources.md",
+    "sha256": "326AECB03FE904DECC3DF261DF1E7550F541B3294B57E7912C78ED95AC03CC7B",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\verification-validation-evidence\\references\\sources.md"
+  }
+]

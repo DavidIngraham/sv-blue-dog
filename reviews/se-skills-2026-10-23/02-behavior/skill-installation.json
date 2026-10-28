@@ -1,0 +1,22 @@
+[
+  {
+    "file": "SKILL.md",
+    "sha256": "F232792B9BB7FDC196A2F8A0755D8AEB7E6DE3F8B0E297F00192BC70B07F3D12",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\behavior-modeling-quality\\SKILL.md"
+  },
+  {
+    "file": "agents\\openai.yaml",
+    "sha256": "C7D2144BE1E34F3B57698999C4658C55C29D51D83EEAE6BA6CFD31FAF13732DF",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\behavior-modeling-quality\\agents\\openai.yaml"
+  },
+  {
+    "file": "references\\checklist.md",
+    "sha256": "449C1576224D189488B544F3675444F42ECE66DF6A473426A35FB7135738B4DD",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\behavior-modeling-quality\\references\\checklist.md"
+  },
+  {
+    "file": "references\\sources.md",
+    "sha256": "D6F291E7883BB09951C23FDDEF7AC334974BBAF5688598BBAAB7DB2CA28E40C8",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\behavior-modeling-quality\\references\\sources.md"
+  }
+]

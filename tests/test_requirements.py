@@ -22,6 +22,9 @@ def published_model():
     model.nodes = {key: name.rsplit("::", 1)[-1] for key, name in model.nodes.items()}
     links = re.findall(r'"(n[0-9]+)" -> "(n[0-9]+)" \[label="derive"', model.dot)
     model.edges = [(model.nodes[b], model.nodes[a]) for a, b in links]
+    links = re.findall(r'"(n[0-9]+)" -> "(n[0-9]+)" \[label="refine"', model.dot)
+    model.refinements = {(model.nodes[a], model.nodes[b]) for a, b in links
+                         if a in model.nodes and b in model.nodes}
     return model
 
 
@@ -32,76 +35,26 @@ def test_challenge_is_standalone():
     __import__("tools.boat_analysis.model.runtime", fromlist=["native"]).native("-validate", models=(Path("models/missions/transgorge.sysml").resolve(),))
 
 def test_diagram_preserves_expected_derivations(published_model):
-    expected = {
-        ('transGorgeChallenge', 'navigationRules'),
-        ('transGorgeChallenge', 'restrictedWaters'),
-        ('transGorgeChallenge', 'trafficCoexistence'),
-        ('trafficCoexistence', 'trafficSafety'),
-        ('navigationRules', 'navigationConspicuity'),
-        ('cruisePerformance', 'cruiseEvidence'),
-        ('cruisePerformance', 'legProgress'),
-        ('cruisePerformance', 'passageDuration'),
-        ('environmentalEnvelope', 'airTemperature'),
-        ('environmentalEnvelope', 'calmOperation'),
-        ('environmentalEnvelope', 'envelopeTransition'),
-        ('environmentalEnvelope', 'humidity'),
-        ('environmentalEnvelope', 'visibility'),
-        ('environmentalEnvelope', 'waterTemperature'),
-        ('gorgeEnvironment', 'freshwaterExposure'),
-        ('gorgeEnvironment', 'gorgeCurrent'),
-        ('gorgeEnvironment', 'gorgeSurvivalWaves'),
-        ('gorgeEnvironment', 'gorgeSurvivalWind'),
-        ('gorgeEnvironment', 'gorgeWaves'),
-        ('gorgeEnvironment', 'gorgeWind'),
-        ('gorgeEnvironment', 'submergedWeedPassage'),
-        ('gorgeEnvironment', 'weedSnagShedding'),
-        ('marineDurability', 'enclosureSealing'),
-        ('marineDurability', 'freshwaterExposure'),
-        ('marineDurability', 'printedMaterialAging'),
-        ('marineDurability', 'solarHeating'),
-        ('marineDurability', 'wetElectricalIntegrity'),
-        ('marineDurability', 'wetMechanicalIntegrity'),
-        ('missionReliability', 'criticalFailureDisposition'),
-        ('missionReliability', 'reliabilityEvidence'),
-        ('multiDayEndurance', 'energyEvidenceReadiness'),
-        ('sustainedEnergyFeasibility', 'harvestCampaignCoverage'),
-        ('multiDayEndurance', 'peakSupplyCapability'),
-        ('multiDayEndurance', 'sustainedReserveProtection'),
-        ('navigationAndControl', 'navigationAvailability'),
-        ('oceanEnvironment', 'oceanCurrent'),
-        ('oceanEnvironment', 'oceanSurvivalWaves'),
-        ('oceanEnvironment', 'oceanSurvivalWind'),
-        ('oceanEnvironment', 'oceanWaves'),
-        ('oceanEnvironment', 'oceanWind'),
-        ('oceanEnvironment', 'saltwaterExposure'),
-        ('stabilityAndFouling', 'recoveryPropulsorWeeds'),
-        ('stabilityAndFouling', 'submergedWeedPassage'),
-        ('stabilityAndFouling', 'weedBlockageResponse'),
-        ('stabilityAndFouling', 'weedSnagShedding'),
-        ('sustainedEnergyFeasibility', 'energyEvidenceReadiness'),
-        ('sustainedEnergyFeasibility', 'peakSupplyCapability'),
-        ('sustainedEnergyFeasibility', 'repeatableCycleBalance'),
-        ('sustainedEnergyFeasibility', 'sustainedReserveProtection'),
-        ('transGorgeChallenge', 'courseCompletion'),
-        ('transGorgeChallenge', 'emergencyIntervention'),
-        ('transGorgeChallenge', 'liveObservation'),
-        ('transGorgeChallenge', 'sailingPropulsion'),
-        ('transGorgeChallenge', 'unassistedAttempt'),
-    }
-    expected.update(('transGorgeChallenge', name) for name in ['overallLength', 'safetyCapabilityAbort', 'autonomousShoreRecovery', 'abortAlert', 'noLittering', 'unattachedPassage', 'communicationOutageAutonomy', 'forecastAdmission', 'weatherOutageContinuation', 'courseRecoveryReserve', 'reserveAbort', 'nightOperation', 'abortPersistence', 'recoveryConspicuity'])
-    expected.update(('noLittering', name) for name in ['casualtyFlotation', 'majorComponentRetention', 'capsizeRecovery'])
-    expected.update((r['parent'], r['usage']) for r in ATOMIC['leaves'] if r.get('relationship', 'derivation') == 'derivation')
-    expected.update(tuple(edge) for edge in ATOMIC['shared_links'])
-    expected.update(('structuralIntegrity', name) for name in STRUCTURE_LEAVES)
+    # Deliberate aggregate implications remain; chosen allocations do not.
+    expected = {tuple(edge) for edge in ATOMIC['aggregate_derivations']}
     assert set(published_model.edges) == expected
-    assert len(published_model.edges) == len(expected)
+    assert len(published_model.edges) == len(expected) == 67
+    for edge in [('energyAwareness', 'energyEstimateCadence'),
+                 ('trafficCoexistence', 'trafficSafety'),
+                 ('navigationRules', 'navigationConspicuity'),
+                 ('resetRecovery', 'logInterruptionDurability')]:
+        assert edge not in expected
+    for detail, general in [('energyEstimateCadence', 'energyAwareness'),
+                            ('trafficSafety', 'trafficCoexistence'),
+                            ('submergedWeedPassage', 'vegetationResilience')]:
+        assert (detail, general) in published_model.refinements
 
 
 def test_use_case_and_satisfaction_traceability():
     text = native("-render-document", "BlueDogDocuments::Traceability")
     for case, requirement in [('prepare', 'transportability'), ('sailGorge', 'roundTrip'),
                               ('sailOcean', 'hawaiiVoyage'), ('monitor', 'telemetryEquipment'),
-                              ('recover', 'safeRecovery'), ('maintain', 'serviceability'),
+                              ('recover', 'emergencyControl'), ('maintain', 'serviceability'),
                               ('avoidTraffic', 'trafficSafety'), ('presentNavigationSignals', 'navigationConspicuity')]:
         assert re.search(f'\\| {case} \\|[^\\n]+\\| {requirement} \\|', text)
     assert '| recoveryPropulsion | boat |' in text
@@ -146,6 +99,7 @@ def test_register_preserves_ids_status_and_relationships(published_model):
     expected.update(ENERGY_IDS)
     expected.update(RELIABILITY_IDS)
     expected.update(STRUCTURE_IDS)
+    expected.update(['N-004', *(f'C-{i:03d}' for i in range(28, 33))])
     assert set(ids) == expected
     assert len(ids) == len(expected)
     for source, target in published_model.edges:
@@ -182,13 +136,13 @@ def test_focused_views_cover_all_derivations(published_model, rendered_site):
             for detail, abstract in re.findall(r'(n[0-9]+) -\.->\|"refine"\| (n[0-9]+)', diagram):
                 refinements.add((nodes[detail], nodes[abstract]))
     assert edges == set(published_model.edges)
-    assert refinements == {('roundTrip', 'courseCompletion'), ('communications', 'liveObservation'), ('operatingBoundary', 'restrictedWaters'), ('printTileEnvelope', 'desktopManufacture')}
+    assert refinements == published_model.refinements
 
 
 def test_statements_exclude_supporting_material(published_model):
     statement_rows = re.findall(r'^\| [A-Z]-\d+ \| \w+ \| open \| (.*?) \|$',
                                 published_model.markdown, re.M)
-    assert len(statement_rows) == 236 + len(STRUCTURE_IDS)
+    assert len(statement_rows) == 242 + len(STRUCTURE_IDS)
     assert all(len(text.split()) <= 45 for text in statement_rows)
     assert all('Verification uses' not in text and 'Aggregate requirement' not in text
                and 'Shared verification context' not in text for text in statement_rows)
@@ -202,7 +156,10 @@ def test_statements_exclude_supporting_material(published_model):
 @pytest.mark.parametrize('case', [
     'BlueDogRequirementVerification::EnergyAwarenessVerification',
     'GorgeChallengeVerification::PassageQualificationVerification',
-    'BlueDogRequirementVerification::StabilityAndFoulingVerification',
+    'BlueDogRequirementVerification::CapsizeResilienceVerification',
+    'BlueDogRequirementVerification::VegetationResilienceVerification',
+    'BlueDogRequirementVerification::MissionPerformanceAssessmentVerification',
+    'BlueDogRequirementVerification::ReliabilityEvidenceVerification',
     'BlueDogRequirementVerification::PeakSupplyCapabilityVerification',
     'BlueDogRequirementVerification::ConstructionArchitectureVerification',
 ])
@@ -218,7 +175,7 @@ def test_planned_verification_cannot_report_a_pass(run_model, case):
 @pytest.mark.parametrize("view,actions", [
     ("normal", ("ObserveWind", "SelectSailingCommand", "ApplySailingCommand")),
     ("traffic", ("ObserveTraffic", "ObserveNavigation", "AssessEncounter", "SelectAvoidanceManeuver", "ExecuteAndReassess")),
-    ("recovery", ("LatchAbort", "RecordAndSignalAbort", "SelectReachableShore", "RecoverAndReassess")),
+    ("recovery", ("LatchAbort", "RecordAndSignalAbort", "ObserveNavigation", "ObserveTraffic", "AssessRecoveryBoundary", "ObserveReserve", "SelectReachableShore", "RecoverAndReassess", "PersistRecoveryAuthorization", "ApplyRecoveryCommand", "RecordRecoveryOutcome")),
 ])
 def test_oosem_scenarios_render_declared_behavior(view, actions):
     diagram = native("-render", f"Page_architecture_{view}::scenario", "-render-form", "mermaid")

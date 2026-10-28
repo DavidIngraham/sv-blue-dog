@@ -1,0 +1,84 @@
+{
+  "stages": [
+    {
+      "stage": "01-interface-contracts",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "957",
+      "time": "937.675",
+      "timestamp": "2026-10-23T09:42:45.736720-07:00",
+      "hostname": "dmi-thinkpad"
+    },
+    {
+      "stage": "02-behavior",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "993",
+      "time": "902.353",
+      "timestamp": "2026-10-23T10:16:51.610893-07:00",
+      "hostname": "dmi-thinkpad"
+    },
+    {
+      "stage": "03-verification-evidence",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1012",
+      "time": "947.097",
+      "timestamp": "2026-10-23T10:54:32.574892-07:00",
+      "hostname": "dmi-thinkpad"
+    },
+    {
+      "stage": "04-safety-reliability",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1030",
+      "time": "1068.318",
+      "timestamp": "2026-10-23T11:44:40.036969-07:00",
+      "hostname": "dmi-thinkpad"
+    },
+    {
+      "stage": "05-configuration-budgets",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1048",
+      "time": "1053.582",
+      "timestamp": "2026-10-23T12:34:02.789824-07:00",
+      "hostname": "dmi-thinkpad"
+    },
+    {
+      "stage": "06-analysis-credibility",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1079",
+      "time": "1119.061",
+      "timestamp": "2026-10-23T13:14:52.694598-07:00",
+      "hostname": "dmi-thinkpad"
+    },
+    {
+      "stage": "07-trade-decisions",
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1095",
+      "time": "1236.752",
+      "timestamp": "2026-10-23T13:53:47.474650-07:00",
+      "hostname": "dmi-thinkpad"
+    }
+  ],
+  "installedSkillFiles": 29,
+  "verifiedSourceArchives": 7,
+  "complete": true
+}

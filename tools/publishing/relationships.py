@@ -23,11 +23,23 @@ def basis_links(report):
 def include_basis(diagram, links, labels=None):
     labels = (labels or {}) | dict((name, rid) for rid, name in
                   re.findall(r'^\*\*([A-Z]-\d+) (\w+)\*\*', diagram, re.M))
+    # Native renderers may omit a common namespace. Restore a short usage
+    # identity only when the native label query provides one unique match.
+    by_short_name = {}
+    for identity in labels:
+        if '::' not in identity:
+            continue
+        short_name = identity.rsplit('::', 1)[-1]
+        by_short_name.setdefault(short_name, []).append(identity)
+    def canonical(identity):
+        matches = by_short_name.get(identity, [])
+        return matches[0] if len(matches) == 1 else identity
     def update(match):
         body = match[1]
         found = diagram_nodes(body).items()
         names = {}
         for node, qualified in found:
+            qualified = canonical(qualified)
             if not qualified.startswith(('BlueDogRequirements::', 'BlueDog::Goals::', 'GorgeChallenge::', 'BlueDogStructure::', 'BlueDog::DesignIntent')):
                 continue
             name = qualified.rsplit('::', 1)[-1]
@@ -38,12 +50,13 @@ def include_basis(diagram, links, labels=None):
                  for a, b in links if a in names and b in names]
         identities = []
         def compact(node):
-            node_id, qualified, definition = node[1], node[2], node[3]
-            if definition not in labels:
+            node_id, qualified, definition = node[1], canonical(node[2]), node[3]
+            requirement_id = labels.get(qualified, labels.get(definition))
+            if requirement_id is None:
                 return node[0]
             identities.append(f'%% source-node {node_id} {qualified}')
             title = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', definition)
-            return f'{node_id}("`*«requirement»*\n**{labels[definition]} {title}**`")'
+            return f'{node_id}("`*«requirement»*\n**{requirement_id} {title}**`")'
         # Use native IDs/titles instead of repeating long qualified usage/type names.
         # Preserve the model identity for source navigation and graph checks.
         body = re.sub(r'(n\d+)\("`\*«requirement»\*\s*\*\*([\w:]+) : (\w+)\*\*`"\)', compact, body)

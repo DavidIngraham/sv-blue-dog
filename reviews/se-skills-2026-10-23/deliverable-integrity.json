@@ -1,0 +1,87 @@
+[
+  {
+    "stage": "01-interface-contracts",
+    "skill": "interface-contract-quality",
+    "installedMatchingFiles": [
+      "SKILL.md",
+      "agents/openai.yaml",
+      "references/checklist.md",
+      "references/sources.md"
+    ],
+    "verifiedArchivedSources": 91,
+    "archiveSha256": "c7c9a58b1c4c10feddcbb66180c573dfaf2b3fff22826e069a9aa030a82a9adb"
+  },
+  {
+    "stage": "02-behavior",
+    "skill": "behavior-modeling-quality",
+    "installedMatchingFiles": [
+      "SKILL.md",
+      "agents/openai.yaml",
+      "references/checklist.md",
+      "references/sources.md"
+    ],
+    "verifiedArchivedSources": 94,
+    "archiveSha256": "d44729e10e3cae0c8f7b7ce32755684b8f9b5ffb834054fcb89229a447f0a39f"
+  },
+  {
+    "stage": "03-verification-evidence",
+    "skill": "verification-validation-evidence",
+    "installedMatchingFiles": [
+      "SKILL.md",
+      "agents/openai.yaml",
+      "references/checklist.md",
+      "references/sources.md"
+    ],
+    "verifiedArchivedSources": 93,
+    "archiveSha256": "0c769154559eebbb1840e891f45397d94d864390ebe9ca21fb83155946d2c4cb"
+  },
+  {
+    "stage": "04-safety-reliability",
+    "skill": "safety-reliability-analysis",
+    "installedMatchingFiles": [
+      "SKILL.md",
+      "agents/openai.yaml",
+      "references/checklist.md",
+      "references/sources.md"
+    ],
+    "verifiedArchivedSources": 101,
+    "archiveSha256": "ceabf36fb7db29dc33b25d3c9ced85e188cf4345c5ff007898ca943377760b52"
+  },
+  {
+    "stage": "05-configuration-budgets",
+    "skill": "configuration-budget-management",
+    "installedMatchingFiles": [
+      "SKILL.md",
+      "agents/openai.yaml",
+      "references/checklist.md",
+      "references/sources.md"
+    ],
+    "verifiedArchivedSources": 101,
+    "archiveSha256": "c36556127d7a224c126337b021b9fa929b9b1bf316ac9e389a6de04a28e55f08"
+  },
+  {
+    "stage": "06-analysis-credibility",
+    "skill": "engineering-analysis-credibility",
+    "installedMatchingFiles": [
+      "SKILL.md",
+      "agents/openai.yaml",
+      "references/checklist.md",
+      "references/sources.md"
+    ],
+    "verifiedArchivedSources": 119,
+    "archiveSha256": "ce8e510a772c1d72fb942ee4aca30d996361215c47de7c4176c24950777103dc"
+  },
+  {
+    "stage": "07-trade-decisions",
+    "skill": "trade-study-decision-management",
+    "installedMatchingFiles": [
+      "SKILL.md",
+      "agents/openai.yaml",
+      "references/checklist.md",
+      "references/native-trade-example.sysml",
+      "references/sources.md"
+    ],
+    "verifiedArchivedSources": 104,
+    "archiveSha256": "f82288f2e1b1b10aaf5f6505aa323dd1bec64bf461e687cc4e9b7427ac882f57"
+  }
+]

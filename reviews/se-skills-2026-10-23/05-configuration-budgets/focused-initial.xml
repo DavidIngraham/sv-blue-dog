@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="6.578" timestamp="2026-10-23T12:20:53.167340-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_configuration_budgets" name="test_all_top_level_design_parameter_parts_have_context_and_no_acceptance" time="6.004"><error message="failed on setup with &quot;opensysml.errors.ExecutionError: evaluation failed: not a quantity expression: not a measurement unit: unresolved unit kg&quot;">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+
+    @pytest.fixture(scope='module')
+&gt;   def report(sources):return native_configuration_audit(sources)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_configuration_budgets.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/configuration_audit.py:56: in native_configuration_audit
+    if m.eval('BlueDogConfigurationManagement::'+feature+' == '+owner) is not True:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/model.py:605: in eval
+    return self._client.eval(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;opensysml.connection.Connection object at 0x7f2c40942630&gt;
+expression = 'BlueDogConfigurationManagement::ic01.fixedEquipment.massAllocation == BlueDogIC01::integration.fixedEquipmentKg * 1 [kg]'
+model_hash = 'b6f4e2f99a6084330f4a653c867fffdeaaaa6739eb94186dc9af44730935b991'
+context_symbol_id = None, subject_symbol_id = None
+
+    def eval(
+        self,
+        expression,
+        model_hash,
+        context_symbol_id=None,
+        subject_symbol_id=None,
+    ):
+        """Evaluate a SysML expression.
+    
+        Args:
+            expression (str): SysML expression (e.g., "2 + 2")
+            model_hash (str): Hash from ParseFile response
+            context_symbol_id (str, optional): Symbol FQN for context scope
+            subject_symbol_id (str, optional): FQN of a part/usage to
+                instantiate and evaluate against, so a feature reads that
+                object's value rather than the declared default
+    
+        Returns:
+            Value from expression (int, float, bool, str, Instance, etc.)
+    
+        Raises:
+            ExecutionError: If evaluation fails
+            ModelNotFoundError: If the service no longer holds the model
+            UnsupportedValueError: If the result cannot be represented on the wire
+        """
+        if subject_symbol_id:
+            # A service that ignores the subject would answer with the declared
+            # default, which is indistinguishable from the object's own value.
+            require(
+                self.server_info(),
+                CAPABILITY_EVALUATE_SUBJECT,
+                upgrade_remedy(CAPABILITY_EVALUATE_SUBJECT),
+            )
+    
+        req = sysml_pb2.EvaluateRequest(
+            model_hash=model_hash,
+            expression=expression,
+            context_symbol_id=context_symbol_id or "",
+            subject_symbol_id=subject_symbol_id or "",
+        )
+    
+        capabilities = (
+            (CAPABILITY_EVALUATE_SUBJECT,) if subject_symbol_id else ()
+        )
+        with translate_rpc_errors(
+            unimplemented=self._capability_refusal(capabilities)
+        ):
+            response = self._stub.Evaluate(req)
+    
+        if response.error:
+            wrapped_diags = [Diagnostic(d) for d in response.diagnostics]
+&gt;           raise ExecutionError(response.error, diagnostics=wrapped_diags)
+E           opensysml.errors.ExecutionError: evaluation failed: not a quantity expression: not a measurement unit: unresolved unit kg
+
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1956: ExecutionError</error></testcase></testsuite></testsuites>

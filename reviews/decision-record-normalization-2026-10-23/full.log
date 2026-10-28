@@ -1,0 +1,38 @@
+........................................................................ [  6%]
+........................................................................ [ 13%]
+........................................................................ [ 19%]
+........................................................................ [ 26%]
+........................................................................ [ 32%]
+........................................................................ [ 39%]
+........................................................................ [ 45%]
+........................................................................ [ 52%]
+........................................................................ [ 59%]
+........................................................................ [ 65%]
+........................................................................ [ 72%]
+........................................................................ [ 78%]
+........................................................................ [ 85%]
+........................................................................ [ 91%]
+........................................................................ [ 98%]
+.................                                                        [100%]
+============================= slowest 20 durations =============================
+50.24s setup    tests/test_analysis_credibility.py::test_use_limitations_are_published_as_native_content
+17.05s call     tests/test_named_configuration.py::test_named_demonstration_links_native_arithmetic_to_recovery_policy
+16.62s call     tests/test_wind_sensing.py::test_all_requirement_views_include_their_upstream_context
+16.45s call     tests/test_sailing_performance.py::test_shorter_time_budget_and_leeway_raise_upwind_demand
+16.36s call     tests/test_recorded_evidence.py::test_native_record_review_distinguishes_nominal_and_adverse_cases
+16.36s call     tests/test_current_sizing.py::test_current_replay_has_all_scenarios_and_native_reviews_match_evidence
+16.07s call     tests/test_sailing_performance.py::test_tacking_gybing_and_current_are_not_conflated
+15.36s call     tests/test_energy.py::test_verification_requires_evidence_and_numerical_success
+14.75s call     tests/test_srr_current.py::test_current_candidate_has_positive_energy_and_passes_refined_screens
+14.07s call     tests/test_avoidance_failures.py::test_native_tables_resolve_event_references_and_diagrams_preserve_connectors
+11.82s call     tests/test_navigation_campaign.py::test_navigation_replay_retains_native_provenance_and_frozen_scope
+11.82s setup    tests/test_requirements.py::test_diagram_preserves_expected_derivations
+10.90s call     tests/test_inline_views.py::test_inline_view_resolves_actual_refinement_and_statements
+10.81s call     tests/test_sailing_performance.py::test_current_reduces_or_increases_demand_without_being_derated
+10.58s call     tests/test_sailing_performance.py::test_wind_strength_changes_required_ratio_not_a_predicted_polar
+10.48s call     tests/test_sailing_performance.py::test_hull_length_changes_reference_not_predicted_speed
+10.22s call     tests/test_requirements.py::test_use_case_and_satisfaction_traceability
+10.07s call     tests/test_recovery_trade.py::test_static_reference_and_diameter_sensitivity
+10.03s call     tests/test_reliability.py::test_holds_increase_exposure_and_tighten_budget
+9.31s call     tests/test_oosem_audit.py::test_removing_a_current_verification_objective_is_detected
+1097 passed in 1227.38s (0:20:27)

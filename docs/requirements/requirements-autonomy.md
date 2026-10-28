@@ -176,8 +176,9 @@ package Page_autonomy_5 {
         expose BlueDogRequirements::resetRecovery;
         expose BlueDogRequirements::restartDeadline;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
-        expose BlueDogRequirements::stabilityAndFouling;
+        expose BlueDogRequirements::emergencyControl;
+        expose BlueDogRequirements::capsizeResilience;
+        expose BlueDogRequirements::vegetationResilience;
         expose BlueDogRequirements::unknownQualificationFallback;
         expose BlueDogRequirements::weedBlockageResponse;
         expose GorgeChallenge::courseCompletion;
@@ -212,8 +213,9 @@ package Page_autonomy_5 {
         metadata Layout about BlueDogRequirements::resetRecovery { x = 960; y = 2000; }
         metadata Layout about BlueDogRequirements::restartDeadline { x = 0; y = 2400; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 320; y = 2400; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 640; y = 2400; }
-        metadata Layout about BlueDogRequirements::stabilityAndFouling { x = 960; y = 2400; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 640; y = 2400; }
+        metadata Layout about BlueDogRequirements::capsizeResilience { x = 960; y = 2400; }
+        metadata Layout about BlueDogRequirements::vegetationResilience { x = 1120; y = 2580; }
         metadata Layout about BlueDogRequirements::unknownQualificationFallback { x = 0; y = 2800; }
         metadata Layout about BlueDogRequirements::weedBlockageResponse { x = 320; y = 2800; }
         metadata Layout about GorgeChallenge::courseCompletion { x = 640; y = 2800; }
@@ -261,8 +263,9 @@ package Page_autonomy_6 {
         expose BlueDogRequirements::resetRecovery;
         expose BlueDogRequirements::resetRestrictionPreservation;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
-        expose BlueDogRequirements::stabilityAndFouling;
+        expose BlueDogRequirements::emergencyControl;
+        expose BlueDogRequirements::capsizeResilience;
+        expose BlueDogRequirements::vegetationResilience;
         expose BlueDogRequirements::weedBlockageResponse;
         expose GorgeChallenge::courseCompletion;
         expose GorgeChallenge::emergencyIntervention;
@@ -292,8 +295,9 @@ package Page_autonomy_6 {
         metadata Layout about BlueDogRequirements::resetRecovery { x = 960; y = 1600; }
         metadata Layout about BlueDogRequirements::resetRestrictionPreservation { x = 0; y = 2000; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 320; y = 2000; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 640; y = 2000; }
-        metadata Layout about BlueDogRequirements::stabilityAndFouling { x = 960; y = 2000; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 640; y = 2000; }
+        metadata Layout about BlueDogRequirements::capsizeResilience { x = 960; y = 2000; }
+        metadata Layout about BlueDogRequirements::vegetationResilience { x = 1120; y = 2180; }
         metadata Layout about BlueDogRequirements::weedBlockageResponse { x = 0; y = 2400; }
         metadata Layout about GorgeChallenge::courseCompletion { x = 320; y = 2400; }
         metadata Layout about GorgeChallenge::emergencyIntervention { x = 640; y = 2400; }
@@ -340,7 +344,7 @@ package Page_autonomy_7 {
         expose BlueDogRequirements::qualificationPersistence;
         expose BlueDogRequirements::resetRecovery;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
+        expose BlueDogRequirements::emergencyControl;
         expose GorgeChallenge::courseCompletion;
         expose GorgeChallenge::emergencyIntervention;
         expose GorgeChallenge::liveObservation;
@@ -369,7 +373,7 @@ package Page_autonomy_7 {
         metadata Layout about BlueDogRequirements::qualificationPersistence { x = 960; y = 1600; }
         metadata Layout about BlueDogRequirements::resetRecovery { x = 0; y = 2000; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 320; y = 2000; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 640; y = 2000; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 640; y = 2000; }
         metadata Layout about GorgeChallenge::courseCompletion { x = 960; y = 2000; }
         metadata Layout about GorgeChallenge::emergencyIntervention { x = 0; y = 2400; }
         metadata Layout about GorgeChallenge::liveObservation { x = 320; y = 2400; }

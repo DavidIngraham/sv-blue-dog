@@ -1,0 +1,705 @@
+[
+  {
+    "id": "BlueDogAcousticEquipment::Budget",
+    "properties": {
+      "owner": "BlueDogAcousticEquipment"
+    }
+  },
+  {
+    "id": "BlueDogAerodynamicPolicy::convergenceInputs",
+    "properties": {
+      "owner": "BlueDogAerodynamicPolicy"
+    }
+  },
+  {
+    "id": "BlueDogAvoidanceFailures::EvaluateExposure",
+    "properties": {
+      "owner": "BlueDogAvoidanceFailures"
+    }
+  },
+  {
+    "id": "BlueDogCandidateEnergy::Reconciliation",
+    "properties": {
+      "owner": "BlueDogCandidateEnergy"
+    }
+  },
+  {
+    "id": "BlueDogClassDetection::Assessment",
+    "properties": {
+      "owner": "BlueDogClassDetection"
+    }
+  },
+  {
+    "id": "BlueDogClassDetection::Summary",
+    "properties": {
+      "owner": "BlueDogClassDetection"
+    }
+  },
+  {
+    "id": "BlueDogConceptCredibility::Inputs",
+    "properties": {
+      "owner": "BlueDogConceptCredibility"
+    }
+  },
+  {
+    "id": "BlueDogConceptCredibility::SensitivityInputs",
+    "properties": {
+      "owner": "BlueDogConceptCredibility"
+    }
+  },
+  {
+    "id": "BlueDogConfigurationManagement::AccountingReview",
+    "properties": {
+      "owner": "BlueDogConfigurationManagement"
+    }
+  },
+  {
+    "id": "BlueDogConfigurationManagement::currentReview",
+    "properties": {
+      "type": "BlueDogConfigurationManagement::AccountingReview",
+      "owner": "BlueDogConfigurationManagement"
+    }
+  },
+  {
+    "id": "BlueDogCoupledOperation::Inputs",
+    "properties": {
+      "owner": "BlueDogCoupledOperation"
+    }
+  },
+  {
+    "id": "BlueDogCoupledSizing::Inputs",
+    "properties": {
+      "owner": "BlueDogCoupledSizing"
+    }
+  },
+  {
+    "id": "BlueDogCoupledUncertainty::Inputs",
+    "properties": {
+      "owner": "BlueDogCoupledUncertainty"
+    }
+  },
+  {
+    "id": "BlueDogCurrentSizing::nominalReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogCurrentSizing"
+    }
+  },
+  {
+    "id": "BlueDogCurrentSizing::constructionReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogCurrentSizing"
+    }
+  },
+  {
+    "id": "BlueDogCurrentSizing::aerodynamicReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogCurrentSizing"
+    }
+  },
+  {
+    "id": "BlueDogCurrentSizing::hydrodynamicReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogCurrentSizing"
+    }
+  },
+  {
+    "id": "BlueDogCurrentSizing::energyReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogCurrentSizing"
+    }
+  },
+  {
+    "id": "BlueDogCurrentSizing::combinedReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogCurrentSizing"
+    }
+  },
+  {
+    "id": "BlueDogEncounterEnvelope::Envelope",
+    "properties": {
+      "owner": "BlueDogEncounterEnvelope"
+    }
+  },
+  {
+    "id": "BlueDogEncounterEnvelope::Summary",
+    "properties": {
+      "owner": "BlueDogEncounterEnvelope"
+    }
+  },
+  {
+    "id": "BlueDogEncounterFeasibility::Inputs",
+    "properties": {
+      "owner": "BlueDogEncounterFeasibility"
+    }
+  },
+  {
+    "id": "BlueDogEncounterReview::Acquisition",
+    "properties": {
+      "owner": "BlueDogEncounterReview"
+    }
+  },
+  {
+    "id": "BlueDogEnergy::SustainedOperation",
+    "properties": {
+      "owner": "BlueDogEnergy"
+    }
+  },
+  {
+    "id": "BlueDogEnergy::SustainedEnergyVerification::calculation",
+    "properties": {
+      "type": "BlueDogEnergy::SustainedOperation",
+      "owner": "BlueDogEnergy::SustainedEnergyVerification"
+    }
+  },
+  {
+    "id": "BlueDogEnvironmentReview::FetchSensitivity",
+    "properties": {
+      "owner": "BlueDogEnvironmentReview"
+    }
+  },
+  {
+    "id": "BlueDogHydrostatics::analyticExample",
+    "properties": {
+      "owner": "BlueDogHydrostatics"
+    }
+  },
+  {
+    "id": "BlueDogIntegratedCandidate::Inputs",
+    "properties": {
+      "owner": "BlueDogIntegratedCandidate"
+    }
+  },
+  {
+    "id": "BlueDogIntegratedCandidate::RecoveryScreen",
+    "properties": {
+      "owner": "BlueDogIntegratedCandidate"
+    }
+  },
+  {
+    "id": "BlueDogIntegratedCandidate::IC01RecoveryIllustration",
+    "properties": {
+      "type": "BlueDogIntegratedCandidate::RecoveryScreen",
+      "owner": "BlueDogIntegratedCandidate"
+    }
+  },
+  {
+    "id": "BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration",
+    "properties": {
+      "type": "BlueDogIntegratedCandidate::RecoveryScreen",
+      "owner": "BlueDogIntegratedCandidate"
+    }
+  },
+  {
+    "id": "BlueDogIntegratedCandidate::IC01NoRecoveryAuthority",
+    "properties": {
+      "type": "BlueDogIntegratedCandidate::RecoveryScreen",
+      "owner": "BlueDogIntegratedCandidate"
+    }
+  },
+  {
+    "id": "BlueDogLocationTraffic::WindowAssessment",
+    "properties": {
+      "owner": "BlueDogLocationTraffic"
+    }
+  },
+  {
+    "id": "BlueDogManeuverDynamics::Defaults",
+    "properties": {
+      "owner": "BlueDogManeuverDynamics"
+    }
+  },
+  {
+    "id": "BlueDogManeuverDynamics::StudyInputs",
+    "properties": {
+      "owner": "BlueDogManeuverDynamics"
+    }
+  },
+  {
+    "id": "BlueDogMissionSimulation::Inputs",
+    "properties": {
+      "owner": "BlueDogMissionSimulation"
+    }
+  },
+  {
+    "id": "BlueDogNavigationController::Policy",
+    "properties": {
+      "owner": "BlueDogNavigationController"
+    }
+  },
+  {
+    "id": "BlueDogNavigationController::Candidate",
+    "properties": {
+      "owner": "BlueDogNavigationController"
+    }
+  },
+  {
+    "id": "BlueDogNavigationController::Geometry",
+    "properties": {
+      "owner": "BlueDogNavigationController"
+    }
+  },
+  {
+    "id": "BlueDogNavigationController::Context",
+    "properties": {
+      "owner": "BlueDogNavigationController"
+    }
+  },
+  {
+    "id": "BlueDogOperatingEnvironment::Inputs",
+    "properties": {
+      "owner": "BlueDogOperatingEnvironment"
+    }
+  },
+  {
+    "id": "BlueDogPassageExposure::Contours",
+    "properties": {
+      "owner": "BlueDogPassageExposure"
+    }
+  },
+  {
+    "id": "BlueDogRecordedSizing::nominalReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogRecordedSizing"
+    }
+  },
+  {
+    "id": "BlueDogRecordedSizing::constructionReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogRecordedSizing"
+    }
+  },
+  {
+    "id": "BlueDogRecordedSizing::aerodynamicReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogRecordedSizing"
+    }
+  },
+  {
+    "id": "BlueDogRecordedSizing::hydrodynamicReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogRecordedSizing"
+    }
+  },
+  {
+    "id": "BlueDogRecordedSizing::energyReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogRecordedSizing"
+    }
+  },
+  {
+    "id": "BlueDogRecordedSizing::combinedReview",
+    "properties": {
+      "type": "BlueDogSizingEvidence::Review",
+      "owner": "BlueDogRecordedSizing"
+    }
+  },
+  {
+    "id": "BlueDogRecoveryRisk::Sensitivity",
+    "properties": {
+      "owner": "BlueDogRecoveryRisk"
+    }
+  },
+  {
+    "id": "BlueDogReliability::CruiseReliability",
+    "properties": {
+      "owner": "BlueDogReliability"
+    }
+  },
+  {
+    "id": "BlueDogReliability::VoyageReliabilityVerification::calculation",
+    "properties": {
+      "type": "BlueDogReliability::CruiseReliability",
+      "owner": "BlueDogReliability::VoyageReliabilityVerification"
+    }
+  },
+  {
+    "id": "BlueDogReliabilityExamples::gorgeAssessment",
+    "properties": {
+      "type": "BlueDogReliability::CruiseReliability",
+      "owner": "BlueDogReliabilityExamples"
+    }
+  },
+  {
+    "id": "BlueDogSafety::SafetyReview",
+    "properties": {
+      "owner": "BlueDogSafety"
+    }
+  },
+  {
+    "id": "BlueDogSafety::SafetyReview::failureModes",
+    "properties": {
+      "type": "FailureAnalysis::DesignFailureReview",
+      "owner": "BlueDogSafety::SafetyReview"
+    }
+  },
+  {
+    "id": "BlueDogSafety::currentReview",
+    "properties": {
+      "type": "BlueDogSafety::SafetyReview",
+      "owner": "BlueDogSafety"
+    }
+  },
+  {
+    "id": "BlueDogSailTrade::TradeAssessment",
+    "properties": {
+      "owner": "BlueDogSailTrade"
+    }
+  },
+  {
+    "id": "BlueDogSailTrade::tailAssessment",
+    "properties": {
+      "type": "BlueDogSailTrade::TradeAssessment",
+      "owner": "BlueDogSailTrade"
+    }
+  },
+  {
+    "id": "BlueDogSailTrade::camberAssessment",
+    "properties": {
+      "type": "BlueDogSailTrade::TradeAssessment",
+      "owner": "BlueDogSailTrade"
+    }
+  },
+  {
+    "id": "BlueDogSailTrade::softAssessment",
+    "properties": {
+      "type": "BlueDogSailTrade::TradeAssessment",
+      "owner": "BlueDogSailTrade"
+    }
+  },
+  {
+    "id": "BlueDogSailTrade::buoyancyIllustration",
+    "properties": {
+      "owner": "BlueDogSailTrade"
+    }
+  },
+  {
+    "id": "BlueDogSailing::PolarDemandAndHullScreen",
+    "properties": {
+      "owner": "BlueDogSailing"
+    }
+  },
+  {
+    "id": "BlueDogSailing::PolarVoyageAssessment",
+    "properties": {
+      "owner": "BlueDogSailing"
+    }
+  },
+  {
+    "id": "BlueDogSailing::PolarVoyageAssessment::cruise",
+    "properties": {
+      "type": "BlueDogReliability::CruiseReliability",
+      "owner": "BlueDogSailing::PolarVoyageAssessment"
+    }
+  },
+  {
+    "id": "BlueDogSailing::SailingSensitivity",
+    "properties": {
+      "owner": "BlueDogSailing"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::upstreamBeat",
+    "properties": {
+      "type": "BlueDogSailing::PolarDemandAndHullScreen",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::upstreamRun",
+    "properties": {
+      "type": "BlueDogSailing::PolarDemandAndHullScreen",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::downstreamBeat",
+    "properties": {
+      "type": "BlueDogSailing::PolarDemandAndHullScreen",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::downstreamRun",
+    "properties": {
+      "type": "BlueDogSailing::PolarDemandAndHullScreen",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::westerlyPassage",
+    "properties": {
+      "type": "BlueDogSailing::PolarVoyageAssessment",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::easterlyPassage",
+    "properties": {
+      "type": "BlueDogSailing::PolarVoyageAssessment",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::lightWindDemand",
+    "properties": {
+      "type": "BlueDogSailing::PolarDemandAndHullScreen",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::strongWindDemand",
+    "properties": {
+      "type": "BlueDogSailing::PolarDemandAndHullScreen",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::highWindDemand",
+    "properties": {
+      "type": "BlueDogSailing::PolarDemandAndHullScreen",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::sensitivity",
+    "properties": {
+      "type": "BlueDogSailing::SailingSensitivity",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSailingExamples::oceanDemand",
+    "properties": {
+      "type": "BlueDogSailing::PolarDemandAndHullScreen",
+      "owner": "BlueDogSailingExamples"
+    }
+  },
+  {
+    "id": "BlueDogSizingEvidence::Review",
+    "properties": {
+      "owner": "BlueDogSizingEvidence"
+    }
+  },
+  {
+    "id": "BlueDogStructuralBasis::Inputs",
+    "properties": {
+      "owner": "BlueDogStructuralBasis"
+    }
+  },
+  {
+    "id": "BlueDogStructure::MaterialInputs",
+    "properties": {
+      "owner": "BlueDogStructure"
+    }
+  },
+  {
+    "id": "BlueDogStructure::material",
+    "properties": {
+      "type": "BlueDogStructure::MaterialInputs",
+      "owner": "BlueDogStructure"
+    }
+  },
+  {
+    "id": "BlueDogSurfaceEnvironment::Inputs",
+    "properties": {
+      "owner": "BlueDogSurfaceEnvironment"
+    }
+  },
+  {
+    "id": "BlueDogWavePerformance::Inputs",
+    "properties": {
+      "owner": "BlueDogWavePerformance"
+    }
+  },
+  {
+    "id": "BlueDogWeather::Inputs",
+    "properties": {
+      "owner": "BlueDogWeather"
+    }
+  },
+  {
+    "id": "BlueDogWeather::RegimeSensitivity",
+    "properties": {
+      "owner": "BlueDogWeather"
+    }
+  },
+  {
+    "id": "BlueDogWeather::primary",
+    "properties": {
+      "type": "BlueDogWeather::RegimeSensitivity",
+      "owner": "BlueDogWeather"
+    }
+  },
+  {
+    "id": "BlueDogWeather::construction",
+    "properties": {
+      "type": "BlueDogWeather::RegimeSensitivity",
+      "owner": "BlueDogWeather"
+    }
+  },
+  {
+    "id": "BlueDogWeather::aerodynamic",
+    "properties": {
+      "type": "BlueDogWeather::RegimeSensitivity",
+      "owner": "BlueDogWeather"
+    }
+  },
+  {
+    "id": "BlueDogWeather::hydrodynamic",
+    "properties": {
+      "type": "BlueDogWeather::RegimeSensitivity",
+      "owner": "BlueDogWeather"
+    }
+  },
+  {
+    "id": "BlueDogWeather::energy",
+    "properties": {
+      "type": "BlueDogWeather::RegimeSensitivity",
+      "owner": "BlueDogWeather"
+    }
+  },
+  {
+    "id": "BlueDogWeather::combined",
+    "properties": {
+      "type": "BlueDogWeather::RegimeSensitivity",
+      "owner": "BlueDogWeather"
+    }
+  },
+  {
+    "id": "BlueDogWindEquipment::Rollup",
+    "properties": {
+      "owner": "BlueDogWindEquipment"
+    }
+  },
+  {
+    "id": "BlueDogWingActuator::accountingExample",
+    "properties": {
+      "owner": "BlueDogWingActuator"
+    }
+  },
+  {
+    "id": "BlueDogWingHeel::sweepInputs",
+    "properties": {
+      "owner": "BlueDogWingHeel"
+    }
+  },
+  {
+    "id": "InlandExtended::General",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::ChannelsAndTSS",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::RestrictedVisibility",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::LightsAndShapes",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::Signals",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::LightFixture",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::Installation",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::SoundAppliance",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::ExemptionsAndSpecialCases",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::CandidateAssessment",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::SnapshotConsistency",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::SpecialDisplays",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::PassageProtocol",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandExtended::DistressCatalog",
+    "properties": {
+      "owner": "InlandExtended"
+    }
+  },
+  {
+    "id": "InlandNavigationExperiment::Assess",
+    "properties": {
+      "owner": "InlandNavigationExperiment"
+    }
+  },
+  {
+    "id": "MarineEnergy::BudgetRollup",
+    "properties": {
+      "owner": "MarineEnergy"
+    }
+  },
+  {
+    "id": "RecoveryPropulsionTrade::RecoverySizing",
+    "properties": {
+      "owner": "RecoveryPropulsionTrade"
+    }
+  },
+  {
+    "id": "TransGorgeCourse::GateGeometry",
+    "properties": {
+      "owner": "TransGorgeCourse"
+    }
+  }
+]

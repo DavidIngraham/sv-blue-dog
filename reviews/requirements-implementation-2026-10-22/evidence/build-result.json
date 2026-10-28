@@ -1,0 +1,10 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "tools.publishing.build"
+  ],
+  "returncode": 0,
+  "seconds": 42.71679822599981,
+  "finishedUTC": "2026-10-23T06:33:45.343195+00:00"
+}

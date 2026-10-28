@@ -1,0 +1,2774 @@
+{
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "modelHash": "abc5415eb607a41924c1ddcd2af7930b53f5e6475941b14b862fd3c5d39fe572",
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/avoidance-failures.sysml": "e696a0d798ca05bbcf3ef05a90c0c2b67bf3268f62238dacd691d553cb46d1f4",
+    "models/analyses/candidate-energy.sysml": "f05a4a2187aabd316ac06e1968fd8e9fae00ab3ca5980d9a216ce2a5146c4241",
+    "models/analyses/class-specific-detection.sysml": "9e585fb65056849ffe3827d6b489912bf6e26e4ae6d20bde7a9b005a3836a8b3",
+    "models/analyses/development-risks.sysml": "02215b2776e5c643d044ce4b8a47c51e8e5796e1ba5a9e451714cbe781ec2a40",
+    "models/analyses/dfmea.sysml": "223b975714a8d76671a3a90a24c7ea764e383c24bc1b6ad8f7a9b5a50a31a34f",
+    "models/analyses/encounter-envelope.sysml": "61654e8fe683aa4932f6c409f8fe954ebd6f3fb5c1295805ecced68b15071db5",
+    "models/analyses/encounter-feasibility.sysml": "4067475ad5174a54f22fc72baad6d8ee3cc502cbc3bc6dbfd528db49277500cb",
+    "models/analyses/encounter-review.sysml": "7efaf1b169a56ae75c6465fe130bb6a0c3fca2b94faa1f3584cea43a666f1bbb",
+    "models/analyses/energy.sysml": "203f075b8b8470331c0a6c725bedafe467b9140bc572ccf79ba5ae14137c8c20",
+    "models/analyses/environment-review.sysml": "5d74730715837b2cfb7596af73d481c5545308ec03cd9b73c6dcb807d7efa243",
+    "models/analyses/integrated-candidate.sysml": "9eab58e1ce9d4d79d57b6fe7c0740fda867ac4286c687f1786673a620c5f0c7b",
+    "models/analyses/location-traffic-risk.sysml": "21fcbaa999f92f7bd1b305708fea4dccd8b0bc5688b0f8d1a749e218b41483ba",
+    "models/analyses/maneuver-dynamics.sysml": "065494ce5c9ff1fa96e761181c3ff40651f0858085c88894f39f50852018c750",
+    "models/analyses/mission.sysml": "5d10d5dcb127b499437a7e915e0c92ad98104477762a0a3d119efc052e6a3cd6",
+    "models/analyses/navigation-controller.sysml": "32d2edfcb696147b7fad2daeb682c0d2bc09a28af0e758b78904cdfde0d77b30",
+    "models/analyses/passage-exposure.sysml": "72f055615ffabba4ec9377d00d2f76ade31ee68091f012b60ed56d5bb1a64f73",
+    "models/analyses/polar-demand.sysml": "2ae69be8debe151f0c081cc37da56074c878a77ff50a647ab5e4364a9a866905",
+    "models/analyses/recovery-propulsion.sysml": "bb79e2d030eda65bf8c2d243d62d9e51a02a9b114f7fb5659fece646a8ab6829",
+    "models/analyses/recovery-risk.sysml": "91d821d597600176304c6d2dede380f409aacee8eae2769ce5b033e9eb7309f5",
+    "models/analyses/recovery-site-review.sysml": "f0e8915d23aea03f4b8af834960fa8dfc4fd075ae0512188ecb97c6f4a3f051d",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "6746846ce5f3f7fcd236ec7c5c83822a5963db53591ad28702dc859735517d76",
+    "models/analyses/safety.sysml": "bbaaa8d52fdd9867699d14ba4efe6627e2f97e2f20001cea319e78c9b901f645",
+    "models/analyses/sail-trade.sysml": "c5cd6ec64a05c65e1eece7c21b47ca97747ad0a848000071b2baa6c9390f22eb",
+    "models/analyses/sizing/credibility.sysml": "42eca821d95eca13772ef1326b6a27b625e1f6ec0e890d2a2ad94f717455728c",
+    "models/analyses/sizing/evidence.sysml": "f0d2a6d886c71d4b7adc632271ff122f7bc57b1a6302db84bf844d74f20fe801",
+    "models/analyses/sizing/inputs.sysml": "934dde8fa12d41656d776b954c7a695f7979e003e629d2677ea4de51b1615925",
+    "models/analyses/sizing/operating.sysml": "04e6733d21d749c8a06e141ad67b7807cb349b6b03612a0c3d2a315ee4c92ce7",
+    "models/analyses/sizing/uncertainty.sysml": "78d71e2767b681561768d486ca6d6a9d4e16332fd576fe9cfe1a8e01d3dfcf3b",
+    "models/analyses/structural-basis.sysml": "c85be7e177715c5586e13508ecb973ac9d9355cac58fac684c683c0da3fc6ed6",
+    "models/analyses/surface-environment.sysml": "5778f163047634797e8ef65a8783a5e783676df530bc0caa0247a679c00222ea",
+    "models/analyses/wave-performance.sysml": "383e94db89dfe142db9e46398de22a707c543f754d3f778aa600a695689d6b3d",
+    "models/analyses/weather.sysml": "44ecf6b6d1e331fa5185398873d42e553128533c925d292dfc4287851ff1ee4c",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/acoustic-equipment.sysml": "cf00a437976ecfd928740adf21a711da19184bd87347e1c8e6ce8126ee6b419e",
+    "models/configurations/energy.sysml": "9a67f9f74fa51fb67f2749cf3b4e12615014f383b365a48043f3461999d6c7b8",
+    "models/configurations/ic01.sysml": "0b953814697ff78defa9931de9c23813a23ca90eb1a2cd7121f4d755064a221f",
+    "models/configurations/operating.sysml": "2f3019e2b9c4a9985d7a5eabfbd39dde694903dc378d8381c1b550f3c48c59d0",
+    "models/configurations/polar-demand.sysml": "776327bf7cefc8edc26f29000d21261cc3f2d2da9da8dcd8a6e30ffa5ced121e",
+    "models/configurations/reference.sysml": "409baa5254262a527b27af7fce00ffb3da35f249fe54e51f3cf024bdf86671be",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/sensing-equipment.sysml": "67f7f5e14071cc49cad4dc86c35477caeae217c06ecb88a30b6b7f97023f3845",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/configurations/wind-equipment.sysml": "ebb44c8c073855c60e4fbe6a6d1d3ee0b9e8dac26284f0451d89bdde67e6ff8c",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/evidence/current-sizing.sysml": "b6176f48be47dde61bd41ea892fec6c68258b72afdf2265ffb1bba5fb642b991",
+    "models/evidence/finite-passage-sizing.sysml": "7c0cac2c4733ba43b652edc7bc547265087434656a11694670ff5347c2028f56",
+    "models/evidence/gorge-wind.sysml": "2eee7571fc7ac02bcd054b0c226b5edb54ff931a31d74c508331ff1bf20ef466",
+    "models/evidence/sizing-continuation.sysml": "b8825d29058049ef75538b8b40b0dceb5bbdcb9aac806457856b9b2a9ccfee2e",
+    "models/evidence/srr-current.sysml": "c429f99895f703e8189f10383374e02865c78a7d5bc623478affdda1600daa33",
+    "models/evidence/srr-frontier.sysml": "c153ab46f07b4fffe4e4d946bd42a81b43f5fb6f6d5f0d95ee52097d8a7333db",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/appendages.sysml": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+    "models/libraries/marine/concept.sysml": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+    "models/libraries/marine/course.sysml": "3f58d6c0dc668858aa0b6bdad232c26b0ac75952ad67d0f06e73f4fbd464c85c",
+    "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "models/libraries/marine/hull-resistance.sysml": "967550313effe20092525e10c1695771b8354c66478203f449ac902d8af1a5f1",
+    "models/libraries/marine/hydrostatics.sysml": "b6791576a108dee393063a15a1a359113a8c24aba793105fa7d60fa193e9d858",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/recovery.sysml": "00c8c1fcfda115116fc66bf1db5a67334e04ea893182a454a796ada62eeeaab4",
+    "models/libraries/marine/reliability.sysml": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+    "models/libraries/marine/sailing.sysml": "8281caf912a840d83d5a6d1c39fe0422419ce7fb9ccaae3d9044b0c5df33446f",
+    "models/libraries/marine/surface.sysml": "781d337d8553160eb8d3c0724ae2aef4463d51ae6bc05ef475d32884645213c8",
+    "models/libraries/marine/wave-performance.sysml": "ee1d491adb19773eb151588a5f8ccb52c8ee4364150c5783637c58ada8a07ba9",
+    "models/libraries/marine/weather.sysml": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326",
+    "models/libraries/structures/mass-properties.sysml": "ced6365432541c9c9ada7b683564efde12f597d46e96144fd70221f767ef5dde",
+    "models/libraries/structures/scantlings.sysml": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+    "models/missions/course.sysml": "58bff9885a96ec73bcd4f0b405f9bef2f5b520bb605c0f1d8eb6ed630ed4d714",
+    "models/missions/scope.sysml": "3f4058d5a9fc653f77764849708b3729f286fc52e692ec418ea5fd47aad92854",
+    "models/missions/transgorge.sysml": "28a3deec02e3b2b7e9c69bb880d5f4c8b3d5e5627c7318506d5156c32dafd920",
+    "models/missions/verification.sysml": "99a624662537a2413b16b86421f2aa0e227efc3a2746046b516923ad50852677",
+    "models/vehicle/allocations.sysml": "1c8753ed06da6175b784f671491b38a75b81c0df0b50fb3818a4648ef57466e5",
+    "models/vehicle/architecture-contracts.sysml": "b8d38ac4fa384ea84ad7c88c8a490417d0495659836eb91744900182991b396a",
+    "models/vehicle/architecture.sysml": "b5cb5660303d5db76c434b0feacba250f2cdcb51c0f6d0622e91e2311f8c53b9",
+    "models/vehicle/behavior-contracts.sysml": "b67da5f4b04bb6c82ea50a1bab0e4d22b1519b65c9cae512ac52ebfb7a815669",
+    "models/vehicle/decisions.sysml": "34d3a1300b2285eebf39236d2c6b929fd6599d8f428d3ab32e9a29da431e1076",
+    "models/vehicle/interface-contracts.sysml": "93844239666f3762a03ff2d414501a8bd1016e233503847b5c0a5e1fe0f14f1a",
+    "models/vehicle/method.sysml": "014068f89e0edc6fb45d586432e989e657a16de5d0d21dcf340b1c842fb81fe5",
+    "models/vehicle/mission-logic.sysml": "d09ddf94799d465b78daa2c8d2ecc4559735f063d36c0bf836aaa045271a663c",
+    "models/vehicle/requirement-basis.sysml": "b390fc89ce054ea5474fd2a1e2c577e6dd389f57283d8644d1754aeed82d52cd",
+    "models/vehicle/requirement-decisions.sysml": "cf6bf8ae2c7e2294a4f90ce7ba05173918adc4b55d19d1940a6a485b93e3d515",
+    "models/vehicle/requirements.sysml": "b2f1105cb06e3b804c974dbd5e01bda4f4912730e1edb36c837cf4f6eb5d73b4",
+    "models/vehicle/source-evidence.sysml": "028ba4009dc681ed1cc3205d6f6385dba8062931303645fb1347030f6b84c8f6",
+    "models/vehicle/structure.sysml": "81ff62a76c486454e01e8a424152f39540a2d63cc819f9850d7f329f47e8fb95",
+    "models/vehicle/use-cases.sysml": "85e937531404b30b8b5472b2ff266a99a57ba8fdc25d633a80dbd40a68e2e319",
+    "models/vehicle/verification-planning.sysml": "beadeb90cce35e07fb77a6c9f5324c00c97a45aea0046dfa059ef6de2e47e64a",
+    "models/vehicle/verification.sysml": "961cb9d09fdec61406585cf6956a2d66b26e2e34e7cc9658df358d3201f890e9"
+  },
+  "auditSources": {
+    "tools/publishing/reference.sysml": "efdff99c2abfcc9652ab1f48a0cdf491b1a871c1e22b61b407d2c667f6196ef7",
+    "tools/boat_analysis/model/safety_audit.py": "20f05fbee099b601cba3e311bc336bcb5e4f96a18efd5eaf3c46995a3ca44cd8"
+  },
+  "diagnostics": [],
+  "errors": [],
+  "safetyReview": {
+    "hazardCount": 6,
+    "unresolvedHazardCount": 6,
+    "hazardRecordsClosed": false,
+    "fmeaReady": false,
+    "reviewReady": false,
+    "ready": false
+  },
+  "fmeaReview": {
+    "modeCount": 15,
+    "safetyCriticalCount": 13,
+    "unresolvedCriticalCount": 13,
+    "openActionCount": 15,
+    "reviewReady": false
+  },
+  "support": {
+    "BlueDogSafety::gorge::collisionExposure": {
+      "contributors": [
+        "BlueDogDFMEA::starter::steeringJam",
+        "BlueDogDFMEA::starter::sailJam",
+        "BlueDogDFMEA::starter::powerCommonCause",
+        "BlueDogDFMEA::starter::navigationFault",
+        "BlueDogDFMEA::starter::controlLockup",
+        "BlueDogDFMEA::starter::trafficMiss",
+        "BlueDogDFMEA::starter::commandContextFault",
+        "BlueDogDFMEA::starter::commonSensingFault"
+      ],
+      "controls": [
+        "BlueDogRequirements::trafficSafety",
+        "BlueDogRequirements::navigationAvailability"
+      ],
+      "verificationPlans": [
+        "BlueDogRequirementVerification::TrafficSafetyVerification",
+        "GorgeChallengeVerification::WindSportEncounterVerification"
+      ]
+    },
+    "BlueDogSafety::gorge::boundaryLoss": {
+      "contributors": [
+        "BlueDogDFMEA::starter::steeringJam",
+        "BlueDogDFMEA::starter::powerCommonCause",
+        "BlueDogDFMEA::starter::navigationFault",
+        "BlueDogDFMEA::starter::controlLockup",
+        "BlueDogDFMEA::starter::commandContextFault",
+        "BlueDogDFMEA::starter::commonSensingFault"
+      ],
+      "controls": [
+        "BlueDogRequirements::operatingBoundary",
+        "GorgeChallenge::restrictedWaters"
+      ],
+      "verificationPlans": [
+        "BlueDogRequirementVerification::OperatingBoundaryVerification",
+        "GorgeChallengeVerification::RestrictedWatersVerification"
+      ]
+    },
+    "BlueDogSafety::gorge::unintendedThrust": {
+      "contributors": [
+        "BlueDogDFMEA::starter::motorUncommanded",
+        "BlueDogDFMEA::starter::controlLockup",
+        "BlueDogDFMEA::starter::commandContextFault"
+      ],
+      "controls": [
+        "BlueDogRequirements::challengeMotorInhibition",
+        "BlueDogRequirements::motorIsolationDeadline",
+        "BlueDogRequirements::qualificationPersistence"
+      ],
+      "verificationPlans": [
+        "BlueDogVerificationPlanning::InterfaceAndDurabilityIntegrationVerification",
+        "BlueDogRequirementVerification::EmergencyControlVerification"
+      ]
+    },
+    "BlueDogSafety::gorge::flotationRetentionLoss": {
+      "contributors": [
+        "BlueDogDFMEA::starter::hullLeak",
+        "BlueDogDFMEA::starter::keelLoss",
+        "BlueDogDFMEA::starter::sailJam"
+      ],
+      "controls": [
+        "GorgeChallenge::casualtyFlotation",
+        "GorgeChallenge::majorComponentRetention",
+        "BlueDogStructure::structuralIntegrity"
+      ],
+      "verificationPlans": [
+        "BlueDogRequirementVerification::FlotationEvidence",
+        "GorgeChallengeVerification::MajorComponentRetentionVerification"
+      ]
+    },
+    "BlueDogSafety::gorge::electricalThermalExposure": {
+      "contributors": [
+        "BlueDogDFMEA::starter::batteryFault",
+        "BlueDogDFMEA::starter::hullLeak",
+        "BlueDogDFMEA::starter::powerCommonCause"
+      ],
+      "controls": [
+        "BlueDogRequirements::wetElectricalIntegrity",
+        "BlueDogRequirements::peakSupplyCapability",
+        "BlueDogRequirements::batteryChargeTemperatureInhibition"
+      ],
+      "verificationPlans": [
+        "BlueDogRequirementVerification::WetElectricalIntegrityVerification",
+        "BlueDogRequirementVerification::PeakSupplyCapabilityVerification",
+        "BlueDogRequirementVerification::SolarHeatingVerification"
+      ]
+    },
+    "BlueDogSafety::gorge::handlingRetrievalExposure": {
+      "contributors": [
+        "BlueDogDFMEA::starter::recoveryCaptureFault",
+        "BlueDogDFMEA::starter::steeringJam"
+      ],
+      "controls": [
+        "BlueDogRequirements::soloRetrieval",
+        "BlueDogRequirements::transportability",
+        "BlueDogStructure::launchClearance"
+      ],
+      "verificationPlans": [
+        "BlueDogVerificationPlanning::HumanRecoveryUseValidation",
+        "BlueDogRequirementVerification::LaunchSiteEvidence",
+        "BlueDogRequirementVerification::TransportabilityVerification"
+      ]
+    }
+  },
+  "openRecords": [
+    {
+      "hazard": "BlueDogSafety::gorge::collisionExposure",
+      "missing": [
+        "Control evidence record",
+        "Acceptance record",
+        "Acceptance authority"
+      ],
+      "closed": false
+    },
+    {
+      "hazard": "BlueDogSafety::gorge::boundaryLoss",
+      "missing": [
+        "Control evidence record",
+        "Acceptance record",
+        "Acceptance authority"
+      ],
+      "closed": false
+    },
+    {
+      "hazard": "BlueDogSafety::gorge::unintendedThrust",
+      "missing": [
+        "Control evidence record",
+        "Acceptance record",
+        "Acceptance authority"
+      ],
+      "closed": false
+    },
+    {
+      "hazard": "BlueDogSafety::gorge::flotationRetentionLoss",
+      "missing": [
+        "Control evidence record",
+        "Acceptance record",
+        "Acceptance authority"
+      ],
+      "closed": false
+    },
+    {
+      "hazard": "BlueDogSafety::gorge::electricalThermalExposure",
+      "missing": [
+        "Control evidence record",
+        "Acceptance record",
+        "Acceptance authority"
+      ],
+      "closed": false
+    },
+    {
+      "hazard": "BlueDogSafety::gorge::handlingRetrievalExposure",
+      "missing": [
+        "Control evidence record",
+        "Acceptance record",
+        "Acceptance authority"
+      ],
+      "closed": false
+    }
+  ],
+  "tables": {
+    "Hazards": {
+      "columns": [
+        "ID",
+        "Condition",
+        "Potential mishap",
+        "Modes",
+        "Owner role",
+        "Configuration",
+        "Control intent"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::collisionExposure",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-01"
+            ],
+            [
+              "Unsafe motion or clearance in the presence of people, craft or their equipment"
+            ],
+            [
+              "Collision, strike or entanglement affecting other waterway users"
+            ],
+            [
+              "Sailing, holds, degraded operation and powered/unpowered recovery"
+            ],
+            [
+              "Safety/navigation"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Admit only supported sensing/maneuver conditions; preserve lookout/avoidance and assess the independent recovery path. Controls and secondary effects need evidence."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::boundaryLoss",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-02"
+            ],
+            [
+              "Required navigation or control cannot retain the approved water envelope"
+            ],
+            [
+              "Grounding or hazardous interaction with excluded waterway structures and traffic"
+            ],
+            [
+              "Sailing, waiting, degraded navigation and recovery"
+            ],
+            [
+              "Navigation/recovery"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Validate the permitted domain and uncertainty; retain current observations, boundary supervision and a supported recovery response. A planner result alone is insufficient."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::unintendedThrust",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-03"
+            ],
+            [
+              "Motor thrust is enabled without current safe authority or during human handling"
+            ],
+            [
+              "Propeller/contact or entanglement exposure; unwanted propulsion also ends qualification"
+            ],
+            [
+              "Launch, qualifying attempt, restart, recovery, capture and service"
+            ],
+            [
+              "Recovery/handling"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Establish current authority, known nonqualifying state, durable disqualification and effective isolation. Driver faults and handling exposure require physical controls and trials."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-04"
+            ],
+            [
+              "Casualty load or ingress defeats flotation or major-component retention"
+            ],
+            [
+              "Vessel loss or released components/debris affecting people, property or the environment"
+            ],
+            [
+              "Loaded operation, capsize, flooding, recovery and retrieval"
+            ],
+            [
+              "Hull/structure"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Establish configuration-specific flotation, load paths and retention under casualty exposure; assess hazards introduced by retention choices. Static intact volume alone is insufficient."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::electricalThermalExposure",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-05"
+            ],
+            [
+              "Water, faults, charging or temperature compromise energy containment and required electrical function"
+            ],
+            [
+              "Thermal/electrical/material exposure to people or vessel and loss of required functions"
+            ],
+            [
+              "Charging, bench testing, operation, casualty recovery and service"
+            ],
+            [
+              "Power/system safety"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Evaluate design/containment/protection alternatives, ingress and thermal limits, supply transients and safe service isolation using the selected installation. No component or protection scheme is selected by this record."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-06"
+            ],
+            [
+              "Approach, capture, retention or lifting cannot be completed with the admitted site and handling arrangement"
+            ],
+            [
+              "Operator fall/contact/exposure or vessel escape during attempted retrieval"
+            ],
+            [
+              "Transport, launch, shore capture, pickup and maintenance handling"
+            ],
+            [
+              "Owner/handling"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Review site access and handling design before relying on procedures; validate the full one-person task and retained vessel rather than approach alone. Preserve failed/incomplete trials."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "Basis": {
+      "columns": [
+        "Link",
+        "Client",
+        "Supporting element",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogSafety::dispositionBasis",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "dispositionBasis"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::SafetyReview",
+                "type": "AnalysisCaseDefinition"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::criticalFailureDisposition",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureControl1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureControl1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::trafficSafety",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureControl2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureControl2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::navigationAvailability",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureVerification1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureVerification1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirementVerification::TrafficSafetyVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureVerification2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureVerification2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallengeVerification::WindSportEncounterVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossControl1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossControl1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::operatingBoundary",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossControl2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossControl2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::restrictedWaters",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossVerification1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossVerification1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirementVerification::OperatingBoundaryVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossVerification2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossVerification2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallengeVerification::RestrictedWatersVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::unintendedThrustControl1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "unintendedThrustControl1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::unintendedThrust",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::challengeMotorInhibition",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::unintendedThrustControl2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "unintendedThrustControl2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::unintendedThrust",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::motorIsolationDeadline",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::unintendedThrustControl3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "unintendedThrustControl3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::unintendedThrust",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::qualificationPersistence",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::unintendedThrustVerification1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "unintendedThrustVerification1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::unintendedThrust",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogVerificationPlanning::InterfaceAndDurabilityIntegrationVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::unintendedThrustVerification2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "unintendedThrustVerification2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::unintendedThrust",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirementVerification::EmergencyControlVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::flotationRetentionLossControl1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "flotationRetentionLossControl1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::casualtyFlotation",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::flotationRetentionLossControl2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "flotationRetentionLossControl2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::majorComponentRetention",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::flotationRetentionLossControl3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "flotationRetentionLossControl3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::structuralIntegrity",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::flotationRetentionLossVerification1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "flotationRetentionLossVerification1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirementVerification::FlotationEvidence",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::flotationRetentionLossVerification2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "flotationRetentionLossVerification2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallengeVerification::MajorComponentRetentionVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::electricalThermalExposureControl1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "electricalThermalExposureControl1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::electricalThermalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::wetElectricalIntegrity",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::electricalThermalExposureControl2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "electricalThermalExposureControl2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::electricalThermalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::peakSupplyCapability",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::electricalThermalExposureControl3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "electricalThermalExposureControl3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::electricalThermalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::batteryChargeTemperatureInhibition",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::electricalThermalExposureVerification1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "electricalThermalExposureVerification1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::electricalThermalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirementVerification::WetElectricalIntegrityVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::electricalThermalExposureVerification2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "electricalThermalExposureVerification2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::electricalThermalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirementVerification::PeakSupplyCapabilityVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::electricalThermalExposureVerification3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "electricalThermalExposureVerification3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::electricalThermalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirementVerification::SolarHeatingVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::handlingRetrievalExposureControl1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "handlingRetrievalExposureControl1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::soloRetrieval",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::handlingRetrievalExposureControl2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "handlingRetrievalExposureControl2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::transportability",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::handlingRetrievalExposureControl3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "handlingRetrievalExposureControl3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::launchClearance",
+                "type": "RequirementUsage"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::handlingRetrievalExposureVerification1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "handlingRetrievalExposureVerification1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogVerificationPlanning::HumanRecoveryUseValidation",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::handlingRetrievalExposureVerification2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "handlingRetrievalExposureVerification2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirementVerification::LaunchSiteEvidence",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::handlingRetrievalExposureVerification3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "handlingRetrievalExposureVerification3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirementVerification::TransportabilityVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureContributor1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureContributor1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::steeringJam",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureContributor2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureContributor2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::sailJam",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureContributor3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureContributor3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::powerCommonCause",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureContributor4",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureContributor4"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::navigationFault",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureContributor5",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureContributor5"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::controlLockup",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureContributor6",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureContributor6"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::trafficMiss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureContributor7",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureContributor7"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::commandContextFault",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::collisionExposureContributor8",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "collisionExposureContributor8"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::collisionExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::commonSensingFault",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossContributor1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossContributor1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::steeringJam",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossContributor2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossContributor2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::powerCommonCause",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossContributor3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossContributor3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::navigationFault",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossContributor4",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossContributor4"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::controlLockup",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossContributor5",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossContributor5"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::commandContextFault",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::boundaryLossContributor6",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "boundaryLossContributor6"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::boundaryLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::commonSensingFault",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::unintendedThrustContributor1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "unintendedThrustContributor1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::unintendedThrust",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::motorUncommanded",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::unintendedThrustContributor2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "unintendedThrustContributor2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::unintendedThrust",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::controlLockup",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::unintendedThrustContributor3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "unintendedThrustContributor3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::unintendedThrust",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::commandContextFault",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::flotationRetentionLossContributor1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "flotationRetentionLossContributor1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::hullLeak",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::flotationRetentionLossContributor2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "flotationRetentionLossContributor2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::keelLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::flotationRetentionLossContributor3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "flotationRetentionLossContributor3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::sailJam",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::electricalThermalExposureContributor1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "electricalThermalExposureContributor1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::electricalThermalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::batteryFault",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::electricalThermalExposureContributor2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "electricalThermalExposureContributor2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::electricalThermalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::hullLeak",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::electricalThermalExposureContributor3",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "electricalThermalExposureContributor3"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::electricalThermalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::powerCommonCause",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::handlingRetrievalExposureContributor1",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "handlingRetrievalExposureContributor1"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::recoveryCaptureFault",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::handlingRetrievalExposureContributor2",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              "handlingRetrievalExposureContributor2"
+            ],
+            [
+              {
+                "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogDFMEA::starter::steeringJam",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Possible contributing mechanism in this hazard's stated modes; supporting basis, not an inevitable mishap or numerical probability."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "Dispositions": {
+      "columns": [
+        "ID",
+        "Implementation evidence",
+        "Effectiveness evidence",
+        "Residual-risk assessment",
+        "Risk disposition",
+        "Control evidence record",
+        "Acceptance record",
+        "Acceptance authority",
+        "Closed preconditions"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::collisionExposure",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-01"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::boundaryLoss",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-02"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::unintendedThrust",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-03"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::flotationRetentionLoss",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-04"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::electricalThermalExposure",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-05"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogSafety::gorge::handlingRetrievalExposure",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "HAZ-06"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "FailureModes": {
+      "columns": [
+        "ID",
+        "Safety critical",
+        "Owner role",
+        "Disposition accepted",
+        "Action evidence accepted"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::hullLeak",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-001"
+            ],
+            [
+              true
+            ],
+            [
+              "Hull/structure"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::keelLoss",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-002"
+            ],
+            [
+              true
+            ],
+            [
+              "Hull/structure"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::steeringJam",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-003"
+            ],
+            [
+              true
+            ],
+            [
+              "Actuation"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::sailJam",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-004"
+            ],
+            [
+              true
+            ],
+            [
+              "Actuation"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::batteryFault",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-005"
+            ],
+            [
+              true
+            ],
+            [
+              "Power"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::harvestLoss",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-006"
+            ],
+            [
+              false
+            ],
+            [
+              "Power"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::powerCommonCause",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-007"
+            ],
+            [
+              true
+            ],
+            [
+              "Power/system"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::navigationFault",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-008"
+            ],
+            [
+              true
+            ],
+            [
+              "Navigation"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::controlLockup",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-009"
+            ],
+            [
+              true
+            ],
+            [
+              "Autonomy"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::trafficMiss",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-010"
+            ],
+            [
+              true
+            ],
+            [
+              "Autonomy/safety"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::radioLoss",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-011"
+            ],
+            [
+              false
+            ],
+            [
+              "Communications"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::motorUncommanded",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-012"
+            ],
+            [
+              true
+            ],
+            [
+              "Recovery"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::recoveryCaptureFault",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-013"
+            ],
+            [
+              true
+            ],
+            [
+              "Owner/handling"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::commandContextFault",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-014"
+            ],
+            [
+              true
+            ],
+            [
+              "Autonomy/recovery"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDFMEA::starter::commonSensingFault",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "FM-015"
+            ],
+            [
+              true
+            ],
+            [
+              "Sensing/system safety"
+            ],
+            [
+              false
+            ],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    }
+  },
+  "interpretation": "Initial current-Gorge argument only. Native review readiness is a supplied-evidence precondition, not accepted physical effectiveness, completeness, quantified risk or actual risk acceptance.",
+  "driverHashes": {
+    "tests/test_safety_reliability.py": "1d3f768cddd14c09a881350db86ca0057dbdf7bb93e7f19a297d9f332fb3ad52",
+    "tests/test_reliability.py": "b932d880339ecac345fcf4895aa2ea4113585b74645804d7c61ad064f320a485",
+    "tests/test_avoidance_failures.py": "cd0b377dfe29e988a2cea167793dfdc1b83d0bda1e8602166564c8844f133aaf"
+  }
+}

@@ -1,0 +1,5481 @@
+{
+  "modelHash": "5640db3d503658913cf9f8a8f04fc4805c70f154fc185de7aeacbe157f6d5ab8",
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/avoidance-failures.sysml": "e696a0d798ca05bbcf3ef05a90c0c2b67bf3268f62238dacd691d553cb46d1f4",
+    "models/analyses/candidate-energy.sysml": "f05a4a2187aabd316ac06e1968fd8e9fae00ab3ca5980d9a216ce2a5146c4241",
+    "models/analyses/class-specific-detection.sysml": "9e585fb65056849ffe3827d6b489912bf6e26e4ae6d20bde7a9b005a3836a8b3",
+    "models/analyses/development-risks.sysml": "02215b2776e5c643d044ce4b8a47c51e8e5796e1ba5a9e451714cbe781ec2a40",
+    "models/analyses/dfmea.sysml": "8c98402beff7af56f9203d0ada24547b4d692de64fb0d9f804ae1a8b632193a6",
+    "models/analyses/encounter-envelope.sysml": "61654e8fe683aa4932f6c409f8fe954ebd6f3fb5c1295805ecced68b15071db5",
+    "models/analyses/encounter-feasibility.sysml": "4067475ad5174a54f22fc72baad6d8ee3cc502cbc3bc6dbfd528db49277500cb",
+    "models/analyses/encounter-review.sysml": "7efaf1b169a56ae75c6465fe130bb6a0c3fca2b94faa1f3584cea43a666f1bbb",
+    "models/analyses/energy.sysml": "0a1fc9435697450907604405c21e87882add03071f1024f73bf26ab2c845bc36",
+    "models/analyses/environment-review.sysml": "5d74730715837b2cfb7596af73d481c5545308ec03cd9b73c6dcb807d7efa243",
+    "models/analyses/integrated-candidate.sysml": "9eab58e1ce9d4d79d57b6fe7c0740fda867ac4286c687f1786673a620c5f0c7b",
+    "models/analyses/location-traffic-risk.sysml": "21fcbaa999f92f7bd1b305708fea4dccd8b0bc5688b0f8d1a749e218b41483ba",
+    "models/analyses/maneuver-dynamics.sysml": "065494ce5c9ff1fa96e761181c3ff40651f0858085c88894f39f50852018c750",
+    "models/analyses/mission.sysml": "5d10d5dcb127b499437a7e915e0c92ad98104477762a0a3d119efc052e6a3cd6",
+    "models/analyses/navigation-controller.sysml": "32d2edfcb696147b7fad2daeb682c0d2bc09a28af0e758b78904cdfde0d77b30",
+    "models/analyses/passage-exposure.sysml": "72f055615ffabba4ec9377d00d2f76ade31ee68091f012b60ed56d5bb1a64f73",
+    "models/analyses/polar-demand.sysml": "2ae69be8debe151f0c081cc37da56074c878a77ff50a647ab5e4364a9a866905",
+    "models/analyses/recovery-propulsion.sysml": "bb79e2d030eda65bf8c2d243d62d9e51a02a9b114f7fb5659fece646a8ab6829",
+    "models/analyses/recovery-risk.sysml": "91d821d597600176304c6d2dede380f409aacee8eae2769ce5b033e9eb7309f5",
+    "models/analyses/recovery-site-review.sysml": "f0e8915d23aea03f4b8af834960fa8dfc4fd075ae0512188ecb97c6f4a3f051d",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "0504b4ce8228a773fdc9965c182125700b1934c64b900deedcdd0acc0b0c2a51",
+    "models/analyses/sail-trade.sysml": "c5cd6ec64a05c65e1eece7c21b47ca97747ad0a848000071b2baa6c9390f22eb",
+    "models/analyses/sizing/credibility.sysml": "42eca821d95eca13772ef1326b6a27b625e1f6ec0e890d2a2ad94f717455728c",
+    "models/analyses/sizing/evidence.sysml": "f0d2a6d886c71d4b7adc632271ff122f7bc57b1a6302db84bf844d74f20fe801",
+    "models/analyses/sizing/inputs.sysml": "934dde8fa12d41656d776b954c7a695f7979e003e629d2677ea4de51b1615925",
+    "models/analyses/sizing/operating.sysml": "04e6733d21d749c8a06e141ad67b7807cb349b6b03612a0c3d2a315ee4c92ce7",
+    "models/analyses/sizing/uncertainty.sysml": "78d71e2767b681561768d486ca6d6a9d4e16332fd576fe9cfe1a8e01d3dfcf3b",
+    "models/analyses/structural-basis.sysml": "c85be7e177715c5586e13508ecb973ac9d9355cac58fac684c683c0da3fc6ed6",
+    "models/analyses/surface-environment.sysml": "5778f163047634797e8ef65a8783a5e783676df530bc0caa0247a679c00222ea",
+    "models/analyses/wave-performance.sysml": "383e94db89dfe142db9e46398de22a707c543f754d3f778aa600a695689d6b3d",
+    "models/analyses/weather.sysml": "44ecf6b6d1e331fa5185398873d42e553128533c925d292dfc4287851ff1ee4c",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/acoustic-equipment.sysml": "cf00a437976ecfd928740adf21a711da19184bd87347e1c8e6ce8126ee6b419e",
+    "models/configurations/energy.sysml": "9a67f9f74fa51fb67f2749cf3b4e12615014f383b365a48043f3461999d6c7b8",
+    "models/configurations/ic01.sysml": "0b953814697ff78defa9931de9c23813a23ca90eb1a2cd7121f4d755064a221f",
+    "models/configurations/operating.sysml": "2f3019e2b9c4a9985d7a5eabfbd39dde694903dc378d8381c1b550f3c48c59d0",
+    "models/configurations/polar-demand.sysml": "776327bf7cefc8edc26f29000d21261cc3f2d2da9da8dcd8a6e30ffa5ced121e",
+    "models/configurations/reference.sysml": "409baa5254262a527b27af7fce00ffb3da35f249fe54e51f3cf024bdf86671be",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/sensing-equipment.sysml": "67f7f5e14071cc49cad4dc86c35477caeae217c06ecb88a30b6b7f97023f3845",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/configurations/wind-equipment.sysml": "ebb44c8c073855c60e4fbe6a6d1d3ee0b9e8dac26284f0451d89bdde67e6ff8c",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/evidence/current-sizing.sysml": "b6176f48be47dde61bd41ea892fec6c68258b72afdf2265ffb1bba5fb642b991",
+    "models/evidence/finite-passage-sizing.sysml": "7c0cac2c4733ba43b652edc7bc547265087434656a11694670ff5347c2028f56",
+    "models/evidence/gorge-wind.sysml": "2eee7571fc7ac02bcd054b0c226b5edb54ff931a31d74c508331ff1bf20ef466",
+    "models/evidence/sizing-continuation.sysml": "b8825d29058049ef75538b8b40b0dceb5bbdcb9aac806457856b9b2a9ccfee2e",
+    "models/evidence/srr-current.sysml": "c429f99895f703e8189f10383374e02865c78a7d5bc623478affdda1600daa33",
+    "models/evidence/srr-frontier.sysml": "c153ab46f07b4fffe4e4d946bd42a81b43f5fb6f6d5f0d95ee52097d8a7333db",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/appendages.sysml": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+    "models/libraries/marine/concept.sysml": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+    "models/libraries/marine/course.sysml": "3f58d6c0dc668858aa0b6bdad232c26b0ac75952ad67d0f06e73f4fbd464c85c",
+    "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "models/libraries/marine/hull-resistance.sysml": "967550313effe20092525e10c1695771b8354c66478203f449ac902d8af1a5f1",
+    "models/libraries/marine/hydrostatics.sysml": "b6791576a108dee393063a15a1a359113a8c24aba793105fa7d60fa193e9d858",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/recovery.sysml": "00c8c1fcfda115116fc66bf1db5a67334e04ea893182a454a796ada62eeeaab4",
+    "models/libraries/marine/reliability.sysml": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+    "models/libraries/marine/sailing.sysml": "8281caf912a840d83d5a6d1c39fe0422419ce7fb9ccaae3d9044b0c5df33446f",
+    "models/libraries/marine/surface.sysml": "781d337d8553160eb8d3c0724ae2aef4463d51ae6bc05ef475d32884645213c8",
+    "models/libraries/marine/wave-performance.sysml": "ee1d491adb19773eb151588a5f8ccb52c8ee4364150c5783637c58ada8a07ba9",
+    "models/libraries/marine/weather.sysml": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326",
+    "models/libraries/structures/mass-properties.sysml": "ced6365432541c9c9ada7b683564efde12f597d46e96144fd70221f767ef5dde",
+    "models/libraries/structures/scantlings.sysml": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+    "models/missions/course.sysml": "58bff9885a96ec73bcd4f0b405f9bef2f5b520bb605c0f1d8eb6ed630ed4d714",
+    "models/missions/scope.sysml": "3f4058d5a9fc653f77764849708b3729f286fc52e692ec418ea5fd47aad92854",
+    "models/missions/transgorge.sysml": "28a3deec02e3b2b7e9c69bb880d5f4c8b3d5e5627c7318506d5156c32dafd920",
+    "models/missions/verification.sysml": "e1b5475a1c6e59f06be93f2b690b005d557a19a54c9a2b7ee34c8944afea0f6e",
+    "models/vehicle/allocations.sysml": "1c8753ed06da6175b784f671491b38a75b81c0df0b50fb3818a4648ef57466e5",
+    "models/vehicle/architecture-contracts.sysml": "b8d38ac4fa384ea84ad7c88c8a490417d0495659836eb91744900182991b396a",
+    "models/vehicle/architecture.sysml": "97499f937a7d237002e76b36172221895e049f86f46cc53b4ec20861fc918bb2",
+    "models/vehicle/decisions.sysml": "34d3a1300b2285eebf39236d2c6b929fd6599d8f428d3ab32e9a29da431e1076",
+    "models/vehicle/method.sysml": "87dda1bfe674bb58532aedf20121275fc9cc5843fcc70bba219ef813f2d28ef3",
+    "models/vehicle/mission-logic.sysml": "d09ddf94799d465b78daa2c8d2ecc4559735f063d36c0bf836aaa045271a663c",
+    "models/vehicle/requirement-basis.sysml": "b390fc89ce054ea5474fd2a1e2c577e6dd389f57283d8644d1754aeed82d52cd",
+    "models/vehicle/requirement-decisions.sysml": "cf6bf8ae2c7e2294a4f90ce7ba05173918adc4b55d19d1940a6a485b93e3d515",
+    "models/vehicle/requirements.sysml": "b2f1105cb06e3b804c974dbd5e01bda4f4912730e1edb36c837cf4f6eb5d73b4",
+    "models/vehicle/source-evidence.sysml": "028ba4009dc681ed1cc3205d6f6385dba8062931303645fb1347030f6b84c8f6",
+    "models/vehicle/structure.sysml": "81ff62a76c486454e01e8a424152f39540a2d63cc819f9850d7f329f47e8fb95",
+    "models/vehicle/use-cases.sysml": "85e937531404b30b8b5472b2ff266a99a57ba8fdc25d633a80dbd40a68e2e319",
+    "models/vehicle/verification.sysml": "88a4bf2deea5e0b2a8b541a7144c74fa02d2fd8284d9719b87ad0e2f7e868d7d"
+  },
+  "auditSources": {
+    "tools/publishing/reference.sysml": "a38d56ba8f3b60ea998ee914d97a9969dc059ad176e9803b8fc3417025721d09",
+    "tools/boat_analysis/model/architecture_audit.py": "39431ea8ab675d76734afe8b8949cd35d86b7df6b324e7fbdb927fc658a8ade1"
+  },
+  "diagnostics": [],
+  "errors": [],
+  "summary": {
+    "logicalResponsibilities": 14,
+    "logicalExchanges": 28,
+    "scenarios": 9,
+    "scenarioSteps": 40,
+    "mappings": {
+      "ContextMapping": 14,
+      "IC01Responsibility": 27,
+      "IC01Exchange": 30,
+      "IC01InternalExchange": 14
+    }
+  },
+  "tables": {
+    "Responsibilities": {
+      "columns": [
+        "Logical responsibility",
+        "Implementation"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::navigation",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "navigation"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryNavigation",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryNavigation",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::wind",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "wind"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::windSensor",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::safety",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "safety"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::energy",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "energy"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::collision",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "collision"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::boundary",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "boundary"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::trafficObservation",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "trafficObservation"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryObservation",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryObservation",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::supervision",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "supervision"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::guidance",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "guidance"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::actuation",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "actuation"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::sailingActuators",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::recovery",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "recovery"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::recoveryActuation",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "recoveryActuation"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryPropulsor",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::recording",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "recording"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recordStorage",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::communications",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "communications"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::telemetry",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "LogicalExchanges": {
+      "columns": [
+        "Logical exchange",
+        "Implementation"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::navigationToSupervisor",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "navigationToSupervisor"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryNavigationData",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryNavigationData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::navigationToGuidance",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "navigationToGuidance"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryNavigationData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::windToGuidance",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "windToGuidance"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::windData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::windToSupervisor",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "windToSupervisor"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::windData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::linkToSupervisor",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "linkToSupervisor"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryLinkStatus",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryLinkStatus",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::safetyToSupervisor",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "safetyToSupervisor"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoverySafetyToPrimary",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primarySafetyToRecovery",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::safetyToRecovery",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "safetyToRecovery"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primarySafetyToRecovery",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::reserveToSupervisor",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "reserveToSupervisor"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::reserveToRecovery",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "reserveToRecovery"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::trafficToSupervisor",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "trafficToSupervisor"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::tracksToCollision",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "tracksToCollision"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryTrafficData",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryTrafficData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::navigationToCollision",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "navigationToCollision"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryNavigationData",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryNavigationData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::navigationToBoundary",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "navigationToBoundary"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryNavigationData",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryNavigationData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::boundaryToSupervisor",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "boundaryToSupervisor"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::boundaryToGuidance",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "boundaryToGuidance"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::permissionsToGuidance",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "permissionsToGuidance"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::permissionsToActuation",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "permissionsToActuation"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::sailingPermissions",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::permissionsToRecovery",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "permissionsToRecovery"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryPermissionsToRecovery",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::sailingCommands",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "sailingCommands"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::sailingCommandData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::supervisorRecords",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "supervisorRecords"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryRecords",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryRecords",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::supervisorTelemetry",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "supervisorTelemetry"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryTelemetry",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryTelemetry",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::navigationToRecovery",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "navigationToRecovery"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryNavigationData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::tracksToRecovery",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "tracksToRecovery"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryTrafficData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::boundaryToRecovery",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "boundaryToRecovery"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryController",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::recoveryCommands",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "recoveryCommands"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryCommandData",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::recoveryRecords",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "recoveryRecords"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryRecords",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::recoveryTelemetry",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "recoveryTelemetry"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryTelemetry",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogLogicalArchitecture::LogicalVessel::retainedRecordsToCommunications",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [
+              "retainedRecordsToCommunications"
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::primaryRecordReadback",
+                "type": "FlowUsage"
+              },
+              {
+                "id": "BlueDogPhysicalArchitecture::IC01Candidate::recoveryRecordReadback",
+                "type": "FlowUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "ScenarioActions": {
+      "columns": [
+        "Responsible element",
+        "Definition"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::normalSailing",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::NormalSailing",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::trafficEncounter",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::TrafficEncounter",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::abortAndRecover",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::AbortAndRecover",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::capsizeAndResume",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::CapsizeAndResume",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::navigationUpdate",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::NavigationUpdate",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::communicationsOutage",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::CommunicationsOutage",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::lowEnergyResponse",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::LowEnergyResponse",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::prepareAndLaunch",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::PrepareAndLaunch",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::maintainAndRelease",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::MaintainAndRelease",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NormalSailing::observe",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::wind",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveWind",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NormalSailing::select",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::guidance",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::SelectSailingCommand",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NormalSailing::actuate",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::actuation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ApplySailingCommand",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NormalSailing::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NormalSailing::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::TrafficEncounter::observe",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::trafficObservation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveTraffic",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::TrafficEncounter::navigate",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::navigation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveNavigation",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::TrafficEncounter::assess",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::collision",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::AssessEncounter",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::TrafficEncounter::select",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::guidance",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::SelectAvoidanceManeuver",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::TrafficEncounter::execute",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::actuation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ExecuteAndReassess",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::TrafficEncounter::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::TrafficEncounter::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::TrafficEncounter::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::TrafficEncounter::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::abort",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::supervision",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::LatchAbort",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::signal",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::communications",
+                "type": "PartUsage"
+              },
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::recording",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::RecordAndSignalAbort",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::navigate",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::navigation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveNavigation",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::observe",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::trafficObservation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveTraffic",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::boundary",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::boundary",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::AssessRecoveryBoundary",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::reserve",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::energy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveReserve",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::plan",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::recovery",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::SelectReachableShore",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::recover",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::recovery",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::RecoverAndReassess",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::actuate",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::recoveryActuation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ApplyRecoveryCommand",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::record",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::recording",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::RecordRecoveryOutcome",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::AbortAndRecover::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CapsizeAndResume::observe",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::safety",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveCapsizeSafety",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CapsizeAndResume::assess",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::supervision",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::AssessCapsizeContinuation",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CapsizeAndResume::apply",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::actuation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ApplyCapsizePermission",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CapsizeAndResume::record",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::recording",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::RetainCapsizeRecord",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CapsizeAndResume::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CapsizeAndResume::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CapsizeAndResume::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NavigationUpdate::observe",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::navigation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveNavigation",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NavigationUpdate::validate",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::navigation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ValidateNavigation",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NavigationUpdate::guide",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::guidance",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::SelectNavigationGuidance",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NavigationUpdate::actuate",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::actuation",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ApplySailingCommand",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NavigationUpdate::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NavigationUpdate::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::NavigationUpdate::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CommunicationsOutage::observe",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::communications",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveLink",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CommunicationsOutage::read",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::recording",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ReadCurrentRecord",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CommunicationsOutage::select",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::communications",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::SelectTelemetryDisposition",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CommunicationsOutage::deliver",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::communications",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::SendOrRetainRecord",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CommunicationsOutage::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CommunicationsOutage::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::CommunicationsOutage::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::LowEnergyResponse::observe",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::energy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ObserveReserve",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::LowEnergyResponse::select",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::supervision",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::SelectReserveResponse",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::LowEnergyResponse::preserve",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::energy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::PreserveSafetyLoads",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::LowEnergyResponse::request",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::recovery",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::RequestRecovery",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::LowEnergyResponse::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::LowEnergyResponse::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::LowEnergyResponse::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::PrepareAndLaunch::inspect",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDog::Architecture::MissionContext::operator",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::InspectLaunchReadiness",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::PrepareAndLaunch::admit",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::supervision",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::AdmitLaunch",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::PrepareAndLaunch::launch",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDog::Architecture::MissionContext::operator",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::LaunchAndInitialize",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::PrepareAndLaunch::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::PrepareAndLaunch::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::MaintainAndRelease::service",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDog::Architecture::MissionContext::operator",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::ServiceAndInspect",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::MaintainAndRelease::assess",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDog::Architecture::MissionContext::operator",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::AssessServiceRelease",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::MaintainAndRelease::record",
+            "type": "ActionUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogLogicalArchitecture::LogicalVessel::recording",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogMethod::Scenarios::RecordServiceConfiguration",
+                "type": "ActionDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::MaintainAndRelease::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::MaintainAndRelease::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogMethod::Scenarios::MaintainAndRelease::",
+            "type": "FlowUsage"
+          },
+          "cells": [
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "Mappings": {
+      "columns": [
+        "Scope",
+        "Configuration",
+        "Path",
+        "Mapping definition"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextEnergy",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Reserve estimation and protection"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextNavigation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Position and attitude estimation"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextWind",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Apparent wind estimates"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextTrafficObservation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Traffic observations"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextSupervision",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Permissions and qualification state"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextGuidance",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Sailing commands"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextCollision",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Encounter assessment"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextBoundary",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Operating domain assessment"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextActuation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Sail and steering execution"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextCommunications",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Onboard telemetry and link status"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextSafety",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Required safety capability assessment"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextRecovery",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Shore recovery planning and control"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextRecoveryActuation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Recovery propulsion execution"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::contextRecording",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Mission evidence retention and readback"
+            ],
+            [],
+            [],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ContextMapping",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primaryNavigation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Acquire and supply primary time-stamped navigation estimates"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryNavigation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Acquire and supply recovery-path navigation estimates"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primaryNavigationValidation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Validate and consume primary navigation estimates; stale data cannot become confirmed safety"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryNavigationValidation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Validate recovery navigation independently of the primary estimate"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::wind",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Supply apparent wind estimates with timestamp and validity"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primarySafety",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Assess primary safety capability from observations; inverted evidence remains unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoverySafety",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Assess recovery safety capability; a peer report alone does not establish independence"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primaryEnergy",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Estimate main and recovery reserve and protect recovery energy"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryEnergy",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Assess recovery-bank energy and route demand after primary loss"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primaryCollision",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Assess traffic for sailing"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryCollision",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Assess traffic for powered recovery; implemented navigation-rule coverage remains open"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primaryBoundary",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Assess the configured sailing domain"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryBoundary",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Assess recovery route boundaries and permitted shore approach"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primaryObservation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Acquire primary traffic tracks; detection coverage remains unverified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryObservation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Acquire recovery traffic tracks including the unresolved inverted installation"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primarySupervision",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Sailing and gate permissions, qualification and abort state"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoverySupervision",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Recovery-side qualification restrictions and fallback authority; primary-loss arbitration remains open"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::guidance",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Select sailing guidance subject to current permissions"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::sailingActuation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Execute permitted sailing commands"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryManagement",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Plan, reassess and command recovery; does not itself produce thrust or retrieve the boat"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryActuation",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Execute permitted recovery commands; achieved upright/inverted thrust remains unverified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recordStorage",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Persist and expose records; supply and post-fault availability remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::shared",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primaryRecordPolicy",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Generate and schedule primary records and readback"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryRecordPolicy",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Generate and schedule recovery records; shared-storage survival is unverified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::telemetry",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Transmit records and report link availability; supply and interface arbitration remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::shared",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::primaryCommunications",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Queue and prioritize primary telemetry without blocking autonomy"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryCommunications",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Queue and prioritize recovery telemetry; autonomy does not require a link"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Responsibility",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::navigationToSupervisorPrimaryNavigationData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::navigationToSupervisorRecoveryNavigationData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::navigationToGuidancePrimaryNavigationData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::windToGuidanceWindData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::windToSupervisorWindData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::linkToSupervisorPrimaryLinkStatus",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::linkToSupervisorRecoveryLinkStatus",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::safetyToSupervisorRecoverySafetyToPrimary",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::safetyToSupervisorPrimarySafetyToRecovery",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::safetyToRecoveryPrimarySafetyToRecovery",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::tracksToCollisionPrimaryTrafficData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::tracksToCollisionRecoveryTrafficData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::navigationToCollisionPrimaryNavigationData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::navigationToCollisionRecoveryNavigationData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::navigationToBoundaryPrimaryNavigationData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::navigationToBoundaryRecoveryNavigationData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::permissionsToActuationSailingPermissions",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::permissionsToRecoveryPrimaryPermissionsToRecovery",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::sailingCommandsSailingCommandData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::supervisorRecordsPrimaryRecords",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::supervisorRecordsRecoveryRecords",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::supervisorTelemetryPrimaryTelemetry",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::supervisorTelemetryRecoveryTelemetry",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::navigationToRecoveryRecoveryNavigationData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::tracksToRecoveryRecoveryTrafficData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryCommandsRecoveryCommandData",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryRecordsRecoveryRecords",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::recoveryTelemetryRecoveryTelemetry",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::retainedRecordsToCommunicationsPrimaryRecordReadback",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::retainedRecordsToCommunicationsRecoveryRecordReadback",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Candidate payload transfer; installed timing, transport and fault handling remain to be specified"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01Exchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::safetyToSupervisorPrimaryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::safetyToSupervisorRecoveryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::safetyToRecoveryRecoveryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::reserveToSupervisorPrimaryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::reserveToSupervisorRecoveryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::reserveToRecoveryRecoveryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::trafficToSupervisorPrimaryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::trafficToSupervisorRecoveryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::boundaryToSupervisorPrimaryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::boundaryToSupervisorRecoveryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::boundaryToGuidancePrimaryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::permissionsToGuidancePrimaryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::primary",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::permissionsToRecoveryRecoveryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence::boundaryToRecoveryRecoveryInternal",
+            "type": "AllocationUsage"
+          },
+          "cells": [
+            [
+              "Internal interaction of coallocated responsibilities; software scheduling, validity propagation and fault handling remain unresolved"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::ImplementationPath::recovery",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogArchitectureContracts::IC01InternalExchange",
+                "type": "AllocationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "Candidate": {
+      "columns": [
+        "Configuration",
+        "Integration assumptions"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogPhysicalArchitecture::ic01",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogIC01::integration",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "OpenDecisions": {
+      "columns": [
+        "Interface decisions",
+        "Context limits"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogArchitectureCorrespondence",
+            "type": "Package"
+          },
+          "cells": [
+            [
+              "Resolve sensor freshness and validity propagation; peer timeout, authority arbitration and startup after primary loss; independent inverted safety observations; controller software deployment and timing; recording/telemetry power, retention and arbitration. Existing IC-01 mass and energy allowances are hypotheses, not a bill of materials or installed-load evidence."
+            ],
+            [
+              "Navigation signaling has a context responsibility and requirements but no detailed logical interface or IC-01 equipment allocation. Optional observation payload and future harvesting remain outside this finite-Gorge implementation. Hull/rig composition and operator launch/pickup stay in their physical and human descriptions; they are not fictitious controller functions."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    }
+  },
+  "interpretation": "Native ownership, endpoint coverage, mapping scope and configuration checks only. Internal mappings are implementation obligations, not executed software. Interface timing, protocol, authority arbitration, supply and independence decisions remain open; no physical qualification verdict is assigned."
+}

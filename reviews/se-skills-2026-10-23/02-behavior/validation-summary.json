@@ -1,0 +1,32 @@
+{
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "modelHash": "33be80913591d1ea23e3a49c6d0796ee148426141a1adf3615c57fd8b9459f97",
+  "verifiedModelSources": 90,
+  "verifiedDrivers": 2,
+  "fullRegression": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "993",
+    "time": "902.353",
+    "timestamp": "2026-10-23T10:16:51.610893-07:00",
+    "hostname": "dmi-thinkpad"
+  },
+  "focusedRegression": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "116",
+    "time": "141.886",
+    "timestamp": "2026-10-23T10:13:40.600468-07:00",
+    "hostname": "dmi-thinkpad"
+  },
+  "nativeDiagnostics": 0,
+  "architectureErrors": 0,
+  "nativeBehaviorGraphs": 8,
+  "publication": "36 pages built successfully",
+  "skill": "validated and installed; four matching draft files",
+  "sourceHashConvention": "SHA256 of UTF-8 text with native-loader newline normalization"
+}

@@ -66,7 +66,15 @@ Adding a supported calculation to the declarative library requires its SysML def
 
 ## Mission actions and records
 
-The [mission supervisor](../../models/vehicle/mission-logic.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing, gate-scoring and harvest permissions, operating mode, persistent abort and qualification state, and whether an abort alert is attempted or queued. `RecoveryAuthority` permits recovery after primary steering or power loss only when an explicitly independent, powered path is supplied. `FallbackPolicy` decides whether the available, permitted recovery path can be attempted or the vessel must continue drifting. Dependencies connect these actions to the logical scenarios; the supervisor is allocated to logical mission supervision, which is mapped to the provisional IC-01 primary controller.
+The architecture audit checks native scenario ownership, logical responsibility allocations, logical exchange coverage, mapping scopes and IC-01 configuration bindings:
+
+```sh
+uv run python -m tools.boat_analysis.model.architecture_audit --output build/architecture-audit.json
+```
+
+The [architecture article](../architecture.md#logical-responsibilities-and-the-candidate-boat) renders the same native queries as tables. Coverage includes all current scenario steps and logical exchanges; it does not establish correct controller scheduling, installed transport, authority arbitration or physical independence. Unresolved interfaces remain in the correspondence model. The audit does not reclassify historical analyses as IC-01 studies.
+
+The [mission supervisor](../../models/vehicle/mission-logic.sysml) executes through OpenSysML's native action API. `HandleEvent` determines the response to an observation or intervention. `SupervisoryCycle` determines sailing, gate-scoring and harvest permissions, operating mode, persistent abort and qualification state, and whether an abort alert is attempted or queued. `RecoveryAuthority` permits recovery after primary steering or power loss only when an explicitly independent, powered path is supplied. `FallbackPolicy` decides whether the available, permitted recovery path can be attempted or the vessel must continue drifting. Dependencies connect these actions to the logical scenarios. Supervisor and capsize decisions are allocated to logical supervision; recovery authority and fallback decisions are allocated to logical recovery management. Named candidate mappings distinguish the primary supervisor's sailing permissions from the recovery controller's qualification restrictions and fallback authority. Primary-loss startup, peer timeout and authority arbitration still need implementation and evidence.
 
 Python supplies observations, computes chart and traffic geometry, ranks feasible headings and integrates motion and energy. It dispatches the action outputs to those mechanisms. The supervisor's traffic mode identifies a predicted encounter; avoidance geometry and maneuver selection remain conceptual Python calculations. This is a partial executable logical architecture, not a complete autopilot or a verified sensing system.
 
@@ -100,3 +108,70 @@ uv run python -m tools.boat_analysis.mission.integrated --phase all
 The sizing phase supplies a freshly evaluated candidate to the mission phase. Records retain model and driver hashes, trajectories, both energy accounts and acceptance facts. An explicitly supplied warm start can accelerate the solve; it is reevaluated before becoming acceptance evidence.
 
 For installed sensing inputs, the [measurement format and importer](sensing-measurements.md) records the pipeline identity, synchronized observations and power, source hashes and any base electronics load replaced by shared compute. Synthetic regression fixtures remain labeled `synthetic-test`; they do not qualify hardware.
+
+## Consumer gates and qualification restoration
+
+`BlueDogBehaviorContracts` supplies partial native action contracts for observation usability, sailing actuation, recovery motor enable and qualification restoration. Observation assessment reuses the typed interface predicate. Applicability, authority, physical availability and durable-record inputs require established evidence; the actions do not infer them from connectivity. `MissionLogic.restore_qualification` executes the native restoration policy and records its inputs and result. It preserves a live disqualification and applies the nonqualifying fallback to an invalid record. This API restores qualification only, without claiming a complete watchdog/storage implementation or deadline verification.
+
+The recovery scenario explicitly orders durable disqualification acknowledgment before actuation. The post-actuation record describes observed execution disposition, not a predicted shore arrival. Native regressions test each motor barrier, unknown state, missing acknowledgment, expired command/permission and fault restoration. The conceptual simulator still supplies scalar observations and does not implement the candidate message serialization, storage protocol or hardware interlocks.
+
+## Verification planning audit
+
+```sh
+uv run python -m tools.boat_analysis.model.verification_audit --output build/verification-audit.json
+```
+
+This native audit inventories project verification definitions, method metadata, objective links and planned IC-01 integration configurations. It executes no case and makes no acceptance decision. The publication method register uses the same query. Empty actual-article, procedure and instrument fields identify evidence gaps. Three numerical verification definitions require supplied subjects; querying their result without inputs is an error, not a default success. The separate eligibility calculation evaluates supplied review assertions and cannot replace evidence inspection or acceptance.
+
+Audit the initial Gorge hazard argument with
+`python -m tools.boat_analysis.model.safety_audit --output /tmp/safety-audit.json`.
+It groups native-resolved contributor/control/verification endpoints and executes
+the native FMEA and hazard review preconditions. Six unresolved hazard records
+are expected. Neither the inventory nor review flags accept risk or prove control
+effectiveness; acceptance records and actual authority remain separate inputs.
+
+## Configuration and accounting audit
+
+`python -m tools.boat_analysis.model.configuration_audit --output /tmp/configuration-audit.json`
+uses native contexts, ownership/type queries, quantity bindings and AccountingReview.
+It inventories all top-level MarineDesign design/parameter parts separately from
+nested references, plus historical and synthetic accounting contexts. Bound values
+retain their existing owners and units. Unmeasured peaks and actual article/revision
+records remain missing; a readiness assertion does not inspect evidence or accept
+a configuration. The same native tables appear in architecture and energy articles.
+
+### Analysis applicability and provenance
+
+Run `python -m tools.boat_analysis.model.credibility_audit --output build/analysis/credibility-audit.json`
+for native intended-use coverage of definitions and configured usages. This reports
+scope and missing metadata, not physical validation. The model's use/limitations
+register supplies the domain and next evidence for interpreting each category.
+
+`input_record` and `input_path` require a current workspace result for generated analyses and
+validate both recorded source and driver hashes. The two registered CAD/polar assets have a centrally declared reference role, preserving unchanged historical geometry consumers. An explicit current role always forbids fallback. `purpose='reference'` is limited
+to the registered wing geometry/polar assets; `purpose='initial_guess'` is limited
+to the historical fixed-design seed. Explicit historical `run_record` preserves
+manifest byte checks and original-revision verification. Do not relabel a reference
+or seed as a current design result. Regenerate stale current results with their
+producer. Native `record_analyses` writes the native AnalysisRecords snapshot and
+an adjacent `.provenance.json` with actual source/model, driver and executable
+fingerprints. Compare its recorded-model digest before interpreting the companion.
+
+### Decision and trade applicability
+
+Run `python -m tools.boat_analysis.model.decision_audit --output build/analysis/decision-audit.json`
+for the native inventory of 20 decision-record items, 80 allocation/procedure review
+annotations and declared rig criterion basis. It checks item kinds, record states,
+metadata inheritance and register coverage, including the six retained design-basis
+records. It executes the three existing unknown-evidence assessments, not physical
+verification or a weighted hardware downselect. The seven-entry legacy evidence
+vector retains its order: entries1-6 are declared mandatory groups; entry7 is the
+provisional reliability study. `qualified` is retained as a compatibility name for
+`declaredMandatoryGatesMet`, not physical qualification. Inspect study disposition
+separately and establish evidence adequacy and full system acceptance before use.
+
+Native TradeStudies examples in the decision skill use synthetic numbers solely
+to check scalar selection, ties and missing inputs. A native selectedAlternative
+may be the first among equals; inspect every evaluation/error/tie and assess
+admissibility before interpreting it as a recommendation. No production rig scores,
+weights, accepted reliability rates or actual selection are supplied by those examples.

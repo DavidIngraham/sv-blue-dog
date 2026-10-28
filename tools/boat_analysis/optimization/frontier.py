@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 from scipy.optimize import minimize
 from .search import Problem
-from ..evidence.records import source_hashes
+from ..evidence.records import source_hashes, input_path, digest
 from ..model.runtime import ROOT
 
 
@@ -97,7 +97,9 @@ def main():
     if args.budget<1:parser.error('Positive solve budget required')
     seeds=[np.asarray(z,dtype=float) for z in json.loads(args.seed.read_text())] if args.seed else []
     paths=subprocess.check_output(['git','ls-files','tools/boat_analysis'],cwd=ROOT,text=True).splitlines()
-    paths=[p for p in paths if p.endswith('.py')]+['uv.lock','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json','build/analysis/coupled-fixed-design.json']
+    paths=[p for p in paths if p.endswith('.py')]+['uv.lock','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json']
+    if not args.seed:
+        paths.append(input_path('coupled-fixed-design.json', purpose='initial_guess'))
     hashes=source_hashes(paths)
     revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     report=solve(args.caps,seeds,args.budget)
@@ -105,6 +107,8 @@ def main():
     report['sourceRevision']=revision
     report['runtime']={'python':platform.python_version(),'numpy':np.__version__,'scipy':scipy.__version__}
     report['suppliedSeeds']=[z.tolist() for z in seeds]
+    report['suppliedSeedSource'] = dict(path=str(args.seed.resolve()), sha256=digest(args.seed),
+        role='Numerical initial guesses only; reevaluated by the current model') if args.seed else None
     report['capsM']=args.caps
     report['solverBudget']=args.budget
     args.output.parent.mkdir(parents=True,exist_ok=True)

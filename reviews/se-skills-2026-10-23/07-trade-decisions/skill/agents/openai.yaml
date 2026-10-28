@@ -1,0 +1,4 @@
+interface:
+  display_name: "Trade studies and decision management"
+  short_description: "Review criteria, alternatives and decision records"
+  default_prompt: "Use $trade-study-decision-management to audit this trade and improve its model and decision records."

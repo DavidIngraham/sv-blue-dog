@@ -168,4 +168,42 @@ A shared-compute installation replaces a declared part of the base electronics l
 
 No measured installation has been supplied. The four earlier sensing stacks remain hypotheses; IC-01 is a resized working candidate with an allocated capability target, rather than a selected hardware stack. The [measurement workflow](reference/sensing-measurements.md) also provides a fixed-passage capacity bound using the earlier reference’s demand, usable fraction and departure charge. Added battery mass, propulsion demand, packaging and passage time require a coupled solve before that number can become a candidate budget. Compare measured pipelines on the same held-out encounters, then replay the feasible resized candidates chronologically.
 
+## Scope the current accounting before adding loads
+
+IC-01's fixed-equipment allowance already includes the additional equipment and
+recovery battery mass. Its electronics allowance already includes the additional
+8 W target and provisioned wired wind installation. Adding those contributions a
+second time would change the answer without changing the boat. A measured shared
+installation must identify what it replaces before its demand is added.
+
+<details>
+<summary>IC-01 accounting boundaries, owners and allocated quantities</summary>
+
+```sysml-report BlueDogConfigurationDocuments::BudgetRegister
+```
+
+</details>
+
+The seven scopes distinguish whole-vessel and fixed-equipment mass, sailing
+electronics, recovery essentials, main and recovery storage, and response timing. They bind the current owned
+values without creating a complete bill of materials or measured budget. Empty
+peak bounds remain unknown; setting review flags cannot make those power scopes
+ready while the required bounds are absent. Nameplate and departure energy are
+successive states, not additive capacity. Recovery demand retains its existing
+battery-withdrawal boundary, and storage/telemetry supply assignments remain open.
+
+The whole-vessel mass estimate remains unset in this register until a new,
+identified coupled mass and center-of-gravity result is connected to it. The
+fixed-equipment allowance cannot fill that field. The main bank's existing
+allocations are 1,300 Wh nameplate and 936 Wh at departure, while the independent
+recovery bank has its own account. Neither pair is additive capacity.
+I need installed measurements and non-overlapping coverage before comparing
+estimates, uncertainty allowances and remaining margin. The [PSM/INCOSE Technical
+Measurement report, sections 6.3–6.4](https://www.incose.org/docs/default-source/ProductsPublications/technical-measurement-guide---dec-2005.pdf?sfvrsn=4&sfvrsn=4)
+provides historical guidance on useful measures and aggregation; [NASA technical
+assessment](https://www.nasa.gov/reference/6-7-technical-assessment/) connects their
+status to decisions. I have not adopted a standard contingency percentage.
+Individual response-stage allowances also need scheduling, occupied-actuator and
+achieved-motion evidence before they establish a whole-path timing bound.
+
 **Next:** [Sailing the challenge before building the boat](mission-simulation.md) · [Series guide](index.md)

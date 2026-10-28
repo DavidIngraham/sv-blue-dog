@@ -1,0 +1,5933 @@
+{
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "modelHash": "0bf4f2014104fded0902bb96b6bcee740f2f3f888ce03e3eb171725eac6068dc",
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/avoidance-failures.sysml": "e696a0d798ca05bbcf3ef05a90c0c2b67bf3268f62238dacd691d553cb46d1f4",
+    "models/analyses/candidate-energy.sysml": "f05a4a2187aabd316ac06e1968fd8e9fae00ab3ca5980d9a216ce2a5146c4241",
+    "models/analyses/class-specific-detection.sysml": "9e585fb65056849ffe3827d6b489912bf6e26e4ae6d20bde7a9b005a3836a8b3",
+    "models/analyses/development-risks.sysml": "02215b2776e5c643d044ce4b8a47c51e8e5796e1ba5a9e451714cbe781ec2a40",
+    "models/analyses/dfmea.sysml": "8c98402beff7af56f9203d0ada24547b4d692de64fb0d9f804ae1a8b632193a6",
+    "models/analyses/encounter-envelope.sysml": "61654e8fe683aa4932f6c409f8fe954ebd6f3fb5c1295805ecced68b15071db5",
+    "models/analyses/encounter-feasibility.sysml": "4067475ad5174a54f22fc72baad6d8ee3cc502cbc3bc6dbfd528db49277500cb",
+    "models/analyses/encounter-review.sysml": "7efaf1b169a56ae75c6465fe130bb6a0c3fca2b94faa1f3584cea43a666f1bbb",
+    "models/analyses/energy.sysml": "203f075b8b8470331c0a6c725bedafe467b9140bc572ccf79ba5ae14137c8c20",
+    "models/analyses/environment-review.sysml": "5d74730715837b2cfb7596af73d481c5545308ec03cd9b73c6dcb807d7efa243",
+    "models/analyses/integrated-candidate.sysml": "9eab58e1ce9d4d79d57b6fe7c0740fda867ac4286c687f1786673a620c5f0c7b",
+    "models/analyses/location-traffic-risk.sysml": "21fcbaa999f92f7bd1b305708fea4dccd8b0bc5688b0f8d1a749e218b41483ba",
+    "models/analyses/maneuver-dynamics.sysml": "065494ce5c9ff1fa96e761181c3ff40651f0858085c88894f39f50852018c750",
+    "models/analyses/mission.sysml": "5d10d5dcb127b499437a7e915e0c92ad98104477762a0a3d119efc052e6a3cd6",
+    "models/analyses/navigation-controller.sysml": "32d2edfcb696147b7fad2daeb682c0d2bc09a28af0e758b78904cdfde0d77b30",
+    "models/analyses/passage-exposure.sysml": "72f055615ffabba4ec9377d00d2f76ade31ee68091f012b60ed56d5bb1a64f73",
+    "models/analyses/polar-demand.sysml": "2ae69be8debe151f0c081cc37da56074c878a77ff50a647ab5e4364a9a866905",
+    "models/analyses/recovery-propulsion.sysml": "bb79e2d030eda65bf8c2d243d62d9e51a02a9b114f7fb5659fece646a8ab6829",
+    "models/analyses/recovery-risk.sysml": "91d821d597600176304c6d2dede380f409aacee8eae2769ce5b033e9eb7309f5",
+    "models/analyses/recovery-site-review.sysml": "f0e8915d23aea03f4b8af834960fa8dfc4fd075ae0512188ecb97c6f4a3f051d",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "ae0f34c578fd6aaeee388ea4eaae73d47c0a8fc1986faabec5aa560ae534cf12",
+    "models/analyses/sail-trade.sysml": "c5cd6ec64a05c65e1eece7c21b47ca97747ad0a848000071b2baa6c9390f22eb",
+    "models/analyses/sizing/credibility.sysml": "42eca821d95eca13772ef1326b6a27b625e1f6ec0e890d2a2ad94f717455728c",
+    "models/analyses/sizing/evidence.sysml": "f0d2a6d886c71d4b7adc632271ff122f7bc57b1a6302db84bf844d74f20fe801",
+    "models/analyses/sizing/inputs.sysml": "934dde8fa12d41656d776b954c7a695f7979e003e629d2677ea4de51b1615925",
+    "models/analyses/sizing/operating.sysml": "04e6733d21d749c8a06e141ad67b7807cb349b6b03612a0c3d2a315ee4c92ce7",
+    "models/analyses/sizing/uncertainty.sysml": "78d71e2767b681561768d486ca6d6a9d4e16332fd576fe9cfe1a8e01d3dfcf3b",
+    "models/analyses/structural-basis.sysml": "c85be7e177715c5586e13508ecb973ac9d9355cac58fac684c683c0da3fc6ed6",
+    "models/analyses/surface-environment.sysml": "5778f163047634797e8ef65a8783a5e783676df530bc0caa0247a679c00222ea",
+    "models/analyses/wave-performance.sysml": "383e94db89dfe142db9e46398de22a707c543f754d3f778aa600a695689d6b3d",
+    "models/analyses/weather.sysml": "44ecf6b6d1e331fa5185398873d42e553128533c925d292dfc4287851ff1ee4c",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/acoustic-equipment.sysml": "cf00a437976ecfd928740adf21a711da19184bd87347e1c8e6ce8126ee6b419e",
+    "models/configurations/energy.sysml": "9a67f9f74fa51fb67f2749cf3b4e12615014f383b365a48043f3461999d6c7b8",
+    "models/configurations/ic01.sysml": "0b953814697ff78defa9931de9c23813a23ca90eb1a2cd7121f4d755064a221f",
+    "models/configurations/operating.sysml": "2f3019e2b9c4a9985d7a5eabfbd39dde694903dc378d8381c1b550f3c48c59d0",
+    "models/configurations/polar-demand.sysml": "776327bf7cefc8edc26f29000d21261cc3f2d2da9da8dcd8a6e30ffa5ced121e",
+    "models/configurations/reference.sysml": "409baa5254262a527b27af7fce00ffb3da35f249fe54e51f3cf024bdf86671be",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/sensing-equipment.sysml": "67f7f5e14071cc49cad4dc86c35477caeae217c06ecb88a30b6b7f97023f3845",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/configurations/wind-equipment.sysml": "ebb44c8c073855c60e4fbe6a6d1d3ee0b9e8dac26284f0451d89bdde67e6ff8c",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/evidence/current-sizing.sysml": "b6176f48be47dde61bd41ea892fec6c68258b72afdf2265ffb1bba5fb642b991",
+    "models/evidence/finite-passage-sizing.sysml": "7c0cac2c4733ba43b652edc7bc547265087434656a11694670ff5347c2028f56",
+    "models/evidence/gorge-wind.sysml": "2eee7571fc7ac02bcd054b0c226b5edb54ff931a31d74c508331ff1bf20ef466",
+    "models/evidence/sizing-continuation.sysml": "b8825d29058049ef75538b8b40b0dceb5bbdcb9aac806457856b9b2a9ccfee2e",
+    "models/evidence/srr-current.sysml": "c429f99895f703e8189f10383374e02865c78a7d5bc623478affdda1600daa33",
+    "models/evidence/srr-frontier.sysml": "c153ab46f07b4fffe4e4d946bd42a81b43f5fb6f6d5f0d95ee52097d8a7333db",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/appendages.sysml": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+    "models/libraries/marine/concept.sysml": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+    "models/libraries/marine/course.sysml": "3f58d6c0dc668858aa0b6bdad232c26b0ac75952ad67d0f06e73f4fbd464c85c",
+    "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "models/libraries/marine/hull-resistance.sysml": "967550313effe20092525e10c1695771b8354c66478203f449ac902d8af1a5f1",
+    "models/libraries/marine/hydrostatics.sysml": "b6791576a108dee393063a15a1a359113a8c24aba793105fa7d60fa193e9d858",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/recovery.sysml": "00c8c1fcfda115116fc66bf1db5a67334e04ea893182a454a796ada62eeeaab4",
+    "models/libraries/marine/reliability.sysml": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+    "models/libraries/marine/sailing.sysml": "8281caf912a840d83d5a6d1c39fe0422419ce7fb9ccaae3d9044b0c5df33446f",
+    "models/libraries/marine/surface.sysml": "781d337d8553160eb8d3c0724ae2aef4463d51ae6bc05ef475d32884645213c8",
+    "models/libraries/marine/wave-performance.sysml": "ee1d491adb19773eb151588a5f8ccb52c8ee4364150c5783637c58ada8a07ba9",
+    "models/libraries/marine/weather.sysml": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326",
+    "models/libraries/structures/mass-properties.sysml": "ced6365432541c9c9ada7b683564efde12f597d46e96144fd70221f767ef5dde",
+    "models/libraries/structures/scantlings.sysml": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+    "models/missions/course.sysml": "58bff9885a96ec73bcd4f0b405f9bef2f5b520bb605c0f1d8eb6ed630ed4d714",
+    "models/missions/scope.sysml": "3f4058d5a9fc653f77764849708b3729f286fc52e692ec418ea5fd47aad92854",
+    "models/missions/transgorge.sysml": "28a3deec02e3b2b7e9c69bb880d5f4c8b3d5e5627c7318506d5156c32dafd920",
+    "models/missions/verification.sysml": "99a624662537a2413b16b86421f2aa0e227efc3a2746046b516923ad50852677",
+    "models/vehicle/allocations.sysml": "1c8753ed06da6175b784f671491b38a75b81c0df0b50fb3818a4648ef57466e5",
+    "models/vehicle/architecture-contracts.sysml": "b8d38ac4fa384ea84ad7c88c8a490417d0495659836eb91744900182991b396a",
+    "models/vehicle/architecture.sysml": "b5cb5660303d5db76c434b0feacba250f2cdcb51c0f6d0622e91e2311f8c53b9",
+    "models/vehicle/behavior-contracts.sysml": "b67da5f4b04bb6c82ea50a1bab0e4d22b1519b65c9cae512ac52ebfb7a815669",
+    "models/vehicle/decisions.sysml": "34d3a1300b2285eebf39236d2c6b929fd6599d8f428d3ab32e9a29da431e1076",
+    "models/vehicle/interface-contracts.sysml": "93844239666f3762a03ff2d414501a8bd1016e233503847b5c0a5e1fe0f14f1a",
+    "models/vehicle/method.sysml": "014068f89e0edc6fb45d586432e989e657a16de5d0d21dcf340b1c842fb81fe5",
+    "models/vehicle/mission-logic.sysml": "d09ddf94799d465b78daa2c8d2ecc4559735f063d36c0bf836aaa045271a663c",
+    "models/vehicle/requirement-basis.sysml": "b390fc89ce054ea5474fd2a1e2c577e6dd389f57283d8644d1754aeed82d52cd",
+    "models/vehicle/requirement-decisions.sysml": "cf6bf8ae2c7e2294a4f90ce7ba05173918adc4b55d19d1940a6a485b93e3d515",
+    "models/vehicle/requirements.sysml": "b2f1105cb06e3b804c974dbd5e01bda4f4912730e1edb36c837cf4f6eb5d73b4",
+    "models/vehicle/source-evidence.sysml": "028ba4009dc681ed1cc3205d6f6385dba8062931303645fb1347030f6b84c8f6",
+    "models/vehicle/structure.sysml": "81ff62a76c486454e01e8a424152f39540a2d63cc819f9850d7f329f47e8fb95",
+    "models/vehicle/use-cases.sysml": "85e937531404b30b8b5472b2ff266a99a57ba8fdc25d633a80dbd40a68e2e319",
+    "models/vehicle/verification-planning.sysml": "beadeb90cce35e07fb77a6c9f5324c00c97a45aea0046dfa059ef6de2e47e64a",
+    "models/vehicle/verification.sysml": "961cb9d09fdec61406585cf6956a2d66b26e2e34e7cc9658df358d3201f890e9"
+  },
+  "auditSources": {
+    "tools/publishing/reference.sysml": "946680ce85d483e82db5163fafa347895be749e6cbc0ae198671824d2c69676c",
+    "tools/boat_analysis/model/verification_audit.py": "f5ea6864e5982b9af68d9eb7d9e2b306ec56e7f9cd0f4a4810a0108181433665"
+  },
+  "diagnostics": [],
+  "errors": [],
+  "summary": {
+    "verificationDefinitions": 100,
+    "withPlannedMethods": 100,
+    "declaredPlanResults": 97,
+    "integrationPlans": 2
+  },
+  "openEvidence": [
+    {
+      "plan": "BlueDogVerificationPlanning::interfaceBench",
+      "missing": [
+        "Actual article",
+        "Released procedure",
+        "Instruments"
+      ]
+    },
+    {
+      "plan": "BlueDogVerificationPlanning::recoveryUseTrial",
+      "missing": [
+        "Actual article",
+        "Released procedure",
+        "Instruments"
+      ]
+    }
+  ],
+  "tables": {
+    "Plans": {
+      "columns": [
+        "Case",
+        "Planned methods",
+        "Objectives"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogEnergy::SustainedEnergyVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SustainedEnergyVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::sustainedEnergyFeasibility",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogReliability::VoyageReliabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "VoyageReliabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::missionSuccessProbability",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::failureRateBudget",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogReliability::PassageDurationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "PassageDurationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::passageDuration",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RoundTripVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RoundTripVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::roundTrip",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MultiDayEnduranceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MultiDayEnduranceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::multiDayEndurance",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EnergyAwarenessVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EnergyAwarenessVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::energyAwareness",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::energyEstimateCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::reserveEstimateCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::energyEstimateAccuracy",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::conservativeEnergyEstimate",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::NavigationAndControlVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NavigationAndControlVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::navigationAndControl",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::guidanceUpdateCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::sailCommandCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::steeringCommandCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::positionAccuracy",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::headingAccuracy",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ResetRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ResetRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::resetRecovery",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::restartDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::missionStateRestoration",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::gateProgressRestoration",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::resetRestrictionPreservation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::qualificationRestoration",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::logInterruptionDurability",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::unknownQualificationFallback",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::qualificationPersistence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::freshRecoveryCommand",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::motorQualificationInvariant",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::LowEnergyRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "LowEnergyRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::lowEnergyRecovery",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::lowEnergyEntry",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::lowEnergyPayloadInhibition",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::lowEnergyNavigationContinuity",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::lowEnergyCollisionContinuity",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::lowEnergyExit",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::payloadRestartPermission",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::periodicLogCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::telemetryDeliveryCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::criticalEventRecording",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::motorQualificationInvariant",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CommunicationsVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CommunicationsVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::communications",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::telemetryDeliveryCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::outageAutonomy",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::reconnectCurrentRecord",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::backlogOrdering",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::backlogCurrentPriority",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::logRetention",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::reconnectLogPreservation",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::IngressResponseVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "IngressResponseVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::ingressResponse",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::ingressDetection",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::ingressRecoveryRequest",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::ingressFlotation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::ingressElectronicsProtection",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::ingressPositionContinuity",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::ingressEventDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::criticalEventRecording",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::motorQualificationInvariant",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MissionEvidenceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MissionEvidenceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::missionEvidence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::periodicLogCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::logRetention",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::criticalEventRecording",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::logTimestampAccuracy",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::invalidTimestampMarking",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::logGapIndication",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::logInterruptionDurability",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::reconnectLogPreservation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::qualificationPersistence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::unknownQualificationFallback",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::TransportabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "TransportabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::transportability",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::soloTransport",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::liftMass",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::setupDuration",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::packDuration",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::soloLaunch",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::soloRetrieval",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::DesktopManufactureVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "DesktopManufactureVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::desktopManufacture",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ServiceabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ServiceabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::serviceability",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::replacementDuration",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::nondestructiveService",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::postServiceSealing",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::postServiceActuation",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::TrafficSafetyVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "TrafficSafetyVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::trafficSafety",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::trafficTracking",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::collisionAssessmentCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::avoidanceCommandDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::trafficAwarenessFault",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OperatingBoundaryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OperatingBoundaryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::operatingBoundary",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::boundaryEvaluationCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::boundaryAvoidanceDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::boundaryAvoidanceRecording",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::boundaryStartInhibition",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::boundaryDegradedEvidence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EmergencyControlVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EmergencyControlVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::emergencyControl",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::abortLatchDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::recoveryTelemetryCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::motorIsolationDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::isolationRestartInhibition",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::manualControlLossShutdown",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::controlLossLocationContinuity",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::qualificationPersistence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::motorQualificationInvariant",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::periodicLogCadence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::NavigationConspicuityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NavigationConspicuityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::navigationConspicuity",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::navigationLightPresentation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::navigationShapePresentation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::navigationSoundPresentation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::signalingModeDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::signalingFaultRecording",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::signalingFaultReporting",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RegulatoryClassificationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RegulatoryClassificationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::regulatoryClassification",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::deploymentComplianceRecord",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::deploymentReleaseGate",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EnvironmentalEnvelopeVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EnvironmentalEnvelopeVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::environmentalEnvelope",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::gorgeEnvironment",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::gorgeSurvivalWind",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::freshwaterExposure",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::enclosureSealing",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MarineDurabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MarineDurabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::marineDurability",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RecoveryPropulsionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RecoveryPropulsionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::recoveryPropulsion",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RecoveryEnergyVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RecoveryEnergyVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::recoveryEnergy",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::TelemetryEquipmentVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "TelemetryEquipmentVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::telemetryEquipment",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::telemetryDisplayContent",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::telemetryStaleIndication",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::telemetryIdentityPreservation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::telemetryDuplicateSuppression",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CommandIntegrityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CommandIntegrityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::commandIntegrity",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::unauthenticatedCommandRejection",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::replayCommandRejection",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::expiredCommandRejection",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::acceptedCommandDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::onboardAcknowledgmentDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::acknowledgmentQueueing",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::externalControlDisqualification",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::criticalEventRecording",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::qualificationPersistence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::GorgeWindVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "GorgeWindVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::gorgeWind",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::GorgeWavesVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "GorgeWavesVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::gorgeWaves",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::GorgeCurrentVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "GorgeCurrentVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::gorgeCurrent",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::GorgeSurvivalWavesVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "GorgeSurvivalWavesVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::gorgeSurvivalWaves",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OceanWindVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OceanWindVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::oceanWind",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OceanWavesVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OceanWavesVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::oceanWaves",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OceanCurrentVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OceanCurrentVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::oceanCurrent",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OceanSurvivalWavesVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OceanSurvivalWavesVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::oceanSurvivalWaves",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::AirTemperatureVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "AirTemperatureVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::airTemperature",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WaterTemperatureVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WaterTemperatureVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::waterTemperature",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::HumidityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "HumidityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::humidity",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::VisibilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "VisibilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::visibility",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::visibilityNavigationCapability",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::visibilityTrafficCapability",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::restrictedVisibilityEntry",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::restrictedVisibilityEvidence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::restrictedVisibilityCollisionAssessment",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CalmOperationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CalmOperationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::calmOperation",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EnvelopeTransitionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EnvelopeTransitionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::envelopeTransition",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::survivalEntryDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::survivalTransitionRecording",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::sailingResumptionDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::sailingResumptionInhibition",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::resumptionBlockEvidence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::periodicLogCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::motorQualificationInvariant",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WetMechanicalIntegrityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WetMechanicalIntegrityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::wetMechanicalIntegrity",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::wetMechanismTravel",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::wetJointIntegrity",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WetElectricalIntegrityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WetElectricalIntegrityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::wetElectricalIntegrity",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::wetConductorResistance",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::wetInsulationResistance",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::SolarHeatingVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SolarHeatingVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::solarHeating",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::hotSunElectronicsOperation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::hotSunBatteryTemperature",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::batteryChargeTemperatureInhibition",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::PrintedMaterialAgingVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "PrintedMaterialAgingVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::printedMaterialAging",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::SelfRightingVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SelfRightingVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::selfRighting",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::rightingDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::capsizeRigRetention",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::capsizeBallastRetention",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::capsizeElectronicsSealing",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CapsizeControlRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CapsizeControlRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::capsizeControlRecovery",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::controlRecoveryDeadline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::capsizeGateProgressRetention",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::capsizeQualificationRetention",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::capsizeRestrictionRetention",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::SubmergedWeedPassageVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SubmergedWeedPassageVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::submergedWeedPassage",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::weedPassageSpeed",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::weedPassageSteering",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WeedSnagSheddingVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WeedSnagSheddingVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::weedSnagShedding",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::weedSnagSpeedRecovery",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::weedSnagSteeringRecovery",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WeedBlockageResponseVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WeedBlockageResponseVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::weedBlockageResponse",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::weedBlockageFault",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::weedBlockageContingency",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::weedBlockageLocation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::motorQualificationInvariant",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RecoveryPropulsorWeedsVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RecoveryPropulsorWeedsVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::recoveryPropulsorWeeds",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::poweredWeedSpeed",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::poweredWeedCurrent",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::poweredWeedTemperature",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::lockedPropulsorShutdown",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::motorQualificationInvariant",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::NavigationAvailabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NavigationAvailabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::navigationAvailability",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::navigationValidEpochs",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::staleNavigationInvalidation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::navigationDegradedTransition",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::staleNavigationUseInhibition",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::criticalEventRecording",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::LaunchEnergyAdmissionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "LaunchEnergyAdmissionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::launchEnergyAdmission",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ChallengeMotorInhibitionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ChallengeMotorInhibitionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::challengeMotorInhibition",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::motorQualificationInvariant",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::freshRecoveryCommand",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::qualificationPersistence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::criticalEventRecording",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::SustainedReserveProtectionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SustainedReserveProtectionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::sustainedReserveProtection",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EnergyEvidenceReadinessVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EnergyEvidenceReadinessVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::energyEvidenceReadiness",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::FailureDispositionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "FailureDispositionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::criticalFailureDisposition",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WindObservationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WindObservationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::windObservation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::windSampleCadence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::windSpeedAccuracy",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::windDirectionAccuracy",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::windStaleInvalidation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::invalidWindUseInhibition",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::windLossResponse",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::windSensingEndurance",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::StructuralMaterialEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "StructuralMaterialEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::wetCouponStrength",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogStructure::wetCouponStiffness",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::FunctionalDeformationEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "FunctionalDeformationEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::appendageDeflection",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogStructure::hullDeflection",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogStructure::panelDeflection",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::StructuralLoadEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "StructuralLoadEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::structuralIntegrity",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogStructure::bendingStrength",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogStructure::panelStrength",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogStructure::rootProofLoad",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogStructure::bondProof",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::FlotationEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "FlotationEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::loadedFreeboard",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogStructure::reserveBuoyancy",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::LaunchSiteEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "LaunchSiteEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::launchClearance",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::StructuralPrintEnvelope",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "StructuralPrintEnvelope"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::printTileEnvelope",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CapsizeResilienceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CapsizeResilienceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::capsizeResilience",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MissionCapabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MissionCapabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::cruisePerformance",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::missionReliability",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::PeakSupplyCapabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "PeakSupplyCapabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::peakSupplyCapability",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ConstructionArchitectureVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ConstructionArchitectureVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::hybridConstruction",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::VegetationResilienceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "VegetationResilienceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::vegetationResilience",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MissionPerformanceAssessmentVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MissionPerformanceAssessmentVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::legProgress",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::cruiseEvidence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ReliabilityEvidenceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ReliabilityEvidenceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::reliabilityEvidence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogVerificationPlanning::InterfaceAndDurabilityIntegrationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InterfaceAndDurabilityIntegrationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::motorQualificationInvariant",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::freshRecoveryCommand",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::qualificationPersistence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "BlueDogRequirements::qualificationRestoration",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogVerificationPlanning::HumanRecoveryUseValidation",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "HumanRecoveryUseValidation"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::demo",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::soloRetrieval",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::OverallLengthVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OverallLengthVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::overallLength",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::SafetyCapabilityAbortVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SafetyCapabilityAbortVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::safetyCapabilityAbort",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::AutonomousShoreRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "AutonomousShoreRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::autonomousShoreRecovery",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::AbortAlertVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "AbortAlertVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::abortAlert",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::NoLitteringVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NoLitteringVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::noLittering",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::CasualtyFlotationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CasualtyFlotationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::casualtyFlotation",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::MajorComponentRetentionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MajorComponentRetentionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::majorComponentRetention",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::CapsizeRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CapsizeRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::capsizeRecovery",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::UnattachedPassageVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "UnattachedPassageVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::unattachedPassage",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::OutageAutonomyVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OutageAutonomyVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::communicationOutageAutonomy",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::ForecastAdmissionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ForecastAdmissionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::forecastAdmission",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::WeatherOutageContinuationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WeatherOutageContinuationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::weatherOutageContinuation",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::CourseRecoveryReserveVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CourseRecoveryReserveVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::courseRecoveryReserve",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::ReserveAbortVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ReserveAbortVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::reserveAbort",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::NightOperationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NightOperationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::nightOperation",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::AbortPersistenceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "AbortPersistenceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::abortPersistence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::RecoveryConspicuityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RecoveryConspicuityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::recoveryConspicuity",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::WindSportEncounterVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WindSportEncounterVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::trafficCoexistence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::navigationRules",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::LocationTrafficAdmissionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "LocationTrafficAdmissionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::forecastAdmission",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::NavigationRulesEntryAndAdjudicationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NavigationRulesEntryAndAdjudicationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::navigationRules",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::navigationRuleApplicability",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::navigationRuleBaseline",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::navigationEntryEvidence",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::operatorSafetyIntervention",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::navigationAdjudication",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandApplicabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandApplicabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::navigationRules",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandLookoutAndAvoidanceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandLookoutAndAvoidanceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::navigationRules",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandEncounterConductVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandEncounterConductVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::navigationRules",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandChannelAndVisibilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandChannelAndVisibilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::navigationRules",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandSignalsVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandSignalsVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::navigationRules",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::PassageQualificationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "PassageQualificationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::transGorgeChallenge",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::courseCompletion",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::unassistedAttempt",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::sailingPropulsion",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::ObservationAndInterventionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ObservationAndInterventionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::liveObservation",
+                "type": "RequirementUsage"
+              },
+              {
+                "id": "GorgeChallenge::emergencyIntervention",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::RestrictedWatersVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RestrictedWatersVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerificationMethodKind::inspect",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::test",
+                "type": "EnumerationUsage"
+              },
+              {
+                "id": "VerificationCases::VerificationMethodKind::analyze",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::restrictedWaters",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "PlannedVerdicts": {
+      "columns": [
+        "Case",
+        "Declared plan result"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RoundTripVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RoundTripVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MultiDayEnduranceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MultiDayEnduranceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EnergyAwarenessVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EnergyAwarenessVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::NavigationAndControlVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NavigationAndControlVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ResetRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ResetRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::LowEnergyRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "LowEnergyRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CommunicationsVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CommunicationsVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::IngressResponseVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "IngressResponseVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MissionEvidenceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MissionEvidenceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::TransportabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "TransportabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::DesktopManufactureVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "DesktopManufactureVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ServiceabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ServiceabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::TrafficSafetyVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "TrafficSafetyVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OperatingBoundaryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OperatingBoundaryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EmergencyControlVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EmergencyControlVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::NavigationConspicuityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NavigationConspicuityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RegulatoryClassificationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RegulatoryClassificationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EnvironmentalEnvelopeVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EnvironmentalEnvelopeVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MarineDurabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MarineDurabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RecoveryPropulsionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RecoveryPropulsionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RecoveryEnergyVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RecoveryEnergyVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::TelemetryEquipmentVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "TelemetryEquipmentVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CommandIntegrityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CommandIntegrityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::GorgeWindVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "GorgeWindVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::GorgeWavesVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "GorgeWavesVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::GorgeCurrentVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "GorgeCurrentVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::GorgeSurvivalWavesVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "GorgeSurvivalWavesVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OceanWindVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OceanWindVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OceanWavesVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OceanWavesVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OceanCurrentVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OceanCurrentVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::OceanSurvivalWavesVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OceanSurvivalWavesVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::AirTemperatureVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "AirTemperatureVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WaterTemperatureVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WaterTemperatureVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::HumidityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "HumidityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::VisibilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "VisibilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CalmOperationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CalmOperationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EnvelopeTransitionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EnvelopeTransitionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WetMechanicalIntegrityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WetMechanicalIntegrityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WetElectricalIntegrityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WetElectricalIntegrityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::SolarHeatingVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SolarHeatingVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::PrintedMaterialAgingVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "PrintedMaterialAgingVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::SelfRightingVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SelfRightingVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CapsizeControlRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CapsizeControlRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::SubmergedWeedPassageVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SubmergedWeedPassageVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WeedSnagSheddingVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WeedSnagSheddingVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WeedBlockageResponseVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WeedBlockageResponseVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::RecoveryPropulsorWeedsVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RecoveryPropulsorWeedsVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::NavigationAvailabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NavigationAvailabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::LaunchEnergyAdmissionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "LaunchEnergyAdmissionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ChallengeMotorInhibitionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ChallengeMotorInhibitionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::SustainedReserveProtectionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SustainedReserveProtectionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::EnergyEvidenceReadinessVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "EnergyEvidenceReadinessVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::FailureDispositionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "FailureDispositionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::WindObservationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WindObservationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::StructuralMaterialEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "StructuralMaterialEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::FunctionalDeformationEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "FunctionalDeformationEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::StructuralLoadEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "StructuralLoadEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::FlotationEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "FlotationEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::LaunchSiteEvidence",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "LaunchSiteEvidence"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::StructuralPrintEnvelope",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "StructuralPrintEnvelope"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::CapsizeResilienceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CapsizeResilienceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MissionCapabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MissionCapabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::PeakSupplyCapabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "PeakSupplyCapabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ConstructionArchitectureVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ConstructionArchitectureVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::VegetationResilienceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "VegetationResilienceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::MissionPerformanceAssessmentVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MissionPerformanceAssessmentVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementVerification::ReliabilityEvidenceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ReliabilityEvidenceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::OverallLengthVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OverallLengthVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::SafetyCapabilityAbortVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "SafetyCapabilityAbortVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::AutonomousShoreRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "AutonomousShoreRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::AbortAlertVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "AbortAlertVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::NoLitteringVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NoLitteringVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::CasualtyFlotationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CasualtyFlotationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::MajorComponentRetentionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "MajorComponentRetentionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::CapsizeRecoveryVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CapsizeRecoveryVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::UnattachedPassageVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "UnattachedPassageVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::OutageAutonomyVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "OutageAutonomyVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::ForecastAdmissionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ForecastAdmissionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::WeatherOutageContinuationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WeatherOutageContinuationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::CourseRecoveryReserveVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "CourseRecoveryReserveVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::ReserveAbortVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ReserveAbortVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::NightOperationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NightOperationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::AbortPersistenceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "AbortPersistenceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::RecoveryConspicuityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RecoveryConspicuityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::WindSportEncounterVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "WindSportEncounterVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::LocationTrafficAdmissionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "LocationTrafficAdmissionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::NavigationRulesEntryAndAdjudicationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "NavigationRulesEntryAndAdjudicationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandApplicabilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandApplicabilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandLookoutAndAvoidanceVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandLookoutAndAvoidanceVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandEncounterConductVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandEncounterConductVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandChannelAndVisibilityVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandChannelAndVisibilityVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::InlandSignalsVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InlandSignalsVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::PassageQualificationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "PassageQualificationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::ObservationAndInterventionVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "ObservationAndInterventionVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "GorgeChallengeVerification::RestrictedWatersVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "RestrictedWatersVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogVerificationPlanning::InterfaceAndDurabilityIntegrationVerification",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "InterfaceAndDurabilityIntegrationVerification"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogVerificationPlanning::HumanRecoveryUseValidation",
+            "type": "VerificationCaseDefinition"
+          },
+          "cells": [
+            [
+              "HumanRecoveryUseValidation"
+            ],
+            [
+              {
+                "id": "VerificationCases::VerdictKind::inconclusive",
+                "type": "EnumerationUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "IntegrationConfigurations": {
+      "columns": [
+        "Plan",
+        "Planned design",
+        "Planned assembly",
+        "Purpose",
+        "Actual article",
+        "Released procedure",
+        "Instruments"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogVerificationPlanning::interfaceBench",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "interfaceBench"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::ic01",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Current Gorge command/permission, storage durability and restart integration"
+            ],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogVerificationPlanning::recoveryUseTrial",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "recoveryUseTrial"
+            ],
+            [
+              {
+                "id": "BlueDogIC01::design",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogPhysicalArchitecture::ic01",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              "Current Gorge recovery approach, shore retention and one-person pickup in admitted conditions"
+            ],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    }
+  },
+  "executedByAudit": false,
+  "evidenceAcceptanceAssessed": false,
+  "interpretation": "Native plan inventory only. Method tags are plans; declared plan results are not executions. Numerical verification definitions require bound subjects. Empty article/procedure/instrument fields remain evidence gaps. Eligibility calculations do not decide acceptance; historical artifacts keep their subjects."
+}

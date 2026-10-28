@@ -6,9 +6,35 @@ Which measurements could change the boat I build? IC-01 gives me a specific geom
 
 ## What I need to establish
 
-I organize verification around the [current Gorge obligations](requirements.md): mission qualification, safe autonomous operation, usable energy and recovery reserve, environmental survival, construction and handling. The model identifies 237 current requirements and two provisional reliability study objectives, each with a verification objective. The 12 future statements concern separate missions and do not set acceptance criteria for the Gorge boat. Their procedures depend on the conditions and configurations selected for those missions.
+I organize verification around the [current Gorge obligations](requirements.md): mission qualification, safe autonomous operation, usable energy and recovery reserve, environmental survival, construction and handling. The model identifies 243 current product and process requirements and two provisional reliability study objectives, each with a verification objective. The 12 future statements concern separate missions and do not set acceptance criteria for the Gorge boat. Their procedures depend on the conditions and configurations selected for those missions.
 
 A defined objective says what must be assessed. A procedure says how to collect the evidence. An executable predicate evaluates supplied inputs; an analysis or simulation supplies evidence within its validity domain. Physical testing establishes what an identified installation actually does. I can accept a claim only when the evidence addresses its criterion and conditions. The planned cases remain inconclusive when that evidence is absent; a simulation pass does not establish physical qualification.
+
+## Methods, configurations and acceptance
+
+The native method register distinguishes inspection, analysis, demonstration and test. Its annotations describe planned work. The existing procedures retain their conditions; future missions and reliability study objectives keep separate applicability. No method tag supplies an execution record or an acceptance decision.
+
+<details>
+<summary>Planned methods and their verification objectives</summary>
+
+```sysml-report BlueDogVerificationDocuments::MethodRegister
+```
+
+</details>
+
+The [integration and recovery-use plans](../models/vehicle/verification-planning.sysml) identify the intended IC-01 design and assembly. Actual article, released procedure and instrument identities remain unset. The interface bench plan checks command/permission applicability, durable disqualification, restart and physical motor-enable timing. The recovery-use plan combines product criteria with the operator's complete approach, capture, retention and one-person pickup task.
+
+<details>
+<summary>Candidate configurations and missing execution details</summary>
+
+```sysml-report BlueDogVerificationDocuments::IntegrationRegister
+```
+
+</details>
+
+Before accepting a claim, I need evidence that was executed on an identified applicable subject, under controlled procedures and conditions, with adequate measurement, uncertainty and provenance. The native eligibility calculation makes those preconditions visible; its result does not decide acceptance. A failed test can be valid evidence even though it cannot support an affirmative claim. Unresolved anomalies and incomplete observations stay in the record.
+
+This follows [NASA verification](https://www.nasa.gov/reference/5-3-product-verification/) and [validation guidance](https://www.nasa.gov/reference/5-4-product-validation/). Three numerical verification definitions in the energy and reliability models require bound subjects before execution; the method table does not evaluate them without inputs. Existing planned physical cases remain inconclusive, and historical sizing evidence retains its original configuration and unaccepted status.
 
 ## Navigation-rule entry review and adjudication
 
@@ -23,7 +49,7 @@ The [model verification cases](../models/missions/verification.sysml) each verif
 | `InlandEncounterConductVerification` | [Rules 11–18](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-B): sailing, overtaking, other relevant encounters and give-way/stand-on duties |
 | `InlandChannelAndVisibilityVerification` | [Rules 9, 10 and 19](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E/part-83/subpart-B): channels, applicable traffic separation and restricted visibility |
 | `InlandSignalsVerification` | [Rules 20–37 and applicable annexes](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E): lights, shapes and sound signals across operating modes |
-| `NavigationRulesEntryAndAdjudicationVerification` | C-007: entry evidence and consistent qualification decisions |
+| `NavigationRulesEntryAndAdjudicationVerification` | C-007 and C-028–C-032: entry evidence, responsibilities and consistent qualification decisions |
 
 All six cases remain **inconclusive**. They provide a structure for assessing compliance, not a finding that Blue Dog complies. The applicability review must account for provisions beyond these grouped cases where relevant. Physical demonstrations, simulation evidence and unresolved gaps remain distinct; passing a limited software rule subset cannot close C-007.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verification, Validation and Evidence"
+  short_description: "Audit V&V plans, provenance and acceptance arguments"
+  default_prompt: "Use $verification-validation-evidence to audit and improve V&V planning and evidence applicability without confusing coverage, execution and acceptance."

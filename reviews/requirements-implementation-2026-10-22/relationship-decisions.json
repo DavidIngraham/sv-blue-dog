@@ -1,0 +1,2724 @@
+[
+  {
+    "relationship": "GorgeChallenge::challengeNavigationRules",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::navigationRules",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::challengeRestrictedWaters",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::restrictedWaters",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::challengeTrafficCoexistence",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::trafficCoexistence",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::challengeRuleCourseCompletion",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::courseCompletion",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::challengeRuleUnassistedAttempt",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::unassistedAttempt",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::challengeRuleSailingPropulsion",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::sailingPropulsion",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::challengeRuleLiveObservation",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::liveObservation",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::challengeRuleEmergencyIntervention",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::emergencyIntervention",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveOverallLength",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::overallLength",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveSafetyCapabilityAbort",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::safetyCapabilityAbort",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveAutonomousShoreRecovery",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::autonomousShoreRecovery",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveAbortAlert",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::abortAlert",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveNoLittering",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::noLittering",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveCasualtyFlotation",
+    "action": "retain derivation",
+    "reason": "C-015 expressly applies C-016 through C-018, including this obligation.",
+    "before": {
+      "original": "GorgeChallenge::noLittering",
+      "derived": "GorgeChallenge::casualtyFlotation",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveMajorComponentRetention",
+    "action": "retain derivation",
+    "reason": "C-015 expressly applies C-016 through C-018, including this obligation.",
+    "before": {
+      "original": "GorgeChallenge::noLittering",
+      "derived": "GorgeChallenge::majorComponentRetention",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveCapsizeRecovery",
+    "action": "retain derivation",
+    "reason": "C-015 expressly applies C-016 through C-018, including this obligation.",
+    "before": {
+      "original": "GorgeChallenge::noLittering",
+      "derived": "GorgeChallenge::capsizeRecovery",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveUnattachedPassage",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::unattachedPassage",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveOutageAutonomy",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::communicationOutageAutonomy",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveForecastAdmission",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::forecastAdmission",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveWeatherOutageContinuation",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::weatherOutageContinuation",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveCourseRecoveryReserve",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::courseRecoveryReserve",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveReserveAbort",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::reserveAbort",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveNightOperation",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::nightOperation",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveAbortPersistence",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::abortPersistence",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "GorgeChallenge::deriveRecoveryConspicuity",
+    "action": "retain derivation",
+    "reason": "C-000 expressly incorporates the numbered challenge rule; it is a deliberate aggregate contract.",
+    "before": {
+      "original": "GorgeChallenge::transGorgeChallenge",
+      "derived": "GorgeChallenge::recoveryConspicuity",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::challengeTrafficResponse",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::trafficSafety",
+    "target": "GorgeChallenge::trafficCoexistence",
+    "reason": "S-001 specifies observation, assessment and response supporting collision-free passage. Its reviewed performance envelopes are selected allocations; C-007 independently supplies navigation duties. No-contact outcome alone does not imply the assessment process.",
+    "before": {
+      "original": "GorgeChallenge::trafficCoexistence",
+      "derived": "BlueDogRequirements::trafficSafety",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::challengeNavigationSignals",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::navigationConspicuity",
+    "target": "GorgeChallenge::navigationRules",
+    "reason": "S-004 clarifies C-007 signal presentation during an attempt only. Its powered-recovery and stationary-mode coverage has the separate C-027 and deployment-matrix basis; those modes are not derived from attempt-only compliance.",
+    "before": {
+      "original": "GorgeChallenge::navigationRules",
+      "derived": "BlueDogRequirements::navigationConspicuity",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveGorgeWind",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::gorgeWind",
+    "target": "BlueDogRequirements::gorgeEnvironment",
+    "reason": "N-011 specifies a detailed acceptance condition for N-010 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::gorgeEnvironment",
+      "derived": "BlueDogRequirements::gorgeWind",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveGorgeWaves",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::gorgeWaves",
+    "target": "BlueDogRequirements::gorgeEnvironment",
+    "reason": "N-012 specifies a detailed acceptance condition for N-010 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::gorgeEnvironment",
+      "derived": "BlueDogRequirements::gorgeWaves",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveGorgeCurrent",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::gorgeCurrent",
+    "target": "BlueDogRequirements::gorgeEnvironment",
+    "reason": "N-013 specifies a detailed acceptance condition for N-010 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::gorgeEnvironment",
+      "derived": "BlueDogRequirements::gorgeCurrent",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveGorgeSurvivalWind",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::gorgeSurvivalWind",
+    "target": "BlueDogRequirements::gorgeEnvironment",
+    "reason": "N-014 specifies a detailed acceptance condition for N-010 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::gorgeEnvironment",
+      "derived": "BlueDogRequirements::gorgeSurvivalWind",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveGorgeSurvivalWaves",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::gorgeSurvivalWaves",
+    "target": "BlueDogRequirements::gorgeEnvironment",
+    "reason": "N-015 specifies a detailed acceptance condition for N-010 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::gorgeEnvironment",
+      "derived": "BlueDogRequirements::gorgeSurvivalWaves",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveOceanWind",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::oceanWind",
+    "target": "BlueDogRequirements::oceanEnvironment",
+    "reason": "N-021 specifies a detailed acceptance condition for N-020 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::oceanEnvironment",
+      "derived": "BlueDogRequirements::oceanWind",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveOceanWaves",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::oceanWaves",
+    "target": "BlueDogRequirements::oceanEnvironment",
+    "reason": "N-022 specifies a detailed acceptance condition for N-020 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::oceanEnvironment",
+      "derived": "BlueDogRequirements::oceanWaves",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveOceanCurrent",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::oceanCurrent",
+    "target": "BlueDogRequirements::oceanEnvironment",
+    "reason": "N-023 specifies a detailed acceptance condition for N-020 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::oceanEnvironment",
+      "derived": "BlueDogRequirements::oceanCurrent",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveOceanSurvivalWind",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::oceanSurvivalWind",
+    "target": "BlueDogRequirements::oceanEnvironment",
+    "reason": "N-024 specifies a detailed acceptance condition for N-020 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::oceanEnvironment",
+      "derived": "BlueDogRequirements::oceanSurvivalWind",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveOceanSurvivalWaves",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::oceanSurvivalWaves",
+    "target": "BlueDogRequirements::oceanEnvironment",
+    "reason": "N-025 specifies a detailed acceptance condition for N-020 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::oceanEnvironment",
+      "derived": "BlueDogRequirements::oceanSurvivalWaves",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveAirTemperature",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::airTemperature",
+    "target": "BlueDogRequirements::environmentalEnvelope",
+    "reason": "N-030 specifies a detailed acceptance condition for N-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::environmentalEnvelope",
+      "derived": "BlueDogRequirements::airTemperature",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveWaterTemperature",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::waterTemperature",
+    "target": "BlueDogRequirements::environmentalEnvelope",
+    "reason": "N-031 specifies a detailed acceptance condition for N-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::environmentalEnvelope",
+      "derived": "BlueDogRequirements::waterTemperature",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveHumidity",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::humidity",
+    "target": "BlueDogRequirements::environmentalEnvelope",
+    "reason": "N-032 specifies a detailed acceptance condition for N-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::environmentalEnvelope",
+      "derived": "BlueDogRequirements::humidity",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveVisibility",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::visibility",
+    "target": "BlueDogRequirements::environmentalEnvelope",
+    "reason": "N-033 specifies a detailed acceptance condition for N-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::environmentalEnvelope",
+      "derived": "BlueDogRequirements::visibility",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveCalmOperation",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::calmOperation",
+    "target": "BlueDogRequirements::environmentalEnvelope",
+    "reason": "N-034 specifies a detailed acceptance condition for N-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::environmentalEnvelope",
+      "derived": "BlueDogRequirements::calmOperation",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveEnvelopeTransition",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::envelopeTransition",
+    "target": "BlueDogRequirements::environmentalEnvelope",
+    "reason": "N-035 specifies a detailed acceptance condition for N-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::environmentalEnvelope",
+      "derived": "BlueDogRequirements::envelopeTransition",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveFreshwaterExposure",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::freshwaterExposure",
+    "target": "BlueDogRequirements::marineDurability",
+    "reason": "N-041 specifies a detailed acceptance condition for N-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::marineDurability",
+      "derived": "BlueDogRequirements::freshwaterExposure",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveEnclosureSealing",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::enclosureSealing",
+    "target": "BlueDogRequirements::marineDurability",
+    "reason": "N-043 specifies a detailed acceptance condition for N-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::marineDurability",
+      "derived": "BlueDogRequirements::enclosureSealing",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveWetMechanicalIntegrity",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::wetMechanicalIntegrity",
+    "target": "BlueDogRequirements::marineDurability",
+    "reason": "N-044 specifies a detailed acceptance condition for N-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::marineDurability",
+      "derived": "BlueDogRequirements::wetMechanicalIntegrity",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveWetElectricalIntegrity",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::wetElectricalIntegrity",
+    "target": "BlueDogRequirements::marineDurability",
+    "reason": "N-045 specifies a detailed acceptance condition for N-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::marineDurability",
+      "derived": "BlueDogRequirements::wetElectricalIntegrity",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveSolarHeating",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::solarHeating",
+    "target": "BlueDogRequirements::marineDurability",
+    "reason": "N-046 specifies a detailed acceptance condition for N-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::marineDurability",
+      "derived": "BlueDogRequirements::solarHeating",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::derivePrintedMaterialAging",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::printedMaterialAging",
+    "target": "BlueDogRequirements::marineDurability",
+    "reason": "N-047 specifies a detailed acceptance condition for N-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::marineDurability",
+      "derived": "BlueDogRequirements::printedMaterialAging",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveSubmergedWeedPassage",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::submergedWeedPassage",
+    "target": "BlueDogRequirements::vegetationResilience",
+    "reason": "N-053 specifies a detailed acceptance condition for N-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::stabilityAndFouling",
+      "derived": "BlueDogRequirements::submergedWeedPassage",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveWeedSnagShedding",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::weedSnagShedding",
+    "target": "BlueDogRequirements::vegetationResilience",
+    "reason": "N-054 specifies a detailed acceptance condition for N-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::stabilityAndFouling",
+      "derived": "BlueDogRequirements::weedSnagShedding",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveWeedBlockageResponse",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::weedBlockageResponse",
+    "target": "BlueDogRequirements::vegetationResilience",
+    "reason": "N-055 specifies a detailed acceptance condition for N-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::stabilityAndFouling",
+      "derived": "BlueDogRequirements::weedBlockageResponse",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::deriveRecoveryPropulsorWeeds",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::recoveryPropulsorWeeds",
+    "target": "BlueDogRequirements::vegetationResilience",
+    "reason": "N-056 specifies a detailed acceptance condition for N-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::stabilityAndFouling",
+      "derived": "BlueDogRequirements::recoveryPropulsorWeeds",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::auditDerivation1",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::navigationAvailability",
+    "target": "BlueDogRequirements::navigationAndControl",
+    "reason": "E-008 specifies a detailed acceptance condition for E-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAndControl",
+      "derived": "BlueDogRequirements::navigationAvailability",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::auditDerivation10",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::freshwaterExposure",
+    "target": "BlueDogRequirements::gorgeEnvironment",
+    "reason": "N-041 specifies a detailed acceptance condition for N-010 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::gorgeEnvironment",
+      "derived": "BlueDogRequirements::freshwaterExposure",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::auditDerivation11",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::saltwaterExposure",
+    "target": "BlueDogRequirements::oceanEnvironment",
+    "reason": "N-042 specifies a detailed acceptance condition for N-020 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::oceanEnvironment",
+      "derived": "BlueDogRequirements::saltwaterExposure",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::auditDerivation12",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::submergedWeedPassage",
+    "target": "BlueDogRequirements::gorgeEnvironment",
+    "reason": "N-053 specifies a detailed acceptance condition for N-010 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::gorgeEnvironment",
+      "derived": "BlueDogRequirements::submergedWeedPassage",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::auditDerivation13",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::weedSnagShedding",
+    "target": "BlueDogRequirements::gorgeEnvironment",
+    "reason": "N-054 specifies a detailed acceptance condition for N-010 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::gorgeEnvironment",
+      "derived": "BlueDogRequirements::weedSnagShedding",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeEnergyEstimateCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::energyEstimateCadence",
+    "target": "BlueDogRequirements::energyAwareness",
+    "reason": "E-101 specifies a detailed acceptance condition for E-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::energyAwareness",
+      "derived": "BlueDogRequirements::energyEstimateCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeReserveEstimateCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::reserveEstimateCadence",
+    "target": "BlueDogRequirements::energyAwareness",
+    "reason": "E-102 specifies a detailed acceptance condition for E-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::energyAwareness",
+      "derived": "BlueDogRequirements::reserveEstimateCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeEnergyEstimateAccuracy",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::energyEstimateAccuracy",
+    "target": "BlueDogRequirements::energyAwareness",
+    "reason": "E-103 specifies a detailed acceptance condition for E-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::energyAwareness",
+      "derived": "BlueDogRequirements::energyEstimateAccuracy",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeConservativeEnergyEstimate",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::conservativeEnergyEstimate",
+    "target": "BlueDogRequirements::energyAwareness",
+    "reason": "E-104 specifies a detailed acceptance condition for E-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::energyAwareness",
+      "derived": "BlueDogRequirements::conservativeEnergyEstimate",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeGuidanceUpdateCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::guidanceUpdateCadence",
+    "target": "BlueDogRequirements::navigationAndControl",
+    "reason": "E-105 specifies a detailed acceptance condition for E-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAndControl",
+      "derived": "BlueDogRequirements::guidanceUpdateCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSailCommandCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::sailCommandCadence",
+    "target": "BlueDogRequirements::navigationAndControl",
+    "reason": "E-106 specifies a detailed acceptance condition for E-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAndControl",
+      "derived": "BlueDogRequirements::sailCommandCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSteeringCommandCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::steeringCommandCadence",
+    "target": "BlueDogRequirements::navigationAndControl",
+    "reason": "E-107 specifies a detailed acceptance condition for E-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAndControl",
+      "derived": "BlueDogRequirements::steeringCommandCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposePositionAccuracy",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::positionAccuracy",
+    "target": "BlueDogRequirements::navigationAndControl",
+    "reason": "E-108 specifies a detailed acceptance condition for E-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAndControl",
+      "derived": "BlueDogRequirements::positionAccuracy",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeHeadingAccuracy",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::headingAccuracy",
+    "target": "BlueDogRequirements::navigationAndControl",
+    "reason": "E-109 specifies a detailed acceptance condition for E-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAndControl",
+      "derived": "BlueDogRequirements::headingAccuracy",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeRestartDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::restartDeadline",
+    "target": "BlueDogRequirements::resetRecovery",
+    "reason": "E-110 specifies a detailed acceptance condition for E-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::restartDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeMissionStateRestoration",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::missionStateRestoration",
+    "target": "BlueDogRequirements::resetRecovery",
+    "reason": "E-111 specifies a detailed acceptance condition for E-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::missionStateRestoration",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeGateProgressRestoration",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::gateProgressRestoration",
+    "target": "BlueDogRequirements::resetRecovery",
+    "reason": "E-112 specifies a detailed acceptance condition for E-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::gateProgressRestoration",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeResetRestrictionPreservation",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::resetRestrictionPreservation",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLowEnergyEntry",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::lowEnergyEntry",
+    "target": "BlueDogRequirements::lowEnergyRecovery",
+    "reason": "E-114 specifies a detailed acceptance condition for E-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::lowEnergyEntry",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLowEnergyPayloadInhibition",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::lowEnergyPayloadInhibition",
+    "target": "BlueDogRequirements::lowEnergyRecovery",
+    "reason": "E-115 specifies a detailed acceptance condition for E-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::lowEnergyPayloadInhibition",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLowEnergyNavigationContinuity",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::lowEnergyNavigationContinuity",
+    "target": "BlueDogRequirements::lowEnergyRecovery",
+    "reason": "E-116 specifies a detailed acceptance condition for E-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::lowEnergyNavigationContinuity",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLowEnergyCollisionContinuity",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::lowEnergyCollisionContinuity",
+    "target": "BlueDogRequirements::lowEnergyRecovery",
+    "reason": "E-117 specifies a detailed acceptance condition for E-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::lowEnergyCollisionContinuity",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLowEnergyExit",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::lowEnergyExit",
+    "target": "BlueDogRequirements::lowEnergyRecovery",
+    "reason": "E-118 specifies a detailed acceptance condition for E-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::lowEnergyExit",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposePayloadRestartPermission",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::payloadRestartPermission",
+    "target": "BlueDogRequirements::lowEnergyRecovery",
+    "reason": "E-119 specifies a detailed acceptance condition for E-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::payloadRestartPermission",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeTelemetryDeliveryCadence",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::communications",
+      "derived": "BlueDogRequirements::telemetryDeliveryCadence",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeOutageAutonomy",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::outageAutonomy",
+    "target": "BlueDogRequirements::communications",
+    "reason": "E-121 specifies a detailed acceptance condition for E-005 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::communications",
+      "derived": "BlueDogRequirements::outageAutonomy",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeReconnectCurrentRecord",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::reconnectCurrentRecord",
+    "target": "BlueDogRequirements::communications",
+    "reason": "E-122 specifies a detailed acceptance condition for E-005 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::communications",
+      "derived": "BlueDogRequirements::reconnectCurrentRecord",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeBacklogOrdering",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::backlogOrdering",
+    "target": "BlueDogRequirements::communications",
+    "reason": "E-123 specifies a detailed acceptance condition for E-005 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::communications",
+      "derived": "BlueDogRequirements::backlogOrdering",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeBacklogCurrentPriority",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::communications",
+      "derived": "BlueDogRequirements::backlogCurrentPriority",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeIngressDetection",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::ingressDetection",
+    "target": "BlueDogRequirements::ingressResponse",
+    "reason": "E-125 specifies a detailed acceptance condition for E-006 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::ingressResponse",
+      "derived": "BlueDogRequirements::ingressDetection",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeIngressRecoveryRequest",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::ingressRecoveryRequest",
+    "target": "BlueDogRequirements::ingressResponse",
+    "reason": "E-126 specifies a detailed acceptance condition for E-006 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::ingressResponse",
+      "derived": "BlueDogRequirements::ingressRecoveryRequest",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeIngressFlotation",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::ingressFlotation",
+    "target": "BlueDogRequirements::ingressResponse",
+    "reason": "E-127 specifies a detailed acceptance condition for E-006 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::ingressResponse",
+      "derived": "BlueDogRequirements::ingressFlotation",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeIngressElectronicsProtection",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::ingressElectronicsProtection",
+    "target": "BlueDogRequirements::ingressResponse",
+    "reason": "E-128 specifies a detailed acceptance condition for E-006 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::ingressResponse",
+      "derived": "BlueDogRequirements::ingressElectronicsProtection",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeIngressPositionContinuity",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::ingressPositionContinuity",
+    "target": "BlueDogRequirements::ingressResponse",
+    "reason": "E-129 specifies a detailed acceptance condition for E-006 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::ingressResponse",
+      "derived": "BlueDogRequirements::ingressPositionContinuity",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposePeriodicLogCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::periodicLogCadence",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-130 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::periodicLogCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLogRetention",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::logRetention",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-131 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::logRetention",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeCriticalEventRecording",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::criticalEventRecording",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-132 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::criticalEventRecording",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLogTimestampAccuracy",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::logTimestampAccuracy",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-133 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::logTimestampAccuracy",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeInvalidTimestampMarking",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::invalidTimestampMarking",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-134 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::invalidTimestampMarking",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLogGapIndication",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::logGapIndication",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-135 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::logGapIndication",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLogInterruptionDurability",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::logInterruptionDurability",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-136 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::logInterruptionDurability",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeReconnectLogPreservation",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::reconnectLogPreservation",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-137 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::reconnectLogPreservation",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeQualificationPersistence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::qualificationPersistence",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-138 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::qualificationPersistence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeUnknownQualificationFallback",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::unknownQualificationFallback",
+    "target": "BlueDogRequirements::missionEvidence",
+    "reason": "E-139 specifies a detailed acceptance condition for E-007 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::missionEvidence",
+      "derived": "BlueDogRequirements::unknownQualificationFallback",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeNavigationValidEpochs",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::navigationValidEpochs",
+    "target": "BlueDogRequirements::navigationAvailability",
+    "reason": "E-140 specifies a detailed acceptance condition for E-008 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAvailability",
+      "derived": "BlueDogRequirements::navigationValidEpochs",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeStaleNavigationInvalidation",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::staleNavigationInvalidation",
+    "target": "BlueDogRequirements::navigationAvailability",
+    "reason": "E-141 specifies a detailed acceptance condition for E-008 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAvailability",
+      "derived": "BlueDogRequirements::staleNavigationInvalidation",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeNavigationDegradedTransition",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::navigationDegradedTransition",
+    "target": "BlueDogRequirements::navigationAvailability",
+    "reason": "E-142 specifies a detailed acceptance condition for E-008 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAvailability",
+      "derived": "BlueDogRequirements::navigationDegradedTransition",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeStaleNavigationUseInhibition",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::staleNavigationUseInhibition",
+    "target": "BlueDogRequirements::navigationAvailability",
+    "reason": "E-143 specifies a detailed acceptance condition for E-008 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAvailability",
+      "derived": "BlueDogRequirements::staleNavigationUseInhibition",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSoloTransport",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::soloTransport",
+    "target": "BlueDogRequirements::transportability",
+    "reason": "P-101 specifies a detailed acceptance condition for P-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::transportability",
+      "derived": "BlueDogRequirements::soloTransport",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLiftMass",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::liftMass",
+    "target": "BlueDogRequirements::transportability",
+    "reason": "P-102 specifies a detailed acceptance condition for P-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::transportability",
+      "derived": "BlueDogRequirements::liftMass",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSetupDuration",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::setupDuration",
+    "target": "BlueDogRequirements::transportability",
+    "reason": "P-103 specifies a detailed acceptance condition for P-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::transportability",
+      "derived": "BlueDogRequirements::setupDuration",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposePackDuration",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::packDuration",
+    "target": "BlueDogRequirements::transportability",
+    "reason": "P-104 specifies a detailed acceptance condition for P-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::transportability",
+      "derived": "BlueDogRequirements::packDuration",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSoloLaunch",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::transportability",
+      "derived": "BlueDogRequirements::soloLaunch",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSoloRetrieval",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::transportability",
+      "derived": "BlueDogRequirements::soloRetrieval",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeReplacementDuration",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::replacementDuration",
+    "target": "BlueDogRequirements::serviceability",
+    "reason": "P-107 specifies a detailed acceptance condition for P-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::serviceability",
+      "derived": "BlueDogRequirements::replacementDuration",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeNondestructiveService",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::serviceability",
+      "derived": "BlueDogRequirements::nondestructiveService",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposePostServiceSealing",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::postServiceSealing",
+    "target": "BlueDogRequirements::serviceability",
+    "reason": "P-109 specifies a detailed acceptance condition for P-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::serviceability",
+      "derived": "BlueDogRequirements::postServiceSealing",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposePostServiceActuation",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::postServiceActuation",
+    "target": "BlueDogRequirements::serviceability",
+    "reason": "P-110 specifies a detailed acceptance condition for P-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::serviceability",
+      "derived": "BlueDogRequirements::postServiceActuation",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeTrafficTracking",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::trafficTracking",
+    "target": "BlueDogRequirements::trafficSafety",
+    "reason": "S-101 specifies a detailed acceptance condition for S-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::trafficSafety",
+      "derived": "BlueDogRequirements::trafficTracking",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeCollisionAssessmentCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::collisionAssessmentCadence",
+    "target": "BlueDogRequirements::trafficSafety",
+    "reason": "S-102 specifies a detailed acceptance condition for S-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::trafficSafety",
+      "derived": "BlueDogRequirements::collisionAssessmentCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeAvoidanceCommandDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::avoidanceCommandDeadline",
+    "target": "BlueDogRequirements::trafficSafety",
+    "reason": "S-103 specifies a detailed acceptance condition for S-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::trafficSafety",
+      "derived": "BlueDogRequirements::avoidanceCommandDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeTrafficAwarenessFault",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::trafficAwarenessFault",
+    "target": "BlueDogRequirements::trafficSafety",
+    "reason": "S-104 specifies a detailed acceptance condition for S-001 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::trafficSafety",
+      "derived": "BlueDogRequirements::trafficAwarenessFault",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeBoundaryEvaluationCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::boundaryEvaluationCadence",
+    "target": "BlueDogRequirements::operatingBoundary",
+    "reason": "S-105 specifies a detailed acceptance condition for S-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::operatingBoundary",
+      "derived": "BlueDogRequirements::boundaryEvaluationCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeBoundaryAvoidanceDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::boundaryAvoidanceDeadline",
+    "target": "BlueDogRequirements::operatingBoundary",
+    "reason": "S-106 specifies a detailed acceptance condition for S-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::operatingBoundary",
+      "derived": "BlueDogRequirements::boundaryAvoidanceDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeBoundaryAvoidanceRecording",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::boundaryAvoidanceRecording",
+    "target": "BlueDogRequirements::operatingBoundary",
+    "reason": "S-107 specifies a detailed acceptance condition for S-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::operatingBoundary",
+      "derived": "BlueDogRequirements::boundaryAvoidanceRecording",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeBoundaryStartInhibition",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::boundaryStartInhibition",
+    "target": "BlueDogRequirements::operatingBoundary",
+    "reason": "S-108 specifies a detailed acceptance condition for S-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::operatingBoundary",
+      "derived": "BlueDogRequirements::boundaryStartInhibition",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeBoundaryDegradedEvidence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::boundaryDegradedEvidence",
+    "target": "BlueDogRequirements::operatingBoundary",
+    "reason": "S-109 specifies a detailed acceptance condition for S-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::operatingBoundary",
+      "derived": "BlueDogRequirements::boundaryDegradedEvidence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeAbortLatchDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::abortLatchDeadline",
+    "target": "BlueDogRequirements::emergencyControl",
+    "reason": "S-110 specifies a detailed acceptance condition for S-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::safeRecovery",
+      "derived": "BlueDogRequirements::abortLatchDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeRecoveryTelemetryCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::recoveryTelemetryCadence",
+    "target": "BlueDogRequirements::emergencyControl",
+    "reason": "S-111 specifies a detailed acceptance condition for S-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::safeRecovery",
+      "derived": "BlueDogRequirements::recoveryTelemetryCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeMotorIsolationDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::motorIsolationDeadline",
+    "target": "BlueDogRequirements::emergencyControl",
+    "reason": "S-112 specifies a detailed acceptance condition for S-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::safeRecovery",
+      "derived": "BlueDogRequirements::motorIsolationDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeIsolationRestartInhibition",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::isolationRestartInhibition",
+    "target": "BlueDogRequirements::emergencyControl",
+    "reason": "S-113 specifies a detailed acceptance condition for S-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::safeRecovery",
+      "derived": "BlueDogRequirements::isolationRestartInhibition",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeManualControlLossShutdown",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::manualControlLossShutdown",
+    "target": "BlueDogRequirements::emergencyControl",
+    "reason": "S-114 specifies a detailed acceptance condition for S-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::safeRecovery",
+      "derived": "BlueDogRequirements::manualControlLossShutdown",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeControlLossLocationContinuity",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::controlLossLocationContinuity",
+    "target": "BlueDogRequirements::emergencyControl",
+    "reason": "S-115 specifies a detailed acceptance condition for S-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::safeRecovery",
+      "derived": "BlueDogRequirements::controlLossLocationContinuity",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeNavigationLightPresentation",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::navigationConspicuity",
+      "derived": "BlueDogRequirements::navigationLightPresentation",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeNavigationShapePresentation",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::navigationConspicuity",
+      "derived": "BlueDogRequirements::navigationShapePresentation",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeNavigationSoundPresentation",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::navigationConspicuity",
+      "derived": "BlueDogRequirements::navigationSoundPresentation",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSignalingModeDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::signalingModeDeadline",
+    "target": "BlueDogRequirements::navigationConspicuity",
+    "reason": "S-119 specifies a detailed acceptance condition for S-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationConspicuity",
+      "derived": "BlueDogRequirements::signalingModeDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSignalingFaultRecording",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::signalingFaultRecording",
+    "target": "BlueDogRequirements::navigationConspicuity",
+    "reason": "S-120 specifies a detailed acceptance condition for S-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationConspicuity",
+      "derived": "BlueDogRequirements::signalingFaultRecording",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSignalingFaultReporting",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::signalingFaultReporting",
+    "target": "BlueDogRequirements::navigationConspicuity",
+    "reason": "S-121 specifies a detailed acceptance condition for S-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::navigationConspicuity",
+      "derived": "BlueDogRequirements::signalingFaultReporting",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeDeploymentComplianceRecord",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::deploymentComplianceRecord",
+    "target": "BlueDogRequirements::regulatoryClassification",
+    "reason": "S-122 specifies a detailed acceptance condition for S-005 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::regulatoryClassification",
+      "derived": "BlueDogRequirements::deploymentComplianceRecord",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeDeploymentReleaseGate",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::regulatoryClassification",
+      "derived": "BlueDogRequirements::deploymentReleaseGate",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeTelemetryDisplayContent",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::telemetryDisplayContent",
+    "target": "BlueDogRequirements::telemetryEquipment",
+    "reason": "C-201 specifies a detailed acceptance condition for C-101 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::telemetryEquipment",
+      "derived": "BlueDogRequirements::telemetryDisplayContent",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeTelemetryStaleIndication",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::telemetryStaleIndication",
+    "target": "BlueDogRequirements::telemetryEquipment",
+    "reason": "C-202 specifies a detailed acceptance condition for C-101 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::telemetryEquipment",
+      "derived": "BlueDogRequirements::telemetryStaleIndication",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeTelemetryIdentityPreservation",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::telemetryIdentityPreservation",
+    "target": "BlueDogRequirements::telemetryEquipment",
+    "reason": "C-203 specifies a detailed acceptance condition for C-101 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::telemetryEquipment",
+      "derived": "BlueDogRequirements::telemetryIdentityPreservation",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeTelemetryDuplicateSuppression",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::telemetryDuplicateSuppression",
+    "target": "BlueDogRequirements::telemetryEquipment",
+    "reason": "C-204 specifies a detailed acceptance condition for C-101 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::telemetryEquipment",
+      "derived": "BlueDogRequirements::telemetryDuplicateSuppression",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeUnauthenticatedCommandRejection",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::unauthenticatedCommandRejection",
+    "target": "BlueDogRequirements::commandIntegrity",
+    "reason": "C-205 specifies a detailed acceptance condition for C-102 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::commandIntegrity",
+      "derived": "BlueDogRequirements::unauthenticatedCommandRejection",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeReplayCommandRejection",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::replayCommandRejection",
+    "target": "BlueDogRequirements::commandIntegrity",
+    "reason": "C-206 specifies a detailed acceptance condition for C-102 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::commandIntegrity",
+      "derived": "BlueDogRequirements::replayCommandRejection",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeExpiredCommandRejection",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::expiredCommandRejection",
+    "target": "BlueDogRequirements::commandIntegrity",
+    "reason": "C-207 specifies a detailed acceptance condition for C-102 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::commandIntegrity",
+      "derived": "BlueDogRequirements::expiredCommandRejection",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeAcceptedCommandDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::acceptedCommandDeadline",
+    "target": "BlueDogRequirements::commandIntegrity",
+    "reason": "C-208 specifies a detailed acceptance condition for C-102 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::commandIntegrity",
+      "derived": "BlueDogRequirements::acceptedCommandDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeOnboardAcknowledgmentDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::onboardAcknowledgmentDeadline",
+    "target": "BlueDogRequirements::commandIntegrity",
+    "reason": "C-209 specifies a detailed acceptance condition for C-102 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::commandIntegrity",
+      "derived": "BlueDogRequirements::onboardAcknowledgmentDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeAcknowledgmentQueueing",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::acknowledgmentQueueing",
+    "target": "BlueDogRequirements::commandIntegrity",
+    "reason": "C-210 specifies a detailed acceptance condition for C-102 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::commandIntegrity",
+      "derived": "BlueDogRequirements::acknowledgmentQueueing",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeExternalControlDisqualification",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::externalControlDisqualification",
+    "target": "BlueDogRequirements::commandIntegrity",
+    "reason": "C-211 specifies a detailed acceptance condition for C-102 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::commandIntegrity",
+      "derived": "BlueDogRequirements::externalControlDisqualification",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeVisibilityNavigationCapability",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::visibility",
+      "derived": "BlueDogRequirements::visibilityNavigationCapability",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeVisibilityTrafficCapability",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::visibility",
+      "derived": "BlueDogRequirements::visibilityTrafficCapability",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeRestrictedVisibilityEntry",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::restrictedVisibilityEntry",
+    "target": "BlueDogRequirements::visibility",
+    "reason": "N-103 specifies a detailed acceptance condition for N-033 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::visibility",
+      "derived": "BlueDogRequirements::restrictedVisibilityEntry",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeRestrictedVisibilityEvidence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::restrictedVisibilityEvidence",
+    "target": "BlueDogRequirements::visibility",
+    "reason": "N-104 specifies a detailed acceptance condition for N-033 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::visibility",
+      "derived": "BlueDogRequirements::restrictedVisibilityEvidence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeRestrictedVisibilityCollisionAssessment",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::visibility",
+      "derived": "BlueDogRequirements::restrictedVisibilityCollisionAssessment",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSurvivalEntryDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::survivalEntryDeadline",
+    "target": "BlueDogRequirements::envelopeTransition",
+    "reason": "N-106 specifies a detailed acceptance condition for N-035 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::envelopeTransition",
+      "derived": "BlueDogRequirements::survivalEntryDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSurvivalTransitionRecording",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::survivalTransitionRecording",
+    "target": "BlueDogRequirements::envelopeTransition",
+    "reason": "N-107 specifies a detailed acceptance condition for N-035 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::envelopeTransition",
+      "derived": "BlueDogRequirements::survivalTransitionRecording",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSailingResumptionDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::sailingResumptionDeadline",
+    "target": "BlueDogRequirements::envelopeTransition",
+    "reason": "N-108 specifies a detailed acceptance condition for N-035 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::envelopeTransition",
+      "derived": "BlueDogRequirements::sailingResumptionDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeSailingResumptionInhibition",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::envelopeTransition",
+      "derived": "BlueDogRequirements::sailingResumptionInhibition",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeResumptionBlockEvidence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::resumptionBlockEvidence",
+    "target": "BlueDogRequirements::envelopeTransition",
+    "reason": "N-110 specifies a detailed acceptance condition for N-035 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::envelopeTransition",
+      "derived": "BlueDogRequirements::resumptionBlockEvidence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWetMechanismTravel",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::wetMechanismTravel",
+    "target": "BlueDogRequirements::wetMechanicalIntegrity",
+    "reason": "N-111 specifies a detailed acceptance condition for N-044 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::wetMechanicalIntegrity",
+      "derived": "BlueDogRequirements::wetMechanismTravel",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWetJointIntegrity",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::wetJointIntegrity",
+    "target": "BlueDogRequirements::wetMechanicalIntegrity",
+    "reason": "N-112 specifies a detailed acceptance condition for N-044 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::wetMechanicalIntegrity",
+      "derived": "BlueDogRequirements::wetJointIntegrity",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWetConductorResistance",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::wetConductorResistance",
+    "target": "BlueDogRequirements::wetElectricalIntegrity",
+    "reason": "N-113 specifies a detailed acceptance condition for N-045 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::wetElectricalIntegrity",
+      "derived": "BlueDogRequirements::wetConductorResistance",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWetInsulationResistance",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::wetInsulationResistance",
+    "target": "BlueDogRequirements::wetElectricalIntegrity",
+    "reason": "N-114 specifies a detailed acceptance condition for N-045 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::wetElectricalIntegrity",
+      "derived": "BlueDogRequirements::wetInsulationResistance",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeHotSunElectronicsOperation",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::solarHeating",
+      "derived": "BlueDogRequirements::hotSunElectronicsOperation",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeHotSunBatteryTemperature",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::solarHeating",
+      "derived": "BlueDogRequirements::hotSunBatteryTemperature",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeRightingDeadline",
+    "action": "retain derivation",
+    "reason": "N-051 expressly says all leaves apply to every defined release. Keep only with an explicit, stable aggregate leaf set.",
+    "before": {
+      "original": "BlueDogRequirements::selfRighting",
+      "derived": "BlueDogRequirements::rightingDeadline",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeCapsizeRigRetention",
+    "action": "retain derivation",
+    "reason": "N-051 expressly says all leaves apply to every defined release. Keep only with an explicit, stable aggregate leaf set.",
+    "before": {
+      "original": "BlueDogRequirements::selfRighting",
+      "derived": "BlueDogRequirements::capsizeRigRetention",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeCapsizeBallastRetention",
+    "action": "retain derivation",
+    "reason": "N-051 expressly says all leaves apply to every defined release. Keep only with an explicit, stable aggregate leaf set.",
+    "before": {
+      "original": "BlueDogRequirements::selfRighting",
+      "derived": "BlueDogRequirements::capsizeBallastRetention",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeCapsizeElectronicsSealing",
+    "action": "retain derivation",
+    "reason": "N-051 expressly says all leaves apply to every defined release. Keep only with an explicit, stable aggregate leaf set.",
+    "before": {
+      "original": "BlueDogRequirements::selfRighting",
+      "derived": "BlueDogRequirements::capsizeElectronicsSealing",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeControlRecoveryDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::controlRecoveryDeadline",
+    "target": "BlueDogRequirements::capsizeControlRecovery",
+    "reason": "N-122 specifies a detailed acceptance condition for N-052 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::capsizeControlRecovery",
+      "derived": "BlueDogRequirements::controlRecoveryDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeCapsizeGateProgressRetention",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::capsizeGateProgressRetention",
+    "target": "BlueDogRequirements::capsizeControlRecovery",
+    "reason": "N-123 specifies a detailed acceptance condition for N-052 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::capsizeControlRecovery",
+      "derived": "BlueDogRequirements::capsizeGateProgressRetention",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeCapsizeQualificationRetention",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::capsizeQualificationRetention",
+    "target": "BlueDogRequirements::capsizeControlRecovery",
+    "reason": "N-124 specifies a detailed acceptance condition for N-052 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::capsizeControlRecovery",
+      "derived": "BlueDogRequirements::capsizeQualificationRetention",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeCapsizeRestrictionRetention",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::capsizeRestrictionRetention",
+    "target": "BlueDogRequirements::capsizeControlRecovery",
+    "reason": "N-125 specifies a detailed acceptance condition for N-052 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::capsizeControlRecovery",
+      "derived": "BlueDogRequirements::capsizeRestrictionRetention",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWeedPassageSpeed",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::weedPassageSpeed",
+    "target": "BlueDogRequirements::submergedWeedPassage",
+    "reason": "N-126 specifies a detailed acceptance condition for N-053 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::submergedWeedPassage",
+      "derived": "BlueDogRequirements::weedPassageSpeed",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWeedPassageSteering",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::weedPassageSteering",
+    "target": "BlueDogRequirements::submergedWeedPassage",
+    "reason": "N-127 specifies a detailed acceptance condition for N-053 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::submergedWeedPassage",
+      "derived": "BlueDogRequirements::weedPassageSteering",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWeedSnagSpeedRecovery",
+    "action": "retain derivation",
+    "reason": "N-054 expressly applies both leaf criteria to every repetition. Make that two-element aggregate explicit.",
+    "before": {
+      "original": "BlueDogRequirements::weedSnagShedding",
+      "derived": "BlueDogRequirements::weedSnagSpeedRecovery",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWeedSnagSteeringRecovery",
+    "action": "retain derivation",
+    "reason": "N-054 expressly applies both leaf criteria to every repetition. Make that two-element aggregate explicit.",
+    "before": {
+      "original": "BlueDogRequirements::weedSnagShedding",
+      "derived": "BlueDogRequirements::weedSnagSteeringRecovery",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWeedBlockageFault",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::weedBlockageFault",
+    "target": "BlueDogRequirements::weedBlockageResponse",
+    "reason": "N-130 specifies a detailed acceptance condition for N-055 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::weedBlockageResponse",
+      "derived": "BlueDogRequirements::weedBlockageFault",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWeedBlockageContingency",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::weedBlockageContingency",
+    "target": "BlueDogRequirements::weedBlockageResponse",
+    "reason": "N-131 specifies a detailed acceptance condition for N-055 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::weedBlockageResponse",
+      "derived": "BlueDogRequirements::weedBlockageContingency",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWeedBlockageLocation",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::weedBlockageLocation",
+    "target": "BlueDogRequirements::weedBlockageResponse",
+    "reason": "N-132 specifies a detailed acceptance condition for N-055 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::weedBlockageResponse",
+      "derived": "BlueDogRequirements::weedBlockageLocation",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposePoweredWeedSpeed",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::poweredWeedSpeed",
+    "target": "BlueDogRequirements::recoveryPropulsorWeeds",
+    "reason": "N-133 specifies a detailed acceptance condition for N-056 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::recoveryPropulsorWeeds",
+      "derived": "BlueDogRequirements::poweredWeedSpeed",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposePoweredWeedCurrent",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::recoveryPropulsorWeeds",
+      "derived": "BlueDogRequirements::poweredWeedCurrent",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposePoweredWeedTemperature",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::recoveryPropulsorWeeds",
+      "derived": "BlueDogRequirements::poweredWeedTemperature",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeLockedPropulsorShutdown",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::lockedPropulsorShutdown",
+    "target": "BlueDogRequirements::recoveryPropulsorWeeds",
+    "reason": "N-136 specifies a detailed acceptance condition for N-056 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::recoveryPropulsorWeeds",
+      "derived": "BlueDogRequirements::lockedPropulsorShutdown",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeMotorQualificationInvariant",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::motorQualificationInvariant",
+    "target": "BlueDogRequirements::challengeMotorInhibition",
+    "reason": "R-101 specifies a detailed acceptance condition for R-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::challengeMotorInhibition",
+      "derived": "BlueDogRequirements::motorQualificationInvariant",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeFreshRecoveryCommand",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::freshRecoveryCommand",
+    "target": "BlueDogRequirements::challengeMotorInhibition",
+    "reason": "R-102 specifies a detailed acceptance condition for R-004 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::challengeMotorInhibition",
+      "derived": "BlueDogRequirements::freshRecoveryCommand",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeIngressEventDeadline",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::ingressEventDeadline",
+    "target": "BlueDogRequirements::ingressResponse",
+    "reason": "E-144 specifies a detailed acceptance condition for E-006 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::ingressResponse",
+      "derived": "BlueDogRequirements::ingressEventDeadline",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeQualificationRestoration",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::qualificationRestoration",
+    "target": "BlueDogRequirements::resetRecovery",
+    "reason": "E-145 specifies a detailed acceptance condition for E-003 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::qualificationRestoration",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance1",
+    "action": "dependency",
+    "source": "BlueDogRequirements::resetRecovery",
+    "target": "BlueDogRequirements::logInterruptionDurability",
+    "reason": "E-003 relies on the E-136 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::logInterruptionDurability",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance2",
+    "action": "dependency",
+    "source": "BlueDogRequirements::resetRecovery",
+    "target": "BlueDogRequirements::unknownQualificationFallback",
+    "reason": "E-003 relies on the E-139 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::unknownQualificationFallback",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance3",
+    "action": "dependency",
+    "source": "BlueDogRequirements::resetRecovery",
+    "target": "BlueDogRequirements::qualificationPersistence",
+    "reason": "E-003 relies on the E-138 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::qualificationPersistence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance4",
+    "action": "dependency",
+    "source": "BlueDogRequirements::resetRecovery",
+    "target": "BlueDogRequirements::freshRecoveryCommand",
+    "reason": "E-003 relies on the R-102 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::freshRecoveryCommand",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance5",
+    "action": "dependency",
+    "source": "BlueDogRequirements::resetRecovery",
+    "target": "BlueDogRequirements::motorQualificationInvariant",
+    "reason": "E-003 relies on the R-101 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::resetRecovery",
+      "derived": "BlueDogRequirements::motorQualificationInvariant",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance6",
+    "action": "dependency",
+    "source": "BlueDogRequirements::commandIntegrity",
+    "target": "BlueDogRequirements::criticalEventRecording",
+    "reason": "C-102 relies on the E-132 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::commandIntegrity",
+      "derived": "BlueDogRequirements::criticalEventRecording",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance7",
+    "action": "dependency",
+    "source": "BlueDogRequirements::commandIntegrity",
+    "target": "BlueDogRequirements::qualificationPersistence",
+    "reason": "C-102 relies on the E-138 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::commandIntegrity",
+      "derived": "BlueDogRequirements::qualificationPersistence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance8",
+    "action": "dependency",
+    "source": "BlueDogRequirements::emergencyControl",
+    "target": "BlueDogRequirements::qualificationPersistence",
+    "reason": "S-003 relies on the E-138 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::safeRecovery",
+      "derived": "BlueDogRequirements::qualificationPersistence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance9",
+    "action": "dependency",
+    "source": "BlueDogRequirements::emergencyControl",
+    "target": "BlueDogRequirements::motorQualificationInvariant",
+    "reason": "S-003 relies on the R-101 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::safeRecovery",
+      "derived": "BlueDogRequirements::motorQualificationInvariant",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance10",
+    "action": "dependency",
+    "source": "BlueDogRequirements::emergencyControl",
+    "target": "BlueDogRequirements::periodicLogCadence",
+    "reason": "S-003 relies on the E-130 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::safeRecovery",
+      "derived": "BlueDogRequirements::periodicLogCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance11",
+    "action": "dependency",
+    "source": "BlueDogRequirements::challengeMotorInhibition",
+    "target": "BlueDogRequirements::qualificationPersistence",
+    "reason": "R-004 relies on the E-138 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::challengeMotorInhibition",
+      "derived": "BlueDogRequirements::qualificationPersistence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance12",
+    "action": "dependency",
+    "source": "BlueDogRequirements::challengeMotorInhibition",
+    "target": "BlueDogRequirements::criticalEventRecording",
+    "reason": "R-004 relies on the E-132 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::challengeMotorInhibition",
+      "derived": "BlueDogRequirements::criticalEventRecording",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance13",
+    "action": "dependency",
+    "source": "BlueDogRequirements::lowEnergyRecovery",
+    "target": "BlueDogRequirements::periodicLogCadence",
+    "reason": "E-004 relies on the E-130 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::periodicLogCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance14",
+    "action": "dependency",
+    "source": "BlueDogRequirements::lowEnergyRecovery",
+    "target": "BlueDogRequirements::telemetryDeliveryCadence",
+    "reason": "E-004 relies on the E-120 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::telemetryDeliveryCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance15",
+    "action": "dependency",
+    "source": "BlueDogRequirements::lowEnergyRecovery",
+    "target": "BlueDogRequirements::criticalEventRecording",
+    "reason": "E-004 relies on the E-132 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::criticalEventRecording",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance16",
+    "action": "dependency",
+    "source": "BlueDogRequirements::lowEnergyRecovery",
+    "target": "BlueDogRequirements::motorQualificationInvariant",
+    "reason": "E-004 relies on the R-101 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::lowEnergyRecovery",
+      "derived": "BlueDogRequirements::motorQualificationInvariant",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance17",
+    "action": "dependency",
+    "source": "BlueDogRequirements::ingressResponse",
+    "target": "BlueDogRequirements::criticalEventRecording",
+    "reason": "E-006 relies on the E-132 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::ingressResponse",
+      "derived": "BlueDogRequirements::criticalEventRecording",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance18",
+    "action": "dependency",
+    "source": "BlueDogRequirements::ingressResponse",
+    "target": "BlueDogRequirements::motorQualificationInvariant",
+    "reason": "E-006 relies on the R-101 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::ingressResponse",
+      "derived": "BlueDogRequirements::motorQualificationInvariant",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance19",
+    "action": "dependency",
+    "source": "BlueDogRequirements::communications",
+    "target": "BlueDogRequirements::logRetention",
+    "reason": "E-005 relies on the E-131 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::communications",
+      "derived": "BlueDogRequirements::logRetention",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance20",
+    "action": "dependency",
+    "source": "BlueDogRequirements::communications",
+    "target": "BlueDogRequirements::reconnectLogPreservation",
+    "reason": "E-005 relies on the E-137 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::communications",
+      "derived": "BlueDogRequirements::reconnectLogPreservation",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance21",
+    "action": "dependency",
+    "source": "BlueDogRequirements::navigationAvailability",
+    "target": "BlueDogRequirements::criticalEventRecording",
+    "reason": "E-008 relies on the E-132 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::navigationAvailability",
+      "derived": "BlueDogRequirements::criticalEventRecording",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance22",
+    "action": "dependency",
+    "source": "BlueDogRequirements::envelopeTransition",
+    "target": "BlueDogRequirements::periodicLogCadence",
+    "reason": "N-035 relies on the E-130 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::envelopeTransition",
+      "derived": "BlueDogRequirements::periodicLogCadence",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance23",
+    "action": "dependency",
+    "source": "BlueDogRequirements::envelopeTransition",
+    "target": "BlueDogRequirements::motorQualificationInvariant",
+    "reason": "N-035 relies on the R-101 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::envelopeTransition",
+      "derived": "BlueDogRequirements::motorQualificationInvariant",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance24",
+    "action": "dependency",
+    "source": "BlueDogRequirements::weedBlockageResponse",
+    "target": "BlueDogRequirements::motorQualificationInvariant",
+    "reason": "N-055 relies on the R-101 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::weedBlockageResponse",
+      "derived": "BlueDogRequirements::motorQualificationInvariant",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::sharedAcceptance25",
+    "action": "dependency",
+    "source": "BlueDogRequirements::recoveryPropulsorWeeds",
+    "target": "BlueDogRequirements::motorQualificationInvariant",
+    "reason": "N-056 relies on the R-101 rule only for events and modes within its own qualification context. The full shared rule remains independently applicable and directly verified; this dependency does not derive its other contexts.",
+    "before": {
+      "original": "BlueDogRequirements::recoveryPropulsorWeeds",
+      "derived": "BlueDogRequirements::motorQualificationInvariant",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::energyDerivation3",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::sustainedEnergyFeasibility",
+      "derived": "BlueDogRequirements::sustainedReserveProtection",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::energyDerivation4",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::sustainedEnergyFeasibility",
+      "derived": "BlueDogRequirements::repeatableCycleBalance",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::energyDerivation5",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::sustainedEnergyFeasibility",
+      "derived": "BlueDogRequirements::peakSupplyCapability",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::energyDerivation6",
+    "action": "dependency",
+    "source": "BlueDogRequirements::energyEvidenceReadiness",
+    "target": "BlueDogRequirements::sustainedEnergyFeasibility",
+    "reason": "E-205 is an evidence-acceptance work product supporting E-200; a product capability does not logically entail the assurance record.",
+    "before": {
+      "original": "BlueDogRequirements::sustainedEnergyFeasibility",
+      "derived": "BlueDogRequirements::energyEvidenceReadiness",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::energyDerivation7",
+    "action": "retain derivation",
+    "reason": "The parent statement or normative conditions explicitly cover this outcome or bound in the same selected scope; no added numerical allocation is inferred.",
+    "before": {
+      "original": "BlueDogRequirements::multiDayEndurance",
+      "derived": "BlueDogRequirements::sustainedReserveProtection",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::energyDerivation8",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::peakSupplyCapability",
+    "target": "BlueDogRequirements::multiDayEndurance",
+    "reason": "E-203 specifies a detailed acceptance condition for M-002 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::multiDayEndurance",
+      "derived": "BlueDogRequirements::peakSupplyCapability",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::energyDerivation9",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::harvestCampaignCoverage",
+    "target": "BlueDogRequirements::sustainedEnergyFeasibility",
+    "reason": "E-204 specifies a detailed acceptance condition for E-200 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::sustainedEnergyFeasibility",
+      "derived": "BlueDogRequirements::harvestCampaignCoverage",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::energyDerivation10",
+    "action": "dependency",
+    "source": "BlueDogRequirements::energyEvidenceReadiness",
+    "target": "BlueDogRequirements::multiDayEndurance",
+    "reason": "E-205 is an evidence-acceptance work product supporting M-002; a product capability does not logically entail the assurance record.",
+    "before": {
+      "original": "BlueDogRequirements::multiDayEndurance",
+      "derived": "BlueDogRequirements::energyEvidenceReadiness",
+      "status": "fail implication"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::cruiseReliabilityDerivation6",
+    "action": "retain derivation",
+    "reason": "Q-001 expressly applies Q-101 through Q-103. Separate the product and assessment roles without losing the incorporation.",
+    "before": {
+      "original": "BlueDogRequirements::cruisePerformance",
+      "derived": "BlueDogRequirements::legProgress",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::cruiseReliabilityDerivation7",
+    "action": "retain derivation",
+    "reason": "Q-001 expressly applies Q-101 through Q-103. Separate the product and assessment roles without losing the incorporation.",
+    "before": {
+      "original": "BlueDogRequirements::cruisePerformance",
+      "derived": "BlueDogRequirements::passageDuration",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::cruiseReliabilityDerivation8",
+    "action": "retain derivation",
+    "reason": "Q-001 expressly applies Q-101 through Q-103. Separate the product and assessment roles without losing the incorporation.",
+    "before": {
+      "original": "BlueDogRequirements::cruisePerformance",
+      "derived": "BlueDogRequirements::cruiseEvidence",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::cruiseReliabilityDerivation11",
+    "action": "retain derivation",
+    "reason": "L-001 expressly applies L-103 evidence and L-104 dispositions; provisional L-101/L-102 are excluded.",
+    "before": {
+      "original": "BlueDogRequirements::missionReliability",
+      "derived": "BlueDogRequirements::reliabilityEvidence",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::cruiseReliabilityDerivation12",
+    "action": "retain derivation",
+    "reason": "L-001 expressly applies L-103 evidence and L-104 dispositions; provisional L-101/L-102 are excluded.",
+    "before": {
+      "original": "BlueDogRequirements::missionReliability",
+      "derived": "BlueDogRequirements::criticalFailureDisposition",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWindSampleCadence",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::windSampleCadence",
+    "target": "BlueDogRequirements::windObservation",
+    "reason": "E-146 specifies a detailed acceptance condition for E-009 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::windObservation",
+      "derived": "BlueDogRequirements::windSampleCadence",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWindSpeedAccuracy",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::windSpeedAccuracy",
+    "target": "BlueDogRequirements::windObservation",
+    "reason": "E-147 specifies a detailed acceptance condition for E-009 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::windObservation",
+      "derived": "BlueDogRequirements::windSpeedAccuracy",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWindDirectionAccuracy",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::windDirectionAccuracy",
+    "target": "BlueDogRequirements::windObservation",
+    "reason": "E-148 specifies a detailed acceptance condition for E-009 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::windObservation",
+      "derived": "BlueDogRequirements::windDirectionAccuracy",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWindStaleInvalidation",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::windStaleInvalidation",
+    "target": "BlueDogRequirements::windObservation",
+    "reason": "E-149 specifies a detailed acceptance condition for E-009 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::windObservation",
+      "derived": "BlueDogRequirements::windStaleInvalidation",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeInvalidWindUseInhibition",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::invalidWindUseInhibition",
+    "target": "BlueDogRequirements::windObservation",
+    "reason": "E-150 specifies a detailed acceptance condition for E-009 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::windObservation",
+      "derived": "BlueDogRequirements::invalidWindUseInhibition",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWindLossResponse",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::windLossResponse",
+    "target": "BlueDogRequirements::windObservation",
+    "reason": "E-151 specifies a detailed acceptance condition for E-009 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::windObservation",
+      "derived": "BlueDogRequirements::windLossResponse",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogRequirements::decomposeWindSensingEndurance",
+    "action": "#refinement dependency",
+    "source": "BlueDogRequirements::windSensingEndurance",
+    "target": "BlueDogRequirements::windObservation",
+    "reason": "E-152 specifies a detailed acceptance condition for E-009 within their stated applicability. Selected limits, mechanisms and campaign conditions remain independent allocations; refinement makes no satisfaction implication or automatic parent-coverage claim.",
+    "before": {
+      "original": "BlueDogRequirements::windObservation",
+      "derived": "BlueDogRequirements::windSensingEndurance",
+      "status": "unresolved meaning"
+    }
+  },
+  {
+    "relationship": "BlueDogStructure::deriveBendingStrength",
+    "action": "retain derivation",
+    "reason": "T-100 expressly applies T-101 through T-109 independently.",
+    "before": {
+      "original": "BlueDogStructure::structuralIntegrity",
+      "derived": "BlueDogStructure::bendingStrength",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogStructure::deriveAppendageDeflection",
+    "action": "retain derivation",
+    "reason": "T-100 expressly applies T-101 through T-109 independently.",
+    "before": {
+      "original": "BlueDogStructure::structuralIntegrity",
+      "derived": "BlueDogStructure::appendageDeflection",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogStructure::deriveHullDeflection",
+    "action": "retain derivation",
+    "reason": "T-100 expressly applies T-101 through T-109 independently.",
+    "before": {
+      "original": "BlueDogStructure::structuralIntegrity",
+      "derived": "BlueDogStructure::hullDeflection",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogStructure::derivePanelStrength",
+    "action": "retain derivation",
+    "reason": "T-100 expressly applies T-101 through T-109 independently.",
+    "before": {
+      "original": "BlueDogStructure::structuralIntegrity",
+      "derived": "BlueDogStructure::panelStrength",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogStructure::derivePanelDeflection",
+    "action": "retain derivation",
+    "reason": "T-100 expressly applies T-101 through T-109 independently.",
+    "before": {
+      "original": "BlueDogStructure::structuralIntegrity",
+      "derived": "BlueDogStructure::panelDeflection",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogStructure::deriveRootProofLoad",
+    "action": "retain derivation",
+    "reason": "T-100 expressly applies T-101 through T-109 independently.",
+    "before": {
+      "original": "BlueDogStructure::structuralIntegrity",
+      "derived": "BlueDogStructure::rootProofLoad",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogStructure::deriveWetCouponStrength",
+    "action": "retain derivation",
+    "reason": "T-100 expressly applies T-101 through T-109 independently.",
+    "before": {
+      "original": "BlueDogStructure::structuralIntegrity",
+      "derived": "BlueDogStructure::wetCouponStrength",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogStructure::deriveWetCouponStiffness",
+    "action": "retain derivation",
+    "reason": "T-100 expressly applies T-101 through T-109 independently.",
+    "before": {
+      "original": "BlueDogStructure::structuralIntegrity",
+      "derived": "BlueDogStructure::wetCouponStiffness",
+      "status": "pass with stated scope"
+    }
+  },
+  {
+    "relationship": "BlueDogStructure::deriveBondProof",
+    "action": "retain derivation",
+    "reason": "T-100 expressly applies T-101 through T-109 independently.",
+    "before": {
+      "original": "BlueDogStructure::structuralIntegrity",
+      "derived": "BlueDogStructure::bondProof",
+      "status": "pass with stated scope"
+    }
+  }
+]

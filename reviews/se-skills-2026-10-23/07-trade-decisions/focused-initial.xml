@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="6" time="14.596" timestamp="2026-10-23T13:47:11.095708-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_decision_management" name="test_native_decision_scope_and_current_evidence_are_explicit" time="3.765" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[attribute :&gt;&gt; position = 6;-attribute :&gt;&gt; position = 7;-D07 Criterion positions]" time="2.211" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[attribute :&gt;&gt; kind = Kind::comparativeStudy;-attribute :&gt;&gt; kind = Kind::mandatory;-D08 Wrong]" time="2.052" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[reopenTrigger = &quot;New comparable rig evidence, changed geometry/domain or a proposed hardware selection.&quot;;-reopenTrigger = &quot;&quot;;-D01 Missing]" time="1.979" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[dependency progressDuration from progress to BlueDogRequirements::passageDuration;-dependency progressDuration from progress to BlueDogRequirements::legProgress;-D07 Missing current]" time="2.019" /><testcase classname="tests.test_decision_management" name="test_new_unclassified_working_decision_is_detected" time="1.983"><failure message="opensysml.errors.ModelError: the model has 3 error(s): /home/david/repos/sv-blue-dog-editorial/models/vehicle/decisions.sysml:83:52: error: unresolved reference: Decision — did you mean BlueDogDesignDecisions::Decision? To use the bare name, import its package: private import BlueDogDesignDecisions::*;; /home/david/repos/sv-blue-dog-editorial/models/vehicle/decisions.sysml:83:77: error: unresolved reference: disposition — did you mean BlueDogRecoveryRisk::disposition, BlueDogRequirementBasis::aging::disposition or BlueDogDesignDecisions::Decision::disposition? To use the bare name, import its package: private import BlueDogRecoveryRisk::*;; /home/david/repos/sv-blue-dog-editorial/models/vehicle/decisions.sysml:83:118: error: unresolved reference: evidenceNeeded — did you mean BlueDogCandidateEnergy::Gap::evidenceNeeded, BlueDogTradeCriteria::energy::evidenceNeeded or BlueDogRequirementBasis::aging::evidenceNeeded?">def test_new_unclassified_working_decision_is_detected():
+        path=ROOT/'models/vehicle/decisions.sysml'
+        sources=[(str(p),p.read_text()+'\npackage BlueDogDesignDecisions { part unreviewed : Decision { attribute :&gt;&gt; disposition="Investigate"; attribute :&gt;&gt; evidenceNeeded="Unknown"; } }' if p==path else p.read_text()) for p in model_files()]
+&gt;       assert native_decision_audit(sources)['errors']
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='42752ef676ac399374d7d3f5fe02b5e577d121e62b3a8be0a165c68f82e36755', root='', diagnostics=5)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 3 error(s): /home/david/repos/sv-blue-dog-editorial/models/vehicle/decisions.sysml:83:52: error: unresolved reference: Decision — did you mean BlueDogDesignDecisions::Decision? To use the bare name, import its package: private import BlueDogDesignDecisions::*;; /home/david/repos/sv-blue-dog-editorial/models/vehicle/decisions.sysml:83:77: error: unresolved reference: disposition — did you mean BlueDogRecoveryRisk::disposition, BlueDogRequirementBasis::aging::disposition or BlueDogDesignDecisions::Decision::disposition? To use the bare name, import its package: private import BlueDogRecoveryRisk::*;; /home/david/repos/sv-blue-dog-editorial/models/vehicle/decisions.sysml:83:118: error: unresolved reference: evidenceNeeded — did you mean BlueDogCandidateEnergy::Gap::evidenceNeeded, BlueDogTradeCriteria::energy::evidenceNeeded or BlueDogRequirementBasis::aging::evidenceNeeded?
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase></testsuite></testsuites>

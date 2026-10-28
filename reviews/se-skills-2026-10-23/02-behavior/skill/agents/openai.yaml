@@ -1,0 +1,4 @@
+interface:
+  display_name: "Behavior Modeling Quality"
+  short_description: "Audit scenarios, control gates, state and fault behavior"
+  default_prompt: "Use $behavior-modeling-quality to review and correct the specified behavior model with sourced findings and native execution checks."

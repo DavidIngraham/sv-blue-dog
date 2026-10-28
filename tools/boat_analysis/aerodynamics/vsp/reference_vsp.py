@@ -8,7 +8,7 @@ from tools.boat_analysis.aerodynamics.vsp.vsp_runtime import ROOT,load_vsp
 
 def build(area,aspect,mesh):
     v=load_vsp();v.ClearVSPModel()
-    data=input_record('wing-geometry.json')
+    data=input_record('wing-geometry.json', purpose='reference')
     p=next(p for p in data['profiles'] if p['span_station_mm']==150)
     if p['incomplete_samples']:raise ValueError('Incomplete reference section')
     x=np.array(p['x_mm']);c=p['chord_mm'];xx=(x-x[0])/(x[-1]-x[0])

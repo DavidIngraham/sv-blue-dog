@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="6" time="14.563" timestamp="2026-10-23T13:48:57.613433-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_decision_management" name="test_native_decision_scope_and_current_evidence_are_explicit" time="3.728" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[attribute :&gt;&gt; position = 6;-attribute :&gt;&gt; position = 7;-D07 Criterion positions]" time="2.209" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[attribute :&gt;&gt; kind = Kind::comparativeStudy;-attribute :&gt;&gt; kind = Kind::mandatory;-D08 Wrong]" time="2.024" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[reopenTrigger = &quot;New comparable rig evidence, changed geometry/domain or a proposed hardware selection.&quot;;-reopenTrigger = &quot;&quot;;-D01 Missing]" time="2.030" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[dependency progressDuration from progress to BlueDogRequirements::passageDuration;-dependency progressDuration from progress to BlueDogRequirements::legProgress;-D07 Missing current]" time="1.955" /><testcase classname="tests.test_decision_management" name="test_new_unclassified_working_decision_is_detected" time="1.962"><failure message="opensysml.errors.InvalidRequestError: query BlueDogDecisionDocuments::WorkingRecords names no single element BlueDogDesignDecisions (declared in /home/david/repos/sv-blue-dog-editorial/tools/publishing/reference.sysml)">not_found = &lt;class 'opensysml.errors.SymbolNotFoundError'&gt;
+unimplemented = &lt;function Connection._capability_refusal.&lt;locals&gt;.refused at 0x7f5f3b8931a0&gt;
+
+    @contextmanager
+    def translate_rpc_errors(not_found=ModelNotFoundError, unimplemented=None):
+        """Re-raise any ``grpc.RpcError`` raised in the block as a OpenSysMLError.
+    
+        Wraps a stub call at the client boundary, so gRPC's status codes stop at the
+        boundary and callers see this package's hierarchy.
+    
+        Args:
+            not_found (type or callable): Class for a NOT_FOUND the details do not
+                identify, or a callable accepting ``(message, code)`` and returning
+                the operation-specific error; pass :class:`ModelFileNotFoundError`
+                where the call named a path.
+            unimplemented (callable): Optional function accepting the service
+                details and returning a more specific error for this operation.
+        """
+        try:
+&gt;           yield
+
+.venv/lib/python3.12/site-packages/opensysml/errors.py:628: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1805: in run_document_query
+    response = self._stub.RunDocumentQuery(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/grpc/_channel.py:1168: in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+state = &lt;grpc._channel._RPCState object at 0x7f5f3b8a0c50&gt;
+call = &lt;grpc._cython.cygrpc.SegregatedCall object at 0x7f5f3b872740&gt;
+with_call = False, deadline = None
+
+    def _end_unary_response_blocking(
+        state: _RPCState,
+        call: cygrpc.SegregatedCall,
+        with_call: bool,
+        deadline: Optional[float],
+    ) -&gt; Union[ResponseType, Tuple[ResponseType, grpc.Call]]:
+        if state.code is grpc.StatusCode.OK:
+            if with_call:
+                rendezvous = _MultiThreadedRendezvous(state, call, None, deadline)
+                return state.response, rendezvous
+            return state.response
+&gt;       raise _InactiveRpcError(state)  # pytype: disable=not-instantiable
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       grpc._channel._InactiveRpcError: &lt;_InactiveRpcError of RPC that terminated with:
+E       	status = StatusCode.FAILED_PRECONDITION
+E       	details = "query BlueDogDecisionDocuments::WorkingRecords names no single element BlueDogDesignDecisions (declared in /home/david/repos/sv-blue-dog-editorial/tools/publishing/reference.sysml)"
+E       	debug_error_string = "FAILED_PRECONDITION:query BlueDogDecisionDocuments::WorkingRecords names no single element BlueDogDesignDecisions (declared in /home/david/repos/sv-blue-dog-editorial/tools/publishing/reference.sysml)"
+E       &gt;
+
+.venv/lib/python3.12/site-packages/grpc/_channel.py:999: _InactiveRpcError
+
+The above exception was the direct cause of the following exception:
+
+    def test_new_unclassified_working_decision_is_detected():
+        path=ROOT/'models/vehicle/decisions.sysml'
+        sources=[(str(p),p.read_text()+'\npackage BlueDogDesignDecisions { part unreviewed : BlueDogDesignDecisions::Decision { attribute :&gt;&gt; disposition="Investigate"; attribute :&gt;&gt; evidenceNeeded="Unknown"; } }' if p==path else p.read_text()) for p in model_files()]
+&gt;       assert native_decision_audit(sources)['errors']
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:14: in native_decision_audit
+    tables={n:m.run_document_query('BlueDogDecisionDocuments::'+n) for n in ('WorkingRecords','OpenRecords','Criteria','Basis','DesignBasis')}
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/model.py:349: in run_document_query
+    return self.connection.run_document_query(
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1801: in run_document_query
+    with translate_rpc_errors(
+/usr/lib/python3.12/contextlib.py:158: in __exit__
+    self.gen.throw(value)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+not_found = &lt;class 'opensysml.errors.SymbolNotFoundError'&gt;
+unimplemented = &lt;function Connection._capability_refusal.&lt;locals&gt;.refused at 0x7f5f3b8931a0&gt;
+
+    @contextmanager
+    def translate_rpc_errors(not_found=ModelNotFoundError, unimplemented=None):
+        """Re-raise any ``grpc.RpcError`` raised in the block as a OpenSysMLError.
+    
+        Wraps a stub call at the client boundary, so gRPC's status codes stop at the
+        boundary and callers see this package's hierarchy.
+    
+        Args:
+            not_found (type or callable): Class for a NOT_FOUND the details do not
+                identify, or a callable accepting ``(message, code)`` and returning
+                the operation-specific error; pass :class:`ModelFileNotFoundError`
+                where the call named a path.
+            unimplemented (callable): Optional function accepting the service
+                details and returning a more specific error for this operation.
+        """
+        try:
+            yield
+        except grpc.RpcError as exc:
+&gt;           raise from_rpc_error(
+                exc, not_found=not_found, unimplemented=unimplemented
+            ) from exc
+E           opensysml.errors.InvalidRequestError: query BlueDogDecisionDocuments::WorkingRecords names no single element BlueDogDesignDecisions (declared in /home/david/repos/sv-blue-dog-editorial/tools/publishing/reference.sysml)
+
+.venv/lib/python3.12/site-packages/opensysml/errors.py:630: InvalidRequestError</failure></testcase></testsuite></testsuites>

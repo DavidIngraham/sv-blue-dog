@@ -42,11 +42,11 @@ package Page_reliability_0 {
         filter @SysML::RequirementUsage;
         expose BlueDogRequirements::cruisePerformance;
         expose BlueDogRequirements::legProgress;
-        expose BlueDogReliability::VoyageReliabilityVerification;
+        expose BlueDogRequirementVerification::MissionPerformanceAssessmentVerification;
         expose BlueDog::Architecture::missionContext::boat;
         metadata Layout about BlueDogRequirements::cruisePerformance { x = 0; y = 0; }
         metadata Layout about BlueDogRequirements::legProgress { x = 360; y = 0; }
-        metadata Layout about BlueDogReliability::VoyageReliabilityVerification { x = 360; y = 200; }
+        metadata Layout about BlueDogRequirementVerification::MissionPerformanceAssessmentVerification { x = 360; y = 200; }
         metadata Layout about BlueDog::Architecture::missionContext::boat { x = 0; y = 400; }
     }
 }
@@ -69,6 +69,8 @@ package Page_reliability_1 {
     }
 }
 ```
+
+The L-101/L-102 reliability verdict assesses provisional study targets. Q-102 passage duration has a separate conditional verdict; Q-101/Q-103 performance records and L-103 reliability evidence have independent planned reviews. A failed study target does not reject a binding product requirement.
 
 ## Combine weather and failure exposure
 
@@ -111,7 +113,7 @@ A scanner jam and a fixed-camera blind sector can both lead to missed detection,
 but they need different diagnostics and design actions.
 
 The model contains 17 functional avoidance rows and 15 concept rows, alongside
-the 12 whole-boat starter rows. These are linked reviews, not 44 independent risks.
+the 15 whole-boat starter rows. These are linked reviews, not 47 independent risks.
 All actions remain open and none of the three reviews is ready for acceptance.
 The concept rows identify candidate configurations, including alternatives; they
 do not imply that all equipment is installed together.
@@ -200,5 +202,42 @@ independence assumptions are assigned, and these trees do not yet inject faults
 into the mission simulator.
 
 My next comparison needs measured sailing and maneuvering performance, followed by failure evidence appropriate to each mechanism. The [DFMEA](../models/analyses/dfmea.sysml) helps choose those tests; the [reliability analysis](../models/analyses/reliability.sysml) connects their results to passage exposure.
+
+
+### Hazard controls and actual disposition
+
+Six initial hazardous scenarios connect the whole-boat failure review to collision,
+boundary loss, unintended thrust, flotation or retention loss, electrical or thermal
+exposure, and human handling or retrieval. Each identifies modes, the IC-01 candidate,
+an owner role, contributing mechanisms, proposed controls and verification plans.
+They do not establish complete lifecycle coverage or assign a numerical risk rank.
+
+```sysml-report BlueDogSafetyDocuments::HazardRegister
+```
+
+I need evidence that each control is implemented and effective before assessing
+residual risk and recording its actual disposition. A role name or a checked flag
+cannot substitute for the supporting record and acceptance authority. All six
+hazard dispositions remain open, as do all thirteen critical whole-boat FMEA
+rows. The fifteen whole-boat rows include capture/retrieval, command-context and
+shared-sensing failures; they complement the functional and concept reviews.
+
+```sysml-report BlueDogSafetyDocuments::DispositionRegister
+```
+
+This structure applies [MIL-STD-882E Change 1, sections 4.3 and Task 106](https://safety.army.mil/Portals/0/Documents/ON-DUTY/SYSTEMSAFETY/Standard/MIL-STD-882E-change-1.pdf)
+and [NASA technical risk management](https://www.nasa.gov/reference/6-4-technical-risk-management/)
+as engineering guidance. I have not adopted a DoD risk matrix or acceptance chain.
+The unresolved work includes launch, storage, maintenance and disposal coverage,
+control side effects, common causes and a project-specific risk assessment basis.
+
+For the numerical reliability illustration, accepting a rate source and a constant
+hazard assumption is insufficient. The critical-function partition, dependence
+treatment and common-cause coverage must also be reviewed. The [NIST series and
+competing-risk models](https://www.itl.nist.gov/div898/handbook/apr/section1/apr182.htm)
+explain why component rates cannot simply be added without their applicability
+conditions. The equations and provisional targets are unchanged; the new review
+preconditions remain false. No physical reliability claim follows from a synthetic
+passing example.
 
 **Next:** [From virtual evidence to water trials](validation-plan.md) · [Series guide](index.md)

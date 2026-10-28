@@ -58,7 +58,7 @@ def native_audit(sources=None):
         ('BlueDogRequirements::recoveryEnergy', 'verification', 'incoming'),
         ('BlueDogRequirements::capsizeQualificationRetention', 'verification', 'incoming'),
         ('BlueDogRequirements::capsizeQualificationRetention', 'satisfaction', 'incoming'),
-        ('BlueDogRequirements::safeRecovery', 'satisfaction', 'incoming'),
+        ('BlueDogRequirements::emergencyControl', 'satisfaction', 'incoming'),
         ('BlueDogLogicalArchitecture::LogicalVessel::supervision', 'allocation', 'outgoing'),
     ):
         rows = audit.run_document_query('BlueDogAudit::Impact', dict(element=element, relationship=relationship, direction=direction, depth=2))

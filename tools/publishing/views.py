@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 import re
 
-from tools.boat_analysis.model.runtime import ROOT, model_files, native, validate
+from tools.boat_analysis.model.runtime import ROOT, load_model, model_files, native, validate
 
 QUALIFIED = r"[A-Za-z_]\w*(?:::[A-Za-z_]\w*)+"
 
@@ -96,4 +96,9 @@ def render_blocks(blocks, directory):
     # has already printed an ancestor's statement in an earlier section.
     labels = {name: rid for text in documents for rid, name in
               re.findall(r'^\*\*([A-Z]-\d+) (\w+)\*\*', text, re.M)}
+    # Native usage identities disambiguate equally named definitions in
+    # different packages (for example the two OutageAutonomy requirements).
+    label_rows = load_model(models).run_document_query('BlueDogDocuments::RequirementLabels')
+    labels.update({row.element.id: row.cells[0][0] for row in label_rows
+                   if len(row.cells[0]) == 1 and isinstance(row.cells[0][0], str)})
     return [include_basis(text, basis, labels) for text in documents]

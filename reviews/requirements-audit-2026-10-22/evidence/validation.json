@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "baseline": "b94b6e0231587b52cb5bec800dba408456ca701d",
+  "model_sources_unchanged": true,
+  "native_model_diagnostics": 0,
+  "native_query_diagnostics": 0,
+  "requirement_rows": 251,
+  "derivation_rows": 238,
+  "dependency_rows": 422,
+  "refinements": 19,
+  "allocation_pairs": 55,
+  "verification_cases": 94,
+  "checklist_checks": 35,
+  "criterion_regressions": {
+    "passed": 93,
+    "failed": 0,
+    "skipped": 0
+  },
+  "scope": "Artifact completeness, exact native inventory/endpoints, source integrity, links and recorded regressions. Engineering judgment is documented in the report and ledgers.",
+  "test_source_hashes": {
+    "tests/test_executable_requirements.py": "03c3af8765a0388f3c49fca3513247d6baf599b469ad4807541c399485976790",
+    "tests/test_structural_acceptance.py": "88abed8207c39143d5e6f1a06f1a225797b829f897e2b0884594d528a7324c78",
+    "tests/fixtures/shared-acceptance.sysml": "5aebda468558610436eb369a868240de064dcb4640f98f3cc3a658a21c702118"
+  },
+  "artifacts": {
+    "allocation-review.csv": "aceff528a649fad711e8c47443439b672ab7c5c7509b2811b8e4fe63ed9ebb32",
+    "audit.md": "0c72a74e23c279a27464aa034d0764cad2caac1f924ee1f54f39ee51f61f17b9",
+    "checklist-review.md": "560ecc34067fd7647c82aac545bb8c7354270e5f540ef16886f60ca78d6780ba",
+    "completion.md": "3b279ddbf2c6545004ddeb86217ee02f4647a6cbcf18535b27c5bf73f7c1567e",
+    "dependency-review.csv": "395b68348ae0598c27a5a1a1f6a768bc2ef7a2040206b804a7006292487b181b",
+    "derivation-review.csv": "37eea418fe2b1a0935477ee02caac251586ea566ae6a17d8cd89199355cd7ff4",
+    "evidence/build_ledgers.py": "dc3f2fae98329bb80a53bb7c43d8d3466520d41608efa675220025893947dab4",
+    "evidence/collect.py": "7e9bd4418b2ddd25ee39509e18918ea6650ab58ff91cbd80dede08c75199da17",
+    "evidence/criterion-regressions.xml": "69d6bba09fca369e6801614acdea641b8a8fc98d34411c916d7e4ebc69fb2ff2",
+    "evidence/ledger-summary.json": "04351ae7a2c4c680e25c147093f16bd21ac215f059b28b752a9b0750983ad963",
+    "evidence/native-review.json": "cbb4f76e36146cf6e85500b984b42ae87e7511d8a7979cf72eaee07604f539ad",
+    "evidence/queries.sysml": "16faf36279ba0b41141a9fbc2e15281076a0aef4d7d0f75f54385a894d795c91",
+    "evidence/verify_artifacts.py": "b26d69b9493004e62bd576c59c36bdb214513454bb3860856066781f220fdedb",
+    "proposed-corrections.md": "e6101d5ecc4da938f8a47c33c390eb653c0aa640ebc02f7cd07eb02295f3771f",
+    "requirement-review.csv": "02dd4dd7236e8232778476854a83ca12faf0a3ffab9cc3132ad8b0a5bee6cd80",
+    "verification-review.csv": "72e12a634dde3e6a0a046b1ba0d7611604ccd4cd35facd30e59dda38c4aa8d99"
+  }
+}

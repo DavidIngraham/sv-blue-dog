@@ -1,0 +1,19 @@
+{
+  "WorkingRecords": {
+    "preservedRecords": 8,
+    "fields": [
+      "Recorded disposition",
+      "Needed evidence"
+    ]
+  },
+  "OpenRecords": {
+    "preservedRecords": 6,
+    "fields": [
+      "Question",
+      "Responsible role",
+      "Needed evidence",
+      "Open-question acceptance"
+    ]
+  },
+  "actualCandidateDevelopmentStanding": "All3preserved; unknown evidence, equal contenders, no selection"
+}

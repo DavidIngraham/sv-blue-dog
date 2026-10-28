@@ -1,0 +1,41 @@
+{
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "modelHash": "18ae5b0c41199ae410d38f6c49f9d6d8e9d0a4818a71a86e6d457c5b7f6a2819",
+  "verifiedSources": {
+    "sourceHashes": 93,
+    "auditSources": 2,
+    "driverHashes": 2
+  },
+  "fullRegression": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "1048",
+    "time": "1053.582",
+    "timestamp": "2026-10-23T12:34:02.789824-07:00",
+    "hostname": "dmi-thinkpad"
+  },
+  "focusedRegression": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "43",
+    "time": "136.783",
+    "timestamp": "2026-10-23T12:30:58.704736-07:00",
+    "hostname": "dmi-thinkpad"
+  },
+  "nativeDiagnostics": 0,
+  "auditErrors": 0,
+  "publication": "See publication.log: serial build completed",
+  "skill": "Validated and installed; see skill-installation.json and skill-review.md",
+  "sourceSnapshot": {
+    "archive": "source-snapshot.zip",
+    "sha256": "c36556127d7a224c126337b021b9fa929b9b1bf316ac9e389a6de04a28e55f08",
+    "modelSources": 93,
+    "totalSources": 101,
+    "reconstructedFromVerifiedEdits": false,
+    "scope": "Exact model/audit/skill sources; not a complete execution environment or physical evidence bundle."
+  }
+}

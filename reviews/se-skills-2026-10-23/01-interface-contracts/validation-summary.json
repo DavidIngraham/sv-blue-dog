@@ -1,0 +1,21 @@
+{
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "modelHash": "c771be7e61e3a859a155a1933887da205855eac06d963ddf40b074eae63c0036",
+  "verifiedModelSources": 89,
+  "fullRegression": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "957",
+    "time": "937.675",
+    "timestamp": "2026-10-23T09:42:45.736720-07:00",
+    "hostname": "dmi-thinkpad"
+  },
+  "focusedTests": 22,
+  "nativeDiagnostics": 0,
+  "architectureErrors": 0,
+  "publication": "36 pages built successfully",
+  "skill": "validated and installed; matching draft hashes",
+  "sourceHashConvention": "SHA256 of UTF-8 text with native-loader newline normalization"
+}

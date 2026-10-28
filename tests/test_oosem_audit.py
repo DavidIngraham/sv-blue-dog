@@ -16,9 +16,9 @@ def report():
 def test_current_coverage_distinguishes_plans_studies_and_future_scope(report):
     assert not report['errors']
     assert not report['diagnostics']
-    assert report['summary']['requirements'] == 251
-    assert report['summary']['currentWithObjectives'] == report['summary']['current'] == 239
-    assert report['summary']['currentRequirements'] == 237
+    assert report['summary']['requirements'] == 257
+    assert report['summary']['currentWithObjectives'] == report['summary']['current'] == 245
+    assert report['summary']['currentRequirements'] == 243
     assert report['summary']['currentStudyObjectives'] == 2
     assert report['summary']['future'] == 12
     assert {i for r in report['coverage'] if r['classification'] == 'study_objective' for i in r['ids']} == {'L-101', 'L-102'}

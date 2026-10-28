@@ -1,0 +1,3442 @@
+{
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "modelHash": "ea6a1160890ed89d520ea2146cd3798da5b9aa383db28b6bef931f7f410d3de9",
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/avoidance-failures.sysml": "e696a0d798ca05bbcf3ef05a90c0c2b67bf3268f62238dacd691d553cb46d1f4",
+    "models/analyses/candidate-energy.sysml": "f05a4a2187aabd316ac06e1968fd8e9fae00ab3ca5980d9a216ce2a5146c4241",
+    "models/analyses/class-specific-detection.sysml": "9e585fb65056849ffe3827d6b489912bf6e26e4ae6d20bde7a9b005a3836a8b3",
+    "models/analyses/credibility.sysml": "014d5a893aca47bf73928ab866b08a2102b80dab7bf1b545c1742f1530116ba6",
+    "models/analyses/development-risks.sysml": "02215b2776e5c643d044ce4b8a47c51e8e5796e1ba5a9e451714cbe781ec2a40",
+    "models/analyses/dfmea.sysml": "223b975714a8d76671a3a90a24c7ea764e383c24bc1b6ad8f7a9b5a50a31a34f",
+    "models/analyses/encounter-envelope.sysml": "61654e8fe683aa4932f6c409f8fe954ebd6f3fb5c1295805ecced68b15071db5",
+    "models/analyses/encounter-feasibility.sysml": "4067475ad5174a54f22fc72baad6d8ee3cc502cbc3bc6dbfd528db49277500cb",
+    "models/analyses/encounter-review.sysml": "7efaf1b169a56ae75c6465fe130bb6a0c3fca2b94faa1f3584cea43a666f1bbb",
+    "models/analyses/energy.sysml": "203f075b8b8470331c0a6c725bedafe467b9140bc572ccf79ba5ae14137c8c20",
+    "models/analyses/environment-review.sysml": "5d74730715837b2cfb7596af73d481c5545308ec03cd9b73c6dcb807d7efa243",
+    "models/analyses/integrated-candidate.sysml": "9eab58e1ce9d4d79d57b6fe7c0740fda867ac4286c687f1786673a620c5f0c7b",
+    "models/analyses/location-traffic-risk.sysml": "21fcbaa999f92f7bd1b305708fea4dccd8b0bc5688b0f8d1a749e218b41483ba",
+    "models/analyses/maneuver-dynamics.sysml": "065494ce5c9ff1fa96e761181c3ff40651f0858085c88894f39f50852018c750",
+    "models/analyses/mission.sysml": "5d10d5dcb127b499437a7e915e0c92ad98104477762a0a3d119efc052e6a3cd6",
+    "models/analyses/navigation-controller.sysml": "32d2edfcb696147b7fad2daeb682c0d2bc09a28af0e758b78904cdfde0d77b30",
+    "models/analyses/passage-exposure.sysml": "72f055615ffabba4ec9377d00d2f76ade31ee68091f012b60ed56d5bb1a64f73",
+    "models/analyses/polar-demand.sysml": "2ae69be8debe151f0c081cc37da56074c878a77ff50a647ab5e4364a9a866905",
+    "models/analyses/recovery-propulsion.sysml": "bb79e2d030eda65bf8c2d243d62d9e51a02a9b114f7fb5659fece646a8ab6829",
+    "models/analyses/recovery-risk.sysml": "91d821d597600176304c6d2dede380f409aacee8eae2769ce5b033e9eb7309f5",
+    "models/analyses/recovery-site-review.sysml": "f0e8915d23aea03f4b8af834960fa8dfc4fd075ae0512188ecb97c6f4a3f051d",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "6746846ce5f3f7fcd236ec7c5c83822a5963db53591ad28702dc859735517d76",
+    "models/analyses/safety.sysml": "bbaaa8d52fdd9867699d14ba4efe6627e2f97e2f20001cea319e78c9b901f645",
+    "models/analyses/sail-trade.sysml": "e231b51c6031a26a304a42c368a1fc2c9cf4a16d55e22dcf0e83a2231e9b08ac",
+    "models/analyses/sizing/credibility.sysml": "42eca821d95eca13772ef1326b6a27b625e1f6ec0e890d2a2ad94f717455728c",
+    "models/analyses/sizing/evidence.sysml": "f0d2a6d886c71d4b7adc632271ff122f7bc57b1a6302db84bf844d74f20fe801",
+    "models/analyses/sizing/inputs.sysml": "934dde8fa12d41656d776b954c7a695f7979e003e629d2677ea4de51b1615925",
+    "models/analyses/sizing/operating.sysml": "04e6733d21d749c8a06e141ad67b7807cb349b6b03612a0c3d2a315ee4c92ce7",
+    "models/analyses/sizing/uncertainty.sysml": "78d71e2767b681561768d486ca6d6a9d4e16332fd576fe9cfe1a8e01d3dfcf3b",
+    "models/analyses/structural-basis.sysml": "c85be7e177715c5586e13508ecb973ac9d9355cac58fac684c683c0da3fc6ed6",
+    "models/analyses/surface-environment.sysml": "5778f163047634797e8ef65a8783a5e783676df530bc0caa0247a679c00222ea",
+    "models/analyses/wave-performance.sysml": "383e94db89dfe142db9e46398de22a707c543f754d3f778aa600a695689d6b3d",
+    "models/analyses/weather.sysml": "44ecf6b6d1e331fa5185398873d42e553128533c925d292dfc4287851ff1ee4c",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/acoustic-equipment.sysml": "cf00a437976ecfd928740adf21a711da19184bd87347e1c8e6ce8126ee6b419e",
+    "models/configurations/energy.sysml": "9a67f9f74fa51fb67f2749cf3b4e12615014f383b365a48043f3461999d6c7b8",
+    "models/configurations/ic01.sysml": "0b953814697ff78defa9931de9c23813a23ca90eb1a2cd7121f4d755064a221f",
+    "models/configurations/management.sysml": "ca0157c9c75a8fd3dfcfaf5707ff5a8fb7789cd19a36697398c19e1bfc92b488",
+    "models/configurations/operating.sysml": "2f3019e2b9c4a9985d7a5eabfbd39dde694903dc378d8381c1b550f3c48c59d0",
+    "models/configurations/polar-demand.sysml": "776327bf7cefc8edc26f29000d21261cc3f2d2da9da8dcd8a6e30ffa5ced121e",
+    "models/configurations/reference.sysml": "409baa5254262a527b27af7fce00ffb3da35f249fe54e51f3cf024bdf86671be",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/sensing-equipment.sysml": "67f7f5e14071cc49cad4dc86c35477caeae217c06ecb88a30b6b7f97023f3845",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/configurations/wind-equipment.sysml": "ebb44c8c073855c60e4fbe6a6d1d3ee0b9e8dac26284f0451d89bdde67e6ff8c",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/evidence/current-sizing.sysml": "b6176f48be47dde61bd41ea892fec6c68258b72afdf2265ffb1bba5fb642b991",
+    "models/evidence/finite-passage-sizing.sysml": "7c0cac2c4733ba43b652edc7bc547265087434656a11694670ff5347c2028f56",
+    "models/evidence/gorge-wind.sysml": "2eee7571fc7ac02bcd054b0c226b5edb54ff931a31d74c508331ff1bf20ef466",
+    "models/evidence/sizing-continuation.sysml": "b8825d29058049ef75538b8b40b0dceb5bbdcb9aac806457856b9b2a9ccfee2e",
+    "models/evidence/srr-current.sysml": "c429f99895f703e8189f10383374e02865c78a7d5bc623478affdda1600daa33",
+    "models/evidence/srr-frontier.sysml": "c153ab46f07b4fffe4e4d946bd42a81b43f5fb6f6d5f0d95ee52097d8a7333db",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/appendages.sysml": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+    "models/libraries/marine/concept.sysml": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+    "models/libraries/marine/course.sysml": "3f58d6c0dc668858aa0b6bdad232c26b0ac75952ad67d0f06e73f4fbd464c85c",
+    "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "models/libraries/marine/hull-resistance.sysml": "967550313effe20092525e10c1695771b8354c66478203f449ac902d8af1a5f1",
+    "models/libraries/marine/hydrostatics.sysml": "b6791576a108dee393063a15a1a359113a8c24aba793105fa7d60fa193e9d858",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/recovery.sysml": "00c8c1fcfda115116fc66bf1db5a67334e04ea893182a454a796ada62eeeaab4",
+    "models/libraries/marine/reliability.sysml": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+    "models/libraries/marine/sailing.sysml": "8281caf912a840d83d5a6d1c39fe0422419ce7fb9ccaae3d9044b0c5df33446f",
+    "models/libraries/marine/surface.sysml": "781d337d8553160eb8d3c0724ae2aef4463d51ae6bc05ef475d32884645213c8",
+    "models/libraries/marine/wave-performance.sysml": "ee1d491adb19773eb151588a5f8ccb52c8ee4364150c5783637c58ada8a07ba9",
+    "models/libraries/marine/weather.sysml": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326",
+    "models/libraries/structures/mass-properties.sysml": "ced6365432541c9c9ada7b683564efde12f597d46e96144fd70221f767ef5dde",
+    "models/libraries/structures/scantlings.sysml": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+    "models/missions/course.sysml": "58bff9885a96ec73bcd4f0b405f9bef2f5b520bb605c0f1d8eb6ed630ed4d714",
+    "models/missions/scope.sysml": "3f4058d5a9fc653f77764849708b3729f286fc52e692ec418ea5fd47aad92854",
+    "models/missions/transgorge.sysml": "28a3deec02e3b2b7e9c69bb880d5f4c8b3d5e5627c7318506d5156c32dafd920",
+    "models/missions/verification.sysml": "99a624662537a2413b16b86421f2aa0e227efc3a2746046b516923ad50852677",
+    "models/vehicle/allocations.sysml": "1c8753ed06da6175b784f671491b38a75b81c0df0b50fb3818a4648ef57466e5",
+    "models/vehicle/architecture-contracts.sysml": "b8d38ac4fa384ea84ad7c88c8a490417d0495659836eb91744900182991b396a",
+    "models/vehicle/architecture.sysml": "b5cb5660303d5db76c434b0feacba250f2cdcb51c0f6d0622e91e2311f8c53b9",
+    "models/vehicle/behavior-contracts.sysml": "b67da5f4b04bb6c82ea50a1bab0e4d22b1519b65c9cae512ac52ebfb7a815669",
+    "models/vehicle/decision-context.sysml": "1ca524827ca3c84b09b030d7ce8aac4966708886ddbaf3209bcdb4893eb467d8",
+    "models/vehicle/decisions.sysml": "085b67cc1cd0ae1cd14b4c3b598863c16ee43900c76676a5a10ead0fcb4be790",
+    "models/vehicle/interface-contracts.sysml": "93844239666f3762a03ff2d414501a8bd1016e233503847b5c0a5e1fe0f14f1a",
+    "models/vehicle/method.sysml": "014068f89e0edc6fb45d586432e989e657a16de5d0d21dcf340b1c842fb81fe5",
+    "models/vehicle/mission-logic.sysml": "d09ddf94799d465b78daa2c8d2ecc4559735f063d36c0bf836aaa045271a663c",
+    "models/vehicle/requirement-basis.sysml": "b390fc89ce054ea5474fd2a1e2c577e6dd389f57283d8644d1754aeed82d52cd",
+    "models/vehicle/requirement-decisions.sysml": "cf6bf8ae2c7e2294a4f90ce7ba05173918adc4b55d19d1940a6a485b93e3d515",
+    "models/vehicle/requirements.sysml": "b2f1105cb06e3b804c974dbd5e01bda4f4912730e1edb36c837cf4f6eb5d73b4",
+    "models/vehicle/source-evidence.sysml": "028ba4009dc681ed1cc3205d6f6385dba8062931303645fb1347030f6b84c8f6",
+    "models/vehicle/structure.sysml": "81ff62a76c486454e01e8a424152f39540a2d63cc819f9850d7f329f47e8fb95",
+    "models/vehicle/use-cases.sysml": "85e937531404b30b8b5472b2ff266a99a57ba8fdc25d633a80dbd40a68e2e319",
+    "models/vehicle/verification-planning.sysml": "beadeb90cce35e07fb77a6c9f5324c00c97a45aea0046dfa059ef6de2e47e64a",
+    "models/vehicle/verification.sysml": "961cb9d09fdec61406585cf6956a2d66b26e2e34e7cc9658df358d3201f890e9"
+  },
+  "auditSources": {
+    "tools/publishing/reference.sysml": "f959d162073527ec45ea8c306b6b0b05e9948975616803d491c6f7e3e5c04639",
+    "tools/boat_analysis/model/credibility_audit.py": "dffa3a1e8a2dee9f357bdb759db1bcea4b9509f5b97ca79e042b26598baf4247"
+  },
+  "diagnostics": [],
+  "errors": [],
+  "summary": {
+    "analysisCases": 110,
+    "registeredCases": 110,
+    "nativeTypes": {
+      "AnalysisCaseUsage": 72,
+      "AnalysisCaseDefinition": 38
+    },
+    "useCategories": {
+      "Equipment": 4,
+      "Inputs": 19,
+      "Encounter": 6,
+      "EnergyReliability": 6,
+      "Readiness": 5,
+      "HistoricalReview": 13,
+      "Weather": 10,
+      "Geometry": 2,
+      "Recovery": 6,
+      "Rules": 19,
+      "Sailing": 15,
+      "Trade": 5
+    }
+  },
+  "table": {
+    "columns": [
+      "Analysis",
+      "Category",
+      "Intended use",
+      "Domain",
+      "Excluded interpretations",
+      "Needed evidence"
+    ],
+    "rows": [
+      {
+        "element": {
+          "id": "BlueDogAcousticEquipment::Budget",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogAcousticEquipment::Budget"
+          ],
+          [
+            "Equipment"
+          ],
+          [
+            "Account for candidate equipment allocations or illustrative actuator/energy loads."
+          ],
+          [
+            "Declared included/excluded components, duty assumptions, modes and accounting boundary."
+          ],
+          [
+            "An allowance or arithmetic rollup is not a measured installed budget, peak capability or architecture downselect."
+          ],
+          [
+            "Identified component/BOM and synchronized mass, peak/average power, duty and environmental measurements."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogAerodynamicPolicy::convergenceInputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogAerodynamicPolicy::convergenceInputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogAvoidanceFailures::EvaluateExposure",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogAvoidanceFailures::EvaluateExposure"
+          ],
+          [
+            "Encounter"
+          ],
+          [
+            "Screen class detection, acquisition or response-distance/exposure from supplied bounds."
+          ],
+          [
+            "Specified target/class, timing, uncertainty, controller state and envelope assumptions."
+          ],
+          [
+            "Allocated observation or response bounds are not demonstrated sensing coverage, maneuver completion or accepted safety margins."
+          ],
+          [
+            "Installed target-class detection/error/dropout and timing evidence including interacting faults and occupied maneuvers."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCandidateEnergy::Reconciliation",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCandidateEnergy::Reconciliation"
+          ],
+          [
+            "EnergyReliability"
+          ],
+          [
+            "Evaluate conditional energy reconciliation or mission-reliability arithmetic for the named subject."
+          ],
+          [
+            "Declared load/exposure/storage boundaries or failure-rate partition, dependence and hazard assumptions."
+          ],
+          [
+            "Numerical success does not establish measured load, accepted rates, independence or physical reliability/energy sufficiency."
+          ],
+          [
+            "Configuration-specific measurements, rate/profile justification, common-cause/dependence review and uncertainty assessment."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogClassDetection::Assessment",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogClassDetection::Assessment"
+          ],
+          [
+            "Encounter"
+          ],
+          [
+            "Screen class detection, acquisition or response-distance/exposure from supplied bounds."
+          ],
+          [
+            "Specified target/class, timing, uncertainty, controller state and envelope assumptions."
+          ],
+          [
+            "Allocated observation or response bounds are not demonstrated sensing coverage, maneuver completion or accepted safety margins."
+          ],
+          [
+            "Installed target-class detection/error/dropout and timing evidence including interacting faults and occupied maneuvers."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogClassDetection::Summary",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogClassDetection::Summary"
+          ],
+          [
+            "Encounter"
+          ],
+          [
+            "Screen class detection, acquisition or response-distance/exposure from supplied bounds."
+          ],
+          [
+            "Specified target/class, timing, uncertainty, controller state and envelope assumptions."
+          ],
+          [
+            "Allocated observation or response bounds are not demonstrated sensing coverage, maneuver completion or accepted safety margins."
+          ],
+          [
+            "Installed target-class detection/error/dropout and timing evidence including interacting faults and occupied maneuvers."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogConceptCredibility::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogConceptCredibility::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogConceptCredibility::SensitivityInputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogConceptCredibility::SensitivityInputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogConfigurationManagement::AccountingReview",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogConfigurationManagement::AccountingReview"
+          ],
+          [
+            "Readiness"
+          ],
+          [
+            "Expose missing review/evidence preconditions in the named safety or configuration argument."
+          ],
+          [
+            "Declared review scope, configuration, contributors and supplied review assertions."
+          ],
+          [
+            "A true review flag or complete register does not demonstrate control effectiveness, install hardware or accept risk."
+          ],
+          [
+            "Actual configuration, implementation/effectiveness records, coverage review and responsible disposition evidence."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogConfigurationManagement::currentReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogConfigurationManagement::currentReview"
+          ],
+          [
+            "Readiness"
+          ],
+          [
+            "Expose missing review/evidence preconditions in the named safety or configuration argument."
+          ],
+          [
+            "Declared review scope, configuration, contributors and supplied review assertions."
+          ],
+          [
+            "A true review flag or complete register does not demonstrate control effectiveness, install hardware or accept risk."
+          ],
+          [
+            "Actual configuration, implementation/effectiveness records, coverage review and responsible disposition evidence."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCoupledOperation::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCoupledOperation::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCoupledSizing::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCoupledSizing::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCoupledUncertainty::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCoupledUncertainty::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCurrentSizing::nominalReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCurrentSizing::nominalReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCurrentSizing::constructionReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCurrentSizing::constructionReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCurrentSizing::aerodynamicReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCurrentSizing::aerodynamicReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCurrentSizing::hydrodynamicReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCurrentSizing::hydrodynamicReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCurrentSizing::energyReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCurrentSizing::energyReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogCurrentSizing::combinedReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogCurrentSizing::combinedReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogEncounterEnvelope::Envelope",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogEncounterEnvelope::Envelope"
+          ],
+          [
+            "Encounter"
+          ],
+          [
+            "Screen class detection, acquisition or response-distance/exposure from supplied bounds."
+          ],
+          [
+            "Specified target/class, timing, uncertainty, controller state and envelope assumptions."
+          ],
+          [
+            "Allocated observation or response bounds are not demonstrated sensing coverage, maneuver completion or accepted safety margins."
+          ],
+          [
+            "Installed target-class detection/error/dropout and timing evidence including interacting faults and occupied maneuvers."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogEncounterEnvelope::Summary",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogEncounterEnvelope::Summary"
+          ],
+          [
+            "Encounter"
+          ],
+          [
+            "Screen class detection, acquisition or response-distance/exposure from supplied bounds."
+          ],
+          [
+            "Specified target/class, timing, uncertainty, controller state and envelope assumptions."
+          ],
+          [
+            "Allocated observation or response bounds are not demonstrated sensing coverage, maneuver completion or accepted safety margins."
+          ],
+          [
+            "Installed target-class detection/error/dropout and timing evidence including interacting faults and occupied maneuvers."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogEncounterFeasibility::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogEncounterFeasibility::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogEncounterReview::Acquisition",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogEncounterReview::Acquisition"
+          ],
+          [
+            "Encounter"
+          ],
+          [
+            "Screen class detection, acquisition or response-distance/exposure from supplied bounds."
+          ],
+          [
+            "Specified target/class, timing, uncertainty, controller state and envelope assumptions."
+          ],
+          [
+            "Allocated observation or response bounds are not demonstrated sensing coverage, maneuver completion or accepted safety margins."
+          ],
+          [
+            "Installed target-class detection/error/dropout and timing evidence including interacting faults and occupied maneuvers."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogEnergy::SustainedOperation",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogEnergy::SustainedOperation"
+          ],
+          [
+            "EnergyReliability"
+          ],
+          [
+            "Evaluate conditional energy reconciliation or mission-reliability arithmetic for the named subject."
+          ],
+          [
+            "Declared load/exposure/storage boundaries or failure-rate partition, dependence and hazard assumptions."
+          ],
+          [
+            "Numerical success does not establish measured load, accepted rates, independence or physical reliability/energy sufficiency."
+          ],
+          [
+            "Configuration-specific measurements, rate/profile justification, common-cause/dependence review and uncertainty assessment."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogEnvironmentReview::FetchSensitivity",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogEnvironmentReview::FetchSensitivity"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogHydrostatics::analyticExample",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogHydrostatics::analyticExample"
+          ],
+          [
+            "Geometry"
+          ],
+          [
+            "Inspect a geometric/course or analytic hydrostatic fixture."
+          ],
+          [
+            "Declared coordinate/geometry conventions and simplified analytic assumptions."
+          ],
+          [
+            "A consistent fixture is not surveyed course truth, validated free-surface response or installed-vessel performance."
+          ],
+          [
+            "Independent coordinate/unit checks, geometry survey or hydrostatic comparison relevant to the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogIntegratedCandidate::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogIntegratedCandidate::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogIntegratedCandidate::RecoveryScreen",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogIntegratedCandidate::RecoveryScreen"
+          ],
+          [
+            "Recovery"
+          ],
+          [
+            "Screen conditional recovery authority, exposure or energy for supplied capabilities and route."
+          ],
+          [
+            "Named configuration, current, orientation, usable reserve, approach and response assumptions."
+          ],
+          [
+            "No demonstrated thrust, whole-river recoverability, physical independence, shore retention or pickup."
+          ],
+          [
+            "Measured installed propulsion/energy and casualty-response envelopes; route and approach evidence with uncertainty."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogIntegratedCandidate::IC01RecoveryIllustration",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogIntegratedCandidate::IC01RecoveryIllustration"
+          ],
+          [
+            "Recovery"
+          ],
+          [
+            "Screen conditional recovery authority, exposure or energy for supplied capabilities and route."
+          ],
+          [
+            "Named configuration, current, orientation, usable reserve, approach and response assumptions."
+          ],
+          [
+            "No demonstrated thrust, whole-river recoverability, physical independence, shore retention or pickup."
+          ],
+          [
+            "Measured installed propulsion/energy and casualty-response envelopes; route and approach evidence with uncertainty."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogIntegratedCandidate::IC01InvertedRecoveryIllustration"
+          ],
+          [
+            "Recovery"
+          ],
+          [
+            "Screen conditional recovery authority, exposure or energy for supplied capabilities and route."
+          ],
+          [
+            "Named configuration, current, orientation, usable reserve, approach and response assumptions."
+          ],
+          [
+            "No demonstrated thrust, whole-river recoverability, physical independence, shore retention or pickup."
+          ],
+          [
+            "Measured installed propulsion/energy and casualty-response envelopes; route and approach evidence with uncertainty."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogIntegratedCandidate::IC01NoRecoveryAuthority",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogIntegratedCandidate::IC01NoRecoveryAuthority"
+          ],
+          [
+            "Recovery"
+          ],
+          [
+            "Screen conditional recovery authority, exposure or energy for supplied capabilities and route."
+          ],
+          [
+            "Named configuration, current, orientation, usable reserve, approach and response assumptions."
+          ],
+          [
+            "No demonstrated thrust, whole-river recoverability, physical independence, shore retention or pickup."
+          ],
+          [
+            "Measured installed propulsion/energy and casualty-response envelopes; route and approach evidence with uncertainty."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogLocationTraffic::WindowAssessment",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogLocationTraffic::WindowAssessment"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogManeuverDynamics::Defaults",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogManeuverDynamics::Defaults"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogManeuverDynamics::StudyInputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogManeuverDynamics::StudyInputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogMissionSimulation::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogMissionSimulation::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogNavigationController::Policy",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogNavigationController::Policy"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogNavigationController::Candidate",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogNavigationController::Candidate"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogNavigationController::Geometry",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogNavigationController::Geometry"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogNavigationController::Context",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogNavigationController::Context"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogOperatingEnvironment::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogOperatingEnvironment::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogPassageExposure::Contours",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogPassageExposure::Contours"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogRecordedSizing::nominalReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogRecordedSizing::nominalReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogRecordedSizing::constructionReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogRecordedSizing::constructionReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogRecordedSizing::aerodynamicReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogRecordedSizing::aerodynamicReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogRecordedSizing::hydrodynamicReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogRecordedSizing::hydrodynamicReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogRecordedSizing::energyReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogRecordedSizing::energyReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogRecordedSizing::combinedReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogRecordedSizing::combinedReview"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogRecoveryRisk::Sensitivity",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogRecoveryRisk::Sensitivity"
+          ],
+          [
+            "Recovery"
+          ],
+          [
+            "Screen conditional recovery authority, exposure or energy for supplied capabilities and route."
+          ],
+          [
+            "Named configuration, current, orientation, usable reserve, approach and response assumptions."
+          ],
+          [
+            "No demonstrated thrust, whole-river recoverability, physical independence, shore retention or pickup."
+          ],
+          [
+            "Measured installed propulsion/energy and casualty-response envelopes; route and approach evidence with uncertainty."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogReliability::CruiseReliability",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogReliability::CruiseReliability"
+          ],
+          [
+            "EnergyReliability"
+          ],
+          [
+            "Evaluate conditional energy reconciliation or mission-reliability arithmetic for the named subject."
+          ],
+          [
+            "Declared load/exposure/storage boundaries or failure-rate partition, dependence and hazard assumptions."
+          ],
+          [
+            "Numerical success does not establish measured load, accepted rates, independence or physical reliability/energy sufficiency."
+          ],
+          [
+            "Configuration-specific measurements, rate/profile justification, common-cause/dependence review and uncertainty assessment."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogReliabilityExamples::gorgeAssessment",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogReliabilityExamples::gorgeAssessment"
+          ],
+          [
+            "EnergyReliability"
+          ],
+          [
+            "Evaluate conditional energy reconciliation or mission-reliability arithmetic for the named subject."
+          ],
+          [
+            "Declared load/exposure/storage boundaries or failure-rate partition, dependence and hazard assumptions."
+          ],
+          [
+            "Numerical success does not establish measured load, accepted rates, independence or physical reliability/energy sufficiency."
+          ],
+          [
+            "Configuration-specific measurements, rate/profile justification, common-cause/dependence review and uncertainty assessment."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSafety::SafetyReview",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogSafety::SafetyReview"
+          ],
+          [
+            "Readiness"
+          ],
+          [
+            "Expose missing review/evidence preconditions in the named safety or configuration argument."
+          ],
+          [
+            "Declared review scope, configuration, contributors and supplied review assertions."
+          ],
+          [
+            "A true review flag or complete register does not demonstrate control effectiveness, install hardware or accept risk."
+          ],
+          [
+            "Actual configuration, implementation/effectiveness records, coverage review and responsible disposition evidence."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSafety::currentReview",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSafety::currentReview"
+          ],
+          [
+            "Readiness"
+          ],
+          [
+            "Expose missing review/evidence preconditions in the named safety or configuration argument."
+          ],
+          [
+            "Declared review scope, configuration, contributors and supplied review assertions."
+          ],
+          [
+            "A true review flag or complete register does not demonstrate control effectiveness, install hardware or accept risk."
+          ],
+          [
+            "Actual configuration, implementation/effectiveness records, coverage review and responsible disposition evidence."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailing::PolarDemandAndHullScreen",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogSailing::PolarDemandAndHullScreen"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailing::PolarVoyageAssessment",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogSailing::PolarVoyageAssessment"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailing::SailingSensitivity",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogSailing::SailingSensitivity"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::upstreamBeat",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::upstreamBeat"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::upstreamRun",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::upstreamRun"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::downstreamBeat",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::downstreamBeat"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::downstreamRun",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::downstreamRun"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::westerlyPassage",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::westerlyPassage"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::easterlyPassage",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::easterlyPassage"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::lightWindDemand",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::lightWindDemand"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::strongWindDemand",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::strongWindDemand"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::highWindDemand",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::highWindDemand"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::sensitivity",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::sensitivity"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailingExamples::oceanDemand",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailingExamples::oceanDemand"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailTrade::TradeAssessment",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogSailTrade::TradeAssessment"
+          ],
+          [
+            "Trade"
+          ],
+          [
+            "Compare declared rig evidence gates or illustrate a supporting buoyancy calculation."
+          ],
+          [
+            "The named candidate and ordered evidence vector, or explicit synthetic buoyancy inputs."
+          ],
+          [
+            "No invented scores, hardware downselect, accepted reliability estimate or physical qualification."
+          ],
+          [
+            "Comparable both-tack, energy, durability, construction, casualty and reliability-study evidence; separate mandatory criteria from studies."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailTrade::tailAssessment",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailTrade::tailAssessment"
+          ],
+          [
+            "Trade"
+          ],
+          [
+            "Compare declared rig evidence gates or illustrate a supporting buoyancy calculation."
+          ],
+          [
+            "The named candidate and ordered evidence vector, or explicit synthetic buoyancy inputs."
+          ],
+          [
+            "No invented scores, hardware downselect, accepted reliability estimate or physical qualification."
+          ],
+          [
+            "Comparable both-tack, energy, durability, construction, casualty and reliability-study evidence; separate mandatory criteria from studies."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailTrade::camberAssessment",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailTrade::camberAssessment"
+          ],
+          [
+            "Trade"
+          ],
+          [
+            "Compare declared rig evidence gates or illustrate a supporting buoyancy calculation."
+          ],
+          [
+            "The named candidate and ordered evidence vector, or explicit synthetic buoyancy inputs."
+          ],
+          [
+            "No invented scores, hardware downselect, accepted reliability estimate or physical qualification."
+          ],
+          [
+            "Comparable both-tack, energy, durability, construction, casualty and reliability-study evidence; separate mandatory criteria from studies."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailTrade::softAssessment",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailTrade::softAssessment"
+          ],
+          [
+            "Trade"
+          ],
+          [
+            "Compare declared rig evidence gates or illustrate a supporting buoyancy calculation."
+          ],
+          [
+            "The named candidate and ordered evidence vector, or explicit synthetic buoyancy inputs."
+          ],
+          [
+            "No invented scores, hardware downselect, accepted reliability estimate or physical qualification."
+          ],
+          [
+            "Comparable both-tack, energy, durability, construction, casualty and reliability-study evidence; separate mandatory criteria from studies."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailTrade::buoyancyIllustration",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailTrade::buoyancyIllustration"
+          ],
+          [
+            "Trade"
+          ],
+          [
+            "Compare declared rig evidence gates or illustrate a supporting buoyancy calculation."
+          ],
+          [
+            "The named candidate and ordered evidence vector, or explicit synthetic buoyancy inputs."
+          ],
+          [
+            "No invented scores, hardware downselect, accepted reliability estimate or physical qualification."
+          ],
+          [
+            "Comparable both-tack, energy, durability, construction, casualty and reliability-study evidence; separate mandatory criteria from studies."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSizingEvidence::Review",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogSizingEvidence::Review"
+          ],
+          [
+            "HistoricalReview"
+          ],
+          [
+            "Inspect recorded operating screens and unaccepted evidence for the original archived candidate."
+          ],
+          [
+            "Only the original run configuration, policy, source revision and sampled scenarios."
+          ],
+          [
+            "No current IC-01 design substitution, physical qualification or transfer of margins between configurations."
+          ],
+          [
+            "Preserve archive manifests and source hashes; assess new use separately against current configuration and policy."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogStructuralBasis::Inputs",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogStructuralBasis::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogStructure::MaterialInputs",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogStructure::MaterialInputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogStructure::material",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogStructure::material"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSurfaceEnvironment::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSurfaceEnvironment::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWavePerformance::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWavePerformance::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWeather::Inputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWeather::Inputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWeather::RegimeSensitivity",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "BlueDogWeather::RegimeSensitivity"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWeather::primary",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWeather::primary"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWeather::construction",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWeather::construction"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWeather::aerodynamic",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWeather::aerodynamic"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWeather::hydrodynamic",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWeather::hydrodynamic"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWeather::energy",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWeather::energy"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWeather::combined",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWeather::combined"
+          ],
+          [
+            "Weather"
+          ],
+          [
+            "Explore environmental or passage-exposure sensitivity with declared scenario values."
+          ],
+          [
+            "Named wind/current/wave/weather assumptions, geometry and sampled domain."
+          ],
+          [
+            "Scenario sweeps are not calibrated probability distributions, full-domain coverage or voyage reliability evidence."
+          ],
+          [
+            "Observed environmental basis, dependence and coverage review; uncertainty and sensitivity for the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWindEquipment::Rollup",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWindEquipment::Rollup"
+          ],
+          [
+            "Equipment"
+          ],
+          [
+            "Account for candidate equipment allocations or illustrative actuator/energy loads."
+          ],
+          [
+            "Declared included/excluded components, duty assumptions, modes and accounting boundary."
+          ],
+          [
+            "An allowance or arithmetic rollup is not a measured installed budget, peak capability or architecture downselect."
+          ],
+          [
+            "Identified component/BOM and synchronized mass, peak/average power, duty and environmental measurements."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWingActuator::accountingExample",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWingActuator::accountingExample"
+          ],
+          [
+            "Equipment"
+          ],
+          [
+            "Account for candidate equipment allocations or illustrative actuator/energy loads."
+          ],
+          [
+            "Declared included/excluded components, duty assumptions, modes and accounting boundary."
+          ],
+          [
+            "An allowance or arithmetic rollup is not a measured installed budget, peak capability or architecture downselect."
+          ],
+          [
+            "Identified component/BOM and synchronized mass, peak/average power, duty and environmental measurements."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogWingHeel::sweepInputs",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogWingHeel::sweepInputs"
+          ],
+          [
+            "Inputs"
+          ],
+          [
+            "Export declared parameters or provisional sensitivity assumptions for an identified caller."
+          ],
+          [
+            "The owning configuration and consumer units/vector ordering; these cases export inputs, not predicted performance."
+          ],
+          [
+            "No feasibility, measured uncertainty distribution or physical capability follows from exporting values."
+          ],
+          [
+            "Trace each value to its owner, external-data pedigree and consuming analysis; verify conversions."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::General",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::General"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::ChannelsAndTSS",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::ChannelsAndTSS"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::RestrictedVisibility",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::RestrictedVisibility"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::LightsAndShapes",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::LightsAndShapes"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::Signals",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::Signals"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::LightFixture",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::LightFixture"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::Installation",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::Installation"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::SoundAppliance",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::SoundAppliance"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::ExemptionsAndSpecialCases",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::ExemptionsAndSpecialCases"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::CandidateAssessment",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::CandidateAssessment"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::SnapshotConsistency",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::SnapshotConsistency"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::SpecialDisplays",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::SpecialDisplays"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::PassageProtocol",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::PassageProtocol"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandExtended::DistressCatalog",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandExtended::DistressCatalog"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "InlandNavigationExperiment::Assess",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "InlandNavigationExperiment::Assess"
+          ],
+          [
+            "Rules"
+          ],
+          [
+            "Evaluate navigation-rule obligations or fixture consistency from supplied situation facts."
+          ],
+          [
+            "Declared rule edition, delivered tracks, vessel/status/visibility/channel facts and bounded encounter context."
+          ],
+          [
+            "Supplied facts do not demonstrate perception, legal status or achieved safe maneuver; no universal compliance claim."
+          ],
+          [
+            "Validate actual fact acquisition, rule applicability and full encounter behavior against authoritative rules and observations."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "MarineEnergy::BudgetRollup",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "MarineEnergy::BudgetRollup"
+          ],
+          [
+            "Equipment"
+          ],
+          [
+            "Account for candidate equipment allocations or illustrative actuator/energy loads."
+          ],
+          [
+            "Declared included/excluded components, duty assumptions, modes and accounting boundary."
+          ],
+          [
+            "An allowance or arithmetic rollup is not a measured installed budget, peak capability or architecture downselect."
+          ],
+          [
+            "Identified component/BOM and synchronized mass, peak/average power, duty and environmental measurements."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "RecoveryPropulsionTrade::RecoverySizing",
+          "type": "AnalysisCaseDefinition"
+        },
+        "cells": [
+          [
+            "RecoveryPropulsionTrade::RecoverySizing"
+          ],
+          [
+            "Recovery"
+          ],
+          [
+            "Screen conditional recovery authority, exposure or energy for supplied capabilities and route."
+          ],
+          [
+            "Named configuration, current, orientation, usable reserve, approach and response assumptions."
+          ],
+          [
+            "No demonstrated thrust, whole-river recoverability, physical independence, shore retention or pickup."
+          ],
+          [
+            "Measured installed propulsion/energy and casualty-response envelopes; route and approach evidence with uncertainty."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "TransGorgeCourse::GateGeometry",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "TransGorgeCourse::GateGeometry"
+          ],
+          [
+            "Geometry"
+          ],
+          [
+            "Inspect a geometric/course or analytic hydrostatic fixture."
+          ],
+          [
+            "Declared coordinate/geometry conventions and simplified analytic assumptions."
+          ],
+          [
+            "A consistent fixture is not surveyed course truth, validated free-surface response or installed-vessel performance."
+          ],
+          [
+            "Independent coordinate/unit checks, geometry survey or hydrostatic comparison relevant to the proposed use."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogEnergy::SustainedEnergyVerification::calculation",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogEnergy::SustainedEnergyVerification::calculation"
+          ],
+          [
+            "EnergyReliability"
+          ],
+          [
+            "Evaluate conditional energy reconciliation or mission-reliability arithmetic for the named subject."
+          ],
+          [
+            "Declared load/exposure/storage boundaries or failure-rate partition, dependence and hazard assumptions."
+          ],
+          [
+            "Numerical success does not establish measured load, accepted rates, independence or physical reliability/energy sufficiency."
+          ],
+          [
+            "Configuration-specific measurements, rate/profile justification, common-cause/dependence review and uncertainty assessment."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogReliability::VoyageReliabilityVerification::calculation",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogReliability::VoyageReliabilityVerification::calculation"
+          ],
+          [
+            "EnergyReliability"
+          ],
+          [
+            "Evaluate conditional energy reconciliation or mission-reliability arithmetic for the named subject."
+          ],
+          [
+            "Declared load/exposure/storage boundaries or failure-rate partition, dependence and hazard assumptions."
+          ],
+          [
+            "Numerical success does not establish measured load, accepted rates, independence or physical reliability/energy sufficiency."
+          ],
+          [
+            "Configuration-specific measurements, rate/profile justification, common-cause/dependence review and uncertainty assessment."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSafety::SafetyReview::failureModes",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSafety::SafetyReview::failureModes"
+          ],
+          [
+            "Readiness"
+          ],
+          [
+            "Expose missing review/evidence preconditions in the named safety or configuration argument."
+          ],
+          [
+            "Declared review scope, configuration, contributors and supplied review assertions."
+          ],
+          [
+            "A true review flag or complete register does not demonstrate control effectiveness, install hardware or accept risk."
+          ],
+          [
+            "Actual configuration, implementation/effectiveness records, coverage review and responsible disposition evidence."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      },
+      {
+        "element": {
+          "id": "BlueDogSailing::PolarVoyageAssessment::cruise",
+          "type": "AnalysisCaseUsage"
+        },
+        "cells": [
+          [
+            "BlueDogSailing::PolarVoyageAssessment::cruise"
+          ],
+          [
+            "Sailing"
+          ],
+          [
+            "Estimate polar demand, conditional progress or hull/route screens under declared inputs."
+          ],
+          [
+            "Supplied polar/geometry, current, wind, leeway and bounded route assumptions."
+          ],
+          [
+            "Demand ratios and solved states do not predict a measured voyage or establish performance outside the studied envelope."
+          ],
+          [
+            "Both-tack measured polar and mass/drag evidence; discretization, convergence and environment-domain sensitivity."
+          ]
+        ],
+        "verdict": null,
+        "object": null,
+        "state": null,
+        "event": null
+      }
+    ]
+  },
+  "interpretation": "Use/limitation coverage only. Category annotations neither execute analyses nor demonstrate validation, credibility ratings or acceptance."
+}

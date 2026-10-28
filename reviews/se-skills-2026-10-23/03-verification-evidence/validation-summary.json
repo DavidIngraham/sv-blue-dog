@@ -1,0 +1,62 @@
+{
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "modelHash": "0bf4f2014104fded0902bb96b6bcee740f2f3f888ce03e3eb171725eac6068dc",
+  "verifiedModelSources": 91,
+  "verifiedAuditSources": 2,
+  "fullRegression": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "1012",
+    "time": "947.097",
+    "timestamp": "2026-10-23T10:54:32.574892-07:00",
+    "hostname": "dmi-thinkpad"
+  },
+  "focusedRegression": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "44",
+    "time": "160.612",
+    "timestamp": "2026-10-23T10:50:20.763162-07:00",
+    "hostname": "dmi-thinkpad"
+  },
+  "nativeDiagnostics": 0,
+  "auditErrors": 0,
+  "planningSummary": {
+    "verificationDefinitions": 100,
+    "withPlannedMethods": 100,
+    "declaredPlanResults": 97,
+    "integrationPlans": 2
+  },
+  "openExecutionDetails": [
+    {
+      "plan": "BlueDogVerificationPlanning::interfaceBench",
+      "missing": [
+        "Actual article",
+        "Released procedure",
+        "Instruments"
+      ]
+    },
+    {
+      "plan": "BlueDogVerificationPlanning::recoveryUseTrial",
+      "missing": [
+        "Actual article",
+        "Released procedure",
+        "Instruments"
+      ]
+    }
+  ],
+  "publication": "36 pages built successfully",
+  "skill": "validated and installed; four matching draft files",
+  "sourceSnapshot": {
+    "archive": "source-snapshot.zip",
+    "sha256": "0c769154559eebbb1840e891f45397d94d864390ebe9ca21fb83155946d2c4cb",
+    "modelSources": 91,
+    "totalSources": 93,
+    "reconstructedFromVerifiedEdits": false,
+    "scope": "Exact model/audit sources and recorded drivers where available; not a complete execution environment or physical evidence bundle."
+  }
+}

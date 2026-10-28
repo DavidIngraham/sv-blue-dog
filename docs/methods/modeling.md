@@ -33,12 +33,22 @@ Read the normative conditions and supporting metadata in the [vehicle requiremen
 
 ## Requirements versus design assumptions
 
-A challenge obligation motivates a function; it does not uniquely determine a material modulus, laminate thickness or sensor accuracy. I keep explicit owner constraints, functional acceptance, provisional performance allocations and selected strategies distinct with [requirement-basis metadata](../../models/vehicle/requirement-basis.sysml). The two provisional reliability objectives are explicitly marked as studies, so their numerical comparisons cannot silently become binding mission obligations. A dependency records a selected design basis; a derivation records an implied obligation under explicit conditions.
+A challenge obligation motivates a function; it does not uniquely determine a material modulus, laminate thickness or sensor accuracy. I keep explicit owner constraints, functional acceptance, provisional performance allocations and selected strategies distinct with [requirement-basis metadata](../../models/vehicle/requirement-basis.sysml). Each numerical allocation has an attached review annotation identifying its source, applicability, owner, needed measurements, margin basis and closure action. An unrecorded value-selection justification remains open; retaining a limit does not accept it. Assessment and release obligations identify the responsible role and work product. The two provisional reliability objectives are explicitly marked as studies, so their numerical comparisons cannot silently become binding mission obligations. A dependency records a selected design basis; a derivation records an implied obligation under explicit conditions.
+
+Engineering decision records use a shared [item definition](../../models/libraries/decision-records.sysml). SysML items can represent identifiable information acted on over time; parts represent systems or components that can perform actions. The decision register includes working policies, baselines, preferences, mixed design-basis statements and unresolved questions. Its record states describe existing content without claiming approval or implementation. Value-allocation and procedure-choice reviews remain metadata on the requirements and procedures they concern. The element choice follows [SysML 2.0 Part 1, §7.10](https://www.omg.org/spec/SysML/2.0/Language/PDF); the record content is project tailoring.
 
 The material and geometric constants used in preliminary sizing live in the [structural analysis basis](../../models/analyses/structural-basis.sysml). They let me explore a candidate before measurements exist. Qualification instead checks supported material bounds and applicable load, functional and site limits. Missing evidence cannot produce a passing executable requirement. Lower measured stiffness or strength means revisiting the geometry or reinforcement, not rejecting a material for missing an assumed property.
 
 ```sysml-report BlueDogRequirementBasisDocuments::Summary
 ```
+
+<details>
+<summary>Current allocation justification, process responsibilities and closure plans</summary>
+
+```sysml-report BlueDogRequirementBasisDocuments::ClosurePlans
+```
+
+</details>
 
 Archived runs retain their original inputs and claims. A passing numerical screen supports a candidate under those assumptions; measured stiffness, strength and operating loads are needed to establish physical compliance.
 

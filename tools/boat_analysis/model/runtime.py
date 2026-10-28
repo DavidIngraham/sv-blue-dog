@@ -1,5 +1,6 @@
 """One model loader for analysis, validation and publishing."""
 import json
+import hashlib
 import atexit
 from fractions import Fraction
 from functools import lru_cache
@@ -10,7 +11,7 @@ import subprocess
 import tempfile
 from collections import Counter
 
-from tools.boat_analysis.model.install import RELEASE, binary_path
+from tools.boat_analysis.model.install import RELEASE, REVISION, binary_path
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -136,4 +137,21 @@ def record_analyses(names, output, models=None):
         if recorded != Counter(names):
             raise RuntimeError(f"Native session did not record the requested cases: {dict(recorded)}")
         staged.replace(output)
+    # The native AnalysisRecords snapshot remains authoritative for case results.
+    # This companion identifies the actual source content and executable, including
+    # an uncommitted tree; it is provenance, not another acceptance/result model.
+    fingerprint = lambda path: hashlib.sha256(Path(path).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
+    provenance = dict(runtimeRevision=REVISION, modelHash=load_model(files).hash,
+        recordedModelSha256=hashlib.sha256(output.read_bytes()).hexdigest(), cases=list(names),
+        sourceHashes={str(Path(p).relative_to(ROOT) if Path(p).is_relative_to(ROOT) else Path(p)): fingerprint(p) for p in files},
+        driverHashes={str(p.relative_to(ROOT)): fingerprint(p) for p in
+            (Path(__file__), ROOT/'tools/boat_analysis/model/install.py', ROOT/'pyproject.toml', ROOT/'uv.lock')},
+        executableSha256=hashlib.sha256(binary_path().read_bytes()).hexdigest(),
+        interpretation='Native execution record; applicability, validation and acceptance require separate evidence.')
+    companion = output.with_suffix(output.suffix + '.provenance.json')
+    with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=output.parent, delete=False) as stream:
+        json.dump(provenance, stream, indent=2)
+        stream.write('\n')
+        temporary = Path(stream.name)
+    temporary.replace(companion)
     return output

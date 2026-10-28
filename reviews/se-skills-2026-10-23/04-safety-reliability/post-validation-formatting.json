@@ -1,0 +1,14 @@
+[
+  {
+    "path": "tests/test_reliability.py",
+    "oldRawSha256": "1F4E00B8D7CDCEDCB4D66CA027CE77D521CC3FDE04820A207DADA43F17A4AFDD",
+    "newRawSha256": "83216875F277364B08E7C7E410A6F1C9E311B5BFEB6192032D09F61F3C85336A",
+    "change": "Only newline normalization and trailing EOF blank lines"
+  },
+  {
+    "path": "tests/test_avoidance_failures.py",
+    "oldRawSha256": "AF3BDA8F2CCEC937B92ABA9CC6BE9BA780ECC835DC9D50CA2FB784AA736DD09B",
+    "newRawSha256": "41DF07092031B64C25A7B257B2392B0BD80BD7D5BB969AA689B2E217A9571598",
+    "change": "Only newline normalization and trailing EOF blank lines"
+  }
+]

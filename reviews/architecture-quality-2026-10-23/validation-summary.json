@@ -1,0 +1,39 @@
+{
+  "runs": [
+    {
+      "file": "test-results.xml",
+      "cases": 934,
+      "failed": [
+        "tests.test_requirements::test_oosem_scenarios_render_declared_behavior[recovery-actions2]"
+      ]
+    },
+    {
+      "file": "follow-up-tests.xml",
+      "cases": 39,
+      "failed": [
+        "tests.test_architecture_quality::test_rendered_architecture_tables_identify_both_sides"
+      ]
+    },
+    {
+      "file": "final-architecture-tests.xml",
+      "cases": 8,
+      "failed": []
+    }
+  ],
+  "uniqueCases": 935,
+  "latestFailures": [],
+  "latestPassed": 935,
+  "modelDocuments": 88,
+  "nativeAudit": {
+    "logicalResponsibilities": 14,
+    "logicalExchanges": 28,
+    "scenarios": 9,
+    "scenarioSteps": 40,
+    "mappings": {
+      "ContextMapping": 14,
+      "IC01Responsibility": 27,
+      "IC01Exchange": 30,
+      "IC01InternalExchange": 14
+    }
+  }
+}

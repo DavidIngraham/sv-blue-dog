@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interface Contract Quality"
+  short_description: "Audit interface meaning, compatibility and failure handling"
+  default_prompt: "Use $interface-contract-quality to audit and improve the specified model interfaces with sourced findings and native validation."

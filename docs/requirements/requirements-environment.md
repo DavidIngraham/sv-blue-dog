@@ -2,7 +2,7 @@
 
 [Requirements overview](../requirements.md) · [Current assessment](../current-assessment.md)
 
-The boat must keep its essential functions within a declared operating envelope and recover when it cannot continue safely. That includes wet structures and electronics, weeds, capsize and retention of damaged components. Self-righting is one recovery solution; powered inverted recovery is another, but motor use ends qualification.
+The boat must keep its essential functions within a declared operating envelope and recover when it cannot continue safely. That includes wet structures and electronics, weeds, capsize and retention of damaged components. N-003 addresses capsize recovery and N-004 addresses vegetation resilience. Each has its own planned assessment. Self-righting is one recovery solution; powered inverted recovery is another, but motor use ends qualification.
 
 ## Operating environments
 
@@ -42,10 +42,11 @@ package Page_environment_12 {
         expose BlueDogRequirements::resetRecovery;
         expose BlueDogRequirements::resumptionBlockEvidence;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
+        expose BlueDogRequirements::emergencyControl;
         expose BlueDogRequirements::sailingResumptionDeadline;
         expose BlueDogRequirements::sailingResumptionInhibition;
-        expose BlueDogRequirements::stabilityAndFouling;
+        expose BlueDogRequirements::capsizeResilience;
+        expose BlueDogRequirements::vegetationResilience;
         expose BlueDogRequirements::submergedWeedPassage;
         expose BlueDogRequirements::survivalEntryDeadline;
         expose BlueDogRequirements::survivalTransitionRecording;
@@ -79,10 +80,11 @@ package Page_environment_12 {
         metadata Layout about BlueDogRequirements::resetRecovery { x = 0; y = 2000; }
         metadata Layout about BlueDogRequirements::resumptionBlockEvidence { x = 320; y = 2000; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 640; y = 2000; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 960; y = 2000; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 960; y = 2000; }
         metadata Layout about BlueDogRequirements::sailingResumptionDeadline { x = 0; y = 2400; }
         metadata Layout about BlueDogRequirements::sailingResumptionInhibition { x = 320; y = 2400; }
-        metadata Layout about BlueDogRequirements::stabilityAndFouling { x = 640; y = 2400; }
+        metadata Layout about BlueDogRequirements::capsizeResilience { x = 640; y = 2400; }
+        metadata Layout about BlueDogRequirements::vegetationResilience { x = 800; y = 2580; }
         metadata Layout about BlueDogRequirements::submergedWeedPassage { x = 960; y = 2400; }
         metadata Layout about BlueDogRequirements::survivalEntryDeadline { x = 0; y = 2800; }
         metadata Layout about BlueDogRequirements::survivalTransitionRecording { x = 320; y = 2800; }
@@ -120,7 +122,8 @@ package Page_environment_13 {
         expose BlueDogRequirements::restrictedVisibilityEntry;
         expose BlueDogRequirements::restrictedVisibilityEvidence;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::stabilityAndFouling;
+        expose BlueDogRequirements::capsizeResilience;
+        expose BlueDogRequirements::vegetationResilience;
         expose BlueDogRequirements::visibility;
         expose BlueDogRequirements::visibilityNavigationCapability;
         expose BlueDogRequirements::visibilityTrafficCapability;
@@ -138,7 +141,8 @@ package Page_environment_13 {
         metadata Layout about BlueDogRequirements::restrictedVisibilityEntry { x = 960; y = 400; }
         metadata Layout about BlueDogRequirements::restrictedVisibilityEvidence { x = 0; y = 800; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 320; y = 800; }
-        metadata Layout about BlueDogRequirements::stabilityAndFouling { x = 640; y = 800; }
+        metadata Layout about BlueDogRequirements::capsizeResilience { x = 640; y = 800; }
+        metadata Layout about BlueDogRequirements::vegetationResilience { x = 800; y = 980; }
         metadata Layout about BlueDogRequirements::visibility { x = 960; y = 800; }
         metadata Layout about BlueDogRequirements::visibilityNavigationCapability { x = 0; y = 1200; }
         metadata Layout about BlueDogRequirements::visibilityTrafficCapability { x = 320; y = 1200; }
@@ -275,9 +279,10 @@ package Page_environment_16 {
         expose BlueDogRequirements::recoveryPropulsorWeeds;
         expose BlueDogRequirements::rightingDeadline;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
+        expose BlueDogRequirements::emergencyControl;
         expose BlueDogRequirements::selfRighting;
-        expose BlueDogRequirements::stabilityAndFouling;
+        expose BlueDogRequirements::capsizeResilience;
+        expose BlueDogRequirements::vegetationResilience;
         expose BlueDogRequirements::submergedWeedPassage;
         expose BlueDogRequirements::weedBlockageResponse;
         expose BlueDogRequirements::weedSnagShedding;
@@ -299,9 +304,10 @@ package Page_environment_16 {
         metadata Layout about BlueDogRequirements::recoveryPropulsorWeeds { x = 960; y = 800; }
         metadata Layout about BlueDogRequirements::rightingDeadline { x = 0; y = 1200; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 320; y = 1200; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 640; y = 1200; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 640; y = 1200; }
         metadata Layout about BlueDogRequirements::selfRighting { x = 960; y = 1200; }
-        metadata Layout about BlueDogRequirements::stabilityAndFouling { x = 0; y = 1600; }
+        metadata Layout about BlueDogRequirements::capsizeResilience { x = 0; y = 1600; }
+        metadata Layout about BlueDogRequirements::vegetationResilience { x = 160; y = 1780; }
         metadata Layout about BlueDogRequirements::submergedWeedPassage { x = 320; y = 1600; }
         metadata Layout about BlueDogRequirements::weedBlockageResponse { x = 640; y = 1600; }
         metadata Layout about BlueDogRequirements::weedSnagShedding { x = 960; y = 1600; }
@@ -346,8 +352,9 @@ package Page_environment_17 {
         expose BlueDogRequirements::recoveryPropulsorWeeds;
         expose BlueDogRequirements::resetRecovery;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
-        expose BlueDogRequirements::stabilityAndFouling;
+        expose BlueDogRequirements::emergencyControl;
+        expose BlueDogRequirements::capsizeResilience;
+        expose BlueDogRequirements::vegetationResilience;
         expose BlueDogRequirements::submergedWeedPassage;
         expose BlueDogRequirements::weedBlockageContingency;
         expose BlueDogRequirements::weedBlockageFault;
@@ -380,8 +387,9 @@ package Page_environment_17 {
         metadata Layout about BlueDogRequirements::recoveryPropulsorWeeds { x = 640; y = 1200; }
         metadata Layout about BlueDogRequirements::resetRecovery { x = 960; y = 1200; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 0; y = 1600; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 320; y = 1600; }
-        metadata Layout about BlueDogRequirements::stabilityAndFouling { x = 640; y = 1600; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 320; y = 1600; }
+        metadata Layout about BlueDogRequirements::capsizeResilience { x = 640; y = 1600; }
+        metadata Layout about BlueDogRequirements::vegetationResilience { x = 800; y = 1780; }
         metadata Layout about BlueDogRequirements::submergedWeedPassage { x = 960; y = 1600; }
         metadata Layout about BlueDogRequirements::weedBlockageContingency { x = 0; y = 2000; }
         metadata Layout about BlueDogRequirements::weedBlockageFault { x = 320; y = 2000; }

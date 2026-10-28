@@ -38,7 +38,7 @@ package Page_mission_0 {
         expose BlueDogRequirements::regulatoryClassification;
         expose BlueDogRequirements::resetRecovery;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
+        expose BlueDogRequirements::emergencyControl;
         expose BlueDogRequirements::serviceability;
         expose BlueDogRequirements::windObservation;
         expose GorgeChallenge::courseCompletion;
@@ -62,7 +62,7 @@ package Page_mission_0 {
         metadata Layout about BlueDogRequirements::regulatoryClassification { x = 0; y = 1200; }
         metadata Layout about BlueDogRequirements::resetRecovery { x = 320; y = 1200; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 640; y = 1200; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 960; y = 1200; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 960; y = 1200; }
         metadata Layout about BlueDogRequirements::serviceability { x = 0; y = 1600; }
         metadata Layout about BlueDogRequirements::windObservation { x = 320; y = 1600; }
         metadata Layout about GorgeChallenge::courseCompletion { x = 640; y = 1600; }
@@ -105,7 +105,7 @@ package Page_mission_1 {
         expose BlueDogRequirements::recoveryEnergy;
         expose BlueDogRequirements::recoveryPropulsion;
         expose BlueDogRequirements::roundTrip;
-        expose BlueDogRequirements::safeRecovery;
+        expose BlueDogRequirements::emergencyControl;
         expose BlueDogRequirements::sustainedReserveProtection;
         expose BlueDogRequirements::windObservation;
         expose BlueDogRequirements::windSensingEndurance;
@@ -127,7 +127,7 @@ package Page_mission_1 {
         metadata Layout about BlueDogRequirements::recoveryEnergy { x = 960; y = 800; }
         metadata Layout about BlueDogRequirements::recoveryPropulsion { x = 0; y = 1200; }
         metadata Layout about BlueDogRequirements::roundTrip { x = 320; y = 1200; }
-        metadata Layout about BlueDogRequirements::safeRecovery { x = 640; y = 1200; }
+        metadata Layout about BlueDogRequirements::emergencyControl { x = 640; y = 1200; }
         metadata Layout about BlueDogRequirements::sustainedReserveProtection { x = 960; y = 1200; }
         metadata Layout about BlueDogRequirements::windObservation { x = 0; y = 1600; }
         metadata Layout about BlueDogRequirements::windSensingEndurance { x = 320; y = 1600; }

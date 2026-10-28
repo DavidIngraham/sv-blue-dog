@@ -33,6 +33,57 @@ The candidate definitions and gate logic live in the [trade model](../models/ana
 
 The [simulation studies](simulation-studies.md#compare-the-open-trades-on-common-terms) connect each working rig candidate to its voyage-level consequences and the evidence needed for comparison.
 
+## Keep evidence gates separate from preferences
+
+The comparison has six declared mandatory evidence groups and a separate
+provisional reliability study. The current passage-duration obligation supplies
+the performance gate; the older leg-progress ratio remains a study comparison.
+The provisional probability target can guide an investigation, but missing or
+adverse study evidence cannot quietly become a new challenge acceptance rule.
+Required mission functions still apply.
+
+All three rigs currently lack comparable evidence. Unknown evidence preserves an
+open development question. A verified mandatory failure needs resolution; a supplied
+passing gate state identifies a claim to review, rather than qualified hardware.
+These groups organize the rig comparison and do not replace the complete system
+acceptance argument. Manufacturing compatibility respects the hull/structure
+requirement without requiring sailcloth to be printed.
+
+<details>
+<summary>Criterion applicability and supporting requirements</summary>
+
+```sysml-report BlueDogDecisionDocuments::CriterionRegister
+```
+
+</details>
+
+A trade result, recommendation and actual decision need separate records. The
+working numerical baseline remains distinct from a rig selection. I need comparable
+installation, safety, performance, energy, construction effort and consequential
+uncertainty before choosing among the contenders. Cost and schedule matter where
+they can change the choice; no defensible estimates or preference weights are yet
+available. A close result should retain the affected alternatives while the next
+measurement addresses what could reverse their order.
+
+<details>
+<summary>Working dispositions, design basis and open acceptance questions</summary>
+
+```sysml-report BlueDogDecisionDocuments::DecisionRegister
+```
+
+</details>
+
+The register presents 20 information items: eight design dispositions, six retained
+requirement-basis records and six open questions. All use the same project-defined
+decision-record item type. Fourteen have additional scope and reopening context;
+the six mixed requirement-basis statements retain their original content pending
+separate review of their constraints, assumptions and policies.
+Actual authority, date, disposition-record and implementation identities remain
+unset where no supporting record is identified. The six acceptance questions remain
+open. This follows [NASA decision analysis](https://www.nasa.gov/reference/6-8-decision-analysis/)
+with proportionate project scope; it does not impose NASA decision boards or invent
+an approval on the owner's behalf.
+
 ## Aerodynamic evidence and sizing assumptions
 
 The existing numerical evidence covers only the fixed-camber wing. OpenVSP provides the geometry and its VSPAERO solver estimates aerodynamic loads. No equivalent tail-controlled-wing or soft-sail dataset is included, so these runs support that one sizing hypothesis rather than rank the three rigs.

@@ -121,7 +121,7 @@ class Problem:
         r=self.evaluate(z);eq,ineq=self.jacobians(z)
         return np.vstack([eq,ineq*(r['ineq']<0)[:,None]])
     def initial(self):
-        saved=input_record('coupled-fixed-design.json')
+        saved=input_record('coupled-fixed-design.json', purpose='initial_guess')
         x=np.array([saved['design'].get(n,self.model.c['referenceDesign'][i]) for i,n in enumerate(self.model.c['designNames'])]);states=[]
         for row in saved['cases']:
             state=np.array(row['state'][3:]);state[1:]*=row['tack'];states.extend(state)

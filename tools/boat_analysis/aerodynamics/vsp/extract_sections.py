@@ -1,5 +1,6 @@
 """Extract planar STEP sections for geometry inspection (CAD units: mm)."""
-from tools.boat_analysis.evidence.records import input_record, input_path, output_path, source_hashes
+from tools.boat_analysis.evidence.records import input_record, input_path, output_path, source_hashes, digest
+from pathlib import Path
 
 import hashlib,json
 import numpy as np
@@ -52,6 +53,9 @@ if __name__=='__main__':
     profiles=[outer_profile(s) for s in sections(shape,[1,50,150,250,299])]
     result={'source':source.relative_to(ROOT).as_posix(),'sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'units':'mm','axes':{'chord':'X','span':'Y','section_height':'Z'},'solid_properties':properties(shape),'profiles':profiles,
       'limitations':'Outer envelopes from sampled section edges; enclosed area excludes internal holes. Five interior stations do not establish a sealed watertight volume or complete full-vessel wing.'}
+    result['sourceHashes']={source.relative_to(ROOT).as_posix():digest(source)}
+    result['driverHashes']={p.relative_to(ROOT).as_posix():digest(p) for p in
+        (Path(__file__), ROOT/'tools/boat_analysis/aerodynamics/vsp/inspect_geometry.py', ROOT/'uv.lock')}
     output=output_path('wing-geometry.json');output.write_text(json.dumps(result,indent=2)+'\n')
     fig,ax=plt.subplots(figsize=(9,3))
     for i,p in enumerate(profiles):

@@ -40,7 +40,7 @@ def run(destination,budget=8):
     model=CoupledModel();original=model.operation;design=[saved['design'][n] for n in model.c['designNames']]
     period=p['periods'][1];height=p['settings'][1];baseline=[];nodes=[];cases=[]
     paths=[f for f in (ROOT/'tools/boat_analysis').rglob('*.py') if '.venv' not in f.parts]
-    paths += [destination.resolve()/'bem.json',destination.resolve()/'bem-refined.json',ROOT/'uv.lock',archive/'operating-1.4.json',archive/'shear-waves.json',input_path('wing-polar-grid.json'),input_path('wing-geometry.json')]
+    paths += [destination.resolve()/'bem.json',destination.resolve()/'bem-refined.json',ROOT/'uv.lock',archive/'operating-1.4.json',archive/'shear-waves.json',input_path('wing-polar-grid.json', purpose='reference'),input_path('wing-geometry.json', purpose='reference')]
     hashes=source_hashes(paths)
     model.operation=SurfaceOperation(model.operating_contract,model.polar,surface['wind'])
     for row in saved['cases']:

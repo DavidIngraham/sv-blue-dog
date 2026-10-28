@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="10" skipped="0" tests="57" time="179.318" timestamp="2026-10-23T11:38:03.104675-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_safety_reliability" name="test_initial_hazards_have_controls_plans_and_critical_contributors" time="3.296" /><testcase classname="tests.test_safety_reliability" name="test_wrong_configuration_is_detected" time="1.950" /><testcase classname="tests.test_safety_reliability" name="test_missing_hazard_argument_link_is_detected[contributors-    dependency handlingRetrievalExposureContributor]" time="0.451" /><testcase classname="tests.test_safety_reliability" name="test_missing_hazard_argument_link_is_detected[controls-    dependency handlingRetrievalExposureControl]" time="0.522" /><testcase classname="tests.test_safety_reliability" name="test_missing_hazard_argument_link_is_detected[verificationPlans-    dependency handlingRetrievalExposureVerification]" time="0.454" /><testcase classname="tests.test_safety_reliability" name="test_incomplete_synthetic_disposition_cannot_close[implementationEvidenceAccepted]" time="3.228"><failure message="opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:484: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+field = 'implementationEvidenceAccepted'
+
+    @pytest.mark.parametrize('field',['implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+        'residualRiskAssessmentAccepted','riskDispositionAccepted','controlEvidenceRecord','acceptanceRecord','acceptanceAuthority','condition'])
+    def test_incomplete_synthetic_disposition_cannot_close(sources,field):
+        values={k:'true' for k in ('implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+            'residualRiskAssessmentAccepted','riskDispositionAccepted')}
+        values|={k:'"synthetic-test-only"' for k in ('controlEvidenceRecord','acceptanceRecord','acceptanceAuthority')}
+        values['condition']='"synthetic condition"'
+        values[field]='false' if field.endswith('Accepted') else '""'
+        body=' '.join('attribute :&gt;&gt; '+k+' = '+v+';' for k,v in values.items())
+        extra='package SafetyTest { part example :&gt; BlueDogSafety::gorge::collisionExposure {'+body+'} }'
+&gt;       m=connection().parse_sources((*sources,('safety-negative.sysml',extra)),strict=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_safety_reliability.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='7ae38172211743bfc2e0983733506a93007a431b22184aef4849e6dc039d99f6', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:484: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_safety_reliability" name="test_incomplete_synthetic_disposition_cannot_close[effectivenessEvidenceAccepted]" time="1.759"><failure message="opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:484: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+field = 'effectivenessEvidenceAccepted'
+
+    @pytest.mark.parametrize('field',['implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+        'residualRiskAssessmentAccepted','riskDispositionAccepted','controlEvidenceRecord','acceptanceRecord','acceptanceAuthority','condition'])
+    def test_incomplete_synthetic_disposition_cannot_close(sources,field):
+        values={k:'true' for k in ('implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+            'residualRiskAssessmentAccepted','riskDispositionAccepted')}
+        values|={k:'"synthetic-test-only"' for k in ('controlEvidenceRecord','acceptanceRecord','acceptanceAuthority')}
+        values['condition']='"synthetic condition"'
+        values[field]='false' if field.endswith('Accepted') else '""'
+        body=' '.join('attribute :&gt;&gt; '+k+' = '+v+';' for k,v in values.items())
+        extra='package SafetyTest { part example :&gt; BlueDogSafety::gorge::collisionExposure {'+body+'} }'
+&gt;       m=connection().parse_sources((*sources,('safety-negative.sysml',extra)),strict=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_safety_reliability.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='3efe2b8c1ef8fbb0e98eba2246c92c5517424213505acd1a7b4c14a6d8227e4e', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:484: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_safety_reliability" name="test_incomplete_synthetic_disposition_cannot_close[residualRiskAssessmentAccepted]" time="0.224"><failure message="opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:484: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+field = 'residualRiskAssessmentAccepted'
+
+    @pytest.mark.parametrize('field',['implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+        'residualRiskAssessmentAccepted','riskDispositionAccepted','controlEvidenceRecord','acceptanceRecord','acceptanceAuthority','condition'])
+    def test_incomplete_synthetic_disposition_cannot_close(sources,field):
+        values={k:'true' for k in ('implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+            'residualRiskAssessmentAccepted','riskDispositionAccepted')}
+        values|={k:'"synthetic-test-only"' for k in ('controlEvidenceRecord','acceptanceRecord','acceptanceAuthority')}
+        values['condition']='"synthetic condition"'
+        values[field]='false' if field.endswith('Accepted') else '""'
+        body=' '.join('attribute :&gt;&gt; '+k+' = '+v+';' for k,v in values.items())
+        extra='package SafetyTest { part example :&gt; BlueDogSafety::gorge::collisionExposure {'+body+'} }'
+&gt;       m=connection().parse_sources((*sources,('safety-negative.sysml',extra)),strict=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_safety_reliability.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='eae140d23a040d728013d5092b09bbc3a15276288109f5235ef67f04ee999456', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:484: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_safety_reliability" name="test_incomplete_synthetic_disposition_cannot_close[riskDispositionAccepted]" time="0.244"><failure message="opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:484: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+field = 'riskDispositionAccepted'
+
+    @pytest.mark.parametrize('field',['implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+        'residualRiskAssessmentAccepted','riskDispositionAccepted','controlEvidenceRecord','acceptanceRecord','acceptanceAuthority','condition'])
+    def test_incomplete_synthetic_disposition_cannot_close(sources,field):
+        values={k:'true' for k in ('implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+            'residualRiskAssessmentAccepted','riskDispositionAccepted')}
+        values|={k:'"synthetic-test-only"' for k in ('controlEvidenceRecord','acceptanceRecord','acceptanceAuthority')}
+        values['condition']='"synthetic condition"'
+        values[field]='false' if field.endswith('Accepted') else '""'
+        body=' '.join('attribute :&gt;&gt; '+k+' = '+v+';' for k,v in values.items())
+        extra='package SafetyTest { part example :&gt; BlueDogSafety::gorge::collisionExposure {'+body+'} }'
+&gt;       m=connection().parse_sources((*sources,('safety-negative.sysml',extra)),strict=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_safety_reliability.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='41ab952ff62edf71965c73329df57e7bf8420901d44d3cb89f7fa798391117d4', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:484: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_safety_reliability" name="test_incomplete_synthetic_disposition_cannot_close[controlEvidenceRecord]" time="0.226"><failure message="opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:464: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+field = 'controlEvidenceRecord'
+
+    @pytest.mark.parametrize('field',['implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+        'residualRiskAssessmentAccepted','riskDispositionAccepted','controlEvidenceRecord','acceptanceRecord','acceptanceAuthority','condition'])
+    def test_incomplete_synthetic_disposition_cannot_close(sources,field):
+        values={k:'true' for k in ('implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+            'residualRiskAssessmentAccepted','riskDispositionAccepted')}
+        values|={k:'"synthetic-test-only"' for k in ('controlEvidenceRecord','acceptanceRecord','acceptanceAuthority')}
+        values['condition']='"synthetic condition"'
+        values[field]='false' if field.endswith('Accepted') else '""'
+        body=' '.join('attribute :&gt;&gt; '+k+' = '+v+';' for k,v in values.items())
+        extra='package SafetyTest { part example :&gt; BlueDogSafety::gorge::collisionExposure {'+body+'} }'
+&gt;       m=connection().parse_sources((*sources,('safety-negative.sysml',extra)),strict=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_safety_reliability.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='0307faec488a1e717f99c32b44d057af4acba52389aa52396dcc8b125c143a03', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:464: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_safety_reliability" name="test_incomplete_synthetic_disposition_cannot_close[acceptanceRecord]" time="0.278"><failure message="opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:464: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+field = 'acceptanceRecord'
+
+    @pytest.mark.parametrize('field',['implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+        'residualRiskAssessmentAccepted','riskDispositionAccepted','controlEvidenceRecord','acceptanceRecord','acceptanceAuthority','condition'])
+    def test_incomplete_synthetic_disposition_cannot_close(sources,field):
+        values={k:'true' for k in ('implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+            'residualRiskAssessmentAccepted','riskDispositionAccepted')}
+        values|={k:'"synthetic-test-only"' for k in ('controlEvidenceRecord','acceptanceRecord','acceptanceAuthority')}
+        values['condition']='"synthetic condition"'
+        values[field]='false' if field.endswith('Accepted') else '""'
+        body=' '.join('attribute :&gt;&gt; '+k+' = '+v+';' for k,v in values.items())
+        extra='package SafetyTest { part example :&gt; BlueDogSafety::gorge::collisionExposure {'+body+'} }'
+&gt;       m=connection().parse_sources((*sources,('safety-negative.sysml',extra)),strict=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_safety_reliability.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='98d7ace8b460b286bf51509160f2003463135703366eb9efc664674666a2d510', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:464: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_safety_reliability" name="test_incomplete_synthetic_disposition_cannot_close[acceptanceAuthority]" time="0.241"><failure message="opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:464: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+field = 'acceptanceAuthority'
+
+    @pytest.mark.parametrize('field',['implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+        'residualRiskAssessmentAccepted','riskDispositionAccepted','controlEvidenceRecord','acceptanceRecord','acceptanceAuthority','condition'])
+    def test_incomplete_synthetic_disposition_cannot_close(sources,field):
+        values={k:'true' for k in ('implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+            'residualRiskAssessmentAccepted','riskDispositionAccepted')}
+        values|={k:'"synthetic-test-only"' for k in ('controlEvidenceRecord','acceptanceRecord','acceptanceAuthority')}
+        values['condition']='"synthetic condition"'
+        values[field]='false' if field.endswith('Accepted') else '""'
+        body=' '.join('attribute :&gt;&gt; '+k+' = '+v+';' for k,v in values.items())
+        extra='package SafetyTest { part example :&gt; BlueDogSafety::gorge::collisionExposure {'+body+'} }'
+&gt;       m=connection().parse_sources((*sources,('safety-negative.sysml',extra)),strict=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_safety_reliability.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='1cada51c951d7a9d25e159c2d51e53fb97c4df6ebe48d6811ee543372e0b7c06', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:464: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_safety_reliability" name="test_incomplete_synthetic_disposition_cannot_close[condition]" time="0.241"><failure message="opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:483: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+field = 'condition'
+
+    @pytest.mark.parametrize('field',['implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+        'residualRiskAssessmentAccepted','riskDispositionAccepted','controlEvidenceRecord','acceptanceRecord','acceptanceAuthority','condition'])
+    def test_incomplete_synthetic_disposition_cannot_close(sources,field):
+        values={k:'true' for k in ('implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+            'residualRiskAssessmentAccepted','riskDispositionAccepted')}
+        values|={k:'"synthetic-test-only"' for k in ('controlEvidenceRecord','acceptanceRecord','acceptanceAuthority')}
+        values['condition']='"synthetic condition"'
+        values[field]='false' if field.endswith('Accepted') else '""'
+        body=' '.join('attribute :&gt;&gt; '+k+' = '+v+';' for k,v in values.items())
+        extra='package SafetyTest { part example :&gt; BlueDogSafety::gorge::collisionExposure {'+body+'} }'
+&gt;       m=connection().parse_sources((*sources,('safety-negative.sysml',extra)),strict=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_safety_reliability.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='69376b677352b0c51dc4b61df39e60992862e549ac1621c170984bbe40914aa3', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): safety-negative.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting); safety-negative.sysml:1:483: error: cannot override the binding value of BlueDogSafety::gorge::collisionExposure::condition: a value written with `=` is fixed for every feature redefining it; write it as `default =` on BlueDogSafety::gorge::collisionExposure::condition to allow overriding, or remove this value
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_safety_reliability" name="test_complete_synthetic_disposition_exercises_native_precondition_only" time="3.475"><failure message="opensysml.errors.ModelError: the model has 1 error(s): safety-positive.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting)">sources = (('/home/david/repos/sv-blue-dog-editorial/models/analyses/actuation.sysml', 'package BlueDogWingActuator {\n    priva...s::missionReliability;\n    dependency missionTrace2 from mission to FailureAnalysis::DesignFailureReview;\n}\n'), ...)
+
+    def test_complete_synthetic_disposition_exercises_native_precondition_only(sources):
+        body=' '.join('attribute :&gt;&gt; '+k+' = true;' for k in ('implementationEvidenceAccepted','effectivenessEvidenceAccepted',
+            'residualRiskAssessmentAccepted','riskDispositionAccepted'))
+        body+=' '.join('attribute :&gt;&gt; '+k+' = "synthetic-test-only";' for k in ('controlEvidenceRecord','acceptanceRecord','acceptanceAuthority'))
+&gt;       m=connection().parse_sources((*sources,('safety-positive.sysml',
+            'package SafetyTest { part example :&gt; BlueDogSafety::gorge::collisionExposure {'+body+'} }')),strict=True)
+
+tests/test_safety_reliability.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='ef174c4dc73da55bf0bbd6b1f17361808c59f257d01fd3bfd27bffd820d1a834', root='', diagnostics=1)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 1 error(s): safety-positive.sysml:1:38: error: Must be an accessible feature (use dot notation for nesting)
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_safety_reliability" name="test_unreviewed_rate_model_cannot_become_supported[criticalFunctionPartitionAccepted]" time="3.094" /><testcase classname="tests.test_safety_reliability" name="test_unreviewed_rate_model_cannot_become_supported[dependenceTreatmentAccepted]" time="1.930" /><testcase classname="tests.test_safety_reliability" name="test_unreviewed_rate_model_cannot_become_supported[commonCauseCoverageAccepted]" time="0.358" /><testcase classname="tests.test_safety_reliability" name="test_rendered_hazards_keep_evidence_and_acceptance_open" time="48.197" /><testcase classname="tests.test_reliability" name="test_synthetic_exposure_and_evidence_gate" time="5.887" /><testcase classname="tests.test_reliability" name="test_holds_increase_exposure_and_tighten_budget" time="7.833" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[part redefines upstream { attribute :&gt;&gt; currentVMG = -2 [m/s]; }]" time="3.893" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[part redefines upstream { attribute :&gt;&gt; currentVMG = -3 [m/s]; }]" time="3.783" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[part redefines upstream { attribute :&gt;&gt; retainedPerformance = 0; }]" time="4.027" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[attribute :&gt;&gt; holdTime = -1 [s];]" time="3.984" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[attribute :&gt;&gt; criticalRatesPerHour = (-0.001, 0.0003);]" time="4.043" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[attribute :&gt;&gt; commonCauseRatePerHour = -0.1;]" time="4.069" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[attribute :&gt;&gt; zeroFailureTestHours = 0;]" time="4.263" /><testcase classname="tests.test_reliability" name="test_positive_but_inadequate_progress_fails" time="4.045" /><testcase classname="tests.test_reliability" name="test_common_cause_rate_is_included" time="4.129" /><testcase classname="tests.test_reliability" name="test_failures_invalidate_zero_failure_demonstration" time="4.000" /><testcase classname="tests.test_reliability" name="test_accepted_but_short_test_is_a_verification_failure" time="4.057" /><testcase classname="tests.test_reliability" name="test_accepted_synthetic_fixture_exercises_pass_path" time="4.052" /><testcase classname="tests.test_reliability" name="test_dfmea_starter_stays_open_and_has_real_links" time="10.759" /><testcase classname="tests.test_reliability" name="test_slow_progress_is_allowed_with_sufficient_qualified_exposure" time="3.188" /><testcase classname="tests.test_reliability" name="test_binding_duration_is_independent_of_provisional_reliability[False-100-inconclusive]" time="3.887" /><testcase classname="tests.test_reliability" name="test_binding_duration_is_independent_of_provisional_reliability[True-100-pass]" time="5.933"><failure message="AssertionError: assert 'VerdictKind::inconclusive' == 'VerdictKind::fail'&#10;  &#10;  - VerdictKind::fail&#10;  + VerdictKind::inconclusive">cruise = &lt;function cruise.&lt;locals&gt;.run at 0x7f9698bc71a0&gt;, accepted = True
+hours = 100, expected = 'pass'
+
+    @pytest.mark.parametrize('accepted, hours, expected', [
+        (False, 100, 'inconclusive'),
+        (True, 100, 'pass'),
+        (True, 10000, 'pass'),
+    ])
+    def test_binding_duration_is_independent_of_provisional_reliability(cruise, accepted, hours, expected):
+        body = f"""attribute :&gt;&gt; profileEvidenceAccepted = {str(accepted).lower()};
+                   attribute :&gt;&gt; rateEvidenceAccepted = true;
+                   attribute :&gt;&gt; constantHazardAccepted = true;
+                   attribute :&gt;&gt; zeroFailureTestHours = {hours};"""
+        _, values = cruise(body, 'PassageDurationVerification')
+        assert values['verdict'] == f'VerdictKind::{expected}'
+        if accepted and hours == 100:
+            _, study = cruise(body, 'VoyageReliabilityVerification')
+&gt;           assert study['verdict'] == 'VerdictKind::fail'
+E           AssertionError: assert 'VerdictKind::inconclusive' == 'VerdictKind::fail'
+E             
+E             - VerdictKind::fail
+E             + VerdictKind::inconclusive
+
+tests/test_reliability.py:143: AssertionError</failure></testcase><testcase classname="tests.test_reliability" name="test_binding_duration_is_independent_of_provisional_reliability[True-10000-pass]" time="3.900" /><testcase classname="tests.test_reliability" name="test_duration_cannot_pass_an_accepted_profile_beyond_qualified_exposure" time="3.884" /><testcase classname="tests.test_verification_evidence" name="test_all_project_definitions_have_methods_and_objectives_without_execution" time="2.925" /><testcase classname="tests.test_verification_evidence" name="test_method_choices_distinguish_inspection_analysis_and_user_demonstration" time="0.000" /><testcase classname="tests.test_verification_evidence" name="test_numerical_eligibility_never_changes_planned_verdicts" time="0.011" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[planned-only-changes0]" time="0.005" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[unidentified-article-changes1]" time="0.005" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[historical-other-configuration-changes2]" time="0.004" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[outside-admitted-conditions-changes3]" time="0.005" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[uncontrolled-procedure-changes4]" time="0.004" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[tampered-artifact-changes5]" time="0.005" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[inadequate-reference-or-instrumentation-changes6]" time="0.005" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[unsupported-uncertainty-changes7]" time="0.006" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[criterion-never-evaluated-changes8]" time="0.005" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[valid-failed-test-changes9]" time="0.004" /><testcase classname="tests.test_verification_evidence" name="test_incomplete_or_failed_evidence_cannot_support_affirmative_acceptance[unaccounted-anomaly-changes10]" time="0.004" /><testcase classname="tests.test_verification_evidence" name="test_missing_evidence_review_input_is_not_success" time="0.005" /><testcase classname="tests.test_verification_evidence" name="test_missing_method_annotation_is_detected" time="5.776" /><testcase classname="tests.test_verification_evidence" name="test_archived_design_cannot_substitute_for_planned_ic01_test_article" time="4.574" /><testcase classname="tests.test_verification_evidence" name="test_removing_uncertainty_precondition_changes_native_eligibility" time="1.668" /><testcase classname="tests.test_verification_evidence" name="test_rendered_verification_tables_preserve_plan_and_execution_distinction" time="0.001" /></testsuite></testsuites>

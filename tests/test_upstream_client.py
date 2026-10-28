@@ -58,6 +58,14 @@ def test_native_analysis_records_reload_with_case_and_output(tmp_path):
     record = model.instantiate('BlueDogRecordedEvidence::sample_run1')
     assert record.caseName == 'Recorded::sample'
     assert record.result == 42
+    import json, hashlib
+    from tools.boat_analysis.model.install import REVISION, binary_path
+    provenance = json.loads(output.with_suffix('.sysml.provenance.json').read_text())
+    assert provenance['runtimeRevision'] == REVISION
+    assert provenance['recordedModelSha256'] == hashlib.sha256(output.read_bytes()).hexdigest()
+    assert provenance['sourceHashes'][str(source)] == hashlib.sha256(source.read_bytes()).hexdigest()
+    assert provenance['executableSha256'] == hashlib.sha256(binary_path().read_bytes()).hexdigest()
+    assert provenance['modelHash'] == load_model((source, dependency)).hash
     with pytest.raises(ValueError, match='overwrite'):
         record_analyses(['Recorded::sample'], source, (source,))
 

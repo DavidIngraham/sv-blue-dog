@@ -50,6 +50,33 @@ Soft sail, tail-controlled rigid wing and directly rotated fixed-camber wing rem
 
 Water and air recovery propulsion likewise need comparable installed thrust, demand, guarding, weed tolerance and inverted-operation evidence. A component advantage matters only if the resulting boat can carry it and use it through the voyage. I want each feasible alternative to face the same declared mission cases with its own mass, performance, energy and recovery capability.
 
+## Establish what an analysis can support
+
+An analysis definition and a configured run have different roles. The model's use
+register identifies input exports, historical reviews, conditional physics screens,
+rule assessments and evidence-readiness checks. Each declares its domain, excluded
+interpretations and the evidence needed for further use. These declarations help
+choose an investigation; they do not establish completed validation.
+
+<details>
+<summary>Analysis purposes, domains and limitations</summary>
+
+```sysml-report BlueDogAnalysisDocuments::UseRegister
+```
+
+</details>
+
+Before using a result, I need its actual configuration and inputs, suitable numerical
+checks, relevant measurements, uncertainty and consequential sensitivities. Evidence
+appropriate to a simple arithmetic check may be inadequate for a recovery safety
+claim. A useful analysis can show that a candidate fails a criterion.
+
+Archived CAD and aerodynamic data remain identified reference inputs. An old
+solution can seed a new numerical solve, whose configuration and calculations must
+still be current. Missing current results must be regenerated rather than silently
+replaced with an archived design. Native execution records carry source, driver and
+runtime fingerprints; their existence does not accept the resulting engineering claim.
+
 ## Keep assumptions visible when interpreting a result
 
 The [environmental replays](reference/environmental-replays.md) illustrate why configuration identity matters. On the studied 1.4 m boat at 5 m/s reference wind, modeled downwind progress through the water is about 1.19 m/s with uniform wind and 0.66 m/s with the height-dependent profile. This is a sensitivity for that geometry, not IC-01's sailing prediction.

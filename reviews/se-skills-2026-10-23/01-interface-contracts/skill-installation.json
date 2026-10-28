@@ -1,0 +1,22 @@
+[
+  {
+    "file": "SKILL.md",
+    "sha256": "564CF9663EDBAC74A6C837CE98D71341B1B4942FA0790CCB6EC1CBB4C7A9443F",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\interface-contract-quality\\SKILL.md"
+  },
+  {
+    "file": "agents\\openai.yaml",
+    "sha256": "1504E5E1F62C39B998A5D21AD4A5AB3C40997F8305894D0D12BE98BF82666D15",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\interface-contract-quality\\agents\\openai.yaml"
+  },
+  {
+    "file": "references\\checklist.md",
+    "sha256": "4004F70C48E4BCEA2A271E51EB43C9FD7D18EDDF7825D58074E60CCF463F0B8A",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\interface-contract-quality\\references\\checklist.md"
+  },
+  {
+    "file": "references\\sources.md",
+    "sha256": "1844501B1A83E9352B2C8BAC5A1E6E1B9DFEEB21CE0F9851AF1EA459323A9CDE",
+    "installed": "C:\\Users\\davin\\.codex\\skills\\interface-contract-quality\\references\\sources.md"
+  }
+]

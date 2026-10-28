@@ -1,0 +1,4 @@
+interface:
+  display_name: "Configuration and Budget Management"
+  short_description: "Audit configuration identity and resource accounting"
+  default_prompt: "Use $configuration-budget-management to audit and improve configuration identity, change impact and resource-budget coherence using sourced practices and native model checks."

@@ -65,7 +65,7 @@ def run(destination,count=4):
     paths=[p for p in (ROOT/'tools/boat_analysis').rglob('*.py') if '.venv' not in p.parts]
     paths += [archive/'operating-1.4.json',archive/'shear-waves.json']
     from ..evidence.records import input_path
-    paths += [input_path('wing-polar-grid.json'),input_path('wing-geometry.json')]
+    paths += [input_path('wing-polar-grid.json', purpose='reference'),input_path('wing-geometry.json', purpose='reference')]
     save(destination/'summary.json',dict(sourceHashes=source_hashes(paths),sourceArchive=str(archive.relative_to(ROOT)),
         physicalQualification=False,phaseCases=len(phase_results),missionCount=len(missions),
         scope='Prescribed heave/pitch/roll and point velocity change phase loads and relative clearance. Mission speed remains the archived quasi-steady polar plus wave resistance; phase loads are not a re-solved dynamic VPP.'))

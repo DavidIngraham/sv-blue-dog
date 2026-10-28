@@ -32,7 +32,7 @@ The [integration study](validation-plan.md#exercise-decisions-before-physical-in
 
 ## Logical responsibilities and the candidate boat
 
-Navigation estimates position and attitude; wind estimation supplies the sailing condition; traffic observation and collision assessment identify conflicts. Guidance chooses a sailing command. Mission supervision decides whether that command may be used, whether a gate crossing can count, and whether an abort has ended the attempt. Energy management supplies the reserve assessment, while recovery management decides how to act after an abort. Recording and communications preserve and expose those decisions.
+Navigation estimates position and attitude; wind estimation supplies the sailing condition; traffic observation and collision assessment identify conflicts. Guidance chooses a sailing command. Mission supervision decides whether that command may be used, whether a gate crossing can count, and whether an abort has ended the attempt. Energy management supplies the reserve assessment. Recovery management plans and commands shore recovery; recovery actuation executes permitted propulsion commands. Recording and communications preserve and expose those decisions.
 
 These are responsibilities, independent of processor or software boundaries. The [logical architecture](../models/vehicle/architecture.sysml) connects them with typed observations, permissions, commands and records. A navigation estimate includes validity and time; a safety observation explicitly confirms which required capabilities remain available.
 
@@ -46,6 +46,32 @@ package Page_architecture_logical {
 ```
 
 The candidate physical assembly allocates those responsibilities to a primary sailing path and a recovery path with its own battery, navigation, observation, controller and propulsor. Wired wind sensing is a provisional equipment choice. The assembly identifies power and data interfaces; connectors, bus timing, equipment ratings and common-cause isolation remain open engineering questions. Recording and telemetry power assignment needs to be reconciled with both energy budgets.
+
+The context description, logical responsibilities and candidate assembly answer different questions. The context's `Boat` groups responsibilities and places the vessel among external actors. The logical model defines their exchanges. IC-01 proposes equipment to implement them. [Named correspondences](../models/vehicle/architecture-contracts.sysml) explain how these descriptions connect, including the portion assigned to each element and the candidate configuration it concerns.
+
+A responsibility can need several implementation contributions. Navigation needs an estimate source and controller-side validation. Recording needs storage and controller-side scheduling. Recovery needs route assessment, commands and a propulsor, supported by its power and sensing interfaces. Assigning several responsibilities to one controller also creates internal interactions whose software timing and fault behavior I still need to establish.
+
+<details>
+<summary>Logical responsibilities and their IC-01 contributions</summary>
+
+The table follows the model's allocation links. Each named allocation records its scope in the [correspondence model](../models/vehicle/architecture-contracts.sysml). Primary and recovery identify implementation paths; shared equipment still needs a supply and fault-survival decision. These links describe the candidate, not accepted equipment or a demonstrated software deployment.
+
+```sysml-report BlueDogArchitectureDocuments::ResponsibilityRegister
+```
+
+</details>
+
+<details>
+<summary>How logical exchanges reach candidate interfaces</summary>
+
+Each logical transfer maps to one or more candidate transfers or to an internal interaction within a controller. One navigation transfer can serve several logical consumers. Internal mappings identify work the controller implementation must perform; they do not establish an implemented software call, scheduling guarantee or accepted latency.
+
+```sysml-report BlueDogArchitectureDocuments::ExchangeRegister
+```
+
+The payload definitions preserve quantities, observation timestamps and validity where those features are defined. Installed encoding, freshness limits, arbitration and fault handling still need interface decisions and tests. Navigation signaling has a context responsibility and requirements, but its detailed logical interface and IC-01 equipment allocation remain open. The optional observation payload and future harvesting need separate configuration decisions.
+
+</details>
 
 ```sysml-view Page_architecture_physical::candidate direction=TB
 package Page_architecture_physical {
@@ -86,7 +112,7 @@ The [mission supervisor](mission-simulation.md#executable-supervisory-logic) imp
 
 ### Normal sailing
 
-Each sailing cycle starts with a wind estimate carrying its value, timestamp and validity. Guidance chooses a command and the actuators carry it out. If wind observations disappear, the supervisor inhibits sailing; when they return, sailing can resume unless the attempt has already been aborted.
+Each sailing cycle starts with a wind estimate carrying its value, timestamp and validity. Guidance receives navigation and supervisor permission as well as wind, then chooses a command. Actuation receives the permission explicitly and must check that both command and permission remain applicable. If wind observations disappear, the supervisor inhibits sailing; when they return, sailing can resume unless the attempt has already been aborted.
 
 ```sysml-view Page_architecture_normal::scenario direction=LR
 package Page_architecture_normal {
@@ -115,6 +141,8 @@ package Page_architecture_traffic {
 Capsize alone need not end qualification: the boat may recover unassisted and continue if it retains the required safety capabilities and uses no recovery motor. Motor use, outside intervention or loss of a required safety capability ends qualification. IC-01’s inverted powered-recovery hypothesis is therefore an abort path.
 
 An abort ends the attempt. The boat records and signals the event, selects a reachable shore destination and attempts recovery without waiting for an operator or communications acknowledgment. The recovery leg may use the motor.
+
+The recovery cycle explicitly supplies navigation, traffic, boundary and reserve assessments to shore planning, then durably records disqualification before passing an acknowledged authorization to recovery actuation. The actuator produces a separate execution-disposition record; sending a command does not establish the achieved response. The candidate implements these exchanges through the recovery sensors, controller and propulsor. Shore capture and one-person pickup remain physical and operator tasks; a propulsion command or simulated approach does not establish retrieval.
 
 ```sysml-view Page_architecture_recovery::scenario direction=LR
 package Page_architecture_recovery {
@@ -237,6 +265,16 @@ Launch, service, ocean sailing and navigation signaling remain in the [complete 
 
 </details>
 
+## Interface meaning and applicability
+
+A connected port needs a shared interpretation of its payload. Observations identify their source, configuration, clock and producer restart epoch; navigation and traffic values also identify their coordinate or angular references. Commands carry authority, configuration, issuance and expiry context. These are candidate interface definitions; transport encoding and installed equipment support remain open.
+
+The [interface contract model](../models/vehicle/interface-contracts.sysml) separates producer validity from consumer usability. Its native predicates check a supplied age bound, an established time basis and applicable context. Command applicability also requires accepted authority and ordering. A valid link-down observation differs from missing link data; an empty traffic list does not establish detection coverage. Numerical refresh cadence does not establish a safe freshness limit.
+
+The [executable consumer contracts](../models/vehicle/behavior-contracts.sysml) reuse those predicates and separate sailing permission from recovery enable. Sailing checks current command and permission applicability, navigation, wind, safety and persistent restrictions. Motor enable requires known nonqualifying state, durable disqualification, established recovery authorization, an available path and no active inhibit. These partial logical actions are tested through native execution; the scalar mission simulator does not yet implement the message/storage protocol or hardware interlocks.
+
+I use [NASA interface management guidance](https://www.nasa.gov/reference/6-3-interface-management/) to connect these definitions to integration checks and change control. The [historical NASA interface design guidance](https://swehb.nasa.gov/spaces/7150/pages/16450621/SWE-112%2B-%2BInterface%2BDesign%2BDescription) supplies the detailed review topics. Freshness allocations, clock uncertainty, reference transformations, controller arbitration and physical compatibility need engineering decisions and evidence before these contracts can support deployment. The conceptual simulator does not yet consume these message envelopes.
+
 ## From mission to verification
 
 Read this view from the challenge obligation to its vehicle refinement and planned verification. A satisfy link states the design's intended satisfaction claim; that claim still needs evidence. Allocation separately maps logical responsibilities to physical elements.
@@ -278,5 +316,34 @@ package Page_architecture_4 {
     }
 }
 ```
+
+## Identify the study and the installation
+
+A candidate name does not identify a built boat. IC-01 owns the working design
+and integration allowances. The retained 440 Wh replay, the earlier Bingen design,
+recorded sizing explorations and synthetic examples answer different questions.
+Search brackets bound a calculation; they are not selected dimensions or vessel
+requirements. Shared parameter assumptions also need their own revision context.
+
+<details>
+<summary>Configuration contexts and the planned IC-01 installation</summary>
+
+```sysml-report BlueDogConfigurationDocuments::ConfigurationRegister
+```
+
+</details>
+
+The intended installation references IC-01's design and candidate assembly.
+Actual article, hardware, software/data, procedure and reconciliation records
+remain unset. I need those identities to compare a test with the boat it is meant
+to support. The archived numerical origin is useful provenance; it is not the
+current hardware revision. A source fingerprint identifies the model used by a
+calculation, while configuration reconciliation checks what was actually built.
+
+This approach follows [NASA configuration management](https://www.nasa.gov/reference/6-5-configuration-management/)
+and the [defense SE guidebook, section 6.1.6](https://www.cto.mil/wp-content/uploads/2026/09/SE-Guidebook-2026.pdf),
+with project-specific scope rather than acquisition review gates. A hardware or
+software change needs its affected interfaces, safety, budgets, analyses and
+verification evidence reconciled together.
 
 **Next:** [Establishing operating constraints](operating-constraints.md) · [Series guide](index.md)

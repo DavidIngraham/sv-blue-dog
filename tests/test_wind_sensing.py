@@ -57,7 +57,6 @@ def test_all_requirement_views_include_their_upstream_context(rendered_site):
     dependencies={(a,b) for a,b in basis_links(native('-render-document','BlueDogDocuments::RelationshipRegister')) if a in names and b in names}
     deferred_report=native('-render-document','BlueDogDocuments::FutureMissionRequirements')
     deferred={name[0].lower()+name[1:] for name in re.findall(r'^\| [A-Z]-\d+ \| (\w+) \|',deferred_report,re.M)}
-    edges |= dependencies
     for page in (rendered_site/'imports/docs/requirements').glob('*.md'):
         for diagram in re.findall(r'```mermaid\n(.*?)```',page.read_text(),re.S):
             node_names={n:q.rsplit('::',1)[-1] for n,q in diagram_nodes(diagram).items()}
@@ -70,5 +69,39 @@ def test_all_requirement_views_include_their_upstream_context(rendered_site):
                     if parent in deferred and not future_scope:
                         continue  # Shared criteria do not import a deferred mission.
                     assert parent in visible, (page.name,child,parent)
-                    if (child,parent) in dependencies:
-                        assert (child,parent) in drawn_dependencies, (page.name,child,parent)
+            # Focused views need not expand the complete change-impact network.
+            # A plain basis is shown whenever both of its endpoints are visible.
+            for child,parent in dependencies:
+                if {child,parent} <= visible:
+                    assert (child,parent) in drawn_dependencies, (page.name,child,parent)
+
+
+def test_same_named_requirements_keep_their_native_ids():
+    diagram = '''```mermaid
+flowchart BT
+n0("`*«requirement»*
+**GorgeChallenge::communicationOutageAutonomy : OutageAutonomy**`")
+n1("`*«requirement»*
+**BlueDogRequirements::outageAutonomy : OutageAutonomy**`")
+```'''
+    labels = {'GorgeChallenge::communicationOutageAutonomy': 'C-020',
+              'BlueDogRequirements::outageAutonomy': 'E-121',
+              'OutageAutonomy': 'E-121'}
+    result = include_basis(diagram, [], labels)
+    assert result.count('**C-020 Outage Autonomy**') == 1
+    assert result.count('**E-121 Outage Autonomy**') == 1
+
+
+def test_native_common_namespace_elision_keeps_basis_edges():
+    diagram = '''```mermaid
+flowchart BT
+n0("`*«requirement»*
+**navigationRules : NavigationRules**`")
+n1("`*«requirement»*
+**operatorSafetyIntervention : OperatorSafetyIntervention**`")
+```'''
+    labels = {'GorgeChallenge::navigationRules': 'C-007',
+              'GorgeChallenge::operatorSafetyIntervention': 'C-031'}
+    result = include_basis(diagram, [('operatorSafetyIntervention', 'navigationRules')], labels)
+    assert 'n1 -.->|"dependency"| n0' in result
+    assert diagram_nodes(result)['n1'] == 'GorgeChallenge::operatorSafetyIntervention'

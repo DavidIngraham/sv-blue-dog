@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="8" time="16.826" timestamp="2026-10-23T13:49:59.004302-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_decision_management" name="test_native_decision_scope_and_current_evidence_are_explicit" time="3.812" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[attribute :&gt;&gt; position = 6;-attribute :&gt;&gt; position = 7;-D07 Criterion positions]" time="2.198" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[attribute :&gt;&gt; kind = Kind::comparativeStudy;-attribute :&gt;&gt; kind = Kind::mandatory;-D08 Wrong]" time="2.065" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[reopenTrigger = &quot;New comparable rig evidence, changed geometry/domain or a proposed hardware selection.&quot;;-reopenTrigger = &quot;&quot;;-D01 Missing]" time="2.000" /><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[dependency progressDuration from progress to BlueDogRequirements::passageDuration;-dependency progressDuration from progress to BlueDogRequirements::legProgress;-D07 Missing current]" time="2.015" /><testcase classname="tests.test_decision_management" name="test_new_unclassified_working_decision_is_detected" time="2.048" /><testcase classname="tests.test_decision_management" name="test_acceptance_flag_without_actual_disposition_identity_is_detected" time="2.076" /><testcase classname="tests.test_decision_management" name="test_native_tie_is_reported_and_first_selection_is_order_dependent" time="0.029"><failure message="AttributeError: 'Instance' object has no attribute or feature 'type'">def test_native_tie_is_reported_and_first_selection_is_order_dependent():
+        source=EXAMPLE.read_text()
+        first=mechanism(source);reversed_order=mechanism(source.replace('(a,b)','(b,a)'))
+&gt;       assert first.outputs['selectedAlternative'].type=='DecisionMechanismExample::a'
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Instance(id=1, type='DecisionMechanismExample::a', features=14)
+name = 'type'
+
+    def __getattr__(self, name):
+        """Expose feature values as attributes. Real attributes always win."""
+        if name.startswith('_'):
+            raise AttributeError(name)
+        values = self._values if self.__dict__.get('_pb') is not None else {}
+        if name not in values:
+&gt;           raise AttributeError(
+                f"{type(self).__name__!r} object has no attribute or feature {name!r}"
+            )
+E           AttributeError: 'Instance' object has no attribute or feature 'type'
+
+.venv/lib/python3.12/site-packages/opensysml/instance.py:114: AttributeError</failure></testcase></testsuite></testsuites>

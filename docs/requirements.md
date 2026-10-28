@@ -1,12 +1,12 @@
 # Requirements: what the boat must achieve
 
-The requirements turn the Gorge challenge and my practical constraints into observable obligations. They define the job before I choose hardware. The six references below retain the detailed model statements; the governing decisions are enough to continue the main story.
+Blue Dog must sail one Bingen-Stevenson-Bingen circuit using onboard control and sail power. It must detect hazards, preserve enough energy for recovery and record the attempt. My construction and handling requirements also determine what I can build and operate. The six references below give the detailed limits and planned checks.
 
 - **Complete one independent, sail-only round trip.** Start at the Bingen gate, round Buoy 16 near Stevenson and return. Safe waiting is allowed; motor use, intervention, anchoring, grounding or refuge ends qualification.
 - **Make decisions onboard.** Shore communications support observation. Their loss must not remove navigation or safety capability.
 - **Preserve safety and recoverability.** The boat must avoid collisions, meet applicable navigation duties and act autonomously when a required capability is lost. Capsize alone need not end qualification if unassisted recovery preserves the required safety functions without motor use.
-- **Carry enough usable energy.** Support the finite passage and its delays while preserving recovery reserve. This mission imposes neither a fixed 72-hour deadline nor daily energy neutrality.
-- **Survive the declared conditions.** Environmental, structural and casualty tests must identify their configuration and exposure. A calculated margin is evidence for a prediction, not a physical demonstration.
+- **Carry enough usable energy.** Support the finite passage and its delays while preserving recovery reserve. There is no completion deadline; size the energy supply for the passage and its recovery plan.
+- **Survive the declared conditions.** Environmental, structural and casualty tests must identify their configuration and exposure. Tests must establish the actual boat's strength and behavior under those conditions.
 - **Remain practical for me to build and handle.** Printed jobs must fit a 250 × 250 × 250 mm envelope; assembled structures can be larger. One person must be able to transport, launch and retrieve the boat with appropriate aids.
 
 Hawai‘i and sustained repeated operation are separate future missions. Their labeled ocean and repeating-energy requirements remain in the reference model, but they do not set acceptance criteria for the first Gorge boat.
@@ -46,7 +46,7 @@ remain in scope; acoustic and optical choices must expose their unsupported case
 | [Traffic safety and monitoring](requirements/requirements-safety.md) | Traffic response, navigation signals, telemetry, commands and autonomous abort |
 | [Manufacturing and handling](requirements/requirements-practicality.md) | Printed construction, material qualification, one-person handling and service |
 
-Each reference starts with the design consequence, then offers expandable model views and authoritative statements. Repeated upstream requirements remain visible in the diagrams; their statements appear only at their first occurrence on each page. In a view, arrows point toward the source: **derive** identifies a derived obligation, **refine** adds precision and **dependency** records a design basis. These relationships explain why a requirement exists; evidence must separately establish whether a configuration meets it. The [modeling reference](methods/modeling.md) explains the notation and the distinction between requirements and provisional design assumptions.
+Each reference starts with the design consequence, then offers expandable model views and authoritative statements. Repeated upstream requirements remain visible in the diagrams; their statements appear only at their first occurrence on each page. In a view, **derive** points from a derived obligation toward its original, **refine** points from a detailed specification toward the obligation it clarifies, and **dependency** points toward a supporting basis. An original requirement implies its derived obligations under the stated conditions; a chosen numerical allocation usually needs its own justification. These relationships explain why a requirement exists; evidence must separately establish whether a configuration meets it. The [modeling reference](methods/modeling.md) explains the notation and the distinction between requirements and provisional design assumptions.
 
 These obligations have to fit in one boat. The next article examines the mass and energy needed for sensing, sailing and independent recovery in IC-01.
 

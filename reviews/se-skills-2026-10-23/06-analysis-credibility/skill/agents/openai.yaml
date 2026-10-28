@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering analysis credibility"
+  short_description: "Review simulation use, uncertainty and provenance"
+  default_prompt: "Use $engineering-analysis-credibility to audit this analysis and correct its model and evidence provenance."

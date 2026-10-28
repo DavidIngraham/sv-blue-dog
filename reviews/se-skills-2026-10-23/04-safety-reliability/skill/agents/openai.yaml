@@ -1,0 +1,4 @@
+interface:
+  display_name: "Safety and Reliability Analysis"
+  short_description: "Audit hazards, controls, failure evidence and reliability"
+  default_prompt: "Use $safety-reliability-analysis to audit and improve the specified model's hazard, control and reliability arguments with primary-source traceability and native validation."

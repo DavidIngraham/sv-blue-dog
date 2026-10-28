@@ -44,7 +44,7 @@ def test_encounter_demand_and_complete_response_paths(cases, case, primary, fall
                                   safeSeparationUnsupported=top)
 
 @pytest.mark.parametrize('review,count,critical', [
-    ('BlueDogDFMEA::starter', 12, 10),
+    ('BlueDogDFMEA::starter', 15, 13),
     ('BlueDogAvoidanceFailures::functional', 17, 17),
     ('BlueDogAvoidanceFailures::concepts', 15, 15),
 ])

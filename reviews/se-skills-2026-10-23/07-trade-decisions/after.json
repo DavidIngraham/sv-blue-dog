@@ -1,0 +1,2098 @@
+{
+  "runtimeRevision": "23ca2e2f0f1fae4da6bc3e1488951cb017ed43e2",
+  "modelHash": "ea6a1160890ed89d520ea2146cd3798da5b9aa383db28b6bef931f7f410d3de9",
+  "sourceHashes": {
+    "models/analyses/actuation.sysml": "ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1",
+    "models/analyses/aerodynamic-policy.sysml": "ea5ec771f7dbf0b31863352efc991b97816e641571588eb1b423a9ec6430b02a",
+    "models/analyses/avoidance-failures.sysml": "e696a0d798ca05bbcf3ef05a90c0c2b67bf3268f62238dacd691d553cb46d1f4",
+    "models/analyses/candidate-energy.sysml": "f05a4a2187aabd316ac06e1968fd8e9fae00ab3ca5980d9a216ce2a5146c4241",
+    "models/analyses/class-specific-detection.sysml": "9e585fb65056849ffe3827d6b489912bf6e26e4ae6d20bde7a9b005a3836a8b3",
+    "models/analyses/credibility.sysml": "014d5a893aca47bf73928ab866b08a2102b80dab7bf1b545c1742f1530116ba6",
+    "models/analyses/development-risks.sysml": "02215b2776e5c643d044ce4b8a47c51e8e5796e1ba5a9e451714cbe781ec2a40",
+    "models/analyses/dfmea.sysml": "223b975714a8d76671a3a90a24c7ea764e383c24bc1b6ad8f7a9b5a50a31a34f",
+    "models/analyses/encounter-envelope.sysml": "61654e8fe683aa4932f6c409f8fe954ebd6f3fb5c1295805ecced68b15071db5",
+    "models/analyses/encounter-feasibility.sysml": "4067475ad5174a54f22fc72baad6d8ee3cc502cbc3bc6dbfd528db49277500cb",
+    "models/analyses/encounter-review.sysml": "7efaf1b169a56ae75c6465fe130bb6a0c3fca2b94faa1f3584cea43a666f1bbb",
+    "models/analyses/energy.sysml": "203f075b8b8470331c0a6c725bedafe467b9140bc572ccf79ba5ae14137c8c20",
+    "models/analyses/environment-review.sysml": "5d74730715837b2cfb7596af73d481c5545308ec03cd9b73c6dcb807d7efa243",
+    "models/analyses/integrated-candidate.sysml": "9eab58e1ce9d4d79d57b6fe7c0740fda867ac4286c687f1786673a620c5f0c7b",
+    "models/analyses/location-traffic-risk.sysml": "21fcbaa999f92f7bd1b305708fea4dccd8b0bc5688b0f8d1a749e218b41483ba",
+    "models/analyses/maneuver-dynamics.sysml": "065494ce5c9ff1fa96e761181c3ff40651f0858085c88894f39f50852018c750",
+    "models/analyses/mission.sysml": "5d10d5dcb127b499437a7e915e0c92ad98104477762a0a3d119efc052e6a3cd6",
+    "models/analyses/navigation-controller.sysml": "32d2edfcb696147b7fad2daeb682c0d2bc09a28af0e758b78904cdfde0d77b30",
+    "models/analyses/passage-exposure.sysml": "72f055615ffabba4ec9377d00d2f76ade31ee68091f012b60ed56d5bb1a64f73",
+    "models/analyses/polar-demand.sysml": "2ae69be8debe151f0c081cc37da56074c878a77ff50a647ab5e4364a9a866905",
+    "models/analyses/recovery-propulsion.sysml": "bb79e2d030eda65bf8c2d243d62d9e51a02a9b114f7fb5659fece646a8ab6829",
+    "models/analyses/recovery-risk.sysml": "91d821d597600176304c6d2dede380f409aacee8eae2769ce5b033e9eb7309f5",
+    "models/analyses/recovery-site-review.sysml": "f0e8915d23aea03f4b8af834960fa8dfc4fd075ae0512188ecb97c6f4a3f051d",
+    "models/analyses/recovery.sysml": "6da6703115287c71d53093ee1476a7c1b025c9f0582b3a53c89bc01e3dbdb4f3",
+    "models/analyses/reliability.sysml": "6746846ce5f3f7fcd236ec7c5c83822a5963db53591ad28702dc859735517d76",
+    "models/analyses/safety.sysml": "bbaaa8d52fdd9867699d14ba4efe6627e2f97e2f20001cea319e78c9b901f645",
+    "models/analyses/sail-trade.sysml": "e231b51c6031a26a304a42c368a1fc2c9cf4a16d55e22dcf0e83a2231e9b08ac",
+    "models/analyses/sizing/credibility.sysml": "42eca821d95eca13772ef1326b6a27b625e1f6ec0e890d2a2ad94f717455728c",
+    "models/analyses/sizing/evidence.sysml": "f0d2a6d886c71d4b7adc632271ff122f7bc57b1a6302db84bf844d74f20fe801",
+    "models/analyses/sizing/inputs.sysml": "934dde8fa12d41656d776b954c7a695f7979e003e629d2677ea4de51b1615925",
+    "models/analyses/sizing/operating.sysml": "04e6733d21d749c8a06e141ad67b7807cb349b6b03612a0c3d2a315ee4c92ce7",
+    "models/analyses/sizing/uncertainty.sysml": "78d71e2767b681561768d486ca6d6a9d4e16332fd576fe9cfe1a8e01d3dfcf3b",
+    "models/analyses/structural-basis.sysml": "c85be7e177715c5586e13508ecb973ac9d9355cac58fac684c683c0da3fc6ed6",
+    "models/analyses/surface-environment.sysml": "5778f163047634797e8ef65a8783a5e783676df530bc0caa0247a679c00222ea",
+    "models/analyses/wave-performance.sysml": "383e94db89dfe142db9e46398de22a707c543f754d3f778aa600a695689d6b3d",
+    "models/analyses/weather.sysml": "44ecf6b6d1e331fa5185398873d42e553128533c925d292dfc4287851ff1ee4c",
+    "models/analyses/wing-heel.sysml": "6565df5421fa138dbb83c9317f3b3ce9c030f3589a29b70ab60f9e3ad689f6ac",
+    "models/configurations/acoustic-equipment.sysml": "cf00a437976ecfd928740adf21a711da19184bd87347e1c8e6ce8126ee6b419e",
+    "models/configurations/energy.sysml": "9a67f9f74fa51fb67f2749cf3b4e12615014f383b365a48043f3461999d6c7b8",
+    "models/configurations/ic01.sysml": "0b953814697ff78defa9931de9c23813a23ca90eb1a2cd7121f4d755064a221f",
+    "models/configurations/management.sysml": "ca0157c9c75a8fd3dfcfaf5707ff5a8fb7789cd19a36697398c19e1bfc92b488",
+    "models/configurations/operating.sysml": "2f3019e2b9c4a9985d7a5eabfbd39dde694903dc378d8381c1b550f3c48c59d0",
+    "models/configurations/polar-demand.sysml": "776327bf7cefc8edc26f29000d21261cc3f2d2da9da8dcd8a6e30ffa5ced121e",
+    "models/configurations/reference.sysml": "409baa5254262a527b27af7fce00ffb3da35f249fe54e51f3cf024bdf86671be",
+    "models/configurations/reliability.sysml": "187ebec5445dd0b29473dba64f3996e6848cc888f8c84f6e3c644d864cedc826",
+    "models/configurations/sensing-equipment.sysml": "67f7f5e14071cc49cad4dc86c35477caeae217c06ecb88a30b6b7f97023f3845",
+    "models/configurations/study-plan.sysml": "b4c706cbc497c3e0146bc68f409b97a4fa5a544f82237f930ff6d242283ae959",
+    "models/configurations/wind-equipment.sysml": "ebb44c8c073855c60e4fbe6a6d1d3ee0b9e8dac26284f0451d89bdde67e6ff8c",
+    "models/evidence/coupled-2026-10-10.sysml": "e8adc0d3df40e38312fece53d7db5415f4e5be27e42e70260bb1455eddb18c21",
+    "models/evidence/current-sizing.sysml": "b6176f48be47dde61bd41ea892fec6c68258b72afdf2265ffb1bba5fb642b991",
+    "models/evidence/finite-passage-sizing.sysml": "7c0cac2c4733ba43b652edc7bc547265087434656a11694670ff5347c2028f56",
+    "models/evidence/gorge-wind.sysml": "2eee7571fc7ac02bcd054b0c226b5edb54ff931a31d74c508331ff1bf20ef466",
+    "models/evidence/sizing-continuation.sysml": "b8825d29058049ef75538b8b40b0dceb5bbdcb9aac806457856b9b2a9ccfee2e",
+    "models/evidence/srr-current.sysml": "c429f99895f703e8189f10383374e02865c78a7d5bc623478affdda1600daa33",
+    "models/evidence/srr-frontier.sysml": "c153ab46f07b4fffe4e4d946bd42a81b43f5fb6f6d5f0d95ee52097d8a7333db",
+    "models/libraries/energy/actuation.sysml": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/appendages.sysml": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+    "models/libraries/marine/concept.sysml": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+    "models/libraries/marine/course.sysml": "3f58d6c0dc668858aa0b6bdad232c26b0ac75952ad67d0f06e73f4fbd464c85c",
+    "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "models/libraries/marine/hull-resistance.sysml": "967550313effe20092525e10c1695771b8354c66478203f449ac902d8af1a5f1",
+    "models/libraries/marine/hydrostatics.sysml": "b6791576a108dee393063a15a1a359113a8c24aba793105fa7d60fa193e9d858",
+    "models/libraries/marine/propulsion.sysml": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+    "models/libraries/marine/recovery.sysml": "00c8c1fcfda115116fc66bf1db5a67334e04ea893182a454a796ada62eeeaab4",
+    "models/libraries/marine/reliability.sysml": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+    "models/libraries/marine/sailing.sysml": "8281caf912a840d83d5a6d1c39fe0422419ce7fb9ccaae3d9044b0c5df33446f",
+    "models/libraries/marine/surface.sysml": "781d337d8553160eb8d3c0724ae2aef4463d51ae6bc05ef475d32884645213c8",
+    "models/libraries/marine/wave-performance.sysml": "ee1d491adb19773eb151588a5f8ccb52c8ee4364150c5783637c58ada8a07ba9",
+    "models/libraries/marine/weather.sysml": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326",
+    "models/libraries/structures/mass-properties.sysml": "ced6365432541c9c9ada7b683564efde12f597d46e96144fd70221f767ef5dde",
+    "models/libraries/structures/scantlings.sysml": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+    "models/missions/course.sysml": "58bff9885a96ec73bcd4f0b405f9bef2f5b520bb605c0f1d8eb6ed630ed4d714",
+    "models/missions/scope.sysml": "3f4058d5a9fc653f77764849708b3729f286fc52e692ec418ea5fd47aad92854",
+    "models/missions/transgorge.sysml": "28a3deec02e3b2b7e9c69bb880d5f4c8b3d5e5627c7318506d5156c32dafd920",
+    "models/missions/verification.sysml": "99a624662537a2413b16b86421f2aa0e227efc3a2746046b516923ad50852677",
+    "models/vehicle/allocations.sysml": "1c8753ed06da6175b784f671491b38a75b81c0df0b50fb3818a4648ef57466e5",
+    "models/vehicle/architecture-contracts.sysml": "b8d38ac4fa384ea84ad7c88c8a490417d0495659836eb91744900182991b396a",
+    "models/vehicle/architecture.sysml": "b5cb5660303d5db76c434b0feacba250f2cdcb51c0f6d0622e91e2311f8c53b9",
+    "models/vehicle/behavior-contracts.sysml": "b67da5f4b04bb6c82ea50a1bab0e4d22b1519b65c9cae512ac52ebfb7a815669",
+    "models/vehicle/decision-context.sysml": "1ca524827ca3c84b09b030d7ce8aac4966708886ddbaf3209bcdb4893eb467d8",
+    "models/vehicle/decisions.sysml": "085b67cc1cd0ae1cd14b4c3b598863c16ee43900c76676a5a10ead0fcb4be790",
+    "models/vehicle/interface-contracts.sysml": "93844239666f3762a03ff2d414501a8bd1016e233503847b5c0a5e1fe0f14f1a",
+    "models/vehicle/method.sysml": "014068f89e0edc6fb45d586432e989e657a16de5d0d21dcf340b1c842fb81fe5",
+    "models/vehicle/mission-logic.sysml": "d09ddf94799d465b78daa2c8d2ecc4559735f063d36c0bf836aaa045271a663c",
+    "models/vehicle/requirement-basis.sysml": "b390fc89ce054ea5474fd2a1e2c577e6dd389f57283d8644d1754aeed82d52cd",
+    "models/vehicle/requirement-decisions.sysml": "cf6bf8ae2c7e2294a4f90ce7ba05173918adc4b55d19d1940a6a485b93e3d515",
+    "models/vehicle/requirements.sysml": "b2f1105cb06e3b804c974dbd5e01bda4f4912730e1edb36c837cf4f6eb5d73b4",
+    "models/vehicle/source-evidence.sysml": "028ba4009dc681ed1cc3205d6f6385dba8062931303645fb1347030f6b84c8f6",
+    "models/vehicle/structure.sysml": "81ff62a76c486454e01e8a424152f39540a2d63cc819f9850d7f329f47e8fb95",
+    "models/vehicle/use-cases.sysml": "85e937531404b30b8b5472b2ff266a99a57ba8fdc25d633a80dbd40a68e2e319",
+    "models/vehicle/verification-planning.sysml": "beadeb90cce35e07fb77a6c9f5324c00c97a45aea0046dfa059ef6de2e47e64a",
+    "models/vehicle/verification.sysml": "961cb9d09fdec61406585cf6956a2d66b26e2e34e7cc9658df358d3201f890e9"
+  },
+  "auditSources": {
+    "tools/publishing/reference.sysml": "f959d162073527ec45ea8c306b6b0b05e9948975616803d491c6f7e3e5c04639",
+    "tools/boat_analysis/model/decision_audit.py": "b7a5cdb2353fb8739d6e02d723a462b3251be87f4e578a14a206f36ffbbb5bbf"
+  },
+  "diagnostics": [],
+  "errors": [],
+  "summary": {
+    "workingDecisions": 8,
+    "openQuestions": 6,
+    "declaredCriteria": 7,
+    "criterionClasses": {
+      "mandatory": 6,
+      "comparativeStudy": 1
+    }
+  },
+  "missingActualRecords": [
+    {
+      "decision": "BlueDogDesignDecisions::sizingBaseline",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogDesignDecisions::holdingDrive",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogDesignDecisions::aerodynamicScope",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogDesignDecisions::structuralScope",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogDesignDecisions::recoveryScope",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogDesignDecisions::energyEvidenceAcceptance",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogDesignDecisions::uncertaintyPolicy",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogDesignDecisions::trafficCourtesy",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogRequirementDecisions::trafficAcceptance",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogRequirementDecisions::recoveryAcceptance",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogRequirementDecisions::structuralQualification",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogRequirementDecisions::installedControlEvidence",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogRequirementDecisions::integrationCoverage",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    },
+    {
+      "decision": "BlueDogRequirementDecisions::futureMissionAcceptance",
+      "missing": [
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ]
+    }
+  ],
+  "assessments": {
+    "tailAssessment": {
+      "candidateName": "Tail-controlled rigid wing",
+      "gateCount": 7,
+      "knownFailure": false,
+      "evidenceComplete": false,
+      "mandatoryEvidenceComplete": false,
+      "declaredMandatoryGatesMet": false,
+      "qualified": false,
+      "reliabilityStudyDisposition": "Study evidence missing",
+      "requirementVerdict": "Inconclusive: mandatory evidence missing",
+      "developmentDecision": "Equal development contender for the finite Gorge mission"
+    },
+    "camberAssessment": {
+      "candidateName": "Fixed-camber rotating-mast wing",
+      "gateCount": 7,
+      "knownFailure": false,
+      "evidenceComplete": false,
+      "mandatoryEvidenceComplete": false,
+      "declaredMandatoryGatesMet": false,
+      "qualified": false,
+      "reliabilityStudyDisposition": "Study evidence missing",
+      "requirementVerdict": "Inconclusive: mandatory evidence missing",
+      "developmentDecision": "Equal development contender for the finite Gorge mission"
+    },
+    "softAssessment": {
+      "candidateName": "Triangular soft sail",
+      "gateCount": 7,
+      "knownFailure": false,
+      "evidenceComplete": false,
+      "mandatoryEvidenceComplete": false,
+      "declaredMandatoryGatesMet": false,
+      "qualified": false,
+      "reliabilityStudyDisposition": "Study evidence missing",
+      "requirementVerdict": "Inconclusive: mandatory evidence missing",
+      "developmentDecision": "Equal development contender for the finite Gorge mission"
+    }
+  },
+  "tables": {
+    "WorkingRecords": {
+      "columns": [
+        "Record",
+        "Kind",
+        "Question",
+        "Scope",
+        "Responsible role",
+        "Mandatory basis",
+        "Comparison basis",
+        "Reopening trigger",
+        "Recorded disposition",
+        "Needed evidence",
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::sizingBaseline",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogDesignDecisions::sizingBaseline"
+            ],
+            [
+              "Numerical baseline"
+            ],
+            [
+              "Which available geometry supports the first coupled sizing calculation?"
+            ],
+            [
+              "Finite Gorge sizing/reference CAD; no hardware rig downselect."
+            ],
+            [
+              "Project owner"
+            ],
+            [
+              "Applicable mission and safety obligations remain mandatory."
+            ],
+            [
+              "Compare all three rigs using measured performance, durability, energy and recovery on common cases."
+            ],
+            [
+              "New comparable rig evidence, changed geometry/domain or a proposed hardware selection."
+            ],
+            [
+              "Use the fixed-camber rotating-mast wing as the first numerical sizing baseline; no final sail downselect."
+            ],
+            [
+              "Comparable both-tack polars, wet-cycle durability, actuator energy, mass/CG and dynamic recovery evidence for the alternatives."
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::holdingDrive",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogDesignDecisions::holdingDrive"
+            ],
+            [
+              "Option investigation"
+            ],
+            [
+              "Should non-backdrivable gearing remain an actuator option?"
+            ],
+            [
+              "Finite Gorge move/hold/standby energy, shock/jam and recovery; future endurance separate."
+            ],
+            [
+              "Project owner"
+            ],
+            [
+              "Launch/recovery energy, controllability and casualty response cannot be traded away."
+            ],
+            [
+              "Compare complete drive mass, efficiency, idle/move/hold energy, wear, depower and construction effort."
+            ],
+            [
+              "Measured holding/efficiency/failure behavior or changed actuator/energy/safety assumptions."
+            ],
+            [
+              "Evaluate non-backdrivable gearing as an option, not a selected or qualified component."
+            ],
+            [
+              "Motor-off holding under shock, wear, temperature and lubrication changes; moving efficiency, controller demand, jam and power-loss recovery tests."
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::aerodynamicScope",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogDesignDecisions::aerodynamicScope"
+            ],
+            [
+              "Analysis-use policy"
+            ],
+            [
+              "What can the provisional VSPAERO response support?"
+            ],
+            [
+              "Restricted attached-flow sizing of the reference section, not a measured candidate polar."
+            ],
+            [
+              "Project owner"
+            ],
+            [
+              "Respect declared analysis domain and mission-evidence obligations."
+            ],
+            [
+              "Convergence and domain sensitivity inform use; additional calculations do not prefer the rig."
+            ],
+            [
+              "New measurements, solver/domain changes or a use beyond the declared polar envelope."
+            ],
+            [
+              "Use restricted attached-flow VSPAERO sensitivity evidence with conservative sizing assumptions and separate actuator-moment uncertainty; no measured polar is available for this CAD."
+            ],
+            [
+              "Low-Reynolds-number viscous drag, stall, broadside response, thickness sensitivity and both-tack moment measurements; converged heel/wind/trim response across the sizing grid."
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::structuralScope",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogDesignDecisions::structuralScope"
+            ],
+            [
+              "Analysis credit policy"
+            ],
+            [
+              "Which structural contributions receive preliminary bending credit?"
+            ],
+            [
+              "Current hybrid printed/composite sizing; production joints and wet/aged properties unaccepted."
+            ],
+            [
+              "Project owner"
+            ],
+            [
+              "Applicable structural integrity, manufacturing boundary and verification requirements."
+            ],
+            [
+              "Compare complete mass, section behavior, constructability and test-supported material/joint alternatives."
+            ],
+            [
+              "New wet/joint/fatigue/buckling data, changed construction or load envelope."
+            ],
+            [
+              "Credit finite glass/epoxy laminate sections for bending; give printed substrate no bending-strength credit."
+            ],
+            [
+              "Wet/jointed coupon strength and stiffness, glass-to-print bonds, ribs, attachments, fatigue, buckling and impact tests."
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::recoveryScope",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogDesignDecisions::recoveryScope"
+            ],
+            [
+              "Analysis-use policy"
+            ],
+            [
+              "What recovery claim can static restoring curves support?"
+            ],
+            [
+              "Static full-roll sensitivities for identified geometries; dynamic self-righting separate."
+            ],
+            [
+              "Project owner"
+            ],
+            [
+              "Self-righting, safe casualty control, independent recovery and retrieval obligations."
+            ],
+            [
+              "Compare geometry, pitch stability, water state, control restoration and dynamic trajectories."
+            ],
+            [
+              "New dynamic releases, water-state geometry, failures or changed recovery use."
+            ],
+            [
+              "Treat static full-roll restoring curves as screening evidence, separate from dynamic self-righting."
+            ],
+            [
+              "Dynamic releases, pitch stability, ingress/drainage, control restoration and credible failure-state geometry."
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::energyEvidenceAcceptance",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogDesignDecisions::energyEvidenceAcceptance"
+            ],
+            [
+              "Evidence-acceptance policy"
+            ],
+            [
+              "What evidence would support setting energy evidenceAccepted?"
+            ],
+            [
+              "Same installed configuration and declared sustained-operation use; finite Gorge energy remains separately scoped."
+            ],
+            [
+              "Project owner"
+            ],
+            [
+              "Required functions, non-overlapping accounts and actual evidence/readiness obligations."
+            ],
+            [
+              "Compare bound adequacy and uncertainty; a review Boolean is not an automatic evidence audit."
+            ],
+            [
+              "Changed installation, duty, temperature/service age, usable storage, harvester or required functions."
+            ],
+            [
+              "Set evidenceAccepted only after review of evidence for the same installed configuration."
+            ],
+            [
+              "Non-overlapping installed-load coverage; measured power and duty bounds that preserve required functions; installed harvester route/season bounds including outages; temperature/end-of-service battery limits; conservative initial energy; consistent stored-energy and bus boundaries; interval resolution, uncertainty, repeat-cycle phase, source identifiers, configuration revision and review disposition."
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::uncertaintyPolicy",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogDesignDecisions::uncertaintyPolicy"
+            ],
+            [
+              "Interpretation policy"
+            ],
+            [
+              "How should nominal solutions, adverse sensitivities and qualification be interpreted?"
+            ],
+            [
+              "Local sizing/search and declared environmental/construction sensitivities."
+            ],
+            [
+              "Project owner"
+            ],
+            [
+              "Preserve mission requirements and report calculation/domain limitations."
+            ],
+            [
+              "Compare robust margins and consequential sensitivities; brackets/reserves are not accepted safety factors or probabilities."
+            ],
+            [
+              "Measured bounds, new adverse cases, solver/domain changes or proposed qualification use."
+            ],
+            [
+              "Separate nominal feasibility, adverse engineering sensitivities and physical qualification."
+            ],
+            [
+              "Measured uncertainty bounds and environmental exposure; hardware packaging/CG; robust feasibility with sufficient mission margins."
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::trafficCourtesy",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogDesignDecisions::trafficCourtesy"
+            ],
+            [
+              "Operational design preference"
+            ],
+            [
+              "How should alternatives reduce the burden on crewed traffic while meeting navigation duties?"
+            ],
+            [
+              "Common finite Gorge traffic scenarios; planner preference not yet implemented or validated."
+            ],
+            [
+              "Project owner"
+            ],
+            [
+              "Navigation duties, predictable required behavior, collision safety and permitted interventions."
+            ],
+            [
+              "Compare close encounters, predicted other-vessel action and mission delay; no inference about another skipper's motives."
+            ],
+            [
+              "Changed traffic/rule context, sensing/planning capability or contrary encounter evidence."
+            ],
+            [
+              "Prefer safe, rule-consistent routes, operating windows and trajectories that reduce the likelihood of crewed vessels needing to maneuver. Accept delay or reduced mission progress to avoid developing encounters. Once encounter duties apply, preserve required predictable behavior and act when permitted or necessary; this is not an always-yield policy."
+            ],
+            [
+              "Compare alternatives against the same traffic scenarios using close-encounter exposure, predicted need for other-vessel action and mission delay, with explicit behavior and sensing assumptions. These are comparative design measures, not evidence of why another skipper acted or challenge pass/fail criteria. The preference is not yet implemented as a planner objective or validated by the existing replay."
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "OpenRecords": {
+      "columns": [
+        "Record",
+        "Kind",
+        "Question",
+        "Scope",
+        "Responsible role",
+        "Mandatory basis",
+        "Comparison basis",
+        "Reopening trigger",
+        "Needed evidence",
+        "Actual disposition record",
+        "Actual authority",
+        "Actual decision date",
+        "Implementation evidence",
+        "Open-question acceptance"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogRequirementDecisions::trafficAcceptance",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogRequirementDecisions::trafficAcceptance"
+            ],
+            [
+              "Open acceptance question"
+            ],
+            [
+              "Accept class-specific observation, response, clearance and reliability/confidence criteria and the deployment applicability matrix."
+            ],
+            [
+              "Current Gorge class-specific traffic/rule applicability and installed response evidence."
+            ],
+            [
+              "BlueDogRequirementDecisions"
+            ],
+            [
+              "Applicable supporting requirements and the evidence named by this open question; unaccepted criteria remain open."
+            ],
+            [
+              "Evidence sufficiency and applicability review; no hardware ranking or invented utility score."
+            ],
+            [
+              "Observation/response errors, changed class/context/rules or new installed evidence."
+            ],
+            [
+              "Installed class-specific observations and achieved responses; configuration-specific rule review and recorded authority."
+            ],
+            [],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementDecisions::recoveryAcceptance",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogRequirementDecisions::recoveryAcceptance"
+            ],
+            [
+              "Open acceptance question"
+            ],
+            [
+              "Establish independent course-wide recovery and physical retrieval."
+            ],
+            [
+              "Current Gorge course-wide powered recovery, capture/retention and human retrieval."
+            ],
+            [
+              "BlueDogRequirementDecisions"
+            ],
+            [
+              "Applicable supporting requirements and the evidence named by this open question; unaccepted criteria remain open."
+            ],
+            [
+              "Evidence sufficiency and applicability review; no hardware ranking or invented utility score."
+            ],
+            [
+              "Changed shores/current/casualty envelope, supplies or recovery/retrieval capability."
+            ],
+            [
+              "Surveyed accessible shores, final capture/retention, casualty propulsion, onboard observations/control and protected power under no-contact faults."
+            ],
+            [],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementDecisions::structuralQualification",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogRequirementDecisions::structuralQualification"
+            ],
+            [
+              "Open acceptance question"
+            ],
+            [
+              "Accept actual structural loads and installed functional limits."
+            ],
+            [
+              "Current production materials/joints and combined structural/environmental loads."
+            ],
+            [
+              "BlueDogRequirementDecisions"
+            ],
+            [
+              "Applicable supporting requirements and the evidence named by this open question; unaccepted criteria remain open."
+            ],
+            [
+              "Evidence sufficiency and applicability review; no hardware ranking or invented utility score."
+            ],
+            [
+              "Changed production process, material/joint aging, loads or functional installation."
+            ],
+            [
+              "Wet and aged production materials/joints, impact/fatigue/buckling and combined environmental load evidence."
+            ],
+            [],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementDecisions::installedControlEvidence",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogRequirementDecisions::installedControlEvidence"
+            ],
+            [
+              "Open acceptance question"
+            ],
+            [
+              "Connect supplied observations and commands to installed sensing and achieved motion."
+            ],
+            [
+              "Current onboard observations, command delivery and achieved motion for the actual installation."
+            ],
+            [
+              "BlueDogRequirementDecisions"
+            ],
+            [
+              "Applicable supporting requirements and the evidence named by this open question; unaccepted criteria remain open."
+            ],
+            [
+              "Evidence sufficiency and applicability review; no hardware ranking or invented utility score."
+            ],
+            [
+              "Changed sensing/frame/time/control path, software/calibration or fault behavior."
+            ],
+            [
+              "Correlated apparent and 10 m true wind, navigation/traffic observations, maneuver response and interacting faults."
+            ],
+            [],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementDecisions::integrationCoverage",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogRequirementDecisions::integrationCoverage"
+            ],
+            [
+              "Open acceptance question"
+            ],
+            [
+              "Establish an integrated acceptance argument beyond sampled predicates and supplied Booleans."
+            ],
+            [
+              "Current whole-route mission/safety/energy/structure/casualty acceptance argument."
+            ],
+            [
+              "BlueDogRequirementDecisions"
+            ],
+            [
+              "Applicable supporting requirements and the evidence named by this open question; unaccepted criteria remain open."
+            ],
+            [
+              "Evidence sufficiency and applicability review; no hardware ranking or invented utility score."
+            ],
+            [
+              "Changed configuration, mission case, interacting fault or excluded domain."
+            ],
+            [
+              "Compatible configuration-specific whole-route, safety, energy, structural and casualty evidence with justified coverage and exclusions."
+            ],
+            [],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogRequirementDecisions::futureMissionAcceptance",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              "BlueDogRequirementDecisions::futureMissionAcceptance"
+            ],
+            [
+              "Open acceptance question"
+            ],
+            [
+              "Select independently scoped future voyage targets and acceptance."
+            ],
+            [
+              "Separately scoped future ocean voyage; no implied current Gorge requirement."
+            ],
+            [
+              "BlueDogRequirementDecisions"
+            ],
+            [
+              "Applicable supporting requirements and the evidence named by this open question; unaccepted criteria remain open."
+            ],
+            [
+              "Evidence sufficiency and applicability review; no hardware ranking or invented utility score."
+            ],
+            [
+              "New route/exposure/maintenance requirements or an authorized future mission scope."
+            ],
+            [
+              "Hawaii route, weather, ocean exposure, sustained energy, communications, maintenance and recovery decisions."
+            ],
+            [],
+            [],
+            [],
+            [],
+            [
+              false
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "Criteria": {
+      "columns": [
+        "Evidence-vector position",
+        "Criterion",
+        "Class",
+        "Applicability",
+        "Evidence needed"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::durability",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              1
+            ],
+            [
+              "Wet and survival durability"
+            ],
+            [
+              {
+                "id": "BlueDogTradeCriteria::Kind::mandatory",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              "Complete proposed rig installation under applicable wet and Gorge survival conditions."
+            ],
+            [
+              "Comparable wet-cycle, wear, joint, storm and faulted-rig evidence for the intended exposure."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::energy",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              2
+            ],
+            [
+              "Finite mission energy and recovery reserve"
+            ],
+            [
+              {
+                "id": "BlueDogTradeCriteria::Kind::mandatory",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              "Installed move/hold/idle and controller demand, main account and protected recovery account; future sustained energy separate."
+            ],
+            [
+              "Measured installed loads and duty bounds, stored-energy boundaries, route/exposure and casualty reserve."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::progress",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              3
+            ],
+            [
+              "Passage duration and representative cruise evidence"
+            ],
+            [
+              {
+                "id": "BlueDogTradeCriteria::Kind::mandatory",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              "Current Gorge passage-duration obligation and both-tack representative evidence; legacy leg-progress ratio is a study comparison."
+            ],
+            [
+              "Comparable installed polars, loading, current/wind cases, passage limits and uncertainty."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::recovery",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              4
+            ],
+            [
+              "Capsize and control recovery"
+            ],
+            [
+              {
+                "id": "BlueDogTradeCriteria::Kind::mandatory",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              "Candidate rig in actual casualty geometry, trim/jam/water states and restored control; static screens alone insufficient."
+            ],
+            [
+              "Dynamic righting, ingress/drainage, depower, observation/control restoration and fault evidence."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::manufacturing",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              5
+            ],
+            [
+              "Manufacturing compatibility"
+            ],
+            [
+              {
+                "id": "BlueDogTradeCriteria::Kind::mandatory",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              "Applicable desktop-manufactured hull/structure obligation and compatible rig installation; sailcloth need not be printed."
+            ],
+            [
+              "Manufacturing/process and installation evidence; compare rig construction effort separately without inventing cost scores."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::handling",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              6
+            ],
+            [
+              "Lift and handling mass"
+            ],
+            [
+              {
+                "id": "BlueDogTradeCriteria::Kind::mandatory",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              "Complete boat and applicable lift/handling configuration; compare total installed rig mass and CG consistently."
+            ],
+            [
+              "Identified configuration mass and handling/structural evidence, including wet and retained-water states as applicable."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::reliabilityStudy",
+            "type": "PartUsage"
+          },
+          "cells": [
+            [
+              7
+            ],
+            [
+              "Provisional voyage reliability study"
+            ],
+            [
+              {
+                "id": "BlueDogTradeCriteria::Kind::comparativeStudy",
+                "type": "EnumerationUsage"
+              }
+            ],
+            [
+              "Unaccepted L-101 study objective; an unknown or missed study target is not a mandatory selection veto. Required functions still apply."
+            ],
+            [
+              "Representative failure/dependence/common-cause/exposure evidence and uncertainty before comparing reliability; supplied states do not accept rates."
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "Basis": {
+      "columns": [
+        "Criterion",
+        "Supporting requirement"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::durabilityWet",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::durability",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::wetMechanicalIntegrity",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::durabilityStorm",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::durability",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::gorgeSurvivalWind",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::energyAdmission",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::energy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::launchEnergyAdmission",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::energyReserve",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::energy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::recoveryEnergy",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::progressDuration",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::progress",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::passageDuration",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::progressEvidence",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::progress",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::cruiseEvidence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::recoveryRighting",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::recovery",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::selfRighting",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::recoveryControl",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::recovery",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::capsizeControlRecovery",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::manufacturingScope",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::manufacturing",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::desktopManufacture",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::handlingMass",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::handling",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::liftMass",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::studyObjective",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::reliabilityStudy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::missionSuccessProbability",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::studyEvidence",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::reliabilityStudy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::reliabilityEvidence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogTradeCriteria::requiredFunctionContinuity",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogTradeCriteria::reliabilityStudy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::missionReliability",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    },
+    "DesignBasis": {
+      "columns": [
+        "Decision",
+        "Supporting element"
+      ],
+      "rows": [
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::baselineCandidate",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::sizingBaseline",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogSailTrade::camberedWing",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::retainedAlternative",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::sizingBaseline",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogSailTrade::tailWing",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::softSailAlternative",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::sizingBaseline",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogSailTrade::softSail",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::baselinePurpose",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::sizingBaseline",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::cruiseEvidence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::holdingEnergy",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::holdingDrive",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::multiDayEndurance",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::holdingFiniteAdmission",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::holdingDrive",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::launchEnergyAdmission",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::holdingFiniteReserve",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::holdingDrive",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::recoveryEnergy",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::holdingRecovery",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::holdingDrive",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::capsizeControlRecovery",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::holdingCalculation",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::holdingDrive",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "MarineActuation::DrivePower",
+                "type": "CalculationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::heelSensitivityEvidence",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::aerodynamicScope",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogWingHeel::sweepInputs",
+                "type": "AnalysisCaseUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::sizingAerodynamicPolicy",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::aerodynamicScope",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogAerodynamicPolicy::sizing",
+                "type": "PartUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::polarPurpose",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::aerodynamicScope",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::cruiseEvidence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::polarCalculation",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::aerodynamicScope",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "MarineSailing::Evaluate",
+                "type": "CalculationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::structureChoice",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::structuralScope",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::hybridConstruction",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::structureCriteria",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::structuralScope",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogStructure::structuralIntegrity",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::structureCalculation",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::structuralScope",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "MarineStructures::DesignMargins",
+                "type": "CalculationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::recoveryCriteria",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::recoveryScope",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::selfRighting",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::recoveryCalculation",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::recoveryScope",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "MarineHydrostatics::Balance",
+                "type": "CalculationDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::energyAcceptance",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::energyEvidenceAcceptance",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::energyEvidenceReadiness",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::energyVerification",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::energyEvidenceAcceptance",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogEnergy::SustainedEnergyVerification",
+                "type": "VerificationCaseDefinition"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::uncertaintyCases",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::uncertaintyPolicy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogCoupledUncertainty::Inputs",
+                "type": "AnalysisCaseUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::missionEvidence",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::uncertaintyPolicy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "BlueDogRequirements::missionEvidence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::courtesyWithinNavigationDuties",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::trafficCourtesy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::navigationRules",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        },
+        {
+          "element": {
+            "id": "BlueDogDesignDecisions::courtesyCollisionSafety",
+            "type": "Dependency"
+          },
+          "cells": [
+            [
+              {
+                "id": "BlueDogDesignDecisions::trafficCourtesy",
+                "type": "PartUsage"
+              }
+            ],
+            [
+              {
+                "id": "GorgeChallenge::trafficCoexistence",
+                "type": "RequirementUsage"
+              }
+            ]
+          ],
+          "verdict": null,
+          "object": null,
+          "state": null,
+          "event": null
+        }
+      ]
+    }
+  },
+  "interpretation": "Native record/criterion and supplied-evidence assessment only. Missing actual identities remain open; six declared gate groups are not exhaustive system acceptance. No hardware ranking, selection or approval inferred.",
+  "driverHashes": {
+    "tests/test_decision_management.py": "3034b30581b7bab8804593566e652aa13f9976f2df30e8a438f12e4104368897",
+    "tests/test_sail_trade.py": "8236b6be87e15b97d7c4cc42b9f37b0839dbd6dbf21ed25108a4ec864073ca2a"
+  }
+}

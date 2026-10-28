@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="5" failures="1" skipped="0" tests="56" time="175.396" timestamp="2026-10-22T23:04:29.770759-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_requirements" name="test_native_validation" time="3.770" /><testcase classname="tests.test_requirements" name="test_challenge_is_standalone" time="0.106" /><testcase classname="tests.test_requirements" name="test_diagram_preserves_expected_derivations" time="6.301"><error message="failed on setup with &quot;KeyError: 'n356'&quot;">@pytest.fixture(scope="module")
+    def published_model():
+        model = SimpleNamespace()
+        model.dot = native_graph()
+        model.markdown = native_register()
+        model.nodes = dict(re.findall(r'"(n[0-9]+)" \[.*?&lt;b&gt;([A-Za-z0-9_:]+) :', model.dot))
+        model.nodes = {key: name.rsplit("::", 1)[-1] for key, name in model.nodes.items()}
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="derive"', model.dot)
+        model.edges = [(model.nodes[b], model.nodes[a]) for a, b in links]
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="refine"', model.dot)
+&gt;       model.refinements = {(model.nodes[a], model.nodes[b]) for a, b in links}
+                              ^^^^^^^^^^^^^^
+E       KeyError: 'n356'
+
+tests/test_requirements.py:26: KeyError</error></testcase><testcase classname="tests.test_requirements" name="test_use_case_and_satisfaction_traceability" time="6.207" /><testcase classname="tests.test_requirements" name="test_mission_drivers_do_not_entail_owner_constraints" time="0.000"><error message="failed on setup with &quot;KeyError: 'n356'&quot;">@pytest.fixture(scope="module")
+    def published_model():
+        model = SimpleNamespace()
+        model.dot = native_graph()
+        model.markdown = native_register()
+        model.nodes = dict(re.findall(r'"(n[0-9]+)" \[.*?&lt;b&gt;([A-Za-z0-9_:]+) :', model.dot))
+        model.nodes = {key: name.rsplit("::", 1)[-1] for key, name in model.nodes.items()}
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="derive"', model.dot)
+        model.edges = [(model.nodes[b], model.nodes[a]) for a, b in links]
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="refine"', model.dot)
+&gt;       model.refinements = {(model.nodes[a], model.nodes[b]) for a, b in links}
+                              ^^^^^^^^^^^^^^
+E       KeyError: 'n356'
+
+tests/test_requirements.py:26: KeyError</error></testcase><testcase classname="tests.test_requirements" name="test_register_preserves_ids_status_and_relationships" time="0.000"><error message="failed on setup with &quot;KeyError: 'n356'&quot;">@pytest.fixture(scope="module")
+    def published_model():
+        model = SimpleNamespace()
+        model.dot = native_graph()
+        model.markdown = native_register()
+        model.nodes = dict(re.findall(r'"(n[0-9]+)" \[.*?&lt;b&gt;([A-Za-z0-9_:]+) :', model.dot))
+        model.nodes = {key: name.rsplit("::", 1)[-1] for key, name in model.nodes.items()}
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="derive"', model.dot)
+        model.edges = [(model.nodes[b], model.nodes[a]) for a, b in links]
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="refine"', model.dot)
+&gt;       model.refinements = {(model.nodes[a], model.nodes[b]) for a, b in links}
+                              ^^^^^^^^^^^^^^
+E       KeyError: 'n356'
+
+tests/test_requirements.py:26: KeyError</error></testcase><testcase classname="tests.test_requirements" name="test_focused_views_cover_all_derivations" time="35.462"><error message="failed on setup with &quot;KeyError: 'n356'&quot;">@pytest.fixture(scope="module")
+    def published_model():
+        model = SimpleNamespace()
+        model.dot = native_graph()
+        model.markdown = native_register()
+        model.nodes = dict(re.findall(r'"(n[0-9]+)" \[.*?&lt;b&gt;([A-Za-z0-9_:]+) :', model.dot))
+        model.nodes = {key: name.rsplit("::", 1)[-1] for key, name in model.nodes.items()}
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="derive"', model.dot)
+        model.edges = [(model.nodes[b], model.nodes[a]) for a, b in links]
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="refine"', model.dot)
+&gt;       model.refinements = {(model.nodes[a], model.nodes[b]) for a, b in links}
+                              ^^^^^^^^^^^^^^
+E       KeyError: 'n356'
+
+tests/test_requirements.py:26: KeyError</error></testcase><testcase classname="tests.test_requirements" name="test_statements_exclude_supporting_material" time="0.000"><error message="failed on setup with &quot;KeyError: 'n356'&quot;">@pytest.fixture(scope="module")
+    def published_model():
+        model = SimpleNamespace()
+        model.dot = native_graph()
+        model.markdown = native_register()
+        model.nodes = dict(re.findall(r'"(n[0-9]+)" \[.*?&lt;b&gt;([A-Za-z0-9_:]+) :', model.dot))
+        model.nodes = {key: name.rsplit("::", 1)[-1] for key, name in model.nodes.items()}
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="derive"', model.dot)
+        model.edges = [(model.nodes[b], model.nodes[a]) for a, b in links]
+        links = re.findall(r'"(n[0-9]+)" -&gt; "(n[0-9]+)" \[label="refine"', model.dot)
+&gt;       model.refinements = {(model.nodes[a], model.nodes[b]) for a, b in links}
+                              ^^^^^^^^^^^^^^
+E       KeyError: 'n356'
+
+tests/test_requirements.py:26: KeyError</error></testcase><testcase classname="tests.test_requirements" name="test_planned_verification_cannot_report_a_pass[BlueDogRequirementVerification::EnergyAwarenessVerification]" time="3.049" /><testcase classname="tests.test_requirements" name="test_planned_verification_cannot_report_a_pass[GorgeChallengeVerification::PassageQualificationVerification]" time="2.985" /><testcase classname="tests.test_requirements" name="test_planned_verification_cannot_report_a_pass[BlueDogRequirementVerification::CapsizeResilienceVerification]" time="3.043" /><testcase classname="tests.test_requirements" name="test_planned_verification_cannot_report_a_pass[BlueDogRequirementVerification::VegetationResilienceVerification]" time="3.044" /><testcase classname="tests.test_requirements" name="test_planned_verification_cannot_report_a_pass[BlueDogRequirementVerification::MissionPerformanceAssessmentVerification]" time="3.083" /><testcase classname="tests.test_requirements" name="test_planned_verification_cannot_report_a_pass[BlueDogRequirementVerification::ReliabilityEvidenceVerification]" time="3.124" /><testcase classname="tests.test_requirements" name="test_planned_verification_cannot_report_a_pass[BlueDogRequirementVerification::PeakSupplyCapabilityVerification]" time="2.970" /><testcase classname="tests.test_requirements" name="test_planned_verification_cannot_report_a_pass[BlueDogRequirementVerification::ConstructionArchitectureVerification]" time="3.047" /><testcase classname="tests.test_requirements" name="test_oosem_scenarios_render_declared_behavior[normal-actions0]" time="5.001" /><testcase classname="tests.test_requirements" name="test_oosem_scenarios_render_declared_behavior[traffic-actions1]" time="2.108" /><testcase classname="tests.test_requirements" name="test_oosem_scenarios_render_declared_behavior[recovery-actions2]" time="2.071" /><testcase classname="tests.test_requirements" name="test_oosem_context_exposes_mission_participants" time="2.087" /><testcase classname="tests.test_relationship_semantics" name="test_mixed_compact_and_native_diagram_identities" time="0.000" /><testcase classname="tests.test_relationship_semantics" name="test_formal_refinements_are_distinct_from_design_dependencies" time="2.198" /><testcase classname="tests.test_relationship_semantics" name="test_semantic_diagrams_are_small_connected_native_views[mission-semantics-kinds0]" time="0.003" /><testcase classname="tests.test_relationship_semantics" name="test_semantic_diagrams_are_small_connected_native_views[energy-semantics-kinds1]" time="0.003" /><testcase classname="tests.test_relationship_semantics" name="test_semantic_diagrams_are_small_connected_native_views[cruise-semantics-kinds2]" time="0.003" /><testcase classname="tests.test_relationship_semantics" name="test_semantic_diagrams_are_small_connected_native_views[reliability-semantics-kinds3]" time="0.003" /><testcase classname="tests.test_relationship_semantics" name="test_semantic_diagrams_are_small_connected_native_views[manufacturing-semantics-kinds4]" time="0.003" /><testcase classname="tests.test_relationship_semantics" name="test_semantic_diagrams_are_small_connected_native_views[weed-semantics-kinds5]" time="0.003" /><testcase classname="tests.test_relationship_semantics" name="test_authored_pages_contain_views_not_copied_diagrams" time="0.022" /><testcase classname="tests.test_relationship_semantics" name="test_requirement_context_does_not_repeat_authoritative_statements" time="0.001" /><testcase classname="tests.test_relationship_semantics" name="test_construction_views_show_model_basis_and_qualification" time="0.001" /><testcase classname="tests.test_reliability" name="test_synthetic_exposure_and_evidence_gate" time="4.094" /><testcase classname="tests.test_reliability" name="test_holds_increase_exposure_and_tighten_budget" time="6.303" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[part redefines upstream { attribute :&gt;&gt; currentVMG = -2 [m/s]; }]" time="3.223" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[part redefines upstream { attribute :&gt;&gt; currentVMG = -3 [m/s]; }]" time="3.169" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[part redefines upstream { attribute :&gt;&gt; retainedPerformance = 0; }]" time="3.310" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[attribute :&gt;&gt; holdTime = -1 [s];]" time="3.333" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[attribute :&gt;&gt; criticalRatesPerHour = (-0.001, 0.0003);]" time="3.169" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[attribute :&gt;&gt; commonCauseRatePerHour = -0.1;]" time="3.079" /><testcase classname="tests.test_reliability" name="test_invalid_profile_cannot_pass[attribute :&gt;&gt; zeroFailureTestHours = 0;]" time="3.168" /><testcase classname="tests.test_reliability" name="test_positive_but_inadequate_progress_fails" time="3.196" /><testcase classname="tests.test_reliability" name="test_common_cause_rate_is_included" time="3.250" /><testcase classname="tests.test_reliability" name="test_failures_invalidate_zero_failure_demonstration" time="3.160" /><testcase classname="tests.test_reliability" name="test_accepted_but_short_test_is_a_verification_failure" time="3.122" /><testcase classname="tests.test_reliability" name="test_accepted_synthetic_fixture_exercises_pass_path" time="3.145" /><testcase classname="tests.test_reliability" name="test_dfmea_starter_stays_open_and_has_real_links" time="7.653" /><testcase classname="tests.test_reliability" name="test_slow_progress_is_allowed_with_sufficient_qualified_exposure" time="2.639" /><testcase classname="tests.test_reliability" name="test_binding_duration_is_independent_of_provisional_reliability[False-100-inconclusive]" time="3.313" /><testcase classname="tests.test_reliability" name="test_binding_duration_is_independent_of_provisional_reliability[True-100-pass]" time="4.545" /><testcase classname="tests.test_reliability" name="test_binding_duration_is_independent_of_provisional_reliability[True-10000-pass]" time="3.113" /><testcase classname="tests.test_reliability" name="test_duration_cannot_pass_an_accepted_profile_beyond_qualified_exposure" time="3.143" /><testcase classname="tests.test_wind_sensing" name="test_native_sensor_budgets" time="3.048" /><testcase classname="tests.test_wind_sensing" name="test_plain_dependencies_are_not_relabelled_as_derivations" time="0.000" /><testcase classname="tests.test_wind_sensing" name="test_compact_labels_retain_native_identity" time="0.000" /><testcase classname="tests.test_wind_sensing" name="test_wind_thread_reaches_current_mission_root" time="0.000" /><testcase classname="tests.test_wind_sensing" name="test_all_requirement_views_include_their_upstream_context" time="9.372"><failure message="AssertionError: ('requirements-safety.md', 'logRetention', 'missionEvidence')&#10;assert 'missionEvidence' in {'abort', 'abortAlert', 'abortPersistence', 'admit', 'appendageDeflection', 'assess', ...}">rendered_site = PosixPath('/tmp/pytest-of-david/pytest-119/published-site0')
+
+    def test_all_requirement_views_include_their_upstream_context(rendered_site):
+        from tests.native_cases import native_graph, native
+        dot=native_graph()
+        nodes=dict(re.findall(r'"(n\d+)" \[.*?&lt;b&gt;((?:GorgeChallenge|BlueDog::Goals|BlueDogRequirements)::\w+) :',dot))
+        names={q.rsplit('::',1)[-1] for q in nodes.values()}
+        edges={(nodes[a].rsplit('::',1)[-1],nodes[b].rsplit('::',1)[-1])
+               for a,b in re.findall(r'"(n\d+)" -&gt; "(n\d+)" \[label="(?:derive|refine)"',dot)
+               if a in nodes and b in nodes}
+        dependencies={(a,b) for a,b in basis_links(native('-render-document','BlueDogDocuments::RelationshipRegister')) if a in names and b in names}
+        deferred_report=native('-render-document','BlueDogDocuments::FutureMissionRequirements')
+        deferred={name[0].lower()+name[1:] for name in re.findall(r'^\| [A-Z]-\d+ \| (\w+) \|',deferred_report,re.M)}
+        for page in (rendered_site/'imports/docs/requirements').glob('*.md'):
+            for diagram in re.findall(r'```mermaid\n(.*?)```',page.read_text(),re.S):
+                node_names={n:q.rsplit('::',1)[-1] for n,q in diagram_nodes(diagram).items()}
+                visible=set(node_names.values())
+                future_scope=bool(visible &amp; deferred)
+                assert visible, page.name
+                drawn_dependencies={(node_names[a],node_names[b]) for a,b in re.findall(r'(n\d+) -\.-&gt;\|"dependency"\| (n\d+)',diagram)}
+                for child,parent in edges:
+                    if child in visible:
+                        if parent in deferred and not future_scope:
+                            continue  # Shared criteria do not import a deferred mission.
+&gt;                       assert parent in visible, (page.name,child,parent)
+E                       AssertionError: ('requirements-safety.md', 'logRetention', 'missionEvidence')
+E                       assert 'missionEvidence' in {'abort', 'abortAlert', 'abortPersistence', 'admit', 'appendageDeflection', 'assess', ...}
+
+tests/test_wind_sensing.py:71: AssertionError</failure></testcase></testsuite></testsuites>

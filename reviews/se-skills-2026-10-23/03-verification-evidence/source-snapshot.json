@@ -1,0 +1,8 @@
+{
+  "archive": "source-snapshot.zip",
+  "sha256": "0c769154559eebbb1840e891f45397d94d864390ebe9ca21fb83155946d2c4cb",
+  "modelSources": 91,
+  "totalSources": 93,
+  "reconstructedFromVerifiedEdits": false,
+  "scope": "Exact model/audit sources and recorded drivers where available; not a complete execution environment or physical evidence bundle."
+}

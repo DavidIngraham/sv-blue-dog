@@ -68,20 +68,45 @@ def verify_run_sources(directory):
     return len(checked)
 
 
-def input_record(name):
+REFERENCE_INPUTS = frozenset(('wing-geometry.json', 'wing-polar-grid.json'))
+INITIAL_GUESSES = frozenset(('coupled-fixed-design.json',))
+
+
+def input_record(name, *, purpose=None):
+    """Read a current result, or explicitly request a historical reference/seed.
+
+    The two registered CAD/polar assets have a declared reference role, including
+    for unchanged geometry consumers whose source hashes protect archived plots.
+    All other omitted roles mean current. Explicit current always forbids fallback.
+    Historical references retain their manifest and original source revision;
+    they are never checked against today's drivers or presented as current runs.
+    """
+    if Path(name).name != name or name in ('.', '..'):
+        raise ValueError('Expected an analysis record filename')
+    if purpose is None:
+        purpose = 'reference' if name in REFERENCE_INPUTS else 'current'
+    allowed = {'current': None, 'reference': REFERENCE_INPUTS, 'initial_guess': INITIAL_GUESSES}
+    if purpose not in allowed or (allowed[purpose] is not None and name not in allowed[purpose]):
+        raise ValueError('Unsupported historical input purpose: ' + purpose + ': ' + name)
     path = WORK / name
     if path.exists():
         record = json.loads(path.read_text(encoding="utf-8"))
-        validate(record.get("sourceHashes", record.get("driverHashes", {})))
+        fingerprints = [record.get(field, {}) for field in ('sourceHashes', 'driverHashes')]
+        if not any(fingerprints):
+            raise ValueError('Unproven workspace analysis input: ' + name + '; regenerate it with provenance')
+        for hashes in fingerprints:
+            validate(hashes)
         return record
+    if purpose == 'current':
+        raise FileNotFoundError('Missing current analysis input: ' + name + '; run prepare or its producing analysis')
     return baseline_record(name)
 
 
-def input_path(name):
+def input_path(name, *, purpose=None):
+    input_record(name, purpose=purpose)  # Path consumers must pass the same provenance checks.
     path = WORK / name
     if path.exists():
         return path
-    baseline_record(name)  # Reject altered or unregistered baseline inputs.
     return BASELINE / name
 
 
@@ -89,11 +114,13 @@ def source_hashes(sources):
     """Resolve evidence locations explicitly and include the loaded physics model."""
     from tools.boat_analysis.model.runtime import model_files
     paths = [*model_files(), *(ROOT/"packages/sysml-python/sysml_python").rglob("*.py"), ROOT/"pyproject.toml",
+             ROOT / 'uv.lock', ROOT / 'tools/boat_analysis/evidence/records.py',
+             ROOT / 'tools/boat_analysis/model/runtime.py', ROOT / 'tools/boat_analysis/model/install.py',
              ROOT / "tools/boat_analysis/model/preparation.py", ROOT / "tools/boat_analysis/model/hydrostatic_mesh.py"]
     for name in sources:
         path = Path(name)
         if path.as_posix().startswith("build/analysis/"):
-            path = input_path(path.name)
+            path = input_path(path.name, purpose='reference' if path.name in REFERENCE_INPUTS else 'current')
         else:
             path = ROOT / path
         paths.append(path)
