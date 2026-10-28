@@ -8,10 +8,11 @@ from tools.boat_analysis.evidence.records import input_record, input_path, outpu
 
 import argparse,json,time
 from types import SimpleNamespace
+from dataclasses import fields
 import numpy as np
 from scipy.optimize import least_squares,minimize
 from tools.boat_analysis.model.vessel import CoupledModel
-from tools.boat_analysis.generated import AppendageLoads
+from tools.boat_analysis.generated import AppendageLoads, Design, OperatingState
 from tools.boat_analysis.generated import structure, concept, Passage, route
 from tools.boat_analysis.model.hydrostatic_mesh import equilibrium
 from tools.boat_analysis.model.runtime import ROOT
@@ -29,14 +30,48 @@ class Problem:
             raise ValueError('Design envelope must respect the challenge overall-length limit')
         self.progress_reserve_m_s=c['progressSearchReserve']
         self.require_east=c['challengeRequiresEastProgress' if route_profile=='challenge' else 'allSeasonRequiresEastProgress']
-        self.lo=np.r_[c['designLower'],np.tile(c['stateLower'],8)]
-        self.hi=np.r_[c['designUpper'],np.tile(c['stateUpper'],8)]
+        # Native exports supply order and dimensions. The numerical algorithm still
+        # defines its windward/leeward and both-tack coverage explicitly; the route
+        # kernel currently accepts the existing six free operating-state fields.
+        self.design_names=tuple(self.model.c['designNames'])
+        self.parameter_names=tuple(self.model.c['parameterNames'])
+        native_design_names=tuple(field.name for field in fields(Design))
+        if self.design_names != native_design_names:
+            raise ValueError('Search design names must match the native Design record order')
+        fixed_state_names=('windSpeed_m_s','windward','foulingMultiplier')
+        full_state_names=tuple(field.name for field in fields(OperatingState))
+        if full_state_names[:len(fixed_state_names)] != fixed_state_names:
+            raise ValueError('Search requires the native fixed operating context before free state fields')
+        self.state_names=tuple(name for name in full_state_names if name not in fixed_state_names)
+        self.state_source_indices=tuple(full_state_names.index(name) for name in self.state_names)
+        self.design_index={name:i for i,name in enumerate(self.design_names)}
+        self.parameter_index={name:i for i,name in enumerate(self.parameter_names)}
+        self.state_index={name:i for i,name in enumerate(self.state_names)}
+        self.length_index=self.design_index['length_m']
+        if len(self.parameter_index) != len(self.parameter_names):
+            raise ValueError('Search parameter names must be unique')
+        if len(self.model.parameters) != len(self.parameter_names):
+            raise ValueError('Search parameter values must match native parameter names')
+        self.design_count=len(self.design_names)
+        self.state_count=len(self.state_names)
+        if len(c['designLower']) != self.design_count or len(c['designUpper']) != self.design_count:
+            raise ValueError('Search design bounds must match the native Design record')
+        if len(c['stateLower']) != self.state_count or len(c['stateUpper']) != self.state_count:
+            raise ValueError('Search state bounds must match the native free OperatingState fields')
         self.env=[(w,u,t) for w in c['windSpeeds'] for u in [True,False] for t in [1,-1]]
+        self.case_count=len(self.env)
+        if not self.case_count:
+            raise ValueError('Search requires at least one model wind speed')
+        self.lo=np.r_[c['designLower'],np.tile(c['stateLower'],self.case_count)]
+        self.hi=np.r_[c['designUpper'],np.tile(c['stateUpper'],self.case_count)]
         for i,(_,up,_) in enumerate(self.env):
-            if not up:self.lo[29+6*i+1],self.hi[29+6*i+1]=c['leewardHeading']
+            heading=self.design_count+self.state_count*i+self.state_index['windFrom_deg']
+            if not up:self.lo[heading],self.hi[heading]=c['leewardHeading']
         self.span=self.hi-self.lo
         axes=self.model.polar.axes
-        physical_knots={5:axes[0],6:axes[1],**{29+6*i+2:axes[2] for i in range(8)}}
+        physical_knots={self.design_index['sail_AR']:axes[0],self.design_index['camber_scale']:axes[1],
+                        **{self.design_count+self.state_count*i+self.state_index['incidence_deg']:axes[2]
+                           for i in range(self.case_count)}}
         self.breakpoints={i:(values-self.lo[i])/self.span[i] for i,values in physical_knots.items()}
         self.last=None;self.calls=0;self.start=time.time();self.best=None;self.best_feasible=None;self.best_infeasible=None;self.derivatives=None;self.design_cache=None
         self.checkpoint_path=ROOT/'.tools/coupled-search-progress.json'
@@ -46,14 +81,14 @@ class Problem:
         bodies,m,g,_=k.configuration(x,0,resolution=self.resolution)
         reference_mass=m.copy()
         cg=[m['cgX'],m['cgY'],m['cgZ']]
-        upright=equilibrium(k.hydro,bodies,cg,m['totalMass'],0,density=k.parameters[31])
+        upright=equilibrium(k.hydro,bodies,cg,m['totalMass'],0,density=k.parameters[self.parameter_index['waterDensity']])
         righting=[]
         for trim in np.deg2rad(self.context['coarseTrims']):
             bodies,m,_,_=k.configuration(x,trim,resolution=self.resolution)
             cg=[m['cgX'],m['cgY'],m['cgZ']]
             for heel in self.context['coarseHeels']:
-                h=equilibrium(k.hydro,bodies,cg,m['totalMass'],heel,density=k.parameters[31])
-                righting.append(h['righting_Nm']*np.sign(heel)/(m['totalMass']*k.parameters[34]*.1))
+                h=equilibrium(k.hydro,bodies,cg,m['totalMass'],heel,density=k.parameters[self.parameter_index['waterDensity']])
+                righting.append(h['righting_Nm']*np.sign(heel)/(m['totalMass']*k.parameters[self.parameter_index['gravity']]*.1))
         result=(reference_mass,g,upright,righting)
         self.design_cache=(np.array(x,copy=True),result)
         return result
@@ -68,7 +103,7 @@ class Problem:
             return {'eq':np.full_like(previous['eq'],1000.),'ineq':np.full_like(previous['ineq'],-1000.),'invalidGeometry':str(error)}
     def _evaluate(self,z):
         if self.last is not None and np.array_equal(z,self.last[0]):return self.last[1]
-        physical=self.lo+z*self.span;x=physical[:29];states=physical[29:].reshape(8,6).copy()
+        physical=self.lo+z*self.span;x=physical[:self.design_count];states=physical[self.design_count:].reshape(self.case_count,self.state_count).copy()
         for state,(_,_,tack) in zip(states,self.env):state[1:]*=tack
         k=self.model;rows=[]
         for state,(wind,up,_) in zip(states,self.env):rows.append(k.at_state(x,np.r_[wind,int(up),1,state],resolution=self.resolution,pitch_equilibrium=False))
@@ -80,7 +115,7 @@ class Problem:
         concept=self.concept(design=x,mass=reference_mass,geometry=g,passage=Passage(duration_h=max(west[5],route[5]) if self.require_east else west[5], averagePower_W=max(r['averagePower'] for r in rows))).to_mapping()
         margins.update({n:concept[n] for n in ('voyageEnergyMargin','installationVolumeMargin')})
         from tools.boat_analysis.geometry.vessel import operating_envelope
-        envelope = operating_envelope(dict(zip(k.c['designNames'], x)), k.parameters[33], self.resolution)
+        envelope = operating_envelope(dict(zip(k.c['designNames'], x)), k.parameters[self.parameter_index['ballastDensity']], self.resolution)
         margins['overallLengthMargin'] = (self.overall_length_limit_m-envelope['sweptLengthM'])/self.overall_length_limit_m
         eq=np.array([[r[n] for n in self.context['equilibriumOutputs']] for r in rows]).ravel()
         static_names=self.context['staticMarginOutputs']+[self.context['peakMarginOutput']]
@@ -89,8 +124,8 @@ class Problem:
         route_reserve=np.array([1.,1.,0.])*self.progress_reserve_m_s/self.context['routeParameters'][5]
         route_screens=[('westerly',west)]+([('easterly',route)] if self.require_east else [])
         ineq=np.r_[ineq,(np.array([[r[n] for n in self.context['resistanceMarginOutputs']] for r in rows])-np.array(k.operating_contract['resistanceDomainReserve'])).ravel(),list(margins.values()),np.concatenate([r[:3]-route_reserve for _,r in route_screens]),righting]
-        self.constraint_names=([f'case {i}: {n}' for i in range(8) for n in static_names]
-            +[f'case {i}: {n} (search reserve)' for i in range(8) for n in self.context['resistanceMarginOutputs']]
+        self.constraint_names=([f'case {i}: {n}' for i in range(self.case_count) for n in static_names]
+            +[f'case {i}: {n} (search reserve)' for i in range(self.case_count) for n in self.context['resistanceMarginOutputs']]
             +list(margins)+[f'{direction} {n}' for direction,_ in route_screens for n in ['downstream progress','upstream progress','duration']]
             +[f'righting trim {trim:g}, heel {heel:g}' for trim in self.context['coarseTrims'] for heel in self.context['coarseHeels']])
         result={'eq':eq,'ineq':ineq,'design':x,'states':states,'rows':rows,'structure':margins,'route':route,'westerlyRoute':west,'righting':righting,'mass':reference_mass,'concept':concept,'envelope':envelope}
@@ -98,9 +133,9 @@ class Problem:
         merit=float(np.linalg.norm(np.r_[eq,np.minimum(ineq,0)]))
         if self.best is None or merit<self.best[0]:self.best=(merit,np.array(z,copy=True))
         if (np.abs(eq).max()>=1e-4 or ineq.min()<=-1e-4) and (self.best_infeasible is None or merit<self.best_infeasible[0]):self.best_infeasible=(merit,np.array(z,copy=True))
-        if np.abs(eq).max()<1e-4 and ineq.min()>-1e-4 and (self.best_feasible is None or x[0]<self.best_feasible[0]):self.best_feasible=(float(x[0]),np.array(z,copy=True))
+        if np.abs(eq).max()<1e-4 and ineq.min()>-1e-4 and (self.best_feasible is None or x[self.length_index]<self.best_feasible[0]):self.best_feasible=(float(x[self.length_index]),np.array(z,copy=True))
         if self.calls%40==0:
-            print(f'{self.calls} calls, {time.time()-self.start:.0f}s, merit {merit:.5f}, best {self.best[0]:.5f}, L {x[0]:.3f}, min margin {ineq.min():.4f}',flush=True)
+            print(f'{self.calls} calls, {time.time()-self.start:.0f}s, merit {merit:.5f}, best {self.best[0]:.5f}, L {x[self.length_index]:.3f}, min margin {ineq.min():.4f}',flush=True)
             self.checkpoint_path.write_text(json.dumps({'calls':self.calls,'bestMerit':self.best[0],'bestZ':self.best[1].tolist(),'currentZ':np.asarray(z).tolist(),'bestFeasibleZ':None if self.best_feasible is None else self.best_feasible[1].tolist(),'bestInfeasibleZ':None if self.best_infeasible is None else self.best_infeasible[1].tolist()})+'\n')
         self.last=(np.array(z,copy=True),result);return result
     def jacobians(self,z):
@@ -124,10 +159,10 @@ class Problem:
         saved=input_record('coupled-fixed-design.json', purpose='initial_guess')
         x=np.array([saved['design'].get(n,self.model.c['referenceDesign'][i]) for i,n in enumerate(self.model.c['designNames'])]);states=[]
         for row in saved['cases']:
-            state=np.array(row['state'][3:]);state[1:]*=row['tack'];states.extend(state)
-        if len(states)!=48:raise ValueError('Both-tack reference solve required')
+            state=np.array(row['state'])[list(self.state_source_indices)];state[1:]*=row['tack'];states.extend(state)
+        if len(states)!=self.case_count*self.state_count:raise ValueError('One reference state per discovered both-tack operating case required')
         # Initial guesses only; all dimensions remain free in the solve.
-        x[5]=3.;x[7]=1.2;x[23]=.6
+        x[self.design_index['sail_AR']]=3.;x[self.design_index['wing_thickness_scale']]=1.2;x[self.design_index['rudder_glass_kg_m2']]=.6
         return np.clip((np.r_[x,states]-self.lo)/self.span,1e-5,1-1e-5)
     def feasible(self,z,tolerance=1e-4):
         r=self.evaluate(z);return bool(np.abs(r['eq']).max()<tolerance and r['ineq'].min()>-tolerance)
@@ -145,10 +180,10 @@ def run(budget,resume=False,resolution=12,route_profile='challenge'):
     seed=initial.copy()
     # Geometrically consistent starting guess only; length remains free.
     physical=p.lo+initial*p.span
-    _,_,geometry,_=p.model.configuration(physical[:29],0,resolution=resolution)
-    needed=physical[17]/(p.model.parameters[37]*geometry[51])
+    _,_,geometry,_=p.model.configuration(physical[:p.design_count],0,resolution=resolution)
+    needed=physical[p.design_index['panel_m2']]/(p.model.parameters[p.parameter_index['panelCoverage']]*geometry[51])
     if needed>1.001:
-        physical[0]=min(p.hi[0],physical[0]*needed*1.02)
+        physical[p.length_index]=min(p.hi[p.length_index],physical[p.length_index]*needed*1.02)
         initial=(physical-p.lo)/p.span
     sources=['tools/boat_analysis/geometry/laminate.py','uv.lock','tools/boat_analysis/optimization/search.py','tools/boat_analysis/optimization/operating.py','tools/boat_analysis/model/vessel.py','packages/sysml-python/sysml_python/execution.py','tools/boat_analysis/model/hydrostatics.py','tools/boat_analysis/geometry/hydro.py','tools/boat_analysis/geometry/vessel.py','tools/boat_analysis/geometry/hull.py','tools/boat_analysis/aerodynamics/polar.py','build/analysis/wing-polar-grid.json','build/analysis/wing-geometry.json']
     hashes={**p.model.c['sourceHashes'],**p.model.operating_contract['sourceHashes'],**source_hashes(sources),'models/analyses/recovery.sysml':digest(ROOT/'models/analyses/recovery.sysml')}
@@ -175,7 +210,8 @@ def run(budget,resume=False,resolution=12,route_profile='challenge'):
         if p.feasible(feasibility_sqp.x):best=feasibility_sqp.x
     message='Feasibility phase did not satisfy all screens';last_attempt=None;repair_message=None
     if p.feasible(best):
-        result=minimize(lambda z:p.lo[0]+z[0]*p.span[0],best,method='SLSQP',jac=lambda z:np.r_[p.span[0],np.zeros(len(z)-1)],bounds=[(0,1)]*len(best),constraints=constraints,options={'maxiter':budget,'eps':1e-5,'ftol':1e-4})
+        length_gradient=np.zeros(len(best));length_gradient[p.length_index]=p.span[p.length_index]
+        result=minimize(lambda z:p.lo[p.length_index]+z[p.length_index]*p.span[p.length_index],best,method='SLSQP',jac=lambda z:length_gradient.copy(),bounds=[(0,1)]*len(best),constraints=constraints,options={'maxiter':budget,'eps':1e-5,'ftol':1e-4})
         message=str(result.message)
         trial=p.evaluate(result.x)
         last_attempt={'normalizedDesignAndStates':result.x.tolist(),'maxEquilibriumResidual':float(np.abs(trial['eq']).max()),'minimumMargin':float(trial['ineq'].min()),'worstConstraints':sorted(zip(p.constraint_names,map(float,trial['ineq'])),key=lambda item:item[1])[:12]}
@@ -190,7 +226,7 @@ def run(budget,resume=False,resolution=12,route_profile='challenge'):
     r=p.evaluate(best)
     validate(hashes)
 
-    report={'sourceHashes':hashes,'geometryResolution':resolution,'progressSearchReserve_m_s':p.progress_reserve_m_s,'budgetPerPhase':budget,'optimizerFtol':1e-4,'energyConstraintScope':'Peak power and finite no-harvest passage allowance; chronological candidate replay required','resistanceDomainReserve':p.model.operating_contract['resistanceDomainReserve'],'designBounds':dict(zip(p.model.c['designNames'],zip(p.lo[:29].tolist(),p.hi[:29].tolist()))),'design':dict(zip(p.model.c['designNames'],r['design'])),'stateRows':r['states'].tolist(),'operating':r['rows'],'structure':r['structure'],'concept':r['concept'],'route':r['route'].tolist(),'westerlyRoute':r['westerlyRoute'].tolist(),'rightingScreen':r['righting'],'mass':r['mass'],'maxEquilibriumResidual':float(np.abs(r['eq']).max()),'minimumMargin':float(r['ineq'].min()),'coarseFeasible':p.feasible(best),'optimizerMessage':message,'feasibilityRestorationMessage':repair_message,'lastOptimizerAttempt':last_attempt,'worstConstraints':sorted(zip(p.constraint_names,map(float,r['ineq'])),key=lambda item:item[1])[:12],'feasibilitySqpMessage':feasibility_sqp_message,'feasibilityMessage':str(phase.message),'calls':p.calls,'elapsed_s':time.time()-p.start,'normalizedDesignAndStates':best.tolist(),'qualified':False,'scope':'Delft upright untrimmed bare-hull regression with explicit coordinate screens; free hull-fullness exponent. Fixed-pitch screening search at the recorded geometry resolution; pending refined free-pitch and uncertainty replay. VSPAERO attached-flow only; independent provisional drag and lift caps. No claim of mission qualification or global optimum.'}
+    report={'sourceHashes':hashes,'geometryResolution':resolution,'progressSearchReserve_m_s':p.progress_reserve_m_s,'budgetPerPhase':budget,'optimizerFtol':1e-4,'energyConstraintScope':'Peak power and finite no-harvest passage allowance; chronological candidate replay required','resistanceDomainReserve':p.model.operating_contract['resistanceDomainReserve'],'designBounds':dict(zip(p.model.c['designNames'],zip(p.lo[:p.design_count].tolist(),p.hi[:p.design_count].tolist()))),'design':dict(zip(p.model.c['designNames'],r['design'])),'stateRows':r['states'].tolist(),'operating':r['rows'],'structure':r['structure'],'concept':r['concept'],'route':r['route'].tolist(),'westerlyRoute':r['westerlyRoute'].tolist(),'rightingScreen':r['righting'],'mass':r['mass'],'maxEquilibriumResidual':float(np.abs(r['eq']).max()),'minimumMargin':float(r['ineq'].min()),'coarseFeasible':p.feasible(best),'optimizerMessage':message,'feasibilityRestorationMessage':repair_message,'lastOptimizerAttempt':last_attempt,'worstConstraints':sorted(zip(p.constraint_names,map(float,r['ineq'])),key=lambda item:item[1])[:12],'feasibilitySqpMessage':feasibility_sqp_message,'feasibilityMessage':str(phase.message),'calls':p.calls,'elapsed_s':time.time()-p.start,'normalizedDesignAndStates':best.tolist(),'qualified':False,'scope':'Delft upright untrimmed bare-hull regression with explicit coordinate screens; free hull-fullness exponent. Fixed-pitch screening search at the recorded geometry resolution; pending refined free-pitch and uncertainty replay. VSPAERO attached-flow only; independent provisional drag and lift caps. No claim of mission qualification or global optimum.'}
     report.update(routeProfile=p.route_profile,requiresEastProgress=p.require_east,
                   probabilityWeighting='No calibrated mission distribution; separate native probability sensitivity, never averaged hard safety constraints.',
                   resumed=resume,resumeCheckpointSha256=checkpoint_hash,

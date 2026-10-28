@@ -1,0 +1,14 @@
+schema_version: 1
+name: IC-01 conditional recovery demonstration
+groups:
+  - name: configuration_inputs
+    select:
+      id: BlueDogIntegratedCandidate::Inputs
+  - name: recovery
+    select:
+      kind: AnalysisCaseUsage
+      owner: BlueDogIntegratedCandidate
+      type: BlueDogIntegratedCandidate::RecoveryScreen
+      cardinality: many
+    subject:
+      id: BlueDogIC01::design

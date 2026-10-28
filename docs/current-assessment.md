@@ -1,6 +1,6 @@
 # What the evidence supports, and what I need to learn next
 
-**Assessment: 25 October 2026** · [Candidate results](results.md) · [Simulation studies](simulation-studies.md)
+**Assessment: 28 October 2026** · [Candidate results](results.md) · [Simulation studies](simulation-studies.md)
 
 I intend to refine IC-01 into the first physical boat. I have defined the river mission, the boat's required functions and an IC-01 design for the simulations. The next step is to choose compatible equipment and measure the properties that matter most to sailing and recovery.
 
@@ -38,6 +38,16 @@ its existing configuration and assumptions.
 Blue Dog also has a [traffic courtesy preference](encounter-feasibility.md#leave-room-for-crewed-boats): avoid developing encounters that require crewed vessels to react, subject to safe navigation duties. The challenge encourages this as nonbinding guidance. It is not a qualification criterion or an implemented planner objective; comparative route studies remain to be done.
 
 The [failure analysis and fault trees](reliability.md#how-avoidance-can-fail) connect functional and equipment failures to loss of avoidance capability. Shared power, observations and control can defeat apparently independent paths. The mitigation actions remain open: I still need evidence of installed diagnostic coverage, timely fallback and isolation from common causes. Software checks establish the behavior of the fault-tree logic; they do not establish failure probabilities or hardware independence.
+
+Native recovery and sail-trade studies can select configured analyses by
+model type and owner through [validated study configuration](reference/declarative-studies.md).
+The execution report retains native results, resolved model identities and
+explicit external assumptions. Numerical search obtains dimensions and named
+fields from exported model records where available. Route topology, several
+legacy vector contracts and numerical solver choices remain explicit software
+limits. These capabilities improve repeatability; they add no physical
+qualification evidence. The next analysis-interface work is to expose semantic
+route/state contracts before generalizing the remaining campaign orchestration.
 
 ## Integrated simulation evidence
 

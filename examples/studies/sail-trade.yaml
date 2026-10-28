@@ -1,0 +1,12 @@
+schema_version: 1
+name: Current sail contenders and buoyancy sensitivity
+groups:
+  - name: candidates
+    select:
+      kind: AnalysisCaseUsage
+      owner: BlueDogSailTrade
+      type: BlueDogSailTrade::TradeAssessment
+      cardinality: many
+  - name: buoyancy
+    select:
+      id: BlueDogSailTrade::buoyancyIllustration

@@ -14,8 +14,13 @@ from ..evidence.records import source_hashes, validate
 from ..model.install import REVISION
 from ..model.runtime import ROOT, analysis_values, load_model, native, record_analyses
 from .logic import MissionLogic
+from ..studies.runner import run_study
+
+STUDY = ROOT / 'examples/studies/recovery.yaml'
 
 
+# Legacy import compatibility only. Execution discovers every configured
+# RecoveryScreen usage through the study; this tuple does not select runs.
 CASES = tuple('BlueDogIntegratedCandidate::'+name for name in (
     'IC01RecoveryIllustration', 'IC01InvertedRecoveryIllustration',
     'IC01NoRecoveryAuthority'))
@@ -67,23 +72,31 @@ def run(output=None, records=None):
         'tools/boat_analysis/mission/logic.py',
         'tools/boat_analysis/model/runtime.py',
         'tools/boat_analysis/model/install.py',
-        'tools/boat_analysis/evidence/records.py', 'uv.lock'])
+        'tools/boat_analysis/evidence/records.py', 'uv.lock',
+        'tools/boat_analysis/studies/config.py',
+        'tools/boat_analysis/studies/runner.py', str(STUDY.relative_to(ROOT))])
     model = load_model()
-    allocation = analysis_values('BlueDogIntegratedCandidate::Inputs')
-    numerical_outputs = {case: analysis_values(case) for case in CASES}
-    reports = {case: json.loads(native('-analysis', case, '-json')) for case in CASES}
+    study = run_study(STUDY, model=model)
+    groups = {group['name']: group for group in study['provenance']['groups']}
+    allocation_run, = groups['configuration_inputs']['runs']
+    allocation = study['nativeOutputs'][allocation_run['key']]
+    recovery_runs = groups['recovery']['runs']
+    numerical_outputs = {entry['case']: study['nativeOutputs'][entry['key']] for entry in recovery_runs}
+    # Preserve the existing report field's CLI wire shape for downstream readers.
+    reports = {case: json.loads(native('-analysis', case, '-json')) for case in numerical_outputs}
     behaviors = behavior_examples(allocation['independentRecoveryAssumed'], numerical_outputs)
     revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     dirty = bool(subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=normal'], cwd=ROOT, text=True).strip())
-    report = dict(configuration='BlueDogIC01::design', configurationId=allocation['identifier'],
+    report = dict(configuration=groups['recovery']['subject'], configurationId=allocation['identifier'],
                   configurationInputs=allocation, modelHash=model.hash,
                   sourceRevision=revision, sourceTreeModified=dirty,
                   runtimeRevision=REVISION, sourceHashes=hashes,
                   nativeAnalyses=reports, nativeOutputs=numerical_outputs, behaviorTraces=behaviors,
+                  studyProvenance=study['provenance'],
                   physicalQualification=False,
                   scope='Native conditional recovery arithmetic and supervisor policy with explicitly supplied hypothetical observations; no whole-course, installed hardware, righting dynamics or physical qualification claim.')
     if records is not None:
-        record_analyses(CASES, records)
+        record_analyses(tuple(numerical_outputs), records)
         report['nativeAnalysisRecords'] = str(Path(records))
     validate(hashes)
     if output is not None:

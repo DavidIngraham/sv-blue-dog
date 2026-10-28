@@ -1,0 +1,30 @@
+schema_version: 1
+name: Explicit hypothetical recovery exposures
+groups:
+  - name: recovery
+    select:
+      id: BlueDogIntegratedCandidate::RecoveryScreen
+    subject:
+      id: BlueDogIC01::design
+    scenarios:
+      - name: bounded_reach
+        arguments:
+          exposureHours:
+            value: 4.0
+            unit: h
+            rationale: Hypothetical four-hour exposure; not a whole-course prediction.
+          distanceM:
+            value: 600.0
+            unit: m
+            rationale: Hypothetical safe-reach distance; no shore-capture evidence.
+          alongCurrentMps:
+            value: -0.4
+            unit: m/s
+            rationale: Explicit sensitivity assumption; not a measured current distribution.
+          crossCurrentMps:
+            value: 0.0
+            unit: m/s
+            rationale: Simplified diagnostic reach with no cross current.
+          inverted:
+            value: false
+            rationale: Upright casualty hypothesis for this arithmetic control.

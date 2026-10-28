@@ -15,6 +15,23 @@ uv run python -m tools.boat_analysis.cli record \
 
 The saved model can be reopened with the same engine and queried through its Python client or MCP server. These records supplement the immutable archives for external simulations and optimizer campaigns; a recorded execution does not imply that a vessel requirement has been physically verified.
 
+## Declarative studies
+
+I use [validated YAML studies](declarative-studies.md) to select native analysis
+cases by their model types and owners, bind named subjects and document external
+scenario assumptions. The recovery demonstration discovers configured recovery
+screens; the sail study discovers the current typed assessments. Engineering
+equations, configured defaults and objectives remain in SysML. Reports retain
+resolved identities and input/source provenance. Unit labels for plain scalar
+inputs document their convention; they do not supply missing dimensional typing.
+
+```sh
+uv run python -m tools.boat_analysis.cli study examples/studies/recovery.yaml \
+  --output build/analysis/recovery-study.json
+uv run python -m tools.boat_analysis.cli study examples/studies/sail-trade.yaml \
+  --output build/analysis/sail-trade-study.json
+```
+
 ## Run the named integration candidate
 
 [IC-01](../../models/configurations/ic01.sysml) owns the complete sizing design and its provisional integration assumptions, with design provenance in the immutable 15 October integration archive. The sizing adapter reads the model configuration and defaults to initial operating guesses from the 13 October SRR-readiness archive's `refinedReplay`; an explicitly supplied warm-start file can replace those guesses. Design values come from the named configuration, while warm starts supply numerical initial guesses.

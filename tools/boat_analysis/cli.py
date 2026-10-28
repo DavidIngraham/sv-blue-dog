@@ -13,6 +13,10 @@ def main():
     record = commands.add_parser("record", help="Execute cases into native AnalysisRecords evidence")
     record.add_argument("--case", action="append", required=True, dest="cases")
     record.add_argument("--output", required=True)
+    study = commands.add_parser("study", help="Validate and execute a declarative native-analysis study")
+    study.add_argument("config", nargs="?", help="YAML study configuration")
+    study.add_argument("--schema", action="store_true", help="Print the versioned JSON Schema")
+    study.add_argument("--output", help="Write the orchestration report or schema as JSON")
     solve = commands.add_parser("solve")
     solve.add_argument("--budget", type=int, default=40)
     solve.add_argument("--resume", action="store_true")
@@ -42,6 +46,42 @@ def main():
     elif args.command == "record":
         from .model.runtime import record_analyses
         print(record_analyses(args.cases, args.output))
+    elif args.command == "study":
+        import json
+        from pathlib import Path
+        from .studies.config import StudyConfig
+        from .studies.runner import run_study, StudyExecutionError, StudyObjectivesError
+        failed = None
+        if args.schema:
+            report = StudyConfig.model_json_schema()
+        else:
+            if args.config is None:
+                parser.error("study requires a YAML configuration or --schema")
+            try:
+                report = run_study(args.config)
+            except (StudyExecutionError, StudyObjectivesError) as error:
+                report = error.report
+                failed = str(error)
+            except (ValueError, OSError) as error:
+                parser.error(str(error))
+        rendered = json.dumps(report, indent=2, allow_nan=False) + "\n"
+        if args.output:
+            output = Path(args.output).resolve()
+            from .model.runtime import model_files
+            protected = {path.resolve() for path in model_files()}
+            if args.config:
+                protected.add(Path(args.config).resolve())
+            if output in protected:
+                parser.error("Study output must not overwrite its configuration or an input model")
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(rendered, encoding="utf-8")
+            print(output)
+        else:
+            print(rendered, end="")
+        if failed is not None:
+            import sys
+            print(failed, file=sys.stderr)
+            raise SystemExit(1)
     elif args.command == "prepare":
         from .model.runtime import ROOT, validate
         (ROOT / ".tools").mkdir(exist_ok=True)
