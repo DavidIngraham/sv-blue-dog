@@ -1,0 +1,9 @@
+......................                                                   [100%]
+============================= slowest 10 durations =============================
+2.29s call     tests/test_interface_contracts.py::test_future_time_guard_is_observable_in_native_negative_control
+1.48s setup    tests/test_interface_contracts.py::test_observation_timestamps_and_validity_are_explicit
+0.02s call     tests/test_interface_contracts.py::test_observation_timestamps_and_validity_are_explicit
+0.01s call     tests/test_interface_contracts.py::test_native_observation_acceptance[True-True-True-9 [s]-10 [s]-1 [s]-True]
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+22 passed in 3.96s

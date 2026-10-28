@@ -1,0 +1,16 @@
+........................................................................ [ 26%]
+........................................................................ [ 52%]
+........................................................................ [ 79%]
+........................................................                 [100%]
+============================= slowest 10 durations =============================
+0.11s call     experiments/inland-navigation/test_navigation.py::test_rule_scenario[Port gives way to starboard]
+0.10s setup    experiments/inland-navigation/test_navigation.py::test_rule_scenario[Port gives way to starboard]
+0.07s call     experiments/inland-navigation/test_navigation.py::test_composed_native_assessment_rejects_independent_channel_failure
+0.05s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[LightsAndShapes: day shapes]
+0.05s call     experiments/inland-navigation/test_navigation.py::test_native_interface_matches_transport_schema
+0.04s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[Signals: small sound required]
+0.04s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[ChannelsAndTSS: outside channel and TSS]
+0.04s call     experiments/inland-navigation/test_navigation.py::test_motor_sailing_requires_powered_signal_mode
+0.03s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[General: supported candidate]
+0.03s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[Special display baseline]
+272 passed in 1.58s

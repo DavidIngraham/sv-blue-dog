@@ -1,0 +1,7 @@
+..                                                                       [100%]
+============================= slowest 10 durations =============================
+2.98s call     tests/test_srr_basis.py::test_encounter_ranges_cover_latency_and_closure
+1.69s call     tests/test_srr_basis.py::test_recovery_risk_sensitivity_is_not_a_measured_probability
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+2 passed in 4.70s

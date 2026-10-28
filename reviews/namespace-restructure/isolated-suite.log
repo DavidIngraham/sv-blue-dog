@@ -1,0 +1,161 @@
+START tests/test_acoustic_equipment.py
+{"module": "tests/test_acoustic_equipment.py", "exitCode": 0, "seconds": 2.22}
+START tests/test_aerodynamic_figures.py
+{"module": "tests/test_aerodynamic_figures.py", "exitCode": 0, "seconds": 6.58}
+START tests/test_analysis_credibility.py
+{"module": "tests/test_analysis_credibility.py", "exitCode": 1, "seconds": 56.94}
+START tests/test_appendage_credibility.py
+{"module": "tests/test_appendage_credibility.py", "exitCode": 0, "seconds": 3.83}
+START tests/test_architecture_quality.py
+{"module": "tests/test_architecture_quality.py", "exitCode": 0, "seconds": 65.09}
+START tests/test_avoidance_failures.py
+{"module": "tests/test_avoidance_failures.py", "exitCode": 0, "seconds": 13.46}
+START tests/test_behavior_contracts.py
+{"module": "tests/test_behavior_contracts.py", "exitCode": 0, "seconds": 3.12}
+START tests/test_candidate_energy_budget.py
+{"module": "tests/test_candidate_energy_budget.py", "exitCode": 0, "seconds": 46.31}
+START tests/test_challenge_baseline.py
+{"module": "tests/test_challenge_baseline.py", "exitCode": 0, "seconds": 19.33}
+START tests/test_class_specific_detection.py
+{"module": "tests/test_class_specific_detection.py", "exitCode": 0, "seconds": 2.07}
+START tests/test_concept_mission.py
+{"module": "tests/test_concept_mission.py", "exitCode": 0, "seconds": 14.71}
+START tests/test_configuration_budgets.py
+{"module": "tests/test_configuration_budgets.py", "exitCode": 0, "seconds": 93.9}
+START tests/test_continuation.py
+{"module": "tests/test_continuation.py", "exitCode": 0, "seconds": 81.6}
+START tests/test_coupled_evidence.py
+{"module": "tests/test_coupled_evidence.py", "exitCode": 0, "seconds": 0.82}
+START tests/test_coupled_operation.py
+{"module": "tests/test_coupled_operation.py", "exitCode": 0, "seconds": 14.11}
+START tests/test_coupled_sizing.py
+{"module": "tests/test_coupled_sizing.py", "exitCode": 0, "seconds": 12.66}
+START tests/test_course.py
+{"module": "tests/test_course.py", "exitCode": 0, "seconds": 9.7}
+START tests/test_course_map.py
+{"module": "tests/test_course_map.py", "exitCode": 0, "seconds": 7.54}
+START tests/test_course_recovery.py
+{"module": "tests/test_course_recovery.py", "exitCode": 0, "seconds": 14.45}
+START tests/test_current_sizing.py
+{"module": "tests/test_current_sizing.py", "exitCode": 0, "seconds": 30.16}
+START tests/test_decision_management.py
+{"module": "tests/test_decision_management.py", "exitCode": 1, "seconds": 28.12}
+START tests/test_declarative_studies.py
+{"module": "tests/test_declarative_studies.py", "exitCode": 0, "seconds": 7.64}
+START tests/test_design_boundary.py
+{"module": "tests/test_design_boundary.py", "exitCode": 0, "seconds": 13.15}
+START tests/test_design_explorer.py
+{"module": "tests/test_design_explorer.py", "exitCode": 0, "seconds": 0.92}
+START tests/test_design_frontier.py
+{"module": "tests/test_design_frontier.py", "exitCode": 0, "seconds": 0.82}
+START tests/test_development_risks.py
+{"module": "tests/test_development_risks.py", "exitCode": 1, "seconds": 12.21}
+START tests/test_documentation.py
+{"module": "tests/test_documentation.py", "exitCode": 1, "seconds": 5.33}
+START tests/test_encounter_continuation.py
+{"module": "tests/test_encounter_continuation.py", "exitCode": 0, "seconds": 14.41}
+START tests/test_encounter_envelope.py
+{"module": "tests/test_encounter_envelope.py", "exitCode": 0, "seconds": 4.68}
+START tests/test_energy.py
+{"module": "tests/test_energy.py", "exitCode": 1, "seconds": 57.98}
+START tests/test_executable_requirements.py
+{"module": "tests/test_executable_requirements.py", "exitCode": 0, "seconds": 2.22}
+START tests/test_finite_sections.py
+{"module": "tests/test_finite_sections.py", "exitCode": 0, "seconds": 0.72}
+START tests/test_geometry_export.py
+{"module": "tests/test_geometry_export.py", "exitCode": 0, "seconds": 13.75}
+START tests/test_hull_resistance.py
+{"module": "tests/test_hull_resistance.py", "exitCode": 0, "seconds": 13.0}
+START tests/test_hydrostatics.py
+{"module": "tests/test_hydrostatics.py", "exitCode": 1, "seconds": 16.26}
+START tests/test_inline_views.py
+{"module": "tests/test_inline_views.py", "exitCode": 1, "seconds": 5.94}
+START tests/test_integrated_candidate.py
+{"module": "tests/test_integrated_candidate.py", "exitCode": 0, "seconds": 14.8}
+START tests/test_interface_contracts.py
+{"module": "tests/test_interface_contracts.py", "exitCode": 0, "seconds": 4.23}
+START tests/test_location_traffic.py
+{"module": "tests/test_location_traffic.py", "exitCode": 0, "seconds": 1.97}
+START tests/test_maneuver_dynamics.py
+{"module": "tests/test_maneuver_dynamics.py", "exitCode": 0, "seconds": 2.82}
+START tests/test_marine_libraries.py
+{"module": "tests/test_marine_libraries.py", "exitCode": 0, "seconds": 0.67}
+START tests/test_mission_execution.py
+{"module": "tests/test_mission_execution.py", "exitCode": 0, "seconds": 3.12}
+START tests/test_mission_logic.py
+{"module": "tests/test_mission_logic.py", "exitCode": 0, "seconds": 4.63}
+START tests/test_model_contracts.py
+{"module": "tests/test_model_contracts.py", "exitCode": 0, "seconds": 12.3}
+START tests/test_named_configuration.py
+{"module": "tests/test_named_configuration.py", "exitCode": 0, "seconds": 19.08}
+START tests/test_namespace_structure.py
+{"module": "tests/test_namespace_structure.py", "exitCode": 0, "seconds": 3.02}
+START tests/test_native_kernel.py
+{"module": "tests/test_native_kernel.py", "exitCode": 0, "seconds": 12.05}
+START tests/test_navigation_campaign.py
+{"module": "tests/test_navigation_campaign.py", "exitCode": 1, "seconds": 35.77}
+START tests/test_navigation_integration.py
+{"module": "tests/test_navigation_integration.py", "exitCode": 1, "seconds": 5.28}
+START tests/test_oosem_audit.py
+{"module": "tests/test_oosem_audit.py", "exitCode": 0, "seconds": 16.02}
+START tests/test_passage_exposure.py
+{"module": "tests/test_passage_exposure.py", "exitCode": 0, "seconds": 6.28}
+START tests/test_perception.py
+{"module": "tests/test_perception.py", "exitCode": 0, "seconds": 41.3}
+START tests/test_projection_sections.py
+{"module": "tests/test_projection_sections.py", "exitCode": 0, "seconds": 0.26}
+START tests/test_recorded_evidence.py
+{"module": "tests/test_recorded_evidence.py", "exitCode": 0, "seconds": 29.35}
+START tests/test_recovery_trade.py
+{"module": "tests/test_recovery_trade.py", "exitCode": 0, "seconds": 26.55}
+START tests/test_relationship_semantics.py
+{"module": "tests/test_relationship_semantics.py", "exitCode": 1, "seconds": 43.81}
+START tests/test_reliability.py
+{"module": "tests/test_reliability.py", "exitCode": 0, "seconds": 73.18}
+START tests/test_requirement_quality.py
+{"module": "tests/test_requirement_quality.py", "exitCode": 0, "seconds": 1.87}
+START tests/test_requirements.py
+{"module": "tests/test_requirements.py", "exitCode": 1, "seconds": 99.52}
+START tests/test_risk_cube.py
+{"module": "tests/test_risk_cube.py", "exitCode": 0, "seconds": 4.28}
+START tests/test_routing.py
+{"module": "tests/test_routing.py", "exitCode": 0, "seconds": 7.94}
+START tests/test_safety_reliability.py
+{"module": "tests/test_safety_reliability.py", "exitCode": 0, "seconds": 69.93}
+START tests/test_sail_trade.py
+{"module": "tests/test_sail_trade.py", "exitCode": 0, "seconds": 16.12}
+START tests/test_sailing_performance.py
+{"module": "tests/test_sailing_performance.py", "exitCode": 0, "seconds": 112.35}
+START tests/test_search_discovery.py
+{"module": "tests/test_search_discovery.py", "exitCode": 0, "seconds": 0.82}
+START tests/test_srr_basis.py
+{"module": "tests/test_srr_basis.py", "exitCode": 0, "seconds": 4.88}
+START tests/test_srr_current.py
+{"module": "tests/test_srr_current.py", "exitCode": 0, "seconds": 45.1}
+START tests/test_structural_acceptance.py
+{"module": "tests/test_structural_acceptance.py", "exitCode": 0, "seconds": 7.99}
+START tests/test_study_cli.py
+{"module": "tests/test_study_cli.py", "exitCode": 0, "seconds": 0.37}
+START tests/test_surface_environment.py
+{"module": "tests/test_surface_environment.py", "exitCode": 0, "seconds": 13.9}
+START tests/test_trajectories.py
+{"module": "tests/test_trajectories.py", "exitCode": 0, "seconds": 0.31}
+START tests/test_typed_operating.py
+{"module": "tests/test_typed_operating.py", "exitCode": 0, "seconds": 12.5}
+START tests/test_upstream_client.py
+{"module": "tests/test_upstream_client.py", "exitCode": 0, "seconds": 2.47}
+START tests/test_verification_evidence.py
+{"module": "tests/test_verification_evidence.py", "exitCode": 0, "seconds": 58.47}
+START tests/test_wave_performance.py
+{"module": "tests/test_wave_performance.py", "exitCode": 0, "seconds": 16.72}
+START tests/test_weather.py
+{"module": "tests/test_weather.py", "exitCode": 0, "seconds": 18.67}
+START tests/test_wind_sensing.py
+{"module": "tests/test_wind_sensing.py", "exitCode": 0, "seconds": 52.9}
+START tests/test_wing_analysis.py
+{"module": "tests/test_wing_analysis.py", "exitCode": 0, "seconds": 0.52}
+START tests/test_wing_heel.py
+{"module": "tests/test_wing_heel.py", "exitCode": 0, "seconds": 2.02}
+START experiments/inland-navigation/test_navigation.py
+{"module": "experiments/inland-navigation/test_navigation.py", "exitCode": 0, "seconds": 1.82}
+COMPLETE 80

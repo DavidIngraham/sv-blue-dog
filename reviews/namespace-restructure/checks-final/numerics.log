@@ -1,0 +1,20 @@
+{
+  "studyRuns": 9,
+  "constraints": 297,
+  "exactReports": true,
+  "maximumAbsoluteErrors": {
+    "lo": 0.0,
+    "hi": 0.0,
+    "span": 0.0,
+    "initial": 0.0,
+    "eq": 0.0,
+    "ineq": 0.0,
+    "design": 0.0,
+    "states": 0.0,
+    "route": 0.0,
+    "westerlyRoute": 0.0,
+    "righting": 0.0
+  },
+  "rtol": 1e-13,
+  "atol": 1e-12
+}

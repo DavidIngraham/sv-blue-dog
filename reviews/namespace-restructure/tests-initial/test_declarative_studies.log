@@ -1,0 +1,13 @@
+......................................                                   [100%]
+============================= slowest 10 durations =============================
+1.03s call     tests/test_declarative_studies.py::test_failed_native_objectives_are_retained_distinctly_from_execution_errors
+1.01s call     tests/test_declarative_studies.py::test_discovered_cases_are_ordered_by_native_id_and_repeated_runs_are_stable
+1.00s call     tests/test_declarative_studies.py::test_new_model_case_is_discovered_without_a_python_registry_edit
+0.55s call     tests/test_declarative_studies.py::test_defaults_are_explicit_and_native_values_preserve_their_types
+0.55s call     tests/test_declarative_studies.py::test_missing_unknown_or_wrongly_typed_inputs_cannot_pass[arguments3]
+0.51s call     tests/test_declarative_studies.py::test_missing_unknown_or_wrongly_typed_inputs_cannot_pass[arguments0]
+0.49s call     tests/test_declarative_studies.py::test_missing_unknown_or_wrongly_typed_inputs_cannot_pass[arguments1]
+0.49s call     tests/test_declarative_studies.py::test_subject_binding_uses_an_identified_model_configuration_and_records_assumptions
+0.48s call     tests/test_declarative_studies.py::test_scalar_bindings_cannot_masquerade_as_native_dimensional_values
+0.47s call     tests/test_declarative_studies.py::test_missing_unknown_or_wrongly_typed_inputs_cannot_pass[arguments2]
+38 passed in 7.34s

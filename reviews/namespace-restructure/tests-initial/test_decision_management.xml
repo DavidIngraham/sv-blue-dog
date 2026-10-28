@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="9" skipped="0" tests="15" time="27.791" timestamp="2026-10-28T12:50:14.510077-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_decision_management" name="test_native_decision_scope_and_current_evidence_are_explicit" time="1.592"><failure message="opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements">def test_native_decision_scope_and_current_evidence_are_explicit():
+&gt;       r=native_decision_audit()
+          ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='766d2f51638c3638b62463c4708f9325540e21b2316d36aba008096107407029', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[BlueDog::Decisions::TradeCriteria::handling::position-7-D07 Criterion positions]" time="3.889"><failure message="opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements">target = 'BlueDog::Decisions::TradeCriteria::handling::position', value = '7'
+error = 'D07 Criterion positions'
+
+    @pytest.mark.parametrize('target,value,error',[
+        ('BlueDog::Decisions::TradeCriteria::handling::position','7','D07 Criterion positions'),
+        ('BlueDog::Decisions::TradeCriteria::reliabilityStudy::kind','BlueDog::Decisions::TradeCriteria::Kind::mandatory','D08 Wrong'),
+        ('BlueDog::Decisions::Context::sizingBaseline::reopenTrigger','""','D01 Missing'),
+    ])
+    def test_native_audit_detects_scope_or_criterion_corruption(target,value,error):
+        sources=tuple((str(p),p.read_text()) for p in model_files())
+&gt;       assert any(x.startswith(error) for x in native_decision_audit(set_values(sources,{target:value}))['errors'])
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='c731b5da38d8a932429ac38e111b7961144a9a1856df388ceafd6908133462d1', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[BlueDog::Decisions::TradeCriteria::reliabilityStudy::kind-BlueDog::Decisions::TradeCriteria::Kind::mandatory-D08 Wrong]" time="2.906"><failure message="opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements">target = 'BlueDog::Decisions::TradeCriteria::reliabilityStudy::kind'
+value = 'BlueDog::Decisions::TradeCriteria::Kind::mandatory'
+error = 'D08 Wrong'
+
+    @pytest.mark.parametrize('target,value,error',[
+        ('BlueDog::Decisions::TradeCriteria::handling::position','7','D07 Criterion positions'),
+        ('BlueDog::Decisions::TradeCriteria::reliabilityStudy::kind','BlueDog::Decisions::TradeCriteria::Kind::mandatory','D08 Wrong'),
+        ('BlueDog::Decisions::Context::sizingBaseline::reopenTrigger','""','D01 Missing'),
+    ])
+    def test_native_audit_detects_scope_or_criterion_corruption(target,value,error):
+        sources=tuple((str(p),p.read_text()) for p in model_files())
+&gt;       assert any(x.startswith(error) for x in native_decision_audit(set_values(sources,{target:value}))['errors'])
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='071c40248479f6029dc7e5ab42c1d0b051980f541f76eac1f5f3064bf848bb5f', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_decision_management" name="test_native_audit_detects_scope_or_criterion_corruption[BlueDog::Decisions::Context::sizingBaseline::reopenTrigger-&quot;&quot;-D01 Missing]" time="2.849"><failure message="opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements">target = 'BlueDog::Decisions::Context::sizingBaseline::reopenTrigger'
+value = '""', error = 'D01 Missing'
+
+    @pytest.mark.parametrize('target,value,error',[
+        ('BlueDog::Decisions::TradeCriteria::handling::position','7','D07 Criterion positions'),
+        ('BlueDog::Decisions::TradeCriteria::reliabilityStudy::kind','BlueDog::Decisions::TradeCriteria::Kind::mandatory','D08 Wrong'),
+        ('BlueDog::Decisions::Context::sizingBaseline::reopenTrigger','""','D01 Missing'),
+    ])
+    def test_native_audit_detects_scope_or_criterion_corruption(target,value,error):
+        sources=tuple((str(p),p.read_text()) for p in model_files())
+&gt;       assert any(x.startswith(error) for x in native_decision_audit(set_values(sources,{target:value}))['errors'])
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='b292efd5652886ac04c64719aa338619b1d5ef0d6e061af568a5b9ad967a5408', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_decision_management" name="test_native_audit_detects_changed_duration_basis" time="1.898"><failure message="opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements">def test_native_audit_detects_changed_duration_basis():
+        sources=tuple((str(p),p.read_text()) for p in model_files())
+        mutant=replace_unique(sources,
+            'dependency progressDuration from progress to BlueDog::Requirements::passageDuration;',
+            'dependency progressDuration from progress to BlueDog::Requirements::legProgress;')
+&gt;       assert any(x.startswith('D07 Missing current') for x in native_decision_audit(mutant)['errors'])
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='590b49f5df0c7a07a64319b1367bdcd07b0d02b5f1a44497d96232d778e00855', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_decision_management" name="test_new_unclassified_working_decision_is_detected" time="1.848"><failure message="opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements">def test_new_unclassified_working_decision_is_detected():
+        anchor='    dependency courtesyCollisionSafety from trafficCourtesy to BlueDog::Mission::Challenge::trafficCoexistence;'
+        addition='\n    item unreviewed : EngineeringDecisions::DecisionRecord { attribute :&gt;&gt; disposition="Investigate"; attribute :&gt;&gt; evidenceNeeded="Unknown"; }'
+        sources=replace_unique(tuple((str(p),p.read_text()) for p in model_files()), anchor, anchor+addition)
+&gt;       assert native_decision_audit(sources)['errors']
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='9955183f288e5619f520e37247e94d103cb796fe088d5aa00b8fc85bdb2ece88', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_decision_management" name="test_acceptance_flag_without_actual_disposition_identity_is_detected" time="2.906"><failure message="opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements">def test_acceptance_flag_without_actual_disposition_identity_is_detected():
+        sources=tuple((str(p),p.read_text()) for p in model_files())
+        # Native ownership identifies exactly the open-question records.
+        m=connection().parse_sources(sources,strict=True)
+        rows=m.query(scope=['BlueDog::Decisions::OpenQuestions'], select=['owner'], where={
+            '@type':'PrimitiveConstraint','property':'@type','operator':'=','value':['ItemUsage']})
+        bindings={row.id+'::accepted':'true' for row in rows
+                  if row.get('owner')=='BlueDog::Decisions::OpenQuestions'}
+        assert len(bindings)==6
+        sources=set_values(sources,bindings)
+&gt;       errors=native_decision_audit(sources)['errors']
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='72f81d321c53a6bf71e12009f09bf0355c0ccc8b832e7ff7370b94db37fb9ae8', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_decision_management" name="test_retained_basis_state_is_checked_without_reclassifying_its_content" time="2.873"><failure message="opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements">def test_retained_basis_state_is_checked_without_reclassifying_its_content():
+        sources=tuple((str(p),p.read_text()) for p in model_files())
+        m=connection().parse_sources(sources,strict=True)
+        rows=m.query(scope=['BlueDog::Requirements::Basis'], select=['owner'], where={
+            '@type':'PrimitiveConstraint','property':'type','operator':'=','value':['EngineeringDecisions::DecisionRecord']})
+        retained=sorted(row.id for row in rows if row.get('owner')=='BlueDog::Requirements::Basis')
+        assert retained
+        sources=set_values(sources,{retained[0]+'::recordState':'EngineeringDecisions::RecordState::openQuestion'})
+&gt;       assert any(x.startswith('D18 Record state disagrees') for x in native_decision_audit(sources)['errors'])
+                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='8c0884072858647afda044f9089b65d1990e2a1eff38cfe512850b315be5619c', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_decision_management" name="test_record_outside_register_scopes_is_not_silently_omitted" time="1.630"><failure message="opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements">def test_record_outside_register_scopes_is_not_silently_omitted():
+        sources=[(str(p),p.read_text()) for p in model_files()]
+        sources.append((str(ROOT/'models/orphan-test.sysml'), '''package UnexpectedDecisionScope {
+            item orphan : EngineeringDecisions::DecisionRecord {
+                attribute :&gt;&gt; recordState = EngineeringDecisions::RecordState::openQuestion;
+                attribute :&gt;&gt; question = "Unresolved";
+                attribute :&gt;&gt; evidenceNeeded = "Unspecified";
+            }
+        }'''))
+&gt;       assert 'D01 Native decision inventory differs from register' in native_decision_audit(sources)['errors']
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_decision_management.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/decision_audit.py:13: in native_decision_audit
+    m=connection().parse_sources((*sources,(str(q),q.read_text())),strict=True)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='c0fdaec91cea0a425a131034d060193764acf932e9f836906191f82cc266bb6b', root='', diagnostics=2)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) &gt; 3:
+            summary += f"; ... and {len(errors) - 3} more"
+&gt;       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 2 error(s): /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;; /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError</failure></testcase><testcase classname="tests.test_decision_management" name="test_native_tie_is_reported_and_first_selection_is_order_dependent" time="0.071" /><testcase classname="tests.test_decision_management" name="test_native_preference_reverses_with_supplied_metric[9-b]" time="0.013" /><testcase classname="tests.test_decision_management" name="test_native_preference_reverses_with_supplied_metric[11-a]" time="0.013" /><testcase classname="tests.test_decision_management" name="test_native_missing_metric_is_visible_not_zero" time="0.013" /><testcase classname="tests.test_decision_management" name="test_native_supplied_admitted_subset_is_the_only_selection_pool" time="0.012" /><testcase classname="tests.test_decision_management" name="test_decision_and_criterion_registers_are_published" time="4.914"><error message="failed on setup with &quot;RuntimeError: OpenSysML exited 2:&#10;{&#10;  &quot;status&quot;: &quot;unresolved&quot;,&#10;  &quot;exit&quot;: 2,&#10;  &quot;checks&quot;: null,&#10;  &quot;diagnostics&quot;: [&#10;    {&#10;      &quot;severity&quot;: &quot;error&quot;,&#10;      &quot;message&quot;: &quot;unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;&quot;,&#10;      &quot;file&quot;: &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml&quot;,&#10;      &quot;line&quot;: 984,&#10;      &quot;column&quot;: 45,&#10;      &quot;pass&quot;: &quot;name-resolution&quot;,&#10;      &quot;code&quot;: &quot;unresolved&quot;&#10;    },&#10;    {&#10;      &quot;severity&quot;: &quot;error&quot;,&#10;      &quot;message&quot;: &quot;document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements&quot;,&#10;      &quot;file&quot;: &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml&quot;,&#10;      &quot;line&quot;: 995,&#10;      &quot;column&quot;: 29,&#10;      &quot;pass&quot;: &quot;document-plan&quot;,&#10;      &quot;code&quot;: &quot;document-plan-query-planning&quot;&#10;    }&#10;  ],&#10;  &quot;output&quot;: [&#10;    &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;&quot;,&#10;    &quot;        Project(source = WhereType(source = ModelElements(),&quot;,&#10;    &quot;                                            ^~~~~~~~~~~~~&quot;,&#10;    &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements&quot;,&#10;    &quot;        part uses : Table { calc rows : Uses; }&quot;,&#10;    &quot;                            ^~~~~~~~~~~~~~~~~&quot;&#10;  ],&#10;  &quot;errors&quot;: [&#10;    &quot;/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-0.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-3.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-4.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-5.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-6.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-7.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-8.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-9.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-10.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-11.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-12.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-13.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-14.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-15.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-24.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-26.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-30.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-31.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-32.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-40.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-41.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-42.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-43.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-44.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-45.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-46.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-47.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-48.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-49.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-50.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-51.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-52.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-53.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-54.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-55.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-56.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-57.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-58.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-59.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-60.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-61.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-62.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-63.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-64.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-65.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-66.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-67.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-68.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-69.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-70.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-71.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-72.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-85.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-86.sysml did not analyse cleanly; no check was made&quot;&#10;  ]&#10;}&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x7f8488542960&gt;, _basetemp=PosixPath('/tmp/pytest-of-david/pytest-170'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="session")
+    def rendered_site(tmp_path_factory):
+        from tools.publishing.build import build
+        from tools.boat_analysis.model.runtime import ROOT
+        output = tmp_path_factory.mktemp("published-site")
+&gt;       build(ROOT / "docs", output)
+
+tests/conftest.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/publishing/build.py:267: in build
+    pages = _build(source_dir, staged)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/publishing/build.py:206: in _build
+    outputs = iter(render_blocks(selected, Path(scratch)))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/publishing/views.py:86: in render_blocks
+    validate(models)
+tools/boat_analysis/model/runtime.py:38: in validate
+    report = json.loads(native("-validate", "-json", models=models))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+models = (PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml'), PosixPath('/home/david/repos/sv-blue-dog...e/appendages.sysml'), PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml'), ...)
+commands = None, arguments = ('-validate', '-json')
+
+    def native(*arguments, models=None, commands=None):
+        files = model_files() if models is None else tuple(dict.fromkeys(models))
+        result = subprocess.run(
+            [str(binary_path()), *map(str, files), *map(str, arguments)],
+            capture_output=True, text=True, encoding="utf-8", cwd=ROOT, input=commands,
+        )
+        if result.returncode:
+&gt;           raise RuntimeError(f"OpenSysML exited {result.returncode}:\n{result.stdout}\n{result.stderr}")
+E           RuntimeError: OpenSysML exited 2:
+E           {
+E             "status": "unresolved",
+E             "exit": 2,
+E             "checks": null,
+E             "diagnostics": [
+E               {
+E                 "severity": "error",
+E                 "message": "unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;",
+E                 "file": "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml",
+E                 "line": 984,
+E                 "column": 45,
+E                 "pass": "name-resolution",
+E                 "code": "unresolved"
+E               },
+E               {
+E                 "severity": "error",
+E                 "message": "document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements",
+E                 "file": "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml",
+E                 "line": 995,
+E                 "column": 29,
+E                 "pass": "document-plan",
+E                 "code": "document-plan-query-planning"
+E               }
+E             ],
+E             "output": [
+E               "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;",
+E               "        Project(source = WhereType(source = ModelElements(),",
+E               "                                            ^~~~~~~~~~~~~",
+E               "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements",
+E               "        part uses : Table { calc rows : Uses; }",
+E               "                            ^~~~~~~~~~~~~~~~~"
+E             ],
+E             "errors": [
+E               "/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-0.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-3.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-4.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-5.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-6.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-7.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-8.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-9.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-10.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-11.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-12.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-13.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-14.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-15.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-24.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-26.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-30.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-31.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-32.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-40.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-41.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-42.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-43.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-44.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-45.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-46.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-47.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-48.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-49.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-50.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-51.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-52.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-53.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-54.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-55.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-56.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-57.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-58.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-59.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-60.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-61.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-62.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-63.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-64.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-65.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-66.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-67.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-68.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-69.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-70.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-71.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-72.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-85.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/site-3f_b9q6e/view-86.sysml did not analyse cleanly; no check was made"
+E             ]
+E           }
+
+tools/boat_analysis/model/runtime.py:33: RuntimeError</error></testcase></testsuite></testsuites>

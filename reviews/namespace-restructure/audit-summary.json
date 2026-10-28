@@ -1,0 +1,168 @@
+[
+  {
+    "audit": "audit",
+    "before": {
+      "requirements": 257,
+      "current": 245,
+      "future": 12,
+      "currentRequirements": 243,
+      "currentStudyObjectives": 2,
+      "currentWithObjectives": 245,
+      "derivations": 67,
+      "refinements": 166,
+      "dependencies": 554
+    },
+    "after": {
+      "requirements": 257,
+      "current": 245,
+      "future": 12,
+      "currentRequirements": 243,
+      "currentStudyObjectives": 2,
+      "currentWithObjectives": 245,
+      "derivations": 67,
+      "refinements": 166,
+      "dependencies": 554
+    },
+    "errors": []
+  },
+  {
+    "audit": "architecture_audit",
+    "before": {
+      "logicalResponsibilities": 14,
+      "logicalExchanges": 28,
+      "scenarios": 9,
+      "scenarioSteps": 41,
+      "mappings": {
+        "ContextMapping": 14,
+        "IC01Responsibility": 27,
+        "IC01Exchange": 30,
+        "IC01InternalExchange": 14
+      }
+    },
+    "after": {
+      "logicalResponsibilities": 14,
+      "logicalExchanges": 28,
+      "scenarios": 9,
+      "scenarioSteps": 41,
+      "mappings": {
+        "ContextMapping": 14,
+        "IC01Responsibility": 27,
+        "IC01Exchange": 30,
+        "IC01InternalExchange": 14
+      }
+    },
+    "errors": []
+  },
+  {
+    "audit": "configuration_audit",
+    "before": {
+      "configurationContexts": 12,
+      "accountingScopes": 7,
+      "topLevelDesignParameterParts": 9
+    },
+    "after": {
+      "configurationContexts": 12,
+      "accountingScopes": 7,
+      "topLevelDesignParameterParts": 9
+    },
+    "errors": []
+  },
+  {
+    "audit": "credibility_audit",
+    "before": {
+      "analysisCases": 110,
+      "registeredCases": 110,
+      "nativeTypes": {
+        "AnalysisCaseUsage": 72,
+        "AnalysisCaseDefinition": 38
+      },
+      "useCategories": {
+        "Equipment": 4,
+        "Inputs": 19,
+        "Encounter": 6,
+        "EnergyReliability": 6,
+        "Readiness": 5,
+        "HistoricalReview": 13,
+        "Weather": 10,
+        "Geometry": 2,
+        "Recovery": 6,
+        "Rules": 19,
+        "Sailing": 15,
+        "Trade": 5
+      }
+    },
+    "after": {
+      "analysisCases": 110,
+      "registeredCases": 110,
+      "nativeTypes": {
+        "AnalysisCaseUsage": 72,
+        "AnalysisCaseDefinition": 38
+      },
+      "useCategories": {
+        "Equipment": 4,
+        "Rules": 19,
+        "Geometry": 2,
+        "Inputs": 19,
+        "EnergyReliability": 6,
+        "Encounter": 6,
+        "Weather": 10,
+        "Recovery": 6,
+        "Readiness": 5,
+        "Trade": 5,
+        "Sailing": 15,
+        "HistoricalReview": 13
+      }
+    },
+    "errors": []
+  },
+  {
+    "audit": "decision_audit",
+    "before": {
+      "workingDecisions": 8,
+      "openQuestions": 6,
+      "designBasisRecords": 6,
+      "totalDecisionRecords": 20,
+      "allocationReviews": 80,
+      "declaredCriteria": 7,
+      "criterionClasses": {
+        "mandatory": 6,
+        "comparativeStudy": 1
+      }
+    },
+    "after": {
+      "workingDecisions": 8,
+      "openQuestions": 6,
+      "designBasisRecords": 6,
+      "totalDecisionRecords": 20,
+      "allocationReviews": 80,
+      "declaredCriteria": 7,
+      "criterionClasses": {
+        "mandatory": 6,
+        "comparativeStudy": 1
+      }
+    },
+    "errors": []
+  },
+  {
+    "audit": "safety_audit",
+    "before": null,
+    "after": null,
+    "errors": []
+  },
+  {
+    "audit": "verification_audit",
+    "before": {
+      "verificationDefinitions": 100,
+      "withPlannedMethods": 100,
+      "declaredPlanResults": 97,
+      "integrationPlans": 2
+    },
+    "after": {
+      "verificationDefinitions": 100,
+      "withPlannedMethods": 100,
+      "declaredPlanResults": 97,
+      "integrationPlans": 2
+    },
+    "errors": []
+  }
+]

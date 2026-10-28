@@ -1,0 +1,8 @@
+..                                                                       [100%]
+============================= slowest 10 durations =============================
+1.57s setup    tests/test_requirement_quality.py::test_new_process_and_disturbance_outcomes_have_direct_objectives
+0.02s call     tests/test_requirement_quality.py::test_open_allocations_and_procedure_choices_have_reviewable_closure_records
+0.02s call     tests/test_requirement_quality.py::test_new_process_and_disturbance_outcomes_have_direct_objectives
+
+(3 durations < 0.005s hidden.  Use -vv to show these durations.)
+2 passed in 1.62s

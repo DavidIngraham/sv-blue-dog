@@ -1,0 +1,13 @@
+................                                                         [100%]
+============================= slowest 10 durations =============================
+9.47s call     tests/test_energy.py::test_verification_requires_evidence_and_numerical_success
+4.25s call     tests/test_energy.py::test_rollup_and_synthetic_campaign
+3.47s call     tests/test_energy.py::test_invalid_inputs_cannot_be_verified_even_with_evidence_flag
+3.42s call     tests/test_energy.py::test_surviving_finite_run_does_not_establish_repeatability
+3.29s call     tests/test_energy.py::test_invalid_input_does_not_pass[above-capacity]
+3.25s call     tests/test_energy.py::test_enabled_zero_resource_still_counts_against_campaign
+3.24s call     tests/test_energy.py::test_missing_input_does_not_pass
+3.24s call     tests/test_energy.py::test_invalid_input_does_not_pass[invalid-usable-fraction]
+3.22s call     tests/test_energy.py::test_finite_campaign_can_consume_charge_without_being_repeatable
+3.21s call     tests/test_energy.py::test_peak_supply_is_independent_of_average_energy
+16 passed in 58.40s

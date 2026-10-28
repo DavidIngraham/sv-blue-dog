@@ -1,0 +1,6 @@
+...                                                                      [100%]
+============================= slowest 10 durations =============================
+12.69s call     tests/test_geometry_export.py::test_candidate_glb_matches_analysis_volumes_and_dimensions
+
+(8 durations < 0.005s hidden.  Use -vv to show these durations.)
+3 passed in 13.27s

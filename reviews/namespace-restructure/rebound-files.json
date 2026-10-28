@@ -1,0 +1,7 @@
+[
+  "tests/native_cases.py",
+  "tests/test_recovery_trade.py",
+  "tools/publishing/assets/design-explorer.js",
+  "tools/publishing/reference.sysml",
+  "models/README.md"
+]

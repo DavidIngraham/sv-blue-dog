@@ -1,0 +1,209 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+__________________ test_risk_actions_are_published_from_model __________________
+
+    def test_risk_actions_are_published_from_model():
+>       report = native('-render-document', 'BlueDogRiskDocuments::Actions')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_development_risks.py:6: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/native_cases.py:16: in native
+    return execute(*args, models=(*files, ROOT/'tools/publishing/reference.sysml', ROOT/'tests/fixtures/regression-views.sysml', views))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+models = (PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml'), PosixPath('/home/david/repos/sv-blue-dog...e/appendages.sysml'), PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml'), ...)
+commands = None
+arguments = ('-render-document', 'BlueDogRiskDocuments::Actions', '-render-show', 'qualifiers,typings')
+
+    def native(*arguments, models=None, commands=None):
+        files = model_files() if models is None else tuple(dict.fromkeys(models))
+        result = subprocess.run(
+            [str(binary_path()), *map(str, files), *map(str, arguments)],
+            capture_output=True, text=True, encoding="utf-8", cwd=ROOT, input=commands,
+        )
+        if result.returncode:
+>           raise RuntimeError(f"OpenSysML exited {result.returncode}:\n{result.stdout}\n{result.stderr}")
+E           RuntimeError: OpenSysML exited 2:
+E           
+E           loaded 24 files:
+E             /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml
+E           /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;
+E                   Project(source = WhereType(source = ModelElements(),
+E                                                       ^~~~~~~~~~~~~
+E           /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+E                   part uses : Table { calc rows : Uses; }
+E                                       ^~~~~~~~~~~~~~~~~
+E           sysml: /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml did not analyse cleanly; nothing was rendered
+
+tools/boat_analysis/model/runtime.py:33: RuntimeError
+_____________ test_standard_risk_metadata_and_unknown_probability ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-david/pytest-173/test_standard_risk_metadata_an0')
+
+    def test_standard_risk_metadata_and_unknown_probability(tmp_path):
+        source = tmp_path / 'risk-query.sysml'
+        source.write_text('''package RiskCheck {
+            private import DocumentQueries::*;
+            calc def Rows :> Query {
+                Project(source = WhereMetadata(source = Descendants(source = Named(qualifiedName = "BlueDog::Analyses::DevelopmentRisks")), 'metadata' = "RiskMetadata::Risk"), columns = (
+                    Column(name = "Risk", path = "risk.identifier"),
+                    Column(name = "Likelihood", path = "risk.technicalRisk.probability")))
+            }
+            part def Report :> Document { attribute redefines title = "Risk metadata test"; part table : Table { calc rows : Rows; } }
+        }''', encoding='utf-8')
+>       report = native('-render-document', 'RiskCheck::Report', models=(*MODELS, source))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_development_risks.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/native_cases.py:16: in native
+    return execute(*args, models=(*files, ROOT/'tools/publishing/reference.sysml', ROOT/'tests/fixtures/regression-views.sysml', views))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+models = (PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml'), PosixPath('/home/david/repos/sv-blue-dog...e/appendages.sysml'), PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml'), ...)
+commands = None
+arguments = ('-render-document', 'RiskCheck::Report', '-render-show', 'qualifiers,typings')
+
+    def native(*arguments, models=None, commands=None):
+        files = model_files() if models is None else tuple(dict.fromkeys(models))
+        result = subprocess.run(
+            [str(binary_path()), *map(str, files), *map(str, arguments)],
+            capture_output=True, text=True, encoding="utf-8", cwd=ROOT, input=commands,
+        )
+        if result.returncode:
+>           raise RuntimeError(f"OpenSysML exited {result.returncode}:\n{result.stdout}\n{result.stderr}")
+E           RuntimeError: OpenSysML exited 2:
+E           
+E           loaded 25 files:
+E             /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml
+E             /tmp/pytest-of-david/pytest-173/test_standard_risk_metadata_an0/risk-query.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml
+E           /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;
+E                   Project(source = WhereType(source = ModelElements(),
+E                                                       ^~~~~~~~~~~~~
+E           /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+E                   part uses : Table { calc rows : Uses; }
+E                                       ^~~~~~~~~~~~~~~~~
+E           sysml: /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /tmp/pytest-of-david/pytest-173/test_standard_risk_metadata_an0/risk-query.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml did not analyse cleanly; nothing was rendered
+
+tools/boat_analysis/model/runtime.py:33: RuntimeError
+_______________ test_assessment_basis_and_evidence_are_published _______________
+
+    def test_assessment_basis_and_evidence_are_published():
+>       report = native('-render-document', 'BlueDogRiskDocuments::Assessments')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_development_risks.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/native_cases.py:16: in native
+    return execute(*args, models=(*files, ROOT/'tools/publishing/reference.sysml', ROOT/'tests/fixtures/regression-views.sysml', views))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+models = (PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml'), PosixPath('/home/david/repos/sv-blue-dog...e/appendages.sysml'), PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml'), ...)
+commands = None
+arguments = ('-render-document', 'BlueDogRiskDocuments::Assessments', '-render-show', 'qualifiers,typings')
+
+    def native(*arguments, models=None, commands=None):
+        files = model_files() if models is None else tuple(dict.fromkeys(models))
+        result = subprocess.run(
+            [str(binary_path()), *map(str, files), *map(str, arguments)],
+            capture_output=True, text=True, encoding="utf-8", cwd=ROOT, input=commands,
+        )
+        if result.returncode:
+>           raise RuntimeError(f"OpenSysML exited {result.returncode}:\n{result.stdout}\n{result.stderr}")
+E           RuntimeError: OpenSysML exited 2:
+E           
+E           loaded 24 files:
+E             /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml
+E             /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml
+E           /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;
+E                   Project(source = WhereType(source = ModelElements(),
+E                                                       ^~~~~~~~~~~~~
+E           /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements
+E                   part uses : Table { calc rows : Uses; }
+E                                       ^~~~~~~~~~~~~~~~~
+E           sysml: /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml did not analyse cleanly; nothing was rendered
+
+tools/boat_analysis/model/runtime.py:33: RuntimeError
+============================= slowest 10 durations =============================
+4.33s call     tests/test_development_risks.py::test_standard_risk_metadata_and_unknown_probability
+4.17s call     tests/test_development_risks.py::test_assessment_basis_and_evidence_are_published
+3.43s call     tests/test_development_risks.py::test_risk_actions_are_published_from_model
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+FAILED tests/test_development_risks.py::test_risk_actions_are_published_from_model
+FAILED tests/test_development_risks.py::test_standard_risk_metadata_and_unknown_probability
+FAILED tests/test_development_risks.py::test_assessment_basis_and_evidence_are_published
+3 failed in 11.99s

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="6.101" timestamp="2026-10-28T12:41:58.121610-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_aerodynamic_figures" name="test_gallery_assets_and_sample_provenance" time="5.142" /></testsuite></testsuites>

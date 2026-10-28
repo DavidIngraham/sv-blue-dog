@@ -1,0 +1,825 @@
+FFFF.FFFF.FFFFF                                                          [100%]
+=================================== FAILURES ===================================
+________________ test_stand_on_holds_until_assessed_escalation _________________
+
+    def test_stand_on_holds_until_assessed_escalation():
+>       assert candidate('holdCourseSpeed')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:21: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_navigation_integration.py:17: in candidate
+    return evaluate('BlueDog::Behavior::Navigation::Candidate',**inputs)['allowed']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+____________ test_unknown_observed_status_cannot_approve_candidate _____________
+
+    def test_unknown_observed_status_cannot_approve_candidate():
+>       nav=NavigationAssessment(assessed_context=ASSESSED_CONTEXT)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+_ test_overtaking_memory_survives_track_loss_and_releases_on_observed_clearance _
+
+    def test_overtaking_memory_survives_track_loss_and_releases_on_observed_clearance():
+>       nav=NavigationAssessment(assessed_context=ASSESSED_CONTEXT)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+___________ test_unknown_clearance_does_not_erase_overtaking_memory ____________
+
+    def test_unknown_clearance_does_not_erase_overtaking_memory():
+>       nav=NavigationAssessment(assessed_context=ASSESSED_CONTEXT)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+_________ test_navigation_cannot_use_truth_or_rescue_an_unseen_target __________
+
+    def test_navigation_cannot_use_truth_or_rescue_an_unseen_target():
+        with pytest.raises(ValueError,match='delivered observations'):
+>           simulate(*fixture(),navigation=NavigationAssessment())
+                                           ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+________ test_unobserved_future_turn_cannot_change_navigation_decision _________
+
+    def test_unobserved_future_turn_cannot_change_navigation_decision():
+        straight=target()
+        turning=replace(straight,track=LineString([(100,0),(110,0),(110,1000)]))
+        masks=[]
+        for actor in (straight,turning):
+            observations=Observations(SensorEnvelope(1000,1000,1000),observe_navigation_facts=True)
+            observations.observe([actor],np.zeros(2),0)
+            contacts=observations.observe([actor],np.zeros(2),1)
+>           masks.append(assess(NavigationAssessment(assessed_context=ASSESSED_CONTEXT),contacts))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+__________ test_committed_turn_does_not_need_a_second_heading_change ___________
+
+    def test_committed_turn_does_not_need_a_second_heading_change():
+>       assert candidate('keepClear',heldClear=False,holdsCourseSpeed=False,continuationSupported=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_navigation_integration.py:17: in candidate
+    return evaluate('BlueDog::Behavior::Navigation::Candidate',**inputs)['allowed']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+_______ test_independent_channel_duty_is_not_skipped_when_pair_is_clear ________
+
+    def test_independent_channel_duty_is_not_skipped_when_pair_is_clear():
+>       nav=NavigationAssessment(assessed_context=dict(ASSESSED_CONTEXT,channelContext='yes'))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+_______________ test_depower_is_not_a_substantial_heading_change _______________
+
+    def test_depower_is_not_a_substantial_heading_change():
+>       result=evaluate('BlueDog::Behavior::Navigation::Geometry',rangeM=100.,closingMps=1.,protectedRadiusM=20.,
+            releaseMultiplier=2.,heldConflict=True,headingKnown=False,trackAdequate=True,
+            headingToleranceDeg=2.,speedToleranceMps=.05,substantialTurnDeg=15.,headingChangeDeg=0.,speedChangeMps=2.)
+
+tests/test_navigation_integration.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+_________ test_empty_scene_has_identical_candidate_grid_in_both_modes __________
+
+    def test_empty_scene_has_identical_candidate_grid_in_both_modes():
+        inputs,route,water,gates=fixture()
+        inputs['retainCurrentHeadingCandidate']=True
+        baseline=simulate(inputs,route,water,gates,observations=Observations(SensorEnvelope(100,100,100)))
+        rules=simulate(inputs,route,water,gates,observations=Observations(SensorEnvelope(100,100,100)),
+>           navigation=NavigationAssessment(assessed_context=ASSESSED_CONTEXT))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+_____ test_new_target_during_drift_is_not_hidden_by_safe_eventual_heading ______
+
+    def test_new_target_during_drift_is_not_hidden_by_safe_eventual_heading():
+        from tools.boat_analysis.mission.navigation import trajectory_clear
+        actor=Traffic('crossing',LineString([(-10,0),(100,0)]),0,1,1,1,0,source_id=4)
+        position=np.zeros(2)
+        segments=[(15.,np.zeros(2)),(20.,np.array([0.,2.]))]
+        assert not trajectory_clear(actor,position,0,segments,[1.2,.43])
+        assert trajectory_clear(actor,position,0,[(35.,np.array([0.,2.]))],[1.2,.43])
+>       nav=NavigationAssessment(assessed_context=ASSESSED_CONTEXT)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:141: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+_________ test_approval_cannot_carry_a_skipped_pair_into_a_new_command _________
+
+    def test_approval_cannot_carry_a_skipped_pair_into_a_new_command():
+>       nav=NavigationAssessment(assessed_context=ASSESSED_CONTEXT)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:151: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+__ test_new_candidate_segment_conflict_is_checked_even_when_holding_is_clear ___
+
+    def test_new_candidate_segment_conflict_is_checked_even_when_holding_is_clear():
+        actor=Traffic('crossing',LineString([(-10,0),(100,0)]),0,1,1,1,0,source_id=4)
+>       nav=NavigationAssessment(assessed_context=ASSESSED_CONTEXT)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_navigation_integration.py:163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/mission/navigation.py:66: in __init__
+    self.policy=evaluate('BlueDog::Behavior::Navigation::Policy')
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:36: in evaluate
+    return dict(_evaluate(name,tuple(sorted(inputs.items()))))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:27: in _evaluate
+    kinds=interface(name)
+          ^^^^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:22: in interface
+    return {s.name:s.type_facts for s in rule_model().find(name).children()
+                                         ^^^^^^^^^^^^
+tools/boat_analysis/mission/navigation.py:18: in rule_model
+    return load_model(SOURCES)
+           ^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:79: in load_model
+    return _loaded_model(snapshot)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+tools/boat_analysis/model/runtime.py:71: in _loaded_model
+    return connection().parse_sources(snapshot, strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1413: in parse_sources
+    model.raise_for_errors()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Model(hash='5a8f85d46eb04dc4785c76eff76f2149a235d4383e144f2c2998bdab00d24f48', root='', diagnostics=640)
+
+    def raise_for_errors(self):
+        """Raise :class:`~opensysml.errors.ModelError` unless :attr:`ok`.
+    
+        Returns:
+            Model: self, so a call can be chained onto a load
+    
+        Raises:
+            ModelError: If the model has error diagnostics. It carries them as
+                ``diagnostics`` and this model as ``model``.
+        """
+        errors = self.errors
+        if not errors:
+            return self
+        where = self._source_path or "the model"
+        summary = "; ".join(str(d) for d in errors[:3])
+        if len(errors) > 3:
+            summary += f"; ... and {len(errors) - 3} more"
+>       raise ModelError(
+            f"{where} has {len(errors)} error(s): {summary}",
+            diagnostics=errors,
+            model=self,
+        )
+E       opensysml.errors.ModelError: the model has 640 error(s): /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3562:30: error: unresolved reference: EngineeringDecisions::DecisionRecord; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:31: error: unresolved reference: recordState — did you mean BlueDog::Architecture::Correspondence::recordStorage?; /home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml:3563:45: error: unresolved reference: EngineeringDecisions::RecordState::workingDisposition; ... and 637 more
+
+.venv/lib/python3.12/site-packages/opensysml/model.py:157: ModelError
+============================= slowest 10 durations =============================
+2.09s call     tests/test_navigation_integration.py::test_stand_on_holds_until_assessed_escalation
+1.43s call     tests/test_navigation_integration.py::test_empty_scene_has_identical_candidate_grid_in_both_modes
+0.02s call     tests/test_navigation_integration.py::test_new_target_during_drift_is_not_hidden_by_safe_eventual_heading
+0.01s call     tests/test_navigation_integration.py::test_unknown_observed_status_cannot_approve_candidate
+0.01s call     tests/test_navigation_integration.py::test_unknown_clearance_does_not_erase_overtaking_memory
+0.01s call     tests/test_navigation_integration.py::test_navigation_cannot_use_truth_or_rescue_an_unseen_target
+0.01s call     tests/test_navigation_integration.py::test_overtaking_memory_survives_track_loss_and_releases_on_observed_clearance
+0.01s call     tests/test_navigation_integration.py::test_unobserved_future_turn_cannot_change_navigation_decision
+0.01s call     tests/test_navigation_integration.py::test_independent_channel_duty_is_not_skipped_when_pair_is_clear
+0.01s call     tests/test_navigation_integration.py::test_committed_turn_does_not_need_a_second_heading_change
+=========================== short test summary info ============================
+FAILED tests/test_navigation_integration.py::test_stand_on_holds_until_assessed_escalation
+FAILED tests/test_navigation_integration.py::test_unknown_observed_status_cannot_approve_candidate
+FAILED tests/test_navigation_integration.py::test_overtaking_memory_survives_track_loss_and_releases_on_observed_clearance
+FAILED tests/test_navigation_integration.py::test_unknown_clearance_does_not_erase_overtaking_memory
+FAILED tests/test_navigation_integration.py::test_navigation_cannot_use_truth_or_rescue_an_unseen_target
+FAILED tests/test_navigation_integration.py::test_unobserved_future_turn_cannot_change_navigation_decision
+FAILED tests/test_navigation_integration.py::test_committed_turn_does_not_need_a_second_heading_change
+FAILED tests/test_navigation_integration.py::test_independent_channel_duty_is_not_skipped_when_pair_is_clear
+FAILED tests/test_navigation_integration.py::test_depower_is_not_a_substantial_heading_change
+FAILED tests/test_navigation_integration.py::test_empty_scene_has_identical_candidate_grid_in_both_modes
+FAILED tests/test_navigation_integration.py::test_new_target_during_drift_is_not_hidden_by_safe_eventual_heading
+FAILED tests/test_navigation_integration.py::test_approval_cannot_carry_a_skipped_pair_into_a_new_command
+FAILED tests/test_navigation_integration.py::test_new_candidate_segment_conflict_is_checked_even_when_holding_is_clear
+13 failed, 2 passed in 4.85s

@@ -1,0 +1,422 @@
+{
+  "BlueDogWingActuator": {
+    "start": 0,
+    "end": 1409,
+    "sha256": "53e0e676faa3282249ab41962c9950e53350391a8ba0bba97d42d8481b641534"
+  },
+  "BlueDogAerodynamicPolicy": {
+    "start": 1411,
+    "end": 4446,
+    "sha256": "3cdc73adeaf076eb557bbee57a7330b38d9bb6704e968f192082830bb54ff9a9"
+  },
+  "BlueDogAvoidanceFailures": {
+    "start": 4448,
+    "end": 62621,
+    "sha256": "63b05fd8bc3be0ca7ef53629fe2b01c70321f146359ea49c44c0351821ddafcf"
+  },
+  "BlueDogCandidateEnergy": {
+    "start": 62623,
+    "end": 71942,
+    "sha256": "a5b3b34a7b41958dd590bdaf10804eb189d5d3a9d81b6839f04e06729a2f887d"
+  },
+  "BlueDogClassDetection": {
+    "start": 71944,
+    "end": 87568,
+    "sha256": "059d239f93d06659d202c557fb7566250b38313d7e5b45f6b726bb8bcf74b869"
+  },
+  "BlueDogAnalysisCredibility": {
+    "start": 87570,
+    "end": 104900,
+    "sha256": "1eaa6ef9e07b300000a48631cedf23ba2658737aa68e15d183b34092948858c1"
+  },
+  "BlueDogRisks": {
+    "start": 104902,
+    "end": 122534,
+    "sha256": "31520526ac36904a4aeaf81a55f94c162aad745b441c49c616b41ad26f1f0404"
+  },
+  "BlueDogDFMEA": {
+    "start": 122536,
+    "end": 157086,
+    "sha256": "31b3e4357587b4770d5c56be1a7c9a0769ca91be97bf99cd354964edadf5b189"
+  },
+  "BlueDogEncounterEnvelope": {
+    "start": 157088,
+    "end": 171710,
+    "sha256": "6c9d72d5349b89e2ae1142c718ed7a6e202ddce157063291b6f39ee63c6f8dbd"
+  },
+  "BlueDogEncounterFeasibility": {
+    "start": 171712,
+    "end": 178768,
+    "sha256": "14ae455050ff08114fde4a35d9d078c6ebda194fd7568c736caae0ba021325ca"
+  },
+  "BlueDogEncounterReview": {
+    "start": 178770,
+    "end": 183045,
+    "sha256": "4386847732b5c2d0b072ef0a239a5e74db5ac20c5f154a825eadd7e16bf63aab"
+  },
+  "BlueDogEnergy": {
+    "start": 183047,
+    "end": 191590,
+    "sha256": "fc66186f6d04bdff4ded51f0921e8508e982bd65b812a21fc8701979da1d54b1"
+  },
+  "BlueDogEnvironmentReview": {
+    "start": 191592,
+    "end": 196991,
+    "sha256": "709d4d28925b3d9a9eeac4ccccefaf9ebcf467eb3e2a92be3be331e1324c24bf"
+  },
+  "BlueDogIntegratedCandidate": {
+    "start": 196993,
+    "end": 204457,
+    "sha256": "78586f6c277e6e16456a05fa39dda892cd8f12e4f8c1121b866c49db94ca7aff"
+  },
+  "BlueDogLocationTraffic": {
+    "start": 204459,
+    "end": 221424,
+    "sha256": "21fcbaa999f92f7bd1b305708fea4dccd8b0bc5688b0f8d1a749e218b41483ba"
+  },
+  "BlueDogManeuverDynamics": {
+    "start": 221426,
+    "end": 225956,
+    "sha256": "199ceca6a612567db60cb712a8cd6a4bb4d112fa34a0fa39ce910d6ac1c044d0"
+  },
+  "BlueDogMissionSimulation": {
+    "start": 225958,
+    "end": 236267,
+    "sha256": "a609b55cea17f53e6410e81cf3d14e8149af18656afd73c130a73157814601d1"
+  },
+  "BlueDogNavigationController": {
+    "start": 236269,
+    "end": 240187,
+    "sha256": "32d2edfcb696147b7fad2daeb682c0d2bc09a28af0e758b78904cdfde0d77b30"
+  },
+  "BlueDogPassageExposure": {
+    "start": 240189,
+    "end": 242254,
+    "sha256": "6e1ff2c131c30bd5208b3300798aa32591bfdd9dc07da7961a76d372d969c10b"
+  },
+  "BlueDogSailing": {
+    "start": 242256,
+    "end": 252762,
+    "sha256": "2ceb6b3dd8674b53b85a1184f32ab4d945c51b3862b771966a962cef6159b7b6"
+  },
+  "RecoveryPropulsionTrade": {
+    "start": 252764,
+    "end": 262198,
+    "sha256": "e868351ecfa062f87518a0fd7512e7ab394754e002fbf478ba1d89218914f51e"
+  },
+  "BlueDogRecoveryRisk": {
+    "start": 262200,
+    "end": 264522,
+    "sha256": "3864b75a0805ed220b05bbcf6a47e41c26fc2732b726fc05002baffadbaae7c9"
+  },
+  "BlueDogRecoverySiteReview": {
+    "start": 264524,
+    "end": 270680,
+    "sha256": "0bcdaa6031f568c61cbc4062cd813144207dbf58d91c0816e71fc2c979aa7a1f"
+  },
+  "BlueDogHydrostatics": {
+    "start": 270682,
+    "end": 271165,
+    "sha256": "d3fb42f9735ee0563ac4754cd534b86f9fc4a372d9263de698b939d9b26c9f04"
+  },
+  "BlueDogReliability": {
+    "start": 271167,
+    "end": 280218,
+    "sha256": "667583b2674200d4ab628a600750eeeb1e8111a71d1c29ce8542210d29887586"
+  },
+  "BlueDogSafety": {
+    "start": 280220,
+    "end": 302095,
+    "sha256": "37fe298cbd50b1c21595b82e010b31acd08c8d0cba0b70c213f28490fd03a571"
+  },
+  "BlueDogSailTrade": {
+    "start": 302097,
+    "end": 315931,
+    "sha256": "0fbcd3513971eaeadd01fc1c3478c5a62abd8d1e93ef92072378f958b8847010"
+  },
+  "BlueDogConceptCredibility": {
+    "start": 315933,
+    "end": 320588,
+    "sha256": "a4062bdd27a63af546716d35586a9ca6a9a4efbe80ce35d295f9e88a3e5c70f2"
+  },
+  "BlueDogSizingEvidence": {
+    "start": 320590,
+    "end": 323314,
+    "sha256": "b7a428aa4ed92348838bfc8bef23bbeabedae89f4db35e9561a8bbaacb8a72ab"
+  },
+  "BlueDogCoupledSizing": {
+    "start": 323316,
+    "end": 325954,
+    "sha256": "301064c04d7ad8baee74b11ed10412a501a2bfae6d8c657dcc9bd22d2de03565"
+  },
+  "BlueDogCoupledOperation": {
+    "start": 325956,
+    "end": 332040,
+    "sha256": "ef634b355a175d05ab159e2ef5eb2d59aa50f6586c2add9f616c3dc1a5899936"
+  },
+  "BlueDogCoupledUncertainty": {
+    "start": 332042,
+    "end": 335058,
+    "sha256": "9ce757e10206c04978e340a3cbee7f355da0775a9212dd15dbafb1807402710b"
+  },
+  "BlueDogStructuralBasis": {
+    "start": 335060,
+    "end": 337827,
+    "sha256": "5e915c8a994d744d7a832e0e0db45b725c9629713e5accefa9b08a40927439b1"
+  },
+  "BlueDogSurfaceEnvironment": {
+    "start": 337829,
+    "end": 342196,
+    "sha256": "a6f2a6e88054dba15a8c03aed048914d2ca854b78546d9bc1cad53236313582c"
+  },
+  "BlueDogWavePerformance": {
+    "start": 342198,
+    "end": 345212,
+    "sha256": "2e692ff3256291d05439b81a60a068d62b1891ae56abb0eadead8cbe0b4bcb39"
+  },
+  "BlueDogWeather": {
+    "start": 345214,
+    "end": 352943,
+    "sha256": "713a94b2a4c298a6882cff3240f13c96d3404f237456528898bd89c145290c11"
+  },
+  "BlueDogWingHeel": {
+    "start": 352945,
+    "end": 354927,
+    "sha256": "cd7dc6cbe01f4abc3ce373ef5d0ac8b0378faa205c8fd5ed6aa13f271713d5df"
+  },
+  "BlueDogAcousticEquipment": {
+    "start": 354929,
+    "end": 364784,
+    "sha256": "cf00a437976ecfd928740adf21a711da19184bd87347e1c8e6ce8126ee6b419e"
+  },
+  "BlueDogEnergyExamples": {
+    "start": 364786,
+    "end": 374739,
+    "sha256": "945f1bccdd0f67c54e20bd6bcd31773e9a2d1ed5f470051c4b8307ec9225a07f"
+  },
+  "BlueDogIC01": {
+    "start": 374741,
+    "end": 379053,
+    "sha256": "66a9fd72098595a48b56bc03590766096a7cef5666fa29d3d31ef1bebc76a9ae"
+  },
+  "BlueDogConfigurationManagement": {
+    "start": 379055,
+    "end": 403435,
+    "sha256": "d6665f6e28c653ee28efd683a3a8c3089adc60928874e148801116491bcc57e3"
+  },
+  "BlueDogOperatingEnvironment": {
+    "start": 403437,
+    "end": 406351,
+    "sha256": "5517a48a32238a17bcf442829f6af7ae92cddb144e9c59594afb3be49244ac0a"
+  },
+  "BlueDogSailingExamples": {
+    "start": 406353,
+    "end": 413050,
+    "sha256": "1374874d48862ad8c46605337c3e3e254d94d8b7518ba25a426d516dc87df815"
+  },
+  "BlueDogConfigurations": {
+    "start": 413052,
+    "end": 420481,
+    "sha256": "ba1f02c2e14fc62b0de6e12b220367bf7e94e1c05ff046daac6eee3e554621a2"
+  },
+  "BlueDogReliabilityExamples": {
+    "start": 420483,
+    "end": 422267,
+    "sha256": "ca1362c277ae442d7812e27c49bbf4d3ced8a7ca8e0f2f33969a7374aec5d15d"
+  },
+  "BlueDogSensingEquipment": {
+    "start": 422269,
+    "end": 430076,
+    "sha256": "67f7f5e14071cc49cad4dc86c35477caeae217c06ecb88a30b6b7f97023f3845"
+  },
+  "BlueDogStudyPlan": {
+    "start": 430078,
+    "end": 432182,
+    "sha256": "144a4559f8969134d0abbcccb292d0e556d4a87041918a5909157b1060619e17"
+  },
+  "BlueDogWindEquipment": {
+    "start": 432184,
+    "end": 437503,
+    "sha256": "d7fdf2c3510845cf11ffaf728172e6df37dcff4cbefba3520ab7d7740cd5df88"
+  },
+  "BlueDogRecordedSizing": {
+    "start": 437505,
+    "end": 448477,
+    "sha256": "de79f5ee8bf5da77064c8b23269aec279aa5641beeb9724d6f82ec8cdeb9f261"
+  },
+  "BlueDogCurrentSizing": {
+    "start": 448479,
+    "end": 472760,
+    "sha256": "50ed6188fb9b4f6159195ba4e414f59268cb1ee6d4961c3fe3af69dac6544353"
+  },
+  "BlueDogFinitePassageSizing": {
+    "start": 472762,
+    "end": 479185,
+    "sha256": "455bd5dc22558a3d62f6dfbaa8193063c929c2f825d860edf6e2a72b55c8b89f"
+  },
+  "BlueDogWindObservations": {
+    "start": 479187,
+    "end": 483949,
+    "sha256": "98ba92987d53ee1cafbabe9b73934b601c93b07bd5e90ff596cf5e387d2cb301"
+  },
+  "BlueDogSizingContinuation": {
+    "start": 483951,
+    "end": 488259,
+    "sha256": "d8ecce67c22331bbb39357125e086733e4c7c1be0ebfba9c26c7f39b56639e05"
+  },
+  "BlueDogSRRCurrent": {
+    "start": 488261,
+    "end": 494917,
+    "sha256": "87d04e44421810007ad19e17a0eff81d0776af6f567bc9bd6e87e8071da7f143"
+  },
+  "BlueDogSRRFrontier": {
+    "start": 494919,
+    "end": 499363,
+    "sha256": "062efe0c5f1def66f1d46b6c39ceedd9b7b1bcd561066c56af6d7cc954bd10b3"
+  },
+  "TransGorgeCourse": {
+    "start": 499365,
+    "end": 508737,
+    "sha256": "bd15c3a56e8cf02c2e413c376aa7f9a539537734992750a3d09a5580397d49e1"
+  },
+  "BlueDogMissionScope": {
+    "start": 508739,
+    "end": 511058,
+    "sha256": "108ac7e9b4758de5634fe80193b98da1f174779a70ed46d2fe99dcf800c494d5"
+  },
+  "GorgeChallenge": {
+    "start": 511060,
+    "end": 545568,
+    "sha256": "b6c1db49ec45f237dfe27d3048640aa271e389e3185cfdad567f047aca405199"
+  },
+  "GorgeChallengeVerification": {
+    "start": 545570,
+    "end": 569918,
+    "sha256": "d837207c010f3170df0e3dc9b3c846daab22448466387f945ad18deb34824daa"
+  },
+  "BlueDogArchitectureContracts": {
+    "start": 569920,
+    "end": 571694,
+    "sha256": "b8af0676d85fbfc87463a72e4de96b9e977d994673ca1994d743b2d92650bf7b"
+  },
+  "BlueDogArchitectureCorrespondence": {
+    "start": 571696,
+    "end": 598147,
+    "sha256": "f58ce9dd4d91ee9b241ea27d0bf3368e1757af07dc11f2902fbccdf7cd2a652f"
+  },
+  "BlueDog": {
+    "start": 598149,
+    "end": 606482,
+    "sha256": "af128d6468158b104ee1043d95c8ea8bac513381dc696f99fe43512d2433e00e"
+  },
+  "BlueDogLogicalArchitecture": {
+    "start": 606484,
+    "end": 619389,
+    "sha256": "276bcdab9578e2f48ca4dd2facf45cd414f2882c05a1e85ac42c370d2ea427bc"
+  },
+  "BlueDogPhysicalArchitecture": {
+    "start": 619391,
+    "end": 629066,
+    "sha256": "52318ef7c27fcc1481973af63d2afb46c8f05d6b84c089cf5a65e92c545e1e72"
+  },
+  "BlueDogBehaviorContracts": {
+    "start": 629068,
+    "end": 635245,
+    "sha256": "cb8f6e8e45f0f5c04e201459eaec51a027095045cebebdd6f851548b14e610b8"
+  },
+  "BlueDogDecisionContext": {
+    "start": 635247,
+    "end": 645513,
+    "sha256": "b5cf31ea767f1ddf3e5408de32d910db1b25a07165dd62099c0c8f139ad23534"
+  },
+  "BlueDogTradeCriteria": {
+    "start": 645515,
+    "end": 650675,
+    "sha256": "21a9f7ab2a562b3b7585a5aa1607f2c800d8c0b361c9bbdd6f4be82222cb4e8d"
+  },
+  "BlueDogDesignDecisions": {
+    "start": 650677,
+    "end": 660634,
+    "sha256": "6e77f622e35128e079b0f84e6b444abf941fe3eb42016d24bd84817497b2a36b"
+  },
+  "BlueDogInterfaceContracts": {
+    "start": 660636,
+    "end": 664562,
+    "sha256": "df28677a1d541cbbe6079bf4fa42ac080f30febd7bf3c27659382da84dea439c"
+  },
+  "BlueDogMethod": {
+    "start": 664564,
+    "end": 692744,
+    "sha256": "526ce8d24cdb7b0c48e575446d287dd48012ac8bfda036fa32f9cb8fc21ea4f0"
+  },
+  "BlueDogMissionLogic": {
+    "start": 692746,
+    "end": 700768,
+    "sha256": "d74b3fb89a83456641952df40c9bda4991fca178ca486cb30c56aa5d8277282b"
+  },
+  "BlueDogRequirementBasis": {
+    "start": 700770,
+    "end": 864991,
+    "sha256": "64f650c4d898bfdfd72ecc2833fd26bdc832f547106941b6a95d4b28316a11ea"
+  },
+  "BlueDogRequirementDecisions": {
+    "start": 864993,
+    "end": 869641,
+    "sha256": "3e24e92f1791d12cf779f062ae370d7a5af4c36212430cea140511e404de7a91"
+  },
+  "BlueDogRequirements": {
+    "start": 869643,
+    "end": 1114454,
+    "sha256": "b78a8f284e831a1f7084d89fbbc72df82e5b7be3ee2bbad8e711b1945cc8a812"
+  },
+  "BlueDogSatisfaction": {
+    "start": 1114456,
+    "end": 1134721,
+    "sha256": "8bf1bc5c41ea7c0cc5da477b2ec0a6f9213ed03e18d46d3d0eeff70a0af422b3"
+  },
+  "BlueDogSourceEvidence": {
+    "start": 1134723,
+    "end": 1148874,
+    "sha256": "5a9455d1cfd21511b9d21709fba7e58a5041e2e4823249c61e3cb6ff5d68b08f"
+  },
+  "BlueDogStructure": {
+    "start": 1148876,
+    "end": 1166081,
+    "sha256": "c1685ca539dd8a4f27b14188e844cc714759fe3d01826883c28dd879c794082d"
+  },
+  "BlueDogUseCases": {
+    "start": 1166083,
+    "end": 1170168,
+    "sha256": "26038d8afed30c9cf2ee8668096dbcae612605cfba18808075bfd764db05bf16"
+  },
+  "BlueDogVerificationPlanning": {
+    "start": 1170170,
+    "end": 1177517,
+    "sha256": "111b80831b5d9fae0a0668dcf65957eabd224bf75c22ea986a2f8c4d5823a06a"
+  },
+  "BlueDogRequirementVerification": {
+    "start": 1177519,
+    "end": 1235221,
+    "sha256": "43557f8c72f7ad60e20d46cc26fdb1f0d0c4b93cda5e0fbd7abafc20d603f55a"
+  },
+  "BlueDog::DesignIntent": {
+    "start": 598725,
+    "end": 598978,
+    "sha256": "d7971ea0e905e4d12e2476583ac1c3531907ec5ab03fd0c7d6b13c170e6700a7"
+  },
+  "BlueDog::Goals": {
+    "start": 598984,
+    "end": 599959,
+    "sha256": "fe190a3d7d7d71f011b326502df35c3464e39db94606b6b3bff47092aa0753db"
+  },
+  "BlueDog::Mission": {
+    "start": 599965,
+    "end": 601919,
+    "sha256": "cb64ad322d797cd40912a28f9d9badbb1d964e1124a77531852daccbefc55f21"
+  },
+  "BlueDog::Architecture": {
+    "start": 601925,
+    "end": 606479,
+    "sha256": "7d0d27c3831b05fed4c5c4cbe1d9dfc7b1a8b963bc5c8313f7840b97296f6d67"
+  }
+}

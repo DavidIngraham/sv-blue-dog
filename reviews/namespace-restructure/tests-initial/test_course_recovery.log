@@ -1,0 +1,13 @@
+............                                                             [100%]
+============================= slowest 10 durations =============================
+11.85s call     tests/test_course_recovery.py::test_current_compensation_and_energy
+1.73s call     tests/test_course_recovery.py::test_capsize_recovers_without_communications_and_disqualifies
+0.14s call     tests/test_course_recovery.py::test_weather_service_outage_alone_does_not_abort
+0.03s call     tests/test_course_recovery.py::test_dynamic_reserve_triggers_before_exhaustion
+0.02s call     tests/test_course_recovery.py::test_forecast_invalidity_aborts_even_without_monitoring_link
+0.02s call     tests/test_course_recovery.py::test_recovery_collision_is_not_hidden_by_failed_detector
+0.02s call     tests/test_course_recovery.py::test_reserve_varies_with_position_and_current
+0.01s call     tests/test_course_recovery.py::test_refuge_does_not_autonomously_resume
+0.01s call     tests/test_course_recovery.py::test_no_recovery_model_cannot_claim_recovery
+0.01s call     tests/test_course_recovery.py::test_recovery_stops_when_current_changes_beyond_authority
+12 passed in 14.09s

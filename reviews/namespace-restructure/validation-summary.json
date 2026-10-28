@@ -1,0 +1,1616 @@
+{
+  "baseline": "8f2dd804e964fd75828ff170c8c93572c751c8f2",
+  "modules": 80,
+  "counts": {
+    "passed": 1163,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "knownBaselineFailures": [
+    {
+      "module": "tests/test_inline_views.py",
+      "name": "test_inline_view_resolves_actual_refinement_and_statements",
+      "kind": "failed",
+      "message": "assert 'The vessel shall cross the configured Bingen departure' in '<h1 id=\"reading-the-design-through-the-model\">Reading the design through the model</h1>\\n<p><strong>OOSEM:</strong> M...esentation; it does not establish that the causal argument is\\ncomplete or that its safeguards work on the boat.</p>\\n'",
+      "report": "reviews/namespace-restructure/checks-final/rerun-test_inline_views.xml"
+    }
+  ],
+  "unexpectedFailures": [],
+  "attempts": {
+    "tests/test_acoustic_equipment.py": [
+      {
+        "module": "tests/test_acoustic_equipment.py",
+        "exitCode": 0,
+        "seconds": 2.22,
+        "report": "tests-initial/test_acoustic_equipment.xml"
+      }
+    ],
+    "tests/test_aerodynamic_figures.py": [
+      {
+        "module": "tests/test_aerodynamic_figures.py",
+        "exitCode": 0,
+        "seconds": 6.58,
+        "report": "tests-initial/test_aerodynamic_figures.xml"
+      }
+    ],
+    "tests/test_analysis_credibility.py": [
+      {
+        "module": "tests/test_analysis_credibility.py",
+        "exitCode": 1,
+        "seconds": 56.94,
+        "report": "tests-initial/test_analysis_credibility.xml"
+      },
+      {
+        "name": "rerun-test_analysis_credibility",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_analysis_credibility.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_analysis_credibility.xml"
+        ],
+        "exitCode": 1,
+        "seconds": 59.87,
+        "report": "checks-final/rerun-test_analysis_credibility.xml"
+      },
+      {
+        "name": "targeted-test_analysis_credibility",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_analysis_credibility.py::test_new_nested_typed_analysis_is_registered_without_a_package_list_edit",
+          "-q",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/targeted-test_analysis_credibility.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 6.87,
+        "report": "checks-final/targeted-test_analysis_credibility.xml"
+      }
+    ],
+    "tests/test_appendage_credibility.py": [
+      {
+        "module": "tests/test_appendage_credibility.py",
+        "exitCode": 0,
+        "seconds": 3.83,
+        "report": "tests-initial/test_appendage_credibility.xml"
+      }
+    ],
+    "tests/test_architecture_quality.py": [
+      {
+        "module": "tests/test_architecture_quality.py",
+        "exitCode": 0,
+        "seconds": 65.09,
+        "report": "tests-initial/test_architecture_quality.xml"
+      }
+    ],
+    "tests/test_avoidance_failures.py": [
+      {
+        "module": "tests/test_avoidance_failures.py",
+        "exitCode": 0,
+        "seconds": 13.46,
+        "report": "tests-initial/test_avoidance_failures.xml"
+      }
+    ],
+    "tests/test_behavior_contracts.py": [
+      {
+        "module": "tests/test_behavior_contracts.py",
+        "exitCode": 0,
+        "seconds": 3.12,
+        "report": "tests-initial/test_behavior_contracts.xml"
+      }
+    ],
+    "tests/test_candidate_energy_budget.py": [
+      {
+        "module": "tests/test_candidate_energy_budget.py",
+        "exitCode": 0,
+        "seconds": 46.31,
+        "report": "tests-initial/test_candidate_energy_budget.xml"
+      }
+    ],
+    "tests/test_challenge_baseline.py": [
+      {
+        "module": "tests/test_challenge_baseline.py",
+        "exitCode": 0,
+        "seconds": 19.33,
+        "report": "tests-initial/test_challenge_baseline.xml"
+      }
+    ],
+    "tests/test_class_specific_detection.py": [
+      {
+        "module": "tests/test_class_specific_detection.py",
+        "exitCode": 0,
+        "seconds": 2.07,
+        "report": "tests-initial/test_class_specific_detection.xml"
+      }
+    ],
+    "tests/test_concept_mission.py": [
+      {
+        "module": "tests/test_concept_mission.py",
+        "exitCode": 0,
+        "seconds": 14.71,
+        "report": "tests-initial/test_concept_mission.xml"
+      }
+    ],
+    "tests/test_configuration_budgets.py": [
+      {
+        "module": "tests/test_configuration_budgets.py",
+        "exitCode": 0,
+        "seconds": 93.9,
+        "report": "tests-initial/test_configuration_budgets.xml"
+      }
+    ],
+    "tests/test_continuation.py": [
+      {
+        "module": "tests/test_continuation.py",
+        "exitCode": 0,
+        "seconds": 81.6,
+        "report": "tests-initial/test_continuation.xml"
+      }
+    ],
+    "tests/test_coupled_evidence.py": [
+      {
+        "module": "tests/test_coupled_evidence.py",
+        "exitCode": 0,
+        "seconds": 0.82,
+        "report": "tests-initial/test_coupled_evidence.xml"
+      }
+    ],
+    "tests/test_coupled_operation.py": [
+      {
+        "module": "tests/test_coupled_operation.py",
+        "exitCode": 0,
+        "seconds": 14.11,
+        "report": "tests-initial/test_coupled_operation.xml"
+      }
+    ],
+    "tests/test_coupled_sizing.py": [
+      {
+        "module": "tests/test_coupled_sizing.py",
+        "exitCode": 0,
+        "seconds": 12.66,
+        "report": "tests-initial/test_coupled_sizing.xml"
+      }
+    ],
+    "tests/test_course.py": [
+      {
+        "module": "tests/test_course.py",
+        "exitCode": 0,
+        "seconds": 9.7,
+        "report": "tests-initial/test_course.xml"
+      }
+    ],
+    "tests/test_course_map.py": [
+      {
+        "module": "tests/test_course_map.py",
+        "exitCode": 0,
+        "seconds": 7.54,
+        "report": "tests-initial/test_course_map.xml"
+      }
+    ],
+    "tests/test_course_recovery.py": [
+      {
+        "module": "tests/test_course_recovery.py",
+        "exitCode": 0,
+        "seconds": 14.45,
+        "report": "tests-initial/test_course_recovery.xml"
+      }
+    ],
+    "tests/test_current_sizing.py": [
+      {
+        "module": "tests/test_current_sizing.py",
+        "exitCode": 0,
+        "seconds": 30.16,
+        "report": "tests-initial/test_current_sizing.xml"
+      }
+    ],
+    "tests/test_decision_management.py": [
+      {
+        "module": "tests/test_decision_management.py",
+        "exitCode": 1,
+        "seconds": 28.12,
+        "report": "tests-initial/test_decision_management.xml"
+      },
+      {
+        "name": "rerun-test_decision_management",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_decision_management.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_decision_management.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 75.17,
+        "report": "checks-final/rerun-test_decision_management.xml"
+      }
+    ],
+    "tests/test_declarative_studies.py": [
+      {
+        "module": "tests/test_declarative_studies.py",
+        "exitCode": 0,
+        "seconds": 7.64,
+        "report": "tests-initial/test_declarative_studies.xml"
+      }
+    ],
+    "tests/test_design_boundary.py": [
+      {
+        "module": "tests/test_design_boundary.py",
+        "exitCode": 0,
+        "seconds": 13.15,
+        "report": "tests-initial/test_design_boundary.xml"
+      }
+    ],
+    "tests/test_design_explorer.py": [
+      {
+        "module": "tests/test_design_explorer.py",
+        "exitCode": 0,
+        "seconds": 0.92,
+        "report": "tests-initial/test_design_explorer.xml"
+      }
+    ],
+    "tests/test_design_frontier.py": [
+      {
+        "module": "tests/test_design_frontier.py",
+        "exitCode": 0,
+        "seconds": 0.82,
+        "report": "tests-initial/test_design_frontier.xml"
+      }
+    ],
+    "tests/test_development_risks.py": [
+      {
+        "module": "tests/test_development_risks.py",
+        "exitCode": 1,
+        "seconds": 12.21,
+        "report": "tests-initial/test_development_risks.xml"
+      },
+      {
+        "name": "rerun-test_development_risks",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_development_risks.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_development_risks.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 13.94,
+        "report": "checks-final/rerun-test_development_risks.xml"
+      }
+    ],
+    "tests/test_documentation.py": [
+      {
+        "module": "tests/test_documentation.py",
+        "exitCode": 1,
+        "seconds": 5.33,
+        "report": "tests-initial/test_documentation.xml"
+      },
+      {
+        "name": "rerun-test_documentation",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_documentation.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_documentation.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 41.26,
+        "report": "checks-final/rerun-test_documentation.xml"
+      }
+    ],
+    "tests/test_encounter_continuation.py": [
+      {
+        "module": "tests/test_encounter_continuation.py",
+        "exitCode": 0,
+        "seconds": 14.41,
+        "report": "tests-initial/test_encounter_continuation.xml"
+      }
+    ],
+    "tests/test_encounter_envelope.py": [
+      {
+        "module": "tests/test_encounter_envelope.py",
+        "exitCode": 0,
+        "seconds": 4.68,
+        "report": "tests-initial/test_encounter_envelope.xml"
+      }
+    ],
+    "tests/test_energy.py": [
+      {
+        "module": "tests/test_energy.py",
+        "exitCode": 1,
+        "seconds": 57.98,
+        "report": "tests-initial/test_energy.xml"
+      },
+      {
+        "name": "rerun-test_energy",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_energy.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_energy.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 58.57,
+        "report": "checks-final/rerun-test_energy.xml"
+      }
+    ],
+    "tests/test_executable_requirements.py": [
+      {
+        "module": "tests/test_executable_requirements.py",
+        "exitCode": 0,
+        "seconds": 2.22,
+        "report": "tests-initial/test_executable_requirements.xml"
+      }
+    ],
+    "tests/test_finite_sections.py": [
+      {
+        "module": "tests/test_finite_sections.py",
+        "exitCode": 0,
+        "seconds": 0.72,
+        "report": "tests-initial/test_finite_sections.xml"
+      }
+    ],
+    "tests/test_geometry_export.py": [
+      {
+        "module": "tests/test_geometry_export.py",
+        "exitCode": 0,
+        "seconds": 13.75,
+        "report": "tests-initial/test_geometry_export.xml"
+      }
+    ],
+    "tests/test_hull_resistance.py": [
+      {
+        "module": "tests/test_hull_resistance.py",
+        "exitCode": 0,
+        "seconds": 13.0,
+        "report": "tests-initial/test_hull_resistance.xml"
+      }
+    ],
+    "tests/test_hydrostatics.py": [
+      {
+        "module": "tests/test_hydrostatics.py",
+        "exitCode": 1,
+        "seconds": 16.26,
+        "report": "tests-initial/test_hydrostatics.xml"
+      },
+      {
+        "name": "rerun-test_hydrostatics",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_hydrostatics.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_hydrostatics.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 16.37,
+        "report": "checks-final/rerun-test_hydrostatics.xml"
+      }
+    ],
+    "tests/test_inline_views.py": [
+      {
+        "module": "tests/test_inline_views.py",
+        "exitCode": 1,
+        "seconds": 5.94,
+        "report": "tests-initial/test_inline_views.xml"
+      },
+      {
+        "name": "rerun-test_inline_views",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_inline_views.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_inline_views.xml"
+        ],
+        "exitCode": 1,
+        "seconds": 11.5,
+        "report": "checks-final/rerun-test_inline_views.xml"
+      }
+    ],
+    "tests/test_integrated_candidate.py": [
+      {
+        "module": "tests/test_integrated_candidate.py",
+        "exitCode": 0,
+        "seconds": 14.8,
+        "report": "tests-initial/test_integrated_candidate.xml"
+      }
+    ],
+    "tests/test_interface_contracts.py": [
+      {
+        "module": "tests/test_interface_contracts.py",
+        "exitCode": 0,
+        "seconds": 4.23,
+        "report": "tests-initial/test_interface_contracts.xml"
+      }
+    ],
+    "tests/test_location_traffic.py": [
+      {
+        "module": "tests/test_location_traffic.py",
+        "exitCode": 0,
+        "seconds": 1.97,
+        "report": "tests-initial/test_location_traffic.xml"
+      }
+    ],
+    "tests/test_maneuver_dynamics.py": [
+      {
+        "module": "tests/test_maneuver_dynamics.py",
+        "exitCode": 0,
+        "seconds": 2.82,
+        "report": "tests-initial/test_maneuver_dynamics.xml"
+      }
+    ],
+    "tests/test_marine_libraries.py": [
+      {
+        "module": "tests/test_marine_libraries.py",
+        "exitCode": 0,
+        "seconds": 0.67,
+        "report": "tests-initial/test_marine_libraries.xml"
+      }
+    ],
+    "tests/test_mission_execution.py": [
+      {
+        "module": "tests/test_mission_execution.py",
+        "exitCode": 0,
+        "seconds": 3.12,
+        "report": "tests-initial/test_mission_execution.xml"
+      }
+    ],
+    "tests/test_mission_logic.py": [
+      {
+        "module": "tests/test_mission_logic.py",
+        "exitCode": 0,
+        "seconds": 4.63,
+        "report": "tests-initial/test_mission_logic.xml"
+      }
+    ],
+    "tests/test_model_contracts.py": [
+      {
+        "module": "tests/test_model_contracts.py",
+        "exitCode": 0,
+        "seconds": 12.3,
+        "report": "tests-initial/test_model_contracts.xml"
+      }
+    ],
+    "tests/test_named_configuration.py": [
+      {
+        "module": "tests/test_named_configuration.py",
+        "exitCode": 0,
+        "seconds": 19.08,
+        "report": "tests-initial/test_named_configuration.xml"
+      }
+    ],
+    "tests/test_namespace_structure.py": [
+      {
+        "module": "tests/test_namespace_structure.py",
+        "exitCode": 0,
+        "seconds": 3.02,
+        "report": "tests-initial/test_namespace_structure.xml"
+      }
+    ],
+    "tests/test_native_kernel.py": [
+      {
+        "module": "tests/test_native_kernel.py",
+        "exitCode": 0,
+        "seconds": 12.05,
+        "report": "tests-initial/test_native_kernel.xml"
+      }
+    ],
+    "tests/test_navigation_campaign.py": [
+      {
+        "module": "tests/test_navigation_campaign.py",
+        "exitCode": 1,
+        "seconds": 35.77,
+        "report": "tests-initial/test_navigation_campaign.xml"
+      },
+      {
+        "name": "rerun-test_navigation_campaign",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_navigation_campaign.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_navigation_campaign.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 35.67,
+        "report": "checks-final/rerun-test_navigation_campaign.xml"
+      }
+    ],
+    "tests/test_navigation_integration.py": [
+      {
+        "module": "tests/test_navigation_integration.py",
+        "exitCode": 1,
+        "seconds": 5.28,
+        "report": "tests-initial/test_navigation_integration.xml"
+      },
+      {
+        "name": "rerun-test_navigation_integration",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_navigation_integration.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_navigation_integration.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 3.07,
+        "report": "checks-final/rerun-test_navigation_integration.xml"
+      }
+    ],
+    "tests/test_oosem_audit.py": [
+      {
+        "module": "tests/test_oosem_audit.py",
+        "exitCode": 0,
+        "seconds": 16.02,
+        "report": "tests-initial/test_oosem_audit.xml"
+      }
+    ],
+    "tests/test_passage_exposure.py": [
+      {
+        "module": "tests/test_passage_exposure.py",
+        "exitCode": 0,
+        "seconds": 6.28,
+        "report": "tests-initial/test_passage_exposure.xml"
+      }
+    ],
+    "tests/test_perception.py": [
+      {
+        "module": "tests/test_perception.py",
+        "exitCode": 0,
+        "seconds": 41.3,
+        "report": "tests-initial/test_perception.xml"
+      }
+    ],
+    "tests/test_projection_sections.py": [
+      {
+        "module": "tests/test_projection_sections.py",
+        "exitCode": 0,
+        "seconds": 0.26,
+        "report": "tests-initial/test_projection_sections.xml"
+      }
+    ],
+    "tests/test_recorded_evidence.py": [
+      {
+        "module": "tests/test_recorded_evidence.py",
+        "exitCode": 0,
+        "seconds": 29.35,
+        "report": "tests-initial/test_recorded_evidence.xml"
+      }
+    ],
+    "tests/test_recovery_trade.py": [
+      {
+        "module": "tests/test_recovery_trade.py",
+        "exitCode": 0,
+        "seconds": 26.55,
+        "report": "tests-initial/test_recovery_trade.xml"
+      }
+    ],
+    "tests/test_relationship_semantics.py": [
+      {
+        "module": "tests/test_relationship_semantics.py",
+        "exitCode": 1,
+        "seconds": 43.81,
+        "report": "tests-initial/test_relationship_semantics.xml"
+      },
+      {
+        "name": "rerun-test_relationship_semantics",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_relationship_semantics.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_relationship_semantics.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 45.07,
+        "report": "checks-final/rerun-test_relationship_semantics.xml"
+      }
+    ],
+    "tests/test_reliability.py": [
+      {
+        "module": "tests/test_reliability.py",
+        "exitCode": 0,
+        "seconds": 73.18,
+        "report": "tests-initial/test_reliability.xml"
+      }
+    ],
+    "tests/test_requirement_quality.py": [
+      {
+        "module": "tests/test_requirement_quality.py",
+        "exitCode": 0,
+        "seconds": 1.87,
+        "report": "tests-initial/test_requirement_quality.xml"
+      }
+    ],
+    "tests/test_requirements.py": [
+      {
+        "module": "tests/test_requirements.py",
+        "exitCode": 1,
+        "seconds": 99.52,
+        "report": "tests-initial/test_requirements.xml"
+      },
+      {
+        "name": "rerun-test_requirements",
+        "command": [
+          "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_requirements.py",
+          "-q",
+          "--durations=10",
+          "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_requirements.xml"
+        ],
+        "exitCode": 0,
+        "seconds": 98.99,
+        "report": "checks-final/rerun-test_requirements.xml"
+      }
+    ],
+    "tests/test_risk_cube.py": [
+      {
+        "module": "tests/test_risk_cube.py",
+        "exitCode": 0,
+        "seconds": 4.28,
+        "report": "tests-initial/test_risk_cube.xml"
+      }
+    ],
+    "tests/test_routing.py": [
+      {
+        "module": "tests/test_routing.py",
+        "exitCode": 0,
+        "seconds": 7.94,
+        "report": "tests-initial/test_routing.xml"
+      }
+    ],
+    "tests/test_safety_reliability.py": [
+      {
+        "module": "tests/test_safety_reliability.py",
+        "exitCode": 0,
+        "seconds": 69.93,
+        "report": "tests-initial/test_safety_reliability.xml"
+      }
+    ],
+    "tests/test_sail_trade.py": [
+      {
+        "module": "tests/test_sail_trade.py",
+        "exitCode": 0,
+        "seconds": 16.12,
+        "report": "tests-initial/test_sail_trade.xml"
+      }
+    ],
+    "tests/test_sailing_performance.py": [
+      {
+        "module": "tests/test_sailing_performance.py",
+        "exitCode": 0,
+        "seconds": 112.35,
+        "report": "tests-initial/test_sailing_performance.xml"
+      }
+    ],
+    "tests/test_search_discovery.py": [
+      {
+        "module": "tests/test_search_discovery.py",
+        "exitCode": 0,
+        "seconds": 0.82,
+        "report": "tests-initial/test_search_discovery.xml"
+      }
+    ],
+    "tests/test_srr_basis.py": [
+      {
+        "module": "tests/test_srr_basis.py",
+        "exitCode": 0,
+        "seconds": 4.88,
+        "report": "tests-initial/test_srr_basis.xml"
+      }
+    ],
+    "tests/test_srr_current.py": [
+      {
+        "module": "tests/test_srr_current.py",
+        "exitCode": 0,
+        "seconds": 45.1,
+        "report": "tests-initial/test_srr_current.xml"
+      }
+    ],
+    "tests/test_structural_acceptance.py": [
+      {
+        "module": "tests/test_structural_acceptance.py",
+        "exitCode": 0,
+        "seconds": 7.99,
+        "report": "tests-initial/test_structural_acceptance.xml"
+      }
+    ],
+    "tests/test_study_cli.py": [
+      {
+        "module": "tests/test_study_cli.py",
+        "exitCode": 0,
+        "seconds": 0.37,
+        "report": "tests-initial/test_study_cli.xml"
+      }
+    ],
+    "tests/test_surface_environment.py": [
+      {
+        "module": "tests/test_surface_environment.py",
+        "exitCode": 0,
+        "seconds": 13.9,
+        "report": "tests-initial/test_surface_environment.xml"
+      }
+    ],
+    "tests/test_trajectories.py": [
+      {
+        "module": "tests/test_trajectories.py",
+        "exitCode": 0,
+        "seconds": 0.31,
+        "report": "tests-initial/test_trajectories.xml"
+      }
+    ],
+    "tests/test_typed_operating.py": [
+      {
+        "module": "tests/test_typed_operating.py",
+        "exitCode": 0,
+        "seconds": 12.5,
+        "report": "tests-initial/test_typed_operating.xml"
+      }
+    ],
+    "tests/test_upstream_client.py": [
+      {
+        "module": "tests/test_upstream_client.py",
+        "exitCode": 0,
+        "seconds": 2.47,
+        "report": "tests-initial/test_upstream_client.xml"
+      }
+    ],
+    "tests/test_verification_evidence.py": [
+      {
+        "module": "tests/test_verification_evidence.py",
+        "exitCode": 0,
+        "seconds": 58.47,
+        "report": "tests-initial/test_verification_evidence.xml"
+      }
+    ],
+    "tests/test_wave_performance.py": [
+      {
+        "module": "tests/test_wave_performance.py",
+        "exitCode": 0,
+        "seconds": 16.72,
+        "report": "tests-initial/test_wave_performance.xml"
+      }
+    ],
+    "tests/test_weather.py": [
+      {
+        "module": "tests/test_weather.py",
+        "exitCode": 0,
+        "seconds": 18.67,
+        "report": "tests-initial/test_weather.xml"
+      }
+    ],
+    "tests/test_wind_sensing.py": [
+      {
+        "module": "tests/test_wind_sensing.py",
+        "exitCode": 0,
+        "seconds": 52.9,
+        "report": "tests-initial/test_wind_sensing.xml"
+      }
+    ],
+    "tests/test_wing_analysis.py": [
+      {
+        "module": "tests/test_wing_analysis.py",
+        "exitCode": 0,
+        "seconds": 0.52,
+        "report": "tests-initial/test_wing_analysis.xml"
+      }
+    ],
+    "tests/test_wing_heel.py": [
+      {
+        "module": "tests/test_wing_heel.py",
+        "exitCode": 0,
+        "seconds": 2.02,
+        "report": "tests-initial/test_wing_heel.xml"
+      }
+    ],
+    "experiments/inland-navigation/test_navigation.py": [
+      {
+        "module": "experiments/inland-navigation/test_navigation.py",
+        "exitCode": 0,
+        "seconds": 1.82,
+        "report": "tests-initial/test_navigation.xml"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "rerun-test_analysis_credibility",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_analysis_credibility.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_analysis_credibility.xml"
+      ],
+      "exitCode": 1,
+      "seconds": 59.87
+    },
+    {
+      "name": "rerun-test_decision_management",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_decision_management.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_decision_management.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 75.17
+    },
+    {
+      "name": "rerun-test_development_risks",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_development_risks.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_development_risks.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 13.94
+    },
+    {
+      "name": "rerun-test_documentation",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_documentation.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_documentation.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 41.26
+    },
+    {
+      "name": "rerun-test_energy",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_energy.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_energy.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 58.57
+    },
+    {
+      "name": "rerun-test_hydrostatics",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_hydrostatics.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_hydrostatics.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 16.37
+    },
+    {
+      "name": "rerun-test_inline_views",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_inline_views.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_inline_views.xml"
+      ],
+      "exitCode": 1,
+      "seconds": 11.5
+    },
+    {
+      "name": "rerun-test_navigation_campaign",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_navigation_campaign.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_navigation_campaign.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 35.67
+    },
+    {
+      "name": "rerun-test_navigation_integration",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_navigation_integration.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_navigation_integration.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 3.07
+    },
+    {
+      "name": "rerun-test_relationship_semantics",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_relationship_semantics.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_relationship_semantics.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 45.07
+    },
+    {
+      "name": "rerun-test_requirements",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_requirements.py",
+        "-q",
+        "--durations=10",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_requirements.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 98.99
+    },
+    {
+      "name": "native-identity",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "reviews/namespace-restructure/validate_native_identity.py"
+      ],
+      "exitCode": 0,
+      "seconds": 3.83
+    },
+    {
+      "name": "numerics",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "reviews/namespace-restructure/validate_numerics.py"
+      ],
+      "exitCode": 0,
+      "seconds": 25.09
+    },
+    {
+      "name": "audits",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "reviews/namespace-restructure/capture_audits.py"
+      ],
+      "exitCode": 0,
+      "seconds": 8.49
+    },
+    {
+      "name": "audit-tables",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "reviews/namespace-restructure/compare_audit_tables.py"
+      ],
+      "exitCode": 0,
+      "seconds": 0.16
+    },
+    {
+      "name": "projection-recorded",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "tools.boat_analysis.evidence.model",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.11
+    },
+    {
+      "name": "projection-current",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "tools.boat_analysis.evidence.model",
+        "--current",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.11
+    },
+    {
+      "name": "projection-continuation",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "tools.boat_analysis.evidence.continuation",
+        "2026-10-12-continuation",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-finite",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "tools.boat_analysis.evidence.continuation",
+        "2026-10-12-finite-passage",
+        "--package",
+        "BlueDog::Evidence::FinitePassageSizing",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-srr",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "tools.publishing.srr",
+        "--run",
+        "2026-10-13-srr-readiness",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 4.58
+    },
+    {
+      "name": "projection-frontier",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "tools.publishing.frontier",
+        "--run",
+        "2026-10-13-srr-frontier",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-weather",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "tools.boat_analysis.environment.climatology",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 2.32
+    },
+    {
+      "name": "publishing",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "tools.publishing.build"
+      ],
+      "exitCode": 0,
+      "seconds": 40.79
+    },
+    {
+      "name": "targeted-test_analysis_credibility",
+      "command": [
+        "/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_analysis_credibility.py::test_new_nested_typed_analysis_is_registered_without_a_package_list_edit",
+        "-q",
+        "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/targeted-test_analysis_credibility.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 6.87
+    }
+  ],
+  "numerics": {
+    "studyRuns": 9,
+    "constraints": 297,
+    "exactReports": true,
+    "maximumAbsoluteErrors": {
+      "lo": 0.0,
+      "hi": 0.0,
+      "span": 0.0,
+      "initial": 0.0,
+      "eq": 0.0,
+      "ineq": 0.0,
+      "design": 0.0,
+      "states": 0.0,
+      "route": 0.0,
+      "westerlyRoute": 0.0,
+      "righting": 0.0
+    },
+    "rtol": 1e-13,
+    "atol": 1e-12
+  },
+  "nativeIdentity": {
+    "baselineElements": 14923,
+    "afterElements": 14929,
+    "missing": [],
+    "changed": [],
+    "beforePackageCount": 105,
+    "afterPackages": [
+      {
+        "id": "BlueDog",
+        "owner": null
+      },
+      {
+        "id": "BlueDog::Mission",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Mission::Challenge",
+        "owner": "BlueDog::Mission"
+      },
+      {
+        "id": "BlueDog::Mission::Course",
+        "owner": "BlueDog::Mission"
+      },
+      {
+        "id": "BlueDog::Mission::Scope",
+        "owner": "BlueDog::Mission"
+      },
+      {
+        "id": "BlueDog::Mission::UseCases",
+        "owner": "BlueDog::Mission"
+      },
+      {
+        "id": "BlueDog::Requirements",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Requirements::Basis",
+        "owner": "BlueDog::Requirements"
+      },
+      {
+        "id": "BlueDog::Requirements::Structure",
+        "owner": "BlueDog::Requirements"
+      },
+      {
+        "id": "BlueDog::Architecture",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Architecture::Contracts",
+        "owner": "BlueDog::Architecture"
+      },
+      {
+        "id": "BlueDog::Architecture::Correspondence",
+        "owner": "BlueDog::Architecture"
+      },
+      {
+        "id": "BlueDog::Architecture::Interfaces",
+        "owner": "BlueDog::Architecture"
+      },
+      {
+        "id": "BlueDog::Architecture::Logical",
+        "owner": "BlueDog::Architecture"
+      },
+      {
+        "id": "BlueDog::Architecture::Physical",
+        "owner": "BlueDog::Architecture"
+      },
+      {
+        "id": "BlueDog::Behavior",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Behavior::Contracts",
+        "owner": "BlueDog::Behavior"
+      },
+      {
+        "id": "BlueDog::Behavior::MissionLogic",
+        "owner": "BlueDog::Behavior"
+      },
+      {
+        "id": "BlueDog::Behavior::Navigation",
+        "owner": "BlueDog::Behavior"
+      },
+      {
+        "id": "BlueDog::Analyses",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Analyses::AerodynamicPolicy",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::AnalysisCredibility",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::CandidateEnergy",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::ClassDetection",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::DevelopmentRisks",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::EncounterEnvelope",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::EncounterFeasibility",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::EncounterReview",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Energy",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::EnvironmentReview",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Hydrostatics",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::IntegratedCandidate",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::LocationTraffic",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::ManeuverDynamics",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::MissionSimulation",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Operating",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::PassageExposure",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::RecoveryPropulsionTrade",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::RecoveryRisk",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::RecoverySiteReview",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Reliability",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Safety",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Safety::AvoidanceFailures",
+        "owner": "BlueDog::Analyses::Safety"
+      },
+      {
+        "id": "BlueDog::Analyses::Safety::DFMEA",
+        "owner": "BlueDog::Analyses::Safety"
+      },
+      {
+        "id": "BlueDog::Analyses::SailTrade",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Sailing",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Sizing",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Sizing::Credibility",
+        "owner": "BlueDog::Analyses::Sizing"
+      },
+      {
+        "id": "BlueDog::Analyses::Sizing::Evidence",
+        "owner": "BlueDog::Analyses::Sizing"
+      },
+      {
+        "id": "BlueDog::Analyses::Sizing::Uncertainty",
+        "owner": "BlueDog::Analyses::Sizing"
+      },
+      {
+        "id": "BlueDog::Analyses::StructuralBasis",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::SurfaceEnvironment",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::WavePerformance",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::Weather",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::WingActuator",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Analyses::WingHeel",
+        "owner": "BlueDog::Analyses"
+      },
+      {
+        "id": "BlueDog::Configurations",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Configurations::AcousticEquipment",
+        "owner": "BlueDog::Configurations"
+      },
+      {
+        "id": "BlueDog::Configurations::Examples",
+        "owner": "BlueDog::Configurations"
+      },
+      {
+        "id": "BlueDog::Configurations::Examples::Energy",
+        "owner": "BlueDog::Configurations::Examples"
+      },
+      {
+        "id": "BlueDog::Configurations::Examples::Reliability",
+        "owner": "BlueDog::Configurations::Examples"
+      },
+      {
+        "id": "BlueDog::Configurations::Examples::Sailing",
+        "owner": "BlueDog::Configurations::Examples"
+      },
+      {
+        "id": "BlueDog::Configurations::IC01",
+        "owner": "BlueDog::Configurations"
+      },
+      {
+        "id": "BlueDog::Configurations::Management",
+        "owner": "BlueDog::Configurations"
+      },
+      {
+        "id": "BlueDog::Configurations::OperatingEnvironment",
+        "owner": "BlueDog::Configurations"
+      },
+      {
+        "id": "BlueDog::Configurations::SensingEquipment",
+        "owner": "BlueDog::Configurations"
+      },
+      {
+        "id": "BlueDog::Configurations::StudyPlan",
+        "owner": "BlueDog::Configurations"
+      },
+      {
+        "id": "BlueDog::Configurations::WindEquipment",
+        "owner": "BlueDog::Configurations"
+      },
+      {
+        "id": "BlueDog::Decisions",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Decisions::Context",
+        "owner": "BlueDog::Decisions"
+      },
+      {
+        "id": "BlueDog::Decisions::Design",
+        "owner": "BlueDog::Decisions"
+      },
+      {
+        "id": "BlueDog::Decisions::OpenQuestions",
+        "owner": "BlueDog::Decisions"
+      },
+      {
+        "id": "BlueDog::Decisions::TradeCriteria",
+        "owner": "BlueDog::Decisions"
+      },
+      {
+        "id": "BlueDog::Verification",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Verification::Challenge",
+        "owner": "BlueDog::Verification"
+      },
+      {
+        "id": "BlueDog::Verification::Planning",
+        "owner": "BlueDog::Verification"
+      },
+      {
+        "id": "BlueDog::Verification::Requirements",
+        "owner": "BlueDog::Verification"
+      },
+      {
+        "id": "BlueDog::Verification::Satisfaction",
+        "owner": "BlueDog::Verification"
+      },
+      {
+        "id": "BlueDog::Evidence",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Evidence::CurrentSizing",
+        "owner": "BlueDog::Evidence"
+      },
+      {
+        "id": "BlueDog::Evidence::FinitePassageSizing",
+        "owner": "BlueDog::Evidence"
+      },
+      {
+        "id": "BlueDog::Evidence::RecordedSizing",
+        "owner": "BlueDog::Evidence"
+      },
+      {
+        "id": "BlueDog::Evidence::SRRCurrent",
+        "owner": "BlueDog::Evidence"
+      },
+      {
+        "id": "BlueDog::Evidence::SRRFrontier",
+        "owner": "BlueDog::Evidence"
+      },
+      {
+        "id": "BlueDog::Evidence::SizingContinuation",
+        "owner": "BlueDog::Evidence"
+      },
+      {
+        "id": "BlueDog::Evidence::Sources",
+        "owner": "BlueDog::Evidence"
+      },
+      {
+        "id": "BlueDog::Evidence::WindObservations",
+        "owner": "BlueDog::Evidence"
+      },
+      {
+        "id": "BlueDog::Method",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::Method::Scenarios",
+        "owner": "BlueDog::Method"
+      },
+      {
+        "id": "BlueDog::Goals",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "BlueDog::DesignIntent",
+        "owner": "BlueDog"
+      },
+      {
+        "id": "EngineeringDecisions",
+        "owner": null
+      },
+      {
+        "id": "MarineActuation",
+        "owner": null
+      },
+      {
+        "id": "MarineEnergy",
+        "owner": null
+      },
+      {
+        "id": "MarineAppendages",
+        "owner": null
+      },
+      {
+        "id": "MarineConcept",
+        "owner": null
+      },
+      {
+        "id": "MarineCourse",
+        "owner": null
+      },
+      {
+        "id": "MarineDesign",
+        "owner": null
+      },
+      {
+        "id": "MarineResistance",
+        "owner": null
+      },
+      {
+        "id": "MarineHydrostatics",
+        "owner": null
+      },
+      {
+        "id": "MarinePropulsion",
+        "owner": null
+      },
+      {
+        "id": "MarineRecovery",
+        "owner": null
+      },
+      {
+        "id": "MarineReliability",
+        "owner": null
+      },
+      {
+        "id": "MarineSailing",
+        "owner": null
+      },
+      {
+        "id": "MarineSurface",
+        "owner": null
+      },
+      {
+        "id": "MarineWavePerformance",
+        "owner": null
+      },
+      {
+        "id": "MarineWeather",
+        "owner": null
+      },
+      {
+        "id": "InlandExtended",
+        "owner": null
+      },
+      {
+        "id": "InlandNavigationExperiment",
+        "owner": null
+      },
+      {
+        "id": "MarineMass",
+        "owner": null
+      },
+      {
+        "id": "MarineStructures",
+        "owner": null
+      }
+    ]
+  },
+  "auditTableDifferences": []
+}

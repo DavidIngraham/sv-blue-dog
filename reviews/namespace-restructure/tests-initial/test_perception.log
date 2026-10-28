@@ -1,0 +1,11 @@
+...............                                                          [100%]
+============================= slowest 10 durations =============================
+38.71s setup    tests/test_perception.py::test_reports_publish_model_ranges_and_provisional_stack_energy
+1.69s call     tests/test_perception.py::test_total_misses_cannot_be_rescued_by_truth_guard
+0.12s call     tests/test_perception.py::test_native_distance_and_energy_sensitivities
+0.05s call     tests/test_perception.py::test_common_cause_loss_does_not_invent_backup[steering_loss]
+0.01s call     tests/test_perception.py::test_common_cause_loss_does_not_invent_backup[power_loss]
+0.01s call     tests/test_perception.py::test_unseen_weed_contact_is_independently_scored
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+15 passed in 40.79s

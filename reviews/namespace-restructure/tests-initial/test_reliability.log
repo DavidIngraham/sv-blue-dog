@@ -1,0 +1,13 @@
+....................                                                     [100%]
+============================= slowest 10 durations =============================
+6.26s call     tests/test_reliability.py::test_holds_increase_exposure_and_tighten_budget
+5.71s call     tests/test_reliability.py::test_dfmea_starter_stays_open_and_has_real_links
+5.04s call     tests/test_reliability.py::test_binding_duration_is_independent_of_provisional_reliability[True-100-pass]
+4.97s call     tests/test_reliability.py::test_synthetic_exposure_and_evidence_gate
+3.44s call     tests/test_reliability.py::test_accepted_but_short_test_is_a_verification_failure
+3.35s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[attribute :>> criticalRatesPerHour = (-0.001, 0.0003);]
+3.34s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[part redefines upstream { attribute :>> retainedPerformance = 0; }]
+3.27s call     tests/test_reliability.py::test_accepted_synthetic_fixture_exercises_pass_path
+3.24s call     tests/test_reliability.py::test_common_cause_rate_is_included
+3.22s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[part redefines upstream { attribute :>> currentVMG = -3 [m/s]; }]
+20 passed in 72.92s (0:01:12)

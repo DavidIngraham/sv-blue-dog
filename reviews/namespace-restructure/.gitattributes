@@ -1,0 +1,3 @@
+# Preserve verbatim generated diagnostics, including their indentation.
+*.log -whitespace
+*.xml -whitespace

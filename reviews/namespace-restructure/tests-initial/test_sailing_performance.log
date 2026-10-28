@@ -1,0 +1,13 @@
+............................                                             [100%]
+============================= slowest 10 durations =============================
+9.51s call     tests/test_sailing_performance.py::test_tacking_gybing_and_current_are_not_conflated
+9.50s call     tests/test_sailing_performance.py::test_shorter_time_budget_and_leeway_raise_upwind_demand
+6.50s call     tests/test_sailing_performance.py::test_wind_strength_changes_required_ratio_not_a_predicted_polar
+6.25s call     tests/test_sailing_performance.py::test_current_reduces_or_increases_demand_without_being_derated
+6.17s call     tests/test_sailing_performance.py::test_hull_length_changes_reference_not_predicted_speed
+4.88s call     tests/test_sailing_performance.py::test_coupled_polar_legs_change_cruise_exposure
+3.26s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> retainedPerformance = 1.01;]
+3.26s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> distance = -1 [m];]
+3.26s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> trueWindAngle = TrigFunctions::rad(90) * (1 [rad]);]
+3.25s call     tests/test_sailing_performance.py::test_upstream_polar_demand_and_hull_screen
+28 passed in 112.12s (0:01:52)

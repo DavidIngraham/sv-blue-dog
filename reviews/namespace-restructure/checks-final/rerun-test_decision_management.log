@@ -1,0 +1,13 @@
+...............                                                          [100%]
+============================= slowest 10 durations =============================
+40.62s setup    tests/test_decision_management.py::test_decision_and_criterion_registers_are_published
+5.05s call     tests/test_decision_management.py::test_native_audit_detects_scope_or_criterion_corruption[BlueDog::Decisions::TradeCriteria::handling::position-7-D07 Criterion positions]
+4.19s call     tests/test_decision_management.py::test_native_audit_detects_scope_or_criterion_corruption[BlueDog::Decisions::TradeCriteria::reliabilityStudy::kind-BlueDog::Decisions::TradeCriteria::Kind::mandatory-D08 Wrong]
+4.10s call     tests/test_decision_management.py::test_retained_basis_state_is_checked_without_reclassifying_its_content
+4.07s call     tests/test_decision_management.py::test_acceptance_flag_without_actual_disposition_identity_is_detected
+4.00s call     tests/test_decision_management.py::test_native_audit_detects_scope_or_criterion_corruption[BlueDog::Decisions::Context::sizingBaseline::reopenTrigger-""-D01 Missing]
+3.26s call     tests/test_decision_management.py::test_native_audit_detects_changed_duration_basis
+3.22s call     tests/test_decision_management.py::test_new_unclassified_working_decision_is_detected
+3.01s call     tests/test_decision_management.py::test_record_outside_register_scopes_is_not_silently_omitted
+2.94s call     tests/test_decision_management.py::test_native_decision_scope_and_current_evidence_are_explicit
+15 passed in 74.57s (0:01:14)

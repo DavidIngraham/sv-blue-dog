@@ -1,0 +1,9 @@
+.....                                                                    [100%]
+============================= slowest 10 durations =============================
+11.74s call     tests/test_native_kernel.py::test_real_operation_batch_matches_scalar
+0.02s call     tests/test_native_kernel.py::test_real_surface_output_types[SpeedRetention-inputs1]
+0.01s call     tests/test_native_kernel.py::test_real_surface_output_types[StripLoad-inputs0]
+0.01s call     tests/test_native_kernel.py::test_real_surface_output_types[WindSample-inputs2]
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+5 passed in 11.85s

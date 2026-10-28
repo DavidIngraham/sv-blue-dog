@@ -1,0 +1,47 @@
+START rerun-test_analysis_credibility
+{"name": "rerun-test_analysis_credibility", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_analysis_credibility.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_analysis_credibility.xml"], "exitCode": 1, "seconds": 59.87}
+START rerun-test_decision_management
+{"name": "rerun-test_decision_management", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_decision_management.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_decision_management.xml"], "exitCode": 0, "seconds": 75.17}
+START rerun-test_development_risks
+{"name": "rerun-test_development_risks", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_development_risks.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_development_risks.xml"], "exitCode": 0, "seconds": 13.94}
+START rerun-test_documentation
+{"name": "rerun-test_documentation", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_documentation.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_documentation.xml"], "exitCode": 0, "seconds": 41.26}
+START rerun-test_energy
+{"name": "rerun-test_energy", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_energy.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_energy.xml"], "exitCode": 0, "seconds": 58.57}
+START rerun-test_hydrostatics
+{"name": "rerun-test_hydrostatics", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_hydrostatics.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_hydrostatics.xml"], "exitCode": 0, "seconds": 16.37}
+START rerun-test_inline_views
+{"name": "rerun-test_inline_views", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_inline_views.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_inline_views.xml"], "exitCode": 1, "seconds": 11.5}
+START rerun-test_navigation_campaign
+{"name": "rerun-test_navigation_campaign", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_navigation_campaign.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_navigation_campaign.xml"], "exitCode": 0, "seconds": 35.67}
+START rerun-test_navigation_integration
+{"name": "rerun-test_navigation_integration", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_navigation_integration.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_navigation_integration.xml"], "exitCode": 0, "seconds": 3.07}
+START rerun-test_relationship_semantics
+{"name": "rerun-test_relationship_semantics", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_relationship_semantics.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_relationship_semantics.xml"], "exitCode": 0, "seconds": 45.07}
+START rerun-test_requirements
+{"name": "rerun-test_requirements", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "pytest", "tests/test_requirements.py", "-q", "--durations=10", "--junitxml=/home/david/repos/sv-blue-dog-namespaces/.tools/namespace-final/rerun-test_requirements.xml"], "exitCode": 0, "seconds": 98.99}
+START native-identity
+{"name": "native-identity", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "reviews/namespace-restructure/validate_native_identity.py"], "exitCode": 0, "seconds": 3.83}
+START numerics
+{"name": "numerics", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "reviews/namespace-restructure/validate_numerics.py"], "exitCode": 0, "seconds": 25.09}
+START audits
+{"name": "audits", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "reviews/namespace-restructure/capture_audits.py"], "exitCode": 0, "seconds": 8.49}
+START audit-tables
+{"name": "audit-tables", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "reviews/namespace-restructure/compare_audit_tables.py"], "exitCode": 0, "seconds": 0.16}
+START projection-recorded
+{"name": "projection-recorded", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "tools.boat_analysis.evidence.model", "--check"], "exitCode": 0, "seconds": 0.11}
+START projection-current
+{"name": "projection-current", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "tools.boat_analysis.evidence.model", "--current", "--check"], "exitCode": 0, "seconds": 0.11}
+START projection-continuation
+{"name": "projection-continuation", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "tools.boat_analysis.evidence.continuation", "2026-10-12-continuation", "--check"], "exitCode": 0, "seconds": 0.06}
+START projection-finite
+{"name": "projection-finite", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "tools.boat_analysis.evidence.continuation", "2026-10-12-finite-passage", "--package", "BlueDog::Evidence::FinitePassageSizing", "--check"], "exitCode": 0, "seconds": 0.06}
+START projection-srr
+{"name": "projection-srr", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "tools.publishing.srr", "--run", "2026-10-13-srr-readiness", "--check"], "exitCode": 0, "seconds": 4.58}
+START projection-frontier
+{"name": "projection-frontier", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "tools.publishing.frontier", "--run", "2026-10-13-srr-frontier", "--check"], "exitCode": 0, "seconds": 0.06}
+START projection-weather
+{"name": "projection-weather", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "tools.boat_analysis.environment.climatology", "--check"], "exitCode": 0, "seconds": 2.32}
+START publishing
+{"name": "publishing", "command": ["/home/david/repos/sv-blue-dog-namespaces/.venv/bin/python", "-m", "tools.publishing.build"], "exitCode": 0, "seconds": 40.79}
+FINAL CHECKS COMPLETE

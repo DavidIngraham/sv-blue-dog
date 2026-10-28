@@ -1,0 +1,13 @@
+....................                                                     [100%]
+============================= slowest 10 durations =============================
+40.60s setup    tests/test_requirements.py::test_focused_views_cover_all_derivations
+6.65s call     tests/test_requirements.py::test_use_case_and_satisfaction_traceability
+4.57s setup    tests/test_requirements.py::test_diagram_preserves_expected_derivations
+4.25s call     tests/test_requirements.py::test_statements_exclude_supporting_material
+4.02s call     tests/test_requirements.py::test_oosem_scenarios_render_declared_behavior[normal-actions0]
+3.57s call     tests/test_requirements.py::test_native_validation
+3.17s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::ReliabilityEvidenceVerification]
+3.12s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::MissionPerformanceAssessmentVerification]
+2.98s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::VegetationResilienceVerification]
+2.93s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Challenge::PassageQualificationVerification]
+20 passed in 98.42s (0:01:38)

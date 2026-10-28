@@ -1,0 +1,70 @@
+.....F....F                                                              [100%]
+=================================== FAILURES ===================================
+_ test_semantic_diagrams_are_small_connected_native_views[reliability-semantics-kinds3] _
+
+slug = 'reliability-semantics', kinds = {'dependency', 'satisfy', 'verify'}
+rendered_site = PosixPath('/tmp/pytest-of-david/pytest-189/published-site0')
+
+    @pytest.mark.parametrize('slug,kinds', [
+        ('mission-semantics', {'derive', 'refine', 'satisfy', 'verify'}),
+        ('energy-semantics', {'derive', 'refine', 'satisfy', 'verify'}),
+        ('cruise-semantics', {'derive', 'satisfy', 'verify'}),
+        ('reliability-semantics', {'dependency', 'satisfy', 'verify'}),
+        ('manufacturing-semantics', {'satisfy', 'verify'}),
+        ('weed-semantics', {'refine', 'satisfy', 'verify'}),
+    ])
+    def test_semantic_diagrams_are_small_connected_native_views(slug, kinds, rendered_site):
+        locations = {
+            'mission-semantics': ('architecture', 'MissionSemantics'),
+            'manufacturing-semantics': ('architecture', 'ManufacturingSemantics'),
+            'energy-semantics': ('energy', 'EnergySemantics'),
+            'cruise-semantics': ('reliability', 'CruiseSemantics'),
+            'reliability-semantics': ('reliability', 'ReliabilitySemantics'),
+            'weed-semantics': ('reliability', 'WeedSemantics'),
+        }
+        page, view = locations[slug]
+        from tools.publishing.build import blocks
+        authored = Path(f'docs/{page}.md').read_text(encoding='utf-8')
+        target = next(token.info.split()[1] for token in blocks(authored) if token.info.split()[1].endswith('::'+view))
+        rendered = (rendered_site / f'imports/docs/{page}.md').read_text(encoding='utf-8')
+        # Explanatory sketches can precede native views. Select by native provenance,
+        # not by a position shared with the authored SysML-only block list.
+        text = next(diagram for diagram in re.findall(r'```mermaid\n(.*?)```', rendered, re.S)
+                    if f'%% {target} ' in diagram)
+        nodes = set(re.findall(r'^  (n\d+)[(\[]', text, re.M))
+        edges = re.findall(r'(n\d+) -\.->\|"(\w+)"\| (n\d+)', text)
+        assert 3 <= len(nodes) <= 5
+>       assert {kind for _, kind, _ in edges} == kinds
+E       AssertionError: assert {'satisfy', 'verify'} == {'dependency'...fy', 'verify'}
+E         
+E         Extra items in the right set:
+E         'dependency'
+E         Use -v to get more diff
+
+tests/test_relationship_semantics.py:78: AssertionError
+__________ test_construction_views_show_model_basis_and_qualification __________
+
+rendered_site = PosixPath('/tmp/pytest-of-david/pytest-189/published-site0')
+
+    def test_construction_views_show_model_basis_and_qualification(rendered_site):
+        text=(rendered_site/'imports/docs/requirements/requirements-practicality.md').read_text(encoding='utf-8')
+        diagrams=re.findall(r'```mermaid\n(.*?)```',text,re.S)
+        construction=next(d for d in diagrams if '%% Page_practicality_construction::thread ' in d)
+        materials=next(d for d in diagrams if '%% Page_practicality_materials::thread ' in d)
+        assert len(re.findall(r'^  n\d+[(\[]',construction,re.M))==4
+>       assert construction.count('|"dependency"|')==2
+E       assert 0 == 2
+E        +  where 0 = <built-in method count of str object at 0x3173d80>('|"dependency"|')
+E        +    where <built-in method count of str object at 0x3173d80> = '---\nconfig:\n  fontFamily: "Helvetica, Arial, sans-serif"\n  theme: base\n  themeCSS: ".edgeLabel rect { opacity: 1 ...-node n2 Requirements::Structure::hybridConstruction\n%% source-node n3 Requirements::Structure::printTileEnvelope\n\n'.count
+
+tests/test_relationship_semantics.py:136: AssertionError
+============================= slowest 10 durations =============================
+39.08s setup    tests/test_relationship_semantics.py::test_semantic_diagrams_are_small_connected_native_views[mission-semantics-kinds0]
+4.11s setup    tests/test_relationship_semantics.py::test_formal_refinements_are_distinct_from_design_dependencies
+0.03s call     tests/test_relationship_semantics.py::test_authored_pages_contain_views_not_copied_diagrams
+
+(7 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+FAILED tests/test_relationship_semantics.py::test_semantic_diagrams_are_small_connected_native_views[reliability-semantics-kinds3]
+FAILED tests/test_relationship_semantics.py::test_construction_views_show_model_basis_and_qualification
+2 failed, 9 passed in 43.33s

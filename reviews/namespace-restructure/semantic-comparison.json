@@ -1,0 +1,453 @@
+{
+  "baselineElements": 14923,
+  "afterElements": 14929,
+  "missing": [],
+  "changed": [],
+  "beforePackageCount": 105,
+  "afterPackages": [
+    {
+      "id": "BlueDog",
+      "owner": null
+    },
+    {
+      "id": "BlueDog::Mission",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Mission::Challenge",
+      "owner": "BlueDog::Mission"
+    },
+    {
+      "id": "BlueDog::Mission::Course",
+      "owner": "BlueDog::Mission"
+    },
+    {
+      "id": "BlueDog::Mission::Scope",
+      "owner": "BlueDog::Mission"
+    },
+    {
+      "id": "BlueDog::Mission::UseCases",
+      "owner": "BlueDog::Mission"
+    },
+    {
+      "id": "BlueDog::Requirements",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Requirements::Basis",
+      "owner": "BlueDog::Requirements"
+    },
+    {
+      "id": "BlueDog::Requirements::Structure",
+      "owner": "BlueDog::Requirements"
+    },
+    {
+      "id": "BlueDog::Architecture",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Architecture::Contracts",
+      "owner": "BlueDog::Architecture"
+    },
+    {
+      "id": "BlueDog::Architecture::Correspondence",
+      "owner": "BlueDog::Architecture"
+    },
+    {
+      "id": "BlueDog::Architecture::Interfaces",
+      "owner": "BlueDog::Architecture"
+    },
+    {
+      "id": "BlueDog::Architecture::Logical",
+      "owner": "BlueDog::Architecture"
+    },
+    {
+      "id": "BlueDog::Architecture::Physical",
+      "owner": "BlueDog::Architecture"
+    },
+    {
+      "id": "BlueDog::Behavior",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Behavior::Contracts",
+      "owner": "BlueDog::Behavior"
+    },
+    {
+      "id": "BlueDog::Behavior::MissionLogic",
+      "owner": "BlueDog::Behavior"
+    },
+    {
+      "id": "BlueDog::Behavior::Navigation",
+      "owner": "BlueDog::Behavior"
+    },
+    {
+      "id": "BlueDog::Analyses",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Analyses::AerodynamicPolicy",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::AnalysisCredibility",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::CandidateEnergy",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::ClassDetection",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::DevelopmentRisks",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::EncounterEnvelope",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::EncounterFeasibility",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::EncounterReview",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Energy",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::EnvironmentReview",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Hydrostatics",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::IntegratedCandidate",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::LocationTraffic",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::ManeuverDynamics",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::MissionSimulation",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Operating",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::PassageExposure",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::RecoveryPropulsionTrade",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::RecoveryRisk",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::RecoverySiteReview",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Reliability",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Safety",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Safety::AvoidanceFailures",
+      "owner": "BlueDog::Analyses::Safety"
+    },
+    {
+      "id": "BlueDog::Analyses::Safety::DFMEA",
+      "owner": "BlueDog::Analyses::Safety"
+    },
+    {
+      "id": "BlueDog::Analyses::SailTrade",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Sailing",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Sizing",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Sizing::Credibility",
+      "owner": "BlueDog::Analyses::Sizing"
+    },
+    {
+      "id": "BlueDog::Analyses::Sizing::Evidence",
+      "owner": "BlueDog::Analyses::Sizing"
+    },
+    {
+      "id": "BlueDog::Analyses::Sizing::Uncertainty",
+      "owner": "BlueDog::Analyses::Sizing"
+    },
+    {
+      "id": "BlueDog::Analyses::StructuralBasis",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::SurfaceEnvironment",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::WavePerformance",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::Weather",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::WingActuator",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Analyses::WingHeel",
+      "owner": "BlueDog::Analyses"
+    },
+    {
+      "id": "BlueDog::Configurations",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Configurations::AcousticEquipment",
+      "owner": "BlueDog::Configurations"
+    },
+    {
+      "id": "BlueDog::Configurations::Examples",
+      "owner": "BlueDog::Configurations"
+    },
+    {
+      "id": "BlueDog::Configurations::Examples::Energy",
+      "owner": "BlueDog::Configurations::Examples"
+    },
+    {
+      "id": "BlueDog::Configurations::Examples::Reliability",
+      "owner": "BlueDog::Configurations::Examples"
+    },
+    {
+      "id": "BlueDog::Configurations::Examples::Sailing",
+      "owner": "BlueDog::Configurations::Examples"
+    },
+    {
+      "id": "BlueDog::Configurations::IC01",
+      "owner": "BlueDog::Configurations"
+    },
+    {
+      "id": "BlueDog::Configurations::Management",
+      "owner": "BlueDog::Configurations"
+    },
+    {
+      "id": "BlueDog::Configurations::OperatingEnvironment",
+      "owner": "BlueDog::Configurations"
+    },
+    {
+      "id": "BlueDog::Configurations::SensingEquipment",
+      "owner": "BlueDog::Configurations"
+    },
+    {
+      "id": "BlueDog::Configurations::StudyPlan",
+      "owner": "BlueDog::Configurations"
+    },
+    {
+      "id": "BlueDog::Configurations::WindEquipment",
+      "owner": "BlueDog::Configurations"
+    },
+    {
+      "id": "BlueDog::Decisions",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Decisions::Context",
+      "owner": "BlueDog::Decisions"
+    },
+    {
+      "id": "BlueDog::Decisions::Design",
+      "owner": "BlueDog::Decisions"
+    },
+    {
+      "id": "BlueDog::Decisions::OpenQuestions",
+      "owner": "BlueDog::Decisions"
+    },
+    {
+      "id": "BlueDog::Decisions::TradeCriteria",
+      "owner": "BlueDog::Decisions"
+    },
+    {
+      "id": "BlueDog::Verification",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Verification::Challenge",
+      "owner": "BlueDog::Verification"
+    },
+    {
+      "id": "BlueDog::Verification::Planning",
+      "owner": "BlueDog::Verification"
+    },
+    {
+      "id": "BlueDog::Verification::Requirements",
+      "owner": "BlueDog::Verification"
+    },
+    {
+      "id": "BlueDog::Verification::Satisfaction",
+      "owner": "BlueDog::Verification"
+    },
+    {
+      "id": "BlueDog::Evidence",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Evidence::CurrentSizing",
+      "owner": "BlueDog::Evidence"
+    },
+    {
+      "id": "BlueDog::Evidence::FinitePassageSizing",
+      "owner": "BlueDog::Evidence"
+    },
+    {
+      "id": "BlueDog::Evidence::RecordedSizing",
+      "owner": "BlueDog::Evidence"
+    },
+    {
+      "id": "BlueDog::Evidence::SRRCurrent",
+      "owner": "BlueDog::Evidence"
+    },
+    {
+      "id": "BlueDog::Evidence::SRRFrontier",
+      "owner": "BlueDog::Evidence"
+    },
+    {
+      "id": "BlueDog::Evidence::SizingContinuation",
+      "owner": "BlueDog::Evidence"
+    },
+    {
+      "id": "BlueDog::Evidence::Sources",
+      "owner": "BlueDog::Evidence"
+    },
+    {
+      "id": "BlueDog::Evidence::WindObservations",
+      "owner": "BlueDog::Evidence"
+    },
+    {
+      "id": "BlueDog::Method",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::Method::Scenarios",
+      "owner": "BlueDog::Method"
+    },
+    {
+      "id": "BlueDog::Goals",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "BlueDog::DesignIntent",
+      "owner": "BlueDog"
+    },
+    {
+      "id": "EngineeringDecisions",
+      "owner": null
+    },
+    {
+      "id": "MarineActuation",
+      "owner": null
+    },
+    {
+      "id": "MarineEnergy",
+      "owner": null
+    },
+    {
+      "id": "MarineAppendages",
+      "owner": null
+    },
+    {
+      "id": "MarineConcept",
+      "owner": null
+    },
+    {
+      "id": "MarineCourse",
+      "owner": null
+    },
+    {
+      "id": "MarineDesign",
+      "owner": null
+    },
+    {
+      "id": "MarineResistance",
+      "owner": null
+    },
+    {
+      "id": "MarineHydrostatics",
+      "owner": null
+    },
+    {
+      "id": "MarinePropulsion",
+      "owner": null
+    },
+    {
+      "id": "MarineRecovery",
+      "owner": null
+    },
+    {
+      "id": "MarineReliability",
+      "owner": null
+    },
+    {
+      "id": "MarineSailing",
+      "owner": null
+    },
+    {
+      "id": "MarineSurface",
+      "owner": null
+    },
+    {
+      "id": "MarineWavePerformance",
+      "owner": null
+    },
+    {
+      "id": "MarineWeather",
+      "owner": null
+    },
+    {
+      "id": "InlandExtended",
+      "owner": null
+    },
+    {
+      "id": "InlandNavigationExperiment",
+      "owner": null
+    },
+    {
+      "id": "MarineMass",
+      "owner": null
+    },
+    {
+      "id": "MarineStructures",
+      "owner": null
+    }
+  ]
+}

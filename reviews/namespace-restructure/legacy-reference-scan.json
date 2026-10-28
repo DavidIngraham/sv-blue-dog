@@ -1,0 +1,59 @@
+{
+  "confirmedStaleReferences": [],
+  "intentionalMatches": [
+    {
+      "path": "models/blue-dog.sysml",
+      "line": 7647,
+      "matches": [
+        "RecoveryPropulsionTrade"
+      ],
+      "text": "package RecoveryPropulsionTrade {",
+      "interpretation": "Canonical leaf declaration retains its original leaf name under BlueDog::Analyses."
+    },
+    {
+      "path": "tests/test_namespace_structure.py",
+      "line": 32,
+      "matches": [
+        "BlueDogIntegratedCandidate"
+      ],
+      "text": "assert model.get('BlueDogIntegratedCandidate') is None",
+      "interpretation": "Negative control verifies the old root alias is absent."
+    },
+    {
+      "path": "tests/test_namespace_structure.py",
+      "line": 33,
+      "matches": [
+        "BlueDogRequirements"
+      ],
+      "text": "assert model.get('BlueDogRequirements') is None",
+      "interpretation": "Negative control verifies the old root alias is absent."
+    },
+    {
+      "path": "tools/publishing/srr.py",
+      "line": 53,
+      "matches": [
+        "BlueDogOperatingEnvironment"
+      ],
+      "text": "environment = numerical_value(historical.run_analysis('BlueDogOperatingEnvironment::Inputs').outputs)",
+      "interpretation": "Historical replay executes the archived source revision with its original names."
+    },
+    {
+      "path": "tools/publishing/srr.py",
+      "line": 54,
+      "matches": [
+        "BlueDogConceptCredibility"
+      ],
+      "text": "policy = numerical_value(historical.run_analysis('BlueDogConceptCredibility::Inputs').outputs)['values']",
+      "interpretation": "Historical replay executes the archived source revision with its original names."
+    },
+    {
+      "path": "tools/publishing/srr.py",
+      "line": 55,
+      "matches": [
+        "BlueDogWindEquipment"
+      ],
+      "text": "wind = numerical_value(historical.eval('BlueDogWindEquipment::challenge.busPowerW'))",
+      "interpretation": "Historical replay executes the archived source revision with its original names."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+....F....                                                                [100%]
+=================================== FAILURES ===================================
+__________ test_inline_view_resolves_actual_refinement_and_statements __________
+
+tmp_path = PosixPath('/tmp/pytest-of-david/pytest-207/test_inline_view_resolves_actu0')
+
+    def test_inline_view_resolves_actual_refinement_and_statements(tmp_path):
+        source = (ROOT / "docs/methods/modeling.md").read_text(encoding="utf-8")
+        result = render_page(source, tmp_path)
+        assert 'class="mermaid"' in result
+        assert 'refine' in result
+>       assert 'The vessel shall cross the configured Bingen departure' in result
+E       assert 'The vessel shall cross the configured Bingen departure' in '<h1 id="reading-the-design-through-the-model">Reading the design through the model</h1>\n<p><strong>OOSEM:</strong> M...esentation; it does not establish that the causal argument is\ncomplete or that its safeguards work on the boat.</p>\n'
+
+tests/test_inline_views.py:44: AssertionError
+============================= slowest 10 durations =============================
+7.89s call     tests/test_inline_views.py::test_inline_view_resolves_actual_refinement_and_statements
+2.48s call     tests/test_inline_views.py::test_unresolved_model_reference_fails_build
+0.43s call     tests/test_inline_views.py::test_failed_build_preserves_last_complete_site
+0.38s call     tests/test_inline_views.py::test_rebuild_removes_stale_pages_and_exports_blog_markdown
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+FAILED tests/test_inline_views.py::test_inline_view_resolves_actual_refinement_and_statements
+1 failed, 8 passed in 11.23s

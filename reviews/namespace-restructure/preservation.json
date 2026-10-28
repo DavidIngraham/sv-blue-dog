@@ -1,0 +1,1142 @@
+{
+  "baseline": "8f2dd804e964fd75828ff170c8c93572c751c8f2",
+  "success": true,
+  "original": {
+    "path": "/home/david/repos/sv-blue-dog-editorial",
+    "checkedFiles": 860,
+    "changedFiles": [],
+    "head": "b94b6e0231587b52cb5bec800dba408456ca701d",
+    "branch": "refactor/oosem-system-model",
+    "sourceStatusUnchanged": true,
+    "sourceHeadUnchanged": true,
+    "aggregateSha256": "ca5bbf6ac80eaaf268e872882b814ff3b082ec68cc7557c26cd7f0a1111835b5"
+  },
+  "completedRefactor": {
+    "path": "/home/david/repos/sv-blue-dog-declarative",
+    "head": "8f2dd804e964fd75828ff170c8c93572c751c8f2",
+    "clean": true,
+    "expectedHead": "8f2dd804e964fd75828ff170c8c93572c751c8f2"
+  },
+  "immutableGroups": {
+    "reusableLibraries": {
+      "checkedFiles": 20,
+      "changedFiles": [],
+      "aggregateSha256": "ce308931da288794d2f45a656a6c9bcabb67cbcea94ad8b729a5a56327a9db47",
+      "files": [
+        {
+          "path": "models/libraries/decision-records.sysml",
+          "baselineSha256": "93102a19a7e9c69cd35544bf7f4815657164803fd1bbe9af6d6689ad613f52f3",
+          "currentSha256": "93102a19a7e9c69cd35544bf7f4815657164803fd1bbe9af6d6689ad613f52f3"
+        },
+        {
+          "path": "models/libraries/energy/actuation.sysml",
+          "baselineSha256": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f",
+          "currentSha256": "b0fba9c178586b4208e50bf7e681959c96cdff4c9d71d49f243b7ff9db57838f"
+        },
+        {
+          "path": "models/libraries/energy/budget.sysml",
+          "baselineSha256": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+          "currentSha256": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365"
+        },
+        {
+          "path": "models/libraries/marine/appendages.sysml",
+          "baselineSha256": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d",
+          "currentSha256": "86cefc51f2d86bcf3cc63fbe06fc8151836cd568d8dd7d73c23c696573131a9d"
+        },
+        {
+          "path": "models/libraries/marine/concept.sysml",
+          "baselineSha256": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524",
+          "currentSha256": "0d21f054d7cec7c54ead46154c2820787678dbcee57b433bf67d15077113f524"
+        },
+        {
+          "path": "models/libraries/marine/course.sysml",
+          "baselineSha256": "3f58d6c0dc668858aa0b6bdad232c26b0ac75952ad67d0f06e73f4fbd464c85c",
+          "currentSha256": "3f58d6c0dc668858aa0b6bdad232c26b0ac75952ad67d0f06e73f4fbd464c85c"
+        },
+        {
+          "path": "models/libraries/marine/design.sysml",
+          "baselineSha256": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+          "currentSha256": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057"
+        },
+        {
+          "path": "models/libraries/marine/hull-resistance.sysml",
+          "baselineSha256": "967550313effe20092525e10c1695771b8354c66478203f449ac902d8af1a5f1",
+          "currentSha256": "967550313effe20092525e10c1695771b8354c66478203f449ac902d8af1a5f1"
+        },
+        {
+          "path": "models/libraries/marine/hydrostatics.sysml",
+          "baselineSha256": "b6791576a108dee393063a15a1a359113a8c24aba793105fa7d60fa193e9d858",
+          "currentSha256": "b6791576a108dee393063a15a1a359113a8c24aba793105fa7d60fa193e9d858"
+        },
+        {
+          "path": "models/libraries/marine/propulsion.sysml",
+          "baselineSha256": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7",
+          "currentSha256": "16848c8a487a3bd087d43099c5062ec4da6dc9e8aee5447af63e50ef3a5a6fc7"
+        },
+        {
+          "path": "models/libraries/marine/recovery.sysml",
+          "baselineSha256": "00c8c1fcfda115116fc66bf1db5a67334e04ea893182a454a796ada62eeeaab4",
+          "currentSha256": "00c8c1fcfda115116fc66bf1db5a67334e04ea893182a454a796ada62eeeaab4"
+        },
+        {
+          "path": "models/libraries/marine/reliability.sysml",
+          "baselineSha256": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29",
+          "currentSha256": "b5e5a18d2924737f1c84df6683c8806a56a65f62e06a3acf25e2d998008aaf29"
+        },
+        {
+          "path": "models/libraries/marine/sailing.sysml",
+          "baselineSha256": "8281caf912a840d83d5a6d1c39fe0422419ce7fb9ccaae3d9044b0c5df33446f",
+          "currentSha256": "8281caf912a840d83d5a6d1c39fe0422419ce7fb9ccaae3d9044b0c5df33446f"
+        },
+        {
+          "path": "models/libraries/marine/surface.sysml",
+          "baselineSha256": "781d337d8553160eb8d3c0724ae2aef4463d51ae6bc05ef475d32884645213c8",
+          "currentSha256": "781d337d8553160eb8d3c0724ae2aef4463d51ae6bc05ef475d32884645213c8"
+        },
+        {
+          "path": "models/libraries/marine/wave-performance.sysml",
+          "baselineSha256": "ee1d491adb19773eb151588a5f8ccb52c8ee4364150c5783637c58ada8a07ba9",
+          "currentSha256": "ee1d491adb19773eb151588a5f8ccb52c8ee4364150c5783637c58ada8a07ba9"
+        },
+        {
+          "path": "models/libraries/marine/weather.sysml",
+          "baselineSha256": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8",
+          "currentSha256": "1d2d4a98082b0daefa5bcce180d4805c1e0907de818ed69d0b68b38d6c1f96b8"
+        },
+        {
+          "path": "models/libraries/navigation/inland-obligations.sysml",
+          "baselineSha256": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+          "currentSha256": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16"
+        },
+        {
+          "path": "models/libraries/navigation/inland-pair.sysml",
+          "baselineSha256": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326",
+          "currentSha256": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326"
+        },
+        {
+          "path": "models/libraries/structures/mass-properties.sysml",
+          "baselineSha256": "ced6365432541c9c9ada7b683564efde12f597d46e96144fd70221f767ef5dde",
+          "currentSha256": "ced6365432541c9c9ada7b683564efde12f597d46e96144fd70221f767ef5dde"
+        },
+        {
+          "path": "models/libraries/structures/scantlings.sysml",
+          "baselineSha256": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32",
+          "currentSha256": "7ed46d886547ac779560838a5abc42c986ce3e41830b150ff0c11e3926fecd32"
+        }
+      ]
+    },
+    "recordedEvidence": {
+      "checkedFiles": 126,
+      "changedFiles": [],
+      "aggregateSha256": "69d7191b0da51400dc2d243f5579c3f269253f8b0552619e5cee8fbdcb3cf6b5",
+      "files": [
+        {
+          "path": "evidence/runs/2026-10-10-coupled/coupled-fixed-design.json",
+          "baselineSha256": "4c92fb19818f16736780ecc0b9b86f633ab9228191d67ddea873a17ffaef7328",
+          "currentSha256": "4c92fb19818f16736780ecc0b9b86f633ab9228191d67ddea873a17ffaef7328"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/coupled-mass-reference.json",
+          "baselineSha256": "a5d1efdbf27c43853e5edea6a9d7db41278dc2b11f39aaac60aadf25f5b26d31",
+          "currentSha256": "a5d1efdbf27c43853e5edea6a9d7db41278dc2b11f39aaac60aadf25f5b26d31"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/coupled-operation-audit.json",
+          "baselineSha256": "a2aed1ad4a891cdd14d26473c156a40ef251810935c1d0739d082cbbaa6875dc",
+          "currentSha256": "a2aed1ad4a891cdd14d26473c156a40ef251810935c1d0739d082cbbaa6875dc"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/coupled-pitch-diagnostic.json",
+          "baselineSha256": "3c51ecad9016675fb4ce628e5fd674479433a41b9e47e8aefcdb30267a1b09e4",
+          "currentSha256": "3c51ecad9016675fb4ce628e5fd674479433a41b9e47e8aefcdb30267a1b09e4"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/coupled-recovery.json",
+          "baselineSha256": "e18049b2f521373a08c623917b4e787c66d8e3137f910491b40caf689d5ec58e",
+          "currentSha256": "e18049b2f521373a08c623917b4e787c66d8e3137f910491b40caf689d5ec58e"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/coupled-sizing-replay.json",
+          "baselineSha256": "e98223133169c9af02213d4a8a184c073aca801f9aeb9a694a66f02d989b8f4b",
+          "currentSha256": "e98223133169c9af02213d4a8a184c073aca801f9aeb9a694a66f02d989b8f4b"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/coupled-sizing-search.json",
+          "baselineSha256": "9fb784c2b86c6e766127b3c85efc846d4d5b6c0cb46f0aca77bfc0cb9f08381b",
+          "currentSha256": "9fb784c2b86c6e766127b3c85efc846d4d5b6c0cb46f0aca77bfc0cb9f08381b"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/coupled-uncertainty-inputs.json",
+          "baselineSha256": "920386299dfdadb03f6b686f623b82213b35227db9a67815eeee37ed648925fe",
+          "currentSha256": "920386299dfdadb03f6b686f623b82213b35227db9a67815eeee37ed648925fe"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/hull-resistance-audit.json",
+          "baselineSha256": "e843e6d62322ba08a0505992e93977fe3e80ba90bd6a8244662fe05a55039c06",
+          "currentSha256": "e843e6d62322ba08a0505992e93977fe3e80ba90bd6a8244662fe05a55039c06"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/hull-resistance-domain.json",
+          "baselineSha256": "da7d34b3a505153cc9617c5f1a1b26a14eab007e12870745cdc73a218eae87a8",
+          "currentSha256": "da7d34b3a505153cc9617c5f1a1b26a14eab007e12870745cdc73a218eae87a8"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/manifest.json",
+          "baselineSha256": "857c16e3595f801378f08f559b97c62290f4ac6376bf17ccb261fcb9f4f13ada",
+          "currentSha256": "857c16e3595f801378f08f559b97c62290f4ac6376bf17ccb261fcb9f4f13ada"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/wing-actuator-audit.json",
+          "baselineSha256": "1a89c84de1dd6f70c0d01bf660606151771bb12f7c43a2ec61f18e78d03b64f9",
+          "currentSha256": "1a89c84de1dd6f70c0d01bf660606151771bb12f7c43a2ec61f18e78d03b64f9"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/wing-candidate-check.json",
+          "baselineSha256": "50c8824c082ba5c2b64f73130e0db1caa6ddcca4c21f1d320042101cd40868d2",
+          "currentSha256": "50c8824c082ba5c2b64f73130e0db1caa6ddcca4c21f1d320042101cd40868d2"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/wing-geometry.json",
+          "baselineSha256": "707a082d3a616713d14ba82e22c14fd1a0afe27bd6a50449cd23f9d2afcbdb35",
+          "currentSha256": "707a082d3a616713d14ba82e22c14fd1a0afe27bd6a50449cd23f9d2afcbdb35"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/wing-polar-grid.json",
+          "baselineSha256": "74b5275ce74a7460a74b5a7761b6e2bdcfbe9c648800cb0fd914ecccd7a84863",
+          "currentSha256": "74b5275ce74a7460a74b5a7761b6e2bdcfbe9c648800cb0fd914ecccd7a84863"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/wing-vsp-reference-16.json",
+          "baselineSha256": "bfa58dd3d71ef04098cd6018a0d0b6cb041bebe406e063399150bd9f76681691",
+          "currentSha256": "bfa58dd3d71ef04098cd6018a0d0b6cb041bebe406e063399150bd9f76681691"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/wing-vsp-reference-32.json",
+          "baselineSha256": "af464495e9ee69b7944c6e6966721413b791e4cdb95bc24d2d1b00741c19a6d7",
+          "currentSha256": "af464495e9ee69b7944c6e6966721413b791e4cdb95bc24d2d1b00741c19a6d7"
+        },
+        {
+          "path": "evidence/runs/2026-10-10-coupled/wing-vsp-reference-64.json",
+          "baselineSha256": "e5dc15d5058c27a6fcb91a12c89c007fb1f9014c63b4267e27df06a8c87b0e96",
+          "currentSha256": "e5dc15d5058c27a6fcb91a12c89c007fb1f9014c63b4267e27df06a8c87b0e96"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/coupled-mass-reference.json",
+          "baselineSha256": "f5044095a30ba1ecc079bc2d186ef404e696e170353abbeab17219c62a23c476",
+          "currentSha256": "f5044095a30ba1ecc079bc2d186ef404e696e170353abbeab17219c62a23c476"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/coupled-operation-audit.json",
+          "baselineSha256": "0ad685eb6fc25bd040a0c6c7a9b155dea5e6cc470a575bec682ee75bf069c44d",
+          "currentSha256": "0ad685eb6fc25bd040a0c6c7a9b155dea5e6cc470a575bec682ee75bf069c44d"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/coupled-pitch-diagnostic.json",
+          "baselineSha256": "72d1e55a47acbcf8120cc75dce1ed39302c5064eca0f9de3efb69e0835a42634",
+          "currentSha256": "72d1e55a47acbcf8120cc75dce1ed39302c5064eca0f9de3efb69e0835a42634"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/coupled-recovery.json",
+          "baselineSha256": "c168eadfeb4ca373828a4f99fdf6c6b0fc532002b1c6bdb5ef61ff83925f32de",
+          "currentSha256": "c168eadfeb4ca373828a4f99fdf6c6b0fc532002b1c6bdb5ef61ff83925f32de"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/coupled-sizing-replay.json",
+          "baselineSha256": "7258bf7223b6daee4517b1099721e837a39140cfc37b493eacbbd12d80946f53",
+          "currentSha256": "7258bf7223b6daee4517b1099721e837a39140cfc37b493eacbbd12d80946f53"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/coupled-sizing-search.json",
+          "baselineSha256": "3d1dd19cc8e6f5604388de8d9f23c06e1e90628596db1808250656c0f2028cea",
+          "currentSha256": "3d1dd19cc8e6f5604388de8d9f23c06e1e90628596db1808250656c0f2028cea"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/coupled-uncertainty-inputs.json",
+          "baselineSha256": "0295d88673b782e77b35a9122992e19e6f99a65eb5f803492cbead9c82021a22",
+          "currentSha256": "0295d88673b782e77b35a9122992e19e6f99a65eb5f803492cbead9c82021a22"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/hull-resistance-audit.json",
+          "baselineSha256": "67d803f54f32503c45d94280eb729e81f12b240c3c819b7a2d7069100ca45bd9",
+          "currentSha256": "67d803f54f32503c45d94280eb729e81f12b240c3c819b7a2d7069100ca45bd9"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/hull-resistance-domain.json",
+          "baselineSha256": "d7a4c83f586a0a92ef31936b2e18d0707d4229508681a8a39a5858875db5dc1d",
+          "currentSha256": "d7a4c83f586a0a92ef31936b2e18d0707d4229508681a8a39a5858875db5dc1d"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/hydrostatics-audit.json",
+          "baselineSha256": "b405b2d1bcf8a0dcc0652b227004f430f718404f2d62db35e35344f5fa3ad217",
+          "currentSha256": "b405b2d1bcf8a0dcc0652b227004f430f718404f2d62db35e35344f5fa3ad217"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/manifest.json",
+          "baselineSha256": "8eab2427cb97549a4cb26d00d4034aba6af0c12ae380add4d8bb802e8bce79ab",
+          "currentSha256": "8eab2427cb97549a4cb26d00d4034aba6af0c12ae380add4d8bb802e8bce79ab"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/optimizer-start.json",
+          "baselineSha256": "abb3691b51e25e95b5db2f53ed0dee1c2901065c327ea1041ec5fb01f57b478d",
+          "currentSha256": "abb3691b51e25e95b5db2f53ed0dee1c2901065c327ea1041ec5fb01f57b478d"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/wing-actuator-audit.json",
+          "baselineSha256": "ee890f145ed01084394066c5a35f873e1b400d8664cd629bd8e32663a92e1f07",
+          "currentSha256": "ee890f145ed01084394066c5a35f873e1b400d8664cd629bd8e32663a92e1f07"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/wing-candidate-check.json",
+          "baselineSha256": "33abc8b5beaa8ba520d4577265b6a9361ac972de6d1351e9d5b6acd894a96d27",
+          "currentSha256": "33abc8b5beaa8ba520d4577265b6a9361ac972de6d1351e9d5b6acd894a96d27"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-conservative/wing-convergence.json",
+          "baselineSha256": "b318262b656fd935012a55e10b5d62d9218d11dd7871ffb0a94cf6d7b48d9e9b",
+          "currentSha256": "b318262b656fd935012a55e10b5d62d9218d11dd7871ffb0a94cf6d7b48d9e9b"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-heel/manifest.json",
+          "baselineSha256": "863bb69d66e4440280f6d0c34492145dbeb913a63ad54c2a7b50f07321b2f2f9",
+          "currentSha256": "863bb69d66e4440280f6d0c34492145dbeb913a63ad54c2a7b50f07321b2f2f9"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-heel/wing-heel-sweep.json",
+          "baselineSha256": "9c41234ee53d013d9157187170382a93de5ba69b763588b9b3bb74b23375400b",
+          "currentSha256": "9c41234ee53d013d9157187170382a93de5ba69b763588b9b3bb74b23375400b"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-mission/manifest.json",
+          "baselineSha256": "6d3185642d1b8c08cc6ea6620099e5bb9883644785e14ba2aa9164bd3efaf85a",
+          "currentSha256": "6d3185642d1b8c08cc6ea6620099e5bb9883644785e14ba2aa9164bd3efaf85a"
+        },
+        {
+          "path": "evidence/runs/2026-10-11-mission/mission-campaign.json",
+          "baselineSha256": "4b38eaad1d7bcd67fefda85341fc11b7665f2fce7c48dcaeda7054b31ee3bfef",
+          "currentSha256": "4b38eaad1d7bcd67fefda85341fc11b7665f2fce7c48dcaeda7054b31ee3bfef"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-appendage-credibility/manifest.json",
+          "baselineSha256": "f9fca285dc1c8bbe192b3250f7f08687f1ab0aed9702190d939a2b28f9ff0d40",
+          "currentSha256": "f9fca285dc1c8bbe192b3250f7f08687f1ab0aed9702190d939a2b28f9ff0d40"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-appendage-credibility/sizing-continuation.json",
+          "baselineSha256": "4f9f5ec9cb66585dcee6dd97db0a4df3ca08bc8fe358bc7a5423cb7e6c4b8a60",
+          "currentSha256": "4f9f5ec9cb66585dcee6dd97db0a4df3ca08bc8fe358bc7a5423cb7e6c4b8a60"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen-mission/manifest.json",
+          "baselineSha256": "ed7d56b43f8a5820e740b9dc38b866dc66110df9ae74e8d873f30c435bec6e19",
+          "currentSha256": "ed7d56b43f8a5820e740b9dc38b866dc66110df9ae74e8d873f30c435bec6e19"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen-mission/mission-campaign.json",
+          "baselineSha256": "f9ba5eda9a4aac375dbfdabe7cc23b4d457ffc7803861b3251e18b3503923a1e",
+          "currentSha256": "f9ba5eda9a4aac375dbfdabe7cc23b4d457ffc7803861b3251e18b3503923a1e"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen/coupled-mass-reference.json",
+          "baselineSha256": "54d9463b6f1bd5d86d218ad00bcd891b3093df6639e443553f69b00bec88fd92",
+          "currentSha256": "54d9463b6f1bd5d86d218ad00bcd891b3093df6639e443553f69b00bec88fd92"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen/coupled-pitch-diagnostic.json",
+          "baselineSha256": "dcb6c7db114705fbc84eab27f5424206b16ff9069bce2759ecb4a8952794c4f6",
+          "currentSha256": "dcb6c7db114705fbc84eab27f5424206b16ff9069bce2759ecb4a8952794c4f6"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen/coupled-recovery.json",
+          "baselineSha256": "baaf6c2c2adffbab5a1198d3749e2c50c3f6e9211778c3b68b234ec8de605ee7",
+          "currentSha256": "baaf6c2c2adffbab5a1198d3749e2c50c3f6e9211778c3b68b234ec8de605ee7"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen/coupled-sizing-replay.json",
+          "baselineSha256": "50a5daa79436f5ef9a9dc905bcd644999096f4cd2f0757b6169432d43795441f",
+          "currentSha256": "50a5daa79436f5ef9a9dc905bcd644999096f4cd2f0757b6169432d43795441f"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen/coupled-sizing-search.json",
+          "baselineSha256": "cdb8e2991d3b78421667b9472497555e7f2d867daa3304b0577efb36cc8adffb",
+          "currentSha256": "cdb8e2991d3b78421667b9472497555e7f2d867daa3304b0577efb36cc8adffb"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen/coupled-uncertainty-inputs.json",
+          "baselineSha256": "95ab0f0c460a031c561b36926fe01fe912e66245e20c672724418eedeb505d64",
+          "currentSha256": "95ab0f0c460a031c561b36926fe01fe912e66245e20c672724418eedeb505d64"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen/hull-resistance-domain.json",
+          "baselineSha256": "67a88c31a39c2f07b59df2b96d90c2dbabdda0e4a4531915d10e9debdc0a60ed",
+          "currentSha256": "67a88c31a39c2f07b59df2b96d90c2dbabdda0e4a4531915d10e9debdc0a60ed"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen/manifest.json",
+          "baselineSha256": "9755b8fc5a72092702bdcb912737fda0a1f7090fb598ee0056059a028eeda9c4",
+          "currentSha256": "9755b8fc5a72092702bdcb912737fda0a1f7090fb598ee0056059a028eeda9c4"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-bingen/optimizer-start.json",
+          "baselineSha256": "1c4b1e161495b453ea20606b89b757827dff9c2f072d1e4dade081ad1ca46868",
+          "currentSha256": "1c4b1e161495b453ea20606b89b757827dff9c2f072d1e4dade081ad1ca46868"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-continuation/continuation-before-recovery.json",
+          "baselineSha256": "fc3b1d83c178de67949278bc254b8101f2d47794d2725af7f661376f09dc2c49",
+          "currentSha256": "fc3b1d83c178de67949278bc254b8101f2d47794d2725af7f661376f09dc2c49"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-continuation/continuation-retained-checkpoint.json",
+          "baselineSha256": "5ff7a18f2fb69169b00f857b9a506deebb7adb9db72d30eee9ca950260e83695",
+          "currentSha256": "5ff7a18f2fb69169b00f857b9a506deebb7adb9db72d30eee9ca950260e83695"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-continuation/manifest.json",
+          "baselineSha256": "586c706708074aeb7c87ddefe0ad733bf42892aa22e65799ad4a46565652b647",
+          "currentSha256": "586c706708074aeb7c87ddefe0ad733bf42892aa22e65799ad4a46565652b647"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-continuation/sizing-continuation.json",
+          "baselineSha256": "a2bbd06f9d5d0c65e7e4e5588350553d37e77b219776f62b9b7ebc59587cb787",
+          "currentSha256": "a2bbd06f9d5d0c65e7e4e5588350553d37e77b219776f62b9b7ebc59587cb787"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage-exploration/coupled-uncertainty-inputs.json",
+          "baselineSha256": "dde79cc95176ac23759dbd6704a3b7c294432248a24f23ad14a1835757ad2d21",
+          "currentSha256": "dde79cc95176ac23759dbd6704a3b7c294432248a24f23ad14a1835757ad2d21"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage-exploration/credibility-1p4.json",
+          "baselineSha256": "b9e12549ea3fe6b706fa752c469d0d586b692e2f35281f528c71fe27954824a4",
+          "currentSha256": "b9e12549ea3fe6b706fa752c469d0d586b692e2f35281f528c71fe27954824a4"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage-exploration/interrupted-sizing-trial.json",
+          "baselineSha256": "158ac7e44f71126263001875d6e49e620967a888d66a9c50a787c4cc73f8302b",
+          "currentSha256": "158ac7e44f71126263001875d6e49e620967a888d66a9c50a787c4cc73f8302b"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage-exploration/manifest.json",
+          "baselineSha256": "81313836aedd07677e1b03ad011e4c1bae3919b7f29c9c9d4c519ecf3367b40b",
+          "currentSha256": "81313836aedd07677e1b03ad011e4c1bae3919b7f29c9c9d4c519ecf3367b40b"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage-exploration/mission-candidate-1p4.json",
+          "baselineSha256": "e6d1ebde889e942a98585db9331203cb79ddb1f07f786a6c57534b51a74247e5",
+          "currentSha256": "e6d1ebde889e942a98585db9331203cb79ddb1f07f786a6c57534b51a74247e5"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage-exploration/sizing-candidate-1p4.json",
+          "baselineSha256": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88",
+          "currentSha256": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage-exploration/sizing-continuation.json",
+          "baselineSha256": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88",
+          "currentSha256": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage/concept-credibility.json",
+          "baselineSha256": "b9e12549ea3fe6b706fa752c469d0d586b692e2f35281f528c71fe27954824a4",
+          "currentSha256": "b9e12549ea3fe6b706fa752c469d0d586b692e2f35281f528c71fe27954824a4"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage/coupled-uncertainty-inputs.json",
+          "baselineSha256": "dde79cc95176ac23759dbd6704a3b7c294432248a24f23ad14a1835757ad2d21",
+          "currentSha256": "dde79cc95176ac23759dbd6704a3b7c294432248a24f23ad14a1835757ad2d21"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage/interrupted-refinement.json",
+          "baselineSha256": "90cae54c3fba0a277e5e42c54509e1976f35fb468dc5e89839babb1b45b46be0",
+          "currentSha256": "90cae54c3fba0a277e5e42c54509e1976f35fb468dc5e89839babb1b45b46be0"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage/manifest.json",
+          "baselineSha256": "08d7afbefdcd931ccf88398a7636ec349fd17817235f3020c66d1053124fe14e",
+          "currentSha256": "08d7afbefdcd931ccf88398a7636ec349fd17817235f3020c66d1053124fe14e"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage/mission-candidate.json",
+          "baselineSha256": "e6d1ebde889e942a98585db9331203cb79ddb1f07f786a6c57534b51a74247e5",
+          "currentSha256": "e6d1ebde889e942a98585db9331203cb79ddb1f07f786a6c57534b51a74247e5"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage/sizing-candidate-1p4.json",
+          "baselineSha256": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88",
+          "currentSha256": "383bd362c59ef4467a0a81dc25ad34ef6ea09ac49a6d93a61b7e61bcf5fd4b88"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-finite-passage/sizing-continuation.json",
+          "baselineSha256": "3e6e9ab8b711d4685297d7dbc2e2a2e696c5294d3163c9f95db7e87275353d2c",
+          "currentSha256": "3e6e9ab8b711d4685297d7dbc2e2a2e696c5294d3163c9f95db7e87275353d2c"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-gorge/coupled-mass-reference.json",
+          "baselineSha256": "7ac308a7a61fa65e95f94fff450b8638fd2126b2733faa4b02458ce84f17fe7d",
+          "currentSha256": "7ac308a7a61fa65e95f94fff450b8638fd2126b2733faa4b02458ce84f17fe7d"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-gorge/coupled-pitch-diagnostic.json",
+          "baselineSha256": "63a9fb2290f9c309e2b3cbc1913414329152d47d700334747ea0f420ac0cbefe",
+          "currentSha256": "63a9fb2290f9c309e2b3cbc1913414329152d47d700334747ea0f420ac0cbefe"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-gorge/coupled-recovery.json",
+          "baselineSha256": "825dc80ac2863961d2cd65fa046f5583d0b22685c2e62101e6e1e9a6f5ff5b5e",
+          "currentSha256": "825dc80ac2863961d2cd65fa046f5583d0b22685c2e62101e6e1e9a6f5ff5b5e"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-gorge/coupled-sizing-replay.json",
+          "baselineSha256": "4ebf178060211e93a8a5ac1b24c90437b631fd18a756fbed8dbee804d230f64b",
+          "currentSha256": "4ebf178060211e93a8a5ac1b24c90437b631fd18a756fbed8dbee804d230f64b"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-gorge/coupled-sizing-search.json",
+          "baselineSha256": "3edf5d75661eed3dc9c06e3146cf17e60b9b2e3ebf053a1d8c39a6be5381e810",
+          "currentSha256": "3edf5d75661eed3dc9c06e3146cf17e60b9b2e3ebf053a1d8c39a6be5381e810"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-gorge/coupled-uncertainty-inputs.json",
+          "baselineSha256": "873adcbd7e0b89365d9fb5e2f8c8e992248317f57f75a224fee8ce4bc81468c5",
+          "currentSha256": "873adcbd7e0b89365d9fb5e2f8c8e992248317f57f75a224fee8ce4bc81468c5"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-gorge/hull-resistance-domain.json",
+          "baselineSha256": "fb2b00822da60f9c70300bb3b1e69ff545faf72c60d466a166c11a3c5808879d",
+          "currentSha256": "fb2b00822da60f9c70300bb3b1e69ff545faf72c60d466a166c11a3c5808879d"
+        },
+        {
+          "path": "evidence/runs/2026-10-12-gorge/manifest.json",
+          "baselineSha256": "9ff399da21d67a7dfe9c867c3ddfe77ff419a9ed9fb794f37adb36dd2523da82",
+          "currentSha256": "9ff399da21d67a7dfe9c867c3ddfe77ff419a9ed9fb794f37adb36dd2523da82"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-frontier/coupled-uncertainty-inputs.json",
+          "baselineSha256": "6dbc7d7fe8cf4764edb6451abaee564651ae7f4c1b75fd95433a9033e47fe183",
+          "currentSha256": "6dbc7d7fe8cf4764edb6451abaee564651ae7f4c1b75fd95433a9033e47fe183"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-frontier/manifest.json",
+          "baselineSha256": "f440ca2ae679848d26d496759ef53c73ef1744f3333ce04007bb617fde3bb3b0",
+          "currentSha256": "f440ca2ae679848d26d496759ef53c73ef1744f3333ce04007bb617fde3bb3b0"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-frontier/srr-candidate-replay.json",
+          "baselineSha256": "d8a38f64b5cfce9829458188ff119363cdc4196b58c90b320254ffd1a87a3cbc",
+          "currentSha256": "d8a38f64b5cfce9829458188ff119363cdc4196b58c90b320254ffd1a87a3cbc"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-frontier/srr-frontier.json",
+          "baselineSha256": "4d1cae2e9c7364666a16dbd16ba2eaff383869ff40ee1d114acc24e69afb6cfe",
+          "currentSha256": "4d1cae2e9c7364666a16dbd16ba2eaff383869ff40ee1d114acc24e69afb6cfe"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-mission-regression/manifest.json",
+          "baselineSha256": "bbd35cd2c932f2e338e006aa74453431e901e0959bbe7b83859ee809c239cd9b",
+          "currentSha256": "bbd35cd2c932f2e338e006aa74453431e901e0959bbe7b83859ee809c239cd9b"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-mission-regression/srr-mission-campaign.json",
+          "baselineSha256": "0fdbbed5aed505904f59381b2acffcd93e9774f7d43c3b3a8dfed51efb96f820",
+          "currentSha256": "0fdbbed5aed505904f59381b2acffcd93e9774f7d43c3b3a8dfed51efb96f820"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-readiness/coupled-uncertainty-inputs.json",
+          "baselineSha256": "564eca11e972de9b47a949f13dc6481a7040a50e3c5bb22e0292ec08624c35e0",
+          "currentSha256": "564eca11e972de9b47a949f13dc6481a7040a50e3c5bb22e0292ec08624c35e0"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-readiness/manifest.json",
+          "baselineSha256": "fad05f0c77a66e3dd6e30bfc31f5148a5ca0943c989402440cde1d22f3420ee9",
+          "currentSha256": "fad05f0c77a66e3dd6e30bfc31f5148a5ca0943c989402440cde1d22f3420ee9"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-readiness/srr-mission-campaign.json",
+          "baselineSha256": "83f032181f30fe69d76ea8ce19c81931d3e5869183c6f993c9ba3daa7b71c63a",
+          "currentSha256": "83f032181f30fe69d76ea8ce19c81931d3e5869183c6f993c9ba3daa7b71c63a"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-srr-readiness/srr-readiness.json",
+          "baselineSha256": "107549a93890b79cd186d8cdda973233582e57f7e14a0b9f6aca4d9552fe0f9b",
+          "currentSha256": "107549a93890b79cd186d8cdda973233582e57f7e14a0b9f6aca4d9552fe0f9b"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-surface-environment/manifest.json",
+          "baselineSha256": "75c99bdc7ece37135ab080a24112bebe91a645e33d672034dba7081cbdcf63a6",
+          "currentSha256": "75c99bdc7ece37135ab080a24112bebe91a645e33d672034dba7081cbdcf63a6"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-surface-environment/operating-1.4.json",
+          "baselineSha256": "19ab04f4eb3f0b1f78323a03484ea8f4cfc0427f8485e53eef49a06b5e5e75a0",
+          "currentSha256": "19ab04f4eb3f0b1f78323a03484ea8f4cfc0427f8485e53eef49a06b5e5e75a0"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-surface-environment/operating-2.0.json",
+          "baselineSha256": "3171f41e0772dae0c5d096da992e01672ec7092d8420f3a92f8694cee8e02710",
+          "currentSha256": "3171f41e0772dae0c5d096da992e01672ec7092d8420f3a92f8694cee8e02710"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-surface-environment/shear-calm.json",
+          "baselineSha256": "704c9206614d4d67249c6273a1018b86b14961da8bb8b0dfc0b5851ec16ce965",
+          "currentSha256": "704c9206614d4d67249c6273a1018b86b14961da8bb8b0dfc0b5851ec16ce965"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-surface-environment/shear-waves.json",
+          "baselineSha256": "b684c8c36f8a1a42d3a0ed4524fc3b1e2b252293516b4e0e03fff83ab59bbe8e",
+          "currentSha256": "b684c8c36f8a1a42d3a0ed4524fc3b1e2b252293516b4e0e03fff83ab59bbe8e"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-surface-environment/summary.json",
+          "baselineSha256": "bdc5dad72ef98bebe0ed018020c5ceb002133889907b1bdb5dfbf947f84764b8",
+          "currentSha256": "bdc5dad72ef98bebe0ed018020c5ceb002133889907b1bdb5dfbf947f84764b8"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-surface-environment/uniform-calm.json",
+          "baselineSha256": "8fb8432c1534e942fd665fb0f83ba9708e6ed8b109b129444f2ca91c6a277998",
+          "currentSha256": "8fb8432c1534e942fd665fb0f83ba9708e6ed8b109b129444f2ca91c6a277998"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-motion/manifest.json",
+          "baselineSha256": "95c433c18a7eaaca1e61b1c5c205e8ccfa20df58c46fbbeefd9021687602dfd7",
+          "currentSha256": "95c433c18a7eaaca1e61b1c5c205e8ccfa20df58c46fbbeefd9021687602dfd7"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-motion/missions.json",
+          "baselineSha256": "289814b08b62fbff99b92bf8e98b46702d63d9738f3ec354925d0a2ee82fd2de",
+          "currentSha256": "289814b08b62fbff99b92bf8e98b46702d63d9738f3ec354925d0a2ee82fd2de"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-motion/phase-loads.json",
+          "baselineSha256": "7fe6619591d8ecb22cdfbe91d24e2c033a34129ddfc7f7ff6f04f3fe0b5966a8",
+          "currentSha256": "7fe6619591d8ecb22cdfbe91d24e2c033a34129ddfc7f7ff6f04f3fe0b5966a8"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-motion/summary.json",
+          "baselineSha256": "ba793d89bbae5cff501201828b2d2326d1a155337b9b4135b82186a377280f3f",
+          "currentSha256": "ba793d89bbae5cff501201828b2d2326d1a155337b9b4135b82186a377280f3f"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-performance/bem-refined.json",
+          "baselineSha256": "7c83a9925b68366050c2d276af710ba85ddbede868340be52cf6e326401eefa0",
+          "currentSha256": "7c83a9925b68366050c2d276af710ba85ddbede868340be52cf6e326401eefa0"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-performance/bem.json",
+          "baselineSha256": "dd780511f2e9fdd9f133221a14ee94764d09b8eb41086c0fd358c64fb54abcb5",
+          "currentSha256": "dd780511f2e9fdd9f133221a14ee94764d09b8eb41086c0fd358c64fb54abcb5"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-performance/manifest.json",
+          "baselineSha256": "66ada6ca0377775f55effe52e5125ecd8ef29b9f4bda08ce576ba9ab122be0e3",
+          "currentSha256": "66ada6ca0377775f55effe52e5125ecd8ef29b9f4bda08ce576ba9ab122be0e3"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-performance/mesh-check.json",
+          "baselineSha256": "afa9fbd3b01a6d7b7567eb88146b3fbe88a30b8de28ede147b0c6719b9a16543",
+          "currentSha256": "afa9fbd3b01a6d7b7567eb88146b3fbe88a30b8de28ede147b0c6719b9a16543"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-performance/missions.json",
+          "baselineSha256": "2f70b1fbeebf58953c105cf3d0d3dace271f46956d235b6ae07df03a1dc51506",
+          "currentSha256": "2f70b1fbeebf58953c105cf3d0d3dace271f46956d235b6ae07df03a1dc51506"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-performance/operating.json",
+          "baselineSha256": "4f211f4fbe245098ed9b1c7e5ef81166d4a251b8224d462f178de51b8a2b32e7",
+          "currentSha256": "4f211f4fbe245098ed9b1c7e5ef81166d4a251b8224d462f178de51b8a2b32e7"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-performance/performance.json",
+          "baselineSha256": "6bf5a3873c715dd7b059b293e73b8181c1ac8329fb4d8d544d23dccd1415aa73",
+          "currentSha256": "6bf5a3873c715dd7b059b293e73b8181c1ac8329fb4d8d544d23dccd1415aa73"
+        },
+        {
+          "path": "evidence/runs/2026-10-13-wave-performance/summary.json",
+          "baselineSha256": "afa4e9a237c98e877d6bf90cab4f6da617aa5943584ece18007b52299145d831",
+          "currentSha256": "afa4e9a237c98e877d6bf90cab4f6da617aa5943584ece18007b52299145d831"
+        },
+        {
+          "path": "evidence/runs/2026-10-15-encounter-continuation/encounter-continuation.json",
+          "baselineSha256": "edbfc802061656c4d18cc83a165c61bac2c2deae2994a50d61a3239eafdb97ae",
+          "currentSha256": "edbfc802061656c4d18cc83a165c61bac2c2deae2994a50d61a3239eafdb97ae"
+        },
+        {
+          "path": "evidence/runs/2026-10-15-encounter-continuation/manifest.json",
+          "baselineSha256": "7ed06e2caec0dc337b517378e4dc019b429e72ca3e2580c3b8c8fd2d18005ecb",
+          "currentSha256": "7ed06e2caec0dc337b517378e4dc019b429e72ca3e2580c3b8c8fd2d18005ecb"
+        },
+        {
+          "path": "evidence/runs/2026-10-15-encounter-feasibility/encounter-feasibility.json",
+          "baselineSha256": "15175ff53af6fc1aca1fc257ad9d1ed74191d39b029db620d172fe52cd03e9bd",
+          "currentSha256": "15175ff53af6fc1aca1fc257ad9d1ed74191d39b029db620d172fe52cd03e9bd"
+        },
+        {
+          "path": "evidence/runs/2026-10-15-encounter-feasibility/manifest.json",
+          "baselineSha256": "5d569e3de27f57c3bc08519f32fafef76ff362504f69a43f9c9e5e564de09b79",
+          "currentSha256": "5d569e3de27f57c3bc08519f32fafef76ff362504f69a43f9c9e5e564de09b79"
+        },
+        {
+          "path": "evidence/runs/2026-10-15-integrated-candidate/coupled-uncertainty-inputs.json",
+          "baselineSha256": "f28eff1423ed7875e0e19ef0678bcf087756b798593a8e25bb3fb0f7aff0132c",
+          "currentSha256": "f28eff1423ed7875e0e19ef0678bcf087756b798593a8e25bb3fb0f7aff0132c"
+        },
+        {
+          "path": "evidence/runs/2026-10-15-integrated-candidate/integrated-mission.json",
+          "baselineSha256": "29541c573df8ad7e2f33501bc15f9506576217e95d8e882f6042f3096643cd09",
+          "currentSha256": "29541c573df8ad7e2f33501bc15f9506576217e95d8e882f6042f3096643cd09"
+        },
+        {
+          "path": "evidence/runs/2026-10-15-integrated-candidate/integrated-sizing.json",
+          "baselineSha256": "51ceda1f8dc9da70c6cba592351e735ac18b84be6af17ef58962bdbb20f57659",
+          "currentSha256": "51ceda1f8dc9da70c6cba592351e735ac18b84be6af17ef58962bdbb20f57659"
+        },
+        {
+          "path": "evidence/runs/2026-10-15-integrated-candidate/manifest.json",
+          "baselineSha256": "569b2c7aa317ab7a92622ca3c453482e6372aa499e3ca25d1e0f28be6e49ce59",
+          "currentSha256": "569b2c7aa317ab7a92622ca3c453482e6372aa499e3ca25d1e0f28be6e49ce59"
+        },
+        {
+          "path": "evidence/runs/2026-10-16-class-specific-encounters/manifest.json",
+          "baselineSha256": "cd0b994479cf28bb2cfe420473075179c2f88208cf3dcc89870a8278034b4bec",
+          "currentSha256": "cd0b994479cf28bb2cfe420473075179c2f88208cf3dcc89870a8278034b4bec"
+        },
+        {
+          "path": "evidence/runs/2026-10-16-class-specific-encounters/summary.json",
+          "baselineSha256": "ff3ae79157f58459bc2d756a9fae80d03e4aa2273f87da25fc08f699cc459158",
+          "currentSha256": "ff3ae79157f58459bc2d756a9fae80d03e4aa2273f87da25fc08f699cc459158"
+        },
+        {
+          "path": "evidence/runs/2026-10-16-response-maneuvers/encounter-envelope.json",
+          "baselineSha256": "121fb46e28637fb15f08a93a170ece82333f6455e73b06fe2ab278ad00f849fc",
+          "currentSha256": "121fb46e28637fb15f08a93a170ece82333f6455e73b06fe2ab278ad00f849fc"
+        },
+        {
+          "path": "evidence/runs/2026-10-16-response-maneuvers/maneuver-study.json",
+          "baselineSha256": "06978b27e52394180715e13ab5d597cda3bf478072f0ce9ee28664d81d4a636b",
+          "currentSha256": "06978b27e52394180715e13ab5d597cda3bf478072f0ce9ee28664d81d4a636b"
+        },
+        {
+          "path": "evidence/runs/2026-10-16-response-maneuvers/manifest.json",
+          "baselineSha256": "ac7c17c3cc59d1eba43fd04fd1cc87d8d9d8000b55b69705013bd53bd91b3b71",
+          "currentSha256": "ac7c17c3cc59d1eba43fd04fd1cc87d8d9d8000b55b69705013bd53bd91b3b71"
+        },
+        {
+          "path": "evidence/runs/2026-10-17-navigation-integration/manifest.json",
+          "baselineSha256": "1409b831fa080ea195adb459b56ad3904daa872f94e3b7f8b45cb6a58c0569ad",
+          "currentSha256": "1409b831fa080ea195adb459b56ad3904daa872f94e3b7f8b45cb6a58c0569ad"
+        },
+        {
+          "path": "evidence/runs/2026-10-17-navigation-integration/navigation-integration.json",
+          "baselineSha256": "ecb16182edc3c6cef062d3356a1d8ab65ec8ed20cada1cdfcb3e07f8bdc777ce",
+          "currentSha256": "ecb16182edc3c6cef062d3356a1d8ab65ec8ed20cada1cdfcb3e07f8bdc777ce"
+        },
+        {
+          "path": "evidence/runs/2026-10-20-oosem-refactor/baseline-numerics.json",
+          "baselineSha256": "8c6e852b88ac859b11066d9b8673a7da552f8634a0b399c965e8a08559ac0600",
+          "currentSha256": "8c6e852b88ac859b11066d9b8673a7da552f8634a0b399c965e8a08559ac0600"
+        },
+        {
+          "path": "evidence/runs/2026-10-20-oosem-refactor/ic01-demonstration.json",
+          "baselineSha256": "00b2aa1da61794bcebaf823ea394b686d968c378a4d7389c232c8c1b2377d6ad",
+          "currentSha256": "00b2aa1da61794bcebaf823ea394b686d968c378a4d7389c232c8c1b2377d6ad"
+        },
+        {
+          "path": "evidence/runs/2026-10-20-oosem-refactor/manifest.json",
+          "baselineSha256": "cab5d9bc1d65f6a796321fb50a15aff9b82fe7aa7ae3c932f59e35de6dc843d5",
+          "currentSha256": "cab5d9bc1d65f6a796321fb50a15aff9b82fe7aa7ae3c932f59e35de6dc843d5"
+        },
+        {
+          "path": "evidence/runs/2026-10-20-oosem-refactor/oosem-audit.json",
+          "baselineSha256": "fec6655bcb91b666a61ff695f70aa065d528a2092c4a5bee35bd57ae302922f0",
+          "currentSha256": "fec6655bcb91b666a61ff695f70aa065d528a2092c4a5bee35bd57ae302922f0"
+        },
+        {
+          "path": "evidence/runs/2026-10-20-oosem-refactor/oosem-numerical-comparison.json",
+          "baselineSha256": "520cee2877d5c4cb79f7f0c20f8e4022012b9e669236f18b32bd970d0340805b",
+          "currentSha256": "520cee2877d5c4cb79f7f0c20f8e4022012b9e669236f18b32bd970d0340805b"
+        },
+        {
+          "path": "evidence/runs/2026-10-20-oosem-refactor/validation-summary.json",
+          "baselineSha256": "456b05c7b10017327eb1309617a6c7e5ab98f364277d90b0d27cc91ce8183b62",
+          "currentSha256": "456b05c7b10017327eb1309617a6c7e5ab98f364277d90b0d27cc91ce8183b62"
+        }
+      ]
+    },
+    "priorRefactorReview": {
+      "checkedFiles": 45,
+      "changedFiles": [],
+      "aggregateSha256": "6c5acf8d80b027814b88b19f8722e5091e9fdd1394f25b827cd06b7b837e55eb",
+      "files": [
+        {
+          "path": "reviews/declarative-analysis-refactor/README.md",
+          "baselineSha256": "4c790731325476b1d2a120eb51bbb858ebb5d0229e5095cab09d4720e54a8435",
+          "currentSha256": "4c790731325476b1d2a120eb51bbb858ebb5d0229e5095cab09d4720e54a8435"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-00-test_navigation.log",
+          "baselineSha256": "4cecc98f3449198f1148a252d28e204d64140ce7d6d71e6ca54267f702c5fd93",
+          "currentSha256": "4cecc98f3449198f1148a252d28e204d64140ce7d6d71e6ca54267f702c5fd93"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-00-test_navigation.xml",
+          "baselineSha256": "e6488b67e10011a921421f6efd4dd30bed743374bf07704b229c98893390cc35",
+          "currentSha256": "e6488b67e10011a921421f6efd4dd30bed743374bf07704b229c98893390cc35"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-01-test_structural_acceptance.log",
+          "baselineSha256": "433476799df4527c51254611b323499fdb1fcac62f810935a4e901a6fe1aa6f2",
+          "currentSha256": "433476799df4527c51254611b323499fdb1fcac62f810935a4e901a6fe1aa6f2"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-01-test_structural_acceptance.xml",
+          "baselineSha256": "44ea415324956ea8faed076cff07c42745c68d23da99d917035dffe3667fb3fe",
+          "currentSha256": "44ea415324956ea8faed076cff07c42745c68d23da99d917035dffe3667fb3fe"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-02-test_surface_environment.log",
+          "baselineSha256": "1ecd271d7caa6dd4b097398cc7b69adcbb4d3e043d434c56e448816008f6914a",
+          "currentSha256": "1ecd271d7caa6dd4b097398cc7b69adcbb4d3e043d434c56e448816008f6914a"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-02-test_surface_environment.xml",
+          "baselineSha256": "01d1d35888c1bf2ef19aba771513fdb61b245b13a150a173fc0c2b0e032dd220",
+          "currentSha256": "01d1d35888c1bf2ef19aba771513fdb61b245b13a150a173fc0c2b0e032dd220"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-03-test_upstream_client.log",
+          "baselineSha256": "e0a0f91582e10f67627d69ee024e033c8044e2e4cb67a0898691b6295e0011dc",
+          "currentSha256": "e0a0f91582e10f67627d69ee024e033c8044e2e4cb67a0898691b6295e0011dc"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-03-test_upstream_client.xml",
+          "baselineSha256": "5884057be73a5d9eb5549189cfeeaa2042a89be4a083bcce75b6819b5ab4fa70",
+          "currentSha256": "5884057be73a5d9eb5549189cfeeaa2042a89be4a083bcce75b6819b5ab4fa70"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-04-test_verification_evidence.log",
+          "baselineSha256": "7272cafdc12d2383ad625718f669d10a0aab02e9b7e3abf991b5b95470565827",
+          "currentSha256": "7272cafdc12d2383ad625718f669d10a0aab02e9b7e3abf991b5b95470565827"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-04-test_verification_evidence.xml",
+          "baselineSha256": "6ba863ba3cde39310e0f8bcf9a20ce2a68042ee7ef5366ceedd2f8e61a4f265d",
+          "currentSha256": "6ba863ba3cde39310e0f8bcf9a20ce2a68042ee7ef5366ceedd2f8e61a4f265d"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-05-test_wave_performance.log",
+          "baselineSha256": "c26cd3b8eb82167708c3634ccabf928831effcd6c2984e40fdbcac5dab0ccbd6",
+          "currentSha256": "c26cd3b8eb82167708c3634ccabf928831effcd6c2984e40fdbcac5dab0ccbd6"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-05-test_wave_performance.xml",
+          "baselineSha256": "ee69298d209c65c5c06c7535f88e18630daabb59453b22dfa39647b0af59c1f1",
+          "currentSha256": "ee69298d209c65c5c06c7535f88e18630daabb59453b22dfa39647b0af59c1f1"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-06-test_weather.log",
+          "baselineSha256": "0bb26c21f63e6124966ee9fea87c61913540db89caf04451ff8628f0994694e2",
+          "currentSha256": "0bb26c21f63e6124966ee9fea87c61913540db89caf04451ff8628f0994694e2"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-06-test_weather.xml",
+          "baselineSha256": "249c6c1337291dcf2d2b3c4450706bf2ffc3287e32c64dc1fc6e2fa07544d4cc",
+          "currentSha256": "249c6c1337291dcf2d2b3c4450706bf2ffc3287e32c64dc1fc6e2fa07544d4cc"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/affected-reruns.json",
+          "baselineSha256": "272f8416cdeebccb4452f626d0d1eebc64514d26c2da1ce26d187ddcc89ac5e3",
+          "currentSha256": "272f8416cdeebccb4452f626d0d1eebc64514d26c2da1ce26d187ddcc89ac5e3"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/baseline-inline-control.json",
+          "baselineSha256": "b9fe9561397add77e9ba5202f31a34945ef2576258436f122f7daa5a8d1fdb8a",
+          "currentSha256": "b9fe9561397add77e9ba5202f31a34945ef2576258436f122f7daa5a8d1fdb8a"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/baseline-prepare.log",
+          "baselineSha256": "050213f9a4113f49a58e163c0867c52f4357d413e45e72528df53b019fa35577",
+          "currentSha256": "050213f9a4113f49a58e163c0867c52f4357d413e45e72528df53b019fa35577"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/baseline-tests.log",
+          "baselineSha256": "caa255bf13e41c19746d0ec33222698133668c2ea5cd1bb4a58281d503c25bbd",
+          "currentSha256": "caa255bf13e41c19746d0ec33222698133668c2ea5cd1bb4a58281d503c25bbd"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/baseline-tests.xml",
+          "baselineSha256": "013b6d81d31a44e77d16fc718cf8dc03504b9f08e642e990b0a9b59c60e1e999",
+          "currentSha256": "013b6d81d31a44e77d16fc718cf8dc03504b9f08e642e990b0a9b59c60e1e999"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/baseline.json",
+          "baselineSha256": "7c4ffd27a937815ee91763aafa4703a9b7c1f787cc663d0e77910e7909c6828a",
+          "currentSha256": "7c4ffd27a937815ee91763aafa4703a9b7c1f787cc663d0e77910e7909c6828a"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/baseline_inline_control.py",
+          "baselineSha256": "18e8c00d9bd04a7ffdce90cb7ca70d65000e75bf650da6002657ddecac550ef5",
+          "currentSha256": "18e8c00d9bd04a7ffdce90cb7ca70d65000e75bf650da6002657ddecac550ef5"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/compare_search.py",
+          "baselineSha256": "687a72d1738af970010cb66a925398913f242142feccd9caa29b3ccbb39b096c",
+          "currentSha256": "687a72d1738af970010cb66a925398913f242142feccd9caa29b3ccbb39b096c"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/demonstrate_addition.py",
+          "baselineSha256": "2b18ec16ed784755bf73976e66f606cf002249914447c4ab2bc145b6bf4f1f3f",
+          "currentSha256": "2b18ec16ed784755bf73976e66f606cf002249914447c4ab2bc145b6bf4f1f3f"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/demonstration-baseline.json",
+          "baselineSha256": "47de741509f8eea0a32812d4a619a9502bc1bc4dca45ada2599604141a84f34c",
+          "currentSha256": "47de741509f8eea0a32812d4a619a9502bc1bc4dca45ada2599604141a84f34c"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/long-run-oom.txt",
+          "baselineSha256": "a5942b271a120f6a158816e769f2c65538364f5bbb986548935ea639865f2ecf",
+          "currentSha256": "a5942b271a120f6a158816e769f2c65538364f5bbb986548935ea639865f2ecf"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/migration-validation.log",
+          "baselineSha256": "26053020e2d45022a94e24e3f33e8fe7cb92535c9c061e925657134532b46569",
+          "currentSha256": "26053020e2d45022a94e24e3f33e8fe7cb92535c9c061e925657134532b46569"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/numerical-baseline.json",
+          "baselineSha256": "57b74bb5a2d5072e43e77e1780530a7132e12abd3b304cfaa919860406388041",
+          "currentSha256": "57b74bb5a2d5072e43e77e1780530a7132e12abd3b304cfaa919860406388041"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/numerical-comparison.json",
+          "baselineSha256": "bde80ccb5fff2ab04e86abc9c412c3dae671cd468ceedc0604e30c047428340f",
+          "currentSha256": "bde80ccb5fff2ab04e86abc9c412c3dae671cd468ceedc0604e30c047428340f"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/original-preservation.json",
+          "baselineSha256": "f11ae34b0c553d2cb8a8927b5920f649188a603cf5ad969d7a831e3d45ae7f19",
+          "currentSha256": "f11ae34b0c553d2cb8a8927b5920f649188a603cf5ad969d7a831e3d45ae7f19"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/publishing-build.log",
+          "baselineSha256": "8402db2336ab878e318c6d4796edb642a432f9668a93b6c823e4a06e49f04928",
+          "currentSha256": "8402db2336ab878e318c6d4796edb642a432f9668a93b6c823e4a06e49f04928"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/refactor-full-tests.log",
+          "baselineSha256": "3382414a857eec9cf1d65f8b5a2af4e74d2a8e8ea50505d79676700d49dd678b",
+          "currentSha256": "3382414a857eec9cf1d65f8b5a2af4e74d2a8e8ea50505d79676700d49dd678b"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/refactor-full-tests.xml",
+          "baselineSha256": "7e1946efdf257132388a8737754798a8126f143e76568952f77f95948cc96550",
+          "currentSha256": "7e1946efdf257132388a8737754798a8126f143e76568952f77f95948cc96550"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/refactor-prepare.log",
+          "baselineSha256": "050213f9a4113f49a58e163c0867c52f4357d413e45e72528df53b019fa35577",
+          "currentSha256": "050213f9a4113f49a58e163c0867c52f4357d413e45e72528df53b019fa35577"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/rerun_affected.py",
+          "baselineSha256": "d41ef7cab94111d229401cd4ecf7d039c792348a1e432628a106323a585be20c",
+          "currentSha256": "d41ef7cab94111d229401cd4ecf7d039c792348a1e432628a106323a585be20c"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/runtime-version.txt",
+          "baselineSha256": "cd97afa0dc7ca504cc098a6eaa324d55b8c854b3a3a99205fb4cded3354dc0ca",
+          "currentSha256": "cd97afa0dc7ca504cc098a6eaa324d55b8c854b3a3a99205fb4cded3354dc0ca"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/search-comparison.json",
+          "baselineSha256": "057b3316d9b4d0daf18de90bd53008d64ade203c7828c7cf34a704b436ce5636",
+          "currentSha256": "057b3316d9b4d0daf18de90bd53008d64ade203c7828c7cf34a704b436ce5636"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/study-tests.log",
+          "baselineSha256": "ff1874087fa218b23b4fdf64cdfe9217608578034b3ec2dd401cf08fdd268fa5",
+          "currentSha256": "ff1874087fa218b23b4fdf64cdfe9217608578034b3ec2dd401cf08fdd268fa5"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/study-tests.xml",
+          "baselineSha256": "dc1a88918846369b0d4c24122eacae03dc23a0d17343ef754b057d813ca867a4",
+          "currentSha256": "dc1a88918846369b0d4c24122eacae03dc23a0d17343ef754b057d813ca867a4"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/synthetic-addition-result.json",
+          "baselineSha256": "c59993ddc1c35285b430fe25f11ea755011e29286ea8ba5d76fab55c5a05ebbb",
+          "currentSha256": "c59993ddc1c35285b430fe25f11ea755011e29286ea8ba5d76fab55c5a05ebbb"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/synthetic-addition.sysml",
+          "baselineSha256": "9eb4c4378e2b3724b2f97ff59b5e99fcdcde750a912d62ddbdf5e1b3fd997206",
+          "currentSha256": "9eb4c4378e2b3724b2f97ff59b5e99fcdcde750a912d62ddbdf5e1b3fd997206"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/synthetic-discovery.yaml",
+          "baselineSha256": "46e745a427de020292a68d50b09cc620db3ee0f0f148cdd98f70a7bd62e0eaf7",
+          "currentSha256": "46e745a427de020292a68d50b09cc620db3ee0f0f148cdd98f70a7bd62e0eaf7"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/validate_migration.py",
+          "baselineSha256": "b47041d98c09808d22ba691b772682fb73f32f6e7853b081720c7a85cc24af8c",
+          "currentSha256": "b47041d98c09808d22ba691b772682fb73f32f6e7853b081720c7a85cc24af8c"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/validation-summary.json",
+          "baselineSha256": "166870ca2611cff3023f180650cd7979c16cfad7e407dd7ea9defb5df8da294d",
+          "currentSha256": "166870ca2611cff3023f180650cd7979c16cfad7e407dd7ea9defb5df8da294d"
+        },
+        {
+          "path": "reviews/declarative-analysis-refactor/verify_original.py",
+          "baselineSha256": "9b347fce327f26d8f173a76007f8a43f941d0edc9a897df3ba9ff0193f0efee0",
+          "currentSha256": "9b347fce327f26d8f173a76007f8a43f941d0edc9a897df3ba9ff0193f0efee0"
+        }
+      ]
+    },
+    "navigationExperimentResults": {
+      "checkedFiles": 1,
+      "changedFiles": [],
+      "aggregateSha256": "dd65926bca8b54c31ff3f9fd8db118c7771c7332b5ef3c48505e9ee6f4cf6f3b",
+      "files": [
+        {
+          "path": "experiments/inland-navigation/results.json",
+          "baselineSha256": "cfcf74bfc7c4a47b0f6f03c421a7b7c06c3a90a0b69244097a8c4a9bd72b4ade",
+          "currentSha256": "cfcf74bfc7c4a47b0f6f03c421a7b7c06c3a90a0b69244097a8c4a9bd72b4ade"
+        }
+      ]
+    }
+  },
+  "staleSourcePathCandidates": [
+    {
+      "path": "docs/energy.md",
+      "line": 12,
+      "mentions": [
+        "recovery.sysml"
+      ],
+      "text": "The independent pack begins with **43.2 Wh**, after the allocated 80% usable and 90% departure fractions. It draws **0.05 W standby** during sailing. Active recovery uses battery-side allocations of **50 W propulsion + 8 W essentials upright**, or **40 W + 8 W inverted**, with a 1.2 route-energy fac",
+      "review": "Preserved reusable library link; referenced library file exists."
+    },
+    {
+      "path": "docs/reference/environmental-replays.md",
+      "line": 76,
+      "mentions": [
+        "wave-performance.sysml"
+      ],
+      "text": "The [wave-performance policy](../../models/blue-dog.sysml) owns the test waves and acceptance screens. The [reusable equations](../../models/libraries/marine/wave-performance.sysml) have no project-specific requirement dependencies. Capytaine's [problem setup](https://capytaine.org/stable/user_manua",
+      "review": "Preserved reusable library link; referenced library file exists."
+    },
+    {
+      "path": "docs/site-and-environment-evidence.md",
+      "line": 13,
+      "mentions": [
+        "recovery.sysml"
+      ],
+      "text": "| Recovery | [Native physics](../models/libraries/marine/recovery.sysml), [planner](../tools/boat_analysis/mission/recovery.py), [mission engine](../tools/boat_analysis/mission/engine.py) | Current authority, route feasibility, reserve and casualty capability |",
+      "review": "Preserved reusable library link; referenced library file exists."
+    },
+    {
+      "path": "tools/boat_analysis/evidence/continuation.py",
+      "line": 199,
+      "mentions": [
+        "models/evidence/sizing-continuation.sysml",
+        "sizing-continuation.sysml"
+      ],
+      "text": "legacy = {ROOT/'models/evidence/sizing-continuation.sysml': 'sizing-continuation',",
+      "review": "Explicit legacy CLI output-path redirect to a canonical generated section; does not recreate the old file."
+    },
+    {
+      "path": "tools/boat_analysis/evidence/continuation.py",
+      "line": 200,
+      "mentions": [
+        "finite-passage-sizing.sysml",
+        "models/evidence/finite-passage-sizing.sysml"
+      ],
+      "text": "ROOT/'models/evidence/finite-passage-sizing.sysml': 'finite-passage-sizing'}",
+      "review": "Explicit legacy CLI output-path redirect to a canonical generated section; does not recreate the old file."
+    },
+    {
+      "path": "tools/boat_analysis/model/architecture_audit.py",
+      "line": 18,
+      "mentions": [
+        "reference.sysml"
+      ],
+      "text": "query_file = ROOT/'tools/publishing/reference.sysml'",
+      "review": "Live tools/publishing/reference.sysml query document; basename collision with the deleted configuration file."
+    },
+    {
+      "path": "tools/boat_analysis/model/configuration_audit.py",
+      "line": 11,
+      "mentions": [
+        "reference.sysml"
+      ],
+      "text": "q=ROOT/'tools/publishing/reference.sysml'",
+      "review": "Live tools/publishing/reference.sysml query document; basename collision with the deleted configuration file."
+    },
+    {
+      "path": "tools/boat_analysis/model/credibility_audit.py",
+      "line": 12,
+      "mentions": [
+        "reference.sysml"
+      ],
+      "text": "q=ROOT/'tools/publishing/reference.sysml'",
+      "review": "Live tools/publishing/reference.sysml query document; basename collision with the deleted configuration file."
+    },
+    {
+      "path": "tools/boat_analysis/model/decision_audit.py",
+      "line": 12,
+      "mentions": [
+        "reference.sysml"
+      ],
+      "text": "q=ROOT/'tools/publishing/reference.sysml'",
+      "review": "Live tools/publishing/reference.sysml query document; basename collision with the deleted configuration file."
+    },
+    {
+      "path": "tools/boat_analysis/model/runtime.py",
+      "line": 116,
+      "mentions": [
+        "evidence.sysml"
+      ],
+      "text": "staged = Path(directory) / \"evidence.sysml\"",
+      "review": "Temporary standalone export filename under a TemporaryDirectory; not a deleted project input."
+    },
+    {
+      "path": "tools/boat_analysis/model/safety_audit.py",
+      "line": 11,
+      "mentions": [
+        "reference.sysml"
+      ],
+      "text": "q=ROOT/'tools/publishing/reference.sysml'",
+      "review": "Live tools/publishing/reference.sysml query document; basename collision with the deleted configuration file."
+    },
+    {
+      "path": "tools/boat_analysis/model/verification_audit.py",
+      "line": 15,
+      "mentions": [
+        "reference.sysml"
+      ],
+      "text": "query_file=ROOT/'tools/publishing/reference.sysml'",
+      "review": "Live tools/publishing/reference.sysml query document; basename collision with the deleted configuration file."
+    },
+    {
+      "path": "tools/publishing/risk_cube.py",
+      "line": 32,
+      "mentions": [
+        "reference.sysml"
+      ],
+      "text": "models=(*model_files(), ROOT/'tools/publishing/reference.sysml'))",
+      "review": "Live tools/publishing/reference.sysml query document; basename collision with the deleted configuration file."
+    },
+    {
+      "path": "tools/publishing/views.py",
+      "line": 85,
+      "mentions": [
+        "reference.sysml"
+      ],
+      "text": "models = (*model_files(), ROOT / \"tools/publishing/reference.sysml\", *paths)",
+      "review": "Live tools/publishing/reference.sysml query document; basename collision with the deleted configuration file."
+    }
+  ],
+  "scanInterpretation": "Reviewed textual candidates: preserved library/query links, explicit legacy CLI output redirects and temporary export filenames are intentional. No confirmed stale source-path issues. The scan cannot prove absence of dynamically constructed paths.",
+  "confirmedStaleSourcePathIssues": []
+}

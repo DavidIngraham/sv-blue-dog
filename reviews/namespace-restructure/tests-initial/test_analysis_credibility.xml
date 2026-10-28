@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="32" time="56.291" timestamp="2026-10-28T12:42:04.709913-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_analysis_credibility" name="test_both_access_paths_check_both_fingerprints[sourceHashes-input_record]" time="0.004" /><testcase classname="tests.test_analysis_credibility" name="test_both_access_paths_check_both_fingerprints[sourceHashes-input_path]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_both_access_paths_check_both_fingerprints[driverHashes-input_record]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_both_access_paths_check_both_fingerprints[driverHashes-input_path]" time="0.002" /><testcase classname="tests.test_analysis_credibility" name="test_no_fingerprints_is_not_a_current_result" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_missing_current_record_never_implicitly_uses_archive" time="0.002" /><testcase classname="tests.test_analysis_credibility" name="test_explicit_historical_roles_use_manifest_checked_reader[reference-wing-geometry.json]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_explicit_historical_roles_use_manifest_checked_reader[reference-wing-polar-grid.json]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_explicit_historical_roles_use_manifest_checked_reader[initial_guess-coupled-fixed-design.json]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_role_cannot_disguise_current_results_or_wrong_kind[coupled-sizing-search.json-reference]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_role_cannot_disguise_current_results_or_wrong_kind[wing-geometry.json-initial_guess]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_role_cannot_disguise_current_results_or_wrong_kind[result.json-unknown]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_role_cannot_disguise_current_results_or_wrong_kind[../result.json-current]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_current_valid_record_and_path_agree" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_native_use_inventory_covers_definitions_and_configured_usages" time="2.967" /><testcase classname="tests.test_analysis_credibility" name="test_native_inventory_detects_missing_scope_or_use[new_case]" time="2.679" /><testcase classname="tests.test_analysis_credibility" name="test_native_inventory_detects_missing_scope_or_use[nested_case]" time="2.623"><failure message="ValueError: 'nested-untagged.sysml' is not in the subpath of '/home/david/repos/sv-blue-dog-namespaces'">mutation = 'nested_case'
+
+    @pytest.mark.parametrize('mutation',('new_case','nested_case','missing_annotation','missing_domain'))
+    def test_native_inventory_detects_missing_scope_or_use(mutation):
+        sources=[(str(p),p.read_text()) for p in model_files()]
+        if mutation=='new_case':sources.append((str(ROOT/'reviews/untagged.sysml'),'package Untagged { analysis sample { out value : ScalarValues::Real = 1; } }'))
+        elif mutation=='nested_case':
+            sources.append(('nested-untagged.sysml','package Untagged { package Nested { analysis sample { out value : ScalarValues::Real = 1; } } }'))
+        elif mutation=='missing_annotation':
+            sources=delete_symbols(sources,'BlueDog::Analyses::AnalysisCredibility::use001')
+        else:
+            sources=set_values(sources,{'BlueDog::Analyses::AnalysisCredibility::Equipment::domain':'""'})
+&gt;       assert native_credibility_audit(sources)['errors']
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_analysis_credibility.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/credibility_audit.py:27: in native_credibility_audit
+    sourceHashes={str(Path(p).relative_to(ROOT)):hashlib.sha256(t.encode()).hexdigest() for p,t in sources},
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('nested-untagged.sysml')
+other = PosixPath('/home/david/repos/sv-blue-dog-namespaces'), walk_up = False
+_deprecated = ()
+
+    def relative_to(self, other, /, *_deprecated, walk_up=False):
+        """Return the relative path to another path identified by the passed
+        arguments.  If the operation is not possible (because this is not
+        related to the other path), raise ValueError.
+    
+        The *walk_up* parameter controls whether `..` may be used to resolve
+        the path.
+        """
+        if _deprecated:
+            msg = ("support for supplying more than one positional argument "
+                   "to pathlib.PurePath.relative_to() is deprecated and "
+                   "scheduled for removal in Python {remove}")
+            warnings._deprecated("pathlib.PurePath.relative_to(*args)", msg,
+                                 remove=(3, 14))
+        other = self.with_segments(other, *_deprecated)
+        for step, path in enumerate([other] + list(other.parents)):
+            if self.is_relative_to(path):
+                break
+            elif not walk_up:
+&gt;               raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+E               ValueError: 'nested-untagged.sysml' is not in the subpath of '/home/david/repos/sv-blue-dog-namespaces'
+
+/usr/lib/python3.12/pathlib.py:682: ValueError</failure></testcase><testcase classname="tests.test_analysis_credibility" name="test_native_inventory_detects_missing_scope_or_use[missing_annotation]" time="5.092" /><testcase classname="tests.test_analysis_credibility" name="test_native_inventory_detects_missing_scope_or_use[missing_domain]" time="3.958" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[intendedUseReviewed]" time="0.017" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[configurationApplicable]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[domainApplicable]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[inputPedigreeReviewed]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[implementationVerified]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[validationAdequateForUse]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[uncertaintyReported]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[sensitivityReviewed]" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[defectsDispositioned]" time="0.004" /><testcase classname="tests.test_analysis_credibility" name="test_each_proposed_use_precondition_is_required[limitationsReported]" time="0.004" /><testcase classname="tests.test_analysis_credibility" name="test_review_preconditions_dont_require_a_passing_design_result" time="0.007" /><testcase classname="tests.test_analysis_credibility" name="test_registered_reference_role_preserves_unchanged_geometry_consumers" time="0.003" /><testcase classname="tests.test_analysis_credibility" name="test_use_limitations_are_published_as_native_content" time="38.797" /></testsuite></testsuites>

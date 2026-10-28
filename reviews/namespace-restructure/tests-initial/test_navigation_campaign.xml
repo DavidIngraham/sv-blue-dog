@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="35.555" timestamp="2026-10-28T12:54:50.349449-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_navigation_campaign" name="test_navigation_replay_retains_native_provenance_and_frozen_scope" time="35.465"><failure message="AssertionError: assert 'models/blue-dog.sysml' in {'models/analyses/actuation.sysml': 'ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1', 'models/analys...dels/analyses/class-specific-detection.sysml': 'fb142baec907c1789e138e2e5dbab6b16f44941e7a8832e5317515ca25633763', ...}">def test_navigation_replay_retains_native_provenance_and_frozen_scope():
+        assert verify_run_sources(ARCHIVE)&gt;100
+        record=run_record(ARCHIVE,'navigation-integration.json')
+        assert not record['resized'] and not record['completeComplianceEstablished']
+        assert 'models/libraries/navigation/inland-pair.sysml' in record['sourceHashes']
+&gt;       assert 'models/blue-dog.sysml' in record['sourceHashes']
+E       AssertionError: assert 'models/blue-dog.sysml' in {'models/analyses/actuation.sysml': 'ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1', 'models/analys...dels/analyses/class-specific-detection.sysml': 'fb142baec907c1789e138e2e5dbab6b16f44941e7a8832e5317515ca25633763', ...}
+
+tests/test_navigation_campaign.py:12: AssertionError</failure></testcase><testcase classname="tests.test_navigation_campaign" name="test_summary_keeps_adverse_controls_and_refusal_separate_from_steering" time="0.059" /></testsuite></testsuites>

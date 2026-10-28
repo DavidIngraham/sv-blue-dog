@@ -1,0 +1,7 @@
+....                                                                     [100%]
+============================= slowest 10 durations =============================
+1.54s call     tests/test_acoustic_equipment.py::test_recorder_allowance_includes_nominal_phantom_supply_once_and_keeps_partial_budget
+0.08s call     tests/test_acoustic_equipment.py::test_catalogue_specs_never_supply_observation_or_recovery_acceptance[passiveArray]
+
+(8 durations < 0.005s hidden.  Use -vv to show these durations.)
+4 passed in 1.66s

@@ -1,0 +1,21 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+______ test_navigation_replay_retains_native_provenance_and_frozen_scope _______
+
+    def test_navigation_replay_retains_native_provenance_and_frozen_scope():
+        assert verify_run_sources(ARCHIVE)>100
+        record=run_record(ARCHIVE,'navigation-integration.json')
+        assert not record['resized'] and not record['completeComplianceEstablished']
+        assert 'models/libraries/navigation/inland-pair.sysml' in record['sourceHashes']
+>       assert 'models/blue-dog.sysml' in record['sourceHashes']
+E       AssertionError: assert 'models/blue-dog.sysml' in {'models/analyses/actuation.sysml': 'ea0190502c8245b34d2b9b15116de1fed500e3ccc6ed3069f56c5f756bb434d1', 'models/analys...dels/analyses/class-specific-detection.sysml': 'fb142baec907c1789e138e2e5dbab6b16f44941e7a8832e5317515ca25633763', ...}
+
+tests/test_navigation_campaign.py:12: AssertionError
+============================= slowest 10 durations =============================
+35.46s call     tests/test_navigation_campaign.py::test_navigation_replay_retains_native_provenance_and_frozen_scope
+0.06s call     tests/test_navigation_campaign.py::test_summary_keeps_adverse_controls_and_refusal_separate_from_steering
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+FAILED tests/test_navigation_campaign.py::test_navigation_replay_retains_native_provenance_and_frozen_scope
+1 failed, 1 passed in 35.55s

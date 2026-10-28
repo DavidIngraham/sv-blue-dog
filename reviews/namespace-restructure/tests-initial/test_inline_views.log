@@ -1,0 +1,83 @@
+....F....                                                                [100%]
+=================================== FAILURES ===================================
+__________ test_inline_view_resolves_actual_refinement_and_statements __________
+
+tmp_path = PosixPath('/tmp/pytest-of-david/pytest-178/test_inline_view_resolves_actu0')
+
+    def test_inline_view_resolves_actual_refinement_and_statements(tmp_path):
+        source = (ROOT / "docs/methods/modeling.md").read_text(encoding="utf-8")
+>       result = render_page(source, tmp_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_inline_views.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/publishing/build.py:112: in render_page
+    return body_html(materialize(source, render_blocks(selected, directory)))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/publishing/views.py:86: in render_blocks
+    validate(models)
+tools/boat_analysis/model/runtime.py:38: in validate
+    report = json.loads(native("-validate", "-json", models=models))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+models = (PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml'), PosixPath('/home/david/repos/sv-blue-dog...e/appendages.sysml'), PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml'), ...)
+commands = None, arguments = ('-validate', '-json')
+
+    def native(*arguments, models=None, commands=None):
+        files = model_files() if models is None else tuple(dict.fromkeys(models))
+        result = subprocess.run(
+            [str(binary_path()), *map(str, files), *map(str, arguments)],
+            capture_output=True, text=True, encoding="utf-8", cwd=ROOT, input=commands,
+        )
+        if result.returncode:
+>           raise RuntimeError(f"OpenSysML exited {result.returncode}:\n{result.stdout}\n{result.stderr}")
+E           RuntimeError: OpenSysML exited 2:
+E           {
+E             "status": "unresolved",
+E             "exit": 2,
+E             "checks": null,
+E             "diagnostics": [
+E               {
+E                 "severity": "error",
+E                 "message": "unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;",
+E                 "file": "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml",
+E                 "line": 984,
+E                 "column": 45,
+E                 "pass": "name-resolution",
+E                 "code": "unresolved"
+E               },
+E               {
+E                 "severity": "error",
+E                 "message": "document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements",
+E                 "file": "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml",
+E                 "line": 995,
+E                 "column": 29,
+E                 "pass": "document-plan",
+E                 "code": "document-plan-query-planning"
+E               }
+E             ],
+E             "output": [
+E               "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;",
+E               "        Project(source = WhereType(source = ModelElements(),",
+E               "                                            ^~~~~~~~~~~~~",
+E               "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements",
+E               "        part uses : Table { calc rows : Uses; }",
+E               "                            ^~~~~~~~~~~~~~~~~"
+E             ],
+E             "errors": [
+E               "/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /tmp/pytest-of-david/pytest-178/test_inline_view_resolves_actu0/view-0.sysml did not analyse cleanly; no check was made"
+E             ]
+E           }
+
+tools/boat_analysis/model/runtime.py:33: RuntimeError
+============================= slowest 10 durations =============================
+2.44s call     tests/test_inline_views.py::test_unresolved_model_reference_fails_build
+2.37s call     tests/test_inline_views.py::test_inline_view_resolves_actual_refinement_and_statements
+0.43s call     tests/test_inline_views.py::test_failed_build_preserves_last_complete_site
+0.43s call     tests/test_inline_views.py::test_rebuild_removes_stale_pages_and_exports_blog_markdown
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+FAILED tests/test_inline_views.py::test_inline_view_resolves_actual_refinement_and_statements
+1 failed, 8 passed in 5.73s

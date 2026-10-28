@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="16" time="57.774" timestamp="2026-10-28T12:51:41.769328-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_energy" name="test_rollup_and_synthetic_campaign" time="3.743"><failure message="RuntimeError: OpenSysML exited 2:&#10;{&#10;  &quot;status&quot;: &quot;unresolved&quot;,&#10;  &quot;exit&quot;: 2,&#10;  &quot;checks&quot;: null,&#10;  &quot;diagnostics&quot;: [&#10;    {&#10;      &quot;severity&quot;: &quot;error&quot;,&#10;      &quot;message&quot;: &quot;unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;&quot;,&#10;      &quot;file&quot;: &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml&quot;,&#10;      &quot;line&quot;: 984,&#10;      &quot;column&quot;: 45,&#10;      &quot;pass&quot;: &quot;name-resolution&quot;,&#10;      &quot;code&quot;: &quot;unresolved&quot;&#10;    },&#10;    {&#10;      &quot;severity&quot;: &quot;error&quot;,&#10;      &quot;message&quot;: &quot;document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements&quot;,&#10;      &quot;file&quot;: &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml&quot;,&#10;      &quot;line&quot;: 995,&#10;      &quot;column&quot;: 29,&#10;      &quot;pass&quot;: &quot;document-plan&quot;,&#10;      &quot;code&quot;: &quot;document-plan-query-planning&quot;&#10;    }&#10;  ],&#10;  &quot;output&quot;: [&#10;    &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;&quot;,&#10;    &quot;        Project(source = WhereType(source = ModelElements(),&quot;,&#10;    &quot;                                            ^~~~~~~~~~~~~&quot;,&#10;    &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements&quot;,&#10;    &quot;        part uses : Table { calc rows : Uses; }&quot;,&#10;    &quot;                            ^~~~~~~~~~~~~~~~~&quot;&#10;  ],&#10;  &quot;errors&quot;: [&#10;    &quot;/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml did not analyse cleanly; no check was made&quot;&#10;  ]&#10;}">def test_rollup_and_synthetic_campaign():
+&gt;       report = json.loads(native_energy_case())
+                            ^^^^^^^^^^^^^^^^^^^^
+
+tests/test_energy.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/native_cases.py:33: in native_energy_case
+    return native("-instantiate", "BlueDog::Configurations::Examples::Energy::sailing", "-analysis",
+tests/native_cases.py:16: in native
+    return execute(*args, models=(*files, ROOT/'tools/publishing/reference.sysml', ROOT/'tests/fixtures/regression-views.sysml', views))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+models = (PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml'), PosixPath('/home/david/repos/sv-blue-dog...e/appendages.sysml'), PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml'), ...)
+commands = None
+arguments = ('-instantiate', 'BlueDog::Configurations::Examples::Energy::sailing', '-analysis', 'BlueDog::Analyses::Energy::Budget...Configurations::Examples::Energy::sailing', '-instantiate', 'BlueDog::Configurations::Examples::Energy::campaign', ...)
+
+    def native(*arguments, models=None, commands=None):
+        files = model_files() if models is None else tuple(dict.fromkeys(models))
+        result = subprocess.run(
+            [str(binary_path()), *map(str, files), *map(str, arguments)],
+            capture_output=True, text=True, encoding="utf-8", cwd=ROOT, input=commands,
+        )
+        if result.returncode:
+&gt;           raise RuntimeError(f"OpenSysML exited {result.returncode}:\n{result.stdout}\n{result.stderr}")
+E           RuntimeError: OpenSysML exited 2:
+E           {
+E             "status": "unresolved",
+E             "exit": 2,
+E             "checks": null,
+E             "diagnostics": [
+E               {
+E                 "severity": "error",
+E                 "message": "unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;",
+E                 "file": "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml",
+E                 "line": 984,
+E                 "column": 45,
+E                 "pass": "name-resolution",
+E                 "code": "unresolved"
+E               },
+E               {
+E                 "severity": "error",
+E                 "message": "document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements",
+E                 "file": "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml",
+E                 "line": 995,
+E                 "column": 29,
+E                 "pass": "document-plan",
+E                 "code": "document-plan-query-planning"
+E               }
+E             ],
+E             "output": [
+E               "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;",
+E               "        Project(source = WhereType(source = ModelElements(),",
+E               "                                            ^~~~~~~~~~~~~",
+E               "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements",
+E               "        part uses : Table { calc rows : Uses; }",
+E               "                            ^~~~~~~~~~~~~~~~~"
+E             ],
+E             "errors": [
+E               "/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml did not analyse cleanly; no check was made"
+E             ]
+E           }
+
+tools/boat_analysis/model/runtime.py:33: RuntimeError</failure></testcase><testcase classname="tests.test_energy" name="test_overnight_failure_despite_recovered_final_energy" time="2.895" /><testcase classname="tests.test_energy" name="test_no_harvest_exhausts_storage" time="3.090" /><testcase classname="tests.test_energy" name="test_finite_campaign_can_consume_charge_without_being_repeatable" time="3.184" /><testcase classname="tests.test_energy" name="test_charge_rate_limit_cannot_hide_behind_available_solar" time="3.273" /><testcase classname="tests.test_energy" name="test_peak_supply_is_independent_of_average_energy" time="3.293" /><testcase classname="tests.test_energy" name="test_enabled_zero_resource_still_counts_against_campaign" time="3.095" /><testcase classname="tests.test_energy" name="test_invalid_input_does_not_pass[invalid-usable-fraction]" time="3.222" /><testcase classname="tests.test_energy" name="test_invalid_input_does_not_pass[negative-duration]" time="3.133" /><testcase classname="tests.test_energy" name="test_invalid_input_does_not_pass[above-capacity]" time="3.137" /><testcase classname="tests.test_energy" name="test_missing_input_does_not_pass" time="3.196" /><testcase classname="tests.test_energy" name="test_mode_change_and_component_growth_are_rolled_up" time="3.309" /><testcase classname="tests.test_energy" name="test_surviving_finite_run_does_not_establish_repeatability" time="3.077" /><testcase classname="tests.test_energy" name="test_verification_requires_evidence_and_numerical_success" time="9.656" /><testcase classname="tests.test_energy" name="test_invalid_inputs_cannot_be_verified_even_with_evidence_flag" time="3.137" /><testcase classname="tests.test_energy" name="test_harvest_window_overlap_is_counted_in_each_day" time="3.278" /></testsuite></testsuites>

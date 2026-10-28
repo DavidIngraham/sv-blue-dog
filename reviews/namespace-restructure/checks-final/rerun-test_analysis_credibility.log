@@ -1,0 +1,109 @@
+...................F.............                                        [100%]
+=================================== FAILURES ===================================
+___ test_new_nested_typed_analysis_is_registered_without_a_package_list_edit ___
+
+    def test_new_nested_typed_analysis_is_registered_without_a_package_list_edit():
+        sources=[(str(p),p.read_text()) for p in model_files()]
+        owner='BlueDog::Analyses::SyntheticExtension::Nested'
+        def extend(editor):
+            editor.add_member('BlueDog::Analyses','package','SyntheticExtension')
+            editor.add_member('BlueDog::Analyses::SyntheticExtension','package','Nested')
+            editor.add_member(owner,'analysis','sample')
+            editor.add_member(owner+'::sample','attribute','value',
+                              type='ScalarValues::Real',direction='out',value='1')
+            editor.add_metadata(owner,'BlueDog::Analyses::AnalysisCredibility::UseIntent',
+                name='use',about=[owner+'::sample'],values={
+                    'category':'"Synthetic"',
+                    'intendedUse':'"Exercise typed inventory discovery."',
+                    'domain':'"A constant scalar test case."',
+                    'excludedUses':'"No engineering capability evidence."',
+                    'evidenceNeeded':'"Software regression only."'})
+>       result=native_credibility_audit(edit_sources(sources,extend))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_analysis_credibility.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/native_edits.py:11: in edit_sources
+    result = editor.apply()
+             ^^^^^^^^^^^^^^
+.venv/lib/python3.12/site-packages/opensysml/edit.py:1456: in apply
+    result = self._connection.apply_edits(self._model_hash, self._operations)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <opensysml.connection.Connection object at 0x7f8f99256ae0>
+model_hash = 'b7e9931aa31654bc674bb8202669eb3f9d5fb293c7d6830cd650ea30e2441a9d'
+operations = [('add_member', 'BlueDog::Analyses', 'package', 'SyntheticExtension', '', '', ...), ('add_member', 'BlueDog::Analyses:...), ('excludedUses', '"No engineering capability evidence."'), ('evidenceNeeded', '"Software regression only."')], ...)]
+
+    def apply_edits(self, model_hash, operations):
+        """Apply source-preserving edits to a loaded model.
+    
+        The operations are performed on the source the service parsed, so what
+        comes back is that notation with the edited spans replaced and every
+        other byte — comments, blank lines, indentation — unchanged. The service
+        re-parses and re-analyses the result and refuses to return content the
+        parser could not read back.
+    
+        Args:
+            model_hash (str): Hash of the model to edit
+            operations (list[tuple]): ``('set_value', target, value)`` and
+                ``('rename', target, new_name)`` tuples, as
+                :class:`~opensysml.edit.Editor` collects them, along with
+                ``('add_connection', owner, kind, from_end, to_end, name, type)`` and
+                ``('add_sequence', owner, keyword, ref, member_kind, member_name, type, after)``,
+                add-member tuples of 8, 12, 13, 14 or 15 fields; extended tuples
+                carry modifiers, metadata prefixes, a constraint
+                ``body_expression`` and optional documentation text. It also accepts
+                ``('add_import', owner, visibility, target, recursive, import_all, filters)``
+                and ``('add_documentation', target, body, name, locale, replace)``,
+                ``('add_comment', owner, body, name, about, locale)`` (``about`` a list
+                or tuple of names) and ``('add_note', target, text)``
+    
+        Returns:
+            EditResult: The edited notation and what each operation changed
+    
+        Raises:
+            ValueError: If an operation names no kind this client knows
+            EditError: If the service refused the edit; the subclass names why,
+                including :class:`NoEditsError` for no operations at all
+            MissingCapabilityError: If the service cannot apply edits
+            ModelNotFoundError: If the model is no longer cached
+        """
+        info = self.server_info()
+        require(info, CAPABILITY_APPLY_EDITS, upgrade_remedy(CAPABILITY_APPLY_EDITS))
+        # This client reads ``documents``, so a model of several may be edited.
+        request = sysml_pb2.ApplyEditsRequest(model_hash=model_hash, accept_documents=True)
+        builder = _EditRequestBuilder(info, request)
+        for operation_data in operations:
+            builder.add(operation_data)
+        requested_capabilities = builder.finish()
+        with translate_rpc_errors(
+            unimplemented=self._capability_refusal(requested_capabilities)
+        ):
+            response = self._stub.ApplyEdits(request)
+        if response.error:
+>           raise error_for_failure(
+                failure_name(response.failure),
+                response.error,
+                diagnostics=[Diagnostic(d) for d in response.diagnostics],
+                referring_elements=list(response.referring_elements),
+                referrers=referrers_of(response),
+            )
+E           opensysml.errors.InvalidEditError: new name "use" is a keyword
+
+.venv/lib/python3.12/site-packages/opensysml/connection.py:1702: InvalidEditError
+============================= slowest 10 durations =============================
+40.07s setup    tests/test_analysis_credibility.py::test_use_limitations_are_published_as_native_content
+5.13s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[missing_annotation]
+4.20s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[missing_domain]
+2.96s call     tests/test_analysis_credibility.py::test_native_use_inventory_covers_definitions_and_configured_usages
+2.76s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[nested_case]
+2.76s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[new_case]
+1.24s call     tests/test_analysis_credibility.py::test_new_nested_typed_analysis_is_registered_without_a_package_list_edit
+0.02s call     tests/test_analysis_credibility.py::test_each_proposed_use_precondition_is_required[intendedUseReviewed]
+0.01s call     tests/test_analysis_credibility.py::test_review_preconditions_dont_require_a_passing_design_result
+
+(1 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+FAILED tests/test_analysis_credibility.py::test_new_nested_typed_analysis_is_registered_without_a_package_list_edit
+1 failed, 32 passed in 59.30s

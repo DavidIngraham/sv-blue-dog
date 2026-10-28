@@ -1,0 +1,14 @@
+.........                                                                [100%]
+============================= slowest 10 durations =============================
+11.58s call     tests/test_model_contracts.py::test_mass_scalar_batch_defaults_and_typed_records
+0.13s call     tests/test_model_contracts.py::test_schema_follows_model_names_order_and_dimensions
+0.06s call     tests/test_model_contracts.py::test_unsupported_schema_fails_preparation
+0.03s setup    tests/test_model_contracts.py::test_mass_scalar_batch_defaults_and_typed_records
+0.01s call     tests/test_model_contracts.py::test_generated_widths_and_finite_checks_cover_both_apis
+0.01s call     tests/test_model_contracts.py::test_mass_preconditions_apply_to_scalar_and_batch[design-0-0-positiveDimensions]
+0.01s call     tests/test_model_contracts.py::test_mass_preconditions_apply_to_scalar_and_batch[parameters-0--0.01-nonnegativeResinRatio]
+0.01s call     tests/test_model_contracts.py::test_mass_preconditions_apply_to_scalar_and_batch[parameters-12-0-positiveBatterySpecificEnergy]
+0.01s call     tests/test_model_contracts.py::test_mass_preconditions_apply_to_scalar_and_batch[design-15--1-nonnegativeBallast]
+
+(1 durations < 0.005s hidden.  Use -vv to show these durations.)
+9 passed in 12.03s

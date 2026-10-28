@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="8" time="15.899" timestamp="2026-10-28T12:53:09.465715-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_hydrostatics" name="test_clipping_matches_independent_convex_hull_for_all_wet_counts" time="11.650" /><testcase classname="tests.test_hydrostatics" name="test_vertex_plane_and_vertex_permutation_invariance" time="0.175" /><testcase classname="tests.test_hydrostatics" name="test_box_displacement_translation_and_small_angle_metacentric_height" time="0.017" /><testcase classname="tests.test_hydrostatics" name="test_pitch_and_roll_are_distinct_and_sink_is_rejected" time="0.009" /><testcase classname="tests.test_hydrostatics" name="test_free_pitch_solves_offset_cg_and_reports_inverted_instability" time="0.029" /><testcase classname="tests.test_hydrostatics" name="test_geometry_changes_with_wing_camber_and_trim_without_changing_volume" time="0.011" /><testcase classname="tests.test_hydrostatics" name="test_native_actuator_accounting_keeps_idle_and_movement_losses" time="3.517"><failure message="RuntimeError: OpenSysML exited 2:&#10;{&#10;  &quot;status&quot;: &quot;unresolved&quot;,&#10;  &quot;exit&quot;: 2,&#10;  &quot;checks&quot;: null,&#10;  &quot;diagnostics&quot;: [&#10;    {&#10;      &quot;severity&quot;: &quot;error&quot;,&#10;      &quot;message&quot;: &quot;unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;&quot;,&#10;      &quot;file&quot;: &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml&quot;,&#10;      &quot;line&quot;: 984,&#10;      &quot;column&quot;: 45,&#10;      &quot;pass&quot;: &quot;name-resolution&quot;,&#10;      &quot;code&quot;: &quot;unresolved&quot;&#10;    },&#10;    {&#10;      &quot;severity&quot;: &quot;error&quot;,&#10;      &quot;message&quot;: &quot;document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements&quot;,&#10;      &quot;file&quot;: &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml&quot;,&#10;      &quot;line&quot;: 995,&#10;      &quot;column&quot;: 29,&#10;      &quot;pass&quot;: &quot;document-plan&quot;,&#10;      &quot;code&quot;: &quot;document-plan-query-planning&quot;&#10;    }&#10;  ],&#10;  &quot;output&quot;: [&#10;    &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;&quot;,&#10;    &quot;        Project(source = WhereType(source = ModelElements(),&quot;,&#10;    &quot;                                            ^~~~~~~~~~~~~&quot;,&#10;    &quot;/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements&quot;,&#10;    &quot;        part uses : Table { calc rows : Uses; }&quot;,&#10;    &quot;                            ^~~~~~~~~~~~~~~~~&quot;&#10;  ],&#10;  &quot;errors&quot;: [&#10;    &quot;/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml did not analyse cleanly; no check was made&quot;&#10;  ]&#10;}">def test_native_actuator_accounting_keeps_idle_and_movement_losses():
+        import json
+        from tests.native_cases import native,MODELS,ROOT
+&gt;       result=json.loads(native('-analysis','BlueDog::Analyses::WingActuator::accountingExample','-json',models=MODELS+(ROOT/'models/blue-dog.sysml',ROOT/'models/blue-dog.sysml')))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_hydrostatics.py:93: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/native_cases.py:16: in native
+    return execute(*args, models=(*files, ROOT/'tools/publishing/reference.sysml', ROOT/'tests/fixtures/regression-views.sysml', views))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+models = (PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml'), PosixPath('/home/david/repos/sv-blue-dog...e/appendages.sysml'), PosixPath('/home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml'), ...)
+commands = None
+arguments = ('-analysis', 'BlueDog::Analyses::WingActuator::accountingExample', '-json')
+
+    def native(*arguments, models=None, commands=None):
+        files = model_files() if models is None else tuple(dict.fromkeys(models))
+        result = subprocess.run(
+            [str(binary_path()), *map(str, files), *map(str, arguments)],
+            capture_output=True, text=True, encoding="utf-8", cwd=ROOT, input=commands,
+        )
+        if result.returncode:
+&gt;           raise RuntimeError(f"OpenSysML exited {result.returncode}:\n{result.stdout}\n{result.stderr}")
+E           RuntimeError: OpenSysML exited 2:
+E           {
+E             "status": "unresolved",
+E             "exit": 2,
+E             "checks": null,
+E             "diagnostics": [
+E               {
+E                 "severity": "error",
+E                 "message": "unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;",
+E                 "file": "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml",
+E                 "line": 984,
+E                 "column": 45,
+E                 "pass": "name-resolution",
+E                 "code": "unresolved"
+E               },
+E               {
+E                 "severity": "error",
+E                 "message": "document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements",
+E                 "file": "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml",
+E                 "line": 995,
+E                 "column": 29,
+E                 "pass": "document-plan",
+E                 "code": "document-plan-query-planning"
+E               }
+E             ],
+E             "output": [
+E               "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:984:45: error: unresolved reference: ModelElements — did you mean BlueDogDocuments::ModelElements? To use the bare name, import its package: private import BlueDogDocuments::*;",
+E               "        Project(source = WhereType(source = ModelElements(),",
+E               "                                            ^~~~~~~~~~~~~",
+E               "/home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml:995:29: error: document BlueDogAnalysisDocuments::UseRegister content BlueDogAnalysisDocuments::UseRegister::uses query BlueDogAnalysisDocuments::Uses: query BlueDogAnalysisDocuments::Uses invokes unknown operation ModelElements",
+E               "        part uses : Table { calc rows : Uses; }",
+E               "                            ^~~~~~~~~~~~~~~~~"
+E             ],
+E             "errors": [
+E               "/home/david/repos/sv-blue-dog-namespaces/models/blue-dog.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/decision-records.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/actuation.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/energy/budget.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/appendages.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/concept.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/course.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/design.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hull-resistance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/hydrostatics.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/propulsion.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/recovery.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/reliability.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/sailing.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/surface.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/wave-performance.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/marine/weather.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-obligations.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/navigation/inland-pair.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/mass-properties.sysml, /home/david/repos/sv-blue-dog-namespaces/models/libraries/structures/scantlings.sysml, /home/david/repos/sv-blue-dog-namespaces/tools/publishing/reference.sysml, /home/david/repos/sv-blue-dog-namespaces/tests/fixtures/regression-views.sysml, /home/david/repos/sv-blue-dog-namespaces/.tools/regression-inline-views.sysml did not analyse cleanly; no check was made"
+E             ]
+E           }
+
+tools/boat_analysis/model/runtime.py:33: RuntimeError</failure></testcase><testcase classname="tests.test_hydrostatics" name="test_mesh_batch_matches_independent_sum_and_checks_inputs" time="0.009" /></testsuite></testsuites>

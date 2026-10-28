@@ -1,0 +1,13 @@
+...................                                                      [100%]
+============================= slowest 10 durations =============================
+39.69s setup    tests/test_configuration_budgets.py::test_rendered_configuration_budget_scopes_preserve_unknowns
+5.71s call     tests/test_configuration_budgets.py::test_changed_bank_owner_updates_only_its_own_accounts[recovery]
+5.43s call     tests/test_configuration_budgets.py::test_changed_bank_owner_updates_only_its_own_accounts[main]
+4.47s call     tests/test_configuration_budgets.py::test_substitution_double_counting_and_invalid_demand_are_detected[ic01::recoveryEssentials::averagePowerAllocation--1 [W]-C07 Invalid allocated quantity]
+4.31s call     tests/test_configuration_budgets.py::test_substitution_double_counting_and_invalid_demand_are_detected[ic01Installation::design-BlueDog::Evidence::CurrentSizing::candidate-C04 Wrong planned installation reference]
+4.27s call     tests/test_configuration_budgets.py::test_substitution_double_counting_and_invalid_demand_are_detected[ic01::sailingElectronics::averagePowerAllocation-(BlueDog::Configurations::IC01::integration.electronicsW + BlueDog::Configurations::IC01::integration.additionalBusW) * 1 [W]-C10 Accounting binding differs]
+4.24s call     tests/test_configuration_budgets.py::test_substitution_double_counting_and_invalid_demand_are_detected[ResourceScope::configuration-BlueDog::Evidence::CurrentSizing::candidate-C07 Wrong accounting configuration]
+4.19s call     tests/test_configuration_budgets.py::test_substitution_double_counting_and_invalid_demand_are_detected[ic01::fixedEquipment::massAllocation-(BlueDog::Configurations::IC01::integration.fixedEquipmentKg + BlueDog::Configurations::IC01::integration.recoveryBatteryWh/BlueDog::Configurations::IC01::integration.batteryWhKg) * 1 [kg]-C10 Accounting binding differs]
+3.79s call     tests/test_configuration_budgets.py::test_substitution_double_counting_and_invalid_demand_are_detected[retainedSizing::representedSubject-BlueDog::Evidence::CurrentSizing::candidate-C02 Wrong represented subject]
+3.02s setup    tests/test_configuration_budgets.py::test_all_top_level_design_parameter_parts_have_context_and_no_acceptance
+19 passed in 93.31s (0:01:33)

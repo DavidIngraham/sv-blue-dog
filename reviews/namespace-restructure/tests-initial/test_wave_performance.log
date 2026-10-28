@@ -1,0 +1,12 @@
+..........                                                               [100%]
+============================= slowest 10 durations =============================
+11.81s call     tests/test_wave_performance.py::test_native_wave_kinematics_and_damped_oscillator
+2.22s call     tests/test_wave_performance.py::test_capytaine_long_wave_heave_follows_surface
+1.54s call     tests/test_wave_performance.py::test_mission_wave_cache_supplies_power_without_second_speed_penalty
+0.32s call     tests/test_wave_performance.py::test_uniform_tetrahedron_moments
+0.09s call     tests/test_wave_performance.py::test_small_wave_limit_recovers_steady_balance_and_power[False]
+0.06s call     tests/test_wave_performance.py::test_small_wave_limit_recovers_steady_balance_and_power[True]
+0.02s call     tests/test_wave_performance.py::test_stored_wind_coordinate_matches_cartesian_lift_and_roll_velocity
+
+(3 durations < 0.005s hidden.  Use -vv to show these durations.)
+10 passed in 16.23s

@@ -1,0 +1,402 @@
+[
+  {
+    "module": "tests/test_acoustic_equipment.py",
+    "exitCode": 0,
+    "seconds": 2.22
+  },
+  {
+    "module": "tests/test_aerodynamic_figures.py",
+    "exitCode": 0,
+    "seconds": 6.58
+  },
+  {
+    "module": "tests/test_analysis_credibility.py",
+    "exitCode": 1,
+    "seconds": 56.94
+  },
+  {
+    "module": "tests/test_appendage_credibility.py",
+    "exitCode": 0,
+    "seconds": 3.83
+  },
+  {
+    "module": "tests/test_architecture_quality.py",
+    "exitCode": 0,
+    "seconds": 65.09
+  },
+  {
+    "module": "tests/test_avoidance_failures.py",
+    "exitCode": 0,
+    "seconds": 13.46
+  },
+  {
+    "module": "tests/test_behavior_contracts.py",
+    "exitCode": 0,
+    "seconds": 3.12
+  },
+  {
+    "module": "tests/test_candidate_energy_budget.py",
+    "exitCode": 0,
+    "seconds": 46.31
+  },
+  {
+    "module": "tests/test_challenge_baseline.py",
+    "exitCode": 0,
+    "seconds": 19.33
+  },
+  {
+    "module": "tests/test_class_specific_detection.py",
+    "exitCode": 0,
+    "seconds": 2.07
+  },
+  {
+    "module": "tests/test_concept_mission.py",
+    "exitCode": 0,
+    "seconds": 14.71
+  },
+  {
+    "module": "tests/test_configuration_budgets.py",
+    "exitCode": 0,
+    "seconds": 93.9
+  },
+  {
+    "module": "tests/test_continuation.py",
+    "exitCode": 0,
+    "seconds": 81.6
+  },
+  {
+    "module": "tests/test_coupled_evidence.py",
+    "exitCode": 0,
+    "seconds": 0.82
+  },
+  {
+    "module": "tests/test_coupled_operation.py",
+    "exitCode": 0,
+    "seconds": 14.11
+  },
+  {
+    "module": "tests/test_coupled_sizing.py",
+    "exitCode": 0,
+    "seconds": 12.66
+  },
+  {
+    "module": "tests/test_course.py",
+    "exitCode": 0,
+    "seconds": 9.7
+  },
+  {
+    "module": "tests/test_course_map.py",
+    "exitCode": 0,
+    "seconds": 7.54
+  },
+  {
+    "module": "tests/test_course_recovery.py",
+    "exitCode": 0,
+    "seconds": 14.45
+  },
+  {
+    "module": "tests/test_current_sizing.py",
+    "exitCode": 0,
+    "seconds": 30.16
+  },
+  {
+    "module": "tests/test_decision_management.py",
+    "exitCode": 1,
+    "seconds": 28.12
+  },
+  {
+    "module": "tests/test_declarative_studies.py",
+    "exitCode": 0,
+    "seconds": 7.64
+  },
+  {
+    "module": "tests/test_design_boundary.py",
+    "exitCode": 0,
+    "seconds": 13.15
+  },
+  {
+    "module": "tests/test_design_explorer.py",
+    "exitCode": 0,
+    "seconds": 0.92
+  },
+  {
+    "module": "tests/test_design_frontier.py",
+    "exitCode": 0,
+    "seconds": 0.82
+  },
+  {
+    "module": "tests/test_development_risks.py",
+    "exitCode": 1,
+    "seconds": 12.21
+  },
+  {
+    "module": "tests/test_documentation.py",
+    "exitCode": 1,
+    "seconds": 5.33
+  },
+  {
+    "module": "tests/test_encounter_continuation.py",
+    "exitCode": 0,
+    "seconds": 14.41
+  },
+  {
+    "module": "tests/test_encounter_envelope.py",
+    "exitCode": 0,
+    "seconds": 4.68
+  },
+  {
+    "module": "tests/test_energy.py",
+    "exitCode": 1,
+    "seconds": 57.98
+  },
+  {
+    "module": "tests/test_executable_requirements.py",
+    "exitCode": 0,
+    "seconds": 2.22
+  },
+  {
+    "module": "tests/test_finite_sections.py",
+    "exitCode": 0,
+    "seconds": 0.72
+  },
+  {
+    "module": "tests/test_geometry_export.py",
+    "exitCode": 0,
+    "seconds": 13.75
+  },
+  {
+    "module": "tests/test_hull_resistance.py",
+    "exitCode": 0,
+    "seconds": 13.0
+  },
+  {
+    "module": "tests/test_hydrostatics.py",
+    "exitCode": 1,
+    "seconds": 16.26
+  },
+  {
+    "module": "tests/test_inline_views.py",
+    "exitCode": 1,
+    "seconds": 5.94
+  },
+  {
+    "module": "tests/test_integrated_candidate.py",
+    "exitCode": 0,
+    "seconds": 14.8
+  },
+  {
+    "module": "tests/test_interface_contracts.py",
+    "exitCode": 0,
+    "seconds": 4.23
+  },
+  {
+    "module": "tests/test_location_traffic.py",
+    "exitCode": 0,
+    "seconds": 1.97
+  },
+  {
+    "module": "tests/test_maneuver_dynamics.py",
+    "exitCode": 0,
+    "seconds": 2.82
+  },
+  {
+    "module": "tests/test_marine_libraries.py",
+    "exitCode": 0,
+    "seconds": 0.67
+  },
+  {
+    "module": "tests/test_mission_execution.py",
+    "exitCode": 0,
+    "seconds": 3.12
+  },
+  {
+    "module": "tests/test_mission_logic.py",
+    "exitCode": 0,
+    "seconds": 4.63
+  },
+  {
+    "module": "tests/test_model_contracts.py",
+    "exitCode": 0,
+    "seconds": 12.3
+  },
+  {
+    "module": "tests/test_named_configuration.py",
+    "exitCode": 0,
+    "seconds": 19.08
+  },
+  {
+    "module": "tests/test_namespace_structure.py",
+    "exitCode": 0,
+    "seconds": 3.02
+  },
+  {
+    "module": "tests/test_native_kernel.py",
+    "exitCode": 0,
+    "seconds": 12.05
+  },
+  {
+    "module": "tests/test_navigation_campaign.py",
+    "exitCode": 1,
+    "seconds": 35.77
+  },
+  {
+    "module": "tests/test_navigation_integration.py",
+    "exitCode": 1,
+    "seconds": 5.28
+  },
+  {
+    "module": "tests/test_oosem_audit.py",
+    "exitCode": 0,
+    "seconds": 16.02
+  },
+  {
+    "module": "tests/test_passage_exposure.py",
+    "exitCode": 0,
+    "seconds": 6.28
+  },
+  {
+    "module": "tests/test_perception.py",
+    "exitCode": 0,
+    "seconds": 41.3
+  },
+  {
+    "module": "tests/test_projection_sections.py",
+    "exitCode": 0,
+    "seconds": 0.26
+  },
+  {
+    "module": "tests/test_recorded_evidence.py",
+    "exitCode": 0,
+    "seconds": 29.35
+  },
+  {
+    "module": "tests/test_recovery_trade.py",
+    "exitCode": 0,
+    "seconds": 26.55
+  },
+  {
+    "module": "tests/test_relationship_semantics.py",
+    "exitCode": 1,
+    "seconds": 43.81
+  },
+  {
+    "module": "tests/test_reliability.py",
+    "exitCode": 0,
+    "seconds": 73.18
+  },
+  {
+    "module": "tests/test_requirement_quality.py",
+    "exitCode": 0,
+    "seconds": 1.87
+  },
+  {
+    "module": "tests/test_requirements.py",
+    "exitCode": 1,
+    "seconds": 99.52
+  },
+  {
+    "module": "tests/test_risk_cube.py",
+    "exitCode": 0,
+    "seconds": 4.28
+  },
+  {
+    "module": "tests/test_routing.py",
+    "exitCode": 0,
+    "seconds": 7.94
+  },
+  {
+    "module": "tests/test_safety_reliability.py",
+    "exitCode": 0,
+    "seconds": 69.93
+  },
+  {
+    "module": "tests/test_sail_trade.py",
+    "exitCode": 0,
+    "seconds": 16.12
+  },
+  {
+    "module": "tests/test_sailing_performance.py",
+    "exitCode": 0,
+    "seconds": 112.35
+  },
+  {
+    "module": "tests/test_search_discovery.py",
+    "exitCode": 0,
+    "seconds": 0.82
+  },
+  {
+    "module": "tests/test_srr_basis.py",
+    "exitCode": 0,
+    "seconds": 4.88
+  },
+  {
+    "module": "tests/test_srr_current.py",
+    "exitCode": 0,
+    "seconds": 45.1
+  },
+  {
+    "module": "tests/test_structural_acceptance.py",
+    "exitCode": 0,
+    "seconds": 7.99
+  },
+  {
+    "module": "tests/test_study_cli.py",
+    "exitCode": 0,
+    "seconds": 0.37
+  },
+  {
+    "module": "tests/test_surface_environment.py",
+    "exitCode": 0,
+    "seconds": 13.9
+  },
+  {
+    "module": "tests/test_trajectories.py",
+    "exitCode": 0,
+    "seconds": 0.31
+  },
+  {
+    "module": "tests/test_typed_operating.py",
+    "exitCode": 0,
+    "seconds": 12.5
+  },
+  {
+    "module": "tests/test_upstream_client.py",
+    "exitCode": 0,
+    "seconds": 2.47
+  },
+  {
+    "module": "tests/test_verification_evidence.py",
+    "exitCode": 0,
+    "seconds": 58.47
+  },
+  {
+    "module": "tests/test_wave_performance.py",
+    "exitCode": 0,
+    "seconds": 16.72
+  },
+  {
+    "module": "tests/test_weather.py",
+    "exitCode": 0,
+    "seconds": 18.67
+  },
+  {
+    "module": "tests/test_wind_sensing.py",
+    "exitCode": 0,
+    "seconds": 52.9
+  },
+  {
+    "module": "tests/test_wing_analysis.py",
+    "exitCode": 0,
+    "seconds": 0.52
+  },
+  {
+    "module": "tests/test_wing_heel.py",
+    "exitCode": 0,
+    "seconds": 2.02
+  },
+  {
+    "module": "experiments/inland-navigation/test_navigation.py",
+    "exitCode": 0,
+    "seconds": 1.82
+  }
+]

@@ -1,0 +1,14 @@
+........................................................................ [ 93%]
+.....                                                                    [100%]
+============================= slowest 10 durations =============================
+1.44s setup    tests/test_executable_requirements.py::test_print_job_out_of_bounds[250.1 [mm]-jobX]
+0.02s call     tests/test_executable_requirements.py::test_print_job_out_of_bounds[250.1 [mm]-jobX]
+0.02s call     tests/test_executable_requirements.py::test_recovery_energy_boundary[boundary]
+0.01s call     tests/test_executable_requirements.py::test_launch_energy_gate_and_input_validity[inhibited-invalid-reserve]
+0.01s call     tests/test_executable_requirements.py::test_recovery_energy_boundary[infeasible-route]
+0.01s call     tests/test_executable_requirements.py::test_launch_energy_gate_and_input_validity[inhibited-zero-reserve]
+0.01s call     tests/test_executable_requirements.py::test_launch_energy_gate_and_input_validity[inhibited-invalid-estimate]
+0.01s call     tests/test_executable_requirements.py::test_launch_energy_gate_and_input_validity[inhibited-negative-age]
+0.01s call     tests/test_executable_requirements.py::test_launch_energy_gate_and_input_validity[inhibited-stale]
+0.01s call     tests/test_executable_requirements.py::test_recovery_energy_boundary[discounted-uncertainty]
+77 passed in 1.97s

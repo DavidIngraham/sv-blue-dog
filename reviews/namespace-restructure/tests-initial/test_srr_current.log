@@ -1,0 +1,6 @@
+.                                                                        [100%]
+============================= slowest 10 durations =============================
+44.90s call     tests/test_srr_current.py::test_current_candidate_has_positive_energy_and_passes_refined_screens
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+1 passed in 44.92s

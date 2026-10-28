@@ -1,0 +1,7 @@
+..                                                                       [100%]
+============================= slowest 10 durations =============================
+3.05s call     tests/test_passage_exposure.py::test_gorge_does_not_inherit_future_mission_constraints
+3.02s call     tests/test_passage_exposure.py::test_equal_survival_contours_and_faster_example
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+2 passed in 6.09s

@@ -1,0 +1,8 @@
+......                                                                   [100%]
+============================= slowest 10 durations =============================
+11.87s call     tests/test_coupled_sizing.py::test_native_mass_derivatives_and_centroid_bookkeeping
+0.05s call     tests/test_coupled_sizing.py::test_polar_nodes_provenance_and_no_extrapolation
+0.03s call     tests/test_coupled_sizing.py::test_shape_scaling_and_degenerate_foil_tip_cells
+
+(7 durations < 0.005s hidden.  Use -vv to show these durations.)
+6 passed in 12.31s

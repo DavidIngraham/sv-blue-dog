@@ -1,0 +1,7 @@
+..                                                                       [100%]
+============================= slowest 10 durations =============================
+35.33s call     tests/test_navigation_campaign.py::test_navigation_replay_retains_native_provenance_and_frozen_scope
+0.06s call     tests/test_navigation_campaign.py::test_summary_keeps_adverse_controls_and_refusal_separate_from_steering
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+2 passed in 35.42s

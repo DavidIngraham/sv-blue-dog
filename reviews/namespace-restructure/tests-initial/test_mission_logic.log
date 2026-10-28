@@ -1,0 +1,13 @@
+..............................                                           [100%]
+============================= slowest 10 durations =============================
+1.70s call     tests/test_mission_logic.py::test_model_policy_change_changes_simulator_behavior
+1.70s call     tests/test_mission_logic.py::test_abort_latch_survives_restored_inputs_and_run_reset
+0.19s call     tests/test_mission_logic.py::test_unknown_event_fails_explicitly
+0.06s call     tests/test_mission_logic.py::test_safe_capsize_and_navigation_outage_resume_without_hidden_sailing
+0.05s call     tests/test_mission_logic.py::test_wind_loss_and_expiry_drive_executed_motion
+0.04s call     tests/test_mission_logic.py::test_unassisted_righting_preserves_attempt_but_never_sails_inverted
+0.02s call     tests/test_mission_logic.py::test_reserve_exhaustion_during_safe_inversion_ends_attempt_with_queued_alert[False]
+0.01s call     tests/test_mission_logic.py::test_reserve_exhaustion_during_safe_inversion_ends_attempt_with_queued_alert[True]
+0.01s call     tests/test_mission_logic.py::test_navigation_loss_without_backup_confirmation_aborts_during_capsize
+0.01s call     tests/test_mission_logic.py::test_righting_cannot_erase_disqualifying_event[safety_capability_loss]
+30 passed in 4.21s

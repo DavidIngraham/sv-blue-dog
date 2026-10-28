@@ -1,0 +1,67 @@
+................F...............                                         [100%]
+=================================== FAILURES ===================================
+_______ test_native_inventory_detects_missing_scope_or_use[nested_case] ________
+
+mutation = 'nested_case'
+
+    @pytest.mark.parametrize('mutation',('new_case','nested_case','missing_annotation','missing_domain'))
+    def test_native_inventory_detects_missing_scope_or_use(mutation):
+        sources=[(str(p),p.read_text()) for p in model_files()]
+        if mutation=='new_case':sources.append((str(ROOT/'reviews/untagged.sysml'),'package Untagged { analysis sample { out value : ScalarValues::Real = 1; } }'))
+        elif mutation=='nested_case':
+            sources.append(('nested-untagged.sysml','package Untagged { package Nested { analysis sample { out value : ScalarValues::Real = 1; } } }'))
+        elif mutation=='missing_annotation':
+            sources=delete_symbols(sources,'BlueDog::Analyses::AnalysisCredibility::use001')
+        else:
+            sources=set_values(sources,{'BlueDog::Analyses::AnalysisCredibility::Equipment::domain':'""'})
+>       assert native_credibility_audit(sources)['errors']
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_analysis_credibility.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/boat_analysis/model/credibility_audit.py:27: in native_credibility_audit
+    sourceHashes={str(Path(p).relative_to(ROOT)):hashlib.sha256(t.encode()).hexdigest() for p,t in sources},
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('nested-untagged.sysml')
+other = PosixPath('/home/david/repos/sv-blue-dog-namespaces'), walk_up = False
+_deprecated = ()
+
+    def relative_to(self, other, /, *_deprecated, walk_up=False):
+        """Return the relative path to another path identified by the passed
+        arguments.  If the operation is not possible (because this is not
+        related to the other path), raise ValueError.
+    
+        The *walk_up* parameter controls whether `..` may be used to resolve
+        the path.
+        """
+        if _deprecated:
+            msg = ("support for supplying more than one positional argument "
+                   "to pathlib.PurePath.relative_to() is deprecated and "
+                   "scheduled for removal in Python {remove}")
+            warnings._deprecated("pathlib.PurePath.relative_to(*args)", msg,
+                                 remove=(3, 14))
+        other = self.with_segments(other, *_deprecated)
+        for step, path in enumerate([other] + list(other.parents)):
+            if self.is_relative_to(path):
+                break
+            elif not walk_up:
+>               raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+E               ValueError: 'nested-untagged.sysml' is not in the subpath of '/home/david/repos/sv-blue-dog-namespaces'
+
+/usr/lib/python3.12/pathlib.py:682: ValueError
+============================= slowest 10 durations =============================
+38.80s setup    tests/test_analysis_credibility.py::test_use_limitations_are_published_as_native_content
+5.09s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[missing_annotation]
+3.96s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[missing_domain]
+2.97s call     tests/test_analysis_credibility.py::test_native_use_inventory_covers_definitions_and_configured_usages
+2.68s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[new_case]
+2.62s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[nested_case]
+0.02s call     tests/test_analysis_credibility.py::test_each_proposed_use_precondition_is_required[intendedUseReviewed]
+0.01s call     tests/test_analysis_credibility.py::test_review_preconditions_dont_require_a_passing_design_result
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+=========================== short test summary info ============================
+FAILED tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[nested_case]
+1 failed, 31 passed in 56.31s
