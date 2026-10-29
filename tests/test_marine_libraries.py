@@ -15,7 +15,7 @@ def test_another_boat_can_use_actuation_without_vehicle_requirements(tmp_path):
         private import ScalarValues::*;
         analysis example {
             out attribute power : Real [3] ordered nonunique =
-                MarineActuation::DrivePower(1,0.2,0.8,0.4,1,0.1,0,0.02,0.98);
+                Analysis::Energy::Actuation::DrivePower(1,0.2,0.8,0.4,1,0.1,0,0.02,0.98);
         }
     }''', encoding="utf-8")
     files = (*tuple((ROOT / "models/libraries").rglob("*.sysml")), case)

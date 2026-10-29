@@ -1,6 +1,6 @@
 # What the evidence supports, and what I need to learn next
 
-**Assessment: 28 October 2026** · [Candidate results](results.md) · [Simulation studies](simulation-studies.md)
+**Assessment: 29 October 2026** · [Candidate results](results.md) · [Simulation studies](simulation-studies.md)
 
 I intend to refine IC-01 into the first physical boat. I have defined the river mission, the boat's required functions and an IC-01 design for the simulations. The next step is to choose compatible equipment and measure the properties that matter most to sailing and recovery.
 
@@ -50,12 +50,13 @@ qualification evidence. The next analysis-interface work is to expose semantic
 route/state contracts before generalizing the remaining campaign orchestration.
 
 The [model's namespaces](reference/namespace-structure.md) place mission,
-requirements, architecture, behavior, analyses, configurations, decisions,
-verification and evidence under one `BlueDog` project root. Reusable calculation
-libraries remain independent. This ownership structure supports scoped native
-discovery and makes the links between engineering areas easier to inspect;
-component composition and allocations still define how the candidate works.
-It adds no measurement or physical verification evidence.
+requirements, architecture, behavior, project analyses, configurations, decisions,
+verification and evidence under one `BlueDog` project root. Reusable numerical
+kernels share the independent `Analysis` root by domain. Design schemas,
+battery/load types, navigation-domain types and decision records retain their
+separate ownership. This supports scoped native discovery; component composition
+and allocations still define how the candidate works. It adds no measurement or
+physical verification evidence.
 
 ## Integrated simulation evidence
 

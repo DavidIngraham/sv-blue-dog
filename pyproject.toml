@@ -35,8 +35,8 @@ generated_package = "tools.boat_analysis.generated"
 backend = "opensysml-c"
 
 [tool.sysml_python.exports.mass]
-definition = "MarineMass::MassProperties"
-checks = "MarineMass::InputChecks"
+definition = "Analysis::Mechanics::Mass::MassProperties"
+checks = "Analysis::Mechanics::Mass::InputChecks"
 output_record = "MarineDesign::MassProperties"
 
 [tool.sysml_python.exports.mass.aliases]
@@ -57,7 +57,7 @@ opensysml = { path = ".tools/develop-23ca2e2f0/source/client/python" }
 sysml-python-runtime = { path = "packages/sysml-python", editable = true }
 
 [tool.sysml_python.exports.structure]
-definition = "MarineStructures::DesignMargins"
+definition = "Analysis::Mechanics::Structures::DesignMargins"
 [tool.sysml_python.exports.structure.aliases]
 d = "design"
 p = "parameters"
@@ -73,7 +73,7 @@ loads = "MarineDesign::AppendageLoads"
 structure = "BlueDog::Analyses::Operating::Inputs.structureValues"
 
 [tool.sysml_python.exports.concept]
-definition = "MarineConcept::Evaluate"
+definition = "Analysis::Marine::Concept::Evaluate"
 [tool.sysml_python.exports.concept.aliases]
 d = "design"
 m = "mass"
@@ -89,9 +89,9 @@ environment = "BlueDog::Configurations::OperatingEnvironment::Inputs.parameterVa
 policy = "BlueDog::Analyses::Sizing::Credibility::Inputs.values"
 
 [tool.sysml_python.exports.operation]
-definition = "MarineSailing::Evaluate"
-output_definition = "MarineSailing::Core"
-checks = "MarineSailing::InputChecks"
+definition = "Analysis::Marine::Sailing::Evaluate"
+output_definition = "Analysis::Marine::Sailing::Core"
+checks = "Analysis::Marine::Sailing::InputChecks"
 [tool.sysml_python.exports.operation.aliases]
 d = "design"
 p = "parameters"
@@ -109,51 +109,51 @@ hydro = "MarineDesign::HydroState"
 environment = "BlueDog::Configurations::OperatingEnvironment::Inputs.parameterValues"
 
 [tool.sysml_python.exports.route]
-definition = "MarineCourse::Route"
+definition = "Analysis::Marine::Course::Route"
 [tool.sysml_python.exports.route.defaults]
 policy = "BlueDog::Analyses::Operating::Inputs.routeParameters"
 
 [tool.sysml_python.exports.wind_sample]
-definition = "MarineSurface::WindSample"
+definition = "Analysis::Marine::Surface::WindSample"
 
 [tool.sysml_python.exports.strip_load]
-definition = "MarineSurface::StripLoad"
+definition = "Analysis::Marine::Surface::StripLoad"
 
 [tool.sysml_python.exports.fetch_sea]
-definition = "MarineSurface::FetchSea"
+definition = "Analysis::Marine::Surface::FetchSea"
 
 [tool.sysml_python.exports.speed_retention]
-definition = "MarineSurface::SpeedRetention"
+definition = "Analysis::Marine::Surface::SpeedRetention"
 
 [tool.sysml_python.exports.wave_screen]
-definition = "MarineSurface::WaveScreen"
+definition = "Analysis::Marine::Surface::WaveScreen"
 
 [tool.sysml_python.exports.harmonic_response]
-definition = "MarineSurface::HarmonicResponse"
+definition = "Analysis::Marine::Surface::HarmonicResponse"
 
 [tool.sysml_python.exports.orbital_velocity]
-definition = "MarineWavePerformance::OrbitalVelocity"
+definition = "Analysis::Marine::WavePerformance::OrbitalVelocity"
 
 [tool.sysml_python.exports.foil_load]
-definition = "MarineWavePerformance::FoilLoad"
+definition = "Analysis::Marine::WavePerformance::FoilLoad"
 
 [tool.sysml_python.exports.impedance_term]
-definition = "MarineWavePerformance::ImpedanceTerm"
+definition = "Analysis::Marine::WavePerformance::ImpedanceTerm"
 
 [tool.sysml_python.exports.balance_correction]
-definition = "MarineWavePerformance::BalanceCorrection"
+definition = "Analysis::Marine::WavePerformance::BalanceCorrection"
 
 [tool.sysml_python.exports.wave_actuation]
-definition = "MarineWavePerformance::Actuation"
+definition = "Analysis::Marine::WavePerformance::Actuation"
 
 [tool.sysml_python.exports.recovery_segment]
-definition = "MarineRecovery::Segment"
+definition = "Analysis::Marine::Recovery::Segment"
 [tool.sysml_python.exports.wave_actuation.defaults]
 q = "BlueDog::Configurations::OperatingEnvironment::Inputs.parameterValues"
 
 [tool.sysml_python.exports.sailing_core]
-definition = "MarineSailing::Core"
-checks = "MarineSailing::InputChecks"
+definition = "Analysis::Marine::Sailing::Core"
+checks = "Analysis::Marine::Sailing::InputChecks"
 [tool.sysml_python.exports.sailing_core.defaults]
 q = "BlueDog::Configurations::OperatingEnvironment::Inputs.parameterValues"
 [tool.sysml_python.exports.sailing_core.records]
@@ -165,19 +165,19 @@ massData = "MarineDesign::MassProperties"
 hydro = "MarineDesign::HydroState"
 
 [tool.sysml_python.exports.hull_resistance]
-definition = "MarineResistance::Evaluate"
-checks = "MarineResistance::InputChecks"
+definition = "Analysis::Marine::Resistance::Evaluate"
+checks = "Analysis::Marine::Resistance::InputChecks"
 [tool.sysml_python.exports.hull_resistance.aliases]
 h = "hull"
 
 [tool.sysml_python.exports.wet_moment]
-definition = "MarineHydrostatics::WetMoment"
+definition = "Analysis::Marine::Hydrostatics::WetMoment"
 [tool.sysml_python.exports.wet_moment.aliases]
 p = "vertices"
 
 [tool.sysml_python.exports.hydrostatic_balance]
-definition = "MarineHydrostatics::Balance"
-checks = "MarineHydrostatics::BalanceChecks"
+definition = "Analysis::Marine::Hydrostatics::Balance"
+checks = "Analysis::Marine::Hydrostatics::BalanceChecks"
 [tool.sysml_python.exports.hydrostatic_balance.aliases]
 centerOfGravity = "cg"
 massKg = "mass"

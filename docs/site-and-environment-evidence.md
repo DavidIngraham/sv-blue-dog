@@ -10,7 +10,7 @@ This reference records where the boat would sail and recover, the environmental 
 | --- | --- | --- |
 | Challenge | [Challenge model](../models/blue-dog.sysml) | Course, size, autonomy, traffic and recovery obligations |
 | Verification | [Challenge cases](../models/blue-dog.sysml), [vehicle cases](../models/blue-dog.sysml) | Methods and missing allocations, not completed verdicts |
-| Recovery | [Native physics](../models/libraries/marine/recovery.sysml), [planner](../tools/boat_analysis/mission/recovery.py), [mission engine](../tools/boat_analysis/mission/engine.py) | Current authority, route feasibility, reserve and casualty capability |
+| Recovery | [Native physics](../models/libraries/analysis.sysml), [planner](../tools/boat_analysis/mission/recovery.py), [mission engine](../tools/boat_analysis/mission/engine.py) | Current authority, route feasibility, reserve and casualty capability |
 | Environmental basis | [Environmental analysis](../models/blue-dog.sysml) | Evidence applicability, coupled exposure and unaccepted margins |
 | Design | [Sizing method](sizing.md), [results](results.md) | Eligible local alternatives, refined replay and remaining evidence gaps |
 

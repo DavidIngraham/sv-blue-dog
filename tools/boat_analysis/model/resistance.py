@@ -8,12 +8,12 @@ from tools.boat_analysis.evidence.records import digest
 
 def prepare():
     from tools.boat_analysis.model.runtime import load_model, numerical_value
-    model=ROOT/'models/libraries/marine/hull-resistance.sysml'
+    model=ROOT/'models/libraries/analysis.sysml'
     h=[2,.6,.15,.071973,.85,1.05,1.1,.55,.727]
     speeds=[fn*(9.80665*2)**.5 for fn in [.15,.4,.425,.6,.65]]
-    rows=[numerical_value(load_model().calc('MarineResistance::Evaluate',
+    rows=[numerical_value(load_model().calc('Analysis::Marine::Resistance::Evaluate',
           arguments=[h, v, 1000.0, 9.80665]).value) for v in speeds]
-    hashes={'models/libraries/marine/hull-resistance.sysml':digest(model),'tools/boat_analysis/model/resistance.py':digest(ROOT/'tools/boat_analysis/model/resistance.py')}
+    hashes={'models/libraries/analysis.sysml':digest(model),'tools/boat_analysis/model/resistance.py':digest(ROOT/'tools/boat_analysis/model/resistance.py')}
     from tools.boat_analysis.generated import HullResistanceResult
     names = tuple(HullResistanceResult.__dataclass_fields__)
     record={'sourceHashes':hashes,'scope':'Synthetic arithmetic fixtures, not measured resistance validation. Fn 0.65 deliberately exceeds the implementation coverage limit. The same native calculation is used by the coupled operating model.','hull':h,'density':1000,'gravity':9.80665,'cases':[{'speed_m_s':v,'outputs':dict(zip(names,r))} for v,r in zip(speeds,rows)],'qualified':False}

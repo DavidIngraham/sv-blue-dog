@@ -61,19 +61,47 @@ analysis. Native semantic queries provide the full inventory. Mission actions
 also live directly in `Mission`, and system composition and context directly
 in `Architecture`.
 
-Twenty reusable packages remain separate in `models/libraries/`. Marine
-calculations, energy/reliability calculations and shared decision-record types
-have independent roots and no Blue Dog dependencies. Project configurations bind
-their inputs; project analyses identify the question, subject and applicability.
-The loaded model has 21 top-level packages and 111 packages in total, including
-the 90 nested packages. This is a namespace count, not a count of view roots or
-boat components.
+Reusable calculation-only libraries share the independent `Analysis` root:
+
+```text
+Analysis
+├── Marine
+│   ├── Appendages, Concept, Course
+│   ├── Hydrostatics, Propulsion, Recovery, Resistance
+│   └── Sailing, Surface, WavePerformance, Weather
+├── Mechanics
+│   ├── Mass
+│   └── Structures
+├── Energy
+│   └── Actuation
+└── Reliability
+```
+
+These packages own numerical calculations and their documentation. For example,
+`Analysis::Marine::Resistance::Evaluate` is a reusable resistance kernel and
+`Analysis::Mechanics::Mass::MassProperties` computes mass properties. Project
+studies and configuration bindings stay under `BlueDog::Analyses`.
+
+Five mixed/domain roots remain separate. `MarineDesign` owns named design,
+parameter, operating-state and result schemas; its vector adapters belong with
+that contract. `MarineEnergy` owns electrical loads, batteries, budget/interval
+types, their derived properties and rollup. `InlandExtended` and
+`InlandNavigationExperiment` own navigation-domain enums, contexts and conditional
+rule assessments. `EngineeringDecisions` owns decision and review records.
+Owning a calculation or an analysis case does not by itself make such a library
+calculation-only, and package ownership does not create physical composition.
+
+The loaded model has **7 top-level packages and 115 packages in total**, including
+108 nested packages, in seven source documents. These are native namespace counts,
+not counts of view roots or boat components. Shared calculations have no Blue Dog
+dependencies. Their SI/vector boundary conventions and existing numerical limits
+remain part of the contract; grouping them adds no new engineering capability.
 
 ## Adding or selecting model elements
 
 Put a project definition under the area that owns its engineering meaning. Keep
 the IC-01 candidate under `BlueDog::Configurations::IC01`, reusable calculations
-in an independent library and project bindings under `BlueDog::Analyses`. Use
+under the appropriate `Analysis` domain and project bindings under `BlueDog::Analyses`. Use
 native references for relationships between areas; importing a package does not
 establish traceability or engineering authority.
 
@@ -91,9 +119,14 @@ Do not infer meaning from a package's display name or source filename.
 `models/blue-dog.sysml` contains the complete native project package. The pinned
 runtime does not resolve independent files as reopened fragments of the same
 package. Keep the project document canonical; a second file declaring another
-`BlueDog` root is not an extension mechanism. Reusable libraries remain separate
-source documents. Use the pinned native editor and semantic validation when
-changing declarations and references.
+`BlueDog` root is not an extension mechanism. The shared `Analysis` package is likewise canonical in
+`models/libraries/analysis.sysml`; do not reopen it across independent files.
+The five mixed/domain libraries remain separate source documents. Use the pinned
+native editor and semantic validation when changing declarations and references. When editing
+a shared calculation through the native client, select the calculation document
+as the primary source; the pinned editor cannot rewrite secondary documents.
+A new reusable calculation can be discovered and executed through the native API
+without adding a Python dispatch list.
 
 Seven evidence sections inside the canonical document have explicit
 `BEGIN GENERATED PROJECTION` / `END GENERATED PROJECTION` comment boundaries.
@@ -121,7 +154,8 @@ Historical `evidence/runs/` records retain their original source revisions, name
 and hashes. Their model projections do not turn those records into current
 physical evidence. Current execution reports record the actual qualified IDs,
 source hashes and runtime. Consumers of older qualified IDs must update their
-bindings; the active model has no old-root alias facade. Historical replay
+bindings (for example, `MarineSailing::Core` becomes
+`Analysis::Marine::Sailing::Core`); the active model has no old-root alias facade. Historical replay
 against an archived source revision continues to use that revision's names.
 
 After model changes, run `uv run python -m tools.boat_analysis.cli prepare`, the

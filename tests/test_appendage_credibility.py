@@ -14,10 +14,10 @@ def test_native_geometry_boundaries_and_independent_oracle(tmp_path):
     expressions=[]
     for i,x in enumerate(variants):
         vector='('+','.join(map(str,x))+')'
-        expressions.append(f'out attribute case{i} : Real [5] ordered nonunique = MarineAppendages::GeometryMargins({vector},2,0.02);')
+        expressions.append(f'out attribute case{i} : Real [5] ordered nonunique = Analysis::Marine::Appendages::GeometryMargins({vector},2,0.02);')
     path=tmp_path/'geometry.sysml'
     path.write_text('package GeometryTest { private import ScalarValues::*; analysis check { '+''.join(expressions)+' } }')
-    model=ROOT/'models/libraries/marine/appendages.sysml'
+    model=ROOT/'models/libraries/analysis.sysml'
     report=json.loads(native('-analysis','GeometryTest::check','-json',models=(model,path)))
     assert report['status']=='holds'
     values={v['name']:native_value(v['value']) for v in report['checks'][0]['values']}

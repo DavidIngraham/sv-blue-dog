@@ -50,9 +50,9 @@ def test_long_passage_has_no_gorge_deadline(run_model):
     states = ','.join(str(v) for _ in range(4) for v in [2,45,0,0,0,0,2,-45,0,0,0,0])
     source = f'''package DurationProbe {{ private import ScalarValues::*;
         analysis Probe {{
-            out attribute noDeadline : Real [6] ordered nonunique = MarineCourse::Route(
+            out attribute noDeadline : Real [6] ordered nonunique = Analysis::Marine::Course::Route(
                 (2,2,2,2,2,2,2,2), ({states}), (1,0.2,0.3,1000000,0,0.5,0));
-            out attribute legacyDeadline : Real [6] ordered nonunique = MarineCourse::Route(
+            out attribute legacyDeadline : Real [6] ordered nonunique = Analysis::Marine::Course::Route(
                 (2,2,2,2,2,2,2,2), ({states}), (1,0.2,0.3,1000000,72,0.5,0));
             out attribute activeDeadline : Real = BlueDog::Analyses::Operating::Inputs.routeParameters#(5);
         }}

@@ -62,11 +62,11 @@ def test_native_probability_does_not_average_failed_duration(run_model):
     source = '''package WeatherRegression {
       private import ScalarValues::*;
       analysis check {
-        out attribute coverage : Real = MarineWeather::TwoRegimeCoverage(0.25,true,false);
-        out attribute duration : Real = MarineWeather::ConditionalPassageHours(0.25,true,false,48,1000000);
-        out attribute none : Real = MarineWeather::TwoRegimeCoverage(1,true,false);
-        out attribute emptyDuration : Real = MarineWeather::ConditionalPassageHours(1,true,false,48,1000000);
-        out attribute bothDuration : Real = MarineWeather::ConditionalPassageHours(0.25,true,true,48,68);
+        out attribute coverage : Real = Analysis::Marine::Weather::TwoRegimeCoverage(0.25,true,false);
+        out attribute duration : Real = Analysis::Marine::Weather::ConditionalPassageHours(0.25,true,false,48,1000000);
+        out attribute none : Real = Analysis::Marine::Weather::TwoRegimeCoverage(1,true,false);
+        out attribute emptyDuration : Real = Analysis::Marine::Weather::ConditionalPassageHours(1,true,false,48,1000000);
+        out attribute bothDuration : Real = Analysis::Marine::Weather::ConditionalPassageHours(0.25,true,true,48,68);
       }
     }'''
     code, report = run_model(source, '-analysis','WeatherRegression::check')
