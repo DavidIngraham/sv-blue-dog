@@ -1,0 +1,8 @@
+...                                                                      [100%]
+============================= slowest 30 durations =============================
+1.19s call     tests/test_namespace_structure.py::test_project_has_one_native_root_and_reusable_libraries_remain_separate
+0.98s call     tests/test_namespace_structure.py::test_engineering_areas_are_owned_packages_with_canonical_identities
+0.04s call     tests/test_namespace_structure.py::test_real_studies_bind_canonical_owned_elements_without_alias_facades
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+3 passed in 2.33s

@@ -1,0 +1,9 @@
+.....                                                                    [100%]
+============================= slowest 30 durations =============================
+17.27s call     tests/test_recorded_evidence.py::test_recorded_sources_match_original_revision
+11.37s call     tests/test_recorded_evidence.py::test_native_record_review_distinguishes_nominal_and_adverse_cases
+0.03s call     tests/test_recorded_evidence.py::test_archive_preserves_dependencies_and_rejects_changed_sources
+0.01s call     tests/test_recorded_evidence.py::test_model_projection_matches_immutable_evidence
+
+(11 durations < 0.005s hidden.  Use -vv to show these durations.)
+5 passed in 28.71s

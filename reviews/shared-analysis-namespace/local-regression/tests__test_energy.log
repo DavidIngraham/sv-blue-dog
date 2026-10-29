@@ -1,0 +1,21 @@
+................                                                         [100%]
+============================= slowest 30 durations =============================
+8.53s call     tests/test_energy.py::test_verification_requires_evidence_and_numerical_success
+3.83s call     tests/test_energy.py::test_rollup_and_synthetic_campaign
+3.18s call     tests/test_energy.py::test_mode_change_and_component_growth_are_rolled_up
+3.16s call     tests/test_energy.py::test_invalid_input_does_not_pass[above-capacity]
+2.99s call     tests/test_energy.py::test_charge_rate_limit_cannot_hide_behind_available_solar
+2.96s call     tests/test_energy.py::test_missing_input_does_not_pass
+2.96s call     tests/test_energy.py::test_harvest_window_overlap_is_counted_in_each_day
+2.91s call     tests/test_energy.py::test_surviving_finite_run_does_not_establish_repeatability
+2.89s call     tests/test_energy.py::test_enabled_zero_resource_still_counts_against_campaign
+2.85s call     tests/test_energy.py::test_invalid_input_does_not_pass[invalid-usable-fraction]
+2.82s call     tests/test_energy.py::test_peak_supply_is_independent_of_average_energy
+2.79s call     tests/test_energy.py::test_finite_campaign_can_consume_charge_without_being_repeatable
+2.75s call     tests/test_energy.py::test_invalid_input_does_not_pass[negative-duration]
+2.75s call     tests/test_energy.py::test_invalid_inputs_cannot_be_verified_even_with_evidence_flag
+2.73s call     tests/test_energy.py::test_no_harvest_exhausts_storage
+2.59s call     tests/test_energy.py::test_overnight_failure_despite_recovered_final_energy
+
+(14 durations < 0.005s hidden.  Use -vv to show these durations.)
+16 passed in 52.75s

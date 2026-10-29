@@ -1,0 +1,11 @@
+........                                                                 [100%]
+============================= slowest 30 durations =============================
+11.61s call     tests/test_hull_resistance.py::test_native_interpreter_parity
+0.44s call     tests/test_hull_resistance.py::test_fullness_changes_prismatic_coefficient_without_changing_midship
+0.26s call     tests/test_hull_resistance.py::test_upright_hull_features_for_rectangular_prism
+0.06s call     tests/test_hull_resistance.py::test_deck_area_follows_fullness_geometry
+0.01s call     tests/test_hull_resistance.py::test_froude_interpolation_and_geometric_similarity
+0.01s call     tests/test_hull_resistance.py::test_domain_extrapolation_is_rejected
+
+(18 durations < 0.005s hidden.  Use -vv to show these durations.)
+8 passed in 12.48s

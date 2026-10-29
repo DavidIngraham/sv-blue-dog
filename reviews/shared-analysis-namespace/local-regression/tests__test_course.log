@@ -1,0 +1,8 @@
+.....                                                                    [100%]
+============================= slowest 30 durations =============================
+3.33s call     tests/test_course.py::test_model_gate_segments_clear_charted_land_and_restrictions
+2.87s call     tests/test_course.py::test_sizing_and_replay_share_chart_reference_distance
+2.85s call     tests/test_course.py::test_long_passage_has_no_gorge_deadline
+
+(12 durations < 0.005s hidden.  Use -vv to show these durations.)
+5 passed in 9.15s

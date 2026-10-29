@@ -1,0 +1,642 @@
+{
+  "operations": [
+    {
+      "target": "MarineActuation",
+      "offset": 617868,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 618236,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 618566,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 618929,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 626906,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 979204,
+      "length": 15
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 1091393,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 1400998,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 1401150,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 1401301,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 1416726,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 1416867,
+      "length": 27
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 1351880,
+      "length": 1618
+    },
+    {
+      "target": "MarineActuation",
+      "offset": 1508043,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 1506654,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 617886,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 618272,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 618620,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 619001,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 626996,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 979312,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 1091519,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 1399524,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 1399694,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 1399863,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 1415306,
+      "length": 15
+    },
+    {
+      "target": "Analysis::Energy::MarineActuation",
+      "offset": 1415465,
+      "length": 15
+    },
+    {
+      "target": "MarineAppendages",
+      "offset": 1505556,
+      "length": 33
+    },
+    {
+      "target": "MarineAppendages",
+      "offset": 1355654,
+      "length": 1261
+    },
+    {
+      "target": "MarineAppendages",
+      "offset": 1506530,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineAppendages",
+      "offset": 1505300,
+      "length": 16
+    },
+    {
+      "target": "Analysis::Marine::MarineAppendages",
+      "offset": 1504313,
+      "length": 16
+    },
+    {
+      "target": "MarineConcept",
+      "offset": 1355654,
+      "length": 1695
+    },
+    {
+      "target": "MarineConcept",
+      "offset": 1506624,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineConcept",
+      "offset": 1504941,
+      "length": 13
+    },
+    {
+      "target": "MarineCourse",
+      "offset": 752005,
+      "length": 12
+    },
+    {
+      "target": "MarineCourse",
+      "offset": 1355654,
+      "length": 3410
+    },
+    {
+      "target": "MarineCourse",
+      "offset": 1506729,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineCourse",
+      "offset": 1503349,
+      "length": 12
+    },
+    {
+      "target": "Analysis::Marine::MarineCourse",
+      "offset": 752023,
+      "length": 12
+    },
+    {
+      "target": "MarineResistance",
+      "offset": 1391514,
+      "length": 26
+    },
+    {
+      "target": "MarineResistance",
+      "offset": 1363587,
+      "length": 11555
+    },
+    {
+      "target": "MarineResistance",
+      "offset": 1506914,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineResistance",
+      "offset": 1495389,
+      "length": 16
+    },
+    {
+      "target": "Analysis::Marine::MarineResistance",
+      "offset": 1379977,
+      "length": 16
+    },
+    {
+      "target": "MarineHydrostatics",
+      "offset": 707857,
+      "length": 18
+    },
+    {
+      "target": "MarineHydrostatics",
+      "offset": 932199,
+      "length": 45
+    },
+    {
+      "target": "MarineHydrostatics",
+      "offset": 1095118,
+      "length": 27
+    },
+    {
+      "target": "MarineHydrostatics",
+      "offset": 1363587,
+      "length": 6772
+    },
+    {
+      "target": "MarineHydrostatics",
+      "offset": 1507247,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineHydrostatics",
+      "offset": 1500541,
+      "length": 18
+    },
+    {
+      "target": "Analysis::Marine::MarineHydrostatics",
+      "offset": 707875,
+      "length": 18
+    },
+    {
+      "target": "Analysis::Marine::MarineHydrostatics",
+      "offset": 932235,
+      "length": 18
+    },
+    {
+      "target": "Analysis::Marine::MarineHydrostatics",
+      "offset": 1095172,
+      "length": 18
+    },
+    {
+      "target": "MarinePropulsion",
+      "offset": 767207,
+      "length": 37
+    },
+    {
+      "target": "MarinePropulsion",
+      "offset": 1363623,
+      "length": 847
+    },
+    {
+      "target": "MarinePropulsion",
+      "offset": 1507788,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarinePropulsion",
+      "offset": 1506971,
+      "length": 16
+    },
+    {
+      "target": "Analysis::Marine::MarinePropulsion",
+      "offset": 767225,
+      "length": 16
+    },
+    {
+      "target": "MarineRecovery",
+      "offset": 713070,
+      "length": 23
+    },
+    {
+      "target": "MarineRecovery",
+      "offset": 1363635,
+      "length": 1277
+    },
+    {
+      "target": "MarineRecovery",
+      "offset": 1507857,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineRecovery",
+      "offset": 1506610,
+      "length": 14
+    },
+    {
+      "target": "Analysis::Marine::MarineRecovery",
+      "offset": 713088,
+      "length": 14
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 759180,
+      "length": 36
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 759345,
+      "length": 36
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 759510,
+      "length": 36
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 759675,
+      "length": 36
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 759930,
+      "length": 41
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 760062,
+      "length": 41
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 771945,
+      "length": 41
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 772021,
+      "length": 41
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 785158,
+      "length": 36
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 785297,
+      "length": 41
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 1363647,
+      "length": 733
+    },
+    {
+      "target": "MarineReliability",
+      "offset": 1509754,
+      "length": 1
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 1509134,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 759190,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 759365,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 759540,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 759715,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 759980,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 760122,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 772015,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 772101,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 785248,
+      "length": 17
+    },
+    {
+      "target": "Analysis::MarineReliability",
+      "offset": 785397,
+      "length": 17
+    },
+    {
+      "target": "MarineSailing",
+      "offset": 751938,
+      "length": 13
+    },
+    {
+      "target": "MarineSailing",
+      "offset": 982935,
+      "length": 23
+    },
+    {
+      "target": "MarineSailing",
+      "offset": 1093027,
+      "length": 23
+    },
+    {
+      "target": "MarineSailing",
+      "offset": 1363687,
+      "length": 14873
+    },
+    {
+      "target": "MarineSailing",
+      "offset": 1507257,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineSailing",
+      "offset": 1492450,
+      "length": 13
+    },
+    {
+      "target": "Analysis::Marine::MarineSailing",
+      "offset": 751956,
+      "length": 13
+    },
+    {
+      "target": "Analysis::Marine::MarineSailing",
+      "offset": 982971,
+      "length": 13
+    },
+    {
+      "target": "Analysis::Marine::MarineSailing",
+      "offset": 1093081,
+      "length": 13
+    },
+    {
+      "target": "MarineSurface",
+      "offset": 706978,
+      "length": 23
+    },
+    {
+      "target": "MarineSurface",
+      "offset": 707194,
+      "length": 23
+    },
+    {
+      "target": "MarineSurface",
+      "offset": 1363723,
+      "length": 6374
+    },
+    {
+      "target": "MarineSurface",
+      "offset": 1508126,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineSurface",
+      "offset": 1501800,
+      "length": 13
+    },
+    {
+      "target": "Analysis::Marine::MarineSurface",
+      "offset": 706996,
+      "length": 13
+    },
+    {
+      "target": "Analysis::Marine::MarineSurface",
+      "offset": 707230,
+      "length": 13
+    },
+    {
+      "target": "MarineWavePerformance",
+      "offset": 1363747,
+      "length": 3422
+    },
+    {
+      "target": "MarineWavePerformance",
+      "offset": 1508547,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineWavePerformance",
+      "offset": 1505137,
+      "length": 21
+    },
+    {
+      "target": "MarineWeather",
+      "offset": 977200,
+      "length": 32
+    },
+    {
+      "target": "MarineWeather",
+      "offset": 977392,
+      "length": 38
+    },
+    {
+      "target": "MarineWeather",
+      "offset": 1363747,
+      "length": 1187
+    },
+    {
+      "target": "MarineWeather",
+      "offset": 1508780,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Marine::MarineWeather",
+      "offset": 1507641,
+      "length": 13
+    },
+    {
+      "target": "Analysis::Marine::MarineWeather",
+      "offset": 977218,
+      "length": 13
+    },
+    {
+      "target": "Analysis::Marine::MarineWeather",
+      "offset": 977428,
+      "length": 13
+    },
+    {
+      "target": "MarineMass",
+      "offset": 944742,
+      "length": 10
+    },
+    {
+      "target": "MarineMass",
+      "offset": 1442565,
+      "length": 5930
+    },
+    {
+      "target": "MarineMass",
+      "offset": 1508918,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Mechanics::MarineMass",
+      "offset": 1503022,
+      "length": 10
+    },
+    {
+      "target": "Analysis::Mechanics::MarineMass",
+      "offset": 944763,
+      "length": 10
+    },
+    {
+      "target": "MarineStructures",
+      "offset": 752018,
+      "length": 16
+    },
+    {
+      "target": "MarineStructures",
+      "offset": 1094309,
+      "length": 31
+    },
+    {
+      "target": "MarineStructures",
+      "offset": 1442580,
+      "length": 4813
+    },
+    {
+      "target": "MarineStructures",
+      "offset": 1509203,
+      "length": 0
+    },
+    {
+      "target": "Analysis::Mechanics::MarineStructures",
+      "offset": 1504444,
+      "length": 16
+    },
+    {
+      "target": "Analysis::Mechanics::MarineStructures",
+      "offset": 752039,
+      "length": 16
+    },
+    {
+      "target": "Analysis::Mechanics::MarineStructures",
+      "offset": 1094351,
+      "length": 16
+    }
+  ],
+  "summary": {
+    "beforeElements": 14929,
+    "afterElements": 14933,
+    "missing": [],
+    "changed": [],
+    "added": [
+      "Analysis",
+      "Analysis::Energy",
+      "Analysis::Marine",
+      "Analysis::Mechanics"
+    ],
+    "nativeAppliedOperations": 125
+  }
+}

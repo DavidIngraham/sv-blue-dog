@@ -1,0 +1,7 @@
+..                                                                       [100%]
+============================= slowest 30 durations =============================
+0.25s call     tests/test_wing_analysis.py::test_reference_runs_are_finite_consistent_and_not_qualified
+0.01s call     tests/test_wing_analysis.py::test_wing_geometry_preserves_missing_data_and_source_identity
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+2 passed in 0.28s

@@ -1,0 +1,15 @@
+...................                                                      [100%]
+============================= slowest 30 durations =============================
+11.34s call     tests/test_coupled_operation.py::test_compiled_operation_matches_interpreter
+0.89s call     tests/test_coupled_operation.py::test_design_cache_preserves_state_dependent_results
+0.49s call     tests/test_coupled_operation.py::test_finite_search_keeps_peak_but_removes_daily_energy_constraints
+0.02s call     tests/test_coupled_operation.py::test_coupled_geometry_mass_and_hydrostatics_share_wing_pose
+0.02s call     tests/test_coupled_operation.py::test_panel_fit_uses_actual_deck_area
+0.02s call     tests/test_coupled_operation.py::test_native_structure_uses_finite_inertia_and_section_modulus
+0.02s call     tests/test_coupled_operation.py::test_structural_stiffness_and_strength_respond_to_material_evidence
+0.02s call     tests/test_coupled_operation.py::test_ballast_volume_and_nonoverlap
+0.01s call     tests/test_coupled_operation.py::test_native_hull_resistance_is_in_force_balance_and_domain_outputs
+0.01s call     tests/test_coupled_operation.py::test_locked_drive_saves_holding_power_without_free_motion
+
+(20 durations < 0.005s hidden.  Use -vv to show these durations.)
+19 passed in 13.32s

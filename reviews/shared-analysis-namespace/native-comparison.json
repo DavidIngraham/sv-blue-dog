@@ -1,0 +1,30 @@
+{
+  "beforeElements": 14929,
+  "afterElements": 14933,
+  "missing": [],
+  "changed": [],
+  "added": [
+    "Analysis",
+    "Analysis::Energy",
+    "Analysis::Marine",
+    "Analysis::Mechanics"
+  ],
+  "topLevelPackages": [
+    "Analysis",
+    "BlueDog",
+    "EngineeringDecisions",
+    "InlandExtended",
+    "InlandNavigationExperiment",
+    "MarineDesign",
+    "MarineEnergy"
+  ],
+  "allPackages": 115,
+  "sourceFiles": 7,
+  "retainedLibraryHashes": {
+    "EngineeringDecisions": "93102a19a7e9c69cd35544bf7f4815657164803fd1bbe9af6d6689ad613f52f3",
+    "MarineEnergy": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "MarineDesign": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "InlandExtended": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "InlandNavigationExperiment": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326"
+  }
+}

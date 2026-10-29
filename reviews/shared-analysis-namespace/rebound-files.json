@@ -1,0 +1,14 @@
+[
+  "docs/energy.md",
+  "docs/reference/environmental-replays.md",
+  "docs/site-and-environment-evidence.md",
+  "docs/sizing.md",
+  "pyproject.toml",
+  "tests/test_appendage_credibility.py",
+  "tests/test_course.py",
+  "tests/test_marine_libraries.py",
+  "tests/test_weather.py",
+  "tools/boat_analysis/model/resistance.py",
+  "tools/boat_analysis/optimization/operating.py",
+  "tools/boat_analysis/optimization/resistance_audit.py"
+]

@@ -1,0 +1,893 @@
+{
+  "path": "models/libraries/decision-records.sysml",
+  "package": "EngineeringDecisions",
+  "kinds": {
+    "EnumerationDefinition": 1,
+    "ItemDefinition": 1,
+    "MetadataDefinition": 1
+  },
+  "children": [
+    [
+      "RecordState",
+      "EnumerationDefinition"
+    ],
+    [
+      "DecisionRecord",
+      "ItemDefinition"
+    ],
+    [
+      "AllocationReview",
+      "MetadataDefinition"
+    ]
+  ]
+}
+package EngineeringDecisions {
+    private import ScalarValues::*;
+
+    enum def RecordState { unclassified; workingDisposition; openQuestion; }
+
+    item def DecisionRecord {
+        doc /* An identifiable engineering information record, not an executable
+            decision node or a physical component. Record state describes the
+            existing content; workingDisposition does not assert formal approval,
+            accepted evidence, implemented behavior or a hardware downselect.
+            SysML 2.0 Part 1 section 7.10 supplies item semantics; NASA SE
+            Handbook 6.8 informs the record content. This is a project-defined
+            schema, not a normative SysML decision-record library. */
+        attribute recordState : RecordState [1];
+{
+  "path": "models/libraries/energy/actuation.sysml",
+  "package": "MarineActuation",
+  "kinds": {
+    "CalculationDefinition": 3
+  },
+  "children": [
+    [
+      "MastTorque",
+      "CalculationDefinition"
+    ],
+    [
+      "DrivePower",
+      "CalculationDefinition"
+    ],
+    [
+      "DailyEnergy",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineActuation {
+    private import ScalarValues::*;
+
+    calc def MastTorque {
+        in densityKgM3 : Real;
+        in apparentWindMS : Real;
+        in sailAreaM2 : Real;
+        in chordM : Real;
+        in momentCoefficientAtMast : Real;
+        in bearingFrictionNm : Real;
+        return torqueNm : Real;
+        0.5*densityKgM3*apparentWindMS*apparentWindMS*sailAreaM2*chordM*RealFunctions::abs(momentCoefficientAtMast)+bearingFrictionNm
+    }
+    calc def DrivePower {
+{
+  "path": "models/libraries/energy/budget.sysml",
+  "package": "MarineEnergy",
+  "kinds": {
+    "PartDefinition": 4,
+    "CalculationDefinition": 1,
+    "AnalysisCaseDefinition": 1
+  },
+  "children": [
+    [
+      "ElectricalLoad",
+      "PartDefinition"
+    ],
+    [
+      "LoadBudget",
+      "PartDefinition"
+    ],
+    [
+      "Battery",
+      "PartDefinition"
+    ],
+    [
+      "Interval",
+      "PartDefinition"
+    ],
+    [
+      "StorageRate",
+      "CalculationDefinition"
+    ],
+    [
+      "BudgetRollup",
+      "AnalysisCaseDefinition"
+    ]
+  ]
+}
+package MarineEnergy {
+    private import ScalarValues::*;
+    private import ISQ::*;
+    private import SI::*;
+    part def ElectricalLoad {
+        attribute label : String;
+        attribute activePower : PowerValue;
+        attribute idlePower : PowerValue;
+        attribute activeFraction : Real;
+        attribute conversionEfficiency : Real;
+        attribute uncertaintyFactor : Real;
+        attribute averagePower : PowerValue =
+            (idlePower + (activePower - idlePower) * activeFraction) * uncertaintyFactor / conversionEfficiency;
+        attribute peakPower : PowerValue = activePower * uncertaintyFactor / conversionEfficiency;
+{
+  "path": "models/libraries/marine/appendages.sysml",
+  "package": "MarineAppendages",
+  "kinds": {
+    "CalculationDefinition": 1
+  },
+  "children": [
+    [
+      "GeometryMargins",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineAppendages {
+    private import ScalarValues::*;
+    calc def GeometryMargins {
+        in d : Real [29] ordered nonunique;
+        in minimumAspectRatio : Real;
+        in clearanceM : Real;
+        doc /* Rectangular underwater foils centered at x=0 (keel) and
+         * x=-arm*length (rudder), with a center-chord rudder stock. The swept
+         * disk bounds all steering angles, including thickness for the current
+         * elliptical 12-percent section. This is a planform screen, not a
+         * bearing, bracket, hull-intersection or bulb-clearance assessment. */
+        attribute keelChord : Real = d#(11)/d#(12);
+        attribute rudderChord : Real = d#(13)/d#(14);
+        attribute keelAspectMargin : Real = d#(12)*d#(12)/d#(11)/minimumAspectRatio-1;
+{
+  "path": "models/libraries/marine/concept.sysml",
+  "package": "MarineConcept",
+  "kinds": {
+    "CalculationDefinition": 1
+  },
+  "children": [
+    [
+      "Evaluate",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineConcept {
+    private import ScalarValues::*;
+    calc def Evaluate {
+        in d : Real [29] ordered nonunique;
+        in m : Real [21] ordered nonunique;
+        in g : Real [60] ordered nonunique;
+        in q : Real [24] ordered nonunique;
+        in policy : Real [5] ordered nonunique;
+        in voyage : Real [2] ordered nonunique;
+        doc /* SI numerical boundary: voyage = conditional hours, maximum bus W.
+         * Policy = duration multiplier, delay hours, installed battery Wh/m3,
+         * equipment installed kg/m3, usable hull-volume fraction.
+         * No harvest credit: a finite-passage screening scenario, not perpetual
+         * energy balance or a completion deadline. Volume is necessary but not
+{
+  "path": "models/libraries/marine/course.sysml",
+  "package": "MarineCourse",
+  "kinds": {
+    "CalculationDefinition": 2
+  },
+  "children": [
+    [
+      "TackAverage",
+      "CalculationDefinition"
+    ],
+    [
+      "Route",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineCourse {
+    private import ScalarValues::*;
+    calc def TackAverage {
+        in a : Real; in b : Real; in lateralA : Real; in lateralB : Real;
+        return vmg : Real;
+        (a*RealFunctions::abs(lateralB)+b*RealFunctions::abs(lateralA))/(RealFunctions::abs(lateralA)+RealFunctions::abs(lateralB))
+    }
+    calc def Route {
+        doc /* Policy element 6 scales positive-progress residuals; it is not a minimum ground-speed requirement. */
+        in water : Real [8] ordered nonunique;
+        in states : Real [48] ordered nonunique;
+        in policy : Real [7] ordered nonunique;
+        doc /* Cases ordered by wind 5 then 8 m/s, windward then leeward, tack + then -.
+         * Each state contains speed, heading, incidence, leeway, rudder and heel.
+{
+  "path": "models/libraries/marine/design.sysml",
+  "package": "MarineDesign",
+  "kinds": {
+    "Documentation": 1,
+    "PartDefinition": 8,
+    "CalculationDefinition": 2
+  },
+  "children": [
+    [
+      "@1",
+      "Documentation"
+    ],
+    [
+      "Design",
+      "PartDefinition"
+    ],
+    [
+      "DesignVector",
+      "CalculationDefinition"
+    ],
+    [
+      "Parameters",
+      "PartDefinition"
+    ],
+    [
+      "ParametersVector",
+      "CalculationDefinition"
+    ],
+    [
+      "OperatingState",
+      "PartDefinition"
+    ],
+    [
+      "AeroCoefficients",
+      "PartDefinition"
+    ],
+    [
+      "HydroState",
+      "PartDefinition"
+    ],
+    [
+      "AppendageLoads",
+      "PartDefinition"
+    ],
+    [
+      "Passage",
+      "PartDefinition"
+    ],
+    [
+      "MassProperties",
+      "PartDefinition"
+    ]
+  ]
+}
+package MarineDesign {
+    private import ScalarValues::*;
+    doc /* Named SI numerical contract for a hull, rotating wing, keel and rudder.
+     * Names carry units: metres, square metres, kg, Wh, Nm, kg/m2 and rad/s.
+     * Fractions and scales are dimensionless. Arrays exist only at the compiled
+     * numerical boundary; application configurations own values and evidence. */
+    part def Design {
+        attribute length_m : Real;
+        attribute beam_m : Real;
+        attribute bottom_depth_m : Real;
+        attribute deck_height_m : Real;
+        attribute sail_m2 : Real;
+        attribute sail_AR : Real;
+        attribute camber_scale : Real;
+{
+  "path": "models/libraries/marine/hull-resistance.sysml",
+  "package": "MarineResistance",
+  "kinds": {
+    "Documentation": 1,
+    "CalculationDefinition": 3
+  },
+  "children": [
+    [
+      "@1",
+      "Documentation"
+    ],
+    [
+      "Coefficients",
+      "CalculationDefinition"
+    ],
+    [
+      "InputChecks",
+      "CalculationDefinition"
+    ],
+    [
+      "Evaluate",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineResistance {
+    private import ScalarValues::*;
+    doc /* Keuning and Katgert (2008), A Bare Hull Resistance Prediction Method
+     * Derived from the Results of the Delft Systematic Yacht Hull Series Extended
+     * to Higher Speeds, equation 1.7 and tables 1-2.
+     * Source: https://www.scribd.com/document/346520042/Keuning-2008-pdf
+     * Untrimmed, upright, bare-hull residuary resistance only. Not a total-drag,
+     * heeled-hull, sail-induced trim, roughness or wave-added-resistance model.
+     * Table-1 coordinate bounds are necessary screening limits, not evidence that
+     * every combination inside their rectangular envelope is supported.
+     * Beyond Fn 0.60 fewer hulls were tested; this implementation's admissible
+     * domain stops at 0.60 pending speed-dependent coverage evidence. */
+    calc def Coefficients {
+        in fn : Real;
+{
+  "path": "models/libraries/marine/hydrostatics.sysml",
+  "package": "MarineHydrostatics",
+  "kinds": {
+    "Documentation": 1,
+    "CalculationDefinition": 11
+  },
+  "children": [
+    [
+      "@1",
+      "Documentation"
+    ],
+    [
+      "Vertex",
+      "CalculationDefinition"
+    ],
+    [
+      "Moment",
+      "CalculationDefinition"
+    ],
+    [
+      "Intersection",
+      "CalculationDefinition"
+    ],
+    [
+      "WetMoment",
+      "CalculationDefinition"
+    ],
+    [
+      "PartialMoment",
+      "CalculationDefinition"
+    ],
+    [
+      "Difference",
+      "CalculationDefinition"
+    ],
+    [
+      "TwoWet",
+      "CalculationDefinition"
+    ],
+    [
+      "MeshMoments",
+      "CalculationDefinition"
+    ],
+    [
+      "BalanceChecks",
+      "CalculationDefinition"
+    ],
+    [
+      "Balance",
+      "CalculationDefinition"
+    ],
+    [
+      "BuoyancyMomentSensitivity",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineHydrostatics {
+    private import ScalarValues::*;
+    doc /* Geometry kernel for full-angle static buoyancy. SI metres and cubic
+     * metres; points are in world axes with Z up and gravity along -Z.
+     * A watertight displacement body is partitioned into nonoverlapping tetrahedra.
+     * The external numerical solver supplies pose and solves waterline equilibrium.
+     * Flooded voids must be excluded from displacement geometry, not made heavy
+     * as well unless retained water is separately trapped. No dynamic recovery claim. */
+    calc def Vertex {
+        in p : Real [*] ordered nonunique;
+        in i : Integer;
+        return xyz : Real [3] ordered nonunique;
+        if i == 1 ? (p#(1),p#(2),p#(3)) else if i == 2 ? (p#(4),p#(5),p#(6)) else if i == 3 ? (p#(7),p#(8),p#(9)) else (p#(10),p#(11),p#(12))
+    }
+{
+  "path": "models/libraries/marine/propulsion.sysml",
+  "package": "MarinePropulsion",
+  "kinds": {
+    "CalculationDefinition": 1
+  },
+  "children": [
+    [
+      "IdealAxialDiskPower",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarinePropulsion {
+    private import ScalarValues::*;
+    calc def IdealAxialDiskPower {
+        doc /* Steady ideal axial actuator disk. Inputs: thrust N, diameter m,
+         * fluid density kg/m3 and nonnegative axial inflow m/s. Output W.
+         * Excludes swirl/profile losses, installation effects, crossflow,
+         * ventilation and cavitation. Callers qualify the operating domain. */
+        in thrustN : Real;
+        in diameterM : Real;
+        in densityKgM3 : Real;
+        in axialSpeedMS : Real;
+        attribute diskAreaM2 : Real = 3.141592653589793 * diameterM * diameterM / 4;
+        attribute inducedSpeed : Real = (-axialSpeedMS + RealFunctions::sqrt(axialSpeedMS * axialSpeedMS + 2 * thrustN / (densityKgM3 * diskAreaM2))) / 2;
+        return powerW : Real = thrustN * (axialSpeedMS + inducedSpeed);
+{
+  "path": "models/libraries/marine/recovery.sysml",
+  "package": "MarineRecovery",
+  "kinds": {
+    "CalculationDefinition": 1
+  },
+  "children": [
+    [
+      "Segment",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineRecovery {
+    private import ScalarValues::*;
+    calc def Segment {
+        doc /* SI boundary: distance m, installed through-water speed m/s,
+         * along-track current m/s, cross-track current m/s, motor and essential
+         * battery withdrawal W, uncertainty multiplier. Output: feasible flag,
+         * ground speed m/s, transit s, protected energy Wh.
+         * Steady crab-angle compensation, no wave or acceleration model.
+         * Speed and power must be valid for the declared casualty state.
+         */
+        in x : Real [7] ordered nonunique;
+        attribute valid : Boolean = x#(1) >= 0 and x#(2) > 0 and x#(5) >= 0 and x#(6) > 0 and x#(7) >= 1;
+        attribute authority : Boolean = valid and RealFunctions::abs(x#(4)) < x#(2);
+        attribute ground : Real = if authority ? RealFunctions::sqrt(x#(2)*x#(2)-x#(4)*x#(4))+x#(3) else 0;
+{
+  "path": "models/libraries/marine/reliability.sysml",
+  "package": "MarineReliability",
+  "kinds": {
+    "CalculationDefinition": 2,
+    "Documentation": 1
+  },
+  "children": [
+    [
+      "ConstantHazardSurvival",
+      "CalculationDefinition"
+    ],
+    [
+      "EqualSurvivalRate",
+      "CalculationDefinition"
+    ],
+    [
+      "@3",
+      "Documentation"
+    ]
+  ]
+}
+package MarineReliability {
+    private import ScalarValues::*;
+    calc def ConstantHazardSurvival {
+        in ratePerHour : Real;
+        in hours : Real;
+        return survival : Real = OpenSysMLMathFunctions::exp(-ratePerHour * hours);
+    }
+    calc def EqualSurvivalRate {
+        in survival : Real;
+        in hours : Real;
+        return ratePerHour : Real = -OpenSysMLMathFunctions::ln(survival) / hours;
+    }
+    doc /* Constant nonnegative mission-critical hazard, no repair, hours > 0,
+     * and 0 < target survival <= 1. NIST Engineering Statistics Handbook,
+{
+  "path": "models/libraries/marine/sailing.sysml",
+  "package": "MarineSailing",
+  "kinds": {
+    "CalculationDefinition": 3
+  },
+  "children": [
+    [
+      "Core",
+      "CalculationDefinition"
+    ],
+    [
+      "Evaluate",
+      "CalculationDefinition"
+    ],
+    [
+      "InputChecks",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineSailing {
+    private import ScalarValues::*;
+
+    calc def Core {
+        in d : Real [29] ordered nonunique;
+        in p : Real [41] ordered nonunique;
+        in q : Real [*] ordered nonunique;
+        in s : Real [9] ordered nonunique;
+        in aero : Real [3] ordered nonunique;
+        in massData : Real [21] ordered nonunique;
+        in hydro : Real [12] ordered nonunique;
+        in surface : Real [9] ordered nonunique;
+        // enabled, Fx, Fy, air roll moment, signed mast moment, min Va, max |CL|, added resistance, incidence margin
+        doc /* s: wind, windward flag, fouling multiplier, speed, wind-from heading,
+{
+  "path": "models/libraries/marine/surface.sysml",
+  "package": "MarineSurface",
+  "kinds": {
+    "Documentation": 1,
+    "CalculationDefinition": 6
+  },
+  "children": [
+    [
+      "@1",
+      "Documentation"
+    ],
+    [
+      "WindSample",
+      "CalculationDefinition"
+    ],
+    [
+      "StripLoad",
+      "CalculationDefinition"
+    ],
+    [
+      "FetchSea",
+      "CalculationDefinition"
+    ],
+    [
+      "SpeedRetention",
+      "CalculationDefinition"
+    ],
+    [
+      "WaveScreen",
+      "CalculationDefinition"
+    ],
+    [
+      "HarmonicResponse",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineSurface {
+    private import ScalarValues::*;
+    doc /* SI magnitudes. Neutral log profile and strip quadrature are a first
+     * surface-layer screen, not a stability-corrected wave boundary-layer model.
+     * Wave resistance is an explicitly uncalibrated sensitivity coefficient.
+     * Deep-water wave/current action transport assumes slow spatial variation;
+     * a uniform river current is not itself a shoaling transition. */
+    calc def WindSample {
+        in x : Real [9] ordered nonunique;
+        // reference wind, reference height, roughness, sample height, heading,
+        // vessel speed, leeway (radians), shear enabled, minimum valid height.
+        attribute height : Real = NumericalFunctions::max(x#(4),x#(9));
+        attribute ratio : Real = if x#(8)>0.5 ? OpenSysMLMathFunctions::ln(height/x#(3))/OpenSysMLMathFunctions::ln(x#(2)/x#(3)) else 1;
+        attribute ax : Real = x#(1)*ratio*TrigFunctions::cos(x#(5))+x#(6)*TrigFunctions::cos(x#(7));
+{
+  "path": "models/libraries/marine/wave-performance.sysml",
+  "package": "MarineWavePerformance",
+  "kinds": {
+    "CalculationDefinition": 5
+  },
+  "children": [
+    [
+      "OrbitalVelocity",
+      "CalculationDefinition"
+    ],
+    [
+      "FoilLoad",
+      "CalculationDefinition"
+    ],
+    [
+      "ImpedanceTerm",
+      "CalculationDefinition"
+    ],
+    [
+      "BalanceCorrection",
+      "CalculationDefinition"
+    ],
+    [
+      "Actuation",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineWavePerformance {
+    private import ScalarValues::*;
+    calc def OrbitalVelocity {
+        in x : Real [7] ordered nonunique;
+        // amplitude, k, intrinsic omega, depth z<=0, phase, direction, gravity.
+        attribute decay : Real = OpenSysMLMathFunctions::exp(x#(2)*NumericalFunctions::min(x#(4),0));
+        attribute scale : Real = x#(1)*x#(3)*decay;
+        attribute vx : Real = scale*TrigFunctions::cos(x#(5))*TrigFunctions::cos(x#(6));
+        attribute vy : Real = scale*TrigFunctions::cos(x#(5))*TrigFunctions::sin(x#(6));
+        attribute vz : Real = scale*TrigFunctions::sin(x#(5));
+        return result : Real [3] ordered nonunique;
+        (vx,vy,vz)
+    }
+    calc def FoilLoad {
+{
+  "path": "models/libraries/marine/weather.sysml",
+  "package": "MarineWeather",
+  "kinds": {
+    "CalculationDefinition": 2,
+    "Documentation": 1
+  },
+  "children": [
+    [
+      "TwoRegimeCoverage",
+      "CalculationDefinition"
+    ],
+    [
+      "ConditionalPassageHours",
+      "CalculationDefinition"
+    ],
+    [
+      "@3",
+      "Documentation"
+    ]
+  ]
+}
+package MarineWeather {
+    private import ScalarValues::*;
+    calc def TwoRegimeCoverage {
+        in eastProbability : Real;
+        in westPass : Boolean;
+        in eastPass : Boolean;
+        return coverage : Real;
+        (1-eastProbability)*(if westPass ? 1 else 0) + eastProbability*(if eastPass ? 1 else 0)
+    }
+    calc def ConditionalPassageHours {
+        in eastProbability : Real;
+        in westPass : Boolean;
+        in eastPass : Boolean;
+        in westHours : Real;
+{
+  "path": "models/libraries/navigation/inland-obligations.sysml",
+  "package": "InlandExtended",
+  "kinds": {
+    "Documentation": 1,
+    "EnumerationDefinition": 5,
+    "PartUsage": 1,
+    "AnalysisCaseDefinition": 14
+  },
+  "children": [
+    [
+      "@0",
+      "Documentation"
+    ],
+    [
+      "Truth",
+      "EnumerationDefinition"
+    ],
+    [
+      "Mode",
+      "EnumerationDefinition"
+    ],
+    [
+      "Side",
+      "EnumerationDefinition"
+    ],
+    [
+      "context",
+      "PartUsage"
+    ],
+    [
+      "General",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "ChannelsAndTSS",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "RestrictedVisibility",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "LightsAndShapes",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "Signals",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "LightKind",
+      "EnumerationDefinition"
+    ],
+    [
+      "Color",
+      "EnumerationDefinition"
+    ],
+    [
+      "LightFixture",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "Installation",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "SoundAppliance",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "ExemptionsAndSpecialCases",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "CandidateAssessment",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "SnapshotConsistency",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "SpecialDisplays",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "PassageProtocol",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "DistressCatalog",
+      "AnalysisCaseDefinition"
+    ]
+  ]
+}
+package InlandExtended {
+ doc /* Reusable U.S. Inland Rules interpretation. Supplied facts and candidate checks are conditional assessments, not established legal compliance. The mission navigation adapter consumes the pair assessment; equipment and other obligations remain separately assessed.*/
+ private import ScalarValues::*;
+ enum def Truth { yes; no; unknown; }
+ enum def Mode { sail; power; rowing; towingAstern; pushing; towed; pushed; trawling; fishing; nuc; ram; dredging; diving; mineClearance; pilot; seaplane; wig; airCushion; mooredBarge; }
+ enum def Side { portSide; starboardSide; ahead; aft; unresolved; }
+ part context;
+ analysis def General {
+  doc /* Rules 1-8. Candidate-action and evidence checks, not a sensor estimator or safe-speed optimizer. Judgment inputs require external evidence; no universal CPA/time/turn threshold is invented. Rule 4 applies general duties in all visibility. Rule 3 definitions are externally classified facts. Rule 2 departure requires assessed necessity, never a blanket emergency exemption.*/
+  subject encounter;
+  in attribute factsKnown : Boolean;
+  in attribute inlandWaters : Boolean;
+  in attribute jurisdictionReviewed : Boolean;
+  in attribute localProvisionsSatisfied : Boolean;
+{
+  "path": "models/libraries/navigation/inland-pair.sysml",
+  "package": "InlandNavigationExperiment",
+  "kinds": {
+    "Documentation": 1,
+    "EnumerationDefinition": 11,
+    "PartUsage": 1,
+    "AnalysisCaseDefinition": 1
+  },
+  "children": [
+    [
+      "@0",
+      "Documentation"
+    ],
+    [
+      "Truth",
+      "EnumerationDefinition"
+    ],
+    [
+      "VesselKind",
+      "EnumerationDefinition"
+    ],
+    [
+      "Tack",
+      "EnumerationDefinition"
+    ],
+    [
+      "Windward",
+      "EnumerationDefinition"
+    ],
+    [
+      "OvertakingMemory",
+      "EnumerationDefinition"
+    ],
+    [
+      "EncounterRole",
+      "EnumerationDefinition"
+    ],
+    [
+      "Response",
+      "EnumerationDefinition"
+    ],
+    [
+      "context",
+      "PartUsage"
+    ],
+    [
+      "Assess",
+      "AnalysisCaseDefinition"
+    ],
+    [
+      "PowerEncounter",
+      "EnumerationDefinition"
+    ],
+    [
+      "TargetSide",
+      "EnumerationDefinition"
+    ],
+    [
+      "RiverMotion",
+      "EnumerationDefinition"
+    ],
+    [
+      "PassageAgreement",
+      "EnumerationDefinition"
+    ]
+  ]
+}
+package InlandNavigationExperiment {
+ doc /* Reusable U.S. Inland Rules interpretation. Supplied facts and candidate checks are conditional assessments, not established legal compliance. The mission navigation adapter consumes the pair assessment; equipment and other obligations remain separately assessed.*/
+ private import ScalarValues::*;
+ enum def Truth { yes; no; unknown; }
+ enum def VesselKind { sailing; power; unclassified;
+     enum fishing;
+     enum notUnderCommand;
+     enum restrictedManeuverability;
+ }
+ enum def Tack { portTack; starboardTack; unresolved; }
+ enum def Windward { ownWindward; otherWindward; unresolved; }
+ enum def OvertakingMemory { clear; ownDuty; otherDuty; conflicting; }
+ enum def EncounterRole { giveWay; standOn; noPairRole; unsupported;
+     enum mutualAvoidance;
+{
+  "path": "models/libraries/structures/mass-properties.sysml",
+  "package": "MarineMass",
+  "kinds": {
+    "CalculationDefinition": 2
+  },
+  "children": [
+    [
+      "MassProperties",
+      "CalculationDefinition"
+    ],
+    [
+      "InputChecks",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineMass {
+    private import ScalarValues::*;
+
+    calc def MassProperties {
+        in d : Real [29] ordered nonunique;
+        in p : Real [41] ordered nonunique;
+        in m : Real [10] ordered nonunique;
+        in geometry : Real [51] ordered nonunique;
+        doc /* Four bodies: hull, wing, keel, rudder. Each geometry block is
+         * skin area; skin centroid XYZ; enclosed volume; volume centroid XYZ;
+         * minimum thin-wall inertia/thickness; worst bending modulus/thickness;
+         * root enclosed area; root perimeter. Last three inputs: ballast centroid XYZ. Geometry units are SI.
+         * Foil ribs are unperforated transverse diaphragms. Hull ribs follow
+         * a surface-density allocation. Neither earns FDM bending credit. */
+{
+  "path": "models/libraries/structures/scantlings.sysml",
+  "package": "MarineStructures",
+  "kinds": {
+    "CalculationDefinition": 1
+  },
+  "children": [
+    [
+      "DesignMargins",
+      "CalculationDefinition"
+    ]
+  ]
+}
+package MarineStructures {
+    private import ScalarValues::*;
+    calc def DesignMargins {
+        in d : Real [29] ordered nonunique;
+        in p : Real [41] ordered nonunique;
+        in m : Real [21] ordered nonunique;
+        in g : Real [60] ordered nonunique;
+        in r : Real [12] ordered nonunique;
+        in loads : Real [3] ordered nonunique;
+        in waterline : Real;
+        doc /* g extends the mass geometry vector with deck area at 52 and finite-laminate
+         * I/Z pairs for hull, wing, keel and rudder at 53 through 60.
+         * Inward polygon offsets define the laminate cross section; no thin-wall
+         * stiffness extrapolation is used. Global bending uses worst-direction section modulus.

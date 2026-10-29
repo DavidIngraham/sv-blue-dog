@@ -1,0 +1,34 @@
+........................................................................ [ 26%]
+........................................................................ [ 52%]
+........................................................................ [ 79%]
+........................................................                 [100%]
+============================= slowest 30 durations =============================
+0.11s setup    experiments/inland-navigation/test_navigation.py::test_rule_scenario[Port gives way to starboard]
+0.10s call     experiments/inland-navigation/test_navigation.py::test_rule_scenario[Port gives way to starboard]
+0.07s call     experiments/inland-navigation/test_navigation.py::test_composed_native_assessment_rejects_independent_channel_failure
+0.06s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[LightsAndShapes: day shapes]
+0.05s call     experiments/inland-navigation/test_navigation.py::test_native_interface_matches_transport_schema
+0.05s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[Signals: small sound required]
+0.04s call     experiments/inland-navigation/test_navigation.py::test_motor_sailing_requires_powered_signal_mode
+0.04s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[ChannelsAndTSS: outside channel and TSS]
+0.04s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[General: supported candidate]
+0.03s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[Special display baseline]
+0.03s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[ExemptionsAndSpecialCases: new small vessel no grandfathering]
+0.03s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[LightFixture: small masthead]
+0.03s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[SoundAppliance: small fitted whistle]
+0.02s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[Installation: standard measured layout]
+0.02s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[RestrictedVisibility: radar forward port turn rejected]
+0.02s call     experiments/inland-navigation/test_navigation.py::test_composition_rejects_disconnected_passage_exchange
+0.02s call     experiments/inland-navigation/test_navigation.py::test_composition_rejects_risk_discarded_after_steady_bearing
+0.02s call     experiments/inland-navigation/test_navigation.py::test_composition_requires_evidence_for_core_agreement
+0.02s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[Unagreed passage needs precaution]
+0.02s call     experiments/inland-navigation/test_navigation.py::test_assurance_cannot_override_native_failed_domain
+0.02s call     experiments/inland-navigation/test_navigation.py::test_composition_cannot_override_inconsistent_visibility
+0.02s call     experiments/inland-navigation/test_navigation.py::test_rule_scenario[Power crossing starboard target]
+0.01s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[Combined consistent assessment]
+0.01s call     experiments/inland-navigation/test_navigation.py::test_extended_rule_scenario[SOS recognized]
+0.01s call     experiments/inland-navigation/test_navigation.py::test_rule_scenario[Overtaking history through turn, lost sight and clearance]
+0.01s call     experiments/inland-navigation/test_navigation.py::test_rule_scenario[Stand-on escalation through nonresponse]
+
+(4 durations < 0.005s hidden.  Use -vv to show these durations.)
+272 passed in 1.57s

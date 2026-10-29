@@ -1,0 +1,19 @@
+............................                                             [100%]
+============================= slowest 30 durations =============================
+1.41s call     tests/test_mission_execution.py::test_mission_crosses_all_gates_in_order
+0.20s call     tests/test_mission_execution.py::test_port_rounding_requires_north_west_south_checkpoints
+0.16s call     tests/test_mission_execution.py::test_integration_refinement_preserves_fixed_controller_behavior
+0.11s call     tests/test_mission_execution.py::test_wind_sensor_outage_does_not_create_station_keeping
+0.06s call     tests/test_mission_execution.py::test_reserve_depletion_stops_mission
+0.04s call     tests/test_mission_execution.py::test_no_harvesting_can_complete_finite_mission
+0.04s call     tests/test_mission_execution.py::test_monitoring_outage_does_not_require_intervention
+0.02s call     tests/test_mission_execution.py::test_instant_maneuver_charge_updates_terminal_history_at_same_timestamp
+0.02s call     tests/test_mission_execution.py::test_blocked_traffic_domain_stops_instead_of_inventing_safe_control
+0.01s call     tests/test_mission_execution.py::test_terminal_history_records_reserve_stop
+0.01s call     tests/test_mission_execution.py::test_intervention_is_applied_at_its_time_between_integration_samples
+0.01s call     tests/test_mission_execution.py::test_horizon_is_censoring_not_deadline_failure
+0.01s call     tests/test_mission_execution.py::test_intervention_disqualifies_attempt[operator_intervention]
+0.01s call     tests/test_mission_execution.py::test_intervention_disqualifies_attempt[motor_use]
+
+(16 durations < 0.005s hidden.  Use -vv to show these durations.)
+28 passed in 2.29s

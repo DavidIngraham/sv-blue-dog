@@ -1,0 +1,6 @@
+.......                                                                  [100%]
+============================= slowest 30 durations =============================
+1.66s call     tests/test_wing_heel.py::test_archived_heel_run_has_complete_cases_and_reproducible_source
+
+(20 durations < 0.005s hidden.  Use -vv to show these durations.)
+7 passed in 1.75s

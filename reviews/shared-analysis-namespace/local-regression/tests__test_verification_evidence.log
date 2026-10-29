@@ -1,0 +1,12 @@
+....................                                                     [100%]
+============================= slowest 30 durations =============================
+38.63s setup    tests/test_verification_evidence.py::test_rendered_verification_tables_preserve_plan_and_execution_distinction
+3.76s call     tests/test_verification_evidence.py::test_archived_design_cannot_substitute_for_planned_ic01_test_article
+3.58s call     tests/test_verification_evidence.py::test_missing_method_annotation_is_detected
+2.43s setup    tests/test_verification_evidence.py::test_all_project_definitions_have_methods_and_objectives_without_execution
+2.28s call     tests/test_verification_evidence.py::test_nested_unplanned_verification_is_not_lost_beneath_namespace_containers
+1.23s call     tests/test_verification_evidence.py::test_removing_uncertainty_precondition_changes_native_eligibility
+1.16s call     tests/test_verification_evidence.py::test_numerical_eligibility_never_changes_planned_verdicts
+
+(23 durations < 0.005s hidden.  Use -vv to show these durations.)
+20 passed in 53.22s

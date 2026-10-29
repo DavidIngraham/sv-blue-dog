@@ -1,0 +1,23 @@
+..................                                                       [100%]
+============================= slowest 30 durations =============================
+39.07s setup    tests/test_safety_reliability.py::test_rendered_hazards_keep_evidence_and_acceptance_open
+3.91s call     tests/test_safety_reliability.py::test_missing_hazard_argument_link_is_detected[controls-handlingRetrievalExposureControl-3]
+3.84s call     tests/test_safety_reliability.py::test_missing_hazard_argument_link_is_detected[verificationPlans-handlingRetrievalExposureVerification-3]
+3.45s call     tests/test_safety_reliability.py::test_wrong_configuration_is_detected
+3.27s call     tests/test_safety_reliability.py::test_missing_hazard_argument_link_is_detected[contributors-handlingRetrievalExposureContributor-2]
+1.44s call     tests/test_safety_reliability.py::test_unreviewed_rate_model_cannot_become_supported[dependenceTreatmentAccepted]
+1.36s setup    tests/test_safety_reliability.py::test_initial_hazards_have_controls_plans_and_critical_contributors
+1.33s call     tests/test_safety_reliability.py::test_incomplete_synthetic_disposition_cannot_close[effectivenessEvidenceAccepted]
+1.30s call     tests/test_safety_reliability.py::test_complete_synthetic_disposition_exercises_native_precondition_only
+1.27s call     tests/test_safety_reliability.py::test_incomplete_synthetic_disposition_cannot_close[implementationEvidenceAccepted]
+1.15s call     tests/test_safety_reliability.py::test_unreviewed_rate_model_cannot_become_supported[criticalFunctionPartitionAccepted]
+0.54s call     tests/test_safety_reliability.py::test_incomplete_synthetic_disposition_cannot_close[condition]
+0.39s call     tests/test_safety_reliability.py::test_incomplete_synthetic_disposition_cannot_close[residualRiskAssessmentAccepted]
+0.36s call     tests/test_safety_reliability.py::test_incomplete_synthetic_disposition_cannot_close[riskDispositionAccepted]
+0.35s call     tests/test_safety_reliability.py::test_unreviewed_rate_model_cannot_become_supported[commonCauseCoverageAccepted]
+0.34s call     tests/test_safety_reliability.py::test_incomplete_synthetic_disposition_cannot_close[acceptanceRecord]
+0.30s call     tests/test_safety_reliability.py::test_incomplete_synthetic_disposition_cannot_close[controlEvidenceRecord]
+0.28s call     tests/test_safety_reliability.py::test_incomplete_synthetic_disposition_cannot_close[acceptanceAuthority]
+
+(12 durations < 0.005s hidden.  Use -vv to show these durations.)
+18 passed in 63.99s (0:01:03)

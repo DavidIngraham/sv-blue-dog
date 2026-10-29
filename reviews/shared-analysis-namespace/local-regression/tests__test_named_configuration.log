@@ -1,0 +1,10 @@
+.......                                                                  [100%]
+============================= slowest 30 durations =============================
+13.93s call     tests/test_named_configuration.py::test_named_demonstration_links_native_arithmetic_to_recovery_policy
+1.38s call     tests/test_named_configuration.py::test_configuration_mutation_changes_native_inputs_and_recovery_result
+1.31s call     tests/test_named_configuration.py::test_named_ic01_preserves_the_complete_archived_design
+0.02s call     tests/test_named_configuration.py::test_native_recovery_cases_distinguish_reserve_and_route_limits
+0.01s call     tests/test_named_configuration.py::test_ic01_recovery_screen_rejects_an_alternate_configuration
+
+(16 durations < 0.005s hidden.  Use -vv to show these durations.)
+7 passed in 17.08s

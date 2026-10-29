@@ -1,0 +1,33 @@
+..............................                                           [100%]
+============================= slowest 30 durations =============================
+1.24s call     tests/test_mission_logic.py::test_abort_latch_survives_restored_inputs_and_run_reset
+1.18s call     tests/test_mission_logic.py::test_model_policy_change_changes_simulator_behavior
+0.18s call     tests/test_mission_logic.py::test_unknown_event_fails_explicitly
+0.06s call     tests/test_mission_logic.py::test_safe_capsize_and_navigation_outage_resume_without_hidden_sailing
+0.05s call     tests/test_mission_logic.py::test_unassisted_righting_preserves_attempt_but_never_sails_inverted
+0.05s call     tests/test_mission_logic.py::test_wind_loss_and_expiry_drive_executed_motion
+0.03s call     tests/test_mission_logic.py::test_reserve_exhaustion_during_safe_inversion_ends_attempt_with_queued_alert[True]
+0.02s call     tests/test_mission_logic.py::test_righting_cannot_erase_disqualifying_event[safety_capability_loss]
+0.02s call     tests/test_mission_logic.py::test_navigation_loss_without_backup_confirmation_aborts_during_capsize
+0.02s call     tests/test_mission_logic.py::test_righting_without_safety_confirmation_aborts
+0.02s call     tests/test_mission_logic.py::test_reserve_exhaustion_during_safe_inversion_ends_attempt_with_queued_alert[False]
+0.01s call     tests/test_mission_logic.py::test_righting_cannot_erase_disqualifying_event[power_loss]
+0.01s call     tests/test_mission_logic.py::test_unobserved_righting_never_resumes_or_counts_drift_gate_crossings
+0.01s call     tests/test_mission_logic.py::test_righting_cannot_erase_disqualifying_event[operator_intervention]
+0.01s call     tests/test_mission_logic.py::test_simultaneous_navigation_observations_cannot_erase_safety_loss[False]
+0.01s call     tests/test_mission_logic.py::test_righting_cannot_erase_disqualifying_event[motor_use]
+0.01s call     tests/test_mission_logic.py::test_event_qualification_persists_in_native_adapter_outside_engine[safety_capability_loss]
+0.01s call     tests/test_mission_logic.py::test_simultaneous_navigation_observations_cannot_erase_safety_loss[True]
+0.01s call     tests/test_mission_logic.py::test_navigation_degradation_requires_confirmed_backup_safety
+0.01s call     tests/test_mission_logic.py::test_event_qualification_persists_in_native_adapter_outside_engine[operator_intervention]
+0.01s call     tests/test_mission_logic.py::test_event_qualification_persists_in_native_adapter_outside_engine[motor_use]
+0.01s call     tests/test_mission_logic.py::test_low_reserve_capsize_and_communications_outage_latch_once
+0.01s call     tests/test_mission_logic.py::test_native_capsize_observation_policy[True-True-False-abort]
+0.01s call     tests/test_mission_logic.py::test_native_capsize_observation_policy[False-True-True-invalid_observation]
+0.01s call     tests/test_mission_logic.py::test_inverted_permissions_are_native_and_fail_closed
+0.01s call     tests/test_mission_logic.py::test_native_capsize_observation_policy[False-False-False-abort]
+0.01s call     tests/test_mission_logic.py::test_native_capsize_observation_policy[False-False-True-await_righting]
+0.01s call     tests/test_mission_logic.py::test_supervisor_precedence_and_traffic_mode
+0.01s call     tests/test_mission_logic.py::test_native_capsize_observation_policy[True-True-True-resume]
+0.01s call     tests/test_mission_logic.py::test_righting_without_capsize_is_invalid
+30 passed in 3.23s

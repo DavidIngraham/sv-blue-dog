@@ -1,0 +1,203 @@
+{
+  "baseline": "556cd79e266394cae9e9b371a86941f50295cffc",
+  "projectModules": 81,
+  "project": {
+    "tests": 1167,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reusableRuntimeUnique": {
+    "tests": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "publishedPagesBuilt": 38,
+  "finalChecks": [
+    {
+      "name": "reusable-runtime",
+      "arguments": [
+        "-m",
+        "pytest",
+        "packages/sysml-python/tests",
+        "-q",
+        "--junitxml=/home/david/repos/sv-blue-dog-analysis-namespaces/.tools/shared-final/reusable-runtime.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 151.03
+    },
+    {
+      "name": "projection-recorded",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.evidence.model",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-current",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.evidence.model",
+        "--current",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.11
+    },
+    {
+      "name": "projection-continuation",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.evidence.continuation",
+        "2026-10-12-continuation",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-finite",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.evidence.continuation",
+        "2026-10-12-finite-passage",
+        "--package",
+        "BlueDog::Evidence::FinitePassageSizing",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.11
+    },
+    {
+      "name": "projection-srr",
+      "arguments": [
+        "-m",
+        "tools.publishing.srr",
+        "--run",
+        "2026-10-13-srr-readiness",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 4.58
+    },
+    {
+      "name": "projection-frontier",
+      "arguments": [
+        "-m",
+        "tools.publishing.frontier",
+        "--run",
+        "2026-10-13-srr-frontier",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-weather",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.environment.climatology",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 2.07
+    },
+    {
+      "name": "seeded-campaign",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.mission.campaign",
+        "--count",
+        "4"
+      ],
+      "exitCode": 0,
+      "seconds": 20.48
+    },
+    {
+      "name": "sizing-figure",
+      "arguments": [
+        "-m",
+        "tools.publishing.sizing_progress"
+      ],
+      "exitCode": 0,
+      "seconds": 0.57
+    },
+    {
+      "name": "course-map",
+      "arguments": [
+        "-m",
+        "tools.publishing.course_map"
+      ],
+      "exitCode": 0,
+      "seconds": 3.68
+    },
+    {
+      "name": "course-satellite",
+      "arguments": [
+        "-m",
+        "tools.publishing.course_satellite"
+      ],
+      "exitCode": 0,
+      "seconds": 4.43
+    },
+    {
+      "name": "wave-motion",
+      "arguments": [
+        "-m",
+        "tools.publishing.wave_motion",
+        "evidence/runs/2026-10-13-wave-motion"
+      ],
+      "exitCode": 0,
+      "seconds": 0.62
+    },
+    {
+      "name": "wave-performance",
+      "arguments": [
+        "-m",
+        "tools.publishing.wave_performance",
+        "evidence/runs/2026-10-13-wave-performance"
+      ],
+      "exitCode": 0,
+      "seconds": 0.92
+    },
+    {
+      "name": "publishing",
+      "arguments": [
+        "-m",
+        "tools.publishing.build"
+      ],
+      "exitCode": 0,
+      "seconds": 39.0
+    },
+    {
+      "name": "reusable-project-native",
+      "arguments": [
+        "-m",
+        "pytest",
+        "packages/sysml-python/tests/test_project.py",
+        "-q",
+        "--junitxml=/home/david/repos/sv-blue-dog-analysis-namespaces/.tools/shared-final/reusable-project-native.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 228.76
+    }
+  ],
+  "sourceHashes": {
+    "models/blue-dog.sysml": "f32961b47aa620dc09f2cde75d5fa27cb35cdf8d07a2ded7611deb386652f2e2",
+    "models/libraries/analysis.sysml": "98065dc7f0298faffb538558fc960f030787a611632b0650b3706d1e748a37ff",
+    "models/libraries/decision-records.sysml": "93102a19a7e9c69cd35544bf7f4815657164803fd1bbe9af6d6689ad613f52f3",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326"
+  },
+  "notes": [
+    "Reusable runtime ran first without OPENSYSML_BINARY; generated cases were rerun with the pinned native binary. Unique test identities all pass without skips.",
+    "No model formulas, configuration values, qualification policy or Challenge namespace changed.",
+    "Local feature branch only; remote CI and publication evidence are in the final handoff."
+  ]
+}

@@ -1,0 +1,9 @@
+..........                                                               [100%]
+============================= slowest 30 durations =============================
+11.25s call     tests/test_encounter_continuation.py::test_completed_recovery_result_uses_standard_json
+1.40s call     tests/test_encounter_continuation.py::test_common_cause_continues_to_declared_horizon
+0.13s call     tests/test_encounter_continuation.py::test_measurement_accounting_excludes_declared_shared_base
+0.01s call     tests/test_encounter_continuation.py::test_native_timing_requirement[1-True]
+
+(26 durations < 0.005s hidden.  Use -vv to show these durations.)
+10 passed in 13.02s

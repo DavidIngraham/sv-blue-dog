@@ -1,0 +1,8 @@
+.......                                                                  [100%]
+============================= slowest 30 durations =============================
+39.19s setup    tests/test_wind_sensing.py::test_wind_thread_reaches_current_mission_root
+7.49s call     tests/test_wind_sensing.py::test_all_requirement_views_include_their_upstream_context
+2.67s call     tests/test_wind_sensing.py::test_native_sensor_budgets
+
+(18 durations < 0.005s hidden.  Use -vv to show these durations.)
+7 passed in 49.38s

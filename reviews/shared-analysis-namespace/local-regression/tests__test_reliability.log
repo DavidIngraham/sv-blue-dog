@@ -1,0 +1,25 @@
+....................                                                     [100%]
+============================= slowest 30 durations =============================
+5.81s call     tests/test_reliability.py::test_holds_increase_exposure_and_tighten_budget
+4.58s call     tests/test_reliability.py::test_dfmea_starter_stays_open_and_has_real_links
+4.51s call     tests/test_reliability.py::test_synthetic_exposure_and_evidence_gate
+4.47s call     tests/test_reliability.py::test_binding_duration_is_independent_of_provisional_reliability[True-100-pass]
+3.19s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[part redefines upstream { attribute :>> retainedPerformance = 0; }]
+3.17s call     tests/test_reliability.py::test_binding_duration_is_independent_of_provisional_reliability[False-100-inconclusive]
+3.02s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[part redefines upstream { attribute :>> currentVMG = -2 [m/s]; }]
+3.00s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[part redefines upstream { attribute :>> currentVMG = -3 [m/s]; }]
+2.93s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[attribute :>> holdTime = -1 [s];]
+2.92s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[attribute :>> commonCauseRatePerHour = -0.1;]
+2.90s call     tests/test_reliability.py::test_accepted_but_short_test_is_a_verification_failure
+2.89s call     tests/test_reliability.py::test_accepted_synthetic_fixture_exercises_pass_path
+2.88s call     tests/test_reliability.py::test_positive_but_inadequate_progress_fails
+2.87s call     tests/test_reliability.py::test_common_cause_rate_is_included
+2.86s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[attribute :>> criticalRatesPerHour = (-0.001, 0.0003);]
+2.82s call     tests/test_reliability.py::test_duration_cannot_pass_an_accepted_profile_beyond_qualified_exposure
+2.81s call     tests/test_reliability.py::test_invalid_profile_cannot_pass[attribute :>> zeroFailureTestHours = 0;]
+2.79s call     tests/test_reliability.py::test_failures_invalidate_zero_failure_demonstration
+2.79s call     tests/test_reliability.py::test_binding_duration_is_independent_of_provisional_reliability[True-10000-pass]
+2.64s call     tests/test_reliability.py::test_slow_progress_is_allowed_with_sufficient_qualified_exposure
+
+(10 durations < 0.005s hidden.  Use -vv to show these durations.)
+20 passed in 65.93s (0:01:05)

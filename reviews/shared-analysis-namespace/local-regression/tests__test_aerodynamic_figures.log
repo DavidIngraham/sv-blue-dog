@@ -1,0 +1,6 @@
+.                                                                        [100%]
+============================= slowest 30 durations =============================
+4.82s call     tests/test_aerodynamic_figures.py::test_gallery_assets_and_sample_provenance
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+1 passed in 5.80s

@@ -1,0 +1,11 @@
+...............                                                          [100%]
+============================= slowest 30 durations =============================
+2.82s call     tests/test_encounter_envelope.py::test_summary_native_cli_client_parity
+1.19s setup    tests/test_encounter_envelope.py::test_original_criteria_and_archived_budget_are_unchanged
+0.12s call     tests/test_encounter_envelope.py::test_original_criteria_and_archived_budget_are_unchanged
+0.01s call     tests/test_encounter_envelope.py::test_occupied_interval_epoch_and_overlap
+0.01s call     tests/test_encounter_envelope.py::test_relative_motion_geometries_and_common_current
+0.01s call     tests/test_encounter_envelope.py::test_assessment_phase_is_charged_once_after_release
+
+(24 durations < 0.005s hidden.  Use -vv to show these durations.)
+15 passed in 4.20s

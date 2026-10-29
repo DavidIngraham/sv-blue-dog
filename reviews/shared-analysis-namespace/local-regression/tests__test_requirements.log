@@ -1,0 +1,24 @@
+....................                                                     [100%]
+============================= slowest 30 durations =============================
+38.39s setup    tests/test_requirements.py::test_focused_views_cover_all_derivations
+6.38s call     tests/test_requirements.py::test_use_case_and_satisfaction_traceability
+4.14s setup    tests/test_requirements.py::test_diagram_preserves_expected_derivations
+3.56s call     tests/test_requirements.py::test_statements_exclude_supporting_material
+3.39s call     tests/test_requirements.py::test_oosem_scenarios_render_declared_behavior[normal-actions0]
+2.90s call     tests/test_requirements.py::test_native_validation
+2.66s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::PeakSupplyCapabilityVerification]
+2.60s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::EnergyAwarenessVerification]
+2.59s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::ConstructionArchitectureVerification]
+2.57s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Challenge::PassageQualificationVerification]
+2.57s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::CapsizeResilienceVerification]
+2.57s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::MissionPerformanceAssessmentVerification]
+2.50s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::ReliabilityEvidenceVerification]
+2.48s call     tests/test_requirements.py::test_planned_verification_cannot_report_a_pass[BlueDog::Verification::Requirements::VegetationResilienceVerification]
+2.20s call     tests/test_requirements.py::test_mission_drivers_do_not_entail_owner_constraints
+2.03s call     tests/test_requirements.py::test_oosem_scenarios_render_declared_behavior[recovery-actions2]
+2.03s call     tests/test_requirements.py::test_challenge_is_standalone
+1.97s call     tests/test_requirements.py::test_oosem_scenarios_render_declared_behavior[traffic-actions1]
+1.86s call     tests/test_requirements.py::test_oosem_context_exposes_mission_participants
+
+(11 durations < 0.005s hidden.  Use -vv to show these durations.)
+20 passed in 89.48s (0:01:29)

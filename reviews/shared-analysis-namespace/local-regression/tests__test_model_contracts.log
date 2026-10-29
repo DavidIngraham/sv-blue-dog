@@ -1,0 +1,10 @@
+.........                                                                [100%]
+============================= slowest 30 durations =============================
+11.45s call     tests/test_model_contracts.py::test_mass_scalar_batch_defaults_and_typed_records
+0.13s call     tests/test_model_contracts.py::test_schema_follows_model_names_order_and_dimensions
+0.06s call     tests/test_model_contracts.py::test_unsupported_schema_fails_preparation
+0.03s setup    tests/test_model_contracts.py::test_mass_scalar_batch_defaults_and_typed_records
+0.01s call     tests/test_model_contracts.py::test_generated_widths_and_finite_checks_cover_both_apis
+
+(22 durations < 0.005s hidden.  Use -vv to show these durations.)
+9 passed in 11.86s

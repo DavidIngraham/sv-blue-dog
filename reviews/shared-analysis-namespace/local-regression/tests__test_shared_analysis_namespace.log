@@ -1,0 +1,8 @@
+...                                                                      [100%]
+============================= slowest 30 durations =============================
+3.88s call     tests/test_shared_analysis_namespace.py::test_new_domain_calculation_is_discovered_and_runs_without_python_dispatch_edits
+2.20s call     tests/test_shared_analysis_namespace.py::test_only_calculation_libraries_share_analysis_and_mixed_roots_stay_separate
+0.07s call     tests/test_shared_analysis_namespace.py::test_shared_analysis_document_is_standalone_and_executes_native_calculations
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+3 passed in 6.16s

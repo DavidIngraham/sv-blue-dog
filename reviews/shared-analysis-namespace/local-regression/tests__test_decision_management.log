@@ -1,0 +1,20 @@
+...............                                                          [100%]
+============================= slowest 30 durations =============================
+39.10s setup    tests/test_decision_management.py::test_decision_and_criterion_registers_are_published
+4.48s call     tests/test_decision_management.py::test_native_audit_detects_scope_or_criterion_corruption[BlueDog::Decisions::TradeCriteria::handling::position-7-D07 Criterion positions]
+3.89s call     tests/test_decision_management.py::test_retained_basis_state_is_checked_without_reclassifying_its_content
+3.86s call     tests/test_decision_management.py::test_native_audit_detects_scope_or_criterion_corruption[BlueDog::Decisions::Context::sizingBaseline::reopenTrigger-""-D01 Missing]
+3.79s call     tests/test_decision_management.py::test_native_audit_detects_scope_or_criterion_corruption[BlueDog::Decisions::TradeCriteria::reliabilityStudy::kind-BlueDog::Decisions::TradeCriteria::Kind::mandatory-D08 Wrong]
+3.77s call     tests/test_decision_management.py::test_acceptance_flag_without_actual_disposition_identity_is_detected
+2.95s call     tests/test_decision_management.py::test_new_unclassified_working_decision_is_detected
+2.92s call     tests/test_decision_management.py::test_native_audit_detects_changed_duration_basis
+2.71s call     tests/test_decision_management.py::test_record_outside_register_scopes_is_not_silently_omitted
+2.56s call     tests/test_decision_management.py::test_native_decision_scope_and_current_evidence_are_explicit
+0.03s call     tests/test_decision_management.py::test_native_tie_is_reported_and_first_selection_is_order_dependent
+0.02s call     tests/test_decision_management.py::test_native_supplied_admitted_subset_is_the_only_selection_pool
+0.01s call     tests/test_decision_management.py::test_native_preference_reverses_with_supplied_metric[9-b]
+0.01s call     tests/test_decision_management.py::test_native_preference_reverses_with_supplied_metric[11-a]
+0.01s call     tests/test_decision_management.py::test_native_missing_metric_is_visible_not_zero
+
+(15 durations < 0.005s hidden.  Use -vv to show these durations.)
+15 passed in 70.18s (0:01:10)

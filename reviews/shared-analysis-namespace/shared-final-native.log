@@ -1,0 +1,23 @@
+{
+  "beforeElements": 14929,
+  "afterElements": 14933,
+  "missing": [],
+  "changed": [],
+  "added": [
+    "Analysis",
+    "Analysis::Energy",
+    "Analysis::Marine",
+    "Analysis::Mechanics"
+  ],
+  "topLevelPackages": [
+    "Analysis",
+    "BlueDog",
+    "EngineeringDecisions",
+    "InlandExtended",
+    "InlandNavigationExperiment",
+    "MarineDesign",
+    "MarineEnergy"
+  ],
+  "allPackages": 115,
+  "sourceFiles": 7
+}

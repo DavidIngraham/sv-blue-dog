@@ -1,0 +1,13 @@
+........                                                                 [100%]
+============================= slowest 30 durations =============================
+11.84s call     tests/test_hydrostatics.py::test_clipping_matches_independent_convex_hull_for_all_wet_counts
+3.34s call     tests/test_hydrostatics.py::test_native_actuator_accounting_keeps_idle_and_movement_losses
+0.12s call     tests/test_hydrostatics.py::test_vertex_plane_and_vertex_permutation_invariance
+0.03s call     tests/test_hydrostatics.py::test_free_pitch_solves_offset_cg_and_reports_inverted_instability
+0.01s call     tests/test_hydrostatics.py::test_box_displacement_translation_and_small_angle_metacentric_height
+0.01s call     tests/test_hydrostatics.py::test_geometry_changes_with_wing_camber_and_trim_without_changing_volume
+0.01s call     tests/test_hydrostatics.py::test_mesh_batch_matches_independent_sum_and_checks_inputs
+0.01s call     tests/test_hydrostatics.py::test_pitch_and_roll_are_distinct_and_sink_is_rejected
+
+(16 durations < 0.005s hidden.  Use -vv to show these durations.)
+8 passed in 15.75s

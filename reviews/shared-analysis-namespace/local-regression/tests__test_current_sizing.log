@@ -1,0 +1,8 @@
+.....                                                                    [100%]
+============================= slowest 30 durations =============================
+19.65s call     tests/test_current_sizing.py::test_current_sources_and_projection_are_reproducible
+10.75s call     tests/test_current_sizing.py::test_current_replay_has_all_scenarios_and_native_reviews_match_evidence
+0.01s call     tests/test_current_sizing.py::test_current_recovery_covers_ingress_media_and_missing_pitch_samples
+
+(12 durations < 0.005s hidden.  Use -vv to show these durations.)
+5 passed in 30.49s

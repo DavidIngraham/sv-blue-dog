@@ -1,0 +1,9 @@
+......                                                                   [100%]
+============================= slowest 30 durations =============================
+3.41s call     tests/test_routing.py::test_current_rounding_and_return_remain_chart_clear
+2.02s call     tests/test_routing.py::test_commercial_encounters_exclude_archived_reaches_outside_course
+1.93s call     tests/test_routing.py::test_both_legs_use_the_selected_bridge_span
+0.01s call     tests/test_routing.py::test_route_goes_around_island_without_shortcutting
+
+(14 durations < 0.005s hidden.  Use -vv to show these durations.)
+6 passed in 7.50s

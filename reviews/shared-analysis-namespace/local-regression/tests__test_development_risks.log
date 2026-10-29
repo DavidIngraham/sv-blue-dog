@@ -1,0 +1,8 @@
+...                                                                      [100%]
+============================= slowest 30 durations =============================
+4.06s call     tests/test_development_risks.py::test_assessment_basis_and_evidence_are_published
+3.95s call     tests/test_development_risks.py::test_standard_risk_metadata_and_unknown_probability
+3.23s call     tests/test_development_risks.py::test_risk_actions_are_published_from_model
+
+(6 durations < 0.005s hidden.  Use -vv to show these durations.)
+3 passed in 11.26s
