@@ -49,7 +49,7 @@ def test_wind_thread_reaches_current_mission_root(rendered_site):
 def test_all_requirement_views_include_their_upstream_context(rendered_site):
     from tests.native_cases import native_graph, native
     dot=native_graph()
-    nodes=dict(re.findall(r'"(n\d+)" \[.*?<b>((?:BlueDog::Mission::Challenge|BlueDog::Goals|BlueDog::Requirements)::\w+) :',dot))
+    nodes=dict(re.findall(r'"(n\d+)" \[.*?<b>((?:GorgeChallenge|BlueDog::Goals|BlueDog::Requirements)::\w+) :',dot))
     names={q.rsplit('::',1)[-1] for q in nodes.values()}
     edges={(nodes[a].rsplit('::',1)[-1],nodes[b].rsplit('::',1)[-1])
            for a,b in re.findall(r'"(n\d+)" -> "(n\d+)" \[label="(?:derive|refine)"',dot)
@@ -80,11 +80,11 @@ def test_same_named_requirements_keep_their_native_ids():
     diagram = '''```mermaid
 flowchart BT
 n0("`*«requirement»*
-**BlueDog::Mission::Challenge::communicationOutageAutonomy : OutageAutonomy**`")
+**GorgeChallenge::communicationOutageAutonomy : OutageAutonomy**`")
 n1("`*«requirement»*
 **BlueDog::Requirements::outageAutonomy : OutageAutonomy**`")
 ```'''
-    labels = {'BlueDog::Mission::Challenge::communicationOutageAutonomy': 'C-020',
+    labels = {'GorgeChallenge::communicationOutageAutonomy': 'C-020',
               'BlueDog::Requirements::outageAutonomy': 'E-121',
               'OutageAutonomy': 'E-121'}
     result = include_basis(diagram, [], labels)
@@ -100,8 +100,8 @@ n0("`*«requirement»*
 n1("`*«requirement»*
 **operatorSafetyIntervention : OperatorSafetyIntervention**`")
 ```'''
-    labels = {'BlueDog::Mission::Challenge::navigationRules': 'C-007',
-              'BlueDog::Mission::Challenge::operatorSafetyIntervention': 'C-031'}
+    labels = {'GorgeChallenge::navigationRules': 'C-007',
+              'GorgeChallenge::operatorSafetyIntervention': 'C-031'}
     result = include_basis(diagram, [('operatorSafetyIntervention', 'navigationRules')], labels)
     assert 'n1 -.->|"dependency"| n0' in result
-    assert diagram_nodes(result)['n1'] == 'BlueDog::Mission::Challenge::operatorSafetyIntervention'
+    assert diagram_nodes(result)['n1'] == 'GorgeChallenge::operatorSafetyIntervention'

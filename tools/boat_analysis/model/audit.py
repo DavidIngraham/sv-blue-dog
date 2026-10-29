@@ -8,7 +8,7 @@ import subprocess
 from tools.boat_analysis.model.install import REVISION
 from tools.boat_analysis.model.runtime import ROOT, connection, model_files
 
-GOVERNING = ('BlueDog::Mission::Challenge', 'BlueDog::Goals', 'BlueDog::Requirements', 'BlueDog::Requirements::Structure')
+GOVERNING = ('GorgeChallenge', 'BlueDog::Goals', 'BlueDog::Requirements', 'BlueDog::Requirements::Structure')
 
 
 def native_audit(sources=None):
@@ -54,7 +54,7 @@ def native_audit(sources=None):
             errors.append('Self-derivation: ' + row['element']['id'])
     impacts = []
     for element, relationship, direction in (
-        ('BlueDog::Mission::Challenge::capsizeRecovery', 'derivation', 'incoming'),
+        ('GorgeChallenge::capsizeRecovery', 'derivation', 'incoming'),
         ('BlueDog::Requirements::recoveryEnergy', 'verification', 'incoming'),
         ('BlueDog::Requirements::capsizeQualificationRetention', 'verification', 'incoming'),
         ('BlueDog::Requirements::capsizeQualificationRetention', 'satisfaction', 'incoming'),

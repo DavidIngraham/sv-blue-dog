@@ -18,7 +18,7 @@ package BlueDogWindDocuments {
 package BlueDogDocuments {
     private import DocumentQueries::*;
     calc def ModelElements :> Query {
-        Descendants(source = Named(qualifiedName = ("BlueDog::Mission::Challenge", "BlueDog::Goals", "BlueDog::Requirements", "BlueDog::Requirements::Structure")))
+        Descendants(source = Named(qualifiedName = ("GorgeChallenge", "BlueDog::Goals", "BlueDog::Requirements", "BlueDog::Requirements::Structure")))
     }
     calc def Requirements :> Query {
         Project(source = WhereType(source = ModelElements(), type = "RequirementDefinition"),
@@ -161,12 +161,12 @@ package BlueDogDocuments {
         }
     }
     calc def ChallengeStatements :> Query {
-        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "BlueDog::Mission::Challenge")), type = "RequirementDefinition"),
+        Project(source = WhereType(source = Descendants(source = Named(qualifiedName = "GorgeChallenge")), type = "RequirementDefinition"),
             columns = (Column(name = "ID", path = "shortName"), Column(name = "Rule", path = "name"), Column(name = "Statement", path = "documentation")))
     }
     part def ChallengeBrief :> Document {
         attribute redefines title = "Trans-Gorge challenge";
-        part intro : Paragraph { attribute redefines text = "The challenge is defined independently of the vehicle in blue-dog.sysml. The statements below are generated from that model. Read the linked qualification conditions and open issues with these rules; a statement or model check is not proof of completion."; }
+        part intro : Paragraph { attribute redefines text = "The challenge is defined independently of any vehicle in gorge-challenge.sysml under GorgeChallenge. Blue Dog references these rules. The statements below are generated from that model. Read the linked qualification conditions and open issues with these rules; a statement or model check is not proof of completion."; }
         part rules : Table { calc rows : ChallengeStatements; }
         part context : Paragraph { part link : Link { attribute redefines text = "Qualification conditions and open issues"; attribute redefines target = "methods/modeling.md"; } }
         part derivation : Paragraph { part link : Link { attribute redefines text = "Challenge derivations"; attribute redefines target = "requirements/requirements-c-000.md"; } }

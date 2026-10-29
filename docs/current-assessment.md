@@ -49,7 +49,9 @@ limits. These capabilities improve repeatability; they add no physical
 qualification evidence. The next analysis-interface work is to expose semantic
 route/state contracts before generalizing the remaining campaign orchestration.
 
-The [model's namespaces](reference/namespace-structure.md) place mission,
+The independent `GorgeChallenge` owns entrant and organizer rules; Blue Dog
+references that challenge while retaining its own course proposal and qualification
+cases. The [model's namespaces](reference/namespace-structure.md) place boat mission,
 requirements, architecture, behavior, project analyses, configurations, decisions,
 verification and evidence under one `BlueDog` project root. Reusable numerical
 kernels share the independent `Analysis` root by domain. Design schemas,

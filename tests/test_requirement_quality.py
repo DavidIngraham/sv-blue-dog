@@ -14,7 +14,7 @@ def test_new_process_and_disturbance_outcomes_have_direct_objectives(quality_mod
     rows = {r.element.id: r for r in table.rows}
     for name in ['navigationRuleApplicability', 'navigationRuleBaseline', 'navigationEntryEvidence',
                  'operatorSafetyIntervention', 'navigationAdjudication']:
-        assert {v.id for v in rows['BlueDog::Mission::Challenge::'+name].cells[0]} == {
+        assert {v.id for v in rows['GorgeChallenge::'+name].cells[0]} == {
             'BlueDog::Verification::Challenge::NavigationRulesEntryAndAdjudicationVerification'}
     for requirement, case in [('capsizeResilience', 'CapsizeResilienceVerification'),
                               ('vegetationResilience', 'VegetationResilienceVerification')]:

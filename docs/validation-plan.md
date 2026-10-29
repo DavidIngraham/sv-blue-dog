@@ -40,7 +40,7 @@ This follows [NASA verification](https://www.nasa.gov/reference/5-3-product-veri
 
 The challenge's C-007 requires the [U.S. Inland Navigation Rules](https://www.ecfr.gov/current/title-33/chapter-I/subchapter-E) and applicable local provisions. Before entry approval, the organizer reviews the identified boat, course, propulsion modes, operating conditions and current rule/notice baseline. The entrant supplies applicability decisions, justified exclusions, observation and maneuver limits, predeclared acceptance criteria and supporting demonstrations. Unsupported conditions cannot enter the admitted operating envelope.
 
-The [model verification cases](../models/blue-dog.sysml) each verify `BlueDog::Mission::Challenge::navigationRules` and link to their legal sources:
+The [Blue Dog verification cases](../models/blue-dog.sysml) each verify the independent `GorgeChallenge::navigationRules` and link to their legal sources:
 
 | Model case | Source and review scope |
 | --- | --- |

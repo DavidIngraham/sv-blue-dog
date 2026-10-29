@@ -32,17 +32,29 @@ def test_native_validation():
     assert not json.loads(native("-validate", "-json"))["diagnostics"]
 
 def test_challenge_is_standalone():
-    from tools.boat_analysis.model.runtime import connection, load_model
-    # Native edit ranges provide the actual declaration. Validate it under its
-    # canonical owners without the vehicle or any project/library declarations.
-    identity='BlueDog::Mission::Challenge'
-    result=load_model().edit().move(identity,'BlueDog::Mission').apply()
-    declarations=[edit.old_text for edit in result.applied
-                  if edit.length and edit.target==identity and 'package Challenge {' in edit.old_text]
-    assert len(declarations)==1
-    isolated='package BlueDog { package Mission {\n'+declarations[0]+'\n} }'
-    challenge=connection().parse_sources((('challenge-only.sysml',isolated),),strict=True)
-    assert challenge.get(identity+'::transGorgeChallenge') is not None
+    from tools.boat_analysis.model.runtime import ROOT, connection, load_model
+    path=ROOT/'models/gorge-challenge.sysml'
+    challenge=connection().parse_sources(((str(path),path.read_text()),),strict=True)
+    assert challenge.get('GorgeChallenge::transGorgeChallenge') is not None
+    assert challenge.get('BlueDog') is None
+    integrated=load_model()
+    assert integrated.get('BlueDog::Mission::Challenge') is None
+    assert integrated.get('GorgeChallenge').id=='GorgeChallenge'
+    assert integrated.get('BlueDog::Mission::Course::policy') is not None
+    assert integrated.get('BlueDog::Requirements::Communications::monitoringTechnologyIssue') is not None
+
+
+def test_standalone_challenge_rejects_a_boat_dependency():
+    from opensysml.errors import ModelError
+    from tools.boat_analysis.model.runtime import ROOT, connection
+    path=ROOT/'models/gorge-challenge.sysml'
+    source=path.read_text()
+    probe='package BoatCouplingProbe { dependency invalid from GorgeChallenge::transGorgeChallenge to BlueDog::Requirements::roundTrip; }'
+    # This check must fail if a boat reference is introduced without its model.
+    with pytest.raises(ModelError) as error:
+        connection().parse_sources(((str(path),source),('coupling-probe.sysml',probe)),strict=True)
+    assert 'BlueDog' in str(error.value)
+
 
 def test_diagram_preserves_expected_derivations(published_model):
     # Deliberate aggregate implications remain; chosen allocations do not.

@@ -14,9 +14,9 @@ package Page_methods_modeling_0 {
     private import DiagramLayout::*;
     view course : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDog::Mission::Challenge::courseCompletion;
+        expose GorgeChallenge::courseCompletion;
         expose BlueDog::Requirements::roundTrip;
-        metadata Layout about BlueDog::Mission::Challenge::courseCompletion { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::courseCompletion { x = 0; y = 0; }
         metadata Layout about BlueDog::Requirements::roundTrip { x = 0; y = 200; }
     }
 }

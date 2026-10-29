@@ -39,7 +39,7 @@ def include_basis(diagram, links, labels=None, identities=()):
         names = {}
         for node, qualified in found:
             qualified = canonical(qualified)
-            if not qualified.startswith(('BlueDog::Requirements::', 'BlueDog::Goals::', 'BlueDog::Mission::Challenge::', 'BlueDog::Requirements::Structure::', 'BlueDog::DesignIntent')):
+            if not qualified.startswith(('BlueDog::Requirements::', 'BlueDog::Goals::', 'GorgeChallenge::', 'BlueDog::Requirements::Structure::', 'BlueDog::DesignIntent')):
                 continue
             name = qualified.rsplit('::', 1)[-1]
             if name in names:

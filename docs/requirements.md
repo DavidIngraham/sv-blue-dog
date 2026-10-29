@@ -11,6 +11,11 @@ Blue Dog must sail one Bingen-Stevenson-Bingen circuit using onboard control and
 
 Hawai‘i and sustained repeated operation are separate future missions. Their labeled ocean and repeating-energy requirements remain in the reference model, but they do not set acceptance criteria for the first Gorge boat.
 
+The [independent Gorge challenge](../models/gorge-challenge.sysml) sets entrant
+and organizer rules for any suitable vessel. Blue Dog's requirements allocate
+those obligations to this boat; its course and equipment choices do not define
+the challenge for other entrants.
+
 The challenge also encourages routes and operating windows that reduce traffic encounters. That is guidance, not a pass/fail test of whether another skipper changes course. My stronger [courtesy preference for Blue Dog](encounter-feasibility.md#leave-room-for-crewed-boats) accepts delay to reduce the need for crewed boats to maneuver, while preserving safe, rule-consistent behavior.
 
 ## Which requirements can the sensing study challenge?

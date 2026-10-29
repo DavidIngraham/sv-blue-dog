@@ -9,9 +9,9 @@ def test_only_calculation_libraries_share_analysis_and_mixed_roots_stay_separate
     model=load_model()
     roots={r.id for r in model.query(select=['owner'],where={
         '@type':'PrimitiveConstraint','operator':'=','property':'@type','value':['Package']}) if not r.get('owner')}
-    assert roots=={'Analysis','BlueDog','MarineDesign','MarineEnergy','InlandExtended',
+    assert roots=={'Analysis','BlueDog','GorgeChallenge','MarineDesign','MarineEnergy','InlandExtended',
                    'InlandNavigationExperiment','EngineeringDecisions'}
-    assert len(model_files())==7
+    assert len(model_files())==8
     assert model.get('MarineSailing') is None
     assert model.get('MarineMass') is None
     for identity in ('MarineDesign::Design','MarineEnergy::Battery',

@@ -4,14 +4,16 @@ from tools.boat_analysis.studies.config import load_study
 from tools.boat_analysis.studies.runner import resolve_selector
 
 
-def test_project_has_one_native_root_and_reusable_libraries_remain_separate():
+def test_boat_and_independent_challenge_have_separate_native_roots():
     files=model_files()
-    project=[path for path in files if not path.is_relative_to(ROOT/'models/libraries')]
-    assert project==[ROOT/'models/blue-dog.sysml']
+    owned_sources={ROOT/'models/blue-dog.sysml':'BlueDog',
+                   ROOT/'models/gorge-challenge.sysml':'GorgeChallenge'}
+    assert [path for path in files if not path.is_relative_to(ROOT/'models/libraries')]==list(owned_sources)
     model=load_model()
     roots=dict(zip(model.documents,model.roots,strict=True))
-    project_packages=[child for child in roots[str(project[0])].children() if child.kind=='package']
-    assert [package.id for package in project_packages]==['BlueDog']
+    for path,identity in owned_sources.items():
+        packages=[child for child in roots[str(path)].children() if child.kind=='package']
+        assert [package.id for package in packages]==[identity]
     for path in files:
         if path.is_relative_to(ROOT/'models/libraries'):
             packages=[child for child in roots[str(path)].children() if child.kind=='package']

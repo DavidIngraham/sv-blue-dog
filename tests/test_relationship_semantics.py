@@ -11,10 +11,10 @@ def test_mixed_compact_and_native_diagram_identities():
     from tools.publishing.relationships import diagram_nodes
     diagram = '''n0("`*«requirement»*\n**C-000 Challenge**`")
 n1("`*«requirement»*\n**BlueDog::Requirements::roundTrip : RoundTrip**`")
-%% source-node n0 BlueDog::Mission::Challenge::transGorgeChallenge
+%% source-node n0 GorgeChallenge::transGorgeChallenge
 '''
     assert diagram_nodes(diagram) == {
-        'n0': 'BlueDog::Mission::Challenge::transGorgeChallenge',
+        'n0': 'GorgeChallenge::transGorgeChallenge',
         'n1': 'BlueDog::Requirements::roundTrip',
     }
 
@@ -113,7 +113,7 @@ def test_authored_pages_contain_views_not_copied_diagrams(rendered_site):
             # Method illustrations may coexist with native semantics, but must
             # not copy the generated model's identities or requirement edges.
             assert 'accTitle:' in sketch and 'accDescr:' in sketch
-            assert not re.search(r'BlueDog\w*::|BlueDog::Mission::Challenge::|[CHEMPNSRQL]-\d{3}|"(?:derive|refine|satisfy|verify)"', sketch)
+            assert not re.search(r'BlueDog\w*::|GorgeChallenge::|[CHEMPNSRQL]-\d{3}|"(?:derive|refine|satisfy|verify)"', sketch)
         assert blocks(source)
         rendered = (rendered_site / f'imports/docs/{name}.md').read_text(encoding='utf-8')
         assert '```sysml-view' not in rendered

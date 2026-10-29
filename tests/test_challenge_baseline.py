@@ -8,7 +8,7 @@ import pytest
 ])
 def test_overall_length(run_model, length, code, status):
     source = ("package MeasuredBoat { private import SI::*; "
-              "requirement envelope : BlueDog::Mission::Challenge::OverallLength { "
+              "requirement envelope : GorgeChallenge::OverallLength { "
               f"attribute :>> measuredOverallLength = {length};" + " } }")
     actual, report = run_model(source, "-requirement", "MeasuredBoat::envelope")
     assert (actual, report["status"]) == (code, status)
@@ -16,7 +16,7 @@ def test_overall_length(run_model, length, code, status):
 
 def test_missing_length_does_not_pass(run_model):
     code, report = run_model(
-        "package MeasuredBoat { requirement envelope : BlueDog::Mission::Challenge::OverallLength; }",
+        "package MeasuredBoat { requirement envelope : GorgeChallenge::OverallLength; }",
         "-requirement", "MeasuredBoat::envelope")
     assert code != 0
     assert report["status"] != "holds"

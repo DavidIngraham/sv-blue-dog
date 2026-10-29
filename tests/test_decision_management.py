@@ -42,7 +42,7 @@ def test_native_audit_detects_changed_duration_basis():
 
 
 def test_new_unclassified_working_decision_is_detected():
-    anchor='    dependency courtesyCollisionSafety from trafficCourtesy to BlueDog::Mission::Challenge::trafficCoexistence;'
+    anchor='    dependency courtesyCollisionSafety from trafficCourtesy to GorgeChallenge::trafficCoexistence;'
     addition='\n    item unreviewed : EngineeringDecisions::DecisionRecord { attribute :>> disposition="Investigate"; attribute :>> evidenceNeeded="Unknown"; }'
     sources=replace_unique(tuple((str(p),p.read_text()) for p in model_files()), anchor, anchor+addition)
     assert native_decision_audit(sources)['errors']

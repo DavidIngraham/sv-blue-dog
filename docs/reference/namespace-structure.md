@@ -9,9 +9,10 @@ The [modeling conventions](../../models/README.md) explain their use.
 ## Ownership
 
 ```text
+GorgeChallenge (independent rules; no boat dependency)
+
 BlueDog
 ├── Mission
-│   ├── Challenge
 │   ├── Course
 │   ├── Scope
 │   └── UseCases
@@ -61,6 +62,17 @@ analysis. Native semantic queries provide the full inventory. Mission actions
 also live directly in `Mission`, and system composition and context directly
 in `Architecture`.
 
+The standalone [`GorgeChallenge`](../../models/gorge-challenge.sysml) owns the
+entrant/organizer rules, their derivations and the maximum vessel length. It
+parses without `BlueDog` or the marine libraries. Blue Dog references these rules;
+the independent challenge does not reference Blue Dog.
+
+`BlueDog::Mission::Course` remains the boat project's proposed gate geometry,
+chart-based route, planning margins and sizing-distance binding. These proposals
+are not accepted organizer course definitions or universal rules for entrants.
+Mission selection and future-scope annotations stay in `BlueDog::Mission::Scope`;
+boat qualification cases stay in `BlueDog::Verification::Challenge`.
+
 Reusable calculation-only libraries share the independent `Analysis` root:
 
 ```text
@@ -91,8 +103,8 @@ rule assessments. `EngineeringDecisions` owns decision and review records.
 Owning a calculation or an analysis case does not by itself make such a library
 calculation-only, and package ownership does not create physical composition.
 
-The loaded model has **7 top-level packages and 115 packages in total**, including
-108 nested packages, in seven source documents. These are native namespace counts,
+The loaded model has **8 top-level packages and 115 packages in total**, including
+107 nested packages, in eight source documents. These are native namespace counts,
 not counts of view roots or boat components. Shared calculations have no Blue Dog
 dependencies. Their SI/vector boundary conventions and existing numerical limits
 remain part of the contract; grouping them adds no new engineering capability.
@@ -116,7 +128,8 @@ Do not infer meaning from a package's display name or source filename.
 
 ## Canonical source and generated evidence
 
-`models/blue-dog.sysml` contains the complete native project package. The pinned
+`models/gorge-challenge.sysml` contains the canonical independent challenge.
+`models/blue-dog.sysml` contains the complete native boat project package. The pinned
 runtime does not resolve independent files as reopened fragments of the same
 package. Keep the project document canonical; a second file declaring another
 `BlueDog` root is not an extension mechanism. The shared `Analysis` package is likewise canonical in

@@ -285,13 +285,13 @@ package Page_architecture_3 {
     private import DiagramLayout::*;
     view MissionSemantics : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDog::Mission::Challenge::transGorgeChallenge;
-        expose BlueDog::Mission::Challenge::courseCompletion;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::courseCompletion;
         expose BlueDog::Requirements::roundTrip;
         expose BlueDog::Verification::Requirements::RoundTripVerification;
         expose BlueDog::Architecture::missionContext::boat;
-        metadata Layout about BlueDog::Mission::Challenge::transGorgeChallenge { x = 0; y = 0; }
-        metadata Layout about BlueDog::Mission::Challenge::courseCompletion { x = 360; y = 0; }
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::courseCompletion { x = 360; y = 0; }
         metadata Layout about BlueDog::Requirements::roundTrip { x = 0; y = 200; }
         metadata Layout about BlueDog::Verification::Requirements::RoundTripVerification { x = 360; y = 200; }
         metadata Layout about BlueDog::Architecture::missionContext::boat { x = 0; y = 400; }

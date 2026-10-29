@@ -1,7 +1,7 @@
 package BlueDogAudit {
     private import DocumentQueries::*;
     calc def GoverningElements :> Query {
-        Descendants(source = Named(qualifiedName = ("BlueDog::Mission::Challenge", "BlueDog::Goals", "BlueDog::Requirements", "BlueDog::Requirements::Structure")))
+        Descendants(source = Named(qualifiedName = ("GorgeChallenge", "BlueDog::Goals", "BlueDog::Requirements", "BlueDog::Requirements::Structure")))
     }
     calc def Coverage :> Query {
         Project(source = WhereType(source = GoverningElements(), type = "RequirementUsage"), columns = (

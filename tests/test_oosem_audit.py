@@ -53,7 +53,7 @@ def test_explicit_current_mission_annotation_does_not_hide_missing_verification(
                                    'BlueDog::Mission::Scope::MissionKind::gorge'})
     result = audit.native_audit(altered)
     assert result['summary']['future'] == 11
-    assert 'Missing current verification objective: BlueDog::Mission::Challenge::repeatedOperation' in result['errors']
+    assert 'Missing current verification objective: GorgeChallenge::repeatedOperation' in result['errors']
 
 
 def test_manifest_input_artifact_change_is_rejected(tmp_path, monkeypatch):
@@ -67,3 +67,13 @@ def test_manifest_input_artifact_change_is_rejected(tmp_path, monkeypatch):
     (tmp_path/'input.json').write_bytes(b'altered input\n')
     with pytest.raises(ValueError, match='Archived input artifact mismatch'):
         audit.manifest_integrity(manifest)
+
+
+def test_challenge_dependencies_stay_independent_and_blue_dog_adopts_them(report):
+    dependencies=report['dependencies']
+    internal=[r for r in dependencies if r['element']['id'].startswith('GorgeChallenge::')]
+    assert internal
+    assert all(v['id'].startswith('GorgeChallenge::') for row in internal for cell in row['cells'][:2] for v in cell)
+    assert any(any(v['id'].startswith('BlueDog::') for v in row['cells'][0])
+               and any(v['id'].startswith('GorgeChallenge::') for v in row['cells'][1])
+               for row in dependencies)

@@ -58,9 +58,9 @@ package Page_practicality_materials {
     private import DiagramLayout::*;
     view thread : GeneralView {
         filter @SysML::RequirementUsage;
-        expose BlueDog::Mission::Challenge::transGorgeChallenge;
-        expose BlueDog::Mission::Challenge::courseCompletion;
-        expose BlueDog::Mission::Challenge::sailingPropulsion;
+        expose GorgeChallenge::transGorgeChallenge;
+        expose GorgeChallenge::courseCompletion;
+        expose GorgeChallenge::sailingPropulsion;
         expose BlueDog::Requirements::roundTrip;
         expose BlueDog::Requirements::environmentalEnvelope;
         expose BlueDog::Requirements::marineDurability;
@@ -75,9 +75,9 @@ package Page_practicality_materials {
         expose BlueDog::Requirements::Structure::panelStrength;
         expose BlueDog::Requirements::Structure::panelDeflection;
         expose BlueDog::Requirements::Structure::rootProofLoad;
-        metadata Layout about BlueDog::Mission::Challenge::transGorgeChallenge { x = 0; y = 0; }
-        metadata Layout about BlueDog::Mission::Challenge::courseCompletion { x = 320; y = 0; }
-        metadata Layout about BlueDog::Mission::Challenge::sailingPropulsion { x = 640; y = 0; }
+        metadata Layout about GorgeChallenge::transGorgeChallenge { x = 0; y = 0; }
+        metadata Layout about GorgeChallenge::courseCompletion { x = 320; y = 0; }
+        metadata Layout about GorgeChallenge::sailingPropulsion { x = 640; y = 0; }
         metadata Layout about BlueDog::Requirements::roundTrip { x = 960; y = 0; }
         metadata Layout about BlueDog::Requirements::environmentalEnvelope { x = 0; y = 400; }
         metadata Layout about BlueDog::Requirements::marineDurability { x = 320; y = 400; }
