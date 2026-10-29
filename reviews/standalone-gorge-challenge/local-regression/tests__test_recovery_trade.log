@@ -1,0 +1,12 @@
+.......                                                                  [100%]
+============================= slowest 30 durations =============================
+5.61s call     tests/test_recovery_trade.py::test_static_reference_and_diameter_sensitivity
+3.48s call     tests/test_recovery_trade.py::test_example_outputs_and_unproven_gates
+2.94s call     tests/test_recovery_trade.py::test_invalid_inputs_are_not_accepted[invalid-efficiency]
+2.80s call     tests/test_recovery_trade.py::test_invalid_inputs_are_not_accepted[negative-inflow]
+2.80s call     tests/test_recovery_trade.py::test_invalid_inputs_are_not_accepted[negative-density]
+2.74s call     tests/test_recovery_trade.py::test_invalid_inputs_are_not_accepted[zero-diameter]
+2.51s call     tests/test_recovery_trade.py::test_insufficient_reserve_fails_objective
+
+(14 durations < 0.005s hidden.  Use -vv to show these durations.)
+7 passed in 22.91s

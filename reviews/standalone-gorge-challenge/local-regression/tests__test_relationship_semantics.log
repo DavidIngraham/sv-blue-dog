@@ -1,0 +1,8 @@
+............                                                             [100%]
+============================= slowest 30 durations =============================
+41.87s setup    tests/test_relationship_semantics.py::test_semantic_diagrams_are_small_connected_native_views[mission-semantics-kinds0]
+3.65s setup    tests/test_relationship_semantics.py::test_formal_refinements_are_distinct_from_design_dependencies
+0.03s call     tests/test_relationship_semantics.py::test_authored_pages_contain_views_not_copied_diagrams
+
+(27 durations < 0.005s hidden.  Use -vv to show these durations.)
+12 passed in 45.60s

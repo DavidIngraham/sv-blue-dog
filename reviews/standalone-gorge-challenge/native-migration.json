@@ -1,0 +1,25 @@
+{
+  "beforeElements": 14933,
+  "afterElements": 14933,
+  "missing": [],
+  "changed": [],
+  "added": [],
+  "roots": [
+    "Analysis",
+    "BlueDog",
+    "GorgeChallenge",
+    "EngineeringDecisions",
+    "MarineDesign",
+    "MarineEnergy",
+    "InlandExtended",
+    "InlandNavigationExperiment"
+  ],
+  "standaloneStrictParse": true,
+  "sourceFiles": 8,
+  "declaredPolicyChanges": [],
+  "documentationChanges": {
+    "Marker-referenced virtual gates are defined in BlueDog::Mission::Course.": "Marker-referenced virtual gates are defined by the reviewed attempt course configuration.",
+    "BlueDog::Mission::Course defines nominal marker references and directed finite gate segments.": "The reviewed attempt course configuration defines nominal marker references and directed finite gate segments.",
+    "Source-linked verification cases in BlueDog::Verification::Challenge cover applicability, lookout/avoidance, encounter conduct, channel/visibility and signals. Their verdicts remain inconclusive pending accepted evidence; traceability is not a compliance finding.": "Configuration-specific verification must cover applicability, lookout/avoidance, encounter conduct, channel/visibility and signals. Traceability is not a compliance finding."
+  }
+}

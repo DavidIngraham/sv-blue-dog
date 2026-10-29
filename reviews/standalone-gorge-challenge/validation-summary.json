@@ -1,0 +1,254 @@
+{
+  "baseline": "e73d45624e9eedafc79f22f8559219195e9b313d",
+  "projectModules": 81,
+  "project": {
+    "tests": 1169,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "initialRegression": "All 81 modules executed: 80 passed; one stale namespace-source assertion failed. That assertion was corrected without model/runtime changes and its module rerun successfully. Initial failure logs and result inventory are retained in initial-regression/.",
+  "targetedRerun": {
+    "reason": "Stale test assumed every non-library source belonged to BlueDog; corrected ownership assertion only. No model/runtime or numerical changes.",
+    "result": {
+      "module": "tests/test_namespace_structure.py",
+      "exitCode": 0,
+      "seconds": 2.68
+    }
+  },
+  "reusableRuntime": {
+    "tests": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "publicationChecks": [
+    {
+      "name": "reusable-runtime",
+      "arguments": [
+        "-m",
+        "pytest",
+        "packages/sysml-python/tests",
+        "-q",
+        "--junitxml=/home/david/repos/sv-blue-dog-gorge-challenge/.tools/gorge-final/reusable-runtime.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 374.39
+    },
+    {
+      "name": "projection-recorded",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.evidence.model",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-current",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.evidence.model",
+        "--current",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.11
+    },
+    {
+      "name": "projection-continuation",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.evidence.continuation",
+        "2026-10-12-continuation",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-finite",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.evidence.continuation",
+        "2026-10-12-finite-passage",
+        "--package",
+        "BlueDog::Evidence::FinitePassageSizing",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-srr",
+      "arguments": [
+        "-m",
+        "tools.publishing.srr",
+        "--run",
+        "2026-10-13-srr-readiness",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 4.58
+    },
+    {
+      "name": "projection-frontier",
+      "arguments": [
+        "-m",
+        "tools.publishing.frontier",
+        "--run",
+        "2026-10-13-srr-frontier",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 0.06
+    },
+    {
+      "name": "projection-weather",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.environment.climatology",
+        "--check"
+      ],
+      "exitCode": 0,
+      "seconds": 2.12
+    },
+    {
+      "name": "seeded-campaign",
+      "arguments": [
+        "-m",
+        "tools.boat_analysis.mission.campaign",
+        "--count",
+        "4"
+      ],
+      "exitCode": 0,
+      "seconds": 20.83
+    },
+    {
+      "name": "sizing-figure",
+      "arguments": [
+        "-m",
+        "tools.publishing.sizing_progress"
+      ],
+      "exitCode": 0,
+      "seconds": 0.57
+    },
+    {
+      "name": "course-map",
+      "arguments": [
+        "-m",
+        "tools.publishing.course_map"
+      ],
+      "exitCode": 0,
+      "seconds": 3.73
+    },
+    {
+      "name": "course-satellite",
+      "arguments": [
+        "-m",
+        "tools.publishing.course_satellite"
+      ],
+      "exitCode": 0,
+      "seconds": 4.38
+    },
+    {
+      "name": "wave-motion",
+      "arguments": [
+        "-m",
+        "tools.publishing.wave_motion",
+        "evidence/runs/2026-10-13-wave-motion"
+      ],
+      "exitCode": 0,
+      "seconds": 0.72
+    },
+    {
+      "name": "wave-performance",
+      "arguments": [
+        "-m",
+        "tools.publishing.wave_performance",
+        "evidence/runs/2026-10-13-wave-performance"
+      ],
+      "exitCode": 0,
+      "seconds": 0.87
+    },
+    {
+      "name": "publishing",
+      "arguments": [
+        "-m",
+        "tools.publishing.build"
+      ],
+      "exitCode": 0,
+      "seconds": 40.11
+    }
+  ],
+  "pagesBuilt": 38,
+  "native": {
+    "elementsBefore": 14933,
+    "elementsAfter": 14933,
+    "packages": 115,
+    "roots": [
+      "Analysis",
+      "BlueDog",
+      "EngineeringDecisions",
+      "GorgeChallenge",
+      "InlandExtended",
+      "InlandNavigationExperiment",
+      "MarineDesign",
+      "MarineEnergy"
+    ],
+    "sources": 8,
+    "missing": [],
+    "changed": [],
+    "added": [],
+    "movedIds": 401,
+    "standaloneStrictParse": true,
+    "normativeRequirementStatementsUnchanged": true,
+    "requirementDefinitions": 32,
+    "sharedLibraryHashesPreserved": true,
+    "sourceHashes": {
+      "models/blue-dog.sysml": "9b4edf033775f6548658dc10fe263fcdc3e80f9c6e66cc36b16ebf6e98d4ba47",
+      "models/gorge-challenge.sysml": "abd0ad9d39cb5b334170c7239862d1e770b521831e56b9f4fa3453c584c54fe9",
+      "models/libraries/analysis.sysml": "98065dc7f0298faffb538558fc960f030787a611632b0650b3706d1e748a37ff",
+      "models/libraries/decision-records.sysml": "93102a19a7e9c69cd35544bf7f4815657164803fd1bbe9af6d6689ad613f52f3",
+      "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+      "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+      "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+      "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326"
+    }
+  },
+  "numerics": {
+    "studyRuns": 9,
+    "constraints": 297,
+    "exactReports": true,
+    "maximumAbsoluteErrors": {
+      "lo": 0.0,
+      "hi": 0.0,
+      "span": 0.0,
+      "initial": 0.0,
+      "eq": 0.0,
+      "ineq": 0.0,
+      "design": 0.0,
+      "states": 0.0,
+      "route": 0.0,
+      "westerlyRoute": 0.0,
+      "righting": 0.0
+    },
+    "rtol": 1e-13,
+    "atol": 1e-12
+  },
+  "auditDifferences": 0,
+  "preservation": {
+    "original": "/home/david/repos/sv-blue-dog-editorial",
+    "checkedOriginalFiles": 860,
+    "changedOriginalFiles": [],
+    "originalHeadUnchanged": true,
+    "originalDirtyStatusUnchanged": true,
+    "declarativeClean": true,
+    "namespaceWorktreeClean": true,
+    "namespaceHead": "556cd79e266394cae9e9b371a86941f50295cffc",
+    "frozenSourceDiff": [],
+    "sharedAnalysisWorktreeClean": true,
+    "sharedAnalysisHead": "e73d45624e9eedafc79f22f8559219195e9b313d"
+  }
+}

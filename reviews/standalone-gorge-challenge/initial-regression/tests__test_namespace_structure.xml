@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="2.515" timestamp="2026-10-29T09:00:02.817767-07:00" hostname="dmi-thinkpad"><testcase classname="tests.test_namespace_structure" name="test_project_has_one_native_root_and_reusable_libraries_remain_separate" time="0.001"><failure message="AssertionError: assert [PosixPath('/...lenge.sysml')] == [PosixPath('/...e-dog.sysml')]&#10;  &#10;  Left contains one more item: PosixPath('/home/david/repos/sv-blue-dog-gorge-challenge/models/gorge-challenge.sysml')&#10;  Use -v to get more diff">def test_project_has_one_native_root_and_reusable_libraries_remain_separate():
+        files=model_files()
+        project=[path for path in files if not path.is_relative_to(ROOT/'models/libraries')]
+&gt;       assert project==[ROOT/'models/blue-dog.sysml']
+E       AssertionError: assert [PosixPath('/...lenge.sysml')] == [PosixPath('/...e-dog.sysml')]
+E         
+E         Left contains one more item: PosixPath('/home/david/repos/sv-blue-dog-gorge-challenge/models/gorge-challenge.sysml')
+E         Use -v to get more diff
+
+tests/test_namespace_structure.py:10: AssertionError</failure></testcase><testcase classname="tests.test_namespace_structure" name="test_engineering_areas_are_owned_packages_with_canonical_identities" time="2.361" /><testcase classname="tests.test_namespace_structure" name="test_real_studies_bind_canonical_owned_elements_without_alias_facades" time="0.045" /></testsuite></testsuites>

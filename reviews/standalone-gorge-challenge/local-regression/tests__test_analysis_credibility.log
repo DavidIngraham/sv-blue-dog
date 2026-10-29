@@ -1,0 +1,14 @@
+.................................                                        [100%]
+============================= slowest 30 durations =============================
+39.57s setup    tests/test_analysis_credibility.py::test_use_limitations_are_published_as_native_content
+5.18s call     tests/test_analysis_credibility.py::test_new_nested_typed_analysis_is_registered_without_a_package_list_edit
+4.74s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[missing_annotation]
+3.77s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[missing_domain]
+2.71s call     tests/test_analysis_credibility.py::test_native_use_inventory_covers_definitions_and_configured_usages
+2.52s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[nested_case]
+2.43s call     tests/test_analysis_credibility.py::test_native_inventory_detects_missing_scope_or_use[new_case]
+0.02s call     tests/test_analysis_credibility.py::test_each_proposed_use_precondition_is_required[intendedUseReviewed]
+0.01s call     tests/test_analysis_credibility.py::test_review_preconditions_dont_require_a_passing_design_result
+
+(21 durations < 0.005s hidden.  Use -vv to show these durations.)
+33 passed in 61.15s (0:01:01)

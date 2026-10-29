@@ -1,0 +1,34 @@
+{
+  "elementsBefore": 14933,
+  "elementsAfter": 14933,
+  "packages": 115,
+  "roots": [
+    "Analysis",
+    "BlueDog",
+    "EngineeringDecisions",
+    "GorgeChallenge",
+    "InlandExtended",
+    "InlandNavigationExperiment",
+    "MarineDesign",
+    "MarineEnergy"
+  ],
+  "sources": 8,
+  "missing": [],
+  "changed": [],
+  "added": [],
+  "movedIds": 401,
+  "standaloneStrictParse": true,
+  "normativeRequirementStatementsUnchanged": true,
+  "requirementDefinitions": 32,
+  "sharedLibraryHashesPreserved": true,
+  "sourceHashes": {
+    "models/blue-dog.sysml": "9b4edf033775f6548658dc10fe263fcdc3e80f9c6e66cc36b16ebf6e98d4ba47",
+    "models/gorge-challenge.sysml": "abd0ad9d39cb5b334170c7239862d1e770b521831e56b9f4fa3453c584c54fe9",
+    "models/libraries/analysis.sysml": "98065dc7f0298faffb538558fc960f030787a611632b0650b3706d1e748a37ff",
+    "models/libraries/decision-records.sysml": "93102a19a7e9c69cd35544bf7f4815657164803fd1bbe9af6d6689ad613f52f3",
+    "models/libraries/energy/budget.sysml": "6b2f8c827db736130e1f343652d7d45695a4c4b18d5b4e7ac07f3d7a444ca365",
+    "models/libraries/marine/design.sysml": "e39ba68e330e539167b298338b5bb20a98c3edb049d9a405a06df307640ef057",
+    "models/libraries/navigation/inland-obligations.sysml": "8954be8c0904583cb977609428ed23734c59cd05aacf57ee82a8669c8e39da16",
+    "models/libraries/navigation/inland-pair.sysml": "e0bb4518cbc1063a31ae63b5f8d3dbca4c06eb864c7a745199c45e47231de326"
+  }
+}

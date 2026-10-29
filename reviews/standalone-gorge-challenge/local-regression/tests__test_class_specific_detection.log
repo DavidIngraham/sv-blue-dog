@@ -1,0 +1,9 @@
+.................................                                        [100%]
+============================= slowest 30 durations =============================
+1.14s setup    tests/test_class_specific_detection.py::test_current_class_summary_keeps_historical_numbers_separate
+0.13s call     tests/test_class_specific_detection.py::test_current_class_summary_keeps_historical_numbers_separate
+0.01s call     tests/test_class_specific_detection.py::test_wind_sports_require_the_same_supported_allocation_inputs[windsurfer]
+0.01s call     tests/test_class_specific_detection.py::test_wind_sports_require_the_same_supported_allocation_inputs[wingfoiler]
+
+(26 durations < 0.005s hidden.  Use -vv to show these durations.)
+33 passed in 1.39s

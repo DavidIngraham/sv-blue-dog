@@ -1,0 +1,12 @@
+........                                                                 [100%]
+============================= slowest 30 durations =============================
+26.58s call     tests/test_continuation.py::test_finite_passage_projection_preserves_interrupted_status_and_lineage
+20.67s call     tests/test_continuation.py::test_restored_baseline_retains_its_geometry_screen_evidence
+19.75s call     tests/test_continuation.py::test_archived_campaign_and_model_projection_agree
+12.69s call     tests/test_continuation.py::test_retained_target_is_rejected_by_current_geometry_policy
+0.61s call     tests/test_continuation.py::test_larger_archived_baseline_is_ineligible_under_current_challenge
+0.01s call     tests/test_continuation.py::test_incompatible_capacity_is_not_reported_as_feasible
+0.01s call     tests/test_continuation.py::test_length_is_fixed_while_other_variable_finds_equilibrium
+
+(17 durations < 0.005s hidden.  Use -vv to show these durations.)
+8 passed in 80.76s (0:01:20)

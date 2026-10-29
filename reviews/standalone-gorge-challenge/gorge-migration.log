@@ -1,0 +1,20 @@
+{
+  "beforeElements": 14933,
+  "afterElements": 14933,
+  "missing": [],
+  "changed": [],
+  "added": [],
+  "roots": [
+    "Analysis",
+    "BlueDog",
+    "GorgeChallenge",
+    "EngineeringDecisions",
+    "MarineDesign",
+    "MarineEnergy",
+    "InlandExtended",
+    "InlandNavigationExperiment"
+  ],
+  "standaloneStrictParse": true,
+  "sourceFiles": 8,
+  "declaredPolicyChanges": []
+}

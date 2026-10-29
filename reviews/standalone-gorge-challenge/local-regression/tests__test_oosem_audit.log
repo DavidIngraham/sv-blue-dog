@@ -1,0 +1,8 @@
+......                                                                   [100%]
+============================= slowest 30 durations =============================
+5.78s call     tests/test_oosem_audit.py::test_explicit_current_mission_annotation_does_not_hide_missing_verification
+4.56s call     tests/test_oosem_audit.py::test_removing_a_current_verification_objective_is_detected
+4.36s setup    tests/test_oosem_audit.py::test_current_coverage_distinguishes_plans_studies_and_future_scope
+
+(15 durations < 0.005s hidden.  Use -vv to show these durations.)
+6 passed in 14.73s

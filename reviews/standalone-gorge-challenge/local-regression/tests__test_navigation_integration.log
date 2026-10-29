@@ -1,0 +1,12 @@
+...............                                                          [100%]
+============================= slowest 30 durations =============================
+1.28s call     tests/test_navigation_integration.py::test_stand_on_holds_until_assessed_escalation
+0.28s call     tests/test_navigation_integration.py::test_empty_scene_has_identical_candidate_grid_in_both_modes
+0.11s call     tests/test_navigation_integration.py::test_unknown_observed_status_cannot_approve_candidate
+0.03s call     tests/test_navigation_integration.py::test_overtaking_memory_survives_track_loss_and_releases_on_observed_clearance
+0.02s call     tests/test_navigation_integration.py::test_unobserved_future_turn_cannot_change_navigation_decision
+0.02s call     tests/test_navigation_integration.py::test_navigation_cannot_use_truth_or_rescue_an_unseen_target
+0.02s call     tests/test_navigation_integration.py::test_unknown_clearance_does_not_erase_overtaking_memory
+
+(23 durations < 0.005s hidden.  Use -vv to show these durations.)
+15 passed in 2.32s

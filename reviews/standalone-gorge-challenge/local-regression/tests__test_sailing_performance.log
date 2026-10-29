@@ -1,0 +1,33 @@
+............................                                             [100%]
+============================= slowest 30 durations =============================
+9.64s call     tests/test_sailing_performance.py::test_shorter_time_budget_and_leeway_raise_upwind_demand
+9.18s call     tests/test_sailing_performance.py::test_tacking_gybing_and_current_are_not_conflated
+6.48s call     tests/test_sailing_performance.py::test_hull_length_changes_reference_not_predicted_speed
+6.16s call     tests/test_sailing_performance.py::test_current_reduces_or_increases_demand_without_being_derated
+6.09s call     tests/test_sailing_performance.py::test_wind_strength_changes_required_ratio_not_a_predicted_polar
+4.83s call     tests/test_sailing_performance.py::test_coupled_polar_legs_change_cruise_exposure
+3.43s call     tests/test_sailing_performance.py::test_speed_either_side_of_the_inverse_boundary[3.71-1]
+3.31s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> retainedPerformance = 0;]
+3.21s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> leeway = -0.1 [rad];]
+3.21s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> waterlineLength = 0 [m];]
+3.20s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> allocatedTime = 0 [s];]
+3.20s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> retainedPerformance = 1.01;]
+3.15s call     tests/test_sailing_performance.py::test_one_evidence_flag_does_not_support_the_claim[hullEvidenceAccepted]
+3.14s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> minimumGroundVMG = -0.01 [m/s];]
+3.14s call     tests/test_sailing_performance.py::test_speed_either_side_of_the_inverse_boundary[3.73-0]
+3.13s call     tests/test_sailing_performance.py::test_time_allocations_cannot_overbook_the_mission
+3.10s call     tests/test_sailing_performance.py::test_one_evidence_flag_does_not_support_the_claim[polarEvidenceAccepted]
+3.09s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> trueWindSpeed = 0 [m/s];]
+3.08s call     tests/test_sailing_performance.py::test_offshore_probe_is_duration_driven_and_unaccepted
+3.07s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> trueWindAngle = TrigFunctions::rad(90) * (1 [rad]);]
+3.06s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> cleanPolarSpeed = 0 [m/s];]
+3.04s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> trueWindAngle = TrigFunctions::rad(181) * (1 [rad]);]
+3.04s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> maneuverRetention = 0;]
+3.02s call     tests/test_sailing_performance.py::test_upstream_polar_demand_and_hull_screen
+2.99s call     tests/test_sailing_performance.py::test_progress_allocation_has_no_artificial_half_meter_per_second_floor
+2.96s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> trueWindAngle = TrigFunctions::rad(120) * (1 [rad]);]
+2.95s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> distance = -1 [m];]
+2.91s call     tests/test_sailing_performance.py::test_invalid_inputs_or_nonforward_heading_cannot_pass[attribute :>> maneuverRetention = 1.01;]
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+28 passed in 110.90s (0:01:50)

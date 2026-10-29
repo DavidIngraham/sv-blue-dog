@@ -1,0 +1,8 @@
+....                                                                     [100%]
+============================= slowest 30 durations =============================
+11.86s call     tests/test_design_boundary.py::test_configuration_accepts_record_without_numerical_change
+0.16s call     tests/test_design_boundary.py::test_ballast_density_invalidates_geometry_cache
+0.02s call     tests/test_design_boundary.py::test_mass_kernel_accepts_both_typed_inputs
+
+(9 durations < 0.005s hidden.  Use -vv to show these durations.)
+4 passed in 12.50s

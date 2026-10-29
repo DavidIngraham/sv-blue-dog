@@ -1,0 +1,8 @@
+....                                                                     [100%]
+============================= slowest 30 durations =============================
+2.69s call     tests/test_risk_cube.py::test_native_risks_have_explicit_qualitative_assessments
+0.74s call     tests/test_risk_cube.py::test_risk_kinds_have_separate_cubes
+0.51s call     tests/test_risk_cube.py::test_render_places_assessed_and_retains_unknown
+
+(9 durations < 0.005s hidden.  Use -vv to show these durations.)
+4 passed in 3.97s

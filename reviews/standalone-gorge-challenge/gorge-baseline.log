@@ -1,0 +1,43 @@
+{
+  "elements": 14933,
+  "challengeElements": 401,
+  "propertyNames": [
+    "@id",
+    "@type",
+    "declaredName",
+    "declaredShortName",
+    "documentation",
+    "general",
+    "isAbstract",
+    "isIndividual",
+    "name",
+    "owner",
+    "qualifiedName",
+    "shortName",
+    "type"
+  ],
+  "sample": [
+    {
+      "id": "BlueDog::Mission::Challenge",
+      "kind": "Package",
+      "properties": {
+        "documentation": "Independent trans-gorge autonomous sailing challenge.\nInspired by the structure of the Microtransat rules:\nhttps://microtransat.org/content.php?p=rules&top=rules\nThis is a separate project challenge, not a Microtransat entry or endorsement.\nVessel architecture and communications technology are unrestricted; overall length is limited to 1.2 m.\nThe Gorge is the proving ground for a longer-term voyage toward Hawaii.\nMarker-referenced virtual gates are defined in BlueDog::Mission::Course.\nThere is no completion deadline. The vehicle defines candidate environmental qualification profiles; no dam passage is permitted.",
+        "@id": "BlueDog::Mission::Challenge",
+        "@type": "Package",
+        "name": "Challenge",
+        "owner": "BlueDog::Mission",
+        "declaredName": "Challenge",
+        "qualifiedName": "BlueDog::Mission::Challenge"
+      }
+    },
+    {
+      "id": "BlueDog::Mission::Challenge::@0",
+      "kind": "Documentation",
+      "properties": {
+        "@type": "Documentation",
+        "owner": "BlueDog::Mission::Challenge",
+        "@id": "BlueDog::Mission::Challenge::@0"
+      }
+    }
+  ]
+}

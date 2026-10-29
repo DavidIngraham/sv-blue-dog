@@ -1,0 +1,18 @@
+...............                                                          [100%]
+============================= slowest 30 durations =============================
+1.41s call     tests/test_maneuver_dynamics.py::test_command_delivery_does_not_teleport_heading_or_finish_a_slow_turn
+0.22s call     tests/test_maneuver_dynamics.py::test_turn_trajectory_converges_under_time_refinement
+0.21s call     tests/test_maneuver_dynamics.py::test_engine_option_records_actual_bounded_steps_and_keeps_legacy_explicit
+0.04s call     tests/test_maneuver_dynamics.py::test_capsize_does_not_relabel_interrupted_turn_as_completed
+0.03s call     tests/test_maneuver_dynamics.py::test_engine_calm_current_does_not_create_rudder_authority
+0.03s call     tests/test_maneuver_dynamics.py::test_each_maneuver_loses_speed_with_bounded_deceleration[turn-0.8]
+0.03s call     tests/test_maneuver_dynamics.py::test_rudder_authority_uses_water_speed_not_current_and_zero_rudder_cannot_turn
+0.03s call     tests/test_maneuver_dynamics.py::test_each_maneuver_loses_speed_with_bounded_deceleration[tack-0.35]
+0.03s call     tests/test_maneuver_dynamics.py::test_each_maneuver_loses_speed_with_bounded_deceleration[gybe-0.65]
+0.02s call     tests/test_maneuver_dynamics.py::test_each_maneuver_loses_speed_with_bounded_deceleration[recovery-0.7]
+0.02s call     tests/test_maneuver_dynamics.py::test_engine_uses_candidate_provider_at_the_achieved_heading
+0.01s call     tests/test_maneuver_dynamics.py::test_hazard_appearing_during_turn_is_scored_without_preempting_it
+0.01s call     tests/test_maneuver_dynamics.py::test_unknown_or_nonphysical_coefficient_is_rejected
+
+(17 durations < 0.005s hidden.  Use -vv to show these durations.)
+15 passed in 2.29s

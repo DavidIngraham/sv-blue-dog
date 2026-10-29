@@ -1,0 +1,8 @@
+{
+  "reason": "Stale test assumed every non-library source belonged to BlueDog; corrected ownership assertion only. No model/runtime or numerical changes.",
+  "result": {
+    "module": "tests/test_namespace_structure.py",
+    "exitCode": 0,
+    "seconds": 2.68
+  }
+}

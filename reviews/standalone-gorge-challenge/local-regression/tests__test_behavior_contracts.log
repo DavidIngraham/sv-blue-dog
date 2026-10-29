@@ -1,0 +1,13 @@
+....................................                                     [100%]
+============================= slowest 30 durations =============================
+1.21s call     tests/test_behavior_contracts.py::test_removing_durability_barrier_changes_the_native_outcome
+1.12s setup    tests/test_behavior_contracts.py::test_each_sailing_barrier_independently_prevents_actuation[commandApplicable]
+0.01s call     tests/test_behavior_contracts.py::test_valid_restart_and_new_attempt_are_distinct_operations
+0.01s call     tests/test_behavior_contracts.py::test_each_sailing_barrier_independently_prevents_actuation[commandApplicable]
+0.01s call     tests/test_behavior_contracts.py::test_native_expired_context_blocks_otherwise_nominal_sailing[commandApplicable]
+0.01s call     tests/test_behavior_contracts.py::test_restored_observations_cannot_undo_restart_fallback
+0.01s call     tests/test_behavior_contracts.py::test_missing_durability_acknowledgment_cannot_enable_motor
+0.01s call     tests/test_behavior_contracts.py::test_native_observation_action_reuses_the_interface_predicate
+
+(22 durations < 0.005s hidden.  Use -vv to show these durations.)
+36 passed in 2.56s
